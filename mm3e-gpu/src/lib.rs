@@ -14,6 +14,18 @@ use mm3e_kit::color::Rgba;
 use mm3e_kit::framebuffer::Framebuffer;
 use mm3e_orchestrator::Scene;
 
+const MAX_DYN: usize = 12;
+
+/// A dynamic sphere (player / physics body) rendered without recompiling the shader — its data
+/// rides in the uniform and is unioned into the field on the GPU each frame.
+#[derive(Clone, Copy, Debug)]
+pub struct DynSphere {
+    pub pos: mm3e_kit::vec::Vec3,
+    pub radius: f32,
+    pub albedo: mm3e_kit::vec::Vec3,
+    pub metallic: f32,
+}
+
 /// The camera + frame uniform, matching `struct U` in the shader (std140 16-byte rows).
 #[repr(C)]
 #[derive(Clone, Copy, bytemuck::Pod, bytemuck::Zeroable)]
@@ -25,9 +37,11 @@ struct Uniforms {
     up: [f32; 3],
     bounces: f32,
     fwd: [f32; 3],
-    _pad: f32,
+    n_dyn: f32,
     res: [f32; 2],
     _pad2: [f32; 2],
+    dyn_pr: [[f32; 4]; MAX_DYN],
+    dyn_col: [[f32; 4]; MAX_DYN],
 }
 
 fn align_up(v: u32, a: u32) -> u32 {
@@ -188,7 +202,14 @@ pub struct GpuScene {
 }
 
 impl GpuScene {
-    fn uniforms(&self, camera: &Camera) -> Uniforms {
+    fn uniforms(&self, camera: &Camera, dyn_spheres: &[DynSphere]) -> Uniforms {
+        let mut dyn_pr = [[0.0f32; 4]; MAX_DYN];
+        let mut dyn_col = [[0.0f32; 4]; MAX_DYN];
+        let n = dyn_spheres.len().min(MAX_DYN);
+        for (i, s) in dyn_spheres.iter().take(MAX_DYN).enumerate() {
+            dyn_pr[i] = [s.pos.x, s.pos.y, s.pos.z, s.radius];
+            dyn_col[i] = [s.albedo.x, s.albedo.y, s.albedo.z, s.metallic];
+        }
         Uniforms {
             eye: [camera.eye.x, camera.eye.y, camera.eye.z],
             fov: camera.fov_scale,
@@ -197,15 +218,17 @@ impl GpuScene {
             up: [camera.up.x, camera.up.y, camera.up.z],
             bounces: self.bounces as f32,
             fwd: [camera.forward.x, camera.forward.y, camera.forward.z],
-            _pad: 0.0,
+            n_dyn: n as f32,
             res: [self.width as f32, self.height as f32],
             _pad2: [0.0, 0.0],
+            dyn_pr,
+            dyn_col,
         }
     }
 
-    /// Dispatch the compute shader for `camera` and copy the result into the readback buffer.
-    fn dispatch(&self, r: &GpuRenderer, camera: &Camera) {
-        r.queue.write_buffer(&self.uniform_buf, 0, bytemuck::bytes_of(&self.uniforms(camera)));
+    /// Dispatch the compute shader for `camera` (+ dynamic spheres) into the readback buffer.
+    fn dispatch(&self, r: &GpuRenderer, camera: &Camera, dyn_spheres: &[DynSphere]) {
+        r.queue.write_buffer(&self.uniform_buf, 0, bytemuck::bytes_of(&self.uniforms(camera, dyn_spheres)));
         let mut enc = r.device.create_command_encoder(&wgpu::CommandEncoderDescriptor { label: Some("enc") });
         {
             let mut pass =
@@ -236,7 +259,12 @@ impl GpuScene {
 
     /// Render `camera` and return the unpadded RGBA8 pixel rows (row-major, top-down).
     pub fn render_rgba(&self, r: &GpuRenderer, camera: &Camera) -> Vec<u8> {
-        self.dispatch(r, camera);
+        self.render_rgba_dyn(r, camera, &[])
+    }
+
+    /// Render `camera` with extra dynamic spheres (player / physics bodies) unioned into the field.
+    pub fn render_rgba_dyn(&self, r: &GpuRenderer, camera: &Camera, dyn_spheres: &[DynSphere]) -> Vec<u8> {
+        self.dispatch(r, camera, dyn_spheres);
         let slice = self.readback.slice(..);
         slice.map_async(wgpu::MapMode::Read, |_| {});
         r.device.poll(wgpu::PollType::Wait).expect("device poll");

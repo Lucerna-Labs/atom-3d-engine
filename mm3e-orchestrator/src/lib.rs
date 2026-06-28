@@ -11,6 +11,7 @@
 
 pub mod anim;
 pub mod gi;
+pub mod physics;
 pub mod post;
 pub mod scene_io;
 
@@ -406,6 +407,12 @@ impl Scene {
             }
         }
         c
+    }
+
+    /// The world field closure (static geometry) — public so physics and custom tools can query
+    /// the same `Fn(Vec3) -> Field` the renderer marches (e.g. distance/normal for collision).
+    pub fn field(&self) -> impl Fn(Vec3) -> Field + '_ {
+        self.world()
     }
 
     /// The world field: a bounded `fold` of every object's contribution into one distance +

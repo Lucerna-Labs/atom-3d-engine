@@ -140,6 +140,38 @@ fn gi_degenerate_dims_dont_panic() {
 }
 
 #[test]
+fn physics_body_rests_on_floor() {
+    use mm3e_kit::sdf::Field;
+    use mm3e_orchestrator::physics::{Body, PhysicsWorld};
+    // Field of an infinite floor at y = 0 (distance = p.y, normal up).
+    let field = |p: Vec3| Field::new(p.y, 0);
+    let mut w = PhysicsWorld::new();
+    let id = w.add(Body::new(Vec3::new(0.0, 5.0, 0.0), 0.5));
+    for _ in 0..300 {
+        w.step(1.0 / 60.0, &field); // 5 seconds — long enough to settle
+    }
+    let b = w.bodies[id];
+    assert!((b.pos.y - 0.5).abs() < 0.06, "body should rest at radius height, got {}", b.pos.y);
+    assert!(b.grounded);
+    assert!(b.vel.length() < 0.5, "body should have settled, |v| = {}", b.vel.length());
+}
+
+#[test]
+fn physics_resolves_penetration() {
+    use mm3e_kit::sdf::Field;
+    use mm3e_orchestrator::physics::{Body, PhysicsWorld};
+    // A unit sphere obstacle at the origin; a body starts overlapping it.
+    let field = |p: Vec3| Field::new(p.length() - 1.0, 0);
+    let mut w = PhysicsWorld::new();
+    w.gravity = Vec3::ZERO; // isolate the collision response
+    let id = w.add(Body::new(Vec3::new(0.3, 0.0, 0.0), 0.5));
+    w.step(1.0 / 60.0, &field);
+    let b = w.bodies[id];
+    let surface_dist = b.pos.length() - 1.0; // distance from the body centre to the obstacle surface
+    assert!(surface_dist >= 0.5 - 0.05, "body should be pushed outside, got {surface_dist}");
+}
+
+#[test]
 fn animation_tracks_sample() {
     let pos = Track::new(Easing::Linear).key(0.0, Vec3::new(0.0, 0.0, 0.0)).key(2.0, Vec3::new(2.0, 4.0, 0.0));
     assert_eq!(pos.sample(-1.0), Vec3::new(0.0, 0.0, 0.0)); // clamps to start

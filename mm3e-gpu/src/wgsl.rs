@@ -151,6 +151,14 @@ fn map_fn(scene: &Scene) -> String {
         }
         s.push_str("  }\n");
     }
+    // Dynamic spheres (player + physics bodies) unioned from the uniform — no recompile when they
+    // move. Material id 1000+i selects the dynamic colour in the shader.
+    s.push_str("  let nd = u32(u.n_dyn);\n");
+    s.push_str("  for (var i = 0u; i < nd; i = i + 1u) {\n");
+    s.push_str("    let sp = u.dyn_pr[i];\n");
+    s.push_str("    let dd = length(p - sp.xyz) - sp.w;\n");
+    s.push_str("    if (dd < d.x) { d = vec2<f32>(dd, 1000.0 + f32(i)); }\n");
+    s.push_str("  }\n");
     s.push_str("  return d;\n}\n\n");
     s
 }
@@ -198,12 +206,15 @@ fn direct_lighting_fn(scene: &Scene) -> String {
 // ----------------------------------------------------------------------------
 
 const KERNEL_HEADER: &str = r#"
+const MAX_DYN: u32 = 12u;
 struct U {
   eye: vec3<f32>, fov: f32,
   right: vec3<f32>, aa: f32,
   up: vec3<f32>, bounces: f32,
-  fwd: vec3<f32>, _pad: f32,
+  fwd: vec3<f32>, n_dyn: f32,
   res: vec2<f32>, _pad2: vec2<f32>,
+  dyn_pr: array<vec4<f32>, 12>,   // dynamic spheres: xyz = centre, w = radius
+  dyn_col: array<vec4<f32>, 12>,  // xyz = albedo, w = metallic
 };
 @group(0) @binding(0) var<uniform> u: U;
 @group(0) @binding(1) var outtex: texture_storage_2d<rgba8unorm, write>;
@@ -315,7 +326,14 @@ fn shade(ro0: vec3<f32>, rd0: vec3<f32>) -> vec3<f32> {
     let hit = raymarch(ro, rd);
     if (hit.z < 0.5) { col = col + atten * sky(rd); break; }
     let t = hit.x; let p = ro + rd*t; let n = calc_normal(p); let v = -rd;
-    let m = material(u32(hit.y + 0.5)); let albedo = surface_albedo(m, p);
+    var m: Mat;
+    if (hit.y > 999.5) {
+      let di = u32(hit.y - 1000.0); let c = u.dyn_col[di];
+      m = Mat(c.xyz, c.w, 0.32, 0.18, 0.5, vec3<f32>(0.0), 0.0);
+    } else {
+      m = material(u32(hit.y + 0.5));
+    }
+    let albedo = surface_albedo(m, p);
     let occ = ao(p, n);
     var rad = albedo * (ibl(n) + AMBIENT) * occ;
     rad = rad + direct_lighting(p, n, v, albedo, m);

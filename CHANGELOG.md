@@ -2,6 +2,20 @@
 
 All notable changes to MM3E are documented here.
 
+## [0.4.0] — physics + a playable game
+
+- **SDF-native physics** (`mm3e_orchestrator::physics`): rigid sphere bodies colliding against the
+  world field. The field is the collision oracle — distance gives penetration, its gradient gives
+  the contact normal — so collision detection is closed-form. Gravity, sub-stepped integration,
+  restitution/friction, grounded detection, sphere–sphere contacts. Two regression tests.
+- **Dynamic spheres on the GPU**: the WGSL kernel unions up to 12 uniform-driven spheres into the
+  baked field, so moving objects render without recompiling the shader.
+- **`examples/game.rs`**: a playable game — roll a ball around an SDF obstacle course (gravity,
+  jump, collisions, follow camera, loose balls to bump), GPU-rendered in real time. Verified
+  running on an RTX 5070 Ti.
+- `Scene::field()` is now public so physics/tools can query the same `Fn(Vec3) -> Field` the
+  renderer marches.
+
 ## [0.3.0] — GPU backend
 
 - **`mm3e-gpu`**: a real-time GPU backend. It codegens the SDF world field into a WGSL compute

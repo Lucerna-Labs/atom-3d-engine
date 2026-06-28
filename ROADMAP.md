@@ -29,7 +29,10 @@ constraint broken:
   compute shader and runs it on wgpu (Vulkan/Metal/DX12): ~430 fps at 960×540 on an RTX 5070 Ti
   (≈400× the CPU), pixel-faithful, with a real-time GPU window (`examples/gpu_viewer.rs`). The core
   crates stay zero-dependency; wgpu is isolated to this opt-in crate.
-- ✅ **Engineering** — a 23-test suite + GitHub Actions CI (fmt, clippy `-D warnings`, build, test;
+- ✅ **SDF-native physics + a playable game** — rigid sphere bodies colliding against the world
+  field (distance = penetration, gradient = contact normal, closed-form), and `examples/game.rs`:
+  roll a ball around an obstacle course (gravity, jump, collisions), GPU-rendered in real time.
+- ✅ **Engineering** — a 25-test suite + GitHub Actions CI (fmt, clippy `-D warnings`, build, test;
   core on Linux + Windows, the GPU crate on Windows).
 
 Highest-leverage next: a true **BVH** over additive objects (the bounding-sphere prune is the

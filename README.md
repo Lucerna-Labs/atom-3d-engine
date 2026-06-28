@@ -48,7 +48,17 @@ wgpu lives only in this crate.
 cargo run -p mm3e-gpu --example gpu_probe  --release   # print the selected GPU adapter
 cargo run -p mm3e-gpu --example gpu_render --release   # GPU render to BMP + an fps benchmark
 cargo run -p mm3e-gpu --example gpu_viewer --release   # real-time GPU window (Windows; orbit live)
+cargo run -p mm3e-gpu --example game       --release   # playable: roll a ball (GPU + SDF physics)
 ```
+
+## Physics + a playable game
+
+`mm3e_orchestrator::physics` is **SDF-native**: the field *is* the collision oracle — `field(p).dist`
+is the penetration depth and its gradient is the contact normal — so the GJK/EPA/BVH machinery a
+mesh engine needs is closed-form here. `examples/game.rs` (in `mm3e-gpu`) is a real playable demo:
+roll a ball around an obstacle course with gravity, jumping, and collisions, rendered on the GPU at
+real-time rates — a static level baked into the shader, the player and loose balls simulated against
+its distance field and unioned in as dynamic spheres.
 
 ## The doctrine
 
