@@ -53,7 +53,8 @@ fn main() {
 mod win32 {
     use super::*;
     use mm3e_kit::font;
-    use mm3e_orchestrator::{orbit_camera, render, Quality};
+    use mm3e_orchestrator::reproject::{reproject, GFrame};
+    use mm3e_orchestrator::{orbit_camera, render, render_gbuffer, Quality};
     use std::ffi::c_void;
     use std::time::Instant;
 
@@ -225,6 +226,8 @@ mod win32 {
         let mut last = Point { x: 0, y: 0 };
         let mut dragging = false;
         let mut bgra: Vec<u32> = Vec::new();
+        let mut prev_g: Option<GFrame> = None; // last real G-buffer, for reprojected fake frames
+        let mut cycle = 0u32;
 
         unsafe {
             let instance = GetModuleHandleW(std::ptr::null());
@@ -325,29 +328,48 @@ mod win32 {
                     still = (still + 1).min(1000);
                 }
 
-                // --- choose internal resolution + quality ---
-                let (rw, rh, q, mode);
+                // --- choose internal resolution + quality, then render or reproject ---
+                let cam = orbit_camera(Vec3::new(0.0, 0.85, 0.4), radius, yaw, pitch, 52f32.to_radians());
+                let t0 = Instant::now();
+                let (rw, rh);
+                let mode;
+                let mut rgba: Vec<u8>; // flat RGBA8 at (rw, rh)
+
                 if still == 0 {
-                    let rw0 = ((base_w as f32 / move_div) as u32).max(220);
-                    let rh0 = ((base_h as f32 / move_div) as u32).max(124);
-                    rw = rw0;
-                    rh = rh0;
-                    q = Quality::fast(rw, rh);
-                    mode = "MOVING";
+                    // Moving: low-res fast preset, with reprojection between real frames. A real
+                    // G-buffer is rendered when the resolution changed or every 3rd frame; the other
+                    // frames are reprojected (warped) from the last real frame — much cheaper.
+                    rw = ((base_w as f32 / move_div) as u32).max(220);
+                    rh = ((base_h as f32 / move_div) as u32).max(124);
+                    Quality::fast(rw, rh).apply(&mut scene);
+                    let res_changed = prev_g.as_ref().is_none_or(|g| g.width != rw || g.height != rh);
+                    if res_changed || cycle.is_multiple_of(3) {
+                        let g = render_gbuffer(&scene, &cam, &[]);
+                        rgba = g.color.iter().flat_map(|&p| p).collect();
+                        prev_g = Some(g);
+                        mode = "MOVING";
+                    } else if let Some(p) = prev_g.as_ref() {
+                        rgba = reproject(p, &cam, &[]).iter().flat_map(|&p| p).collect();
+                        mode = "REPROJ";
+                    } else {
+                        let g = render_gbuffer(&scene, &cam, &[]);
+                        rgba = g.color.iter().flat_map(|&p| p).collect();
+                        prev_g = Some(g);
+                        mode = "MOVING";
+                    }
+                    cycle += 1;
                 } else {
+                    // Still: progressive refinement to a full-quality beauty frame (no reprojection).
+                    prev_g = None;
+                    cycle = 0;
                     let tnorm = (still as f32 / 20.0).min(1.0);
                     let div = 3.0 + (1.0 - 3.0) * tnorm; // 3 → 1 as it converges
                     rw = ((base_w as f32 / div) as u32).max(220);
                     rh = ((base_h as f32 / div) as u32).max(124);
-                    q = Quality::lerp(Quality::fast(rw, rh), Quality::full(rw, rh), tnorm);
+                    Quality::lerp(Quality::fast(rw, rh), Quality::full(rw, rh), tnorm).apply(&mut scene);
+                    rgba = render(&scene, &cam).to_rgba8(bg);
                     mode = if tnorm >= 1.0 { "FULL" } else { "REFINING" };
                 }
-                q.apply(&mut scene);
-
-                // --- render + time it ---
-                let cam = orbit_camera(Vec3::new(0.0, 0.85, 0.4), radius, yaw, pitch, 52f32.to_radians());
-                let t0 = Instant::now();
-                let fb = render(&scene, &cam);
                 let ms = t0.elapsed().as_secs_f32() * 1000.0;
                 let fps = if ms > 0.0 { 1000.0 / ms } else { 999.0 };
 
@@ -361,7 +383,6 @@ mod win32 {
                 }
 
                 // --- HUD + present (upscaled to the window) ---
-                let mut rgba = fb.to_rgba8(bg);
                 let hud = format!("{mode} {rw}X{rh} {fps:.0} FPS");
                 font::draw_text(&mut rgba, rw, rh, 6, 6, 2, &hud, [255, 232, 96]);
                 rgba_to_bgra(&rgba, &mut bgra);
