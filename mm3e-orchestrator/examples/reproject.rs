@@ -34,22 +34,34 @@ fn scene() -> Scene {
 }
 
 fn main() {
-    let scene = scene();
+    let mut scene = scene();
     let (w, h) = (scene.width, scene.height);
     let frames = 60u32;
     let real_every = 3u32; // 1 real + 2 reprojected
 
+    // The chrome sphere (object index 1, radius 1.0) is a moving object: it slides in X. Level 2
+    // reprojection warps its pixels by its own motion, not just the camera's.
+    let mover_idx = 1usize;
+    let mover_r = 1.0f32;
+    let base = scene.objects[mover_idx].xform.pos;
+    let mover_pos = |f: u32| Vec3::new(base.x + 1.6 * (f as f32 * 0.13).sin(), base.y, base.z);
+
     let mut prev: Option<GFrame> = None;
+    let mut last_real_center = base;
     let (mut real_ms, mut real_n, mut fake_ms, mut fake_n) = (0.0f32, 0u32, 0.0f32, 0u32);
 
     let t_all = Instant::now();
     for f in 0..frames {
-        let cam = orbit_camera(Vec3::new(0.2, 0.85, 0.4), 8.5, 0.55 + f as f32 * 0.02, 0.32, 50f32.to_radians());
+        let cam = orbit_camera(Vec3::new(0.2, 0.85, 0.4), 8.5, 0.55 + f as f32 * 0.015, 0.32, 50f32.to_radians());
+        let center = mover_pos(f);
+        scene.objects[mover_idx].xform.pos = center;
+
         let t0 = Instant::now();
         // Fake (reprojected) frame, if this isn't a real-render slot and we have a frame to warp.
         if f % real_every != 0 {
             if let Some(p) = prev.as_ref() {
-                let col = reproject(p, &cam);
+                let delta = center - last_real_center; // the mover's motion since the last real frame
+                let col = reproject(p, &cam, &[delta]);
                 if f == 1 {
                     let fb = GFrame::color_to_framebuffer(w, h, &col);
                     std::fs::write("reproject_fake.bmp", fb.to_bmp(Rgba::rgb8(0, 0, 0))).unwrap();
@@ -59,8 +71,9 @@ fn main() {
                 continue;
             }
         }
-        // Real (raymarched) frame: render the G-buffer and store it for the next fake frames.
-        let g = render_gbuffer(&scene, &cam);
+        // Real (raymarched) frame: render the G-buffer (tagging the mover) and store it.
+        let g = render_gbuffer(&scene, &cam, &[(center, mover_r)]);
+        last_real_center = center;
         if f == 0 {
             let fb = GFrame::color_to_framebuffer(w, h, &g.color);
             std::fs::write("reproject_real.bmp", fb.to_bmp(Rgba::rgb8(0, 0, 0))).unwrap();

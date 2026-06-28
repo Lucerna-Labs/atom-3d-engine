@@ -572,8 +572,8 @@ pub fn render(scene: &Scene, camera: &Camera) -> Framebuffer {
 
 /// Render a **G-buffer frame** — display colour + primary-ray depth + the camera — for reprojection
 /// ([`reproject`]). One sample/pixel, no post pass: it is the base the cheap fake frames warp.
-pub fn render_gbuffer(scene: &Scene, camera: &Camera) -> reproject::GFrame {
-    type GBand = (u32, Vec<([u8; 4], f32)>); // (first row, [color, depth] per pixel)
+pub fn render_gbuffer(scene: &Scene, camera: &Camera, movers: &[(Vec3, f32)]) -> reproject::GFrame {
+    type GBand = (u32, Vec<([u8; 4], f32, i32)>); // (first row, [color, depth, obj] per pixel)
     let (w, h) = (scene.width, scene.height);
     let threads = std::thread::available_parallelism().map(|n| n.get()).unwrap_or(1).max(1);
     let band = (h as usize).div_ceil(threads);
@@ -589,15 +589,20 @@ pub fn render_gbuffer(scene: &Scene, camera: &Camera) -> reproject::GFrame {
                         for x in 0..w {
                             let ray = camera.ray(x as f32 + 0.5, y as f32 + 0.5, w, h);
                             let hit = scene.marcher.march(&field, &ray);
-                            let (hdr, depth) = if hit.hit {
-                                (shade_hit(scene, &field, &hit, &ray, 0), hit.t)
+                            let (hdr, depth, obj) = if hit.hit {
+                                let o = movers
+                                    .iter()
+                                    .position(|(c, r)| (hit.pos - *c).length() <= r + 0.05)
+                                    .map(|k| k as i32)
+                                    .unwrap_or(-1);
+                                (shade_hit(scene, &field, &hit, &ray, 0), hit.t, o)
                             } else {
-                                (shade::sky(ray.dir, scene.sun_dir), f32::INFINITY)
+                                (shade::sky(ray.dir, scene.sun_dir), f32::INFINITY, -1)
                             };
                             let d = shade::gamma(shade::aces(hdr.scale(scene.post.exposure))).clamp01();
                             let px =
                                 [(d.x * 255.0 + 0.5) as u8, (d.y * 255.0 + 0.5) as u8, (d.z * 255.0 + 0.5) as u8, 255];
-                            rows.push((px, depth));
+                            rows.push((px, depth, obj));
                         }
                     }
                     (y0, rows)
@@ -608,14 +613,16 @@ pub fn render_gbuffer(scene: &Scene, camera: &Camera) -> reproject::GFrame {
     });
     let mut color = vec![[0u8; 4]; (w * h) as usize];
     let mut depth = vec![f32::INFINITY; (w * h) as usize];
+    let mut obj = vec![-1i32; (w * h) as usize];
     for (y0, rows) in bands {
-        for (i, (c, dd)) in rows.into_iter().enumerate() {
+        for (i, (c, dd, o)) in rows.into_iter().enumerate() {
             let idx = (y0 * w) as usize + i;
             color[idx] = c;
             depth[idx] = dd;
+            obj[idx] = o;
         }
     }
-    reproject::GFrame { width: w, height: h, color, depth, camera: *camera }
+    reproject::GFrame { width: w, height: h, color, depth, obj, camera: *camera }
 }
 
 /// Checkerboard (interlaced) render — ray-trace only the pixels where `(x + y)` is even and fill

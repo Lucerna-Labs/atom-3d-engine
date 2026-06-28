@@ -14,12 +14,17 @@ All notable changes to MM3E are documented here.
   calling through `&dyn Fn` (~4%).
 - **Checkerboard render** (`render_checkerboard`): trace half the pixels, fill the rest from
   neighbours (~2× for the moving phase).
-- **Engine-native frame generation** — camera **reprojection** (`reproject` module + `render_gbuffer`).
-  A real frame captures colour + depth; cheap fake frames warp it into the new camera using the
-  depth the engine already computes (forward warp + z-buffer + row hole-fill). Deterministic and
-  testable, not a black box. Measured (`examples/reproject`, 640×360): **fake frames ~11× cheaper**
-  than a real frame (≈5 ms vs ≈50 ms), lifting displayed fps from ~20 to ~50. Physics/input/logic
-  stay honest at full rate; only the raymarched image is generated less often.
+- **Engine-native frame generation** — **reprojection** (`reproject` module + `render_gbuffer`).
+  A real frame captures colour + depth + object tags; cheap fake frames warp it into the new camera
+  using the depth the engine already computes (forward warp + z-buffer + row hole-fill).
+  Deterministic and testable, not a black box.
+  - **Level 1 (camera):** the whole frame reprojects to the new camera.
+  - **Level 2 (object motion vectors):** each pixel is tagged with the moving object it belongs to,
+    and those pixels are additionally shifted by that object's world-space motion — so dynamic
+    objects warp correctly, not just the camera.
+  - Measured (`examples/reproject`, 640×360): **fake frames ~11× cheaper** than a real frame
+    (≈5 ms vs ≈50 ms), lifting displayed fps from ~20 to ~50. Physics/input/logic stay honest at
+    full rate; only the raymarched image is generated less often.
 
 ## [0.5.0] — CPU performance + adaptive rendering
 

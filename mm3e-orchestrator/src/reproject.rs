@@ -16,7 +16,7 @@ use mm3e_kit::framebuffer::Framebuffer;
 use mm3e_kit::vec::Vec3;
 use mm3e_kit::Rgba;
 
-/// A rendered frame plus the depth and camera needed to reproject it.
+/// A rendered frame plus the depth, object tags, and camera needed to reproject it.
 pub struct GFrame {
     pub width: u32,
     pub height: u32,
@@ -24,6 +24,9 @@ pub struct GFrame {
     pub color: Vec<[u8; 4]>,
     /// Primary-ray hit distance per pixel; `f32::INFINITY` for sky.
     pub depth: Vec<f32>,
+    /// Index of the moving object each pixel belongs to (`-1` = static geometry / sky). Level 2
+    /// reprojection shifts these pixels by their object's world-space motion, not just the camera's.
+    pub obj: Vec<i32>,
     pub camera: Camera,
 }
 
@@ -57,8 +60,10 @@ fn project(camera: &Camera, world: Vec3, w: u32, h: u32) -> Option<(f32, f32, f3
     Some((sx, sy, fz))
 }
 
-/// Reproject `prev` into `new_camera`, returning a fresh display RGBA8 buffer.
-pub fn reproject(prev: &GFrame, new_camera: &Camera) -> Vec<[u8; 4]> {
+/// Reproject `prev` into `new_camera`, returning a fresh display RGBA8 buffer. `mover_deltas[k]` is
+/// the world-space displacement of moving object `k` since `prev` was rendered (pass `&[]` for
+/// camera-only Level 1 reprojection); pixels tagged with object `k` are shifted by that delta.
+pub fn reproject(prev: &GFrame, new_camera: &Camera, mover_deltas: &[Vec3]) -> Vec<[u8; 4]> {
     let (w, h) = (prev.width, prev.height);
     let n = (w * h) as usize;
     let mut out = vec![[0u8; 4]; n];
@@ -71,7 +76,14 @@ pub fn reproject(prev: &GFrame, new_camera: &Camera) -> Vec<[u8; 4]> {
             let dir = prev.camera.ray(x as f32 + 0.5, y as f32 + 0.5, w, h).dir;
             // Sky (infinite depth) is reprojected as a far point so it rotates with the camera.
             let d = if prev.depth[i].is_finite() { prev.depth[i] } else { 1.0e6 };
-            let world = prev.camera.eye + dir.scale(d);
+            let mut world = prev.camera.eye + dir.scale(d);
+            // Level 2: if this pixel belongs to a moving object, advance it by the object's motion.
+            let oi = prev.obj[i];
+            if oi >= 0 {
+                if let Some(delta) = mover_deltas.get(oi as usize) {
+                    world = world + *delta;
+                }
+            }
             if let Some((sx, sy, fz)) = project(new_camera, world, w, h) {
                 // `sx = x + 0.5` is the centre of pixel x, so the target pixel index is floor(sx).
                 let (nx, ny) = (sx.floor() as i32, sy.floor() as i32);

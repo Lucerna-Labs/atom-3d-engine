@@ -173,11 +173,11 @@ fn reprojection_identity_mostly_matches() {
     use mm3e_orchestrator::reproject::reproject;
     let scene = demo_scene();
     let c = cam();
-    let g = render_gbuffer(&scene, &c);
+    let g = render_gbuffer(&scene, &c, &[]);
     assert_eq!(g.color.len(), (scene.width * scene.height) as usize);
     // Reprojecting to the SAME camera should reproduce almost the whole frame (each pixel's world
     // point projects back to ~its own pixel).
-    let out = reproject(&g, &c);
+    let out = reproject(&g, &c, &[]);
     let mut same = 0u32;
     for (i, px) in out.iter().enumerate() {
         if (px[0] as i32 - g.color[i][0] as i32).abs() < 24 {
@@ -186,6 +186,21 @@ fn reprojection_identity_mostly_matches() {
     }
     let frac = same as f32 / out.len() as f32;
     assert!(frac > 0.85, "identity reprojection should mostly match, got {frac:.2}");
+}
+
+#[test]
+fn reprojection_object_motion_has_effect() {
+    use mm3e_orchestrator::render_gbuffer;
+    use mm3e_orchestrator::reproject::reproject;
+    // Tag the first sphere (centre -1.2,1,0, radius 1) as a moving object.
+    let scene = demo_scene();
+    let c = cam();
+    let g = render_gbuffer(&scene, &c, &[(Vec3::new(-1.2, 1.0, 0.0), 1.3)]);
+    assert!(g.obj.contains(&0), "the mover should tag some pixels");
+    // Reprojecting with a non-zero object delta must differ from a zero delta (the object moves).
+    let still = reproject(&g, &c, &[Vec3::ZERO]);
+    let moved = reproject(&g, &c, &[Vec3::new(1.5, 0.0, 0.0)]);
+    assert_ne!(still, moved, "object motion vectors should shift the moving object's pixels");
 }
 
 #[test]
