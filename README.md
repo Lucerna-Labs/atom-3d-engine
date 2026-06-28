@@ -1,9 +1,12 @@
 # MM3E — Mechanical Math 3-D Engine
 
-A **dependency-free, real-time-capable 3-D engine** built from pure math primitives, in std-only
-Rust. No GPU, no Vello, no `image`, no math crate, no windowing crate — it rolls its own vectors,
-matrices, quaternions, signed-distance fields, sphere tracer, global illumination, post-processing,
-animation, scene format, an interactive window, and 24-bit BMP encoder.
+A real-time 3-D engine built from pure math primitives, in std-only Rust. The core
+(`mm3e-kit` + `mm3e-orchestrator`) is **dependency-free** — no Vello, no `image`, no math crate, no
+windowing crate; it rolls its own vectors, matrices, quaternions, signed-distance fields, sphere
+tracer, global illumination, post-processing, animation, scene format, an interactive window, and
+24-bit BMP encoder. An optional **GPU backend** (`mm3e-gpu`) compiles the same scenes into a WGSL
+compute shader and runs them on wgpu (Vulkan/Metal/DX12) — **~430 fps at 960×540** on an RTX 5070 Ti,
+roughly 400× the CPU path, with a pixel-faithful image.
 
 MM3E is the **3-D elevation of [MMPE](https://github.com/Rekonquest/mm3e)** — where the 2-D engine
 rasterized 2-D signed-distance fields with a `scan`-convert, this one sphere-traces 3-D
@@ -18,13 +21,34 @@ kit/orchestrator split.
 baked from the SDF probe volume. Middle: PBR metals, emissive bloom, soft shadows. Bottom: the
 primitive zoo plus domain operators (twist, onion, round, smooth-union). All pure-math raymarched.*
 
+![GPU render](gpu_render.png)
+
+*Rendered on the GPU (`mm3e-gpu`) from the WGSL-codegen'd world field — the same scene as the CPU
+`spheres` example, at ~430 fps.*
+
 ## What it is (and isn't)
 
 MM3E is a **best-in-class real-time SDF / raymarching engine + renderer**. Geometry is analytic
 signed-distance fields, which makes global illumination, soft shadows, ambient occlusion, and CSG
 fall out of the field essentially for free — the things a mesh engine voxelizes or approximates to
-fake. It deliberately is **not** a GPU triangle rasterizer like Unreal/Unity/Godot; it has no mesh
-pipeline. See [ROADMAP.md](ROADMAP.md) for the honest gap analysis and the path to a GPU backend.
+fake. It runs on the CPU (multithreaded) and on the GPU (wgpu compute). It deliberately is **not**
+a GPU triangle rasterizer like Unreal/Unity/Godot; it has no mesh pipeline. See
+[ROADMAP.md](ROADMAP.md) for the honest gap analysis and where mesh ingestion would go.
+
+## GPU backend
+
+`mm3e-gpu` walks a `Scene` and emits a WGSL compute shader whose `map(p) -> (dist, matId)` is the
+GPU twin of the CPU world-field closure — the doctrine re-targeted (the same atoms, now shader text
+the GPU runs across thousands of lanes). The camera rides in a uniform, so a fixed scene compiles
+once and a real-time loop only re-uploads the camera. Primitives, CSG, domain operators, GGX PBR,
+soft shadows, AO, IBL ambient, reflections, and fog are all ported; the core crates stay zero-dep —
+wgpu lives only in this crate.
+
+```sh
+cargo run -p mm3e-gpu --example gpu_probe  --release   # print the selected GPU adapter
+cargo run -p mm3e-gpu --example gpu_render --release   # GPU render to BMP + an fps benchmark
+cargo run -p mm3e-gpu --example gpu_viewer --release   # real-time GPU window (Windows; orbit live)
+```
 
 ## The doctrine
 

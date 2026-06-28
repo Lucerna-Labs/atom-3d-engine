@@ -2,6 +2,20 @@
 
 All notable changes to MM3E are documented here.
 
+## [0.3.0] — GPU backend
+
+- **`mm3e-gpu`**: a real-time GPU backend. It codegens the SDF world field into a WGSL compute
+  shader (the GPU twin of the CPU `world()` closure) and runs it on **wgpu** (Vulkan/Metal/DX12).
+  Measured **~430 fps at 960×540 on an RTX 5070 Ti** — roughly 400× the CPU path — with a
+  pixel-faithful image. The camera rides in a uniform, so a fixed scene compiles once and a
+  real-time loop only re-uploads the camera.
+- Ported to WGSL: all 11 primitives, union/smooth/subtract CSG, the round/onion/twist/bend/mirror/
+  repeat/elongate domain operators, GGX PBR, soft shadows, AO, IBL ambient, reflections, and fog.
+- Examples: `gpu_probe` (adapter check), `gpu_render` (GPU render to BMP + fps benchmark), and
+  `gpu_viewer` (a real-time GPU window via Win32/GDI present — no windowing crate).
+- The core crates (`mm3e-kit`, `mm3e-orchestrator`) remain **zero-dependency**; wgpu is isolated to
+  the opt-in `mm3e-gpu` crate. CI builds and lints the GPU crate on Windows.
+
 ## [0.2.0] — the complete engine
 
 A large feature pass turning the renderer into a full SDF engine, all within the zero-dependency,

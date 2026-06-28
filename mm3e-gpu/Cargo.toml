@@ -1,0 +1,26 @@
+[package]
+name = "mm3e-gpu"
+version = "0.1.0"
+edition = "2021"
+description = "GPU backend: codegen the SDF world field into a WGSL compute shader and run it on wgpu."
+
+# NOTE: the core engine (mm3e-kit + mm3e-orchestrator) stays dependency-free std-only Rust.
+# This crate is the OPT-IN real-time path: it is the only place wgpu/GPU dependencies live.
+[dependencies]
+mm3e-kit = { path = "../mm3e-kit" }
+mm3e-orchestrator = { path = "../mm3e-orchestrator" }
+wgpu = "26"
+pollster = "0.4"
+bytemuck = { version = "1", features = ["derive"] }
+
+[[example]]
+name = "gpu_probe"
+path = "examples/gpu_probe.rs"
+
+[[example]]
+name = "gpu_render"
+path = "examples/gpu_render.rs"
+
+[[example]]
+name = "gpu_viewer"
+path = "examples/gpu_viewer.rs"

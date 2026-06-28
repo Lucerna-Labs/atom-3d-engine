@@ -25,11 +25,16 @@ constraint broken:
 - ✅ **Animation** — keyframe tracks with easing + quaternion slerp (`anim`).
 - ✅ **Scene file format** — the `.mm3e` serializer + parser, round-trip tested (`scene_io`).
 - ✅ **Real-time interactive viewer** — raw Win32/GDI, zero windowing crates (`examples/viewer.rs`).
-- ✅ **Engineering** — a 19-test suite + GitHub Actions CI (fmt, clippy `-D warnings`, build, test).
+- ✅ **GPU backend** (`mm3e-gpu`) — **the Tier-3 leap, done.** Codegens the world field into a WGSL
+  compute shader and runs it on wgpu (Vulkan/Metal/DX12): ~430 fps at 960×540 on an RTX 5070 Ti
+  (≈400× the CPU), pixel-faithful, with a real-time GPU window (`examples/gpu_viewer.rs`). The core
+  crates stay zero-dependency; wgpu is isolated to this opt-in crate.
+- ✅ **Engineering** — a 23-test suite + GitHub Actions CI (fmt, clippy `-D warnings`, build, test;
+  core on Linux + Windows, the GPU crate on Windows).
 
-Highest-leverage next, in order: a true **BVH** over additive objects (the bounding-sphere prune is the
-substrate; the open problem is ordered CSG with subtraction), then the **Tier-3 GPU backend** (wgpu +
-WGSL codegen of the world field) to cross from offline-quality stills to 60 Hz. See the tiers below.
+Highest-leverage next: a true **BVH** over additive objects (the bounding-sphere prune is the
+substrate; the open problem is ordered CSG with subtraction), and **mesh ingestion** (glTF + a
+mesh→SDF bake) for those who want to bring external geometry into the field. See the tiers below.
 
 ## The strategic fork (pick one)
 
