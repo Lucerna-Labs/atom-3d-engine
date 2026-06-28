@@ -14,6 +14,7 @@ pub mod gi;
 pub mod particles;
 pub mod physics;
 pub mod post;
+pub mod reproject;
 pub mod scene_io;
 
 use mm3e_kit::{
@@ -21,7 +22,7 @@ use mm3e_kit::{
     camera::Camera,
     color::{Material, Rgba},
     framebuffer::Framebuffer,
-    march::{Marcher, Ray},
+    march::{Hit, Marcher, Ray},
     sdf::{self, Field},
     shade,
     vec::{Transform, Vec3},
@@ -569,6 +570,54 @@ pub fn render(scene: &Scene, camera: &Camera) -> Framebuffer {
     post::resolve(&hdr, w, h, &scene.post)
 }
 
+/// Render a **G-buffer frame** — display colour + primary-ray depth + the camera — for reprojection
+/// ([`reproject`]). One sample/pixel, no post pass: it is the base the cheap fake frames warp.
+pub fn render_gbuffer(scene: &Scene, camera: &Camera) -> reproject::GFrame {
+    type GBand = (u32, Vec<([u8; 4], f32)>); // (first row, [color, depth] per pixel)
+    let (w, h) = (scene.width, scene.height);
+    let threads = std::thread::available_parallelism().map(|n| n.get()).unwrap_or(1).max(1);
+    let band = (h as usize).div_ceil(threads);
+    let bands: Vec<GBand> = std::thread::scope(|s| {
+        let handles: Vec<_> = (0..threads)
+            .map(|ti| {
+                let y0 = (ti * band) as u32;
+                let y1 = (((ti + 1) * band) as u32).min(h);
+                s.spawn(move || {
+                    let field = scene.world();
+                    let mut rows = Vec::with_capacity(((y1.saturating_sub(y0)) * w) as usize);
+                    for y in y0..y1 {
+                        for x in 0..w {
+                            let ray = camera.ray(x as f32 + 0.5, y as f32 + 0.5, w, h);
+                            let hit = scene.marcher.march(&field, &ray);
+                            let (hdr, depth) = if hit.hit {
+                                (shade_hit(scene, &field, &hit, &ray, 0), hit.t)
+                            } else {
+                                (shade::sky(ray.dir, scene.sun_dir), f32::INFINITY)
+                            };
+                            let d = shade::gamma(shade::aces(hdr.scale(scene.post.exposure))).clamp01();
+                            let px =
+                                [(d.x * 255.0 + 0.5) as u8, (d.y * 255.0 + 0.5) as u8, (d.z * 255.0 + 0.5) as u8, 255];
+                            rows.push((px, depth));
+                        }
+                    }
+                    (y0, rows)
+                })
+            })
+            .collect();
+        handles.into_iter().map(|hd| hd.join().unwrap()).collect()
+    });
+    let mut color = vec![[0u8; 4]; (w * h) as usize];
+    let mut depth = vec![f32::INFINITY; (w * h) as usize];
+    for (y0, rows) in bands {
+        for (i, (c, dd)) in rows.into_iter().enumerate() {
+            let idx = (y0 * w) as usize + i;
+            color[idx] = c;
+            depth[idx] = dd;
+        }
+    }
+    reproject::GFrame { width: w, height: h, color, depth, camera: *camera }
+}
+
 /// Checkerboard (interlaced) render — ray-trace only the pixels where `(x + y)` is even and fill
 /// the rest by averaging their four (always-rendered) neighbours. Halves the per-frame ray work
 /// for a small softening, ideal for the camera-moving phase of an interactive previewer. Resolves
@@ -709,7 +758,12 @@ fn trace<F: Fn(Vec3) -> Field + ?Sized>(scene: &Scene, field: &F, ray: &Ray, dep
     if !hit.hit {
         return shade::sky(ray.dir, scene.sun_dir);
     }
+    shade_hit(scene, field, &hit, ray, depth)
+}
 
+/// Shade a confirmed surface hit — the post-hit half of [`trace`], factored out so the G-buffer
+/// renderer (reprojection) can capture the primary depth without marching the ray a second time.
+fn shade_hit<F: Fn(Vec3) -> Field + ?Sized>(scene: &Scene, field: &F, hit: &Hit, ray: &Ray, depth: u32) -> Vec3 {
     let m = scene.materials[hit.mat as usize % scene.materials.len()];
     let albedo = surface_albedo(&m, hit.pos);
     let normal = hit.normal;

@@ -2,6 +2,25 @@
 
 All notable changes to MM3E are documented here.
 
+## [0.6.0] — profiling + engine-native frame generation
+
+- **CPU profiler** (`examples/cpu_profile`): differential timing (toggle a feature, measure the
+  delta) + per-phase field-eval counts. It proved the renderer is march-bound and *not* wasteful —
+  the bounding-sphere prune already makes shadow rays cheap-per-eval, and shading runs only after a
+  confirmed hit. Primary march + shading is ~85% of the frame; shadows 18%; AO/reflections ~0%.
+- **Monomorphized field dispatch**: `Marcher::{march,normal,soft_shadow,ambient_occlusion}` and
+  `trace`/`shade_pixel` are generic over the field type (`F: Fn + ?Sized`); the beauty path builds
+  the concrete world closure per band so the ~8M evals/frame inline the primitive loop instead of
+  calling through `&dyn Fn` (~4%).
+- **Checkerboard render** (`render_checkerboard`): trace half the pixels, fill the rest from
+  neighbours (~2× for the moving phase).
+- **Engine-native frame generation** — camera **reprojection** (`reproject` module + `render_gbuffer`).
+  A real frame captures colour + depth; cheap fake frames warp it into the new camera using the
+  depth the engine already computes (forward warp + z-buffer + row hole-fill). Deterministic and
+  testable, not a black box. Measured (`examples/reproject`, 640×360): **fake frames ~11× cheaper**
+  than a real frame (≈5 ms vs ≈50 ms), lifting displayed fps from ~20 to ~50. Physics/input/logic
+  stay honest at full rate; only the raymarched image is generated less often.
+
 ## [0.5.0] — CPU performance + adaptive rendering
 
 The CPU bottleneck is per-pixel ray-march cost, not threads, so the wins are algorithmic and

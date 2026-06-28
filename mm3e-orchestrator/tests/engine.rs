@@ -168,6 +168,27 @@ fn physics_body_rests_on_floor() {
 }
 
 #[test]
+fn reprojection_identity_mostly_matches() {
+    use mm3e_orchestrator::render_gbuffer;
+    use mm3e_orchestrator::reproject::reproject;
+    let scene = demo_scene();
+    let c = cam();
+    let g = render_gbuffer(&scene, &c);
+    assert_eq!(g.color.len(), (scene.width * scene.height) as usize);
+    // Reprojecting to the SAME camera should reproduce almost the whole frame (each pixel's world
+    // point projects back to ~its own pixel).
+    let out = reproject(&g, &c);
+    let mut same = 0u32;
+    for (i, px) in out.iter().enumerate() {
+        if (px[0] as i32 - g.color[i][0] as i32).abs() < 24 {
+            same += 1;
+        }
+    }
+    let frac = same as f32 / out.len() as f32;
+    assert!(frac > 0.85, "identity reprojection should mostly match, got {frac:.2}");
+}
+
+#[test]
 fn quality_presets_and_lerp() {
     use mm3e_orchestrator::Quality;
     let fast = Quality::fast(320, 180);
