@@ -2,7 +2,7 @@
 //! transform. `Vec3::dot` is the `project` root atom; `normalize` is `scale`; `Transform`
 //! is the 3-D analog of MMPE's 2-D `Affine`. Pure mechanism — no rendering decisions.
 
-#[derive(Clone, Copy, Debug, PartialEq)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
 pub struct Vec3 {
     pub x: f32,
     pub y: f32,
@@ -66,6 +66,10 @@ impl Vec3 {
     }
     pub fn clamp01(self) -> Vec3 {
         Vec3::new(self.x.clamp(0.0, 1.0), self.y.clamp(0.0, 1.0), self.z.clamp(0.0, 1.0))
+    }
+    /// Component-wise clamp into the box `[lo, hi]`.
+    pub fn clamp_to(self, lo: Vec3, hi: Vec3) -> Vec3 {
+        self.max(lo).min(hi)
     }
     /// Linear interpolation toward `o` by `t`.
     pub fn mix(self, o: Vec3, t: f32) -> Vec3 {
@@ -185,5 +189,82 @@ impl Transform {
     /// Map a world-space point into this object's local space.
     pub fn to_local(&self, p: Vec3) -> Vec3 {
         self.rot.transpose().mul_vec(p - self.pos).scale(1.0 / self.scale)
+    }
+}
+
+/// A unit quaternion `(x, y, z, w)` for smooth rotation interpolation (animation). Stored
+/// scalar-last. `slerp` is the spherical interpolation animation needs; `to_mat3` hands a
+/// rotation to a `Transform` so the rest of the engine never sees quaternions.
+#[derive(Clone, Copy, Debug)]
+pub struct Quat {
+    pub x: f32,
+    pub y: f32,
+    pub z: f32,
+    pub w: f32,
+}
+
+impl Quat {
+    pub const IDENTITY: Quat = Quat { x: 0.0, y: 0.0, z: 0.0, w: 1.0 };
+
+    /// A rotation of `angle` radians about a unit `axis`.
+    pub fn from_axis_angle(axis: Vec3, angle: f32) -> Quat {
+        let half = angle * 0.5;
+        let s = half.sin();
+        let a = axis.normalize();
+        Quat { x: a.x * s, y: a.y * s, z: a.z * s, w: half.cos() }
+    }
+
+    pub fn dot(self, o: Quat) -> f32 {
+        self.x * o.x + self.y * o.y + self.z * o.z + self.w * o.w
+    }
+
+    pub fn normalize(self) -> Quat {
+        let n = self.dot(self).sqrt();
+        if n > 1e-12 {
+            Quat { x: self.x / n, y: self.y / n, z: self.z / n, w: self.w / n }
+        } else {
+            Quat::IDENTITY
+        }
+    }
+
+    /// Spherical linear interpolation toward `o` by `t` (shortest path).
+    pub fn slerp(self, o: Quat, t: f32) -> Quat {
+        let mut cos = self.dot(o);
+        let mut end = o;
+        if cos < 0.0 {
+            cos = -cos;
+            end = Quat { x: -o.x, y: -o.y, z: -o.z, w: -o.w };
+        }
+        if cos > 0.9995 {
+            // Nearly parallel — fall back to normalized lerp.
+            return Quat {
+                x: self.x + (end.x - self.x) * t,
+                y: self.y + (end.y - self.y) * t,
+                z: self.z + (end.z - self.z) * t,
+                w: self.w + (end.w - self.w) * t,
+            }
+            .normalize();
+        }
+        let theta = cos.clamp(-1.0, 1.0).acos();
+        let sin = theta.sin();
+        let a = ((1.0 - t) * theta).sin() / sin;
+        let b = (t * theta).sin() / sin;
+        Quat {
+            x: self.x * a + end.x * b,
+            y: self.y * a + end.y * b,
+            z: self.z * a + end.z * b,
+            w: self.w * a + end.w * b,
+        }
+    }
+
+    /// The equivalent 3×3 rotation matrix.
+    pub fn to_mat3(self) -> Mat3 {
+        let q = self.normalize();
+        let (x, y, z, w) = (q.x, q.y, q.z, q.w);
+        Mat3::from_cols(
+            Vec3::new(1.0 - 2.0 * (y * y + z * z), 2.0 * (x * y + z * w), 2.0 * (x * z - y * w)),
+            Vec3::new(2.0 * (x * y - z * w), 1.0 - 2.0 * (x * x + z * z), 2.0 * (y * z + x * w)),
+            Vec3::new(2.0 * (x * z + y * w), 2.0 * (y * z - x * w), 1.0 - 2.0 * (x * x + y * y)),
+        )
     }
 }

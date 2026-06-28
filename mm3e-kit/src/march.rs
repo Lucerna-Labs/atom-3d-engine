@@ -42,11 +42,14 @@ pub struct Marcher {
     pub max_steps: u32,
     pub max_dist: f32,
     pub eps: f32,
+    /// Fraction of the safe distance to actually step. 1.0 for pure Lipschitz fields; lower
+    /// (≈0.6) when the scene uses non-distance-preserving domain warps (twist/bend/repeat).
+    pub step_scale: f32,
 }
 
 impl Default for Marcher {
     fn default() -> Self {
-        Self { max_steps: 160, max_dist: 120.0, eps: 0.0006 }
+        Self { max_steps: 160, max_dist: 120.0, eps: 0.0006, step_scale: 1.0 }
     }
 }
 
@@ -62,7 +65,7 @@ impl Marcher {
             if f.dist < eps {
                 return Hit { hit: true, t, pos: p, normal: self.normal(field, p), mat: f.mat, steps: i };
             }
-            t += f.dist;
+            t += f.dist * self.step_scale;
             if t > self.max_dist {
                 break;
             }

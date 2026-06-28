@@ -1,74 +1,110 @@
 # MM3E — Mechanical Math 3-D Engine
 
-A **robust, dependency-free 3-D renderer** built from pure math primitives, in std-only Rust.
-No GPU, no Vello, no `image`, no math crate — it rolls its own vectors, matrices, signed-distance
-fields, sphere tracer, shader, framebuffer, and 24-bit BMP encoder.
+A **dependency-free, real-time-capable 3-D engine** built from pure math primitives, in std-only
+Rust. No GPU, no Vello, no `image`, no math crate, no windowing crate — it rolls its own vectors,
+matrices, quaternions, signed-distance fields, sphere tracer, global illumination, post-processing,
+animation, scene format, an interactive window, and 24-bit BMP encoder.
 
-MM3E is the **3-D elevation of MMPE** (the 2-D "mechanical math primitive engine"). It is
-built with the *same techniques*, one dimension up:
+MM3E is the **3-D elevation of [MMPE](https://github.com/Rekonquest/mm3e)** — where the 2-D engine
+rasterized 2-D signed-distance fields with a `scan`-convert, this one sphere-traces 3-D
+signed-distance fields. Same eight root atoms, same zero-dependency spirit, same strict
+kit/orchestrator split.
 
-![Hero scene](spheres.png)
-![Showcase scene](showcase.png)
+![Global illumination demo](gi_demo.png)
+![Showcase](showcase.png)
+![Feature gallery](gallery.png)
 
-*Above: rendered by the examples below. Mirror/Fresnel reflections, soft shadows, ambient
-occlusion, CSG (incl. a sphere carved out of the copper box), smooth-min blobs, an emissive
-light bar, a procedural checker floor, HDR sky, and distance fog — all from pure-math 3-D SDFs,
-no GPU and no external crates.*
+*Top: a Cornell-style room with real GI color-bleed (red/blue walls tinting the white sphere),
+baked from the SDF probe volume. Middle: PBR metals, emissive bloom, soft shadows. Bottom: the
+primitive zoo plus domain operators (twist, onion, round, smooth-union). All pure-math raymarched.*
 
-| MMPE (2-D) | MM3E (3-D) |
-|---|---|
-| 2-D signed-distance fields | 3-D signed-distance fields (sphere, box, torus, cylinder, capsule, plane) |
-| `scan_convert` over the pixel grid | **sphere tracing** (ray marching) over the pixel grid |
-| analytic AA via `smoothstep` coverage | **supersampled** AA on an n×n sub-pixel grid |
-| Porter-Duff alpha-over compositing | **CSG** union / intersect / subtract / smooth-min |
-| painter's algorithm (`order` atom) | nearest-surface depth from the march + light ordering |
-| `Affine` 2-D transform | `Transform` = `Mat3` rotation + translation + uniform scale |
-| self-rolled BMP + bitmap font | self-rolled BMP (framebuffer carried over verbatim) |
+## What it is (and isn't)
 
-## The doctrine (unchanged)
+MM3E is a **best-in-class real-time SDF / raymarching engine + renderer**. Geometry is analytic
+signed-distance fields, which makes global illumination, soft shadows, ambient occlusion, and CSG
+fall out of the field essentially for free — the things a mesh engine voxelizes or approximates to
+fake. It deliberately is **not** a GPU triangle rasterizer like Unreal/Unity/Godot; it has no mesh
+pipeline. See [ROADMAP.md](ROADMAP.md) for the honest gap analysis and the path to a GPU backend.
+
+## The doctrine
 
 Everything decomposes into the **eight root atoms** and recomposes — *composition over cracking*:
 
 `scan · hash · fold · project · scale · compare · combine · order`
 
-In 3-D they specialize as: `scan` walks the pixel grid into rays · `hash` drives the procedural
-checker floor · `fold` reduces ray steps to a hit and folds objects into the world field ·
-`project` is every dot product (camera basis, normals, lighting) · `scale` is normalization and
-the perspective spread · `compare` is every SDF (a distance) · `combine` is lighting, fog, and the
-smooth-min blend · `order` sorts the lights brightest-first.
+Sphere tracing is `fold` (reduce ray steps to a hit); every SDF is `compare` (a distance); the GGX
+BRDF, fog, smooth-min CSG, and bloom are all `combine`; the camera basis and every normal are
+`project`. See [ARCHITECTURE.md](ARCHITECTURE.md).
 
 ## Architecture — two crates, strictly split
 
-- **`mm3e-kit`** — *all mechanism, no policy.* The atoms + 3-D math (`vec`), SDF primitives and
-  CSG combinators (`sdf`), the pinhole `camera`, the sphere tracer with normals / soft shadows /
-  ambient occlusion (`march`), the light-transport math (`shade`), `color`/`Material`, and the
-  `framebuffer`. Nothing here decides *what* to draw.
-- **`mm3e-orchestrator`** — *all policy, no mechanism.* The scene graph (`Object`/`Prim`/`Combine`),
-  materials, lights, atmosphere, the world-field closure the kit marches, and the parallel render
-  loop. It drives the kit; it never computes a distance, normal, or tone-map itself.
+- **`mm3e-kit`** — *all mechanism, no policy.* The atoms, math (`vec`), SDF primitives + CSG +
+  domain operators (`sdf`), the pinhole `camera`, the sphere tracer (`march`), light-transport
+  math (`shade`), `color`/`Material`, and the `framebuffer`. Nothing here decides *what* to draw.
+- **`mm3e-orchestrator`** — *all policy, no mechanism.* The scene graph, the world-field closure,
+  lighting, reflections, fog, GI baking (`gi`), the post stack (`post`), render modes, animation
+  (`anim`), and the scene file format (`scene_io`). It drives the kit; it never rasterizes a pixel.
 
 ## Features
 
-- Exact analytic 3-D SDFs + constructive solid geometry (incl. polynomial smooth-min blends)
-- Sphere tracing with distance-relaxed tolerance and **conservative bounding-sphere pruning**
-  (an O(1) lower-bound early-out — the first acceleration step toward a full BVH)
-- Gradient normals (tetrahedron sampling), **soft shadows**, **ambient occlusion**
-- **Cook-Torrance GGX PBR**: metallic-roughness workflow (GGX NDF + height-correlated Smith
-  visibility + spectral Schlick Fresnel), energy-conserving diffuse
-- **Recursive mirror reflections** (configurable bounce depth)
-- Procedural checkered floor, HDR sky with a sun disk, exponential distance fog
-- **Linear-HDR pipeline**: a float scene-color target resolved through a real post pass —
-  **bloom** (bright-pass + separable Gaussian), **exposure**, **ACES** tone-map, gamma
-- Supersampled anti-aliasing
-- **Multithreaded** rendering via scoped std threads (≈11× on 24 cores) — still zero dependencies
+**Geometry** — 11 analytic SDF primitives (sphere, box, rounded box, torus, cylinder, capsule,
+cone, ellipsoid, octahedron, hex prism, plane); CSG union/intersect/subtract + smooth variants;
+domain operators (round, onion, elongate, infinite repeat, twist, bend, mirror); conservative
+bounding-sphere pruning of the world field.
+
+**Shading & lighting** — Cook-Torrance GGX PBR (metallic-roughness); diffuse image-based lighting
+from the sky; **SDF global illumination** (baked irradiance probe volume); directional + point +
+**area/sphere lights** with inverse-square falloff and soft shadows; recursive mirror reflections;
+gradient normals; ambient occlusion; HDR sky + sun; distance fog.
+
+**Pipeline** — linear-HDR scene-color target → post pass (bloom, exposure, ACES tone-map, gamma);
+supersampled anti-aliasing; debug AOVs (normals, depth, AO, albedo, march-step heatmap);
+multithreaded rendering via scoped std threads (deterministic, ≈11× on 24 cores).
+
+**Systems** — keyframe animation with easing and quaternion slerp; a `.mm3e` text scene format
+(serializer + parser, round-trip tested); a real-time interactive viewer (raw Win32/GDI, no crate).
+
+**Engineering** — 19-test suite, GitHub Actions CI (fmt + clippy `-D warnings` + build + test on
+Linux & Windows), zero external dependencies.
 
 ## Run
 
 ```sh
-cargo run --release -p mm3e-orchestrator --example spheres     # hero scene
-cargo run --release -p mm3e-orchestrator --example showcase    # every primitive + CSG mode
-cargo run --release -p mm3e-orchestrator --example turntable 12 # 12 orbiting frames
+cargo run -p mm3e-orchestrator --example spheres    --release   # hero scene
+cargo run -p mm3e-orchestrator --example showcase   --release   # every primitive + CSG mode
+cargo run -p mm3e-orchestrator --example gallery    --release   # primitive zoo + domain ops
+cargo run -p mm3e-orchestrator --example gi_demo    --release   # global illumination color bleed
+cargo run -p mm3e-orchestrator --example aov        --release   # debug passes (normals/steps/…)
+cargo run -p mm3e-orchestrator --example scene_file --release   # write + load a .mm3e scene
+cargo run -p mm3e-orchestrator --example animate    --release 24 # 24 animation frames
+cargo run -p mm3e-orchestrator --example viewer     --release   # live interactive window (Windows)
 ```
 
-Each example writes a `.bmp` next to the workspace and prints its absolute path.
-(`spheres.bmp`, `showcase.bmp`, `turntable_NN.bmp`.)
+Each renderer writes a `.bmp` next to the workspace and prints its absolute path. The viewer opens
+an orbit-able window — arrow keys or left-drag to orbit, `W`/`S` to zoom, `Esc` to quit.
+
+## Scene format
+
+`scene_io::serialize` / `parse` read and write a line-oriented `.mm3e` document — settings, camera,
+materials, lights, and objects (primitive + transform + CSG mode + domain modifiers). Editing a
+scene no longer means recompiling Rust:
+
+```
+size 800 450
+sun 0.5 0.7 0.4
+cam 0 0.8 8  0 0.8 0  0 1 0  50
+mat 1 1 1 0 0.6 0 0.15 0 0 0 1          # checkered floor
+mat 0.95 0.72 0.28 1 0.18 0.5 0.5 0 0 0 0   # gold metal
+obj plane 0 1 0 0 pos 0 0 0 basis 1 0 0 0 1 0 0 0 1 scale 1 mat 0 combine union
+obj sphere 1 pos -1.4 1 0 basis 1 0 0 0 1 0 0 0 1 scale 1 mat 1 combine union
+```
+
+## Documentation
+
+- [ARCHITECTURE.md](ARCHITECTURE.md) — the two crates, the eight atoms, data flow, module map.
+- [ROADMAP.md](ROADMAP.md) — honest competitive gap analysis and the path forward (GPU, meshes).
+- [CHANGELOG.md](CHANGELOG.md) — release history.
+
+## License
+
+MIT — see [LICENSE](LICENSE).

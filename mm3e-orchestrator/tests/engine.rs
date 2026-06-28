@@ -1,0 +1,122 @@
+//! Integration tests for the orchestrator: scene serialization round-trips, render determinism,
+//! a render smoke test, GI baking, and animation tracks. Run with `cargo test`.
+
+use mm3e_kit::camera::Camera;
+use mm3e_kit::color::Material;
+use mm3e_kit::vec::{Quat, Transform, Vec3};
+use mm3e_orchestrator::anim::{Easing, Track};
+use mm3e_orchestrator::{orbit_camera, render, scene_io, Light, Object, Prim, RenderMode, Scene};
+
+/// A small scene exercising a plane, several primitives, modifiers, and lights.
+fn demo_scene() -> Scene {
+    let mut scene = Scene::new(96, 64);
+    scene.aa = 1;
+    let floor = scene.material(Material::solid(Vec3::splat(1.0)).checkered().roughness(0.6));
+    let red = scene.material(Material::solid(Vec3::new(0.85, 0.2, 0.2)).roughness(0.3));
+    let metal = scene.material(Material::solid(Vec3::new(0.9, 0.8, 0.4)).metallic(1.0).roughness(0.2).reflective(0.4));
+    scene.add(Object::new(Prim::Plane { n: Vec3::new(0.0, 1.0, 0.0), h: 0.0 }, Transform::IDENTITY, floor));
+    scene.add(Object::new(Prim::Sphere { r: 1.0 }, Transform::at(Vec3::new(-1.2, 1.0, 0.0)), red).round(0.1));
+    scene.add(Object::new(Prim::Torus { major: 0.7, minor: 0.25 }, Transform::at(Vec3::new(1.2, 1.0, 0.0)), metal));
+    scene.add(
+        Object::new(Prim::Box { half: Vec3::splat(0.6) }, Transform::at(Vec3::new(0.0, 0.6, 1.6)), red).onion(0.05),
+    );
+    scene.sun_dir = Vec3::new(0.5, 0.75, 0.4).normalize();
+    scene.light(Light::directional(scene.sun_dir, Vec3::splat(2.0)).soft(0.04));
+    scene.light(Light::sphere(Vec3::new(-3.0, 4.0, 3.0), Vec3::splat(20.0), 1.0));
+    scene
+}
+
+fn cam() -> Camera {
+    orbit_camera(Vec3::new(0.0, 0.8, 0.3), 7.0, 0.5, 0.3, 52f32.to_radians())
+}
+
+#[test]
+fn scene_io_roundtrips_stably() {
+    let scene = demo_scene();
+    let c = cam();
+    let text = scene_io::serialize(&scene, &c);
+    let (parsed, _) = scene_io::parse(&text).expect("parse");
+    assert_eq!(parsed.objects.len(), scene.objects.len());
+    assert_eq!(parsed.materials.len(), scene.materials.len());
+    assert_eq!(parsed.lights.len(), scene.lights.len());
+    // Re-serializing the parsed scene must reproduce the exact same text.
+    let again = scene_io::serialize(&parsed, &c);
+    assert_eq!(text, again, "serialization is not a stable round-trip");
+}
+
+#[test]
+fn scene_io_rejects_garbage() {
+    assert!(scene_io::parse("size 10\n").is_err()); // missing height
+    assert!(scene_io::parse("obj banana 1 2 3\n").is_err()); // unknown primitive
+    assert!(scene_io::parse("wat 1 2 3\n").is_err()); // unknown directive
+}
+
+#[test]
+fn render_is_deterministic() {
+    let scene = demo_scene();
+    let c = cam();
+    let a = render(&scene, &c).to_bmp(mm3e_kit::color::Rgba::rgb8(0, 0, 0));
+    let b = render(&scene, &c).to_bmp(mm3e_kit::color::Rgba::rgb8(0, 0, 0));
+    assert_eq!(a, b, "render must be deterministic regardless of thread scheduling");
+}
+
+#[test]
+fn render_smoke_produces_a_nontrivial_image() {
+    let scene = demo_scene();
+    let fb = render(&scene, &cam());
+    let px = fb.to_u32(mm3e_kit::color::Rgba::rgb8(0, 0, 0));
+    assert_eq!(px.len() as u32, scene.width * scene.height);
+    // The image must not be a single flat color (geometry + floor are visible).
+    let first = px[0];
+    assert!(px.iter().any(|&p| p != first), "render is a flat color — nothing was drawn");
+    // No NaN leaked through (all pixels are valid 0x00RRGGBB).
+    assert!(px.iter().all(|&p| p <= 0x00FF_FFFF));
+}
+
+#[test]
+fn all_render_modes_run() {
+    let mut scene = demo_scene();
+    let c = cam();
+    for mode in [
+        RenderMode::Beauty,
+        RenderMode::Normal,
+        RenderMode::Depth,
+        RenderMode::Ao,
+        RenderMode::Steps,
+        RenderMode::Albedo,
+    ] {
+        scene.mode = mode;
+        let fb = render(&scene, &c);
+        assert_eq!(fb.width * fb.height, scene.width * scene.height);
+    }
+}
+
+#[test]
+fn gi_bake_and_render() {
+    let mut scene = demo_scene();
+    scene.bake_gi((6, 5, 6), 3);
+    assert!(scene.gi.is_some());
+    let fb = render(&scene, &cam());
+    let px = fb.to_u32(mm3e_kit::color::Rgba::rgb8(0, 0, 0));
+    assert!(px.iter().any(|&p| p != px[0]));
+}
+
+#[test]
+fn animation_tracks_sample() {
+    let pos = Track::new(Easing::Linear).key(0.0, Vec3::new(0.0, 0.0, 0.0)).key(2.0, Vec3::new(2.0, 4.0, 0.0));
+    assert_eq!(pos.sample(-1.0), Vec3::new(0.0, 0.0, 0.0)); // clamps to start
+    assert_eq!(pos.sample(3.0), Vec3::new(2.0, 4.0, 0.0)); // clamps to end
+    let mid = pos.sample(1.0);
+    assert!((mid - Vec3::new(1.0, 2.0, 0.0)).length() < 1e-5);
+
+    // Use a 90° turn (a 180° turn has an ambiguous midpoint). Halfway is 45° about +Y, which
+    // maps +x → (cos45, 0, -sin45) ≈ (0.707, 0, -0.707) at t=1, and ~22.5° at t=0.5.
+    let spin = Track::new(Easing::Linear)
+        .key(0.0, Quat::IDENTITY)
+        .key(1.0, Quat::from_axis_angle(Vec3::new(0.0, 1.0, 0.0), std::f32::consts::FRAC_PI_2));
+    let end = spin.sample(1.0).to_mat3().mul_vec(Vec3::new(1.0, 0.0, 0.0));
+    assert!((end - Vec3::new(0.0, 0.0, -1.0)).length() < 1e-3);
+    // The slerp midpoint is a 45° rotation (quaternion half-angles): +x → (0.707, 0, -0.707).
+    let mid = spin.sample(0.5).to_mat3().mul_vec(Vec3::new(1.0, 0.0, 0.0));
+    assert!(mid.x > 0.65 && mid.z < -0.65 && mid.y.abs() < 1e-3);
+}

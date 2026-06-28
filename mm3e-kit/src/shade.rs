@@ -81,6 +81,17 @@ pub fn sky(dir: Vec3, sun_dir: Vec3) -> Vec3 {
     base + Vec3::splat(glow)
 }
 
+/// The sky without the sharp sun disk — only the gradient plus a soft glow. Used for diffuse
+/// image-based lighting, where sampling the hard sun would alias into sparkle.
+pub fn sky_diffuse(dir: Vec3, sun_dir: Vec3) -> Vec3 {
+    let t = (0.5 * (dir.y + 1.0)).clamp(0.0, 1.0);
+    let horizon = Vec3::new(0.78, 0.86, 0.96);
+    let zenith = Vec3::new(0.20, 0.38, 0.72);
+    let base = horizon.mix(zenith, t);
+    let soft = dir.dot(sun_dir).max(0.0).powf(8.0) * 0.3;
+    base + Vec3::splat(soft)
+}
+
 /// ACES filmic tone-map (Narkowicz fit), mapping linear HDR into [0, 1].
 pub fn aces(x: Vec3) -> Vec3 {
     let f = |v: f32| {

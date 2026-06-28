@@ -9,18 +9,27 @@
 
 ## Implemented so far (from this roadmap)
 
-These shipped already — all **doctrine-preserving** (zero-dep, CPU, SDF, offline), no constraint broken:
+A large slice of Tiers 0–2 has shipped — all **doctrine-preserving** (zero-dep, CPU, SDF), no core
+constraint broken:
 
-- ✅ **Tier 0 — Cook-Torrance GGX metallic-roughness BRDF** replacing Blinn-Phong (`mm3e-kit/src/shade.rs`
-  `brdf()` + `Material.metallic`/`specular`-as-reflectance). The empirical→PBR jump.
-- ✅ **Tier 0 — Conservative bounding-sphere pruning** of the world field (`Prim::local_bound` /
-  `Object::world_bound`; bounded fold in `Scene::world`). O(1) lower-bound early-out; ~2× on the showcase
-  scene and the substrate a BVH will sit on.
-- ✅ **Tier 0/1 — Linear-HDR scene-color target + post pass** (`mm3e-orchestrator/src/post.rs`): bloom
-  (bright-pass + separable Gaussian), exposure, ACES, gamma — tone-map deferred out of the per-pixel path.
+- ✅ **Cook-Torrance GGX metallic-roughness BRDF** replacing Blinn-Phong (`mm3e-kit/src/shade.rs`).
+- ✅ **Conservative bounding-sphere pruning** of the world field (O(1) per far object).
+- ✅ **Linear-HDR target + post pass**: bloom (bright-pass + separable Gaussian), exposure, ACES, gamma.
+- ✅ **SDF global illumination** — a baked irradiance probe volume (ambient cube + trilinear lookup),
+  parallel-baked (`mm3e-orchestrator/src/gi.rs`). The signature SDF superpower: real one-bounce bleed.
+- ✅ **Diffuse image-based lighting** from the procedural sky.
+- ✅ **Area / sphere lights** with inverse-square falloff and distance-widened soft shadows.
+- ✅ **Debug AOVs** — normals, depth, AO, albedo, and the march-step heatmap (the perf diagnostic).
+- ✅ **Primitive + operator library** — cone, ellipsoid, octahedron, hex prism; round, onion, elongate,
+  repeat, twist, bend, mirror; smooth subtract/intersect.
+- ✅ **Animation** — keyframe tracks with easing + quaternion slerp (`anim`).
+- ✅ **Scene file format** — the `.mm3e` serializer + parser, round-trip tested (`scene_io`).
+- ✅ **Real-time interactive viewer** — raw Win32/GDI, zero windowing crates (`examples/viewer.rs`).
+- ✅ **Engineering** — a 19-test suite + GitHub Actions CI (fmt, clippy `-D warnings`, build, test).
 
-Still open and highest-leverage next: **BVH + cascaded SDFGI**, then the **data layer** (scene format +
-march-step heatmap + profiler). See the tiers below.
+Highest-leverage next, in order: a true **BVH** over additive objects (the bounding-sphere prune is the
+substrate; the open problem is ordered CSG with subtraction), then the **Tier-3 GPU backend** (wgpu +
+WGSL codegen of the world field) to cross from offline-quality stills to 60 Hz. See the tiers below.
 
 ## The strategic fork (pick one)
 

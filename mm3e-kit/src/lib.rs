@@ -22,9 +22,9 @@ pub mod vec;
 pub use camera::Camera;
 pub use color::{Material, Rgba};
 pub use framebuffer::Framebuffer;
-pub use march::{Hit, Ray};
+pub use march::{Hit, Marcher, Ray};
 pub use sdf::Field;
-pub use vec::{Mat3, Transform, Vec3};
+pub use vec::{Mat3, Quat, Transform, Vec3};
 
 /// The eight root atoms — the canonical vocabulary the whole kit specializes from.
 /// Each does exactly one thing and makes no decisions. The 3-D code specializes them:

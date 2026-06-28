@@ -22,6 +22,14 @@ impl Framebuffer {
         }
     }
 
+    /// Read a pixel back (clamped to the edges). Lets the renderer use a framebuffer as a scratch
+    /// carrier for linear-HDR values before the post pass resolves them.
+    pub fn pixel(&self, x: u32, y: u32) -> Rgba {
+        let x = x.min(self.width.saturating_sub(1));
+        let y = y.min(self.height.saturating_sub(1));
+        self.pixels[(y * self.width + x) as usize]
+    }
+
     /// Porter-Duff "over": straight-alpha `src` composited onto the stored pixel.
     pub fn blend_over(&mut self, x: u32, y: u32, src: Rgba) {
         if x >= self.width || y >= self.height {
