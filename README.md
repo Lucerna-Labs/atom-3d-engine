@@ -50,12 +50,16 @@ smooth-min blend · `order` sorts the lights brightest-first.
 ## Features
 
 - Exact analytic 3-D SDFs + constructive solid geometry (incl. polynomial smooth-min blends)
-- Sphere tracing with distance-relaxed surface tolerance
+- Sphere tracing with distance-relaxed tolerance and **conservative bounding-sphere pruning**
+  (an O(1) lower-bound early-out — the first acceleration step toward a full BVH)
 - Gradient normals (tetrahedron sampling), **soft shadows**, **ambient occlusion**
-- PBR-flavored shading: Lambert diffuse + Blinn-Phong specular + **Schlick Fresnel**
+- **Cook-Torrance GGX PBR**: metallic-roughness workflow (GGX NDF + height-correlated Smith
+  visibility + spectral Schlick Fresnel), energy-conserving diffuse
 - **Recursive mirror reflections** (configurable bounce depth)
 - Procedural checkered floor, HDR sky with a sun disk, exponential distance fog
-- **ACES filmic tone-mapping** + gamma, supersampled anti-aliasing
+- **Linear-HDR pipeline**: a float scene-color target resolved through a real post pass —
+  **bloom** (bright-pass + separable Gaussian), **exposure**, **ACES** tone-map, gamma
+- Supersampled anti-aliasing
 - **Multithreaded** rendering via scoped std threads (≈11× on 24 cores) — still zero dependencies
 
 ## Run

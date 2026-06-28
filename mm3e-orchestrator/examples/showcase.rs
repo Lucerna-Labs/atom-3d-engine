@@ -13,12 +13,14 @@ fn main() {
     scene.aa = 3;
     scene.bounces = 2;
     scene.fog_density = 0.008;
-    scene.ambient = Vec3::splat(0.08);
+    scene.ambient = Vec3::splat(0.10);
+    scene.post.exposure = 1.3;
+    scene.post.bloom_intensity = 0.08;
 
     let floor = scene.material(Material::solid(Vec3::splat(1.0)).checkered().roughness(0.7).specular(0.2));
     let jade = scene.material(Material::solid(Vec3::new(0.16, 0.62, 0.42)).specular(0.8).roughness(0.2).reflective(0.25));
-    let copper = scene.material(Material::solid(Vec3::new(0.92, 0.55, 0.32)).specular(1.0).roughness(0.18).reflective(0.45));
-    let chrome = scene.material(Material::solid(Vec3::splat(0.95)).specular(1.0).roughness(0.04).reflective(0.9));
+    let copper = scene.material(Material::solid(Vec3::new(0.92, 0.55, 0.32)).metallic(1.0).roughness(0.22).reflective(0.45));
+    let chrome = scene.material(Material::solid(Vec3::splat(0.95)).metallic(1.0).roughness(0.05).reflective(0.9));
     let plum = scene.material(Material::solid(Vec3::new(0.55, 0.22, 0.6)).specular(0.7).roughness(0.3));
     let lamp = scene.material(Material::solid(Vec3::splat(1.0)).emissive(Vec3::new(1.6, 1.3, 0.7).scale(3.0)));
 
@@ -60,8 +62,8 @@ fn main() {
 
     // Lighting.
     scene.sun_dir = Vec3::new(0.5, 0.75, 0.42).normalize();
-    scene.light(Light::directional(scene.sun_dir, Vec3::new(1.2, 1.1, 0.95).scale(1.7)));
-    scene.light(Light::point(Vec3::new(0.0, 3.6, -1.0), Vec3::new(1.6, 1.3, 0.7).scale(8.0)));
+    scene.light(Light::directional(scene.sun_dir, Vec3::new(1.2, 1.1, 0.95).scale(2.4)));
+    scene.light(Light::point(Vec3::new(0.0, 3.6, -1.0), Vec3::new(1.6, 1.3, 0.7).scale(11.0)));
     scene.light(Light::directional(Vec3::new(-0.5, 0.4, -0.6), Vec3::new(0.3, 0.38, 0.55)));
 
     let cam = orbit_camera(Vec3::new(0.0, 1.0, 0.3), 10.0, 0.62, 0.30, 48f32.to_radians());

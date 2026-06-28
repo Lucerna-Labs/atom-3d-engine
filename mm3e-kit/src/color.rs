@@ -36,6 +36,8 @@ impl Rgba {
 #[derive(Clone, Copy, Debug)]
 pub struct Material {
     pub albedo: Vec3,
+    /// Metalness in [0, 1]: 0 = dielectric (4% F0), 1 = conductor (albedo-tinted F0, no diffuse).
+    pub metallic: f32,
     pub specular: f32,
     pub roughness: f32,
     pub reflectivity: f32,
@@ -47,6 +49,7 @@ impl Default for Material {
     fn default() -> Self {
         Self {
             albedo: Vec3::splat(0.8),
+            metallic: 0.0,
             specular: 0.5,
             roughness: 0.35,
             reflectivity: 0.0,
@@ -59,6 +62,10 @@ impl Default for Material {
 impl Material {
     pub fn solid(albedo: Vec3) -> Self {
         Self { albedo, ..Self::default() }
+    }
+    pub fn metallic(mut self, m: f32) -> Self {
+        self.metallic = m;
+        self
     }
     pub fn specular(mut self, s: f32) -> Self {
         self.specular = s;

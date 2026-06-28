@@ -14,7 +14,7 @@ fn build_scene() -> Scene {
 
     let floor = scene.material(Material::solid(Vec3::splat(1.0)).checkered().roughness(0.65).specular(0.2));
     let teal = scene.material(Material::solid(Vec3::new(0.18, 0.6, 0.65)).specular(0.8).roughness(0.2).reflective(0.3));
-    let amber = scene.material(Material::solid(Vec3::new(0.95, 0.6, 0.18)).specular(0.9).roughness(0.18).reflective(0.3));
+    let amber = scene.material(Material::solid(Vec3::new(0.95, 0.6, 0.18)).metallic(1.0).roughness(0.22).reflective(0.3));
 
     scene.add(Object::new(Prim::Plane { n: Vec3::new(0.0, 1.0, 0.0), h: 0.0 }, Transform::IDENTITY, floor));
     scene.add(Object::new(

@@ -7,6 +7,21 @@
 > has **none of the platform layer**: no GPU, no window, no event loop, no input, no audio, no
 > meshes, no asset import, no retained/queryable scene, no ECS, no serialization, no editor.
 
+## Implemented so far (from this roadmap)
+
+These shipped already — all **doctrine-preserving** (zero-dep, CPU, SDF, offline), no constraint broken:
+
+- ✅ **Tier 0 — Cook-Torrance GGX metallic-roughness BRDF** replacing Blinn-Phong (`mm3e-kit/src/shade.rs`
+  `brdf()` + `Material.metallic`/`specular`-as-reflectance). The empirical→PBR jump.
+- ✅ **Tier 0 — Conservative bounding-sphere pruning** of the world field (`Prim::local_bound` /
+  `Object::world_bound`; bounded fold in `Scene::world`). O(1) lower-bound early-out; ~2× on the showcase
+  scene and the substrate a BVH will sit on.
+- ✅ **Tier 0/1 — Linear-HDR scene-color target + post pass** (`mm3e-orchestrator/src/post.rs`): bloom
+  (bright-pass + separable Gaussian), exposure, ACES, gamma — tone-map deferred out of the per-pixel path.
+
+Still open and highest-leverage next: **BVH + cascaded SDFGI**, then the **data layer** (scene format +
+march-step heatmap + profiler). See the tiers below.
+
 ## The strategic fork (pick one)
 
 **Fork A — best-in-class real-time SDF / raymarch renderer + SDF-native physics.** *(Recommended.)*

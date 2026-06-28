@@ -16,9 +16,9 @@ fn main() {
     // Materials.
     let floor = scene.material(Material::solid(Vec3::splat(1.0)).checkered().specular(0.15).roughness(0.6));
     let red = scene.material(Material::solid(Vec3::new(0.85, 0.18, 0.20)).specular(0.7).roughness(0.25));
-    let gold = scene.material(Material::solid(Vec3::new(0.95, 0.72, 0.25)).specular(1.0).roughness(0.12).reflective(0.5));
+    let gold = scene.material(Material::solid(Vec3::new(0.95, 0.72, 0.25)).metallic(1.0).roughness(0.18).reflective(0.5));
     let glassy = scene.material(Material::solid(Vec3::new(0.20, 0.55, 0.85)).specular(0.9).roughness(0.15).reflective(0.35));
-    let mirror = scene.material(Material::solid(Vec3::splat(0.92)).specular(1.0).roughness(0.05).reflective(0.85));
+    let mirror = scene.material(Material::solid(Vec3::splat(0.95)).metallic(1.0).roughness(0.05).reflective(0.85));
 
     // Ground plane (y = 0, normal up).
     scene.add(Object::new(

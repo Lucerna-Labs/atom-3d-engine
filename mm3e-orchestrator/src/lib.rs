@@ -9,16 +9,20 @@
 //!   scan pixels → project each into a camera ray → fold the ray down to a hit (sphere-trace)
 //!   → combine lights into radiance → order/compose reflection + fog → tone-map → put pixel.
 
+pub mod post;
+
 use mm3e_kit::{
     atoms,
     camera::Camera,
-    color::{Material, Rgba},
+    color::Material,
     framebuffer::Framebuffer,
     march::{Marcher, Ray},
     sdf::{self, Field},
     shade,
     vec::{Transform, Vec3},
 };
+
+use post::Post;
 
 // ----------------------------------------------------------------------------
 // Scene description (policy: what exists in the world)
@@ -46,6 +50,19 @@ impl Prim {
             Prim::Cylinder { h, r } => sdf::cylinder(local, h, r),
             Prim::Capsule { a, b, r } => sdf::capsule(local, a, b, r),
             Prim::Plane { n, h } => sdf::plane(local, n, h),
+        }
+    }
+
+    /// A conservative local-space bounding sphere `(center, radius)`, or `None` if unbounded.
+    fn local_bound(&self) -> Option<(Vec3, f32)> {
+        match *self {
+            Prim::Sphere { r } => Some((Vec3::ZERO, r)),
+            Prim::Box { half } => Some((Vec3::ZERO, half.length())),
+            Prim::RoundBox { half, .. } => Some((Vec3::ZERO, half.length())),
+            Prim::Torus { major, minor } => Some((Vec3::ZERO, major + minor)),
+            Prim::Cylinder { h, r } => Some((Vec3::ZERO, (h * h + r * r).sqrt())),
+            Prim::Capsule { a, b, r } => Some(((a + b).scale(0.5), (a - b).scale(0.5).length() + r)),
+            Prim::Plane { .. } => None,
         }
     }
 }
@@ -88,6 +105,16 @@ impl Object {
         let local = self.xform.to_local(p);
         // Rotation+translation is an isometry, so the world distance is `scale · sdf(local)`.
         Field::new(self.prim.distance(local) * self.xform.scale, self.mat)
+    }
+
+    /// A conservative world-space bounding sphere `(center, radius)`, or `None` for unbounded
+    /// shapes (an infinite plane). Used to prune the field fold: outside the sphere, the cheap
+    /// lower bound `|p − center| − radius` is a valid distance underestimate, so the expensive
+    /// exact SDF can be skipped without ever letting the sphere tracer overshoot a surface.
+    fn world_bound(&self) -> Option<(Vec3, f32)> {
+        let (center, radius) = self.prim.local_bound()?;
+        let world_center = self.xform.pos + self.xform.rot.mul_vec(center.scale(self.xform.scale));
+        Some((world_center, radius * self.xform.scale))
     }
 }
 
@@ -138,6 +165,8 @@ pub struct Scene {
     pub shadows: bool,
     pub ao: bool,
     pub marcher: Marcher,
+    /// Post-processing (exposure, bloom, tone-map) applied to the linear-HDR frame.
+    pub post: Post,
 }
 
 impl Scene {
@@ -157,6 +186,7 @@ impl Scene {
             shadows: true,
             ao: true,
             marcher: Marcher::default(),
+            post: Post::default(),
         }
     }
 
@@ -172,25 +202,54 @@ impl Scene {
         self.lights.push(l);
     }
 
-    /// The world field: fold every object's contribution into one distance + material.
-    /// This is the closure the kit's sphere tracer marches through. Built once per frame.
+    /// The world field: a bounded `fold` of every object's contribution into one distance +
+    /// material — the closure the kit's sphere tracer marches through. Built once per frame.
+    ///
+    /// Each object carries a conservative bounding sphere; when the sample point is well outside
+    /// it (`lower_bound > slack`), the cheap lower bound replaces the exact SDF. Because the
+    /// lower bound never exceeds the true distance, every CSG op stays a safe underestimate and
+    /// the tracer never overshoots — this is the O(1) early-out that makes scenes scale and the
+    /// substrate a full BVH would later sit on. The `slack` covers the widest smooth-blend so
+    /// near-surface blends always use the exact field.
     fn world(&self) -> impl Fn(Vec3) -> Field + '_ {
+        let bounds: Vec<Option<(Vec3, f32)>> = self.objects.iter().map(Object::world_bound).collect();
+        let slack = self
+            .objects
+            .iter()
+            .map(|o| match o.combine {
+                Combine::Smooth(k) => k,
+                _ => 0.0,
+            })
+            .fold(0.0_f32, f32::max)
+            + 0.1;
         move |p: Vec3| {
+            let mut acc = Field::FAR;
             let mut first = true;
-            atoms::fold(&self.objects, Field::FAR, |acc, obj| {
-                let f = obj.field(p);
-                // The first placed object seeds the field; a leading Subtract has nothing to
-                // carve yet, so it too just seeds. After that, each object's combine mode rules.
+            for (i, obj) in self.objects.iter().enumerate() {
+                let f = match bounds[i] {
+                    Some((c, r)) => {
+                        let lower = (p - c).length() - r;
+                        if lower > slack {
+                            Field::new(lower, obj.mat)
+                        } else {
+                            obj.field(p)
+                        }
+                    }
+                    None => obj.field(p),
+                };
+                // The first placed object seeds the field; after that, its combine mode rules.
                 if first {
                     first = false;
-                    return f;
+                    acc = f;
+                    continue;
                 }
-                match obj.combine {
+                acc = match obj.combine {
                     Combine::Union => sdf::union(acc, f),
                     Combine::Smooth(k) => sdf::smooth_union(acc, f, k),
                     Combine::Subtract => sdf::subtract(acc, f),
-                }
-            })
+                };
+            }
+            acc
         }
     }
 }
@@ -200,18 +259,16 @@ impl Scene {
 // ----------------------------------------------------------------------------
 
 /// Render `scene` from `camera` to a framebuffer, parallelized across CPU cores with scoped
-/// std threads (no external crate). Each thread sphere-traces a contiguous band of rows; the
-/// bands are then assembled into the framebuffer. Deterministic regardless of thread count.
+/// std threads (no external crate). Each thread sphere-traces a contiguous band of rows into a
+/// **linear-HDR** buffer; a single post pass (bloom, exposure, ACES, gamma) then resolves that
+/// float frame to displayable pixels. Deterministic regardless of thread count.
 pub fn render(scene: &Scene, camera: &Camera) -> Framebuffer {
     let (w, h) = (scene.width, scene.height);
-    let clear = Rgba::from_vec3(shade::gamma(shade::aces(scene.fog)));
-    let mut fb = Framebuffer::new(w, h, clear);
-
     let threads = std::thread::available_parallelism().map(|n| n.get()).unwrap_or(1).max(1);
     let band = (h as usize).div_ceil(threads);
 
     // Each scoped thread renders rows [y0, y1) into its own buffer, then we stitch them in order.
-    let bands: Vec<(u32, Vec<Rgba>)> = std::thread::scope(|s| {
+    let bands: Vec<(u32, Vec<Vec3>)> = std::thread::scope(|s| {
         let handles: Vec<_> = (0..threads)
             .map(|ti| {
                 let y0 = (ti * band) as u32;
@@ -232,19 +289,20 @@ pub fn render(scene: &Scene, camera: &Camera) -> Framebuffer {
         handles.into_iter().map(|hd| hd.join().unwrap()).collect()
     });
 
+    // Assemble the linear-HDR scene-color buffer, then resolve it through the post pass.
+    let mut hdr = vec![Vec3::ZERO; (w * h) as usize];
     for (y0, rows) in bands {
         for (i, px) in rows.into_iter().enumerate() {
-            let x = i as u32 % w;
-            let y = y0 + i as u32 / w;
-            fb.put(x, y, px);
+            hdr[(y0 * w) as usize + i] = px;
         }
     }
-    fb
+    post::resolve(&hdr, w, h, &scene.post)
 }
 
-/// Shade one pixel: supersample on an n×n sub-pixel grid (the 3-D analog of MMPE's analytic
-/// AA band), then tone-map the accumulated linear radiance once.
-fn shade_pixel(scene: &Scene, field: &dyn Fn(Vec3) -> Field, camera: &Camera, x: u32, y: u32) -> Rgba {
+/// Shade one pixel into **linear HDR**: supersample on an n×n sub-pixel grid (the 3-D analog of
+/// MMPE's analytic AA band) and return the averaged radiance. Tone-mapping happens later, in the
+/// post pass, so the float frame stays available for bloom/exposure.
+fn shade_pixel(scene: &Scene, field: &dyn Fn(Vec3) -> Field, camera: &Camera, x: u32, y: u32) -> Vec3 {
     let n = scene.aa.max(1);
     let inv_samples = 1.0 / (n * n) as f32;
     let mut acc = Vec3::ZERO;
@@ -256,8 +314,7 @@ fn shade_pixel(scene: &Scene, field: &dyn Fn(Vec3) -> Field, camera: &Camera, x:
             acc = acc + trace(scene, field, &ray, 0);
         }
     }
-    let display = shade::gamma(shade::aces(acc.scale(inv_samples)));
-    Rgba::from_vec3(display)
+    acc.scale(inv_samples)
 }
 
 /// Trace one ray and return its linear HDR radiance. Recurses for mirror reflections.
@@ -280,12 +337,12 @@ fn trace(scene: &Scene, field: &dyn Fn(Vec3) -> Field, ray: &Ray, depth: u32) ->
     };
     let mut radiance = albedo.cmul(scene.ambient).scale(occ);
 
-    // Direct lighting: `order` the lights brightest-first, then `combine` (fold) them in.
+    // Direct lighting: `order` the lights brightest-first, then `combine` (fold) them in,
+    // each evaluated through the Cook-Torrance GGX BRDF.
     for &li in atoms::order(&scene.lights, |l| l.luminance()).iter() {
         let light = scene.lights[li];
         let (l_dir, l_dist) = light.toward(hit.pos);
-        let ndl = shade::lambert(normal, l_dir);
-        if ndl <= 0.0 {
+        if shade::lambert(normal, l_dir) <= 0.0 {
             continue;
         }
         // Lift the shadow ray off the surface to avoid self-intersection acne.
@@ -298,10 +355,8 @@ fn trace(scene: &Scene, field: &dyn Fn(Vec3) -> Field, ray: &Ray, depth: u32) ->
         if shadow <= 0.0 {
             continue;
         }
-        let diffuse = albedo.cmul(light.color).scale(ndl);
-        let spec = shade::specular(normal, l_dir, view, m.roughness) * m.specular;
-        let specular = light.color.scale(spec);
-        radiance = radiance + (diffuse + specular).scale(shadow);
+        let surface = shade::brdf(normal, l_dir, view, albedo, m.metallic, m.roughness, m.specular);
+        radiance = radiance + surface.cmul(light.color).scale(shadow);
     }
 
     radiance = radiance + m.emissive;
