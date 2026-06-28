@@ -32,16 +32,31 @@ fn cam() -> Camera {
 
 #[test]
 fn scene_io_roundtrips_stably() {
-    let scene = demo_scene();
+    let mut scene = demo_scene();
+    scene.mode = RenderMode::Steps; // a non-default mode must survive the round-trip
     let c = cam();
     let text = scene_io::serialize(&scene, &c);
     let (parsed, _) = scene_io::parse(&text).expect("parse");
     assert_eq!(parsed.objects.len(), scene.objects.len());
     assert_eq!(parsed.materials.len(), scene.materials.len());
     assert_eq!(parsed.lights.len(), scene.lights.len());
+    assert_eq!(parsed.mode, RenderMode::Steps, "render mode lost on round-trip");
     // Re-serializing the parsed scene must reproduce the exact same text.
     let again = scene_io::serialize(&parsed, &c);
     assert_eq!(text, again, "serialization is not a stable round-trip");
+}
+
+#[test]
+fn camera_roundtrips() {
+    let scene = demo_scene();
+    let c = cam();
+    let text = scene_io::serialize(&scene, &c);
+    let (_, parsed_cam) = scene_io::parse(&text).expect("parse");
+    // The look-at basis + FOV must reconstruct from the serialized eye/target/up/fov.
+    assert!((parsed_cam.eye - c.eye).length() < 1e-4);
+    assert!((parsed_cam.forward - c.forward).length() < 1e-4);
+    assert!((parsed_cam.up - c.up).length() < 1e-4);
+    assert!((parsed_cam.fov_scale - c.fov_scale).abs() < 1e-4);
 }
 
 #[test]
@@ -99,6 +114,29 @@ fn gi_bake_and_render() {
     let fb = render(&scene, &cam());
     let px = fb.to_u32(mm3e_kit::color::Rgba::rgb8(0, 0, 0));
     assert!(px.iter().any(|&p| p != px[0]));
+}
+
+#[test]
+fn gi_volume_interpolates_a_known_field() {
+    use mm3e_orchestrator::gi::GiVolume;
+    // A radiance field that is exactly linear in x, independent of direction. Every cube face of
+    // a probe then equals splat(probe.x), and trilinear interpolation should reproduce it exactly.
+    let radiance = |o: Vec3, _d: Vec3| Vec3::splat(o.x);
+    let vol = GiVolume::bake(Vec3::new(0.0, 0.0, 0.0), Vec3::new(4.0, 2.0, 4.0), (5, 3, 5), 1, &radiance);
+    let n = Vec3::new(1.0, 0.0, 0.0);
+    // At a probe center (x=2) and a cell midpoint (x=2.5), the ambient cube returns ~x.
+    assert!((vol.sample(Vec3::new(2.0, 1.0, 2.0), n).x - 2.0).abs() < 1e-3);
+    assert!((vol.sample(Vec3::new(2.5, 1.0, 2.0), n).x - 2.5).abs() < 1e-3);
+}
+
+#[test]
+fn gi_degenerate_dims_dont_panic() {
+    // A zero / one probe dimension must be clamped, not panic on an empty buffer or underflow.
+    let radiance = |_o: Vec3, _d: Vec3| Vec3::splat(0.5);
+    for dims in [(0, 5, 6), (1, 1, 1), (3, 0, 3)] {
+        let vol = mm3e_orchestrator::gi::GiVolume::bake(Vec3::ZERO, Vec3::splat(4.0), dims, 1, &radiance);
+        let _ = vol.sample(Vec3::splat(2.0), Vec3::new(0.0, 1.0, 0.0)); // must not panic
+    }
 }
 
 #[test]

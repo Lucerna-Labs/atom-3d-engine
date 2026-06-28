@@ -229,9 +229,17 @@ impl Object {
             radius += center.length(); // reflected copies straddle the origin
             center = Vec3::ZERO;
         }
+        if m.twist != 0.0 {
+            // Twist preserves cylindrical radius and y, so recenter the bound onto the Y axis to
+            // cover every twisted image of an off-axis shape (else it could be wrongly pruned).
+            radius += (center.x * center.x + center.z * center.z).sqrt();
+            center.x = 0.0;
+            center.z = 0.0;
+        }
         radius += m.elongate.length();
         let world_center = self.xform.pos + self.xform.rot.mul_vec(center.scale(self.xform.scale));
-        Some((world_center, radius * self.xform.scale + m.round.max(0.0)))
+        // `round` and `onion` grow the outer surface in world units (applied after the scale).
+        Some((world_center, radius * self.xform.scale + m.round.max(0.0) + m.onion.abs()))
     }
 }
 
@@ -618,17 +626,19 @@ fn trace(scene: &Scene, field: &dyn Fn(Vec3) -> Field, ray: &Ray, depth: u32) ->
         radiance = radiance + surface.cmul(light.color).scale(shadow * light.attenuation(l_dist));
     }
 
-    radiance = radiance + m.emissive;
-
-    // One-bounce mirror reflection, weighted by a Fresnel-modulated reflectivity.
+    // One-bounce environment reflection, layered by a Fresnel-modulated reflectivity. Energy is
+    // conserved (the diffuse/direct base is attenuated by `1 − fr` and the reflection adds `fr`),
+    // and emissive is added *after* so a reflective light source is never erased at grazing angles.
     if depth < scene.bounces && m.reflectivity > 0.0 {
         let cos = normal.dot(view).max(0.0);
         let fr = shade::fresnel_schlick(cos, m.reflectivity);
         let rdir = ray.dir.reflect(normal).normalize();
         let rorigin = hit.pos + normal.scale(0.02);
         let refl = trace(scene, field, &Ray { origin: rorigin, dir: rdir }, depth + 1);
-        radiance = radiance.mix(refl, fr);
+        radiance = radiance.scale(1.0 - fr) + refl.scale(fr);
     }
+
+    radiance = radiance + m.emissive;
 
     // Distance fog blends far geometry into the atmosphere.
     shade::apply_fog(radiance, scene.fog, hit.t, scene.fog_density)

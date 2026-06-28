@@ -188,7 +188,10 @@ impl Transform {
 
     /// Map a world-space point into this object's local space.
     pub fn to_local(&self, p: Vec3) -> Vec3 {
-        self.rot.transpose().mul_vec(p - self.pos).scale(1.0 / self.scale)
+        // Guard a zero scale (matches the zero-length guards in `normalize`) so a degenerate
+        // transform yields a finite point rather than Inf/NaN poisoning the whole field.
+        let inv = if self.scale.abs() > 1e-12 { 1.0 / self.scale } else { 0.0 };
+        self.rot.transpose().mul_vec(p - self.pos).scale(inv)
     }
 }
 

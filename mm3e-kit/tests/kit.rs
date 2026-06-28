@@ -34,6 +34,14 @@ fn mat3_rotation_is_orthonormal_and_correct() {
 }
 
 #[test]
+fn transform_zero_scale_is_finite() {
+    // A degenerate (zero-scale) transform must not poison the field with Inf/NaN.
+    let t = Transform::new(Vec3::new(1.0, 2.0, 3.0), Mat3::IDENTITY, 0.0);
+    let p = t.to_local(Vec3::new(4.0, 5.0, 6.0));
+    assert!(p.x.is_finite() && p.y.is_finite() && p.z.is_finite());
+}
+
+#[test]
 fn transform_to_local_roundtrip() {
     let t = Transform::new(Vec3::new(2.0, -1.0, 3.0), Mat3::from_euler(0.3, 0.5, -0.2), 2.0);
     let world = Vec3::new(1.0, 4.0, -2.0);

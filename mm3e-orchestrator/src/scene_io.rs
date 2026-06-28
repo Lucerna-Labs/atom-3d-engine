@@ -7,7 +7,18 @@
 use mm3e_kit::camera::Camera;
 use mm3e_kit::vec::{Mat3, Transform, Vec3};
 
-use crate::{Combine, Light, Material, Object, Prim, Scene};
+use crate::{Combine, Light, Material, Object, Prim, RenderMode, Scene};
+
+fn mode_name(m: RenderMode) -> &'static str {
+    match m {
+        RenderMode::Beauty => "beauty",
+        RenderMode::Normal => "normal",
+        RenderMode::Depth => "depth",
+        RenderMode::Ao => "ao",
+        RenderMode::Steps => "steps",
+        RenderMode::Albedo => "albedo",
+    }
+}
 
 // ----------------------------------------------------------------------------
 // Writer
@@ -33,6 +44,7 @@ pub fn serialize(scene: &Scene, camera: &Camera) -> String {
         "post {} {} {} {} {}\n",
         p.exposure, p.bloom as u32, p.bloom_threshold, p.bloom_intensity, p.bloom_radius
     ));
+    s.push_str(&format!("mode {}\n", mode_name(scene.mode)));
 
     // Camera: eye, target (= eye + forward), up, vertical FOV in degrees.
     let target = camera.eye + camera.forward;
@@ -193,6 +205,17 @@ pub fn parse(src: &str) -> Result<(Scene, Camera), String> {
                 scene.post.bloom_threshold = c.f("bloom_threshold")?;
                 scene.post.bloom_intensity = c.f("bloom_intensity")?;
                 scene.post.bloom_radius = c.u("bloom_radius")?;
+            }
+            "mode" => {
+                scene.mode = match c.next("mode")? {
+                    "beauty" => RenderMode::Beauty,
+                    "normal" => RenderMode::Normal,
+                    "depth" => RenderMode::Depth,
+                    "ao" => RenderMode::Ao,
+                    "steps" => RenderMode::Steps,
+                    "albedo" => RenderMode::Albedo,
+                    other => return Err(format!("line {}: unknown render mode '{other}'", i + 1)),
+                }
             }
             "cam" => {
                 let eye = c.v3("eye")?;

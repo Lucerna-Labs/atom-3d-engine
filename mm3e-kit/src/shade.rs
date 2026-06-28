@@ -30,7 +30,9 @@ pub fn luminance(c: Vec3) -> f32 {
 /// GGX / Trowbridge-Reitz normal-distribution term `D`.
 fn d_ggx(noh: f32, a2: f32) -> f32 {
     let d = noh * noh * (a2 - 1.0) + 1.0;
-    a2 / (std::f32::consts::PI * d * d).max(1e-7)
+    // `d` is strictly positive (d ≥ a2 > 0), so this guard is pure denormal insurance — it must
+    // stay tiny, or it would cap the sharp specular peak of low-roughness (chrome/mirror) materials.
+    a2 / (std::f32::consts::PI * d * d).max(1e-12)
 }
 
 /// Height-correlated Smith visibility term `V` (already folds in the `1/(4·NoL·NoV)` denominator).

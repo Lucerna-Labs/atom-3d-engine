@@ -56,7 +56,10 @@ impl GiVolume {
         samples: u32,
         radiance: &(dyn Fn(Vec3, Vec3) -> Vec3 + Sync),
     ) -> GiVolume {
-        let (nx, ny, nz) = dims;
+        // Clamp every axis to at least one probe so allocation and the `nx-1` index math below
+        // can never underflow or touch an empty buffer.
+        let (nx, ny, nz) = (dims.0.max(1), dims.1.max(1), dims.2.max(1));
+        let dims = (nx, ny, nz);
         let size = max - min;
         let cell = Vec3::new(
             size.x / (nx.max(2) - 1) as f32,
@@ -126,11 +129,19 @@ impl GiVolume {
     /// Sample the interpolated irradiance arriving at `pos` on a surface with normal `n`.
     pub fn sample(&self, pos: Vec3, n: Vec3) -> Vec3 {
         let (nx, ny, nz) = self.dims;
-        // Fractional grid coordinate, clamped into the volume.
+        // Fractional grid coordinate, clamped into the volume. A degenerate (zero-extent) axis
+        // collapses to probe 0 instead of dividing by zero (which would poison shading with NaN).
+        let axis = |p: f32, lo: f32, ext: f32, n: usize| {
+            if ext.abs() > 1e-6 {
+                (p - lo) / ext * (n.max(2) - 1) as f32
+            } else {
+                0.0
+            }
+        };
         let g = Vec3::new(
-            (pos.x - self.min.x) / self.size.x * (nx.max(2) - 1) as f32,
-            (pos.y - self.min.y) / self.size.y * (ny.max(2) - 1) as f32,
-            (pos.z - self.min.z) / self.size.z * (nz.max(2) - 1) as f32,
+            axis(pos.x, self.min.x, self.size.x, nx),
+            axis(pos.y, self.min.y, self.size.y, ny),
+            axis(pos.z, self.min.z, self.size.z, nz),
         );
         let clampi = |v: f32, hi: usize| (v.floor().max(0.0) as usize).min(hi.saturating_sub(1));
         let (i0, j0, k0) = (clampi(g.x, nx), clampi(g.y, ny), clampi(g.z, nz));

@@ -77,7 +77,7 @@ fn main() {
     scene.light(Light::directional(scene.sun_dir, Vec3::new(1.2, 1.12, 0.98).scale(2.2)).soft(0.04));
     scene.light(Light::sphere(Vec3::new(-3.0, 4.0, 3.0), Vec3::new(0.8, 0.85, 1.0).scale(40.0), 1.0));
 
-    let cam = orbit_camera(Vec3::new(0.0, 0.9, 0.0), 9.5, 0.5, 0.26, 52f32.to_radians());
+    let cam = orbit_camera(Vec3::new(0.0, 0.75, 0.2), 8.6, 0.58, 0.40, 52f32.to_radians());
     let fb = render(&scene, &cam);
     std::fs::write("gallery.bmp", fb.to_bmp(Rgba::rgb8(0, 0, 0))).expect("write");
     println!("wrote {} ({}x{})", std::fs::canonicalize("gallery.bmp").unwrap().display(), scene.width, scene.height);
