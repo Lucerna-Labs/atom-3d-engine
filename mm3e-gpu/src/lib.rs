@@ -89,6 +89,12 @@ impl GpuRenderer {
         &self.adapter_name
     }
 
+    /// Block until the GPU has finished all submitted work. Used to time a batch of [`GpuScene::
+    /// render_only`] dispatches (submit N frames, then `wait_idle` once = pure shading throughput).
+    pub fn wait_idle(&self) {
+        self.device.poll(wgpu::PollType::Wait).expect("device poll");
+    }
+
     /// Compile `scene` into a GPU pipeline + render targets at `width × height`.
     pub fn compile(&self, scene: &Scene, width: u32, height: u32) -> GpuScene {
         let device = &self.device;
@@ -254,6 +260,24 @@ impl GpuScene {
             },
             wgpu::Extent3d { width: self.width, height: self.height, depth_or_array_layers: 1 },
         );
+        r.queue.submit([enc.finish()]);
+    }
+
+    /// Shade `camera` on the GPU **without** copying the image back to the CPU. This is the
+    /// throughput an on-screen real-time loop actually sees: presenting a texture is a GPU-local
+    /// operation, whereas [`render_rgba`] additionally copies the whole frame back over PCIe every
+    /// call (≈33 MB/frame at 4K), which dominates timing at high resolution. Submit a batch of
+    /// these, then call [`GpuRenderer::wait_idle`] once to measure pure shading throughput.
+    pub fn render_only(&self, r: &GpuRenderer, camera: &Camera) {
+        r.queue.write_buffer(&self.uniform_buf, 0, bytemuck::bytes_of(&self.uniforms(camera, &[])));
+        let mut enc = r.device.create_command_encoder(&wgpu::CommandEncoderDescriptor { label: Some("enc-ro") });
+        {
+            let mut pass =
+                enc.begin_compute_pass(&wgpu::ComputePassDescriptor { label: Some("sdf"), timestamp_writes: None });
+            pass.set_pipeline(&self.pipeline);
+            pass.set_bind_group(0, &self.bind_group, &[]);
+            pass.dispatch_workgroups(self.width.div_ceil(8), self.height.div_ceil(8), 1);
+        }
         r.queue.submit([enc.finish()]);
     }
 

@@ -2,6 +2,20 @@
 
 All notable changes to MM3E are documented here.
 
+## [0.6.1] — GPU resolution sweep (the CPU-vs-GPU "why" answered with numbers)
+
+- **`GpuScene::render_only` + `GpuRenderer::wait_idle`**: a no-readback dispatch path. The existing
+  render copies the whole frame back over PCIe every call (≈33 MB/frame at 4K), which is what an
+  off-screen BMP/AOV save needs but *not* what an on-screen game does — a game presents the GPU
+  texture directly. `render_only` measures pure shading throughput; `wait_idle` fences a batch.
+- **`examples/gpu_resolution`**: renders the same GGX-PBR scene (soft shadows + reflections,
+  aa=2, 3 bounces) at 540p → 1080p → 1440p → 4K and prints render + readback fps. Measured on an
+  RTX 5070 Ti: **540p 606 fps, 1080p 167 fps, 1440p 96 fps, 4K 43 fps** (render-only). This is the
+  *same* SDF raymarch the CPU runs at ~2 fps — the gap is lane count (thousands of GPU lanes vs a
+  handful of CPU cores), not the algorithm. It directly answers why integrated graphics can drive
+  4K (rasterizing pre-built triangles on dedicated hardware) while the CPU SDF path cannot
+  (solving a distance field by marching, hundreds of evals per pixel).
+
 ## [0.6.0] — profiling + engine-native frame generation
 
 - **CPU profiler** (`examples/cpu_profile`): differential timing (toggle a feature, measure the
