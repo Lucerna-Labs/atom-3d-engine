@@ -22,6 +22,11 @@ All notable changes to MM3E are documented here.
   - **Level 2 (object motion vectors):** each pixel is tagged with the moving object it belongs to,
     and those pixels are additionally shifted by that object's world-space motion — so dynamic
     objects warp correctly, not just the camera.
+  - **Level 3 (hybrid partial rerender):** `reproject_hybrid` rerenders only the disocclusion
+    holes for real (raymarches those few pixels) instead of smearing them, so newly revealed
+    surfaces are correct — verified closer to ground truth than the cheap fill.
+  - **Wired into the live viewer:** during camera motion it renders a real G-buffer every 3rd frame
+    and reprojects the rest; when still it drops reprojection and refines to a full-quality frame.
   - Measured (`examples/reproject`, 640×360): **fake frames ~11× cheaper** than a real frame
     (≈5 ms vs ≈50 ms), lifting displayed fps from ~20 to ~50. Physics/input/logic stay honest at
     full rate; only the raymarched image is generated less often.

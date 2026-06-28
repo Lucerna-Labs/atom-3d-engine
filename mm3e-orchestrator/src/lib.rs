@@ -625,6 +625,36 @@ pub fn render_gbuffer(scene: &Scene, camera: &Camera, movers: &[(Vec3, f32)]) ->
     reproject::GFrame { width: w, height: h, color, depth, obj, camera: *camera }
 }
 
+/// **Level-3 hybrid reprojection**: forward-warp `prev` into `new_camera`, then *rerender the
+/// disocclusion holes for real* (raymarch just those pixels) instead of smearing them. Newly
+/// revealed surfaces come out correct, at a fraction of a full render's cost (holes are typically
+/// a few percent of the frame). The static scene reprojects by camera; movers by their motion.
+pub fn reproject_hybrid(
+    prev: &reproject::GFrame,
+    new_camera: &Camera,
+    scene: &Scene,
+    mover_deltas: &[Vec3],
+) -> Vec<[u8; 4]> {
+    let (w, h) = (prev.width, prev.height);
+    let (mut out, filled) = reproject::warp(prev, new_camera, mover_deltas);
+    let field = scene.world();
+    for y in 0..h {
+        for x in 0..w {
+            let i = (y * w + x) as usize;
+            if filled[i] {
+                continue;
+            }
+            let ray = new_camera.ray(x as f32 + 0.5, y as f32 + 0.5, w, h);
+            let hit = scene.marcher.march(&field, &ray);
+            let hdr =
+                if hit.hit { shade_hit(scene, &field, &hit, &ray, 0) } else { shade::sky(ray.dir, scene.sun_dir) };
+            let d = shade::gamma(shade::aces(hdr.scale(scene.post.exposure))).clamp01();
+            out[i] = [(d.x * 255.0 + 0.5) as u8, (d.y * 255.0 + 0.5) as u8, (d.z * 255.0 + 0.5) as u8, 255];
+        }
+    }
+    out
+}
+
 /// Checkerboard (interlaced) render — ray-trace only the pixels where `(x + y)` is even and fill
 /// the rest by averaging their four (always-rendered) neighbours. Halves the per-frame ray work
 /// for a small softening, ideal for the camera-moving phase of an interactive previewer. Resolves

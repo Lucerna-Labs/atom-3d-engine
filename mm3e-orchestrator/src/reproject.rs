@@ -63,7 +63,10 @@ fn project(camera: &Camera, world: Vec3, w: u32, h: u32) -> Option<(f32, f32, f3
 /// Reproject `prev` into `new_camera`, returning a fresh display RGBA8 buffer. `mover_deltas[k]` is
 /// the world-space displacement of moving object `k` since `prev` was rendered (pass `&[]` for
 /// camera-only Level 1 reprojection); pixels tagged with object `k` are shifted by that delta.
-pub fn reproject(prev: &GFrame, new_camera: &Camera, mover_deltas: &[Vec3]) -> Vec<[u8; 4]> {
+/// Forward-warp `prev` into `new_camera` (with per-object motion), returning the warped colour
+/// buffer and a `filled` mask (false where reprojection left a disocclusion hole). Shared by the
+/// cheap `reproject` (row hole-fill) and the orchestrator's Level-3 hybrid (rerender the holes).
+pub fn warp(prev: &GFrame, new_camera: &Camera, mover_deltas: &[Vec3]) -> (Vec<[u8; 4]>, Vec<bool>) {
     let (w, h) = (prev.width, prev.height);
     let n = (w * h) as usize;
     let mut out = vec![[0u8; 4]; n];
@@ -98,6 +101,14 @@ pub fn reproject(prev: &GFrame, new_camera: &Camera, mover_deltas: &[Vec3]) -> V
             }
         }
     }
+    (out, filled)
+}
+
+/// Reproject `prev` into `new_camera` with cheap row hole-fill (Levels 1 + 2). For correct
+/// disocclusion fills, see the orchestrator's `reproject_hybrid` (Level 3), which rerenders holes.
+pub fn reproject(prev: &GFrame, new_camera: &Camera, mover_deltas: &[Vec3]) -> Vec<[u8; 4]> {
+    let (w, h) = (prev.width, prev.height);
+    let (mut out, mut filled) = warp(prev, new_camera, mover_deltas);
 
     // Hole fill: each unfilled pixel copies the last filled pixel on its row (cheap, removes the
     // thin gaps reprojection leaves). Pixels with no filled neighbour on the row stay background.

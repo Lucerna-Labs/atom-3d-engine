@@ -189,6 +189,24 @@ fn reprojection_identity_mostly_matches() {
 }
 
 #[test]
+fn reprojection_hybrid_beats_cheap_fill() {
+    use mm3e_orchestrator::reproject::reproject;
+    use mm3e_orchestrator::{render_gbuffer, reproject_hybrid};
+    let scene = demo_scene();
+    let c0 = orbit_camera(Vec3::new(0.0, 0.8, 0.3), 7.0, 0.5, 0.3, 52f32.to_radians());
+    let c1 = orbit_camera(Vec3::new(0.0, 0.8, 0.3), 7.0, 0.62, 0.3, 52f32.to_radians()); // moved → holes
+    let g = render_gbuffer(&scene, &c0, &[]);
+    let truth = render_gbuffer(&scene, &c1, &[]).color; // ground truth at the new camera
+    let basic = reproject(&g, &c1, &[]); // cheap row-fill
+    let hybrid = reproject_hybrid(&g, &c1, &scene, &[]); // rerendered holes
+    let err = |a: &[[u8; 4]], b: &[[u8; 4]]| -> u64 {
+        a.iter().zip(b).map(|(p, q)| (p[0] as i32 - q[0] as i32).unsigned_abs() as u64).sum()
+    };
+    // Rerendering the holes must be at least as close to ground truth as smearing them.
+    assert!(err(&hybrid, &truth) <= err(&basic, &truth), "hybrid reprojection should beat the cheap fill");
+}
+
+#[test]
 fn reprojection_object_motion_has_effect() {
     use mm3e_orchestrator::render_gbuffer;
     use mm3e_orchestrator::reproject::reproject;
