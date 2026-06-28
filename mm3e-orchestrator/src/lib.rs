@@ -330,11 +330,7 @@ fn trace(scene: &Scene, field: &dyn Fn(Vec3) -> Field, ray: &Ray, depth: u32) ->
     let view = ray.dir.scale(-1.0);
 
     // Ambient term, attenuated by ambient occlusion.
-    let occ = if scene.ao {
-        scene.marcher.ambient_occlusion(field, hit.pos, normal)
-    } else {
-        1.0
-    };
+    let occ = if scene.ao { scene.marcher.ambient_occlusion(field, hit.pos, normal) } else { 1.0 };
     let mut radiance = albedo.cmul(scene.ambient).scale(occ);
 
     // Direct lighting: `order` the lights brightest-first, then `combine` (fold) them in,
@@ -396,11 +392,7 @@ fn surface_albedo(m: &Material, p: Vec3) -> Vec3 {
 
 /// A camera orbiting `target` at `radius`, `yaw`/`pitch` in radians, FOV `fov_y` in radians.
 pub fn orbit_camera(target: Vec3, radius: f32, yaw: f32, pitch: f32, fov_y: f32) -> Camera {
-    let eye = target
-        + Vec3::new(
-            radius * yaw.cos() * pitch.cos(),
-            radius * pitch.sin(),
-            radius * yaw.sin() * pitch.cos(),
-        );
+    let eye =
+        target + Vec3::new(radius * yaw.cos() * pitch.cos(), radius * pitch.sin(), radius * yaw.sin() * pitch.cos());
     Camera::look_at(eye, target, Vec3::new(0.0, 1.0, 0.0), fov_y)
 }

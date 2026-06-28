@@ -60,14 +60,7 @@ impl Marcher {
             // Relax the surface tolerance with distance so far-away pixels don't over-march.
             let eps = self.eps * (1.0 + t * 0.5);
             if f.dist < eps {
-                return Hit {
-                    hit: true,
-                    t,
-                    pos: p,
-                    normal: self.normal(field, p),
-                    mat: f.mat,
-                    steps: i,
-                };
+                return Hit { hit: true, t, pos: p, normal: self.normal(field, p), mat: f.mat, steps: i };
             }
             t += f.dist;
             if t > self.max_dist {

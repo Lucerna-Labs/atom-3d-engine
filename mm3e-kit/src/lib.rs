@@ -86,11 +86,7 @@ pub mod atoms {
     /// `order` — indices of `items` sorted by `key`, descending.
     pub fn order<T, K: Fn(&T) -> f32>(items: &[T], key: K) -> Vec<usize> {
         let mut idx: Vec<usize> = (0..items.len()).collect();
-        idx.sort_by(|&i, &j| {
-            key(&items[j])
-                .partial_cmp(&key(&items[i]))
-                .unwrap_or(std::cmp::Ordering::Equal)
-        });
+        idx.sort_by(|&i, &j| key(&items[j]).partial_cmp(&key(&items[i])).unwrap_or(std::cmp::Ordering::Equal));
         idx
     }
 }

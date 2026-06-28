@@ -95,11 +95,8 @@ fn blur_axis(src: &[Vec3], w: u32, h: u32, kernel: &[f32], horizontal: bool) -> 
             let mut acc = Vec3::ZERO;
             for (ki, &kw) in kernel.iter().enumerate() {
                 let off = ki as i32 - r;
-                let (sx, sy) = if horizontal {
-                    ((x + off).clamp(0, wi - 1), y)
-                } else {
-                    (x, (y + off).clamp(0, hi - 1))
-                };
+                let (sx, sy) =
+                    if horizontal { ((x + off).clamp(0, wi - 1), y) } else { (x, (y + off).clamp(0, hi - 1)) };
                 acc = acc + src[(sy * wi + sx) as usize].scale(kw);
             }
             out[(y * wi + x) as usize] = acc;

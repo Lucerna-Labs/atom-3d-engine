@@ -1,5 +1,5 @@
 //! Framebuffer + alpha-over compositing (`blend_over` = the `combine` atom, weight = alpha)
-//! + a dependency-free 24-bit BMP encoder, so output is viewable without any external crate.
+//! plus a dependency-free 24-bit BMP encoder, so output is viewable without any external crate.
 //! Carried over verbatim from MMPE — the surface is renderer-neutral and dimension-agnostic.
 
 use crate::color::Rgba;
@@ -12,11 +12,7 @@ pub struct Framebuffer {
 
 impl Framebuffer {
     pub fn new(width: u32, height: u32, clear: Rgba) -> Self {
-        Self {
-            width,
-            height,
-            pixels: vec![clear; (width * height) as usize],
-        }
+        Self { width, height, pixels: vec![clear; (width * height) as usize] }
     }
 
     /// Directly set a pixel to an opaque, already-shaded color (the raymarcher's output path).

@@ -25,11 +25,7 @@ impl Vec3 {
         self.x * o.x + self.y * o.y + self.z * o.z
     }
     pub fn cross(self, o: Vec3) -> Vec3 {
-        Vec3::new(
-            self.y * o.z - self.z * o.y,
-            self.z * o.x - self.x * o.z,
-            self.x * o.y - self.y * o.x,
-        )
+        Vec3::new(self.y * o.z - self.z * o.y, self.z * o.x - self.x * o.z, self.x * o.y - self.y * o.x)
     }
     pub fn length_sq(self) -> f32 {
         self.dot(self)
@@ -114,13 +110,8 @@ pub struct Mat3 {
 }
 
 impl Mat3 {
-    pub const IDENTITY: Mat3 = Mat3 {
-        cols: [
-            Vec3::new(1.0, 0.0, 0.0),
-            Vec3::new(0.0, 1.0, 0.0),
-            Vec3::new(0.0, 0.0, 1.0),
-        ],
-    };
+    pub const IDENTITY: Mat3 =
+        Mat3 { cols: [Vec3::new(1.0, 0.0, 0.0), Vec3::new(0.0, 1.0, 0.0), Vec3::new(0.0, 0.0, 1.0)] };
 
     pub fn from_cols(c0: Vec3, c1: Vec3, c2: Vec3) -> Mat3 {
         Mat3 { cols: [c0, c1, c2] }
@@ -134,16 +125,7 @@ impl Mat3 {
     /// Transpose — for an orthonormal rotation this is the inverse.
     pub fn transpose(self) -> Mat3 {
         let [a, b, c] = self.cols;
-        Mat3::from_cols(
-            Vec3::new(a.x, b.x, c.x),
-            Vec3::new(a.y, b.y, c.y),
-            Vec3::new(a.z, b.z, c.z),
-        )
-    }
-
-    /// Matrix product `self * other`.
-    pub fn mul(self, o: Mat3) -> Mat3 {
-        Mat3::from_cols(self.mul_vec(o.cols[0]), self.mul_vec(o.cols[1]), self.mul_vec(o.cols[2]))
+        Mat3::from_cols(Vec3::new(a.x, b.x, c.x), Vec3::new(a.y, b.y, c.y), Vec3::new(a.z, b.z, c.z))
     }
 
     /// Rotation by `angle` (radians) about a unit `axis`, via Rodrigues' rotation formula.
@@ -151,11 +133,7 @@ impl Mat3 {
         let k = axis.normalize();
         let (s, c) = (angle.sin(), angle.cos());
         let col = |e: Vec3| e.scale(c) + k.cross(e).scale(s) + k.scale(k.dot(e) * (1.0 - c));
-        Mat3::from_cols(
-            col(Vec3::new(1.0, 0.0, 0.0)),
-            col(Vec3::new(0.0, 1.0, 0.0)),
-            col(Vec3::new(0.0, 0.0, 1.0)),
-        )
+        Mat3::from_cols(col(Vec3::new(1.0, 0.0, 0.0)), col(Vec3::new(0.0, 1.0, 0.0)), col(Vec3::new(0.0, 0.0, 1.0)))
     }
 
     /// Euler rotation, applied Z then Y then X (yaw-pitch-roll-ish), composed left-to-right.
@@ -163,7 +141,15 @@ impl Mat3 {
         let rx = Mat3::from_axis_angle(Vec3::new(1.0, 0.0, 0.0), x);
         let ry = Mat3::from_axis_angle(Vec3::new(0.0, 1.0, 0.0), y);
         let rz = Mat3::from_axis_angle(Vec3::new(0.0, 0.0, 1.0), z);
-        rx.mul(ry).mul(rz)
+        rx * ry * rz
+    }
+}
+
+impl std::ops::Mul for Mat3 {
+    type Output = Mat3;
+    /// Matrix product `self * other` (compose: apply `other` first, then `self`).
+    fn mul(self, o: Mat3) -> Mat3 {
+        Mat3::from_cols(self.mul_vec(o.cols[0]), self.mul_vec(o.cols[1]), self.mul_vec(o.cols[2]))
     }
 }
 
