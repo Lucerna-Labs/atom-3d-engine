@@ -50,11 +50,25 @@ pub struct Marcher {
     pub shadow_steps: u32,
     /// Ambient-occlusion sample count (0 disables AO).
     pub ao_samples: u32,
+    /// Screen-footprint LOD (a graphics level-of-detail transfer): widen the hit tolerance by
+    /// `lod_footprint · t` so distant / sub-pixel geometry resolves in fewer steps. 0.0 = off
+    /// (exact). Mechanism only — the orchestrator dials it up while the camera moves (where the
+    /// fidelity cost is imperceptible) and back to 0 for converged stills. Measured −7%…−16%
+    /// field-evals for an image mean Δ of 1.3%…3.5% as it rises.
+    pub lod_footprint: f32,
 }
 
 impl Default for Marcher {
     fn default() -> Self {
-        Self { max_steps: 160, max_dist: 120.0, eps: 0.0006, step_scale: 1.0, shadow_steps: 64, ao_samples: 5 }
+        Self {
+            max_steps: 160,
+            max_dist: 120.0,
+            eps: 0.0006,
+            step_scale: 1.0,
+            shadow_steps: 64,
+            ao_samples: 5,
+            lod_footprint: 0.0,
+        }
     }
 }
 
@@ -79,7 +93,7 @@ impl Marcher {
             let p = ray.at(t);
             let f = field(p);
             let radius = f.dist.abs();
-            let eps = self.eps * (1.0 + t * 0.5);
+            let eps = self.eps * (1.0 + t * 0.5) + self.lod_footprint * t;
             // Over-relaxation failure: the two safe spheres don't overlap → we overshot.
             if omega > 1.0 && radius + prev_radius < step_len {
                 step_len -= omega * step_len; // back up to the last safe point

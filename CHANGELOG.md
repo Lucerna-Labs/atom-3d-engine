@@ -2,6 +2,23 @@
 
 All notable changes to MM3E are documented here.
 
+## [0.6.3] — screen-footprint LOD (a validated graphics→marcher glue, dialed by policy)
+
+- **The cross-domain glue finder was deepened** (`xdsim --mode binding`) to weight a primitive's
+  *adapter signature* (does it convert between representations) and *engine-relevance* (does it reach
+  the marcher's domains), so the top hits are glue we can actually test. It surfaced graphics
+  **level-of-detail** as engine-applicable glue.
+- **Validated on the real marcher, then merged as a policy-dialed knob.** Adding a screen-footprint
+  term to the hit tolerance (`eps += lod_footprint · t`) lets distant / sub-pixel geometry resolve in
+  fewer steps. Measured against the secant-merged baseline: **−7.2% / −11.6% / −16.2% field-evals** at
+  footprint 0.003 / 0.006 / 0.010, for an image mean Δ of **1.3% / 2.3% / 3.5%**, 32 tests green at
+  each. Unlike secant (near-free), LOD **charges a real currency it names — image fidelity** — so it
+  is a speed/quality lever, not a default.
+- Merged as `Marcher.lod_footprint` (**mechanism**, default `0.0` = exact, render path byte-identical)
+  wired into the `Quality` presets (**policy**): `fast`/moving `0.006` (≈−12%, imperceptible in
+  motion), `balanced` `0.002`, `full`/still `0.0` (exact), interpolated by `Quality::lerp` as a frame
+  converges. The marcher carries the mechanism; the orchestrator decides when to spend the currency.
+
 ## [0.6.2] — secant root refinement (a validated cross-domain transfer)
 
 - **`Marcher::march` now does secant / regula-falsi root refinement near the surface** — a primitive

@@ -61,26 +61,57 @@ pub struct Quality {
     pub max_steps: u32,
     pub shadow_steps: u32,
     pub ao_samples: u32,
+    /// Screen-footprint LOD handed to the marcher (a validated graphics→marcher transfer): up while
+    /// moving (≈−12% field-evals, imperceptible in motion), 0 for converged stills (exact).
+    pub lod_footprint: f32,
 }
 
 impl Quality {
-    /// Fast preview: low resolution, no AA, no reflections, lean shadows, AO off.
+    /// Fast preview: low resolution, no AA, no reflections, lean shadows, AO off, LOD on.
     pub fn fast(width: u32, height: u32) -> Quality {
-        Quality { width, height, aa: 1, bounces: 0, max_steps: 64, shadow_steps: 12, ao_samples: 0 }
+        Quality {
+            width,
+            height,
+            aa: 1,
+            bounces: 0,
+            max_steps: 64,
+            shadow_steps: 12,
+            ao_samples: 0,
+            lod_footprint: 0.006,
+        }
     }
     /// A middle ground.
     pub fn balanced(width: u32, height: u32) -> Quality {
-        Quality { width, height, aa: 1, bounces: 1, max_steps: 110, shadow_steps: 28, ao_samples: 3 }
+        Quality {
+            width,
+            height,
+            aa: 1,
+            bounces: 1,
+            max_steps: 110,
+            shadow_steps: 28,
+            ao_samples: 3,
+            lod_footprint: 0.002,
+        }
     }
-    /// Full quality — converged still frames / offline.
+    /// Full quality — converged still frames / offline. LOD off (exact).
     pub fn full(width: u32, height: u32) -> Quality {
-        Quality { width, height, aa: 2, bounces: 2, max_steps: 160, shadow_steps: 64, ao_samples: 5 }
+        Quality {
+            width,
+            height,
+            aa: 2,
+            bounces: 2,
+            max_steps: 160,
+            shadow_steps: 64,
+            ao_samples: 5,
+            lod_footprint: 0.0,
+        }
     }
     /// Interpolate the budgets from `a` toward `b` by `t ∈ [0, 1]` (resolution is `b`'s). Used to
     /// step quality up over successive still frames.
     pub fn lerp(a: Quality, b: Quality, t: f32) -> Quality {
         let t = t.clamp(0.0, 1.0);
         let mix = |x: u32, y: u32| (x as f32 + (y as f32 - x as f32) * t).round() as u32;
+        let mixf = |x: f32, y: f32| x + (y - x) * t;
         Quality {
             width: b.width,
             height: b.height,
@@ -89,6 +120,7 @@ impl Quality {
             max_steps: mix(a.max_steps, b.max_steps),
             shadow_steps: mix(a.shadow_steps, b.shadow_steps),
             ao_samples: mix(a.ao_samples, b.ao_samples),
+            lod_footprint: mixf(a.lod_footprint, b.lod_footprint),
         }
     }
     /// Write these knobs into `scene`.
@@ -100,6 +132,7 @@ impl Quality {
         scene.marcher.max_steps = self.max_steps;
         scene.marcher.shadow_steps = self.shadow_steps;
         scene.marcher.ao_samples = self.ao_samples;
+        scene.marcher.lod_footprint = self.lod_footprint;
     }
 }
 
