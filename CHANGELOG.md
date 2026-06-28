@@ -15,6 +15,12 @@ All notable changes to MM3E are documented here.
   handful of CPU cores), not the algorithm. It directly answers why integrated graphics can drive
   4K (rasterizing pre-built triangles on dedicated hardware) while the CPU SDF path cannot
   (solving a distance field by marching, hundreds of evals per pixel).
+- **`gpu_viewer` is now resolution-selectable**: pass `480p` / `720p` / `1080p` / `1440p` / `4k`
+  (or `WxH`), e.g. `cargo run -p mm3e-gpu --example gpu_viewer --release -- 4k`, and the live fps
+  shows in the title bar (`SetWindowTextW`, refreshed twice a second) — so the sweep numbers are
+  watchable interactively, not just a printed table. Launched at 3840×2160 on an RTX 5070 Ti.
+  (The Win32/GDI viewer reads each frame back to present it, so its fps reflects render + readback;
+  the render-only ceiling is in `gpu_resolution`.)
 
 ## [0.6.0] — profiling + engine-native frame generation
 

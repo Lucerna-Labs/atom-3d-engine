@@ -5,14 +5,35 @@
 //!
 //! Controls: arrow keys or left-drag to orbit, `W`/`S` to zoom, `Esc` to quit.
 //! Run (Windows desktop): cargo run -p mm3e-gpu --example gpu_viewer --release
+//! Resolution: pass `480p` / `720p` / `1080p` / `1440p` / `4k` (or `WxH`) to render at that size,
+//! e.g. `cargo run -p mm3e-gpu --example gpu_viewer --release -- 4k`. The live fps is in the title
+//! bar. (This Win32/GDI viewer reads each frame back to the CPU to present it, so its fps reflects
+//! render + readback; a swapchain-present engine would hit the higher render-only numbers from the
+//! `gpu_resolution` benchmark.)
 
 use mm3e_gpu::GpuRenderer;
 use mm3e_kit::color::Material;
 use mm3e_kit::vec::{Mat3, Transform, Vec3};
 use mm3e_orchestrator::{Light, Object, Prim, Scene};
 
-fn build_scene() -> Scene {
-    let mut scene = Scene::new(854, 480);
+/// Resolution from the first non-flag CLI argument (a preset keyword or `WxH`); default 854×480.
+fn parse_res(args: &[String]) -> (u32, u32) {
+    let pick = args.iter().skip(1).find(|a| !a.starts_with('-'));
+    match pick.map(|s| s.to_lowercase()).as_deref() {
+        Some("480p") => (854, 480),
+        Some("720p") => (1280, 720),
+        Some("1080p") => (1920, 1080),
+        Some("1440p") => (2560, 1440),
+        Some("4k") | Some("2160p") => (3840, 2160),
+        Some(other) => {
+            other.split_once('x').and_then(|(w, h)| Some((w.parse().ok()?, h.parse().ok()?))).unwrap_or((854, 480))
+        }
+        None => (854, 480),
+    }
+}
+
+fn build_scene(width: u32, height: u32) -> Scene {
+    let mut scene = Scene::new(width, height);
     scene.aa = 1;
     scene.bounces = 2;
     scene.marcher.max_steps = 128;
@@ -44,7 +65,8 @@ fn main() {
 
 #[cfg(windows)]
 fn main() {
-    let scene = build_scene();
+    let (rw, rh) = parse_res(&std::env::args().collect::<Vec<_>>());
+    let scene = build_scene(rw, rh);
     let renderer = match GpuRenderer::new() {
         Ok(r) => r,
         Err(e) => {
@@ -52,9 +74,9 @@ fn main() {
             std::process::exit(1);
         }
     };
-    println!("GPU viewer on {}", renderer.adapter_name());
-    let gpu_scene = renderer.compile(&scene, scene.width, scene.height);
-    win32::run(&renderer, &gpu_scene, scene.width, scene.height);
+    println!("GPU viewer on {} at {rw}x{rh}", renderer.adapter_name());
+    let gpu_scene = renderer.compile(&scene, rw, rh);
+    win32::run(&renderer, &gpu_scene, rw, rh);
 }
 
 #[cfg(windows)]
@@ -148,6 +170,7 @@ mod win32 {
         fn GetCursorPos(p: *mut Point) -> i32;
         fn LoadCursorW(instance: Hinstance, name: *const u16) -> *mut c_void;
         fn ShowWindow(hwnd: Hwnd, cmd: i32) -> i32;
+        fn SetWindowTextW(hwnd: Hwnd, text: *const u16) -> i32;
     }
     #[link(name = "gdi32")]
     extern "system" {
@@ -270,6 +293,10 @@ mod win32 {
             let mut dragging = false;
             let mut bgra: Vec<u32> = Vec::with_capacity((rw * rh) as usize);
 
+            // Live fps in the title bar (refreshed twice a second).
+            let mut frames = 0u32;
+            let mut fps_clock = std::time::Instant::now();
+
             let mut msg = std::mem::zeroed::<Msg>();
             'frame: loop {
                 while PeekMessageW(&mut msg, std::ptr::null_mut(), 0, 0, PM_REMOVE) != 0 {
@@ -350,6 +377,18 @@ mod win32 {
                     SRCCOPY,
                 );
                 ReleaseDC(hwnd, hdc);
+
+                frames += 1;
+                let secs = fps_clock.elapsed().as_secs_f32();
+                if secs >= 0.5 {
+                    let fps = frames as f32 / secs;
+                    let title = wide(&format!(
+                        "MM3E — GPU SDF viewer — {rw}x{rh} — {fps:.0} fps (arrows/drag orbit, W/S zoom, Esc quit)"
+                    ));
+                    SetWindowTextW(hwnd, title.as_ptr());
+                    frames = 0;
+                    fps_clock = std::time::Instant::now();
+                }
                 Sleep(1);
             }
         }
