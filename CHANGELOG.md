@@ -2,6 +2,28 @@
 
 All notable changes to MM3E are documented here.
 
+## [0.5.0] — CPU performance + adaptive rendering
+
+The CPU bottleneck is per-pixel ray-march cost, not threads, so the wins are algorithmic and
+adaptive (the CPU path becomes a progressive previewer, not a brute-force real-timer).
+
+- **Enhanced sphere tracing** (Keinert over-relaxation) in `Marcher::march`: step by `1.4·distance`
+  and back off only when two safe spheres fail to overlap — fewer steps on the empty horizon/grazing
+  rays that dominate cost, with the hit point unchanged.
+- **Distance-adaptive soft shadows**: the shadow march cap now grows with `t` (fine near the caster,
+  big leaps in open space) instead of a fixed small cap — the single biggest CPU win.
+- Removed a **per-pixel `Vec` allocation** in the light loop (lighting is additive, so the old
+  brightest-first sort was pure waste).
+- **Configurable budgets**: `Marcher.shadow_steps` and `Marcher.ao_samples` (AO off at 0).
+- **`Quality` presets** (`fast`/`balanced`/`full` + `lerp`): a knob bundle an adaptive renderer
+  interpolates between.
+- **Adaptive CPU viewer** (`examples/viewer.rs`): low-res `fast` preset while the camera moves with
+  **dynamic resolution** auto-tuned to a frame budget, then **progressive refinement** to a
+  full-quality still when it holds — upscaled to the window, with an FPS/mode HUD.
+- **Bitmap-font primitive** (`mm3e_kit::font`) + `Framebuffer::to_rgba8` for HUD overlays.
+- Measured (24 threads): full still **1.19 → 2.1 fps**; new `fast` preview **68.5 fps** at 320×180
+  (vs 14.65 fps before), so the viewer is smooth while moving and converges to a clean still.
+
 ## [0.4.0] — physics + a playable game
 
 - **SDF-native physics** (`mm3e_orchestrator::physics`): rigid sphere bodies colliding against the

@@ -90,6 +90,21 @@ impl Framebuffer {
         out
     }
 
+    /// Flatten to opaque RGBA8 bytes (`[R, G, B, 255]` per pixel) over `background` — for HUD
+    /// overlay (see `font::draw_text`) and software presentation.
+    pub fn to_rgba8(&self, background: Rgba) -> Vec<u8> {
+        let to_u8 = |c: f32| (c.clamp(0.0, 1.0) * 255.0 + 0.5) as u8;
+        let mut out = Vec::with_capacity((self.width * self.height * 4) as usize);
+        for px in &self.pixels {
+            let a = px.a.clamp(0.0, 1.0);
+            out.push(to_u8(px.r * a + background.r * (1.0 - a)));
+            out.push(to_u8(px.g * a + background.g * (1.0 - a)));
+            out.push(to_u8(px.b * a + background.b * (1.0 - a)));
+            out.push(255);
+        }
+        out
+    }
+
     /// Flatten to opaque `0x00RRGGBB` pixels for software presentation (e.g. softbuffer).
     pub fn to_u32(&self, background: Rgba) -> Vec<u32> {
         let to_u8 = |c: f32| (c.clamp(0.0, 1.0) * 255.0 + 0.5) as u32;

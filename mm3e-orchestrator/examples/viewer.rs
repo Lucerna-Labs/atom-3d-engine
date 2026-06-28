@@ -1,25 +1,22 @@
-//! Real-time interactive viewer — a live orbit-able window driven by the CPU raymarcher, using
-//! raw Win32 + GDI through `extern "system"` FFI so the engine stays **dependency-free** (no
-//! winit, no softbuffer). It renders at a reduced internal resolution each frame and scales the
-//! result to the window with `StretchDIBits`, which keeps a CPU SDF tracer interactive.
+//! Adaptive real-time CPU viewer — a live orbit window driven by the CPU raymarcher, using raw
+//! Win32 + GDI through `extern "system"` FFI (no winit, no softbuffer).
+//!
+//! The CPU path is treated as a progressive previewer, not a brute-force real-timer. While the
+//! camera moves it renders at a low internal resolution with the `fast` quality preset and
+//! auto-tunes that resolution to hold a frame budget (dynamic resolution). When the camera holds
+//! still it progressively refines — resolution and quality climb toward a full-quality still over
+//! ~20 frames. The low-res frame is upscaled to the window with `StretchDIBits`, so it stays smooth.
 //!
 //! Controls: arrow keys or left-drag to orbit, `W`/`S` to zoom, `Esc` to quit.
-//!
-//! Run (on a Windows desktop): cargo run -p mm3e-orchestrator --example viewer --release
-//!
-//! NOTE: this opens a GUI window, so it cannot run in a headless CI; it is built (compiled and
-//! linked) by CI to guarantee the FFI stays correct.
+//! Run (Windows desktop): cargo run -p mm3e-orchestrator --example viewer --release
 
 use mm3e_kit::color::{Material, Rgba};
 use mm3e_kit::vec::{Mat3, Transform, Vec3};
-use mm3e_orchestrator::{orbit_camera, render, Light, Object, Prim, Scene};
+use mm3e_orchestrator::{Light, Object, Prim, Scene};
 
-/// The scene the viewer flies around (shared by all platforms).
 fn build_scene() -> Scene {
-    let mut scene = Scene::new(480, 270);
-    scene.aa = 1; // single sample for interactivity; the still renderers use more
-    scene.bounces = 1;
-    scene.marcher.max_steps = 96;
+    let mut scene = Scene::new(960, 540);
+    scene.bounces = 2;
 
     let floor = scene.material(Material::solid(Vec3::splat(1.0)).checkered().roughness(0.6));
     let red = scene.material(Material::solid(Vec3::new(0.85, 0.2, 0.22)).roughness(0.3).specular(0.8));
@@ -55,7 +52,10 @@ fn main() {
 #[cfg(windows)]
 mod win32 {
     use super::*;
+    use mm3e_kit::font;
+    use mm3e_orchestrator::{orbit_camera, render, Quality};
     use std::ffi::c_void;
+    use std::time::Instant;
 
     type Hwnd = *mut c_void;
     type Hinstance = *mut c_void;
@@ -74,7 +74,6 @@ mod win32 {
         menu_name: *const u16,
         class_name: *const u16,
     }
-
     #[repr(C)]
     struct Point {
         x: i32,
@@ -170,7 +169,7 @@ mod win32 {
 
     const WS_OVERLAPPEDWINDOW: u32 = 0x00CF_0000;
     const WS_VISIBLE: u32 = 0x1000_0000;
-    const CW_USEDEFAULT: i32 = i32::MIN; // 0x80000000
+    const CW_USEDEFAULT: i32 = i32::MIN;
     const SW_SHOW: i32 = 5;
     const PM_REMOVE: u32 = 1;
     const WM_QUIT: u32 = 0x0012;
@@ -206,7 +205,27 @@ mod win32 {
         }
     }
 
-    pub fn run(scene: Scene) {
+    fn rgba_to_bgra(rgba: &[u8], out: &mut Vec<u32>) {
+        out.clear();
+        for px in rgba.chunks_exact(4) {
+            out.push((px[2] as u32) | ((px[1] as u32) << 8) | ((px[0] as u32) << 16));
+        }
+    }
+
+    pub fn run(mut scene: Scene) {
+        let (base_w, base_h) = (960u32, 540u32);
+        let bg = Rgba::rgb8(0, 0, 0);
+        let target_ms = 30.0f32; // frame budget while moving
+        let mut move_div = 3.0f32; // dynamic-resolution divisor (auto-tuned)
+        let mut still = 0u32;
+
+        let mut yaw = 0.5f32;
+        let mut pitch = 0.3f32;
+        let mut radius = 8.5f32;
+        let mut last = Point { x: 0, y: 0 };
+        let mut dragging = false;
+        let mut bgra: Vec<u32> = Vec::new();
+
         unsafe {
             let instance = GetModuleHandleW(std::ptr::null());
             let class_name = wide("mm3e_viewer");
@@ -224,10 +243,9 @@ mod win32 {
                 class_name: class_name.as_ptr(),
             };
             if RegisterClassW(&wc) == 0 {
-                eprintln!("RegisterClassW failed");
                 return;
             }
-            let title = wide("MM3E — interactive SDF viewer (arrows/drag orbit, W/S zoom, Esc quit)");
+            let title = wide("MM3E — adaptive CPU viewer (arrows/drag orbit, W/S zoom, Esc quit)");
             let hwnd = CreateWindowExW(
                 0,
                 class_name.as_ptr(),
@@ -235,26 +253,18 @@ mod win32 {
                 WS_OVERLAPPEDWINDOW | WS_VISIBLE,
                 CW_USEDEFAULT,
                 CW_USEDEFAULT,
-                960,
-                560,
+                1024,
+                600,
                 std::ptr::null_mut(),
                 std::ptr::null_mut(),
                 instance,
                 std::ptr::null_mut(),
             );
             if hwnd.is_null() {
-                eprintln!("CreateWindowExW failed");
                 return;
             }
             ShowWindow(hwnd, SW_SHOW);
-
-            let (rw, rh) = (scene.width, scene.height);
-            let mut yaw = 0.5f32;
-            let mut pitch = 0.3f32;
-            let mut radius = 8.5f32;
-            let mut last = Point { x: 0, y: 0 };
             GetCursorPos(&mut last);
-            let mut dragging = false;
 
             let mut msg = std::mem::zeroed::<Msg>();
             'frame: loop {
@@ -265,37 +275,43 @@ mod win32 {
                     TranslateMessage(&msg);
                     DispatchMessageW(&msg);
                 }
-
                 if down(VK_ESCAPE) {
                     break 'frame;
                 }
-                // Keyboard orbit / zoom.
+
+                // --- input → camera, and motion detection ---
+                let mut moved = false;
                 if down(VK_LEFT) {
                     yaw -= 0.04;
+                    moved = true;
                 }
                 if down(VK_RIGHT) {
                     yaw += 0.04;
+                    moved = true;
                 }
                 if down(VK_UP) {
                     pitch = (pitch + 0.03).min(1.45);
+                    moved = true;
                 }
                 if down(VK_DOWN) {
                     pitch = (pitch - 0.03).max(-0.2);
+                    moved = true;
                 }
                 if down(0x57) {
                     radius = (radius - 0.15).max(2.5);
-                } // W
+                    moved = true;
+                }
                 if down(0x53) {
                     radius = (radius + 0.15).min(30.0);
-                } // S
-
-                // Mouse-drag orbit.
+                    moved = true;
+                }
                 let mut cur = Point { x: 0, y: 0 };
                 GetCursorPos(&mut cur);
                 if down(VK_LBUTTON) {
-                    if dragging {
+                    if dragging && (cur.x != last.x || cur.y != last.y) {
                         yaw += (cur.x - last.x) as f32 * 0.01;
                         pitch = (pitch - (cur.y - last.y) as f32 * 0.01).clamp(-0.2, 1.45);
+                        moved = true;
                     }
                     dragging = true;
                 } else {
@@ -303,17 +319,60 @@ mod win32 {
                 }
                 last = cur;
 
-                // Render one frame and blit it, scaled, to the whole client area.
+                if moved {
+                    still = 0;
+                } else {
+                    still = (still + 1).min(1000);
+                }
+
+                // --- choose internal resolution + quality ---
+                let (rw, rh, q, mode);
+                if still == 0 {
+                    let rw0 = ((base_w as f32 / move_div) as u32).max(220);
+                    let rh0 = ((base_h as f32 / move_div) as u32).max(124);
+                    rw = rw0;
+                    rh = rh0;
+                    q = Quality::fast(rw, rh);
+                    mode = "MOVING";
+                } else {
+                    let tnorm = (still as f32 / 20.0).min(1.0);
+                    let div = 3.0 + (1.0 - 3.0) * tnorm; // 3 → 1 as it converges
+                    rw = ((base_w as f32 / div) as u32).max(220);
+                    rh = ((base_h as f32 / div) as u32).max(124);
+                    q = Quality::lerp(Quality::fast(rw, rh), Quality::full(rw, rh), tnorm);
+                    mode = if tnorm >= 1.0 { "FULL" } else { "REFINING" };
+                }
+                q.apply(&mut scene);
+
+                // --- render + time it ---
                 let cam = orbit_camera(Vec3::new(0.0, 0.85, 0.4), radius, yaw, pitch, 52f32.to_radians());
+                let t0 = Instant::now();
                 let fb = render(&scene, &cam);
-                let pixels = fb.to_u32(Rgba::rgb8(0, 0, 0));
+                let ms = t0.elapsed().as_secs_f32() * 1000.0;
+                let fps = if ms > 0.0 { 1000.0 / ms } else { 999.0 };
+
+                // Dynamic resolution: hold the frame budget while moving.
+                if still == 0 {
+                    if ms > target_ms * 1.25 {
+                        move_div = (move_div * 1.12).min(9.0);
+                    } else if ms < target_ms * 0.8 {
+                        move_div = (move_div / 1.1).max(1.0);
+                    }
+                }
+
+                // --- HUD + present (upscaled to the window) ---
+                let mut rgba = fb.to_rgba8(bg);
+                let hud = format!("{mode} {rw}X{rh} {fps:.0} FPS");
+                font::draw_text(&mut rgba, rw, rh, 6, 6, 2, &hud, [255, 232, 96]);
+                rgba_to_bgra(&rgba, &mut bgra);
+
                 let bmi = BitmapInfoHeader {
                     size: std::mem::size_of::<BitmapInfoHeader>() as u32,
                     width: rw as i32,
-                    height: -(rh as i32), // top-down
+                    height: -(rh as i32),
                     planes: 1,
                     bit_count: 32,
-                    compression: 0, // BI_RGB
+                    compression: 0,
                     size_image: 0,
                     x_ppm: 0,
                     y_ppm: 0,
@@ -333,13 +392,18 @@ mod win32 {
                     0,
                     rw as i32,
                     rh as i32,
-                    pixels.as_ptr() as *const c_void,
+                    bgra.as_ptr() as *const c_void,
                     &bmi,
-                    0, // DIB_RGB_COLORS
+                    0,
                     SRCCOPY,
                 );
                 ReleaseDC(hwnd, hdc);
-                Sleep(6);
+                // When fully converged, idle a little so we don't spin re-rendering the same frame.
+                if still > 24 {
+                    Sleep(30);
+                } else {
+                    Sleep(1);
+                }
             }
         }
     }

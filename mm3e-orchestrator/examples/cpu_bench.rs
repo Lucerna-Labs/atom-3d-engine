@@ -5,12 +5,10 @@
 
 use mm3e_kit::vec::{Mat3, Transform, Vec3};
 use mm3e_kit::Material;
-use mm3e_orchestrator::{orbit_camera, render, Light, Object, Prim, Scene};
+use mm3e_orchestrator::{orbit_camera, render, Light, Object, Prim, Quality, Scene};
 
-fn build(width: u32, height: u32, aa: u32, bounces: u32) -> Scene {
-    let mut scene = Scene::new(width, height);
-    scene.aa = aa;
-    scene.bounces = bounces;
+fn scene_geometry() -> Scene {
+    let mut scene = Scene::new(960, 540);
 
     let floor = scene.material(Material::solid(Vec3::splat(1.0)).checkered().specular(0.15).roughness(0.6));
     let red = scene.material(Material::solid(Vec3::new(0.85, 0.18, 0.20)).specular(0.7).roughness(0.25));
@@ -47,17 +45,19 @@ fn build(width: u32, height: u32, aa: u32, bounces: u32) -> Scene {
     scene
 }
 
-fn bench(label: &str, scene: &Scene, frames: u32) {
+fn bench(label: &str, q: Quality, frames: u32) {
+    let mut scene = scene_geometry();
+    q.apply(&mut scene);
     let cam = orbit_camera(Vec3::new(0.2, 0.85, 0.4), 8.5, 0.55, 0.32, 50f32.to_radians());
-    let _ = render(scene, &cam); // warm up
+    let _ = render(&scene, &cam); // warm up
     let t0 = std::time::Instant::now();
     for i in 0..frames {
         let c = orbit_camera(Vec3::new(0.2, 0.85, 0.4), 8.5, 0.55 + i as f32 * 0.01, 0.32, 50f32.to_radians());
-        let _ = render(scene, &c);
+        let _ = render(&scene, &c);
     }
     let dt = t0.elapsed().as_secs_f32();
     println!(
-        "{label}: {}x{} aa={} bounces={} -> {:.2} fps ({:.0} ms/frame) over {frames} frames",
+        "{label}: {}x{} aa={} bounces={} -> {:.1} fps ({:.0} ms/frame)",
         scene.width,
         scene.height,
         scene.aa,
@@ -69,7 +69,8 @@ fn bench(label: &str, scene: &Scene, frames: u32) {
 
 fn main() {
     let threads = std::thread::available_parallelism().map(|n| n.get()).unwrap_or(1);
-    println!("CPU renderer benchmark ({threads} threads)");
-    bench("quality   ", &build(960, 540, 2, 3), 20); // matches the GPU gpu_render benchmark
-    bench("interactive", &build(480, 270, 1, 1), 40); // the live-viewer setting
+    println!("CPU renderer benchmark ({threads} threads) — the adaptive viewer's three quality tiers:");
+    bench("full (still) ", Quality::full(960, 540), 20); // converged still / offline
+    bench("balanced     ", Quality::balanced(640, 360), 40);
+    bench("fast (moving)", Quality::fast(320, 180), 80); // low-res preview while orbiting
 }

@@ -157,6 +157,23 @@ fn physics_body_rests_on_floor() {
 }
 
 #[test]
+fn quality_presets_and_lerp() {
+    use mm3e_orchestrator::Quality;
+    let fast = Quality::fast(320, 180);
+    let full = Quality::full(960, 540);
+    assert!(fast.aa <= full.aa && fast.bounces <= full.bounces && fast.shadow_steps < full.shadow_steps);
+    // Lerp climbs the budgets and takes the target resolution.
+    let mid = Quality::lerp(fast, full, 0.5);
+    assert_eq!((mid.width, mid.height), (960, 540));
+    assert!(mid.shadow_steps > fast.shadow_steps && mid.shadow_steps < full.shadow_steps);
+    // apply() writes the knobs into a scene.
+    let mut s = Scene::new(10, 10);
+    full.apply(&mut s);
+    assert_eq!((s.width, s.height, s.aa, s.bounces), (960, 540, 2, 2));
+    assert_eq!((s.marcher.shadow_steps, s.marcher.ao_samples), (64, 5));
+}
+
+#[test]
 fn particles_burst_move_and_expire() {
     use mm3e_orchestrator::particles::Particles;
     let mut p = Particles::new();

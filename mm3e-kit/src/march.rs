@@ -36,7 +36,8 @@ pub struct Hit {
     pub steps: u32,
 }
 
-/// Budget + tolerances for a march. Defaults are tuned for the example scenes.
+/// Budget + tolerances for a march. Defaults are tuned for the example scenes. The step/shadow/AO
+/// budgets are the quality knobs an adaptive renderer turns down while moving and up when still.
 #[derive(Clone, Copy, Debug)]
 pub struct Marcher {
     pub max_steps: u32,
@@ -45,27 +46,49 @@ pub struct Marcher {
     /// Fraction of the safe distance to actually step. 1.0 for pure Lipschitz fields; lower
     /// (≈0.6) when the scene uses non-distance-preserving domain warps (twist/bend/repeat).
     pub step_scale: f32,
+    /// Max iterations for the soft-shadow march (lower = faster, harder shadows).
+    pub shadow_steps: u32,
+    /// Ambient-occlusion sample count (0 disables AO).
+    pub ao_samples: u32,
 }
 
 impl Default for Marcher {
     fn default() -> Self {
-        Self { max_steps: 160, max_dist: 120.0, eps: 0.0006, step_scale: 1.0 }
+        Self { max_steps: 160, max_dist: 120.0, eps: 0.0006, step_scale: 1.0, shadow_steps: 64, ao_samples: 5 }
     }
 }
 
 impl Marcher {
     /// Sphere-trace one ray through `field`, folding ray steps down to a `Hit`.
+    ///
+    /// Uses **enhanced sphere tracing** (Keinert et al. 2014): step by `ω · distance` with
+    /// `ω = 1.4`, and whenever two successive unbounding spheres fail to overlap (the signal that
+    /// the over-relaxed step jumped past a surface), undo the over-relaxed part and continue
+    /// conservatively. This skips long empty stretches — exactly the horizon/grazing rays that
+    /// dominate the cost — without moving the hit point. A `step_scale < 1` (set for non-Lipschitz
+    /// domain warps) disables over-relaxation and just under-relaxes, as before.
     pub fn march(&self, field: &dyn Fn(Vec3) -> Field, ray: &Ray) -> Hit {
+        let mut omega = if self.step_scale >= 1.0 { 1.4 } else { self.step_scale };
         let mut t = 0.0f32;
+        let mut prev_radius = 0.0f32;
+        let mut step_len = 0.0f32;
         for i in 0..self.max_steps {
             let p = ray.at(t);
             let f = field(p);
-            // Relax the surface tolerance with distance so far-away pixels don't over-march.
+            let radius = f.dist.abs();
             let eps = self.eps * (1.0 + t * 0.5);
-            if f.dist < eps {
-                return Hit { hit: true, t, pos: p, normal: self.normal(field, p), mat: f.mat, steps: i };
+            // Over-relaxation failure: the two safe spheres don't overlap → we overshot.
+            if omega > 1.0 && radius + prev_radius < step_len {
+                step_len -= omega * step_len; // back up to the last safe point
+                omega = 1.0; // conservative for the rest of this ray
+            } else {
+                if f.dist < eps {
+                    return Hit { hit: true, t, pos: p, normal: self.normal(field, p), mat: f.mat, steps: i };
+                }
+                step_len = f.dist * omega;
             }
-            t += f.dist * self.step_scale;
+            prev_radius = radius;
+            t += step_len;
             if t > self.max_dist {
                 break;
             }
@@ -92,13 +115,15 @@ impl Marcher {
     pub fn soft_shadow(&self, field: &dyn Fn(Vec3) -> Field, origin: Vec3, dir: Vec3, max_t: f32, k: f32) -> f32 {
         let mut res = 1.0f32;
         let mut t = 0.02;
-        for _ in 0..64 {
+        for _ in 0..self.shadow_steps {
             let h = field(origin + dir.scale(t)).dist;
             if h < 0.0008 {
                 return 0.0;
             }
             res = res.min(k * h / t);
-            t += h.clamp(0.01, 0.4);
+            // Step by the safe distance with a cap that grows with `t`: fine near the caster
+            // (where the penumbra is shaped) and large leaps through open space far away.
+            t += h.clamp(0.02, 0.25 + 0.4 * t);
             if t > max_t {
                 break;
             }
@@ -107,11 +132,17 @@ impl Marcher {
     }
 
     /// Ambient occlusion in [0, 1] by probing the field along the normal (1 = fully open).
+    /// `ao_samples == 0` skips the work and returns a fully-open 1.0.
     pub fn ambient_occlusion(&self, field: &dyn Fn(Vec3) -> Field, p: Vec3, n: Vec3) -> f32 {
+        let n_samples = self.ao_samples;
+        if n_samples == 0 {
+            return 1.0;
+        }
+        let span = (n_samples.max(2) - 1) as f32;
         let mut occ = 0.0f32;
         let mut sca = 1.0f32;
-        for i in 0..5 {
-            let hr = 0.01 + 0.12 * i as f32 / 4.0;
+        for i in 0..n_samples {
+            let hr = 0.01 + 0.12 * i as f32 / span;
             let d = field(p + n.scale(hr)).dist;
             occ += (hr - d) * sca;
             sca *= 0.92;

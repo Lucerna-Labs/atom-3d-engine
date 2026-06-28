@@ -47,6 +47,61 @@ pub enum RenderMode {
     Albedo,
 }
 
+/// A bundle of render-quality knobs for **adaptive rendering**: turn it down while the camera
+/// moves, then progressively up (via [`Quality::lerp`]) as it sits still. `apply` writes the knobs
+/// (resolution + AA + bounces + marcher budgets) into a [`Scene`]. This is what lets the CPU path
+/// be a fast previewer that refines to a ground-truth still, instead of a brute-force real-timer.
+#[derive(Clone, Copy, Debug)]
+pub struct Quality {
+    pub width: u32,
+    pub height: u32,
+    pub aa: u32,
+    pub bounces: u32,
+    pub max_steps: u32,
+    pub shadow_steps: u32,
+    pub ao_samples: u32,
+}
+
+impl Quality {
+    /// Fast preview: low resolution, no AA, no reflections, lean shadows, AO off.
+    pub fn fast(width: u32, height: u32) -> Quality {
+        Quality { width, height, aa: 1, bounces: 0, max_steps: 64, shadow_steps: 12, ao_samples: 0 }
+    }
+    /// A middle ground.
+    pub fn balanced(width: u32, height: u32) -> Quality {
+        Quality { width, height, aa: 1, bounces: 1, max_steps: 110, shadow_steps: 28, ao_samples: 3 }
+    }
+    /// Full quality — converged still frames / offline.
+    pub fn full(width: u32, height: u32) -> Quality {
+        Quality { width, height, aa: 2, bounces: 2, max_steps: 160, shadow_steps: 64, ao_samples: 5 }
+    }
+    /// Interpolate the budgets from `a` toward `b` by `t ∈ [0, 1]` (resolution is `b`'s). Used to
+    /// step quality up over successive still frames.
+    pub fn lerp(a: Quality, b: Quality, t: f32) -> Quality {
+        let t = t.clamp(0.0, 1.0);
+        let mix = |x: u32, y: u32| (x as f32 + (y as f32 - x as f32) * t).round() as u32;
+        Quality {
+            width: b.width,
+            height: b.height,
+            aa: mix(a.aa, b.aa),
+            bounces: mix(a.bounces, b.bounces),
+            max_steps: mix(a.max_steps, b.max_steps),
+            shadow_steps: mix(a.shadow_steps, b.shadow_steps),
+            ao_samples: mix(a.ao_samples, b.ao_samples),
+        }
+    }
+    /// Write these knobs into `scene`.
+    pub fn apply(&self, scene: &mut Scene) {
+        scene.width = self.width;
+        scene.height = self.height;
+        scene.aa = self.aa;
+        scene.bounces = self.bounces;
+        scene.marcher.max_steps = self.max_steps;
+        scene.marcher.shadow_steps = self.shadow_steps;
+        scene.marcher.ao_samples = self.ao_samples;
+    }
+}
+
 // ----------------------------------------------------------------------------
 // Scene description (policy: what exists in the world)
 // ----------------------------------------------------------------------------
@@ -302,9 +357,6 @@ impl Light {
         } else {
             (dist / self.radius).clamp(2.0, 64.0)
         }
-    }
-    fn luminance(&self) -> f32 {
-        self.color.x * 0.2126 + self.color.y * 0.7152 + self.color.z * 0.0722
     }
 }
 
@@ -612,10 +664,10 @@ fn trace(scene: &Scene, field: &dyn Fn(Vec3) -> Field, ray: &Ray, depth: u32) ->
     let ambient_irr = ibl_irradiance(scene, normal) + gi + scene.ambient;
     let mut radiance = albedo.cmul(ambient_irr).scale(occ);
 
-    // Direct lighting: `order` the lights brightest-first, then `combine` (fold) them in,
-    // each through the Cook-Torrance GGX BRDF with inverse-square falloff and soft shadows.
-    for &li in atoms::order(&scene.lights, |l| l.luminance()).iter() {
-        let light = scene.lights[li];
+    // Direct lighting: `combine` (fold) each light through the Cook-Torrance GGX BRDF with
+    // inverse-square falloff and soft shadows. Lighting is additive, so no per-pixel ordering is
+    // needed (the old `order` call allocated a Vec for every shaded pixel — pure waste).
+    for light in &scene.lights {
         let (l_dir, l_dist) = light.toward(hit.pos);
         if shade::lambert(normal, l_dir) <= 0.0 {
             continue;
