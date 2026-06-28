@@ -21,6 +21,12 @@ All notable changes to MM3E are documented here.
   watchable interactively, not just a printed table. Launched at 3840×2160 on an RTX 5070 Ti.
   (The Win32/GDI viewer reads each frame back to present it, so its fps reflects render + readback;
   the render-only ceiling is in `gpu_resolution`.)
+- **`examples/cpu_vs_gpu`**: the same scene / camera / shading rendered on **both** paths at matched
+  resolutions, side by side with the speedup factor. Measured (24-thread CPU vs RTX 5070 Ti):
+  480p **2.7 → 725 fps (271×)**, 1080p **0.51 → 165 fps (326×)**, 4K **~0.13 → 43 fps (337×)**.
+  The GPU's WGSL is codegen'd from the same world field the CPU marches, so this isolates the one
+  variable that differs — parallel hardware lanes — and quantifies it: the algorithm is identical;
+  only the lane count separates "a couple of frames" from "real-time 4K".
 
 ## [0.6.0] — profiling + engine-native frame generation
 
