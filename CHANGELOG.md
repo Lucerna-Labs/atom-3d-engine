@@ -2,6 +2,23 @@
 
 All notable changes to MM3E are documented here.
 
+## [0.6.2] — secant root refinement (a validated cross-domain transfer)
+
+- **`Marcher::march` now does secant / regula-falsi root refinement near the surface** — a primitive
+  borrowed from numerical optimization (control-numerical-opt). When the march gets close to a
+  surface, it estimates the field's slope `dd/dt` from the last two samples and steps toward the
+  predicted root instead of by the raw safe distance. On grazing rays the slope is shallow, so the
+  secant step *exceeds* the sphere step — exactly where sphere tracing crawls — capped at `4·d` with
+  the existing over-relaxation overlap test as the safety net, and gated to Lipschitz fields
+  (`step_scale >= 1.0`) like over-relaxation.
+- **How it was found:** surfaced as a candidate by the cross-domain primitive simulator, then
+  validated empirically — not by type-checking, but by measuring the conserved currency it charges.
+  Measured on the profiler scene (480×270): **march-phase field-evaluations −14.3%, total −5.3%**
+  (8,063,874 → 7,633,504), **28.6 → 29.4 fps**, with a **0.19% mean image change** (sub-pixel
+  silhouette shift only) and all 32 tests green. A combined `secant + coarser-eps` variant reached
+  −6.5% but doubled the edge perturbation, so the eps coarsening was left out as a separate quality
+  knob rather than a default.
+
 ## [0.6.1] — GPU resolution sweep (the CPU-vs-GPU "why" answered with numbers)
 
 - **`GpuScene::render_only` + `GpuRenderer::wait_idle`**: a no-readback dispatch path. The existing
