@@ -11,6 +11,7 @@
 
 pub mod anim;
 pub mod gi;
+pub mod particles;
 pub mod physics;
 pub mod post;
 pub mod scene_io;

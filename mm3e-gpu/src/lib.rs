@@ -14,7 +14,7 @@ use mm3e_kit::color::Rgba;
 use mm3e_kit::framebuffer::Framebuffer;
 use mm3e_orchestrator::Scene;
 
-const MAX_DYN: usize = 12;
+const MAX_DYN: usize = 24;
 
 /// A dynamic sphere (player / physics body) rendered without recompiling the shader — its data
 /// rides in the uniform and is unioned into the field on the GPU each frame.

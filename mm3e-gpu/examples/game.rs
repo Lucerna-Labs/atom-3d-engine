@@ -79,6 +79,7 @@ mod win32 {
     use mm3e_gpu::{GpuRenderer, GpuScene};
     use mm3e_kit::camera::Camera;
     use mm3e_kit::sdf::Field;
+    use mm3e_orchestrator::particles::Particles;
     use mm3e_orchestrator::physics::{Body, PhysicsWorld};
     use std::ffi::c_void;
 
@@ -249,6 +250,16 @@ mod win32 {
             world.add(Body::new(Vec3::new(a.cos() * 2.5, 1.5 + i as f32 * 0.4, a.sin() * 2.5), 0.45));
         }
 
+        // Collectible gold orbs scattered around the level — roll into one to score (with a burst).
+        let mut collectibles: Vec<(Vec3, bool)> = Vec::new();
+        for k in 0..6 {
+            let a = k as f32 / 6.0 * std::f32::consts::TAU + 0.4;
+            collectibles.push((Vec3::new(a.cos() * 6.0, 0.6, a.sin() * 6.0), false));
+        }
+        let mut particles = Particles::new();
+        let mut score = 0u32;
+        let mut burst_seed = 1u32;
+
         let mut cam_yaw = 1.2f32;
         let mut cam_pitch = 0.35f32;
         let mut last = Point { x: 0, y: 0 };
@@ -359,6 +370,24 @@ mod win32 {
                     }
                 }
 
+                // Collect orbs the player rolls into: score + a particle burst.
+                let player_pos = world.bodies[player].pos;
+                let player_r = world.bodies[player].radius;
+                let total = collectibles.len();
+                for c in collectibles.iter_mut() {
+                    if !c.1 && (c.0 - player_pos).length() < player_r + 0.45 {
+                        c.1 = true;
+                        score += 1;
+                        particles.burst(c.0, 14, 4.5, Vec3::new(1.0, 0.82, 0.3), burst_seed);
+                        burst_seed = burst_seed.wrapping_add(101);
+                        println!("collected! score = {score}/{total}");
+                        if score as usize == total {
+                            println!("all orbs collected — you win!");
+                        }
+                    }
+                }
+                particles.update(dt);
+
                 let pp = world.bodies[player].pos;
                 let eye = pp
                     + Vec3::new(
@@ -380,6 +409,24 @@ mod win32 {
                 for (i, c) in ball_colors.iter().enumerate() {
                     let b = world.bodies[player + 1 + i];
                     dyn_spheres.push(DynSphere { pos: b.pos, radius: b.radius, albedo: *c, metallic: 0.0 });
+                }
+                // Uncollected gold orbs.
+                for c in &collectibles {
+                    if !c.1 {
+                        dyn_spheres.push(DynSphere {
+                            pos: c.0,
+                            radius: 0.35,
+                            albedo: Vec3::new(1.0, 0.82, 0.3),
+                            metallic: 1.0,
+                        });
+                    }
+                }
+                // Live particles fill any remaining dynamic-sphere slots.
+                for p in particles.alive() {
+                    if dyn_spheres.len() >= 24 {
+                        break;
+                    }
+                    dyn_spheres.push(DynSphere { pos: p.pos, radius: p.size, albedo: p.color, metallic: 0.0 });
                 }
 
                 let rgba = scene.render_rgba_dyn(renderer, &cam, &dyn_spheres);

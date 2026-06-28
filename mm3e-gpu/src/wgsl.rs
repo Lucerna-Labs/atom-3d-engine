@@ -206,15 +206,15 @@ fn direct_lighting_fn(scene: &Scene) -> String {
 // ----------------------------------------------------------------------------
 
 const KERNEL_HEADER: &str = r#"
-const MAX_DYN: u32 = 12u;
+const MAX_DYN: u32 = 24u;
 struct U {
   eye: vec3<f32>, fov: f32,
   right: vec3<f32>, aa: f32,
   up: vec3<f32>, bounces: f32,
   fwd: vec3<f32>, n_dyn: f32,
   res: vec2<f32>, _pad2: vec2<f32>,
-  dyn_pr: array<vec4<f32>, 12>,   // dynamic spheres: xyz = centre, w = radius
-  dyn_col: array<vec4<f32>, 12>,  // xyz = albedo, w = metallic
+  dyn_pr: array<vec4<f32>, 24>,   // dynamic spheres: xyz = centre, w = radius
+  dyn_col: array<vec4<f32>, 24>,  // xyz = albedo, w = metallic
 };
 @group(0) @binding(0) var<uniform> u: U;
 @group(0) @binding(1) var outtex: texture_storage_2d<rgba8unorm, write>;

@@ -10,9 +10,12 @@ All notable changes to MM3E are documented here.
   restitution/friction, grounded detection, sphere–sphere contacts. Two regression tests.
 - **Dynamic spheres on the GPU**: the WGSL kernel unions up to 12 uniform-driven spheres into the
   baked field, so moving objects render without recompiling the shader.
+- **Particle system** (`mm3e_orchestrator::particles`): short-lived sparks that integrate under
+  gravity + drag and render as the same dynamic spheres — particles are just more primitives.
 - **`examples/game.rs`**: a playable game — roll a ball around an SDF obstacle course (gravity,
-  jump, collisions, follow camera, loose balls to bump), GPU-rendered in real time. Verified
-  running on an RTX 5070 Ti.
+  jump, collisions, follow camera, loose balls to bump), **collect gold orbs to score** with a
+  particle burst on pickup and a win condition. GPU-rendered in real time, verified on an RTX 5070 Ti.
+- The GPU dynamic-sphere budget is 24 (player + balls + collectibles + particles).
 - `Scene::field()` is now public so physics/tools can query the same `Fn(Vec3) -> Field` the
   renderer marches.
 

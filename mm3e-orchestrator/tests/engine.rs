@@ -157,6 +157,22 @@ fn physics_body_rests_on_floor() {
 }
 
 #[test]
+fn particles_burst_move_and_expire() {
+    use mm3e_orchestrator::particles::Particles;
+    let mut p = Particles::new();
+    p.burst(Vec3::new(0.0, 2.0, 0.0), 16, 4.0, Vec3::new(1.0, 0.8, 0.2), 7);
+    assert_eq!(p.alive().len(), 16);
+    let start = p.alive()[0].pos;
+    p.update(0.1);
+    assert_ne!(p.alive()[0].pos, start, "particles should move when updated");
+    // After enough time every particle expires.
+    for _ in 0..40 {
+        p.update(0.1);
+    }
+    assert_eq!(p.alive().len(), 0, "particles should die after their lifetime");
+}
+
+#[test]
 fn physics_resolves_penetration() {
     use mm3e_kit::sdf::Field;
     use mm3e_orchestrator::physics::{Body, PhysicsWorld};
