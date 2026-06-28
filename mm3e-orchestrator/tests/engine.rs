@@ -89,6 +89,17 @@ fn render_smoke_produces_a_nontrivial_image() {
 }
 
 #[test]
+fn checkerboard_render_fills_every_pixel() {
+    use mm3e_orchestrator::render_checkerboard;
+    let scene = demo_scene();
+    let fb = render_checkerboard(&scene, &cam());
+    let px = fb.to_u32(mm3e_kit::color::Rgba::rgb8(0, 0, 0));
+    assert_eq!(px.len() as u32, scene.width * scene.height);
+    assert!(px.iter().any(|&p| p != px[0]), "checkerboard render is flat");
+    assert!(px.iter().all(|&p| p <= 0x00FF_FFFF));
+}
+
+#[test]
 fn all_render_modes_run() {
     let mut scene = demo_scene();
     let c = cam();

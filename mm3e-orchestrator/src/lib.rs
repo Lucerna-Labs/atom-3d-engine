@@ -535,19 +535,77 @@ pub fn render(scene: &Scene, camera: &Camera) -> Framebuffer {
         return render_bands(scene, camera, |sc, f, cam, x, y| aov_pixel(sc, f, cam, x, y));
     }
 
-    // Beauty: shade to linear HDR (carried in the scratch framebuffer's rgb), then resolve it
-    // through the post pass (bloom, exposure, ACES, gamma).
-    let hdr_fb = render_bands(scene, camera, |sc, f, cam, x, y| {
-        let c = shade_pixel(sc, f, cam, x, y);
-        Rgba::new(c.x, c.y, c.z, 1.0)
+    // Beauty path: each thread builds the *concrete* world-field closure and shades its band with
+    // it, so the marcher and the per-primitive loop monomorphize and inline (no `&dyn Fn` call in
+    // the ~8M-evals-per-frame hot path). Results are linear HDR, resolved through the post pass.
+    let threads = std::thread::available_parallelism().map(|n| n.get()).unwrap_or(1).max(1);
+    let band = (h as usize).div_ceil(threads);
+    let bands: Vec<(u32, Vec<Vec3>)> = std::thread::scope(|s| {
+        let handles: Vec<_> = (0..threads)
+            .map(|ti| {
+                let y0 = (ti * band) as u32;
+                let y1 = (((ti + 1) * band) as u32).min(h);
+                s.spawn(move || {
+                    let field = scene.world();
+                    let mut rows = Vec::with_capacity(((y1.saturating_sub(y0)) * w) as usize);
+                    for y in y0..y1 {
+                        for x in 0..w {
+                            rows.push(shade_pixel(scene, &field, camera, x, y));
+                        }
+                    }
+                    (y0, rows)
+                })
+            })
+            .collect();
+        handles.into_iter().map(|hd| hd.join().unwrap()).collect()
     });
-    let hdr: Vec<Vec3> = (0..(w * h))
-        .map(|i| {
-            let p = hdr_fb.pixel(i % w, i / w);
-            Vec3::new(p.r, p.g, p.b)
-        })
-        .collect();
+
+    let mut hdr = vec![Vec3::ZERO; (w * h) as usize];
+    for (y0, rows) in bands {
+        for (i, px) in rows.into_iter().enumerate() {
+            hdr[(y0 * w) as usize + i] = px;
+        }
+    }
     post::resolve(&hdr, w, h, &scene.post)
+}
+
+/// Checkerboard (interlaced) render — ray-trace only the pixels where `(x + y)` is even and fill
+/// the rest by averaging their four (always-rendered) neighbours. Halves the per-frame ray work
+/// for a small softening, ideal for the camera-moving phase of an interactive previewer. Resolves
+/// straight to display pixels (no HDR post pass), since it is a preview path.
+pub fn render_checkerboard(scene: &Scene, camera: &Camera) -> Framebuffer {
+    let (w, h) = (scene.width, scene.height);
+    // Pass 1: shade the even pixels; mark the odd ones unfilled (alpha 0).
+    let mut fb = render_bands(scene, camera, |sc, f, cam, x, y| {
+        if (x + y) % 2 == 0 {
+            let c = shade_pixel(sc, f, cam, x, y).scale(sc.post.exposure);
+            Rgba::from_vec3(shade::gamma(shade::aces(c)))
+        } else {
+            Rgba::new(0.0, 0.0, 0.0, 0.0)
+        }
+    });
+    // Pass 2: fill the odd pixels from their even neighbours (which are all already shaded).
+    for y in 0..h {
+        for x in 0..w {
+            if (x + y) % 2 == 0 {
+                continue;
+            }
+            let mut acc = Vec3::ZERO;
+            let mut n = 0.0f32;
+            for (dx, dy) in [(-1i32, 0i32), (1, 0), (0, -1), (0, 1)] {
+                let (nx, ny) = (x as i32 + dx, y as i32 + dy);
+                if nx >= 0 && ny >= 0 && (nx as u32) < w && (ny as u32) < h {
+                    let p = fb.pixel(nx as u32, ny as u32);
+                    acc = acc + Vec3::new(p.r, p.g, p.b);
+                    n += 1.0;
+                }
+            }
+            if n > 0.0 {
+                fb.put(x, y, Rgba::from_vec3(acc.scale(1.0 / n)));
+            }
+        }
+    }
+    fb
 }
 
 /// Shade every row-band in parallel (scoped std threads), one pixel per `shade` callback, and
@@ -629,7 +687,7 @@ fn aov_pixel(scene: &Scene, field: &dyn Fn(Vec3) -> Field, camera: &Camera, x: u
 /// Shade one pixel into **linear HDR**: supersample on an n×n sub-pixel grid (the 3-D analog of
 /// MMPE's analytic AA band) and return the averaged radiance. Tone-mapping happens later, in the
 /// post pass, so the float frame stays available for bloom/exposure.
-fn shade_pixel(scene: &Scene, field: &dyn Fn(Vec3) -> Field, camera: &Camera, x: u32, y: u32) -> Vec3 {
+fn shade_pixel<F: Fn(Vec3) -> Field + ?Sized>(scene: &Scene, field: &F, camera: &Camera, x: u32, y: u32) -> Vec3 {
     let n = scene.aa.max(1);
     let inv_samples = 1.0 / (n * n) as f32;
     let mut acc = Vec3::ZERO;
@@ -644,8 +702,9 @@ fn shade_pixel(scene: &Scene, field: &dyn Fn(Vec3) -> Field, camera: &Camera, x:
     acc.scale(inv_samples)
 }
 
-/// Trace one ray and return its linear HDR radiance. Recurses for mirror reflections.
-fn trace(scene: &Scene, field: &dyn Fn(Vec3) -> Field, ray: &Ray, depth: u32) -> Vec3 {
+/// Trace one ray and return its linear HDR radiance. Recurses for mirror reflections. Generic over
+/// the field type so the beauty path monomorphizes (the primitive loop inlines into the marcher).
+fn trace<F: Fn(Vec3) -> Field + ?Sized>(scene: &Scene, field: &F, ray: &Ray, depth: u32) -> Vec3 {
     let hit = scene.marcher.march(field, ray);
     if !hit.hit {
         return shade::sky(ray.dir, scene.sun_dir);

@@ -67,7 +67,7 @@ impl Marcher {
     /// conservatively. This skips long empty stretches — exactly the horizon/grazing rays that
     /// dominate the cost — without moving the hit point. A `step_scale < 1` (set for non-Lipschitz
     /// domain warps) disables over-relaxation and just under-relaxes, as before.
-    pub fn march(&self, field: &dyn Fn(Vec3) -> Field, ray: &Ray) -> Hit {
+    pub fn march<F: Fn(Vec3) -> Field + ?Sized>(&self, field: &F, ray: &Ray) -> Hit {
         let mut omega = if self.step_scale >= 1.0 { 1.4 } else { self.step_scale };
         let mut t = 0.0f32;
         let mut prev_radius = 0.0f32;
@@ -97,7 +97,7 @@ impl Marcher {
     }
 
     /// Surface normal as the normalized field gradient (tetrahedron sampling: four `compare`s).
-    pub fn normal(&self, field: &dyn Fn(Vec3) -> Field, p: Vec3) -> Vec3 {
+    pub fn normal<F: Fn(Vec3) -> Field + ?Sized>(&self, field: &F, p: Vec3) -> Vec3 {
         let h = 0.0009;
         let k0 = Vec3::new(1.0, -1.0, -1.0);
         let k1 = Vec3::new(-1.0, -1.0, 1.0);
@@ -112,7 +112,14 @@ impl Marcher {
 
     /// Soft shadow factor in [0, 1] from `origin` toward `dir`, marching to `max_t`.
     /// `k` controls penumbra hardness (larger = sharper). The classic SDF shadow trick.
-    pub fn soft_shadow(&self, field: &dyn Fn(Vec3) -> Field, origin: Vec3, dir: Vec3, max_t: f32, k: f32) -> f32 {
+    pub fn soft_shadow<F: Fn(Vec3) -> Field + ?Sized>(
+        &self,
+        field: &F,
+        origin: Vec3,
+        dir: Vec3,
+        max_t: f32,
+        k: f32,
+    ) -> f32 {
         let mut res = 1.0f32;
         let mut t = 0.02;
         for _ in 0..self.shadow_steps {
@@ -133,7 +140,7 @@ impl Marcher {
 
     /// Ambient occlusion in [0, 1] by probing the field along the normal (1 = fully open).
     /// `ao_samples == 0` skips the work and returns a fully-open 1.0.
-    pub fn ambient_occlusion(&self, field: &dyn Fn(Vec3) -> Field, p: Vec3, n: Vec3) -> f32 {
+    pub fn ambient_occlusion<F: Fn(Vec3) -> Field + ?Sized>(&self, field: &F, p: Vec3, n: Vec3) -> f32 {
         let n_samples = self.ao_samples;
         if n_samples == 0 {
             return 1.0;
