@@ -429,7 +429,30 @@ mod win32 {
                     dyn_spheres.push(DynSphere { pos: p.pos, radius: p.size, albedo: p.color, metallic: 0.0 });
                 }
 
-                let rgba = scene.render_rgba_dyn(renderer, &cam, &dyn_spheres);
+                let mut rgba = scene.render_rgba_dyn(renderer, &cam, &dyn_spheres);
+                // HUD overlay (drawn on the CPU onto the GPU frame before present).
+                mm3e_kit::font::draw_text(
+                    &mut rgba,
+                    rw,
+                    rh,
+                    14,
+                    12,
+                    3,
+                    &format!("SCORE {score}/{total}"),
+                    [255, 226, 90],
+                );
+                if score as usize == total {
+                    mm3e_kit::font::draw_text(
+                        &mut rgba,
+                        rw,
+                        rh,
+                        (rw as i32) / 2 - 120,
+                        (rh as i32) / 2 - 20,
+                        5,
+                        "YOU WIN!",
+                        [120, 255, 140],
+                    );
+                }
                 rgba_to_bgra(&rgba, &mut bgra);
 
                 let bmi = BitmapInfoHeader {

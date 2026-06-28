@@ -159,6 +159,20 @@ fn marcher_hits_a_sphere_and_normal_points_back() {
 }
 
 #[test]
+fn font_draws_glyphs() {
+    use mm3e_kit::font;
+    assert_eq!(font::glyph(' '), [0; 7]);
+    assert!(font::glyph('A').iter().any(|&r| r != 0));
+    // Drawing onto an RGBA buffer marks some pixels and leaves blank space untouched.
+    let (w, h) = (64u32, 16u32);
+    let mut buf = vec![0u8; (w * h * 4) as usize];
+    font::draw_text(&mut buf, w, h, 2, 2, 1, "A1", [255, 255, 255]);
+    assert!(buf.iter().any(|&b| b != 0), "draw_text should mark pixels");
+    // A character drawn out of bounds must not panic or write.
+    font::draw_text(&mut buf, w, h, -100, -100, 2, "Z", [255, 0, 0]);
+}
+
+#[test]
 fn shading_invariants() {
     let n = Vec3::new(0.0, 1.0, 0.0);
     let l = Vec3::new(0.0, 1.0, 0.0);

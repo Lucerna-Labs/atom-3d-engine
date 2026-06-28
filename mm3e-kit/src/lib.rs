@@ -13,6 +13,7 @@
 
 pub mod camera;
 pub mod color;
+pub mod font;
 pub mod framebuffer;
 pub mod march;
 pub mod sdf;
