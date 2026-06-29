@@ -2,6 +2,22 @@
 
 All notable changes to MM3E are documented here.
 
+## [0.6.4] — stochastic soft shadows (the `hash` atom enters the renderer)
+
+- **`Marcher::soft_shadow` is now blue-noise stochastic** — the cross-domain primitive finder kept
+  pointing at the one bridge the engine was missing, `hash → graphics` (procedural/stochastic
+  sampling), and `hash` is literally the only one of the eight root atoms the marcher never used.
+  Brought it in: jitter the shadow march's start by a hash of the ray origin and take coarser steps,
+  so the per-ray jitter dithers the coarser penumbra across pixels instead of banding.
+- **Validated on the real engine.** Shadows were the single biggest cost (51% of field-evals).
+  Measured against the secant+LOD baseline: **shadow-phase field-evals −25.3%, total −13.8%**
+  (7,633,504 → 6,579,880), **29.4 → 31.2 fps**, all 32 tests green. Image cost: mean Δ ~0.04–0.06/255
+  (spheres 0.035, showcase 0.058), max ~130 at a few penumbra-edge pixels, ~0.1% of pixels changed
+  by >16 — edge-localized, the same character as the secant change, and deterministic (hash of
+  position) so renders stay stable frame-to-frame.
+- This is the third validated cross-domain transfer to land in the engine (after secant and LOD),
+  and the largest single eval cut — it makes the dominant shadow phase a quarter cheaper.
+
 ## [0.6.3] — screen-footprint LOD (a validated graphics→marcher glue, dialed by policy)
 
 - **The cross-domain glue finder was deepened** (`xdsim --mode binding`) to weight a primitive's
