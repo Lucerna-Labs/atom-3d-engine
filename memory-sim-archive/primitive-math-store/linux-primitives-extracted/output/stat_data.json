@@ -1,0 +1,531 @@
+{
+  "filename": "stat.h",
+  "includes": [
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "S_IFMT",
+      "value": "00170000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "S_IFSOCK",
+      "value": "0140000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "S_IFLNK",
+      "value": "0120000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "S_IFREG",
+      "value": "0100000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "S_IFBLK",
+      "value": "0060000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "S_IFDIR",
+      "value": "0040000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "S_IFCHR",
+      "value": "0020000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "S_IFIFO",
+      "value": "0010000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "S_ISUID",
+      "value": "0004000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "S_ISGID",
+      "value": "0002000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "S_ISVTX",
+      "value": "0001000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "S_IRWXU",
+      "value": "00700",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "S_IRUSR",
+      "value": "00400",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "S_IWUSR",
+      "value": "00200",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "S_IXUSR",
+      "value": "00100",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "S_IRWXG",
+      "value": "00070",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "S_IRGRP",
+      "value": "00040",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "S_IWGRP",
+      "value": "00020",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "S_IXGRP",
+      "value": "00010",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "S_IRWXO",
+      "value": "00007",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "S_IROTH",
+      "value": "00004",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "S_IWOTH",
+      "value": "00002",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "S_IXOTH",
+      "value": "00001",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "STATX_TYPE",
+      "value": "0x00000001U",
+      "comment": "Want/got stx_mode & S_IFMT",
+      "category": ""
+    },
+    {
+      "name": "STATX_MODE",
+      "value": "0x00000002U",
+      "comment": "Want/got stx_mode & ~S_IFMT",
+      "category": ""
+    },
+    {
+      "name": "STATX_NLINK",
+      "value": "0x00000004U",
+      "comment": "Want/got stx_nlink",
+      "category": ""
+    },
+    {
+      "name": "STATX_UID",
+      "value": "0x00000008U",
+      "comment": "Want/got stx_uid",
+      "category": ""
+    },
+    {
+      "name": "STATX_GID",
+      "value": "0x00000010U",
+      "comment": "Want/got stx_gid",
+      "category": ""
+    },
+    {
+      "name": "STATX_ATIME",
+      "value": "0x00000020U",
+      "comment": "Want/got stx_atime",
+      "category": ""
+    },
+    {
+      "name": "STATX_MTIME",
+      "value": "0x00000040U",
+      "comment": "Want/got stx_mtime",
+      "category": ""
+    },
+    {
+      "name": "STATX_CTIME",
+      "value": "0x00000080U",
+      "comment": "Want/got stx_ctime",
+      "category": ""
+    },
+    {
+      "name": "STATX_INO",
+      "value": "0x00000100U",
+      "comment": "Want/got stx_ino",
+      "category": ""
+    },
+    {
+      "name": "STATX_SIZE",
+      "value": "0x00000200U",
+      "comment": "Want/got stx_size",
+      "category": ""
+    },
+    {
+      "name": "STATX_BLOCKS",
+      "value": "0x00000400U",
+      "comment": "Want/got stx_blocks",
+      "category": ""
+    },
+    {
+      "name": "STATX_BASIC_STATS",
+      "value": "0x000007ffU",
+      "comment": "The stuff in the normal stat struct",
+      "category": "STATX_BASIC"
+    },
+    {
+      "name": "STATX_BTIME",
+      "value": "0x00000800U",
+      "comment": "Want/got stx_btime",
+      "category": ""
+    },
+    {
+      "name": "STATX_MNT_ID",
+      "value": "0x00001000U",
+      "comment": "Got stx_mnt_id",
+      "category": "STATX_MNT"
+    },
+    {
+      "name": "STATX_DIOALIGN",
+      "value": "0x00002000U",
+      "comment": "Want/got direct I/O alignment info",
+      "category": ""
+    },
+    {
+      "name": "STATX_MNT_ID_UNIQUE",
+      "value": "0x00004000U",
+      "comment": "Want/got extended stx_mount_id",
+      "category": "STATX_MNT"
+    },
+    {
+      "name": "STATX_SUBVOL",
+      "value": "0x00008000U",
+      "comment": "Want/got stx_subvol",
+      "category": ""
+    },
+    {
+      "name": "STATX_WRITE_ATOMIC",
+      "value": "0x00010000U",
+      "comment": "Want/got atomic_write_* fields",
+      "category": "STATX_WRITE"
+    },
+    {
+      "name": "STATX_DIO_READ_ALIGN",
+      "value": "0x00020000U",
+      "comment": "Want/got dio read alignment info",
+      "category": "STATX_DIO"
+    },
+    {
+      "name": "STATX__RESERVED",
+      "value": "0x80000000U",
+      "comment": "Reserved for future struct statx expansion",
+      "category": ""
+    },
+    {
+      "name": "STATX_ALL",
+      "value": "0x00000fffU",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "STATX_ATTR_COMPRESSED",
+      "value": "0x00000004",
+      "comment": "[I] File is compressed by the fs",
+      "category": "STATX_ATTR"
+    },
+    {
+      "name": "STATX_ATTR_IMMUTABLE",
+      "value": "0x00000010",
+      "comment": "[I] File is marked immutable",
+      "category": "STATX_ATTR"
+    },
+    {
+      "name": "STATX_ATTR_APPEND",
+      "value": "0x00000020",
+      "comment": "[I] File is append-only",
+      "category": "STATX_ATTR"
+    },
+    {
+      "name": "STATX_ATTR_NODUMP",
+      "value": "0x00000040",
+      "comment": "[I] File is not to be dumped",
+      "category": "STATX_ATTR"
+    },
+    {
+      "name": "STATX_ATTR_ENCRYPTED",
+      "value": "0x00000800",
+      "comment": "[I] File requires key to decrypt in fs",
+      "category": "STATX_ATTR"
+    },
+    {
+      "name": "STATX_ATTR_AUTOMOUNT",
+      "value": "0x00001000",
+      "comment": "Dir: Automount trigger",
+      "category": "STATX_ATTR"
+    },
+    {
+      "name": "STATX_ATTR_MOUNT_ROOT",
+      "value": "0x00002000",
+      "comment": "Root of a mount",
+      "category": "STATX_ATTR"
+    },
+    {
+      "name": "STATX_ATTR_VERITY",
+      "value": "0x00100000",
+      "comment": "[I] Verity protected file",
+      "category": "STATX_ATTR"
+    },
+    {
+      "name": "STATX_ATTR_DAX",
+      "value": "0x00200000",
+      "comment": "File is currently in DAX state",
+      "category": "STATX_ATTR"
+    },
+    {
+      "name": "STATX_ATTR_WRITE_ATOMIC",
+      "value": "0x00400000",
+      "comment": "File supports atomic write operations",
+      "category": "STATX_ATTR"
+    }
+  ],
+  "structs": [
+    {
+      "name": "statx_timestamp",
+      "fields": [
+        {
+          "type_name": "__s64",
+          "name": "tv_sec",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tv_nsec",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "__reserved",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "statx",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "stx_mask",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "stx_blksize",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "stx_attributes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "stx_nlink",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "stx_uid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "stx_gid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "stx_mode",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "__spare0",
+          "array_size": "1",
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "stx_ino",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "stx_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "stx_blocks",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "stx_attributes_mask",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "stx_rdev_major",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "stx_rdev_minor",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "stx_dev_major",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "stx_dev_minor",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "stx_mnt_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "stx_dio_mem_align",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "stx_dio_offset_align",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "stx_subvol",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "stx_atomic_write_unit_min",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "stx_atomic_write_unit_max",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "stx_atomic_write_segments_max",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "stx_dio_read_offset_align",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "stx_atomic_write_unit_max_opt",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "__spare2",
+          "array_size": "1",
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "__spare3",
+          "array_size": "8",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

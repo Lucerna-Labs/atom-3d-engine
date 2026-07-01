@@ -1,0 +1,216 @@
+{
+  "filename": "resource.h",
+  "includes": [
+    "linux/time_types.h",
+    "linux/types.h",
+    "asm/resource.h"
+  ],
+  "defines": [
+    {
+      "name": "RUSAGE_SELF",
+      "value": "0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RUSAGE_CHILDREN",
+      "value": "(-1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RUSAGE_BOTH",
+      "value": "(-2)",
+      "comment": "sys_wait4() uses this",
+      "category": ""
+    },
+    {
+      "name": "RUSAGE_THREAD",
+      "value": "1",
+      "comment": "only the calling thread",
+      "category": ""
+    },
+    {
+      "name": "RLIM64_INFINITY",
+      "value": "(~0ULL)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PRIO_MIN",
+      "value": "(-20)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PRIO_MAX",
+      "value": "20",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PRIO_PROCESS",
+      "value": "0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PRIO_PGRP",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PRIO_USER",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "_STK_LIM",
+      "value": "(8*1024*1024)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "MLOCK_LIMIT",
+      "value": "(8*1024*1024)",
+      "comment": "",
+      "category": ""
+    }
+  ],
+  "structs": [
+    {
+      "name": "rusage",
+      "fields": [
+        {
+          "type_name": "__kernel_long_t",
+          "name": "ru_maxrss",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__kernel_long_t",
+          "name": "ru_ixrss",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__kernel_long_t",
+          "name": "ru_idrss",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__kernel_long_t",
+          "name": "ru_isrss",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__kernel_long_t",
+          "name": "ru_minflt",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__kernel_long_t",
+          "name": "ru_majflt",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__kernel_long_t",
+          "name": "ru_nswap",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__kernel_long_t",
+          "name": "ru_inblock",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__kernel_long_t",
+          "name": "ru_oublock",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__kernel_long_t",
+          "name": "ru_msgsnd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__kernel_long_t",
+          "name": "ru_msgrcv",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__kernel_long_t",
+          "name": "ru_nsignals",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__kernel_long_t",
+          "name": "ru_nvcsw",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__kernel_long_t",
+          "name": "ru_nivcsw",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "rlimit",
+      "fields": [
+        {
+          "type_name": "__kernel_ulong_t",
+          "name": "rlim_cur",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__kernel_ulong_t",
+          "name": "rlim_max",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "rlimit64",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "rlim_cur",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "rlim_max",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

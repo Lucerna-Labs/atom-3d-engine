@@ -1,0 +1,598 @@
+{
+  "filename": "hyperv.h",
+  "includes": [
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "UTIL_FW_MINOR",
+      "value": "0",
+      "comment": "",
+      "category": "UTIL_FW"
+    },
+    {
+      "name": "UTIL_WS2K8_FW_MAJOR",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "UTIL_WS2K8_FW_VERSION",
+      "value": "(UTIL_WS2K8_FW_MAJOR << 16 | UTIL_FW_MINOR)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "UTIL_FW_MAJOR",
+      "value": "3",
+      "comment": "",
+      "category": "UTIL_FW"
+    },
+    {
+      "name": "UTIL_FW_VERSION",
+      "value": "(UTIL_FW_MAJOR << 16 | UTIL_FW_MINOR)",
+      "comment": "",
+      "category": "UTIL_FW"
+    },
+    {
+      "name": "VSS_OP_REGISTER",
+      "value": "128",
+      "comment": "",
+      "category": "VSS_OP"
+    },
+    {
+      "name": "VSS_OP_REGISTER1",
+      "value": "129",
+      "comment": "",
+      "category": "VSS_OP"
+    },
+    {
+      "name": "VSS_HBU_NO_AUTO_RECOVERY",
+      "value": "0x00000005",
+      "comment": "",
+      "category": "VSS_HBU"
+    },
+    {
+      "name": "FCOPY_VERSION_0",
+      "value": "0",
+      "comment": "",
+      "category": "FCOPY_VERSION"
+    },
+    {
+      "name": "FCOPY_VERSION_1",
+      "value": "1",
+      "comment": "",
+      "category": "FCOPY_VERSION"
+    },
+    {
+      "name": "FCOPY_CURRENT_VERSION",
+      "value": "FCOPY_VERSION_1",
+      "comment": "",
+      "category": "FCOPY_CURRENT"
+    },
+    {
+      "name": "W_MAX_PATH",
+      "value": "260",
+      "comment": "",
+      "category": "W_MAX"
+    },
+    {
+      "name": "OVER_WRITE",
+      "value": "0x1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "CREATE_PATH",
+      "value": "0x2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DATA_FRAGMENT",
+      "value": "(6 * 1024)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "HV_KVP_EXCHANGE_MAX_VALUE_SIZE",
+      "value": "(2048)",
+      "comment": "",
+      "category": "HV_KVP"
+    },
+    {
+      "name": "HV_KVP_EXCHANGE_MAX_KEY_SIZE",
+      "value": "(512)",
+      "comment": "",
+      "category": "HV_KVP"
+    },
+    {
+      "name": "REG_SZ",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "REG_U32",
+      "value": "4",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "REG_U64",
+      "value": "8",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "KVP_OP_REGISTER",
+      "value": "4",
+      "comment": "",
+      "category": "KVP_OP"
+    },
+    {
+      "name": "KVP_OP_REGISTER1",
+      "value": "100",
+      "comment": "",
+      "category": "KVP_OP"
+    },
+    {
+      "name": "HV_S_OK",
+      "value": "0x00000000",
+      "comment": "",
+      "category": "HV_S"
+    },
+    {
+      "name": "HV_E_FAIL",
+      "value": "0x80004005",
+      "comment": "",
+      "category": "HV_E"
+    },
+    {
+      "name": "HV_S_CONT",
+      "value": "0x80070103",
+      "comment": "",
+      "category": "HV_S"
+    },
+    {
+      "name": "HV_ERROR_NOT_SUPPORTED",
+      "value": "0x80070032",
+      "comment": "",
+      "category": "HV_ERROR"
+    },
+    {
+      "name": "HV_ERROR_MACHINE_LOCKED",
+      "value": "0x800704F7",
+      "comment": "",
+      "category": "HV_ERROR"
+    },
+    {
+      "name": "HV_ERROR_DEVICE_NOT_CONNECTED",
+      "value": "0x8007048F",
+      "comment": "",
+      "category": "HV_ERROR"
+    },
+    {
+      "name": "HV_INVALIDARG",
+      "value": "0x80070057",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "HV_GUID_NOTFOUND",
+      "value": "0x80041002",
+      "comment": "",
+      "category": "HV_GUID"
+    },
+    {
+      "name": "HV_ERROR_ALREADY_EXISTS",
+      "value": "0x80070050",
+      "comment": "",
+      "category": "HV_ERROR"
+    },
+    {
+      "name": "HV_ERROR_DISK_FULL",
+      "value": "0x80070070",
+      "comment": "",
+      "category": "HV_ERROR"
+    },
+    {
+      "name": "ADDR_FAMILY_NONE",
+      "value": "0x00",
+      "comment": "",
+      "category": "ADDR_FAMILY"
+    },
+    {
+      "name": "ADDR_FAMILY_IPV4",
+      "value": "0x01",
+      "comment": "",
+      "category": "ADDR_FAMILY"
+    },
+    {
+      "name": "ADDR_FAMILY_IPV6",
+      "value": "0x02",
+      "comment": "",
+      "category": "ADDR_FAMILY"
+    },
+    {
+      "name": "MAX_ADAPTER_ID_SIZE",
+      "value": "128",
+      "comment": "",
+      "category": "MAX_ADAPTER"
+    },
+    {
+      "name": "MAX_IP_ADDR_SIZE",
+      "value": "1024",
+      "comment": "",
+      "category": "MAX_IP"
+    },
+    {
+      "name": "MAX_GATEWAY_SIZE",
+      "value": "512",
+      "comment": "",
+      "category": "MAX_GATEWAY"
+    }
+  ],
+  "structs": [
+    {
+      "name": "hv_vss_hdr",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "operation",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reserved",
+          "array_size": "7",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "hv_vss_check_feature",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "hv_vss_check_dm_info",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "hv_vss_msg",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "error",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "hv_fcopy_hdr",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "operation",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "service_id0",
+          "array_size": "16",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "service_id1",
+          "array_size": "16",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "hv_start_fcopy",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "file_name",
+          "array_size": "W_MAX_PATH",
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "path_name",
+          "array_size": "W_MAX_PATH",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "copy_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "file_size",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "hv_do_fcopy",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "data",
+          "array_size": "DATA_FRAGMENT",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "hv_kvp_ipaddr_value",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "adapter_id",
+          "array_size": "MAX_ADAPTER_ID_SIZE",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "addr_family",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "dhcp_enabled",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "ip_addr",
+          "array_size": "MAX_IP_ADDR_SIZE",
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "sub_net",
+          "array_size": "MAX_IP_ADDR_SIZE",
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "gate_way",
+          "array_size": "MAX_GATEWAY_SIZE",
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "dns_addr",
+          "array_size": "MAX_IP_ADDR_SIZE",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "hv_kvp_hdr",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "operation",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "pool",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "hv_kvp_exchg_msg_value",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "value_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "key_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "value_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "key",
+          "array_size": "HV_KVP_EXCHANGE_MAX_KEY_SIZE",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "value",
+          "array_size": "HV_KVP_EXCHANGE_MAX_VALUE_SIZE",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "value_u32",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "value_u64",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": true
+    },
+    {
+      "name": "hv_kvp_msg_enumerate",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "index",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "hv_kvp_msg_get",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "hv_kvp_msg_set",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "hv_kvp_msg_delete",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "key_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "key",
+          "array_size": "HV_KVP_EXCHANGE_MAX_KEY_SIZE",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "hv_kvp_register",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "version",
+          "array_size": "HV_KVP_EXCHANGE_MAX_KEY_SIZE",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "hv_kvp_msg",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "error",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "hv_kvp_ip_msg",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "operation",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "pool",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

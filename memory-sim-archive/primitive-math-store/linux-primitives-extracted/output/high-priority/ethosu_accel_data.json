@@ -1,0 +1,231 @@
+{
+  "filename": "ethosu_accel.h",
+  "includes": [
+    "drm.h"
+  ],
+  "defines": [
+    {
+      "name": "ETHOSU_MAX_REGIONS",
+      "value": "8",
+      "comment": "",
+      "category": "ETHOSU_MAX"
+    }
+  ],
+  "structs": [
+    {
+      "name": "drm_ethosu_npu_info",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "config",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "sram_size",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_ethosu_dev_query",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "pointer",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_ethosu_bo_create",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_ethosu_bo_mmap_offset",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_ethosu_bo_wait",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s64",
+          "name": "timeout_ns",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_ethosu_cmdstream_bo_create",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "data",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_ethosu_job",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "cmd_bo",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "sram_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "region_bo_handles",
+          "array_size": "ETHOSU_MAX_REGIONS",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_ethosu_submit",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "jobs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "job_count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

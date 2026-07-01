@@ -1,0 +1,932 @@
+{
+  "filename": "coff.h",
+  "includes": [],
+  "defines": [
+    {
+      "name": "E_SYMNMLEN",
+      "value": "8",
+      "comment": "Number of characters in a symbol name",
+      "category": ""
+    },
+    {
+      "name": "E_FILNMLEN",
+      "value": "14",
+      "comment": "Number of characters in a file name",
+      "category": ""
+    },
+    {
+      "name": "E_DIMNUM",
+      "value": "4",
+      "comment": "Number of array dimensions in auxiliary entry",
+      "category": ""
+    },
+    {
+      "name": "COFF_F_RELFLG",
+      "value": "0000001",
+      "comment": "",
+      "category": "COFF_F"
+    },
+    {
+      "name": "COFF_F_EXEC",
+      "value": "0000002",
+      "comment": "",
+      "category": "COFF_F"
+    },
+    {
+      "name": "COFF_F_LNNO",
+      "value": "0000004",
+      "comment": "",
+      "category": "COFF_F"
+    },
+    {
+      "name": "COFF_F_LSYMS",
+      "value": "0000010",
+      "comment": "",
+      "category": "COFF_F"
+    },
+    {
+      "name": "COFF_F_MINMAL",
+      "value": "0000020",
+      "comment": "",
+      "category": "COFF_F"
+    },
+    {
+      "name": "COFF_F_UPDATE",
+      "value": "0000040",
+      "comment": "",
+      "category": "COFF_F"
+    },
+    {
+      "name": "COFF_F_SWABD",
+      "value": "0000100",
+      "comment": "",
+      "category": "COFF_F"
+    },
+    {
+      "name": "COFF_F_AR16WR",
+      "value": "0000200",
+      "comment": "",
+      "category": "COFF_F"
+    },
+    {
+      "name": "COFF_F_AR32WR",
+      "value": "0000400",
+      "comment": "",
+      "category": "COFF_F"
+    },
+    {
+      "name": "COFF_F_AR32W",
+      "value": "0001000",
+      "comment": "",
+      "category": "COFF_F"
+    },
+    {
+      "name": "COFF_F_PATCH",
+      "value": "0002000",
+      "comment": "",
+      "category": "COFF_F"
+    },
+    {
+      "name": "COFF_F_NODF",
+      "value": "0002000",
+      "comment": "",
+      "category": "COFF_F"
+    },
+    {
+      "name": "COFF_I386MAGIC",
+      "value": "0x14c",
+      "comment": "Linux's system",
+      "category": ""
+    },
+    {
+      "name": "COFF_I386PTXMAGIC",
+      "value": "0x154",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "COFF_I386AIXMAGIC",
+      "value": "0x175",
+      "comment": "IBM's AIX system",
+      "category": ""
+    },
+    {
+      "name": "COFF_FILHDR",
+      "value": "struct COFF_filehdr",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "COFF_FILHSZ",
+      "value": "sizeof(COFF_FILHDR)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "COFF_AOUTSZ",
+      "value": "(sizeof(COFF_AOUTHDR))",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "COFF_STMAGIC",
+      "value": "0401",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "COFF_OMAGIC",
+      "value": "0404",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "COFF_JMAGIC",
+      "value": "0407",
+      "comment": "dirty text and data image, can't share",
+      "category": ""
+    },
+    {
+      "name": "COFF_DMAGIC",
+      "value": "0410",
+      "comment": "dirty text segment, data aligned",
+      "category": ""
+    },
+    {
+      "name": "COFF_ZMAGIC",
+      "value": "0413",
+      "comment": "The proper magic number for executables",
+      "category": ""
+    },
+    {
+      "name": "COFF_SHMAGIC",
+      "value": "0443",
+      "comment": "shared library header",
+      "category": ""
+    },
+    {
+      "name": "COFF_SCNHDR",
+      "value": "struct COFF_scnhdr",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "COFF_SCNHSZ",
+      "value": "sizeof(COFF_SCNHDR)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "COFF_TEXT",
+      "value": "\".text\"",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "COFF_DATA",
+      "value": "\".data\"",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "COFF_BSS",
+      "value": "\".bss\"",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "COFF_COMMENT",
+      "value": "\".comment\"",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "COFF_LIB",
+      "value": "\".lib\"",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "COFF_SECT_TEXT",
+      "value": "0",
+      "comment": "Section for instruction code",
+      "category": "COFF_SECT"
+    },
+    {
+      "name": "COFF_SECT_DATA",
+      "value": "1",
+      "comment": "Section for initialized globals",
+      "category": "COFF_SECT"
+    },
+    {
+      "name": "COFF_SECT_BSS",
+      "value": "2",
+      "comment": "Section for un-initialized globals",
+      "category": "COFF_SECT"
+    },
+    {
+      "name": "COFF_SECT_REQD",
+      "value": "3",
+      "comment": "Minimum number of sections for good file",
+      "category": "COFF_SECT"
+    },
+    {
+      "name": "COFF_STYP_REG",
+      "value": "0x00",
+      "comment": "regular segment",
+      "category": "COFF_STYP"
+    },
+    {
+      "name": "COFF_STYP_DSECT",
+      "value": "0x01",
+      "comment": "dummy segment",
+      "category": "COFF_STYP"
+    },
+    {
+      "name": "COFF_STYP_NOLOAD",
+      "value": "0x02",
+      "comment": "no-load segment",
+      "category": "COFF_STYP"
+    },
+    {
+      "name": "COFF_STYP_GROUP",
+      "value": "0x04",
+      "comment": "group segment",
+      "category": "COFF_STYP"
+    },
+    {
+      "name": "COFF_STYP_PAD",
+      "value": "0x08",
+      "comment": ".pad segment",
+      "category": "COFF_STYP"
+    },
+    {
+      "name": "COFF_STYP_COPY",
+      "value": "0x10",
+      "comment": "copy section",
+      "category": "COFF_STYP"
+    },
+    {
+      "name": "COFF_STYP_TEXT",
+      "value": "0x20",
+      "comment": ".text segment",
+      "category": "COFF_STYP"
+    },
+    {
+      "name": "COFF_STYP_DATA",
+      "value": "0x40",
+      "comment": ".data segment",
+      "category": "COFF_STYP"
+    },
+    {
+      "name": "COFF_STYP_BSS",
+      "value": "0x80",
+      "comment": ".bss segment",
+      "category": "COFF_STYP"
+    },
+    {
+      "name": "COFF_STYP_INFO",
+      "value": "0x200",
+      "comment": ".comment section",
+      "category": "COFF_STYP"
+    },
+    {
+      "name": "COFF_STYP_OVER",
+      "value": "0x400",
+      "comment": "overlay section",
+      "category": "COFF_STYP"
+    },
+    {
+      "name": "COFF_STYP_LIB",
+      "value": "0x800",
+      "comment": "library section",
+      "category": "COFF_STYP"
+    },
+    {
+      "name": "COFF_SLIBHD",
+      "value": "struct COFF_slib",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "COFF_SLIBSZ",
+      "value": "sizeof(COFF_SLIBHD)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "COFF_LINENO",
+      "value": "struct COFF_lineno",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "COFF_LINESZ",
+      "value": "6",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "COFF_E_SYMNMLEN",
+      "value": "8",
+      "comment": "# characters in a short symbol name",
+      "category": "COFF_E"
+    },
+    {
+      "name": "COFF_E_FILNMLEN",
+      "value": "14",
+      "comment": "# characters in a file name",
+      "category": "COFF_E"
+    },
+    {
+      "name": "COFF_E_DIMNUM",
+      "value": "4",
+      "comment": "# array dimensions in auxiliary entry",
+      "category": "COFF_E"
+    },
+    {
+      "name": "COFF_N_BTMASK",
+      "value": "(0xf)",
+      "comment": "Mask for important class bits",
+      "category": "COFF_N"
+    },
+    {
+      "name": "COFF_N_TMASK",
+      "value": "(0x30)",
+      "comment": "Mask for important type bits",
+      "category": "COFF_N"
+    },
+    {
+      "name": "COFF_N_BTSHFT",
+      "value": "(4)",
+      "comment": "# bits to shift class field",
+      "category": "COFF_N"
+    },
+    {
+      "name": "COFF_N_TSHIFT",
+      "value": "(2)",
+      "comment": "# bits to shift type field",
+      "category": "COFF_N"
+    },
+    {
+      "name": "COFF_SYMENT",
+      "value": "struct COFF_syment",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "COFF_SYMESZ",
+      "value": "18",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "COFF_AUXENT",
+      "value": "union COFF_auxent",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "COFF_AUXESZ",
+      "value": "18",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "COFF_ETEXT",
+      "value": "\"etext\"",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "COFF_RELOC",
+      "value": "struct COFF_reloc",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "COFF_RELSZ",
+      "value": "10",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "COFF_DEF_DATA_SECTION_ALIGNMENT",
+      "value": "4",
+      "comment": "",
+      "category": "COFF_DEF"
+    },
+    {
+      "name": "COFF_DEF_BSS_SECTION_ALIGNMENT",
+      "value": "4",
+      "comment": "",
+      "category": "COFF_DEF"
+    },
+    {
+      "name": "COFF_DEF_TEXT_SECTION_ALIGNMENT",
+      "value": "4",
+      "comment": "",
+      "category": "COFF_DEF"
+    },
+    {
+      "name": "COFF_DEF_SECTION_ALIGNMENT",
+      "value": "4",
+      "comment": "",
+      "category": "COFF_DEF"
+    }
+  ],
+  "structs": [
+    {
+      "name": "COFF_filehdr",
+      "fields": [
+        {
+          "type_name": "char",
+          "name": "f_magic",
+          "array_size": "2",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "f_nscns",
+          "array_size": "2",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "f_timdat",
+          "array_size": "4",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "f_symptr",
+          "array_size": "4",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "f_nsyms",
+          "array_size": "4",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "f_opthdr",
+          "array_size": "2",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "f_flags",
+          "array_size": "2",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_1",
+      "fields": [
+        {
+          "type_name": "char",
+          "name": "magic",
+          "array_size": "2",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "vstamp",
+          "array_size": "2",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "tsize",
+          "array_size": "4",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "dsize",
+          "array_size": "4",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "bsize",
+          "array_size": "4",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "entry",
+          "array_size": "4",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "text_start",
+          "array_size": "4",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "data_start",
+          "array_size": "4",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "COFF_scnhdr",
+      "fields": [
+        {
+          "type_name": "char",
+          "name": "s_name",
+          "array_size": "8",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "s_paddr",
+          "array_size": "4",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "s_vaddr",
+          "array_size": "4",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "s_size",
+          "array_size": "4",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "s_scnptr",
+          "array_size": "4",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "s_relptr",
+          "array_size": "4",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "s_lnnoptr",
+          "array_size": "4",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "s_nreloc",
+          "array_size": "2",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "s_nlnno",
+          "array_size": "2",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "s_flags",
+          "array_size": "4",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "COFF_slib",
+      "fields": [
+        {
+          "type_name": "char",
+          "name": "sl_entsz",
+          "array_size": "4",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "sl_pathndx",
+          "array_size": "4",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "COFF_lineno",
+      "fields": [
+        {
+          "type_name": "char",
+          "name": "l_symndx",
+          "array_size": "4",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "l_paddr",
+          "array_size": "4",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "l_lnno",
+          "array_size": "2",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "COFF_syment",
+      "fields": [
+        {
+          "type_name": "char",
+          "name": "e_name",
+          "array_size": "E_SYMNMLEN",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "e_zeroes",
+          "array_size": "4",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "e_offset",
+          "array_size": "4",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "e_value",
+          "array_size": "4",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "e_scnum",
+          "array_size": "2",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "e_type",
+          "array_size": "2",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "e_sclass",
+          "array_size": "1",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "e_numaux",
+          "array_size": "1",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_6",
+      "fields": [
+        {
+          "type_name": "char",
+          "name": "e_zeroes",
+          "array_size": "4",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "e_offset",
+          "array_size": "4",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_7",
+      "fields": [
+        {
+          "type_name": "char",
+          "name": "x_tagndx",
+          "array_size": "4",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "x_lnno",
+          "array_size": "2",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "x_size",
+          "array_size": "2",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "x_fsize",
+          "array_size": "4",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "x_lnnoptr",
+          "array_size": "4",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "x_endndx",
+          "array_size": "4",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "x_dimen",
+          "array_size": "E_DIMNUM][2",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "x_tvndx",
+          "array_size": "2",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_8",
+      "fields": [
+        {
+          "type_name": "char",
+          "name": "x_lnno",
+          "array_size": "2",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "x_size",
+          "array_size": "2",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_9",
+      "fields": [
+        {
+          "type_name": "char",
+          "name": "x_lnnoptr",
+          "array_size": "4",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "x_endndx",
+          "array_size": "4",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_10",
+      "fields": [
+        {
+          "type_name": "char",
+          "name": "x_dimen",
+          "array_size": "E_DIMNUM][2",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_11",
+      "fields": [
+        {
+          "type_name": "char",
+          "name": "x_zeroes",
+          "array_size": "4",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "x_offset",
+          "array_size": "4",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_12",
+      "fields": [
+        {
+          "type_name": "char",
+          "name": "x_scnlen",
+          "array_size": "4",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "x_nreloc",
+          "array_size": "2",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "x_nlinno",
+          "array_size": "2",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_13",
+      "fields": [
+        {
+          "type_name": "char",
+          "name": "x_tvfill",
+          "array_size": "4",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "x_tvlen",
+          "array_size": "2",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "x_tvran",
+          "array_size": "2][2",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "COFF_reloc",
+      "fields": [
+        {
+          "type_name": "char",
+          "name": "r_vaddr",
+          "array_size": "4",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "r_symndx",
+          "array_size": "4",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "r_type",
+          "array_size": "2",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

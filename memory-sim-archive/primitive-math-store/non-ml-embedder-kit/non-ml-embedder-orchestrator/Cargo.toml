@@ -1,0 +1,9 @@
+[package]
+name = "non-ml-embedder-orchestrator"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+description = "Orchestrator that composes non-ML embedding primitives"
+
+[dependencies]
+non-ml-embedder-primitives = { path = "../non-ml-embedder-primitives" }

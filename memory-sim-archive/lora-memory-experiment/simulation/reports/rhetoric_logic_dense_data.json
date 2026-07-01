@@ -1,0 +1,99 @@
+{
+  "config_name": "rhetoric_logic_dense",
+  "domains": [
+    "rhetoric",
+    "logic"
+  ],
+  "total_memories": 65,
+  "total_behaviors": 13,
+  "uncovered_behaviors": [],
+  "isolated_memories": 22,
+  "echo_connectivity": 0.6615384615384615,
+  "cross_domain_connections": 15,
+  "pressure_pass_rate": {
+    "low": 1.0,
+    "medium": 1.0,
+    "high": 1.0
+  },
+  "overall_score": 0.9323076923076924,
+  "behavior_coverage": {
+    "R-001": {
+      "behavior_name": "Claim Identification",
+      "domain": "rhetoric",
+      "coverage_count": 10,
+      "has_load_bearing": true
+    },
+    "R-002": {
+      "behavior_name": "Evidence Evaluation",
+      "domain": "rhetoric",
+      "coverage_count": 10,
+      "has_load_bearing": true
+    },
+    "R-003": {
+      "behavior_name": "Warrant Detection",
+      "domain": "rhetoric",
+      "coverage_count": 12,
+      "has_load_bearing": true
+    },
+    "R-004": {
+      "behavior_name": "Fallacy Recognition",
+      "domain": "rhetoric",
+      "coverage_count": 5,
+      "has_load_bearing": true
+    },
+    "R-005": {
+      "behavior_name": "Kairos Detection",
+      "domain": "rhetoric",
+      "coverage_count": 10,
+      "has_load_bearing": true
+    },
+    "R-006": {
+      "behavior_name": "Enthymeme Reconstruction",
+      "domain": "rhetoric",
+      "coverage_count": 10,
+      "has_load_bearing": true
+    },
+    "R-007": {
+      "behavior_name": "Audience Awareness",
+      "domain": "rhetoric",
+      "coverage_count": 10,
+      "has_load_bearing": true
+    },
+    "L-001": {
+      "behavior_name": "Necessary vs Sufficient",
+      "domain": "logic",
+      "coverage_count": 10,
+      "has_load_bearing": true
+    },
+    "L-002": {
+      "behavior_name": "Counterexample Construction",
+      "domain": "logic",
+      "coverage_count": 10,
+      "has_load_bearing": true
+    },
+    "L-003": {
+      "behavior_name": "Chain Validation",
+      "domain": "logic",
+      "coverage_count": 8,
+      "has_load_bearing": true
+    },
+    "L-004": {
+      "behavior_name": "Scope Recognition",
+      "domain": "logic",
+      "coverage_count": 10,
+      "has_load_bearing": true
+    },
+    "L-005": {
+      "behavior_name": "Conditional Reasoning",
+      "domain": "logic",
+      "coverage_count": 7,
+      "has_load_bearing": true
+    },
+    "L-006": {
+      "behavior_name": "Hidden Assumption Extraction",
+      "domain": "logic",
+      "coverage_count": 10,
+      "has_load_bearing": true
+    }
+  }
+}

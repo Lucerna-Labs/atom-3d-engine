@@ -1,0 +1,832 @@
+{
+  "filename": "ip_vs.h",
+  "includes": [
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "IP_VS_VERSION_CODE",
+      "value": "0x010201",
+      "comment": "",
+      "category": "IP_VS"
+    },
+    {
+      "name": "IP_VS_SVC_F_PERSISTENT",
+      "value": "0x0001",
+      "comment": "persistent port",
+      "category": "IP_VS"
+    },
+    {
+      "name": "IP_VS_SVC_F_HASHED",
+      "value": "0x0002",
+      "comment": "hashed entry",
+      "category": "IP_VS"
+    },
+    {
+      "name": "IP_VS_SVC_F_ONEPACKET",
+      "value": "0x0004",
+      "comment": "one-packet scheduling",
+      "category": "IP_VS"
+    },
+    {
+      "name": "IP_VS_SVC_F_SCHED1",
+      "value": "0x0008",
+      "comment": "scheduler flag 1",
+      "category": "IP_VS"
+    },
+    {
+      "name": "IP_VS_SVC_F_SCHED2",
+      "value": "0x0010",
+      "comment": "scheduler flag 2",
+      "category": "IP_VS"
+    },
+    {
+      "name": "IP_VS_SVC_F_SCHED3",
+      "value": "0x0020",
+      "comment": "scheduler flag 3",
+      "category": "IP_VS"
+    },
+    {
+      "name": "IP_VS_SVC_F_SCHED_SH_FALLBACK",
+      "value": "IP_VS_SVC_F_SCHED1",
+      "comment": "SH fallback",
+      "category": "IP_VS"
+    },
+    {
+      "name": "IP_VS_SVC_F_SCHED_SH_PORT",
+      "value": "IP_VS_SVC_F_SCHED2",
+      "comment": "SH use port",
+      "category": "IP_VS"
+    },
+    {
+      "name": "IP_VS_DEST_F_AVAILABLE",
+      "value": "0x0001",
+      "comment": "server is available",
+      "category": "IP_VS"
+    },
+    {
+      "name": "IP_VS_DEST_F_OVERLOAD",
+      "value": "0x0002",
+      "comment": "server is overloaded",
+      "category": "IP_VS"
+    },
+    {
+      "name": "IP_VS_STATE_NONE",
+      "value": "0x0000",
+      "comment": "daemon is stopped",
+      "category": "IP_VS"
+    },
+    {
+      "name": "IP_VS_STATE_MASTER",
+      "value": "0x0001",
+      "comment": "started as master",
+      "category": "IP_VS"
+    },
+    {
+      "name": "IP_VS_STATE_BACKUP",
+      "value": "0x0002",
+      "comment": "started as backup",
+      "category": "IP_VS"
+    },
+    {
+      "name": "IP_VS_BASE_CTL",
+      "value": "(64+1024+64)",
+      "comment": "base",
+      "category": "IP_VS"
+    },
+    {
+      "name": "IP_VS_SO_SET_NONE",
+      "value": "IP_VS_BASE_CTL",
+      "comment": "just peek",
+      "category": "IP_VS"
+    },
+    {
+      "name": "IP_VS_SO_SET_INSERT",
+      "value": "(IP_VS_BASE_CTL+1)",
+      "comment": "",
+      "category": "IP_VS"
+    },
+    {
+      "name": "IP_VS_SO_SET_ADD",
+      "value": "(IP_VS_BASE_CTL+2)",
+      "comment": "",
+      "category": "IP_VS"
+    },
+    {
+      "name": "IP_VS_SO_SET_EDIT",
+      "value": "(IP_VS_BASE_CTL+3)",
+      "comment": "",
+      "category": "IP_VS"
+    },
+    {
+      "name": "IP_VS_SO_SET_DEL",
+      "value": "(IP_VS_BASE_CTL+4)",
+      "comment": "",
+      "category": "IP_VS"
+    },
+    {
+      "name": "IP_VS_SO_SET_FLUSH",
+      "value": "(IP_VS_BASE_CTL+5)",
+      "comment": "",
+      "category": "IP_VS"
+    },
+    {
+      "name": "IP_VS_SO_SET_LIST",
+      "value": "(IP_VS_BASE_CTL+6)",
+      "comment": "",
+      "category": "IP_VS"
+    },
+    {
+      "name": "IP_VS_SO_SET_ADDDEST",
+      "value": "(IP_VS_BASE_CTL+7)",
+      "comment": "",
+      "category": "IP_VS"
+    },
+    {
+      "name": "IP_VS_SO_SET_DELDEST",
+      "value": "(IP_VS_BASE_CTL+8)",
+      "comment": "",
+      "category": "IP_VS"
+    },
+    {
+      "name": "IP_VS_SO_SET_EDITDEST",
+      "value": "(IP_VS_BASE_CTL+9)",
+      "comment": "",
+      "category": "IP_VS"
+    },
+    {
+      "name": "IP_VS_SO_SET_TIMEOUT",
+      "value": "(IP_VS_BASE_CTL+10)",
+      "comment": "",
+      "category": "IP_VS"
+    },
+    {
+      "name": "IP_VS_SO_SET_STARTDAEMON",
+      "value": "(IP_VS_BASE_CTL+11)",
+      "comment": "",
+      "category": "IP_VS"
+    },
+    {
+      "name": "IP_VS_SO_SET_STOPDAEMON",
+      "value": "(IP_VS_BASE_CTL+12)",
+      "comment": "",
+      "category": "IP_VS"
+    },
+    {
+      "name": "IP_VS_SO_SET_RESTORE",
+      "value": "(IP_VS_BASE_CTL+13)",
+      "comment": "",
+      "category": "IP_VS"
+    },
+    {
+      "name": "IP_VS_SO_SET_SAVE",
+      "value": "(IP_VS_BASE_CTL+14)",
+      "comment": "",
+      "category": "IP_VS"
+    },
+    {
+      "name": "IP_VS_SO_SET_ZERO",
+      "value": "(IP_VS_BASE_CTL+15)",
+      "comment": "",
+      "category": "IP_VS"
+    },
+    {
+      "name": "IP_VS_SO_SET_MAX",
+      "value": "IP_VS_SO_SET_ZERO",
+      "comment": "",
+      "category": "IP_VS"
+    },
+    {
+      "name": "IP_VS_SO_GET_VERSION",
+      "value": "IP_VS_BASE_CTL",
+      "comment": "",
+      "category": "IP_VS"
+    },
+    {
+      "name": "IP_VS_SO_GET_INFO",
+      "value": "(IP_VS_BASE_CTL+1)",
+      "comment": "",
+      "category": "IP_VS"
+    },
+    {
+      "name": "IP_VS_SO_GET_SERVICES",
+      "value": "(IP_VS_BASE_CTL+2)",
+      "comment": "",
+      "category": "IP_VS"
+    },
+    {
+      "name": "IP_VS_SO_GET_SERVICE",
+      "value": "(IP_VS_BASE_CTL+3)",
+      "comment": "",
+      "category": "IP_VS"
+    },
+    {
+      "name": "IP_VS_SO_GET_DESTS",
+      "value": "(IP_VS_BASE_CTL+4)",
+      "comment": "",
+      "category": "IP_VS"
+    },
+    {
+      "name": "IP_VS_SO_GET_DEST",
+      "value": "(IP_VS_BASE_CTL+5)",
+      "comment": "not used now",
+      "category": "IP_VS"
+    },
+    {
+      "name": "IP_VS_SO_GET_TIMEOUT",
+      "value": "(IP_VS_BASE_CTL+6)",
+      "comment": "",
+      "category": "IP_VS"
+    },
+    {
+      "name": "IP_VS_SO_GET_DAEMON",
+      "value": "(IP_VS_BASE_CTL+7)",
+      "comment": "",
+      "category": "IP_VS"
+    },
+    {
+      "name": "IP_VS_SO_GET_MAX",
+      "value": "IP_VS_SO_GET_DAEMON",
+      "comment": "",
+      "category": "IP_VS"
+    },
+    {
+      "name": "IP_VS_CONN_F_FWD_MASK",
+      "value": "0x0007",
+      "comment": "mask for the fwd methods",
+      "category": "IP_VS"
+    },
+    {
+      "name": "IP_VS_CONN_F_MASQ",
+      "value": "0x0000",
+      "comment": "masquerading/NAT",
+      "category": "IP_VS"
+    },
+    {
+      "name": "IP_VS_CONN_F_LOCALNODE",
+      "value": "0x0001",
+      "comment": "local node",
+      "category": "IP_VS"
+    },
+    {
+      "name": "IP_VS_CONN_F_TUNNEL",
+      "value": "0x0002",
+      "comment": "tunneling",
+      "category": "IP_VS"
+    },
+    {
+      "name": "IP_VS_CONN_F_DROUTE",
+      "value": "0x0003",
+      "comment": "direct routing",
+      "category": "IP_VS"
+    },
+    {
+      "name": "IP_VS_CONN_F_BYPASS",
+      "value": "0x0004",
+      "comment": "cache bypass",
+      "category": "IP_VS"
+    },
+    {
+      "name": "IP_VS_CONN_F_SYNC",
+      "value": "0x0020",
+      "comment": "entry created by sync",
+      "category": "IP_VS"
+    },
+    {
+      "name": "IP_VS_CONN_F_HASHED",
+      "value": "0x0040",
+      "comment": "hashed entry",
+      "category": "IP_VS"
+    },
+    {
+      "name": "IP_VS_CONN_F_NOOUTPUT",
+      "value": "0x0080",
+      "comment": "no output packets",
+      "category": "IP_VS"
+    },
+    {
+      "name": "IP_VS_CONN_F_INACTIVE",
+      "value": "0x0100",
+      "comment": "not established",
+      "category": "IP_VS"
+    },
+    {
+      "name": "IP_VS_CONN_F_OUT_SEQ",
+      "value": "0x0200",
+      "comment": "must do output seq adjust",
+      "category": "IP_VS"
+    },
+    {
+      "name": "IP_VS_CONN_F_IN_SEQ",
+      "value": "0x0400",
+      "comment": "must do input seq adjust",
+      "category": "IP_VS"
+    },
+    {
+      "name": "IP_VS_CONN_F_SEQ_MASK",
+      "value": "0x0600",
+      "comment": "in/out sequence mask",
+      "category": "IP_VS"
+    },
+    {
+      "name": "IP_VS_CONN_F_NO_CPORT",
+      "value": "0x0800",
+      "comment": "no client port set yet",
+      "category": "IP_VS"
+    },
+    {
+      "name": "IP_VS_CONN_F_TEMPLATE",
+      "value": "0x1000",
+      "comment": "template, not connection",
+      "category": "IP_VS"
+    },
+    {
+      "name": "IP_VS_CONN_F_ONE_PACKET",
+      "value": "0x2000",
+      "comment": "forward only one packet",
+      "category": "IP_VS"
+    },
+    {
+      "name": "IP_VS_CONN_F_BACKUP_MASK",
+      "value": "(IP_VS_CONN_F_FWD_MASK | ",
+      "comment": "",
+      "category": "IP_VS"
+    },
+    {
+      "name": "IP_VS_CONN_F_BACKUP_UPD_MASK",
+      "value": "(IP_VS_CONN_F_INACTIVE | ",
+      "comment": "",
+      "category": "IP_VS"
+    },
+    {
+      "name": "IP_VS_CONN_F_NFCT",
+      "value": "(1 << 16)",
+      "comment": "use netfilter conntrack",
+      "category": "IP_VS"
+    },
+    {
+      "name": "IP_VS_CONN_F_DEST_MASK",
+      "value": "(IP_VS_CONN_F_FWD_MASK | ",
+      "comment": "",
+      "category": "IP_VS"
+    },
+    {
+      "name": "IP_VS_SCHEDNAME_MAXLEN",
+      "value": "16",
+      "comment": "",
+      "category": "IP_VS"
+    },
+    {
+      "name": "IP_VS_PENAME_MAXLEN",
+      "value": "16",
+      "comment": "",
+      "category": "IP_VS"
+    },
+    {
+      "name": "IP_VS_IFNAME_MAXLEN",
+      "value": "16",
+      "comment": "",
+      "category": "IP_VS"
+    },
+    {
+      "name": "IP_VS_PEDATA_MAXLEN",
+      "value": "255",
+      "comment": "",
+      "category": "IP_VS"
+    },
+    {
+      "name": "IP_VS_TUNNEL_ENCAP_FLAG_NOCSUM",
+      "value": "(0)",
+      "comment": "",
+      "category": "IP_VS"
+    },
+    {
+      "name": "IP_VS_TUNNEL_ENCAP_FLAG_CSUM",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "IP_VS"
+    },
+    {
+      "name": "IP_VS_TUNNEL_ENCAP_FLAG_REMCSUM",
+      "value": "(1 << 1)",
+      "comment": "",
+      "category": "IP_VS"
+    },
+    {
+      "name": "IPVS_GENL_NAME",
+      "value": "\"IPVS\"",
+      "comment": "",
+      "category": "IPVS_GENL"
+    },
+    {
+      "name": "IPVS_GENL_VERSION",
+      "value": "0x1",
+      "comment": "",
+      "category": "IPVS_GENL"
+    },
+    {
+      "name": "IPVS_CMD_MAX",
+      "value": "(__IPVS_CMD_MAX - 1)",
+      "comment": "",
+      "category": "IPVS_CMD"
+    },
+    {
+      "name": "IPVS_CMD_ATTR_MAX",
+      "value": "(__IPVS_CMD_ATTR_MAX - 1)",
+      "comment": "",
+      "category": "IPVS_CMD"
+    },
+    {
+      "name": "IPVS_SVC_ATTR_MAX",
+      "value": "(__IPVS_SVC_ATTR_MAX - 1)",
+      "comment": "",
+      "category": "IPVS_SVC"
+    },
+    {
+      "name": "IPVS_DEST_ATTR_MAX",
+      "value": "(__IPVS_DEST_ATTR_MAX - 1)",
+      "comment": "",
+      "category": "IPVS_DEST"
+    },
+    {
+      "name": "IPVS_DAEMON_ATTR_MAX",
+      "value": "(__IPVS_DAEMON_ATTR_MAX - 1)",
+      "comment": "",
+      "category": "IPVS_DAEMON"
+    },
+    {
+      "name": "IPVS_STATS_ATTR_MAX",
+      "value": "(__IPVS_STATS_ATTR_MAX - 1)",
+      "comment": "",
+      "category": "IPVS_STATS"
+    },
+    {
+      "name": "IPVS_INFO_ATTR_MAX",
+      "value": "(__IPVS_INFO_ATTR_MAX - 1)",
+      "comment": "",
+      "category": "IPVS_INFO"
+    }
+  ],
+  "structs": [
+    {
+      "name": "ip_vs_service_user",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "protocol",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "addr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be16",
+          "name": "port",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "fwmark",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "sched_name",
+          "array_size": "IP_VS_SCHEDNAME_MAXLEN",
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "netmask",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ip_vs_dest_user",
+      "fields": [
+        {
+          "type_name": "__be32",
+          "name": "addr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be16",
+          "name": "port",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "weight",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "u_threshold",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "l_threshold",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ip_vs_stats_user",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "conns",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "inpkts",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "outpkts",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "inbytes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "outbytes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "cps",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "inpps",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "outpps",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "inbps",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "outbps",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ip_vs_getinfo",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ip_vs_service_entry",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "protocol",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "addr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be16",
+          "name": "port",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "fwmark",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "sched_name",
+          "array_size": "IP_VS_SCHEDNAME_MAXLEN",
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "netmask",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ip_vs_dest_entry",
+      "fields": [
+        {
+          "type_name": "__be32",
+          "name": "addr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be16",
+          "name": "port",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "weight",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "u_threshold",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "l_threshold",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "activeconns",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "inactconns",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "persistconns",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ip_vs_get_dests",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "protocol",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "addr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be16",
+          "name": "port",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "fwmark",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ip_vs_get_services",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ip_vs_timeout_user",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "tcp_timeout",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "tcp_fin_timeout",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "udp_timeout",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ip_vs_daemon_user",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "state",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "mcast_ifn",
+          "array_size": "IP_VS_IFNAME_MAXLEN",
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "syncid",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ip_vs_flags",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "mask",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

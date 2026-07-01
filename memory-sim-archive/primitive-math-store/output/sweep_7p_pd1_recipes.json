@@ -1,0 +1,106 @@
+{
+  "metadata": {
+    "timestamp": "2026-06-24T01:42:34.056258+00:00",
+    "seed": 42,
+    "n_primitives": 7,
+    "top_recipes": 20,
+    "seed_pool_size": 7,
+    "n_domains": 7,
+    "catalog_path": "D:\\MINIMAX-PRIMITVE-SIMULATIONS\\src\\primitive_catalog_full.json",
+    "catalog_size": 939,
+    "weights": {
+      "cross_domain_bonus": 50.0,
+      "multi_category_bonus": 30.0,
+      "root_atom_diversity": 5.0,
+      "real_wall_diversity": 5.0,
+      "base_per_primitive": 100.0
+    },
+    "runtime_seconds": 0.00550389289855957,
+    "enum_counts": {
+      "7-tuple": 1
+    },
+    "scoring_summary": {
+      "total_recipes_scored": 1,
+      "max_score": 855.0,
+      "min_score": 855.0,
+      "mean_score": 855.0,
+      "cross_domain_count": 1,
+      "cross_domain_pct": 100.0,
+      "wiring_pattern_counts": {
+        "fusion ranking": 1
+      },
+      "domain_pair_counts": {
+        "formal-verification": 1,
+        "networking": 1,
+        "causal-inference": 1,
+        "combinatorial-optimization": 1,
+        "agentic-reasoning": 1,
+        "statistics-probability": 1,
+        "cryptography-advanced": 1
+      },
+      "root_atom_counts": {
+        "sample": 1,
+        "combine": 1
+      }
+    }
+  },
+  "recipes": [
+    {
+      "primitives": [
+        "chain-of-thought",
+        "commitment-scheme",
+        "integer-programming",
+        "maximum-likelihood-estimation",
+        "photon-arrival",
+        "state-transition-system",
+        "structural-causal-model"
+      ],
+      "domains": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "combinatorial-optimization",
+        "statistics-probability",
+        "networking",
+        "formal-verification",
+        "causal-inference"
+      ],
+      "categories": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "combinatorial-optimization",
+        "statistics-probability",
+        "networking",
+        "formal-verification",
+        "causal-inference"
+      ],
+      "score": 855.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "formal-verification",
+        "networking",
+        "statistics-probability"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "formal-verification",
+        "networking",
+        "statistics-probability"
+      ],
+      "root_atoms_used": [
+        "sample",
+        "combine"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 7,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 causal-inference \u2192 combinatorial-optimization \u2192 cryptography-advanced \u2192 formal-verification \u2192 networking \u2192 statistics-probability\n**Components:**\n  - chain-of-thought (agentic-reasoning): Chain-of-Thought (CoT): generate intermediate reasoning steps before final answer. \"Let's think step by step.\" Implicit vs. explicit CoT; generated vs. retrieved CoT.\n  - commitment-scheme (cryptography-advanced): A commitment scheme allows a committer to lock a value (binding) without revealing it (hiding), then open it later (verifiable). Two phases: commit(value) \u2192 (commitment, decommit), verify(commitment, value, decommit) \u2192 accept/reject.\n  - integer-programming (combinatorial-optimization): IP (Integer Programming): optimization over integer variables with linear constraints. NP-hard in general; branch-and-bound solves practically.\n  - maximum-likelihood-estimation (statistics-probability): MLE: choose parameter \u03b8 to maximize likelihood L(\u03b8; x) = P(x | \u03b8). Equivalently maximize log-likelihood \u2113(\u03b8; x) = \u03a3 log P(x\u1d62 | \u03b8). Consistent (as n \u2192 \u221e) and asymptotically efficient (lowest variance among unbiased estimators).\n  - photon-arrival (networking): Detection of a single photon or optical quantum at a photodetector.\n  - state-transition-system (formal-verification): Model of a system as states and transitions: TS = (S, S\u2080, Act, \u2192, AP, L). States S, initial states S\u2080 \u2286 S, actions Act, transition relation \u2192 \u2286 S \u00d7 Act \u00d7 S, atomic propositions AP, labeling L: S \u2192 2^AP.\n  - structural-causal-model (causal-inference): SCM (Structural Causal Model): set of endogenous variables X, exogenous variables U, and structural equations f such that X = f(X, U). Each equation represents a causal mechanism.\n**Real walls (combined):**\n  - [chain-of-thought] CoT effectiveness plateaus for >5\u20137 steps\n  - [chain-of-thought] self-consistency (sample multiple CoTs, vote) improves accuracy at cost O(n\u00b7k)\n  - [commitment-scheme] Binding property (cannot change committed value) vs. hiding property (cannot see committed value before opening) \u2014 some schemes trade one for the other\n  - [integer-programming] Problem formulation (modeling) quality matters more than solver\n  - [integer-programming] different formulations have vastly different solving times\n  - [maximum-likelihood-estimation] Non-convex likelihoods \u2192 multiple local maxima\n  - [maximum-likelihood-estimation] flat likelihood \u2192 high variance\n  - [maximum-likelihood-estimation] regularization may be needed\n  - [photon-arrival] Dark count rate, APD gain drift, timing jitter (>10 ps degrades correlation resolution)\n  - [state-transition-system] State explosion: |S| grows exponentially with components\n  - [state-transition-system] compositional methods mitigate but don't solve\n  - [structural-causal-model] SCMs assume acyclic graphs (except with cycles under equilibrium)\n  - [structural-causal-model] cyclic SCMs require fixed-point solution"
+    }
+  ]
+}

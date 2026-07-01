@@ -1,0 +1,18 @@
+[package]
+name = "xdsim"
+version = "0.1.0"
+edition = "2021"
+description = "Cross-domain primitive simulator — tests game-engine primitives against a cross-domain primitive library under the Painted Fence doctrine. Zero dependencies."
+
+[[bin]]
+name = "xdsim"
+path = "src/main.rs"
+
+# Zero external dependencies — std only, faithful to the doctrine.
+[dependencies]
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+panic = "abort"

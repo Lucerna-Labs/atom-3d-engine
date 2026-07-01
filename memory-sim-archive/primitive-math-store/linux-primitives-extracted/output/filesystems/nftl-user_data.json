@@ -1,0 +1,210 @@
+{
+  "filename": "nftl-user.h",
+  "includes": [
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "MAX_ERASE_ZONES",
+      "value": "(8192 - 512)",
+      "comment": "",
+      "category": "MAX_ERASE"
+    },
+    {
+      "name": "ERASE_MARK",
+      "value": "0x3c69",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SECTOR_FREE",
+      "value": "0xff",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SECTOR_USED",
+      "value": "0x55",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SECTOR_IGNORE",
+      "value": "0x11",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SECTOR_DELETED",
+      "value": "0x00",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FOLD_MARK_IN_PROGRESS",
+      "value": "0x5555",
+      "comment": "",
+      "category": "FOLD_MARK"
+    },
+    {
+      "name": "ZONE_GOOD",
+      "value": "0xff",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ZONE_BAD_ORIGINAL",
+      "value": "0",
+      "comment": "",
+      "category": "ZONE_BAD"
+    },
+    {
+      "name": "ZONE_BAD_MARKED",
+      "value": "7",
+      "comment": "",
+      "category": "ZONE_BAD"
+    }
+  ],
+  "structs": [
+    {
+      "name": "nftl_bci",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "Status",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "Status1",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "nftl_uci0",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "VirtUnitNum",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "ReplUnitNum",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "SpareVirtUnitNum",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "SpareReplUnitNum",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "nftl_uci1",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "WearInfo",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "EraseMark",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "EraseMark1",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "nftl_uci2",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "FoldMark",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "FoldMark1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "unused",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "nftl_oob",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "NFTLMediaHeader",
+      "fields": [
+        {
+          "type_name": "char",
+          "name": "DataOrgID",
+          "array_size": "6",
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "NumEraseUnits",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "FirstPhysicalEUN",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "FormattedSize",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

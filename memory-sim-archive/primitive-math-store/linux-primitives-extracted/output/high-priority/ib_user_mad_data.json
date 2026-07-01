@@ -1,0 +1,372 @@
+{
+  "filename": "ib_user_mad.h",
+  "includes": [
+    "linux/types.h",
+    "rdma/rdma_user_ioctl.h"
+  ],
+  "defines": [
+    {
+      "name": "IB_USER_MAD_ABI_VERSION",
+      "value": "5",
+      "comment": "",
+      "category": "IB_USER"
+    },
+    {
+      "name": "IB_USER_MAD_LONGS_PER_METHOD_MASK",
+      "value": "(128 / (8 * sizeof (long)))",
+      "comment": "",
+      "category": "IB_USER"
+    },
+    {
+      "name": "IB_USER_MAD_REG_FLAGS_CAP",
+      "value": "(IB_USER_MAD_USER_RMPP)",
+      "comment": "",
+      "category": "IB_USER"
+    }
+  ],
+  "structs": [
+    {
+      "name": "ib_user_mad_hdr_old",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "status",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "timeout_ms",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "retries",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "length",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "qpn",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "qkey",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be16",
+          "name": "lid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "sl",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "path_bits",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "grh_present",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "gid_index",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "hop_limit",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "traffic_class",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "gid",
+          "array_size": "16",
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "flow_label",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ib_user_mad_hdr",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "status",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "timeout_ms",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "retries",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "length",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "qpn",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "qkey",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be16",
+          "name": "lid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "sl",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "path_bits",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "grh_present",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "gid_index",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "hop_limit",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "traffic_class",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "gid",
+          "array_size": "16",
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "flow_label",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "pkey_index",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reserved",
+          "array_size": "6",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ib_user_mad",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ib_user_mad_reg_req",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "packed_ulong",
+          "name": "method_mask",
+          "array_size": "IB_USER_MAD_LONGS_PER_METHOD_MASK",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "qpn",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "mgmt_class",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "mgmt_class_version",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "oui",
+          "array_size": "3",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "rmpp_version",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": true
+    },
+    {
+      "name": "ib_user_mad_reg_req2",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "qpn",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "mgmt_class",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "mgmt_class_version",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "res",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__aligned_u64",
+          "name": "method_mask",
+          "array_size": "2",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "oui",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "rmpp_version",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reserved",
+          "array_size": "3",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

@@ -1,0 +1,592 @@
+{
+  "filename": "netlink.h",
+  "includes": [
+    "linux/const.h",
+    "linux/socket.h",
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "NETLINK_ROUTE",
+      "value": "0",
+      "comment": "Routing/device hook",
+      "category": ""
+    },
+    {
+      "name": "NETLINK_UNUSED",
+      "value": "1",
+      "comment": "Unused number",
+      "category": ""
+    },
+    {
+      "name": "NETLINK_USERSOCK",
+      "value": "2",
+      "comment": "Reserved for user mode socket protocols",
+      "category": ""
+    },
+    {
+      "name": "NETLINK_FIREWALL",
+      "value": "3",
+      "comment": "Unused number, formerly ip_queue",
+      "category": ""
+    },
+    {
+      "name": "NETLINK_SOCK_DIAG",
+      "value": "4",
+      "comment": "socket monitoring",
+      "category": "NETLINK_SOCK"
+    },
+    {
+      "name": "NETLINK_NFLOG",
+      "value": "5",
+      "comment": "netfilter/iptables ULOG",
+      "category": ""
+    },
+    {
+      "name": "NETLINK_XFRM",
+      "value": "6",
+      "comment": "ipsec",
+      "category": ""
+    },
+    {
+      "name": "NETLINK_SELINUX",
+      "value": "7",
+      "comment": "SELinux event notifications",
+      "category": ""
+    },
+    {
+      "name": "NETLINK_ISCSI",
+      "value": "8",
+      "comment": "Open-iSCSI",
+      "category": ""
+    },
+    {
+      "name": "NETLINK_AUDIT",
+      "value": "9",
+      "comment": "auditing",
+      "category": ""
+    },
+    {
+      "name": "NETLINK_FIB_LOOKUP",
+      "value": "10",
+      "comment": "",
+      "category": "NETLINK_FIB"
+    },
+    {
+      "name": "NETLINK_CONNECTOR",
+      "value": "11",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NETLINK_NETFILTER",
+      "value": "12",
+      "comment": "netfilter subsystem",
+      "category": ""
+    },
+    {
+      "name": "NETLINK_IP6_FW",
+      "value": "13",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NETLINK_DNRTMSG",
+      "value": "14",
+      "comment": "DECnet routing messages (obsolete)",
+      "category": ""
+    },
+    {
+      "name": "NETLINK_KOBJECT_UEVENT",
+      "value": "15",
+      "comment": "Kernel messages to userspace",
+      "category": "NETLINK_KOBJECT"
+    },
+    {
+      "name": "NETLINK_GENERIC",
+      "value": "16",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NETLINK_SCSITRANSPORT",
+      "value": "18",
+      "comment": "SCSI Transports",
+      "category": ""
+    },
+    {
+      "name": "NETLINK_ECRYPTFS",
+      "value": "19",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NETLINK_RDMA",
+      "value": "20",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NETLINK_CRYPTO",
+      "value": "21",
+      "comment": "Crypto layer",
+      "category": ""
+    },
+    {
+      "name": "NETLINK_SMC",
+      "value": "22",
+      "comment": "SMC monitoring",
+      "category": ""
+    },
+    {
+      "name": "NETLINK_INET_DIAG",
+      "value": "NETLINK_SOCK_DIAG",
+      "comment": "",
+      "category": "NETLINK_INET"
+    },
+    {
+      "name": "MAX_LINKS",
+      "value": "32",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NLM_F_REQUEST",
+      "value": "0x01",
+      "comment": "It is request message.",
+      "category": "NLM_F"
+    },
+    {
+      "name": "NLM_F_MULTI",
+      "value": "0x02",
+      "comment": "Multipart message, terminated by NLMSG_DONE",
+      "category": "NLM_F"
+    },
+    {
+      "name": "NLM_F_ACK",
+      "value": "0x04",
+      "comment": "Reply with ack, with zero or error code",
+      "category": "NLM_F"
+    },
+    {
+      "name": "NLM_F_ECHO",
+      "value": "0x08",
+      "comment": "Receive resulting notifications",
+      "category": "NLM_F"
+    },
+    {
+      "name": "NLM_F_DUMP_INTR",
+      "value": "0x10",
+      "comment": "Dump was inconsistent due to sequence change",
+      "category": "NLM_F"
+    },
+    {
+      "name": "NLM_F_DUMP_FILTERED",
+      "value": "0x20",
+      "comment": "Dump was filtered as requested",
+      "category": "NLM_F"
+    },
+    {
+      "name": "NLM_F_ROOT",
+      "value": "0x100",
+      "comment": "specify tree\troot",
+      "category": "NLM_F"
+    },
+    {
+      "name": "NLM_F_MATCH",
+      "value": "0x200",
+      "comment": "return all matching",
+      "category": "NLM_F"
+    },
+    {
+      "name": "NLM_F_ATOMIC",
+      "value": "0x400",
+      "comment": "atomic GET",
+      "category": "NLM_F"
+    },
+    {
+      "name": "NLM_F_DUMP",
+      "value": "(NLM_F_ROOT|NLM_F_MATCH)",
+      "comment": "",
+      "category": "NLM_F"
+    },
+    {
+      "name": "NLM_F_REPLACE",
+      "value": "0x100",
+      "comment": "Override existing",
+      "category": "NLM_F"
+    },
+    {
+      "name": "NLM_F_EXCL",
+      "value": "0x200",
+      "comment": "Do not touch, if it exists",
+      "category": "NLM_F"
+    },
+    {
+      "name": "NLM_F_CREATE",
+      "value": "0x400",
+      "comment": "Create, if it does not exist",
+      "category": "NLM_F"
+    },
+    {
+      "name": "NLM_F_APPEND",
+      "value": "0x800",
+      "comment": "Add to end of list",
+      "category": "NLM_F"
+    },
+    {
+      "name": "NLM_F_NONREC",
+      "value": "0x100",
+      "comment": "Do not delete recursively",
+      "category": "NLM_F"
+    },
+    {
+      "name": "NLM_F_BULK",
+      "value": "0x200",
+      "comment": "Delete multiple objects",
+      "category": "NLM_F"
+    },
+    {
+      "name": "NLM_F_CAPPED",
+      "value": "0x100",
+      "comment": "request was capped",
+      "category": "NLM_F"
+    },
+    {
+      "name": "NLM_F_ACK_TLVS",
+      "value": "0x200",
+      "comment": "extended ACK TVLs were included",
+      "category": "NLM_F"
+    },
+    {
+      "name": "NLMSG_ALIGNTO",
+      "value": "4U",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NLMSG_HDRLEN",
+      "value": "((int) NLMSG_ALIGN(sizeof(struct nlmsghdr)))",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NLMSG_NOOP",
+      "value": "0x1",
+      "comment": "Nothing.",
+      "category": ""
+    },
+    {
+      "name": "NLMSG_ERROR",
+      "value": "0x2",
+      "comment": "Error",
+      "category": ""
+    },
+    {
+      "name": "NLMSG_DONE",
+      "value": "0x3",
+      "comment": "End of a dump",
+      "category": ""
+    },
+    {
+      "name": "NLMSG_OVERRUN",
+      "value": "0x4",
+      "comment": "Data lost",
+      "category": ""
+    },
+    {
+      "name": "NLMSG_MIN_TYPE",
+      "value": "0x10",
+      "comment": "< 0x10: reserved control messages",
+      "category": "NLMSG_MIN"
+    },
+    {
+      "name": "NETLINK_ADD_MEMBERSHIP",
+      "value": "1",
+      "comment": "",
+      "category": "NETLINK_ADD"
+    },
+    {
+      "name": "NETLINK_DROP_MEMBERSHIP",
+      "value": "2",
+      "comment": "",
+      "category": "NETLINK_DROP"
+    },
+    {
+      "name": "NETLINK_PKTINFO",
+      "value": "3",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NETLINK_BROADCAST_ERROR",
+      "value": "4",
+      "comment": "",
+      "category": "NETLINK_BROADCAST"
+    },
+    {
+      "name": "NETLINK_NO_ENOBUFS",
+      "value": "5",
+      "comment": "",
+      "category": "NETLINK_NO"
+    },
+    {
+      "name": "NETLINK_RX_RING",
+      "value": "6",
+      "comment": "",
+      "category": "NETLINK_RX"
+    },
+    {
+      "name": "NETLINK_TX_RING",
+      "value": "7",
+      "comment": "",
+      "category": "NETLINK_TX"
+    },
+    {
+      "name": "NETLINK_LISTEN_ALL_NSID",
+      "value": "8",
+      "comment": "",
+      "category": "NETLINK_LISTEN"
+    },
+    {
+      "name": "NETLINK_LIST_MEMBERSHIPS",
+      "value": "9",
+      "comment": "",
+      "category": "NETLINK_LIST"
+    },
+    {
+      "name": "NETLINK_CAP_ACK",
+      "value": "10",
+      "comment": "",
+      "category": "NETLINK_CAP"
+    },
+    {
+      "name": "NETLINK_EXT_ACK",
+      "value": "11",
+      "comment": "",
+      "category": "NETLINK_EXT"
+    },
+    {
+      "name": "NETLINK_GET_STRICT_CHK",
+      "value": "12",
+      "comment": "",
+      "category": "NETLINK_GET"
+    },
+    {
+      "name": "NL_MMAP_MSG_ALIGNMENT",
+      "value": "NLMSG_ALIGNTO",
+      "comment": "",
+      "category": "NL_MMAP"
+    },
+    {
+      "name": "NL_MMAP_HDRLEN",
+      "value": "NL_MMAP_MSG_ALIGN(sizeof(struct nl_mmap_hdr))",
+      "comment": "",
+      "category": "NL_MMAP"
+    },
+    {
+      "name": "NET_MAJOR",
+      "value": "36",
+      "comment": "Major 36 is reserved for networking",
+      "category": ""
+    },
+    {
+      "name": "NLA_F_NESTED",
+      "value": "(1 << 15)",
+      "comment": "",
+      "category": "NLA_F"
+    },
+    {
+      "name": "NLA_F_NET_BYTEORDER",
+      "value": "(1 << 14)",
+      "comment": "",
+      "category": "NLA_F"
+    },
+    {
+      "name": "NLA_TYPE_MASK",
+      "value": "~(NLA_F_NESTED | NLA_F_NET_BYTEORDER)",
+      "comment": "",
+      "category": "NLA_TYPE"
+    },
+    {
+      "name": "NLA_ALIGNTO",
+      "value": "4",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NLA_HDRLEN",
+      "value": "((int) NLA_ALIGN(sizeof(struct nlattr)))",
+      "comment": "",
+      "category": ""
+    }
+  ],
+  "structs": [
+    {
+      "name": "sockaddr_nl",
+      "fields": [
+        {
+          "type_name": "__kernel_sa_family_t",
+          "name": "nl_family",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "nl_pid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "nl_groups",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "nlmsghdr",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "nlmsg_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "nlmsg_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "nlmsg_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "nlmsg_seq",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "nlmsg_pid",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "nlmsgerr",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "error",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "nl_pktinfo",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "group",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "nl_mmap_req",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "nl_mmap_hdr",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "nm_group",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "nm_pid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "nm_uid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "nm_gid",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "nlattr",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "nla_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "nla_type",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "nla_bitfield32",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "value",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "selector",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

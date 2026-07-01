@@ -1,0 +1,22 @@
+{
+  "dataset": "data\\routed_memory_lora_sft.jsonl",
+  "example_count": 72,
+  "by_kind": {
+    "baked_domain_solution": 17,
+    "active_memory_solution": 17,
+    "interference_guard": 17,
+    "router_selection": 17,
+    "general_capability_guard": 4
+  },
+  "by_domain": {
+    "python": 15,
+    "ordo": 36,
+    "router": 17,
+    "general": 4
+  },
+  "source_runs": [
+    "rag_runs/python-domain-scar-20260611-141018",
+    "rag_runs/ordo-extended-suite-20260611-141111"
+  ],
+  "training_intent": "Convert runtime routed-memory behavior into LoRA-trainable examples. The adapter should learn domain-selective behavior without relying on memory files at inference."
+}

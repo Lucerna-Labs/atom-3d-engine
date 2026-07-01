@@ -1,0 +1,2886 @@
+{
+  "filename": "xe_drm.h",
+  "includes": [
+    "drm.h"
+  ],
+  "defines": [
+    {
+      "name": "DRM_XE_DEVICE_QUERY",
+      "value": "0x00",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_GEM_CREATE",
+      "value": "0x01",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_GEM_MMAP_OFFSET",
+      "value": "0x02",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_VM_CREATE",
+      "value": "0x03",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_VM_DESTROY",
+      "value": "0x04",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_VM_BIND",
+      "value": "0x05",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_EXEC_QUEUE_CREATE",
+      "value": "0x06",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_EXEC_QUEUE_DESTROY",
+      "value": "0x07",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_EXEC_QUEUE_GET_PROPERTY",
+      "value": "0x08",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_EXEC",
+      "value": "0x09",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_WAIT_USER_FENCE",
+      "value": "0x0a",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_OBSERVATION",
+      "value": "0x0b",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_MADVISE",
+      "value": "0x0c",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_VM_QUERY_MEM_RANGE_ATTRS",
+      "value": "0x0d",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_EXEC_QUEUE_SET_PROPERTY",
+      "value": "0x0e",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_VM_GET_PROPERTY",
+      "value": "0x0f",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_IOCTL_XE_DEVICE_QUERY",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_XE_DEVICE_QUERY, struct drm_xe_device_query)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_XE_GEM_CREATE",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_XE_GEM_CREATE, struct drm_xe_gem_create)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_XE_GEM_MMAP_OFFSET",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_XE_GEM_MMAP_OFFSET, struct drm_xe_gem_mmap_offset)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_XE_VM_CREATE",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_XE_VM_CREATE, struct drm_xe_vm_create)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_XE_VM_DESTROY",
+      "value": "DRM_IOW(DRM_COMMAND_BASE + DRM_XE_VM_DESTROY, struct drm_xe_vm_destroy)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_XE_VM_BIND",
+      "value": "DRM_IOW(DRM_COMMAND_BASE + DRM_XE_VM_BIND, struct drm_xe_vm_bind)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_XE_EXEC_QUEUE_CREATE",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_XE_EXEC_QUEUE_CREATE, struct drm_xe_exec_queue_create)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_XE_EXEC_QUEUE_DESTROY",
+      "value": "DRM_IOW(DRM_COMMAND_BASE + DRM_XE_EXEC_QUEUE_DESTROY, struct drm_xe_exec_queue_destroy)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_XE_EXEC_QUEUE_GET_PROPERTY",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_XE_EXEC_QUEUE_GET_PROPERTY, struct drm_xe_exec_queue_get_property)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_XE_EXEC",
+      "value": "DRM_IOW(DRM_COMMAND_BASE + DRM_XE_EXEC, struct drm_xe_exec)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_XE_WAIT_USER_FENCE",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_XE_WAIT_USER_FENCE, struct drm_xe_wait_user_fence)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_XE_OBSERVATION",
+      "value": "DRM_IOW(DRM_COMMAND_BASE + DRM_XE_OBSERVATION, struct drm_xe_observation_param)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_XE_MADVISE",
+      "value": "DRM_IOW(DRM_COMMAND_BASE + DRM_XE_MADVISE, struct drm_xe_madvise)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_XE_VM_QUERY_MEM_RANGE_ATTRS",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_XE_VM_QUERY_MEM_RANGE_ATTRS, struct drm_xe_vm_query_mem_range_attr)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_XE_EXEC_QUEUE_SET_PROPERTY",
+      "value": "DRM_IOW(DRM_COMMAND_BASE + DRM_XE_EXEC_QUEUE_SET_PROPERTY, struct drm_xe_exec_queue_set_property)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_XE_VM_GET_PROPERTY",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_XE_VM_GET_PROPERTY, struct drm_xe_vm_get_property)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_XE_ENGINE_CLASS_RENDER",
+      "value": "0",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_ENGINE_CLASS_COPY",
+      "value": "1",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_ENGINE_CLASS_VIDEO_DECODE",
+      "value": "2",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_ENGINE_CLASS_VIDEO_ENHANCE",
+      "value": "3",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_ENGINE_CLASS_COMPUTE",
+      "value": "4",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_ENGINE_CLASS_VM_BIND",
+      "value": "5",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_QUERY_CONFIG_REV_AND_DEVICE_ID",
+      "value": "0",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_QUERY_CONFIG_FLAGS",
+      "value": "1",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_QUERY_CONFIG_FLAG_HAS_VRAM",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_QUERY_CONFIG_FLAG_HAS_LOW_LATENCY",
+      "value": "(1 << 1)",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_QUERY_CONFIG_FLAG_HAS_CPU_ADDR_MIRROR",
+      "value": "(1 << 2)",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_QUERY_CONFIG_FLAG_HAS_NO_COMPRESSION_HINT",
+      "value": "(1 << 3)",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_QUERY_CONFIG_FLAG_HAS_DISABLE_STATE_CACHE_PERF_FIX",
+      "value": "(1 << 4)",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_QUERY_CONFIG_FLAG_HAS_PURGING_SUPPORT",
+      "value": "(1 << 5)",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_QUERY_CONFIG_MIN_ALIGNMENT",
+      "value": "2",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_QUERY_CONFIG_VA_BITS",
+      "value": "3",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_QUERY_CONFIG_MAX_EXEC_QUEUE_PRIORITY",
+      "value": "4",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_QUERY_GT_TYPE_MAIN",
+      "value": "0",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_QUERY_GT_TYPE_MEDIA",
+      "value": "1",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_TOPO_DSS_GEOMETRY",
+      "value": "1",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_TOPO_DSS_COMPUTE",
+      "value": "2",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_TOPO_L3_BANK",
+      "value": "3",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_TOPO_EU_PER_DSS",
+      "value": "4",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_TOPO_SIMD16_EU_PER_DSS",
+      "value": "5",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "XE_QUERY_UC_TYPE_GUC_SUBMISSION",
+      "value": "0",
+      "comment": "",
+      "category": "XE_QUERY"
+    },
+    {
+      "name": "XE_QUERY_UC_TYPE_HUC",
+      "value": "1",
+      "comment": "",
+      "category": "XE_QUERY"
+    },
+    {
+      "name": "DRM_XE_DEVICE_QUERY_ENGINES",
+      "value": "0",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_DEVICE_QUERY_MEM_REGIONS",
+      "value": "1",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_DEVICE_QUERY_CONFIG",
+      "value": "2",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_DEVICE_QUERY_GT_LIST",
+      "value": "3",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_DEVICE_QUERY_HWCONFIG",
+      "value": "4",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_DEVICE_QUERY_GT_TOPOLOGY",
+      "value": "5",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_DEVICE_QUERY_ENGINE_CYCLES",
+      "value": "6",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_DEVICE_QUERY_UC_FW_VERSION",
+      "value": "7",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_DEVICE_QUERY_OA_UNITS",
+      "value": "8",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_DEVICE_QUERY_PXP_STATUS",
+      "value": "9",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_DEVICE_QUERY_EU_STALL",
+      "value": "10",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_GEM_CREATE_EXTENSION_SET_PROPERTY",
+      "value": "0",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_GEM_CREATE_SET_PROPERTY_PXP_TYPE",
+      "value": "0",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_GEM_CREATE_FLAG_DEFER_BACKING",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_GEM_CREATE_FLAG_SCANOUT",
+      "value": "(1 << 1)",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_GEM_CREATE_FLAG_NEEDS_VISIBLE_VRAM",
+      "value": "(1 << 2)",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_GEM_CREATE_FLAG_NO_COMPRESSION",
+      "value": "(1 << 3)",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_GEM_CPU_CACHING_WB",
+      "value": "1",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_GEM_CPU_CACHING_WC",
+      "value": "2",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_MMAP_OFFSET_FLAG_PCI_BARRIER",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_VM_CREATE_FLAG_SCRATCH_PAGE",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_VM_CREATE_FLAG_LR_MODE",
+      "value": "(1 << 1)",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_VM_CREATE_FLAG_FAULT_MODE",
+      "value": "(1 << 2)",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_VM_CREATE_FLAG_NO_VM_OVERCOMMIT",
+      "value": "(1 << 3)",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_VM_BIND_OP_MAP",
+      "value": "0x0",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_VM_BIND_OP_UNMAP",
+      "value": "0x1",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_VM_BIND_OP_MAP_USERPTR",
+      "value": "0x2",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_VM_BIND_OP_UNMAP_ALL",
+      "value": "0x3",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_VM_BIND_OP_PREFETCH",
+      "value": "0x4",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_VM_BIND_FLAG_READONLY",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_VM_BIND_FLAG_IMMEDIATE",
+      "value": "(1 << 1)",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_VM_BIND_FLAG_NULL",
+      "value": "(1 << 2)",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_VM_BIND_FLAG_DUMPABLE",
+      "value": "(1 << 3)",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_VM_BIND_FLAG_CHECK_PXP",
+      "value": "(1 << 4)",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_VM_BIND_FLAG_CPU_ADDR_MIRROR",
+      "value": "(1 << 5)",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_VM_BIND_FLAG_MADVISE_AUTORESET",
+      "value": "(1 << 6)",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_VM_BIND_FLAG_DECOMPRESS",
+      "value": "(1 << 7)",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_CONSULT_MEM_ADVISE_PREF_LOC",
+      "value": "-1",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "FAULT_ACCESS_TYPE_READ",
+      "value": "0",
+      "comment": "",
+      "category": "FAULT_ACCESS"
+    },
+    {
+      "name": "FAULT_ACCESS_TYPE_WRITE",
+      "value": "1",
+      "comment": "",
+      "category": "FAULT_ACCESS"
+    },
+    {
+      "name": "FAULT_ACCESS_TYPE_ATOMIC",
+      "value": "2",
+      "comment": "",
+      "category": "FAULT_ACCESS"
+    },
+    {
+      "name": "FAULT_TYPE_NOT_PRESENT",
+      "value": "0",
+      "comment": "",
+      "category": "FAULT_TYPE"
+    },
+    {
+      "name": "FAULT_TYPE_WRITE_ACCESS",
+      "value": "1",
+      "comment": "",
+      "category": "FAULT_TYPE"
+    },
+    {
+      "name": "FAULT_TYPE_ATOMIC_ACCESS",
+      "value": "2",
+      "comment": "",
+      "category": "FAULT_TYPE"
+    },
+    {
+      "name": "FAULT_LEVEL_PTE",
+      "value": "0",
+      "comment": "",
+      "category": "FAULT_LEVEL"
+    },
+    {
+      "name": "FAULT_LEVEL_PDE",
+      "value": "1",
+      "comment": "",
+      "category": "FAULT_LEVEL"
+    },
+    {
+      "name": "FAULT_LEVEL_PDP",
+      "value": "2",
+      "comment": "",
+      "category": "FAULT_LEVEL"
+    },
+    {
+      "name": "FAULT_LEVEL_PML4",
+      "value": "3",
+      "comment": "",
+      "category": "FAULT_LEVEL"
+    },
+    {
+      "name": "FAULT_LEVEL_PML5",
+      "value": "4",
+      "comment": "",
+      "category": "FAULT_LEVEL"
+    },
+    {
+      "name": "DRM_XE_VM_GET_PROPERTY_FAULTS",
+      "value": "0",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_EXEC_QUEUE_EXTENSION_SET_PROPERTY",
+      "value": "0",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_EXEC_QUEUE_SET_PROPERTY_PRIORITY",
+      "value": "0",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_EXEC_QUEUE_SET_PROPERTY_TIMESLICE",
+      "value": "1",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_EXEC_QUEUE_SET_PROPERTY_PXP_TYPE",
+      "value": "2",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_EXEC_QUEUE_SET_HANG_REPLAY_STATE",
+      "value": "3",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_EXEC_QUEUE_SET_PROPERTY_MULTI_GROUP",
+      "value": "4",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_MULTI_GROUP_CREATE",
+      "value": "(1ull << 63)",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_EXEC_QUEUE_SET_PROPERTY_MULTI_QUEUE_PRIORITY",
+      "value": "5",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_EXEC_QUEUE_SET_DISABLE_STATE_CACHE_PERF_FIX",
+      "value": "6",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_EXEC_QUEUE_LOW_LATENCY_HINT",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_EXEC_QUEUE_GET_PROPERTY_BAN",
+      "value": "0",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_SYNC_TYPE_SYNCOBJ",
+      "value": "0x0",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_SYNC_TYPE_TIMELINE_SYNCOBJ",
+      "value": "0x1",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_SYNC_TYPE_USER_FENCE",
+      "value": "0x2",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_SYNC_FLAG_SIGNAL",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_MAX_SYNCS",
+      "value": "1024",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_UFENCE_WAIT_OP_EQ",
+      "value": "0x0",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_UFENCE_WAIT_OP_NEQ",
+      "value": "0x1",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_UFENCE_WAIT_OP_GT",
+      "value": "0x2",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_UFENCE_WAIT_OP_GTE",
+      "value": "0x3",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_UFENCE_WAIT_OP_LT",
+      "value": "0x4",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_UFENCE_WAIT_OP_LTE",
+      "value": "0x5",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_UFENCE_WAIT_FLAG_ABSTIME",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_OA_CAPS_BASE",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_OA_CAPS_SYNCS",
+      "value": "(1 << 1)",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_OA_CAPS_OA_BUFFER_SIZE",
+      "value": "(1 << 2)",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_OA_CAPS_WAIT_NUM_REPORTS",
+      "value": "(1 << 3)",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_OA_CAPS_OAM",
+      "value": "(1 << 4)",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_OA_CAPS_OA_UNIT_GT_ID",
+      "value": "(1 << 5)",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_OA_EXTENSION_SET_PROPERTY",
+      "value": "0",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_OA_FORMAT_MASK_FMT_TYPE",
+      "value": "(0xffu << 0)",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_OA_FORMAT_MASK_COUNTER_SEL",
+      "value": "(0xffu << 8)",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_OA_FORMAT_MASK_COUNTER_SIZE",
+      "value": "(0xffu << 16)",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_OA_FORMAT_MASK_BC_REPORT",
+      "value": "(0xffu << 24)",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_OASTATUS_MMIO_TRG_Q_FULL",
+      "value": "(1 << 3)",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_OASTATUS_COUNTER_OVERFLOW",
+      "value": "(1 << 2)",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_OASTATUS_BUFFER_OVERFLOW",
+      "value": "(1 << 1)",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_OASTATUS_REPORT_LOST",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_PXP_HWDRM_DEFAULT_SESSION",
+      "value": "0xf",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_EU_STALL_EXTENSION_SET_PROPERTY",
+      "value": "0",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_EU_STALL_CAPS_BASE",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_MEM_RANGE_ATTR_PREFERRED_LOC",
+      "value": "0",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_MEM_RANGE_ATTR_ATOMIC",
+      "value": "1",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_MEM_RANGE_ATTR_PAT",
+      "value": "2",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_VMA_ATTR_PURGEABLE_STATE",
+      "value": "3",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_PREFERRED_LOC_DEFAULT_DEVICE",
+      "value": "0",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_PREFERRED_LOC_DEFAULT_SYSTEM",
+      "value": "-1",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_MIGRATE_ALL_PAGES",
+      "value": "0",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_MIGRATE_ONLY_SYSTEM_PAGES",
+      "value": "1",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_ATOMIC_UNDEFINED",
+      "value": "0",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_ATOMIC_DEVICE",
+      "value": "1",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_ATOMIC_GLOBAL",
+      "value": "2",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_ATOMIC_CPU",
+      "value": "3",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_VMA_PURGEABLE_STATE_WILLNEED",
+      "value": "0",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_VMA_PURGEABLE_STATE_DONTNEED",
+      "value": "1",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_RAS_ERROR_SEVERITY_NAMES",
+      "value": "{\t\t\t\t",
+      "comment": "",
+      "category": "DRM_XE"
+    },
+    {
+      "name": "DRM_XE_RAS_ERROR_COMPONENT_NAMES",
+      "value": "{\t\t\t\t",
+      "comment": "",
+      "category": "DRM_XE"
+    }
+  ],
+  "structs": [
+    {
+      "name": "drm_xe_user_extension",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "next_extension",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "name",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_xe_ext_set_property",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "property",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "value",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "ptr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "reserved",
+          "array_size": "2",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_xe_engine_class_instance",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "engine_class",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "engine_instance",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "gt_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_xe_engine",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "reserved",
+          "array_size": "3",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_xe_query_engines",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "num_engines",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_xe_mem_region",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "mem_class",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "instance",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "min_page_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "total_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "used",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "cpu_visible_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "cpu_visible_used",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "reserved",
+          "array_size": "6",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_xe_query_mem_regions",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "num_mem_regions",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_xe_query_config",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "num_params",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_xe_gt",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "tile_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "gt_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "pad",
+          "array_size": "3",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reference_clock",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "near_mem_regions",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "far_mem_regions",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "ip_ver_major",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "ip_ver_minor",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "ip_ver_rev",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "pad2",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "reserved",
+          "array_size": "7",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_xe_query_gt_list",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "num_gt",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_xe_query_topology_mask",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "gt_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "num_bytes",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_xe_query_engine_cycles",
+      "fields": [
+        {
+          "type_name": "__s32",
+          "name": "clockid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "width",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "engine_cycles",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "cpu_timestamp",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "cpu_delta",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_xe_query_uc_fw_version",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "uc_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "branch_ver",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "major_ver",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "minor_ver",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "patch_ver",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad2",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_xe_query_pxp_status",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "status",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "supported_session_types",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_xe_device_query",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "extensions",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "query",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "data",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "reserved",
+          "array_size": "2",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_xe_gem_create",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "extensions",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "placement",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "vm_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "cpu_caching",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "pad",
+          "array_size": "3",
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "reserved",
+          "array_size": "2",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_xe_gem_mmap_offset",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "extensions",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "reserved",
+          "array_size": "2",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_xe_vm_create",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "extensions",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "vm_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "reserved",
+          "array_size": "2",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_xe_vm_destroy",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "vm_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "reserved",
+          "array_size": "2",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_xe_vm_bind_op",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "extensions",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "obj",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "pat_index",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "obj_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "userptr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s64",
+          "name": "cpu_addr_mirror_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "range",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "addr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "op",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "prefetch_mem_region_instance",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad2",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "reserved",
+          "array_size": "3",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_xe_vm_bind",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "extensions",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "vm_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "exec_queue_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "num_binds",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "vector_of_binds",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad2",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "num_syncs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "syncs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "reserved",
+          "array_size": "2",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "xe_vm_fault",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "address",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "address_precision",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "access_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "fault_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "fault_level",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "reserved",
+          "array_size": "4",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_xe_vm_get_property",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "extensions",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "vm_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "property",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "data",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "value",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "reserved",
+          "array_size": "3",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_xe_exec_queue_create",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "extensions",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "width",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "num_placements",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "vm_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "exec_queue_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "instances",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "reserved",
+          "array_size": "2",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_xe_exec_queue_destroy",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "exec_queue_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "reserved",
+          "array_size": "2",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_xe_exec_queue_get_property",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "extensions",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "exec_queue_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "property",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "value",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "reserved",
+          "array_size": "2",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_xe_sync",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "extensions",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "addr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "timeline_value",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "reserved",
+          "array_size": "2",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_xe_exec",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "extensions",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "exec_queue_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "num_syncs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "syncs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "address",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "num_batch_buffer",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "pad",
+          "array_size": "3",
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "reserved",
+          "array_size": "2",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_xe_wait_user_fence",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "extensions",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "addr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "op",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "value",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "mask",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s64",
+          "name": "timeout",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "exec_queue_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad2",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "reserved",
+          "array_size": "2",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_xe_observation_param",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "extensions",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "observation_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "observation_op",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "param",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_xe_oa_unit",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "extensions",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "oa_unit_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "oa_unit_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "capabilities",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "oa_timestamp_freq",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "gt_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "reserved1",
+          "array_size": "3",
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "reserved",
+          "array_size": "3",
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "num_engines",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_xe_query_oa_units",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "extensions",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "num_oa_units",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_xe_oa_config",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "extensions",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "uuid",
+          "array_size": "36",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "n_regs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "regs_ptr",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_xe_oa_stream_status",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "extensions",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "oa_status",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "reserved",
+          "array_size": "3",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_xe_oa_stream_info",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "extensions",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "oa_buf_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "reserved",
+          "array_size": "3",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_xe_query_eu_stall",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "extensions",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "capabilities",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "record_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "per_xecore_buf_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "reserved",
+          "array_size": "5",
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "num_sampling_rates",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_xe_madvise",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "extensions",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "start",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "range",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "vm_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "devmem_fd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "migration_policy",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "region_instance",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "val",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "val",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "val",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "retained_ptr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "reserved",
+          "array_size": "2",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_37",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "devmem_fd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "migration_policy",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "region_instance",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_38",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "val",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_39",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "val",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_40",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "val",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "retained_ptr",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_xe_mem_range_attr",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "extensions",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "start",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "end",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "devmem_fd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "migration_policy",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "val",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "val",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "reserved",
+          "array_size": "2",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_42",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "devmem_fd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "migration_policy",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_43",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "val",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_44",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "val",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_xe_vm_query_mem_range_attr",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "extensions",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "vm_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "num_mem_ranges",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "start",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "range",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "sizeof_mem_range_attr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "vector_of_mem_attr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "reserved",
+          "array_size": "2",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_xe_exec_queue_set_property",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "extensions",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "exec_queue_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "property",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "value",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "reserved",
+          "array_size": "2",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

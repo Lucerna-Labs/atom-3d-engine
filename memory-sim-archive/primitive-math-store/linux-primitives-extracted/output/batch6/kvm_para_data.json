@@ -1,0 +1,120 @@
+{
+  "filename": "kvm_para.h",
+  "includes": [
+    "asm/kvm_para.h"
+  ],
+  "defines": [
+    {
+      "name": "KVM_ENOSYS",
+      "value": "1000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "KVM_EFAULT",
+      "value": "EFAULT",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "KVM_EINVAL",
+      "value": "EINVAL",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "KVM_E2BIG",
+      "value": "E2BIG",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "KVM_EPERM",
+      "value": "EPERM",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "KVM_EOPNOTSUPP",
+      "value": "95",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "KVM_HC_VAPIC_POLL_IRQ",
+      "value": "1",
+      "comment": "",
+      "category": "KVM_HC"
+    },
+    {
+      "name": "KVM_HC_MMU_OP",
+      "value": "2",
+      "comment": "",
+      "category": "KVM_HC"
+    },
+    {
+      "name": "KVM_HC_FEATURES",
+      "value": "3",
+      "comment": "",
+      "category": "KVM_HC"
+    },
+    {
+      "name": "KVM_HC_PPC_MAP_MAGIC_PAGE",
+      "value": "4",
+      "comment": "",
+      "category": "KVM_HC"
+    },
+    {
+      "name": "KVM_HC_KICK_CPU",
+      "value": "5",
+      "comment": "",
+      "category": "KVM_HC"
+    },
+    {
+      "name": "KVM_HC_MIPS_GET_CLOCK_FREQ",
+      "value": "6",
+      "comment": "",
+      "category": "KVM_HC"
+    },
+    {
+      "name": "KVM_HC_MIPS_EXIT_VM",
+      "value": "7",
+      "comment": "",
+      "category": "KVM_HC"
+    },
+    {
+      "name": "KVM_HC_MIPS_CONSOLE_OUTPUT",
+      "value": "8",
+      "comment": "",
+      "category": "KVM_HC"
+    },
+    {
+      "name": "KVM_HC_CLOCK_PAIRING",
+      "value": "9",
+      "comment": "",
+      "category": "KVM_HC"
+    },
+    {
+      "name": "KVM_HC_SEND_IPI",
+      "value": "10",
+      "comment": "",
+      "category": "KVM_HC"
+    },
+    {
+      "name": "KVM_HC_SCHED_YIELD",
+      "value": "11",
+      "comment": "",
+      "category": "KVM_HC"
+    },
+    {
+      "name": "KVM_HC_MAP_GPA_RANGE",
+      "value": "12",
+      "comment": "",
+      "category": "KVM_HC"
+    }
+  ],
+  "structs": [],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

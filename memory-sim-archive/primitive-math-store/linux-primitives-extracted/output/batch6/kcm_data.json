@@ -1,0 +1,86 @@
+{
+  "filename": "kcm.h",
+  "includes": [],
+  "defines": [
+    {
+      "name": "SIOCKCMATTACH",
+      "value": "(SIOCPROTOPRIVATE + 0)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SIOCKCMUNATTACH",
+      "value": "(SIOCPROTOPRIVATE + 1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SIOCKCMCLONE",
+      "value": "(SIOCPROTOPRIVATE + 2)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "KCMPROTO_CONNECTED",
+      "value": "0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "KCM_RECV_DISABLE",
+      "value": "1",
+      "comment": "",
+      "category": "KCM_RECV"
+    }
+  ],
+  "structs": [
+    {
+      "name": "kcm_attach",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "fd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "bpf_fd",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "kcm_unattach",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "fd",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "kcm_clone",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "fd",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

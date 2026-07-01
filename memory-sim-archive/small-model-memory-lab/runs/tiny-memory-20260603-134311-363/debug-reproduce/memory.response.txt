@@ -1,0 +1,4 @@
+﻿1. **Reproduce the failure**: Trigger the intermittent crash locally or in staging to establish a consistent failure state, acknowledging that intermittent issues may require stress testing to surface.
+2. **Verify before repairing**: Analyze the warnings and logs to confirm the root cause before applying fixes, ensuring the repair does not introduce new instability.
+3. **Assess speed vs. verification**: Evaluate if recent deployment optimizations (speed) may have bypassed necessary checks, as rushing verification often leads to missed failure modes.
+4. **Execute and monitor**: Deploy the verified fix and monitor for recurrence, accepting uncertainty if the crash persists despite these steps.

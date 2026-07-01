@@ -1,0 +1,4 @@
+﻿1. **Capture Stack Traces**: Run `dmesg | grep -i crash` and `dmesg | grep -i kernel` to identify kernel-level events, then use `strace` or `perf` to pinpoint the specific process causing the crash.
+2. **Analyze Runtime Logs**: Review application logs for unhandled exceptions or race conditions, while checking system logs for memory corruption or OOM (Out Of Memory) events that might trigger the crash.
+3. **Isolate the Component**: Temporarily disable non-critical services or modules to determine if the crash is isolated to a specific library or dependency.
+4. **Reproduce and Verify**: Attempt to reproduce the crash in a controlled environment with minimal dependencies to confirm the root cause and plan a targeted fix.

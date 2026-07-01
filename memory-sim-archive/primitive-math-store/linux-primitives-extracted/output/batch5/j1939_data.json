@@ -1,0 +1,130 @@
+{
+  "filename": "j1939.h",
+  "includes": [
+    "linux/types.h",
+    "linux/socket.h",
+    "linux/can.h"
+  ],
+  "defines": [
+    {
+      "name": "J1939_MAX_UNICAST_ADDR",
+      "value": "0xfd",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "J1939_IDLE_ADDR",
+      "value": "0xfe",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "J1939_NO_ADDR",
+      "value": "0xff",
+      "comment": "== broadcast or no addr",
+      "category": ""
+    },
+    {
+      "name": "J1939_NO_NAME",
+      "value": "0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "J1939_PGN_REQUEST",
+      "value": "0x0ea00",
+      "comment": "Request PG",
+      "category": ""
+    },
+    {
+      "name": "J1939_PGN_ADDRESS_CLAIMED",
+      "value": "0x0ee00",
+      "comment": "Address Claimed",
+      "category": ""
+    },
+    {
+      "name": "J1939_PGN_ADDRESS_COMMANDED",
+      "value": "0x0fed8",
+      "comment": "Commanded Address",
+      "category": ""
+    },
+    {
+      "name": "J1939_PGN_PDU1_MAX",
+      "value": "0x3ff00",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "J1939_PGN_MAX",
+      "value": "0x3ffff",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "J1939_NO_PGN",
+      "value": "0x40000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SOL_CAN_J1939",
+      "value": "(SOL_CAN_BASE + CAN_J1939)",
+      "comment": "",
+      "category": "SOL_CAN"
+    },
+    {
+      "name": "J1939_FILTER_MAX",
+      "value": "512",
+      "comment": "maximum number of j1939_filter set via setsockopt()",
+      "category": ""
+    }
+  ],
+  "structs": [
+    {
+      "name": "j1939_filter",
+      "fields": [
+        {
+          "type_name": "name_t",
+          "name": "name",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "name_t",
+          "name": "name_mask",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "pgn_t",
+          "name": "pgn",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "pgn_t",
+          "name": "pgn_mask",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "addr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "addr_mask",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

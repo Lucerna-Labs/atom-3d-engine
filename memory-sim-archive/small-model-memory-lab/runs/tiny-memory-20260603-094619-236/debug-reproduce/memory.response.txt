@@ -1,0 +1,14 @@
+﻿
+
+1. **Reproduce Before Repair**
+   - **Action:** Reproduce the crash in a staging environment.
+   - **Uncertainty:** The crash may be intermittent; ensure the environment matches production.
+   - **Next Action:** If reproducible, isolate the trigger and change code.
+
+2. **Isolate the Variable**
+   - **Action:** Move one variable to test its impact.
+   - **Uncertainty:** Multiple variables may be involved; focus on the one that changes behavior.
+   - **Next Action:** Observe if the crash persists or changes.
+
+3. **Check the Loop**
+   - **Action:** Stop the loop at a

@@ -1,0 +1,165 @@
+{
+  "filename": "signalfd.h",
+  "includes": [
+    "linux/types.h",
+    "linux/fcntl.h"
+  ],
+  "defines": [
+    {
+      "name": "SFD_CLOEXEC",
+      "value": "O_CLOEXEC",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SFD_NONBLOCK",
+      "value": "O_NONBLOCK",
+      "comment": "",
+      "category": ""
+    }
+  ],
+  "structs": [
+    {
+      "name": "signalfd_siginfo",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "ssi_signo",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "ssi_errno",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "ssi_code",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ssi_pid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ssi_uid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "ssi_fd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ssi_tid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ssi_band",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ssi_overrun",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ssi_trapno",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "ssi_status",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "ssi_int",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "ssi_ptr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "ssi_utime",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "ssi_stime",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "ssi_addr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "ssi_addr_lsb",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "__pad2",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "ssi_syscall",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "ssi_call_addr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ssi_arch",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "__pad",
+          "array_size": "28",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

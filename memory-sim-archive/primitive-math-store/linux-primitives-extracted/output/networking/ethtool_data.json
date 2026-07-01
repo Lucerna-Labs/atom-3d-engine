@@ -1,0 +1,3309 @@
+{
+  "filename": "ethtool.h",
+  "includes": [
+    "linux/const.h",
+    "linux/typelimits.h",
+    "linux/types.h",
+    "linux/if_ether.h"
+  ],
+  "defines": [
+    {
+      "name": "ETH_MDIO_SUPPORTS_C22",
+      "value": "1",
+      "comment": "",
+      "category": "ETH_MDIO"
+    },
+    {
+      "name": "ETH_MDIO_SUPPORTS_C45",
+      "value": "2",
+      "comment": "",
+      "category": "ETH_MDIO"
+    },
+    {
+      "name": "ETHTOOL_FWVERS_LEN",
+      "value": "32",
+      "comment": "",
+      "category": "ETHTOOL_FWVERS"
+    },
+    {
+      "name": "ETHTOOL_BUSINFO_LEN",
+      "value": "32",
+      "comment": "",
+      "category": "ETHTOOL_BUSINFO"
+    },
+    {
+      "name": "ETHTOOL_EROMVERS_LEN",
+      "value": "32",
+      "comment": "",
+      "category": "ETHTOOL_EROMVERS"
+    },
+    {
+      "name": "SOPASS_MAX",
+      "value": "6",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PFC_STORM_PREVENTION_AUTO",
+      "value": "0xffff",
+      "comment": "",
+      "category": "PFC_STORM"
+    },
+    {
+      "name": "PFC_STORM_PREVENTION_DISABLE",
+      "value": "0",
+      "comment": "",
+      "category": "PFC_STORM"
+    },
+    {
+      "name": "DOWNSHIFT_DEV_DEFAULT_COUNT",
+      "value": "0xff",
+      "comment": "",
+      "category": "DOWNSHIFT_DEV"
+    },
+    {
+      "name": "DOWNSHIFT_DEV_DISABLE",
+      "value": "0",
+      "comment": "",
+      "category": "DOWNSHIFT_DEV"
+    },
+    {
+      "name": "ETHTOOL_PHY_FAST_LINK_DOWN_ON",
+      "value": "0",
+      "comment": "",
+      "category": "ETHTOOL_PHY"
+    },
+    {
+      "name": "ETHTOOL_PHY_FAST_LINK_DOWN_OFF",
+      "value": "0xff",
+      "comment": "",
+      "category": "ETHTOOL_PHY"
+    },
+    {
+      "name": "ETHTOOL_PHY_EDPD_DFLT_TX_MSECS",
+      "value": "0xffff",
+      "comment": "",
+      "category": "ETHTOOL_PHY"
+    },
+    {
+      "name": "ETHTOOL_PHY_EDPD_NO_TX",
+      "value": "0xfffe",
+      "comment": "",
+      "category": "ETHTOOL_PHY"
+    },
+    {
+      "name": "ETHTOOL_PHY_EDPD_DISABLE",
+      "value": "0",
+      "comment": "",
+      "category": "ETHTOOL_PHY"
+    },
+    {
+      "name": "ETH_GSTRING_LEN",
+      "value": "32",
+      "comment": "",
+      "category": "ETH_GSTRING"
+    },
+    {
+      "name": "ETH_RX_NFC_IP4",
+      "value": "1",
+      "comment": "",
+      "category": "ETH_RX"
+    },
+    {
+      "name": "ETHTOOL_RX_FLOW_SPEC_RING",
+      "value": "0x00000000FFFFFFFFLL",
+      "comment": "",
+      "category": "ETHTOOL_RX"
+    },
+    {
+      "name": "ETHTOOL_RX_FLOW_SPEC_RING_VF",
+      "value": "0x000000FF00000000LL",
+      "comment": "",
+      "category": "ETHTOOL_RX"
+    },
+    {
+      "name": "ETHTOOL_RX_FLOW_SPEC_RING_VF_OFF",
+      "value": "32",
+      "comment": "",
+      "category": "ETHTOOL_RX"
+    },
+    {
+      "name": "ETH_RXFH_CONTEXT_ALLOC",
+      "value": "0xffffffff",
+      "comment": "",
+      "category": "ETH_RXFH"
+    },
+    {
+      "name": "ETH_RXFH_INDIR_NO_CHANGE",
+      "value": "0xffffffff",
+      "comment": "",
+      "category": "ETH_RXFH"
+    },
+    {
+      "name": "ETHTOOL_RXNTUPLE_ACTION_DROP",
+      "value": "(-1)",
+      "comment": "drop packet",
+      "category": "ETHTOOL_RXNTUPLE"
+    },
+    {
+      "name": "ETHTOOL_RXNTUPLE_ACTION_CLEAR",
+      "value": "(-2)",
+      "comment": "clear filter",
+      "category": "ETHTOOL_RXNTUPLE"
+    },
+    {
+      "name": "ETHTOOL_FLASH_MAX_FILENAME",
+      "value": "128",
+      "comment": "",
+      "category": "ETHTOOL_FLASH"
+    },
+    {
+      "name": "ETH_FW_DUMP_DISABLE",
+      "value": "0",
+      "comment": "",
+      "category": "ETH_FW"
+    },
+    {
+      "name": "ETHTOOL_F_UNSUPPORTED",
+      "value": "(1 << ETHTOOL_F_UNSUPPORTED__BIT)",
+      "comment": "",
+      "category": "ETHTOOL_F"
+    },
+    {
+      "name": "ETHTOOL_F_WISH",
+      "value": "(1 << ETHTOOL_F_WISH__BIT)",
+      "comment": "",
+      "category": "ETHTOOL_F"
+    },
+    {
+      "name": "ETHTOOL_F_COMPAT",
+      "value": "(1 << ETHTOOL_F_COMPAT__BIT)",
+      "comment": "",
+      "category": "ETHTOOL_F"
+    },
+    {
+      "name": "MAX_NUM_QUEUE",
+      "value": "4096",
+      "comment": "",
+      "category": "MAX_NUM"
+    },
+    {
+      "name": "ETHTOOL_FEC_NONE",
+      "value": "(1 << ETHTOOL_FEC_NONE_BIT)",
+      "comment": "",
+      "category": "ETHTOOL_FEC"
+    },
+    {
+      "name": "ETHTOOL_FEC_AUTO",
+      "value": "(1 << ETHTOOL_FEC_AUTO_BIT)",
+      "comment": "",
+      "category": "ETHTOOL_FEC"
+    },
+    {
+      "name": "ETHTOOL_FEC_OFF",
+      "value": "(1 << ETHTOOL_FEC_OFF_BIT)",
+      "comment": "",
+      "category": "ETHTOOL_FEC"
+    },
+    {
+      "name": "ETHTOOL_FEC_RS",
+      "value": "(1 << ETHTOOL_FEC_RS_BIT)",
+      "comment": "",
+      "category": "ETHTOOL_FEC"
+    },
+    {
+      "name": "ETHTOOL_FEC_BASER",
+      "value": "(1 << ETHTOOL_FEC_BASER_BIT)",
+      "comment": "",
+      "category": "ETHTOOL_FEC"
+    },
+    {
+      "name": "ETHTOOL_FEC_LLRS",
+      "value": "(1 << ETHTOOL_FEC_LLRS_BIT)",
+      "comment": "",
+      "category": "ETHTOOL_FEC"
+    },
+    {
+      "name": "ETHTOOL_GSET",
+      "value": "0x00000001 /* DEPRECATED, Get settings.",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ETHTOOL_SSET",
+      "value": "0x00000002 /* DEPRECATED, Set settings.",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ETHTOOL_GDRVINFO",
+      "value": "0x00000003",
+      "comment": "Get driver info.",
+      "category": ""
+    },
+    {
+      "name": "ETHTOOL_GREGS",
+      "value": "0x00000004",
+      "comment": "Get NIC registers.",
+      "category": ""
+    },
+    {
+      "name": "ETHTOOL_GWOL",
+      "value": "0x00000005",
+      "comment": "Get wake-on-lan options.",
+      "category": ""
+    },
+    {
+      "name": "ETHTOOL_SWOL",
+      "value": "0x00000006",
+      "comment": "Set wake-on-lan options.",
+      "category": ""
+    },
+    {
+      "name": "ETHTOOL_GMSGLVL",
+      "value": "0x00000007",
+      "comment": "Get driver message level",
+      "category": ""
+    },
+    {
+      "name": "ETHTOOL_SMSGLVL",
+      "value": "0x00000008",
+      "comment": "Set driver msg level.",
+      "category": ""
+    },
+    {
+      "name": "ETHTOOL_NWAY_RST",
+      "value": "0x00000009",
+      "comment": "Restart autonegotiation.",
+      "category": "ETHTOOL_NWAY"
+    },
+    {
+      "name": "ETHTOOL_GLINK",
+      "value": "0x0000000a",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ETHTOOL_GEEPROM",
+      "value": "0x0000000b",
+      "comment": "Get EEPROM data",
+      "category": ""
+    },
+    {
+      "name": "ETHTOOL_SEEPROM",
+      "value": "0x0000000c",
+      "comment": "Set EEPROM data.",
+      "category": ""
+    },
+    {
+      "name": "ETHTOOL_GCOALESCE",
+      "value": "0x0000000e",
+      "comment": "Get coalesce config",
+      "category": ""
+    },
+    {
+      "name": "ETHTOOL_SCOALESCE",
+      "value": "0x0000000f",
+      "comment": "Set coalesce config.",
+      "category": ""
+    },
+    {
+      "name": "ETHTOOL_GRINGPARAM",
+      "value": "0x00000010",
+      "comment": "Get ring parameters",
+      "category": ""
+    },
+    {
+      "name": "ETHTOOL_SRINGPARAM",
+      "value": "0x00000011",
+      "comment": "Set ring parameters.",
+      "category": ""
+    },
+    {
+      "name": "ETHTOOL_GPAUSEPARAM",
+      "value": "0x00000012",
+      "comment": "Get pause parameters",
+      "category": ""
+    },
+    {
+      "name": "ETHTOOL_SPAUSEPARAM",
+      "value": "0x00000013",
+      "comment": "Set pause parameters.",
+      "category": ""
+    },
+    {
+      "name": "ETHTOOL_GRXCSUM",
+      "value": "0x00000014",
+      "comment": "Get RX hw csum enable (ethtool_value)",
+      "category": ""
+    },
+    {
+      "name": "ETHTOOL_SRXCSUM",
+      "value": "0x00000015",
+      "comment": "Set RX hw csum enable (ethtool_value)",
+      "category": ""
+    },
+    {
+      "name": "ETHTOOL_GTXCSUM",
+      "value": "0x00000016",
+      "comment": "Get TX hw csum enable (ethtool_value)",
+      "category": ""
+    },
+    {
+      "name": "ETHTOOL_STXCSUM",
+      "value": "0x00000017",
+      "comment": "Set TX hw csum enable (ethtool_value)",
+      "category": ""
+    },
+    {
+      "name": "ETHTOOL_GSG",
+      "value": "0x00000018 /* Get scatter-gather enable",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ETHTOOL_SSG",
+      "value": "0x00000019 /* Set scatter-gather enable",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ETHTOOL_TEST",
+      "value": "0x0000001a",
+      "comment": "execute NIC self-test.",
+      "category": ""
+    },
+    {
+      "name": "ETHTOOL_GSTRINGS",
+      "value": "0x0000001b",
+      "comment": "get specified string set",
+      "category": ""
+    },
+    {
+      "name": "ETHTOOL_PHYS_ID",
+      "value": "0x0000001c",
+      "comment": "identify the NIC",
+      "category": "ETHTOOL_PHYS"
+    },
+    {
+      "name": "ETHTOOL_GSTATS",
+      "value": "0x0000001d",
+      "comment": "get NIC-specific statistics",
+      "category": ""
+    },
+    {
+      "name": "ETHTOOL_GTSO",
+      "value": "0x0000001e",
+      "comment": "Get TSO enable (ethtool_value)",
+      "category": ""
+    },
+    {
+      "name": "ETHTOOL_STSO",
+      "value": "0x0000001f",
+      "comment": "Set TSO enable (ethtool_value)",
+      "category": ""
+    },
+    {
+      "name": "ETHTOOL_GPERMADDR",
+      "value": "0x00000020",
+      "comment": "Get permanent hardware address",
+      "category": ""
+    },
+    {
+      "name": "ETHTOOL_GUFO",
+      "value": "0x00000021",
+      "comment": "Get UFO enable (ethtool_value)",
+      "category": ""
+    },
+    {
+      "name": "ETHTOOL_SUFO",
+      "value": "0x00000022",
+      "comment": "Set UFO enable (ethtool_value)",
+      "category": ""
+    },
+    {
+      "name": "ETHTOOL_GGSO",
+      "value": "0x00000023",
+      "comment": "Get GSO enable (ethtool_value)",
+      "category": ""
+    },
+    {
+      "name": "ETHTOOL_SGSO",
+      "value": "0x00000024",
+      "comment": "Set GSO enable (ethtool_value)",
+      "category": ""
+    },
+    {
+      "name": "ETHTOOL_GFLAGS",
+      "value": "0x00000025",
+      "comment": "Get flags bitmap(ethtool_value)",
+      "category": ""
+    },
+    {
+      "name": "ETHTOOL_SFLAGS",
+      "value": "0x00000026",
+      "comment": "Set flags bitmap(ethtool_value)",
+      "category": ""
+    },
+    {
+      "name": "ETHTOOL_GPFLAGS",
+      "value": "0x00000027",
+      "comment": "Get driver-private flags bitmap",
+      "category": ""
+    },
+    {
+      "name": "ETHTOOL_SPFLAGS",
+      "value": "0x00000028",
+      "comment": "Set driver-private flags bitmap",
+      "category": ""
+    },
+    {
+      "name": "ETHTOOL_GRXFH",
+      "value": "0x00000029",
+      "comment": "Get RX flow hash configuration",
+      "category": ""
+    },
+    {
+      "name": "ETHTOOL_SRXFH",
+      "value": "0x0000002a",
+      "comment": "Set RX flow hash configuration",
+      "category": ""
+    },
+    {
+      "name": "ETHTOOL_GGRO",
+      "value": "0x0000002b",
+      "comment": "Get GRO enable (ethtool_value)",
+      "category": ""
+    },
+    {
+      "name": "ETHTOOL_SGRO",
+      "value": "0x0000002c",
+      "comment": "Set GRO enable (ethtool_value)",
+      "category": ""
+    },
+    {
+      "name": "ETHTOOL_GRXRINGS",
+      "value": "0x0000002d",
+      "comment": "Get RX rings available for LB",
+      "category": ""
+    },
+    {
+      "name": "ETHTOOL_GRXCLSRLCNT",
+      "value": "0x0000002e",
+      "comment": "Get RX class rule count",
+      "category": ""
+    },
+    {
+      "name": "ETHTOOL_GRXCLSRULE",
+      "value": "0x0000002f",
+      "comment": "Get RX classification rule",
+      "category": ""
+    },
+    {
+      "name": "ETHTOOL_GRXCLSRLALL",
+      "value": "0x00000030",
+      "comment": "Get all RX classification rule",
+      "category": ""
+    },
+    {
+      "name": "ETHTOOL_SRXCLSRLDEL",
+      "value": "0x00000031",
+      "comment": "Delete RX classification rule",
+      "category": ""
+    },
+    {
+      "name": "ETHTOOL_SRXCLSRLINS",
+      "value": "0x00000032",
+      "comment": "Insert RX classification rule",
+      "category": ""
+    },
+    {
+      "name": "ETHTOOL_FLASHDEV",
+      "value": "0x00000033",
+      "comment": "Flash firmware to device",
+      "category": ""
+    },
+    {
+      "name": "ETHTOOL_RESET",
+      "value": "0x00000034",
+      "comment": "Reset hardware",
+      "category": ""
+    },
+    {
+      "name": "ETHTOOL_SRXNTUPLE",
+      "value": "0x00000035",
+      "comment": "Add an n-tuple filter to device",
+      "category": ""
+    },
+    {
+      "name": "ETHTOOL_GRXNTUPLE",
+      "value": "0x00000036",
+      "comment": "deprecated",
+      "category": ""
+    },
+    {
+      "name": "ETHTOOL_GSSET_INFO",
+      "value": "0x00000037",
+      "comment": "Get string set info",
+      "category": "ETHTOOL_GSSET"
+    },
+    {
+      "name": "ETHTOOL_GRXFHINDIR",
+      "value": "0x00000038",
+      "comment": "Get RX flow hash indir'n table",
+      "category": ""
+    },
+    {
+      "name": "ETHTOOL_SRXFHINDIR",
+      "value": "0x00000039",
+      "comment": "Set RX flow hash indir'n table",
+      "category": ""
+    },
+    {
+      "name": "ETHTOOL_GFEATURES",
+      "value": "0x0000003a",
+      "comment": "Get device offload settings",
+      "category": ""
+    },
+    {
+      "name": "ETHTOOL_SFEATURES",
+      "value": "0x0000003b",
+      "comment": "Change device offload settings",
+      "category": ""
+    },
+    {
+      "name": "ETHTOOL_GCHANNELS",
+      "value": "0x0000003c",
+      "comment": "Get no of channels",
+      "category": ""
+    },
+    {
+      "name": "ETHTOOL_SCHANNELS",
+      "value": "0x0000003d",
+      "comment": "Set no of channels",
+      "category": ""
+    },
+    {
+      "name": "ETHTOOL_SET_DUMP",
+      "value": "0x0000003e",
+      "comment": "Set dump settings",
+      "category": "ETHTOOL_SET"
+    },
+    {
+      "name": "ETHTOOL_GET_DUMP_FLAG",
+      "value": "0x0000003f",
+      "comment": "Get dump settings",
+      "category": "ETHTOOL_GET"
+    },
+    {
+      "name": "ETHTOOL_GET_DUMP_DATA",
+      "value": "0x00000040",
+      "comment": "Get dump data",
+      "category": "ETHTOOL_GET"
+    },
+    {
+      "name": "ETHTOOL_GET_TS_INFO",
+      "value": "0x00000041",
+      "comment": "Get time stamping and PHC info",
+      "category": "ETHTOOL_GET"
+    },
+    {
+      "name": "ETHTOOL_GMODULEINFO",
+      "value": "0x00000042",
+      "comment": "Get plug-in module information",
+      "category": ""
+    },
+    {
+      "name": "ETHTOOL_GMODULEEEPROM",
+      "value": "0x00000043",
+      "comment": "Get plug-in module eeprom",
+      "category": ""
+    },
+    {
+      "name": "ETHTOOL_GEEE",
+      "value": "0x00000044",
+      "comment": "Get EEE settings",
+      "category": ""
+    },
+    {
+      "name": "ETHTOOL_SEEE",
+      "value": "0x00000045",
+      "comment": "Set EEE settings",
+      "category": ""
+    },
+    {
+      "name": "ETHTOOL_GRSSH",
+      "value": "0x00000046",
+      "comment": "Get RX flow hash configuration",
+      "category": ""
+    },
+    {
+      "name": "ETHTOOL_SRSSH",
+      "value": "0x00000047",
+      "comment": "Set RX flow hash configuration",
+      "category": ""
+    },
+    {
+      "name": "ETHTOOL_GTUNABLE",
+      "value": "0x00000048",
+      "comment": "Get tunable configuration",
+      "category": ""
+    },
+    {
+      "name": "ETHTOOL_STUNABLE",
+      "value": "0x00000049",
+      "comment": "Set tunable configuration",
+      "category": ""
+    },
+    {
+      "name": "ETHTOOL_GPHYSTATS",
+      "value": "0x0000004a",
+      "comment": "get PHY-specific statistics",
+      "category": ""
+    },
+    {
+      "name": "ETHTOOL_PERQUEUE",
+      "value": "0x0000004b",
+      "comment": "Set per queue options",
+      "category": ""
+    },
+    {
+      "name": "ETHTOOL_GLINKSETTINGS",
+      "value": "0x0000004c",
+      "comment": "Get ethtool_link_settings",
+      "category": ""
+    },
+    {
+      "name": "ETHTOOL_SLINKSETTINGS",
+      "value": "0x0000004d",
+      "comment": "Set ethtool_link_settings",
+      "category": ""
+    },
+    {
+      "name": "ETHTOOL_PHY_GTUNABLE",
+      "value": "0x0000004e",
+      "comment": "Get PHY tunable configuration",
+      "category": "ETHTOOL_PHY"
+    },
+    {
+      "name": "ETHTOOL_PHY_STUNABLE",
+      "value": "0x0000004f",
+      "comment": "Set PHY tunable configuration",
+      "category": "ETHTOOL_PHY"
+    },
+    {
+      "name": "ETHTOOL_GFECPARAM",
+      "value": "0x00000050",
+      "comment": "Get FEC settings",
+      "category": ""
+    },
+    {
+      "name": "ETHTOOL_SFECPARAM",
+      "value": "0x00000051",
+      "comment": "Set FEC settings",
+      "category": ""
+    },
+    {
+      "name": "SPARC_ETH_GSET",
+      "value": "ETHTOOL_GSET",
+      "comment": "",
+      "category": "SPARC_ETH"
+    },
+    {
+      "name": "SPARC_ETH_SSET",
+      "value": "ETHTOOL_SSET",
+      "comment": "",
+      "category": "SPARC_ETH"
+    },
+    {
+      "name": "SUPPORTED_10baseT_Half",
+      "value": "__ETHTOOL_LINK_MODE_LEGACY_MASK(10baseT_Half)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SUPPORTED_10baseT_Full",
+      "value": "__ETHTOOL_LINK_MODE_LEGACY_MASK(10baseT_Full)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SUPPORTED_100baseT_Half",
+      "value": "__ETHTOOL_LINK_MODE_LEGACY_MASK(100baseT_Half)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SUPPORTED_100baseT_Full",
+      "value": "__ETHTOOL_LINK_MODE_LEGACY_MASK(100baseT_Full)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SUPPORTED_1000baseT_Half",
+      "value": "__ETHTOOL_LINK_MODE_LEGACY_MASK(1000baseT_Half)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SUPPORTED_1000baseT_Full",
+      "value": "__ETHTOOL_LINK_MODE_LEGACY_MASK(1000baseT_Full)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SUPPORTED_Autoneg",
+      "value": "__ETHTOOL_LINK_MODE_LEGACY_MASK(Autoneg)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SUPPORTED_TP",
+      "value": "__ETHTOOL_LINK_MODE_LEGACY_MASK(TP)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SUPPORTED_AUI",
+      "value": "__ETHTOOL_LINK_MODE_LEGACY_MASK(AUI)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SUPPORTED_MII",
+      "value": "__ETHTOOL_LINK_MODE_LEGACY_MASK(MII)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SUPPORTED_FIBRE",
+      "value": "__ETHTOOL_LINK_MODE_LEGACY_MASK(FIBRE)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SUPPORTED_BNC",
+      "value": "__ETHTOOL_LINK_MODE_LEGACY_MASK(BNC)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SUPPORTED_10000baseT_Full",
+      "value": "__ETHTOOL_LINK_MODE_LEGACY_MASK(10000baseT_Full)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SUPPORTED_Pause",
+      "value": "__ETHTOOL_LINK_MODE_LEGACY_MASK(Pause)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SUPPORTED_Asym_Pause",
+      "value": "__ETHTOOL_LINK_MODE_LEGACY_MASK(Asym_Pause)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SUPPORTED_2500baseX_Full",
+      "value": "__ETHTOOL_LINK_MODE_LEGACY_MASK(2500baseX_Full)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SUPPORTED_Backplane",
+      "value": "__ETHTOOL_LINK_MODE_LEGACY_MASK(Backplane)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SUPPORTED_1000baseKX_Full",
+      "value": "__ETHTOOL_LINK_MODE_LEGACY_MASK(1000baseKX_Full)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SUPPORTED_10000baseKX4_Full",
+      "value": "__ETHTOOL_LINK_MODE_LEGACY_MASK(10000baseKX4_Full)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SUPPORTED_10000baseKR_Full",
+      "value": "__ETHTOOL_LINK_MODE_LEGACY_MASK(10000baseKR_Full)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SUPPORTED_10000baseR_FEC",
+      "value": "__ETHTOOL_LINK_MODE_LEGACY_MASK(10000baseR_FEC)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SUPPORTED_20000baseMLD2_Full",
+      "value": "__ETHTOOL_LINK_MODE_LEGACY_MASK(20000baseMLD2_Full)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SUPPORTED_20000baseKR2_Full",
+      "value": "__ETHTOOL_LINK_MODE_LEGACY_MASK(20000baseKR2_Full)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SUPPORTED_40000baseKR4_Full",
+      "value": "__ETHTOOL_LINK_MODE_LEGACY_MASK(40000baseKR4_Full)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SUPPORTED_40000baseCR4_Full",
+      "value": "__ETHTOOL_LINK_MODE_LEGACY_MASK(40000baseCR4_Full)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SUPPORTED_40000baseSR4_Full",
+      "value": "__ETHTOOL_LINK_MODE_LEGACY_MASK(40000baseSR4_Full)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SUPPORTED_40000baseLR4_Full",
+      "value": "__ETHTOOL_LINK_MODE_LEGACY_MASK(40000baseLR4_Full)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SUPPORTED_56000baseKR4_Full",
+      "value": "__ETHTOOL_LINK_MODE_LEGACY_MASK(56000baseKR4_Full)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SUPPORTED_56000baseCR4_Full",
+      "value": "__ETHTOOL_LINK_MODE_LEGACY_MASK(56000baseCR4_Full)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SUPPORTED_56000baseSR4_Full",
+      "value": "__ETHTOOL_LINK_MODE_LEGACY_MASK(56000baseSR4_Full)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SUPPORTED_56000baseLR4_Full",
+      "value": "__ETHTOOL_LINK_MODE_LEGACY_MASK(56000baseLR4_Full)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ADVERTISED_10baseT_Half",
+      "value": "__ETHTOOL_LINK_MODE_LEGACY_MASK(10baseT_Half)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ADVERTISED_10baseT_Full",
+      "value": "__ETHTOOL_LINK_MODE_LEGACY_MASK(10baseT_Full)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ADVERTISED_100baseT_Half",
+      "value": "__ETHTOOL_LINK_MODE_LEGACY_MASK(100baseT_Half)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ADVERTISED_100baseT_Full",
+      "value": "__ETHTOOL_LINK_MODE_LEGACY_MASK(100baseT_Full)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ADVERTISED_1000baseT_Half",
+      "value": "__ETHTOOL_LINK_MODE_LEGACY_MASK(1000baseT_Half)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ADVERTISED_1000baseT_Full",
+      "value": "__ETHTOOL_LINK_MODE_LEGACY_MASK(1000baseT_Full)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ADVERTISED_Autoneg",
+      "value": "__ETHTOOL_LINK_MODE_LEGACY_MASK(Autoneg)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ADVERTISED_TP",
+      "value": "__ETHTOOL_LINK_MODE_LEGACY_MASK(TP)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ADVERTISED_AUI",
+      "value": "__ETHTOOL_LINK_MODE_LEGACY_MASK(AUI)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ADVERTISED_MII",
+      "value": "__ETHTOOL_LINK_MODE_LEGACY_MASK(MII)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ADVERTISED_FIBRE",
+      "value": "__ETHTOOL_LINK_MODE_LEGACY_MASK(FIBRE)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ADVERTISED_BNC",
+      "value": "__ETHTOOL_LINK_MODE_LEGACY_MASK(BNC)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ADVERTISED_10000baseT_Full",
+      "value": "__ETHTOOL_LINK_MODE_LEGACY_MASK(10000baseT_Full)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ADVERTISED_Pause",
+      "value": "__ETHTOOL_LINK_MODE_LEGACY_MASK(Pause)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ADVERTISED_Asym_Pause",
+      "value": "__ETHTOOL_LINK_MODE_LEGACY_MASK(Asym_Pause)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ADVERTISED_2500baseX_Full",
+      "value": "__ETHTOOL_LINK_MODE_LEGACY_MASK(2500baseX_Full)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ADVERTISED_Backplane",
+      "value": "__ETHTOOL_LINK_MODE_LEGACY_MASK(Backplane)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ADVERTISED_1000baseKX_Full",
+      "value": "__ETHTOOL_LINK_MODE_LEGACY_MASK(1000baseKX_Full)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ADVERTISED_10000baseKX4_Full",
+      "value": "__ETHTOOL_LINK_MODE_LEGACY_MASK(10000baseKX4_Full)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ADVERTISED_10000baseKR_Full",
+      "value": "__ETHTOOL_LINK_MODE_LEGACY_MASK(10000baseKR_Full)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ADVERTISED_10000baseR_FEC",
+      "value": "__ETHTOOL_LINK_MODE_LEGACY_MASK(10000baseR_FEC)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ADVERTISED_20000baseMLD2_Full",
+      "value": "__ETHTOOL_LINK_MODE_LEGACY_MASK(20000baseMLD2_Full)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ADVERTISED_20000baseKR2_Full",
+      "value": "__ETHTOOL_LINK_MODE_LEGACY_MASK(20000baseKR2_Full)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ADVERTISED_40000baseKR4_Full",
+      "value": "__ETHTOOL_LINK_MODE_LEGACY_MASK(40000baseKR4_Full)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ADVERTISED_40000baseCR4_Full",
+      "value": "__ETHTOOL_LINK_MODE_LEGACY_MASK(40000baseCR4_Full)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ADVERTISED_40000baseSR4_Full",
+      "value": "__ETHTOOL_LINK_MODE_LEGACY_MASK(40000baseSR4_Full)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ADVERTISED_40000baseLR4_Full",
+      "value": "__ETHTOOL_LINK_MODE_LEGACY_MASK(40000baseLR4_Full)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ADVERTISED_56000baseKR4_Full",
+      "value": "__ETHTOOL_LINK_MODE_LEGACY_MASK(56000baseKR4_Full)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ADVERTISED_56000baseCR4_Full",
+      "value": "__ETHTOOL_LINK_MODE_LEGACY_MASK(56000baseCR4_Full)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ADVERTISED_56000baseSR4_Full",
+      "value": "__ETHTOOL_LINK_MODE_LEGACY_MASK(56000baseSR4_Full)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ADVERTISED_56000baseLR4_Full",
+      "value": "__ETHTOOL_LINK_MODE_LEGACY_MASK(56000baseLR4_Full)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SPEED_10",
+      "value": "10",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SPEED_100",
+      "value": "100",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SPEED_1000",
+      "value": "1000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SPEED_2500",
+      "value": "2500",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SPEED_5000",
+      "value": "5000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SPEED_10000",
+      "value": "10000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SPEED_14000",
+      "value": "14000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SPEED_20000",
+      "value": "20000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SPEED_25000",
+      "value": "25000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SPEED_40000",
+      "value": "40000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SPEED_50000",
+      "value": "50000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SPEED_56000",
+      "value": "56000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SPEED_80000",
+      "value": "80000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SPEED_100000",
+      "value": "100000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SPEED_200000",
+      "value": "200000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SPEED_400000",
+      "value": "400000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SPEED_800000",
+      "value": "800000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SPEED_1600000",
+      "value": "1600000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SPEED_UNKNOWN",
+      "value": "-1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DUPLEX_HALF",
+      "value": "0x00",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DUPLEX_FULL",
+      "value": "0x01",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DUPLEX_UNKNOWN",
+      "value": "0xff",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "MASTER_SLAVE_CFG_UNSUPPORTED",
+      "value": "0",
+      "comment": "",
+      "category": "MASTER_SLAVE"
+    },
+    {
+      "name": "MASTER_SLAVE_CFG_UNKNOWN",
+      "value": "1",
+      "comment": "",
+      "category": "MASTER_SLAVE"
+    },
+    {
+      "name": "MASTER_SLAVE_CFG_MASTER_PREFERRED",
+      "value": "2",
+      "comment": "",
+      "category": "MASTER_SLAVE"
+    },
+    {
+      "name": "MASTER_SLAVE_CFG_SLAVE_PREFERRED",
+      "value": "3",
+      "comment": "",
+      "category": "MASTER_SLAVE"
+    },
+    {
+      "name": "MASTER_SLAVE_CFG_MASTER_FORCE",
+      "value": "4",
+      "comment": "",
+      "category": "MASTER_SLAVE"
+    },
+    {
+      "name": "MASTER_SLAVE_CFG_SLAVE_FORCE",
+      "value": "5",
+      "comment": "",
+      "category": "MASTER_SLAVE"
+    },
+    {
+      "name": "MASTER_SLAVE_STATE_UNSUPPORTED",
+      "value": "0",
+      "comment": "",
+      "category": "MASTER_SLAVE"
+    },
+    {
+      "name": "MASTER_SLAVE_STATE_UNKNOWN",
+      "value": "1",
+      "comment": "",
+      "category": "MASTER_SLAVE"
+    },
+    {
+      "name": "MASTER_SLAVE_STATE_MASTER",
+      "value": "2",
+      "comment": "",
+      "category": "MASTER_SLAVE"
+    },
+    {
+      "name": "MASTER_SLAVE_STATE_SLAVE",
+      "value": "3",
+      "comment": "",
+      "category": "MASTER_SLAVE"
+    },
+    {
+      "name": "MASTER_SLAVE_STATE_ERR",
+      "value": "4",
+      "comment": "",
+      "category": "MASTER_SLAVE"
+    },
+    {
+      "name": "RATE_MATCH_NONE",
+      "value": "0",
+      "comment": "",
+      "category": "RATE_MATCH"
+    },
+    {
+      "name": "RATE_MATCH_PAUSE",
+      "value": "1",
+      "comment": "",
+      "category": "RATE_MATCH"
+    },
+    {
+      "name": "RATE_MATCH_CRS",
+      "value": "2",
+      "comment": "",
+      "category": "RATE_MATCH"
+    },
+    {
+      "name": "RATE_MATCH_OPEN_LOOP",
+      "value": "3",
+      "comment": "",
+      "category": "RATE_MATCH"
+    },
+    {
+      "name": "PORT_TP",
+      "value": "0x00",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PORT_AUI",
+      "value": "0x01",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PORT_MII",
+      "value": "0x02",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PORT_FIBRE",
+      "value": "0x03",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PORT_BNC",
+      "value": "0x04",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PORT_DA",
+      "value": "0x05",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PORT_NONE",
+      "value": "0xef",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PORT_OTHER",
+      "value": "0xff",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "XCVR_INTERNAL",
+      "value": "0x00",
+      "comment": "PHY and MAC are in the same package",
+      "category": ""
+    },
+    {
+      "name": "XCVR_EXTERNAL",
+      "value": "0x01",
+      "comment": "PHY and MAC are in different packages",
+      "category": ""
+    },
+    {
+      "name": "XCVR_DUMMY1",
+      "value": "0x02",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "XCVR_DUMMY2",
+      "value": "0x03",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "XCVR_DUMMY3",
+      "value": "0x04",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "AUTONEG_DISABLE",
+      "value": "0x00",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "AUTONEG_ENABLE",
+      "value": "0x01",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ETH_TP_MDI_INVALID",
+      "value": "0x00",
+      "comment": "status: unknown; control: unsupported",
+      "category": "ETH_TP"
+    },
+    {
+      "name": "ETH_TP_MDI",
+      "value": "0x01",
+      "comment": "status: MDI;     control: force MDI",
+      "category": "ETH_TP"
+    },
+    {
+      "name": "ETH_TP_MDI_X",
+      "value": "0x02",
+      "comment": "status: MDI-X;   control: force MDI-X",
+      "category": "ETH_TP"
+    },
+    {
+      "name": "ETH_TP_MDI_AUTO",
+      "value": "0x03",
+      "comment": "control: auto-select",
+      "category": "ETH_TP"
+    },
+    {
+      "name": "WAKE_PHY",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "WAKE_UCAST",
+      "value": "(1 << 1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "WAKE_MCAST",
+      "value": "(1 << 2)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "WAKE_BCAST",
+      "value": "(1 << 3)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "WAKE_ARP",
+      "value": "(1 << 4)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "WAKE_MAGIC",
+      "value": "(1 << 5)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "WAKE_MAGICSECURE",
+      "value": "(1 << 6)",
+      "comment": "only meaningful if WAKE_MAGIC",
+      "category": ""
+    },
+    {
+      "name": "WAKE_FILTER",
+      "value": "(1 << 7)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "WOL_MODE_COUNT",
+      "value": "8",
+      "comment": "",
+      "category": "WOL_MODE"
+    },
+    {
+      "name": "RXH_XFRM_SYM_XOR",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "RXH_XFRM"
+    },
+    {
+      "name": "RXH_XFRM_SYM_OR_XOR",
+      "value": "(1 << 1)",
+      "comment": "",
+      "category": "RXH_XFRM"
+    },
+    {
+      "name": "RXH_XFRM_NO_CHANGE",
+      "value": "0xff",
+      "comment": "",
+      "category": "RXH_XFRM"
+    },
+    {
+      "name": "FLOW_EXT",
+      "value": "0x80000000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FLOW_MAC_EXT",
+      "value": "0x40000000",
+      "comment": "",
+      "category": "FLOW_MAC"
+    },
+    {
+      "name": "FLOW_RSS",
+      "value": "0x20000000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RXH_L2DA",
+      "value": "(1 << 1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RXH_VLAN",
+      "value": "(1 << 2)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RXH_L3_PROTO",
+      "value": "(1 << 3)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RXH_IP_SRC",
+      "value": "(1 << 4)",
+      "comment": "",
+      "category": "RXH_IP"
+    },
+    {
+      "name": "RXH_IP_DST",
+      "value": "(1 << 5)",
+      "comment": "",
+      "category": "RXH_IP"
+    },
+    {
+      "name": "RXH_L4_B_0_1",
+      "value": "(1 << 6)",
+      "comment": "src port in case of TCP/UDP/SCTP",
+      "category": ""
+    },
+    {
+      "name": "RXH_L4_B_2_3",
+      "value": "(1 << 7)",
+      "comment": "dst port in case of TCP/UDP/SCTP",
+      "category": ""
+    },
+    {
+      "name": "RXH_GTP_TEID",
+      "value": "(1 << 8)",
+      "comment": "teid in case of GTP",
+      "category": "RXH_GTP"
+    },
+    {
+      "name": "RXH_IP6_FL",
+      "value": "(1 << 9)",
+      "comment": "IPv6 flow label",
+      "category": ""
+    },
+    {
+      "name": "RXH_DISCARD",
+      "value": "(1 << 31)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RX_CLS_FLOW_DISC",
+      "value": "0xffffffffffffffffULL",
+      "comment": "",
+      "category": "RX_CLS"
+    },
+    {
+      "name": "RX_CLS_FLOW_WAKE",
+      "value": "0xfffffffffffffffeULL",
+      "comment": "",
+      "category": "RX_CLS"
+    },
+    {
+      "name": "RX_CLS_LOC_SPECIAL",
+      "value": "0x80000000",
+      "comment": "flag",
+      "category": "RX_CLS"
+    },
+    {
+      "name": "RX_CLS_LOC_ANY",
+      "value": "0xffffffff",
+      "comment": "",
+      "category": "RX_CLS"
+    },
+    {
+      "name": "RX_CLS_LOC_FIRST",
+      "value": "0xfffffffe",
+      "comment": "",
+      "category": "RX_CLS"
+    },
+    {
+      "name": "RX_CLS_LOC_LAST",
+      "value": "0xfffffffd",
+      "comment": "",
+      "category": "RX_CLS"
+    },
+    {
+      "name": "ETH_MODULE_SFF_8079",
+      "value": "0x1",
+      "comment": "",
+      "category": "ETH_MODULE"
+    },
+    {
+      "name": "ETH_MODULE_SFF_8079_LEN",
+      "value": "256",
+      "comment": "",
+      "category": "ETH_MODULE"
+    },
+    {
+      "name": "ETH_MODULE_SFF_8472",
+      "value": "0x2",
+      "comment": "",
+      "category": "ETH_MODULE"
+    },
+    {
+      "name": "ETH_MODULE_SFF_8472_LEN",
+      "value": "512",
+      "comment": "",
+      "category": "ETH_MODULE"
+    },
+    {
+      "name": "ETH_MODULE_SFF_8636",
+      "value": "0x3",
+      "comment": "",
+      "category": "ETH_MODULE"
+    },
+    {
+      "name": "ETH_MODULE_SFF_8636_LEN",
+      "value": "256",
+      "comment": "",
+      "category": "ETH_MODULE"
+    },
+    {
+      "name": "ETH_MODULE_SFF_8436",
+      "value": "0x4",
+      "comment": "",
+      "category": "ETH_MODULE"
+    },
+    {
+      "name": "ETH_MODULE_SFF_8436_LEN",
+      "value": "256",
+      "comment": "",
+      "category": "ETH_MODULE"
+    },
+    {
+      "name": "ETH_MODULE_SFF_8636_MAX_LEN",
+      "value": "640",
+      "comment": "",
+      "category": "ETH_MODULE"
+    },
+    {
+      "name": "ETH_MODULE_SFF_8436_MAX_LEN",
+      "value": "640",
+      "comment": "",
+      "category": "ETH_MODULE"
+    },
+    {
+      "name": "ETH_RESET_SHARED_SHIFT",
+      "value": "16",
+      "comment": "",
+      "category": "ETH_RESET"
+    }
+  ],
+  "structs": [
+    {
+      "name": "ethtool_cmd",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "cmd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "supported",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "advertising",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "speed",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "duplex",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "port",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "phy_address",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "transceiver",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "autoneg",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "mdio_support",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "maxtxpkt",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "maxrxpkt",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "speed_hi",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "eth_tp_mdix",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "eth_tp_mdix_ctrl",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "lp_advertising",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved",
+          "array_size": "2",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ethtool_drvinfo",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "cmd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "driver",
+          "array_size": "32",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "version",
+          "array_size": "32",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "fw_version",
+          "array_size": "ETHTOOL_FWVERS_LEN",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "bus_info",
+          "array_size": "ETHTOOL_BUSINFO_LEN",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "erom_version",
+          "array_size": "ETHTOOL_EROMVERS_LEN",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "reserved2",
+          "array_size": "12",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "n_priv_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "n_stats",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "testinfo_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "eedump_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "regdump_len",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ethtool_wolinfo",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "cmd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "supported",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "wolopts",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "sopass",
+          "array_size": "SOPASS_MAX",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ethtool_value",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "cmd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "data",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ethtool_tunable",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "cmd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "type_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "len",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ethtool_regs",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "cmd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "version",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "len",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ethtool_eeprom",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "cmd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "magic",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "len",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ethtool_eee",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "cmd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "supported",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "advertised",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "lp_advertised",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "eee_active",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "eee_enabled",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tx_lpi_enabled",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tx_lpi_timer",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved",
+          "array_size": "2",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ethtool_modinfo",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "cmd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "eeprom_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved",
+          "array_size": "8",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ethtool_coalesce",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "cmd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "rx_coalesce_usecs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "rx_max_coalesced_frames",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "rx_coalesce_usecs_irq",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "rx_max_coalesced_frames_irq",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tx_coalesce_usecs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tx_max_coalesced_frames",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tx_coalesce_usecs_irq",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tx_max_coalesced_frames_irq",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "stats_block_coalesce_usecs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "use_adaptive_rx_coalesce",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "use_adaptive_tx_coalesce",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pkt_rate_low",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "rx_coalesce_usecs_low",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "rx_max_coalesced_frames_low",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tx_coalesce_usecs_low",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tx_max_coalesced_frames_low",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pkt_rate_high",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "rx_coalesce_usecs_high",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "rx_max_coalesced_frames_high",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tx_coalesce_usecs_high",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tx_max_coalesced_frames_high",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "rate_sample_interval",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ethtool_ringparam",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "cmd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "rx_max_pending",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "rx_mini_max_pending",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "rx_jumbo_max_pending",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tx_max_pending",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "rx_pending",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "rx_mini_pending",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "rx_jumbo_pending",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tx_pending",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ethtool_channels",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "cmd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "max_rx",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "max_tx",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "max_other",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "max_combined",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "rx_count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tx_count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "other_count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "combined_count",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ethtool_pauseparam",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "cmd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "autoneg",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "rx_pause",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tx_pause",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ethtool_gstrings",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "cmd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "string_set",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "len",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ethtool_sset_info",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "cmd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "sset_mask",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ethtool_test",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "cmd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "len",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ethtool_stats",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "cmd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "n_stats",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ethtool_perm_addr",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "cmd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ethtool_tcpip4_spec",
+      "fields": [
+        {
+          "type_name": "__be32",
+          "name": "ip4src",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "ip4dst",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be16",
+          "name": "psrc",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be16",
+          "name": "pdst",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "tos",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ethtool_ah_espip4_spec",
+      "fields": [
+        {
+          "type_name": "__be32",
+          "name": "ip4src",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "ip4dst",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "spi",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "tos",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ethtool_usrip4_spec",
+      "fields": [
+        {
+          "type_name": "__be32",
+          "name": "ip4src",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "ip4dst",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "l4_4_bytes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "tos",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "ip_ver",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "proto",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ethtool_tcpip6_spec",
+      "fields": [
+        {
+          "type_name": "__be32",
+          "name": "ip6src",
+          "array_size": "4",
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "ip6dst",
+          "array_size": "4",
+          "comment": ""
+        },
+        {
+          "type_name": "__be16",
+          "name": "psrc",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be16",
+          "name": "pdst",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "tclass",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ethtool_ah_espip6_spec",
+      "fields": [
+        {
+          "type_name": "__be32",
+          "name": "ip6src",
+          "array_size": "4",
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "ip6dst",
+          "array_size": "4",
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "spi",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "tclass",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ethtool_usrip6_spec",
+      "fields": [
+        {
+          "type_name": "__be32",
+          "name": "ip6src",
+          "array_size": "4",
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "ip6dst",
+          "array_size": "4",
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "l4_4_bytes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "tclass",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "l4_proto",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ethtool_flow_ext",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "padding",
+          "array_size": "2",
+          "comment": ""
+        },
+        {
+          "type_name": "__be16",
+          "name": "vlan_etype",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be16",
+          "name": "vlan_tci",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "data",
+          "array_size": "2",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ethtool_rx_flow_spec",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "flow_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "ring_cookie",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "location",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ethtool_rxnfc",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "cmd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flow_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "data",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "rule_cnt",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "rss_context",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ethtool_rxfh_indir",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "cmd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ethtool_rxfh",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "cmd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "rss_context",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "indir_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "key_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "hfunc",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "input_xfrm",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "rsvd8",
+          "array_size": "2",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "rsvd32",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ethtool_rx_ntuple_flow_spec",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "flow_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "hdata",
+          "array_size": "72",
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "vlan_tag",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "vlan_tag_mask",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "data",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "data_mask",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "action",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ethtool_rx_ntuple",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "cmd",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ethtool_flash",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "cmd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "region",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "data",
+          "array_size": "ETHTOOL_FLASH_MAX_FILENAME",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ethtool_dump",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "cmd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "version",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flag",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "len",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ethtool_get_features_block",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "available",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "requested",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "active",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "never_changed",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ethtool_gfeatures",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "cmd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ethtool_set_features_block",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "valid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "requested",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ethtool_sfeatures",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "cmd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ethtool_ts_info",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "cmd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "so_timestamping",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "phc_index",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tx_types",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tx_reserved",
+          "array_size": "3",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "rx_filters",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "rx_reserved",
+          "array_size": "3",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ethtool_per_queue_op",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "cmd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "sub_command",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "queue_mask",
+          "array_size": "__KERNEL_DIV_ROUND_UP(MAX_NUM_QUEUE, 32)",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ethtool_fecparam",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "cmd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "active_fec",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "fec",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ethtool_link_settings",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "cmd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "speed",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "duplex",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "port",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "phy_address",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "autoneg",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "mdio_support",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "eth_tp_mdix",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "eth_tp_mdix_ctrl",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s8",
+          "name": "link_mode_masks_nwords",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "transceiver",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "master_slave_cfg",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "master_slave_state",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "rate_matching",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved",
+          "array_size": "7",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

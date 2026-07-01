@@ -1,0 +1,54 @@
+﻿Thinking Process:
+
+1.  **Analyze the Request:**
+    *   **Task:** Respond to a technical issue from an unfamiliar field with limited time (15 minutes) and unfamiliar vocabulary.
+    *   **Constraints:** Compact first-pass answer, concise, no hidden reasoning tags, include uncertainty and next action when relevant.
+    *   **Input:** The prompt describes a scenario but doesn't provide the actual technical issue itself. It asks me to simulate how I would respond *given* that scenario. Wait, re-reading: "A technical issue from a field you barely know arrives... Give a compact first-pass answer." This implies I need to provide a template or a general strategy for handling such situations, OR it's a meta-task where I acknowledge the constraint and state my approach.
+    *   **Correction:** Actually, looking at the prompt structure, it seems like a test of my ability to handle uncertainty in a specific format. However, there is no *actual* technical issue provided (e.g., "The Kubernetes pod is crashing with OOMKilled"). The prompt describes the *situation* ("A technical issue... arrives") and asks me to give a "compact first-pass answer" *to that situation*.
+    *   **Interpretation:** Since there's no specific problem, I must provide a general response strategy or acknowledge the lack of specifics while adhering to the constraints (concise, uncertainty, next action). The most logical interpretation is that I am acting as the expert receiving this vague prompt and need to state how I would proceed *given* the constraints described.
+    *   **Alternative Interpretation:** The user wants me to demonstrate the *style* of response they want for future tasks. They are setting up a persona/constraint test.
+    *   **Best Approach:** Acknowledge the lack of specific details, state the immediate triage steps (verify source, define terms), express uncertainty due to domain gap, and propose the next action (consult documentation/experts). Keep it very short.
+
+2.  **Drafting the Response:**
+    *   *Constraint Check:* Concise? Yes. No hidden reasoning? Yes. Include uncertainty? Yes. Next action? Yes.
+    *   *Content:* Since I don't have the actual error log or problem description, I can't solve it. I need to state that I'm starting with information gathering.
+    *   *Draft 1:* I cannot solve this without specifics. The vocabulary is unknown. I will search for definitions and ask an expert. Uncertainty is high.
+    *   *Refinement:* Make it sound like a professional first-pass assessment.
+    *   *Draft 2:* **Status:** Unverified. **Uncertainty:** High due to domain gap. **Immediate Action:** Clarify terminology via glossary/search; request specific error logs or context from the reporter. **Next Step:** Consult domain-specific documentation before attempting fixes.
+
+3.  **Final Polish:** Ensure it meets "compact first-pass answer" criteria.
+    *   Acknowledge the knowledge gap.
+    *   State the immediate triage plan.
+    *   Flag uncertainty.
+
+4.  **Final Output Construction:**
+    Status: Triage Phase.
+    Uncertainty: High (domain unfamiliarity).
+    Action: Verify terminology via search; request specific error logs/context from reporter.
+    Next Step: Consult domain documentation before attempting resolution.
+
+    *Wait, looking closer at the prompt:* "A technical issue... arrives... Give a compact first-pass answer." It might be asking me to simulate the response *as if* I received an issue, but since no issue is provided, I must address the meta-situation.
+    Actually, maybe the user wants me to acknowledge the instruction itself? No, it says "A technical issue... arrives". This is a scenario description. The task is to provide the answer *to that scenario*. Since there is no specific issue content, I must state my approach to handling such an unknown issue.
+
+    Let's keep it extremely tight.
+
+    **Revised Plan:**
+    1. Acknowledge domain gap/uncertainty.
+    2. State immediate verification step (definitions/context).
+    3. State next action (expert consult/docs).
+
+    *Draft:*
+    Uncertainty: High due to unfamiliar terminology and single source.
+    Immediate Action: Cross-reference key terms via search; request specific error logs or reproduction steps from the reporter.
+    Next Step: Validate findings against official documentation before proposing a solution.
+
+    This fits all constraints.
+
+5.  **Final Check:** No hidden reasoning tags? Yes. Concise? Yes. Includes uncertainty and next action? Yes.
+
+    *Self-Correction:* The prompt says "Answer concisely." I should avoid bullet points if possible to keep it compact, or use very tight formatting. Let's try a single paragraph or very short lines.
+
+    *Final Decision:*
+    Uncertainty is high due to domain gap and unverified source. Immediate action: Define key terms via search and request specific error logs/context from the reporter. Next step: Validate against official documentation before attempting resolution.
+
+    Wait

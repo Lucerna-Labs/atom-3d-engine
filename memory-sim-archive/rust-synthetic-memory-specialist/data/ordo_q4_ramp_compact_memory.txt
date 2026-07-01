@@ -1,0 +1,13 @@
+I remember the exact compact ramp_roundtrip build that passed when the model stopped inventing extra state.
+
+RampTrace is a public struct with only these public fields: path: Vec<String>, elevations: Vec<String>, promotions: usize, demotions: usize.
+
+RampRuntime stores only edges: Vec<(String, String)> and states: HashMap<String, String>. new returns empty edges and states.
+
+The public API signatures are exact: on_ramp(&mut self, from: &str, to: &str), off_ramp(&mut self, from: &str, to: &str), and trace(&self, start: &str) -> RampTrace. The methods never drop the to argument. trace always uses the start argument as the first node.
+
+on_ramp pushes the directed edge from the source node to the destination node and stores the destination as the string "parallel". off_ramp pushes the directed edge from the source node to the destination node and stores the destination as the string "local".
+
+trace takes &self and never mutates the runtime. It starts with current as the start string and current_state as "local". It pushes current into path and current_state into elevations. Then it repeatedly finds the first edge whose from equals current. For each next node, it reads next_state from the states map or uses "local". It increments promotions for local to parallel and demotions for parallel to local. It pushes next and next_state, then assigns current = next and current_state = next_state. The loop does not redeclare current inside the loop.
+
+The binary creates one RampRuntime before reading commands and keeps it alive for every input line. It imports Read, reads stdin into one String buffer, loops over input.lines(), splits each line with split_whitespace, and matches exactly "on", "off", and "trace". The on command calls runtime.on_ramp(parts[1], parts[2]). The off command calls runtime.off_ramp(parts[1], parts[2]). The trace command calls runtime.trace(parts[1]) and prints exactly path=<joined path> elevations=<joined elevations> promoted=<promotions> demoted=<demotions>. The output uses join(">") for path and join(",") for elevations, not debug formatting.

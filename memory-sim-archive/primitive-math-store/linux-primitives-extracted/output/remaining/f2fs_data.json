@@ -1,0 +1,374 @@
+{
+  "filename": "f2fs.h",
+  "includes": [
+    "linux/types.h",
+    "linux/ioctl.h"
+  ],
+  "defines": [
+    {
+      "name": "F2FS_IOCTL_MAGIC",
+      "value": "0xf5",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "F2FS_IOC_START_ATOMIC_WRITE",
+      "value": "_IO(F2FS_IOCTL_MAGIC, 1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "F2FS_IOC_COMMIT_ATOMIC_WRITE",
+      "value": "_IO(F2FS_IOCTL_MAGIC, 2)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "F2FS_IOC_START_VOLATILE_WRITE",
+      "value": "_IO(F2FS_IOCTL_MAGIC, 3)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "F2FS_IOC_RELEASE_VOLATILE_WRITE",
+      "value": "_IO(F2FS_IOCTL_MAGIC, 4)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "F2FS_IOC_ABORT_ATOMIC_WRITE",
+      "value": "_IO(F2FS_IOCTL_MAGIC, 5)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "F2FS_IOC_GARBAGE_COLLECT",
+      "value": "_IOW(F2FS_IOCTL_MAGIC, 6, __u32)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "F2FS_IOC_WRITE_CHECKPOINT",
+      "value": "_IO(F2FS_IOCTL_MAGIC, 7)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "F2FS_IOC_DEFRAGMENT",
+      "value": "_IOWR(F2FS_IOCTL_MAGIC, 8,\t",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "F2FS_IOC_MOVE_RANGE",
+      "value": "_IOWR(F2FS_IOCTL_MAGIC, 9,\t",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "F2FS_IOC_FLUSH_DEVICE",
+      "value": "_IOW(F2FS_IOCTL_MAGIC, 10,\t",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "F2FS_IOC_GARBAGE_COLLECT_RANGE",
+      "value": "_IOW(F2FS_IOCTL_MAGIC, 11,\t",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "F2FS_IOC_GET_FEATURES",
+      "value": "_IOR(F2FS_IOCTL_MAGIC, 12, __u32)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "F2FS_IOC_SET_PIN_FILE",
+      "value": "_IOW(F2FS_IOCTL_MAGIC, 13, __u32)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "F2FS_IOC_GET_PIN_FILE",
+      "value": "_IOR(F2FS_IOCTL_MAGIC, 14, __u32)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "F2FS_IOC_PRECACHE_EXTENTS",
+      "value": "_IO(F2FS_IOCTL_MAGIC, 15)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "F2FS_IOC_RESIZE_FS",
+      "value": "_IOW(F2FS_IOCTL_MAGIC, 16, __u64)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "F2FS_IOC_GET_COMPRESS_BLOCKS",
+      "value": "_IOR(F2FS_IOCTL_MAGIC, 17, __u64)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "F2FS_IOC_RELEASE_COMPRESS_BLOCKS",
+      "value": "",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "F2FS_IOC_RESERVE_COMPRESS_BLOCKS",
+      "value": "",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "F2FS_IOC_SEC_TRIM_FILE",
+      "value": "_IOW(F2FS_IOCTL_MAGIC, 20,\t",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "F2FS_IOC_GET_COMPRESS_OPTION",
+      "value": "_IOR(F2FS_IOCTL_MAGIC, 21,\t",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "F2FS_IOC_SET_COMPRESS_OPTION",
+      "value": "_IOW(F2FS_IOCTL_MAGIC, 22,\t",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "F2FS_IOC_DECOMPRESS_FILE",
+      "value": "_IO(F2FS_IOCTL_MAGIC, 23)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "F2FS_IOC_COMPRESS_FILE",
+      "value": "_IO(F2FS_IOCTL_MAGIC, 24)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "F2FS_IOC_START_ATOMIC_REPLACE",
+      "value": "_IO(F2FS_IOCTL_MAGIC, 25)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "F2FS_IOC_GET_DEV_ALIAS_FILE",
+      "value": "_IOR(F2FS_IOCTL_MAGIC, 26, __u32)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "F2FS_IOC_IO_PRIO",
+      "value": "_IOW(F2FS_IOCTL_MAGIC, 27, __u32)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "F2FS_IOC_SHUTDOWN",
+      "value": "_IOR('X', 125, __u32)",
+      "comment": "Shutdown",
+      "category": ""
+    },
+    {
+      "name": "F2FS_GOING_DOWN_FULLSYNC",
+      "value": "0x0",
+      "comment": "going down with full sync",
+      "category": ""
+    },
+    {
+      "name": "F2FS_GOING_DOWN_METASYNC",
+      "value": "0x1",
+      "comment": "going down with metadata",
+      "category": ""
+    },
+    {
+      "name": "F2FS_GOING_DOWN_NOSYNC",
+      "value": "0x2",
+      "comment": "going down",
+      "category": ""
+    },
+    {
+      "name": "F2FS_GOING_DOWN_METAFLUSH",
+      "value": "0x3",
+      "comment": "going down with meta flush",
+      "category": ""
+    },
+    {
+      "name": "F2FS_GOING_DOWN_NEED_FSCK",
+      "value": "0x4",
+      "comment": "going down to trigger fsck",
+      "category": ""
+    },
+    {
+      "name": "F2FS_TRIM_FILE_DISCARD",
+      "value": "0x1",
+      "comment": "send discard command",
+      "category": ""
+    },
+    {
+      "name": "F2FS_TRIM_FILE_ZEROOUT",
+      "value": "0x2",
+      "comment": "zero out",
+      "category": ""
+    },
+    {
+      "name": "F2FS_TRIM_FILE_MASK",
+      "value": "0x3",
+      "comment": "",
+      "category": ""
+    }
+  ],
+  "structs": [
+    {
+      "name": "f2fs_gc_range",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "sync",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "start",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "len",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "f2fs_defragment",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "start",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "len",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "f2fs_move_range",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "dst_fd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "pos_in",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "pos_out",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "len",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "f2fs_flush_device",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "dev_num",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "segments",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "f2fs_sectrim_range",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "start",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "f2fs_comp_option",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "algorithm",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "log_cluster_size",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

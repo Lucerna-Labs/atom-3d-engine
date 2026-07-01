@@ -1,0 +1,294 @@
+{
+  "filename": "packet_diag.h",
+  "includes": [
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "PACKET_SHOW_INFO",
+      "value": "0x00000001",
+      "comment": "Basic packet_sk information",
+      "category": "PACKET_SHOW"
+    },
+    {
+      "name": "PACKET_SHOW_MCLIST",
+      "value": "0x00000002",
+      "comment": "A set of packet_diag_mclist-s",
+      "category": "PACKET_SHOW"
+    },
+    {
+      "name": "PACKET_SHOW_RING_CFG",
+      "value": "0x00000004",
+      "comment": "Rings configuration parameters",
+      "category": "PACKET_SHOW"
+    },
+    {
+      "name": "PACKET_SHOW_FANOUT",
+      "value": "0x00000008",
+      "comment": "",
+      "category": "PACKET_SHOW"
+    },
+    {
+      "name": "PACKET_SHOW_MEMINFO",
+      "value": "0x00000010",
+      "comment": "",
+      "category": "PACKET_SHOW"
+    },
+    {
+      "name": "PACKET_SHOW_FILTER",
+      "value": "0x00000020",
+      "comment": "",
+      "category": "PACKET_SHOW"
+    },
+    {
+      "name": "PACKET_DIAG_MAX",
+      "value": "(__PACKET_DIAG_MAX - 1)",
+      "comment": "",
+      "category": "PACKET_DIAG"
+    },
+    {
+      "name": "PDI_RUNNING",
+      "value": "0x1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PDI_AUXDATA",
+      "value": "0x2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PDI_ORIGDEV",
+      "value": "0x4",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PDI_VNETHDR",
+      "value": "0x8",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PDI_LOSS",
+      "value": "0x10",
+      "comment": "",
+      "category": ""
+    }
+  ],
+  "structs": [
+    {
+      "name": "packet_diag_req",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "sdiag_family",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "sdiag_protocol",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pdiag_ino",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pdiag_show",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pdiag_cookie",
+          "array_size": "2",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "packet_diag_msg",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "pdiag_family",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "pdiag_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "pdiag_num",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pdiag_ino",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pdiag_cookie",
+          "array_size": "2",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "packet_diag_info",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "pdi_index",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pdi_version",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pdi_reserve",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pdi_copy_thresh",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pdi_tstamp",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pdi_flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "packet_diag_mclist",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "pdmc_index",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pdmc_count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "pdmc_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "pdmc_alen",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "pdmc_addr",
+          "array_size": "32",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "packet_diag_ring",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "pdr_block_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pdr_block_nr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pdr_frame_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pdr_frame_nr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pdr_retire_tmo",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pdr_sizeof_priv",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pdr_features",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

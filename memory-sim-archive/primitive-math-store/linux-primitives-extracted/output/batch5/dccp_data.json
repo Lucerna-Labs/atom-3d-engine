@@ -1,0 +1,229 @@
+{
+  "filename": "dccp.h",
+  "includes": [
+    "linux/types.h",
+    "asm/byteorder.h"
+  ],
+  "defines": [
+    {
+      "name": "DCCP_NR_PKT_TYPES",
+      "value": "DCCP_PKT_INVALID",
+      "comment": "",
+      "category": "DCCP_NR"
+    },
+    {
+      "name": "DCCP_SINGLE_OPT_MAXLEN",
+      "value": "253",
+      "comment": "",
+      "category": "DCCP_SINGLE"
+    },
+    {
+      "name": "DCCP_SOCKOPT_PACKET_SIZE",
+      "value": "1",
+      "comment": "XXX deprecated, without effect",
+      "category": "DCCP_SOCKOPT"
+    },
+    {
+      "name": "DCCP_SOCKOPT_SERVICE",
+      "value": "2",
+      "comment": "",
+      "category": "DCCP_SOCKOPT"
+    },
+    {
+      "name": "DCCP_SOCKOPT_CHANGE_L",
+      "value": "3",
+      "comment": "",
+      "category": "DCCP_SOCKOPT"
+    },
+    {
+      "name": "DCCP_SOCKOPT_CHANGE_R",
+      "value": "4",
+      "comment": "",
+      "category": "DCCP_SOCKOPT"
+    },
+    {
+      "name": "DCCP_SOCKOPT_GET_CUR_MPS",
+      "value": "5",
+      "comment": "",
+      "category": "DCCP_SOCKOPT"
+    },
+    {
+      "name": "DCCP_SOCKOPT_SERVER_TIMEWAIT",
+      "value": "6",
+      "comment": "",
+      "category": "DCCP_SOCKOPT"
+    },
+    {
+      "name": "DCCP_SOCKOPT_SEND_CSCOV",
+      "value": "10",
+      "comment": "",
+      "category": "DCCP_SOCKOPT"
+    },
+    {
+      "name": "DCCP_SOCKOPT_RECV_CSCOV",
+      "value": "11",
+      "comment": "",
+      "category": "DCCP_SOCKOPT"
+    },
+    {
+      "name": "DCCP_SOCKOPT_AVAILABLE_CCIDS",
+      "value": "12",
+      "comment": "",
+      "category": "DCCP_SOCKOPT"
+    },
+    {
+      "name": "DCCP_SOCKOPT_CCID",
+      "value": "13",
+      "comment": "",
+      "category": "DCCP_SOCKOPT"
+    },
+    {
+      "name": "DCCP_SOCKOPT_TX_CCID",
+      "value": "14",
+      "comment": "",
+      "category": "DCCP_SOCKOPT"
+    },
+    {
+      "name": "DCCP_SOCKOPT_RX_CCID",
+      "value": "15",
+      "comment": "",
+      "category": "DCCP_SOCKOPT"
+    },
+    {
+      "name": "DCCP_SOCKOPT_QPOLICY_ID",
+      "value": "16",
+      "comment": "",
+      "category": "DCCP_SOCKOPT"
+    },
+    {
+      "name": "DCCP_SOCKOPT_QPOLICY_TXQLEN",
+      "value": "17",
+      "comment": "",
+      "category": "DCCP_SOCKOPT"
+    },
+    {
+      "name": "DCCP_SOCKOPT_CCID_RX_INFO",
+      "value": "128",
+      "comment": "",
+      "category": "DCCP_SOCKOPT"
+    },
+    {
+      "name": "DCCP_SOCKOPT_CCID_TX_INFO",
+      "value": "192",
+      "comment": "",
+      "category": "DCCP_SOCKOPT"
+    },
+    {
+      "name": "DCCP_SERVICE_LIST_MAX_LEN",
+      "value": "32",
+      "comment": "",
+      "category": "DCCP_SERVICE"
+    }
+  ],
+  "structs": [
+    {
+      "name": "dccp_hdr",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "dccph_doff",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__sum16",
+          "name": "dccph_checksum",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "dccph_seq2",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be16",
+          "name": "dccph_seq",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "dccp_hdr_ext",
+      "fields": [
+        {
+          "type_name": "__be32",
+          "name": "dccph_seq_low",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "dccp_hdr_request",
+      "fields": [
+        {
+          "type_name": "__be32",
+          "name": "dccph_req_service",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "dccp_hdr_ack_bits",
+      "fields": [
+        {
+          "type_name": "__be16",
+          "name": "dccph_reserved1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be16",
+          "name": "dccph_ack_nr_high",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "dccph_ack_nr_low",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "dccp_hdr_response",
+      "fields": [
+        {
+          "type_name": "__be32",
+          "name": "dccph_resp_service",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "dccp_hdr_reset",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

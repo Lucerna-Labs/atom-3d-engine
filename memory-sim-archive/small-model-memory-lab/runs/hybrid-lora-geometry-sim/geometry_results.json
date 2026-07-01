@@ -1,0 +1,590 @@
+[
+  {
+    "geometry": "hybrid_all_three_overbuilt",
+    "pass_rate": 0.863,
+    "clean_pass_rate": 0.8565,
+    "mean_score": 0.9228,
+    "classified_rate": 0.7631,
+    "packet_rate": 0.7889,
+    "gate_open_rate": 0.7181,
+    "repair_rate": 0.4245,
+    "echo_rate": 0.0095,
+    "overdrive_rate": 0.0,
+    "cascade_rate": 0.0278,
+    "avg_missing": 0.3495,
+    "avg_distractors": 0.6363,
+    "train_complexity": 0.92,
+    "per_mode": {
+      "normal": {
+        "pass_rate": 0.8828,
+        "clean_pass_rate": 0.8828,
+        "echo_rate": 0.0,
+        "cascade_rate": 0.0185
+      },
+      "high_pressure": {
+        "pass_rate": 0.8561,
+        "clean_pass_rate": 0.8561,
+        "echo_rate": 0.0,
+        "cascade_rate": 0.039
+      },
+      "heldout_shift": {
+        "pass_rate": 0.8731,
+        "clean_pass_rate": 0.8731,
+        "echo_rate": 0.0,
+        "cascade_rate": 0.0243
+      },
+      "echo_trap": {
+        "pass_rate": 0.84,
+        "clean_pass_rate": 0.8139,
+        "echo_rate": 0.0379,
+        "cascade_rate": 0.0296
+      }
+    }
+  },
+  {
+    "geometry": "hybrid_all_three_balanced",
+    "pass_rate": 0.7931,
+    "clean_pass_rate": 0.7931,
+    "mean_score": 0.8879,
+    "classified_rate": 0.7334,
+    "packet_rate": 0.7497,
+    "gate_open_rate": 0.6743,
+    "repair_rate": 0.5426,
+    "echo_rate": 0.0,
+    "overdrive_rate": 0.0,
+    "cascade_rate": 0.0592,
+    "avg_missing": 0.5081,
+    "avg_distractors": 0.594,
+    "train_complexity": 0.78,
+    "per_mode": {
+      "normal": {
+        "pass_rate": 0.8249,
+        "clean_pass_rate": 0.8249,
+        "echo_rate": 0.0,
+        "cascade_rate": 0.0365
+      },
+      "high_pressure": {
+        "pass_rate": 0.7746,
+        "clean_pass_rate": 0.7746,
+        "echo_rate": 0.0,
+        "cascade_rate": 0.0792
+      },
+      "heldout_shift": {
+        "pass_rate": 0.7982,
+        "clean_pass_rate": 0.7982,
+        "echo_rate": 0.0,
+        "cascade_rate": 0.0581
+      },
+      "echo_trap": {
+        "pass_rate": 0.7747,
+        "clean_pass_rate": 0.7747,
+        "echo_rate": 0.0,
+        "cascade_rate": 0.0631
+      }
+    }
+  },
+  {
+    "geometry": "hybrid_no_add_payload",
+    "pass_rate": 0.7394,
+    "clean_pass_rate": 0.7394,
+    "mean_score": 0.8579,
+    "classified_rate": 0.7198,
+    "packet_rate": 0.6806,
+    "gate_open_rate": 0.6887,
+    "repair_rate": 0.7632,
+    "echo_rate": 0.0,
+    "overdrive_rate": 0.0,
+    "cascade_rate": 0.0791,
+    "avg_missing": 0.6595,
+    "avg_distractors": 0.4707,
+    "train_complexity": 0.74,
+    "per_mode": {
+      "normal": {
+        "pass_rate": 0.775,
+        "clean_pass_rate": 0.775,
+        "echo_rate": 0.0,
+        "cascade_rate": 0.0526
+      },
+      "high_pressure": {
+        "pass_rate": 0.7292,
+        "clean_pass_rate": 0.7292,
+        "echo_rate": 0.0,
+        "cascade_rate": 0.1015
+      },
+      "heldout_shift": {
+        "pass_rate": 0.7428,
+        "clean_pass_rate": 0.7428,
+        "echo_rate": 0.0,
+        "cascade_rate": 0.0758
+      },
+      "echo_trap": {
+        "pass_rate": 0.7108,
+        "clean_pass_rate": 0.7108,
+        "echo_rate": 0.0,
+        "cascade_rate": 0.0862
+      }
+    }
+  },
+  {
+    "geometry": "hybrid_all_three_light",
+    "pass_rate": 0.6539,
+    "clean_pass_rate": 0.6458,
+    "mean_score": 0.8194,
+    "classified_rate": 0.6744,
+    "packet_rate": 0.7158,
+    "gate_open_rate": 0.559,
+    "repair_rate": 0.6152,
+    "echo_rate": 0.0196,
+    "overdrive_rate": 0.0,
+    "cascade_rate": 0.1165,
+    "avg_missing": 0.7616,
+    "avg_distractors": 0.6529,
+    "train_complexity": 0.7,
+    "per_mode": {
+      "normal": {
+        "pass_rate": 0.7021,
+        "clean_pass_rate": 0.7021,
+        "echo_rate": 0.0,
+        "cascade_rate": 0.0835
+      },
+      "high_pressure": {
+        "pass_rate": 0.6339,
+        "clean_pass_rate": 0.6339,
+        "echo_rate": 0.0,
+        "cascade_rate": 0.1506
+      },
+      "heldout_shift": {
+        "pass_rate": 0.6731,
+        "clean_pass_rate": 0.6731,
+        "echo_rate": 0.0,
+        "cascade_rate": 0.1062
+      },
+      "echo_trap": {
+        "pass_rate": 0.6064,
+        "clean_pass_rate": 0.574,
+        "echo_rate": 0.0785,
+        "cascade_rate": 0.1258
+      }
+    }
+  },
+  {
+    "geometry": "gated_plus_web",
+    "pass_rate": 0.5203,
+    "clean_pass_rate": 0.5203,
+    "mean_score": 0.7526,
+    "classified_rate": 0.6191,
+    "packet_rate": 0.5949,
+    "gate_open_rate": 0.5762,
+    "repair_rate": 0.7483,
+    "echo_rate": 0.0,
+    "overdrive_rate": 0.0,
+    "cascade_rate": 0.2051,
+    "avg_missing": 0.9972,
+    "avg_distractors": 0.5661,
+    "train_complexity": 0.58,
+    "per_mode": {
+      "normal": {
+        "pass_rate": 0.5643,
+        "clean_pass_rate": 0.5643,
+        "echo_rate": 0.0,
+        "cascade_rate": 0.1676
+      },
+      "high_pressure": {
+        "pass_rate": 0.4949,
+        "clean_pass_rate": 0.4949,
+        "echo_rate": 0.0,
+        "cascade_rate": 0.2389
+      },
+      "heldout_shift": {
+        "pass_rate": 0.5294,
+        "clean_pass_rate": 0.5294,
+        "echo_rate": 0.0,
+        "cascade_rate": 0.1982
+      },
+      "echo_trap": {
+        "pass_rate": 0.4926,
+        "clean_pass_rate": 0.4926,
+        "echo_rate": 0.0,
+        "cascade_rate": 0.2156
+      }
+    }
+  },
+  {
+    "geometry": "gated_plus_fourier",
+    "pass_rate": 0.3021,
+    "clean_pass_rate": 0.3007,
+    "mean_score": 0.57,
+    "classified_rate": 0.5705,
+    "packet_rate": 0.6597,
+    "gate_open_rate": 0.5817,
+    "repair_rate": 0.0,
+    "echo_rate": 0.0118,
+    "overdrive_rate": 0.0,
+    "cascade_rate": 0.2145,
+    "avg_missing": 1.8422,
+    "avg_distractors": 0.5958,
+    "train_complexity": 0.58,
+    "per_mode": {
+      "normal": {
+        "pass_rate": 0.3486,
+        "clean_pass_rate": 0.3486,
+        "echo_rate": 0.0,
+        "cascade_rate": 0.1685
+      },
+      "high_pressure": {
+        "pass_rate": 0.2899,
+        "clean_pass_rate": 0.2899,
+        "echo_rate": 0.0,
+        "cascade_rate": 0.2468
+      },
+      "heldout_shift": {
+        "pass_rate": 0.2953,
+        "clean_pass_rate": 0.2953,
+        "echo_rate": 0.0,
+        "cascade_rate": 0.2081
+      },
+      "echo_trap": {
+        "pass_rate": 0.2747,
+        "clean_pass_rate": 0.2689,
+        "echo_rate": 0.0472,
+        "cascade_rate": 0.2349
+      }
+    }
+  },
+  {
+    "geometry": "gated_lora",
+    "pass_rate": 0.1901,
+    "clean_pass_rate": 0.1901,
+    "mean_score": 0.4718,
+    "classified_rate": 0.5027,
+    "packet_rate": 0.5313,
+    "gate_open_rate": 0.5883,
+    "repair_rate": 0.0,
+    "echo_rate": 0.0,
+    "overdrive_rate": 0.0,
+    "cascade_rate": 0.321,
+    "avg_missing": 2.1854,
+    "avg_distractors": 0.5167,
+    "train_complexity": 0.28,
+    "per_mode": {
+      "normal": {
+        "pass_rate": 0.2164,
+        "clean_pass_rate": 0.2164,
+        "echo_rate": 0.0,
+        "cascade_rate": 0.2733
+      },
+      "high_pressure": {
+        "pass_rate": 0.1833,
+        "clean_pass_rate": 0.1833,
+        "echo_rate": 0.0,
+        "cascade_rate": 0.3654
+      },
+      "heldout_shift": {
+        "pass_rate": 0.1883,
+        "clean_pass_rate": 0.1883,
+        "echo_rate": 0.0,
+        "cascade_rate": 0.3129
+      },
+      "echo_trap": {
+        "pass_rate": 0.1724,
+        "clean_pass_rate": 0.1724,
+        "echo_rate": 0.0,
+        "cascade_rate": 0.3322
+      }
+    }
+  },
+  {
+    "geometry": "web_plus_fourier_no_gate",
+    "pass_rate": 0.2027,
+    "clean_pass_rate": 0.1587,
+    "mean_score": 0.5037,
+    "classified_rate": 0.6285,
+    "packet_rate": 0.7076,
+    "gate_open_rate": 0.0,
+    "repair_rate": 0.0,
+    "echo_rate": 0.3881,
+    "overdrive_rate": 0.0777,
+    "cascade_rate": 0.2952,
+    "avg_missing": 1.7913,
+    "avg_distractors": 0.8389,
+    "train_complexity": 0.62,
+    "per_mode": {
+      "normal": {
+        "pass_rate": 0.239,
+        "clean_pass_rate": 0.1918,
+        "echo_rate": 0.3554,
+        "cascade_rate": 0.2536
+      },
+      "high_pressure": {
+        "pass_rate": 0.1893,
+        "clean_pass_rate": 0.1501,
+        "echo_rate": 0.3656,
+        "cascade_rate": 0.3307
+      },
+      "heldout_shift": {
+        "pass_rate": 0.2067,
+        "clean_pass_rate": 0.1657,
+        "echo_rate": 0.3735,
+        "cascade_rate": 0.2886
+      },
+      "echo_trap": {
+        "pass_rate": 0.176,
+        "clean_pass_rate": 0.1272,
+        "echo_rate": 0.4581,
+        "cascade_rate": 0.3081
+      }
+    }
+  },
+  {
+    "geometry": "kronecker_web",
+    "pass_rate": 0.1349,
+    "clean_pass_rate": 0.1206,
+    "mean_score": 0.4223,
+    "classified_rate": 0.5672,
+    "packet_rate": 0.5784,
+    "gate_open_rate": 0.0,
+    "repair_rate": 0.0,
+    "echo_rate": 0.2325,
+    "overdrive_rate": 0.0582,
+    "cascade_rate": 0.3947,
+    "avg_missing": 2.1682,
+    "avg_distractors": 0.7316,
+    "train_complexity": 0.42,
+    "per_mode": {
+      "normal": {
+        "pass_rate": 0.1574,
+        "clean_pass_rate": 0.1399,
+        "echo_rate": 0.2112,
+        "cascade_rate": 0.3507
+      },
+      "high_pressure": {
+        "pass_rate": 0.1303,
+        "clean_pass_rate": 0.1185,
+        "echo_rate": 0.2078,
+        "cascade_rate": 0.4357
+      },
+      "heldout_shift": {
+        "pass_rate": 0.1389,
+        "clean_pass_rate": 0.1272,
+        "echo_rate": 0.2054,
+        "cascade_rate": 0.3822
+      },
+      "echo_trap": {
+        "pass_rate": 0.1131,
+        "clean_pass_rate": 0.0969,
+        "echo_rate": 0.3056,
+        "cascade_rate": 0.41
+      }
+    }
+  },
+  {
+    "geometry": "additive_plus_web",
+    "pass_rate": 0.1347,
+    "clean_pass_rate": 0.1129,
+    "mean_score": 0.4245,
+    "classified_rate": 0.5479,
+    "packet_rate": 0.6074,
+    "gate_open_rate": 0.0,
+    "repair_rate": 0.0,
+    "echo_rate": 0.3249,
+    "overdrive_rate": 0.0926,
+    "cascade_rate": 0.4059,
+    "avg_missing": 2.0579,
+    "avg_distractors": 0.7986,
+    "train_complexity": 0.52,
+    "per_mode": {
+      "normal": {
+        "pass_rate": 0.1568,
+        "clean_pass_rate": 0.1325,
+        "echo_rate": 0.2865,
+        "cascade_rate": 0.3628
+      },
+      "high_pressure": {
+        "pass_rate": 0.1288,
+        "clean_pass_rate": 0.109,
+        "echo_rate": 0.3093,
+        "cascade_rate": 0.441
+      },
+      "heldout_shift": {
+        "pass_rate": 0.1383,
+        "clean_pass_rate": 0.1174,
+        "echo_rate": 0.3061,
+        "cascade_rate": 0.4037
+      },
+      "echo_trap": {
+        "pass_rate": 0.1149,
+        "clean_pass_rate": 0.0926,
+        "echo_rate": 0.3976,
+        "cascade_rate": 0.4163
+      }
+    }
+  },
+  {
+    "geometry": "additive_plus_fourier",
+    "pass_rate": 0.1103,
+    "clean_pass_rate": 0.0883,
+    "mean_score": 0.3898,
+    "classified_rate": 0.509,
+    "packet_rate": 0.6705,
+    "gate_open_rate": 0.0,
+    "repair_rate": 0.0,
+    "echo_rate": 0.4103,
+    "overdrive_rate": 0.0925,
+    "cascade_rate": 0.4224,
+    "avg_missing": 2.1568,
+    "avg_distractors": 0.8367,
+    "train_complexity": 0.5,
+    "per_mode": {
+      "normal": {
+        "pass_rate": 0.1335,
+        "clean_pass_rate": 0.1079,
+        "echo_rate": 0.39,
+        "cascade_rate": 0.3764
+      },
+      "high_pressure": {
+        "pass_rate": 0.1087,
+        "clean_pass_rate": 0.0896,
+        "echo_rate": 0.3843,
+        "cascade_rate": 0.4621
+      },
+      "heldout_shift": {
+        "pass_rate": 0.1044,
+        "clean_pass_rate": 0.0854,
+        "echo_rate": 0.3886,
+        "cascade_rate": 0.4174
+      },
+      "echo_trap": {
+        "pass_rate": 0.0946,
+        "clean_pass_rate": 0.0703,
+        "echo_rate": 0.4785,
+        "cascade_rate": 0.4338
+      }
+    }
+  },
+  {
+    "geometry": "fourier_carrier",
+    "pass_rate": 0.0968,
+    "clean_pass_rate": 0.0818,
+    "mean_score": 0.3706,
+    "classified_rate": 0.5162,
+    "packet_rate": 0.6659,
+    "gate_open_rate": 0.0,
+    "repair_rate": 0.0,
+    "echo_rate": 0.3501,
+    "overdrive_rate": 0.0792,
+    "cascade_rate": 0.4139,
+    "avg_missing": 2.3222,
+    "avg_distractors": 0.7715,
+    "train_complexity": 0.4,
+    "per_mode": {
+      "normal": {
+        "pass_rate": 0.1179,
+        "clean_pass_rate": 0.0997,
+        "echo_rate": 0.3282,
+        "cascade_rate": 0.3706
+      },
+      "high_pressure": {
+        "pass_rate": 0.0974,
+        "clean_pass_rate": 0.0833,
+        "echo_rate": 0.3215,
+        "cascade_rate": 0.4444
+      },
+      "heldout_shift": {
+        "pass_rate": 0.0907,
+        "clean_pass_rate": 0.0779,
+        "echo_rate": 0.3171,
+        "cascade_rate": 0.416
+      },
+      "echo_trap": {
+        "pass_rate": 0.0813,
+        "clean_pass_rate": 0.0664,
+        "echo_rate": 0.4338,
+        "cascade_rate": 0.4244
+      }
+    }
+  },
+  {
+    "geometry": "standard_lora_additive",
+    "pass_rate": 0.077,
+    "clean_pass_rate": 0.0658,
+    "mean_score": 0.3317,
+    "classified_rate": 0.4511,
+    "packet_rate": 0.5742,
+    "gate_open_rate": 0.0,
+    "repair_rate": 0.0,
+    "echo_rate": 0.3177,
+    "overdrive_rate": 0.0972,
+    "cascade_rate": 0.5128,
+    "avg_missing": 2.3927,
+    "avg_distractors": 0.7752,
+    "train_complexity": 0.18,
+    "per_mode": {
+      "normal": {
+        "pass_rate": 0.0943,
+        "clean_pass_rate": 0.0819,
+        "echo_rate": 0.2979,
+        "cascade_rate": 0.4701
+      },
+      "high_pressure": {
+        "pass_rate": 0.0722,
+        "clean_pass_rate": 0.0638,
+        "echo_rate": 0.2893,
+        "cascade_rate": 0.5525
+      },
+      "heldout_shift": {
+        "pass_rate": 0.0751,
+        "clean_pass_rate": 0.0636,
+        "echo_rate": 0.2932,
+        "cascade_rate": 0.5049
+      },
+      "echo_trap": {
+        "pass_rate": 0.0664,
+        "clean_pass_rate": 0.054,
+        "echo_rate": 0.3904,
+        "cascade_rate": 0.5239
+      }
+    }
+  },
+  {
+    "geometry": "base_no_adapter",
+    "pass_rate": 0.0298,
+    "clean_pass_rate": 0.0293,
+    "mean_score": 0.2138,
+    "classified_rate": 0.4125,
+    "packet_rate": 0.4195,
+    "gate_open_rate": 0.0,
+    "repair_rate": 0.0,
+    "echo_rate": 0.0628,
+    "overdrive_rate": 0.0406,
+    "cascade_rate": 0.5598,
+    "avg_missing": 3.1594,
+    "avg_distractors": 0.5355,
+    "train_complexity": 0.0,
+    "per_mode": {
+      "normal": {
+        "pass_rate": 0.0358,
+        "clean_pass_rate": 0.0354,
+        "echo_rate": 0.0389,
+        "cascade_rate": 0.5015
+      },
+      "high_pressure": {
+        "pass_rate": 0.0262,
+        "clean_pass_rate": 0.026,
+        "echo_rate": 0.0381,
+        "cascade_rate": 0.6101
+      },
+      "heldout_shift": {
+        "pass_rate": 0.029,
+        "clean_pass_rate": 0.0288,
+        "echo_rate": 0.04,
+        "cascade_rate": 0.5514
+      },
+      "echo_trap": {
+        "pass_rate": 0.0282,
+        "clean_pass_rate": 0.0271,
+        "echo_rate": 0.1344,
+        "cascade_rate": 0.5763
+      }
+    }
+  }
+]

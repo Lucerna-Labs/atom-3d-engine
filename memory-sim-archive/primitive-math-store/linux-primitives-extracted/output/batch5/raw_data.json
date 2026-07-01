@@ -1,0 +1,74 @@
+{
+  "filename": "raw.h",
+  "includes": [
+    "linux/can.h"
+  ],
+  "defines": [
+    {
+      "name": "SOL_CAN_RAW",
+      "value": "(SOL_CAN_BASE + CAN_RAW)",
+      "comment": "",
+      "category": "SOL_CAN"
+    },
+    {
+      "name": "CAN_RAW_FILTER_MAX",
+      "value": "512",
+      "comment": "maximum number of can_filter set via setsockopt()",
+      "category": "CAN_RAW"
+    },
+    {
+      "name": "CAN_RAW_XL_VCID_TX_SET",
+      "value": "0x01",
+      "comment": "",
+      "category": "CAN_RAW"
+    },
+    {
+      "name": "CAN_RAW_XL_VCID_TX_PASS",
+      "value": "0x02",
+      "comment": "",
+      "category": "CAN_RAW"
+    },
+    {
+      "name": "CAN_RAW_XL_VCID_RX_FILTER",
+      "value": "0x04",
+      "comment": "",
+      "category": "CAN_RAW"
+    }
+  ],
+  "structs": [
+    {
+      "name": "can_raw_vcid_options",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "tx_vcid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "rx_vcid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "rx_vcid_mask",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

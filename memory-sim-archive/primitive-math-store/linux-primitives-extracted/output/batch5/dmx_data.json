@@ -1,0 +1,326 @@
+{
+  "filename": "dmx.h",
+  "includes": [
+    "linux/types.h",
+    "time.h"
+  ],
+  "defines": [
+    {
+      "name": "DMX_FILTER_SIZE",
+      "value": "16",
+      "comment": "",
+      "category": "DMX_FILTER"
+    },
+    {
+      "name": "DMX_PES_AUDIO",
+      "value": "DMX_PES_AUDIO0",
+      "comment": "",
+      "category": "DMX_PES"
+    },
+    {
+      "name": "DMX_PES_VIDEO",
+      "value": "DMX_PES_VIDEO0",
+      "comment": "",
+      "category": "DMX_PES"
+    },
+    {
+      "name": "DMX_PES_TELETEXT",
+      "value": "DMX_PES_TELETEXT0",
+      "comment": "",
+      "category": "DMX_PES"
+    },
+    {
+      "name": "DMX_PES_SUBTITLE",
+      "value": "DMX_PES_SUBTITLE0",
+      "comment": "",
+      "category": "DMX_PES"
+    },
+    {
+      "name": "DMX_PES_PCR",
+      "value": "DMX_PES_PCR0",
+      "comment": "",
+      "category": "DMX_PES"
+    },
+    {
+      "name": "DMX_CHECK_CRC",
+      "value": "1",
+      "comment": "",
+      "category": "DMX_CHECK"
+    },
+    {
+      "name": "DMX_ONESHOT",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DMX_IMMEDIATE_START",
+      "value": "4",
+      "comment": "",
+      "category": "DMX_IMMEDIATE"
+    },
+    {
+      "name": "DMX_START",
+      "value": "_IO('o', 41)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DMX_STOP",
+      "value": "_IO('o', 42)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DMX_SET_FILTER",
+      "value": "_IOW('o', 43, struct dmx_sct_filter_params)",
+      "comment": "",
+      "category": "DMX_SET"
+    },
+    {
+      "name": "DMX_SET_PES_FILTER",
+      "value": "_IOW('o', 44, struct dmx_pes_filter_params)",
+      "comment": "",
+      "category": "DMX_SET"
+    },
+    {
+      "name": "DMX_SET_BUFFER_SIZE",
+      "value": "_IO('o', 45)",
+      "comment": "",
+      "category": "DMX_SET"
+    },
+    {
+      "name": "DMX_GET_PES_PIDS",
+      "value": "_IOR('o', 47, __u16[5])",
+      "comment": "",
+      "category": "DMX_GET"
+    },
+    {
+      "name": "DMX_GET_STC",
+      "value": "_IOWR('o', 50, struct dmx_stc)",
+      "comment": "",
+      "category": "DMX_GET"
+    },
+    {
+      "name": "DMX_ADD_PID",
+      "value": "_IOW('o', 51, __u16)",
+      "comment": "",
+      "category": "DMX_ADD"
+    },
+    {
+      "name": "DMX_REMOVE_PID",
+      "value": "_IOW('o', 52, __u16)",
+      "comment": "",
+      "category": "DMX_REMOVE"
+    },
+    {
+      "name": "DMX_REQBUFS",
+      "value": "_IOWR('o', 60, struct dmx_requestbuffers)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DMX_QUERYBUF",
+      "value": "_IOWR('o', 61, struct dmx_buffer)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DMX_EXPBUF",
+      "value": "_IOWR('o', 62, struct dmx_exportbuffer)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DMX_QBUF",
+      "value": "_IOWR('o', 63, struct dmx_buffer)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DMX_DQBUF",
+      "value": "_IOWR('o', 64, struct dmx_buffer)",
+      "comment": "",
+      "category": ""
+    }
+  ],
+  "structs": [
+    {
+      "name": "dmx_filter",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "filter",
+          "array_size": "DMX_FILTER_SIZE",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "mask",
+          "array_size": "DMX_FILTER_SIZE",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "mode",
+          "array_size": "DMX_FILTER_SIZE",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "dmx_sct_filter_params",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "pid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "timeout",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "dmx_pes_filter_params",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "pid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "dmx_stc",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "stc",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "dmx_buffer",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "index",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "bytesused",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "length",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "count",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "dmx_requestbuffers",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "dmx_exportbuffer",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "index",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "fd",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [
+    "dmx_output_t",
+    "dmx_input_t",
+    "dmx_pes_type_t",
+    "dmx_filter_t"
+  ],
+  "enums": {}
+}

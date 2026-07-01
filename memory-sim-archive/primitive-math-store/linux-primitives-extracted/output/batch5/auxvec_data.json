@@ -1,0 +1,180 @@
+{
+  "filename": "auxvec.h",
+  "includes": [
+    "asm/auxvec.h"
+  ],
+  "defines": [
+    {
+      "name": "AT_NULL",
+      "value": "0",
+      "comment": "end of vector",
+      "category": ""
+    },
+    {
+      "name": "AT_IGNORE",
+      "value": "1",
+      "comment": "entry should be ignored",
+      "category": ""
+    },
+    {
+      "name": "AT_EXECFD",
+      "value": "2",
+      "comment": "file descriptor of program",
+      "category": ""
+    },
+    {
+      "name": "AT_PHDR",
+      "value": "3",
+      "comment": "program headers for program",
+      "category": ""
+    },
+    {
+      "name": "AT_PHENT",
+      "value": "4",
+      "comment": "size of program header entry",
+      "category": ""
+    },
+    {
+      "name": "AT_PHNUM",
+      "value": "5",
+      "comment": "number of program headers",
+      "category": ""
+    },
+    {
+      "name": "AT_PAGESZ",
+      "value": "6",
+      "comment": "system page size",
+      "category": ""
+    },
+    {
+      "name": "AT_BASE",
+      "value": "7",
+      "comment": "base address of interpreter",
+      "category": ""
+    },
+    {
+      "name": "AT_FLAGS",
+      "value": "8",
+      "comment": "flags",
+      "category": ""
+    },
+    {
+      "name": "AT_ENTRY",
+      "value": "9",
+      "comment": "entry point of program",
+      "category": ""
+    },
+    {
+      "name": "AT_NOTELF",
+      "value": "10",
+      "comment": "program is not ELF",
+      "category": ""
+    },
+    {
+      "name": "AT_UID",
+      "value": "11",
+      "comment": "real uid",
+      "category": ""
+    },
+    {
+      "name": "AT_EUID",
+      "value": "12",
+      "comment": "effective uid",
+      "category": ""
+    },
+    {
+      "name": "AT_GID",
+      "value": "13",
+      "comment": "real gid",
+      "category": ""
+    },
+    {
+      "name": "AT_EGID",
+      "value": "14",
+      "comment": "effective gid",
+      "category": ""
+    },
+    {
+      "name": "AT_PLATFORM",
+      "value": "15",
+      "comment": "string identifying CPU for optimizations",
+      "category": ""
+    },
+    {
+      "name": "AT_HWCAP",
+      "value": "16",
+      "comment": "arch dependent hints at CPU capabilities",
+      "category": ""
+    },
+    {
+      "name": "AT_CLKTCK",
+      "value": "17",
+      "comment": "frequency at which times() increments",
+      "category": ""
+    },
+    {
+      "name": "AT_SECURE",
+      "value": "23",
+      "comment": "secure mode boolean",
+      "category": ""
+    },
+    {
+      "name": "AT_BASE_PLATFORM",
+      "value": "24\t/* string identifying real platform, may",
+      "comment": "",
+      "category": "AT_BASE"
+    },
+    {
+      "name": "AT_RANDOM",
+      "value": "25",
+      "comment": "address of 16 random bytes",
+      "category": ""
+    },
+    {
+      "name": "AT_HWCAP2",
+      "value": "26",
+      "comment": "extension of AT_HWCAP",
+      "category": ""
+    },
+    {
+      "name": "AT_RSEQ_FEATURE_SIZE",
+      "value": "27",
+      "comment": "rseq supported feature size",
+      "category": "AT_RSEQ"
+    },
+    {
+      "name": "AT_RSEQ_ALIGN",
+      "value": "28",
+      "comment": "rseq allocation alignment",
+      "category": "AT_RSEQ"
+    },
+    {
+      "name": "AT_HWCAP3",
+      "value": "29",
+      "comment": "extension of AT_HWCAP",
+      "category": ""
+    },
+    {
+      "name": "AT_HWCAP4",
+      "value": "30",
+      "comment": "extension of AT_HWCAP",
+      "category": ""
+    },
+    {
+      "name": "AT_EXECFN",
+      "value": "31",
+      "comment": "filename of program",
+      "category": ""
+    },
+    {
+      "name": "AT_MINSIGSTKSZ",
+      "value": "51",
+      "comment": "minimal stack size for signal delivery",
+      "category": ""
+    }
+  ],
+  "structs": [],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

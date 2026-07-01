@@ -1,0 +1,1391 @@
+{
+  "description": "Toy simulation of how dataset shape couples with hybrid LoRA geometry.",
+  "iterations_per_task_per_mode": 2400,
+  "dataset_profiles": [
+    {
+      "name": "current_structural_v0_1",
+      "description": "The dataset just trained: structural primitive payload, light implicit gain clamp, weak explicit stop behavior.",
+      "additive_boost": 0.06,
+      "gate_boost": 0.02,
+      "web_boost": 0.02,
+      "fourier_boost": 0.0,
+      "anti_echo_boost": 0.04,
+      "overhead_delta": 0.02,
+      "complexity_delta": 0.0
+    },
+    {
+      "name": "v0_1_plus_clean_stop",
+      "description": "Current dataset plus explicit clean-stop and no-continuation examples.",
+      "additive_boost": 0.06,
+      "gate_boost": 0.08,
+      "web_boost": 0.02,
+      "fourier_boost": 0.0,
+      "anti_echo_boost": 0.26,
+      "overhead_delta": 0.03,
+      "complexity_delta": 0.04
+    },
+    {
+      "name": "hybrid_tagged_v0_2",
+      "description": "Current dataset plus examples that explicitly teach gate, web association, carrier rhythm, and clean stop.",
+      "additive_boost": 0.08,
+      "gate_boost": 0.18,
+      "web_boost": 0.16,
+      "fourier_boost": 0.14,
+      "anti_echo_boost": 0.22,
+      "overhead_delta": 0.05,
+      "complexity_delta": 0.1
+    },
+    {
+      "name": "hybrid_overstuffed_v0_2",
+      "description": "Too many hybrid examples and repeated primitive labels; strong signal but more clutter.",
+      "additive_boost": 0.14,
+      "gate_boost": 0.22,
+      "web_boost": 0.22,
+      "fourier_boost": 0.2,
+      "anti_echo_boost": 0.18,
+      "overhead_delta": 0.14,
+      "complexity_delta": 0.18
+    },
+    {
+      "name": "gate_web_carrier_minimal",
+      "description": "Compact dataset focused only on gate, web, carrier, and stop behavior with less payload repetition.",
+      "additive_boost": -0.02,
+      "gate_boost": 0.2,
+      "web_boost": 0.18,
+      "fourier_boost": 0.16,
+      "anti_echo_boost": 0.28,
+      "overhead_delta": -0.02,
+      "complexity_delta": 0.08
+    }
+  ],
+  "target_geometries": [
+    "standard_lora_additive",
+    "gated_lora",
+    "gated_plus_web",
+    "gated_plus_fourier",
+    "hybrid_all_three_balanced",
+    "hybrid_all_three_overbuilt"
+  ],
+  "results": [
+    {
+      "geometry": "hybrid_all_three_overbuilt",
+      "pass_rate": 0.9717,
+      "clean_pass_rate": 0.9717,
+      "mean_score": 0.9819,
+      "classified_rate": 0.8759,
+      "packet_rate": 0.8643,
+      "gate_open_rate": 0.8814,
+      "repair_rate": 0.1733,
+      "echo_rate": 0.0,
+      "overdrive_rate": 0.0,
+      "cascade_rate": 0.0026,
+      "avg_missing": 0.0843,
+      "avg_distractors": 0.5169,
+      "train_complexity": 1.0,
+      "per_mode": {
+        "normal": {
+          "pass_rate": 0.9797,
+          "clean_pass_rate": 0.9797,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.001
+        },
+        "high_pressure": {
+          "pass_rate": 0.9691,
+          "clean_pass_rate": 0.9691,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.0043
+        },
+        "heldout_shift": {
+          "pass_rate": 0.9737,
+          "clean_pass_rate": 0.9737,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.0017
+        },
+        "echo_trap": {
+          "pass_rate": 0.9643,
+          "clean_pass_rate": 0.9643,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.0033
+        }
+      },
+      "dataset_profile": "gate_web_carrier_minimal",
+      "profile_description": "Compact dataset focused only on gate, web, carrier, and stop behavior with less payload repetition."
+    },
+    {
+      "geometry": "hybrid_all_three_overbuilt",
+      "pass_rate": 0.9674,
+      "clean_pass_rate": 0.9674,
+      "mean_score": 0.98,
+      "classified_rate": 0.8569,
+      "packet_rate": 0.8592,
+      "gate_open_rate": 0.8823,
+      "repair_rate": 0.171,
+      "echo_rate": 0.0,
+      "overdrive_rate": 0.0,
+      "cascade_rate": 0.0022,
+      "avg_missing": 0.0889,
+      "avg_distractors": 0.5908,
+      "train_complexity": 1.1,
+      "per_mode": {
+        "normal": {
+          "pass_rate": 0.9745,
+          "clean_pass_rate": 0.9745,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.001
+        },
+        "high_pressure": {
+          "pass_rate": 0.9642,
+          "clean_pass_rate": 0.9642,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.0037
+        },
+        "heldout_shift": {
+          "pass_rate": 0.969,
+          "clean_pass_rate": 0.969,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.0019
+        },
+        "echo_trap": {
+          "pass_rate": 0.9619,
+          "clean_pass_rate": 0.9619,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.0021
+        }
+      },
+      "dataset_profile": "hybrid_overstuffed_v0_2",
+      "profile_description": "Too many hybrid examples and repeated primitive labels; strong signal but more clutter."
+    },
+    {
+      "geometry": "hybrid_all_three_overbuilt",
+      "pass_rate": 0.9625,
+      "clean_pass_rate": 0.9625,
+      "mean_score": 0.9769,
+      "classified_rate": 0.8507,
+      "packet_rate": 0.8534,
+      "gate_open_rate": 0.8634,
+      "repair_rate": 0.1934,
+      "echo_rate": 0.0,
+      "overdrive_rate": 0.0,
+      "cascade_rate": 0.003,
+      "avg_missing": 0.1049,
+      "avg_distractors": 0.567,
+      "train_complexity": 1.02,
+      "per_mode": {
+        "normal": {
+          "pass_rate": 0.9706,
+          "clean_pass_rate": 0.9706,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.0013
+        },
+        "high_pressure": {
+          "pass_rate": 0.9584,
+          "clean_pass_rate": 0.9584,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.0052
+        },
+        "heldout_shift": {
+          "pass_rate": 0.9633,
+          "clean_pass_rate": 0.9633,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.003
+        },
+        "echo_trap": {
+          "pass_rate": 0.9578,
+          "clean_pass_rate": 0.9578,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.0026
+        }
+      },
+      "dataset_profile": "hybrid_tagged_v0_2",
+      "profile_description": "Current dataset plus examples that explicitly teach gate, web association, carrier rhythm, and clean stop."
+    },
+    {
+      "geometry": "hybrid_all_three_balanced",
+      "pass_rate": 0.9463,
+      "clean_pass_rate": 0.9463,
+      "mean_score": 0.9663,
+      "classified_rate": 0.8489,
+      "packet_rate": 0.8275,
+      "gate_open_rate": 0.8413,
+      "repair_rate": 0.2841,
+      "echo_rate": 0.0,
+      "overdrive_rate": 0.0,
+      "cascade_rate": 0.0084,
+      "avg_missing": 0.1664,
+      "avg_distractors": 0.4786,
+      "train_complexity": 0.86,
+      "per_mode": {
+        "normal": {
+          "pass_rate": 0.9602,
+          "clean_pass_rate": 0.9602,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.0031
+        },
+        "high_pressure": {
+          "pass_rate": 0.9398,
+          "clean_pass_rate": 0.9398,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.0133
+        },
+        "heldout_shift": {
+          "pass_rate": 0.9497,
+          "clean_pass_rate": 0.9497,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.0077
+        },
+        "echo_trap": {
+          "pass_rate": 0.9352,
+          "clean_pass_rate": 0.9352,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.0096
+        }
+      },
+      "dataset_profile": "gate_web_carrier_minimal",
+      "profile_description": "Compact dataset focused only on gate, web, carrier, and stop behavior with less payload repetition."
+    },
+    {
+      "geometry": "hybrid_all_three_balanced",
+      "pass_rate": 0.9456,
+      "clean_pass_rate": 0.9456,
+      "mean_score": 0.9677,
+      "classified_rate": 0.838,
+      "packet_rate": 0.8243,
+      "gate_open_rate": 0.8401,
+      "repair_rate": 0.2494,
+      "echo_rate": 0.0,
+      "overdrive_rate": 0.0,
+      "cascade_rate": 0.0055,
+      "avg_missing": 0.1513,
+      "avg_distractors": 0.5534,
+      "train_complexity": 0.96,
+      "per_mode": {
+        "normal": {
+          "pass_rate": 0.9554,
+          "clean_pass_rate": 0.9554,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.0023
+        },
+        "high_pressure": {
+          "pass_rate": 0.9417,
+          "clean_pass_rate": 0.9417,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.0091
+        },
+        "heldout_shift": {
+          "pass_rate": 0.9485,
+          "clean_pass_rate": 0.9485,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.0045
+        },
+        "echo_trap": {
+          "pass_rate": 0.9369,
+          "clean_pass_rate": 0.9369,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.0062
+        }
+      },
+      "dataset_profile": "hybrid_overstuffed_v0_2",
+      "profile_description": "Too many hybrid examples and repeated primitive labels; strong signal but more clutter."
+    },
+    {
+      "geometry": "hybrid_all_three_balanced",
+      "pass_rate": 0.9339,
+      "clean_pass_rate": 0.9339,
+      "mean_score": 0.9601,
+      "classified_rate": 0.8264,
+      "packet_rate": 0.8169,
+      "gate_open_rate": 0.8201,
+      "repair_rate": 0.3023,
+      "echo_rate": 0.0,
+      "overdrive_rate": 0.0,
+      "cascade_rate": 0.0102,
+      "avg_missing": 0.1912,
+      "avg_distractors": 0.5285,
+      "train_complexity": 0.88,
+      "per_mode": {
+        "normal": {
+          "pass_rate": 0.9486,
+          "clean_pass_rate": 0.9486,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.0041
+        },
+        "high_pressure": {
+          "pass_rate": 0.9254,
+          "clean_pass_rate": 0.9254,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.0165
+        },
+        "heldout_shift": {
+          "pass_rate": 0.9379,
+          "clean_pass_rate": 0.9379,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.0098
+        },
+        "echo_trap": {
+          "pass_rate": 0.9235,
+          "clean_pass_rate": 0.9235,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.0103
+        }
+      },
+      "dataset_profile": "hybrid_tagged_v0_2",
+      "profile_description": "Current dataset plus examples that explicitly teach gate, web association, carrier rhythm, and clean stop."
+    },
+    {
+      "geometry": "hybrid_all_three_overbuilt",
+      "pass_rate": 0.9104,
+      "clean_pass_rate": 0.9104,
+      "mean_score": 0.9469,
+      "classified_rate": 0.7926,
+      "packet_rate": 0.7956,
+      "gate_open_rate": 0.8075,
+      "repair_rate": 0.327,
+      "echo_rate": 0.0,
+      "overdrive_rate": 0.0,
+      "cascade_rate": 0.0145,
+      "avg_missing": 0.2509,
+      "avg_distractors": 0.5562,
+      "train_complexity": 0.9600000000000001,
+      "per_mode": {
+        "normal": {
+          "pass_rate": 0.9276,
+          "clean_pass_rate": 0.9276,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.0067
+        },
+        "high_pressure": {
+          "pass_rate": 0.9034,
+          "clean_pass_rate": 0.9034,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.0212
+        },
+        "heldout_shift": {
+          "pass_rate": 0.9142,
+          "clean_pass_rate": 0.9142,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.0138
+        },
+        "echo_trap": {
+          "pass_rate": 0.8963,
+          "clean_pass_rate": 0.8963,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.0161
+        }
+      },
+      "dataset_profile": "v0_1_plus_clean_stop",
+      "profile_description": "Current dataset plus explicit clean-stop and no-continuation examples."
+    },
+    {
+      "geometry": "hybrid_all_three_overbuilt",
+      "pass_rate": 0.8829,
+      "clean_pass_rate": 0.8752,
+      "mean_score": 0.9337,
+      "classified_rate": 0.7729,
+      "packet_rate": 0.7981,
+      "gate_open_rate": 0.7376,
+      "repair_rate": 0.3734,
+      "echo_rate": 0.0101,
+      "overdrive_rate": 0.0,
+      "cascade_rate": 0.0213,
+      "avg_missing": 0.2984,
+      "avg_distractors": 0.6394,
+      "train_complexity": 0.92,
+      "per_mode": {
+        "normal": {
+          "pass_rate": 0.9043,
+          "clean_pass_rate": 0.9043,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.0109
+        },
+        "high_pressure": {
+          "pass_rate": 0.8745,
+          "clean_pass_rate": 0.8745,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.0316
+        },
+        "heldout_shift": {
+          "pass_rate": 0.8898,
+          "clean_pass_rate": 0.8898,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.0175
+        },
+        "echo_trap": {
+          "pass_rate": 0.8629,
+          "clean_pass_rate": 0.8322,
+          "echo_rate": 0.0405,
+          "cascade_rate": 0.025
+        }
+      },
+      "dataset_profile": "current_structural_v0_1",
+      "profile_description": "The dataset just trained: structural primitive payload, light implicit gain clamp, weak explicit stop behavior."
+    },
+    {
+      "geometry": "hybrid_all_three_balanced",
+      "pass_rate": 0.844,
+      "clean_pass_rate": 0.844,
+      "mean_score": 0.9126,
+      "classified_rate": 0.7564,
+      "packet_rate": 0.7579,
+      "gate_open_rate": 0.7629,
+      "repair_rate": 0.4629,
+      "echo_rate": 0.0,
+      "overdrive_rate": 0.0,
+      "cascade_rate": 0.0379,
+      "avg_missing": 0.4136,
+      "avg_distractors": 0.5212,
+      "train_complexity": 0.8200000000000001,
+      "per_mode": {
+        "normal": {
+          "pass_rate": 0.8746,
+          "clean_pass_rate": 0.8746,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.0225
+        },
+        "high_pressure": {
+          "pass_rate": 0.8277,
+          "clean_pass_rate": 0.8277,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.0558
+        },
+        "heldout_shift": {
+          "pass_rate": 0.8501,
+          "clean_pass_rate": 0.8501,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.0311
+        },
+        "echo_trap": {
+          "pass_rate": 0.8235,
+          "clean_pass_rate": 0.8235,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.0421
+        }
+      },
+      "dataset_profile": "v0_1_plus_clean_stop",
+      "profile_description": "Current dataset plus explicit clean-stop and no-continuation examples."
+    },
+    {
+      "geometry": "hybrid_all_three_balanced",
+      "pass_rate": 0.8139,
+      "clean_pass_rate": 0.8139,
+      "mean_score": 0.898,
+      "classified_rate": 0.7422,
+      "packet_rate": 0.7601,
+      "gate_open_rate": 0.6941,
+      "repair_rate": 0.5043,
+      "echo_rate": 0.0,
+      "overdrive_rate": 0.0,
+      "cascade_rate": 0.0504,
+      "avg_missing": 0.4637,
+      "avg_distractors": 0.5991,
+      "train_complexity": 0.78,
+      "per_mode": {
+        "normal": {
+          "pass_rate": 0.8465,
+          "clean_pass_rate": 0.8465,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.0311
+        },
+        "high_pressure": {
+          "pass_rate": 0.796,
+          "clean_pass_rate": 0.796,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.0709
+        },
+        "heldout_shift": {
+          "pass_rate": 0.8205,
+          "clean_pass_rate": 0.8205,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.0451
+        },
+        "echo_trap": {
+          "pass_rate": 0.7926,
+          "clean_pass_rate": 0.7926,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.0546
+        }
+      },
+      "dataset_profile": "current_structural_v0_1",
+      "profile_description": "The dataset just trained: structural primitive payload, light implicit gain clamp, weak explicit stop behavior."
+    },
+    {
+      "geometry": "gated_plus_web",
+      "pass_rate": 0.7839,
+      "clean_pass_rate": 0.7839,
+      "mean_score": 0.8849,
+      "classified_rate": 0.7112,
+      "packet_rate": 0.6597,
+      "gate_open_rate": 0.7426,
+      "repair_rate": 0.6014,
+      "echo_rate": 0.0,
+      "overdrive_rate": 0.0,
+      "cascade_rate": 0.0661,
+      "avg_missing": 0.5095,
+      "avg_distractors": 0.539,
+      "train_complexity": 0.76,
+      "per_mode": {
+        "normal": {
+          "pass_rate": 0.8205,
+          "clean_pass_rate": 0.8205,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.0395
+        },
+        "high_pressure": {
+          "pass_rate": 0.7658,
+          "clean_pass_rate": 0.7658,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.0898
+        },
+        "heldout_shift": {
+          "pass_rate": 0.7891,
+          "clean_pass_rate": 0.7891,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.0624
+        },
+        "echo_trap": {
+          "pass_rate": 0.7603,
+          "clean_pass_rate": 0.7603,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.0726
+        }
+      },
+      "dataset_profile": "hybrid_overstuffed_v0_2",
+      "profile_description": "Too many hybrid examples and repeated primitive labels; strong signal but more clutter."
+    },
+    {
+      "geometry": "gated_plus_web",
+      "pass_rate": 0.7774,
+      "clean_pass_rate": 0.7774,
+      "mean_score": 0.8823,
+      "classified_rate": 0.7272,
+      "packet_rate": 0.6676,
+      "gate_open_rate": 0.7457,
+      "repair_rate": 0.6429,
+      "echo_rate": 0.0,
+      "overdrive_rate": 0.0,
+      "cascade_rate": 0.0807,
+      "avg_missing": 0.5275,
+      "avg_distractors": 0.4661,
+      "train_complexity": 0.6599999999999999,
+      "per_mode": {
+        "normal": {
+          "pass_rate": 0.8117,
+          "clean_pass_rate": 0.8117,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.0533
+        },
+        "high_pressure": {
+          "pass_rate": 0.7558,
+          "clean_pass_rate": 0.7558,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.1035
+        },
+        "heldout_shift": {
+          "pass_rate": 0.7892,
+          "clean_pass_rate": 0.7892,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.0761
+        },
+        "echo_trap": {
+          "pass_rate": 0.7529,
+          "clean_pass_rate": 0.7529,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.09
+        }
+      },
+      "dataset_profile": "gate_web_carrier_minimal",
+      "profile_description": "Compact dataset focused only on gate, web, carrier, and stop behavior with less payload repetition."
+    },
+    {
+      "geometry": "gated_plus_web",
+      "pass_rate": 0.7434,
+      "clean_pass_rate": 0.7434,
+      "mean_score": 0.867,
+      "classified_rate": 0.7077,
+      "packet_rate": 0.6533,
+      "gate_open_rate": 0.7239,
+      "repair_rate": 0.6369,
+      "echo_rate": 0.0,
+      "overdrive_rate": 0.0,
+      "cascade_rate": 0.0901,
+      "avg_missing": 0.5823,
+      "avg_distractors": 0.5168,
+      "train_complexity": 0.6799999999999999,
+      "per_mode": {
+        "normal": {
+          "pass_rate": 0.7891,
+          "clean_pass_rate": 0.7891,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.0575
+        },
+        "high_pressure": {
+          "pass_rate": 0.7146,
+          "clean_pass_rate": 0.7146,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.1196
+        },
+        "heldout_shift": {
+          "pass_rate": 0.7514,
+          "clean_pass_rate": 0.7514,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.0873
+        },
+        "echo_trap": {
+          "pass_rate": 0.7185,
+          "clean_pass_rate": 0.7185,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.0961
+        }
+      },
+      "dataset_profile": "hybrid_tagged_v0_2",
+      "profile_description": "Current dataset plus examples that explicitly teach gate, web association, carrier rhythm, and clean stop."
+    },
+    {
+      "geometry": "gated_plus_fourier",
+      "pass_rate": 0.7311,
+      "clean_pass_rate": 0.7299,
+      "mean_score": 0.853,
+      "classified_rate": 0.6728,
+      "packet_rate": 0.7372,
+      "gate_open_rate": 0.745,
+      "repair_rate": 0.5376,
+      "echo_rate": 0.0021,
+      "overdrive_rate": 0.0,
+      "cascade_rate": 0.0695,
+      "avg_missing": 0.6671,
+      "avg_distractors": 0.5632,
+      "train_complexity": 0.76,
+      "per_mode": {
+        "normal": {
+          "pass_rate": 0.7659,
+          "clean_pass_rate": 0.7659,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.0436
+        },
+        "high_pressure": {
+          "pass_rate": 0.7134,
+          "clean_pass_rate": 0.7134,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.0941
+        },
+        "heldout_shift": {
+          "pass_rate": 0.7355,
+          "clean_pass_rate": 0.7355,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.0681
+        },
+        "echo_trap": {
+          "pass_rate": 0.7096,
+          "clean_pass_rate": 0.7049,
+          "echo_rate": 0.0085,
+          "cascade_rate": 0.072
+        }
+      },
+      "dataset_profile": "hybrid_overstuffed_v0_2",
+      "profile_description": "Too many hybrid examples and repeated primitive labels; strong signal but more clutter."
+    },
+    {
+      "geometry": "gated_plus_fourier",
+      "pass_rate": 0.7243,
+      "clean_pass_rate": 0.7243,
+      "mean_score": 0.849,
+      "classified_rate": 0.6866,
+      "packet_rate": 0.7404,
+      "gate_open_rate": 0.7482,
+      "repair_rate": 0.568,
+      "echo_rate": 0.0,
+      "overdrive_rate": 0.0,
+      "cascade_rate": 0.0847,
+      "avg_missing": 0.693,
+      "avg_distractors": 0.4829,
+      "train_complexity": 0.6599999999999999,
+      "per_mode": {
+        "normal": {
+          "pass_rate": 0.7633,
+          "clean_pass_rate": 0.7633,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.0567
+        },
+        "high_pressure": {
+          "pass_rate": 0.7037,
+          "clean_pass_rate": 0.7037,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.1072
+        },
+        "heldout_shift": {
+          "pass_rate": 0.7287,
+          "clean_pass_rate": 0.7287,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.0814
+        },
+        "echo_trap": {
+          "pass_rate": 0.7014,
+          "clean_pass_rate": 0.7014,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.0935
+        }
+      },
+      "dataset_profile": "gate_web_carrier_minimal",
+      "profile_description": "Compact dataset focused only on gate, web, carrier, and stop behavior with less payload repetition."
+    },
+    {
+      "geometry": "gated_plus_fourier",
+      "pass_rate": 0.6915,
+      "clean_pass_rate": 0.6915,
+      "mean_score": 0.8337,
+      "classified_rate": 0.6643,
+      "packet_rate": 0.7312,
+      "gate_open_rate": 0.7273,
+      "repair_rate": 0.5508,
+      "echo_rate": 0.0,
+      "overdrive_rate": 0.0,
+      "cascade_rate": 0.0937,
+      "avg_missing": 0.746,
+      "avg_distractors": 0.5283,
+      "train_complexity": 0.6799999999999999,
+      "per_mode": {
+        "normal": {
+          "pass_rate": 0.7286,
+          "clean_pass_rate": 0.7286,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.0661
+        },
+        "high_pressure": {
+          "pass_rate": 0.6758,
+          "clean_pass_rate": 0.6758,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.1203
+        },
+        "heldout_shift": {
+          "pass_rate": 0.6931,
+          "clean_pass_rate": 0.6931,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.0873
+        },
+        "echo_trap": {
+          "pass_rate": 0.6684,
+          "clean_pass_rate": 0.6684,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.1012
+        }
+      },
+      "dataset_profile": "hybrid_tagged_v0_2",
+      "profile_description": "Current dataset plus examples that explicitly teach gate, web association, carrier rhythm, and clean stop."
+    },
+    {
+      "geometry": "gated_plus_web",
+      "pass_rate": 0.586,
+      "clean_pass_rate": 0.586,
+      "mean_score": 0.7879,
+      "classified_rate": 0.6359,
+      "packet_rate": 0.595,
+      "gate_open_rate": 0.669,
+      "repair_rate": 0.7046,
+      "echo_rate": 0.0,
+      "overdrive_rate": 0.0,
+      "cascade_rate": 0.1713,
+      "avg_missing": 0.8767,
+      "avg_distractors": 0.4988,
+      "train_complexity": 0.62,
+      "per_mode": {
+        "normal": {
+          "pass_rate": 0.6308,
+          "clean_pass_rate": 0.6308,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.1329
+        },
+        "high_pressure": {
+          "pass_rate": 0.559,
+          "clean_pass_rate": 0.559,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.2041
+        },
+        "heldout_shift": {
+          "pass_rate": 0.5908,
+          "clean_pass_rate": 0.5908,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.1641
+        },
+        "echo_trap": {
+          "pass_rate": 0.5635,
+          "clean_pass_rate": 0.5635,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.184
+        }
+      },
+      "dataset_profile": "v0_1_plus_clean_stop",
+      "profile_description": "Current dataset plus explicit clean-stop and no-continuation examples."
+    },
+    {
+      "geometry": "gated_lora",
+      "pass_rate": 0.5735,
+      "clean_pass_rate": 0.5735,
+      "mean_score": 0.7739,
+      "classified_rate": 0.6008,
+      "packet_rate": 0.6013,
+      "gate_open_rate": 0.7525,
+      "repair_rate": 0.6036,
+      "echo_rate": 0.0,
+      "overdrive_rate": 0.0,
+      "cascade_rate": 0.156,
+      "avg_missing": 0.9528,
+      "avg_distractors": 0.4828,
+      "train_complexity": 0.46,
+      "per_mode": {
+        "normal": {
+          "pass_rate": 0.619,
+          "clean_pass_rate": 0.619,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.1188
+        },
+        "high_pressure": {
+          "pass_rate": 0.5482,
+          "clean_pass_rate": 0.5482,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.1925
+        },
+        "heldout_shift": {
+          "pass_rate": 0.5766,
+          "clean_pass_rate": 0.5766,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.1526
+        },
+        "echo_trap": {
+          "pass_rate": 0.5505,
+          "clean_pass_rate": 0.5505,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.16
+        }
+      },
+      "dataset_profile": "hybrid_overstuffed_v0_2",
+      "profile_description": "Too many hybrid examples and repeated primitive labels; strong signal but more clutter."
+    },
+    {
+      "geometry": "gated_lora",
+      "pass_rate": 0.564,
+      "clean_pass_rate": 0.564,
+      "mean_score": 0.7696,
+      "classified_rate": 0.6125,
+      "packet_rate": 0.607,
+      "gate_open_rate": 0.7562,
+      "repair_rate": 0.646,
+      "echo_rate": 0.0,
+      "overdrive_rate": 0.0,
+      "cascade_rate": 0.1778,
+      "avg_missing": 0.9753,
+      "avg_distractors": 0.406,
+      "train_complexity": 0.36000000000000004,
+      "per_mode": {
+        "normal": {
+          "pass_rate": 0.6073,
+          "clean_pass_rate": 0.6073,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.1383
+        },
+        "high_pressure": {
+          "pass_rate": 0.5381,
+          "clean_pass_rate": 0.5381,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.2136
+        },
+        "heldout_shift": {
+          "pass_rate": 0.5648,
+          "clean_pass_rate": 0.5648,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.1737
+        },
+        "echo_trap": {
+          "pass_rate": 0.5459,
+          "clean_pass_rate": 0.5459,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.1854
+        }
+      },
+      "dataset_profile": "gate_web_carrier_minimal",
+      "profile_description": "Compact dataset focused only on gate, web, carrier, and stop behavior with less payload repetition."
+    },
+    {
+      "geometry": "gated_plus_web",
+      "pass_rate": 0.5471,
+      "clean_pass_rate": 0.5471,
+      "mean_score": 0.7676,
+      "classified_rate": 0.6246,
+      "packet_rate": 0.6005,
+      "gate_open_rate": 0.597,
+      "repair_rate": 0.7183,
+      "echo_rate": 0.0,
+      "overdrive_rate": 0.0,
+      "cascade_rate": 0.1911,
+      "avg_missing": 0.94,
+      "avg_distractors": 0.5714,
+      "train_complexity": 0.58,
+      "per_mode": {
+        "normal": {
+          "pass_rate": 0.592,
+          "clean_pass_rate": 0.592,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.1542
+        },
+        "high_pressure": {
+          "pass_rate": 0.5183,
+          "clean_pass_rate": 0.5183,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.2278
+        },
+        "heldout_shift": {
+          "pass_rate": 0.5554,
+          "clean_pass_rate": 0.5554,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.1807
+        },
+        "echo_trap": {
+          "pass_rate": 0.5226,
+          "clean_pass_rate": 0.5226,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.2015
+        }
+      },
+      "dataset_profile": "current_structural_v0_1",
+      "profile_description": "The dataset just trained: structural primitive payload, light implicit gain clamp, weak explicit stop behavior."
+    },
+    {
+      "geometry": "gated_lora",
+      "pass_rate": 0.5297,
+      "clean_pass_rate": 0.5297,
+      "mean_score": 0.75,
+      "classified_rate": 0.5925,
+      "packet_rate": 0.5989,
+      "gate_open_rate": 0.7362,
+      "repair_rate": 0.6187,
+      "echo_rate": 0.0,
+      "overdrive_rate": 0.0,
+      "cascade_rate": 0.1932,
+      "avg_missing": 1.0378,
+      "avg_distractors": 0.4526,
+      "train_complexity": 0.38,
+      "per_mode": {
+        "normal": {
+          "pass_rate": 0.5785,
+          "clean_pass_rate": 0.5785,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.1555
+        },
+        "high_pressure": {
+          "pass_rate": 0.5081,
+          "clean_pass_rate": 0.5081,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.2247
+        },
+        "heldout_shift": {
+          "pass_rate": 0.5252,
+          "clean_pass_rate": 0.5252,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.1902
+        },
+        "echo_trap": {
+          "pass_rate": 0.5071,
+          "clean_pass_rate": 0.5071,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.2023
+        }
+      },
+      "dataset_profile": "hybrid_tagged_v0_2",
+      "profile_description": "Current dataset plus examples that explicitly teach gate, web association, carrier rhythm, and clean stop."
+    },
+    {
+      "geometry": "gated_plus_fourier",
+      "pass_rate": 0.5232,
+      "clean_pass_rate": 0.5232,
+      "mean_score": 0.7436,
+      "classified_rate": 0.5942,
+      "packet_rate": 0.6751,
+      "gate_open_rate": 0.6728,
+      "repair_rate": 0.5829,
+      "echo_rate": 0.0,
+      "overdrive_rate": 0.0,
+      "cascade_rate": 0.1776,
+      "avg_missing": 1.084,
+      "avg_distractors": 0.5189,
+      "train_complexity": 0.62,
+      "per_mode": {
+        "normal": {
+          "pass_rate": 0.569,
+          "clean_pass_rate": 0.569,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.1389
+        },
+        "high_pressure": {
+          "pass_rate": 0.5032,
+          "clean_pass_rate": 0.5032,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.2153
+        },
+        "heldout_shift": {
+          "pass_rate": 0.5193,
+          "clean_pass_rate": 0.5193,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.1736
+        },
+        "echo_trap": {
+          "pass_rate": 0.5012,
+          "clean_pass_rate": 0.5012,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.1827
+        }
+      },
+      "dataset_profile": "v0_1_plus_clean_stop",
+      "profile_description": "Current dataset plus explicit clean-stop and no-continuation examples."
+    },
+    {
+      "geometry": "gated_plus_fourier",
+      "pass_rate": 0.4809,
+      "clean_pass_rate": 0.4776,
+      "mean_score": 0.7183,
+      "classified_rate": 0.5809,
+      "packet_rate": 0.6795,
+      "gate_open_rate": 0.6002,
+      "repair_rate": 0.5867,
+      "echo_rate": 0.0128,
+      "overdrive_rate": 0.0,
+      "cascade_rate": 0.1973,
+      "avg_missing": 1.1602,
+      "avg_distractors": 0.5923,
+      "train_complexity": 0.58,
+      "per_mode": {
+        "normal": {
+          "pass_rate": 0.5269,
+          "clean_pass_rate": 0.5269,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.1572
+        },
+        "high_pressure": {
+          "pass_rate": 0.4665,
+          "clean_pass_rate": 0.4665,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.2308
+        },
+        "heldout_shift": {
+          "pass_rate": 0.4799,
+          "clean_pass_rate": 0.4799,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.191
+        },
+        "echo_trap": {
+          "pass_rate": 0.4502,
+          "clean_pass_rate": 0.437,
+          "echo_rate": 0.0511,
+          "cascade_rate": 0.2102
+        }
+      },
+      "dataset_profile": "current_structural_v0_1",
+      "profile_description": "The dataset just trained: structural primitive payload, light implicit gain clamp, weak explicit stop behavior."
+    },
+    {
+      "geometry": "gated_lora",
+      "pass_rate": 0.3616,
+      "clean_pass_rate": 0.3616,
+      "mean_score": 0.6429,
+      "classified_rate": 0.5231,
+      "packet_rate": 0.5391,
+      "gate_open_rate": 0.6777,
+      "repair_rate": 0.5952,
+      "echo_rate": 0.0,
+      "overdrive_rate": 0.0,
+      "cascade_rate": 0.2873,
+      "avg_missing": 1.4291,
+      "avg_distractors": 0.4426,
+      "train_complexity": 0.32,
+      "per_mode": {
+        "normal": {
+          "pass_rate": 0.4029,
+          "clean_pass_rate": 0.4029,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.2423
+        },
+        "high_pressure": {
+          "pass_rate": 0.3448,
+          "clean_pass_rate": 0.3448,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.3261
+        },
+        "heldout_shift": {
+          "pass_rate": 0.3569,
+          "clean_pass_rate": 0.3569,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.2828
+        },
+        "echo_trap": {
+          "pass_rate": 0.3419,
+          "clean_pass_rate": 0.3419,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.298
+        }
+      },
+      "dataset_profile": "v0_1_plus_clean_stop",
+      "profile_description": "Current dataset plus explicit clean-stop and no-continuation examples."
+    },
+    {
+      "geometry": "gated_lora",
+      "pass_rate": 0.3264,
+      "clean_pass_rate": 0.3264,
+      "mean_score": 0.6191,
+      "classified_rate": 0.5089,
+      "packet_rate": 0.5433,
+      "gate_open_rate": 0.6055,
+      "repair_rate": 0.5981,
+      "echo_rate": 0.0,
+      "overdrive_rate": 0.0,
+      "cascade_rate": 0.3054,
+      "avg_missing": 1.5003,
+      "avg_distractors": 0.5184,
+      "train_complexity": 0.28,
+      "per_mode": {
+        "normal": {
+          "pass_rate": 0.3669,
+          "clean_pass_rate": 0.3669,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.2602
+        },
+        "high_pressure": {
+          "pass_rate": 0.3081,
+          "clean_pass_rate": 0.3081,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.3441
+        },
+        "heldout_shift": {
+          "pass_rate": 0.325,
+          "clean_pass_rate": 0.325,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.3017
+        },
+        "echo_trap": {
+          "pass_rate": 0.3055,
+          "clean_pass_rate": 0.3055,
+          "echo_rate": 0.0,
+          "cascade_rate": 0.3157
+        }
+      },
+      "dataset_profile": "current_structural_v0_1",
+      "profile_description": "The dataset just trained: structural primitive payload, light implicit gain clamp, weak explicit stop behavior."
+    },
+    {
+      "geometry": "standard_lora_additive",
+      "pass_rate": 0.2646,
+      "clean_pass_rate": 0.244,
+      "mean_score": 0.5762,
+      "classified_rate": 0.5266,
+      "packet_rate": 0.6506,
+      "gate_open_rate": 0.3199,
+      "repair_rate": 0.5142,
+      "echo_rate": 0.1636,
+      "overdrive_rate": 0.0,
+      "cascade_rate": 0.3652,
+      "avg_missing": 1.526,
+      "avg_distractors": 0.7336,
+      "train_complexity": 0.26,
+      "per_mode": {
+        "normal": {
+          "pass_rate": 0.2985,
+          "clean_pass_rate": 0.2787,
+          "echo_rate": 0.1371,
+          "cascade_rate": 0.3261
+        },
+        "high_pressure": {
+          "pass_rate": 0.2561,
+          "clean_pass_rate": 0.2383,
+          "echo_rate": 0.1409,
+          "cascade_rate": 0.3988
+        },
+        "heldout_shift": {
+          "pass_rate": 0.2662,
+          "clean_pass_rate": 0.249,
+          "echo_rate": 0.1434,
+          "cascade_rate": 0.3556
+        },
+        "echo_trap": {
+          "pass_rate": 0.2378,
+          "clean_pass_rate": 0.2099,
+          "echo_rate": 0.2329,
+          "cascade_rate": 0.3803
+        }
+      },
+      "dataset_profile": "gate_web_carrier_minimal",
+      "profile_description": "Compact dataset focused only on gate, web, carrier, and stop behavior with less payload repetition."
+    },
+    {
+      "geometry": "standard_lora_additive",
+      "pass_rate": 0.2375,
+      "clean_pass_rate": 0.1979,
+      "mean_score": 0.5468,
+      "classified_rate": 0.508,
+      "packet_rate": 0.6444,
+      "gate_open_rate": 0.318,
+      "repair_rate": 0.4975,
+      "echo_rate": 0.2729,
+      "overdrive_rate": 0.0872,
+      "cascade_rate": 0.3677,
+      "avg_missing": 1.5272,
+      "avg_distractors": 0.8088,
+      "train_complexity": 0.36,
+      "per_mode": {
+        "normal": {
+          "pass_rate": 0.2711,
+          "clean_pass_rate": 0.2292,
+          "echo_rate": 0.2483,
+          "cascade_rate": 0.3226
+        },
+        "high_pressure": {
+          "pass_rate": 0.2272,
+          "clean_pass_rate": 0.1919,
+          "echo_rate": 0.2516,
+          "cascade_rate": 0.402
+        },
+        "heldout_shift": {
+          "pass_rate": 0.2409,
+          "clean_pass_rate": 0.2051,
+          "echo_rate": 0.2451,
+          "cascade_rate": 0.3596
+        },
+        "echo_trap": {
+          "pass_rate": 0.2108,
+          "clean_pass_rate": 0.1656,
+          "echo_rate": 0.3465,
+          "cascade_rate": 0.3866
+        }
+      },
+      "dataset_profile": "hybrid_overstuffed_v0_2",
+      "profile_description": "Too many hybrid examples and repeated primitive labels; strong signal but more clutter."
+    },
+    {
+      "geometry": "standard_lora_additive",
+      "pass_rate": 0.2225,
+      "clean_pass_rate": 0.194,
+      "mean_score": 0.5328,
+      "classified_rate": 0.5034,
+      "packet_rate": 0.6379,
+      "gate_open_rate": 0.3024,
+      "repair_rate": 0.4766,
+      "echo_rate": 0.2301,
+      "overdrive_rate": 0.0442,
+      "cascade_rate": 0.391,
+      "avg_missing": 1.6254,
+      "avg_distractors": 0.7711,
+      "train_complexity": 0.28,
+      "per_mode": {
+        "normal": {
+          "pass_rate": 0.2561,
+          "clean_pass_rate": 0.2279,
+          "echo_rate": 0.2068,
+          "cascade_rate": 0.3466
+        },
+        "high_pressure": {
+          "pass_rate": 0.2157,
+          "clean_pass_rate": 0.1917,
+          "echo_rate": 0.2041,
+          "cascade_rate": 0.4227
+        },
+        "heldout_shift": {
+          "pass_rate": 0.2209,
+          "clean_pass_rate": 0.1953,
+          "echo_rate": 0.2011,
+          "cascade_rate": 0.3878
+        },
+        "echo_trap": {
+          "pass_rate": 0.1973,
+          "clean_pass_rate": 0.161,
+          "echo_rate": 0.3084,
+          "cascade_rate": 0.407
+        }
+      },
+      "dataset_profile": "hybrid_tagged_v0_2",
+      "profile_description": "Current dataset plus examples that explicitly teach gate, web association, carrier rhythm, and clean stop."
+    },
+    {
+      "geometry": "standard_lora_additive",
+      "pass_rate": 0.1251,
+      "clean_pass_rate": 0.1129,
+      "mean_score": 0.4202,
+      "classified_rate": 0.4418,
+      "packet_rate": 0.5784,
+      "gate_open_rate": 0.2427,
+      "repair_rate": 0.3633,
+      "echo_rate": 0.2092,
+      "overdrive_rate": 0.0509,
+      "cascade_rate": 0.4795,
+      "avg_missing": 2.065,
+      "avg_distractors": 0.7333,
+      "train_complexity": 0.22,
+      "per_mode": {
+        "normal": {
+          "pass_rate": 0.1492,
+          "clean_pass_rate": 0.1367,
+          "echo_rate": 0.1828,
+          "cascade_rate": 0.4282
+        },
+        "high_pressure": {
+          "pass_rate": 0.1173,
+          "clean_pass_rate": 0.1065,
+          "echo_rate": 0.1867,
+          "cascade_rate": 0.5194
+        },
+        "heldout_shift": {
+          "pass_rate": 0.1272,
+          "clean_pass_rate": 0.1156,
+          "echo_rate": 0.1801,
+          "cascade_rate": 0.4715
+        },
+        "echo_trap": {
+          "pass_rate": 0.1068,
+          "clean_pass_rate": 0.0929,
+          "echo_rate": 0.2871,
+          "cascade_rate": 0.499
+        }
+      },
+      "dataset_profile": "v0_1_plus_clean_stop",
+      "profile_description": "Current dataset plus explicit clean-stop and no-continuation examples."
+    },
+    {
+      "geometry": "standard_lora_additive",
+      "pass_rate": 0.0857,
+      "clean_pass_rate": 0.0715,
+      "mean_score": 0.3615,
+      "classified_rate": 0.42,
+      "packet_rate": 0.5821,
+      "gate_open_rate": 0.0009,
+      "repair_rate": 0.3514,
+      "echo_rate": 0.3245,
+      "overdrive_rate": 0.1086,
+      "cascade_rate": 0.5254,
+      "avg_missing": 2.1991,
+      "avg_distractors": 0.7825,
+      "train_complexity": 0.18,
+      "per_mode": {
+        "normal": {
+          "pass_rate": 0.1036,
+          "clean_pass_rate": 0.0876,
+          "echo_rate": 0.2965,
+          "cascade_rate": 0.4744
+        },
+        "high_pressure": {
+          "pass_rate": 0.0839,
+          "clean_pass_rate": 0.0709,
+          "echo_rate": 0.2988,
+          "cascade_rate": 0.5605
+        },
+        "heldout_shift": {
+          "pass_rate": 0.0838,
+          "clean_pass_rate": 0.0715,
+          "echo_rate": 0.2992,
+          "cascade_rate": 0.5203
+        },
+        "echo_trap": {
+          "pass_rate": 0.0716,
+          "clean_pass_rate": 0.056,
+          "echo_rate": 0.4034,
+          "cascade_rate": 0.5464
+        }
+      },
+      "dataset_profile": "current_structural_v0_1",
+      "profile_description": "The dataset just trained: structural primitive payload, light implicit gain clamp, weak explicit stop behavior."
+    }
+  ]
+}

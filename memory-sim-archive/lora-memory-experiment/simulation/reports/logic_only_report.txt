@@ -1,0 +1,43 @@
+======================================================================
+SIMULATION REPORT: logic_only
+======================================================================
+
+Domains: logic
+Total memories: 18
+Total behaviors: 6
+Uncovered behaviors: 0
+Echo chains: 3
+Isolated memories: 10
+Echo connectivity: 44.4%
+Cross-domain connections: 0
+
+--- OVERALL SCORE: 0.889 ---
+
+--- PRESSURE PASS RATES ---
+       low: 100.0%
+    medium: 100.0%
+      high: 100.0%
+
+--- BEHAVIOR COVERAGE ---
+  ✓ L-001: Necessary vs Sufficient (6 memories) [LB] echo:1→0
+  ✓ L-002: Counterexample Construction (6 memories) [LB] echo:2→2
+  ✓ L-003: Chain Validation (5 memories) [LB] echo:1→2
+  ✓ L-004: Scope Recognition (6 memories) [LB] echo:2→2
+  ✓ L-005: Conditional Reasoning (4 memories) [LB]
+  ✓ L-006: Hidden Assumption Extraction (6 memories) [LB] echo:2→3
+
+--- ECHO CHAINS ---
+  chain_0: LOG-002 → LOG-007 → LOG-016 → LOG-017
+    Domains: logic
+    Behaviors: L-003, L-006, R-003, L-001
+    Strength: 1.00
+  chain_1: LOG-003 → LOG-009
+    Domains: logic
+    Behaviors: L-004, L-002
+    Strength: 1.00
+  chain_2: LOG-004 → LOG-011
+    Domains: logic
+    Behaviors: L-004, L-002
+    Strength: 1.00
+
+======================================================================

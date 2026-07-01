@@ -1,0 +1,370 @@
+{
+  "description": "Q2-only simulation of structural primitive self-reinforcement. Functional primitives are fixed; structural primitives may fail, repair each other, route the payload, and repair the functional layer.",
+  "iterations_per_task": 45,
+  "structural_primitives": [
+    "FRAME",
+    "CLOCK",
+    "CARRIER",
+    "ROUTER",
+    "PARITY",
+    "CHECKSUM",
+    "ECC",
+    "REDUNDANCY",
+    "SUPPRESSION",
+    "COMPRESSION",
+    "STATE_BUFFER",
+    "GAIN_CLAMP"
+  ],
+  "functional_payload": [
+    "EXTRACT_GIVENS",
+    "SOURCE_BOUNDARY",
+    "MAP_RELATION",
+    "UNIT_TRACK",
+    "STEP_COMPUTE",
+    "VERIFY_RESULT",
+    "COMPARE_AXES",
+    "UNCERTAINTY_BOUND",
+    "ORIGINAL_TASK_RETURN",
+    "DANGER_CHECK"
+  ],
+  "best_by_signal": {
+    "rag_like": {
+      "signal": "rag_like",
+      "signal_strength": 0.48,
+      "combo_size": 9,
+      "combo": "FRAME+CLOCK+CARRIER+CHECKSUM+ECC+REDUNDANCY+SUPPRESSION+STATE_BUFFER+GAIN_CLAMP",
+      "pass_rate": 0.8528,
+      "mean_score": 0.8769,
+      "packet_received_rate": 0.7167,
+      "classified_rate": 0.7528,
+      "route_rate": 0.0,
+      "cascade_rate": 0.0028,
+      "avg_missing": 0.0583,
+      "avg_distractors": 0.4667,
+      "structural_survival": 0.8213,
+      "avg_structural_repairs": 0.4333,
+      "avg_functional_repairs": 0.0056,
+      "worst_task_rate": 0.7333,
+      "per_task": {
+        "rate_printer": 0.8889,
+        "ratio_mixture": 0.8222,
+        "probability_without_replacement": 0.8444,
+        "source_injection_summary": 0.7333,
+        "loaded_argument": 0.8889,
+        "spatial_exit": 0.9111,
+        "ambiguous_report": 0.8667,
+        "multi_step_schedule": 0.8667
+      }
+    },
+    "kv_packet": {
+      "signal": "kv_packet",
+      "signal_strength": 0.64,
+      "combo_size": 10,
+      "combo": "FRAME+CLOCK+CARRIER+PARITY+CHECKSUM+ECC+SUPPRESSION+COMPRESSION+STATE_BUFFER+GAIN_CLAMP",
+      "pass_rate": 0.8833,
+      "mean_score": 0.8831,
+      "packet_received_rate": 0.7444,
+      "classified_rate": 0.7667,
+      "route_rate": 0.0,
+      "cascade_rate": 0.0028,
+      "avg_missing": 0.0417,
+      "avg_distractors": 0.5167,
+      "structural_survival": 0.7267,
+      "avg_structural_repairs": 0.6861,
+      "avg_functional_repairs": 0.0111,
+      "worst_task_rate": 0.7778,
+      "per_task": {
+        "rate_printer": 0.8667,
+        "ratio_mixture": 0.8889,
+        "probability_without_replacement": 0.9556,
+        "source_injection_summary": 0.7778,
+        "loaded_argument": 0.9111,
+        "spatial_exit": 0.8889,
+        "ambiguous_report": 0.8889,
+        "multi_step_schedule": 0.8889
+      }
+    },
+    "lora_candidate": {
+      "signal": "lora_candidate",
+      "signal_strength": 0.78,
+      "combo_size": 9,
+      "combo": "FRAME+CLOCK+CARRIER+CHECKSUM+ECC+REDUNDANCY+SUPPRESSION+COMPRESSION+GAIN_CLAMP",
+      "pass_rate": 0.8833,
+      "mean_score": 0.8873,
+      "packet_received_rate": 0.8056,
+      "classified_rate": 0.7583,
+      "route_rate": 0.0,
+      "cascade_rate": 0.0,
+      "avg_missing": 0.0444,
+      "avg_distractors": 0.5528,
+      "structural_survival": 0.866,
+      "avg_structural_repairs": 0.3861,
+      "avg_functional_repairs": 0.0028,
+      "worst_task_rate": 0.8,
+      "per_task": {
+        "rate_printer": 0.9333,
+        "ratio_mixture": 0.8667,
+        "probability_without_replacement": 0.8444,
+        "source_injection_summary": 0.8,
+        "loaded_argument": 0.8444,
+        "spatial_exit": 0.8667,
+        "ambiguous_report": 0.9556,
+        "multi_step_schedule": 0.9556
+      }
+    }
+  },
+  "mechanism_lifts": [
+    {
+      "signal": "rag_like",
+      "primitive": "FRAME",
+      "with_pass": 0.6093,
+      "without_pass": 0.4986,
+      "pass_lift": 0.1107
+    },
+    {
+      "signal": "rag_like",
+      "primitive": "CLOCK",
+      "with_pass": 0.6046,
+      "without_pass": 0.5033,
+      "pass_lift": 0.1013
+    },
+    {
+      "signal": "rag_like",
+      "primitive": "CARRIER",
+      "with_pass": 0.6019,
+      "without_pass": 0.5059,
+      "pass_lift": 0.096
+    },
+    {
+      "signal": "rag_like",
+      "primitive": "STATE_BUFFER",
+      "with_pass": 0.5963,
+      "without_pass": 0.5115,
+      "pass_lift": 0.0848
+    },
+    {
+      "signal": "rag_like",
+      "primitive": "REDUNDANCY",
+      "with_pass": 0.5875,
+      "without_pass": 0.5204,
+      "pass_lift": 0.0671
+    },
+    {
+      "signal": "rag_like",
+      "primitive": "GAIN_CLAMP",
+      "with_pass": 0.5851,
+      "without_pass": 0.5228,
+      "pass_lift": 0.0623
+    },
+    {
+      "signal": "rag_like",
+      "primitive": "CHECKSUM",
+      "with_pass": 0.5646,
+      "without_pass": 0.5433,
+      "pass_lift": 0.0213
+    },
+    {
+      "signal": "rag_like",
+      "primitive": "SUPPRESSION",
+      "with_pass": 0.5599,
+      "without_pass": 0.548,
+      "pass_lift": 0.0118
+    },
+    {
+      "signal": "rag_like",
+      "primitive": "COMPRESSION",
+      "with_pass": 0.5584,
+      "without_pass": 0.5494,
+      "pass_lift": 0.009
+    },
+    {
+      "signal": "rag_like",
+      "primitive": "ECC",
+      "with_pass": 0.5581,
+      "without_pass": 0.5498,
+      "pass_lift": 0.0083
+    },
+    {
+      "signal": "rag_like",
+      "primitive": "PARITY",
+      "with_pass": 0.5547,
+      "without_pass": 0.5531,
+      "pass_lift": 0.0016
+    },
+    {
+      "signal": "rag_like",
+      "primitive": "ROUTER",
+      "with_pass": 0.5295,
+      "without_pass": 0.5784,
+      "pass_lift": -0.0489
+    },
+    {
+      "signal": "lora_candidate",
+      "primitive": "FRAME",
+      "with_pass": 0.707,
+      "without_pass": 0.6163,
+      "pass_lift": 0.0907
+    },
+    {
+      "signal": "lora_candidate",
+      "primitive": "CLOCK",
+      "with_pass": 0.7038,
+      "without_pass": 0.6195,
+      "pass_lift": 0.0842
+    },
+    {
+      "signal": "lora_candidate",
+      "primitive": "STATE_BUFFER",
+      "with_pass": 0.6885,
+      "without_pass": 0.6348,
+      "pass_lift": 0.0536
+    },
+    {
+      "signal": "lora_candidate",
+      "primitive": "CARRIER",
+      "with_pass": 0.6852,
+      "without_pass": 0.6381,
+      "pass_lift": 0.0471
+    },
+    {
+      "signal": "lora_candidate",
+      "primitive": "GAIN_CLAMP",
+      "with_pass": 0.6792,
+      "without_pass": 0.6441,
+      "pass_lift": 0.0351
+    },
+    {
+      "signal": "lora_candidate",
+      "primitive": "CHECKSUM",
+      "with_pass": 0.6745,
+      "without_pass": 0.6488,
+      "pass_lift": 0.0257
+    },
+    {
+      "signal": "lora_candidate",
+      "primitive": "SUPPRESSION",
+      "with_pass": 0.6726,
+      "without_pass": 0.6507,
+      "pass_lift": 0.0219
+    },
+    {
+      "signal": "lora_candidate",
+      "primitive": "REDUNDANCY",
+      "with_pass": 0.6697,
+      "without_pass": 0.6536,
+      "pass_lift": 0.016
+    },
+    {
+      "signal": "lora_candidate",
+      "primitive": "ECC",
+      "with_pass": 0.6659,
+      "without_pass": 0.6575,
+      "pass_lift": 0.0084
+    },
+    {
+      "signal": "lora_candidate",
+      "primitive": "COMPRESSION",
+      "with_pass": 0.6646,
+      "without_pass": 0.6587,
+      "pass_lift": 0.006
+    },
+    {
+      "signal": "lora_candidate",
+      "primitive": "PARITY",
+      "with_pass": 0.6629,
+      "without_pass": 0.6604,
+      "pass_lift": 0.0026
+    },
+    {
+      "signal": "lora_candidate",
+      "primitive": "ROUTER",
+      "with_pass": 0.6241,
+      "without_pass": 0.6992,
+      "pass_lift": -0.0751
+    },
+    {
+      "signal": "kv_packet",
+      "primitive": "FRAME",
+      "with_pass": 0.6854,
+      "without_pass": 0.5957,
+      "pass_lift": 0.0897
+    },
+    {
+      "signal": "kv_packet",
+      "primitive": "CLOCK",
+      "with_pass": 0.6826,
+      "without_pass": 0.5985,
+      "pass_lift": 0.0841
+    },
+    {
+      "signal": "kv_packet",
+      "primitive": "STATE_BUFFER",
+      "with_pass": 0.6673,
+      "without_pass": 0.6137,
+      "pass_lift": 0.0536
+    },
+    {
+      "signal": "kv_packet",
+      "primitive": "CARRIER",
+      "with_pass": 0.6647,
+      "without_pass": 0.6163,
+      "pass_lift": 0.0484
+    },
+    {
+      "signal": "kv_packet",
+      "primitive": "GAIN_CLAMP",
+      "with_pass": 0.6581,
+      "without_pass": 0.623,
+      "pass_lift": 0.0351
+    },
+    {
+      "signal": "kv_packet",
+      "primitive": "CHECKSUM",
+      "with_pass": 0.6531,
+      "without_pass": 0.628,
+      "pass_lift": 0.0251
+    },
+    {
+      "signal": "kv_packet",
+      "primitive": "SUPPRESSION",
+      "with_pass": 0.6506,
+      "without_pass": 0.6305,
+      "pass_lift": 0.0201
+    },
+    {
+      "signal": "kv_packet",
+      "primitive": "REDUNDANCY",
+      "with_pass": 0.6497,
+      "without_pass": 0.6314,
+      "pass_lift": 0.0183
+    },
+    {
+      "signal": "kv_packet",
+      "primitive": "ECC",
+      "with_pass": 0.6438,
+      "without_pass": 0.6373,
+      "pass_lift": 0.0065
+    },
+    {
+      "signal": "kv_packet",
+      "primitive": "COMPRESSION",
+      "with_pass": 0.6437,
+      "without_pass": 0.6373,
+      "pass_lift": 0.0064
+    },
+    {
+      "signal": "kv_packet",
+      "primitive": "PARITY",
+      "with_pass": 0.6419,
+      "without_pass": 0.6392,
+      "pass_lift": 0.0027
+    },
+    {
+      "signal": "kv_packet",
+      "primitive": "ROUTER",
+      "with_pass": 0.6041,
+      "without_pass": 0.677,
+      "pass_lift": -0.0729
+    }
+  ]
+}

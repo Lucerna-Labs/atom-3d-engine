@@ -1,0 +1,281 @@
+======================================================================
+SIMULATION REPORT: fl_final_250
+======================================================================
+
+Domains: forensic, logic
+Total memories: 228
+Total behaviors: 12
+Uncovered behaviors: 0
+Echo chains: 61
+Isolated memories: 93
+Echo connectivity: 59.2%
+Cross-domain connections: 39
+
+--- OVERALL SCORE: 0.918 ---
+
+--- PRESSURE PASS RATES ---
+       low: 100.0%
+    medium: 100.0%
+      high: 100.0%
+
+--- BEHAVIOR COVERAGE ---
+  ✓ F-001: Deception Detection (39 memories) [LB] echo:15→18
+  ✓ F-002: Statement Analysis (29 memories) [LB] echo:13→12
+  ✓ F-003: Threat Assessment (37 memories) [LB] echo:16→10
+  ✓ F-004: Behavioral Baseline Reading (28 memories) [LB] echo:13→5
+  ✓ F-005: Criminal Thinking Pattern Recognition (19 memories) [LB] echo:2→4
+  ✓ F-006: Victim Psychology Awareness (19 memories) [LB] echo:9→8
+  ✓ L-001: Necessary vs Sufficient (38 memories) [LB] echo:9→16
+  ✓ L-002: Counterexample Construction (38 memories) [LB] echo:12→15
+  ✓ L-003: Chain Validation (29 memories) [LB] echo:13→17
+  ✓ L-004: Scope Recognition (38 memories) [LB] echo:12→15
+  ✓ L-005: Conditional Reasoning (28 memories) [LB] echo:7→12
+  ✓ L-006: Hidden Assumption Extraction (38 memories) [LB] echo:17→20
+
+--- ECHO CHAINS ---
+  chain_0: FOR-001 → FOR-048
+    Domains: forensic
+    Behaviors: F-001, F-003
+    Strength: 1.00
+  chain_1: FOR-002 → FOR-024 → FOR-112 → LOG-141 → LOG-145 → LOG-151 → LOG-152
+    Domains: logic, forensic
+    Behaviors: F-001, R-007, L-006, L-003, L-002
+    Strength: 1.00
+  chain_2: FOR-004 → FOR-011 → FOR-021 → FOR-035 → LOG-164
+    Domains: logic, forensic
+    Behaviors: F-001, L-006, L-003, F-003, F-002
+    Strength: 1.00
+  chain_3: FOR-005 → LOG-178 → LOG-179 → LOG-184
+    Domains: logic, forensic
+    Behaviors: L-004, F-001, F-003, L-002
+    Strength: 1.00
+  chain_4: FOR-006 → FOR-107 → LOG-223
+    Domains: logic, forensic
+    Behaviors: F-001, R-007, L-006, L-003, F-006
+    Strength: 1.00
+  chain_5: FOR-008 → FOR-018
+    Domains: forensic
+    Behaviors: F-001, F-002
+    Strength: 1.00
+  chain_6: FOR-009 → FOR-043
+    Domains: forensic
+    Behaviors: F-004, F-001, F-003
+    Strength: 1.00
+  chain_7: FOR-010 → FOR-023 → FOR-033
+    Domains: forensic
+    Behaviors: F-001, F-002
+    Strength: 1.00
+  chain_8: FOR-015 → LOG-201
+    Domains: logic, forensic
+    Behaviors: L-001, F-001, F-003, L-005
+    Strength: 1.00
+  chain_9: FOR-016 → FOR-034
+    Domains: forensic
+    Behaviors: F-001, F-002, R-006
+    Strength: 1.00
+  chain_10: FOR-017 → LOG-201
+    Domains: logic, forensic
+    Behaviors: L-001, F-001, F-003, L-005
+    Strength: 1.00
+  chain_11: FOR-019 → LOG-212
+    Domains: logic, forensic
+    Behaviors: F-001, F-002, R-003, L-006
+    Strength: 1.00
+  chain_12: FOR-020 → FOR-031 → LOG-153 → LOG-154 → LOG-160 → LOG-226
+    Domains: logic, forensic
+    Behaviors: F-001, L-006, L-003, R-006, F-002
+    Strength: 1.00
+  chain_13: FOR-026 → LOG-120
+    Domains: logic, forensic
+    Behaviors: L-001, F-002, R-006
+    Strength: 1.00
+  chain_14: FOR-027 → LOG-183
+    Domains: logic, forensic
+    Behaviors: L-004, F-001, F-002, L-002
+    Strength: 1.00
+  chain_15: FOR-037 → LOG-198 → LOG-199
+    Domains: logic, forensic
+    Behaviors: L-001, F-001, F-002, L-005
+    Strength: 1.00
+  chain_16: FOR-038 → FOR-060
+    Domains: forensic
+    Behaviors: F-004, F-001, F-003
+    Strength: 1.00
+  chain_17: FOR-039 → LOG-136
+    Domains: logic, forensic
+    Behaviors: L-004, F-004, F-003, L-002
+    Strength: 1.00
+  chain_18: FOR-040 → LOG-221
+    Domains: logic, forensic
+    Behaviors: L-003, F-001, F-003, L-006
+    Strength: 1.00
+  chain_19: FOR-046 → FOR-053 → LOG-146 → LOG-151
+    Domains: logic, forensic
+    Behaviors: F-001, F-004, F-003, L-004, L-002
+    Strength: 1.00
+  chain_20: FOR-047 → FOR-075 → FOR-080 → LOG-174 → LOG-209
+    Domains: logic, forensic
+    Behaviors: R-004, L-003, L-006, F-004, F-003
+    Strength: 1.00
+  chain_21: FOR-049 → FOR-062 → LOG-193
+    Domains: logic, forensic
+    Behaviors: L-001, F-004, F-003, L-005
+    Strength: 1.00
+  chain_22: FOR-052 → FOR-089 → LOG-217
+    Domains: logic, forensic
+    Behaviors: F-001, R-004, L-003, L-006, F-003
+    Strength: 1.00
+  chain_23: FOR-056 → LOG-216
+    Domains: logic, forensic
+    Behaviors: F-001, F-003, R-003, L-006
+    Strength: 1.00
+  chain_24: FOR-057 → FOR-089 → FOR-093 → LOG-172
+    Domains: logic, forensic
+    Behaviors: R-004, F-004, F-005, L-004, L-002
+    Strength: 1.00
+  chain_25: FOR-059 → LOG-176
+    Domains: logic, forensic
+    Behaviors: L-004, F-004, L-002, P-002
+    Strength: 1.00
+  chain_26: FOR-065 → LOG-154 → LOG-160 → LOG-170
+    Domains: logic, forensic
+    Behaviors: L-003, F-004, P-002, L-006
+    Strength: 1.00
+  chain_27: FOR-066 → LOG-195
+    Domains: logic, forensic
+    Behaviors: L-001, F-004, F-003, L-005
+    Strength: 1.00
+  chain_28: FOR-068 → LOG-154 → LOG-160
+    Domains: logic, forensic
+    Behaviors: L-003, F-004, F-003, L-006
+    Strength: 1.00
+  chain_29: FOR-072 → LOG-135
+    Domains: logic, forensic
+    Behaviors: L-004, F-004, F-003, L-002
+    Strength: 1.00
+  chain_30: FOR-078 → LOG-154
+    Domains: logic, forensic
+    Behaviors: L-003, L-006, F-005, R-004
+    Strength: 1.00
+  chain_31: FOR-005 → FOR-086 → LOG-179 → LOG-184
+    Domains: logic, forensic
+    Behaviors: F-001, R-004, F-003, F-005, L-004
+    Strength: 1.00
+  chain_32: FOR-020 → FOR-095 → LOG-153 → LOG-226
+    Domains: logic, forensic
+    Behaviors: R-007, L-006, L-003, R-006, F-006
+    Strength: 1.00
+  chain_33: FOR-096 → FOR-097 → FOR-103
+    Domains: forensic
+    Behaviors: R-007, F-006
+    Strength: 1.00
+  chain_34: FOR-038 → FOR-098 → LOG-180
+    Domains: logic, forensic
+    Behaviors: F-001, R-007, F-003, F-006, L-004
+    Strength: 1.00
+  chain_35: FOR-099 → LOG-218
+    Domains: logic, forensic
+    Behaviors: R-007, R-003, F-006, L-006
+    Strength: 1.00
+  chain_36: FOR-100 → FOR-107
+    Domains: forensic
+    Behaviors: R-007, F-006
+    Strength: 1.00
+  chain_37: FOR-057 → FOR-093 → FOR-101 → FOR-108 → LOG-166 → LOG-171 → LOG-172 → LOG-219
+    Domains: logic, forensic
+    Behaviors: R-007, R-004, L-003, L-006, F-004
+    Strength: 1.00
+  chain_38: FOR-106 → LOG-119
+    Domains: logic, forensic
+    Behaviors: L-001, L-005, R-007, F-006
+    Strength: 1.00
+  chain_39: FOR-111 → LOG-188
+    Domains: logic, forensic
+    Behaviors: L-004, R-007, L-002, F-006
+    Strength: 1.00
+  chain_40: LOG-115 → LOG-124
+    Domains: logic
+    Behaviors: L-001, L-005
+    Strength: 1.00
+  chain_41: LOG-117 → LOG-121
+    Domains: logic
+    Behaviors: L-001, L-005
+    Strength: 1.00
+  chain_42: LOG-118 → LOG-130
+    Domains: logic
+    Behaviors: L-001
+    Strength: 1.00
+  chain_43: FOR-098 → LOG-122
+    Domains: logic, forensic
+    Behaviors: L-001, R-007, F-006
+    Strength: 1.00
+  chain_44: FOR-103 → LOG-125
+    Domains: logic, forensic
+    Behaviors: L-001, L-005, R-007, F-006
+    Strength: 1.00
+  chain_45: LOG-119 → LOG-126
+    Domains: logic
+    Behaviors: L-001, L-005
+    Strength: 1.00
+  chain_46: LOG-131 → LOG-203
+    Domains: logic
+    Behaviors: L-001, L-005
+    Strength: 1.00
+  chain_47: FOR-020 → FOR-031 → LOG-133 → LOG-153 → LOG-226
+    Domains: logic, forensic
+    Behaviors: F-001, L-006, L-003, L-002, R-006
+    Strength: 1.00
+  chain_48: FOR-002 → FOR-024 → FOR-112 → LOG-138 → LOG-141 → LOG-145 → LOG-151
+    Domains: logic, forensic
+    Behaviors: F-001, R-007, L-002, R-006, F-006
+    Strength: 1.00
+  chain_49: LOG-143 → LOG-149
+    Domains: logic
+    Behaviors: L-004, L-002
+    Strength: 1.00
+  chain_50: LOG-158 → LOG-162 → LOG-167
+    Domains: logic
+    Behaviors: L-003, L-006
+    Strength: 1.00
+  chain_51: FOR-021 → FOR-035 → LOG-161
+    Domains: logic, forensic
+    Behaviors: L-003, F-001, F-002, L-006
+    Strength: 1.00
+  chain_52: LOG-165 → LOG-218
+    Domains: logic
+    Behaviors: L-003, R-003, L-006
+    Strength: 1.00
+  chain_53: LOG-168 → LOG-225
+    Domains: logic
+    Behaviors: L-003, L-006
+    Strength: 1.00
+  chain_54: LOG-181 → LOG-182
+    Domains: logic
+    Behaviors: L-004, L-002
+    Strength: 1.00
+  chain_55: LOG-190 → LOG-191
+    Domains: logic
+    Behaviors: L-001, L-005
+    Strength: 1.00
+  chain_56: FOR-060 → LOG-194
+    Domains: logic, forensic
+    Behaviors: L-001, F-004, F-003, L-005
+    Strength: 1.00
+  chain_57: FOR-019 → LOG-197
+    Domains: logic, forensic
+    Behaviors: L-001, F-001, F-002, L-005
+    Strength: 1.00
+  chain_58: LOG-205 → LOG-206
+    Domains: logic
+    Behaviors: L-001, L-005
+    Strength: 1.00
+  chain_59: LOG-210 → LOG-224
+    Domains: logic
+    Behaviors: R-003, L-006
+    Strength: 1.00
+  chain_60: LOG-213 → LOG-221
+    Domains: logic
+    Behaviors: L-003, L-006
+    Strength: 1.00
+
+======================================================================

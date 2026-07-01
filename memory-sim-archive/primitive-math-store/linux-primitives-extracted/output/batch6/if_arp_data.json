@@ -1,0 +1,556 @@
+{
+  "filename": "if_arp.h",
+  "includes": [
+    "linux/netdevice.h"
+  ],
+  "defines": [
+    {
+      "name": "ARPHRD_NETROM",
+      "value": "0",
+      "comment": "from KA9Q: NET/ROM pseudo",
+      "category": ""
+    },
+    {
+      "name": "ARPHRD_ETHER",
+      "value": "1",
+      "comment": "Ethernet 10Mbps",
+      "category": ""
+    },
+    {
+      "name": "ARPHRD_EETHER",
+      "value": "2",
+      "comment": "Experimental Ethernet",
+      "category": ""
+    },
+    {
+      "name": "ARPHRD_AX25",
+      "value": "3",
+      "comment": "AX.25 Level 2",
+      "category": ""
+    },
+    {
+      "name": "ARPHRD_PRONET",
+      "value": "4",
+      "comment": "PROnet token ring",
+      "category": ""
+    },
+    {
+      "name": "ARPHRD_CHAOS",
+      "value": "5",
+      "comment": "Chaosnet",
+      "category": ""
+    },
+    {
+      "name": "ARPHRD_IEEE802",
+      "value": "6",
+      "comment": "IEEE 802.2 Ethernet/TR/TB",
+      "category": ""
+    },
+    {
+      "name": "ARPHRD_ARCNET",
+      "value": "7",
+      "comment": "ARCnet",
+      "category": ""
+    },
+    {
+      "name": "ARPHRD_APPLETLK",
+      "value": "8",
+      "comment": "APPLEtalk",
+      "category": ""
+    },
+    {
+      "name": "ARPHRD_DLCI",
+      "value": "15",
+      "comment": "Frame Relay DLCI",
+      "category": ""
+    },
+    {
+      "name": "ARPHRD_ATM",
+      "value": "19",
+      "comment": "ATM",
+      "category": ""
+    },
+    {
+      "name": "ARPHRD_METRICOM",
+      "value": "23",
+      "comment": "Metricom STRIP (new IANA id)",
+      "category": ""
+    },
+    {
+      "name": "ARPHRD_IEEE1394",
+      "value": "24",
+      "comment": "IEEE 1394 IPv4 - RFC 2734",
+      "category": ""
+    },
+    {
+      "name": "ARPHRD_EUI64",
+      "value": "27",
+      "comment": "EUI-64",
+      "category": ""
+    },
+    {
+      "name": "ARPHRD_INFINIBAND",
+      "value": "32",
+      "comment": "InfiniBand",
+      "category": ""
+    },
+    {
+      "name": "ARPHRD_SLIP",
+      "value": "256",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ARPHRD_CSLIP",
+      "value": "257",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ARPHRD_SLIP6",
+      "value": "258",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ARPHRD_CSLIP6",
+      "value": "259",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ARPHRD_RSRVD",
+      "value": "260",
+      "comment": "Notional KISS type",
+      "category": ""
+    },
+    {
+      "name": "ARPHRD_ADAPT",
+      "value": "264",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ARPHRD_ROSE",
+      "value": "270",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ARPHRD_X25",
+      "value": "271",
+      "comment": "CCITT X.25",
+      "category": ""
+    },
+    {
+      "name": "ARPHRD_HWX25",
+      "value": "272",
+      "comment": "Boards with X.25 in firmware",
+      "category": ""
+    },
+    {
+      "name": "ARPHRD_CAN",
+      "value": "280",
+      "comment": "Controller Area Network",
+      "category": ""
+    },
+    {
+      "name": "ARPHRD_MCTP",
+      "value": "290",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ARPHRD_PPP",
+      "value": "512",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ARPHRD_CISCO",
+      "value": "513",
+      "comment": "Cisco HDLC",
+      "category": ""
+    },
+    {
+      "name": "ARPHRD_HDLC",
+      "value": "ARPHRD_CISCO",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ARPHRD_LAPB",
+      "value": "516",
+      "comment": "LAPB",
+      "category": ""
+    },
+    {
+      "name": "ARPHRD_DDCMP",
+      "value": "517",
+      "comment": "Digital's DDCMP protocol",
+      "category": ""
+    },
+    {
+      "name": "ARPHRD_RAWHDLC",
+      "value": "518",
+      "comment": "Raw HDLC",
+      "category": ""
+    },
+    {
+      "name": "ARPHRD_RAWIP",
+      "value": "519",
+      "comment": "Raw IP",
+      "category": ""
+    },
+    {
+      "name": "ARPHRD_TUNNEL",
+      "value": "768",
+      "comment": "IPIP tunnel",
+      "category": ""
+    },
+    {
+      "name": "ARPHRD_TUNNEL6",
+      "value": "769",
+      "comment": "IP6IP6 tunnel",
+      "category": ""
+    },
+    {
+      "name": "ARPHRD_FRAD",
+      "value": "770",
+      "comment": "Frame Relay Access Device",
+      "category": ""
+    },
+    {
+      "name": "ARPHRD_SKIP",
+      "value": "771",
+      "comment": "SKIP vif",
+      "category": ""
+    },
+    {
+      "name": "ARPHRD_LOOPBACK",
+      "value": "772",
+      "comment": "Loopback device",
+      "category": ""
+    },
+    {
+      "name": "ARPHRD_LOCALTLK",
+      "value": "773",
+      "comment": "Localtalk device",
+      "category": ""
+    },
+    {
+      "name": "ARPHRD_FDDI",
+      "value": "774",
+      "comment": "Fiber Distributed Data Interface",
+      "category": ""
+    },
+    {
+      "name": "ARPHRD_BIF",
+      "value": "775",
+      "comment": "AP1000 BIF",
+      "category": ""
+    },
+    {
+      "name": "ARPHRD_SIT",
+      "value": "776",
+      "comment": "sit0 device - IPv6-in-IPv4",
+      "category": ""
+    },
+    {
+      "name": "ARPHRD_IPDDP",
+      "value": "777",
+      "comment": "IP over DDP tunneller",
+      "category": ""
+    },
+    {
+      "name": "ARPHRD_IPGRE",
+      "value": "778",
+      "comment": "GRE over IP",
+      "category": ""
+    },
+    {
+      "name": "ARPHRD_PIMREG",
+      "value": "779",
+      "comment": "PIMSM register interface",
+      "category": ""
+    },
+    {
+      "name": "ARPHRD_HIPPI",
+      "value": "780",
+      "comment": "High Performance Parallel Interface",
+      "category": ""
+    },
+    {
+      "name": "ARPHRD_ASH",
+      "value": "781",
+      "comment": "Nexus 64Mbps Ash",
+      "category": ""
+    },
+    {
+      "name": "ARPHRD_ECONET",
+      "value": "782",
+      "comment": "Acorn Econet",
+      "category": ""
+    },
+    {
+      "name": "ARPHRD_IRDA",
+      "value": "783",
+      "comment": "Linux-IrDA",
+      "category": ""
+    },
+    {
+      "name": "ARPHRD_FCPP",
+      "value": "784",
+      "comment": "Point to point fibrechannel",
+      "category": ""
+    },
+    {
+      "name": "ARPHRD_FCAL",
+      "value": "785",
+      "comment": "Fibrechannel arbitrated loop",
+      "category": ""
+    },
+    {
+      "name": "ARPHRD_FCPL",
+      "value": "786",
+      "comment": "Fibrechannel public loop",
+      "category": ""
+    },
+    {
+      "name": "ARPHRD_FCFABRIC",
+      "value": "787",
+      "comment": "Fibrechannel fabric",
+      "category": ""
+    },
+    {
+      "name": "ARPHRD_IEEE802_TR",
+      "value": "800",
+      "comment": "Magic type ident for TR",
+      "category": ""
+    },
+    {
+      "name": "ARPHRD_IEEE80211",
+      "value": "801",
+      "comment": "IEEE 802.11",
+      "category": ""
+    },
+    {
+      "name": "ARPHRD_IEEE80211_PRISM",
+      "value": "802",
+      "comment": "IEEE 802.11 + Prism2 header",
+      "category": ""
+    },
+    {
+      "name": "ARPHRD_IEEE80211_RADIOTAP",
+      "value": "803",
+      "comment": "IEEE 802.11 + radiotap header",
+      "category": ""
+    },
+    {
+      "name": "ARPHRD_IEEE802154",
+      "value": "804",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ARPHRD_IEEE802154_MONITOR",
+      "value": "805",
+      "comment": "IEEE 802.15.4 network monitor",
+      "category": ""
+    },
+    {
+      "name": "ARPHRD_PHONET",
+      "value": "820",
+      "comment": "PhoNet media type",
+      "category": ""
+    },
+    {
+      "name": "ARPHRD_PHONET_PIPE",
+      "value": "821",
+      "comment": "PhoNet pipe header",
+      "category": "ARPHRD_PHONET"
+    },
+    {
+      "name": "ARPHRD_CAIF",
+      "value": "822",
+      "comment": "CAIF media type",
+      "category": ""
+    },
+    {
+      "name": "ARPHRD_IP6GRE",
+      "value": "823",
+      "comment": "GRE over IPv6",
+      "category": ""
+    },
+    {
+      "name": "ARPHRD_NETLINK",
+      "value": "824",
+      "comment": "Netlink header",
+      "category": ""
+    },
+    {
+      "name": "ARPHRD_6LOWPAN",
+      "value": "825",
+      "comment": "IPv6 over LoWPAN",
+      "category": ""
+    },
+    {
+      "name": "ARPHRD_VSOCKMON",
+      "value": "826",
+      "comment": "Vsock monitor header",
+      "category": ""
+    },
+    {
+      "name": "ARPHRD_VOID",
+      "value": "0xFFFF",
+      "comment": "Void type, nothing is known",
+      "category": ""
+    },
+    {
+      "name": "ARPHRD_NONE",
+      "value": "0xFFFE",
+      "comment": "zero header length",
+      "category": ""
+    },
+    {
+      "name": "ARPOP_REQUEST",
+      "value": "1",
+      "comment": "ARP request",
+      "category": ""
+    },
+    {
+      "name": "ARPOP_REPLY",
+      "value": "2",
+      "comment": "ARP reply",
+      "category": ""
+    },
+    {
+      "name": "ARPOP_RREQUEST",
+      "value": "3",
+      "comment": "RARP request",
+      "category": ""
+    },
+    {
+      "name": "ARPOP_RREPLY",
+      "value": "4",
+      "comment": "RARP reply",
+      "category": ""
+    },
+    {
+      "name": "ARPOP_InREQUEST",
+      "value": "8",
+      "comment": "InARP request",
+      "category": ""
+    },
+    {
+      "name": "ARPOP_InREPLY",
+      "value": "9",
+      "comment": "InARP reply",
+      "category": ""
+    },
+    {
+      "name": "ARPOP_NAK",
+      "value": "10",
+      "comment": "(ATM)ARP NAK",
+      "category": ""
+    },
+    {
+      "name": "ATF_COM",
+      "value": "0x02",
+      "comment": "completed entry (ha valid)",
+      "category": ""
+    },
+    {
+      "name": "ATF_PERM",
+      "value": "0x04",
+      "comment": "permanent entry",
+      "category": ""
+    },
+    {
+      "name": "ATF_PUBL",
+      "value": "0x08",
+      "comment": "publish entry",
+      "category": ""
+    },
+    {
+      "name": "ATF_USETRAILERS",
+      "value": "0x10",
+      "comment": "has requested trailers",
+      "category": ""
+    },
+    {
+      "name": "ATF_NETMASK",
+      "value": "0x20            /* want to use a netmask (only",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ATF_DONTPUB",
+      "value": "0x40",
+      "comment": "don't answer this addresses",
+      "category": ""
+    }
+  ],
+  "structs": [
+    {
+      "name": "arpreq",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "arp_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "arp_dev",
+          "array_size": "IFNAMSIZ",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "arpreq_old",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "arp_flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "arphdr",
+      "fields": [
+        {
+          "type_name": "__be16",
+          "name": "ar_hrd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be16",
+          "name": "ar_pro",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be16",
+          "name": "ar_op",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

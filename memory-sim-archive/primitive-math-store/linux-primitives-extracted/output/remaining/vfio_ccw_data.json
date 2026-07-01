@@ -1,0 +1,131 @@
+{
+  "filename": "vfio_ccw.h",
+  "includes": [
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "ORB_AREA_SIZE",
+      "value": "12",
+      "comment": "",
+      "category": "ORB_AREA"
+    },
+    {
+      "name": "SCSW_AREA_SIZE",
+      "value": "12",
+      "comment": "",
+      "category": "SCSW_AREA"
+    },
+    {
+      "name": "IRB_AREA_SIZE",
+      "value": "96",
+      "comment": "",
+      "category": "IRB_AREA"
+    },
+    {
+      "name": "VFIO_CCW_ASYNC_CMD_HSCH",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "VFIO_CCW"
+    },
+    {
+      "name": "VFIO_CCW_ASYNC_CMD_CSCH",
+      "value": "(1 << 1)",
+      "comment": "",
+      "category": "VFIO_CCW"
+    },
+    {
+      "name": "SCHIB_AREA_SIZE",
+      "value": "52",
+      "comment": "",
+      "category": "SCHIB_AREA"
+    }
+  ],
+  "structs": [
+    {
+      "name": "ccw_io_region",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "orb_area",
+          "array_size": "ORB_AREA_SIZE",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "scsw_area",
+          "array_size": "SCSW_AREA_SIZE",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "irb_area",
+          "array_size": "IRB_AREA_SIZE",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ret_code",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ccw_cmd_region",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "command",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ret_code",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ccw_schib_region",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "schib_area",
+          "array_size": "SCHIB_AREA_SIZE",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ccw_crw_region",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "crw",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

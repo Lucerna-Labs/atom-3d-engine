@@ -1,0 +1,994 @@
+{
+  "filename": "rdma_user_cm.h",
+  "includes": [
+    "linux/types.h",
+    "linux/socket.h",
+    "linux/in6.h",
+    "rdma/ib_user_verbs.h",
+    "rdma/ib_user_sa.h"
+  ],
+  "defines": [
+    {
+      "name": "RDMA_USER_CM_ABI_VERSION",
+      "value": "4",
+      "comment": "",
+      "category": "RDMA_USER"
+    },
+    {
+      "name": "RDMA_MAX_PRIVATE_DATA",
+      "value": "256",
+      "comment": "",
+      "category": "RDMA_MAX"
+    },
+    {
+      "name": "RDMA_USER_CM_IB_SERVICE_NAME_SIZE",
+      "value": "64",
+      "comment": "",
+      "category": "RDMA_USER"
+    }
+  ],
+  "structs": [
+    {
+      "name": "rdma_ucm_cmd_hdr",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "cmd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "in",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "out",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "rdma_ucm_create_id",
+      "fields": [
+        {
+          "type_name": "__aligned_u64",
+          "name": "uid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__aligned_u64",
+          "name": "response",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "ps",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "qp_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reserved",
+          "array_size": "5",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "rdma_ucm_create_id_resp",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "rdma_ucm_destroy_id",
+      "fields": [
+        {
+          "type_name": "__aligned_u64",
+          "name": "response",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "rdma_ucm_destroy_id_resp",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "events_reported",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "rdma_ucm_bind_ip",
+      "fields": [
+        {
+          "type_name": "__aligned_u64",
+          "name": "response",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "rdma_ucm_bind",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "addr_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "rdma_ucm_resolve_ip",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "timeout_ms",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "rdma_ucm_resolve_addr",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "timeout_ms",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "src_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "dst_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "rdma_ucm_resolve_route",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "timeout_ms",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "rdma_ucm_query",
+      "fields": [
+        {
+          "type_name": "__aligned_u64",
+          "name": "response",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "option",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "rdma_ucm_query_route_resp",
+      "fields": [
+        {
+          "type_name": "__aligned_u64",
+          "name": "node_guid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "num_paths",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "port_num",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reserved",
+          "array_size": "3",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ibdev_index",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved1",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "rdma_ucm_query_addr_resp",
+      "fields": [
+        {
+          "type_name": "__aligned_u64",
+          "name": "node_guid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "port_num",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "pkey",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "src_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "dst_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ibdev_index",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved1",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "rdma_ucm_query_path_resp",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "num_paths",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "rdma_ucm_query_ib_service_resp",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "num_service_recs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "rdma_ucm_conn_param",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "qp_num",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "qkey",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "private_data",
+          "array_size": "RDMA_MAX_PRIVATE_DATA",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "private_data_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "srq",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "responder_resources",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "initiator_depth",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "flow_control",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "retry_count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "rnr_retry_count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "valid",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "rdma_ucm_ud_param",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "qp_num",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "qkey",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "private_data",
+          "array_size": "RDMA_MAX_PRIVATE_DATA",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "private_data_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reserved",
+          "array_size": "7",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "rdma_ucm_ece",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "vendor_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "attr_mod",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "rdma_ucm_connect",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "rdma_ucm_listen",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "backlog",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "rdma_ucm_accept",
+      "fields": [
+        {
+          "type_name": "__aligned_u64",
+          "name": "uid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "rdma_ucm_reject",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "private_data_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reason",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reserved",
+          "array_size": "2",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "private_data",
+          "array_size": "RDMA_MAX_PRIVATE_DATA",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "rdma_ucm_disconnect",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "rdma_ucm_init_qp_attr",
+      "fields": [
+        {
+          "type_name": "__aligned_u64",
+          "name": "response",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "qp_state",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "rdma_ucm_notify",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "event",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "rdma_ucm_join_ip_mcast",
+      "fields": [
+        {
+          "type_name": "__aligned_u64",
+          "name": "response",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__aligned_u64",
+          "name": "uid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "rdma_ucm_join_mcast",
+      "fields": [
+        {
+          "type_name": "__aligned_u64",
+          "name": "response",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__aligned_u64",
+          "name": "uid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "addr_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "join_flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "rdma_ucm_get_event",
+      "fields": [
+        {
+          "type_name": "__aligned_u64",
+          "name": "response",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "rdma_ucm_event_resp",
+      "fields": [
+        {
+          "type_name": "__aligned_u64",
+          "name": "uid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "event",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "status",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "arg32",
+          "array_size": "2",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "rdma_ucm_set_option",
+      "fields": [
+        {
+          "type_name": "__aligned_u64",
+          "name": "optval",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "level",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "optname",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "optlen",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "rdma_ucm_migrate_id",
+      "fields": [
+        {
+          "type_name": "__aligned_u64",
+          "name": "response",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "fd",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "rdma_ucm_migrate_resp",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "events_reported",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "rdma_ucm_ib_service",
+      "fields": [
+        {
+          "type_name": "__aligned_u64",
+          "name": "service_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "service_name",
+          "array_size": "RDMA_USER_CM_IB_SERVICE_NAME_SIZE",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "rdma_ucm_resolve_ib_service",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "rdma_ucm_write_cm_event",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "event",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "status",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "arg",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

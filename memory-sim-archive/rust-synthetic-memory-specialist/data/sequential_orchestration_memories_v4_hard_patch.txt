@@ -1,0 +1,26 @@
+task=common
+I remember the hard-suite patch run where the stable corpus already worked on many tasks, so I did not flood myself with more memories. I kept only the scars that matched the current failure shape. When a task was not about that shape, I left the older scar alone and did not let the new memory compete.
+---
+task=arithmetic
+I remember a dropped-score weighted average where the failed answer kept the removed score's weight inside the denominator. The correction was mechanical: remove the lowest score and its weight first, then compute the weighted average using only the remaining weights. If 70 with weight 30 is dropped, the remaining denominator is 20 plus 50, not 100.
+---
+task=arithmetic
+I remember a ratio task where I multiplied across the wrong direction and got an answer three times too large. The known amount belonged to one named ratio part. The correction was to find one ratio unit from that known part, then multiply by the requested part. Known amount divided by known ratio part comes before requested ratio part times that unit.
+---
+task=json
+I remember a category invoice where I treated a quantity-two item like quantity one. The correct method was line total first, category second: quantity times unit price for every item, then add the line totals with the same category. Hardware meant all hardware line totals, not one hardware price and not all item prices.
+---
+task=scheduling
+I remember a four-seat puzzle where my first answer placed someone immediately after the wrong neighbor. The passing method was to test the chain as a block. If Dee must sit immediately after Ben, then Ben-Dee occupies seats 2-3 or 3-4 when Ben cannot sit at the edges. After placing that block, every before/after and not-seat rule must still be true.
+---
+task=spatial
+I remember a grid path where I used screen coordinates instead of math coordinates. In the task coordinate system, east increases x, west decreases x, north increases y, and south decreases y. Turns change facing only. Forward changes position using the current facing. The final answer must use the requested lowercase x,y,facing shape if the prompt asks for it.
+---
+task=probability
+I remember a conditional probability task where the prompt said "given French" and I answered from the whole class. The denominator must be the given group. If 30 percent are French and 10 percent are both Spanish and French, then the conditional fraction is 10 divided by 30. The result is one third, written as 33.33 percent when the prompt asks for a percent.
+---
+task=filtering
+I remember a table join where I matched the city to the wrong table. Employee rows only had department ids; city and budget lived in the department table. The correct route was join employee.dept to department.dept, then filter joined rows by city and budget, then return only the employee names that survived.
+---
+task=format
+I remember a YAML status task where I wrote "pass" because it sounded natural, but the data said checks passed. The requested status value was the one-word state from the data, "passed". The exact YAML shape had only status and count, one key per line, no title, no fence, and no extra keys.

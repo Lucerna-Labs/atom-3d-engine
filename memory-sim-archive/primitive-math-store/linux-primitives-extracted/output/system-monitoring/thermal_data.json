@@ -1,0 +1,76 @@
+{
+  "filename": "thermal.h",
+  "includes": [],
+  "defines": [
+    {
+      "name": "THERMAL_NAME_LENGTH",
+      "value": "20",
+      "comment": "",
+      "category": "THERMAL_NAME"
+    },
+    {
+      "name": "THERMAL_THRESHOLD_WAY_UP",
+      "value": "0x1",
+      "comment": "",
+      "category": "THERMAL_THRESHOLD"
+    },
+    {
+      "name": "THERMAL_THRESHOLD_WAY_DOWN",
+      "value": "0x2",
+      "comment": "",
+      "category": "THERMAL_THRESHOLD"
+    },
+    {
+      "name": "THERMAL_GENL_FAMILY_NAME",
+      "value": "\"thermal\"",
+      "comment": "",
+      "category": "THERMAL_GENL"
+    },
+    {
+      "name": "THERMAL_GENL_VERSION",
+      "value": "0x02",
+      "comment": "",
+      "category": "THERMAL_GENL"
+    },
+    {
+      "name": "THERMAL_GENL_SAMPLING_GROUP_NAME",
+      "value": "\"sampling\"",
+      "comment": "",
+      "category": "THERMAL_GENL"
+    },
+    {
+      "name": "THERMAL_GENL_EVENT_GROUP_NAME",
+      "value": "\"event\"",
+      "comment": "",
+      "category": "THERMAL_GENL"
+    },
+    {
+      "name": "THERMAL_GENL_ATTR_MAX",
+      "value": "(__THERMAL_GENL_ATTR_MAX - 1)",
+      "comment": "",
+      "category": "THERMAL_GENL"
+    },
+    {
+      "name": "THERMAL_GENL_SAMPLING_MAX",
+      "value": "(__THERMAL_GENL_SAMPLING_MAX - 1)",
+      "comment": "",
+      "category": "THERMAL_GENL"
+    },
+    {
+      "name": "THERMAL_GENL_EVENT_MAX",
+      "value": "(__THERMAL_GENL_EVENT_MAX - 1)",
+      "comment": "",
+      "category": "THERMAL_GENL"
+    },
+    {
+      "name": "THERMAL_GENL_CMD_MAX",
+      "value": "(__THERMAL_GENL_CMD_MAX - 1)",
+      "comment": "",
+      "category": "THERMAL_GENL"
+    }
+  ],
+  "structs": [],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

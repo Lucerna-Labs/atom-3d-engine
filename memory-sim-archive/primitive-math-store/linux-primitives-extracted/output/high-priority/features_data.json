@@ -1,0 +1,307 @@
+{
+  "filename": "features.h",
+  "includes": [
+    "linux/types.h",
+    "linux/uuid.h"
+  ],
+  "defines": [
+    {
+      "name": "__uapi_uuid_t",
+      "value": "uuid_t",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "CXL_CMD_CONFIG_CHANGE_COLD_RESET",
+      "value": "BIT(0)",
+      "comment": "",
+      "category": "CXL_CMD"
+    },
+    {
+      "name": "CXL_CMD_CONFIG_CHANGE_IMMEDIATE",
+      "value": "BIT(1)",
+      "comment": "",
+      "category": "CXL_CMD"
+    },
+    {
+      "name": "CXL_CMD_DATA_CHANGE_IMMEDIATE",
+      "value": "BIT(2)",
+      "comment": "",
+      "category": "CXL_CMD"
+    },
+    {
+      "name": "CXL_CMD_POLICY_CHANGE_IMMEDIATE",
+      "value": "BIT(3)",
+      "comment": "",
+      "category": "CXL_CMD"
+    },
+    {
+      "name": "CXL_CMD_LOG_CHANGE_IMMEDIATE",
+      "value": "BIT(4)",
+      "comment": "",
+      "category": "CXL_CMD"
+    },
+    {
+      "name": "CXL_CMD_SECURITY_STATE_CHANGE",
+      "value": "BIT(5)",
+      "comment": "",
+      "category": "CXL_CMD"
+    },
+    {
+      "name": "CXL_CMD_BACKGROUND",
+      "value": "BIT(6)",
+      "comment": "",
+      "category": "CXL_CMD"
+    },
+    {
+      "name": "CXL_CMD_BGCMD_ABORT_SUPPORTED",
+      "value": "BIT(7)",
+      "comment": "",
+      "category": "CXL_CMD"
+    },
+    {
+      "name": "CXL_CMD_EFFECTS_VALID",
+      "value": "BIT(9)",
+      "comment": "",
+      "category": "CXL_CMD"
+    },
+    {
+      "name": "CXL_CMD_CONFIG_CHANGE_CONV_RESET",
+      "value": "BIT(10)",
+      "comment": "",
+      "category": "CXL_CMD"
+    },
+    {
+      "name": "CXL_CMD_CONFIG_CHANGE_CXL_RESET",
+      "value": "BIT(11)",
+      "comment": "",
+      "category": "CXL_CMD"
+    },
+    {
+      "name": "CXL_CMD_EFFECTS_RESERVED",
+      "value": "GENMASK(15, 12)",
+      "comment": "",
+      "category": "CXL_CMD"
+    },
+    {
+      "name": "CXL_FEATURE_F_CHANGEABLE",
+      "value": "BIT(0)",
+      "comment": "",
+      "category": "CXL_FEATURE"
+    },
+    {
+      "name": "CXL_FEATURE_F_PERSIST_FW_UPDATE",
+      "value": "BIT(4)",
+      "comment": "",
+      "category": "CXL_FEATURE"
+    },
+    {
+      "name": "CXL_FEATURE_F_DEFAULT_SEL",
+      "value": "BIT(5)",
+      "comment": "",
+      "category": "CXL_FEATURE"
+    },
+    {
+      "name": "CXL_FEATURE_F_SAVED_SEL",
+      "value": "BIT(6)",
+      "comment": "",
+      "category": "CXL_FEATURE"
+    },
+    {
+      "name": "CXL_SET_FEAT_FLAG_DATA_TRANSFER_MASK",
+      "value": "GENMASK(2, 0)",
+      "comment": "",
+      "category": "CXL_SET"
+    },
+    {
+      "name": "CXL_SET_FEAT_FLAG_DATA_SAVED_ACROSS_RESET",
+      "value": "BIT(3)",
+      "comment": "",
+      "category": "CXL_SET"
+    }
+  ],
+  "structs": [
+    {
+      "name": "cxl_mbox_get_sup_feats_in",
+      "fields": [
+        {
+          "type_name": "__le32",
+          "name": "count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le16",
+          "name": "start_idx",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reserved",
+          "array_size": "2",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "cxl_feat_entry",
+      "fields": [
+        {
+          "type_name": "__uapi_uuid_t",
+          "name": "uuid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le16",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le16",
+          "name": "get_feat_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le16",
+          "name": "set_feat_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "get_feat_ver",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "set_feat_ver",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le16",
+          "name": "effects",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reserved",
+          "array_size": "18",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "cxl_mbox_get_sup_feats_out",
+      "fields": [
+        {
+          "type_name": "__le16",
+          "name": "num_entries",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le16",
+          "name": "supported_feats",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reserved",
+          "array_size": "4",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "cxl_mbox_get_feat_in",
+      "fields": [
+        {
+          "type_name": "__uapi_uuid_t",
+          "name": "uuid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le16",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le16",
+          "name": "count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "selection",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "cxl_mbox_set_feat_in",
+      "fields": [
+        {
+          "type_name": "__uapi_uuid_t",
+          "name": "uuid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le16",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "version",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "rsvd",
+          "array_size": "9",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

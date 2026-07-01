@@ -1,0 +1,2070 @@
+{
+  "filename": "audit.h",
+  "includes": [
+    "linux/types.h",
+    "linux/elf-em.h"
+  ],
+  "defines": [
+    {
+      "name": "AUDIT_GET",
+      "value": "1000",
+      "comment": "Get status",
+      "category": ""
+    },
+    {
+      "name": "AUDIT_SET",
+      "value": "1001",
+      "comment": "Set status (enable/disable/auditd)",
+      "category": ""
+    },
+    {
+      "name": "AUDIT_LIST",
+      "value": "1002",
+      "comment": "List syscall rules -- deprecated",
+      "category": ""
+    },
+    {
+      "name": "AUDIT_ADD",
+      "value": "1003",
+      "comment": "Add syscall rule -- deprecated",
+      "category": ""
+    },
+    {
+      "name": "AUDIT_DEL",
+      "value": "1004",
+      "comment": "Delete syscall rule -- deprecated",
+      "category": ""
+    },
+    {
+      "name": "AUDIT_USER",
+      "value": "1005",
+      "comment": "Message from userspace -- deprecated",
+      "category": ""
+    },
+    {
+      "name": "AUDIT_LOGIN",
+      "value": "1006",
+      "comment": "Define the login id and information",
+      "category": ""
+    },
+    {
+      "name": "AUDIT_WATCH_INS",
+      "value": "1007",
+      "comment": "Insert file/dir watch entry",
+      "category": "AUDIT_WATCH"
+    },
+    {
+      "name": "AUDIT_WATCH_REM",
+      "value": "1008",
+      "comment": "Remove file/dir watch entry",
+      "category": "AUDIT_WATCH"
+    },
+    {
+      "name": "AUDIT_WATCH_LIST",
+      "value": "1009",
+      "comment": "List all file/dir watches",
+      "category": "AUDIT_WATCH"
+    },
+    {
+      "name": "AUDIT_SIGNAL_INFO",
+      "value": "1010",
+      "comment": "Get info about sender of signal to auditd",
+      "category": "AUDIT_SIGNAL"
+    },
+    {
+      "name": "AUDIT_ADD_RULE",
+      "value": "1011",
+      "comment": "Add syscall filtering rule",
+      "category": "AUDIT_ADD"
+    },
+    {
+      "name": "AUDIT_DEL_RULE",
+      "value": "1012",
+      "comment": "Delete syscall filtering rule",
+      "category": "AUDIT_DEL"
+    },
+    {
+      "name": "AUDIT_LIST_RULES",
+      "value": "1013",
+      "comment": "List syscall filtering rules",
+      "category": "AUDIT_LIST"
+    },
+    {
+      "name": "AUDIT_TRIM",
+      "value": "1014",
+      "comment": "Trim junk from watched tree",
+      "category": ""
+    },
+    {
+      "name": "AUDIT_MAKE_EQUIV",
+      "value": "1015",
+      "comment": "Append to watched tree",
+      "category": "AUDIT_MAKE"
+    },
+    {
+      "name": "AUDIT_TTY_GET",
+      "value": "1016",
+      "comment": "Get TTY auditing status",
+      "category": "AUDIT_TTY"
+    },
+    {
+      "name": "AUDIT_TTY_SET",
+      "value": "1017",
+      "comment": "Set TTY auditing status",
+      "category": "AUDIT_TTY"
+    },
+    {
+      "name": "AUDIT_SET_FEATURE",
+      "value": "1018",
+      "comment": "Turn an audit feature on or off",
+      "category": "AUDIT_SET"
+    },
+    {
+      "name": "AUDIT_GET_FEATURE",
+      "value": "1019",
+      "comment": "Get which features are enabled",
+      "category": "AUDIT_GET"
+    },
+    {
+      "name": "AUDIT_FIRST_USER_MSG",
+      "value": "1100",
+      "comment": "Userspace messages mostly uninteresting to kernel",
+      "category": "AUDIT_FIRST"
+    },
+    {
+      "name": "AUDIT_USER_AVC",
+      "value": "1107",
+      "comment": "We filter this differently",
+      "category": "AUDIT_USER"
+    },
+    {
+      "name": "AUDIT_USER_TTY",
+      "value": "1124",
+      "comment": "Non-ICANON TTY input meaning",
+      "category": "AUDIT_USER"
+    },
+    {
+      "name": "AUDIT_LAST_USER_MSG",
+      "value": "1199",
+      "comment": "",
+      "category": "AUDIT_LAST"
+    },
+    {
+      "name": "AUDIT_FIRST_USER_MSG2",
+      "value": "2100",
+      "comment": "More user space messages",
+      "category": "AUDIT_FIRST"
+    },
+    {
+      "name": "AUDIT_LAST_USER_MSG2",
+      "value": "2999",
+      "comment": "",
+      "category": "AUDIT_LAST"
+    },
+    {
+      "name": "AUDIT_DAEMON_START",
+      "value": "1200",
+      "comment": "Daemon startup record",
+      "category": "AUDIT_DAEMON"
+    },
+    {
+      "name": "AUDIT_DAEMON_END",
+      "value": "1201",
+      "comment": "Daemon normal stop record",
+      "category": "AUDIT_DAEMON"
+    },
+    {
+      "name": "AUDIT_DAEMON_ABORT",
+      "value": "1202",
+      "comment": "Daemon error stop record",
+      "category": "AUDIT_DAEMON"
+    },
+    {
+      "name": "AUDIT_DAEMON_CONFIG",
+      "value": "1203",
+      "comment": "Daemon config change",
+      "category": "AUDIT_DAEMON"
+    },
+    {
+      "name": "AUDIT_SYSCALL",
+      "value": "1300",
+      "comment": "Syscall event",
+      "category": ""
+    },
+    {
+      "name": "AUDIT_PATH",
+      "value": "1302",
+      "comment": "Filename path information",
+      "category": ""
+    },
+    {
+      "name": "AUDIT_IPC",
+      "value": "1303",
+      "comment": "IPC record",
+      "category": ""
+    },
+    {
+      "name": "AUDIT_SOCKETCALL",
+      "value": "1304",
+      "comment": "sys_socketcall arguments",
+      "category": ""
+    },
+    {
+      "name": "AUDIT_CONFIG_CHANGE",
+      "value": "1305",
+      "comment": "Audit system configuration change",
+      "category": "AUDIT_CONFIG"
+    },
+    {
+      "name": "AUDIT_SOCKADDR",
+      "value": "1306",
+      "comment": "sockaddr copied as syscall arg",
+      "category": ""
+    },
+    {
+      "name": "AUDIT_CWD",
+      "value": "1307",
+      "comment": "Current working directory",
+      "category": ""
+    },
+    {
+      "name": "AUDIT_EXECVE",
+      "value": "1309",
+      "comment": "execve arguments",
+      "category": ""
+    },
+    {
+      "name": "AUDIT_IPC_SET_PERM",
+      "value": "1311",
+      "comment": "IPC new permissions record type",
+      "category": "AUDIT_IPC"
+    },
+    {
+      "name": "AUDIT_MQ_OPEN",
+      "value": "1312",
+      "comment": "POSIX MQ open record type",
+      "category": "AUDIT_MQ"
+    },
+    {
+      "name": "AUDIT_MQ_SENDRECV",
+      "value": "1313",
+      "comment": "POSIX MQ send/receive record type",
+      "category": "AUDIT_MQ"
+    },
+    {
+      "name": "AUDIT_MQ_NOTIFY",
+      "value": "1314",
+      "comment": "POSIX MQ notify record type",
+      "category": "AUDIT_MQ"
+    },
+    {
+      "name": "AUDIT_MQ_GETSETATTR",
+      "value": "1315",
+      "comment": "POSIX MQ get/set attribute record type",
+      "category": "AUDIT_MQ"
+    },
+    {
+      "name": "AUDIT_KERNEL_OTHER",
+      "value": "1316",
+      "comment": "For use by 3rd party modules",
+      "category": "AUDIT_KERNEL"
+    },
+    {
+      "name": "AUDIT_FD_PAIR",
+      "value": "1317",
+      "comment": "audit record for pipe/socketpair",
+      "category": "AUDIT_FD"
+    },
+    {
+      "name": "AUDIT_OBJ_PID",
+      "value": "1318",
+      "comment": "ptrace target",
+      "category": "AUDIT_OBJ"
+    },
+    {
+      "name": "AUDIT_TTY",
+      "value": "1319",
+      "comment": "Input on an administrative TTY",
+      "category": ""
+    },
+    {
+      "name": "AUDIT_EOE",
+      "value": "1320",
+      "comment": "End of multi-record event",
+      "category": ""
+    },
+    {
+      "name": "AUDIT_BPRM_FCAPS",
+      "value": "1321",
+      "comment": "Information about fcaps increasing perms",
+      "category": "AUDIT_BPRM"
+    },
+    {
+      "name": "AUDIT_CAPSET",
+      "value": "1322",
+      "comment": "Record showing argument to sys_capset",
+      "category": ""
+    },
+    {
+      "name": "AUDIT_MMAP",
+      "value": "1323",
+      "comment": "Record showing descriptor and flags in mmap",
+      "category": ""
+    },
+    {
+      "name": "AUDIT_NETFILTER_PKT",
+      "value": "1324",
+      "comment": "Packets traversing netfilter chains",
+      "category": "AUDIT_NETFILTER"
+    },
+    {
+      "name": "AUDIT_NETFILTER_CFG",
+      "value": "1325",
+      "comment": "Netfilter chain modifications",
+      "category": "AUDIT_NETFILTER"
+    },
+    {
+      "name": "AUDIT_SECCOMP",
+      "value": "1326",
+      "comment": "Secure Computing event",
+      "category": ""
+    },
+    {
+      "name": "AUDIT_PROCTITLE",
+      "value": "1327",
+      "comment": "Proctitle emit event",
+      "category": ""
+    },
+    {
+      "name": "AUDIT_FEATURE_CHANGE",
+      "value": "1328",
+      "comment": "audit log listing feature changes",
+      "category": "AUDIT_FEATURE"
+    },
+    {
+      "name": "AUDIT_REPLACE",
+      "value": "1329",
+      "comment": "Replace auditd if this packet unanswerd",
+      "category": ""
+    },
+    {
+      "name": "AUDIT_KERN_MODULE",
+      "value": "1330",
+      "comment": "Kernel Module events",
+      "category": "AUDIT_KERN"
+    },
+    {
+      "name": "AUDIT_FANOTIFY",
+      "value": "1331",
+      "comment": "Fanotify access decision",
+      "category": ""
+    },
+    {
+      "name": "AUDIT_TIME_INJOFFSET",
+      "value": "1332",
+      "comment": "Timekeeping offset injected",
+      "category": "AUDIT_TIME"
+    },
+    {
+      "name": "AUDIT_TIME_ADJNTPVAL",
+      "value": "1333",
+      "comment": "NTP value adjustment",
+      "category": "AUDIT_TIME"
+    },
+    {
+      "name": "AUDIT_BPF",
+      "value": "1334",
+      "comment": "BPF subsystem",
+      "category": ""
+    },
+    {
+      "name": "AUDIT_EVENT_LISTENER",
+      "value": "1335",
+      "comment": "Task joined multicast read socket",
+      "category": "AUDIT_EVENT"
+    },
+    {
+      "name": "AUDIT_URINGOP",
+      "value": "1336",
+      "comment": "io_uring operation",
+      "category": ""
+    },
+    {
+      "name": "AUDIT_OPENAT2",
+      "value": "1337",
+      "comment": "Record showing openat2 how args",
+      "category": ""
+    },
+    {
+      "name": "AUDIT_DM_CTRL",
+      "value": "1338",
+      "comment": "Device Mapper target control",
+      "category": "AUDIT_DM"
+    },
+    {
+      "name": "AUDIT_DM_EVENT",
+      "value": "1339",
+      "comment": "Device Mapper events",
+      "category": "AUDIT_DM"
+    },
+    {
+      "name": "AUDIT_AVC",
+      "value": "1400",
+      "comment": "SE Linux avc denial or grant",
+      "category": ""
+    },
+    {
+      "name": "AUDIT_SELINUX_ERR",
+      "value": "1401",
+      "comment": "Internal SE Linux Errors",
+      "category": "AUDIT_SELINUX"
+    },
+    {
+      "name": "AUDIT_AVC_PATH",
+      "value": "1402",
+      "comment": "dentry, vfsmount pair from avc",
+      "category": "AUDIT_AVC"
+    },
+    {
+      "name": "AUDIT_MAC_POLICY_LOAD",
+      "value": "1403",
+      "comment": "Policy file load",
+      "category": "AUDIT_MAC"
+    },
+    {
+      "name": "AUDIT_MAC_STATUS",
+      "value": "1404",
+      "comment": "Changed enforcing,permissive,off",
+      "category": "AUDIT_MAC"
+    },
+    {
+      "name": "AUDIT_MAC_CONFIG_CHANGE",
+      "value": "1405",
+      "comment": "Changes to booleans",
+      "category": "AUDIT_MAC"
+    },
+    {
+      "name": "AUDIT_MAC_UNLBL_ALLOW",
+      "value": "1406",
+      "comment": "NetLabel: allow unlabeled traffic",
+      "category": "AUDIT_MAC"
+    },
+    {
+      "name": "AUDIT_MAC_CIPSOV4_ADD",
+      "value": "1407",
+      "comment": "NetLabel: add CIPSOv4 DOI entry",
+      "category": "AUDIT_MAC"
+    },
+    {
+      "name": "AUDIT_MAC_CIPSOV4_DEL",
+      "value": "1408",
+      "comment": "NetLabel: del CIPSOv4 DOI entry",
+      "category": "AUDIT_MAC"
+    },
+    {
+      "name": "AUDIT_MAC_MAP_ADD",
+      "value": "1409",
+      "comment": "NetLabel: add LSM domain mapping",
+      "category": "AUDIT_MAC"
+    },
+    {
+      "name": "AUDIT_MAC_MAP_DEL",
+      "value": "1410",
+      "comment": "NetLabel: del LSM domain mapping",
+      "category": "AUDIT_MAC"
+    },
+    {
+      "name": "AUDIT_MAC_IPSEC_ADDSA",
+      "value": "1411",
+      "comment": "Not used",
+      "category": "AUDIT_MAC"
+    },
+    {
+      "name": "AUDIT_MAC_IPSEC_DELSA",
+      "value": "1412",
+      "comment": "Not used",
+      "category": "AUDIT_MAC"
+    },
+    {
+      "name": "AUDIT_MAC_IPSEC_ADDSPD",
+      "value": "1413",
+      "comment": "Not used",
+      "category": "AUDIT_MAC"
+    },
+    {
+      "name": "AUDIT_MAC_IPSEC_DELSPD",
+      "value": "1414",
+      "comment": "Not used",
+      "category": "AUDIT_MAC"
+    },
+    {
+      "name": "AUDIT_MAC_IPSEC_EVENT",
+      "value": "1415",
+      "comment": "Audit an IPSec event",
+      "category": "AUDIT_MAC"
+    },
+    {
+      "name": "AUDIT_MAC_UNLBL_STCADD",
+      "value": "1416",
+      "comment": "NetLabel: add a static label",
+      "category": "AUDIT_MAC"
+    },
+    {
+      "name": "AUDIT_MAC_UNLBL_STCDEL",
+      "value": "1417",
+      "comment": "NetLabel: del a static label",
+      "category": "AUDIT_MAC"
+    },
+    {
+      "name": "AUDIT_MAC_CALIPSO_ADD",
+      "value": "1418",
+      "comment": "NetLabel: add CALIPSO DOI entry",
+      "category": "AUDIT_MAC"
+    },
+    {
+      "name": "AUDIT_MAC_CALIPSO_DEL",
+      "value": "1419",
+      "comment": "NetLabel: del CALIPSO DOI entry",
+      "category": "AUDIT_MAC"
+    },
+    {
+      "name": "AUDIT_IPE_ACCESS",
+      "value": "1420",
+      "comment": "IPE denial or grant",
+      "category": "AUDIT_IPE"
+    },
+    {
+      "name": "AUDIT_IPE_CONFIG_CHANGE",
+      "value": "1421",
+      "comment": "IPE config change",
+      "category": "AUDIT_IPE"
+    },
+    {
+      "name": "AUDIT_IPE_POLICY_LOAD",
+      "value": "1422",
+      "comment": "IPE policy load",
+      "category": "AUDIT_IPE"
+    },
+    {
+      "name": "AUDIT_LANDLOCK_ACCESS",
+      "value": "1423",
+      "comment": "Landlock denial",
+      "category": "AUDIT_LANDLOCK"
+    },
+    {
+      "name": "AUDIT_LANDLOCK_DOMAIN",
+      "value": "1424",
+      "comment": "Landlock domain status",
+      "category": "AUDIT_LANDLOCK"
+    },
+    {
+      "name": "AUDIT_MAC_TASK_CONTEXTS",
+      "value": "1425",
+      "comment": "Multiple LSM task contexts",
+      "category": "AUDIT_MAC"
+    },
+    {
+      "name": "AUDIT_MAC_OBJ_CONTEXTS",
+      "value": "1426",
+      "comment": "Multiple LSM objext contexts",
+      "category": "AUDIT_MAC"
+    },
+    {
+      "name": "AUDIT_FIRST_KERN_ANOM_MSG",
+      "value": "1700",
+      "comment": "",
+      "category": "AUDIT_FIRST"
+    },
+    {
+      "name": "AUDIT_LAST_KERN_ANOM_MSG",
+      "value": "1799",
+      "comment": "",
+      "category": "AUDIT_LAST"
+    },
+    {
+      "name": "AUDIT_ANOM_PROMISCUOUS",
+      "value": "1700",
+      "comment": "Device changed promiscuous mode",
+      "category": "AUDIT_ANOM"
+    },
+    {
+      "name": "AUDIT_ANOM_ABEND",
+      "value": "1701",
+      "comment": "Process ended abnormally",
+      "category": "AUDIT_ANOM"
+    },
+    {
+      "name": "AUDIT_ANOM_LINK",
+      "value": "1702",
+      "comment": "Suspicious use of file links",
+      "category": "AUDIT_ANOM"
+    },
+    {
+      "name": "AUDIT_ANOM_CREAT",
+      "value": "1703",
+      "comment": "Suspicious file creation",
+      "category": "AUDIT_ANOM"
+    },
+    {
+      "name": "AUDIT_INTEGRITY_DATA",
+      "value": "1800",
+      "comment": "Data integrity verification",
+      "category": "AUDIT_INTEGRITY"
+    },
+    {
+      "name": "AUDIT_INTEGRITY_METADATA",
+      "value": "1801",
+      "comment": "Metadata integrity verification",
+      "category": "AUDIT_INTEGRITY"
+    },
+    {
+      "name": "AUDIT_INTEGRITY_STATUS",
+      "value": "1802",
+      "comment": "Integrity enable status",
+      "category": "AUDIT_INTEGRITY"
+    },
+    {
+      "name": "AUDIT_INTEGRITY_HASH",
+      "value": "1803",
+      "comment": "Integrity HASH type",
+      "category": "AUDIT_INTEGRITY"
+    },
+    {
+      "name": "AUDIT_INTEGRITY_PCR",
+      "value": "1804",
+      "comment": "PCR invalidation msgs",
+      "category": "AUDIT_INTEGRITY"
+    },
+    {
+      "name": "AUDIT_INTEGRITY_RULE",
+      "value": "1805",
+      "comment": "policy rule",
+      "category": "AUDIT_INTEGRITY"
+    },
+    {
+      "name": "AUDIT_INTEGRITY_EVM_XATTR",
+      "value": "1806",
+      "comment": "New EVM-covered xattr",
+      "category": "AUDIT_INTEGRITY"
+    },
+    {
+      "name": "AUDIT_INTEGRITY_POLICY_RULE",
+      "value": "1807",
+      "comment": "IMA policy rules",
+      "category": "AUDIT_INTEGRITY"
+    },
+    {
+      "name": "AUDIT_INTEGRITY_USERSPACE",
+      "value": "1808",
+      "comment": "Userspace enforced data integrity",
+      "category": "AUDIT_INTEGRITY"
+    },
+    {
+      "name": "AUDIT_KERNEL",
+      "value": "2000",
+      "comment": "Asynchronous audit record. NOT A REQUEST.",
+      "category": ""
+    },
+    {
+      "name": "AUDIT_FILTER_USER",
+      "value": "0x00",
+      "comment": "Apply rule to user-generated messages",
+      "category": "AUDIT_FILTER"
+    },
+    {
+      "name": "AUDIT_FILTER_TASK",
+      "value": "0x01",
+      "comment": "Apply rule at task creation (not syscall)",
+      "category": "AUDIT_FILTER"
+    },
+    {
+      "name": "AUDIT_FILTER_ENTRY",
+      "value": "0x02",
+      "comment": "Apply rule at syscall entry",
+      "category": "AUDIT_FILTER"
+    },
+    {
+      "name": "AUDIT_FILTER_WATCH",
+      "value": "0x03",
+      "comment": "Apply rule to file system watches",
+      "category": "AUDIT_FILTER"
+    },
+    {
+      "name": "AUDIT_FILTER_EXIT",
+      "value": "0x04",
+      "comment": "Apply rule at syscall exit",
+      "category": "AUDIT_FILTER"
+    },
+    {
+      "name": "AUDIT_FILTER_EXCLUDE",
+      "value": "0x05",
+      "comment": "Apply rule before record creation",
+      "category": "AUDIT_FILTER"
+    },
+    {
+      "name": "AUDIT_FILTER_TYPE",
+      "value": "AUDIT_FILTER_EXCLUDE",
+      "comment": "obsolete misleading naming",
+      "category": "AUDIT_FILTER"
+    },
+    {
+      "name": "AUDIT_FILTER_FS",
+      "value": "0x06",
+      "comment": "Apply rule at __audit_inode_child",
+      "category": "AUDIT_FILTER"
+    },
+    {
+      "name": "AUDIT_FILTER_URING_EXIT",
+      "value": "0x07",
+      "comment": "Apply rule at io_uring op exit",
+      "category": "AUDIT_FILTER"
+    },
+    {
+      "name": "AUDIT_NR_FILTERS",
+      "value": "8",
+      "comment": "",
+      "category": "AUDIT_NR"
+    },
+    {
+      "name": "AUDIT_FILTER_PREPEND",
+      "value": "0x10",
+      "comment": "Prepend to front of list",
+      "category": "AUDIT_FILTER"
+    },
+    {
+      "name": "AUDIT_NEVER",
+      "value": "0",
+      "comment": "Do not build context if rule matches",
+      "category": ""
+    },
+    {
+      "name": "AUDIT_POSSIBLE",
+      "value": "1",
+      "comment": "Build context if rule matches",
+      "category": ""
+    },
+    {
+      "name": "AUDIT_ALWAYS",
+      "value": "2",
+      "comment": "Generate audit record if rule matches",
+      "category": ""
+    },
+    {
+      "name": "AUDIT_MAX_FIELDS",
+      "value": "64",
+      "comment": "",
+      "category": "AUDIT_MAX"
+    },
+    {
+      "name": "AUDIT_MAX_KEY_LEN",
+      "value": "256",
+      "comment": "",
+      "category": "AUDIT_MAX"
+    },
+    {
+      "name": "AUDIT_BITMASK_SIZE",
+      "value": "64",
+      "comment": "",
+      "category": "AUDIT_BITMASK"
+    },
+    {
+      "name": "AUDIT_SYSCALL_CLASSES",
+      "value": "16",
+      "comment": "",
+      "category": "AUDIT_SYSCALL"
+    },
+    {
+      "name": "AUDIT_CLASS_DIR_WRITE",
+      "value": "0",
+      "comment": "",
+      "category": "AUDIT_CLASS"
+    },
+    {
+      "name": "AUDIT_CLASS_DIR_WRITE_32",
+      "value": "1",
+      "comment": "",
+      "category": "AUDIT_CLASS"
+    },
+    {
+      "name": "AUDIT_CLASS_CHATTR",
+      "value": "2",
+      "comment": "",
+      "category": "AUDIT_CLASS"
+    },
+    {
+      "name": "AUDIT_CLASS_CHATTR_32",
+      "value": "3",
+      "comment": "",
+      "category": "AUDIT_CLASS"
+    },
+    {
+      "name": "AUDIT_CLASS_READ",
+      "value": "4",
+      "comment": "",
+      "category": "AUDIT_CLASS"
+    },
+    {
+      "name": "AUDIT_CLASS_READ_32",
+      "value": "5",
+      "comment": "",
+      "category": "AUDIT_CLASS"
+    },
+    {
+      "name": "AUDIT_CLASS_WRITE",
+      "value": "6",
+      "comment": "",
+      "category": "AUDIT_CLASS"
+    },
+    {
+      "name": "AUDIT_CLASS_WRITE_32",
+      "value": "7",
+      "comment": "",
+      "category": "AUDIT_CLASS"
+    },
+    {
+      "name": "AUDIT_CLASS_SIGNAL",
+      "value": "8",
+      "comment": "",
+      "category": "AUDIT_CLASS"
+    },
+    {
+      "name": "AUDIT_CLASS_SIGNAL_32",
+      "value": "9",
+      "comment": "",
+      "category": "AUDIT_CLASS"
+    },
+    {
+      "name": "AUDIT_UNUSED_BITS",
+      "value": "0x07FFFC00",
+      "comment": "",
+      "category": "AUDIT_UNUSED"
+    },
+    {
+      "name": "AUDIT_COMPARE_UID_TO_OBJ_UID",
+      "value": "1",
+      "comment": "",
+      "category": "AUDIT_COMPARE"
+    },
+    {
+      "name": "AUDIT_COMPARE_GID_TO_OBJ_GID",
+      "value": "2",
+      "comment": "",
+      "category": "AUDIT_COMPARE"
+    },
+    {
+      "name": "AUDIT_COMPARE_EUID_TO_OBJ_UID",
+      "value": "3",
+      "comment": "",
+      "category": "AUDIT_COMPARE"
+    },
+    {
+      "name": "AUDIT_COMPARE_EGID_TO_OBJ_GID",
+      "value": "4",
+      "comment": "",
+      "category": "AUDIT_COMPARE"
+    },
+    {
+      "name": "AUDIT_COMPARE_AUID_TO_OBJ_UID",
+      "value": "5",
+      "comment": "",
+      "category": "AUDIT_COMPARE"
+    },
+    {
+      "name": "AUDIT_COMPARE_SUID_TO_OBJ_UID",
+      "value": "6",
+      "comment": "",
+      "category": "AUDIT_COMPARE"
+    },
+    {
+      "name": "AUDIT_COMPARE_SGID_TO_OBJ_GID",
+      "value": "7",
+      "comment": "",
+      "category": "AUDIT_COMPARE"
+    },
+    {
+      "name": "AUDIT_COMPARE_FSUID_TO_OBJ_UID",
+      "value": "8",
+      "comment": "",
+      "category": "AUDIT_COMPARE"
+    },
+    {
+      "name": "AUDIT_COMPARE_FSGID_TO_OBJ_GID",
+      "value": "9",
+      "comment": "",
+      "category": "AUDIT_COMPARE"
+    },
+    {
+      "name": "AUDIT_COMPARE_UID_TO_AUID",
+      "value": "10",
+      "comment": "",
+      "category": "AUDIT_COMPARE"
+    },
+    {
+      "name": "AUDIT_COMPARE_UID_TO_EUID",
+      "value": "11",
+      "comment": "",
+      "category": "AUDIT_COMPARE"
+    },
+    {
+      "name": "AUDIT_COMPARE_UID_TO_FSUID",
+      "value": "12",
+      "comment": "",
+      "category": "AUDIT_COMPARE"
+    },
+    {
+      "name": "AUDIT_COMPARE_UID_TO_SUID",
+      "value": "13",
+      "comment": "",
+      "category": "AUDIT_COMPARE"
+    },
+    {
+      "name": "AUDIT_COMPARE_AUID_TO_FSUID",
+      "value": "14",
+      "comment": "",
+      "category": "AUDIT_COMPARE"
+    },
+    {
+      "name": "AUDIT_COMPARE_AUID_TO_SUID",
+      "value": "15",
+      "comment": "",
+      "category": "AUDIT_COMPARE"
+    },
+    {
+      "name": "AUDIT_COMPARE_AUID_TO_EUID",
+      "value": "16",
+      "comment": "",
+      "category": "AUDIT_COMPARE"
+    },
+    {
+      "name": "AUDIT_COMPARE_EUID_TO_SUID",
+      "value": "17",
+      "comment": "",
+      "category": "AUDIT_COMPARE"
+    },
+    {
+      "name": "AUDIT_COMPARE_EUID_TO_FSUID",
+      "value": "18",
+      "comment": "",
+      "category": "AUDIT_COMPARE"
+    },
+    {
+      "name": "AUDIT_COMPARE_SUID_TO_FSUID",
+      "value": "19",
+      "comment": "",
+      "category": "AUDIT_COMPARE"
+    },
+    {
+      "name": "AUDIT_COMPARE_GID_TO_EGID",
+      "value": "20",
+      "comment": "",
+      "category": "AUDIT_COMPARE"
+    },
+    {
+      "name": "AUDIT_COMPARE_GID_TO_FSGID",
+      "value": "21",
+      "comment": "",
+      "category": "AUDIT_COMPARE"
+    },
+    {
+      "name": "AUDIT_COMPARE_GID_TO_SGID",
+      "value": "22",
+      "comment": "",
+      "category": "AUDIT_COMPARE"
+    },
+    {
+      "name": "AUDIT_COMPARE_EGID_TO_FSGID",
+      "value": "23",
+      "comment": "",
+      "category": "AUDIT_COMPARE"
+    },
+    {
+      "name": "AUDIT_COMPARE_EGID_TO_SGID",
+      "value": "24",
+      "comment": "",
+      "category": "AUDIT_COMPARE"
+    },
+    {
+      "name": "AUDIT_COMPARE_SGID_TO_FSGID",
+      "value": "25",
+      "comment": "",
+      "category": "AUDIT_COMPARE"
+    },
+    {
+      "name": "AUDIT_MAX_FIELD_COMPARE",
+      "value": "AUDIT_COMPARE_SGID_TO_FSGID",
+      "comment": "",
+      "category": "AUDIT_MAX"
+    },
+    {
+      "name": "AUDIT_PID",
+      "value": "0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "AUDIT_UID",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "AUDIT_EUID",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "AUDIT_SUID",
+      "value": "3",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "AUDIT_FSUID",
+      "value": "4",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "AUDIT_GID",
+      "value": "5",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "AUDIT_EGID",
+      "value": "6",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "AUDIT_SGID",
+      "value": "7",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "AUDIT_FSGID",
+      "value": "8",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "AUDIT_LOGINUID",
+      "value": "9",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "AUDIT_PERS",
+      "value": "10",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "AUDIT_ARCH",
+      "value": "11",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "AUDIT_MSGTYPE",
+      "value": "12",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "AUDIT_SUBJ_USER",
+      "value": "13",
+      "comment": "security label user",
+      "category": "AUDIT_SUBJ"
+    },
+    {
+      "name": "AUDIT_SUBJ_ROLE",
+      "value": "14",
+      "comment": "security label role",
+      "category": "AUDIT_SUBJ"
+    },
+    {
+      "name": "AUDIT_SUBJ_TYPE",
+      "value": "15",
+      "comment": "security label type",
+      "category": "AUDIT_SUBJ"
+    },
+    {
+      "name": "AUDIT_SUBJ_SEN",
+      "value": "16",
+      "comment": "security label sensitivity label",
+      "category": "AUDIT_SUBJ"
+    },
+    {
+      "name": "AUDIT_SUBJ_CLR",
+      "value": "17",
+      "comment": "security label clearance label",
+      "category": "AUDIT_SUBJ"
+    },
+    {
+      "name": "AUDIT_PPID",
+      "value": "18",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "AUDIT_OBJ_USER",
+      "value": "19",
+      "comment": "",
+      "category": "AUDIT_OBJ"
+    },
+    {
+      "name": "AUDIT_OBJ_ROLE",
+      "value": "20",
+      "comment": "",
+      "category": "AUDIT_OBJ"
+    },
+    {
+      "name": "AUDIT_OBJ_TYPE",
+      "value": "21",
+      "comment": "",
+      "category": "AUDIT_OBJ"
+    },
+    {
+      "name": "AUDIT_OBJ_LEV_LOW",
+      "value": "22",
+      "comment": "",
+      "category": "AUDIT_OBJ"
+    },
+    {
+      "name": "AUDIT_OBJ_LEV_HIGH",
+      "value": "23",
+      "comment": "",
+      "category": "AUDIT_OBJ"
+    },
+    {
+      "name": "AUDIT_LOGINUID_SET",
+      "value": "24",
+      "comment": "",
+      "category": "AUDIT_LOGINUID"
+    },
+    {
+      "name": "AUDIT_SESSIONID",
+      "value": "25",
+      "comment": "Session ID",
+      "category": ""
+    },
+    {
+      "name": "AUDIT_FSTYPE",
+      "value": "26",
+      "comment": "FileSystem Type",
+      "category": ""
+    },
+    {
+      "name": "AUDIT_DEVMAJOR",
+      "value": "100",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "AUDIT_DEVMINOR",
+      "value": "101",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "AUDIT_INODE",
+      "value": "102",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "AUDIT_EXIT",
+      "value": "103",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "AUDIT_SUCCESS",
+      "value": "104",
+      "comment": "exit >= 0; value ignored",
+      "category": ""
+    },
+    {
+      "name": "AUDIT_WATCH",
+      "value": "105",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "AUDIT_PERM",
+      "value": "106",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "AUDIT_DIR",
+      "value": "107",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "AUDIT_FILETYPE",
+      "value": "108",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "AUDIT_OBJ_UID",
+      "value": "109",
+      "comment": "",
+      "category": "AUDIT_OBJ"
+    },
+    {
+      "name": "AUDIT_OBJ_GID",
+      "value": "110",
+      "comment": "",
+      "category": "AUDIT_OBJ"
+    },
+    {
+      "name": "AUDIT_FIELD_COMPARE",
+      "value": "111",
+      "comment": "",
+      "category": "AUDIT_FIELD"
+    },
+    {
+      "name": "AUDIT_EXE",
+      "value": "112",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "AUDIT_SADDR_FAM",
+      "value": "113",
+      "comment": "",
+      "category": "AUDIT_SADDR"
+    },
+    {
+      "name": "AUDIT_ARG0",
+      "value": "200",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "AUDIT_ARG1",
+      "value": "(AUDIT_ARG0+1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "AUDIT_ARG2",
+      "value": "(AUDIT_ARG0+2)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "AUDIT_ARG3",
+      "value": "(AUDIT_ARG0+3)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "AUDIT_FILTERKEY",
+      "value": "210",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "AUDIT_NEGATE",
+      "value": "0x80000000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "AUDIT_BIT_MASK",
+      "value": "0x08000000",
+      "comment": "",
+      "category": "AUDIT_BIT"
+    },
+    {
+      "name": "AUDIT_LESS_THAN",
+      "value": "0x10000000",
+      "comment": "",
+      "category": "AUDIT_LESS"
+    },
+    {
+      "name": "AUDIT_GREATER_THAN",
+      "value": "0x20000000",
+      "comment": "",
+      "category": "AUDIT_GREATER"
+    },
+    {
+      "name": "AUDIT_NOT_EQUAL",
+      "value": "0x30000000",
+      "comment": "",
+      "category": "AUDIT_NOT"
+    },
+    {
+      "name": "AUDIT_EQUAL",
+      "value": "0x40000000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "AUDIT_BIT_TEST",
+      "value": "(AUDIT_BIT_MASK|AUDIT_EQUAL)",
+      "comment": "",
+      "category": "AUDIT_BIT"
+    },
+    {
+      "name": "AUDIT_LESS_THAN_OR_EQUAL",
+      "value": "(AUDIT_LESS_THAN|AUDIT_EQUAL)",
+      "comment": "",
+      "category": "AUDIT_LESS"
+    },
+    {
+      "name": "AUDIT_GREATER_THAN_OR_EQUAL",
+      "value": "(AUDIT_GREATER_THAN|AUDIT_EQUAL)",
+      "comment": "",
+      "category": "AUDIT_GREATER"
+    },
+    {
+      "name": "AUDIT_OPERATORS",
+      "value": "(AUDIT_EQUAL|AUDIT_NOT_EQUAL|AUDIT_BIT_MASK)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "AUDIT_STATUS_ENABLED",
+      "value": "0x0001",
+      "comment": "",
+      "category": "AUDIT_STATUS"
+    },
+    {
+      "name": "AUDIT_STATUS_FAILURE",
+      "value": "0x0002",
+      "comment": "",
+      "category": "AUDIT_STATUS"
+    },
+    {
+      "name": "AUDIT_STATUS_PID",
+      "value": "0x0004",
+      "comment": "",
+      "category": "AUDIT_STATUS"
+    },
+    {
+      "name": "AUDIT_STATUS_RATE_LIMIT",
+      "value": "0x0008",
+      "comment": "",
+      "category": "AUDIT_STATUS"
+    },
+    {
+      "name": "AUDIT_STATUS_BACKLOG_LIMIT",
+      "value": "0x0010",
+      "comment": "",
+      "category": "AUDIT_STATUS"
+    },
+    {
+      "name": "AUDIT_STATUS_BACKLOG_WAIT_TIME",
+      "value": "0x0020",
+      "comment": "",
+      "category": "AUDIT_STATUS"
+    },
+    {
+      "name": "AUDIT_STATUS_LOST",
+      "value": "0x0040",
+      "comment": "",
+      "category": "AUDIT_STATUS"
+    },
+    {
+      "name": "AUDIT_STATUS_BACKLOG_WAIT_TIME_ACTUAL",
+      "value": "0x0080",
+      "comment": "",
+      "category": "AUDIT_STATUS"
+    },
+    {
+      "name": "AUDIT_FEATURE_BITMAP_BACKLOG_LIMIT",
+      "value": "0x00000001",
+      "comment": "",
+      "category": "AUDIT_FEATURE"
+    },
+    {
+      "name": "AUDIT_FEATURE_BITMAP_BACKLOG_WAIT_TIME",
+      "value": "0x00000002",
+      "comment": "",
+      "category": "AUDIT_FEATURE"
+    },
+    {
+      "name": "AUDIT_FEATURE_BITMAP_EXECUTABLE_PATH",
+      "value": "0x00000004",
+      "comment": "",
+      "category": "AUDIT_FEATURE"
+    },
+    {
+      "name": "AUDIT_FEATURE_BITMAP_EXCLUDE_EXTEND",
+      "value": "0x00000008",
+      "comment": "",
+      "category": "AUDIT_FEATURE"
+    },
+    {
+      "name": "AUDIT_FEATURE_BITMAP_SESSIONID_FILTER",
+      "value": "0x00000010",
+      "comment": "",
+      "category": "AUDIT_FEATURE"
+    },
+    {
+      "name": "AUDIT_FEATURE_BITMAP_LOST_RESET",
+      "value": "0x00000020",
+      "comment": "",
+      "category": "AUDIT_FEATURE"
+    },
+    {
+      "name": "AUDIT_FEATURE_BITMAP_FILTER_FS",
+      "value": "0x00000040",
+      "comment": "",
+      "category": "AUDIT_FEATURE"
+    },
+    {
+      "name": "AUDIT_FEATURE_BITMAP_ALL",
+      "value": "(AUDIT_FEATURE_BITMAP_BACKLOG_LIMIT | ",
+      "comment": "",
+      "category": "AUDIT_FEATURE"
+    },
+    {
+      "name": "AUDIT_VERSION_LATEST",
+      "value": "AUDIT_FEATURE_BITMAP_ALL",
+      "comment": "",
+      "category": "AUDIT_VERSION"
+    },
+    {
+      "name": "AUDIT_VERSION_BACKLOG_LIMIT",
+      "value": "AUDIT_FEATURE_BITMAP_BACKLOG_LIMIT",
+      "comment": "",
+      "category": "AUDIT_VERSION"
+    },
+    {
+      "name": "AUDIT_VERSION_BACKLOG_WAIT_TIME",
+      "value": "AUDIT_FEATURE_BITMAP_BACKLOG_WAIT_TIME",
+      "comment": "",
+      "category": "AUDIT_VERSION"
+    },
+    {
+      "name": "AUDIT_FAIL_SILENT",
+      "value": "0",
+      "comment": "",
+      "category": "AUDIT_FAIL"
+    },
+    {
+      "name": "AUDIT_FAIL_PRINTK",
+      "value": "1",
+      "comment": "",
+      "category": "AUDIT_FAIL"
+    },
+    {
+      "name": "AUDIT_FAIL_PANIC",
+      "value": "2",
+      "comment": "",
+      "category": "AUDIT_FAIL"
+    },
+    {
+      "name": "__AUDIT_ARCH_CONVENTION_MASK",
+      "value": "0x30000000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "__AUDIT_ARCH_CONVENTION_MIPS64_N32",
+      "value": "0x20000000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "__AUDIT_ARCH_64BIT",
+      "value": "0x80000000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "__AUDIT_ARCH_LE",
+      "value": "0x40000000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "AUDIT_ARCH_AARCH64",
+      "value": "(EM_AARCH64|__AUDIT_ARCH_64BIT|__AUDIT_ARCH_LE)",
+      "comment": "",
+      "category": "AUDIT_ARCH"
+    },
+    {
+      "name": "AUDIT_ARCH_ALPHA",
+      "value": "(EM_ALPHA|__AUDIT_ARCH_64BIT|__AUDIT_ARCH_LE)",
+      "comment": "",
+      "category": "AUDIT_ARCH"
+    },
+    {
+      "name": "AUDIT_ARCH_ARCOMPACT",
+      "value": "(EM_ARCOMPACT|__AUDIT_ARCH_LE)",
+      "comment": "",
+      "category": "AUDIT_ARCH"
+    },
+    {
+      "name": "AUDIT_ARCH_ARCOMPACTBE",
+      "value": "(EM_ARCOMPACT)",
+      "comment": "",
+      "category": "AUDIT_ARCH"
+    },
+    {
+      "name": "AUDIT_ARCH_ARCV2",
+      "value": "(EM_ARCV2|__AUDIT_ARCH_LE)",
+      "comment": "",
+      "category": "AUDIT_ARCH"
+    },
+    {
+      "name": "AUDIT_ARCH_ARCV2BE",
+      "value": "(EM_ARCV2)",
+      "comment": "",
+      "category": "AUDIT_ARCH"
+    },
+    {
+      "name": "AUDIT_ARCH_ARM",
+      "value": "(EM_ARM|__AUDIT_ARCH_LE)",
+      "comment": "",
+      "category": "AUDIT_ARCH"
+    },
+    {
+      "name": "AUDIT_ARCH_ARMEB",
+      "value": "(EM_ARM)",
+      "comment": "",
+      "category": "AUDIT_ARCH"
+    },
+    {
+      "name": "AUDIT_ARCH_C6X",
+      "value": "(EM_TI_C6000|__AUDIT_ARCH_LE)",
+      "comment": "",
+      "category": "AUDIT_ARCH"
+    },
+    {
+      "name": "AUDIT_ARCH_C6XBE",
+      "value": "(EM_TI_C6000)",
+      "comment": "",
+      "category": "AUDIT_ARCH"
+    },
+    {
+      "name": "AUDIT_ARCH_CRIS",
+      "value": "(EM_CRIS|__AUDIT_ARCH_LE)",
+      "comment": "",
+      "category": "AUDIT_ARCH"
+    },
+    {
+      "name": "AUDIT_ARCH_CSKY",
+      "value": "(EM_CSKY|__AUDIT_ARCH_LE)",
+      "comment": "",
+      "category": "AUDIT_ARCH"
+    },
+    {
+      "name": "AUDIT_ARCH_FRV",
+      "value": "(EM_FRV)",
+      "comment": "",
+      "category": "AUDIT_ARCH"
+    },
+    {
+      "name": "AUDIT_ARCH_H8300",
+      "value": "(EM_H8_300)",
+      "comment": "",
+      "category": "AUDIT_ARCH"
+    },
+    {
+      "name": "AUDIT_ARCH_HEXAGON",
+      "value": "(EM_HEXAGON)",
+      "comment": "",
+      "category": "AUDIT_ARCH"
+    },
+    {
+      "name": "AUDIT_ARCH_I386",
+      "value": "(EM_386|__AUDIT_ARCH_LE)",
+      "comment": "",
+      "category": "AUDIT_ARCH"
+    },
+    {
+      "name": "AUDIT_ARCH_IA64",
+      "value": "(EM_IA_64|__AUDIT_ARCH_64BIT|__AUDIT_ARCH_LE)",
+      "comment": "",
+      "category": "AUDIT_ARCH"
+    },
+    {
+      "name": "AUDIT_ARCH_M32R",
+      "value": "(EM_M32R)",
+      "comment": "",
+      "category": "AUDIT_ARCH"
+    },
+    {
+      "name": "AUDIT_ARCH_M68K",
+      "value": "(EM_68K)",
+      "comment": "",
+      "category": "AUDIT_ARCH"
+    },
+    {
+      "name": "AUDIT_ARCH_MICROBLAZE",
+      "value": "(EM_MICROBLAZE)",
+      "comment": "",
+      "category": "AUDIT_ARCH"
+    },
+    {
+      "name": "AUDIT_ARCH_MIPS",
+      "value": "(EM_MIPS)",
+      "comment": "",
+      "category": "AUDIT_ARCH"
+    },
+    {
+      "name": "AUDIT_ARCH_MIPSEL",
+      "value": "(EM_MIPS|__AUDIT_ARCH_LE)",
+      "comment": "",
+      "category": "AUDIT_ARCH"
+    },
+    {
+      "name": "AUDIT_ARCH_MIPS64",
+      "value": "(EM_MIPS|__AUDIT_ARCH_64BIT)",
+      "comment": "",
+      "category": "AUDIT_ARCH"
+    },
+    {
+      "name": "AUDIT_ARCH_MIPS64N32",
+      "value": "(EM_MIPS|__AUDIT_ARCH_64BIT|",
+      "comment": "",
+      "category": "AUDIT_ARCH"
+    },
+    {
+      "name": "AUDIT_ARCH_MIPSEL64",
+      "value": "(EM_MIPS|__AUDIT_ARCH_64BIT|__AUDIT_ARCH_LE)",
+      "comment": "",
+      "category": "AUDIT_ARCH"
+    },
+    {
+      "name": "AUDIT_ARCH_MIPSEL64N32",
+      "value": "(EM_MIPS|__AUDIT_ARCH_64BIT|__AUDIT_ARCH_LE|",
+      "comment": "",
+      "category": "AUDIT_ARCH"
+    },
+    {
+      "name": "AUDIT_ARCH_NDS32",
+      "value": "(EM_NDS32|__AUDIT_ARCH_LE)",
+      "comment": "",
+      "category": "AUDIT_ARCH"
+    },
+    {
+      "name": "AUDIT_ARCH_NDS32BE",
+      "value": "(EM_NDS32)",
+      "comment": "",
+      "category": "AUDIT_ARCH"
+    },
+    {
+      "name": "AUDIT_ARCH_NIOS2",
+      "value": "(EM_ALTERA_NIOS2|__AUDIT_ARCH_LE)",
+      "comment": "",
+      "category": "AUDIT_ARCH"
+    },
+    {
+      "name": "AUDIT_ARCH_OPENRISC",
+      "value": "(EM_OPENRISC)",
+      "comment": "",
+      "category": "AUDIT_ARCH"
+    },
+    {
+      "name": "AUDIT_ARCH_PARISC",
+      "value": "(EM_PARISC)",
+      "comment": "",
+      "category": "AUDIT_ARCH"
+    },
+    {
+      "name": "AUDIT_ARCH_PARISC64",
+      "value": "(EM_PARISC|__AUDIT_ARCH_64BIT)",
+      "comment": "",
+      "category": "AUDIT_ARCH"
+    },
+    {
+      "name": "AUDIT_ARCH_PPC",
+      "value": "(EM_PPC)",
+      "comment": "",
+      "category": "AUDIT_ARCH"
+    },
+    {
+      "name": "AUDIT_ARCH_PPC64",
+      "value": "(EM_PPC64|__AUDIT_ARCH_64BIT)",
+      "comment": "",
+      "category": "AUDIT_ARCH"
+    },
+    {
+      "name": "AUDIT_ARCH_PPC64LE",
+      "value": "(EM_PPC64|__AUDIT_ARCH_64BIT|__AUDIT_ARCH_LE)",
+      "comment": "",
+      "category": "AUDIT_ARCH"
+    },
+    {
+      "name": "AUDIT_ARCH_RISCV32",
+      "value": "(EM_RISCV|__AUDIT_ARCH_LE)",
+      "comment": "",
+      "category": "AUDIT_ARCH"
+    },
+    {
+      "name": "AUDIT_ARCH_RISCV64",
+      "value": "(EM_RISCV|__AUDIT_ARCH_64BIT|__AUDIT_ARCH_LE)",
+      "comment": "",
+      "category": "AUDIT_ARCH"
+    },
+    {
+      "name": "AUDIT_ARCH_S390",
+      "value": "(EM_S390)",
+      "comment": "",
+      "category": "AUDIT_ARCH"
+    },
+    {
+      "name": "AUDIT_ARCH_S390X",
+      "value": "(EM_S390|__AUDIT_ARCH_64BIT)",
+      "comment": "",
+      "category": "AUDIT_ARCH"
+    },
+    {
+      "name": "AUDIT_ARCH_SH",
+      "value": "(EM_SH)",
+      "comment": "",
+      "category": "AUDIT_ARCH"
+    },
+    {
+      "name": "AUDIT_ARCH_SHEL",
+      "value": "(EM_SH|__AUDIT_ARCH_LE)",
+      "comment": "",
+      "category": "AUDIT_ARCH"
+    },
+    {
+      "name": "AUDIT_ARCH_SH64",
+      "value": "(EM_SH|__AUDIT_ARCH_64BIT)",
+      "comment": "",
+      "category": "AUDIT_ARCH"
+    },
+    {
+      "name": "AUDIT_ARCH_SHEL64",
+      "value": "(EM_SH|__AUDIT_ARCH_64BIT|__AUDIT_ARCH_LE)",
+      "comment": "",
+      "category": "AUDIT_ARCH"
+    },
+    {
+      "name": "AUDIT_ARCH_SPARC",
+      "value": "(EM_SPARC)",
+      "comment": "",
+      "category": "AUDIT_ARCH"
+    },
+    {
+      "name": "AUDIT_ARCH_SPARC64",
+      "value": "(EM_SPARCV9|__AUDIT_ARCH_64BIT)",
+      "comment": "",
+      "category": "AUDIT_ARCH"
+    },
+    {
+      "name": "AUDIT_ARCH_TILEGX",
+      "value": "(EM_TILEGX|__AUDIT_ARCH_64BIT|__AUDIT_ARCH_LE)",
+      "comment": "",
+      "category": "AUDIT_ARCH"
+    },
+    {
+      "name": "AUDIT_ARCH_TILEGX32",
+      "value": "(EM_TILEGX|__AUDIT_ARCH_LE)",
+      "comment": "",
+      "category": "AUDIT_ARCH"
+    },
+    {
+      "name": "AUDIT_ARCH_TILEPRO",
+      "value": "(EM_TILEPRO|__AUDIT_ARCH_LE)",
+      "comment": "",
+      "category": "AUDIT_ARCH"
+    },
+    {
+      "name": "AUDIT_ARCH_UNICORE",
+      "value": "(EM_UNICORE|__AUDIT_ARCH_LE)",
+      "comment": "",
+      "category": "AUDIT_ARCH"
+    },
+    {
+      "name": "AUDIT_ARCH_X86_64",
+      "value": "(EM_X86_64|__AUDIT_ARCH_64BIT|__AUDIT_ARCH_LE)",
+      "comment": "",
+      "category": "AUDIT_ARCH"
+    },
+    {
+      "name": "AUDIT_ARCH_XTENSA",
+      "value": "(EM_XTENSA)",
+      "comment": "",
+      "category": "AUDIT_ARCH"
+    },
+    {
+      "name": "AUDIT_ARCH_LOONGARCH32",
+      "value": "(EM_LOONGARCH|__AUDIT_ARCH_LE)",
+      "comment": "",
+      "category": "AUDIT_ARCH"
+    },
+    {
+      "name": "AUDIT_ARCH_LOONGARCH64",
+      "value": "(EM_LOONGARCH|__AUDIT_ARCH_64BIT|__AUDIT_ARCH_LE)",
+      "comment": "",
+      "category": "AUDIT_ARCH"
+    },
+    {
+      "name": "AUDIT_PERM_EXEC",
+      "value": "1",
+      "comment": "",
+      "category": "AUDIT_PERM"
+    },
+    {
+      "name": "AUDIT_PERM_WRITE",
+      "value": "2",
+      "comment": "",
+      "category": "AUDIT_PERM"
+    },
+    {
+      "name": "AUDIT_PERM_READ",
+      "value": "4",
+      "comment": "",
+      "category": "AUDIT_PERM"
+    },
+    {
+      "name": "AUDIT_PERM_ATTR",
+      "value": "8",
+      "comment": "",
+      "category": "AUDIT_PERM"
+    },
+    {
+      "name": "AUDIT_MESSAGE_TEXT_MAX",
+      "value": "8560",
+      "comment": "",
+      "category": "AUDIT_MESSAGE"
+    },
+    {
+      "name": "AUDIT_NLGRP_MAX",
+      "value": "(__AUDIT_NLGRP_MAX - 1)",
+      "comment": "",
+      "category": "AUDIT_NLGRP"
+    },
+    {
+      "name": "AUDIT_FEATURE_VERSION",
+      "value": "1",
+      "comment": "",
+      "category": "AUDIT_FEATURE"
+    },
+    {
+      "name": "AUDIT_FEATURE_ONLY_UNSET_LOGINUID",
+      "value": "0",
+      "comment": "",
+      "category": "AUDIT_FEATURE"
+    },
+    {
+      "name": "AUDIT_FEATURE_LOGINUID_IMMUTABLE",
+      "value": "1",
+      "comment": "",
+      "category": "AUDIT_FEATURE"
+    },
+    {
+      "name": "AUDIT_LAST_FEATURE",
+      "value": "AUDIT_FEATURE_LOGINUID_IMMUTABLE",
+      "comment": "",
+      "category": "AUDIT_LAST"
+    },
+    {
+      "name": "AUDIT_UID_UNSET",
+      "value": "((unsigned int)-1)",
+      "comment": "",
+      "category": "AUDIT_UID"
+    },
+    {
+      "name": "AUDIT_SID_UNSET",
+      "value": "((unsigned int)-1)",
+      "comment": "",
+      "category": "AUDIT_SID"
+    }
+  ],
+  "structs": [
+    {
+      "name": "audit_status",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "mask",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "enabled",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "failure",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "rate_limit",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "backlog_limit",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "lost",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "backlog",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "version",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "feature_bitmap",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "backlog_wait_time",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "backlog_wait_time_actual",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "audit_features",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "vers",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "mask",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "features",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "lock",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "audit_tty_status",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "enabled",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "log_passwd",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "audit_rule_data",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "action",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "field_count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "mask",
+          "array_size": "AUDIT_BITMASK_SIZE",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "fields",
+          "array_size": "AUDIT_MAX_FIELDS",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "values",
+          "array_size": "AUDIT_MAX_FIELDS",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "fieldflags",
+          "array_size": "AUDIT_MAX_FIELDS",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "buflen",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

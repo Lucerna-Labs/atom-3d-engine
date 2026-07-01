@@ -1,0 +1,42 @@
+{
+  "filename": "pci.h",
+  "includes": [
+    "linux/pci_regs.h"
+  ],
+  "defines": [
+    {
+      "name": "PCIIOC_BASE",
+      "value": "('P' << 24 | 'C' << 16 | 'I' << 8)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PCIIOC_CONTROLLER",
+      "value": "(PCIIOC_BASE | 0x00)",
+      "comment": "Get controller for PCI device.",
+      "category": ""
+    },
+    {
+      "name": "PCIIOC_MMAP_IS_IO",
+      "value": "(PCIIOC_BASE | 0x01)",
+      "comment": "Set mmap state to I/O space.",
+      "category": "PCIIOC_MMAP"
+    },
+    {
+      "name": "PCIIOC_MMAP_IS_MEM",
+      "value": "(PCIIOC_BASE | 0x02)",
+      "comment": "Set mmap state to MEM space.",
+      "category": "PCIIOC_MMAP"
+    },
+    {
+      "name": "PCIIOC_WRITE_COMBINE",
+      "value": "(PCIIOC_BASE | 0x03)",
+      "comment": "Enable/disable write-combining.",
+      "category": "PCIIOC_WRITE"
+    }
+  ],
+  "structs": [],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

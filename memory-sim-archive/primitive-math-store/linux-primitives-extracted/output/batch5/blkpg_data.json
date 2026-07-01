@@ -1,0 +1,100 @@
+{
+  "filename": "blkpg.h",
+  "includes": [
+    "linux/compiler.h",
+    "linux/ioctl.h"
+  ],
+  "defines": [
+    {
+      "name": "BLKPG",
+      "value": "_IO(0x12,105)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "BLKPG_ADD_PARTITION",
+      "value": "1",
+      "comment": "",
+      "category": "BLKPG_ADD"
+    },
+    {
+      "name": "BLKPG_DEL_PARTITION",
+      "value": "2",
+      "comment": "",
+      "category": "BLKPG_DEL"
+    },
+    {
+      "name": "BLKPG_RESIZE_PARTITION",
+      "value": "3",
+      "comment": "",
+      "category": "BLKPG_RESIZE"
+    },
+    {
+      "name": "BLKPG_DEVNAMELTH",
+      "value": "64",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "BLKPG_VOLNAMELTH",
+      "value": "64",
+      "comment": "",
+      "category": ""
+    }
+  ],
+  "structs": [
+    {
+      "name": "blkpg_ioctl_arg",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "op",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "datalen",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "blkpg_partition",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "pno",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "devname",
+          "array_size": "BLKPG_DEVNAMELTH",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "volname",
+          "array_size": "BLKPG_VOLNAMELTH",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

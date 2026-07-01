@@ -1,0 +1,112 @@
+{
+  "filename": "fwctl.h",
+  "includes": [
+    "linux/types.h",
+    "linux/ioctl.h"
+  ],
+  "defines": [
+    {
+      "name": "FWCTL_TYPE",
+      "value": "0x9A",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FWCTL_INFO",
+      "value": "_IO(FWCTL_TYPE, FWCTL_CMD_INFO)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FWCTL_RPC",
+      "value": "_IO(FWCTL_TYPE, FWCTL_CMD_RPC)",
+      "comment": "",
+      "category": ""
+    }
+  ],
+  "structs": [
+    {
+      "name": "fwctl_info",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "out_device_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "device_data_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__aligned_u64",
+          "name": "out_device_data",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fwctl_rpc",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "scope",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "in_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "out_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__aligned_u64",
+          "name": "in",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__aligned_u64",
+          "name": "out",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

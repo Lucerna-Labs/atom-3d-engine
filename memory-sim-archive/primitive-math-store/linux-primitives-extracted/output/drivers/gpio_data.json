@@ -1,0 +1,721 @@
+{
+  "filename": "gpio.h",
+  "includes": [
+    "linux/const.h",
+    "linux/ioctl.h",
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "GPIO_MAX_NAME_SIZE",
+      "value": "32",
+      "comment": "",
+      "category": "GPIO_MAX"
+    },
+    {
+      "name": "GPIO_V2_LINES_MAX",
+      "value": "64",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GPIO_V2_LINE_NUM_ATTRS_MAX",
+      "value": "10",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GPIOLINE_FLAG_KERNEL",
+      "value": "(1UL << 0)",
+      "comment": "Line used by the kernel",
+      "category": "GPIOLINE_FLAG"
+    },
+    {
+      "name": "GPIOLINE_FLAG_IS_OUT",
+      "value": "(1UL << 1)",
+      "comment": "",
+      "category": "GPIOLINE_FLAG"
+    },
+    {
+      "name": "GPIOLINE_FLAG_ACTIVE_LOW",
+      "value": "(1UL << 2)",
+      "comment": "",
+      "category": "GPIOLINE_FLAG"
+    },
+    {
+      "name": "GPIOLINE_FLAG_OPEN_DRAIN",
+      "value": "(1UL << 3)",
+      "comment": "",
+      "category": "GPIOLINE_FLAG"
+    },
+    {
+      "name": "GPIOLINE_FLAG_OPEN_SOURCE",
+      "value": "(1UL << 4)",
+      "comment": "",
+      "category": "GPIOLINE_FLAG"
+    },
+    {
+      "name": "GPIOLINE_FLAG_BIAS_PULL_UP",
+      "value": "(1UL << 5)",
+      "comment": "",
+      "category": "GPIOLINE_FLAG"
+    },
+    {
+      "name": "GPIOLINE_FLAG_BIAS_PULL_DOWN",
+      "value": "(1UL << 6)",
+      "comment": "",
+      "category": "GPIOLINE_FLAG"
+    },
+    {
+      "name": "GPIOLINE_FLAG_BIAS_DISABLE",
+      "value": "(1UL << 7)",
+      "comment": "",
+      "category": "GPIOLINE_FLAG"
+    },
+    {
+      "name": "GPIOHANDLES_MAX",
+      "value": "64",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GPIOHANDLE_REQUEST_INPUT",
+      "value": "(1UL << 0)",
+      "comment": "",
+      "category": "GPIOHANDLE_REQUEST"
+    },
+    {
+      "name": "GPIOHANDLE_REQUEST_OUTPUT",
+      "value": "(1UL << 1)",
+      "comment": "",
+      "category": "GPIOHANDLE_REQUEST"
+    },
+    {
+      "name": "GPIOHANDLE_REQUEST_ACTIVE_LOW",
+      "value": "(1UL << 2)",
+      "comment": "",
+      "category": "GPIOHANDLE_REQUEST"
+    },
+    {
+      "name": "GPIOHANDLE_REQUEST_OPEN_DRAIN",
+      "value": "(1UL << 3)",
+      "comment": "",
+      "category": "GPIOHANDLE_REQUEST"
+    },
+    {
+      "name": "GPIOHANDLE_REQUEST_OPEN_SOURCE",
+      "value": "(1UL << 4)",
+      "comment": "",
+      "category": "GPIOHANDLE_REQUEST"
+    },
+    {
+      "name": "GPIOHANDLE_REQUEST_BIAS_PULL_UP",
+      "value": "(1UL << 5)",
+      "comment": "",
+      "category": "GPIOHANDLE_REQUEST"
+    },
+    {
+      "name": "GPIOHANDLE_REQUEST_BIAS_PULL_DOWN",
+      "value": "(1UL << 6)",
+      "comment": "",
+      "category": "GPIOHANDLE_REQUEST"
+    },
+    {
+      "name": "GPIOHANDLE_REQUEST_BIAS_DISABLE",
+      "value": "(1UL << 7)",
+      "comment": "",
+      "category": "GPIOHANDLE_REQUEST"
+    },
+    {
+      "name": "GPIOEVENT_REQUEST_RISING_EDGE",
+      "value": "(1UL << 0)",
+      "comment": "",
+      "category": "GPIOEVENT_REQUEST"
+    },
+    {
+      "name": "GPIOEVENT_REQUEST_FALLING_EDGE",
+      "value": "(1UL << 1)",
+      "comment": "",
+      "category": "GPIOEVENT_REQUEST"
+    },
+    {
+      "name": "GPIOEVENT_REQUEST_BOTH_EDGES",
+      "value": "((1UL << 0) | (1UL << 1))",
+      "comment": "",
+      "category": "GPIOEVENT_REQUEST"
+    },
+    {
+      "name": "GPIOEVENT_EVENT_RISING_EDGE",
+      "value": "0x01",
+      "comment": "",
+      "category": "GPIOEVENT_EVENT"
+    },
+    {
+      "name": "GPIOEVENT_EVENT_FALLING_EDGE",
+      "value": "0x02",
+      "comment": "",
+      "category": "GPIOEVENT_EVENT"
+    },
+    {
+      "name": "GPIO_GET_CHIPINFO_IOCTL",
+      "value": "_IOR(0xB4, 0x01, struct gpiochip_info)",
+      "comment": "",
+      "category": "GPIO_GET"
+    },
+    {
+      "name": "GPIO_GET_LINEINFO_UNWATCH_IOCTL",
+      "value": "_IOWR(0xB4, 0x0C, __u32)",
+      "comment": "",
+      "category": "GPIO_GET"
+    },
+    {
+      "name": "GPIO_V2_GET_LINEINFO_IOCTL",
+      "value": "_IOWR(0xB4, 0x05, struct gpio_v2_line_info)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GPIO_V2_GET_LINEINFO_WATCH_IOCTL",
+      "value": "_IOWR(0xB4, 0x06, struct gpio_v2_line_info)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GPIO_V2_GET_LINE_IOCTL",
+      "value": "_IOWR(0xB4, 0x07, struct gpio_v2_line_request)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GPIO_V2_LINE_SET_CONFIG_IOCTL",
+      "value": "_IOWR(0xB4, 0x0D, struct gpio_v2_line_config)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GPIO_V2_LINE_GET_VALUES_IOCTL",
+      "value": "_IOWR(0xB4, 0x0E, struct gpio_v2_line_values)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GPIO_V2_LINE_SET_VALUES_IOCTL",
+      "value": "_IOWR(0xB4, 0x0F, struct gpio_v2_line_values)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GPIO_GET_LINEINFO_IOCTL",
+      "value": "_IOWR(0xB4, 0x02, struct gpioline_info)",
+      "comment": "",
+      "category": "GPIO_GET"
+    },
+    {
+      "name": "GPIO_GET_LINEHANDLE_IOCTL",
+      "value": "_IOWR(0xB4, 0x03, struct gpiohandle_request)",
+      "comment": "",
+      "category": "GPIO_GET"
+    },
+    {
+      "name": "GPIO_GET_LINEEVENT_IOCTL",
+      "value": "_IOWR(0xB4, 0x04, struct gpioevent_request)",
+      "comment": "",
+      "category": "GPIO_GET"
+    },
+    {
+      "name": "GPIOHANDLE_GET_LINE_VALUES_IOCTL",
+      "value": "_IOWR(0xB4, 0x08, struct gpiohandle_data)",
+      "comment": "",
+      "category": "GPIOHANDLE_GET"
+    },
+    {
+      "name": "GPIOHANDLE_SET_LINE_VALUES_IOCTL",
+      "value": "_IOWR(0xB4, 0x09, struct gpiohandle_data)",
+      "comment": "",
+      "category": "GPIOHANDLE_SET"
+    },
+    {
+      "name": "GPIOHANDLE_SET_CONFIG_IOCTL",
+      "value": "_IOWR(0xB4, 0x0A, struct gpiohandle_config)",
+      "comment": "",
+      "category": "GPIOHANDLE_SET"
+    },
+    {
+      "name": "GPIO_GET_LINEINFO_WATCH_IOCTL",
+      "value": "_IOWR(0xB4, 0x0B, struct gpioline_info)",
+      "comment": "",
+      "category": "GPIO_GET"
+    }
+  ],
+  "structs": [
+    {
+      "name": "gpiochip_info",
+      "fields": [
+        {
+          "type_name": "char",
+          "name": "name",
+          "array_size": "GPIO_MAX_NAME_SIZE",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "label",
+          "array_size": "GPIO_MAX_NAME_SIZE",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "lines",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "gpio_v2_line_values",
+      "fields": [
+        {
+          "type_name": "__aligned_u64",
+          "name": "bits",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__aligned_u64",
+          "name": "mask",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "gpio_v2_line_attribute",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "padding",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__aligned_u64",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__aligned_u64",
+          "name": "values",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "debounce_period_us",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "gpio_v2_line_config_attribute",
+      "fields": [
+        {
+          "type_name": "__aligned_u64",
+          "name": "mask",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "gpio_v2_line_config",
+      "fields": [
+        {
+          "type_name": "__aligned_u64",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "num_attrs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "padding",
+          "array_size": "5",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "gpio_v2_line_request",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "offsets",
+          "array_size": "GPIO_V2_LINES_MAX",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "consumer",
+          "array_size": "GPIO_MAX_NAME_SIZE",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "num_lines",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "event_buffer_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "padding",
+          "array_size": "5",
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "fd",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "gpio_v2_line_info",
+      "fields": [
+        {
+          "type_name": "char",
+          "name": "name",
+          "array_size": "GPIO_MAX_NAME_SIZE",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "consumer",
+          "array_size": "GPIO_MAX_NAME_SIZE",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "num_attrs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__aligned_u64",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "padding",
+          "array_size": "4",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "gpio_v2_line_info_changed",
+      "fields": [
+        {
+          "type_name": "__aligned_u64",
+          "name": "timestamp_ns",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "event_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "padding",
+          "array_size": "5",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "gpio_v2_line_event",
+      "fields": [
+        {
+          "type_name": "__aligned_u64",
+          "name": "timestamp_ns",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "seqno",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "line_seqno",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "padding",
+          "array_size": "6",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "gpioline_info",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "line_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "name",
+          "array_size": "GPIO_MAX_NAME_SIZE",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "consumer",
+          "array_size": "GPIO_MAX_NAME_SIZE",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "gpioline_info_changed",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "timestamp",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "event_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "padding",
+          "array_size": "5",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "gpiohandle_request",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "lineoffsets",
+          "array_size": "GPIOHANDLES_MAX",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "default_values",
+          "array_size": "GPIOHANDLES_MAX",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "consumer_label",
+          "array_size": "GPIO_MAX_NAME_SIZE",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "lines",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "fd",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "gpiohandle_config",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "default_values",
+          "array_size": "GPIOHANDLES_MAX",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "padding",
+          "array_size": "4",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "gpiohandle_data",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "values",
+          "array_size": "GPIOHANDLES_MAX",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "gpioevent_request",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "lineoffset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "handleflags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "eventflags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "consumer_label",
+          "array_size": "GPIO_MAX_NAME_SIZE",
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "fd",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "gpioevent_data",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "timestamp",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

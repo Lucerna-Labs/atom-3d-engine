@@ -1,0 +1,10 @@
+﻿
+
+- Orientation: The room is a hallway with a blocked east exit and a working north exit.
+- Decomposition:
+  - What is known: blocked east exit, working north exit, people near blocked exit.
+  - What is unknown: exact layout, distances, and whether the north exit is reachable.
+  - Next action: map the room and identify the shortest path from the people to the north exit.
+- Action: Walk north from the people to the working exit.
+- Uncertainty: If the north exit is blocked, the plan fails.
+- Closure: The plan is complete once the north exit is reached.

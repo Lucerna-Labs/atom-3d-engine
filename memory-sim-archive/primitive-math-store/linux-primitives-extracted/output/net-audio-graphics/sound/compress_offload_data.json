@@ -1,0 +1,500 @@
+{
+  "filename": "compress_offload.h",
+  "includes": [
+    "linux/types.h",
+    "sound/asound.h",
+    "sound/compress_params.h"
+  ],
+  "defines": [
+    {
+      "name": "SNDRV_COMPRESS_VERSION",
+      "value": "SNDRV_PROTOCOL_VERSION(0, 4, 1)",
+      "comment": "",
+      "category": "SNDRV_COMPRESS"
+    },
+    {
+      "name": "SND_COMPRESS_TFLG_NEW_STREAM",
+      "value": "(1<<0)",
+      "comment": "mark for the new stream data",
+      "category": "SND_COMPRESS"
+    },
+    {
+      "name": "SNDRV_COMPRESS_IOCTL_VERSION",
+      "value": "_IOR('C', 0x00, int)",
+      "comment": "",
+      "category": "SNDRV_COMPRESS"
+    },
+    {
+      "name": "SNDRV_COMPRESS_GET_CAPS",
+      "value": "_IOWR('C', 0x10, struct snd_compr_caps)",
+      "comment": "",
+      "category": "SNDRV_COMPRESS"
+    },
+    {
+      "name": "SNDRV_COMPRESS_GET_CODEC_CAPS",
+      "value": "_IOWR('C', 0x11,",
+      "comment": "",
+      "category": "SNDRV_COMPRESS"
+    },
+    {
+      "name": "SNDRV_COMPRESS_SET_PARAMS",
+      "value": "_IOW('C', 0x12, struct snd_compr_params)",
+      "comment": "",
+      "category": "SNDRV_COMPRESS"
+    },
+    {
+      "name": "SNDRV_COMPRESS_GET_PARAMS",
+      "value": "_IOR('C', 0x13, struct snd_codec)",
+      "comment": "",
+      "category": "SNDRV_COMPRESS"
+    },
+    {
+      "name": "SNDRV_COMPRESS_SET_METADATA",
+      "value": "_IOW('C', 0x14,",
+      "comment": "",
+      "category": "SNDRV_COMPRESS"
+    },
+    {
+      "name": "SNDRV_COMPRESS_GET_METADATA",
+      "value": "_IOWR('C', 0x15,",
+      "comment": "",
+      "category": "SNDRV_COMPRESS"
+    },
+    {
+      "name": "SNDRV_COMPRESS_TSTAMP",
+      "value": "_IOR('C', 0x20, struct snd_compr_tstamp)",
+      "comment": "",
+      "category": "SNDRV_COMPRESS"
+    },
+    {
+      "name": "SNDRV_COMPRESS_AVAIL",
+      "value": "_IOR('C', 0x21, struct snd_compr_avail)",
+      "comment": "",
+      "category": "SNDRV_COMPRESS"
+    },
+    {
+      "name": "SNDRV_COMPRESS_TSTAMP64",
+      "value": "_IOR('C', 0x22, struct snd_compr_tstamp64)",
+      "comment": "",
+      "category": "SNDRV_COMPRESS"
+    },
+    {
+      "name": "SNDRV_COMPRESS_AVAIL64",
+      "value": "_IOR('C', 0x23, struct snd_compr_avail64)",
+      "comment": "",
+      "category": "SNDRV_COMPRESS"
+    },
+    {
+      "name": "SNDRV_COMPRESS_PAUSE",
+      "value": "_IO('C', 0x30)",
+      "comment": "",
+      "category": "SNDRV_COMPRESS"
+    },
+    {
+      "name": "SNDRV_COMPRESS_RESUME",
+      "value": "_IO('C', 0x31)",
+      "comment": "",
+      "category": "SNDRV_COMPRESS"
+    },
+    {
+      "name": "SNDRV_COMPRESS_START",
+      "value": "_IO('C', 0x32)",
+      "comment": "",
+      "category": "SNDRV_COMPRESS"
+    },
+    {
+      "name": "SNDRV_COMPRESS_STOP",
+      "value": "_IO('C', 0x33)",
+      "comment": "",
+      "category": "SNDRV_COMPRESS"
+    },
+    {
+      "name": "SNDRV_COMPRESS_DRAIN",
+      "value": "_IO('C', 0x34)",
+      "comment": "",
+      "category": "SNDRV_COMPRESS"
+    },
+    {
+      "name": "SNDRV_COMPRESS_NEXT_TRACK",
+      "value": "_IO('C', 0x35)",
+      "comment": "",
+      "category": "SNDRV_COMPRESS"
+    },
+    {
+      "name": "SNDRV_COMPRESS_PARTIAL_DRAIN",
+      "value": "_IO('C', 0x36)",
+      "comment": "",
+      "category": "SNDRV_COMPRESS"
+    },
+    {
+      "name": "SNDRV_COMPRESS_TASK_CREATE",
+      "value": "_IOWR('C', 0x60, struct snd_compr_task)",
+      "comment": "",
+      "category": "SNDRV_COMPRESS"
+    },
+    {
+      "name": "SNDRV_COMPRESS_TASK_FREE",
+      "value": "_IOW('C', 0x61, __u64)",
+      "comment": "",
+      "category": "SNDRV_COMPRESS"
+    },
+    {
+      "name": "SNDRV_COMPRESS_TASK_START",
+      "value": "_IOWR('C', 0x62, struct snd_compr_task)",
+      "comment": "",
+      "category": "SNDRV_COMPRESS"
+    },
+    {
+      "name": "SNDRV_COMPRESS_TASK_STOP",
+      "value": "_IOW('C', 0x63, __u64)",
+      "comment": "",
+      "category": "SNDRV_COMPRESS"
+    },
+    {
+      "name": "SNDRV_COMPRESS_TASK_STATUS",
+      "value": "_IOWR('C', 0x68, struct snd_compr_task_status)",
+      "comment": "",
+      "category": "SNDRV_COMPRESS"
+    },
+    {
+      "name": "SND_COMPR_TRIGGER_DRAIN",
+      "value": "7",
+      "comment": "FIXME move this to pcm.h",
+      "category": "SND_COMPR"
+    },
+    {
+      "name": "SND_COMPR_TRIGGER_NEXT_TRACK",
+      "value": "8",
+      "comment": "",
+      "category": "SND_COMPR"
+    },
+    {
+      "name": "SND_COMPR_TRIGGER_PARTIAL_DRAIN",
+      "value": "9",
+      "comment": "",
+      "category": "SND_COMPR"
+    }
+  ],
+  "structs": [
+    {
+      "name": "snd_compressed_buffer",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "fragment_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "fragments",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_compr_params",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "no_wake_mode",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_compr_tstamp",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "byte_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "copied_total",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pcm_frames",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pcm_io_frames",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "sampling_rate",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_compr_tstamp64",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "byte_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "copied_total",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "pcm_frames",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "pcm_io_frames",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "sampling_rate",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_compr_avail",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "avail",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_compr_avail64",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "avail",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_compr_caps",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "num_codecs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "direction",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "min_fragment_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "max_fragment_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "min_fragments",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "max_fragments",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "codecs",
+          "array_size": "MAX_NUM_CODECS",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved",
+          "array_size": "11",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_compr_codec_caps",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "codec",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "num_descriptors",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_compr_metadata",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "key",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "value",
+          "array_size": "8",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_compr_task",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "seqno",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "origin_seqno",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "input_fd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "output_fd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "input_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reserved",
+          "array_size": "16",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_compr_task_status",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "seqno",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "input_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "output_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "output_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "state",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reserved",
+          "array_size": "15",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

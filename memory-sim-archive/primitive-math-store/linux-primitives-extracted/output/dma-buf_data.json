@@ -1,0 +1,149 @@
+{
+  "filename": "dma-buf.h",
+  "includes": [
+    "linux/ioctl.h",
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "DMA_BUF_SYNC_READ",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "DMA_BUF"
+    },
+    {
+      "name": "DMA_BUF_SYNC_WRITE",
+      "value": "(2 << 0)",
+      "comment": "",
+      "category": "DMA_BUF"
+    },
+    {
+      "name": "DMA_BUF_SYNC_RW",
+      "value": "(DMA_BUF_SYNC_READ | DMA_BUF_SYNC_WRITE)",
+      "comment": "",
+      "category": "DMA_BUF"
+    },
+    {
+      "name": "DMA_BUF_SYNC_START",
+      "value": "(0 << 2)",
+      "comment": "",
+      "category": "DMA_BUF"
+    },
+    {
+      "name": "DMA_BUF_SYNC_END",
+      "value": "(1 << 2)",
+      "comment": "",
+      "category": "DMA_BUF"
+    },
+    {
+      "name": "DMA_BUF_SYNC_VALID_FLAGS_MASK",
+      "value": "",
+      "comment": "",
+      "category": "DMA_BUF"
+    },
+    {
+      "name": "DMA_BUF_NAME_LEN",
+      "value": "32",
+      "comment": "",
+      "category": "DMA_BUF"
+    },
+    {
+      "name": "DMA_BUF_BASE",
+      "value": "'b'",
+      "comment": "",
+      "category": "DMA_BUF"
+    },
+    {
+      "name": "DMA_BUF_IOCTL_SYNC",
+      "value": "_IOW(DMA_BUF_BASE, 0, struct dma_buf_sync)",
+      "comment": "",
+      "category": "DMA_BUF"
+    },
+    {
+      "name": "DMA_BUF_SET_NAME",
+      "value": "_IOW(DMA_BUF_BASE, 1, const char *)",
+      "comment": "",
+      "category": "DMA_BUF"
+    },
+    {
+      "name": "DMA_BUF_SET_NAME_A",
+      "value": "_IOW(DMA_BUF_BASE, 1, __u32)",
+      "comment": "",
+      "category": "DMA_BUF"
+    },
+    {
+      "name": "DMA_BUF_SET_NAME_B",
+      "value": "_IOW(DMA_BUF_BASE, 1, __u64)",
+      "comment": "",
+      "category": "DMA_BUF"
+    },
+    {
+      "name": "DMA_BUF_IOCTL_EXPORT_SYNC_FILE",
+      "value": "_IOWR(DMA_BUF_BASE, 2, struct dma_buf_export_sync_file)",
+      "comment": "",
+      "category": "DMA_BUF"
+    },
+    {
+      "name": "DMA_BUF_IOCTL_IMPORT_SYNC_FILE",
+      "value": "_IOW(DMA_BUF_BASE, 3, struct dma_buf_import_sync_file)",
+      "comment": "",
+      "category": "DMA_BUF"
+    }
+  ],
+  "structs": [
+    {
+      "name": "dma_buf_sync",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "dma_buf_export_sync_file",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "fd",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "dma_buf_import_sync_file",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "fd",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

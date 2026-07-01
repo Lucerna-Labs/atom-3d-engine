@@ -1,0 +1,209 @@
+{
+  "filename": "msg.h",
+  "includes": [
+    "linux/ipc.h",
+    "asm/msgbuf.h"
+  ],
+  "defines": [
+    {
+      "name": "MSG_STAT",
+      "value": "11",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "MSG_INFO",
+      "value": "12",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "MSG_STAT_ANY",
+      "value": "13",
+      "comment": "",
+      "category": "MSG_STAT"
+    },
+    {
+      "name": "MSG_NOERROR",
+      "value": "010000",
+      "comment": "no error if message is too big",
+      "category": ""
+    },
+    {
+      "name": "MSG_EXCEPT",
+      "value": "020000",
+      "comment": "recv any msg except of specified type.",
+      "category": ""
+    },
+    {
+      "name": "MSG_COPY",
+      "value": "040000",
+      "comment": "copy (not remove) all queue messages",
+      "category": ""
+    },
+    {
+      "name": "MSGMNI",
+      "value": "32000",
+      "comment": "<= IPCMNI */     /* max # of msg queue identifiers",
+      "category": ""
+    },
+    {
+      "name": "MSGMAX",
+      "value": "8192",
+      "comment": "<= INT_MAX */   /* max size of message (bytes)",
+      "category": ""
+    },
+    {
+      "name": "MSGMNB",
+      "value": "16384",
+      "comment": "<= INT_MAX */   /* default max size of a message queue",
+      "category": ""
+    },
+    {
+      "name": "MSGPOOL",
+      "value": "(MSGMNI * MSGMNB / 1024)",
+      "comment": "size in kbytes of message pool",
+      "category": ""
+    },
+    {
+      "name": "MSGTQL",
+      "value": "MSGMNB",
+      "comment": "number of system message headers",
+      "category": ""
+    },
+    {
+      "name": "MSGMAP",
+      "value": "MSGMNB",
+      "comment": "number of entries in message map",
+      "category": ""
+    },
+    {
+      "name": "MSGSSZ",
+      "value": "16",
+      "comment": "message segment size",
+      "category": ""
+    },
+    {
+      "name": "__MSGSEG",
+      "value": "((MSGPOOL * 1024) / MSGSSZ)",
+      "comment": "max no. of segments",
+      "category": ""
+    },
+    {
+      "name": "MSGSEG",
+      "value": "(__MSGSEG <= 0xffff ? __MSGSEG : 0xffff)",
+      "comment": "",
+      "category": ""
+    }
+  ],
+  "structs": [
+    {
+      "name": "msqid_ds",
+      "fields": [
+        {
+          "type_name": "__kernel_old_time_t",
+          "name": "msg_stime",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__kernel_old_time_t",
+          "name": "msg_rtime",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__kernel_old_time_t",
+          "name": "msg_ctime",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__kernel_ipc_pid_t",
+          "name": "msg_lspid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__kernel_ipc_pid_t",
+          "name": "msg_lrpid",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "msgbuf",
+      "fields": [
+        {
+          "type_name": "__kernel_long_t",
+          "name": "mtype",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "mtext",
+          "array_size": "1",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "msginfo",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "msgpool",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "msgmap",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "msgmax",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "msgmnb",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "msgmni",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "msgssz",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "msgtql",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

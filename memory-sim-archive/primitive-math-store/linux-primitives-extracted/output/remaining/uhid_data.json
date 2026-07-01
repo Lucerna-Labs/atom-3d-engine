@@ -1,0 +1,431 @@
+{
+  "filename": "uhid.h",
+  "includes": [
+    "linux/input.h",
+    "linux/types.h",
+    "linux/hid.h"
+  ],
+  "defines": [
+    {
+      "name": "UHID_DATA_MAX",
+      "value": "4096",
+      "comment": "",
+      "category": "UHID_DATA"
+    }
+  ],
+  "structs": [
+    {
+      "name": "uhid_create2_req",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "name",
+          "array_size": "128",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "phys",
+          "array_size": "64",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "uniq",
+          "array_size": "64",
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "rd_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "bus",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "vendor",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "product",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "version",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "country",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "rd_data",
+          "array_size": "HID_MAX_DESCRIPTOR_SIZE",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "uhid_start_req",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "dev_flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "uhid_input2_req",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "data",
+          "array_size": "UHID_DATA_MAX",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "uhid_output_req",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "data",
+          "array_size": "UHID_DATA_MAX",
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "rtype",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "uhid_get_report_req",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "rnum",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "rtype",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "uhid_get_report_reply_req",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "err",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "data",
+          "array_size": "UHID_DATA_MAX",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "uhid_set_report_req",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "rnum",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "rtype",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "data",
+          "array_size": "UHID_DATA_MAX",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "uhid_set_report_reply_req",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "err",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "uhid_create_req",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "name",
+          "array_size": "128",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "phys",
+          "array_size": "64",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "uniq",
+          "array_size": "64",
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "rd_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "bus",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "vendor",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "product",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "version",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "country",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "uhid_input_req",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "data",
+          "array_size": "UHID_DATA_MAX",
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "uhid_output_ev_req",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "code",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "value",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "uhid_feature_req",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "rnum",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "rtype",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "uhid_feature_answer_req",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "err",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "data",
+          "array_size": "UHID_DATA_MAX",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "uhid_event",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

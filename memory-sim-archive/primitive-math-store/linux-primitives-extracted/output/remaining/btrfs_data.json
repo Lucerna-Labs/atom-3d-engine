@@ -1,0 +1,2913 @@
+{
+  "filename": "btrfs.h",
+  "includes": [
+    "linux/types.h",
+    "linux/ioctl.h",
+    "linux/fs.h"
+  ],
+  "defines": [
+    {
+      "name": "BTRFS_IOCTL_MAGIC",
+      "value": "0x94",
+      "comment": "",
+      "category": "BTRFS_IOCTL"
+    },
+    {
+      "name": "BTRFS_VOL_NAME_MAX",
+      "value": "255",
+      "comment": "",
+      "category": "BTRFS_VOL"
+    },
+    {
+      "name": "BTRFS_LABEL_SIZE",
+      "value": "256",
+      "comment": "",
+      "category": "BTRFS_LABEL"
+    },
+    {
+      "name": "BTRFS_PATH_NAME_MAX",
+      "value": "4087",
+      "comment": "",
+      "category": "BTRFS_PATH"
+    },
+    {
+      "name": "BTRFS_DEVICE_PATH_NAME_MAX",
+      "value": "1024",
+      "comment": "",
+      "category": "BTRFS_DEVICE"
+    },
+    {
+      "name": "BTRFS_SUBVOL_NAME_MAX",
+      "value": "4039",
+      "comment": "",
+      "category": "BTRFS_SUBVOL"
+    },
+    {
+      "name": "BTRFS_SUBVOL_RDONLY",
+      "value": "(1ULL << 1)",
+      "comment": "",
+      "category": "BTRFS_SUBVOL"
+    },
+    {
+      "name": "BTRFS_SUBVOL_QGROUP_INHERIT",
+      "value": "(1ULL << 2)",
+      "comment": "",
+      "category": "BTRFS_SUBVOL"
+    },
+    {
+      "name": "BTRFS_DEVICE_SPEC_BY_ID",
+      "value": "(1ULL << 3)",
+      "comment": "",
+      "category": "BTRFS_DEVICE"
+    },
+    {
+      "name": "BTRFS_SUBVOL_SPEC_BY_ID",
+      "value": "(1ULL << 4)",
+      "comment": "",
+      "category": "BTRFS_SUBVOL"
+    },
+    {
+      "name": "BTRFS_VOL_ARG_V2_FLAGS_SUPPORTED",
+      "value": "",
+      "comment": "",
+      "category": "BTRFS_VOL"
+    },
+    {
+      "name": "BTRFS_FSID_SIZE",
+      "value": "16",
+      "comment": "",
+      "category": "BTRFS_FSID"
+    },
+    {
+      "name": "BTRFS_UUID_SIZE",
+      "value": "16",
+      "comment": "",
+      "category": "BTRFS_UUID"
+    },
+    {
+      "name": "BTRFS_UUID_UNPARSED_SIZE",
+      "value": "37",
+      "comment": "",
+      "category": "BTRFS_UUID"
+    },
+    {
+      "name": "BTRFS_QGROUP_LIMIT_MAX_RFER",
+      "value": "(1ULL << 0)",
+      "comment": "",
+      "category": "BTRFS_QGROUP"
+    },
+    {
+      "name": "BTRFS_QGROUP_LIMIT_MAX_EXCL",
+      "value": "(1ULL << 1)",
+      "comment": "",
+      "category": "BTRFS_QGROUP"
+    },
+    {
+      "name": "BTRFS_QGROUP_LIMIT_RSV_RFER",
+      "value": "(1ULL << 2)",
+      "comment": "",
+      "category": "BTRFS_QGROUP"
+    },
+    {
+      "name": "BTRFS_QGROUP_LIMIT_RSV_EXCL",
+      "value": "(1ULL << 3)",
+      "comment": "",
+      "category": "BTRFS_QGROUP"
+    },
+    {
+      "name": "BTRFS_QGROUP_LIMIT_RFER_CMPR",
+      "value": "(1ULL << 4)",
+      "comment": "",
+      "category": "BTRFS_QGROUP"
+    },
+    {
+      "name": "BTRFS_QGROUP_LIMIT_EXCL_CMPR",
+      "value": "(1ULL << 5)",
+      "comment": "",
+      "category": "BTRFS_QGROUP"
+    },
+    {
+      "name": "BTRFS_QGROUP_INHERIT_SET_LIMITS",
+      "value": "(1ULL << 0)",
+      "comment": "",
+      "category": "BTRFS_QGROUP"
+    },
+    {
+      "name": "BTRFS_QGROUP_INHERIT_FLAGS_SUPP",
+      "value": "(BTRFS_QGROUP_INHERIT_SET_LIMITS)",
+      "comment": "",
+      "category": "BTRFS_QGROUP"
+    },
+    {
+      "name": "BTRFS_DEVICE_REMOVE_ARGS_MASK",
+      "value": "",
+      "comment": "",
+      "category": "BTRFS_DEVICE"
+    },
+    {
+      "name": "BTRFS_SUBVOL_CREATE_ARGS_MASK",
+      "value": "",
+      "comment": "",
+      "category": "BTRFS_SUBVOL"
+    },
+    {
+      "name": "BTRFS_SUBVOL_DELETE_ARGS_MASK",
+      "value": "",
+      "comment": "",
+      "category": "BTRFS_SUBVOL"
+    },
+    {
+      "name": "BTRFS_SCRUB_READONLY",
+      "value": "1",
+      "comment": "",
+      "category": "BTRFS_SCRUB"
+    },
+    {
+      "name": "BTRFS_SCRUB_SUPPORTED_FLAGS",
+      "value": "(BTRFS_SCRUB_READONLY)",
+      "comment": "",
+      "category": "BTRFS_SCRUB"
+    },
+    {
+      "name": "BTRFS_IOCTL_DEV_REPLACE_CONT_READING_FROM_SRCDEV_MODE_ALWAYS",
+      "value": "0",
+      "comment": "",
+      "category": "BTRFS_IOCTL"
+    },
+    {
+      "name": "BTRFS_IOCTL_DEV_REPLACE_CONT_READING_FROM_SRCDEV_MODE_AVOID",
+      "value": "1",
+      "comment": "",
+      "category": "BTRFS_IOCTL"
+    },
+    {
+      "name": "BTRFS_IOCTL_DEV_REPLACE_STATE_NEVER_STARTED",
+      "value": "0",
+      "comment": "",
+      "category": "BTRFS_IOCTL"
+    },
+    {
+      "name": "BTRFS_IOCTL_DEV_REPLACE_STATE_STARTED",
+      "value": "1",
+      "comment": "",
+      "category": "BTRFS_IOCTL"
+    },
+    {
+      "name": "BTRFS_IOCTL_DEV_REPLACE_STATE_FINISHED",
+      "value": "2",
+      "comment": "",
+      "category": "BTRFS_IOCTL"
+    },
+    {
+      "name": "BTRFS_IOCTL_DEV_REPLACE_STATE_CANCELED",
+      "value": "3",
+      "comment": "",
+      "category": "BTRFS_IOCTL"
+    },
+    {
+      "name": "BTRFS_IOCTL_DEV_REPLACE_STATE_SUSPENDED",
+      "value": "4",
+      "comment": "",
+      "category": "BTRFS_IOCTL"
+    },
+    {
+      "name": "BTRFS_IOCTL_DEV_REPLACE_CMD_START",
+      "value": "0",
+      "comment": "",
+      "category": "BTRFS_IOCTL"
+    },
+    {
+      "name": "BTRFS_IOCTL_DEV_REPLACE_CMD_STATUS",
+      "value": "1",
+      "comment": "",
+      "category": "BTRFS_IOCTL"
+    },
+    {
+      "name": "BTRFS_IOCTL_DEV_REPLACE_CMD_CANCEL",
+      "value": "2",
+      "comment": "",
+      "category": "BTRFS_IOCTL"
+    },
+    {
+      "name": "BTRFS_IOCTL_DEV_REPLACE_RESULT_NO_ERROR",
+      "value": "0",
+      "comment": "",
+      "category": "BTRFS_IOCTL"
+    },
+    {
+      "name": "BTRFS_IOCTL_DEV_REPLACE_RESULT_NOT_STARTED",
+      "value": "1",
+      "comment": "",
+      "category": "BTRFS_IOCTL"
+    },
+    {
+      "name": "BTRFS_IOCTL_DEV_REPLACE_RESULT_ALREADY_STARTED",
+      "value": "2",
+      "comment": "",
+      "category": "BTRFS_IOCTL"
+    },
+    {
+      "name": "BTRFS_IOCTL_DEV_REPLACE_RESULT_SCRUB_INPROGRESS",
+      "value": "3",
+      "comment": "",
+      "category": "BTRFS_IOCTL"
+    },
+    {
+      "name": "BTRFS_FS_INFO_FLAG_CSUM_INFO",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "BTRFS_FS"
+    },
+    {
+      "name": "BTRFS_FS_INFO_FLAG_GENERATION",
+      "value": "(1 << 1)",
+      "comment": "",
+      "category": "BTRFS_FS"
+    },
+    {
+      "name": "BTRFS_FS_INFO_FLAG_METADATA_UUID",
+      "value": "(1 << 2)",
+      "comment": "",
+      "category": "BTRFS_FS"
+    },
+    {
+      "name": "BTRFS_FEATURE_COMPAT_RO_FREE_SPACE_TREE",
+      "value": "(1ULL << 0)",
+      "comment": "",
+      "category": "BTRFS_FEATURE"
+    },
+    {
+      "name": "BTRFS_FEATURE_COMPAT_RO_FREE_SPACE_TREE_VALID",
+      "value": "(1ULL << 1)",
+      "comment": "",
+      "category": "BTRFS_FEATURE"
+    },
+    {
+      "name": "BTRFS_FEATURE_COMPAT_RO_VERITY",
+      "value": "(1ULL << 2)",
+      "comment": "",
+      "category": "BTRFS_FEATURE"
+    },
+    {
+      "name": "BTRFS_FEATURE_COMPAT_RO_BLOCK_GROUP_TREE",
+      "value": "(1ULL << 3)",
+      "comment": "",
+      "category": "BTRFS_FEATURE"
+    },
+    {
+      "name": "BTRFS_FEATURE_INCOMPAT_MIXED_BACKREF",
+      "value": "(1ULL << 0)",
+      "comment": "",
+      "category": "BTRFS_FEATURE"
+    },
+    {
+      "name": "BTRFS_FEATURE_INCOMPAT_DEFAULT_SUBVOL",
+      "value": "(1ULL << 1)",
+      "comment": "",
+      "category": "BTRFS_FEATURE"
+    },
+    {
+      "name": "BTRFS_FEATURE_INCOMPAT_MIXED_GROUPS",
+      "value": "(1ULL << 2)",
+      "comment": "",
+      "category": "BTRFS_FEATURE"
+    },
+    {
+      "name": "BTRFS_FEATURE_INCOMPAT_COMPRESS_LZO",
+      "value": "(1ULL << 3)",
+      "comment": "",
+      "category": "BTRFS_FEATURE"
+    },
+    {
+      "name": "BTRFS_FEATURE_INCOMPAT_COMPRESS_ZSTD",
+      "value": "(1ULL << 4)",
+      "comment": "",
+      "category": "BTRFS_FEATURE"
+    },
+    {
+      "name": "BTRFS_FEATURE_INCOMPAT_BIG_METADATA",
+      "value": "(1ULL << 5)",
+      "comment": "",
+      "category": "BTRFS_FEATURE"
+    },
+    {
+      "name": "BTRFS_FEATURE_INCOMPAT_EXTENDED_IREF",
+      "value": "(1ULL << 6)",
+      "comment": "",
+      "category": "BTRFS_FEATURE"
+    },
+    {
+      "name": "BTRFS_FEATURE_INCOMPAT_RAID56",
+      "value": "(1ULL << 7)",
+      "comment": "",
+      "category": "BTRFS_FEATURE"
+    },
+    {
+      "name": "BTRFS_FEATURE_INCOMPAT_SKINNY_METADATA",
+      "value": "(1ULL << 8)",
+      "comment": "",
+      "category": "BTRFS_FEATURE"
+    },
+    {
+      "name": "BTRFS_FEATURE_INCOMPAT_NO_HOLES",
+      "value": "(1ULL << 9)",
+      "comment": "",
+      "category": "BTRFS_FEATURE"
+    },
+    {
+      "name": "BTRFS_FEATURE_INCOMPAT_METADATA_UUID",
+      "value": "(1ULL << 10)",
+      "comment": "",
+      "category": "BTRFS_FEATURE"
+    },
+    {
+      "name": "BTRFS_FEATURE_INCOMPAT_RAID1C34",
+      "value": "(1ULL << 11)",
+      "comment": "",
+      "category": "BTRFS_FEATURE"
+    },
+    {
+      "name": "BTRFS_FEATURE_INCOMPAT_ZONED",
+      "value": "(1ULL << 12)",
+      "comment": "",
+      "category": "BTRFS_FEATURE"
+    },
+    {
+      "name": "BTRFS_FEATURE_INCOMPAT_EXTENT_TREE_V2",
+      "value": "(1ULL << 13)",
+      "comment": "",
+      "category": "BTRFS_FEATURE"
+    },
+    {
+      "name": "BTRFS_FEATURE_INCOMPAT_RAID_STRIPE_TREE",
+      "value": "(1ULL << 14)",
+      "comment": "",
+      "category": "BTRFS_FEATURE"
+    },
+    {
+      "name": "BTRFS_FEATURE_INCOMPAT_SIMPLE_QUOTA",
+      "value": "(1ULL << 16)",
+      "comment": "",
+      "category": "BTRFS_FEATURE"
+    },
+    {
+      "name": "BTRFS_FEATURE_INCOMPAT_REMAP_TREE",
+      "value": "(1ULL << 17)",
+      "comment": "",
+      "category": "BTRFS_FEATURE"
+    },
+    {
+      "name": "BTRFS_BALANCE_CTL_PAUSE",
+      "value": "1",
+      "comment": "",
+      "category": "BTRFS_BALANCE"
+    },
+    {
+      "name": "BTRFS_BALANCE_CTL_CANCEL",
+      "value": "2",
+      "comment": "",
+      "category": "BTRFS_BALANCE"
+    },
+    {
+      "name": "BTRFS_BALANCE_DATA",
+      "value": "(1ULL << 0)",
+      "comment": "",
+      "category": "BTRFS_BALANCE"
+    },
+    {
+      "name": "BTRFS_BALANCE_SYSTEM",
+      "value": "(1ULL << 1)",
+      "comment": "",
+      "category": "BTRFS_BALANCE"
+    },
+    {
+      "name": "BTRFS_BALANCE_METADATA",
+      "value": "(1ULL << 2)",
+      "comment": "",
+      "category": "BTRFS_BALANCE"
+    },
+    {
+      "name": "BTRFS_BALANCE_TYPE_MASK",
+      "value": "(BTRFS_BALANCE_DATA |\t    ",
+      "comment": "",
+      "category": "BTRFS_BALANCE"
+    },
+    {
+      "name": "BTRFS_BALANCE_FORCE",
+      "value": "(1ULL << 3)",
+      "comment": "",
+      "category": "BTRFS_BALANCE"
+    },
+    {
+      "name": "BTRFS_BALANCE_RESUME",
+      "value": "(1ULL << 4)",
+      "comment": "",
+      "category": "BTRFS_BALANCE"
+    },
+    {
+      "name": "BTRFS_BALANCE_ARGS_PROFILES",
+      "value": "(1ULL << 0)",
+      "comment": "",
+      "category": "BTRFS_BALANCE"
+    },
+    {
+      "name": "BTRFS_BALANCE_ARGS_USAGE",
+      "value": "(1ULL << 1)",
+      "comment": "",
+      "category": "BTRFS_BALANCE"
+    },
+    {
+      "name": "BTRFS_BALANCE_ARGS_DEVID",
+      "value": "(1ULL << 2)",
+      "comment": "",
+      "category": "BTRFS_BALANCE"
+    },
+    {
+      "name": "BTRFS_BALANCE_ARGS_DRANGE",
+      "value": "(1ULL << 3)",
+      "comment": "",
+      "category": "BTRFS_BALANCE"
+    },
+    {
+      "name": "BTRFS_BALANCE_ARGS_VRANGE",
+      "value": "(1ULL << 4)",
+      "comment": "",
+      "category": "BTRFS_BALANCE"
+    },
+    {
+      "name": "BTRFS_BALANCE_ARGS_LIMIT",
+      "value": "(1ULL << 5)",
+      "comment": "",
+      "category": "BTRFS_BALANCE"
+    },
+    {
+      "name": "BTRFS_BALANCE_ARGS_LIMIT_RANGE",
+      "value": "(1ULL << 6)",
+      "comment": "",
+      "category": "BTRFS_BALANCE"
+    },
+    {
+      "name": "BTRFS_BALANCE_ARGS_STRIPES_RANGE",
+      "value": "(1ULL << 7)",
+      "comment": "",
+      "category": "BTRFS_BALANCE"
+    },
+    {
+      "name": "BTRFS_BALANCE_ARGS_USAGE_RANGE",
+      "value": "(1ULL << 10)",
+      "comment": "",
+      "category": "BTRFS_BALANCE"
+    },
+    {
+      "name": "BTRFS_BALANCE_ARGS_MASK",
+      "value": "",
+      "comment": "",
+      "category": "BTRFS_BALANCE"
+    },
+    {
+      "name": "BTRFS_BALANCE_ARGS_CONVERT",
+      "value": "(1ULL << 8)",
+      "comment": "",
+      "category": "BTRFS_BALANCE"
+    },
+    {
+      "name": "BTRFS_BALANCE_ARGS_SOFT",
+      "value": "(1ULL << 9)",
+      "comment": "",
+      "category": "BTRFS_BALANCE"
+    },
+    {
+      "name": "BTRFS_BALANCE_STATE_RUNNING",
+      "value": "(1ULL << 0)",
+      "comment": "",
+      "category": "BTRFS_BALANCE"
+    },
+    {
+      "name": "BTRFS_BALANCE_STATE_PAUSE_REQ",
+      "value": "(1ULL << 1)",
+      "comment": "",
+      "category": "BTRFS_BALANCE"
+    },
+    {
+      "name": "BTRFS_BALANCE_STATE_CANCEL_REQ",
+      "value": "(1ULL << 2)",
+      "comment": "",
+      "category": "BTRFS_BALANCE"
+    },
+    {
+      "name": "BTRFS_INO_LOOKUP_PATH_MAX",
+      "value": "4080",
+      "comment": "",
+      "category": "BTRFS_INO"
+    },
+    {
+      "name": "BTRFS_INO_LOOKUP_USER_PATH_MAX",
+      "value": "(4080 - BTRFS_VOL_NAME_MAX - 1)",
+      "comment": "",
+      "category": "BTRFS_INO"
+    },
+    {
+      "name": "BTRFS_SEARCH_ARGS_BUFSIZE",
+      "value": "(4096 - sizeof(struct btrfs_ioctl_search_key))",
+      "comment": "",
+      "category": "BTRFS_SEARCH"
+    },
+    {
+      "name": "BTRFS_DEFRAG_RANGE_COMPRESS",
+      "value": "1",
+      "comment": "",
+      "category": "BTRFS_DEFRAG"
+    },
+    {
+      "name": "BTRFS_DEFRAG_RANGE_START_IO",
+      "value": "2",
+      "comment": "",
+      "category": "BTRFS_DEFRAG"
+    },
+    {
+      "name": "BTRFS_DEFRAG_RANGE_COMPRESS_LEVEL",
+      "value": "4",
+      "comment": "",
+      "category": "BTRFS_DEFRAG"
+    },
+    {
+      "name": "BTRFS_DEFRAG_RANGE_NOCOMPRESS",
+      "value": "8",
+      "comment": "",
+      "category": "BTRFS_DEFRAG"
+    },
+    {
+      "name": "BTRFS_DEFRAG_RANGE_FLAGS_SUPP",
+      "value": "(BTRFS_DEFRAG_RANGE_COMPRESS |\t\t",
+      "comment": "",
+      "category": "BTRFS_DEFRAG"
+    },
+    {
+      "name": "BTRFS_SAME_DATA_DIFFERS",
+      "value": "1",
+      "comment": "",
+      "category": "BTRFS_SAME"
+    },
+    {
+      "name": "BTRFS_LOGICAL_INO_ARGS_IGNORE_OFFSET",
+      "value": "(1ULL << 0)",
+      "comment": "",
+      "category": "BTRFS_LOGICAL"
+    },
+    {
+      "name": "BTRFS_DEV_STATS_RESET",
+      "value": "(1ULL << 0)",
+      "comment": "",
+      "category": "BTRFS_DEV"
+    },
+    {
+      "name": "BTRFS_QUOTA_CTL_ENABLE",
+      "value": "1",
+      "comment": "",
+      "category": "BTRFS_QUOTA"
+    },
+    {
+      "name": "BTRFS_QUOTA_CTL_DISABLE",
+      "value": "2",
+      "comment": "",
+      "category": "BTRFS_QUOTA"
+    },
+    {
+      "name": "BTRFS_QUOTA_CTL_RESCAN__NOTUSED",
+      "value": "3",
+      "comment": "",
+      "category": "BTRFS_QUOTA"
+    },
+    {
+      "name": "BTRFS_QUOTA_CTL_ENABLE_SIMPLE_QUOTA",
+      "value": "4",
+      "comment": "",
+      "category": "BTRFS_QUOTA"
+    },
+    {
+      "name": "BTRFS_SEND_FLAG_NO_FILE_DATA",
+      "value": "0x1",
+      "comment": "",
+      "category": "BTRFS_SEND"
+    },
+    {
+      "name": "BTRFS_SEND_FLAG_OMIT_STREAM_HEADER",
+      "value": "0x2",
+      "comment": "",
+      "category": "BTRFS_SEND"
+    },
+    {
+      "name": "BTRFS_SEND_FLAG_OMIT_END_CMD",
+      "value": "0x4",
+      "comment": "",
+      "category": "BTRFS_SEND"
+    },
+    {
+      "name": "BTRFS_SEND_FLAG_VERSION",
+      "value": "0x8",
+      "comment": "",
+      "category": "BTRFS_SEND"
+    },
+    {
+      "name": "BTRFS_SEND_FLAG_COMPRESSED",
+      "value": "0x10",
+      "comment": "",
+      "category": "BTRFS_SEND"
+    },
+    {
+      "name": "BTRFS_SEND_FLAG_MASK",
+      "value": "",
+      "comment": "",
+      "category": "BTRFS_SEND"
+    },
+    {
+      "name": "BTRFS_MAX_ROOTREF_BUFFER_NUM",
+      "value": "255",
+      "comment": "",
+      "category": "BTRFS_MAX"
+    },
+    {
+      "name": "BTRFS_ENCODED_IO_COMPRESSION_NONE",
+      "value": "0",
+      "comment": "",
+      "category": "BTRFS_ENCODED"
+    },
+    {
+      "name": "BTRFS_ENCODED_IO_COMPRESSION_ZLIB",
+      "value": "1",
+      "comment": "",
+      "category": "BTRFS_ENCODED"
+    },
+    {
+      "name": "BTRFS_ENCODED_IO_COMPRESSION_ZSTD",
+      "value": "2",
+      "comment": "",
+      "category": "BTRFS_ENCODED"
+    },
+    {
+      "name": "BTRFS_ENCODED_IO_COMPRESSION_LZO_4K",
+      "value": "3",
+      "comment": "",
+      "category": "BTRFS_ENCODED"
+    },
+    {
+      "name": "BTRFS_ENCODED_IO_COMPRESSION_LZO_8K",
+      "value": "4",
+      "comment": "",
+      "category": "BTRFS_ENCODED"
+    },
+    {
+      "name": "BTRFS_ENCODED_IO_COMPRESSION_LZO_16K",
+      "value": "5",
+      "comment": "",
+      "category": "BTRFS_ENCODED"
+    },
+    {
+      "name": "BTRFS_ENCODED_IO_COMPRESSION_LZO_32K",
+      "value": "6",
+      "comment": "",
+      "category": "BTRFS_ENCODED"
+    },
+    {
+      "name": "BTRFS_ENCODED_IO_COMPRESSION_LZO_64K",
+      "value": "7",
+      "comment": "",
+      "category": "BTRFS_ENCODED"
+    },
+    {
+      "name": "BTRFS_ENCODED_IO_COMPRESSION_TYPES",
+      "value": "8",
+      "comment": "",
+      "category": "BTRFS_ENCODED"
+    },
+    {
+      "name": "BTRFS_ENCODED_IO_ENCRYPTION_NONE",
+      "value": "0",
+      "comment": "",
+      "category": "BTRFS_ENCODED"
+    },
+    {
+      "name": "BTRFS_ENCODED_IO_ENCRYPTION_TYPES",
+      "value": "1",
+      "comment": "",
+      "category": "BTRFS_ENCODED"
+    },
+    {
+      "name": "BTRFS_SUBVOL_SYNC_WAIT_FOR_ONE",
+      "value": "(0)",
+      "comment": "",
+      "category": "BTRFS_SUBVOL"
+    },
+    {
+      "name": "BTRFS_SUBVOL_SYNC_WAIT_FOR_QUEUED",
+      "value": "(1)",
+      "comment": "",
+      "category": "BTRFS_SUBVOL"
+    },
+    {
+      "name": "BTRFS_SUBVOL_SYNC_COUNT",
+      "value": "(2)",
+      "comment": "",
+      "category": "BTRFS_SUBVOL"
+    },
+    {
+      "name": "BTRFS_SUBVOL_SYNC_PEEK_FIRST",
+      "value": "(3)",
+      "comment": "",
+      "category": "BTRFS_SUBVOL"
+    },
+    {
+      "name": "BTRFS_SUBVOL_SYNC_PEEK_LAST",
+      "value": "(4)",
+      "comment": "",
+      "category": "BTRFS_SUBVOL"
+    },
+    {
+      "name": "BTRFS_SHUTDOWN_FLAGS_DEFAULT",
+      "value": "0x0",
+      "comment": "",
+      "category": "BTRFS_SHUTDOWN"
+    },
+    {
+      "name": "BTRFS_SHUTDOWN_FLAGS_LOGFLUSH",
+      "value": "0x1",
+      "comment": "",
+      "category": "BTRFS_SHUTDOWN"
+    },
+    {
+      "name": "BTRFS_SHUTDOWN_FLAGS_NOLOGFLUSH",
+      "value": "0x2",
+      "comment": "",
+      "category": "BTRFS_SHUTDOWN"
+    },
+    {
+      "name": "BTRFS_SHUTDOWN_FLAGS_LAST",
+      "value": "0x3",
+      "comment": "",
+      "category": "BTRFS_SHUTDOWN"
+    },
+    {
+      "name": "BTRFS_IOC_SNAP_CREATE",
+      "value": "_IOW(BTRFS_IOCTL_MAGIC, 1, ",
+      "comment": "",
+      "category": "BTRFS_IOC"
+    },
+    {
+      "name": "BTRFS_IOC_DEFRAG",
+      "value": "_IOW(BTRFS_IOCTL_MAGIC, 2, ",
+      "comment": "",
+      "category": "BTRFS_IOC"
+    },
+    {
+      "name": "BTRFS_IOC_RESIZE",
+      "value": "_IOW(BTRFS_IOCTL_MAGIC, 3, ",
+      "comment": "",
+      "category": "BTRFS_IOC"
+    },
+    {
+      "name": "BTRFS_IOC_SCAN_DEV",
+      "value": "_IOW(BTRFS_IOCTL_MAGIC, 4, ",
+      "comment": "",
+      "category": "BTRFS_IOC"
+    },
+    {
+      "name": "BTRFS_IOC_FORGET_DEV",
+      "value": "_IOW(BTRFS_IOCTL_MAGIC, 5, ",
+      "comment": "",
+      "category": "BTRFS_IOC"
+    },
+    {
+      "name": "BTRFS_IOC_TRANS_START",
+      "value": "_IO(BTRFS_IOCTL_MAGIC, 6)",
+      "comment": "",
+      "category": "BTRFS_IOC"
+    },
+    {
+      "name": "BTRFS_IOC_TRANS_END",
+      "value": "_IO(BTRFS_IOCTL_MAGIC, 7)",
+      "comment": "",
+      "category": "BTRFS_IOC"
+    },
+    {
+      "name": "BTRFS_IOC_SYNC",
+      "value": "_IO(BTRFS_IOCTL_MAGIC, 8)",
+      "comment": "",
+      "category": "BTRFS_IOC"
+    },
+    {
+      "name": "BTRFS_IOC_CLONE",
+      "value": "_IOW(BTRFS_IOCTL_MAGIC, 9, int)",
+      "comment": "",
+      "category": "BTRFS_IOC"
+    },
+    {
+      "name": "BTRFS_IOC_ADD_DEV",
+      "value": "_IOW(BTRFS_IOCTL_MAGIC, 10, ",
+      "comment": "",
+      "category": "BTRFS_IOC"
+    },
+    {
+      "name": "BTRFS_IOC_RM_DEV",
+      "value": "_IOW(BTRFS_IOCTL_MAGIC, 11, ",
+      "comment": "",
+      "category": "BTRFS_IOC"
+    },
+    {
+      "name": "BTRFS_IOC_BALANCE",
+      "value": "_IOW(BTRFS_IOCTL_MAGIC, 12, ",
+      "comment": "",
+      "category": "BTRFS_IOC"
+    },
+    {
+      "name": "BTRFS_IOC_CLONE_RANGE",
+      "value": "_IOW(BTRFS_IOCTL_MAGIC, 13, ",
+      "comment": "",
+      "category": "BTRFS_IOC"
+    },
+    {
+      "name": "BTRFS_IOC_SUBVOL_CREATE",
+      "value": "_IOW(BTRFS_IOCTL_MAGIC, 14, ",
+      "comment": "",
+      "category": "BTRFS_IOC"
+    },
+    {
+      "name": "BTRFS_IOC_SNAP_DESTROY",
+      "value": "_IOW(BTRFS_IOCTL_MAGIC, 15, ",
+      "comment": "",
+      "category": "BTRFS_IOC"
+    },
+    {
+      "name": "BTRFS_IOC_DEFRAG_RANGE",
+      "value": "_IOW(BTRFS_IOCTL_MAGIC, 16, ",
+      "comment": "",
+      "category": "BTRFS_IOC"
+    },
+    {
+      "name": "BTRFS_IOC_TREE_SEARCH",
+      "value": "_IOWR(BTRFS_IOCTL_MAGIC, 17, ",
+      "comment": "",
+      "category": "BTRFS_IOC"
+    },
+    {
+      "name": "BTRFS_IOC_TREE_SEARCH_V2",
+      "value": "_IOWR(BTRFS_IOCTL_MAGIC, 17, ",
+      "comment": "",
+      "category": "BTRFS_IOC"
+    },
+    {
+      "name": "BTRFS_IOC_INO_LOOKUP",
+      "value": "_IOWR(BTRFS_IOCTL_MAGIC, 18, ",
+      "comment": "",
+      "category": "BTRFS_IOC"
+    },
+    {
+      "name": "BTRFS_IOC_DEFAULT_SUBVOL",
+      "value": "_IOW(BTRFS_IOCTL_MAGIC, 19, __u64)",
+      "comment": "",
+      "category": "BTRFS_IOC"
+    },
+    {
+      "name": "BTRFS_IOC_SPACE_INFO",
+      "value": "_IOWR(BTRFS_IOCTL_MAGIC, 20, ",
+      "comment": "",
+      "category": "BTRFS_IOC"
+    },
+    {
+      "name": "BTRFS_IOC_START_SYNC",
+      "value": "_IOR(BTRFS_IOCTL_MAGIC, 24, __u64)",
+      "comment": "",
+      "category": "BTRFS_IOC"
+    },
+    {
+      "name": "BTRFS_IOC_WAIT_SYNC",
+      "value": "_IOW(BTRFS_IOCTL_MAGIC, 22, __u64)",
+      "comment": "",
+      "category": "BTRFS_IOC"
+    },
+    {
+      "name": "BTRFS_IOC_SNAP_CREATE_V2",
+      "value": "_IOW(BTRFS_IOCTL_MAGIC, 23, ",
+      "comment": "",
+      "category": "BTRFS_IOC"
+    },
+    {
+      "name": "BTRFS_IOC_SUBVOL_CREATE_V2",
+      "value": "_IOW(BTRFS_IOCTL_MAGIC, 24, ",
+      "comment": "",
+      "category": "BTRFS_IOC"
+    },
+    {
+      "name": "BTRFS_IOC_SUBVOL_GETFLAGS",
+      "value": "_IOR(BTRFS_IOCTL_MAGIC, 25, __u64)",
+      "comment": "",
+      "category": "BTRFS_IOC"
+    },
+    {
+      "name": "BTRFS_IOC_SUBVOL_SETFLAGS",
+      "value": "_IOW(BTRFS_IOCTL_MAGIC, 26, __u64)",
+      "comment": "",
+      "category": "BTRFS_IOC"
+    },
+    {
+      "name": "BTRFS_IOC_SCRUB",
+      "value": "_IOWR(BTRFS_IOCTL_MAGIC, 27, ",
+      "comment": "",
+      "category": "BTRFS_IOC"
+    },
+    {
+      "name": "BTRFS_IOC_SCRUB_CANCEL",
+      "value": "_IO(BTRFS_IOCTL_MAGIC, 28)",
+      "comment": "",
+      "category": "BTRFS_IOC"
+    },
+    {
+      "name": "BTRFS_IOC_SCRUB_PROGRESS",
+      "value": "_IOWR(BTRFS_IOCTL_MAGIC, 29, ",
+      "comment": "",
+      "category": "BTRFS_IOC"
+    },
+    {
+      "name": "BTRFS_IOC_DEV_INFO",
+      "value": "_IOWR(BTRFS_IOCTL_MAGIC, 30, ",
+      "comment": "",
+      "category": "BTRFS_IOC"
+    },
+    {
+      "name": "BTRFS_IOC_FS_INFO",
+      "value": "_IOR(BTRFS_IOCTL_MAGIC, 31, ",
+      "comment": "",
+      "category": "BTRFS_IOC"
+    },
+    {
+      "name": "BTRFS_IOC_BALANCE_V2",
+      "value": "_IOWR(BTRFS_IOCTL_MAGIC, 32, ",
+      "comment": "",
+      "category": "BTRFS_IOC"
+    },
+    {
+      "name": "BTRFS_IOC_BALANCE_CTL",
+      "value": "_IOW(BTRFS_IOCTL_MAGIC, 33, int)",
+      "comment": "",
+      "category": "BTRFS_IOC"
+    },
+    {
+      "name": "BTRFS_IOC_BALANCE_PROGRESS",
+      "value": "_IOR(BTRFS_IOCTL_MAGIC, 34, ",
+      "comment": "",
+      "category": "BTRFS_IOC"
+    },
+    {
+      "name": "BTRFS_IOC_INO_PATHS",
+      "value": "_IOWR(BTRFS_IOCTL_MAGIC, 35, ",
+      "comment": "",
+      "category": "BTRFS_IOC"
+    },
+    {
+      "name": "BTRFS_IOC_LOGICAL_INO",
+      "value": "_IOWR(BTRFS_IOCTL_MAGIC, 36, ",
+      "comment": "",
+      "category": "BTRFS_IOC"
+    },
+    {
+      "name": "BTRFS_IOC_SET_RECEIVED_SUBVOL",
+      "value": "_IOWR(BTRFS_IOCTL_MAGIC, 37, ",
+      "comment": "",
+      "category": "BTRFS_IOC"
+    },
+    {
+      "name": "BTRFS_IOC_SEND",
+      "value": "_IOW(BTRFS_IOCTL_MAGIC, 38, struct btrfs_ioctl_send_args)",
+      "comment": "",
+      "category": "BTRFS_IOC"
+    },
+    {
+      "name": "BTRFS_IOC_DEVICES_READY",
+      "value": "_IOR(BTRFS_IOCTL_MAGIC, 39, ",
+      "comment": "",
+      "category": "BTRFS_IOC"
+    },
+    {
+      "name": "BTRFS_IOC_QUOTA_CTL",
+      "value": "_IOWR(BTRFS_IOCTL_MAGIC, 40, ",
+      "comment": "",
+      "category": "BTRFS_IOC"
+    },
+    {
+      "name": "BTRFS_IOC_QGROUP_ASSIGN",
+      "value": "_IOW(BTRFS_IOCTL_MAGIC, 41, ",
+      "comment": "",
+      "category": "BTRFS_IOC"
+    },
+    {
+      "name": "BTRFS_IOC_QGROUP_CREATE",
+      "value": "_IOW(BTRFS_IOCTL_MAGIC, 42, ",
+      "comment": "",
+      "category": "BTRFS_IOC"
+    },
+    {
+      "name": "BTRFS_IOC_QGROUP_LIMIT",
+      "value": "_IOR(BTRFS_IOCTL_MAGIC, 43, ",
+      "comment": "",
+      "category": "BTRFS_IOC"
+    },
+    {
+      "name": "BTRFS_IOC_QUOTA_RESCAN",
+      "value": "_IOW(BTRFS_IOCTL_MAGIC, 44, ",
+      "comment": "",
+      "category": "BTRFS_IOC"
+    },
+    {
+      "name": "BTRFS_IOC_QUOTA_RESCAN_STATUS",
+      "value": "_IOR(BTRFS_IOCTL_MAGIC, 45, ",
+      "comment": "",
+      "category": "BTRFS_IOC"
+    },
+    {
+      "name": "BTRFS_IOC_QUOTA_RESCAN_WAIT",
+      "value": "_IO(BTRFS_IOCTL_MAGIC, 46)",
+      "comment": "",
+      "category": "BTRFS_IOC"
+    },
+    {
+      "name": "BTRFS_IOC_GET_FSLABEL",
+      "value": "FS_IOC_GETFSLABEL",
+      "comment": "",
+      "category": "BTRFS_IOC"
+    },
+    {
+      "name": "BTRFS_IOC_SET_FSLABEL",
+      "value": "FS_IOC_SETFSLABEL",
+      "comment": "",
+      "category": "BTRFS_IOC"
+    },
+    {
+      "name": "BTRFS_IOC_GET_DEV_STATS",
+      "value": "_IOWR(BTRFS_IOCTL_MAGIC, 52, ",
+      "comment": "",
+      "category": "BTRFS_IOC"
+    },
+    {
+      "name": "BTRFS_IOC_DEV_REPLACE",
+      "value": "_IOWR(BTRFS_IOCTL_MAGIC, 53, ",
+      "comment": "",
+      "category": "BTRFS_IOC"
+    },
+    {
+      "name": "BTRFS_IOC_FILE_EXTENT_SAME",
+      "value": "_IOWR(BTRFS_IOCTL_MAGIC, 54, ",
+      "comment": "",
+      "category": "BTRFS_IOC"
+    },
+    {
+      "name": "BTRFS_IOC_GET_FEATURES",
+      "value": "_IOR(BTRFS_IOCTL_MAGIC, 57, ",
+      "comment": "",
+      "category": "BTRFS_IOC"
+    },
+    {
+      "name": "BTRFS_IOC_SET_FEATURES",
+      "value": "_IOW(BTRFS_IOCTL_MAGIC, 57, ",
+      "comment": "",
+      "category": "BTRFS_IOC"
+    },
+    {
+      "name": "BTRFS_IOC_GET_SUPPORTED_FEATURES",
+      "value": "_IOR(BTRFS_IOCTL_MAGIC, 57, ",
+      "comment": "",
+      "category": "BTRFS_IOC"
+    },
+    {
+      "name": "BTRFS_IOC_RM_DEV_V2",
+      "value": "_IOW(BTRFS_IOCTL_MAGIC, 58, ",
+      "comment": "",
+      "category": "BTRFS_IOC"
+    },
+    {
+      "name": "BTRFS_IOC_LOGICAL_INO_V2",
+      "value": "_IOWR(BTRFS_IOCTL_MAGIC, 59, ",
+      "comment": "",
+      "category": "BTRFS_IOC"
+    },
+    {
+      "name": "BTRFS_IOC_GET_SUBVOL_INFO",
+      "value": "_IOR(BTRFS_IOCTL_MAGIC, 60, ",
+      "comment": "",
+      "category": "BTRFS_IOC"
+    },
+    {
+      "name": "BTRFS_IOC_GET_SUBVOL_ROOTREF",
+      "value": "_IOWR(BTRFS_IOCTL_MAGIC, 61, ",
+      "comment": "",
+      "category": "BTRFS_IOC"
+    },
+    {
+      "name": "BTRFS_IOC_INO_LOOKUP_USER",
+      "value": "_IOWR(BTRFS_IOCTL_MAGIC, 62, ",
+      "comment": "",
+      "category": "BTRFS_IOC"
+    },
+    {
+      "name": "BTRFS_IOC_SNAP_DESTROY_V2",
+      "value": "_IOW(BTRFS_IOCTL_MAGIC, 63, ",
+      "comment": "",
+      "category": "BTRFS_IOC"
+    },
+    {
+      "name": "BTRFS_IOC_ENCODED_READ",
+      "value": "_IOR(BTRFS_IOCTL_MAGIC, 64, ",
+      "comment": "",
+      "category": "BTRFS_IOC"
+    },
+    {
+      "name": "BTRFS_IOC_ENCODED_WRITE",
+      "value": "_IOW(BTRFS_IOCTL_MAGIC, 64, ",
+      "comment": "",
+      "category": "BTRFS_IOC"
+    },
+    {
+      "name": "BTRFS_IOC_SUBVOL_SYNC_WAIT",
+      "value": "_IOW(BTRFS_IOCTL_MAGIC, 65, ",
+      "comment": "",
+      "category": "BTRFS_IOC"
+    },
+    {
+      "name": "BTRFS_IOC_SHUTDOWN",
+      "value": "_IOR('X', 125, __u32)",
+      "comment": "",
+      "category": "BTRFS_IOC"
+    }
+  ],
+  "structs": [
+    {
+      "name": "btrfs_ioctl_vol_args",
+      "fields": [
+        {
+          "type_name": "__s64",
+          "name": "fd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "name",
+          "array_size": "BTRFS_PATH_NAME_MAX + 1",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_qgroup_limit",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "max_rfer",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "max_excl",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "rsv_rfer",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "rsv_excl",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_qgroup_inherit",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "num_qgroups",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "num_ref_copies",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "num_excl_copies",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_ioctl_qgroup_limit_args",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "qgroupid",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_ioctl_vol_args_v2",
+      "fields": [
+        {
+          "type_name": "__s64",
+          "name": "fd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "transid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "unused",
+          "array_size": "4",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "name",
+          "array_size": "BTRFS_SUBVOL_NAME_MAX + 1",
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "devid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "subvolid",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_5",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_scrub_progress",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "data_extents_scrubbed",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "tree_extents_scrubbed",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "data_bytes_scrubbed",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "tree_bytes_scrubbed",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "read_errors",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "csum_errors",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "verify_errors",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "no_csum",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "csum_discards",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "super_errors",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "malloc_errors",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "uncorrectable_errors",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "corrected_errors",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "last_physical",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "unverified_errors",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_ioctl_scrub_args",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "devid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "start",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "end",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "unused",
+          "array_size": "(1024-32-sizeof(struct btrfs_scrub_progress))/8",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_ioctl_dev_replace_start_params",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "srcdevid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "cont_reading_from_srcdev_mode",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "srcdev_name",
+          "array_size": "BTRFS_DEVICE_PATH_NAME_MAX + 1",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "tgtdev_name",
+          "array_size": "BTRFS_DEVICE_PATH_NAME_MAX + 1",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_ioctl_dev_replace_status_params",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "replace_state",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "progress_1000",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "time_started",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "time_stopped",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "num_write_errors",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "num_uncorrectable_read_errors",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_ioctl_dev_replace_args",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "cmd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "result",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "spare",
+          "array_size": "64",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_ioctl_dev_info_args",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "devid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "uuid",
+          "array_size": "BTRFS_UUID_SIZE",
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "bytes_used",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "total_bytes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "fsid",
+          "array_size": "BTRFS_UUID_SIZE",
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "unused",
+          "array_size": "377",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "path",
+          "array_size": "BTRFS_DEVICE_PATH_NAME_MAX",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_ioctl_fs_info_args",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "max_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "num_devices",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "fsid",
+          "array_size": "BTRFS_FSID_SIZE",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "nodesize",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "sectorsize",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "clone_alignment",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "csum_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "csum_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "generation",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "metadata_uuid",
+          "array_size": "BTRFS_FSID_SIZE",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reserved",
+          "array_size": "944",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_ioctl_feature_flags",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "compat_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "compat_ro_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "incompat_flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_balance_args",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "profiles",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "usage",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "usage_min",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "usage_max",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "devid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "pstart",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "pend",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "vstart",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "vend",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "target",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "limit",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "limit_min",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "limit_max",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "stripes_min",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "stripes_max",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "unused",
+          "array_size": "6",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_15",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "usage_min",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "usage_max",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_16",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "limit_min",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "limit_max",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_balance_progress",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "expected",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "considered",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "completed",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_ioctl_balance_args",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "state",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "unused",
+          "array_size": "72",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_ioctl_ino_lookup_args",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "treeid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "objectid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "name",
+          "array_size": "BTRFS_INO_LOOKUP_PATH_MAX",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_ioctl_ino_lookup_user_args",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "dirid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "treeid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "name",
+          "array_size": "BTRFS_VOL_NAME_MAX + 1",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "path",
+          "array_size": "BTRFS_INO_LOOKUP_USER_PATH_MAX",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_ioctl_search_key",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "tree_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "min_objectid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "max_objectid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "min_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "max_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "min_transid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "max_transid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "min_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "max_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "nr_items",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "unused",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "unused1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "unused2",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "unused3",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "unused4",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_ioctl_search_header",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "transid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "objectid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "len",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_ioctl_search_args",
+      "fields": [
+        {
+          "type_name": "char",
+          "name": "buf",
+          "array_size": "BTRFS_SEARCH_ARGS_BUFSIZE",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_ioctl_search_args_v2",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "buf_size",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_ioctl_clone_range_args",
+      "fields": [
+        {
+          "type_name": "__s64",
+          "name": "src_fd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "dest_offset",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_ioctl_defrag_range_args",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "start",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "extent_thresh",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "compress_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s8",
+          "name": "level",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "unused",
+          "array_size": "4",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_27",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s8",
+          "name": "level",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_ioctl_same_extent_info",
+      "fields": [
+        {
+          "type_name": "__s64",
+          "name": "fd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "logical_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "bytes_deduped",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "status",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_ioctl_same_args",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "logical_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "length",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "dest_count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "reserved1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved2",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_ioctl_space_info",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "total_bytes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "used_bytes",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_ioctl_space_args",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "space_slots",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "total_spaces",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_data_container",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "bytes_left",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "bytes_missing",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "elem_cnt",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "elem_missed",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_ioctl_ino_path_args",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "inum",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "reserved",
+          "array_size": "4",
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "fspath",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_ioctl_logical_ino_args",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "logical",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "reserved",
+          "array_size": "3",
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "inodes",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_ioctl_get_dev_stats",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "devid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "nr_items",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "values",
+          "array_size": "BTRFS_DEV_STAT_VALUES_MAX",
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "unused",
+          "array_size": "128 - 2 - BTRFS_DEV_STAT_VALUES_MAX",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_ioctl_quota_ctl_args",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "cmd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "status",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_ioctl_quota_rescan_args",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "progress",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "reserved",
+          "array_size": "6",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_ioctl_qgroup_assign_args",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "assign",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "src",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "dst",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_ioctl_qgroup_create_args",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "create",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "qgroupid",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_ioctl_timespec",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "sec",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "nsec",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_ioctl_received_subvol_args",
+      "fields": [
+        {
+          "type_name": "char",
+          "name": "uuid",
+          "array_size": "BTRFS_UUID_SIZE",
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "stransid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "rtransid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "reserved",
+          "array_size": "16",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_ioctl_send_args",
+      "fields": [
+        {
+          "type_name": "__s64",
+          "name": "send_fd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "clone_sources_count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "parent_root",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "version",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reserved",
+          "array_size": "28",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_ioctl_get_subvol_info_args",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "treeid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "name",
+          "array_size": "BTRFS_VOL_NAME_MAX + 1",
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "parent_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "dirid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "generation",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "uuid",
+          "array_size": "BTRFS_UUID_SIZE",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "parent_uuid",
+          "array_size": "BTRFS_UUID_SIZE",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "received_uuid",
+          "array_size": "BTRFS_UUID_SIZE",
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "ctransid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "otransid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "stransid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "rtransid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "reserved",
+          "array_size": "8",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_ioctl_get_subvol_rootref_args",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "min_treeid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "treeid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "dirid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "num_items",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "align",
+          "array_size": "7",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_45",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "treeid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "dirid",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_ioctl_encoded_io_args",
+      "fields": [
+        {
+          "type_name": "__s64",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "unencoded_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "unencoded_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "compression",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "encryption",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reserved",
+          "array_size": "64",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_ioctl_subvol_wait",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "subvolid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "mode",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "count",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

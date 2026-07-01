@@ -1,0 +1,289 @@
+{
+  "filename": "uinput.h",
+  "includes": [
+    "linux/types.h",
+    "linux/input.h"
+  ],
+  "defines": [
+    {
+      "name": "UINPUT_VERSION",
+      "value": "5",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "UINPUT_MAX_NAME_SIZE",
+      "value": "80",
+      "comment": "",
+      "category": "UINPUT_MAX"
+    },
+    {
+      "name": "UINPUT_IOCTL_BASE",
+      "value": "'U'",
+      "comment": "",
+      "category": "UINPUT_IOCTL"
+    },
+    {
+      "name": "UI_DEV_CREATE",
+      "value": "_IO(UINPUT_IOCTL_BASE, 1)",
+      "comment": "",
+      "category": "UI_DEV"
+    },
+    {
+      "name": "UI_DEV_DESTROY",
+      "value": "_IO(UINPUT_IOCTL_BASE, 2)",
+      "comment": "",
+      "category": "UI_DEV"
+    },
+    {
+      "name": "UI_DEV_SETUP",
+      "value": "_IOW(UINPUT_IOCTL_BASE, 3, struct uinput_setup)",
+      "comment": "",
+      "category": "UI_DEV"
+    },
+    {
+      "name": "UI_ABS_SETUP",
+      "value": "_IOW(UINPUT_IOCTL_BASE, 4, struct uinput_abs_setup)",
+      "comment": "",
+      "category": "UI_ABS"
+    },
+    {
+      "name": "UI_SET_EVBIT",
+      "value": "_IOW(UINPUT_IOCTL_BASE, 100, int)",
+      "comment": "",
+      "category": "UI_SET"
+    },
+    {
+      "name": "UI_SET_KEYBIT",
+      "value": "_IOW(UINPUT_IOCTL_BASE, 101, int)",
+      "comment": "",
+      "category": "UI_SET"
+    },
+    {
+      "name": "UI_SET_RELBIT",
+      "value": "_IOW(UINPUT_IOCTL_BASE, 102, int)",
+      "comment": "",
+      "category": "UI_SET"
+    },
+    {
+      "name": "UI_SET_ABSBIT",
+      "value": "_IOW(UINPUT_IOCTL_BASE, 103, int)",
+      "comment": "",
+      "category": "UI_SET"
+    },
+    {
+      "name": "UI_SET_MSCBIT",
+      "value": "_IOW(UINPUT_IOCTL_BASE, 104, int)",
+      "comment": "",
+      "category": "UI_SET"
+    },
+    {
+      "name": "UI_SET_LEDBIT",
+      "value": "_IOW(UINPUT_IOCTL_BASE, 105, int)",
+      "comment": "",
+      "category": "UI_SET"
+    },
+    {
+      "name": "UI_SET_SNDBIT",
+      "value": "_IOW(UINPUT_IOCTL_BASE, 106, int)",
+      "comment": "",
+      "category": "UI_SET"
+    },
+    {
+      "name": "UI_SET_FFBIT",
+      "value": "_IOW(UINPUT_IOCTL_BASE, 107, int)",
+      "comment": "",
+      "category": "UI_SET"
+    },
+    {
+      "name": "UI_SET_PHYS",
+      "value": "_IOW(UINPUT_IOCTL_BASE, 108, char*)",
+      "comment": "",
+      "category": "UI_SET"
+    },
+    {
+      "name": "UI_SET_SWBIT",
+      "value": "_IOW(UINPUT_IOCTL_BASE, 109, int)",
+      "comment": "",
+      "category": "UI_SET"
+    },
+    {
+      "name": "UI_SET_PROPBIT",
+      "value": "_IOW(UINPUT_IOCTL_BASE, 110, int)",
+      "comment": "",
+      "category": "UI_SET"
+    },
+    {
+      "name": "UI_BEGIN_FF_UPLOAD",
+      "value": "_IOWR(UINPUT_IOCTL_BASE, 200, struct uinput_ff_upload)",
+      "comment": "",
+      "category": "UI_BEGIN"
+    },
+    {
+      "name": "UI_END_FF_UPLOAD",
+      "value": "_IOW(UINPUT_IOCTL_BASE, 201, struct uinput_ff_upload)",
+      "comment": "",
+      "category": "UI_END"
+    },
+    {
+      "name": "UI_BEGIN_FF_ERASE",
+      "value": "_IOWR(UINPUT_IOCTL_BASE, 202, struct uinput_ff_erase)",
+      "comment": "",
+      "category": "UI_BEGIN"
+    },
+    {
+      "name": "UI_END_FF_ERASE",
+      "value": "_IOW(UINPUT_IOCTL_BASE, 203, struct uinput_ff_erase)",
+      "comment": "",
+      "category": "UI_END"
+    },
+    {
+      "name": "UI_GET_VERSION",
+      "value": "_IOR(UINPUT_IOCTL_BASE, 45, unsigned int)",
+      "comment": "",
+      "category": "UI_GET"
+    },
+    {
+      "name": "EV_UINPUT",
+      "value": "0x0101",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "UI_FF_UPLOAD",
+      "value": "1",
+      "comment": "",
+      "category": "UI_FF"
+    },
+    {
+      "name": "UI_FF_ERASE",
+      "value": "2",
+      "comment": "",
+      "category": "UI_FF"
+    }
+  ],
+  "structs": [
+    {
+      "name": "uinput_ff_upload",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "request_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "retval",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "uinput_ff_erase",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "request_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "retval",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "effect_id",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "uinput_setup",
+      "fields": [
+        {
+          "type_name": "char",
+          "name": "name",
+          "array_size": "UINPUT_MAX_NAME_SIZE",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ff_effects_max",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "uinput_abs_setup",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "code",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "uinput_user_dev",
+      "fields": [
+        {
+          "type_name": "char",
+          "name": "name",
+          "array_size": "UINPUT_MAX_NAME_SIZE",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ff_effects_max",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "absmax",
+          "array_size": "ABS_CNT",
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "absmin",
+          "array_size": "ABS_CNT",
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "absfuzz",
+          "array_size": "ABS_CNT",
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "absflat",
+          "array_size": "ABS_CNT",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

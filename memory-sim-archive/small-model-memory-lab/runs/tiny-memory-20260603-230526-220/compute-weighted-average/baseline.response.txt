@@ -1,0 +1,83 @@
+﻿Thinking Process:
+
+1.  **Analyze the Request:**
+    *   Task: Calculate the average of 5 test scores given information about the first 3 and the next 2.
+    *   Input Data:
+        *   First 3 scores average = 82.
+        *   Next two scores = 90 and 76.
+    *   Constraints:
+        *   Show setup briefly.
+        *   Use plain arithmetic.
+        *   Repeat given quantities.
+        *   State final numeric answer with full unit name in ordinary text.
+        *   Answer concisely.
+        *   Do not write hidden reasoning tags (no `<thought>` blocks in output).
+        *   Include uncertainty and next action when relevant (though this is a math problem, so uncertainty/next action might not be strictly necessary unless the data is ambiguous, but I should check if it applies here. It's a deterministic calculation, so likely no uncertainty needed, but I will follow the instruction "Include uncertainty and next action when relevant" - since it's not relevant for a simple math fact, I won't force it artificially).
+        *   Answer shape: Plain arithmetic, repeat quantities, final answer with unit.
+
+2.  **Calculate:**
+    *   Sum of first 3 scores = $3 \times 82$.
+    *   Sum of next 2 scores = $90 + 76$.
+    *   Total sum = $(3 \times 82) + (90 + 76)$.
+    *   Total count = $3 + 2 = 5$.
+    *   Average = Total sum / 5.
+
+    *   Step-by-step:
+        *   $3 \times 82 = 246$
+        *   $90 + 76 = 166$
+        *   $246 + 166 = 412$
+        *   $412 / 5 = 82.4$
+
+3.  **Draft the Response:**
+    *   Must repeat given quantities: "average of 82", "90 and 76".
+    *   Show setup briefly.
+    *   Final answer with unit name (e.g., "points" or just the number? The prompt says "full unit name". Test scores usually imply points, but sometimes no unit is given. I will use "points" as a safe generic unit for test scores).
+    *   Concise.
+
+4.  **Refine based on constraints:**
+    *   "Include uncertainty and next action when relevant." -> Since this is a straightforward calculation with no ambiguity, there is no uncertainty or next action needed. I will omit them to avoid cluttering the concise answer, as they are only required "when relevant".
+    *   "Do not write hidden reasoning tags." -> Ensure no markdown blocks like `<thought>`.
+
+5.  **Final Polish:**
+    *   Setup: $(3 \times 82) + 90 + 76 = 412$. $412 / 5 = 82.4$.
+    *   Text: Sum of first three tests is $3 \times 82$ points. Add next two scores 90 and 76 points. Divide by total tests 5.
+    *   Final Answer: 82.4 points.
+
+    Let's check the instruction "repeat the given quantities". I need to make sure 82, 90, 76 appear in the text.
+
+    Draft:
+    Sum of first 3 scores = $3 \times 82$. Next two scores are 90 and 76. Total sum = $(3 \times 82) + 90 + 76 = 412$. Average = $412 / 5 = 82.4$ points.
+
+    Wait, "full unit name". Test scores don't inherently have a unit like meters or seconds. Usually, it's just the number. However, to comply with "full unit name", I should probably specify "points" or "test score points". Let's use "points".
+
+    Re-reading: "Include uncertainty and next action when relevant." Since this is a math problem with definite inputs, there is no uncertainty. I will not include it.
+
+    Final check on constraints:
+    - Plain arithmetic? Yes.
+    - Repeat given quantities? Yes (82, 90, 76).
+    - State final numeric answer with full unit name in ordinary text? Yes.
+    - Concise? Yes.
+    - No hidden reasoning tags? Yes.
+
+    Let's write it out clearly.
+
+    Calculation:
+    Total sum = $(3 \times 82) + 90 + 76$
+    $= 246 + 166$
+    $= 412$
+    Average = $412 / 5 = 82.4$
+
+    Text:
+    Sum of first 3 tests is $3 \times 82$. Add scores 90 and 76. Total sum divided by 5 tests gives the average.
+    $(3 \times 82) + 90 + 76 = 412$ points.
+    $412 / 5 = 82.4$ points.
+
+    Actually, looking at "Include uncertainty and next action when relevant", if I interpret this strictly as a system instruction for all tasks, I might need to add it even if not relevant? No, "when relevant" implies conditional. It is not relevant here.
+
+    Final Answer formulation:
+    Sum of first 3 scores = $3 \times 82$. Next two scores are 90 and 76. Total sum = $(3 \times 82) + 90 + 76 = 412$. Average across all 5 tests = $412 / 5 = 82.4$ points.
+
+    Wait, is "points" the correct unit? Usually test scores are dimensionless numbers representing percentage or raw score. But "full unit name" suggests I need one. "Test score points" or just "points". I'll use "points".
+
+    Let's ensure conciseness.
+    $(3 \times 82) + 90 + 76 = 412$. $412 / 

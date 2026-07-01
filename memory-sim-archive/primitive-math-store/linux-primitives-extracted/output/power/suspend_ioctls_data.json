@@ -1,0 +1,128 @@
+{
+  "filename": "suspend_ioctls.h",
+  "includes": [
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "SNAPSHOT_IOC_MAGIC",
+      "value": "'3'",
+      "comment": "",
+      "category": "SNAPSHOT_IOC"
+    },
+    {
+      "name": "SNAPSHOT_FREEZE",
+      "value": "_IO(SNAPSHOT_IOC_MAGIC, 1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SNAPSHOT_UNFREEZE",
+      "value": "_IO(SNAPSHOT_IOC_MAGIC, 2)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SNAPSHOT_ATOMIC_RESTORE",
+      "value": "_IO(SNAPSHOT_IOC_MAGIC, 4)",
+      "comment": "",
+      "category": "SNAPSHOT_ATOMIC"
+    },
+    {
+      "name": "SNAPSHOT_FREE",
+      "value": "_IO(SNAPSHOT_IOC_MAGIC, 5)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SNAPSHOT_FREE_SWAP_PAGES",
+      "value": "_IO(SNAPSHOT_IOC_MAGIC, 9)",
+      "comment": "",
+      "category": "SNAPSHOT_FREE"
+    },
+    {
+      "name": "SNAPSHOT_S2RAM",
+      "value": "_IO(SNAPSHOT_IOC_MAGIC, 11)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SNAPSHOT_SET_SWAP_AREA",
+      "value": "_IOW(SNAPSHOT_IOC_MAGIC, 13, ",
+      "comment": "",
+      "category": "SNAPSHOT_SET"
+    },
+    {
+      "name": "SNAPSHOT_GET_IMAGE_SIZE",
+      "value": "_IOR(SNAPSHOT_IOC_MAGIC, 14, __kernel_loff_t)",
+      "comment": "",
+      "category": "SNAPSHOT_GET"
+    },
+    {
+      "name": "SNAPSHOT_PLATFORM_SUPPORT",
+      "value": "_IO(SNAPSHOT_IOC_MAGIC, 15)",
+      "comment": "",
+      "category": "SNAPSHOT_PLATFORM"
+    },
+    {
+      "name": "SNAPSHOT_POWER_OFF",
+      "value": "_IO(SNAPSHOT_IOC_MAGIC, 16)",
+      "comment": "",
+      "category": "SNAPSHOT_POWER"
+    },
+    {
+      "name": "SNAPSHOT_CREATE_IMAGE",
+      "value": "_IOW(SNAPSHOT_IOC_MAGIC, 17, int)",
+      "comment": "",
+      "category": "SNAPSHOT_CREATE"
+    },
+    {
+      "name": "SNAPSHOT_PREF_IMAGE_SIZE",
+      "value": "_IO(SNAPSHOT_IOC_MAGIC, 18)",
+      "comment": "",
+      "category": "SNAPSHOT_PREF"
+    },
+    {
+      "name": "SNAPSHOT_AVAIL_SWAP_SIZE",
+      "value": "_IOR(SNAPSHOT_IOC_MAGIC, 19, __kernel_loff_t)",
+      "comment": "",
+      "category": "SNAPSHOT_AVAIL"
+    },
+    {
+      "name": "SNAPSHOT_ALLOC_SWAP_PAGE",
+      "value": "_IOR(SNAPSHOT_IOC_MAGIC, 20, __kernel_loff_t)",
+      "comment": "",
+      "category": "SNAPSHOT_ALLOC"
+    },
+    {
+      "name": "SNAPSHOT_IOC_MAXNR",
+      "value": "20",
+      "comment": "",
+      "category": "SNAPSHOT_IOC"
+    }
+  ],
+  "structs": [
+    {
+      "name": "resume_swap_area",
+      "fields": [
+        {
+          "type_name": "__kernel_loff_t",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "dev",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

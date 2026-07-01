@@ -1,0 +1,236 @@
+{
+  "filename": "net.h",
+  "includes": [
+    "linux/socket.h",
+    "asm/socket.h"
+  ],
+  "defines": [
+    {
+      "name": "NPROTO",
+      "value": "AF_MAX",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SYS_SOCKET",
+      "value": "1",
+      "comment": "sys_socket(2)",
+      "category": ""
+    },
+    {
+      "name": "SYS_BIND",
+      "value": "2",
+      "comment": "sys_bind(2)",
+      "category": ""
+    },
+    {
+      "name": "SYS_CONNECT",
+      "value": "3",
+      "comment": "sys_connect(2)",
+      "category": ""
+    },
+    {
+      "name": "SYS_LISTEN",
+      "value": "4",
+      "comment": "sys_listen(2)",
+      "category": ""
+    },
+    {
+      "name": "SYS_ACCEPT",
+      "value": "5",
+      "comment": "sys_accept(2)",
+      "category": ""
+    },
+    {
+      "name": "SYS_GETSOCKNAME",
+      "value": "6",
+      "comment": "sys_getsockname(2)",
+      "category": ""
+    },
+    {
+      "name": "SYS_GETPEERNAME",
+      "value": "7",
+      "comment": "sys_getpeername(2)",
+      "category": ""
+    },
+    {
+      "name": "SYS_SOCKETPAIR",
+      "value": "8",
+      "comment": "sys_socketpair(2)",
+      "category": ""
+    },
+    {
+      "name": "SYS_SEND",
+      "value": "9",
+      "comment": "sys_send(2)",
+      "category": ""
+    },
+    {
+      "name": "SYS_RECV",
+      "value": "10",
+      "comment": "sys_recv(2)",
+      "category": ""
+    },
+    {
+      "name": "SYS_SENDTO",
+      "value": "11",
+      "comment": "sys_sendto(2)",
+      "category": ""
+    },
+    {
+      "name": "SYS_RECVFROM",
+      "value": "12",
+      "comment": "sys_recvfrom(2)",
+      "category": ""
+    },
+    {
+      "name": "SYS_SHUTDOWN",
+      "value": "13",
+      "comment": "sys_shutdown(2)",
+      "category": ""
+    },
+    {
+      "name": "SYS_SETSOCKOPT",
+      "value": "14",
+      "comment": "sys_setsockopt(2)",
+      "category": ""
+    },
+    {
+      "name": "SYS_GETSOCKOPT",
+      "value": "15",
+      "comment": "sys_getsockopt(2)",
+      "category": ""
+    },
+    {
+      "name": "SYS_SENDMSG",
+      "value": "16",
+      "comment": "sys_sendmsg(2)",
+      "category": ""
+    },
+    {
+      "name": "SYS_RECVMSG",
+      "value": "17",
+      "comment": "sys_recvmsg(2)",
+      "category": ""
+    },
+    {
+      "name": "SYS_ACCEPT4",
+      "value": "18",
+      "comment": "sys_accept4(2)",
+      "category": ""
+    },
+    {
+      "name": "SYS_RECVMMSG",
+      "value": "19",
+      "comment": "sys_recvmmsg(2)",
+      "category": ""
+    },
+    {
+      "name": "SYS_SENDMMSG",
+      "value": "20",
+      "comment": "sys_sendmmsg(2)",
+      "category": ""
+    },
+    {
+      "name": "__SO_ACCEPTCON",
+      "value": "(1 << 16)",
+      "comment": "performed a listen",
+      "category": ""
+    }
+  ],
+  "structs": [],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {
+    "anonymous_enum_0": [
+      [
+        "SS_FREE",
+        "0"
+      ],
+      [
+        "not",
+        ""
+      ],
+      [
+        "allocated",
+        ""
+      ],
+      [
+        "SS_UNCONNECTED",
+        ""
+      ],
+      [
+        "unconnected",
+        ""
+      ],
+      [
+        "to",
+        ""
+      ],
+      [
+        "any",
+        ""
+      ],
+      [
+        "socket",
+        ""
+      ],
+      [
+        "SS_CONNECTING",
+        ""
+      ],
+      [
+        "in",
+        ""
+      ],
+      [
+        "process",
+        ""
+      ],
+      [
+        "of",
+        ""
+      ],
+      [
+        "connecting",
+        ""
+      ],
+      [
+        "SS_CONNECTED",
+        ""
+      ],
+      [
+        "connected",
+        ""
+      ],
+      [
+        "to",
+        ""
+      ],
+      [
+        "socket",
+        ""
+      ],
+      [
+        "SS_DISCONNECTING",
+        ""
+      ],
+      [
+        "in",
+        ""
+      ],
+      [
+        "process",
+        ""
+      ],
+      [
+        "of",
+        ""
+      ],
+      [
+        "disconnecting",
+        ""
+      ]
+    ]
+  }
+}

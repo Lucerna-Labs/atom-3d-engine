@@ -1,0 +1,350 @@
+{
+  "filename": "minix_fs.h",
+  "includes": [
+    "linux/types.h",
+    "linux/magic.h"
+  ],
+  "defines": [
+    {
+      "name": "MINIX_ROOT_INO",
+      "value": "1",
+      "comment": "",
+      "category": "MINIX_ROOT"
+    },
+    {
+      "name": "MINIX_LINK_MAX",
+      "value": "250",
+      "comment": "",
+      "category": "MINIX_LINK"
+    },
+    {
+      "name": "MINIX2_LINK_MAX",
+      "value": "65530",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "MINIX_I_MAP_SLOTS",
+      "value": "8",
+      "comment": "",
+      "category": "MINIX_I"
+    },
+    {
+      "name": "MINIX_Z_MAP_SLOTS",
+      "value": "64",
+      "comment": "",
+      "category": "MINIX_Z"
+    },
+    {
+      "name": "MINIX_VALID_FS",
+      "value": "0x0001",
+      "comment": "Clean fs.",
+      "category": "MINIX_VALID"
+    },
+    {
+      "name": "MINIX_ERROR_FS",
+      "value": "0x0002",
+      "comment": "fs has errors.",
+      "category": "MINIX_ERROR"
+    },
+    {
+      "name": "MINIX_INODES_PER_BLOCK",
+      "value": "((BLOCK_SIZE)/(sizeof (struct minix_inode)))",
+      "comment": "",
+      "category": "MINIX_INODES"
+    }
+  ],
+  "structs": [
+    {
+      "name": "minix_inode",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "i_mode",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "i_uid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "i_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "i_time",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "i_gid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "i_nlinks",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "i_zone",
+          "array_size": "9",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "minix2_inode",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "i_mode",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "i_nlinks",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "i_uid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "i_gid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "i_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "i_atime",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "i_mtime",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "i_ctime",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "i_zone",
+          "array_size": "10",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "minix_super_block",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "s_ninodes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "s_nzones",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "s_imap_blocks",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "s_zmap_blocks",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "s_firstdatazone",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "s_log_zone_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "s_max_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "s_magic",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "s_state",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "s_zones",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "minix3_super_block",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "s_ninodes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "s_pad0",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "s_imap_blocks",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "s_zmap_blocks",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "s_firstdatazone",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "s_log_zone_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "s_pad1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "s_max_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "s_zones",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "s_magic",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "s_pad2",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "s_blocksize",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "s_disk_version",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "minix_dir_entry",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "inode",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "minix3_dir_entry",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "inode",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

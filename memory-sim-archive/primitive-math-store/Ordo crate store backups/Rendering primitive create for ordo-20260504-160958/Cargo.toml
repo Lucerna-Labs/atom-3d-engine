@@ -1,0 +1,26 @@
+[workspace]
+members = [
+    "crates/cap-geometry",
+    "crates/cap-keymap",
+    "crates/cap-primitives",
+    "crates/ordo-ux-branding-experiment",
+    "crates/ordo-ux-color-experiment",
+    "crates/ordo-ux-curves-experiment",
+    "crates/ordo-ux-dnd-experiment",
+    "crates/ordo-ux-input-experiment",
+    "crates/ordo-ux-layouts-experiment",
+    "crates/ordo-ux-menus-experiment",
+    "crates/ordo-ux-microinteractions-experiment",
+    "crates/ordo-ux-motion-experiment",
+    "crates/ordo-ux-overlays-experiment",
+    "crates/ordo-ux-primitives",
+    "crates/ordo-ux-pulse-experiment",
+    "crates/ordo-ux-textures-experiment",
+    "crates/ordo-ux-transitions-experiment",
+    "crates/ordo-ux-typography-experiment",
+]
+resolver = "3"
+
+[workspace.dependencies]
+smallvec = { version = "1.6", features = ["union"] }
+thiserror = "2.0"

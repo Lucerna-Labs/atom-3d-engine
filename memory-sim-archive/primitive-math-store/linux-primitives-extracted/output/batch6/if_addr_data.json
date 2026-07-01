@@ -1,0 +1,190 @@
+{
+  "filename": "if_addr.h",
+  "includes": [
+    "linux/types.h",
+    "linux/netlink.h"
+  ],
+  "defines": [
+    {
+      "name": "IFA_MAX",
+      "value": "(__IFA_MAX - 1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IFA_F_SECONDARY",
+      "value": "0x01",
+      "comment": "",
+      "category": "IFA_F"
+    },
+    {
+      "name": "IFA_F_TEMPORARY",
+      "value": "IFA_F_SECONDARY",
+      "comment": "",
+      "category": "IFA_F"
+    },
+    {
+      "name": "IFA_F_NODAD",
+      "value": "0x02",
+      "comment": "",
+      "category": "IFA_F"
+    },
+    {
+      "name": "IFA_F_OPTIMISTIC",
+      "value": "0x04",
+      "comment": "",
+      "category": "IFA_F"
+    },
+    {
+      "name": "IFA_F_DADFAILED",
+      "value": "0x08",
+      "comment": "",
+      "category": "IFA_F"
+    },
+    {
+      "name": "IFA_F_HOMEADDRESS",
+      "value": "0x10",
+      "comment": "",
+      "category": "IFA_F"
+    },
+    {
+      "name": "IFA_F_DEPRECATED",
+      "value": "0x20",
+      "comment": "",
+      "category": "IFA_F"
+    },
+    {
+      "name": "IFA_F_TENTATIVE",
+      "value": "0x40",
+      "comment": "",
+      "category": "IFA_F"
+    },
+    {
+      "name": "IFA_F_PERMANENT",
+      "value": "0x80",
+      "comment": "",
+      "category": "IFA_F"
+    },
+    {
+      "name": "IFA_F_MANAGETEMPADDR",
+      "value": "0x100",
+      "comment": "",
+      "category": "IFA_F"
+    },
+    {
+      "name": "IFA_F_NOPREFIXROUTE",
+      "value": "0x200",
+      "comment": "",
+      "category": "IFA_F"
+    },
+    {
+      "name": "IFA_F_MCAUTOJOIN",
+      "value": "0x400",
+      "comment": "",
+      "category": "IFA_F"
+    },
+    {
+      "name": "IFA_F_STABLE_PRIVACY",
+      "value": "0x800",
+      "comment": "",
+      "category": "IFA_F"
+    },
+    {
+      "name": "IFAPROT_UNSPEC",
+      "value": "0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IFAPROT_KERNEL_LO",
+      "value": "1",
+      "comment": "loopback",
+      "category": "IFAPROT_KERNEL"
+    },
+    {
+      "name": "IFAPROT_KERNEL_RA",
+      "value": "2",
+      "comment": "set by kernel from router announcement",
+      "category": "IFAPROT_KERNEL"
+    },
+    {
+      "name": "IFAPROT_KERNEL_LL",
+      "value": "3",
+      "comment": "link-local set by kernel",
+      "category": "IFAPROT_KERNEL"
+    }
+  ],
+  "structs": [
+    {
+      "name": "ifaddrmsg",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "ifa_family",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "ifa_prefixlen",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "ifa_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "ifa_scope",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ifa_index",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ifa_cacheinfo",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "ifa_prefered",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ifa_valid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "cstamp",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tstamp",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

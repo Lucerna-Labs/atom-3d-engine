@@ -1,0 +1,40 @@
+{
+  "filename": "cifs_mount.h",
+  "includes": [],
+  "defines": [
+    {
+      "name": "CIFS_MAX_DOMAINNAME_LEN",
+      "value": "256",
+      "comment": "max fully qualified domain name",
+      "category": "CIFS_MAX"
+    },
+    {
+      "name": "CIFS_MAX_USERNAME_LEN",
+      "value": "256",
+      "comment": "reasonable max for current servers",
+      "category": "CIFS_MAX"
+    },
+    {
+      "name": "CIFS_MAX_PASSWORD_LEN",
+      "value": "512",
+      "comment": "Windows max seems to be 256 wide chars",
+      "category": "CIFS_MAX"
+    },
+    {
+      "name": "CIFS_MAX_SHARE_LEN",
+      "value": "256",
+      "comment": "reasonable max share name length",
+      "category": "CIFS_MAX"
+    },
+    {
+      "name": "CIFS_NI_MAXHOST",
+      "value": "1024",
+      "comment": "max host name length (256 * 4 bytes)",
+      "category": "CIFS_NI"
+    }
+  ],
+  "structs": [],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

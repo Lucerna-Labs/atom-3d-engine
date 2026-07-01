@@ -1,0 +1,1669 @@
+{
+  "filename": "asoc.h",
+  "includes": [
+    "linux/types.h",
+    "sound/asound.h"
+  ],
+  "defines": [
+    {
+      "name": "SND_SOC_TPLG_MAX_CHAN",
+      "value": "8",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_MAX_FORMATS",
+      "value": "16",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_STREAM_CONFIG_MAX",
+      "value": "8",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_HW_CONFIG_MAX",
+      "value": "8",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_CTL_VOLSW",
+      "value": "1",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_CTL_VOLSW_SX",
+      "value": "2",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_CTL_VOLSW_XR_SX",
+      "value": "3",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_CTL_ENUM",
+      "value": "4",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_CTL_BYTES",
+      "value": "5",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_CTL_ENUM_VALUE",
+      "value": "6",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_CTL_RANGE",
+      "value": "7",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_CTL_STROBE",
+      "value": "8",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_DAPM_CTL_VOLSW",
+      "value": "64",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_DAPM_CTL_ENUM_DOUBLE",
+      "value": "65",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_DAPM_CTL_ENUM_VIRT",
+      "value": "66",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_DAPM_CTL_ENUM_VALUE",
+      "value": "67",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_DAPM_CTL_PIN",
+      "value": "68",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_DAPM_INPUT",
+      "value": "0",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_DAPM_OUTPUT",
+      "value": "1",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_DAPM_MUX",
+      "value": "2",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_DAPM_MIXER",
+      "value": "3",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_DAPM_PGA",
+      "value": "4",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_DAPM_OUT_DRV",
+      "value": "5",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_DAPM_ADC",
+      "value": "6",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_DAPM_DAC",
+      "value": "7",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_DAPM_SWITCH",
+      "value": "8",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_DAPM_PRE",
+      "value": "9",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_DAPM_POST",
+      "value": "10",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_DAPM_AIF_IN",
+      "value": "11",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_DAPM_AIF_OUT",
+      "value": "12",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_DAPM_DAI_IN",
+      "value": "13",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_DAPM_DAI_OUT",
+      "value": "14",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_DAPM_DAI_LINK",
+      "value": "15",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_DAPM_BUFFER",
+      "value": "16",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_DAPM_SCHEDULER",
+      "value": "17",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_DAPM_EFFECT",
+      "value": "18",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_DAPM_SIGGEN",
+      "value": "19",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_DAPM_SRC",
+      "value": "20",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_DAPM_ASRC",
+      "value": "21",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_DAPM_ENCODER",
+      "value": "22",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_DAPM_DECODER",
+      "value": "23",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_DAPM_LAST",
+      "value": "SND_SOC_TPLG_DAPM_DECODER",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_MAGIC",
+      "value": "0x41536F43",
+      "comment": "ASoC",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_NUM_TEXTS",
+      "value": "16",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_ABI_VERSION",
+      "value": "0x5",
+      "comment": "current version",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_ABI_VERSION_MIN",
+      "value": "0x5",
+      "comment": "oldest version supported",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_TLV_SIZE",
+      "value": "32",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_TYPE_MIXER",
+      "value": "1",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_TYPE_BYTES",
+      "value": "2",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_TYPE_ENUM",
+      "value": "3",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_TYPE_DAPM_GRAPH",
+      "value": "4",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_TYPE_DAPM_WIDGET",
+      "value": "5",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_TYPE_DAI_LINK",
+      "value": "6",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_TYPE_PCM",
+      "value": "7",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_TYPE_MANIFEST",
+      "value": "8",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_TYPE_CODEC_LINK",
+      "value": "9",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_TYPE_BACKEND_LINK",
+      "value": "10",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_TYPE_PDATA",
+      "value": "11",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_TYPE_DAI",
+      "value": "12",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_TYPE_MAX",
+      "value": "SND_SOC_TPLG_TYPE_DAI",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_TYPE_VENDOR_FW",
+      "value": "1000",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_TYPE_VENDOR_CONFIG",
+      "value": "1001",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_TYPE_VENDOR_COEFF",
+      "value": "1002",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_TYPEVENDOR_CODEC",
+      "value": "1003",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_STREAM_PLAYBACK",
+      "value": "0",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_STREAM_CAPTURE",
+      "value": "1",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_TUPLE_TYPE_UUID",
+      "value": "0",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_TUPLE_TYPE_STRING",
+      "value": "1",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_TUPLE_TYPE_BOOL",
+      "value": "2",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_TUPLE_TYPE_BYTE",
+      "value": "3",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_TUPLE_TYPE_WORD",
+      "value": "4",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_TUPLE_TYPE_SHORT",
+      "value": "5",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_DAI_FLGBIT_SYMMETRIC_RATES",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_DAI_FLGBIT_SYMMETRIC_CHANNELS",
+      "value": "(1 << 1)",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_DAI_FLGBIT_SYMMETRIC_SAMPLEBITS",
+      "value": "(1 << 2)",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_DAI_CLK_GATE_UNDEFINED",
+      "value": "0",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_DAI_CLK_GATE_GATED",
+      "value": "1",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_DAI_CLK_GATE_CONT",
+      "value": "2",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_MCLK_CO",
+      "value": "0",
+      "comment": "for codec, mclk is output",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_MCLK_CI",
+      "value": "1",
+      "comment": "for codec, mclk is input",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_DAI_FORMAT_I2S",
+      "value": "1",
+      "comment": "I2S mode",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_DAI_FORMAT_RIGHT_J",
+      "value": "2",
+      "comment": "Right Justified mode",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_DAI_FORMAT_LEFT_J",
+      "value": "3",
+      "comment": "Left Justified mode",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_DAI_FORMAT_DSP_A",
+      "value": "4",
+      "comment": "L data MSB after FRM LRC",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_DAI_FORMAT_DSP_B",
+      "value": "5",
+      "comment": "L data MSB during FRM LRC",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_DAI_FORMAT_AC97",
+      "value": "6",
+      "comment": "AC97",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_DAI_FORMAT_PDM",
+      "value": "7",
+      "comment": "Pulse density modulation",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_DAI_FORMAT_MSB",
+      "value": "SND_SOC_DAI_FORMAT_LEFT_J",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_DAI_FORMAT_LSB",
+      "value": "SND_SOC_DAI_FORMAT_RIGHT_J",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_LNK_FLGBIT_SYMMETRIC_RATES",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_LNK_FLGBIT_SYMMETRIC_CHANNELS",
+      "value": "(1 << 1)",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_LNK_FLGBIT_SYMMETRIC_SAMPLEBITS",
+      "value": "(1 << 2)",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_LNK_FLGBIT_VOICE_WAKEUP",
+      "value": "(1 << 3)",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_BCLK_CP",
+      "value": "0",
+      "comment": "codec is bclk provider",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_BCLK_CC",
+      "value": "1",
+      "comment": "codec is bclk consumer",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_BCLK_CM",
+      "value": "SND_SOC_TPLG_BCLK_CP",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_BCLK_CS",
+      "value": "SND_SOC_TPLG_BCLK_CC",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_FSYNC_CP",
+      "value": "0",
+      "comment": "codec is fsync provider",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_FSYNC_CC",
+      "value": "1",
+      "comment": "codec is fsync consumer",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_FSYNC_CM",
+      "value": "SND_SOC_TPLG_FSYNC_CP",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_TPLG_FSYNC_CS",
+      "value": "SND_SOC_TPLG_FSYNC_CC",
+      "comment": "",
+      "category": "SND_SOC"
+    }
+  ],
+  "structs": [
+    {
+      "name": "snd_soc_tplg_hdr",
+      "fields": [
+        {
+          "type_name": "__le32",
+          "name": "magic",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "abi",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "version",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "vendor_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "payload_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "index",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "count",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_soc_tplg_vendor_uuid_elem",
+      "fields": [
+        {
+          "type_name": "__le32",
+          "name": "token",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "uuid",
+          "array_size": "16",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_soc_tplg_vendor_value_elem",
+      "fields": [
+        {
+          "type_name": "__le32",
+          "name": "token",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "value",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_soc_tplg_vendor_string_elem",
+      "fields": [
+        {
+          "type_name": "__le32",
+          "name": "token",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "string",
+          "array_size": "SNDRV_CTL_ELEM_ID_NAME_MAXLEN",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_soc_tplg_vendor_array",
+      "fields": [
+        {
+          "type_name": "__le32",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "num_elems",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_soc_tplg_private",
+      "fields": [
+        {
+          "type_name": "__le32",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_soc_tplg_tlv_dbscale",
+      "fields": [
+        {
+          "type_name": "__le32",
+          "name": "min",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "step",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "mute",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_soc_tplg_ctl_tlv",
+      "fields": [
+        {
+          "type_name": "__le32",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "data",
+          "array_size": "SND_SOC_TPLG_TLV_SIZE",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_soc_tplg_channel",
+      "fields": [
+        {
+          "type_name": "__le32",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "reg",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "shift",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_soc_tplg_io_ops",
+      "fields": [
+        {
+          "type_name": "__le32",
+          "name": "get",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "put",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "info",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_soc_tplg_ctl_hdr",
+      "fields": [
+        {
+          "type_name": "__le32",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "name",
+          "array_size": "SNDRV_CTL_ELEM_ID_NAME_MAXLEN",
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "access",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_soc_tplg_stream_caps",
+      "fields": [
+        {
+          "type_name": "__le32",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "name",
+          "array_size": "SNDRV_CTL_ELEM_ID_NAME_MAXLEN",
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "formats",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "rates",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "rate_min",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "rate_max",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "channels_min",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "channels_max",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "periods_min",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "periods_max",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "period_size_min",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "period_size_max",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "buffer_size_min",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "buffer_size_max",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "sig_bits",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_soc_tplg_stream",
+      "fields": [
+        {
+          "type_name": "__le32",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "name",
+          "array_size": "SNDRV_CTL_ELEM_ID_NAME_MAXLEN",
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "format",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "rate",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "period_bytes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "buffer_bytes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "channels",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_soc_tplg_hw_config",
+      "fields": [
+        {
+          "type_name": "__le32",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "fmt",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "clock_gated",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "invert_bclk",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "invert_fsync",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "bclk_provider",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "fsync_provider",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "mclk_direction",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le16",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "mclk_rate",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "bclk_rate",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "fsync_rate",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "tdm_slots",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "tdm_slot_width",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "tx_slots",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "rx_slots",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "tx_channels",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "tx_chanmap",
+          "array_size": "SND_SOC_TPLG_MAX_CHAN",
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "rx_channels",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "rx_chanmap",
+          "array_size": "SND_SOC_TPLG_MAX_CHAN",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_soc_tplg_manifest",
+      "fields": [
+        {
+          "type_name": "__le32",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "control_elems",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "widget_elems",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "graph_elems",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "pcm_elems",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "dai_link_elems",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "dai_elems",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "reserved",
+          "array_size": "20",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_soc_tplg_mixer_control",
+      "fields": [
+        {
+          "type_name": "__le32",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "min",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "max",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "platform_max",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "invert",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "num_channels",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_soc_tplg_enum_control",
+      "fields": [
+        {
+          "type_name": "__le32",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "num_channels",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "items",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "mask",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "texts",
+          "array_size": "SND_SOC_TPLG_NUM_TEXTS][SNDRV_CTL_ELEM_ID_NAME_MAXLEN",
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "values",
+          "array_size": "SND_SOC_TPLG_NUM_TEXTS * SNDRV_CTL_ELEM_ID_NAME_MAXLEN / 4",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_soc_tplg_bytes_control",
+      "fields": [
+        {
+          "type_name": "__le32",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "max",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "mask",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "base",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "num_regs",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_soc_tplg_dapm_graph_elem",
+      "fields": [
+        {
+          "type_name": "char",
+          "name": "sink",
+          "array_size": "SNDRV_CTL_ELEM_ID_NAME_MAXLEN",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "control",
+          "array_size": "SNDRV_CTL_ELEM_ID_NAME_MAXLEN",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "source",
+          "array_size": "SNDRV_CTL_ELEM_ID_NAME_MAXLEN",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_soc_tplg_dapm_widget",
+      "fields": [
+        {
+          "type_name": "__le32",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "name",
+          "array_size": "SNDRV_CTL_ELEM_ID_NAME_MAXLEN",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "sname",
+          "array_size": "SNDRV_CTL_ELEM_ID_NAME_MAXLEN",
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "reg",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "shift",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "mask",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "subseq",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "invert",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "ignore_suspend",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le16",
+          "name": "event_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le16",
+          "name": "event_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "num_kcontrols",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_soc_tplg_pcm",
+      "fields": [
+        {
+          "type_name": "__le32",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "pcm_name",
+          "array_size": "SNDRV_CTL_ELEM_ID_NAME_MAXLEN",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "dai_name",
+          "array_size": "SNDRV_CTL_ELEM_ID_NAME_MAXLEN",
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "pcm_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "dai_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "playback",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "capture",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "compress",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "num_streams",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "flag_mask",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_soc_tplg_link_config",
+      "fields": [
+        {
+          "type_name": "__le32",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "name",
+          "array_size": "SNDRV_CTL_ELEM_ID_NAME_MAXLEN",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "stream_name",
+          "array_size": "SNDRV_CTL_ELEM_ID_NAME_MAXLEN",
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "num_streams",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "num_hw_configs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "default_hw_config_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "flag_mask",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_soc_tplg_dai",
+      "fields": [
+        {
+          "type_name": "__le32",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "dai_name",
+          "array_size": "SNDRV_CTL_ELEM_ID_NAME_MAXLEN",
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "dai_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "playback",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "capture",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "flag_mask",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

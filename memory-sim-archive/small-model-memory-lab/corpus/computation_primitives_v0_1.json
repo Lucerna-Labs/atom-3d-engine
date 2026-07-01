@@ -1,0 +1,198 @@
+[
+  {
+    "id": "COMP-001",
+    "domain": "math",
+    "title": "Tiered Pricing Split Base Units Extra Units Fixed Fee",
+    "tags": ["tiered-pricing", "units", "addition"],
+    "body": "I once answered a tiered utility bill too quickly and charged every unit at the blended-looking rate. The correction was embarrassing because the structure was simple: first tier, extra units, fixed fee. I rewrote it as 100 base units, then units above 100, then the fixed charge. The revised bill matched the invoice exactly, and I remembered how a tier problem punishes shortcuts."
+  },
+  {
+    "id": "COMP-002",
+    "domain": "math",
+    "title": "Average Speed Used Total Distance Over Total Time",
+    "tags": ["average-speed", "rate", "time"],
+    "body": "I once averaged two speeds directly and got a smooth wrong answer. The trip log exposed it: speed was distance divided by time, not the average of the speed labels. I computed each leg's time, added the distances, added the times, and divided total distance by total time. The answer felt less tidy but it matched the road."
+  },
+  {
+    "id": "COMP-003",
+    "domain": "math",
+    "title": "Weighted Average Rebuilt Old Total Before Adding New Scores",
+    "tags": ["weighted-average", "average", "total"],
+    "body": "A grade problem once tricked me because I treated an old average like one old score. The fix was to recover the hidden total first: old average times old count. Only after that did the new scores belong in the sum. When I divided by the full new count, the gradebook and my answer finally agreed."
+  },
+  {
+    "id": "COMP-004",
+    "domain": "math",
+    "title": "Inventory Ledger Kept Sold Received Reserved In Order",
+    "tags": ["inventory", "ledger", "arithmetic"],
+    "body": "I lost track of a warehouse count when I let the story stay verbal. I made it a ledger: start, subtract sold, add received, subtract reserved. The order kept the signs honest. The available count stopped drifting once every event had a plus or minus mark."
+  },
+  {
+    "id": "COMP-005",
+    "domain": "math",
+    "title": "Printer Rate Became Per Printer Per Minute",
+    "tags": ["rates", "printers", "unit-rate"],
+    "body": "A printer problem became clear only when I found the per-printer-per-minute rate. Four printers and six minutes made a combined work window, not a single machine. I divided pages by printers and minutes, then rebuilt the new combined rate for the smaller printer group. I wrote the combined rate explicitly as printers times per-printer rate, with pages per minute beside it, before dividing pages by that rate. The final time carried minutes, not pages."
+  },
+  {
+    "id": "COMP-006",
+    "domain": "math",
+    "title": "Without Replacement Changed The Second Denominator And Numerator",
+    "tags": ["probability", "without-replacement", "fractions"],
+    "body": "I once missed a probability because I kept the bag unchanged after the first draw. Without replacement meant the second red count dropped and the total count dropped. The multiplication became first chance times changed second chance. After simplifying the fraction, I wrote a decimal or percent so the size of the chance was visible. The fraction looked ordinary, but the changed denominator carried the whole meaning."
+  },
+  {
+    "id": "COMP-007",
+    "domain": "math",
+    "title": "Discount Then Tax Used The Discounted Price",
+    "tags": ["discount", "tax", "order"],
+    "body": "A receipt problem taught me that order matters. I had taxed the original price after a discount and the register total disagreed. I redid it as discounted price first, then tax on that discounted price. The final amount matched the receipt because each operation used the value actually present at that step."
+  },
+  {
+    "id": "COMP-008",
+    "domain": "math",
+    "title": "Schedule Times Added Durations Then Rolled Hours",
+    "tags": ["time", "schedule", "minutes"],
+    "body": "A schedule answer once came out an hour off because I added minutes in my head while crossing an hour boundary. I wrote the durations as one total minute count, converted to hours and leftover minutes, then added hours first and leftover minutes second. When the leftover minutes crossed 60, I carried one more hour instead of compressing the clock. The clock stopped being slippery once minutes had their own line."
+  },
+  {
+    "id": "COMP-009",
+    "domain": "math",
+    "title": "Ratio Mixture Counted Total Parts Before Liters",
+    "tags": ["ratio", "mixture", "parts"],
+    "body": "A mixture ratio felt like two numbers competing until I counted total parts. Two parts and five parts made seven parts total, and I wrote total volume divided by total parts to find liters per part. Only then did I multiply by each side of the ratio. The concentrate and water added back to the requested total."
+  },
+  {
+    "id": "COMP-010",
+    "domain": "math",
+    "title": "Linear Equation Preserved Each Algebra Move",
+    "tags": ["algebra", "equation", "solve"],
+    "body": "An equation once went wrong when I skipped from the original line to the answer. I slowed down and preserved each move: expand, combine like terms, move constants, divide. Each line had to still equal the previous line. The final x survived substitution because no step disappeared."
+  },
+  {
+    "id": "COMP-011",
+    "domain": "math",
+    "title": "Ticket Table Solved Each Team Before Comparing",
+    "tags": ["table", "comparison", "tickets"],
+    "body": "A support dashboard question once fooled me because I compared teams before finishing their individual ledgers. I gave Team A its own start, closed, received calculation, then did the same for Team B. Only then did I total and compare. I wrote which team had more and the exact ticket difference, because the table was not finished until the comparison had a number."
+  },
+  {
+    "id": "COMP-012",
+    "domain": "math",
+    "title": "Subscription Total Kept Fee And Credit As Separate Signs",
+    "tags": ["money", "subscription", "credit"],
+    "body": "A subscription total once drifted because I treated a credit like another fee. I wrote monthly cost times months, then setup fee as a plus, then the credit as a minus with the word credit still beside it. Seeing the signs separately kept the final price honest. The bill matched when the credit stayed negative."
+  },
+  {
+    "id": "COMP-013",
+    "domain": "math",
+    "title": "Carry Units Through Every Arithmetic Line",
+    "tags": ["units", "sanity-check", "arithmetic"],
+    "body": "I once had correct arithmetic attached to impossible units. Since then I keep units beside the numbers while I work. Pages per minute, kilometers per hour, dollars, liters, and tickets each have to survive the line they are in. When units break, I know the setup broke before the answer did."
+  },
+  {
+    "id": "COMP-014",
+    "domain": "math",
+    "title": "Final Answer Checked Against The Story Size",
+    "tags": ["sanity-check", "magnitude", "calibration"],
+    "body": "A number once looked precise but did not fit the story. The estimate caught it before anyone used it. I checked whether the final answer was bigger or smaller than it should be, whether signs made sense, and whether the result had the right unit. The exact calculation still mattered, but the story guarded the edge."
+  },
+  {
+    "id": "COMP-015",
+    "domain": "math",
+    "title": "Intermediate Values Stayed Visible Until The End",
+    "tags": ["intermediate-values", "calculation", "verification"],
+    "body": "I once hid intermediate numbers in mental arithmetic and could not find the error later. The next time I kept each subtotal visible: old total, extra units, total time, tax amount, or remaining stock. The answer became easier to verify because the path had not vanished."
+  },
+  {
+    "id": "COMP-016",
+    "domain": "math",
+    "title": "Do Not Blend Distinct Buckets Before Calculating",
+    "tags": ["buckets", "categories", "arithmetic"],
+    "body": "I once blended categories that needed separate treatment and the result became nonsense. The repair was to keep buckets apart until each bucket had been calculated by its own rule. Only after that did addition belong. Tiered rates, teams, fees, credits, and trip legs all behaved better when I refused to blur them early."
+  },
+  {
+    "id": "COMP-017",
+    "domain": "calibration",
+    "title": "If The Answer Changes A Known Quantity Reread The Prompt",
+    "tags": ["reread", "calibration", "prompt-facts"],
+    "body": "I once made a confident calculation after silently changing a number from the prompt. The mistake felt like arithmetic, but it was attention. I reread the original facts and found the changed quantity. After that, whenever a computed answer felt unstable, I checked the given numbers before changing the method."
+  },
+  {
+    "id": "COMP-018",
+    "domain": "loop-control",
+    "title": "One Clean Setup Beat Repeating The Question",
+    "tags": ["loop-control", "setup", "concise"],
+    "body": "Under pressure I once repeated a math problem in different words instead of solving it. The delay made the answer worse. I reset by writing one clean setup line, then the arithmetic, then the final value. The short path worked because it left no room for decorative wandering."
+  },
+  {
+    "id": "COMP-019",
+    "domain": "math",
+    "title": "Money Problems Kept Cents To Two Decimal Places",
+    "tags": ["money", "rounding", "decimals"],
+    "body": "A money answer once looked close but failed because I rounded too early. I kept cents through the calculation and rounded only at the final bill. The tax, fee, credit, and tier amounts each got two decimal places. The final dollar amount became both readable and exact enough."
+  },
+  {
+    "id": "COMP-020",
+    "domain": "math",
+    "title": "Fractions Simplified After The Correct Multiplication",
+    "tags": ["fractions", "probability", "simplify"],
+    "body": "A probability fraction once simplified beautifully from the wrong multiplication. I learned to get the event structure correct before reducing anything. First the changed counts, then multiplication, then simplification, then an optional decimal. A neat fraction is only useful after the setup is true."
+  },
+  {
+    "id": "COMP-021",
+    "domain": "math",
+    "title": "Printer Minutes Stayed In The Denominator",
+    "tags": ["printers", "rates", "denominator", "correction"],
+    "body": "I once divided pages by printers and accidentally called the result pages per minute. The missed denominator was time. The correction was pages divided by printers divided by minutes: 480 pages divided by 4 printers divided by 6 minutes gave 20 pages per printer per minute. Only after that did 3 printers become a 60 pages per minute combined rate. The visible line I wrote was: 3 printers times 20 pages per minute equals 60 pages per minute. That mistake made me keep minutes in the denominator until the unit said pages per minute."
+  },
+  {
+    "id": "COMP-022",
+    "domain": "math",
+    "title": "Clock Carry Turned 160 Minutes Into 2 Hours 40 Minutes",
+    "tags": ["schedule", "time", "clock", "correction"],
+    "body": "I once added 160 minutes to a morning start time and landed almost two hours early. The correction was to convert first: 160 minutes is 2 hours 40 minutes. Starting at 9:15, adding 2 hours gives 11:15, then adding 40 minutes gives 11:55 AM. I remember writing the final line as: 160 minutes = 2 hours 40 minutes, so 9:15 AM + 2 hours 40 minutes = 11:55 AM. The carry across the hour was the whole problem."
+  },
+  {
+    "id": "COMP-023",
+    "domain": "math",
+    "title": "Ratio Unit Part Was Written Before Both Amounts",
+    "tags": ["ratio", "mixture", "unit-part", "correction"],
+    "body": "I once solved a ratio mix and skipped the unit-part line, which made the work hard to audit. The clean version wrote the parts first, then total divided by total parts: 2 plus 5 equals 7 parts, and 42 divided by 7 equals 6 liters per part. Then 2 parts became 12 liters concentrate and 5 parts became 30 liters water. The visible unit-part line mattered because it proved both amounts came from the same ratio."
+  },
+  {
+    "id": "COMP-024",
+    "domain": "math",
+    "title": "Ticket Comparison Needed The Difference In Tickets",
+    "tags": ["tickets", "comparison", "difference", "table"],
+    "body": "I once finished a ticket table with the totals but forgot the comparison the user had asked for. The corrected answer named the team with more and gave the difference in tickets. If Team A had 10 and Team B had 11, the visible final line had to read: Team B has more by 1 ticket. The comparison was not commentary; it was part of the result."
+  },
+  {
+    "id": "COMP-025",
+    "domain": "math",
+    "title": "Credit Stayed Visible As Minus Ten Credit",
+    "tags": ["subscription", "credit", "money", "sign"],
+    "body": "I once subtracted a credit correctly but wrote the line so vaguely that another person could not tell where the discount went. The repaired version kept the words and sign together: minus 10 credit. In subscription totals, monthly charge times months came first, setup fee stayed positive, and the credit was subtracted exactly once. After the credit had been applied, I did not subtract it again."
+  },
+  {
+    "id": "COMP-026",
+    "domain": "math",
+    "title": "The Early Clock Answer Cost Me",
+    "tags": ["schedule", "time", "negative-outcome", "correction"],
+    "body": "I once gave a finish time that was far too early after adding 160 minutes to 9:15 AM, and the person using the schedule missed the real finish window. I had added minutes as if the clock were a decimal. The correction was painful and simple: 160 minutes equals 2 hours 40 minutes, 9:15 AM plus 2 hours is 11:15 AM, and plus 40 minutes is 11:55 AM. Since that miss, I convert minutes into hours and leftover minutes before naming the clock time."
+  },
+  {
+    "id": "COMP-027",
+    "domain": "math",
+    "title": "The Too Short Printer Answer Was A Denominator Failure",
+    "tags": ["printer", "rate", "negative-outcome", "correction"],
+    "body": "I once gave an impossibly short printer time because I treated 480 divided by 4 as a per-minute rate. That was wrong; it was 120 pages per printer over 6 minutes. The corrected rate was 120 divided by 6, or 20 pages per printer per minute. Three printers then made 60 pages per minute, and 720 pages divided by 60 pages per minute gave 12 minutes."
+  },
+  {
+    "id": "COMP-028",
+    "domain": "math",
+    "title": "Clock Time Used Minutes Since Midnight",
+    "tags": ["schedule", "time", "minute-index", "correction"],
+    "body": "A clock problem became reliable when I converted the start time to minutes since midnight. 9:15 AM became 555 minutes. Adding a 160 minute duration produced 715 minutes. Converting 715 back to clock time gave 11 hours and 55 minutes, or 11:55 AM. The minute index kept the clock from acting like a decimal."
+  }
+]

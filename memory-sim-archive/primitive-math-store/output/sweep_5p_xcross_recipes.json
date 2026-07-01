@@ -1,0 +1,1429 @@
+{
+  "metadata": {
+    "timestamp": "2026-06-24T02:04:56.365118+00:00",
+    "seed": 42,
+    "n_primitives": 5,
+    "top_recipes": 30,
+    "seed_pool_size": 14,
+    "n_domains": 7,
+    "catalog_path": "D:\\MINIMAX-PRIMITVE-SIMULATIONS\\src\\primitive_catalog_full.json",
+    "catalog_size": 939,
+    "weights": {
+      "cross_domain_bonus": 200.0,
+      "multi_category_bonus": 100.0,
+      "root_atom_diversity": 5.0,
+      "real_wall_diversity": 5.0,
+      "base_per_primitive": 100.0
+    },
+    "runtime_seconds": 0.036550045013427734,
+    "enum_counts": {
+      "5-tuple": 2002
+    },
+    "scoring_summary": {
+      "total_recipes_scored": 2002,
+      "max_score": 880.0,
+      "min_score": 835.0,
+      "mean_score": 858.021978021978,
+      "cross_domain_count": 2002,
+      "cross_domain_pct": 100.0,
+      "wiring_pattern_counts": {
+        "fusion ranking": 2002
+      },
+      "domain_pair_counts": {
+        "formal-verification": 1210,
+        "statistics-probability": 1210,
+        "agentic-reasoning": 1210,
+        "cryptography-advanced": 1210,
+        "combinatorial-optimization": 1210,
+        "causal-inference": 1210,
+        "networking": 1210
+      },
+      "root_atom_counts": {
+        "combine": 2002,
+        "sample": 1210,
+        "order": 715
+      }
+    }
+  },
+  "recipes": [
+    {
+      "primitives": [
+        "bayesian-posterior-inference",
+        "chain-of-thought",
+        "computation-tree-logic",
+        "maximum-likelihood-estimation",
+        "pedersen-commitment"
+      ],
+      "domains": [
+        "statistics-probability",
+        "agentic-reasoning",
+        "formal-verification",
+        "statistics-probability",
+        "cryptography-advanced"
+      ],
+      "categories": [
+        "statistics-probability",
+        "agentic-reasoning",
+        "formal-verification",
+        "statistics-probability",
+        "cryptography-advanced"
+      ],
+      "score": 880.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification",
+        "statistics-probability"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification",
+        "statistics-probability"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "sample",
+        "order"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 cryptography-advanced \u2192 formal-verification \u2192 statistics-probability\n**Components:**\n  - bayesian-posterior-inference (statistics-probability): Bayesian inference: compute posterior p(\u03b8 | x) = p(x | \u03b8)\u00b7p(\u03b8) / p(x). Prior p(\u03b8) encodes domain knowledge; posterior combines data + prior; predictive posterior p(x_new | x) = \u222b p(x_new | \u03b8)\u00b7p(\u03b8 | x) d\u03b8.\n  - chain-of-thought (agentic-reasoning): Chain-of-Thought (CoT): generate intermediate reasoning steps before final answer. \"Let's think step by step.\" Implicit vs. explicit CoT; generated vs. retrieved CoT.\n  - computation-tree-logic (formal-verification): CTL: branching-time temporal logic with path quantifiers (A = all paths, E = exists path) and temporal operators (X = next, F = eventually, G = always, U = until, W = weak until). Model checking: labeling algorithm.\n  - maximum-likelihood-estimation (statistics-probability): MLE: choose parameter \u03b8 to maximize likelihood L(\u03b8; x) = P(x | \u03b8). Equivalently maximize log-likelihood \u2113(\u03b8; x) = \u03a3 log P(x\u1d62 | \u03b8). Consistent (as n \u2192 \u221e) and asymptotically efficient (lowest variance among unbiased estimators).\n  - pedersen-commitment (cryptography-advanced): Pedersen commitment: commit to m as C = g^m \u00b7 h^r, where g, h are generators of a group of unknown order, and r is randomness. Perfectly hiding (given m, g^r is uniform) and computationally binding under the discrete log assumption.\n**Real walls (combined):**\n  - [bayesian-posterior-inference] Prior sensitivity: posterior can be prior-dominated if data is sparse\n  - [bayesian-posterior-inference] Jeffreys prior = uninformative\n  - [bayesian-posterior-inference] conjugate priors simplify\n  - [chain-of-thought] CoT effectiveness plateaus for >5\u20137 steps\n  - [chain-of-thought] self-consistency (sample multiple CoTs, vote) improves accuracy at cost O(n\u00b7k)\n  - [computation-tree-logic] Expressive enough for many properties\n  - [computation-tree-logic] CTL cannot express some properties (e.g., \"always eventually p holds on all paths\" = AG EF p)\n  - [computation-tree-logic] CTL* (full branching time) is more expressive\n  - [maximum-likelihood-estimation] Non-convex likelihoods \u2192 multiple local maxima\n  - [maximum-likelihood-estimation] flat likelihood \u2192 high variance\n  - [maximum-likelihood-estimation] regularization may be needed\n  - [pedersen-commitment] Requires trusted setup to generate g, h such that discrete log of h wrt g is unknown\n  - [pedersen-commitment] no known trapdoor"
+    },
+    {
+      "primitives": [
+        "bayesian-posterior-inference",
+        "computation-tree-logic",
+        "integer-programming",
+        "maximum-likelihood-estimation",
+        "pedersen-commitment"
+      ],
+      "domains": [
+        "statistics-probability",
+        "formal-verification",
+        "combinatorial-optimization",
+        "statistics-probability",
+        "cryptography-advanced"
+      ],
+      "categories": [
+        "statistics-probability",
+        "formal-verification",
+        "combinatorial-optimization",
+        "statistics-probability",
+        "cryptography-advanced"
+      ],
+      "score": 880.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "formal-verification",
+        "statistics-probability"
+      ],
+      "unique_domains": [
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "formal-verification",
+        "statistics-probability"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "order",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** combinatorial-optimization \u2192 cryptography-advanced \u2192 formal-verification \u2192 statistics-probability\n**Components:**\n  - bayesian-posterior-inference (statistics-probability): Bayesian inference: compute posterior p(\u03b8 | x) = p(x | \u03b8)\u00b7p(\u03b8) / p(x). Prior p(\u03b8) encodes domain knowledge; posterior combines data + prior; predictive posterior p(x_new | x) = \u222b p(x_new | \u03b8)\u00b7p(\u03b8 | x) d\u03b8.\n  - computation-tree-logic (formal-verification): CTL: branching-time temporal logic with path quantifiers (A = all paths, E = exists path) and temporal operators (X = next, F = eventually, G = always, U = until, W = weak until). Model checking: labeling algorithm.\n  - integer-programming (combinatorial-optimization): IP (Integer Programming): optimization over integer variables with linear constraints. NP-hard in general; branch-and-bound solves practically.\n  - maximum-likelihood-estimation (statistics-probability): MLE: choose parameter \u03b8 to maximize likelihood L(\u03b8; x) = P(x | \u03b8). Equivalently maximize log-likelihood \u2113(\u03b8; x) = \u03a3 log P(x\u1d62 | \u03b8). Consistent (as n \u2192 \u221e) and asymptotically efficient (lowest variance among unbiased estimators).\n  - pedersen-commitment (cryptography-advanced): Pedersen commitment: commit to m as C = g^m \u00b7 h^r, where g, h are generators of a group of unknown order, and r is randomness. Perfectly hiding (given m, g^r is uniform) and computationally binding under the discrete log assumption.\n**Real walls (combined):**\n  - [bayesian-posterior-inference] Prior sensitivity: posterior can be prior-dominated if data is sparse\n  - [bayesian-posterior-inference] Jeffreys prior = uninformative\n  - [bayesian-posterior-inference] conjugate priors simplify\n  - [computation-tree-logic] Expressive enough for many properties\n  - [computation-tree-logic] CTL cannot express some properties (e.g., \"always eventually p holds on all paths\" = AG EF p)\n  - [computation-tree-logic] CTL* (full branching time) is more expressive\n  - [integer-programming] Problem formulation (modeling) quality matters more than solver\n  - [integer-programming] different formulations have vastly different solving times\n  - [maximum-likelihood-estimation] Non-convex likelihoods \u2192 multiple local maxima\n  - [maximum-likelihood-estimation] flat likelihood \u2192 high variance\n  - [maximum-likelihood-estimation] regularization may be needed\n  - [pedersen-commitment] Requires trusted setup to generate g, h such that discrete log of h wrt g is unknown\n  - [pedersen-commitment] no known trapdoor"
+    },
+    {
+      "primitives": [
+        "bayesian-posterior-inference",
+        "computation-tree-logic",
+        "linear-relaxation",
+        "maximum-likelihood-estimation",
+        "pedersen-commitment"
+      ],
+      "domains": [
+        "statistics-probability",
+        "formal-verification",
+        "combinatorial-optimization",
+        "statistics-probability",
+        "cryptography-advanced"
+      ],
+      "categories": [
+        "statistics-probability",
+        "formal-verification",
+        "combinatorial-optimization",
+        "statistics-probability",
+        "cryptography-advanced"
+      ],
+      "score": 880.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "formal-verification",
+        "statistics-probability"
+      ],
+      "unique_domains": [
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "formal-verification",
+        "statistics-probability"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "order",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** combinatorial-optimization \u2192 cryptography-advanced \u2192 formal-verification \u2192 statistics-probability\n**Components:**\n  - bayesian-posterior-inference (statistics-probability): Bayesian inference: compute posterior p(\u03b8 | x) = p(x | \u03b8)\u00b7p(\u03b8) / p(x). Prior p(\u03b8) encodes domain knowledge; posterior combines data + prior; predictive posterior p(x_new | x) = \u222b p(x_new | \u03b8)\u00b7p(\u03b8 | x) d\u03b8.\n  - computation-tree-logic (formal-verification): CTL: branching-time temporal logic with path quantifiers (A = all paths, E = exists path) and temporal operators (X = next, F = eventually, G = always, U = until, W = weak until). Model checking: labeling algorithm.\n  - linear-relaxation (combinatorial-optimization): LP relaxation: remove integrality constraints from IP. Optimal LP value \u2264 optimal IP value (lower bound for minimization).\n  - maximum-likelihood-estimation (statistics-probability): MLE: choose parameter \u03b8 to maximize likelihood L(\u03b8; x) = P(x | \u03b8). Equivalently maximize log-likelihood \u2113(\u03b8; x) = \u03a3 log P(x\u1d62 | \u03b8). Consistent (as n \u2192 \u221e) and asymptotically efficient (lowest variance among unbiased estimators).\n  - pedersen-commitment (cryptography-advanced): Pedersen commitment: commit to m as C = g^m \u00b7 h^r, where g, h are generators of a group of unknown order, and r is randomness. Perfectly hiding (given m, g^r is uniform) and computationally binding under the discrete log assumption.\n**Real walls (combined):**\n  - [bayesian-posterior-inference] Prior sensitivity: posterior can be prior-dominated if data is sparse\n  - [bayesian-posterior-inference] Jeffreys prior = uninformative\n  - [bayesian-posterior-inference] conjugate priors simplify\n  - [computation-tree-logic] Expressive enough for many properties\n  - [computation-tree-logic] CTL cannot express some properties (e.g., \"always eventually p holds on all paths\" = AG EF p)\n  - [computation-tree-logic] CTL* (full branching time) is more expressive\n  - [linear-relaxation] LP relaxation gap (IP-LP)/IP = integrality gap\n  - [linear-relaxation] large gap means branch-and-bound explores many nodes\n  - [maximum-likelihood-estimation] Non-convex likelihoods \u2192 multiple local maxima\n  - [maximum-likelihood-estimation] flat likelihood \u2192 high variance\n  - [maximum-likelihood-estimation] regularization may be needed\n  - [pedersen-commitment] Requires trusted setup to generate g, h such that discrete log of h wrt g is unknown\n  - [pedersen-commitment] no known trapdoor"
+    },
+    {
+      "primitives": [
+        "bayesian-posterior-inference",
+        "computation-tree-logic",
+        "maximum-likelihood-estimation",
+        "pedersen-commitment",
+        "state-transition-system"
+      ],
+      "domains": [
+        "statistics-probability",
+        "formal-verification",
+        "statistics-probability",
+        "cryptography-advanced",
+        "formal-verification"
+      ],
+      "categories": [
+        "statistics-probability",
+        "formal-verification",
+        "statistics-probability",
+        "cryptography-advanced",
+        "formal-verification"
+      ],
+      "score": 880.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "cryptography-advanced",
+        "formal-verification",
+        "statistics-probability"
+      ],
+      "unique_domains": [
+        "cryptography-advanced",
+        "formal-verification",
+        "statistics-probability"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "order",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** cryptography-advanced \u2192 formal-verification \u2192 statistics-probability\n**Components:**\n  - bayesian-posterior-inference (statistics-probability): Bayesian inference: compute posterior p(\u03b8 | x) = p(x | \u03b8)\u00b7p(\u03b8) / p(x). Prior p(\u03b8) encodes domain knowledge; posterior combines data + prior; predictive posterior p(x_new | x) = \u222b p(x_new | \u03b8)\u00b7p(\u03b8 | x) d\u03b8.\n  - computation-tree-logic (formal-verification): CTL: branching-time temporal logic with path quantifiers (A = all paths, E = exists path) and temporal operators (X = next, F = eventually, G = always, U = until, W = weak until). Model checking: labeling algorithm.\n  - maximum-likelihood-estimation (statistics-probability): MLE: choose parameter \u03b8 to maximize likelihood L(\u03b8; x) = P(x | \u03b8). Equivalently maximize log-likelihood \u2113(\u03b8; x) = \u03a3 log P(x\u1d62 | \u03b8). Consistent (as n \u2192 \u221e) and asymptotically efficient (lowest variance among unbiased estimators).\n  - pedersen-commitment (cryptography-advanced): Pedersen commitment: commit to m as C = g^m \u00b7 h^r, where g, h are generators of a group of unknown order, and r is randomness. Perfectly hiding (given m, g^r is uniform) and computationally binding under the discrete log assumption.\n  - state-transition-system (formal-verification): Model of a system as states and transitions: TS = (S, S\u2080, Act, \u2192, AP, L). States S, initial states S\u2080 \u2286 S, actions Act, transition relation \u2192 \u2286 S \u00d7 Act \u00d7 S, atomic propositions AP, labeling L: S \u2192 2^AP.\n**Real walls (combined):**\n  - [bayesian-posterior-inference] Prior sensitivity: posterior can be prior-dominated if data is sparse\n  - [bayesian-posterior-inference] Jeffreys prior = uninformative\n  - [bayesian-posterior-inference] conjugate priors simplify\n  - [computation-tree-logic] Expressive enough for many properties\n  - [computation-tree-logic] CTL cannot express some properties (e.g., \"always eventually p holds on all paths\" = AG EF p)\n  - [computation-tree-logic] CTL* (full branching time) is more expressive\n  - [maximum-likelihood-estimation] Non-convex likelihoods \u2192 multiple local maxima\n  - [maximum-likelihood-estimation] flat likelihood \u2192 high variance\n  - [maximum-likelihood-estimation] regularization may be needed\n  - [pedersen-commitment] Requires trusted setup to generate g, h such that discrete log of h wrt g is unknown\n  - [pedersen-commitment] no known trapdoor\n  - [state-transition-system] State explosion: |S| grows exponentially with components\n  - [state-transition-system] compositional methods mitigate but don't solve"
+    },
+    {
+      "primitives": [
+        "bayesian-posterior-inference",
+        "computation-tree-logic",
+        "maximum-likelihood-estimation",
+        "pedersen-commitment",
+        "structural-causal-model"
+      ],
+      "domains": [
+        "statistics-probability",
+        "formal-verification",
+        "statistics-probability",
+        "cryptography-advanced",
+        "causal-inference"
+      ],
+      "categories": [
+        "statistics-probability",
+        "formal-verification",
+        "statistics-probability",
+        "cryptography-advanced",
+        "causal-inference"
+      ],
+      "score": 880.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "causal-inference",
+        "cryptography-advanced",
+        "formal-verification",
+        "statistics-probability"
+      ],
+      "unique_domains": [
+        "causal-inference",
+        "cryptography-advanced",
+        "formal-verification",
+        "statistics-probability"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "order",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** causal-inference \u2192 cryptography-advanced \u2192 formal-verification \u2192 statistics-probability\n**Components:**\n  - bayesian-posterior-inference (statistics-probability): Bayesian inference: compute posterior p(\u03b8 | x) = p(x | \u03b8)\u00b7p(\u03b8) / p(x). Prior p(\u03b8) encodes domain knowledge; posterior combines data + prior; predictive posterior p(x_new | x) = \u222b p(x_new | \u03b8)\u00b7p(\u03b8 | x) d\u03b8.\n  - computation-tree-logic (formal-verification): CTL: branching-time temporal logic with path quantifiers (A = all paths, E = exists path) and temporal operators (X = next, F = eventually, G = always, U = until, W = weak until). Model checking: labeling algorithm.\n  - maximum-likelihood-estimation (statistics-probability): MLE: choose parameter \u03b8 to maximize likelihood L(\u03b8; x) = P(x | \u03b8). Equivalently maximize log-likelihood \u2113(\u03b8; x) = \u03a3 log P(x\u1d62 | \u03b8). Consistent (as n \u2192 \u221e) and asymptotically efficient (lowest variance among unbiased estimators).\n  - pedersen-commitment (cryptography-advanced): Pedersen commitment: commit to m as C = g^m \u00b7 h^r, where g, h are generators of a group of unknown order, and r is randomness. Perfectly hiding (given m, g^r is uniform) and computationally binding under the discrete log assumption.\n  - structural-causal-model (causal-inference): SCM (Structural Causal Model): set of endogenous variables X, exogenous variables U, and structural equations f such that X = f(X, U). Each equation represents a causal mechanism.\n**Real walls (combined):**\n  - [bayesian-posterior-inference] Prior sensitivity: posterior can be prior-dominated if data is sparse\n  - [bayesian-posterior-inference] Jeffreys prior = uninformative\n  - [bayesian-posterior-inference] conjugate priors simplify\n  - [computation-tree-logic] Expressive enough for many properties\n  - [computation-tree-logic] CTL cannot express some properties (e.g., \"always eventually p holds on all paths\" = AG EF p)\n  - [computation-tree-logic] CTL* (full branching time) is more expressive\n  - [maximum-likelihood-estimation] Non-convex likelihoods \u2192 multiple local maxima\n  - [maximum-likelihood-estimation] flat likelihood \u2192 high variance\n  - [maximum-likelihood-estimation] regularization may be needed\n  - [pedersen-commitment] Requires trusted setup to generate g, h such that discrete log of h wrt g is unknown\n  - [pedersen-commitment] no known trapdoor\n  - [structural-causal-model] SCMs assume acyclic graphs (except with cycles under equilibrium)\n  - [structural-causal-model] cyclic SCMs require fixed-point solution"
+    },
+    {
+      "primitives": [
+        "bayesian-posterior-inference",
+        "computation-tree-logic",
+        "maximum-likelihood-estimation",
+        "pedersen-commitment",
+        "tree-of-thought"
+      ],
+      "domains": [
+        "statistics-probability",
+        "formal-verification",
+        "statistics-probability",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "statistics-probability",
+        "formal-verification",
+        "statistics-probability",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "score": 880.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification",
+        "statistics-probability"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification",
+        "statistics-probability"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "order",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 cryptography-advanced \u2192 formal-verification \u2192 statistics-probability\n**Components:**\n  - bayesian-posterior-inference (statistics-probability): Bayesian inference: compute posterior p(\u03b8 | x) = p(x | \u03b8)\u00b7p(\u03b8) / p(x). Prior p(\u03b8) encodes domain knowledge; posterior combines data + prior; predictive posterior p(x_new | x) = \u222b p(x_new | \u03b8)\u00b7p(\u03b8 | x) d\u03b8.\n  - computation-tree-logic (formal-verification): CTL: branching-time temporal logic with path quantifiers (A = all paths, E = exists path) and temporal operators (X = next, F = eventually, G = always, U = until, W = weak until). Model checking: labeling algorithm.\n  - maximum-likelihood-estimation (statistics-probability): MLE: choose parameter \u03b8 to maximize likelihood L(\u03b8; x) = P(x | \u03b8). Equivalently maximize log-likelihood \u2113(\u03b8; x) = \u03a3 log P(x\u1d62 | \u03b8). Consistent (as n \u2192 \u221e) and asymptotically efficient (lowest variance among unbiased estimators).\n  - pedersen-commitment (cryptography-advanced): Pedersen commitment: commit to m as C = g^m \u00b7 h^r, where g, h are generators of a group of unknown order, and r is randomness. Perfectly hiding (given m, g^r is uniform) and computationally binding under the discrete log assumption.\n  - tree-of-thought (agentic-reasoning): Tree-of-Thought (ToT): explore branching reasoning paths; each node = partial solution; DFS/BFS for search; evaluate branch quality to prune.\n**Real walls (combined):**\n  - [bayesian-posterior-inference] Prior sensitivity: posterior can be prior-dominated if data is sparse\n  - [bayesian-posterior-inference] Jeffreys prior = uninformative\n  - [bayesian-posterior-inference] conjugate priors simplify\n  - [computation-tree-logic] Expressive enough for many properties\n  - [computation-tree-logic] CTL cannot express some properties (e.g., \"always eventually p holds on all paths\" = AG EF p)\n  - [computation-tree-logic] CTL* (full branching time) is more expressive\n  - [maximum-likelihood-estimation] Non-convex likelihoods \u2192 multiple local maxima\n  - [maximum-likelihood-estimation] flat likelihood \u2192 high variance\n  - [maximum-likelihood-estimation] regularization may be needed\n  - [pedersen-commitment] Requires trusted setup to generate g, h such that discrete log of h wrt g is unknown\n  - [pedersen-commitment] no known trapdoor\n  - [tree-of-thought] Evaluation function quality determines pruning accuracy\n  - [tree-of-thought] noisy evaluation \u2192 wrong branches kept, correct branches pruned"
+    },
+    {
+      "primitives": [
+        "bayesian-posterior-inference",
+        "chain-of-thought",
+        "computation-tree-logic",
+        "integer-programming",
+        "maximum-likelihood-estimation"
+      ],
+      "domains": [
+        "statistics-probability",
+        "agentic-reasoning",
+        "formal-verification",
+        "combinatorial-optimization",
+        "statistics-probability"
+      ],
+      "categories": [
+        "statistics-probability",
+        "agentic-reasoning",
+        "formal-verification",
+        "combinatorial-optimization",
+        "statistics-probability"
+      ],
+      "score": 875.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "combinatorial-optimization",
+        "formal-verification",
+        "statistics-probability"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "combinatorial-optimization",
+        "formal-verification",
+        "statistics-probability"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 combinatorial-optimization \u2192 formal-verification \u2192 statistics-probability\n**Components:**\n  - bayesian-posterior-inference (statistics-probability): Bayesian inference: compute posterior p(\u03b8 | x) = p(x | \u03b8)\u00b7p(\u03b8) / p(x). Prior p(\u03b8) encodes domain knowledge; posterior combines data + prior; predictive posterior p(x_new | x) = \u222b p(x_new | \u03b8)\u00b7p(\u03b8 | x) d\u03b8.\n  - chain-of-thought (agentic-reasoning): Chain-of-Thought (CoT): generate intermediate reasoning steps before final answer. \"Let's think step by step.\" Implicit vs. explicit CoT; generated vs. retrieved CoT.\n  - computation-tree-logic (formal-verification): CTL: branching-time temporal logic with path quantifiers (A = all paths, E = exists path) and temporal operators (X = next, F = eventually, G = always, U = until, W = weak until). Model checking: labeling algorithm.\n  - integer-programming (combinatorial-optimization): IP (Integer Programming): optimization over integer variables with linear constraints. NP-hard in general; branch-and-bound solves practically.\n  - maximum-likelihood-estimation (statistics-probability): MLE: choose parameter \u03b8 to maximize likelihood L(\u03b8; x) = P(x | \u03b8). Equivalently maximize log-likelihood \u2113(\u03b8; x) = \u03a3 log P(x\u1d62 | \u03b8). Consistent (as n \u2192 \u221e) and asymptotically efficient (lowest variance among unbiased estimators).\n**Real walls (combined):**\n  - [bayesian-posterior-inference] Prior sensitivity: posterior can be prior-dominated if data is sparse\n  - [bayesian-posterior-inference] Jeffreys prior = uninformative\n  - [bayesian-posterior-inference] conjugate priors simplify\n  - [chain-of-thought] CoT effectiveness plateaus for >5\u20137 steps\n  - [chain-of-thought] self-consistency (sample multiple CoTs, vote) improves accuracy at cost O(n\u00b7k)\n  - [computation-tree-logic] Expressive enough for many properties\n  - [computation-tree-logic] CTL cannot express some properties (e.g., \"always eventually p holds on all paths\" = AG EF p)\n  - [computation-tree-logic] CTL* (full branching time) is more expressive\n  - [integer-programming] Problem formulation (modeling) quality matters more than solver\n  - [integer-programming] different formulations have vastly different solving times\n  - [maximum-likelihood-estimation] Non-convex likelihoods \u2192 multiple local maxima\n  - [maximum-likelihood-estimation] flat likelihood \u2192 high variance\n  - [maximum-likelihood-estimation] regularization may be needed"
+    },
+    {
+      "primitives": [
+        "bayesian-posterior-inference",
+        "chain-of-thought",
+        "computation-tree-logic",
+        "integer-programming",
+        "pedersen-commitment"
+      ],
+      "domains": [
+        "statistics-probability",
+        "agentic-reasoning",
+        "formal-verification",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "categories": [
+        "statistics-probability",
+        "agentic-reasoning",
+        "formal-verification",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "score": 875.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "formal-verification",
+        "statistics-probability"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "formal-verification",
+        "statistics-probability"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "sample",
+        "order"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 combinatorial-optimization \u2192 cryptography-advanced \u2192 formal-verification \u2192 statistics-probability\n**Components:**\n  - bayesian-posterior-inference (statistics-probability): Bayesian inference: compute posterior p(\u03b8 | x) = p(x | \u03b8)\u00b7p(\u03b8) / p(x). Prior p(\u03b8) encodes domain knowledge; posterior combines data + prior; predictive posterior p(x_new | x) = \u222b p(x_new | \u03b8)\u00b7p(\u03b8 | x) d\u03b8.\n  - chain-of-thought (agentic-reasoning): Chain-of-Thought (CoT): generate intermediate reasoning steps before final answer. \"Let's think step by step.\" Implicit vs. explicit CoT; generated vs. retrieved CoT.\n  - computation-tree-logic (formal-verification): CTL: branching-time temporal logic with path quantifiers (A = all paths, E = exists path) and temporal operators (X = next, F = eventually, G = always, U = until, W = weak until). Model checking: labeling algorithm.\n  - integer-programming (combinatorial-optimization): IP (Integer Programming): optimization over integer variables with linear constraints. NP-hard in general; branch-and-bound solves practically.\n  - pedersen-commitment (cryptography-advanced): Pedersen commitment: commit to m as C = g^m \u00b7 h^r, where g, h are generators of a group of unknown order, and r is randomness. Perfectly hiding (given m, g^r is uniform) and computationally binding under the discrete log assumption.\n**Real walls (combined):**\n  - [bayesian-posterior-inference] Prior sensitivity: posterior can be prior-dominated if data is sparse\n  - [bayesian-posterior-inference] Jeffreys prior = uninformative\n  - [bayesian-posterior-inference] conjugate priors simplify\n  - [chain-of-thought] CoT effectiveness plateaus for >5\u20137 steps\n  - [chain-of-thought] self-consistency (sample multiple CoTs, vote) improves accuracy at cost O(n\u00b7k)\n  - [computation-tree-logic] Expressive enough for many properties\n  - [computation-tree-logic] CTL cannot express some properties (e.g., \"always eventually p holds on all paths\" = AG EF p)\n  - [computation-tree-logic] CTL* (full branching time) is more expressive\n  - [integer-programming] Problem formulation (modeling) quality matters more than solver\n  - [integer-programming] different formulations have vastly different solving times\n  - [pedersen-commitment] Requires trusted setup to generate g, h such that discrete log of h wrt g is unknown\n  - [pedersen-commitment] no known trapdoor"
+    },
+    {
+      "primitives": [
+        "bayesian-posterior-inference",
+        "chain-of-thought",
+        "computation-tree-logic",
+        "linear-relaxation",
+        "maximum-likelihood-estimation"
+      ],
+      "domains": [
+        "statistics-probability",
+        "agentic-reasoning",
+        "formal-verification",
+        "combinatorial-optimization",
+        "statistics-probability"
+      ],
+      "categories": [
+        "statistics-probability",
+        "agentic-reasoning",
+        "formal-verification",
+        "combinatorial-optimization",
+        "statistics-probability"
+      ],
+      "score": 875.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "combinatorial-optimization",
+        "formal-verification",
+        "statistics-probability"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "combinatorial-optimization",
+        "formal-verification",
+        "statistics-probability"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 combinatorial-optimization \u2192 formal-verification \u2192 statistics-probability\n**Components:**\n  - bayesian-posterior-inference (statistics-probability): Bayesian inference: compute posterior p(\u03b8 | x) = p(x | \u03b8)\u00b7p(\u03b8) / p(x). Prior p(\u03b8) encodes domain knowledge; posterior combines data + prior; predictive posterior p(x_new | x) = \u222b p(x_new | \u03b8)\u00b7p(\u03b8 | x) d\u03b8.\n  - chain-of-thought (agentic-reasoning): Chain-of-Thought (CoT): generate intermediate reasoning steps before final answer. \"Let's think step by step.\" Implicit vs. explicit CoT; generated vs. retrieved CoT.\n  - computation-tree-logic (formal-verification): CTL: branching-time temporal logic with path quantifiers (A = all paths, E = exists path) and temporal operators (X = next, F = eventually, G = always, U = until, W = weak until). Model checking: labeling algorithm.\n  - linear-relaxation (combinatorial-optimization): LP relaxation: remove integrality constraints from IP. Optimal LP value \u2264 optimal IP value (lower bound for minimization).\n  - maximum-likelihood-estimation (statistics-probability): MLE: choose parameter \u03b8 to maximize likelihood L(\u03b8; x) = P(x | \u03b8). Equivalently maximize log-likelihood \u2113(\u03b8; x) = \u03a3 log P(x\u1d62 | \u03b8). Consistent (as n \u2192 \u221e) and asymptotically efficient (lowest variance among unbiased estimators).\n**Real walls (combined):**\n  - [bayesian-posterior-inference] Prior sensitivity: posterior can be prior-dominated if data is sparse\n  - [bayesian-posterior-inference] Jeffreys prior = uninformative\n  - [bayesian-posterior-inference] conjugate priors simplify\n  - [chain-of-thought] CoT effectiveness plateaus for >5\u20137 steps\n  - [chain-of-thought] self-consistency (sample multiple CoTs, vote) improves accuracy at cost O(n\u00b7k)\n  - [computation-tree-logic] Expressive enough for many properties\n  - [computation-tree-logic] CTL cannot express some properties (e.g., \"always eventually p holds on all paths\" = AG EF p)\n  - [computation-tree-logic] CTL* (full branching time) is more expressive\n  - [linear-relaxation] LP relaxation gap (IP-LP)/IP = integrality gap\n  - [linear-relaxation] large gap means branch-and-bound explores many nodes\n  - [maximum-likelihood-estimation] Non-convex likelihoods \u2192 multiple local maxima\n  - [maximum-likelihood-estimation] flat likelihood \u2192 high variance\n  - [maximum-likelihood-estimation] regularization may be needed"
+    },
+    {
+      "primitives": [
+        "bayesian-posterior-inference",
+        "chain-of-thought",
+        "computation-tree-logic",
+        "linear-relaxation",
+        "pedersen-commitment"
+      ],
+      "domains": [
+        "statistics-probability",
+        "agentic-reasoning",
+        "formal-verification",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "categories": [
+        "statistics-probability",
+        "agentic-reasoning",
+        "formal-verification",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "score": 875.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "formal-verification",
+        "statistics-probability"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "formal-verification",
+        "statistics-probability"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "sample",
+        "order"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 combinatorial-optimization \u2192 cryptography-advanced \u2192 formal-verification \u2192 statistics-probability\n**Components:**\n  - bayesian-posterior-inference (statistics-probability): Bayesian inference: compute posterior p(\u03b8 | x) = p(x | \u03b8)\u00b7p(\u03b8) / p(x). Prior p(\u03b8) encodes domain knowledge; posterior combines data + prior; predictive posterior p(x_new | x) = \u222b p(x_new | \u03b8)\u00b7p(\u03b8 | x) d\u03b8.\n  - chain-of-thought (agentic-reasoning): Chain-of-Thought (CoT): generate intermediate reasoning steps before final answer. \"Let's think step by step.\" Implicit vs. explicit CoT; generated vs. retrieved CoT.\n  - computation-tree-logic (formal-verification): CTL: branching-time temporal logic with path quantifiers (A = all paths, E = exists path) and temporal operators (X = next, F = eventually, G = always, U = until, W = weak until). Model checking: labeling algorithm.\n  - linear-relaxation (combinatorial-optimization): LP relaxation: remove integrality constraints from IP. Optimal LP value \u2264 optimal IP value (lower bound for minimization).\n  - pedersen-commitment (cryptography-advanced): Pedersen commitment: commit to m as C = g^m \u00b7 h^r, where g, h are generators of a group of unknown order, and r is randomness. Perfectly hiding (given m, g^r is uniform) and computationally binding under the discrete log assumption.\n**Real walls (combined):**\n  - [bayesian-posterior-inference] Prior sensitivity: posterior can be prior-dominated if data is sparse\n  - [bayesian-posterior-inference] Jeffreys prior = uninformative\n  - [bayesian-posterior-inference] conjugate priors simplify\n  - [chain-of-thought] CoT effectiveness plateaus for >5\u20137 steps\n  - [chain-of-thought] self-consistency (sample multiple CoTs, vote) improves accuracy at cost O(n\u00b7k)\n  - [computation-tree-logic] Expressive enough for many properties\n  - [computation-tree-logic] CTL cannot express some properties (e.g., \"always eventually p holds on all paths\" = AG EF p)\n  - [computation-tree-logic] CTL* (full branching time) is more expressive\n  - [linear-relaxation] LP relaxation gap (IP-LP)/IP = integrality gap\n  - [linear-relaxation] large gap means branch-and-bound explores many nodes\n  - [pedersen-commitment] Requires trusted setup to generate g, h such that discrete log of h wrt g is unknown\n  - [pedersen-commitment] no known trapdoor"
+    },
+    {
+      "primitives": [
+        "bayesian-posterior-inference",
+        "chain-of-thought",
+        "computation-tree-logic",
+        "maximum-likelihood-estimation",
+        "state-transition-system"
+      ],
+      "domains": [
+        "statistics-probability",
+        "agentic-reasoning",
+        "formal-verification",
+        "statistics-probability",
+        "formal-verification"
+      ],
+      "categories": [
+        "statistics-probability",
+        "agentic-reasoning",
+        "formal-verification",
+        "statistics-probability",
+        "formal-verification"
+      ],
+      "score": 875.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "formal-verification",
+        "statistics-probability"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "formal-verification",
+        "statistics-probability"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 formal-verification \u2192 statistics-probability\n**Components:**\n  - bayesian-posterior-inference (statistics-probability): Bayesian inference: compute posterior p(\u03b8 | x) = p(x | \u03b8)\u00b7p(\u03b8) / p(x). Prior p(\u03b8) encodes domain knowledge; posterior combines data + prior; predictive posterior p(x_new | x) = \u222b p(x_new | \u03b8)\u00b7p(\u03b8 | x) d\u03b8.\n  - chain-of-thought (agentic-reasoning): Chain-of-Thought (CoT): generate intermediate reasoning steps before final answer. \"Let's think step by step.\" Implicit vs. explicit CoT; generated vs. retrieved CoT.\n  - computation-tree-logic (formal-verification): CTL: branching-time temporal logic with path quantifiers (A = all paths, E = exists path) and temporal operators (X = next, F = eventually, G = always, U = until, W = weak until). Model checking: labeling algorithm.\n  - maximum-likelihood-estimation (statistics-probability): MLE: choose parameter \u03b8 to maximize likelihood L(\u03b8; x) = P(x | \u03b8). Equivalently maximize log-likelihood \u2113(\u03b8; x) = \u03a3 log P(x\u1d62 | \u03b8). Consistent (as n \u2192 \u221e) and asymptotically efficient (lowest variance among unbiased estimators).\n  - state-transition-system (formal-verification): Model of a system as states and transitions: TS = (S, S\u2080, Act, \u2192, AP, L). States S, initial states S\u2080 \u2286 S, actions Act, transition relation \u2192 \u2286 S \u00d7 Act \u00d7 S, atomic propositions AP, labeling L: S \u2192 2^AP.\n**Real walls (combined):**\n  - [bayesian-posterior-inference] Prior sensitivity: posterior can be prior-dominated if data is sparse\n  - [bayesian-posterior-inference] Jeffreys prior = uninformative\n  - [bayesian-posterior-inference] conjugate priors simplify\n  - [chain-of-thought] CoT effectiveness plateaus for >5\u20137 steps\n  - [chain-of-thought] self-consistency (sample multiple CoTs, vote) improves accuracy at cost O(n\u00b7k)\n  - [computation-tree-logic] Expressive enough for many properties\n  - [computation-tree-logic] CTL cannot express some properties (e.g., \"always eventually p holds on all paths\" = AG EF p)\n  - [computation-tree-logic] CTL* (full branching time) is more expressive\n  - [maximum-likelihood-estimation] Non-convex likelihoods \u2192 multiple local maxima\n  - [maximum-likelihood-estimation] flat likelihood \u2192 high variance\n  - [maximum-likelihood-estimation] regularization may be needed\n  - [state-transition-system] State explosion: |S| grows exponentially with components\n  - [state-transition-system] compositional methods mitigate but don't solve"
+    },
+    {
+      "primitives": [
+        "bayesian-posterior-inference",
+        "chain-of-thought",
+        "computation-tree-logic",
+        "maximum-likelihood-estimation",
+        "structural-causal-model"
+      ],
+      "domains": [
+        "statistics-probability",
+        "agentic-reasoning",
+        "formal-verification",
+        "statistics-probability",
+        "causal-inference"
+      ],
+      "categories": [
+        "statistics-probability",
+        "agentic-reasoning",
+        "formal-verification",
+        "statistics-probability",
+        "causal-inference"
+      ],
+      "score": 875.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "causal-inference",
+        "formal-verification",
+        "statistics-probability"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "causal-inference",
+        "formal-verification",
+        "statistics-probability"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 causal-inference \u2192 formal-verification \u2192 statistics-probability\n**Components:**\n  - bayesian-posterior-inference (statistics-probability): Bayesian inference: compute posterior p(\u03b8 | x) = p(x | \u03b8)\u00b7p(\u03b8) / p(x). Prior p(\u03b8) encodes domain knowledge; posterior combines data + prior; predictive posterior p(x_new | x) = \u222b p(x_new | \u03b8)\u00b7p(\u03b8 | x) d\u03b8.\n  - chain-of-thought (agentic-reasoning): Chain-of-Thought (CoT): generate intermediate reasoning steps before final answer. \"Let's think step by step.\" Implicit vs. explicit CoT; generated vs. retrieved CoT.\n  - computation-tree-logic (formal-verification): CTL: branching-time temporal logic with path quantifiers (A = all paths, E = exists path) and temporal operators (X = next, F = eventually, G = always, U = until, W = weak until). Model checking: labeling algorithm.\n  - maximum-likelihood-estimation (statistics-probability): MLE: choose parameter \u03b8 to maximize likelihood L(\u03b8; x) = P(x | \u03b8). Equivalently maximize log-likelihood \u2113(\u03b8; x) = \u03a3 log P(x\u1d62 | \u03b8). Consistent (as n \u2192 \u221e) and asymptotically efficient (lowest variance among unbiased estimators).\n  - structural-causal-model (causal-inference): SCM (Structural Causal Model): set of endogenous variables X, exogenous variables U, and structural equations f such that X = f(X, U). Each equation represents a causal mechanism.\n**Real walls (combined):**\n  - [bayesian-posterior-inference] Prior sensitivity: posterior can be prior-dominated if data is sparse\n  - [bayesian-posterior-inference] Jeffreys prior = uninformative\n  - [bayesian-posterior-inference] conjugate priors simplify\n  - [chain-of-thought] CoT effectiveness plateaus for >5\u20137 steps\n  - [chain-of-thought] self-consistency (sample multiple CoTs, vote) improves accuracy at cost O(n\u00b7k)\n  - [computation-tree-logic] Expressive enough for many properties\n  - [computation-tree-logic] CTL cannot express some properties (e.g., \"always eventually p holds on all paths\" = AG EF p)\n  - [computation-tree-logic] CTL* (full branching time) is more expressive\n  - [maximum-likelihood-estimation] Non-convex likelihoods \u2192 multiple local maxima\n  - [maximum-likelihood-estimation] flat likelihood \u2192 high variance\n  - [maximum-likelihood-estimation] regularization may be needed\n  - [structural-causal-model] SCMs assume acyclic graphs (except with cycles under equilibrium)\n  - [structural-causal-model] cyclic SCMs require fixed-point solution"
+    },
+    {
+      "primitives": [
+        "bayesian-posterior-inference",
+        "chain-of-thought",
+        "computation-tree-logic",
+        "maximum-likelihood-estimation",
+        "tree-of-thought"
+      ],
+      "domains": [
+        "statistics-probability",
+        "agentic-reasoning",
+        "formal-verification",
+        "statistics-probability",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "statistics-probability",
+        "agentic-reasoning",
+        "formal-verification",
+        "statistics-probability",
+        "agentic-reasoning"
+      ],
+      "score": 875.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "formal-verification",
+        "statistics-probability"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "formal-verification",
+        "statistics-probability"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 formal-verification \u2192 statistics-probability\n**Components:**\n  - bayesian-posterior-inference (statistics-probability): Bayesian inference: compute posterior p(\u03b8 | x) = p(x | \u03b8)\u00b7p(\u03b8) / p(x). Prior p(\u03b8) encodes domain knowledge; posterior combines data + prior; predictive posterior p(x_new | x) = \u222b p(x_new | \u03b8)\u00b7p(\u03b8 | x) d\u03b8.\n  - chain-of-thought (agentic-reasoning): Chain-of-Thought (CoT): generate intermediate reasoning steps before final answer. \"Let's think step by step.\" Implicit vs. explicit CoT; generated vs. retrieved CoT.\n  - computation-tree-logic (formal-verification): CTL: branching-time temporal logic with path quantifiers (A = all paths, E = exists path) and temporal operators (X = next, F = eventually, G = always, U = until, W = weak until). Model checking: labeling algorithm.\n  - maximum-likelihood-estimation (statistics-probability): MLE: choose parameter \u03b8 to maximize likelihood L(\u03b8; x) = P(x | \u03b8). Equivalently maximize log-likelihood \u2113(\u03b8; x) = \u03a3 log P(x\u1d62 | \u03b8). Consistent (as n \u2192 \u221e) and asymptotically efficient (lowest variance among unbiased estimators).\n  - tree-of-thought (agentic-reasoning): Tree-of-Thought (ToT): explore branching reasoning paths; each node = partial solution; DFS/BFS for search; evaluate branch quality to prune.\n**Real walls (combined):**\n  - [bayesian-posterior-inference] Prior sensitivity: posterior can be prior-dominated if data is sparse\n  - [bayesian-posterior-inference] Jeffreys prior = uninformative\n  - [bayesian-posterior-inference] conjugate priors simplify\n  - [chain-of-thought] CoT effectiveness plateaus for >5\u20137 steps\n  - [chain-of-thought] self-consistency (sample multiple CoTs, vote) improves accuracy at cost O(n\u00b7k)\n  - [computation-tree-logic] Expressive enough for many properties\n  - [computation-tree-logic] CTL cannot express some properties (e.g., \"always eventually p holds on all paths\" = AG EF p)\n  - [computation-tree-logic] CTL* (full branching time) is more expressive\n  - [maximum-likelihood-estimation] Non-convex likelihoods \u2192 multiple local maxima\n  - [maximum-likelihood-estimation] flat likelihood \u2192 high variance\n  - [maximum-likelihood-estimation] regularization may be needed\n  - [tree-of-thought] Evaluation function quality determines pruning accuracy\n  - [tree-of-thought] noisy evaluation \u2192 wrong branches kept, correct branches pruned"
+    },
+    {
+      "primitives": [
+        "bayesian-posterior-inference",
+        "chain-of-thought",
+        "computation-tree-logic",
+        "pedersen-commitment",
+        "state-transition-system"
+      ],
+      "domains": [
+        "statistics-probability",
+        "agentic-reasoning",
+        "formal-verification",
+        "cryptography-advanced",
+        "formal-verification"
+      ],
+      "categories": [
+        "statistics-probability",
+        "agentic-reasoning",
+        "formal-verification",
+        "cryptography-advanced",
+        "formal-verification"
+      ],
+      "score": 875.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification",
+        "statistics-probability"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification",
+        "statistics-probability"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "sample",
+        "order"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 cryptography-advanced \u2192 formal-verification \u2192 statistics-probability\n**Components:**\n  - bayesian-posterior-inference (statistics-probability): Bayesian inference: compute posterior p(\u03b8 | x) = p(x | \u03b8)\u00b7p(\u03b8) / p(x). Prior p(\u03b8) encodes domain knowledge; posterior combines data + prior; predictive posterior p(x_new | x) = \u222b p(x_new | \u03b8)\u00b7p(\u03b8 | x) d\u03b8.\n  - chain-of-thought (agentic-reasoning): Chain-of-Thought (CoT): generate intermediate reasoning steps before final answer. \"Let's think step by step.\" Implicit vs. explicit CoT; generated vs. retrieved CoT.\n  - computation-tree-logic (formal-verification): CTL: branching-time temporal logic with path quantifiers (A = all paths, E = exists path) and temporal operators (X = next, F = eventually, G = always, U = until, W = weak until). Model checking: labeling algorithm.\n  - pedersen-commitment (cryptography-advanced): Pedersen commitment: commit to m as C = g^m \u00b7 h^r, where g, h are generators of a group of unknown order, and r is randomness. Perfectly hiding (given m, g^r is uniform) and computationally binding under the discrete log assumption.\n  - state-transition-system (formal-verification): Model of a system as states and transitions: TS = (S, S\u2080, Act, \u2192, AP, L). States S, initial states S\u2080 \u2286 S, actions Act, transition relation \u2192 \u2286 S \u00d7 Act \u00d7 S, atomic propositions AP, labeling L: S \u2192 2^AP.\n**Real walls (combined):**\n  - [bayesian-posterior-inference] Prior sensitivity: posterior can be prior-dominated if data is sparse\n  - [bayesian-posterior-inference] Jeffreys prior = uninformative\n  - [bayesian-posterior-inference] conjugate priors simplify\n  - [chain-of-thought] CoT effectiveness plateaus for >5\u20137 steps\n  - [chain-of-thought] self-consistency (sample multiple CoTs, vote) improves accuracy at cost O(n\u00b7k)\n  - [computation-tree-logic] Expressive enough for many properties\n  - [computation-tree-logic] CTL cannot express some properties (e.g., \"always eventually p holds on all paths\" = AG EF p)\n  - [computation-tree-logic] CTL* (full branching time) is more expressive\n  - [pedersen-commitment] Requires trusted setup to generate g, h such that discrete log of h wrt g is unknown\n  - [pedersen-commitment] no known trapdoor\n  - [state-transition-system] State explosion: |S| grows exponentially with components\n  - [state-transition-system] compositional methods mitigate but don't solve"
+    },
+    {
+      "primitives": [
+        "bayesian-posterior-inference",
+        "chain-of-thought",
+        "computation-tree-logic",
+        "pedersen-commitment",
+        "structural-causal-model"
+      ],
+      "domains": [
+        "statistics-probability",
+        "agentic-reasoning",
+        "formal-verification",
+        "cryptography-advanced",
+        "causal-inference"
+      ],
+      "categories": [
+        "statistics-probability",
+        "agentic-reasoning",
+        "formal-verification",
+        "cryptography-advanced",
+        "causal-inference"
+      ],
+      "score": 875.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "causal-inference",
+        "cryptography-advanced",
+        "formal-verification",
+        "statistics-probability"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "causal-inference",
+        "cryptography-advanced",
+        "formal-verification",
+        "statistics-probability"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "sample",
+        "order"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 causal-inference \u2192 cryptography-advanced \u2192 formal-verification \u2192 statistics-probability\n**Components:**\n  - bayesian-posterior-inference (statistics-probability): Bayesian inference: compute posterior p(\u03b8 | x) = p(x | \u03b8)\u00b7p(\u03b8) / p(x). Prior p(\u03b8) encodes domain knowledge; posterior combines data + prior; predictive posterior p(x_new | x) = \u222b p(x_new | \u03b8)\u00b7p(\u03b8 | x) d\u03b8.\n  - chain-of-thought (agentic-reasoning): Chain-of-Thought (CoT): generate intermediate reasoning steps before final answer. \"Let's think step by step.\" Implicit vs. explicit CoT; generated vs. retrieved CoT.\n  - computation-tree-logic (formal-verification): CTL: branching-time temporal logic with path quantifiers (A = all paths, E = exists path) and temporal operators (X = next, F = eventually, G = always, U = until, W = weak until). Model checking: labeling algorithm.\n  - pedersen-commitment (cryptography-advanced): Pedersen commitment: commit to m as C = g^m \u00b7 h^r, where g, h are generators of a group of unknown order, and r is randomness. Perfectly hiding (given m, g^r is uniform) and computationally binding under the discrete log assumption.\n  - structural-causal-model (causal-inference): SCM (Structural Causal Model): set of endogenous variables X, exogenous variables U, and structural equations f such that X = f(X, U). Each equation represents a causal mechanism.\n**Real walls (combined):**\n  - [bayesian-posterior-inference] Prior sensitivity: posterior can be prior-dominated if data is sparse\n  - [bayesian-posterior-inference] Jeffreys prior = uninformative\n  - [bayesian-posterior-inference] conjugate priors simplify\n  - [chain-of-thought] CoT effectiveness plateaus for >5\u20137 steps\n  - [chain-of-thought] self-consistency (sample multiple CoTs, vote) improves accuracy at cost O(n\u00b7k)\n  - [computation-tree-logic] Expressive enough for many properties\n  - [computation-tree-logic] CTL cannot express some properties (e.g., \"always eventually p holds on all paths\" = AG EF p)\n  - [computation-tree-logic] CTL* (full branching time) is more expressive\n  - [pedersen-commitment] Requires trusted setup to generate g, h such that discrete log of h wrt g is unknown\n  - [pedersen-commitment] no known trapdoor\n  - [structural-causal-model] SCMs assume acyclic graphs (except with cycles under equilibrium)\n  - [structural-causal-model] cyclic SCMs require fixed-point solution"
+    },
+    {
+      "primitives": [
+        "bayesian-posterior-inference",
+        "chain-of-thought",
+        "computation-tree-logic",
+        "pedersen-commitment",
+        "tree-of-thought"
+      ],
+      "domains": [
+        "statistics-probability",
+        "agentic-reasoning",
+        "formal-verification",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "statistics-probability",
+        "agentic-reasoning",
+        "formal-verification",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "score": 875.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification",
+        "statistics-probability"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification",
+        "statistics-probability"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "sample",
+        "order"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 cryptography-advanced \u2192 formal-verification \u2192 statistics-probability\n**Components:**\n  - bayesian-posterior-inference (statistics-probability): Bayesian inference: compute posterior p(\u03b8 | x) = p(x | \u03b8)\u00b7p(\u03b8) / p(x). Prior p(\u03b8) encodes domain knowledge; posterior combines data + prior; predictive posterior p(x_new | x) = \u222b p(x_new | \u03b8)\u00b7p(\u03b8 | x) d\u03b8.\n  - chain-of-thought (agentic-reasoning): Chain-of-Thought (CoT): generate intermediate reasoning steps before final answer. \"Let's think step by step.\" Implicit vs. explicit CoT; generated vs. retrieved CoT.\n  - computation-tree-logic (formal-verification): CTL: branching-time temporal logic with path quantifiers (A = all paths, E = exists path) and temporal operators (X = next, F = eventually, G = always, U = until, W = weak until). Model checking: labeling algorithm.\n  - pedersen-commitment (cryptography-advanced): Pedersen commitment: commit to m as C = g^m \u00b7 h^r, where g, h are generators of a group of unknown order, and r is randomness. Perfectly hiding (given m, g^r is uniform) and computationally binding under the discrete log assumption.\n  - tree-of-thought (agentic-reasoning): Tree-of-Thought (ToT): explore branching reasoning paths; each node = partial solution; DFS/BFS for search; evaluate branch quality to prune.\n**Real walls (combined):**\n  - [bayesian-posterior-inference] Prior sensitivity: posterior can be prior-dominated if data is sparse\n  - [bayesian-posterior-inference] Jeffreys prior = uninformative\n  - [bayesian-posterior-inference] conjugate priors simplify\n  - [chain-of-thought] CoT effectiveness plateaus for >5\u20137 steps\n  - [chain-of-thought] self-consistency (sample multiple CoTs, vote) improves accuracy at cost O(n\u00b7k)\n  - [computation-tree-logic] Expressive enough for many properties\n  - [computation-tree-logic] CTL cannot express some properties (e.g., \"always eventually p holds on all paths\" = AG EF p)\n  - [computation-tree-logic] CTL* (full branching time) is more expressive\n  - [pedersen-commitment] Requires trusted setup to generate g, h such that discrete log of h wrt g is unknown\n  - [pedersen-commitment] no known trapdoor\n  - [tree-of-thought] Evaluation function quality determines pruning accuracy\n  - [tree-of-thought] noisy evaluation \u2192 wrong branches kept, correct branches pruned"
+    },
+    {
+      "primitives": [
+        "bayesian-posterior-inference",
+        "chain-of-thought",
+        "integer-programming",
+        "maximum-likelihood-estimation",
+        "pedersen-commitment"
+      ],
+      "domains": [
+        "statistics-probability",
+        "agentic-reasoning",
+        "combinatorial-optimization",
+        "statistics-probability",
+        "cryptography-advanced"
+      ],
+      "categories": [
+        "statistics-probability",
+        "agentic-reasoning",
+        "combinatorial-optimization",
+        "statistics-probability",
+        "cryptography-advanced"
+      ],
+      "score": 875.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "statistics-probability"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "statistics-probability"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "sample",
+        "order"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 combinatorial-optimization \u2192 cryptography-advanced \u2192 statistics-probability\n**Components:**\n  - bayesian-posterior-inference (statistics-probability): Bayesian inference: compute posterior p(\u03b8 | x) = p(x | \u03b8)\u00b7p(\u03b8) / p(x). Prior p(\u03b8) encodes domain knowledge; posterior combines data + prior; predictive posterior p(x_new | x) = \u222b p(x_new | \u03b8)\u00b7p(\u03b8 | x) d\u03b8.\n  - chain-of-thought (agentic-reasoning): Chain-of-Thought (CoT): generate intermediate reasoning steps before final answer. \"Let's think step by step.\" Implicit vs. explicit CoT; generated vs. retrieved CoT.\n  - integer-programming (combinatorial-optimization): IP (Integer Programming): optimization over integer variables with linear constraints. NP-hard in general; branch-and-bound solves practically.\n  - maximum-likelihood-estimation (statistics-probability): MLE: choose parameter \u03b8 to maximize likelihood L(\u03b8; x) = P(x | \u03b8). Equivalently maximize log-likelihood \u2113(\u03b8; x) = \u03a3 log P(x\u1d62 | \u03b8). Consistent (as n \u2192 \u221e) and asymptotically efficient (lowest variance among unbiased estimators).\n  - pedersen-commitment (cryptography-advanced): Pedersen commitment: commit to m as C = g^m \u00b7 h^r, where g, h are generators of a group of unknown order, and r is randomness. Perfectly hiding (given m, g^r is uniform) and computationally binding under the discrete log assumption.\n**Real walls (combined):**\n  - [bayesian-posterior-inference] Prior sensitivity: posterior can be prior-dominated if data is sparse\n  - [bayesian-posterior-inference] Jeffreys prior = uninformative\n  - [bayesian-posterior-inference] conjugate priors simplify\n  - [chain-of-thought] CoT effectiveness plateaus for >5\u20137 steps\n  - [chain-of-thought] self-consistency (sample multiple CoTs, vote) improves accuracy at cost O(n\u00b7k)\n  - [integer-programming] Problem formulation (modeling) quality matters more than solver\n  - [integer-programming] different formulations have vastly different solving times\n  - [maximum-likelihood-estimation] Non-convex likelihoods \u2192 multiple local maxima\n  - [maximum-likelihood-estimation] flat likelihood \u2192 high variance\n  - [maximum-likelihood-estimation] regularization may be needed\n  - [pedersen-commitment] Requires trusted setup to generate g, h such that discrete log of h wrt g is unknown\n  - [pedersen-commitment] no known trapdoor"
+    },
+    {
+      "primitives": [
+        "bayesian-posterior-inference",
+        "chain-of-thought",
+        "linear-relaxation",
+        "maximum-likelihood-estimation",
+        "pedersen-commitment"
+      ],
+      "domains": [
+        "statistics-probability",
+        "agentic-reasoning",
+        "combinatorial-optimization",
+        "statistics-probability",
+        "cryptography-advanced"
+      ],
+      "categories": [
+        "statistics-probability",
+        "agentic-reasoning",
+        "combinatorial-optimization",
+        "statistics-probability",
+        "cryptography-advanced"
+      ],
+      "score": 875.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "statistics-probability"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "statistics-probability"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "sample",
+        "order"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 combinatorial-optimization \u2192 cryptography-advanced \u2192 statistics-probability\n**Components:**\n  - bayesian-posterior-inference (statistics-probability): Bayesian inference: compute posterior p(\u03b8 | x) = p(x | \u03b8)\u00b7p(\u03b8) / p(x). Prior p(\u03b8) encodes domain knowledge; posterior combines data + prior; predictive posterior p(x_new | x) = \u222b p(x_new | \u03b8)\u00b7p(\u03b8 | x) d\u03b8.\n  - chain-of-thought (agentic-reasoning): Chain-of-Thought (CoT): generate intermediate reasoning steps before final answer. \"Let's think step by step.\" Implicit vs. explicit CoT; generated vs. retrieved CoT.\n  - linear-relaxation (combinatorial-optimization): LP relaxation: remove integrality constraints from IP. Optimal LP value \u2264 optimal IP value (lower bound for minimization).\n  - maximum-likelihood-estimation (statistics-probability): MLE: choose parameter \u03b8 to maximize likelihood L(\u03b8; x) = P(x | \u03b8). Equivalently maximize log-likelihood \u2113(\u03b8; x) = \u03a3 log P(x\u1d62 | \u03b8). Consistent (as n \u2192 \u221e) and asymptotically efficient (lowest variance among unbiased estimators).\n  - pedersen-commitment (cryptography-advanced): Pedersen commitment: commit to m as C = g^m \u00b7 h^r, where g, h are generators of a group of unknown order, and r is randomness. Perfectly hiding (given m, g^r is uniform) and computationally binding under the discrete log assumption.\n**Real walls (combined):**\n  - [bayesian-posterior-inference] Prior sensitivity: posterior can be prior-dominated if data is sparse\n  - [bayesian-posterior-inference] Jeffreys prior = uninformative\n  - [bayesian-posterior-inference] conjugate priors simplify\n  - [chain-of-thought] CoT effectiveness plateaus for >5\u20137 steps\n  - [chain-of-thought] self-consistency (sample multiple CoTs, vote) improves accuracy at cost O(n\u00b7k)\n  - [linear-relaxation] LP relaxation gap (IP-LP)/IP = integrality gap\n  - [linear-relaxation] large gap means branch-and-bound explores many nodes\n  - [maximum-likelihood-estimation] Non-convex likelihoods \u2192 multiple local maxima\n  - [maximum-likelihood-estimation] flat likelihood \u2192 high variance\n  - [maximum-likelihood-estimation] regularization may be needed\n  - [pedersen-commitment] Requires trusted setup to generate g, h such that discrete log of h wrt g is unknown\n  - [pedersen-commitment] no known trapdoor"
+    },
+    {
+      "primitives": [
+        "bayesian-posterior-inference",
+        "chain-of-thought",
+        "maximum-likelihood-estimation",
+        "pedersen-commitment",
+        "state-transition-system"
+      ],
+      "domains": [
+        "statistics-probability",
+        "agentic-reasoning",
+        "statistics-probability",
+        "cryptography-advanced",
+        "formal-verification"
+      ],
+      "categories": [
+        "statistics-probability",
+        "agentic-reasoning",
+        "statistics-probability",
+        "cryptography-advanced",
+        "formal-verification"
+      ],
+      "score": 875.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification",
+        "statistics-probability"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification",
+        "statistics-probability"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "sample",
+        "order"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 cryptography-advanced \u2192 formal-verification \u2192 statistics-probability\n**Components:**\n  - bayesian-posterior-inference (statistics-probability): Bayesian inference: compute posterior p(\u03b8 | x) = p(x | \u03b8)\u00b7p(\u03b8) / p(x). Prior p(\u03b8) encodes domain knowledge; posterior combines data + prior; predictive posterior p(x_new | x) = \u222b p(x_new | \u03b8)\u00b7p(\u03b8 | x) d\u03b8.\n  - chain-of-thought (agentic-reasoning): Chain-of-Thought (CoT): generate intermediate reasoning steps before final answer. \"Let's think step by step.\" Implicit vs. explicit CoT; generated vs. retrieved CoT.\n  - maximum-likelihood-estimation (statistics-probability): MLE: choose parameter \u03b8 to maximize likelihood L(\u03b8; x) = P(x | \u03b8). Equivalently maximize log-likelihood \u2113(\u03b8; x) = \u03a3 log P(x\u1d62 | \u03b8). Consistent (as n \u2192 \u221e) and asymptotically efficient (lowest variance among unbiased estimators).\n  - pedersen-commitment (cryptography-advanced): Pedersen commitment: commit to m as C = g^m \u00b7 h^r, where g, h are generators of a group of unknown order, and r is randomness. Perfectly hiding (given m, g^r is uniform) and computationally binding under the discrete log assumption.\n  - state-transition-system (formal-verification): Model of a system as states and transitions: TS = (S, S\u2080, Act, \u2192, AP, L). States S, initial states S\u2080 \u2286 S, actions Act, transition relation \u2192 \u2286 S \u00d7 Act \u00d7 S, atomic propositions AP, labeling L: S \u2192 2^AP.\n**Real walls (combined):**\n  - [bayesian-posterior-inference] Prior sensitivity: posterior can be prior-dominated if data is sparse\n  - [bayesian-posterior-inference] Jeffreys prior = uninformative\n  - [bayesian-posterior-inference] conjugate priors simplify\n  - [chain-of-thought] CoT effectiveness plateaus for >5\u20137 steps\n  - [chain-of-thought] self-consistency (sample multiple CoTs, vote) improves accuracy at cost O(n\u00b7k)\n  - [maximum-likelihood-estimation] Non-convex likelihoods \u2192 multiple local maxima\n  - [maximum-likelihood-estimation] flat likelihood \u2192 high variance\n  - [maximum-likelihood-estimation] regularization may be needed\n  - [pedersen-commitment] Requires trusted setup to generate g, h such that discrete log of h wrt g is unknown\n  - [pedersen-commitment] no known trapdoor\n  - [state-transition-system] State explosion: |S| grows exponentially with components\n  - [state-transition-system] compositional methods mitigate but don't solve"
+    },
+    {
+      "primitives": [
+        "bayesian-posterior-inference",
+        "chain-of-thought",
+        "maximum-likelihood-estimation",
+        "pedersen-commitment",
+        "structural-causal-model"
+      ],
+      "domains": [
+        "statistics-probability",
+        "agentic-reasoning",
+        "statistics-probability",
+        "cryptography-advanced",
+        "causal-inference"
+      ],
+      "categories": [
+        "statistics-probability",
+        "agentic-reasoning",
+        "statistics-probability",
+        "cryptography-advanced",
+        "causal-inference"
+      ],
+      "score": 875.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "causal-inference",
+        "cryptography-advanced",
+        "statistics-probability"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "causal-inference",
+        "cryptography-advanced",
+        "statistics-probability"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "sample",
+        "order"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 causal-inference \u2192 cryptography-advanced \u2192 statistics-probability\n**Components:**\n  - bayesian-posterior-inference (statistics-probability): Bayesian inference: compute posterior p(\u03b8 | x) = p(x | \u03b8)\u00b7p(\u03b8) / p(x). Prior p(\u03b8) encodes domain knowledge; posterior combines data + prior; predictive posterior p(x_new | x) = \u222b p(x_new | \u03b8)\u00b7p(\u03b8 | x) d\u03b8.\n  - chain-of-thought (agentic-reasoning): Chain-of-Thought (CoT): generate intermediate reasoning steps before final answer. \"Let's think step by step.\" Implicit vs. explicit CoT; generated vs. retrieved CoT.\n  - maximum-likelihood-estimation (statistics-probability): MLE: choose parameter \u03b8 to maximize likelihood L(\u03b8; x) = P(x | \u03b8). Equivalently maximize log-likelihood \u2113(\u03b8; x) = \u03a3 log P(x\u1d62 | \u03b8). Consistent (as n \u2192 \u221e) and asymptotically efficient (lowest variance among unbiased estimators).\n  - pedersen-commitment (cryptography-advanced): Pedersen commitment: commit to m as C = g^m \u00b7 h^r, where g, h are generators of a group of unknown order, and r is randomness. Perfectly hiding (given m, g^r is uniform) and computationally binding under the discrete log assumption.\n  - structural-causal-model (causal-inference): SCM (Structural Causal Model): set of endogenous variables X, exogenous variables U, and structural equations f such that X = f(X, U). Each equation represents a causal mechanism.\n**Real walls (combined):**\n  - [bayesian-posterior-inference] Prior sensitivity: posterior can be prior-dominated if data is sparse\n  - [bayesian-posterior-inference] Jeffreys prior = uninformative\n  - [bayesian-posterior-inference] conjugate priors simplify\n  - [chain-of-thought] CoT effectiveness plateaus for >5\u20137 steps\n  - [chain-of-thought] self-consistency (sample multiple CoTs, vote) improves accuracy at cost O(n\u00b7k)\n  - [maximum-likelihood-estimation] Non-convex likelihoods \u2192 multiple local maxima\n  - [maximum-likelihood-estimation] flat likelihood \u2192 high variance\n  - [maximum-likelihood-estimation] regularization may be needed\n  - [pedersen-commitment] Requires trusted setup to generate g, h such that discrete log of h wrt g is unknown\n  - [pedersen-commitment] no known trapdoor\n  - [structural-causal-model] SCMs assume acyclic graphs (except with cycles under equilibrium)\n  - [structural-causal-model] cyclic SCMs require fixed-point solution"
+    },
+    {
+      "primitives": [
+        "bayesian-posterior-inference",
+        "chain-of-thought",
+        "maximum-likelihood-estimation",
+        "pedersen-commitment",
+        "tree-of-thought"
+      ],
+      "domains": [
+        "statistics-probability",
+        "agentic-reasoning",
+        "statistics-probability",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "statistics-probability",
+        "agentic-reasoning",
+        "statistics-probability",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "score": 875.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "statistics-probability"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "statistics-probability"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "sample",
+        "order"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 cryptography-advanced \u2192 statistics-probability\n**Components:**\n  - bayesian-posterior-inference (statistics-probability): Bayesian inference: compute posterior p(\u03b8 | x) = p(x | \u03b8)\u00b7p(\u03b8) / p(x). Prior p(\u03b8) encodes domain knowledge; posterior combines data + prior; predictive posterior p(x_new | x) = \u222b p(x_new | \u03b8)\u00b7p(\u03b8 | x) d\u03b8.\n  - chain-of-thought (agentic-reasoning): Chain-of-Thought (CoT): generate intermediate reasoning steps before final answer. \"Let's think step by step.\" Implicit vs. explicit CoT; generated vs. retrieved CoT.\n  - maximum-likelihood-estimation (statistics-probability): MLE: choose parameter \u03b8 to maximize likelihood L(\u03b8; x) = P(x | \u03b8). Equivalently maximize log-likelihood \u2113(\u03b8; x) = \u03a3 log P(x\u1d62 | \u03b8). Consistent (as n \u2192 \u221e) and asymptotically efficient (lowest variance among unbiased estimators).\n  - pedersen-commitment (cryptography-advanced): Pedersen commitment: commit to m as C = g^m \u00b7 h^r, where g, h are generators of a group of unknown order, and r is randomness. Perfectly hiding (given m, g^r is uniform) and computationally binding under the discrete log assumption.\n  - tree-of-thought (agentic-reasoning): Tree-of-Thought (ToT): explore branching reasoning paths; each node = partial solution; DFS/BFS for search; evaluate branch quality to prune.\n**Real walls (combined):**\n  - [bayesian-posterior-inference] Prior sensitivity: posterior can be prior-dominated if data is sparse\n  - [bayesian-posterior-inference] Jeffreys prior = uninformative\n  - [bayesian-posterior-inference] conjugate priors simplify\n  - [chain-of-thought] CoT effectiveness plateaus for >5\u20137 steps\n  - [chain-of-thought] self-consistency (sample multiple CoTs, vote) improves accuracy at cost O(n\u00b7k)\n  - [maximum-likelihood-estimation] Non-convex likelihoods \u2192 multiple local maxima\n  - [maximum-likelihood-estimation] flat likelihood \u2192 high variance\n  - [maximum-likelihood-estimation] regularization may be needed\n  - [pedersen-commitment] Requires trusted setup to generate g, h such that discrete log of h wrt g is unknown\n  - [pedersen-commitment] no known trapdoor\n  - [tree-of-thought] Evaluation function quality determines pruning accuracy\n  - [tree-of-thought] noisy evaluation \u2192 wrong branches kept, correct branches pruned"
+    },
+    {
+      "primitives": [
+        "bayesian-posterior-inference",
+        "commitment-scheme",
+        "computation-tree-logic",
+        "maximum-likelihood-estimation",
+        "pedersen-commitment"
+      ],
+      "domains": [
+        "statistics-probability",
+        "cryptography-advanced",
+        "formal-verification",
+        "statistics-probability",
+        "cryptography-advanced"
+      ],
+      "categories": [
+        "statistics-probability",
+        "cryptography-advanced",
+        "formal-verification",
+        "statistics-probability",
+        "cryptography-advanced"
+      ],
+      "score": 875.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "cryptography-advanced",
+        "formal-verification",
+        "statistics-probability"
+      ],
+      "unique_domains": [
+        "cryptography-advanced",
+        "formal-verification",
+        "statistics-probability"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "order",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** cryptography-advanced \u2192 formal-verification \u2192 statistics-probability\n**Components:**\n  - bayesian-posterior-inference (statistics-probability): Bayesian inference: compute posterior p(\u03b8 | x) = p(x | \u03b8)\u00b7p(\u03b8) / p(x). Prior p(\u03b8) encodes domain knowledge; posterior combines data + prior; predictive posterior p(x_new | x) = \u222b p(x_new | \u03b8)\u00b7p(\u03b8 | x) d\u03b8.\n  - commitment-scheme (cryptography-advanced): A commitment scheme allows a committer to lock a value (binding) without revealing it (hiding), then open it later (verifiable). Two phases: commit(value) \u2192 (commitment, decommit), verify(commitment, value, decommit) \u2192 accept/reject.\n  - computation-tree-logic (formal-verification): CTL: branching-time temporal logic with path quantifiers (A = all paths, E = exists path) and temporal operators (X = next, F = eventually, G = always, U = until, W = weak until). Model checking: labeling algorithm.\n  - maximum-likelihood-estimation (statistics-probability): MLE: choose parameter \u03b8 to maximize likelihood L(\u03b8; x) = P(x | \u03b8). Equivalently maximize log-likelihood \u2113(\u03b8; x) = \u03a3 log P(x\u1d62 | \u03b8). Consistent (as n \u2192 \u221e) and asymptotically efficient (lowest variance among unbiased estimators).\n  - pedersen-commitment (cryptography-advanced): Pedersen commitment: commit to m as C = g^m \u00b7 h^r, where g, h are generators of a group of unknown order, and r is randomness. Perfectly hiding (given m, g^r is uniform) and computationally binding under the discrete log assumption.\n**Real walls (combined):**\n  - [bayesian-posterior-inference] Prior sensitivity: posterior can be prior-dominated if data is sparse\n  - [bayesian-posterior-inference] Jeffreys prior = uninformative\n  - [bayesian-posterior-inference] conjugate priors simplify\n  - [commitment-scheme] Binding property (cannot change committed value) vs. hiding property (cannot see committed value before opening) \u2014 some schemes trade one for the other\n  - [computation-tree-logic] Expressive enough for many properties\n  - [computation-tree-logic] CTL cannot express some properties (e.g., \"always eventually p holds on all paths\" = AG EF p)\n  - [computation-tree-logic] CTL* (full branching time) is more expressive\n  - [maximum-likelihood-estimation] Non-convex likelihoods \u2192 multiple local maxima\n  - [maximum-likelihood-estimation] flat likelihood \u2192 high variance\n  - [maximum-likelihood-estimation] regularization may be needed\n  - [pedersen-commitment] Requires trusted setup to generate g, h such that discrete log of h wrt g is unknown\n  - [pedersen-commitment] no known trapdoor"
+    },
+    {
+      "primitives": [
+        "bayesian-posterior-inference",
+        "computation-tree-logic",
+        "do-operator",
+        "maximum-likelihood-estimation",
+        "pedersen-commitment"
+      ],
+      "domains": [
+        "statistics-probability",
+        "formal-verification",
+        "causal-inference",
+        "statistics-probability",
+        "cryptography-advanced"
+      ],
+      "categories": [
+        "statistics-probability",
+        "formal-verification",
+        "causal-inference",
+        "statistics-probability",
+        "cryptography-advanced"
+      ],
+      "score": 875.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "causal-inference",
+        "cryptography-advanced",
+        "formal-verification",
+        "statistics-probability"
+      ],
+      "unique_domains": [
+        "causal-inference",
+        "cryptography-advanced",
+        "formal-verification",
+        "statistics-probability"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "order",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** causal-inference \u2192 cryptography-advanced \u2192 formal-verification \u2192 statistics-probability\n**Components:**\n  - bayesian-posterior-inference (statistics-probability): Bayesian inference: compute posterior p(\u03b8 | x) = p(x | \u03b8)\u00b7p(\u03b8) / p(x). Prior p(\u03b8) encodes domain knowledge; posterior combines data + prior; predictive posterior p(x_new | x) = \u222b p(x_new | \u03b8)\u00b7p(\u03b8 | x) d\u03b8.\n  - computation-tree-logic (formal-verification): CTL: branching-time temporal logic with path quantifiers (A = all paths, E = exists path) and temporal operators (X = next, F = eventually, G = always, U = until, W = weak until). Model checking: labeling algorithm.\n  - do-operator (causal-inference): do(X = x): intervention that fixes variable X to value x, removing incoming arrows from its causal parents. Post-intervention distribution P(Y | do(X=x)).\n  - maximum-likelihood-estimation (statistics-probability): MLE: choose parameter \u03b8 to maximize likelihood L(\u03b8; x) = P(x | \u03b8). Equivalently maximize log-likelihood \u2113(\u03b8; x) = \u03a3 log P(x\u1d62 | \u03b8). Consistent (as n \u2192 \u221e) and asymptotically efficient (lowest variance among unbiased estimators).\n  - pedersen-commitment (cryptography-advanced): Pedersen commitment: commit to m as C = g^m \u00b7 h^r, where g, h are generators of a group of unknown order, and r is randomness. Perfectly hiding (given m, g^r is uniform) and computationally binding under the discrete log assumption.\n**Real walls (combined):**\n  - [bayesian-posterior-inference] Prior sensitivity: posterior can be prior-dominated if data is sparse\n  - [bayesian-posterior-inference] Jeffreys prior = uninformative\n  - [bayesian-posterior-inference] conjugate priors simplify\n  - [computation-tree-logic] Expressive enough for many properties\n  - [computation-tree-logic] CTL cannot express some properties (e.g., \"always eventually p holds on all paths\" = AG EF p)\n  - [computation-tree-logic] CTL* (full branching time) is more expressive\n  - [do-operator] do differs from conditioning: do(X=x) \u2260 P(X=x | X=x) unless X has no confounders\n  - [maximum-likelihood-estimation] Non-convex likelihoods \u2192 multiple local maxima\n  - [maximum-likelihood-estimation] flat likelihood \u2192 high variance\n  - [maximum-likelihood-estimation] regularization may be needed\n  - [pedersen-commitment] Requires trusted setup to generate g, h such that discrete log of h wrt g is unknown\n  - [pedersen-commitment] no known trapdoor"
+    },
+    {
+      "primitives": [
+        "bayesian-posterior-inference",
+        "computation-tree-logic",
+        "integer-programming",
+        "linear-relaxation",
+        "pedersen-commitment"
+      ],
+      "domains": [
+        "statistics-probability",
+        "formal-verification",
+        "combinatorial-optimization",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "categories": [
+        "statistics-probability",
+        "formal-verification",
+        "combinatorial-optimization",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "score": 875.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "formal-verification",
+        "statistics-probability"
+      ],
+      "unique_domains": [
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "formal-verification",
+        "statistics-probability"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "order",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** combinatorial-optimization \u2192 cryptography-advanced \u2192 formal-verification \u2192 statistics-probability\n**Components:**\n  - bayesian-posterior-inference (statistics-probability): Bayesian inference: compute posterior p(\u03b8 | x) = p(x | \u03b8)\u00b7p(\u03b8) / p(x). Prior p(\u03b8) encodes domain knowledge; posterior combines data + prior; predictive posterior p(x_new | x) = \u222b p(x_new | \u03b8)\u00b7p(\u03b8 | x) d\u03b8.\n  - computation-tree-logic (formal-verification): CTL: branching-time temporal logic with path quantifiers (A = all paths, E = exists path) and temporal operators (X = next, F = eventually, G = always, U = until, W = weak until). Model checking: labeling algorithm.\n  - integer-programming (combinatorial-optimization): IP (Integer Programming): optimization over integer variables with linear constraints. NP-hard in general; branch-and-bound solves practically.\n  - linear-relaxation (combinatorial-optimization): LP relaxation: remove integrality constraints from IP. Optimal LP value \u2264 optimal IP value (lower bound for minimization).\n  - pedersen-commitment (cryptography-advanced): Pedersen commitment: commit to m as C = g^m \u00b7 h^r, where g, h are generators of a group of unknown order, and r is randomness. Perfectly hiding (given m, g^r is uniform) and computationally binding under the discrete log assumption.\n**Real walls (combined):**\n  - [bayesian-posterior-inference] Prior sensitivity: posterior can be prior-dominated if data is sparse\n  - [bayesian-posterior-inference] Jeffreys prior = uninformative\n  - [bayesian-posterior-inference] conjugate priors simplify\n  - [computation-tree-logic] Expressive enough for many properties\n  - [computation-tree-logic] CTL cannot express some properties (e.g., \"always eventually p holds on all paths\" = AG EF p)\n  - [computation-tree-logic] CTL* (full branching time) is more expressive\n  - [integer-programming] Problem formulation (modeling) quality matters more than solver\n  - [integer-programming] different formulations have vastly different solving times\n  - [linear-relaxation] LP relaxation gap (IP-LP)/IP = integrality gap\n  - [linear-relaxation] large gap means branch-and-bound explores many nodes\n  - [pedersen-commitment] Requires trusted setup to generate g, h such that discrete log of h wrt g is unknown\n  - [pedersen-commitment] no known trapdoor"
+    },
+    {
+      "primitives": [
+        "bayesian-posterior-inference",
+        "computation-tree-logic",
+        "integer-programming",
+        "pedersen-commitment",
+        "state-transition-system"
+      ],
+      "domains": [
+        "statistics-probability",
+        "formal-verification",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "formal-verification"
+      ],
+      "categories": [
+        "statistics-probability",
+        "formal-verification",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "formal-verification"
+      ],
+      "score": 875.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "formal-verification",
+        "statistics-probability"
+      ],
+      "unique_domains": [
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "formal-verification",
+        "statistics-probability"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "order",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** combinatorial-optimization \u2192 cryptography-advanced \u2192 formal-verification \u2192 statistics-probability\n**Components:**\n  - bayesian-posterior-inference (statistics-probability): Bayesian inference: compute posterior p(\u03b8 | x) = p(x | \u03b8)\u00b7p(\u03b8) / p(x). Prior p(\u03b8) encodes domain knowledge; posterior combines data + prior; predictive posterior p(x_new | x) = \u222b p(x_new | \u03b8)\u00b7p(\u03b8 | x) d\u03b8.\n  - computation-tree-logic (formal-verification): CTL: branching-time temporal logic with path quantifiers (A = all paths, E = exists path) and temporal operators (X = next, F = eventually, G = always, U = until, W = weak until). Model checking: labeling algorithm.\n  - integer-programming (combinatorial-optimization): IP (Integer Programming): optimization over integer variables with linear constraints. NP-hard in general; branch-and-bound solves practically.\n  - pedersen-commitment (cryptography-advanced): Pedersen commitment: commit to m as C = g^m \u00b7 h^r, where g, h are generators of a group of unknown order, and r is randomness. Perfectly hiding (given m, g^r is uniform) and computationally binding under the discrete log assumption.\n  - state-transition-system (formal-verification): Model of a system as states and transitions: TS = (S, S\u2080, Act, \u2192, AP, L). States S, initial states S\u2080 \u2286 S, actions Act, transition relation \u2192 \u2286 S \u00d7 Act \u00d7 S, atomic propositions AP, labeling L: S \u2192 2^AP.\n**Real walls (combined):**\n  - [bayesian-posterior-inference] Prior sensitivity: posterior can be prior-dominated if data is sparse\n  - [bayesian-posterior-inference] Jeffreys prior = uninformative\n  - [bayesian-posterior-inference] conjugate priors simplify\n  - [computation-tree-logic] Expressive enough for many properties\n  - [computation-tree-logic] CTL cannot express some properties (e.g., \"always eventually p holds on all paths\" = AG EF p)\n  - [computation-tree-logic] CTL* (full branching time) is more expressive\n  - [integer-programming] Problem formulation (modeling) quality matters more than solver\n  - [integer-programming] different formulations have vastly different solving times\n  - [pedersen-commitment] Requires trusted setup to generate g, h such that discrete log of h wrt g is unknown\n  - [pedersen-commitment] no known trapdoor\n  - [state-transition-system] State explosion: |S| grows exponentially with components\n  - [state-transition-system] compositional methods mitigate but don't solve"
+    },
+    {
+      "primitives": [
+        "bayesian-posterior-inference",
+        "computation-tree-logic",
+        "integer-programming",
+        "pedersen-commitment",
+        "structural-causal-model"
+      ],
+      "domains": [
+        "statistics-probability",
+        "formal-verification",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "causal-inference"
+      ],
+      "categories": [
+        "statistics-probability",
+        "formal-verification",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "causal-inference"
+      ],
+      "score": 875.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "formal-verification",
+        "statistics-probability"
+      ],
+      "unique_domains": [
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "formal-verification",
+        "statistics-probability"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "order",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** causal-inference \u2192 combinatorial-optimization \u2192 cryptography-advanced \u2192 formal-verification \u2192 statistics-probability\n**Components:**\n  - bayesian-posterior-inference (statistics-probability): Bayesian inference: compute posterior p(\u03b8 | x) = p(x | \u03b8)\u00b7p(\u03b8) / p(x). Prior p(\u03b8) encodes domain knowledge; posterior combines data + prior; predictive posterior p(x_new | x) = \u222b p(x_new | \u03b8)\u00b7p(\u03b8 | x) d\u03b8.\n  - computation-tree-logic (formal-verification): CTL: branching-time temporal logic with path quantifiers (A = all paths, E = exists path) and temporal operators (X = next, F = eventually, G = always, U = until, W = weak until). Model checking: labeling algorithm.\n  - integer-programming (combinatorial-optimization): IP (Integer Programming): optimization over integer variables with linear constraints. NP-hard in general; branch-and-bound solves practically.\n  - pedersen-commitment (cryptography-advanced): Pedersen commitment: commit to m as C = g^m \u00b7 h^r, where g, h are generators of a group of unknown order, and r is randomness. Perfectly hiding (given m, g^r is uniform) and computationally binding under the discrete log assumption.\n  - structural-causal-model (causal-inference): SCM (Structural Causal Model): set of endogenous variables X, exogenous variables U, and structural equations f such that X = f(X, U). Each equation represents a causal mechanism.\n**Real walls (combined):**\n  - [bayesian-posterior-inference] Prior sensitivity: posterior can be prior-dominated if data is sparse\n  - [bayesian-posterior-inference] Jeffreys prior = uninformative\n  - [bayesian-posterior-inference] conjugate priors simplify\n  - [computation-tree-logic] Expressive enough for many properties\n  - [computation-tree-logic] CTL cannot express some properties (e.g., \"always eventually p holds on all paths\" = AG EF p)\n  - [computation-tree-logic] CTL* (full branching time) is more expressive\n  - [integer-programming] Problem formulation (modeling) quality matters more than solver\n  - [integer-programming] different formulations have vastly different solving times\n  - [pedersen-commitment] Requires trusted setup to generate g, h such that discrete log of h wrt g is unknown\n  - [pedersen-commitment] no known trapdoor\n  - [structural-causal-model] SCMs assume acyclic graphs (except with cycles under equilibrium)\n  - [structural-causal-model] cyclic SCMs require fixed-point solution"
+    },
+    {
+      "primitives": [
+        "bayesian-posterior-inference",
+        "computation-tree-logic",
+        "integer-programming",
+        "pedersen-commitment",
+        "tree-of-thought"
+      ],
+      "domains": [
+        "statistics-probability",
+        "formal-verification",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "statistics-probability",
+        "formal-verification",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "score": 875.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "formal-verification",
+        "statistics-probability"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "formal-verification",
+        "statistics-probability"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "order",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 combinatorial-optimization \u2192 cryptography-advanced \u2192 formal-verification \u2192 statistics-probability\n**Components:**\n  - bayesian-posterior-inference (statistics-probability): Bayesian inference: compute posterior p(\u03b8 | x) = p(x | \u03b8)\u00b7p(\u03b8) / p(x). Prior p(\u03b8) encodes domain knowledge; posterior combines data + prior; predictive posterior p(x_new | x) = \u222b p(x_new | \u03b8)\u00b7p(\u03b8 | x) d\u03b8.\n  - computation-tree-logic (formal-verification): CTL: branching-time temporal logic with path quantifiers (A = all paths, E = exists path) and temporal operators (X = next, F = eventually, G = always, U = until, W = weak until). Model checking: labeling algorithm.\n  - integer-programming (combinatorial-optimization): IP (Integer Programming): optimization over integer variables with linear constraints. NP-hard in general; branch-and-bound solves practically.\n  - pedersen-commitment (cryptography-advanced): Pedersen commitment: commit to m as C = g^m \u00b7 h^r, where g, h are generators of a group of unknown order, and r is randomness. Perfectly hiding (given m, g^r is uniform) and computationally binding under the discrete log assumption.\n  - tree-of-thought (agentic-reasoning): Tree-of-Thought (ToT): explore branching reasoning paths; each node = partial solution; DFS/BFS for search; evaluate branch quality to prune.\n**Real walls (combined):**\n  - [bayesian-posterior-inference] Prior sensitivity: posterior can be prior-dominated if data is sparse\n  - [bayesian-posterior-inference] Jeffreys prior = uninformative\n  - [bayesian-posterior-inference] conjugate priors simplify\n  - [computation-tree-logic] Expressive enough for many properties\n  - [computation-tree-logic] CTL cannot express some properties (e.g., \"always eventually p holds on all paths\" = AG EF p)\n  - [computation-tree-logic] CTL* (full branching time) is more expressive\n  - [integer-programming] Problem formulation (modeling) quality matters more than solver\n  - [integer-programming] different formulations have vastly different solving times\n  - [pedersen-commitment] Requires trusted setup to generate g, h such that discrete log of h wrt g is unknown\n  - [pedersen-commitment] no known trapdoor\n  - [tree-of-thought] Evaluation function quality determines pruning accuracy\n  - [tree-of-thought] noisy evaluation \u2192 wrong branches kept, correct branches pruned"
+    },
+    {
+      "primitives": [
+        "bayesian-posterior-inference",
+        "computation-tree-logic",
+        "linear-relaxation",
+        "pedersen-commitment",
+        "state-transition-system"
+      ],
+      "domains": [
+        "statistics-probability",
+        "formal-verification",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "formal-verification"
+      ],
+      "categories": [
+        "statistics-probability",
+        "formal-verification",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "formal-verification"
+      ],
+      "score": 875.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "formal-verification",
+        "statistics-probability"
+      ],
+      "unique_domains": [
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "formal-verification",
+        "statistics-probability"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "order",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** combinatorial-optimization \u2192 cryptography-advanced \u2192 formal-verification \u2192 statistics-probability\n**Components:**\n  - bayesian-posterior-inference (statistics-probability): Bayesian inference: compute posterior p(\u03b8 | x) = p(x | \u03b8)\u00b7p(\u03b8) / p(x). Prior p(\u03b8) encodes domain knowledge; posterior combines data + prior; predictive posterior p(x_new | x) = \u222b p(x_new | \u03b8)\u00b7p(\u03b8 | x) d\u03b8.\n  - computation-tree-logic (formal-verification): CTL: branching-time temporal logic with path quantifiers (A = all paths, E = exists path) and temporal operators (X = next, F = eventually, G = always, U = until, W = weak until). Model checking: labeling algorithm.\n  - linear-relaxation (combinatorial-optimization): LP relaxation: remove integrality constraints from IP. Optimal LP value \u2264 optimal IP value (lower bound for minimization).\n  - pedersen-commitment (cryptography-advanced): Pedersen commitment: commit to m as C = g^m \u00b7 h^r, where g, h are generators of a group of unknown order, and r is randomness. Perfectly hiding (given m, g^r is uniform) and computationally binding under the discrete log assumption.\n  - state-transition-system (formal-verification): Model of a system as states and transitions: TS = (S, S\u2080, Act, \u2192, AP, L). States S, initial states S\u2080 \u2286 S, actions Act, transition relation \u2192 \u2286 S \u00d7 Act \u00d7 S, atomic propositions AP, labeling L: S \u2192 2^AP.\n**Real walls (combined):**\n  - [bayesian-posterior-inference] Prior sensitivity: posterior can be prior-dominated if data is sparse\n  - [bayesian-posterior-inference] Jeffreys prior = uninformative\n  - [bayesian-posterior-inference] conjugate priors simplify\n  - [computation-tree-logic] Expressive enough for many properties\n  - [computation-tree-logic] CTL cannot express some properties (e.g., \"always eventually p holds on all paths\" = AG EF p)\n  - [computation-tree-logic] CTL* (full branching time) is more expressive\n  - [linear-relaxation] LP relaxation gap (IP-LP)/IP = integrality gap\n  - [linear-relaxation] large gap means branch-and-bound explores many nodes\n  - [pedersen-commitment] Requires trusted setup to generate g, h such that discrete log of h wrt g is unknown\n  - [pedersen-commitment] no known trapdoor\n  - [state-transition-system] State explosion: |S| grows exponentially with components\n  - [state-transition-system] compositional methods mitigate but don't solve"
+    },
+    {
+      "primitives": [
+        "bayesian-posterior-inference",
+        "computation-tree-logic",
+        "linear-relaxation",
+        "pedersen-commitment",
+        "structural-causal-model"
+      ],
+      "domains": [
+        "statistics-probability",
+        "formal-verification",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "causal-inference"
+      ],
+      "categories": [
+        "statistics-probability",
+        "formal-verification",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "causal-inference"
+      ],
+      "score": 875.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "formal-verification",
+        "statistics-probability"
+      ],
+      "unique_domains": [
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "formal-verification",
+        "statistics-probability"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "order",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** causal-inference \u2192 combinatorial-optimization \u2192 cryptography-advanced \u2192 formal-verification \u2192 statistics-probability\n**Components:**\n  - bayesian-posterior-inference (statistics-probability): Bayesian inference: compute posterior p(\u03b8 | x) = p(x | \u03b8)\u00b7p(\u03b8) / p(x). Prior p(\u03b8) encodes domain knowledge; posterior combines data + prior; predictive posterior p(x_new | x) = \u222b p(x_new | \u03b8)\u00b7p(\u03b8 | x) d\u03b8.\n  - computation-tree-logic (formal-verification): CTL: branching-time temporal logic with path quantifiers (A = all paths, E = exists path) and temporal operators (X = next, F = eventually, G = always, U = until, W = weak until). Model checking: labeling algorithm.\n  - linear-relaxation (combinatorial-optimization): LP relaxation: remove integrality constraints from IP. Optimal LP value \u2264 optimal IP value (lower bound for minimization).\n  - pedersen-commitment (cryptography-advanced): Pedersen commitment: commit to m as C = g^m \u00b7 h^r, where g, h are generators of a group of unknown order, and r is randomness. Perfectly hiding (given m, g^r is uniform) and computationally binding under the discrete log assumption.\n  - structural-causal-model (causal-inference): SCM (Structural Causal Model): set of endogenous variables X, exogenous variables U, and structural equations f such that X = f(X, U). Each equation represents a causal mechanism.\n**Real walls (combined):**\n  - [bayesian-posterior-inference] Prior sensitivity: posterior can be prior-dominated if data is sparse\n  - [bayesian-posterior-inference] Jeffreys prior = uninformative\n  - [bayesian-posterior-inference] conjugate priors simplify\n  - [computation-tree-logic] Expressive enough for many properties\n  - [computation-tree-logic] CTL cannot express some properties (e.g., \"always eventually p holds on all paths\" = AG EF p)\n  - [computation-tree-logic] CTL* (full branching time) is more expressive\n  - [linear-relaxation] LP relaxation gap (IP-LP)/IP = integrality gap\n  - [linear-relaxation] large gap means branch-and-bound explores many nodes\n  - [pedersen-commitment] Requires trusted setup to generate g, h such that discrete log of h wrt g is unknown\n  - [pedersen-commitment] no known trapdoor\n  - [structural-causal-model] SCMs assume acyclic graphs (except with cycles under equilibrium)\n  - [structural-causal-model] cyclic SCMs require fixed-point solution"
+    },
+    {
+      "primitives": [
+        "bayesian-posterior-inference",
+        "computation-tree-logic",
+        "linear-relaxation",
+        "pedersen-commitment",
+        "tree-of-thought"
+      ],
+      "domains": [
+        "statistics-probability",
+        "formal-verification",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "statistics-probability",
+        "formal-verification",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "score": 875.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "formal-verification",
+        "statistics-probability"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "formal-verification",
+        "statistics-probability"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "order",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 combinatorial-optimization \u2192 cryptography-advanced \u2192 formal-verification \u2192 statistics-probability\n**Components:**\n  - bayesian-posterior-inference (statistics-probability): Bayesian inference: compute posterior p(\u03b8 | x) = p(x | \u03b8)\u00b7p(\u03b8) / p(x). Prior p(\u03b8) encodes domain knowledge; posterior combines data + prior; predictive posterior p(x_new | x) = \u222b p(x_new | \u03b8)\u00b7p(\u03b8 | x) d\u03b8.\n  - computation-tree-logic (formal-verification): CTL: branching-time temporal logic with path quantifiers (A = all paths, E = exists path) and temporal operators (X = next, F = eventually, G = always, U = until, W = weak until). Model checking: labeling algorithm.\n  - linear-relaxation (combinatorial-optimization): LP relaxation: remove integrality constraints from IP. Optimal LP value \u2264 optimal IP value (lower bound for minimization).\n  - pedersen-commitment (cryptography-advanced): Pedersen commitment: commit to m as C = g^m \u00b7 h^r, where g, h are generators of a group of unknown order, and r is randomness. Perfectly hiding (given m, g^r is uniform) and computationally binding under the discrete log assumption.\n  - tree-of-thought (agentic-reasoning): Tree-of-Thought (ToT): explore branching reasoning paths; each node = partial solution; DFS/BFS for search; evaluate branch quality to prune.\n**Real walls (combined):**\n  - [bayesian-posterior-inference] Prior sensitivity: posterior can be prior-dominated if data is sparse\n  - [bayesian-posterior-inference] Jeffreys prior = uninformative\n  - [bayesian-posterior-inference] conjugate priors simplify\n  - [computation-tree-logic] Expressive enough for many properties\n  - [computation-tree-logic] CTL cannot express some properties (e.g., \"always eventually p holds on all paths\" = AG EF p)\n  - [computation-tree-logic] CTL* (full branching time) is more expressive\n  - [linear-relaxation] LP relaxation gap (IP-LP)/IP = integrality gap\n  - [linear-relaxation] large gap means branch-and-bound explores many nodes\n  - [pedersen-commitment] Requires trusted setup to generate g, h such that discrete log of h wrt g is unknown\n  - [pedersen-commitment] no known trapdoor\n  - [tree-of-thought] Evaluation function quality determines pruning accuracy\n  - [tree-of-thought] noisy evaluation \u2192 wrong branches kept, correct branches pruned"
+    }
+  ]
+}

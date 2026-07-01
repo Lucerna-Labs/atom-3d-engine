@@ -1,0 +1,1187 @@
+{
+  "filename": "media.h",
+  "includes": [
+    "linux/ioctl.h",
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "MEDIA_ENT_F_BASE",
+      "value": "0x00000000",
+      "comment": "",
+      "category": "MEDIA_ENT"
+    },
+    {
+      "name": "MEDIA_ENT_F_OLD_BASE",
+      "value": "0x00010000",
+      "comment": "",
+      "category": "MEDIA_ENT"
+    },
+    {
+      "name": "MEDIA_ENT_F_OLD_SUBDEV_BASE",
+      "value": "0x00020000",
+      "comment": "",
+      "category": "MEDIA_ENT"
+    },
+    {
+      "name": "MEDIA_ENT_F_UNKNOWN",
+      "value": "MEDIA_ENT_F_BASE",
+      "comment": "",
+      "category": "MEDIA_ENT"
+    },
+    {
+      "name": "MEDIA_ENT_F_V4L2_SUBDEV_UNKNOWN",
+      "value": "MEDIA_ENT_F_OLD_SUBDEV_BASE",
+      "comment": "",
+      "category": "MEDIA_ENT"
+    },
+    {
+      "name": "MEDIA_ENT_F_DTV_DEMOD",
+      "value": "(MEDIA_ENT_F_BASE + 0x00001)",
+      "comment": "",
+      "category": "MEDIA_ENT"
+    },
+    {
+      "name": "MEDIA_ENT_F_TS_DEMUX",
+      "value": "(MEDIA_ENT_F_BASE + 0x00002)",
+      "comment": "",
+      "category": "MEDIA_ENT"
+    },
+    {
+      "name": "MEDIA_ENT_F_DTV_CA",
+      "value": "(MEDIA_ENT_F_BASE + 0x00003)",
+      "comment": "",
+      "category": "MEDIA_ENT"
+    },
+    {
+      "name": "MEDIA_ENT_F_DTV_NET_DECAP",
+      "value": "(MEDIA_ENT_F_BASE + 0x00004)",
+      "comment": "",
+      "category": "MEDIA_ENT"
+    },
+    {
+      "name": "MEDIA_ENT_F_IO_V4L",
+      "value": "(MEDIA_ENT_F_OLD_BASE + 1)",
+      "comment": "",
+      "category": "MEDIA_ENT"
+    },
+    {
+      "name": "MEDIA_ENT_F_IO_DTV",
+      "value": "(MEDIA_ENT_F_BASE + 0x01001)",
+      "comment": "",
+      "category": "MEDIA_ENT"
+    },
+    {
+      "name": "MEDIA_ENT_F_IO_VBI",
+      "value": "(MEDIA_ENT_F_BASE + 0x01002)",
+      "comment": "",
+      "category": "MEDIA_ENT"
+    },
+    {
+      "name": "MEDIA_ENT_F_IO_SWRADIO",
+      "value": "(MEDIA_ENT_F_BASE + 0x01003)",
+      "comment": "",
+      "category": "MEDIA_ENT"
+    },
+    {
+      "name": "MEDIA_ENT_F_CAM_SENSOR",
+      "value": "(MEDIA_ENT_F_OLD_SUBDEV_BASE + 1)",
+      "comment": "",
+      "category": "MEDIA_ENT"
+    },
+    {
+      "name": "MEDIA_ENT_F_FLASH",
+      "value": "(MEDIA_ENT_F_OLD_SUBDEV_BASE + 2)",
+      "comment": "",
+      "category": "MEDIA_ENT"
+    },
+    {
+      "name": "MEDIA_ENT_F_LENS",
+      "value": "(MEDIA_ENT_F_OLD_SUBDEV_BASE + 3)",
+      "comment": "",
+      "category": "MEDIA_ENT"
+    },
+    {
+      "name": "MEDIA_ENT_F_TUNER",
+      "value": "(MEDIA_ENT_F_OLD_SUBDEV_BASE + 5)",
+      "comment": "",
+      "category": "MEDIA_ENT"
+    },
+    {
+      "name": "MEDIA_ENT_F_IF_VID_DECODER",
+      "value": "(MEDIA_ENT_F_BASE + 0x02001)",
+      "comment": "",
+      "category": "MEDIA_ENT"
+    },
+    {
+      "name": "MEDIA_ENT_F_IF_AUD_DECODER",
+      "value": "(MEDIA_ENT_F_BASE + 0x02002)",
+      "comment": "",
+      "category": "MEDIA_ENT"
+    },
+    {
+      "name": "MEDIA_ENT_F_AUDIO_CAPTURE",
+      "value": "(MEDIA_ENT_F_BASE + 0x03001)",
+      "comment": "",
+      "category": "MEDIA_ENT"
+    },
+    {
+      "name": "MEDIA_ENT_F_AUDIO_PLAYBACK",
+      "value": "(MEDIA_ENT_F_BASE + 0x03002)",
+      "comment": "",
+      "category": "MEDIA_ENT"
+    },
+    {
+      "name": "MEDIA_ENT_F_AUDIO_MIXER",
+      "value": "(MEDIA_ENT_F_BASE + 0x03003)",
+      "comment": "",
+      "category": "MEDIA_ENT"
+    },
+    {
+      "name": "MEDIA_ENT_F_PROC_VIDEO_COMPOSER",
+      "value": "(MEDIA_ENT_F_BASE + 0x4001)",
+      "comment": "",
+      "category": "MEDIA_ENT"
+    },
+    {
+      "name": "MEDIA_ENT_F_PROC_VIDEO_PIXEL_FORMATTER",
+      "value": "(MEDIA_ENT_F_BASE + 0x4002)",
+      "comment": "",
+      "category": "MEDIA_ENT"
+    },
+    {
+      "name": "MEDIA_ENT_F_PROC_VIDEO_PIXEL_ENC_CONV",
+      "value": "(MEDIA_ENT_F_BASE + 0x4003)",
+      "comment": "",
+      "category": "MEDIA_ENT"
+    },
+    {
+      "name": "MEDIA_ENT_F_PROC_VIDEO_LUT",
+      "value": "(MEDIA_ENT_F_BASE + 0x4004)",
+      "comment": "",
+      "category": "MEDIA_ENT"
+    },
+    {
+      "name": "MEDIA_ENT_F_PROC_VIDEO_SCALER",
+      "value": "(MEDIA_ENT_F_BASE + 0x4005)",
+      "comment": "",
+      "category": "MEDIA_ENT"
+    },
+    {
+      "name": "MEDIA_ENT_F_PROC_VIDEO_STATISTICS",
+      "value": "(MEDIA_ENT_F_BASE + 0x4006)",
+      "comment": "",
+      "category": "MEDIA_ENT"
+    },
+    {
+      "name": "MEDIA_ENT_F_PROC_VIDEO_ENCODER",
+      "value": "(MEDIA_ENT_F_BASE + 0x4007)",
+      "comment": "",
+      "category": "MEDIA_ENT"
+    },
+    {
+      "name": "MEDIA_ENT_F_PROC_VIDEO_DECODER",
+      "value": "(MEDIA_ENT_F_BASE + 0x4008)",
+      "comment": "",
+      "category": "MEDIA_ENT"
+    },
+    {
+      "name": "MEDIA_ENT_F_PROC_VIDEO_ISP",
+      "value": "(MEDIA_ENT_F_BASE + 0x4009)",
+      "comment": "",
+      "category": "MEDIA_ENT"
+    },
+    {
+      "name": "MEDIA_ENT_F_VID_MUX",
+      "value": "(MEDIA_ENT_F_BASE + 0x5001)",
+      "comment": "",
+      "category": "MEDIA_ENT"
+    },
+    {
+      "name": "MEDIA_ENT_F_VID_IF_BRIDGE",
+      "value": "(MEDIA_ENT_F_BASE + 0x5002)",
+      "comment": "",
+      "category": "MEDIA_ENT"
+    },
+    {
+      "name": "MEDIA_ENT_F_ATV_DECODER",
+      "value": "(MEDIA_ENT_F_OLD_SUBDEV_BASE + 4)",
+      "comment": "",
+      "category": "MEDIA_ENT"
+    },
+    {
+      "name": "MEDIA_ENT_F_DV_DECODER",
+      "value": "(MEDIA_ENT_F_BASE + 0x6001)",
+      "comment": "",
+      "category": "MEDIA_ENT"
+    },
+    {
+      "name": "MEDIA_ENT_F_DV_ENCODER",
+      "value": "(MEDIA_ENT_F_BASE + 0x6002)",
+      "comment": "",
+      "category": "MEDIA_ENT"
+    },
+    {
+      "name": "MEDIA_ENT_FL_DEFAULT",
+      "value": "(1U << 0)",
+      "comment": "",
+      "category": "MEDIA_ENT"
+    },
+    {
+      "name": "MEDIA_ENT_FL_CONNECTOR",
+      "value": "(1U << 1)",
+      "comment": "",
+      "category": "MEDIA_ENT"
+    },
+    {
+      "name": "MEDIA_ENT_ID_FLAG_NEXT",
+      "value": "(1U << 31)",
+      "comment": "",
+      "category": "MEDIA_ENT"
+    },
+    {
+      "name": "MEDIA_PAD_FL_SINK",
+      "value": "(1U << 0)",
+      "comment": "",
+      "category": "MEDIA_PAD"
+    },
+    {
+      "name": "MEDIA_PAD_FL_SOURCE",
+      "value": "(1U << 1)",
+      "comment": "",
+      "category": "MEDIA_PAD"
+    },
+    {
+      "name": "MEDIA_PAD_FL_MUST_CONNECT",
+      "value": "(1U << 2)",
+      "comment": "",
+      "category": "MEDIA_PAD"
+    },
+    {
+      "name": "MEDIA_LNK_FL_ENABLED",
+      "value": "(1U << 0)",
+      "comment": "",
+      "category": "MEDIA_LNK"
+    },
+    {
+      "name": "MEDIA_LNK_FL_IMMUTABLE",
+      "value": "(1U << 1)",
+      "comment": "",
+      "category": "MEDIA_LNK"
+    },
+    {
+      "name": "MEDIA_LNK_FL_DYNAMIC",
+      "value": "(1U << 2)",
+      "comment": "",
+      "category": "MEDIA_LNK"
+    },
+    {
+      "name": "MEDIA_LNK_FL_LINK_TYPE",
+      "value": "(0xf << 28)",
+      "comment": "",
+      "category": "MEDIA_LNK"
+    },
+    {
+      "name": "MEDIA_INTF_T_DVB_BASE",
+      "value": "0x00000100",
+      "comment": "",
+      "category": "MEDIA_INTF"
+    },
+    {
+      "name": "MEDIA_INTF_T_V4L_BASE",
+      "value": "0x00000200",
+      "comment": "",
+      "category": "MEDIA_INTF"
+    },
+    {
+      "name": "MEDIA_INTF_T_DVB_FE",
+      "value": "(MEDIA_INTF_T_DVB_BASE)",
+      "comment": "",
+      "category": "MEDIA_INTF"
+    },
+    {
+      "name": "MEDIA_INTF_T_DVB_DEMUX",
+      "value": "(MEDIA_INTF_T_DVB_BASE + 1)",
+      "comment": "",
+      "category": "MEDIA_INTF"
+    },
+    {
+      "name": "MEDIA_INTF_T_DVB_DVR",
+      "value": "(MEDIA_INTF_T_DVB_BASE + 2)",
+      "comment": "",
+      "category": "MEDIA_INTF"
+    },
+    {
+      "name": "MEDIA_INTF_T_DVB_CA",
+      "value": "(MEDIA_INTF_T_DVB_BASE + 3)",
+      "comment": "",
+      "category": "MEDIA_INTF"
+    },
+    {
+      "name": "MEDIA_INTF_T_DVB_NET",
+      "value": "(MEDIA_INTF_T_DVB_BASE + 4)",
+      "comment": "",
+      "category": "MEDIA_INTF"
+    },
+    {
+      "name": "MEDIA_INTF_T_V4L_VIDEO",
+      "value": "(MEDIA_INTF_T_V4L_BASE)",
+      "comment": "",
+      "category": "MEDIA_INTF"
+    },
+    {
+      "name": "MEDIA_INTF_T_V4L_VBI",
+      "value": "(MEDIA_INTF_T_V4L_BASE + 1)",
+      "comment": "",
+      "category": "MEDIA_INTF"
+    },
+    {
+      "name": "MEDIA_INTF_T_V4L_RADIO",
+      "value": "(MEDIA_INTF_T_V4L_BASE + 2)",
+      "comment": "",
+      "category": "MEDIA_INTF"
+    },
+    {
+      "name": "MEDIA_INTF_T_V4L_SUBDEV",
+      "value": "(MEDIA_INTF_T_V4L_BASE + 3)",
+      "comment": "",
+      "category": "MEDIA_INTF"
+    },
+    {
+      "name": "MEDIA_INTF_T_V4L_SWRADIO",
+      "value": "(MEDIA_INTF_T_V4L_BASE + 4)",
+      "comment": "",
+      "category": "MEDIA_INTF"
+    },
+    {
+      "name": "MEDIA_INTF_T_V4L_TOUCH",
+      "value": "(MEDIA_INTF_T_V4L_BASE + 5)",
+      "comment": "",
+      "category": "MEDIA_INTF"
+    },
+    {
+      "name": "MEDIA_INTF_T_ALSA_BASE",
+      "value": "0x00000300",
+      "comment": "",
+      "category": "MEDIA_INTF"
+    },
+    {
+      "name": "MEDIA_INTF_T_ALSA_PCM_CAPTURE",
+      "value": "(MEDIA_INTF_T_ALSA_BASE)",
+      "comment": "",
+      "category": "MEDIA_INTF"
+    },
+    {
+      "name": "MEDIA_INTF_T_ALSA_PCM_PLAYBACK",
+      "value": "(MEDIA_INTF_T_ALSA_BASE + 1)",
+      "comment": "",
+      "category": "MEDIA_INTF"
+    },
+    {
+      "name": "MEDIA_INTF_T_ALSA_CONTROL",
+      "value": "(MEDIA_INTF_T_ALSA_BASE + 2)",
+      "comment": "",
+      "category": "MEDIA_INTF"
+    },
+    {
+      "name": "MEDIA_ENT_F_CONN_RF",
+      "value": "(MEDIA_ENT_F_BASE + 0x30001)",
+      "comment": "",
+      "category": "MEDIA_ENT"
+    },
+    {
+      "name": "MEDIA_ENT_F_CONN_SVIDEO",
+      "value": "(MEDIA_ENT_F_BASE + 0x30002)",
+      "comment": "",
+      "category": "MEDIA_ENT"
+    },
+    {
+      "name": "MEDIA_ENT_F_CONN_COMPOSITE",
+      "value": "(MEDIA_ENT_F_BASE + 0x30003)",
+      "comment": "",
+      "category": "MEDIA_ENT"
+    },
+    {
+      "name": "MEDIA_IOC_DEVICE_INFO",
+      "value": "_IOWR('|', 0x00, struct media_device_info)",
+      "comment": "",
+      "category": "MEDIA_IOC"
+    },
+    {
+      "name": "MEDIA_IOC_ENUM_ENTITIES",
+      "value": "_IOWR('|', 0x01, struct media_entity_desc)",
+      "comment": "",
+      "category": "MEDIA_IOC"
+    },
+    {
+      "name": "MEDIA_IOC_ENUM_LINKS",
+      "value": "_IOWR('|', 0x02, struct media_links_enum)",
+      "comment": "",
+      "category": "MEDIA_IOC"
+    },
+    {
+      "name": "MEDIA_IOC_SETUP_LINK",
+      "value": "_IOWR('|', 0x03, struct media_link_desc)",
+      "comment": "",
+      "category": "MEDIA_IOC"
+    },
+    {
+      "name": "MEDIA_IOC_G_TOPOLOGY",
+      "value": "_IOWR('|', 0x04, struct media_v2_topology)",
+      "comment": "",
+      "category": "MEDIA_IOC"
+    },
+    {
+      "name": "MEDIA_IOC_REQUEST_ALLOC",
+      "value": "_IOR ('|', 0x05, int)",
+      "comment": "",
+      "category": "MEDIA_IOC"
+    },
+    {
+      "name": "MEDIA_REQUEST_IOC_QUEUE",
+      "value": "_IO('|',  0x80)",
+      "comment": "",
+      "category": "MEDIA_REQUEST"
+    },
+    {
+      "name": "MEDIA_REQUEST_IOC_REINIT",
+      "value": "_IO('|',  0x81)",
+      "comment": "",
+      "category": "MEDIA_REQUEST"
+    },
+    {
+      "name": "MEDIA_ENT_TYPE_SHIFT",
+      "value": "16",
+      "comment": "",
+      "category": "MEDIA_ENT"
+    },
+    {
+      "name": "MEDIA_ENT_TYPE_MASK",
+      "value": "0x00ff0000",
+      "comment": "",
+      "category": "MEDIA_ENT"
+    },
+    {
+      "name": "MEDIA_ENT_SUBTYPE_MASK",
+      "value": "0x0000ffff",
+      "comment": "",
+      "category": "MEDIA_ENT"
+    },
+    {
+      "name": "MEDIA_ENT_T_DEVNODE_UNKNOWN",
+      "value": "(MEDIA_ENT_F_OLD_BASE | ",
+      "comment": "",
+      "category": "MEDIA_ENT"
+    },
+    {
+      "name": "MEDIA_ENT_T_DEVNODE",
+      "value": "MEDIA_ENT_F_OLD_BASE",
+      "comment": "",
+      "category": "MEDIA_ENT"
+    },
+    {
+      "name": "MEDIA_ENT_T_DEVNODE_V4L",
+      "value": "MEDIA_ENT_F_IO_V4L",
+      "comment": "",
+      "category": "MEDIA_ENT"
+    },
+    {
+      "name": "MEDIA_ENT_T_DEVNODE_FB",
+      "value": "(MEDIA_ENT_F_OLD_BASE + 2)",
+      "comment": "",
+      "category": "MEDIA_ENT"
+    },
+    {
+      "name": "MEDIA_ENT_T_DEVNODE_ALSA",
+      "value": "(MEDIA_ENT_F_OLD_BASE + 3)",
+      "comment": "",
+      "category": "MEDIA_ENT"
+    },
+    {
+      "name": "MEDIA_ENT_T_DEVNODE_DVB",
+      "value": "(MEDIA_ENT_F_OLD_BASE + 4)",
+      "comment": "",
+      "category": "MEDIA_ENT"
+    },
+    {
+      "name": "MEDIA_ENT_T_UNKNOWN",
+      "value": "MEDIA_ENT_F_UNKNOWN",
+      "comment": "",
+      "category": "MEDIA_ENT"
+    },
+    {
+      "name": "MEDIA_ENT_T_V4L2_VIDEO",
+      "value": "MEDIA_ENT_F_IO_V4L",
+      "comment": "",
+      "category": "MEDIA_ENT"
+    },
+    {
+      "name": "MEDIA_ENT_T_V4L2_SUBDEV",
+      "value": "MEDIA_ENT_F_V4L2_SUBDEV_UNKNOWN",
+      "comment": "",
+      "category": "MEDIA_ENT"
+    },
+    {
+      "name": "MEDIA_ENT_T_V4L2_SUBDEV_SENSOR",
+      "value": "MEDIA_ENT_F_CAM_SENSOR",
+      "comment": "",
+      "category": "MEDIA_ENT"
+    },
+    {
+      "name": "MEDIA_ENT_T_V4L2_SUBDEV_FLASH",
+      "value": "MEDIA_ENT_F_FLASH",
+      "comment": "",
+      "category": "MEDIA_ENT"
+    },
+    {
+      "name": "MEDIA_ENT_T_V4L2_SUBDEV_LENS",
+      "value": "MEDIA_ENT_F_LENS",
+      "comment": "",
+      "category": "MEDIA_ENT"
+    },
+    {
+      "name": "MEDIA_ENT_T_V4L2_SUBDEV_DECODER",
+      "value": "MEDIA_ENT_F_ATV_DECODER",
+      "comment": "",
+      "category": "MEDIA_ENT"
+    },
+    {
+      "name": "MEDIA_ENT_T_V4L2_SUBDEV_TUNER",
+      "value": "MEDIA_ENT_F_TUNER",
+      "comment": "",
+      "category": "MEDIA_ENT"
+    },
+    {
+      "name": "MEDIA_ENT_F_DTV_DECODER",
+      "value": "MEDIA_ENT_F_DV_DECODER",
+      "comment": "",
+      "category": "MEDIA_ENT"
+    },
+    {
+      "name": "MEDIA_INTF_T_ALSA_COMPRESS",
+      "value": "(MEDIA_INTF_T_ALSA_BASE + 3)",
+      "comment": "",
+      "category": "MEDIA_INTF"
+    },
+    {
+      "name": "MEDIA_INTF_T_ALSA_RAWMIDI",
+      "value": "(MEDIA_INTF_T_ALSA_BASE + 4)",
+      "comment": "",
+      "category": "MEDIA_INTF"
+    },
+    {
+      "name": "MEDIA_INTF_T_ALSA_HWDEP",
+      "value": "(MEDIA_INTF_T_ALSA_BASE + 5)",
+      "comment": "",
+      "category": "MEDIA_INTF"
+    },
+    {
+      "name": "MEDIA_INTF_T_ALSA_SEQUENCER",
+      "value": "(MEDIA_INTF_T_ALSA_BASE + 6)",
+      "comment": "",
+      "category": "MEDIA_INTF"
+    },
+    {
+      "name": "MEDIA_INTF_T_ALSA_TIMER",
+      "value": "(MEDIA_INTF_T_ALSA_BASE + 7)",
+      "comment": "",
+      "category": "MEDIA_INTF"
+    },
+    {
+      "name": "MEDIA_API_VERSION",
+      "value": "((0U << 16) | (1U << 8) | 0U)",
+      "comment": "",
+      "category": "MEDIA_API"
+    }
+  ],
+  "structs": [
+    {
+      "name": "media_device_info",
+      "fields": [
+        {
+          "type_name": "char",
+          "name": "driver",
+          "array_size": "16",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "model",
+          "array_size": "32",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "serial",
+          "array_size": "40",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "bus_info",
+          "array_size": "32",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "media_version",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "hw_revision",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "driver_version",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved",
+          "array_size": "31",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "media_entity_desc",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "name",
+          "array_size": "32",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "revision",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "group_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "pads",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "links",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved",
+          "array_size": "4",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "major",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "minor",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "card",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "device",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "subdevice",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "major",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "minor",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "major",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "minor",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "dvb",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "raw",
+          "array_size": "184",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_2",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "major",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "minor",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_3",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "card",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "device",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "subdevice",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_4",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "major",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "minor",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_5",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "major",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "minor",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "media_pad_desc",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "entity",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "index",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved",
+          "array_size": "2",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "media_link_desc",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved",
+          "array_size": "2",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "media_links_enum",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "entity",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved",
+          "array_size": "4",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "media_v2_entity",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "name",
+          "array_size": "64",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "function",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved",
+          "array_size": "5",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "media_v2_intf_devnode",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "major",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "minor",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "media_v2_interface",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "intf_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved",
+          "array_size": "9",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "raw",
+          "array_size": "16",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "media_v2_pad",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "entity_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "index",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved",
+          "array_size": "4",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "media_v2_link",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "source_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "sink_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved",
+          "array_size": "6",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "media_v2_topology",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "topology_version",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "num_entities",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "ptr_entities",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "num_interfaces",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved2",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "ptr_interfaces",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "num_pads",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved3",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "ptr_pads",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "num_links",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved4",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "ptr_links",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

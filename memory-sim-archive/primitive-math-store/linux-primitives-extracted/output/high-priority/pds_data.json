@@ -1,0 +1,154 @@
+{
+  "filename": "pds.h",
+  "includes": [
+    "linux/types.h"
+  ],
+  "defines": [],
+  "structs": [
+    {
+      "name": "fwctl_info_pds",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "uctx_caps",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fwctl_rpc_pds",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "op",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ep",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "rsvd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__aligned_u64",
+          "name": "payload",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "retval",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "rsvd",
+          "array_size": "2",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__aligned_u64",
+          "name": "payload",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_2",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "op",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ep",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "rsvd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__aligned_u64",
+          "name": "payload",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_3",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "retval",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "rsvd",
+          "array_size": "2",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__aligned_u64",
+          "name": "payload",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

@@ -1,0 +1,1734 @@
+{
+  "filename": "rtnetlink.h",
+  "includes": [
+    "linux/types.h",
+    "linux/netlink.h",
+    "linux/if_link.h",
+    "linux/if_addr.h",
+    "linux/neighbour.h"
+  ],
+  "defines": [
+    {
+      "name": "RTNL_FAMILY_IPMR",
+      "value": "128",
+      "comment": "",
+      "category": "RTNL_FAMILY"
+    },
+    {
+      "name": "RTNL_FAMILY_IP6MR",
+      "value": "129",
+      "comment": "",
+      "category": "RTNL_FAMILY"
+    },
+    {
+      "name": "RTNL_FAMILY_MAX",
+      "value": "129",
+      "comment": "",
+      "category": "RTNL_FAMILY"
+    },
+    {
+      "name": "RTM_BASE",
+      "value": "RTM_BASE",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTM_NEWLINK",
+      "value": "RTM_NEWLINK",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTM_DELLINK",
+      "value": "RTM_DELLINK",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTM_GETLINK",
+      "value": "RTM_GETLINK",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTM_SETLINK",
+      "value": "RTM_SETLINK",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTM_NEWADDR",
+      "value": "RTM_NEWADDR",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTM_DELADDR",
+      "value": "RTM_DELADDR",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTM_GETADDR",
+      "value": "RTM_GETADDR",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTM_NEWROUTE",
+      "value": "RTM_NEWROUTE",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTM_DELROUTE",
+      "value": "RTM_DELROUTE",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTM_GETROUTE",
+      "value": "RTM_GETROUTE",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTM_NEWNEIGH",
+      "value": "RTM_NEWNEIGH",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTM_DELNEIGH",
+      "value": "RTM_DELNEIGH",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTM_GETNEIGH",
+      "value": "RTM_GETNEIGH",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTM_NEWRULE",
+      "value": "RTM_NEWRULE",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTM_DELRULE",
+      "value": "RTM_DELRULE",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTM_GETRULE",
+      "value": "RTM_GETRULE",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTM_NEWQDISC",
+      "value": "RTM_NEWQDISC",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTM_DELQDISC",
+      "value": "RTM_DELQDISC",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTM_GETQDISC",
+      "value": "RTM_GETQDISC",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTM_NEWTCLASS",
+      "value": "RTM_NEWTCLASS",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTM_DELTCLASS",
+      "value": "RTM_DELTCLASS",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTM_GETTCLASS",
+      "value": "RTM_GETTCLASS",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTM_NEWTFILTER",
+      "value": "RTM_NEWTFILTER",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTM_DELTFILTER",
+      "value": "RTM_DELTFILTER",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTM_GETTFILTER",
+      "value": "RTM_GETTFILTER",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTM_NEWACTION",
+      "value": "RTM_NEWACTION",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTM_DELACTION",
+      "value": "RTM_DELACTION",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTM_GETACTION",
+      "value": "RTM_GETACTION",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTM_NEWPREFIX",
+      "value": "RTM_NEWPREFIX",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTM_NEWMULTICAST",
+      "value": "RTM_NEWMULTICAST",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTM_DELMULTICAST",
+      "value": "RTM_DELMULTICAST",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTM_GETMULTICAST",
+      "value": "RTM_GETMULTICAST",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTM_NEWANYCAST",
+      "value": "RTM_NEWANYCAST",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTM_DELANYCAST",
+      "value": "RTM_DELANYCAST",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTM_GETANYCAST",
+      "value": "RTM_GETANYCAST",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTM_NEWNEIGHTBL",
+      "value": "RTM_NEWNEIGHTBL",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTM_GETNEIGHTBL",
+      "value": "RTM_GETNEIGHTBL",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTM_SETNEIGHTBL",
+      "value": "RTM_SETNEIGHTBL",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTM_NEWNDUSEROPT",
+      "value": "RTM_NEWNDUSEROPT",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTM_NEWADDRLABEL",
+      "value": "RTM_NEWADDRLABEL",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTM_DELADDRLABEL",
+      "value": "RTM_DELADDRLABEL",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTM_GETADDRLABEL",
+      "value": "RTM_GETADDRLABEL",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTM_GETDCB",
+      "value": "RTM_GETDCB",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTM_SETDCB",
+      "value": "RTM_SETDCB",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTM_NEWNETCONF",
+      "value": "RTM_NEWNETCONF",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTM_DELNETCONF",
+      "value": "RTM_DELNETCONF",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTM_GETNETCONF",
+      "value": "RTM_GETNETCONF",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTM_NEWMDB",
+      "value": "RTM_NEWMDB",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTM_DELMDB",
+      "value": "RTM_DELMDB",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTM_GETMDB",
+      "value": "RTM_GETMDB",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTM_NEWNSID",
+      "value": "RTM_NEWNSID",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTM_DELNSID",
+      "value": "RTM_DELNSID",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTM_GETNSID",
+      "value": "RTM_GETNSID",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTM_NEWSTATS",
+      "value": "RTM_NEWSTATS",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTM_GETSTATS",
+      "value": "RTM_GETSTATS",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTM_SETSTATS",
+      "value": "RTM_SETSTATS",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTM_NEWCACHEREPORT",
+      "value": "RTM_NEWCACHEREPORT",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTM_NEWCHAIN",
+      "value": "RTM_NEWCHAIN",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTM_DELCHAIN",
+      "value": "RTM_DELCHAIN",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTM_GETCHAIN",
+      "value": "RTM_GETCHAIN",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTM_NEWNEXTHOP",
+      "value": "RTM_NEWNEXTHOP",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTM_DELNEXTHOP",
+      "value": "RTM_DELNEXTHOP",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTM_GETNEXTHOP",
+      "value": "RTM_GETNEXTHOP",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTM_NEWLINKPROP",
+      "value": "RTM_NEWLINKPROP",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTM_DELLINKPROP",
+      "value": "RTM_DELLINKPROP",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTM_GETLINKPROP",
+      "value": "RTM_GETLINKPROP",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTM_NEWVLAN",
+      "value": "RTM_NEWVLAN",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTM_DELVLAN",
+      "value": "RTM_DELVLAN",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTM_GETVLAN",
+      "value": "RTM_GETVLAN",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTM_NEWNEXTHOPBUCKET",
+      "value": "RTM_NEWNEXTHOPBUCKET",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTM_DELNEXTHOPBUCKET",
+      "value": "RTM_DELNEXTHOPBUCKET",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTM_GETNEXTHOPBUCKET",
+      "value": "RTM_GETNEXTHOPBUCKET",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTM_NEWTUNNEL",
+      "value": "RTM_NEWTUNNEL",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTM_DELTUNNEL",
+      "value": "RTM_DELTUNNEL",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTM_GETTUNNEL",
+      "value": "RTM_GETTUNNEL",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTM_MAX",
+      "value": "(((__RTM_MAX + 3) & ~3) - 1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTM_NR_MSGTYPES",
+      "value": "(RTM_MAX + 1 - RTM_BASE)",
+      "comment": "",
+      "category": "RTM_NR"
+    },
+    {
+      "name": "RTM_NR_FAMILIES",
+      "value": "(RTM_NR_MSGTYPES >> 2)",
+      "comment": "",
+      "category": "RTM_NR"
+    },
+    {
+      "name": "RTA_ALIGNTO",
+      "value": "4U",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTN_MAX",
+      "value": "(__RTN_MAX - 1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTPROT_UNSPEC",
+      "value": "0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTPROT_REDIRECT",
+      "value": "1\t/* Route installed by ICMP redirects;",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTPROT_KERNEL",
+      "value": "2",
+      "comment": "Route installed by kernel",
+      "category": ""
+    },
+    {
+      "name": "RTPROT_BOOT",
+      "value": "3",
+      "comment": "Route installed during boot",
+      "category": ""
+    },
+    {
+      "name": "RTPROT_STATIC",
+      "value": "4",
+      "comment": "Route installed by administrator",
+      "category": ""
+    },
+    {
+      "name": "RTPROT_GATED",
+      "value": "8",
+      "comment": "Apparently, GateD",
+      "category": ""
+    },
+    {
+      "name": "RTPROT_RA",
+      "value": "9",
+      "comment": "RDISC/ND router advertisements",
+      "category": ""
+    },
+    {
+      "name": "RTPROT_MRT",
+      "value": "10",
+      "comment": "Merit MRT",
+      "category": ""
+    },
+    {
+      "name": "RTPROT_ZEBRA",
+      "value": "11",
+      "comment": "Zebra",
+      "category": ""
+    },
+    {
+      "name": "RTPROT_BIRD",
+      "value": "12",
+      "comment": "BIRD",
+      "category": ""
+    },
+    {
+      "name": "RTPROT_DNROUTED",
+      "value": "13",
+      "comment": "DECnet routing daemon",
+      "category": ""
+    },
+    {
+      "name": "RTPROT_XORP",
+      "value": "14",
+      "comment": "XORP",
+      "category": ""
+    },
+    {
+      "name": "RTPROT_NTK",
+      "value": "15",
+      "comment": "Netsukuku",
+      "category": ""
+    },
+    {
+      "name": "RTPROT_DHCP",
+      "value": "16",
+      "comment": "DHCP client",
+      "category": ""
+    },
+    {
+      "name": "RTPROT_MROUTED",
+      "value": "17",
+      "comment": "Multicast daemon",
+      "category": ""
+    },
+    {
+      "name": "RTPROT_KEEPALIVED",
+      "value": "18",
+      "comment": "Keepalived daemon",
+      "category": ""
+    },
+    {
+      "name": "RTPROT_BABEL",
+      "value": "42",
+      "comment": "Babel daemon",
+      "category": ""
+    },
+    {
+      "name": "RTPROT_OVN",
+      "value": "84",
+      "comment": "OVN daemon",
+      "category": ""
+    },
+    {
+      "name": "RTPROT_OPENR",
+      "value": "99",
+      "comment": "Open Routing (Open/R) Routes",
+      "category": ""
+    },
+    {
+      "name": "RTPROT_BGP",
+      "value": "186",
+      "comment": "BGP Routes",
+      "category": ""
+    },
+    {
+      "name": "RTPROT_ISIS",
+      "value": "187",
+      "comment": "ISIS Routes",
+      "category": ""
+    },
+    {
+      "name": "RTPROT_OSPF",
+      "value": "188",
+      "comment": "OSPF Routes",
+      "category": ""
+    },
+    {
+      "name": "RTPROT_RIP",
+      "value": "189",
+      "comment": "RIP Routes",
+      "category": ""
+    },
+    {
+      "name": "RTPROT_EIGRP",
+      "value": "192",
+      "comment": "EIGRP Routes",
+      "category": ""
+    },
+    {
+      "name": "RTM_F_NOTIFY",
+      "value": "0x100",
+      "comment": "Notify user of route change",
+      "category": "RTM_F"
+    },
+    {
+      "name": "RTM_F_CLONED",
+      "value": "0x200",
+      "comment": "This route is cloned",
+      "category": "RTM_F"
+    },
+    {
+      "name": "RTM_F_EQUALIZE",
+      "value": "0x400",
+      "comment": "Multipath equalizer: NI",
+      "category": "RTM_F"
+    },
+    {
+      "name": "RTM_F_PREFIX",
+      "value": "0x800",
+      "comment": "Prefix addresses",
+      "category": "RTM_F"
+    },
+    {
+      "name": "RTM_F_LOOKUP_TABLE",
+      "value": "0x1000",
+      "comment": "set rtm_table to FIB lookup result",
+      "category": "RTM_F"
+    },
+    {
+      "name": "RTM_F_FIB_MATCH",
+      "value": "0x2000",
+      "comment": "return full fib lookup match",
+      "category": "RTM_F"
+    },
+    {
+      "name": "RTM_F_OFFLOAD",
+      "value": "0x4000",
+      "comment": "route is offloaded",
+      "category": "RTM_F"
+    },
+    {
+      "name": "RTM_F_TRAP",
+      "value": "0x8000",
+      "comment": "route is trapping packets",
+      "category": "RTM_F"
+    },
+    {
+      "name": "RTM_F_OFFLOAD_FAILED",
+      "value": "0x20000000 /* route offload failed, this value",
+      "comment": "",
+      "category": "RTM_F"
+    },
+    {
+      "name": "RTA_MAX",
+      "value": "(__RTA_MAX - 1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTNH_F_DEAD",
+      "value": "1",
+      "comment": "Nexthop is dead (used by multipath)",
+      "category": "RTNH_F"
+    },
+    {
+      "name": "RTNH_F_PERVASIVE",
+      "value": "2",
+      "comment": "Do recursive gateway lookup",
+      "category": "RTNH_F"
+    },
+    {
+      "name": "RTNH_F_ONLINK",
+      "value": "4",
+      "comment": "Gateway is forced on link",
+      "category": "RTNH_F"
+    },
+    {
+      "name": "RTNH_F_OFFLOAD",
+      "value": "8",
+      "comment": "Nexthop is offloaded",
+      "category": "RTNH_F"
+    },
+    {
+      "name": "RTNH_F_LINKDOWN",
+      "value": "16",
+      "comment": "carrier-down on nexthop",
+      "category": "RTNH_F"
+    },
+    {
+      "name": "RTNH_F_UNRESOLVED",
+      "value": "32",
+      "comment": "The entry is unresolved (ipmr)",
+      "category": "RTNH_F"
+    },
+    {
+      "name": "RTNH_F_TRAP",
+      "value": "64",
+      "comment": "Nexthop is trapping packets",
+      "category": "RTNH_F"
+    },
+    {
+      "name": "RTNH_COMPARE_MASK",
+      "value": "(RTNH_F_DEAD | RTNH_F_LINKDOWN | ",
+      "comment": "",
+      "category": "RTNH_COMPARE"
+    },
+    {
+      "name": "RTNH_ALIGNTO",
+      "value": "4",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTNETLINK_HAVE_PEERINFO",
+      "value": "1",
+      "comment": "",
+      "category": "RTNETLINK_HAVE"
+    },
+    {
+      "name": "RTAX_UNSPEC",
+      "value": "RTAX_UNSPEC",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTAX_LOCK",
+      "value": "RTAX_LOCK",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTAX_MTU",
+      "value": "RTAX_MTU",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTAX_WINDOW",
+      "value": "RTAX_WINDOW",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTAX_RTT",
+      "value": "RTAX_RTT",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTAX_RTTVAR",
+      "value": "RTAX_RTTVAR",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTAX_SSTHRESH",
+      "value": "RTAX_SSTHRESH",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTAX_CWND",
+      "value": "RTAX_CWND",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTAX_ADVMSS",
+      "value": "RTAX_ADVMSS",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTAX_REORDERING",
+      "value": "RTAX_REORDERING",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTAX_HOPLIMIT",
+      "value": "RTAX_HOPLIMIT",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTAX_INITCWND",
+      "value": "RTAX_INITCWND",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTAX_FEATURES",
+      "value": "RTAX_FEATURES",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTAX_RTO_MIN",
+      "value": "RTAX_RTO_MIN",
+      "comment": "",
+      "category": "RTAX_RTO"
+    },
+    {
+      "name": "RTAX_INITRWND",
+      "value": "RTAX_INITRWND",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTAX_QUICKACK",
+      "value": "RTAX_QUICKACK",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTAX_CC_ALGO",
+      "value": "RTAX_CC_ALGO",
+      "comment": "",
+      "category": "RTAX_CC"
+    },
+    {
+      "name": "RTAX_FASTOPEN_NO_COOKIE",
+      "value": "RTAX_FASTOPEN_NO_COOKIE",
+      "comment": "",
+      "category": "RTAX_FASTOPEN"
+    },
+    {
+      "name": "RTAX_MAX",
+      "value": "(__RTAX_MAX - 1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTAX_FEATURE_ECN",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "RTAX_FEATURE"
+    },
+    {
+      "name": "RTAX_FEATURE_SACK",
+      "value": "(1 << 1)",
+      "comment": "unused",
+      "category": "RTAX_FEATURE"
+    },
+    {
+      "name": "RTAX_FEATURE_TIMESTAMP",
+      "value": "(1 << 2)",
+      "comment": "unused",
+      "category": "RTAX_FEATURE"
+    },
+    {
+      "name": "RTAX_FEATURE_ALLFRAG",
+      "value": "(1 << 3)",
+      "comment": "unused",
+      "category": "RTAX_FEATURE"
+    },
+    {
+      "name": "RTAX_FEATURE_TCP_USEC_TS",
+      "value": "(1 << 4)",
+      "comment": "",
+      "category": "RTAX_FEATURE"
+    },
+    {
+      "name": "RTAX_FEATURE_MASK",
+      "value": "(RTAX_FEATURE_ECN |\t\t",
+      "comment": "",
+      "category": "RTAX_FEATURE"
+    },
+    {
+      "name": "PREFIX_MAX",
+      "value": "(__PREFIX_MAX - 1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "tcm_block_index",
+      "value": "tcm_parent",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "TCM_IFINDEX_MAGIC_BLOCK",
+      "value": "(0xFFFFFFFFU)",
+      "comment": "",
+      "category": "TCM_IFINDEX"
+    },
+    {
+      "name": "TCA_MAX",
+      "value": "(__TCA_MAX - 1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "TCA_DUMP_FLAGS_TERSE",
+      "value": "(1 << 0) /* Means that in dump user gets only basic",
+      "comment": "",
+      "category": "TCA_DUMP"
+    },
+    {
+      "name": "NDUSEROPT_MAX",
+      "value": "(__NDUSEROPT_MAX - 1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTMGRP_LINK",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTMGRP_NOTIFY",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTMGRP_NEIGH",
+      "value": "4",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTMGRP_TC",
+      "value": "8",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTMGRP_IPV4_IFADDR",
+      "value": "0x10",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTMGRP_IPV4_MROUTE",
+      "value": "0x20",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTMGRP_IPV4_ROUTE",
+      "value": "0x40",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTMGRP_IPV4_RULE",
+      "value": "0x80",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTMGRP_IPV6_IFADDR",
+      "value": "0x100",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTMGRP_IPV6_MROUTE",
+      "value": "0x200",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTMGRP_IPV6_ROUTE",
+      "value": "0x400",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTMGRP_IPV6_IFINFO",
+      "value": "0x800",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTMGRP_DECnet_IFADDR",
+      "value": "0x1000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTMGRP_DECnet_ROUTE",
+      "value": "0x4000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTMGRP_IPV6_PREFIX",
+      "value": "0x20000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTNLGRP_NONE",
+      "value": "RTNLGRP_NONE",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTNLGRP_LINK",
+      "value": "RTNLGRP_LINK",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTNLGRP_NOTIFY",
+      "value": "RTNLGRP_NOTIFY",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTNLGRP_NEIGH",
+      "value": "RTNLGRP_NEIGH",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTNLGRP_TC",
+      "value": "RTNLGRP_TC",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTNLGRP_IPV4_IFADDR",
+      "value": "RTNLGRP_IPV4_IFADDR",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTNLGRP_IPV4_MROUTE",
+      "value": "RTNLGRP_IPV4_MROUTE",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTNLGRP_IPV4_ROUTE",
+      "value": "RTNLGRP_IPV4_ROUTE",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTNLGRP_IPV4_RULE",
+      "value": "RTNLGRP_IPV4_RULE",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTNLGRP_IPV6_IFADDR",
+      "value": "RTNLGRP_IPV6_IFADDR",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTNLGRP_IPV6_MROUTE",
+      "value": "RTNLGRP_IPV6_MROUTE",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTNLGRP_IPV6_ROUTE",
+      "value": "RTNLGRP_IPV6_ROUTE",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTNLGRP_IPV6_IFINFO",
+      "value": "RTNLGRP_IPV6_IFINFO",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTNLGRP_DECnet_IFADDR",
+      "value": "RTNLGRP_DECnet_IFADDR",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTNLGRP_DECnet_ROUTE",
+      "value": "RTNLGRP_DECnet_ROUTE",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTNLGRP_DECnet_RULE",
+      "value": "RTNLGRP_DECnet_RULE",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTNLGRP_IPV6_PREFIX",
+      "value": "RTNLGRP_IPV6_PREFIX",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTNLGRP_IPV6_RULE",
+      "value": "RTNLGRP_IPV6_RULE",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTNLGRP_ND_USEROPT",
+      "value": "RTNLGRP_ND_USEROPT",
+      "comment": "",
+      "category": "RTNLGRP_ND"
+    },
+    {
+      "name": "RTNLGRP_PHONET_IFADDR",
+      "value": "RTNLGRP_PHONET_IFADDR",
+      "comment": "",
+      "category": "RTNLGRP_PHONET"
+    },
+    {
+      "name": "RTNLGRP_PHONET_ROUTE",
+      "value": "RTNLGRP_PHONET_ROUTE",
+      "comment": "",
+      "category": "RTNLGRP_PHONET"
+    },
+    {
+      "name": "RTNLGRP_DCB",
+      "value": "RTNLGRP_DCB",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTNLGRP_IPV4_NETCONF",
+      "value": "RTNLGRP_IPV4_NETCONF",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTNLGRP_IPV6_NETCONF",
+      "value": "RTNLGRP_IPV6_NETCONF",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTNLGRP_MDB",
+      "value": "RTNLGRP_MDB",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTNLGRP_MPLS_ROUTE",
+      "value": "RTNLGRP_MPLS_ROUTE",
+      "comment": "",
+      "category": "RTNLGRP_MPLS"
+    },
+    {
+      "name": "RTNLGRP_NSID",
+      "value": "RTNLGRP_NSID",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTNLGRP_MPLS_NETCONF",
+      "value": "RTNLGRP_MPLS_NETCONF",
+      "comment": "",
+      "category": "RTNLGRP_MPLS"
+    },
+    {
+      "name": "RTNLGRP_IPV4_MROUTE_R",
+      "value": "RTNLGRP_IPV4_MROUTE_R",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTNLGRP_IPV6_MROUTE_R",
+      "value": "RTNLGRP_IPV6_MROUTE_R",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTNLGRP_NEXTHOP",
+      "value": "RTNLGRP_NEXTHOP",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTNLGRP_BRVLAN",
+      "value": "RTNLGRP_BRVLAN",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTNLGRP_MCTP_IFADDR",
+      "value": "RTNLGRP_MCTP_IFADDR",
+      "comment": "",
+      "category": "RTNLGRP_MCTP"
+    },
+    {
+      "name": "RTNLGRP_TUNNEL",
+      "value": "RTNLGRP_TUNNEL",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTNLGRP_STATS",
+      "value": "RTNLGRP_STATS",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTNLGRP_IPV4_MCADDR",
+      "value": "RTNLGRP_IPV4_MCADDR",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTNLGRP_IPV6_MCADDR",
+      "value": "RTNLGRP_IPV6_MCADDR",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTNLGRP_IPV6_ACADDR",
+      "value": "RTNLGRP_IPV6_ACADDR",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTNLGRP_MAX",
+      "value": "(__RTNLGRP_MAX - 1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "TCA_ACT_TAB",
+      "value": "TCA_ROOT_TAB",
+      "comment": "",
+      "category": "TCA_ACT"
+    },
+    {
+      "name": "TCAA_MAX",
+      "value": "TCA_ROOT_TAB",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "TCA_ROOT_MAX",
+      "value": "(__TCA_ROOT_MAX - 1)",
+      "comment": "",
+      "category": "TCA_ROOT"
+    },
+    {
+      "name": "TCA_FLAG_LARGE_DUMP_ON",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "TCA_FLAG"
+    },
+    {
+      "name": "TCA_ACT_FLAG_LARGE_DUMP_ON",
+      "value": "TCA_FLAG_LARGE_DUMP_ON",
+      "comment": "",
+      "category": "TCA_ACT"
+    },
+    {
+      "name": "TCA_ACT_FLAG_TERSE_DUMP",
+      "value": "(1 << 1)",
+      "comment": "",
+      "category": "TCA_ACT"
+    },
+    {
+      "name": "RTEXT_FILTER_VF",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "RTEXT_FILTER"
+    },
+    {
+      "name": "RTEXT_FILTER_BRVLAN",
+      "value": "(1 << 1)",
+      "comment": "",
+      "category": "RTEXT_FILTER"
+    },
+    {
+      "name": "RTEXT_FILTER_BRVLAN_COMPRESSED",
+      "value": "(1 << 2)",
+      "comment": "",
+      "category": "RTEXT_FILTER"
+    },
+    {
+      "name": "RTEXT_FILTER_SKIP_STATS",
+      "value": "(1 << 3)",
+      "comment": "",
+      "category": "RTEXT_FILTER"
+    },
+    {
+      "name": "RTEXT_FILTER_MRP",
+      "value": "(1 << 4)",
+      "comment": "",
+      "category": "RTEXT_FILTER"
+    },
+    {
+      "name": "RTEXT_FILTER_CFM_CONFIG",
+      "value": "(1 << 5)",
+      "comment": "",
+      "category": "RTEXT_FILTER"
+    },
+    {
+      "name": "RTEXT_FILTER_CFM_STATUS",
+      "value": "(1 << 6)",
+      "comment": "",
+      "category": "RTEXT_FILTER"
+    },
+    {
+      "name": "RTEXT_FILTER_MST",
+      "value": "(1 << 7)",
+      "comment": "",
+      "category": "RTEXT_FILTER"
+    }
+  ],
+  "structs": [
+    {
+      "name": "rtattr",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "rtmsg",
+      "fields": [
+        {
+          "type_name": "unsigned",
+          "name": "rtm_flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "rtnexthop",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "rtnh_ifindex",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "rtvia",
+      "fields": [
+        {
+          "type_name": "__kernel_sa_family_t",
+          "name": "rtvia_family",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "rta_cacheinfo",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "rta_clntref",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "rta_lastuse",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "rta_expires",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "rta_error",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "rta_used",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "rta_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "rta_ts",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "rta_tsage",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "rta_session",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "proto",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "pad1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "pad2",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "sport",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "dport",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "code",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "ident",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "spi",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_6",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "sport",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "dport",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_7",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "code",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "ident",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "rta_mfc_stats",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "mfcs_packets",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "mfcs_bytes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "mfcs_wrong_if",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "rtgenmsg",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ifinfomsg",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "ifi_index",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "unsigned",
+          "name": "ifi_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "unsigned",
+          "name": "ifi_change",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "prefixmsg",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "prefix_ifindex",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "prefix_cacheinfo",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "preferred_time",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "valid_time",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "tcmsg",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "tcm_ifindex",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tcm_handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tcm_parent",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tcm_info",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "nduseroptmsg",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "nduseropt_ifindex",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "nduseropt_icmp_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "nduseropt_icmp_code",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "tcamsg",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

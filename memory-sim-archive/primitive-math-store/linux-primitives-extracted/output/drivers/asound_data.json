@@ -1,0 +1,3137 @@
+{
+  "filename": "asound.h",
+  "includes": [
+    "linux/types.h",
+    "asm/byteorder.h",
+    "endian.h",
+    "sys/ioctl.h",
+    "stdlib.h",
+    "time.h"
+  ],
+  "defines": [
+    {
+      "name": "AES_IEC958_STATUS_SIZE",
+      "value": "24",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SNDRV_HWDEP_VERSION",
+      "value": "SNDRV_PROTOCOL_VERSION(1, 0, 1)",
+      "comment": "",
+      "category": "SNDRV_HWDEP"
+    },
+    {
+      "name": "SNDRV_HWDEP_IOCTL_PVERSION",
+      "value": "_IOR ('H', 0x00, int)",
+      "comment": "",
+      "category": "SNDRV_HWDEP"
+    },
+    {
+      "name": "SNDRV_HWDEP_IOCTL_INFO",
+      "value": "_IOR ('H', 0x01, struct snd_hwdep_info)",
+      "comment": "",
+      "category": "SNDRV_HWDEP"
+    },
+    {
+      "name": "SNDRV_HWDEP_IOCTL_DSP_STATUS",
+      "value": "_IOR('H', 0x02, struct snd_hwdep_dsp_status)",
+      "comment": "",
+      "category": "SNDRV_HWDEP"
+    },
+    {
+      "name": "SNDRV_HWDEP_IOCTL_DSP_LOAD",
+      "value": "_IOW('H', 0x03, struct snd_hwdep_dsp_image)",
+      "comment": "",
+      "category": "SNDRV_HWDEP"
+    },
+    {
+      "name": "SNDRV_PCM_VERSION",
+      "value": "SNDRV_PROTOCOL_VERSION(2, 0, 18)",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_ACCESS_MMAP_INTERLEAVED",
+      "value": "((__force snd_pcm_access_t) 0)",
+      "comment": "interleaved mmap",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_ACCESS_MMAP_NONINTERLEAVED",
+      "value": "((__force snd_pcm_access_t) 1)",
+      "comment": "noninterleaved mmap",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_ACCESS_MMAP_COMPLEX",
+      "value": "((__force snd_pcm_access_t) 2)",
+      "comment": "complex mmap",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_ACCESS_RW_INTERLEAVED",
+      "value": "((__force snd_pcm_access_t) 3)",
+      "comment": "readi/writei",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_ACCESS_RW_NONINTERLEAVED",
+      "value": "((__force snd_pcm_access_t) 4)",
+      "comment": "readn/writen",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_ACCESS_LAST",
+      "value": "SNDRV_PCM_ACCESS_RW_NONINTERLEAVED",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_FORMAT_S8",
+      "value": "((__force snd_pcm_format_t) 0)",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_FORMAT_U8",
+      "value": "((__force snd_pcm_format_t) 1)",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_FORMAT_S16_LE",
+      "value": "((__force snd_pcm_format_t) 2)",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_FORMAT_S16_BE",
+      "value": "((__force snd_pcm_format_t) 3)",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_FORMAT_U16_LE",
+      "value": "((__force snd_pcm_format_t) 4)",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_FORMAT_U16_BE",
+      "value": "((__force snd_pcm_format_t) 5)",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_FORMAT_S24_LE",
+      "value": "((__force snd_pcm_format_t) 6)",
+      "comment": "low three bytes",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_FORMAT_S24_BE",
+      "value": "((__force snd_pcm_format_t) 7)",
+      "comment": "low three bytes",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_FORMAT_U24_LE",
+      "value": "((__force snd_pcm_format_t) 8)",
+      "comment": "low three bytes",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_FORMAT_U24_BE",
+      "value": "((__force snd_pcm_format_t) 9)",
+      "comment": "low three bytes",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_FORMAT_S32_LE",
+      "value": "((__force snd_pcm_format_t) 10)",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_FORMAT_S32_BE",
+      "value": "((__force snd_pcm_format_t) 11)",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_FORMAT_U32_LE",
+      "value": "((__force snd_pcm_format_t) 12)",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_FORMAT_U32_BE",
+      "value": "((__force snd_pcm_format_t) 13)",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_FORMAT_FLOAT_LE",
+      "value": "((__force snd_pcm_format_t) 14)",
+      "comment": "4-byte float, IEEE-754 32-bit, range -1.0 to 1.0",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_FORMAT_FLOAT_BE",
+      "value": "((__force snd_pcm_format_t) 15)",
+      "comment": "4-byte float, IEEE-754 32-bit, range -1.0 to 1.0",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_FORMAT_FLOAT64_LE",
+      "value": "((__force snd_pcm_format_t) 16)",
+      "comment": "8-byte float, IEEE-754 64-bit, range -1.0 to 1.0",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_FORMAT_FLOAT64_BE",
+      "value": "((__force snd_pcm_format_t) 17)",
+      "comment": "8-byte float, IEEE-754 64-bit, range -1.0 to 1.0",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_FORMAT_IEC958_SUBFRAME_LE",
+      "value": "((__force snd_pcm_format_t) 18)",
+      "comment": "IEC-958 subframe, Little Endian",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_FORMAT_IEC958_SUBFRAME_BE",
+      "value": "((__force snd_pcm_format_t) 19)",
+      "comment": "IEC-958 subframe, Big Endian",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_FORMAT_MU_LAW",
+      "value": "((__force snd_pcm_format_t) 20)",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_FORMAT_A_LAW",
+      "value": "((__force snd_pcm_format_t) 21)",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_FORMAT_IMA_ADPCM",
+      "value": "((__force snd_pcm_format_t) 22)",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_FORMAT_MPEG",
+      "value": "((__force snd_pcm_format_t) 23)",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_FORMAT_GSM",
+      "value": "((__force snd_pcm_format_t) 24)",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_FORMAT_S20_LE",
+      "value": "((__force snd_pcm_format_t) 25)",
+      "comment": "in four bytes, LSB justified",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_FORMAT_S20_BE",
+      "value": "((__force snd_pcm_format_t) 26)",
+      "comment": "in four bytes, LSB justified",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_FORMAT_U20_LE",
+      "value": "((__force snd_pcm_format_t) 27)",
+      "comment": "in four bytes, LSB justified",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_FORMAT_U20_BE",
+      "value": "((__force snd_pcm_format_t) 28)",
+      "comment": "in four bytes, LSB justified",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_FORMAT_SPECIAL",
+      "value": "((__force snd_pcm_format_t) 31)",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_FORMAT_S24_3LE",
+      "value": "((__force snd_pcm_format_t) 32)",
+      "comment": "in three bytes",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_FORMAT_S24_3BE",
+      "value": "((__force snd_pcm_format_t) 33)",
+      "comment": "in three bytes",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_FORMAT_U24_3LE",
+      "value": "((__force snd_pcm_format_t) 34)",
+      "comment": "in three bytes",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_FORMAT_U24_3BE",
+      "value": "((__force snd_pcm_format_t) 35)",
+      "comment": "in three bytes",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_FORMAT_S20_3LE",
+      "value": "((__force snd_pcm_format_t) 36)",
+      "comment": "in three bytes",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_FORMAT_S20_3BE",
+      "value": "((__force snd_pcm_format_t) 37)",
+      "comment": "in three bytes",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_FORMAT_U20_3LE",
+      "value": "((__force snd_pcm_format_t) 38)",
+      "comment": "in three bytes",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_FORMAT_U20_3BE",
+      "value": "((__force snd_pcm_format_t) 39)",
+      "comment": "in three bytes",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_FORMAT_S18_3LE",
+      "value": "((__force snd_pcm_format_t) 40)",
+      "comment": "in three bytes",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_FORMAT_S18_3BE",
+      "value": "((__force snd_pcm_format_t) 41)",
+      "comment": "in three bytes",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_FORMAT_U18_3LE",
+      "value": "((__force snd_pcm_format_t) 42)",
+      "comment": "in three bytes",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_FORMAT_U18_3BE",
+      "value": "((__force snd_pcm_format_t) 43)",
+      "comment": "in three bytes",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_FORMAT_G723_24",
+      "value": "((__force snd_pcm_format_t) 44)",
+      "comment": "8 samples in 3 bytes",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_FORMAT_G723_24_1B",
+      "value": "((__force snd_pcm_format_t) 45)",
+      "comment": "1 sample in 1 byte",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_FORMAT_G723_40",
+      "value": "((__force snd_pcm_format_t) 46)",
+      "comment": "8 Samples in 5 bytes",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_FORMAT_G723_40_1B",
+      "value": "((__force snd_pcm_format_t) 47)",
+      "comment": "1 sample in 1 byte",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_FORMAT_DSD_U8",
+      "value": "((__force snd_pcm_format_t) 48)",
+      "comment": "DSD, 1-byte samples DSD (x8)",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_FORMAT_DSD_U16_LE",
+      "value": "((__force snd_pcm_format_t) 49)",
+      "comment": "DSD, 2-byte samples DSD (x16), little endian",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_FORMAT_DSD_U32_LE",
+      "value": "((__force snd_pcm_format_t) 50)",
+      "comment": "DSD, 4-byte samples DSD (x32), little endian",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_FORMAT_DSD_U16_BE",
+      "value": "((__force snd_pcm_format_t) 51)",
+      "comment": "DSD, 2-byte samples DSD (x16), big endian",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_FORMAT_DSD_U32_BE",
+      "value": "((__force snd_pcm_format_t) 52)",
+      "comment": "DSD, 4-byte samples DSD (x32), big endian",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_FORMAT_LAST",
+      "value": "SNDRV_PCM_FORMAT_DSD_U32_BE",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_FORMAT_FIRST",
+      "value": "SNDRV_PCM_FORMAT_S8",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_FORMAT_S16",
+      "value": "SNDRV_PCM_FORMAT_S16_LE",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_FORMAT_U16",
+      "value": "SNDRV_PCM_FORMAT_U16_LE",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_FORMAT_S24",
+      "value": "SNDRV_PCM_FORMAT_S24_LE",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_FORMAT_U24",
+      "value": "SNDRV_PCM_FORMAT_U24_LE",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_FORMAT_S32",
+      "value": "SNDRV_PCM_FORMAT_S32_LE",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_FORMAT_U32",
+      "value": "SNDRV_PCM_FORMAT_U32_LE",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_FORMAT_FLOAT",
+      "value": "SNDRV_PCM_FORMAT_FLOAT_LE",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_FORMAT_FLOAT64",
+      "value": "SNDRV_PCM_FORMAT_FLOAT64_LE",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_FORMAT_IEC958_SUBFRAME",
+      "value": "SNDRV_PCM_FORMAT_IEC958_SUBFRAME_LE",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_FORMAT_S20",
+      "value": "SNDRV_PCM_FORMAT_S20_LE",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_FORMAT_U20",
+      "value": "SNDRV_PCM_FORMAT_U20_LE",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_FORMAT_S16",
+      "value": "SNDRV_PCM_FORMAT_S16_BE",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_FORMAT_U16",
+      "value": "SNDRV_PCM_FORMAT_U16_BE",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_FORMAT_S24",
+      "value": "SNDRV_PCM_FORMAT_S24_BE",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_FORMAT_U24",
+      "value": "SNDRV_PCM_FORMAT_U24_BE",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_FORMAT_S32",
+      "value": "SNDRV_PCM_FORMAT_S32_BE",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_FORMAT_U32",
+      "value": "SNDRV_PCM_FORMAT_U32_BE",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_FORMAT_FLOAT",
+      "value": "SNDRV_PCM_FORMAT_FLOAT_BE",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_FORMAT_FLOAT64",
+      "value": "SNDRV_PCM_FORMAT_FLOAT64_BE",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_FORMAT_IEC958_SUBFRAME",
+      "value": "SNDRV_PCM_FORMAT_IEC958_SUBFRAME_BE",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_FORMAT_S20",
+      "value": "SNDRV_PCM_FORMAT_S20_BE",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_FORMAT_U20",
+      "value": "SNDRV_PCM_FORMAT_U20_BE",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_SUBFORMAT_STD",
+      "value": "((__force snd_pcm_subformat_t) 0)",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_SUBFORMAT_MSBITS_MAX",
+      "value": "((__force snd_pcm_subformat_t) 1)",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_SUBFORMAT_MSBITS_20",
+      "value": "((__force snd_pcm_subformat_t) 2)",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_SUBFORMAT_MSBITS_24",
+      "value": "((__force snd_pcm_subformat_t) 3)",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_SUBFORMAT_LAST",
+      "value": "SNDRV_PCM_SUBFORMAT_MSBITS_24",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_INFO_MMAP",
+      "value": "0x00000001",
+      "comment": "hardware supports mmap",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_INFO_MMAP_VALID",
+      "value": "0x00000002",
+      "comment": "period data are valid during transfer",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_INFO_DOUBLE",
+      "value": "0x00000004",
+      "comment": "Double buffering needed for PCM start/stop",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_INFO_BATCH",
+      "value": "0x00000010",
+      "comment": "double buffering",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_INFO_SYNC_APPLPTR",
+      "value": "0x00000020",
+      "comment": "need the explicit sync of appl_ptr update",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_INFO_PERFECT_DRAIN",
+      "value": "0x00000040",
+      "comment": "silencing at the end of stream is not required",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_INFO_INTERLEAVED",
+      "value": "0x00000100",
+      "comment": "channels are interleaved",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_INFO_NONINTERLEAVED",
+      "value": "0x00000200",
+      "comment": "channels are not interleaved",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_INFO_COMPLEX",
+      "value": "0x00000400",
+      "comment": "complex frame organization (mmap only)",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_INFO_BLOCK_TRANSFER",
+      "value": "0x00010000",
+      "comment": "hardware transfer block of samples",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_INFO_OVERRANGE",
+      "value": "0x00020000",
+      "comment": "hardware supports ADC (capture) overrange detection",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_INFO_RESUME",
+      "value": "0x00040000",
+      "comment": "hardware supports stream resume after suspend",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_INFO_PAUSE",
+      "value": "0x00080000",
+      "comment": "pause ioctl is supported",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_INFO_HALF_DUPLEX",
+      "value": "0x00100000",
+      "comment": "only half duplex",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_INFO_JOINT_DUPLEX",
+      "value": "0x00200000",
+      "comment": "playback and capture stream are somewhat correlated",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_INFO_SYNC_START",
+      "value": "0x00400000",
+      "comment": "pcm support some kind of sync go",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_INFO_NO_PERIOD_WAKEUP",
+      "value": "0x00800000",
+      "comment": "period wakeup can be disabled",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_INFO_HAS_WALL_CLOCK",
+      "value": "0x01000000",
+      "comment": "(Deprecated)has audio wall clock for audio/system time sync",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_INFO_HAS_LINK_ATIME",
+      "value": "0x01000000",
+      "comment": "report hardware link audio time, reset on startup",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_INFO_HAS_LINK_ABSOLUTE_ATIME",
+      "value": "0x02000000",
+      "comment": "report absolute hardware link audio time, not reset on startup",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_INFO_HAS_LINK_ESTIMATED_ATIME",
+      "value": "0x04000000",
+      "comment": "report estimated link audio time",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_INFO_HAS_LINK_SYNCHRONIZED_ATIME",
+      "value": "0x08000000",
+      "comment": "report synchronized audio/system time",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_INFO_EXPLICIT_SYNC",
+      "value": "0x10000000",
+      "comment": "needs explicit sync of pointers and data",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_INFO_NO_REWINDS",
+      "value": "0x20000000",
+      "comment": "hardware can only support monotonic changes of appl_ptr",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_INFO_DRAIN_TRIGGER",
+      "value": "0x40000000",
+      "comment": "internal kernel flag - trigger in drain",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_INFO_FIFO_IN_FRAMES",
+      "value": "0x80000000",
+      "comment": "internal kernel flag - FIFO size is in frames",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_STATE_OPEN",
+      "value": "((__force snd_pcm_state_t) 0)",
+      "comment": "stream is open",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_STATE_SETUP",
+      "value": "((__force snd_pcm_state_t) 1)",
+      "comment": "stream has a setup",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_STATE_PREPARED",
+      "value": "((__force snd_pcm_state_t) 2)",
+      "comment": "stream is ready to start",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_STATE_RUNNING",
+      "value": "((__force snd_pcm_state_t) 3)",
+      "comment": "stream is running",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_STATE_XRUN",
+      "value": "((__force snd_pcm_state_t) 4)",
+      "comment": "stream reached an xrun",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_STATE_DRAINING",
+      "value": "((__force snd_pcm_state_t) 5)",
+      "comment": "stream is draining",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_STATE_PAUSED",
+      "value": "((__force snd_pcm_state_t) 6)",
+      "comment": "stream is paused",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_STATE_SUSPENDED",
+      "value": "((__force snd_pcm_state_t) 7)",
+      "comment": "hardware is suspended",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_STATE_DISCONNECTED",
+      "value": "((__force snd_pcm_state_t) 8)",
+      "comment": "hardware is disconnected",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_STATE_LAST",
+      "value": "SNDRV_PCM_STATE_DISCONNECTED",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_HW_PARAM_ACCESS",
+      "value": "0",
+      "comment": "Access type",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_HW_PARAM_FORMAT",
+      "value": "1",
+      "comment": "Format",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_HW_PARAM_SUBFORMAT",
+      "value": "2",
+      "comment": "Subformat",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_HW_PARAM_FIRST_MASK",
+      "value": "SNDRV_PCM_HW_PARAM_ACCESS",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_HW_PARAM_LAST_MASK",
+      "value": "SNDRV_PCM_HW_PARAM_SUBFORMAT",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_HW_PARAM_SAMPLE_BITS",
+      "value": "8",
+      "comment": "Bits per sample",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_HW_PARAM_FRAME_BITS",
+      "value": "9",
+      "comment": "Bits per frame",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_HW_PARAM_CHANNELS",
+      "value": "10",
+      "comment": "Channels",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_HW_PARAM_RATE",
+      "value": "11",
+      "comment": "Approx rate",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_HW_PARAM_PERIOD_TIME",
+      "value": "12\t/* Approx distance between",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_HW_PARAM_PERIOD_SIZE",
+      "value": "13\t/* Approx frames between",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_HW_PARAM_PERIOD_BYTES",
+      "value": "14\t/* Approx bytes between",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_HW_PARAM_PERIODS",
+      "value": "15\t/* Approx interrupts per",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_HW_PARAM_BUFFER_TIME",
+      "value": "16\t/* Approx duration of buffer",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_HW_PARAM_BUFFER_SIZE",
+      "value": "17",
+      "comment": "Size of buffer in frames",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_HW_PARAM_BUFFER_BYTES",
+      "value": "18",
+      "comment": "Size of buffer in bytes",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_HW_PARAM_TICK_TIME",
+      "value": "19",
+      "comment": "Approx tick duration in us",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_HW_PARAM_FIRST_INTERVAL",
+      "value": "SNDRV_PCM_HW_PARAM_SAMPLE_BITS",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_HW_PARAM_LAST_INTERVAL",
+      "value": "SNDRV_PCM_HW_PARAM_TICK_TIME",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_HW_PARAMS_NORESAMPLE",
+      "value": "(1<<0)",
+      "comment": "avoid rate resampling",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_HW_PARAMS_EXPORT_BUFFER",
+      "value": "(1<<1)",
+      "comment": "export buffer",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_HW_PARAMS_NO_PERIOD_WAKEUP",
+      "value": "(1<<2)",
+      "comment": "disable period wakeups",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_HW_PARAMS_NO_DRAIN_SILENCE",
+      "value": "(1<<3)\t/* suppress drain with the filling",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_MASK_MAX",
+      "value": "256",
+      "comment": "",
+      "category": "SNDRV_MASK"
+    },
+    {
+      "name": "__snd_pcm_mmap_status64",
+      "value": "snd_pcm_mmap_status",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "__snd_pcm_mmap_control64",
+      "value": "snd_pcm_mmap_control",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "__snd_pcm_sync_ptr64",
+      "value": "snd_pcm_sync_ptr",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "__snd_timespec64",
+      "value": "__kernel_timespec",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "__snd_timespec64",
+      "value": "timespec",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "__snd_pcm_mmap_status",
+      "value": "snd_pcm_mmap_status",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "__snd_pcm_mmap_control",
+      "value": "snd_pcm_mmap_control",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "__snd_pcm_sync_ptr",
+      "value": "snd_pcm_sync_ptr",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "__snd_timespec",
+      "value": "timespec",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SNDRV_PCM_SYNC_PTR_HWSYNC",
+      "value": "(1<<0)",
+      "comment": "execute hwsync",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_SYNC_PTR_APPL",
+      "value": "(1<<1)",
+      "comment": "get appl_ptr from driver (r/w op)",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_SYNC_PTR_AVAIL_MIN",
+      "value": "(1<<2)",
+      "comment": "get avail_min from driver",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_CHMAP_POSITION_MASK",
+      "value": "0xffff",
+      "comment": "",
+      "category": "SNDRV_CHMAP"
+    },
+    {
+      "name": "SNDRV_CHMAP_PHASE_INVERSE",
+      "value": "(0x01 << 16)",
+      "comment": "",
+      "category": "SNDRV_CHMAP"
+    },
+    {
+      "name": "SNDRV_CHMAP_DRIVER_SPEC",
+      "value": "(0x02 << 16)",
+      "comment": "",
+      "category": "SNDRV_CHMAP"
+    },
+    {
+      "name": "SNDRV_PCM_IOCTL_PVERSION",
+      "value": "_IOR('A', 0x00, int)",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_IOCTL_INFO",
+      "value": "_IOR('A', 0x01, struct snd_pcm_info)",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_IOCTL_TSTAMP",
+      "value": "_IOW('A', 0x02, int)",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_IOCTL_TTSTAMP",
+      "value": "_IOW('A', 0x03, int)",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_IOCTL_USER_PVERSION",
+      "value": "_IOW('A', 0x04, int)",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_IOCTL_HW_REFINE",
+      "value": "_IOWR('A', 0x10, struct snd_pcm_hw_params)",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_IOCTL_HW_PARAMS",
+      "value": "_IOWR('A', 0x11, struct snd_pcm_hw_params)",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_IOCTL_HW_FREE",
+      "value": "_IO('A', 0x12)",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_IOCTL_SW_PARAMS",
+      "value": "_IOWR('A', 0x13, struct snd_pcm_sw_params)",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_IOCTL_STATUS",
+      "value": "_IOR('A', 0x20, struct snd_pcm_status)",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_IOCTL_DELAY",
+      "value": "_IOR('A', 0x21, snd_pcm_sframes_t)",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_IOCTL_HWSYNC",
+      "value": "_IO('A', 0x22)",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "__SNDRV_PCM_IOCTL_SYNC_PTR",
+      "value": "_IOWR('A', 0x23, struct __snd_pcm_sync_ptr)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "__SNDRV_PCM_IOCTL_SYNC_PTR64",
+      "value": "_IOWR('A', 0x23, struct __snd_pcm_sync_ptr64)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SNDRV_PCM_IOCTL_SYNC_PTR",
+      "value": "_IOWR('A', 0x23, struct snd_pcm_sync_ptr)",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_IOCTL_STATUS_EXT",
+      "value": "_IOWR('A', 0x24, struct snd_pcm_status)",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_IOCTL_CHANNEL_INFO",
+      "value": "_IOR('A', 0x32, struct snd_pcm_channel_info)",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_IOCTL_PREPARE",
+      "value": "_IO('A', 0x40)",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_IOCTL_RESET",
+      "value": "_IO('A', 0x41)",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_IOCTL_START",
+      "value": "_IO('A', 0x42)",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_IOCTL_DROP",
+      "value": "_IO('A', 0x43)",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_IOCTL_DRAIN",
+      "value": "_IO('A', 0x44)",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_IOCTL_PAUSE",
+      "value": "_IOW('A', 0x45, int)",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_IOCTL_REWIND",
+      "value": "_IOW('A', 0x46, snd_pcm_uframes_t)",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_IOCTL_RESUME",
+      "value": "_IO('A', 0x47)",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_IOCTL_XRUN",
+      "value": "_IO('A', 0x48)",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_IOCTL_FORWARD",
+      "value": "_IOW('A', 0x49, snd_pcm_uframes_t)",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_IOCTL_WRITEI_FRAMES",
+      "value": "_IOW('A', 0x50, struct snd_xferi)",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_IOCTL_READI_FRAMES",
+      "value": "_IOR('A', 0x51, struct snd_xferi)",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_IOCTL_WRITEN_FRAMES",
+      "value": "_IOW('A', 0x52, struct snd_xfern)",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_IOCTL_READN_FRAMES",
+      "value": "_IOR('A', 0x53, struct snd_xfern)",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_IOCTL_LINK",
+      "value": "_IOW('A', 0x60, int)",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_PCM_IOCTL_UNLINK",
+      "value": "_IO('A', 0x61)",
+      "comment": "",
+      "category": "SNDRV_PCM"
+    },
+    {
+      "name": "SNDRV_RAWMIDI_VERSION",
+      "value": "SNDRV_PROTOCOL_VERSION(2, 0, 5)",
+      "comment": "",
+      "category": "SNDRV_RAWMIDI"
+    },
+    {
+      "name": "SNDRV_RAWMIDI_INFO_OUTPUT",
+      "value": "0x00000001",
+      "comment": "",
+      "category": "SNDRV_RAWMIDI"
+    },
+    {
+      "name": "SNDRV_RAWMIDI_INFO_INPUT",
+      "value": "0x00000002",
+      "comment": "",
+      "category": "SNDRV_RAWMIDI"
+    },
+    {
+      "name": "SNDRV_RAWMIDI_INFO_DUPLEX",
+      "value": "0x00000004",
+      "comment": "",
+      "category": "SNDRV_RAWMIDI"
+    },
+    {
+      "name": "SNDRV_RAWMIDI_INFO_UMP",
+      "value": "0x00000008",
+      "comment": "",
+      "category": "SNDRV_RAWMIDI"
+    },
+    {
+      "name": "SNDRV_RAWMIDI_INFO_STREAM_INACTIVE",
+      "value": "0x00000010",
+      "comment": "",
+      "category": "SNDRV_RAWMIDI"
+    },
+    {
+      "name": "SNDRV_RAWMIDI_DEVICE_UNKNOWN",
+      "value": "0",
+      "comment": "",
+      "category": "SNDRV_RAWMIDI"
+    },
+    {
+      "name": "SNDRV_RAWMIDI_MODE_FRAMING_MASK",
+      "value": "(7<<0)",
+      "comment": "",
+      "category": "SNDRV_RAWMIDI"
+    },
+    {
+      "name": "SNDRV_RAWMIDI_MODE_FRAMING_SHIFT",
+      "value": "0",
+      "comment": "",
+      "category": "SNDRV_RAWMIDI"
+    },
+    {
+      "name": "SNDRV_RAWMIDI_MODE_FRAMING_NONE",
+      "value": "(0<<0)",
+      "comment": "",
+      "category": "SNDRV_RAWMIDI"
+    },
+    {
+      "name": "SNDRV_RAWMIDI_MODE_FRAMING_TSTAMP",
+      "value": "(1<<0)",
+      "comment": "",
+      "category": "SNDRV_RAWMIDI"
+    },
+    {
+      "name": "SNDRV_RAWMIDI_MODE_CLOCK_MASK",
+      "value": "(7<<3)",
+      "comment": "",
+      "category": "SNDRV_RAWMIDI"
+    },
+    {
+      "name": "SNDRV_RAWMIDI_MODE_CLOCK_SHIFT",
+      "value": "3",
+      "comment": "",
+      "category": "SNDRV_RAWMIDI"
+    },
+    {
+      "name": "SNDRV_RAWMIDI_MODE_CLOCK_NONE",
+      "value": "(0<<3)",
+      "comment": "",
+      "category": "SNDRV_RAWMIDI"
+    },
+    {
+      "name": "SNDRV_RAWMIDI_MODE_CLOCK_REALTIME",
+      "value": "(1<<3)",
+      "comment": "",
+      "category": "SNDRV_RAWMIDI"
+    },
+    {
+      "name": "SNDRV_RAWMIDI_MODE_CLOCK_MONOTONIC",
+      "value": "(2<<3)",
+      "comment": "",
+      "category": "SNDRV_RAWMIDI"
+    },
+    {
+      "name": "SNDRV_RAWMIDI_MODE_CLOCK_MONOTONIC_RAW",
+      "value": "(3<<3)",
+      "comment": "",
+      "category": "SNDRV_RAWMIDI"
+    },
+    {
+      "name": "SNDRV_RAWMIDI_FRAMING_DATA_LENGTH",
+      "value": "16",
+      "comment": "",
+      "category": "SNDRV_RAWMIDI"
+    },
+    {
+      "name": "SNDRV_UMP_EP_INFO_STATIC_BLOCKS",
+      "value": "0x01",
+      "comment": "",
+      "category": "SNDRV_UMP"
+    },
+    {
+      "name": "SNDRV_UMP_EP_INFO_PROTO_MIDI_MASK",
+      "value": "0x0300",
+      "comment": "",
+      "category": "SNDRV_UMP"
+    },
+    {
+      "name": "SNDRV_UMP_EP_INFO_PROTO_MIDI1",
+      "value": "0x0100",
+      "comment": "MIDI 1.0",
+      "category": "SNDRV_UMP"
+    },
+    {
+      "name": "SNDRV_UMP_EP_INFO_PROTO_MIDI2",
+      "value": "0x0200",
+      "comment": "MIDI 2.0",
+      "category": "SNDRV_UMP"
+    },
+    {
+      "name": "SNDRV_UMP_EP_INFO_PROTO_JRTS_MASK",
+      "value": "0x0003",
+      "comment": "",
+      "category": "SNDRV_UMP"
+    },
+    {
+      "name": "SNDRV_UMP_EP_INFO_PROTO_JRTS_TX",
+      "value": "0x0001",
+      "comment": "JRTS Transmit",
+      "category": "SNDRV_UMP"
+    },
+    {
+      "name": "SNDRV_UMP_EP_INFO_PROTO_JRTS_RX",
+      "value": "0x0002",
+      "comment": "JRTS Receive",
+      "category": "SNDRV_UMP"
+    },
+    {
+      "name": "SNDRV_UMP_DIR_INPUT",
+      "value": "0x01",
+      "comment": "",
+      "category": "SNDRV_UMP"
+    },
+    {
+      "name": "SNDRV_UMP_DIR_OUTPUT",
+      "value": "0x02",
+      "comment": "",
+      "category": "SNDRV_UMP"
+    },
+    {
+      "name": "SNDRV_UMP_DIR_BIDIRECTION",
+      "value": "0x03",
+      "comment": "",
+      "category": "SNDRV_UMP"
+    },
+    {
+      "name": "SNDRV_UMP_BLOCK_IS_MIDI1",
+      "value": "(1U << 0)",
+      "comment": "MIDI 1.0 port w/o restrict",
+      "category": "SNDRV_UMP"
+    },
+    {
+      "name": "SNDRV_UMP_BLOCK_IS_LOWSPEED",
+      "value": "(1U << 1)",
+      "comment": "31.25Kbps B/W MIDI1 port",
+      "category": "SNDRV_UMP"
+    },
+    {
+      "name": "SNDRV_UMP_BLOCK_UI_HINT_UNKNOWN",
+      "value": "0x00",
+      "comment": "",
+      "category": "SNDRV_UMP"
+    },
+    {
+      "name": "SNDRV_UMP_BLOCK_UI_HINT_RECEIVER",
+      "value": "0x01",
+      "comment": "",
+      "category": "SNDRV_UMP"
+    },
+    {
+      "name": "SNDRV_UMP_BLOCK_UI_HINT_SENDER",
+      "value": "0x02",
+      "comment": "",
+      "category": "SNDRV_UMP"
+    },
+    {
+      "name": "SNDRV_UMP_BLOCK_UI_HINT_BOTH",
+      "value": "0x03",
+      "comment": "",
+      "category": "SNDRV_UMP"
+    },
+    {
+      "name": "SNDRV_UMP_MAX_GROUPS",
+      "value": "16",
+      "comment": "",
+      "category": "SNDRV_UMP"
+    },
+    {
+      "name": "SNDRV_UMP_MAX_BLOCKS",
+      "value": "32",
+      "comment": "",
+      "category": "SNDRV_UMP"
+    },
+    {
+      "name": "SNDRV_RAWMIDI_IOCTL_PVERSION",
+      "value": "_IOR('W', 0x00, int)",
+      "comment": "",
+      "category": "SNDRV_RAWMIDI"
+    },
+    {
+      "name": "SNDRV_RAWMIDI_IOCTL_INFO",
+      "value": "_IOR('W', 0x01, struct snd_rawmidi_info)",
+      "comment": "",
+      "category": "SNDRV_RAWMIDI"
+    },
+    {
+      "name": "SNDRV_RAWMIDI_IOCTL_USER_PVERSION",
+      "value": "_IOW('W', 0x02, int)",
+      "comment": "",
+      "category": "SNDRV_RAWMIDI"
+    },
+    {
+      "name": "SNDRV_RAWMIDI_IOCTL_PARAMS",
+      "value": "_IOWR('W', 0x10, struct snd_rawmidi_params)",
+      "comment": "",
+      "category": "SNDRV_RAWMIDI"
+    },
+    {
+      "name": "SNDRV_RAWMIDI_IOCTL_STATUS",
+      "value": "_IOWR('W', 0x20, struct snd_rawmidi_status)",
+      "comment": "",
+      "category": "SNDRV_RAWMIDI"
+    },
+    {
+      "name": "SNDRV_RAWMIDI_IOCTL_DROP",
+      "value": "_IOW('W', 0x30, int)",
+      "comment": "",
+      "category": "SNDRV_RAWMIDI"
+    },
+    {
+      "name": "SNDRV_RAWMIDI_IOCTL_DRAIN",
+      "value": "_IOW('W', 0x31, int)",
+      "comment": "",
+      "category": "SNDRV_RAWMIDI"
+    },
+    {
+      "name": "SNDRV_UMP_IOCTL_ENDPOINT_INFO",
+      "value": "_IOR('W', 0x40, struct snd_ump_endpoint_info)",
+      "comment": "",
+      "category": "SNDRV_UMP"
+    },
+    {
+      "name": "SNDRV_UMP_IOCTL_BLOCK_INFO",
+      "value": "_IOR('W', 0x41, struct snd_ump_block_info)",
+      "comment": "",
+      "category": "SNDRV_UMP"
+    },
+    {
+      "name": "SNDRV_TIMER_VERSION",
+      "value": "SNDRV_PROTOCOL_VERSION(2, 0, 8)",
+      "comment": "",
+      "category": "SNDRV_TIMER"
+    },
+    {
+      "name": "SNDRV_TIMER_GLOBAL_SYSTEM",
+      "value": "0",
+      "comment": "",
+      "category": "SNDRV_TIMER"
+    },
+    {
+      "name": "SNDRV_TIMER_GLOBAL_RTC",
+      "value": "1",
+      "comment": "unused",
+      "category": "SNDRV_TIMER"
+    },
+    {
+      "name": "SNDRV_TIMER_GLOBAL_HPET",
+      "value": "2",
+      "comment": "",
+      "category": "SNDRV_TIMER"
+    },
+    {
+      "name": "SNDRV_TIMER_GLOBAL_HRTIMER",
+      "value": "3",
+      "comment": "",
+      "category": "SNDRV_TIMER"
+    },
+    {
+      "name": "SNDRV_TIMER_GLOBAL_UDRIVEN",
+      "value": "4",
+      "comment": "",
+      "category": "SNDRV_TIMER"
+    },
+    {
+      "name": "SNDRV_TIMER_FLG_SLAVE",
+      "value": "(1<<0)",
+      "comment": "cannot be controlled",
+      "category": "SNDRV_TIMER"
+    },
+    {
+      "name": "SNDRV_TIMER_PSFLG_AUTO",
+      "value": "(1<<0)",
+      "comment": "auto start, otherwise one-shot",
+      "category": "SNDRV_TIMER"
+    },
+    {
+      "name": "SNDRV_TIMER_PSFLG_EXCLUSIVE",
+      "value": "(1<<1)",
+      "comment": "exclusive use, precise start/stop/pause/continue",
+      "category": "SNDRV_TIMER"
+    },
+    {
+      "name": "SNDRV_TIMER_PSFLG_EARLY_EVENT",
+      "value": "(1<<2)",
+      "comment": "write early event to the poll queue",
+      "category": "SNDRV_TIMER"
+    },
+    {
+      "name": "SNDRV_TIMER_IOCTL_PVERSION",
+      "value": "_IOR('T', 0x00, int)",
+      "comment": "",
+      "category": "SNDRV_TIMER"
+    },
+    {
+      "name": "SNDRV_TIMER_IOCTL_NEXT_DEVICE",
+      "value": "_IOWR('T', 0x01, struct snd_timer_id)",
+      "comment": "",
+      "category": "SNDRV_TIMER"
+    },
+    {
+      "name": "SNDRV_TIMER_IOCTL_TREAD_OLD",
+      "value": "_IOW('T', 0x02, int)",
+      "comment": "",
+      "category": "SNDRV_TIMER"
+    },
+    {
+      "name": "SNDRV_TIMER_IOCTL_GINFO",
+      "value": "_IOWR('T', 0x03, struct snd_timer_ginfo)",
+      "comment": "",
+      "category": "SNDRV_TIMER"
+    },
+    {
+      "name": "SNDRV_TIMER_IOCTL_GPARAMS",
+      "value": "_IOW('T', 0x04, struct snd_timer_gparams)",
+      "comment": "",
+      "category": "SNDRV_TIMER"
+    },
+    {
+      "name": "SNDRV_TIMER_IOCTL_GSTATUS",
+      "value": "_IOWR('T', 0x05, struct snd_timer_gstatus)",
+      "comment": "",
+      "category": "SNDRV_TIMER"
+    },
+    {
+      "name": "SNDRV_TIMER_IOCTL_SELECT",
+      "value": "_IOW('T', 0x10, struct snd_timer_select)",
+      "comment": "",
+      "category": "SNDRV_TIMER"
+    },
+    {
+      "name": "SNDRV_TIMER_IOCTL_INFO",
+      "value": "_IOR('T', 0x11, struct snd_timer_info)",
+      "comment": "",
+      "category": "SNDRV_TIMER"
+    },
+    {
+      "name": "SNDRV_TIMER_IOCTL_PARAMS",
+      "value": "_IOW('T', 0x12, struct snd_timer_params)",
+      "comment": "",
+      "category": "SNDRV_TIMER"
+    },
+    {
+      "name": "SNDRV_TIMER_IOCTL_STATUS",
+      "value": "_IOR('T', 0x14, struct snd_timer_status)",
+      "comment": "",
+      "category": "SNDRV_TIMER"
+    },
+    {
+      "name": "SNDRV_TIMER_IOCTL_START",
+      "value": "_IO('T', 0xa0)",
+      "comment": "",
+      "category": "SNDRV_TIMER"
+    },
+    {
+      "name": "SNDRV_TIMER_IOCTL_STOP",
+      "value": "_IO('T', 0xa1)",
+      "comment": "",
+      "category": "SNDRV_TIMER"
+    },
+    {
+      "name": "SNDRV_TIMER_IOCTL_CONTINUE",
+      "value": "_IO('T', 0xa2)",
+      "comment": "",
+      "category": "SNDRV_TIMER"
+    },
+    {
+      "name": "SNDRV_TIMER_IOCTL_PAUSE",
+      "value": "_IO('T', 0xa3)",
+      "comment": "",
+      "category": "SNDRV_TIMER"
+    },
+    {
+      "name": "SNDRV_TIMER_IOCTL_TREAD64",
+      "value": "_IOW('T', 0xa4, int)",
+      "comment": "",
+      "category": "SNDRV_TIMER"
+    },
+    {
+      "name": "SNDRV_TIMER_IOCTL_CREATE",
+      "value": "_IOWR('T', 0xa5, struct snd_timer_uinfo)",
+      "comment": "",
+      "category": "SNDRV_TIMER"
+    },
+    {
+      "name": "SNDRV_TIMER_IOCTL_TRIGGER",
+      "value": "_IO('T', 0xa6)",
+      "comment": "",
+      "category": "SNDRV_TIMER"
+    },
+    {
+      "name": "SNDRV_TIMER_IOCTL_TREAD",
+      "value": "SNDRV_TIMER_IOCTL_TREAD_OLD",
+      "comment": "",
+      "category": "SNDRV_TIMER"
+    },
+    {
+      "name": "SNDRV_TIMER_IOCTL_TREAD",
+      "value": "((sizeof(__kernel_long_t) >= sizeof(time_t)) ? ",
+      "comment": "",
+      "category": "SNDRV_TIMER"
+    },
+    {
+      "name": "SNDRV_CTL_VERSION",
+      "value": "SNDRV_PROTOCOL_VERSION(2, 0, 9)",
+      "comment": "",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_ELEM_TYPE_NONE",
+      "value": "((__force snd_ctl_elem_type_t) 0)",
+      "comment": "invalid",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_ELEM_TYPE_BOOLEAN",
+      "value": "((__force snd_ctl_elem_type_t) 1)",
+      "comment": "boolean type",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_ELEM_TYPE_INTEGER",
+      "value": "((__force snd_ctl_elem_type_t) 2)",
+      "comment": "integer type",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_ELEM_TYPE_ENUMERATED",
+      "value": "((__force snd_ctl_elem_type_t) 3)",
+      "comment": "enumerated type",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_ELEM_TYPE_BYTES",
+      "value": "((__force snd_ctl_elem_type_t) 4)",
+      "comment": "byte array",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_ELEM_TYPE_IEC958",
+      "value": "((__force snd_ctl_elem_type_t) 5)",
+      "comment": "IEC958 (S/PDIF) setup",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_ELEM_TYPE_INTEGER64",
+      "value": "((__force snd_ctl_elem_type_t) 6)",
+      "comment": "64-bit integer type",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_ELEM_TYPE_LAST",
+      "value": "SNDRV_CTL_ELEM_TYPE_INTEGER64",
+      "comment": "",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_ELEM_IFACE_CARD",
+      "value": "((__force snd_ctl_elem_iface_t) 0)",
+      "comment": "global control",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_ELEM_IFACE_HWDEP",
+      "value": "((__force snd_ctl_elem_iface_t) 1)",
+      "comment": "hardware dependent device",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_ELEM_IFACE_MIXER",
+      "value": "((__force snd_ctl_elem_iface_t) 2)",
+      "comment": "virtual mixer device",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_ELEM_IFACE_PCM",
+      "value": "((__force snd_ctl_elem_iface_t) 3)",
+      "comment": "PCM device",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_ELEM_IFACE_RAWMIDI",
+      "value": "((__force snd_ctl_elem_iface_t) 4)",
+      "comment": "RawMidi device",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_ELEM_IFACE_TIMER",
+      "value": "((__force snd_ctl_elem_iface_t) 5)",
+      "comment": "timer device",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_ELEM_IFACE_SEQUENCER",
+      "value": "((__force snd_ctl_elem_iface_t) 6)",
+      "comment": "sequencer client",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_ELEM_IFACE_LAST",
+      "value": "SNDRV_CTL_ELEM_IFACE_SEQUENCER",
+      "comment": "",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_ELEM_ACCESS_READ",
+      "value": "(1<<0)",
+      "comment": "",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_ELEM_ACCESS_WRITE",
+      "value": "(1<<1)",
+      "comment": "",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_ELEM_ACCESS_READWRITE",
+      "value": "(SNDRV_CTL_ELEM_ACCESS_READ|SNDRV_CTL_ELEM_ACCESS_WRITE)",
+      "comment": "",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_ELEM_ACCESS_VOLATILE",
+      "value": "(1<<2)",
+      "comment": "control value may be changed without a notification",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_ELEM_ACCESS_TLV_READ",
+      "value": "(1<<4)",
+      "comment": "TLV read is possible",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_ELEM_ACCESS_TLV_WRITE",
+      "value": "(1<<5)",
+      "comment": "TLV write is possible",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_ELEM_ACCESS_TLV_READWRITE",
+      "value": "(SNDRV_CTL_ELEM_ACCESS_TLV_READ|SNDRV_CTL_ELEM_ACCESS_TLV_WRITE)",
+      "comment": "",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_ELEM_ACCESS_TLV_COMMAND",
+      "value": "(1<<6)",
+      "comment": "TLV command is possible",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_ELEM_ACCESS_INACTIVE",
+      "value": "(1<<8)",
+      "comment": "control does actually nothing, but may be updated",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_ELEM_ACCESS_LOCK",
+      "value": "(1<<9)",
+      "comment": "write lock",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_ELEM_ACCESS_OWNER",
+      "value": "(1<<10)",
+      "comment": "write lock owner",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_ELEM_ACCESS_TLV_CALLBACK",
+      "value": "(1<<28)",
+      "comment": "kernel use a TLV callback",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_ELEM_ACCESS_USER",
+      "value": "(1<<29)",
+      "comment": "user space element",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_POWER_D0",
+      "value": "0x0000",
+      "comment": "full On",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_POWER_D1",
+      "value": "0x0100",
+      "comment": "partial On",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_POWER_D2",
+      "value": "0x0200",
+      "comment": "partial On",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_POWER_D3",
+      "value": "0x0300",
+      "comment": "Off",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_POWER_D3hot",
+      "value": "(SNDRV_CTL_POWER_D3|0x0000)",
+      "comment": "Off, with power",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_POWER_D3cold",
+      "value": "(SNDRV_CTL_POWER_D3|0x0001)",
+      "comment": "Off, without power",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_ELEM_ID_NAME_MAXLEN",
+      "value": "44",
+      "comment": "",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_IOCTL_PVERSION",
+      "value": "_IOR('U', 0x00, int)",
+      "comment": "",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_IOCTL_CARD_INFO",
+      "value": "_IOR('U', 0x01, struct snd_ctl_card_info)",
+      "comment": "",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_IOCTL_ELEM_LIST",
+      "value": "_IOWR('U', 0x10, struct snd_ctl_elem_list)",
+      "comment": "",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_IOCTL_ELEM_INFO",
+      "value": "_IOWR('U', 0x11, struct snd_ctl_elem_info)",
+      "comment": "",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_IOCTL_ELEM_READ",
+      "value": "_IOWR('U', 0x12, struct snd_ctl_elem_value)",
+      "comment": "",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_IOCTL_ELEM_WRITE",
+      "value": "_IOWR('U', 0x13, struct snd_ctl_elem_value)",
+      "comment": "",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_IOCTL_ELEM_LOCK",
+      "value": "_IOW('U', 0x14, struct snd_ctl_elem_id)",
+      "comment": "",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_IOCTL_ELEM_UNLOCK",
+      "value": "_IOW('U', 0x15, struct snd_ctl_elem_id)",
+      "comment": "",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_IOCTL_SUBSCRIBE_EVENTS",
+      "value": "_IOWR('U', 0x16, int)",
+      "comment": "",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_IOCTL_ELEM_ADD",
+      "value": "_IOWR('U', 0x17, struct snd_ctl_elem_info)",
+      "comment": "",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_IOCTL_ELEM_REPLACE",
+      "value": "_IOWR('U', 0x18, struct snd_ctl_elem_info)",
+      "comment": "",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_IOCTL_ELEM_REMOVE",
+      "value": "_IOWR('U', 0x19, struct snd_ctl_elem_id)",
+      "comment": "",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_IOCTL_TLV_READ",
+      "value": "_IOWR('U', 0x1a, struct snd_ctl_tlv)",
+      "comment": "",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_IOCTL_TLV_WRITE",
+      "value": "_IOWR('U', 0x1b, struct snd_ctl_tlv)",
+      "comment": "",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_IOCTL_TLV_COMMAND",
+      "value": "_IOWR('U', 0x1c, struct snd_ctl_tlv)",
+      "comment": "",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_IOCTL_HWDEP_NEXT_DEVICE",
+      "value": "_IOWR('U', 0x20, int)",
+      "comment": "",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_IOCTL_HWDEP_INFO",
+      "value": "_IOR('U', 0x21, struct snd_hwdep_info)",
+      "comment": "",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_IOCTL_PCM_NEXT_DEVICE",
+      "value": "_IOR('U', 0x30, int)",
+      "comment": "",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_IOCTL_PCM_INFO",
+      "value": "_IOWR('U', 0x31, struct snd_pcm_info)",
+      "comment": "",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_IOCTL_PCM_PREFER_SUBDEVICE",
+      "value": "_IOW('U', 0x32, int)",
+      "comment": "",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_IOCTL_RAWMIDI_NEXT_DEVICE",
+      "value": "_IOWR('U', 0x40, int)",
+      "comment": "",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_IOCTL_RAWMIDI_INFO",
+      "value": "_IOWR('U', 0x41, struct snd_rawmidi_info)",
+      "comment": "",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_IOCTL_RAWMIDI_PREFER_SUBDEVICE",
+      "value": "_IOW('U', 0x42, int)",
+      "comment": "",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_IOCTL_UMP_NEXT_DEVICE",
+      "value": "_IOWR('U', 0x43, int)",
+      "comment": "",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_IOCTL_UMP_ENDPOINT_INFO",
+      "value": "_IOWR('U', 0x44, struct snd_ump_endpoint_info)",
+      "comment": "",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_IOCTL_UMP_BLOCK_INFO",
+      "value": "_IOWR('U', 0x45, struct snd_ump_block_info)",
+      "comment": "",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_IOCTL_POWER",
+      "value": "_IOWR('U', 0xd0, int)",
+      "comment": "",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_IOCTL_POWER_STATE",
+      "value": "_IOR('U', 0xd1, int)",
+      "comment": "",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_EVENT_MASK_VALUE",
+      "value": "(1<<0)",
+      "comment": "element value was changed",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_EVENT_MASK_INFO",
+      "value": "(1<<1)",
+      "comment": "element info was changed",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_EVENT_MASK_ADD",
+      "value": "(1<<2)",
+      "comment": "element was added",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_EVENT_MASK_TLV",
+      "value": "(1<<3)",
+      "comment": "element TLV tree was changed",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_EVENT_MASK_REMOVE",
+      "value": "(~0U)",
+      "comment": "element was removed",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_NAME_NONE",
+      "value": "\"\"",
+      "comment": "",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_NAME_PLAYBACK",
+      "value": "\"Playback \"",
+      "comment": "",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_NAME_CAPTURE",
+      "value": "\"Capture \"",
+      "comment": "",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_NAME_IEC958_NONE",
+      "value": "\"\"",
+      "comment": "",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_NAME_IEC958_SWITCH",
+      "value": "\"Switch\"",
+      "comment": "",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_NAME_IEC958_VOLUME",
+      "value": "\"Volume\"",
+      "comment": "",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_NAME_IEC958_DEFAULT",
+      "value": "\"Default\"",
+      "comment": "",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_NAME_IEC958_MASK",
+      "value": "\"Mask\"",
+      "comment": "",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_NAME_IEC958_CON_MASK",
+      "value": "\"Con Mask\"",
+      "comment": "",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_NAME_IEC958_PRO_MASK",
+      "value": "\"Pro Mask\"",
+      "comment": "",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_NAME_IEC958_PCM_STREAM",
+      "value": "\"PCM Stream\"",
+      "comment": "",
+      "category": "SNDRV_CTL"
+    }
+  ],
+  "structs": [
+    {
+      "name": "snd_aes_iec958",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_cea_861_aud_if",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_hwdep_info",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "card",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "iface",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_hwdep_dsp_status",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_hwdep_dsp_image",
+      "fields": [
+        {
+          "type_name": "size_t",
+          "name": "length",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_pcm_info",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "stream",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "card",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "dev_class",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "dev_subclass",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_interval",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_mask",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "bits",
+          "array_size": "(SNDRV_MASK_MAX+31)/32",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_pcm_hw_params",
+      "fields": [
+        {
+          "type_name": "snd_pcm_uframes_t",
+          "name": "fifo_size",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_pcm_sw_params",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "tstamp_mode",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "snd_pcm_uframes_t",
+          "name": "avail_min",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "snd_pcm_uframes_t",
+          "name": "xfer_align",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "snd_pcm_uframes_t",
+          "name": "start_threshold",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "snd_pcm_uframes_t",
+          "name": "stop_threshold",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "snd_pcm_uframes_t",
+          "name": "silence_threshold",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "snd_pcm_uframes_t",
+          "name": "silence_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "snd_pcm_uframes_t",
+          "name": "boundary",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_pcm_channel_info",
+      "fields": [
+        {
+          "type_name": "__kernel_off_t",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_11",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_pcm_status",
+      "fields": [
+        {
+          "type_name": "snd_pcm_state_t",
+          "name": "state",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__time_pad",
+          "name": "pad1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "snd_pcm_uframes_t",
+          "name": "appl_ptr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "snd_pcm_uframes_t",
+          "name": "hw_ptr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "snd_pcm_sframes_t",
+          "name": "delay",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "snd_pcm_uframes_t",
+          "name": "avail",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "snd_pcm_uframes_t",
+          "name": "avail_max",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "snd_pcm_uframes_t",
+          "name": "overrange",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "snd_pcm_state_t",
+          "name": "suspended_state",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "audio_tstamp_data",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "audio_tstamp_accuracy",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "__snd_timespec",
+      "fields": [
+        {
+          "type_name": "__s32",
+          "name": "tv_sec",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "tv_nsec",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "__snd_timespec64",
+      "fields": [
+        {
+          "type_name": "__s64",
+          "name": "tv_sec",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s64",
+          "name": "tv_nsec",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "__snd_pcm_mmap_status",
+      "fields": [
+        {
+          "type_name": "snd_pcm_state_t",
+          "name": "state",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "pad1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "snd_pcm_uframes_t",
+          "name": "hw_ptr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "snd_pcm_state_t",
+          "name": "suspended_state",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "__snd_pcm_mmap_control",
+      "fields": [
+        {
+          "type_name": "snd_pcm_uframes_t",
+          "name": "appl_ptr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "snd_pcm_uframes_t",
+          "name": "avail_min",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "__snd_pcm_sync_ptr",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "__snd_pcm_mmap_status64",
+      "fields": [
+        {
+          "type_name": "snd_pcm_state_t",
+          "name": "state",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__pad_before_uframe",
+          "name": "__pad1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "snd_pcm_uframes_t",
+          "name": "hw_ptr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__pad_after_uframe",
+          "name": "__pad2",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "snd_pcm_state_t",
+          "name": "suspended_state",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad3",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "__snd_pcm_mmap_control64",
+      "fields": [
+        {
+          "type_name": "__pad_before_uframe",
+          "name": "__pad1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "snd_pcm_uframes_t",
+          "name": "appl_ptr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__pad_before_uframe",
+          "name": "__pad2",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__pad_before_uframe",
+          "name": "__pad3",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "snd_pcm_uframes_t",
+          "name": "avail_min",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__pad_after_uframe",
+          "name": "__pad4",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "__snd_pcm_sync_ptr64",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad1",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_xferi",
+      "fields": [
+        {
+          "type_name": "snd_pcm_sframes_t",
+          "name": "result",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "snd_pcm_uframes_t",
+          "name": "frames",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_xfern",
+      "fields": [
+        {
+          "type_name": "snd_pcm_sframes_t",
+          "name": "result",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "snd_pcm_uframes_t",
+          "name": "frames",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_rawmidi_info",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "stream",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "card",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "tied_device",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_rawmidi_framing_tstamp",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "frame_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "length",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reserved",
+          "array_size": "2",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tv_nsec",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "tv_sec",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "data",
+          "array_size": "SNDRV_RAWMIDI_FRAMING_DATA_LENGTH",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_rawmidi_params",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "stream",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "size_t",
+          "name": "buffer_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "size_t",
+          "name": "avail_min",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_rawmidi_status",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "stream",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__time_pad",
+          "name": "pad1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "size_t",
+          "name": "avail",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "size_t",
+          "name": "xruns",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_ump_endpoint_info",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "card",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "device",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_ump_block_info",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "card",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "device",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_timer_id",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "dev_class",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "dev_sclass",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "card",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "device",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "subdevice",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_timer_ginfo",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "card",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_timer_gparams",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_timer_gstatus",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_timer_select",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_timer_info",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "card",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_timer_params",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_timer_status",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_timer_uinfo",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "resolution",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "fd",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_timer_read",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_timer_tread",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "event",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__time_pad",
+          "name": "pad1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__time_pad",
+          "name": "pad2",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_ctl_card_info",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "card",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_ctl_elem_id",
+      "fields": [
+        {
+          "type_name": "snd_ctl_elem_iface_t",
+          "name": "iface",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_ctl_elem_list",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_ctl_elem_info",
+      "fields": [
+        {
+          "type_name": "snd_ctl_elem_type_t",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__kernel_pid_t",
+          "name": "owner",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "long",
+          "name": "min",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "long",
+          "name": "max",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "long",
+          "name": "step",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "name",
+          "array_size": "64",
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "names_ptr",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_44",
+      "fields": [
+        {
+          "type_name": "long",
+          "name": "min",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "long",
+          "name": "max",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "long",
+          "name": "step",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_45",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_46",
+      "fields": [
+        {
+          "type_name": "char",
+          "name": "name",
+          "array_size": "64",
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "names_ptr",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_ctl_elem_value",
+      "fields": [
+        {
+          "type_name": "long",
+          "name": "value",
+          "array_size": "128",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_ctl_tlv",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_ctl_event",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_50",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

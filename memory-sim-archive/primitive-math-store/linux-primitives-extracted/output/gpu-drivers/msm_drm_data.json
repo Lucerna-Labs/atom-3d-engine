@@ -1,0 +1,1314 @@
+{
+  "filename": "msm_drm.h",
+  "includes": [
+    "drm.h"
+  ],
+  "defines": [
+    {
+      "name": "MSM_PIPE_NONE",
+      "value": "0x00",
+      "comment": "",
+      "category": "MSM_PIPE"
+    },
+    {
+      "name": "MSM_PIPE_2D0",
+      "value": "0x01",
+      "comment": "",
+      "category": "MSM_PIPE"
+    },
+    {
+      "name": "MSM_PIPE_2D1",
+      "value": "0x02",
+      "comment": "",
+      "category": "MSM_PIPE"
+    },
+    {
+      "name": "MSM_PIPE_3D0",
+      "value": "0x10",
+      "comment": "",
+      "category": "MSM_PIPE"
+    },
+    {
+      "name": "MSM_PIPE_ID_MASK",
+      "value": "0xffff",
+      "comment": "",
+      "category": "MSM_PIPE"
+    },
+    {
+      "name": "MSM_PARAM_GPU_ID",
+      "value": "0x01",
+      "comment": "RO",
+      "category": "MSM_PARAM"
+    },
+    {
+      "name": "MSM_PARAM_GMEM_SIZE",
+      "value": "0x02",
+      "comment": "RO",
+      "category": "MSM_PARAM"
+    },
+    {
+      "name": "MSM_PARAM_CHIP_ID",
+      "value": "0x03",
+      "comment": "RO",
+      "category": "MSM_PARAM"
+    },
+    {
+      "name": "MSM_PARAM_MAX_FREQ",
+      "value": "0x04",
+      "comment": "RO",
+      "category": "MSM_PARAM"
+    },
+    {
+      "name": "MSM_PARAM_TIMESTAMP",
+      "value": "0x05",
+      "comment": "RO",
+      "category": "MSM_PARAM"
+    },
+    {
+      "name": "MSM_PARAM_GMEM_BASE",
+      "value": "0x06",
+      "comment": "RO",
+      "category": "MSM_PARAM"
+    },
+    {
+      "name": "MSM_PARAM_PRIORITIES",
+      "value": "0x07",
+      "comment": "RO: The # of priority levels",
+      "category": "MSM_PARAM"
+    },
+    {
+      "name": "MSM_PARAM_PP_PGTABLE",
+      "value": "0x08",
+      "comment": "RO: Deprecated, always returns zero",
+      "category": "MSM_PARAM"
+    },
+    {
+      "name": "MSM_PARAM_FAULTS",
+      "value": "0x09",
+      "comment": "RO",
+      "category": "MSM_PARAM"
+    },
+    {
+      "name": "MSM_PARAM_SUSPENDS",
+      "value": "0x0a",
+      "comment": "RO",
+      "category": "MSM_PARAM"
+    },
+    {
+      "name": "MSM_PARAM_SYSPROF",
+      "value": "0x0b",
+      "comment": "WO: 1 preserves perfcntrs, 2 also disables suspend",
+      "category": "MSM_PARAM"
+    },
+    {
+      "name": "MSM_PARAM_COMM",
+      "value": "0x0c",
+      "comment": "WO: override for task->comm",
+      "category": "MSM_PARAM"
+    },
+    {
+      "name": "MSM_PARAM_CMDLINE",
+      "value": "0x0d",
+      "comment": "WO: override for task cmdline",
+      "category": "MSM_PARAM"
+    },
+    {
+      "name": "MSM_PARAM_VA_START",
+      "value": "0x0e",
+      "comment": "RO: start of valid GPU iova range",
+      "category": "MSM_PARAM"
+    },
+    {
+      "name": "MSM_PARAM_VA_SIZE",
+      "value": "0x0f",
+      "comment": "RO: size of valid GPU iova range (bytes)",
+      "category": "MSM_PARAM"
+    },
+    {
+      "name": "MSM_PARAM_HIGHEST_BANK_BIT",
+      "value": "0x10",
+      "comment": "RO",
+      "category": "MSM_PARAM"
+    },
+    {
+      "name": "MSM_PARAM_RAYTRACING",
+      "value": "0x11",
+      "comment": "RO",
+      "category": "MSM_PARAM"
+    },
+    {
+      "name": "MSM_PARAM_UBWC_SWIZZLE",
+      "value": "0x12",
+      "comment": "RO",
+      "category": "MSM_PARAM"
+    },
+    {
+      "name": "MSM_PARAM_MACROTILE_MODE",
+      "value": "0x13",
+      "comment": "RO",
+      "category": "MSM_PARAM"
+    },
+    {
+      "name": "MSM_PARAM_UCHE_TRAP_BASE",
+      "value": "0x14",
+      "comment": "RO",
+      "category": "MSM_PARAM"
+    },
+    {
+      "name": "MSM_PARAM_HAS_PRR",
+      "value": "0x15",
+      "comment": "RO",
+      "category": "MSM_PARAM"
+    },
+    {
+      "name": "MSM_PARAM_EN_VM_BIND",
+      "value": "0x16",
+      "comment": "WO, once",
+      "category": "MSM_PARAM"
+    },
+    {
+      "name": "MSM_PARAM_AQE",
+      "value": "0x17",
+      "comment": "RO",
+      "category": "MSM_PARAM"
+    },
+    {
+      "name": "MSM_PARAM_NR_RINGS",
+      "value": "MSM_PARAM_PRIORITIES",
+      "comment": "",
+      "category": "MSM_PARAM"
+    },
+    {
+      "name": "MSM_BO_SCANOUT",
+      "value": "0x00000001",
+      "comment": "scanout capable",
+      "category": "MSM_BO"
+    },
+    {
+      "name": "MSM_BO_GPU_READONLY",
+      "value": "0x00000002",
+      "comment": "",
+      "category": "MSM_BO"
+    },
+    {
+      "name": "MSM_BO_NO_SHARE",
+      "value": "0x00000004",
+      "comment": "",
+      "category": "MSM_BO"
+    },
+    {
+      "name": "MSM_BO_CACHE_MASK",
+      "value": "0x000f0000",
+      "comment": "",
+      "category": "MSM_BO"
+    },
+    {
+      "name": "MSM_BO_CACHED",
+      "value": "0x00010000",
+      "comment": "",
+      "category": "MSM_BO"
+    },
+    {
+      "name": "MSM_BO_WC",
+      "value": "0x00020000",
+      "comment": "",
+      "category": "MSM_BO"
+    },
+    {
+      "name": "MSM_BO_UNCACHED",
+      "value": "0x00040000",
+      "comment": "deprecated, use MSM_BO_WC",
+      "category": "MSM_BO"
+    },
+    {
+      "name": "MSM_BO_CACHED_COHERENT",
+      "value": "0x080000",
+      "comment": "",
+      "category": "MSM_BO"
+    },
+    {
+      "name": "MSM_BO_FLAGS",
+      "value": "(MSM_BO_SCANOUT | ",
+      "comment": "",
+      "category": "MSM_BO"
+    },
+    {
+      "name": "MSM_INFO_GET_OFFSET",
+      "value": "0x00",
+      "comment": "get mmap() offset, returned by value",
+      "category": "MSM_INFO"
+    },
+    {
+      "name": "MSM_INFO_GET_IOVA",
+      "value": "0x01",
+      "comment": "get iova, returned by value",
+      "category": "MSM_INFO"
+    },
+    {
+      "name": "MSM_INFO_SET_NAME",
+      "value": "0x02",
+      "comment": "set the debug name (by pointer)",
+      "category": "MSM_INFO"
+    },
+    {
+      "name": "MSM_INFO_GET_NAME",
+      "value": "0x03",
+      "comment": "get debug name, returned by pointer",
+      "category": "MSM_INFO"
+    },
+    {
+      "name": "MSM_INFO_SET_IOVA",
+      "value": "0x04",
+      "comment": "set the iova, passed by value",
+      "category": "MSM_INFO"
+    },
+    {
+      "name": "MSM_INFO_GET_FLAGS",
+      "value": "0x05",
+      "comment": "get the MSM_BO_x flags",
+      "category": "MSM_INFO"
+    },
+    {
+      "name": "MSM_INFO_SET_METADATA",
+      "value": "0x06",
+      "comment": "set userspace metadata",
+      "category": "MSM_INFO"
+    },
+    {
+      "name": "MSM_INFO_GET_METADATA",
+      "value": "0x07",
+      "comment": "get userspace metadata",
+      "category": "MSM_INFO"
+    },
+    {
+      "name": "MSM_PREP_READ",
+      "value": "0x01",
+      "comment": "",
+      "category": "MSM_PREP"
+    },
+    {
+      "name": "MSM_PREP_WRITE",
+      "value": "0x02",
+      "comment": "",
+      "category": "MSM_PREP"
+    },
+    {
+      "name": "MSM_PREP_NOSYNC",
+      "value": "0x04",
+      "comment": "",
+      "category": "MSM_PREP"
+    },
+    {
+      "name": "MSM_PREP_BOOST",
+      "value": "0x08",
+      "comment": "",
+      "category": "MSM_PREP"
+    },
+    {
+      "name": "MSM_PREP_FLAGS",
+      "value": "(MSM_PREP_READ | ",
+      "comment": "",
+      "category": "MSM_PREP"
+    },
+    {
+      "name": "MSM_SYNCOBJ_RESET",
+      "value": "0x00000001",
+      "comment": "Reset syncobj after wait.",
+      "category": "MSM_SYNCOBJ"
+    },
+    {
+      "name": "MSM_SYNCOBJ_FLAGS",
+      "value": "( ",
+      "comment": "",
+      "category": "MSM_SYNCOBJ"
+    },
+    {
+      "name": "MSM_SUBMIT_CMD_BUF",
+      "value": "0x0001",
+      "comment": "",
+      "category": "MSM_SUBMIT"
+    },
+    {
+      "name": "MSM_SUBMIT_CMD_IB_TARGET_BUF",
+      "value": "0x0002",
+      "comment": "",
+      "category": "MSM_SUBMIT"
+    },
+    {
+      "name": "MSM_SUBMIT_CMD_CTX_RESTORE_BUF",
+      "value": "0x0003",
+      "comment": "",
+      "category": "MSM_SUBMIT"
+    },
+    {
+      "name": "MSM_SUBMIT_BO_READ",
+      "value": "0x0001",
+      "comment": "",
+      "category": "MSM_SUBMIT"
+    },
+    {
+      "name": "MSM_SUBMIT_BO_WRITE",
+      "value": "0x0002",
+      "comment": "",
+      "category": "MSM_SUBMIT"
+    },
+    {
+      "name": "MSM_SUBMIT_BO_DUMP",
+      "value": "0x0004",
+      "comment": "",
+      "category": "MSM_SUBMIT"
+    },
+    {
+      "name": "MSM_SUBMIT_BO_NO_IMPLICIT",
+      "value": "0x0008",
+      "comment": "",
+      "category": "MSM_SUBMIT"
+    },
+    {
+      "name": "MSM_SUBMIT_BO_FLAGS",
+      "value": "(MSM_SUBMIT_BO_READ | ",
+      "comment": "",
+      "category": "MSM_SUBMIT"
+    },
+    {
+      "name": "MSM_SUBMIT_NO_IMPLICIT",
+      "value": "0x80000000",
+      "comment": "disable implicit sync",
+      "category": "MSM_SUBMIT"
+    },
+    {
+      "name": "MSM_SUBMIT_FENCE_FD_IN",
+      "value": "0x40000000",
+      "comment": "enable input fence_fd",
+      "category": "MSM_SUBMIT"
+    },
+    {
+      "name": "MSM_SUBMIT_FENCE_FD_OUT",
+      "value": "0x20000000",
+      "comment": "enable output fence_fd",
+      "category": "MSM_SUBMIT"
+    },
+    {
+      "name": "MSM_SUBMIT_SUDO",
+      "value": "0x10000000",
+      "comment": "run submitted cmds from RB",
+      "category": "MSM_SUBMIT"
+    },
+    {
+      "name": "MSM_SUBMIT_SYNCOBJ_IN",
+      "value": "0x08000000",
+      "comment": "enable input syncobj",
+      "category": "MSM_SUBMIT"
+    },
+    {
+      "name": "MSM_SUBMIT_SYNCOBJ_OUT",
+      "value": "0x04000000",
+      "comment": "enable output syncobj",
+      "category": "MSM_SUBMIT"
+    },
+    {
+      "name": "MSM_SUBMIT_FENCE_SN_IN",
+      "value": "0x02000000",
+      "comment": "userspace passes in seqno fence",
+      "category": "MSM_SUBMIT"
+    },
+    {
+      "name": "MSM_SUBMIT_FLAGS",
+      "value": "( ",
+      "comment": "",
+      "category": "MSM_SUBMIT"
+    },
+    {
+      "name": "MSM_VM_BIND_OP_UNMAP",
+      "value": "0",
+      "comment": "",
+      "category": "MSM_VM"
+    },
+    {
+      "name": "MSM_VM_BIND_OP_MAP",
+      "value": "1",
+      "comment": "",
+      "category": "MSM_VM"
+    },
+    {
+      "name": "MSM_VM_BIND_OP_MAP_NULL",
+      "value": "2",
+      "comment": "",
+      "category": "MSM_VM"
+    },
+    {
+      "name": "MSM_VM_BIND_OP_DUMP",
+      "value": "1",
+      "comment": "",
+      "category": "MSM_VM"
+    },
+    {
+      "name": "MSM_VM_BIND_OP_FLAGS",
+      "value": "( ",
+      "comment": "",
+      "category": "MSM_VM"
+    },
+    {
+      "name": "MSM_VM_BIND_FENCE_FD_IN",
+      "value": "0x00000001",
+      "comment": "",
+      "category": "MSM_VM"
+    },
+    {
+      "name": "MSM_VM_BIND_FENCE_FD_OUT",
+      "value": "0x00000002",
+      "comment": "",
+      "category": "MSM_VM"
+    },
+    {
+      "name": "MSM_VM_BIND_FLAGS",
+      "value": "( ",
+      "comment": "",
+      "category": "MSM_VM"
+    },
+    {
+      "name": "MSM_WAIT_FENCE_BOOST",
+      "value": "0x00000001",
+      "comment": "",
+      "category": "MSM_WAIT"
+    },
+    {
+      "name": "MSM_WAIT_FENCE_FLAGS",
+      "value": "( ",
+      "comment": "",
+      "category": "MSM_WAIT"
+    },
+    {
+      "name": "MSM_MADV_WILLNEED",
+      "value": "0",
+      "comment": "backing pages are needed, status returned in 'retained'",
+      "category": "MSM_MADV"
+    },
+    {
+      "name": "MSM_MADV_DONTNEED",
+      "value": "1",
+      "comment": "backing pages not needed",
+      "category": "MSM_MADV"
+    },
+    {
+      "name": "__MSM_MADV_PURGED",
+      "value": "2",
+      "comment": "internal state",
+      "category": ""
+    },
+    {
+      "name": "MSM_SUBMITQUEUE_ALLOW_PREEMPT",
+      "value": "0x00000001",
+      "comment": "",
+      "category": "MSM_SUBMITQUEUE"
+    },
+    {
+      "name": "MSM_SUBMITQUEUE_VM_BIND",
+      "value": "0x00000002",
+      "comment": "virtual queue for VM_BIND ops",
+      "category": "MSM_SUBMITQUEUE"
+    },
+    {
+      "name": "MSM_SUBMITQUEUE_FLAGS",
+      "value": "( ",
+      "comment": "",
+      "category": "MSM_SUBMITQUEUE"
+    },
+    {
+      "name": "MSM_SUBMITQUEUE_PARAM_FAULTS",
+      "value": "0",
+      "comment": "",
+      "category": "MSM_SUBMITQUEUE"
+    },
+    {
+      "name": "DRM_MSM_GET_PARAM",
+      "value": "0x00",
+      "comment": "",
+      "category": "DRM_MSM"
+    },
+    {
+      "name": "DRM_MSM_SET_PARAM",
+      "value": "0x01",
+      "comment": "",
+      "category": "DRM_MSM"
+    },
+    {
+      "name": "DRM_MSM_GEM_NEW",
+      "value": "0x02",
+      "comment": "",
+      "category": "DRM_MSM"
+    },
+    {
+      "name": "DRM_MSM_GEM_INFO",
+      "value": "0x03",
+      "comment": "",
+      "category": "DRM_MSM"
+    },
+    {
+      "name": "DRM_MSM_GEM_CPU_PREP",
+      "value": "0x04",
+      "comment": "",
+      "category": "DRM_MSM"
+    },
+    {
+      "name": "DRM_MSM_GEM_CPU_FINI",
+      "value": "0x05",
+      "comment": "",
+      "category": "DRM_MSM"
+    },
+    {
+      "name": "DRM_MSM_GEM_SUBMIT",
+      "value": "0x06",
+      "comment": "",
+      "category": "DRM_MSM"
+    },
+    {
+      "name": "DRM_MSM_WAIT_FENCE",
+      "value": "0x07",
+      "comment": "",
+      "category": "DRM_MSM"
+    },
+    {
+      "name": "DRM_MSM_GEM_MADVISE",
+      "value": "0x08",
+      "comment": "",
+      "category": "DRM_MSM"
+    },
+    {
+      "name": "DRM_MSM_GEM_SVM_NEW",
+      "value": "0x09",
+      "comment": "",
+      "category": "DRM_MSM"
+    },
+    {
+      "name": "DRM_MSM_SUBMITQUEUE_NEW",
+      "value": "0x0A",
+      "comment": "",
+      "category": "DRM_MSM"
+    },
+    {
+      "name": "DRM_MSM_SUBMITQUEUE_CLOSE",
+      "value": "0x0B",
+      "comment": "",
+      "category": "DRM_MSM"
+    },
+    {
+      "name": "DRM_MSM_SUBMITQUEUE_QUERY",
+      "value": "0x0C",
+      "comment": "",
+      "category": "DRM_MSM"
+    },
+    {
+      "name": "DRM_MSM_VM_BIND",
+      "value": "0x0D",
+      "comment": "",
+      "category": "DRM_MSM"
+    },
+    {
+      "name": "DRM_IOCTL_MSM_GET_PARAM",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_MSM_GET_PARAM, struct drm_msm_param)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_MSM_SET_PARAM",
+      "value": "DRM_IOW (DRM_COMMAND_BASE + DRM_MSM_SET_PARAM, struct drm_msm_param)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_MSM_GEM_NEW",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_MSM_GEM_NEW, struct drm_msm_gem_new)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_MSM_GEM_INFO",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_MSM_GEM_INFO, struct drm_msm_gem_info)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_MSM_GEM_CPU_PREP",
+      "value": "DRM_IOW (DRM_COMMAND_BASE + DRM_MSM_GEM_CPU_PREP, struct drm_msm_gem_cpu_prep)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_MSM_GEM_CPU_FINI",
+      "value": "DRM_IOW (DRM_COMMAND_BASE + DRM_MSM_GEM_CPU_FINI, struct drm_msm_gem_cpu_fini)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_MSM_GEM_SUBMIT",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_MSM_GEM_SUBMIT, struct drm_msm_gem_submit)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_MSM_WAIT_FENCE",
+      "value": "DRM_IOW (DRM_COMMAND_BASE + DRM_MSM_WAIT_FENCE, struct drm_msm_wait_fence)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_MSM_GEM_MADVISE",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_MSM_GEM_MADVISE, struct drm_msm_gem_madvise)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_MSM_SUBMITQUEUE_NEW",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_MSM_SUBMITQUEUE_NEW, struct drm_msm_submitqueue)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_MSM_SUBMITQUEUE_CLOSE",
+      "value": "DRM_IOW (DRM_COMMAND_BASE + DRM_MSM_SUBMITQUEUE_CLOSE, __u32)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_MSM_SUBMITQUEUE_QUERY",
+      "value": "DRM_IOW (DRM_COMMAND_BASE + DRM_MSM_SUBMITQUEUE_QUERY, struct drm_msm_submitqueue_query)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_MSM_VM_BIND",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_MSM_VM_BIND, struct drm_msm_vm_bind)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    }
+  ],
+  "structs": [
+    {
+      "name": "drm_msm_timespec",
+      "fields": [
+        {
+          "type_name": "__s64",
+          "name": "tv_sec",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s64",
+          "name": "tv_nsec",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_msm_param",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "pipe",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "param",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "value",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_msm_gem_new",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_msm_gem_info",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "info",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "value",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_msm_gem_cpu_prep",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "op",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_msm_gem_cpu_fini",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_msm_syncobj",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "point",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_msm_gem_submit_reloc",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "submit_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "_or",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "or",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "shift",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reloc_idx",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "reloc_offset",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_msm_gem_submit_cmd",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "submit_idx",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "submit_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "nr_relocs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "relocs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "iova",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_msm_gem_submit_bo",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "presumed",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_msm_gem_submit",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "fence",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "nr_bos",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "nr_cmds",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "bos",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "cmds",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "fence_fd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "queueid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "in_syncobjs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "out_syncobjs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "nr_in_syncobjs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "nr_out_syncobjs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "syncobj_stride",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_msm_vm_bind_op",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "op",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "obj_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "iova",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "range",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_msm_vm_bind",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "nr_ops",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "fence_fd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "queue_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "in_syncobjs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "out_syncobjs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "nr_in_syncobjs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "nr_out_syncobjs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "syncobj_stride",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "op_stride",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "ops",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_msm_wait_fence",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "fence",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "queueid",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_msm_gem_madvise",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "madv",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "retained",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_msm_submitqueue",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "prio",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_msm_submitqueue_query",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "data",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "param",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

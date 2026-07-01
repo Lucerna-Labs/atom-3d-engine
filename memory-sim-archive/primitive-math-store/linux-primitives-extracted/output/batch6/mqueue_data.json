@@ -1,0 +1,86 @@
+{
+  "filename": "mqueue.h",
+  "includes": [
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "MQ_PRIO_MAX",
+      "value": "32768",
+      "comment": "",
+      "category": "MQ_PRIO"
+    },
+    {
+      "name": "MQ_BYTES_MAX",
+      "value": "819200",
+      "comment": "",
+      "category": "MQ_BYTES"
+    },
+    {
+      "name": "NOTIFY_NONE",
+      "value": "0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NOTIFY_WOKENUP",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NOTIFY_REMOVED",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NOTIFY_COOKIE_LEN",
+      "value": "32",
+      "comment": "",
+      "category": "NOTIFY_COOKIE"
+    }
+  ],
+  "structs": [
+    {
+      "name": "mq_attr",
+      "fields": [
+        {
+          "type_name": "__kernel_long_t",
+          "name": "mq_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__kernel_long_t",
+          "name": "mq_maxmsg",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__kernel_long_t",
+          "name": "mq_msgsize",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__kernel_long_t",
+          "name": "mq_curmsgs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__kernel_long_t",
+          "name": "__reserved",
+          "array_size": "4",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

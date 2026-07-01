@@ -1,0 +1,60 @@
+﻿Thinking Process:
+
+1.  **Analyze the Request:**
+    *   Task: Provide a debugging plan for an intermittently crashing web app after a recent deploy.
+    *   Constraints: Four concise steps, answer concisely, no hidden reasoning tags, include uncertainty and next action when relevant.
+    *   Context: Logs show warnings but no clear fatal line.
+
+2.  **Drafting the Steps:**
+    *   Step 1: Need to isolate the issue. Since it's intermittent and post-deploy, compare environments or roll back.
+    *   Step 2: Need more data. Warnings aren't enough. Enable detailed logging or tracing.
+    *   Step 3: Analyze the new data. Look for patterns in the warnings vs. crashes.
+    *   Step 4: Fix and verify. Implement a fix based on findings and test.
+
+3.  **Refining for Conciseness & Constraints:**
+    *   Constraint Check: "Include uncertainty and next action when relevant." This means I need to acknowledge that the root cause isn't known yet and suggest what to do if steps fail or are inconclusive.
+    *   Constraint Check: "Four concise steps." Keep them short.
+    *   Constraint Check: "No hidden reasoning tags." Just output the answer.
+
+4.  **Drafting Step Content:**
+    *   1. Rollback temporarily to confirm stability, isolating the deploy as the cause (uncertainty: if rollback doesn't fix it, investigate infrastructure).
+    *   2. Enable verbose logging or distributed tracing on the new version to capture stack traces during crashes.
+    *   3. Correlate warning logs with crash timestamps to identify patterns or resource exhaustion.
+    *   4. Implement targeted fixes based on findings; if root cause remains unclear, increase monitoring frequency for further analysis.
+
+5.  **Reviewing against "Concise" and "Uncertainty/Next Action":**
+    *   Step 1: Rollback to verify deploy causality; if stable, revert changes, otherwise investigate infrastructure drift.
+    *   Step 2: Enable detailed error tracing on the current version to capture hidden stack traces during intermittent failures.
+    *   Step 3: Analyze correlated logs for memory leaks or race conditions hinted by warnings; uncertainty remains if patterns are elusive.
+    *   Step 4: Apply fixes and monitor; if crashes persist, escalate to infrastructure review or increase sampling rate.
+
+6.  **Final Polish:** Make it tighter.
+
+    1. Rollback the deploy temporarily to confirm stability; if stable, revert changes, otherwise investigate infrastructure drift.
+    2. Enable verbose logging or distributed tracing on the current version to capture hidden stack traces during failures.
+    3. Correlate warning logs with crash timestamps to identify patterns like memory leaks; uncertainty remains if correlations are weak.
+    4. Implement targeted fixes and monitor; if crashes persist, increase sampling rate or escalate for infrastructure review.
+
+7.  **Final Check:** Four steps? Yes. Concise? Yes. Uncertainty/Next Action included? Yes (in steps 1, 3, 4). No hidden tags? Yes.
+
+    *Self-Correction on Step 1:* Rolling back might not be feasible if the deploy is already live and causing issues for users. Better to say "Isolate" or "Compare". But rollback is a standard debugging step for post-deploy crashes. Let's stick with rollback but acknowledge uncertainty.
+    *Refining Step 3:* "Uncertainty remains..." fits the prompt requirement well.
+
+    *Final Plan:*
+    1. Rollback to previous version to confirm stability; if stable, revert changes, otherwise investigate infrastructure drift.
+    2. Enable verbose logging or distributed tracing on the current version to capture hidden stack traces during failures.
+    3. Correlate warning logs with crash timestamps to identify patterns like memory leaks; uncertainty remains if correlations are weak.
+    4. Implement targeted fixes and monitor; if crashes persist, increase sampling rate or escalate for infrastructure review.
+
+    *Wait, check constraint:* "Include uncertainty and next action when relevant." I need to make sure this is explicit.
+    Let's adjust Step 3 and 4 slightly to be more explicit about the uncertainty/next action flow.
+
+    Revised:
+    1. Rollback to previous version to confirm stability; if stable, revert changes, otherwise investigate infrastructure drift.
+    2. Enable verbose logging or distributed tracing on the current version to capture hidden stack traces during failures.
+    3. Correlate warning logs with crash timestamps to identify patterns like memory leaks; uncertainty remains if correlations are weak.
+    4. Implement targeted fixes and monitor; if crashes persist, increase sampling rate or escalate for infrastructure review.
+
+    Actually, looking at the prompt "Include uncertainty and next action when relevant", I should ensure every step that involves a hypothesis includes what to do if it fails.
+    Step 1: Rollback... (Next action: investigate infra).
+    Step 2: Enable logging...

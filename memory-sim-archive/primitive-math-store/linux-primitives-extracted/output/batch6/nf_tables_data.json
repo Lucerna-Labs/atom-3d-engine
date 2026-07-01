@@ -1,0 +1,712 @@
+{
+  "filename": "nf_tables.h",
+  "includes": [],
+  "defines": [
+    {
+      "name": "NFT_NAME_MAXLEN",
+      "value": "256",
+      "comment": "",
+      "category": "NFT_NAME"
+    },
+    {
+      "name": "NFT_TABLE_MAXNAMELEN",
+      "value": "NFT_NAME_MAXLEN",
+      "comment": "",
+      "category": "NFT_TABLE"
+    },
+    {
+      "name": "NFT_CHAIN_MAXNAMELEN",
+      "value": "NFT_NAME_MAXLEN",
+      "comment": "",
+      "category": "NFT_CHAIN"
+    },
+    {
+      "name": "NFT_SET_MAXNAMELEN",
+      "value": "NFT_NAME_MAXLEN",
+      "comment": "",
+      "category": "NFT_SET"
+    },
+    {
+      "name": "NFT_OBJ_MAXNAMELEN",
+      "value": "NFT_NAME_MAXLEN",
+      "comment": "",
+      "category": "NFT_OBJ"
+    },
+    {
+      "name": "NFT_USERDATA_MAXLEN",
+      "value": "256",
+      "comment": "",
+      "category": "NFT_USERDATA"
+    },
+    {
+      "name": "NFT_OSF_MAXGENRELEN",
+      "value": "16",
+      "comment": "",
+      "category": "NFT_OSF"
+    },
+    {
+      "name": "NFT_REG_MAX",
+      "value": "(__NFT_REG_MAX - 1)",
+      "comment": "",
+      "category": "NFT_REG"
+    },
+    {
+      "name": "NFT_REG32_MAX",
+      "value": "NFT_REG32_15",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NFT_REG_SIZE",
+      "value": "16",
+      "comment": "",
+      "category": "NFT_REG"
+    },
+    {
+      "name": "NFT_REG32_SIZE",
+      "value": "4",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NFT_REG32_COUNT",
+      "value": "(NFT_REG32_15 - NFT_REG32_00 + 1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NFTA_LIST_MAX",
+      "value": "(__NFTA_LIST_MAX - 1)",
+      "comment": "",
+      "category": "NFTA_LIST"
+    },
+    {
+      "name": "NFTA_HOOK_MAX",
+      "value": "(__NFTA_HOOK_MAX - 1)",
+      "comment": "",
+      "category": "NFTA_HOOK"
+    },
+    {
+      "name": "NFT_TABLE_F_MASK",
+      "value": "(NFT_TABLE_F_DORMANT | ",
+      "comment": "",
+      "category": "NFT_TABLE"
+    },
+    {
+      "name": "NFTA_TABLE_MAX",
+      "value": "(__NFTA_TABLE_MAX - 1)",
+      "comment": "",
+      "category": "NFTA_TABLE"
+    },
+    {
+      "name": "NFT_CHAIN_FLAGS",
+      "value": "(NFT_CHAIN_BASE\t\t| ",
+      "comment": "",
+      "category": "NFT_CHAIN"
+    },
+    {
+      "name": "NFTA_CHAIN_MAX",
+      "value": "(__NFTA_CHAIN_MAX - 1)",
+      "comment": "",
+      "category": "NFTA_CHAIN"
+    },
+    {
+      "name": "NFTA_RULE_MAX",
+      "value": "(__NFTA_RULE_MAX - 1)",
+      "comment": "",
+      "category": "NFTA_RULE"
+    },
+    {
+      "name": "NFTA_RULE_COMPAT_MAX",
+      "value": "(__NFTA_RULE_COMPAT_MAX - 1)",
+      "comment": "",
+      "category": "NFTA_RULE"
+    },
+    {
+      "name": "NFTA_SET_DESC_MAX",
+      "value": "(__NFTA_SET_DESC_MAX - 1)",
+      "comment": "",
+      "category": "NFTA_SET"
+    },
+    {
+      "name": "NFTA_SET_FIELD_MAX",
+      "value": "(__NFTA_SET_FIELD_MAX - 1)",
+      "comment": "",
+      "category": "NFTA_SET"
+    },
+    {
+      "name": "NFTA_SET_MAX",
+      "value": "(__NFTA_SET_MAX - 1)",
+      "comment": "",
+      "category": "NFTA_SET"
+    },
+    {
+      "name": "NFTA_SET_ELEM_MAX",
+      "value": "(__NFTA_SET_ELEM_MAX - 1)",
+      "comment": "",
+      "category": "NFTA_SET"
+    },
+    {
+      "name": "NFTA_SET_ELEM_LIST_MAX",
+      "value": "(__NFTA_SET_ELEM_LIST_MAX - 1)",
+      "comment": "",
+      "category": "NFTA_SET"
+    },
+    {
+      "name": "NFT_DATA_RESERVED_MASK",
+      "value": "0xffffff00U",
+      "comment": "",
+      "category": "NFT_DATA"
+    },
+    {
+      "name": "NFTA_DATA_MAX",
+      "value": "(__NFTA_DATA_MAX - 1)",
+      "comment": "",
+      "category": "NFTA_DATA"
+    },
+    {
+      "name": "NFT_DATA_VALUE_MAXLEN",
+      "value": "64",
+      "comment": "",
+      "category": "NFT_DATA"
+    },
+    {
+      "name": "NFTA_VERDICT_MAX",
+      "value": "(__NFTA_VERDICT_MAX - 1)",
+      "comment": "",
+      "category": "NFTA_VERDICT"
+    },
+    {
+      "name": "NFTA_EXPR_MAX",
+      "value": "(__NFTA_EXPR_MAX - 1)",
+      "comment": "",
+      "category": "NFTA_EXPR"
+    },
+    {
+      "name": "NFTA_IMMEDIATE_MAX",
+      "value": "(__NFTA_IMMEDIATE_MAX - 1)",
+      "comment": "",
+      "category": "NFTA_IMMEDIATE"
+    },
+    {
+      "name": "NFT_BITWISE_BOOL",
+      "value": "NFT_BITWISE_MASK_XOR",
+      "comment": "",
+      "category": "NFT_BITWISE"
+    },
+    {
+      "name": "NFTA_BITWISE_MAX",
+      "value": "(__NFTA_BITWISE_MAX - 1)",
+      "comment": "",
+      "category": "NFTA_BITWISE"
+    },
+    {
+      "name": "NFTA_BYTEORDER_MAX",
+      "value": "(__NFTA_BYTEORDER_MAX - 1)",
+      "comment": "",
+      "category": "NFTA_BYTEORDER"
+    },
+    {
+      "name": "NFTA_CMP_MAX",
+      "value": "(__NFTA_CMP_MAX - 1)",
+      "comment": "",
+      "category": "NFTA_CMP"
+    },
+    {
+      "name": "NFTA_RANGE_MAX",
+      "value": "(__NFTA_RANGE_MAX - 1)",
+      "comment": "",
+      "category": "NFTA_RANGE"
+    },
+    {
+      "name": "NFTA_LOOKUP_MAX",
+      "value": "(__NFTA_LOOKUP_MAX - 1)",
+      "comment": "",
+      "category": "NFTA_LOOKUP"
+    },
+    {
+      "name": "NFTA_DYNSET_MAX",
+      "value": "(__NFTA_DYNSET_MAX - 1)",
+      "comment": "",
+      "category": "NFTA_DYNSET"
+    },
+    {
+      "name": "NFT_INNER_MASK",
+      "value": "(NFT_INNER_HDRSIZE | NFT_INNER_LL | ",
+      "comment": "",
+      "category": "NFT_INNER"
+    },
+    {
+      "name": "NFTA_INNER_MAX",
+      "value": "(__NFTA_INNER_MAX - 1)",
+      "comment": "",
+      "category": "NFTA_INNER"
+    },
+    {
+      "name": "NFTA_PAYLOAD_MAX",
+      "value": "(__NFTA_PAYLOAD_MAX - 1)",
+      "comment": "",
+      "category": "NFTA_PAYLOAD"
+    },
+    {
+      "name": "NFT_EXTHDR_OP_MAX",
+      "value": "(__NFT_EXTHDR_OP_MAX - 1)",
+      "comment": "",
+      "category": "NFT_EXTHDR"
+    },
+    {
+      "name": "NFTA_EXTHDR_MAX",
+      "value": "(__NFTA_EXTHDR_MAX - 1)",
+      "comment": "",
+      "category": "NFTA_EXTHDR"
+    },
+    {
+      "name": "NFT_META_IIFTYPE",
+      "value": "NFT_META_IFTYPE",
+      "comment": "",
+      "category": "NFT_META"
+    },
+    {
+      "name": "NFT_RT_MAX",
+      "value": "(__NFT_RT_MAX - 1)",
+      "comment": "",
+      "category": "NFT_RT"
+    },
+    {
+      "name": "NFTA_HASH_MAX",
+      "value": "(__NFTA_HASH_MAX - 1)",
+      "comment": "",
+      "category": "NFTA_HASH"
+    },
+    {
+      "name": "NFTA_META_MAX",
+      "value": "(__NFTA_META_MAX - 1)",
+      "comment": "",
+      "category": "NFTA_META"
+    },
+    {
+      "name": "NFTA_RT_MAX",
+      "value": "(__NFTA_RT_MAX - 1)",
+      "comment": "",
+      "category": "NFTA_RT"
+    },
+    {
+      "name": "NFTA_SOCKET_MAX",
+      "value": "(__NFTA_SOCKET_MAX - 1)",
+      "comment": "",
+      "category": "NFTA_SOCKET"
+    },
+    {
+      "name": "NFT_SOCKET_MAX",
+      "value": "(__NFT_SOCKET_MAX - 1)",
+      "comment": "",
+      "category": "NFT_SOCKET"
+    },
+    {
+      "name": "NFT_CT_MAX",
+      "value": "(__NFT_CT_MAX - 1)",
+      "comment": "",
+      "category": "NFT_CT"
+    },
+    {
+      "name": "NFTA_CT_MAX",
+      "value": "(__NFTA_CT_MAX - 1)",
+      "comment": "",
+      "category": "NFTA_CT"
+    },
+    {
+      "name": "NFTA_FLOW_MAX",
+      "value": "(__NFTA_FLOW_MAX - 1)",
+      "comment": "",
+      "category": "NFTA_FLOW"
+    },
+    {
+      "name": "NFTA_LIMIT_MAX",
+      "value": "(__NFTA_LIMIT_MAX - 1)",
+      "comment": "",
+      "category": "NFTA_LIMIT"
+    },
+    {
+      "name": "NFTA_CONNLIMIT_MAX",
+      "value": "(__NFTA_CONNLIMIT_MAX - 1)",
+      "comment": "",
+      "category": "NFTA_CONNLIMIT"
+    },
+    {
+      "name": "NFTA_COUNTER_MAX",
+      "value": "(__NFTA_COUNTER_MAX - 1)",
+      "comment": "",
+      "category": "NFTA_COUNTER"
+    },
+    {
+      "name": "NFTA_LAST_MAX",
+      "value": "(__NFTA_LAST_MAX - 1)",
+      "comment": "",
+      "category": "NFTA_LAST"
+    },
+    {
+      "name": "NFTA_LOG_MAX",
+      "value": "(__NFTA_LOG_MAX - 1)",
+      "comment": "",
+      "category": "NFTA_LOG"
+    },
+    {
+      "name": "NFT_LOGLEVEL_MAX",
+      "value": "(__NFT_LOGLEVEL_MAX - 1)",
+      "comment": "",
+      "category": "NFT_LOGLEVEL"
+    },
+    {
+      "name": "NFTA_QUEUE_MAX",
+      "value": "(__NFTA_QUEUE_MAX - 1)",
+      "comment": "",
+      "category": "NFTA_QUEUE"
+    },
+    {
+      "name": "NFT_QUEUE_FLAG_BYPASS",
+      "value": "0x01",
+      "comment": "for compatibility with v2",
+      "category": "NFT_QUEUE"
+    },
+    {
+      "name": "NFT_QUEUE_FLAG_CPU_FANOUT",
+      "value": "0x02",
+      "comment": "use current CPU (no hashing)",
+      "category": "NFT_QUEUE"
+    },
+    {
+      "name": "NFT_QUEUE_FLAG_MASK",
+      "value": "0x03",
+      "comment": "",
+      "category": "NFT_QUEUE"
+    },
+    {
+      "name": "NFTA_QUOTA_MAX",
+      "value": "(__NFTA_QUOTA_MAX - 1)",
+      "comment": "",
+      "category": "NFTA_QUOTA"
+    },
+    {
+      "name": "NFTA_SECMARK_MAX",
+      "value": "(__NFTA_SECMARK_MAX - 1)",
+      "comment": "",
+      "category": "NFTA_SECMARK"
+    },
+    {
+      "name": "NFT_SECMARK_CTX_MAXLEN",
+      "value": "4096",
+      "comment": "",
+      "category": "NFT_SECMARK"
+    },
+    {
+      "name": "NFT_REJECT_ICMPX_MAX",
+      "value": "(__NFT_REJECT_ICMPX_MAX - 1)",
+      "comment": "",
+      "category": "NFT_REJECT"
+    },
+    {
+      "name": "NFTA_REJECT_MAX",
+      "value": "(__NFTA_REJECT_MAX - 1)",
+      "comment": "",
+      "category": "NFTA_REJECT"
+    },
+    {
+      "name": "NFTA_NAT_MAX",
+      "value": "(__NFTA_NAT_MAX - 1)",
+      "comment": "",
+      "category": "NFTA_NAT"
+    },
+    {
+      "name": "NFTA_TPROXY_MAX",
+      "value": "(__NFTA_TPROXY_MAX - 1)",
+      "comment": "",
+      "category": "NFTA_TPROXY"
+    },
+    {
+      "name": "NFTA_MASQ_MAX",
+      "value": "(__NFTA_MASQ_MAX - 1)",
+      "comment": "",
+      "category": "NFTA_MASQ"
+    },
+    {
+      "name": "NFTA_REDIR_MAX",
+      "value": "(__NFTA_REDIR_MAX - 1)",
+      "comment": "",
+      "category": "NFTA_REDIR"
+    },
+    {
+      "name": "NFTA_DUP_MAX",
+      "value": "(__NFTA_DUP_MAX - 1)",
+      "comment": "",
+      "category": "NFTA_DUP"
+    },
+    {
+      "name": "NFTA_FWD_MAX",
+      "value": "(__NFTA_FWD_MAX - 1)",
+      "comment": "",
+      "category": "NFTA_FWD"
+    },
+    {
+      "name": "NFTA_OBJREF_MAX",
+      "value": "(__NFTA_OBJREF_MAX - 1)",
+      "comment": "",
+      "category": "NFTA_OBJREF"
+    },
+    {
+      "name": "NFTA_GEN_MAX",
+      "value": "(__NFTA_GEN_MAX - 1)",
+      "comment": "",
+      "category": "NFTA_GEN"
+    },
+    {
+      "name": "NFTA_FIB_MAX",
+      "value": "(__NFTA_FIB_MAX - 1)",
+      "comment": "",
+      "category": "NFTA_FIB"
+    },
+    {
+      "name": "NFT_FIB_RESULT_MAX",
+      "value": "(__NFT_FIB_RESULT_MAX - 1)",
+      "comment": "",
+      "category": "NFT_FIB"
+    },
+    {
+      "name": "NFTA_CT_HELPER_MAX",
+      "value": "(__NFTA_CT_HELPER_MAX - 1)",
+      "comment": "",
+      "category": "NFTA_CT"
+    },
+    {
+      "name": "NFTA_CT_TIMEOUT_MAX",
+      "value": "(__NFTA_CT_TIMEOUT_MAX - 1)",
+      "comment": "",
+      "category": "NFTA_CT"
+    },
+    {
+      "name": "NFTA_CT_EXPECT_MAX",
+      "value": "(__NFTA_CT_EXPECT_MAX - 1)",
+      "comment": "",
+      "category": "NFTA_CT"
+    },
+    {
+      "name": "NFT_OBJECT_UNSPEC",
+      "value": "0",
+      "comment": "",
+      "category": "NFT_OBJECT"
+    },
+    {
+      "name": "NFT_OBJECT_COUNTER",
+      "value": "1",
+      "comment": "",
+      "category": "NFT_OBJECT"
+    },
+    {
+      "name": "NFT_OBJECT_QUOTA",
+      "value": "2",
+      "comment": "",
+      "category": "NFT_OBJECT"
+    },
+    {
+      "name": "NFT_OBJECT_CT_HELPER",
+      "value": "3",
+      "comment": "",
+      "category": "NFT_OBJECT"
+    },
+    {
+      "name": "NFT_OBJECT_LIMIT",
+      "value": "4",
+      "comment": "",
+      "category": "NFT_OBJECT"
+    },
+    {
+      "name": "NFT_OBJECT_CONNLIMIT",
+      "value": "5",
+      "comment": "",
+      "category": "NFT_OBJECT"
+    },
+    {
+      "name": "NFT_OBJECT_TUNNEL",
+      "value": "6",
+      "comment": "",
+      "category": "NFT_OBJECT"
+    },
+    {
+      "name": "NFT_OBJECT_CT_TIMEOUT",
+      "value": "7",
+      "comment": "",
+      "category": "NFT_OBJECT"
+    },
+    {
+      "name": "NFT_OBJECT_SECMARK",
+      "value": "8",
+      "comment": "",
+      "category": "NFT_OBJECT"
+    },
+    {
+      "name": "NFT_OBJECT_CT_EXPECT",
+      "value": "9",
+      "comment": "",
+      "category": "NFT_OBJECT"
+    },
+    {
+      "name": "NFT_OBJECT_SYNPROXY",
+      "value": "10",
+      "comment": "",
+      "category": "NFT_OBJECT"
+    },
+    {
+      "name": "__NFT_OBJECT_MAX",
+      "value": "11",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NFT_OBJECT_MAX",
+      "value": "(__NFT_OBJECT_MAX - 1)",
+      "comment": "",
+      "category": "NFT_OBJECT"
+    },
+    {
+      "name": "NFTA_OBJ_MAX",
+      "value": "(__NFTA_OBJ_MAX - 1)",
+      "comment": "",
+      "category": "NFTA_OBJ"
+    },
+    {
+      "name": "NFTA_FLOWTABLE_MAX",
+      "value": "(__NFTA_FLOWTABLE_MAX - 1)",
+      "comment": "",
+      "category": "NFTA_FLOWTABLE"
+    },
+    {
+      "name": "NFTA_FLOWTABLE_HOOK_MAX",
+      "value": "(__NFTA_FLOWTABLE_HOOK_MAX - 1)",
+      "comment": "",
+      "category": "NFTA_FLOWTABLE"
+    },
+    {
+      "name": "NFTA_OSF_MAX",
+      "value": "(__NFTA_OSF_MAX - 1)",
+      "comment": "",
+      "category": "NFTA_OSF"
+    },
+    {
+      "name": "NFTA_SYNPROXY_MAX",
+      "value": "(__NFTA_SYNPROXY_MAX - 1)",
+      "comment": "",
+      "category": "NFTA_SYNPROXY"
+    },
+    {
+      "name": "NFTA_DEVICE_MAX",
+      "value": "(__NFTA_DEVICE_MAX - 1)",
+      "comment": "",
+      "category": "NFTA_DEVICE"
+    },
+    {
+      "name": "NFTA_XFRM_MAX",
+      "value": "(__NFTA_XFRM_MAX - 1)",
+      "comment": "",
+      "category": "NFTA_XFRM"
+    },
+    {
+      "name": "NFT_XFRM_KEY_MAX",
+      "value": "(__NFT_XFRM_KEY_MAX - 1)",
+      "comment": "",
+      "category": "NFT_XFRM"
+    },
+    {
+      "name": "NFTA_TRACE_MAX",
+      "value": "(__NFTA_TRACE_MAX - 1)",
+      "comment": "",
+      "category": "NFTA_TRACE"
+    },
+    {
+      "name": "NFT_TRACETYPE_MAX",
+      "value": "(__NFT_TRACETYPE_MAX - 1)",
+      "comment": "",
+      "category": "NFT_TRACETYPE"
+    },
+    {
+      "name": "NFTA_NG_MAX",
+      "value": "(__NFTA_NG_MAX - 1)",
+      "comment": "",
+      "category": "NFTA_NG"
+    },
+    {
+      "name": "NFT_NG_MAX",
+      "value": "(__NFT_NG_MAX - 1)",
+      "comment": "",
+      "category": "NFT_NG"
+    },
+    {
+      "name": "NFTA_TUNNEL_KEY_IP_MAX",
+      "value": "(__NFTA_TUNNEL_KEY_IP_MAX - 1)",
+      "comment": "",
+      "category": "NFTA_TUNNEL"
+    },
+    {
+      "name": "NFTA_TUNNEL_KEY_IP6_MAX",
+      "value": "(__NFTA_TUNNEL_KEY_IP6_MAX - 1)",
+      "comment": "",
+      "category": "NFTA_TUNNEL"
+    },
+    {
+      "name": "NFTA_TUNNEL_KEY_OPTS_MAX",
+      "value": "(__NFTA_TUNNEL_KEY_OPTS_MAX - 1)",
+      "comment": "",
+      "category": "NFTA_TUNNEL"
+    },
+    {
+      "name": "NFTA_TUNNEL_KEY_VXLAN_MAX",
+      "value": "(__NFTA_TUNNEL_KEY_VXLAN_MAX - 1)",
+      "comment": "",
+      "category": "NFTA_TUNNEL"
+    },
+    {
+      "name": "NFTA_TUNNEL_KEY_ERSPAN_MAX",
+      "value": "(__NFTA_TUNNEL_KEY_ERSPAN_MAX - 1)",
+      "comment": "",
+      "category": "NFTA_TUNNEL"
+    },
+    {
+      "name": "NFTA_TUNNEL_KEY_GENEVE_MAX",
+      "value": "(__NFTA_TUNNEL_KEY_GENEVE_MAX - 1)",
+      "comment": "",
+      "category": "NFTA_TUNNEL"
+    },
+    {
+      "name": "NFT_TUNNEL_F_MASK",
+      "value": "(NFT_TUNNEL_F_ZERO_CSUM_TX | ",
+      "comment": "",
+      "category": "NFT_TUNNEL"
+    },
+    {
+      "name": "NFTA_TUNNEL_KEY_MAX",
+      "value": "(__NFTA_TUNNEL_KEY_MAX - 1)",
+      "comment": "",
+      "category": "NFTA_TUNNEL"
+    },
+    {
+      "name": "NFT_TUNNEL_MAX",
+      "value": "(__NFT_TUNNEL_MAX - 1)",
+      "comment": "",
+      "category": "NFT_TUNNEL"
+    },
+    {
+      "name": "NFT_TUNNEL_MODE_MAX",
+      "value": "(__NFT_TUNNEL_MODE_MAX - 1)",
+      "comment": "",
+      "category": "NFT_TUNNEL"
+    },
+    {
+      "name": "NFTA_TUNNEL_MAX",
+      "value": "(__NFTA_TUNNEL_MAX - 1)",
+      "comment": "",
+      "category": "NFTA_TUNNEL"
+    }
+  ],
+  "structs": [],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

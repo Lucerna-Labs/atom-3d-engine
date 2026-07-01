@@ -1,0 +1,10 @@
+﻿**Step 1:** Check server logs for stack traces or error messages near the crash time (e.g., `tail -f /var/log/nginx/access.log` or equivalent).  
+**Uncertainty:** Logs may be sparse; confirm if warnings are critical.  
+
+**Step 2:** Identify which service/process crashed by correlating log timestamps with deployment events (e.g., check container logs via `docker logs <container>`).  
+**Next Action:** If unsure, use a tool like `k8s logs` or `ps aux | grep -i process_name`.  
+
+**Step 3:** Review recent code changes and dependencies for known issues (e.g., outdated libraries, config errors).  
+**Uncertainty:** Without version history, this may be speculative.  
+
+**Step 4:** If the cause is unclear, consider restarting services or rolling back to a previous deploy point.

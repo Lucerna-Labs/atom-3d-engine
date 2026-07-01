@@ -1,0 +1,6 @@
+﻿
+
+1. Reproduce the crash in staging using load testing to mimic production traffic patterns.
+2. Isolate the issue by inspecting logs for warning correlations, acknowledging uncertainty if no fatal line appears.
+3. Compare recent deploy artifacts with the prior stable version or rollback immediately if isolation fails.
+4. Verify stability after changes; if crashes persist, proceed to deep code review as next action.

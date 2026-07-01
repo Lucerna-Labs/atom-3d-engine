@@ -1,0 +1,2221 @@
+{
+  "filename": "drm.h",
+  "includes": [
+    "linux/types.h",
+    "asm/ioctl.h",
+    "linux/types.h",
+    "asm/ioctl.h",
+    "stdint.h",
+    "sys/ioccom.h",
+    "sys/types.h",
+    "drm_mode.h"
+  ],
+  "defines": [
+    {
+      "name": "DRM_NAME",
+      "value": "\"drm\"",
+      "comment": "*< Name in kernel, /dev, and /proc",
+      "category": ""
+    },
+    {
+      "name": "DRM_MIN_ORDER",
+      "value": "5",
+      "comment": "*< At least 2^5 bytes = 32 bytes",
+      "category": "DRM_MIN"
+    },
+    {
+      "name": "DRM_MAX_ORDER",
+      "value": "22",
+      "comment": "*< Up to 2^22 bytes = 4MB",
+      "category": "DRM_MAX"
+    },
+    {
+      "name": "DRM_RAM_PERCENT",
+      "value": "10",
+      "comment": "*< How much system ram can we lock?",
+      "category": "DRM_RAM"
+    },
+    {
+      "name": "_DRM_LOCK_HELD",
+      "value": "0x80000000U",
+      "comment": "*< Hardware lock is held",
+      "category": ""
+    },
+    {
+      "name": "_DRM_LOCK_CONT",
+      "value": "0x40000000U",
+      "comment": "*< Hardware lock is contended",
+      "category": ""
+    },
+    {
+      "name": "_DRM_VBLANK_HIGH_CRTC_SHIFT",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "_DRM_VBLANK_TYPES_MASK",
+      "value": "(_DRM_VBLANK_ABSOLUTE | _DRM_VBLANK_RELATIVE)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "_DRM_VBLANK_FLAGS_MASK",
+      "value": "(_DRM_VBLANK_EVENT | _DRM_VBLANK_SIGNAL | ",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "_DRM_PRE_MODESET",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "_DRM_POST_MODESET",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_CAP_DUMB_BUFFER",
+      "value": "0x1",
+      "comment": "",
+      "category": "DRM_CAP"
+    },
+    {
+      "name": "DRM_CAP_VBLANK_HIGH_CRTC",
+      "value": "0x2",
+      "comment": "",
+      "category": "DRM_CAP"
+    },
+    {
+      "name": "DRM_CAP_DUMB_PREFERRED_DEPTH",
+      "value": "0x3",
+      "comment": "",
+      "category": "DRM_CAP"
+    },
+    {
+      "name": "DRM_CAP_DUMB_PREFER_SHADOW",
+      "value": "0x4",
+      "comment": "",
+      "category": "DRM_CAP"
+    },
+    {
+      "name": "DRM_CAP_PRIME",
+      "value": "0x5",
+      "comment": "",
+      "category": "DRM_CAP"
+    },
+    {
+      "name": "DRM_PRIME_CAP_IMPORT",
+      "value": "0x1",
+      "comment": "",
+      "category": "DRM_PRIME"
+    },
+    {
+      "name": "DRM_PRIME_CAP_EXPORT",
+      "value": "0x2",
+      "comment": "",
+      "category": "DRM_PRIME"
+    },
+    {
+      "name": "DRM_CAP_TIMESTAMP_MONOTONIC",
+      "value": "0x6",
+      "comment": "",
+      "category": "DRM_CAP"
+    },
+    {
+      "name": "DRM_CAP_ASYNC_PAGE_FLIP",
+      "value": "0x7",
+      "comment": "",
+      "category": "DRM_CAP"
+    },
+    {
+      "name": "DRM_CAP_CURSOR_WIDTH",
+      "value": "0x8",
+      "comment": "",
+      "category": "DRM_CAP"
+    },
+    {
+      "name": "DRM_CAP_CURSOR_HEIGHT",
+      "value": "0x9",
+      "comment": "",
+      "category": "DRM_CAP"
+    },
+    {
+      "name": "DRM_CAP_ADDFB2_MODIFIERS",
+      "value": "0x10",
+      "comment": "",
+      "category": "DRM_CAP"
+    },
+    {
+      "name": "DRM_CAP_PAGE_FLIP_TARGET",
+      "value": "0x11",
+      "comment": "",
+      "category": "DRM_CAP"
+    },
+    {
+      "name": "DRM_CAP_CRTC_IN_VBLANK_EVENT",
+      "value": "0x12",
+      "comment": "",
+      "category": "DRM_CAP"
+    },
+    {
+      "name": "DRM_CAP_SYNCOBJ",
+      "value": "0x13",
+      "comment": "",
+      "category": "DRM_CAP"
+    },
+    {
+      "name": "DRM_CAP_SYNCOBJ_TIMELINE",
+      "value": "0x14",
+      "comment": "",
+      "category": "DRM_CAP"
+    },
+    {
+      "name": "DRM_CAP_ATOMIC_ASYNC_PAGE_FLIP",
+      "value": "0x15",
+      "comment": "",
+      "category": "DRM_CAP"
+    },
+    {
+      "name": "DRM_CLIENT_CAP_STEREO_3D",
+      "value": "1",
+      "comment": "",
+      "category": "DRM_CLIENT"
+    },
+    {
+      "name": "DRM_CLIENT_CAP_UNIVERSAL_PLANES",
+      "value": "2",
+      "comment": "",
+      "category": "DRM_CLIENT"
+    },
+    {
+      "name": "DRM_CLIENT_CAP_ATOMIC",
+      "value": "3",
+      "comment": "",
+      "category": "DRM_CLIENT"
+    },
+    {
+      "name": "DRM_CLIENT_CAP_ASPECT_RATIO",
+      "value": "4",
+      "comment": "",
+      "category": "DRM_CLIENT"
+    },
+    {
+      "name": "DRM_CLIENT_CAP_WRITEBACK_CONNECTORS",
+      "value": "5",
+      "comment": "",
+      "category": "DRM_CLIENT"
+    },
+    {
+      "name": "DRM_CLIENT_CAP_CURSOR_PLANE_HOTSPOT",
+      "value": "6",
+      "comment": "",
+      "category": "DRM_CLIENT"
+    },
+    {
+      "name": "DRM_CLIENT_CAP_PLANE_COLOR_PIPELINE",
+      "value": "7",
+      "comment": "",
+      "category": "DRM_CLIENT"
+    },
+    {
+      "name": "DRM_RDWR",
+      "value": "O_RDWR",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_CLOEXEC",
+      "value": "O_CLOEXEC",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_SYNCOBJ_CREATE_SIGNALED",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "DRM_SYNCOBJ"
+    },
+    {
+      "name": "DRM_SYNCOBJ_FD_TO_HANDLE_FLAGS_IMPORT_SYNC_FILE",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "DRM_SYNCOBJ"
+    },
+    {
+      "name": "DRM_SYNCOBJ_FD_TO_HANDLE_FLAGS_TIMELINE",
+      "value": "(1 << 1)",
+      "comment": "",
+      "category": "DRM_SYNCOBJ"
+    },
+    {
+      "name": "DRM_SYNCOBJ_HANDLE_TO_FD_FLAGS_EXPORT_SYNC_FILE",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "DRM_SYNCOBJ"
+    },
+    {
+      "name": "DRM_SYNCOBJ_HANDLE_TO_FD_FLAGS_TIMELINE",
+      "value": "(1 << 1)",
+      "comment": "",
+      "category": "DRM_SYNCOBJ"
+    },
+    {
+      "name": "DRM_SYNCOBJ_WAIT_FLAGS_WAIT_ALL",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "DRM_SYNCOBJ"
+    },
+    {
+      "name": "DRM_SYNCOBJ_WAIT_FLAGS_WAIT_FOR_SUBMIT",
+      "value": "(1 << 1)",
+      "comment": "",
+      "category": "DRM_SYNCOBJ"
+    },
+    {
+      "name": "DRM_SYNCOBJ_WAIT_FLAGS_WAIT_AVAILABLE",
+      "value": "(1 << 2)",
+      "comment": "wait for time point to become available",
+      "category": "DRM_SYNCOBJ"
+    },
+    {
+      "name": "DRM_SYNCOBJ_WAIT_FLAGS_WAIT_DEADLINE",
+      "value": "(1 << 3)",
+      "comment": "set fence deadline to deadline_nsec",
+      "category": "DRM_SYNCOBJ"
+    },
+    {
+      "name": "DRM_SYNCOBJ_QUERY_FLAGS_LAST_SUBMITTED",
+      "value": "(1 << 0)",
+      "comment": "last available point on timeline syncobj",
+      "category": "DRM_SYNCOBJ"
+    },
+    {
+      "name": "DRM_CRTC_SEQUENCE_RELATIVE",
+      "value": "0x00000001",
+      "comment": "sequence is relative to current",
+      "category": "DRM_CRTC"
+    },
+    {
+      "name": "DRM_CRTC_SEQUENCE_NEXT_ON_MISS",
+      "value": "0x00000002",
+      "comment": "Use next sequence if we've missed",
+      "category": "DRM_CRTC"
+    },
+    {
+      "name": "DRM_CLIENT_NAME_MAX_LEN",
+      "value": "64",
+      "comment": "",
+      "category": "DRM_CLIENT"
+    },
+    {
+      "name": "DRM_IOCTL_BASE",
+      "value": "'d'",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_VERSION",
+      "value": "DRM_IOWR(0x00, struct drm_version)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_GET_UNIQUE",
+      "value": "DRM_IOWR(0x01, struct drm_unique)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_GET_MAGIC",
+      "value": "DRM_IOR( 0x02, struct drm_auth)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_IRQ_BUSID",
+      "value": "DRM_IOWR(0x03, struct drm_irq_busid)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_GET_MAP",
+      "value": "DRM_IOWR(0x04, struct drm_map)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_GET_CLIENT",
+      "value": "DRM_IOWR(0x05, struct drm_client)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_GET_STATS",
+      "value": "DRM_IOR( 0x06, struct drm_stats)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_SET_VERSION",
+      "value": "DRM_IOWR(0x07, struct drm_set_version)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_MODESET_CTL",
+      "value": "DRM_IOW(0x08, struct drm_modeset_ctl)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_GEM_CLOSE",
+      "value": "DRM_IOW (0x09, struct drm_gem_close)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_GEM_FLINK",
+      "value": "DRM_IOWR(0x0a, struct drm_gem_flink)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_GEM_OPEN",
+      "value": "DRM_IOWR(0x0b, struct drm_gem_open)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_GET_CAP",
+      "value": "DRM_IOWR(0x0c, struct drm_get_cap)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_SET_CLIENT_CAP",
+      "value": "DRM_IOW( 0x0d, struct drm_set_client_cap)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_SET_UNIQUE",
+      "value": "DRM_IOW( 0x10, struct drm_unique)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_AUTH_MAGIC",
+      "value": "DRM_IOW( 0x11, struct drm_auth)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_BLOCK",
+      "value": "DRM_IOWR(0x12, struct drm_block)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_UNBLOCK",
+      "value": "DRM_IOWR(0x13, struct drm_block)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_CONTROL",
+      "value": "DRM_IOW( 0x14, struct drm_control)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_ADD_MAP",
+      "value": "DRM_IOWR(0x15, struct drm_map)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_ADD_BUFS",
+      "value": "DRM_IOWR(0x16, struct drm_buf_desc)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_MARK_BUFS",
+      "value": "DRM_IOW( 0x17, struct drm_buf_desc)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_INFO_BUFS",
+      "value": "DRM_IOWR(0x18, struct drm_buf_info)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_MAP_BUFS",
+      "value": "DRM_IOWR(0x19, struct drm_buf_map)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_FREE_BUFS",
+      "value": "DRM_IOW( 0x1a, struct drm_buf_free)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_RM_MAP",
+      "value": "DRM_IOW( 0x1b, struct drm_map)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_SET_SAREA_CTX",
+      "value": "DRM_IOW( 0x1c, struct drm_ctx_priv_map)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_GET_SAREA_CTX",
+      "value": "DRM_IOWR(0x1d, struct drm_ctx_priv_map)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_SET_MASTER",
+      "value": "DRM_IO(0x1e)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_DROP_MASTER",
+      "value": "DRM_IO(0x1f)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_ADD_CTX",
+      "value": "DRM_IOWR(0x20, struct drm_ctx)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_RM_CTX",
+      "value": "DRM_IOWR(0x21, struct drm_ctx)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_MOD_CTX",
+      "value": "DRM_IOW( 0x22, struct drm_ctx)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_GET_CTX",
+      "value": "DRM_IOWR(0x23, struct drm_ctx)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_SWITCH_CTX",
+      "value": "DRM_IOW( 0x24, struct drm_ctx)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_NEW_CTX",
+      "value": "DRM_IOW( 0x25, struct drm_ctx)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_RES_CTX",
+      "value": "DRM_IOWR(0x26, struct drm_ctx_res)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_ADD_DRAW",
+      "value": "DRM_IOWR(0x27, struct drm_draw)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_RM_DRAW",
+      "value": "DRM_IOWR(0x28, struct drm_draw)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_DMA",
+      "value": "DRM_IOWR(0x29, struct drm_dma)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_LOCK",
+      "value": "DRM_IOW( 0x2a, struct drm_lock)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_UNLOCK",
+      "value": "DRM_IOW( 0x2b, struct drm_lock)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_FINISH",
+      "value": "DRM_IOW( 0x2c, struct drm_lock)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_PRIME_HANDLE_TO_FD",
+      "value": "DRM_IOWR(0x2d, struct drm_prime_handle)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_PRIME_FD_TO_HANDLE",
+      "value": "DRM_IOWR(0x2e, struct drm_prime_handle)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_AGP_ACQUIRE",
+      "value": "DRM_IO(  0x30)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_AGP_RELEASE",
+      "value": "DRM_IO(  0x31)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_AGP_ENABLE",
+      "value": "DRM_IOW( 0x32, struct drm_agp_mode)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_AGP_INFO",
+      "value": "DRM_IOR( 0x33, struct drm_agp_info)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_AGP_ALLOC",
+      "value": "DRM_IOWR(0x34, struct drm_agp_buffer)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_AGP_FREE",
+      "value": "DRM_IOW( 0x35, struct drm_agp_buffer)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_AGP_BIND",
+      "value": "DRM_IOW( 0x36, struct drm_agp_binding)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_AGP_UNBIND",
+      "value": "DRM_IOW( 0x37, struct drm_agp_binding)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_SG_ALLOC",
+      "value": "DRM_IOWR(0x38, struct drm_scatter_gather)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_SG_FREE",
+      "value": "DRM_IOW( 0x39, struct drm_scatter_gather)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_WAIT_VBLANK",
+      "value": "DRM_IOWR(0x3a, union drm_wait_vblank)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_CRTC_GET_SEQUENCE",
+      "value": "DRM_IOWR(0x3b, struct drm_crtc_get_sequence)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_CRTC_QUEUE_SEQUENCE",
+      "value": "DRM_IOWR(0x3c, struct drm_crtc_queue_sequence)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_UPDATE_DRAW",
+      "value": "DRM_IOW(0x3f, struct drm_update_draw)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_MODE_GETRESOURCES",
+      "value": "DRM_IOWR(0xA0, struct drm_mode_card_res)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_MODE_GETCRTC",
+      "value": "DRM_IOWR(0xA1, struct drm_mode_crtc)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_MODE_SETCRTC",
+      "value": "DRM_IOWR(0xA2, struct drm_mode_crtc)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_MODE_CURSOR",
+      "value": "DRM_IOWR(0xA3, struct drm_mode_cursor)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_MODE_GETGAMMA",
+      "value": "DRM_IOWR(0xA4, struct drm_mode_crtc_lut)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_MODE_SETGAMMA",
+      "value": "DRM_IOWR(0xA5, struct drm_mode_crtc_lut)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_MODE_GETENCODER",
+      "value": "DRM_IOWR(0xA6, struct drm_mode_get_encoder)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_MODE_GETCONNECTOR",
+      "value": "DRM_IOWR(0xA7, struct drm_mode_get_connector)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_MODE_ATTACHMODE",
+      "value": "DRM_IOWR(0xA8, struct drm_mode_mode_cmd)",
+      "comment": "deprecated (never worked)",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_MODE_DETACHMODE",
+      "value": "DRM_IOWR(0xA9, struct drm_mode_mode_cmd)",
+      "comment": "deprecated (never worked)",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_MODE_GETPROPERTY",
+      "value": "DRM_IOWR(0xAA, struct drm_mode_get_property)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_MODE_SETPROPERTY",
+      "value": "DRM_IOWR(0xAB, struct drm_mode_connector_set_property)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_MODE_GETPROPBLOB",
+      "value": "DRM_IOWR(0xAC, struct drm_mode_get_blob)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_MODE_GETFB",
+      "value": "DRM_IOWR(0xAD, struct drm_mode_fb_cmd)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_MODE_ADDFB",
+      "value": "DRM_IOWR(0xAE, struct drm_mode_fb_cmd)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_MODE_RMFB",
+      "value": "DRM_IOWR(0xAF, unsigned int)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_MODE_PAGE_FLIP",
+      "value": "DRM_IOWR(0xB0, struct drm_mode_crtc_page_flip)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_MODE_DIRTYFB",
+      "value": "DRM_IOWR(0xB1, struct drm_mode_fb_dirty_cmd)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_MODE_CREATE_DUMB",
+      "value": "DRM_IOWR(0xB2, struct drm_mode_create_dumb)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_MODE_MAP_DUMB",
+      "value": "DRM_IOWR(0xB3, struct drm_mode_map_dumb)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_MODE_DESTROY_DUMB",
+      "value": "DRM_IOWR(0xB4, struct drm_mode_destroy_dumb)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_MODE_GETPLANERESOURCES",
+      "value": "DRM_IOWR(0xB5, struct drm_mode_get_plane_res)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_MODE_GETPLANE",
+      "value": "DRM_IOWR(0xB6, struct drm_mode_get_plane)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_MODE_SETPLANE",
+      "value": "DRM_IOWR(0xB7, struct drm_mode_set_plane)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_MODE_ADDFB2",
+      "value": "DRM_IOWR(0xB8, struct drm_mode_fb_cmd2)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_MODE_OBJ_GETPROPERTIES",
+      "value": "DRM_IOWR(0xB9, struct drm_mode_obj_get_properties)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_MODE_OBJ_SETPROPERTY",
+      "value": "DRM_IOWR(0xBA, struct drm_mode_obj_set_property)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_MODE_CURSOR2",
+      "value": "DRM_IOWR(0xBB, struct drm_mode_cursor2)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_MODE_ATOMIC",
+      "value": "DRM_IOWR(0xBC, struct drm_mode_atomic)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_MODE_CREATEPROPBLOB",
+      "value": "DRM_IOWR(0xBD, struct drm_mode_create_blob)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_MODE_DESTROYPROPBLOB",
+      "value": "DRM_IOWR(0xBE, struct drm_mode_destroy_blob)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_SYNCOBJ_CREATE",
+      "value": "DRM_IOWR(0xBF, struct drm_syncobj_create)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_SYNCOBJ_DESTROY",
+      "value": "DRM_IOWR(0xC0, struct drm_syncobj_destroy)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_SYNCOBJ_HANDLE_TO_FD",
+      "value": "DRM_IOWR(0xC1, struct drm_syncobj_handle)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_SYNCOBJ_FD_TO_HANDLE",
+      "value": "DRM_IOWR(0xC2, struct drm_syncobj_handle)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_SYNCOBJ_WAIT",
+      "value": "DRM_IOWR(0xC3, struct drm_syncobj_wait)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_SYNCOBJ_RESET",
+      "value": "DRM_IOWR(0xC4, struct drm_syncobj_array)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_SYNCOBJ_SIGNAL",
+      "value": "DRM_IOWR(0xC5, struct drm_syncobj_array)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_MODE_CREATE_LEASE",
+      "value": "DRM_IOWR(0xC6, struct drm_mode_create_lease)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_MODE_LIST_LESSEES",
+      "value": "DRM_IOWR(0xC7, struct drm_mode_list_lessees)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_MODE_GET_LEASE",
+      "value": "DRM_IOWR(0xC8, struct drm_mode_get_lease)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_MODE_REVOKE_LEASE",
+      "value": "DRM_IOWR(0xC9, struct drm_mode_revoke_lease)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_SYNCOBJ_TIMELINE_WAIT",
+      "value": "DRM_IOWR(0xCA, struct drm_syncobj_timeline_wait)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_SYNCOBJ_QUERY",
+      "value": "DRM_IOWR(0xCB, struct drm_syncobj_timeline_array)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_SYNCOBJ_TRANSFER",
+      "value": "DRM_IOWR(0xCC, struct drm_syncobj_transfer)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_SYNCOBJ_TIMELINE_SIGNAL",
+      "value": "DRM_IOWR(0xCD, struct drm_syncobj_timeline_array)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_MODE_GETFB2",
+      "value": "DRM_IOWR(0xCE, struct drm_mode_fb_cmd2)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_SYNCOBJ_EVENTFD",
+      "value": "DRM_IOWR(0xCF, struct drm_syncobj_eventfd)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_MODE_CLOSEFB",
+      "value": "DRM_IOWR(0xD0, struct drm_mode_closefb)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_SET_CLIENT_NAME",
+      "value": "DRM_IOWR(0xD1, struct drm_set_client_name)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_GEM_CHANGE_HANDLE",
+      "value": "DRM_IOWR(0xD2, struct drm_gem_change_handle)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_COMMAND_BASE",
+      "value": "0x40",
+      "comment": "",
+      "category": "DRM_COMMAND"
+    },
+    {
+      "name": "DRM_COMMAND_END",
+      "value": "0xA0",
+      "comment": "",
+      "category": "DRM_COMMAND"
+    },
+    {
+      "name": "DRM_EVENT_VBLANK",
+      "value": "0x01",
+      "comment": "",
+      "category": "DRM_EVENT"
+    },
+    {
+      "name": "DRM_EVENT_FLIP_COMPLETE",
+      "value": "0x02",
+      "comment": "",
+      "category": "DRM_EVENT"
+    },
+    {
+      "name": "DRM_EVENT_CRTC_SEQUENCE",
+      "value": "0x03",
+      "comment": "",
+      "category": "DRM_EVENT"
+    }
+  ],
+  "structs": [
+    {
+      "name": "drm_clip_rect",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_drawable_info",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_tex_region",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_hw_lock",
+      "fields": [
+        {
+          "type_name": "char",
+          "name": "padding",
+          "array_size": "60",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_version",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "version_major",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "version_minor",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "version_patchlevel",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__kernel_size_t",
+          "name": "name_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__kernel_size_t",
+          "name": "date_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__kernel_size_t",
+          "name": "desc_len",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_unique",
+      "fields": [
+        {
+          "type_name": "__kernel_size_t",
+          "name": "unique_len",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_list",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "count",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_block",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "unused",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_control",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "irq",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_ctx_priv_map",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_map",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "mtrr",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_client",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "idx",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "auth",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_stats",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_13",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_lock",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "context",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_buf_desc",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "low_mark",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "high_mark",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_buf_info",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "count",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_buf_free",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "count",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_buf_pub",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "idx",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "total",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "used",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_buf_map",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "count",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_dma",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "context",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "send_count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "request_count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "request_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "granted_count",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_ctx",
+      "fields": [
+        {
+          "type_name": "drm_context_t",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_ctx_res",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "count",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_draw",
+      "fields": [
+        {
+          "type_name": "drm_drawable_t",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_update_draw",
+      "fields": [
+        {
+          "type_name": "drm_drawable_t",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_auth",
+      "fields": [
+        {
+          "type_name": "drm_magic_t",
+          "name": "magic",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_irq_busid",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "irq",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "busnum",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "devnum",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "funcnum",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_wait_vblank_request",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_wait_vblank_reply",
+      "fields": [
+        {
+          "type_name": "long",
+          "name": "tval_sec",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "long",
+          "name": "tval_usec",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_modeset_ctl",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "crtc",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "cmd",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_agp_mode",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_agp_buffer",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_agp_binding",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_agp_info",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "agp_version_major",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "agp_version_minor",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_scatter_gather",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_set_version",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "drm_di_major",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "drm_di_minor",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "drm_dd_major",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "drm_dd_minor",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_gem_close",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_gem_flink",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "name",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_gem_open",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "name",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_gem_change_handle",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "new_handle",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_get_cap",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "capability",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "value",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_set_client_cap",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "capability",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "value",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_prime_handle",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "fd",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_syncobj_create",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_syncobj_destroy",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_syncobj_handle",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "fd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "point",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_syncobj_transfer",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "src_handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "dst_handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "src_point",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "dst_point",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_syncobj_wait",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "handles",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s64",
+          "name": "timeout_nsec",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "count_handles",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "first_signaled",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "deadline_nsec",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_syncobj_timeline_wait",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "handles",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "points",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s64",
+          "name": "timeout_nsec",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "count_handles",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "first_signaled",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "deadline_nsec",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_syncobj_eventfd",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "point",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "fd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_syncobj_array",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "handles",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "count_handles",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_syncobj_timeline_array",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "handles",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "points",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "count_handles",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_crtc_get_sequence",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "crtc_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "active",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "sequence",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s64",
+          "name": "sequence_ns",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_crtc_queue_sequence",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "crtc_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "sequence",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "user_data",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_set_client_name",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "name_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "name",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_event",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "length",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_event_vblank",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "user_data",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tv_sec",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tv_usec",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "sequence",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "crtc_id",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_event_crtc_sequence",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "user_data",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s64",
+          "name": "time_ns",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "sequence",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [
+    "drm_clip_rect_t",
+    "drm_drawable_info_t",
+    "drm_tex_region_t",
+    "drm_hw_lock_t",
+    "drm_version_t",
+    "drm_unique_t",
+    "drm_list_t",
+    "drm_block_t",
+    "drm_control_t",
+    "drm_map_type_t",
+    "drm_map_flags_t",
+    "drm_ctx_priv_map_t",
+    "drm_map_t",
+    "drm_client_t",
+    "drm_stat_type_t",
+    "drm_stats_t",
+    "drm_lock_flags_t",
+    "drm_lock_t",
+    "drm_dma_flags_t",
+    "drm_buf_desc_t",
+    "drm_buf_info_t",
+    "drm_buf_free_t",
+    "drm_buf_pub_t",
+    "drm_buf_map_t",
+    "drm_dma_t",
+    "drm_wait_vblank_t",
+    "drm_agp_mode_t",
+    "drm_ctx_flags_t",
+    "drm_ctx_t",
+    "drm_ctx_res_t",
+    "drm_draw_t",
+    "drm_update_draw_t",
+    "drm_auth_t",
+    "drm_irq_busid_t",
+    "drm_vblank_seq_type_t",
+    "drm_agp_buffer_t",
+    "drm_agp_binding_t",
+    "drm_agp_info_t",
+    "drm_scatter_gather_t",
+    "drm_set_version_t"
+  ],
+  "enums": {
+    "anonymous_enum_0": [
+      [
+        "DRM_DRAWABLE_CLIPRECTS",
+        ""
+      ]
+    ]
+  }
+}

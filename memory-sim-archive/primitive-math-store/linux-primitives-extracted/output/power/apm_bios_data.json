@@ -1,0 +1,477 @@
+{
+  "filename": "apm_bios.h",
+  "includes": [
+    "linux/types.h",
+    "linux/ioctl.h"
+  ],
+  "defines": [
+    {
+      "name": "APM_STATE_READY",
+      "value": "0x0000",
+      "comment": "",
+      "category": "APM_STATE"
+    },
+    {
+      "name": "APM_STATE_STANDBY",
+      "value": "0x0001",
+      "comment": "",
+      "category": "APM_STATE"
+    },
+    {
+      "name": "APM_STATE_SUSPEND",
+      "value": "0x0002",
+      "comment": "",
+      "category": "APM_STATE"
+    },
+    {
+      "name": "APM_STATE_OFF",
+      "value": "0x0003",
+      "comment": "",
+      "category": "APM_STATE"
+    },
+    {
+      "name": "APM_STATE_BUSY",
+      "value": "0x0004",
+      "comment": "",
+      "category": "APM_STATE"
+    },
+    {
+      "name": "APM_STATE_REJECT",
+      "value": "0x0005",
+      "comment": "",
+      "category": "APM_STATE"
+    },
+    {
+      "name": "APM_STATE_OEM_SYS",
+      "value": "0x0020",
+      "comment": "",
+      "category": "APM_STATE"
+    },
+    {
+      "name": "APM_STATE_OEM_DEV",
+      "value": "0x0040",
+      "comment": "",
+      "category": "APM_STATE"
+    },
+    {
+      "name": "APM_STATE_DISABLE",
+      "value": "0x0000",
+      "comment": "",
+      "category": "APM_STATE"
+    },
+    {
+      "name": "APM_STATE_ENABLE",
+      "value": "0x0001",
+      "comment": "",
+      "category": "APM_STATE"
+    },
+    {
+      "name": "APM_STATE_DISENGAGE",
+      "value": "0x0000",
+      "comment": "",
+      "category": "APM_STATE"
+    },
+    {
+      "name": "APM_STATE_ENGAGE",
+      "value": "0x0001",
+      "comment": "",
+      "category": "APM_STATE"
+    },
+    {
+      "name": "APM_SYS_STANDBY",
+      "value": "0x0001",
+      "comment": "",
+      "category": "APM_SYS"
+    },
+    {
+      "name": "APM_SYS_SUSPEND",
+      "value": "0x0002",
+      "comment": "",
+      "category": "APM_SYS"
+    },
+    {
+      "name": "APM_NORMAL_RESUME",
+      "value": "0x0003",
+      "comment": "",
+      "category": "APM_NORMAL"
+    },
+    {
+      "name": "APM_CRITICAL_RESUME",
+      "value": "0x0004",
+      "comment": "",
+      "category": "APM_CRITICAL"
+    },
+    {
+      "name": "APM_LOW_BATTERY",
+      "value": "0x0005",
+      "comment": "",
+      "category": "APM_LOW"
+    },
+    {
+      "name": "APM_POWER_STATUS_CHANGE",
+      "value": "0x0006",
+      "comment": "",
+      "category": "APM_POWER"
+    },
+    {
+      "name": "APM_UPDATE_TIME",
+      "value": "0x0007",
+      "comment": "",
+      "category": "APM_UPDATE"
+    },
+    {
+      "name": "APM_CRITICAL_SUSPEND",
+      "value": "0x0008",
+      "comment": "",
+      "category": "APM_CRITICAL"
+    },
+    {
+      "name": "APM_USER_STANDBY",
+      "value": "0x0009",
+      "comment": "",
+      "category": "APM_USER"
+    },
+    {
+      "name": "APM_USER_SUSPEND",
+      "value": "0x000a",
+      "comment": "",
+      "category": "APM_USER"
+    },
+    {
+      "name": "APM_STANDBY_RESUME",
+      "value": "0x000b",
+      "comment": "",
+      "category": "APM_STANDBY"
+    },
+    {
+      "name": "APM_CAPABILITY_CHANGE",
+      "value": "0x000c",
+      "comment": "",
+      "category": "APM_CAPABILITY"
+    },
+    {
+      "name": "APM_USER_HIBERNATION",
+      "value": "0x000d",
+      "comment": "",
+      "category": "APM_USER"
+    },
+    {
+      "name": "APM_HIBERNATION_RESUME",
+      "value": "0x000e",
+      "comment": "",
+      "category": "APM_HIBERNATION"
+    },
+    {
+      "name": "APM_SUCCESS",
+      "value": "0x00",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "APM_DISABLED",
+      "value": "0x01",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "APM_CONNECTED",
+      "value": "0x02",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "APM_NOT_CONNECTED",
+      "value": "0x03",
+      "comment": "",
+      "category": "APM_NOT"
+    },
+    {
+      "name": "APM_16_CONNECTED",
+      "value": "0x05",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "APM_16_UNSUPPORTED",
+      "value": "0x06",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "APM_32_CONNECTED",
+      "value": "0x07",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "APM_32_UNSUPPORTED",
+      "value": "0x08",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "APM_BAD_DEVICE",
+      "value": "0x09",
+      "comment": "",
+      "category": "APM_BAD"
+    },
+    {
+      "name": "APM_BAD_PARAM",
+      "value": "0x0a",
+      "comment": "",
+      "category": "APM_BAD"
+    },
+    {
+      "name": "APM_NOT_ENGAGED",
+      "value": "0x0b",
+      "comment": "",
+      "category": "APM_NOT"
+    },
+    {
+      "name": "APM_BAD_FUNCTION",
+      "value": "0x0c",
+      "comment": "",
+      "category": "APM_BAD"
+    },
+    {
+      "name": "APM_RESUME_DISABLED",
+      "value": "0x0d",
+      "comment": "",
+      "category": "APM_RESUME"
+    },
+    {
+      "name": "APM_NO_ERROR",
+      "value": "0x53",
+      "comment": "",
+      "category": "APM_NO"
+    },
+    {
+      "name": "APM_BAD_STATE",
+      "value": "0x60",
+      "comment": "",
+      "category": "APM_BAD"
+    },
+    {
+      "name": "APM_NO_EVENTS",
+      "value": "0x80",
+      "comment": "",
+      "category": "APM_NO"
+    },
+    {
+      "name": "APM_NOT_PRESENT",
+      "value": "0x86",
+      "comment": "",
+      "category": "APM_NOT"
+    },
+    {
+      "name": "APM_DEVICE_BIOS",
+      "value": "0x0000",
+      "comment": "",
+      "category": "APM_DEVICE"
+    },
+    {
+      "name": "APM_DEVICE_ALL",
+      "value": "0x0001",
+      "comment": "",
+      "category": "APM_DEVICE"
+    },
+    {
+      "name": "APM_DEVICE_DISPLAY",
+      "value": "0x0100",
+      "comment": "",
+      "category": "APM_DEVICE"
+    },
+    {
+      "name": "APM_DEVICE_STORAGE",
+      "value": "0x0200",
+      "comment": "",
+      "category": "APM_DEVICE"
+    },
+    {
+      "name": "APM_DEVICE_PARALLEL",
+      "value": "0x0300",
+      "comment": "",
+      "category": "APM_DEVICE"
+    },
+    {
+      "name": "APM_DEVICE_SERIAL",
+      "value": "0x0400",
+      "comment": "",
+      "category": "APM_DEVICE"
+    },
+    {
+      "name": "APM_DEVICE_NETWORK",
+      "value": "0x0500",
+      "comment": "",
+      "category": "APM_DEVICE"
+    },
+    {
+      "name": "APM_DEVICE_PCMCIA",
+      "value": "0x0600",
+      "comment": "",
+      "category": "APM_DEVICE"
+    },
+    {
+      "name": "APM_DEVICE_BATTERY",
+      "value": "0x8000",
+      "comment": "",
+      "category": "APM_DEVICE"
+    },
+    {
+      "name": "APM_DEVICE_OEM",
+      "value": "0xe000",
+      "comment": "",
+      "category": "APM_DEVICE"
+    },
+    {
+      "name": "APM_DEVICE_OLD_ALL",
+      "value": "0xffff",
+      "comment": "",
+      "category": "APM_DEVICE"
+    },
+    {
+      "name": "APM_DEVICE_CLASS",
+      "value": "0x00ff",
+      "comment": "",
+      "category": "APM_DEVICE"
+    },
+    {
+      "name": "APM_DEVICE_MASK",
+      "value": "0xff00",
+      "comment": "",
+      "category": "APM_DEVICE"
+    },
+    {
+      "name": "APM_MAX_BATTERIES",
+      "value": "2",
+      "comment": "",
+      "category": "APM_MAX"
+    },
+    {
+      "name": "APM_CAP_GLOBAL_STANDBY",
+      "value": "0x0001",
+      "comment": "",
+      "category": "APM_CAP"
+    },
+    {
+      "name": "APM_CAP_GLOBAL_SUSPEND",
+      "value": "0x0002",
+      "comment": "",
+      "category": "APM_CAP"
+    },
+    {
+      "name": "APM_CAP_RESUME_STANDBY_TIMER",
+      "value": "0x0004",
+      "comment": "Timer resume from standby",
+      "category": "APM_CAP"
+    },
+    {
+      "name": "APM_CAP_RESUME_SUSPEND_TIMER",
+      "value": "0x0008",
+      "comment": "Timer resume from suspend",
+      "category": "APM_CAP"
+    },
+    {
+      "name": "APM_CAP_RESUME_STANDBY_RING",
+      "value": "0x0010",
+      "comment": "Resume on Ring fr standby",
+      "category": "APM_CAP"
+    },
+    {
+      "name": "APM_CAP_RESUME_SUSPEND_RING",
+      "value": "0x0020",
+      "comment": "Resume on Ring fr suspend",
+      "category": "APM_CAP"
+    },
+    {
+      "name": "APM_CAP_RESUME_STANDBY_PCMCIA",
+      "value": "0x0040",
+      "comment": "Resume on PCMCIA Ring",
+      "category": "APM_CAP"
+    },
+    {
+      "name": "APM_CAP_RESUME_SUSPEND_PCMCIA",
+      "value": "0x0080",
+      "comment": "Resume on PCMCIA Ring",
+      "category": "APM_CAP"
+    },
+    {
+      "name": "APM_IOC_STANDBY",
+      "value": "_IO('A', 1)",
+      "comment": "",
+      "category": "APM_IOC"
+    },
+    {
+      "name": "APM_IOC_SUSPEND",
+      "value": "_IO('A', 2)",
+      "comment": "",
+      "category": "APM_IOC"
+    }
+  ],
+  "structs": [
+    {
+      "name": "apm_bios_info",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "version",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "cseg",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "cseg_16",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "dseg",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "cseg_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "cseg_16_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "dseg_len",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

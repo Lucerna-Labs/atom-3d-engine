@@ -1,0 +1,220 @@
+{
+  "filename": "ipc.h",
+  "includes": [
+    "linux/types.h",
+    "asm/ipcbuf.h"
+  ],
+  "defines": [
+    {
+      "name": "IPC_PRIVATE",
+      "value": "((__kernel_key_t) 0)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPC_CREAT",
+      "value": "00001000",
+      "comment": "create if key is nonexistent",
+      "category": ""
+    },
+    {
+      "name": "IPC_EXCL",
+      "value": "00002000",
+      "comment": "fail if key exists",
+      "category": ""
+    },
+    {
+      "name": "IPC_NOWAIT",
+      "value": "00004000",
+      "comment": "return error on wait",
+      "category": ""
+    },
+    {
+      "name": "IPC_DIPC",
+      "value": "00010000",
+      "comment": "make it distributed",
+      "category": ""
+    },
+    {
+      "name": "IPC_OWN",
+      "value": "00020000",
+      "comment": "this machine is the DIPC owner",
+      "category": ""
+    },
+    {
+      "name": "IPC_RMID",
+      "value": "0",
+      "comment": "remove resource",
+      "category": ""
+    },
+    {
+      "name": "IPC_SET",
+      "value": "1",
+      "comment": "set ipc_perm options",
+      "category": ""
+    },
+    {
+      "name": "IPC_STAT",
+      "value": "2",
+      "comment": "get ipc_perm options",
+      "category": ""
+    },
+    {
+      "name": "IPC_INFO",
+      "value": "3",
+      "comment": "see ipcs",
+      "category": ""
+    },
+    {
+      "name": "IPC_OLD",
+      "value": "0\t/* Old version (no 32-bit UID support on many",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPC_64",
+      "value": "0x0100  /* New version (support 32-bit UIDs, bigger",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SEMOP",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SEMGET",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SEMCTL",
+      "value": "3",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SEMTIMEDOP",
+      "value": "4",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "MSGSND",
+      "value": "11",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "MSGRCV",
+      "value": "12",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "MSGGET",
+      "value": "13",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "MSGCTL",
+      "value": "14",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SHMAT",
+      "value": "21",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SHMDT",
+      "value": "22",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SHMGET",
+      "value": "23",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SHMCTL",
+      "value": "24",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DIPC",
+      "value": "25",
+      "comment": "",
+      "category": ""
+    }
+  ],
+  "structs": [
+    {
+      "name": "ipc_perm",
+      "fields": [
+        {
+          "type_name": "__kernel_key_t",
+          "name": "key",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__kernel_uid_t",
+          "name": "uid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__kernel_gid_t",
+          "name": "gid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__kernel_uid_t",
+          "name": "cuid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__kernel_gid_t",
+          "name": "cgid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__kernel_mode_t",
+          "name": "mode",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ipc_kludge",
+      "fields": [
+        {
+          "type_name": "long",
+          "name": "msgtyp",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

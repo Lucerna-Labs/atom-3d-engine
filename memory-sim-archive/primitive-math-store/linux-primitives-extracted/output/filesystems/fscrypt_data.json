@@ -1,0 +1,653 @@
+{
+  "filename": "fscrypt.h",
+  "includes": [
+    "linux/ioctl.h",
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "FSCRYPT_POLICY_FLAGS_PAD_4",
+      "value": "0x00",
+      "comment": "",
+      "category": "FSCRYPT_POLICY"
+    },
+    {
+      "name": "FSCRYPT_POLICY_FLAGS_PAD_8",
+      "value": "0x01",
+      "comment": "",
+      "category": "FSCRYPT_POLICY"
+    },
+    {
+      "name": "FSCRYPT_POLICY_FLAGS_PAD_16",
+      "value": "0x02",
+      "comment": "",
+      "category": "FSCRYPT_POLICY"
+    },
+    {
+      "name": "FSCRYPT_POLICY_FLAGS_PAD_32",
+      "value": "0x03",
+      "comment": "",
+      "category": "FSCRYPT_POLICY"
+    },
+    {
+      "name": "FSCRYPT_POLICY_FLAGS_PAD_MASK",
+      "value": "0x03",
+      "comment": "",
+      "category": "FSCRYPT_POLICY"
+    },
+    {
+      "name": "FSCRYPT_POLICY_FLAG_DIRECT_KEY",
+      "value": "0x04",
+      "comment": "",
+      "category": "FSCRYPT_POLICY"
+    },
+    {
+      "name": "FSCRYPT_POLICY_FLAG_IV_INO_LBLK_64",
+      "value": "0x08",
+      "comment": "",
+      "category": "FSCRYPT_POLICY"
+    },
+    {
+      "name": "FSCRYPT_POLICY_FLAG_IV_INO_LBLK_32",
+      "value": "0x10",
+      "comment": "",
+      "category": "FSCRYPT_POLICY"
+    },
+    {
+      "name": "FSCRYPT_MODE_AES_256_XTS",
+      "value": "1",
+      "comment": "",
+      "category": "FSCRYPT_MODE"
+    },
+    {
+      "name": "FSCRYPT_MODE_AES_256_CTS",
+      "value": "4",
+      "comment": "",
+      "category": "FSCRYPT_MODE"
+    },
+    {
+      "name": "FSCRYPT_MODE_AES_128_CBC",
+      "value": "5",
+      "comment": "",
+      "category": "FSCRYPT_MODE"
+    },
+    {
+      "name": "FSCRYPT_MODE_AES_128_CTS",
+      "value": "6",
+      "comment": "",
+      "category": "FSCRYPT_MODE"
+    },
+    {
+      "name": "FSCRYPT_MODE_SM4_XTS",
+      "value": "7",
+      "comment": "",
+      "category": "FSCRYPT_MODE"
+    },
+    {
+      "name": "FSCRYPT_MODE_SM4_CTS",
+      "value": "8",
+      "comment": "",
+      "category": "FSCRYPT_MODE"
+    },
+    {
+      "name": "FSCRYPT_MODE_ADIANTUM",
+      "value": "9",
+      "comment": "",
+      "category": "FSCRYPT_MODE"
+    },
+    {
+      "name": "FSCRYPT_MODE_AES_256_HCTR2",
+      "value": "10",
+      "comment": "",
+      "category": "FSCRYPT_MODE"
+    },
+    {
+      "name": "FSCRYPT_POLICY_V1",
+      "value": "0",
+      "comment": "",
+      "category": "FSCRYPT_POLICY"
+    },
+    {
+      "name": "FSCRYPT_KEY_DESCRIPTOR_SIZE",
+      "value": "8",
+      "comment": "",
+      "category": "FSCRYPT_KEY"
+    },
+    {
+      "name": "FSCRYPT_KEY_DESC_PREFIX",
+      "value": "\"fscrypt:\"",
+      "comment": "",
+      "category": "FSCRYPT_KEY"
+    },
+    {
+      "name": "FSCRYPT_KEY_DESC_PREFIX_SIZE",
+      "value": "8",
+      "comment": "",
+      "category": "FSCRYPT_KEY"
+    },
+    {
+      "name": "FSCRYPT_MAX_KEY_SIZE",
+      "value": "64",
+      "comment": "",
+      "category": "FSCRYPT_MAX"
+    },
+    {
+      "name": "FSCRYPT_POLICY_V2",
+      "value": "2",
+      "comment": "",
+      "category": "FSCRYPT_POLICY"
+    },
+    {
+      "name": "FSCRYPT_KEY_IDENTIFIER_SIZE",
+      "value": "16",
+      "comment": "",
+      "category": "FSCRYPT_KEY"
+    },
+    {
+      "name": "FSCRYPT_KEY_SPEC_TYPE_DESCRIPTOR",
+      "value": "1",
+      "comment": "",
+      "category": "FSCRYPT_KEY"
+    },
+    {
+      "name": "FSCRYPT_KEY_SPEC_TYPE_IDENTIFIER",
+      "value": "2",
+      "comment": "",
+      "category": "FSCRYPT_KEY"
+    },
+    {
+      "name": "FSCRYPT_ADD_KEY_FLAG_HW_WRAPPED",
+      "value": "0x00000001",
+      "comment": "",
+      "category": "FSCRYPT_ADD"
+    },
+    {
+      "name": "FSCRYPT_KEY_REMOVAL_STATUS_FLAG_FILES_BUSY",
+      "value": "0x00000001",
+      "comment": "",
+      "category": "FSCRYPT_KEY"
+    },
+    {
+      "name": "FSCRYPT_KEY_REMOVAL_STATUS_FLAG_OTHER_USERS",
+      "value": "0x00000002",
+      "comment": "",
+      "category": "FSCRYPT_KEY"
+    },
+    {
+      "name": "FSCRYPT_KEY_STATUS_ABSENT",
+      "value": "1",
+      "comment": "",
+      "category": "FSCRYPT_KEY"
+    },
+    {
+      "name": "FSCRYPT_KEY_STATUS_PRESENT",
+      "value": "2",
+      "comment": "",
+      "category": "FSCRYPT_KEY"
+    },
+    {
+      "name": "FSCRYPT_KEY_STATUS_INCOMPLETELY_REMOVED",
+      "value": "3",
+      "comment": "",
+      "category": "FSCRYPT_KEY"
+    },
+    {
+      "name": "FSCRYPT_KEY_STATUS_FLAG_ADDED_BY_SELF",
+      "value": "0x00000001",
+      "comment": "",
+      "category": "FSCRYPT_KEY"
+    },
+    {
+      "name": "FS_IOC_SET_ENCRYPTION_POLICY",
+      "value": "_IOR('f', 19, struct fscrypt_policy_v1)",
+      "comment": "",
+      "category": "FS_IOC"
+    },
+    {
+      "name": "FS_IOC_GET_ENCRYPTION_PWSALT",
+      "value": "_IOW('f', 20, __u8[16])",
+      "comment": "",
+      "category": "FS_IOC"
+    },
+    {
+      "name": "FS_IOC_GET_ENCRYPTION_POLICY",
+      "value": "_IOW('f', 21, struct fscrypt_policy_v1)",
+      "comment": "",
+      "category": "FS_IOC"
+    },
+    {
+      "name": "FS_IOC_GET_ENCRYPTION_POLICY_EX",
+      "value": "_IOWR('f', 22, __u8[9])",
+      "comment": "size + version",
+      "category": "FS_IOC"
+    },
+    {
+      "name": "FS_IOC_ADD_ENCRYPTION_KEY",
+      "value": "_IOWR('f', 23, struct fscrypt_add_key_arg)",
+      "comment": "",
+      "category": "FS_IOC"
+    },
+    {
+      "name": "FS_IOC_REMOVE_ENCRYPTION_KEY",
+      "value": "_IOWR('f', 24, struct fscrypt_remove_key_arg)",
+      "comment": "",
+      "category": "FS_IOC"
+    },
+    {
+      "name": "FS_IOC_REMOVE_ENCRYPTION_KEY_ALL_USERS",
+      "value": "_IOWR('f', 25, struct fscrypt_remove_key_arg)",
+      "comment": "",
+      "category": "FS_IOC"
+    },
+    {
+      "name": "FS_IOC_GET_ENCRYPTION_KEY_STATUS",
+      "value": "_IOWR('f', 26, struct fscrypt_get_key_status_arg)",
+      "comment": "",
+      "category": "FS_IOC"
+    },
+    {
+      "name": "FS_IOC_GET_ENCRYPTION_NONCE",
+      "value": "_IOR('f', 27, __u8[16])",
+      "comment": "",
+      "category": "FS_IOC"
+    },
+    {
+      "name": "fscrypt_policy",
+      "value": "fscrypt_policy_v1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FS_KEY_DESCRIPTOR_SIZE",
+      "value": "FSCRYPT_KEY_DESCRIPTOR_SIZE",
+      "comment": "",
+      "category": "FS_KEY"
+    },
+    {
+      "name": "FS_POLICY_FLAGS_PAD_4",
+      "value": "FSCRYPT_POLICY_FLAGS_PAD_4",
+      "comment": "",
+      "category": "FS_POLICY"
+    },
+    {
+      "name": "FS_POLICY_FLAGS_PAD_8",
+      "value": "FSCRYPT_POLICY_FLAGS_PAD_8",
+      "comment": "",
+      "category": "FS_POLICY"
+    },
+    {
+      "name": "FS_POLICY_FLAGS_PAD_16",
+      "value": "FSCRYPT_POLICY_FLAGS_PAD_16",
+      "comment": "",
+      "category": "FS_POLICY"
+    },
+    {
+      "name": "FS_POLICY_FLAGS_PAD_32",
+      "value": "FSCRYPT_POLICY_FLAGS_PAD_32",
+      "comment": "",
+      "category": "FS_POLICY"
+    },
+    {
+      "name": "FS_POLICY_FLAGS_PAD_MASK",
+      "value": "FSCRYPT_POLICY_FLAGS_PAD_MASK",
+      "comment": "",
+      "category": "FS_POLICY"
+    },
+    {
+      "name": "FS_POLICY_FLAG_DIRECT_KEY",
+      "value": "FSCRYPT_POLICY_FLAG_DIRECT_KEY",
+      "comment": "",
+      "category": "FS_POLICY"
+    },
+    {
+      "name": "FS_POLICY_FLAGS_VALID",
+      "value": "0x07",
+      "comment": "contains old flags only",
+      "category": "FS_POLICY"
+    },
+    {
+      "name": "FS_ENCRYPTION_MODE_INVALID",
+      "value": "0",
+      "comment": "never used",
+      "category": "FS_ENCRYPTION"
+    },
+    {
+      "name": "FS_ENCRYPTION_MODE_AES_256_XTS",
+      "value": "FSCRYPT_MODE_AES_256_XTS",
+      "comment": "",
+      "category": "FS_ENCRYPTION"
+    },
+    {
+      "name": "FS_ENCRYPTION_MODE_AES_256_GCM",
+      "value": "2",
+      "comment": "never used",
+      "category": "FS_ENCRYPTION"
+    },
+    {
+      "name": "FS_ENCRYPTION_MODE_AES_256_CBC",
+      "value": "3",
+      "comment": "never used",
+      "category": "FS_ENCRYPTION"
+    },
+    {
+      "name": "FS_ENCRYPTION_MODE_AES_256_CTS",
+      "value": "FSCRYPT_MODE_AES_256_CTS",
+      "comment": "",
+      "category": "FS_ENCRYPTION"
+    },
+    {
+      "name": "FS_ENCRYPTION_MODE_AES_128_CBC",
+      "value": "FSCRYPT_MODE_AES_128_CBC",
+      "comment": "",
+      "category": "FS_ENCRYPTION"
+    },
+    {
+      "name": "FS_ENCRYPTION_MODE_AES_128_CTS",
+      "value": "FSCRYPT_MODE_AES_128_CTS",
+      "comment": "",
+      "category": "FS_ENCRYPTION"
+    },
+    {
+      "name": "FS_ENCRYPTION_MODE_ADIANTUM",
+      "value": "FSCRYPT_MODE_ADIANTUM",
+      "comment": "",
+      "category": "FS_ENCRYPTION"
+    },
+    {
+      "name": "FS_KEY_DESC_PREFIX",
+      "value": "FSCRYPT_KEY_DESC_PREFIX",
+      "comment": "",
+      "category": "FS_KEY"
+    },
+    {
+      "name": "FS_KEY_DESC_PREFIX_SIZE",
+      "value": "FSCRYPT_KEY_DESC_PREFIX_SIZE",
+      "comment": "",
+      "category": "FS_KEY"
+    },
+    {
+      "name": "FS_MAX_KEY_SIZE",
+      "value": "FSCRYPT_MAX_KEY_SIZE",
+      "comment": "",
+      "category": "FS_MAX"
+    }
+  ],
+  "structs": [
+    {
+      "name": "fscrypt_policy_v1",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "version",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "contents_encryption_mode",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "filenames_encryption_mode",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "master_key_descriptor",
+          "array_size": "FSCRYPT_KEY_DESCRIPTOR_SIZE",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fscrypt_key",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "mode",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "raw",
+          "array_size": "FSCRYPT_MAX_KEY_SIZE",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fscrypt_policy_v2",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "version",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "contents_encryption_mode",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "filenames_encryption_mode",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "log2_data_unit_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "__reserved",
+          "array_size": "3",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "master_key_identifier",
+          "array_size": "FSCRYPT_KEY_IDENTIFIER_SIZE",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fscrypt_get_policy_ex_arg",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "policy_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "version",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fscrypt_key_specifier",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "__reserved",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "__reserved",
+          "array_size": "32",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "descriptor",
+          "array_size": "FSCRYPT_KEY_DESCRIPTOR_SIZE",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "identifier",
+          "array_size": "FSCRYPT_KEY_IDENTIFIER_SIZE",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fscrypt_provisioning_key_payload",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fscrypt_add_key_arg",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "raw_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "key_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "__reserved",
+          "array_size": "7",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fscrypt_remove_key_arg",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "removal_status_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "__reserved",
+          "array_size": "5",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fscrypt_get_key_status_arg",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "__reserved",
+          "array_size": "6",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "status",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "status_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "user_count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "__out_reserved",
+          "array_size": "13",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

@@ -1,0 +1,131 @@
+{
+  "filename": "blk-crypto.h",
+  "includes": [
+    "linux/ioctl.h",
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "BLKCRYPTOIMPORTKEY",
+      "value": "_IOWR(0x12, 137, struct blk_crypto_import_key_arg)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "BLKCRYPTOGENERATEKEY",
+      "value": "_IOWR(0x12, 138, struct blk_crypto_generate_key_arg)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "BLKCRYPTOPREPAREKEY",
+      "value": "_IOWR(0x12, 139, struct blk_crypto_prepare_key_arg)",
+      "comment": "",
+      "category": ""
+    }
+  ],
+  "structs": [
+    {
+      "name": "blk_crypto_import_key_arg",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "raw_key_ptr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "raw_key_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "lt_key_ptr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "lt_key_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "reserved",
+          "array_size": "4",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "blk_crypto_generate_key_arg",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "lt_key_ptr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "lt_key_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "reserved",
+          "array_size": "4",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "blk_crypto_prepare_key_arg",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "lt_key_ptr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "lt_key_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "eph_key_ptr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "eph_key_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "reserved",
+          "array_size": "4",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

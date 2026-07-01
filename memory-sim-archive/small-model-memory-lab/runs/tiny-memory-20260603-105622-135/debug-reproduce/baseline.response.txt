@@ -1,0 +1,4 @@
+﻿1. **Correlate Deployments & Logs**: Map the crash timestamps to the specific recent deploy version and filter logs for the warning patterns mentioned, noting that the absence of a fatal line suggests a silent failure or resource exhaustion.
+2. **Reproduce in Isolation**: Attempt to replicate the crash in a staging environment using the same traffic load or data conditions; if reproduction fails, the issue is likely intermittent or environment-specific.
+3. **Analyze Metrics & Heap**: Check infrastructure metrics (CPU, memory, GC pauses) around crash times and inspect heap dumps if available, as silent crashes often stem from memory leaks or thread deadlocks rather than explicit exceptions.
+4. **Implement Observability & Rollback**: If the root cause remains unclear, deploy a temporary fix to increase log verbosity or add distributed tracing, and prepare a rollback strategy if the crash frequency increases.

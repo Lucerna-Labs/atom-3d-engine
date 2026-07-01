@@ -1,0 +1,397 @@
+{
+  "filename": "neighbour.h",
+  "includes": [
+    "linux/types.h",
+    "linux/netlink.h"
+  ],
+  "defines": [
+    {
+      "name": "NDA_MAX",
+      "value": "(__NDA_MAX - 1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NTF_USE",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NTF_SELF",
+      "value": "(1 << 1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NTF_MASTER",
+      "value": "(1 << 2)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NTF_PROXY",
+      "value": "(1 << 3)",
+      "comment": "== ATF_PUBL",
+      "category": ""
+    },
+    {
+      "name": "NTF_EXT_LEARNED",
+      "value": "(1 << 4)",
+      "comment": "",
+      "category": "NTF_EXT"
+    },
+    {
+      "name": "NTF_OFFLOADED",
+      "value": "(1 << 5)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NTF_STICKY",
+      "value": "(1 << 6)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NTF_ROUTER",
+      "value": "(1 << 7)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NTF_EXT_MANAGED",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "NTF_EXT"
+    },
+    {
+      "name": "NTF_EXT_LOCKED",
+      "value": "(1 << 1)",
+      "comment": "",
+      "category": "NTF_EXT"
+    },
+    {
+      "name": "NTF_EXT_EXT_VALIDATED",
+      "value": "(1 << 2)",
+      "comment": "",
+      "category": "NTF_EXT"
+    },
+    {
+      "name": "NUD_INCOMPLETE",
+      "value": "0x01",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NUD_REACHABLE",
+      "value": "0x02",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NUD_STALE",
+      "value": "0x04",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NUD_DELAY",
+      "value": "0x08",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NUD_PROBE",
+      "value": "0x10",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NUD_FAILED",
+      "value": "0x20",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NUD_NOARP",
+      "value": "0x40",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NUD_PERMANENT",
+      "value": "0x80",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NUD_NONE",
+      "value": "0x00",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NDTPA_MAX",
+      "value": "(__NDTPA_MAX - 1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NDTA_MAX",
+      "value": "(__NDTA_MAX - 1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NFEA_MAX",
+      "value": "(__NFEA_MAX - 1)",
+      "comment": "",
+      "category": ""
+    }
+  ],
+  "structs": [
+    {
+      "name": "ndmsg",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "ndm_family",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "ndm_pad1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "ndm_pad2",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "ndm_ifindex",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "ndm_state",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "ndm_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "ndm_type",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "nda_cacheinfo",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "ndm_confirmed",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ndm_used",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ndm_updated",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ndm_refcnt",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ndt_stats",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "ndts_allocs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "ndts_destroys",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "ndts_hash_grows",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "ndts_res_failed",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "ndts_lookups",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "ndts_hits",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "ndts_rcv_probes_mcast",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "ndts_rcv_probes_ucast",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "ndts_periodic_gc_runs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "ndts_forced_gc_runs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "ndts_table_fulls",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ndtmsg",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "ndtm_family",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "ndtm_pad1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "ndtm_pad2",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ndt_config",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "ndtc_key_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "ndtc_entry_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ndtc_entries",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ndtc_last_flush",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ndtc_last_rand",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ndtc_hash_rnd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ndtc_hash_mask",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ndtc_hash_chain_gc",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ndtc_proxy_qlen",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

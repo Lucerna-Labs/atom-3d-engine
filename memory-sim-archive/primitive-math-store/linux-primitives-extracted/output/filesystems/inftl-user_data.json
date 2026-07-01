@@ -1,0 +1,295 @@
+{
+  "filename": "inftl-user.h",
+  "includes": [
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "OSAK_VERSION",
+      "value": "0x5120",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PERCENTUSED",
+      "value": "98",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SECTORSIZE",
+      "value": "512",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "INFTL_BINARY",
+      "value": "0x20000000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "INFTL_BDTL",
+      "value": "0x40000000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "INFTL_LAST",
+      "value": "0x80000000",
+      "comment": "",
+      "category": ""
+    }
+  ],
+  "structs": [
+    {
+      "name": "inftl_bci",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "ECCsig",
+          "array_size": "6",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "Status",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "Status1",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "inftl_unithead1",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "virtualUnitNo",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "prevUnitNo",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "ANAC",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "NACs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "parityPerField",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "discarded",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "inftl_unithead2",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "parityPerField",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "ANAC",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "prevUnitNo",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "virtualUnitNo",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "NACs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "discarded",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "inftl_unittail",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "Reserved",
+          "array_size": "4",
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "EraseMark",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "EraseMark1",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "inftl_oob",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "INFTLPartition",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "virtualUnits",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "firstUnit",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "lastUnit",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "spareUnits",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "Reserved0",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "Reserved1",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "INFTLMediaHeader",
+      "fields": [
+        {
+          "type_name": "char",
+          "name": "bootRecordID",
+          "array_size": "8",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "NoOfBootImageBlocks",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "NoOfBinaryPartitions",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "NoOfBDTLPartitions",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "BlockMultiplierBits",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "FormatFlags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "OsakVersion",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "PercentUsed",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

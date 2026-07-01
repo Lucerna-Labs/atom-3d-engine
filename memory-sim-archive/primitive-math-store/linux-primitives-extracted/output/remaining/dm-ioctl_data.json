@@ -1,0 +1,493 @@
+{
+  "filename": "dm-ioctl.h",
+  "includes": [
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "DM_DIR",
+      "value": "\"mapper\"",
+      "comment": "Slashes not supported",
+      "category": ""
+    },
+    {
+      "name": "DM_CONTROL_NODE",
+      "value": "\"control\"",
+      "comment": "",
+      "category": "DM_CONTROL"
+    },
+    {
+      "name": "DM_MAX_TYPE_NAME",
+      "value": "16",
+      "comment": "",
+      "category": "DM_MAX"
+    },
+    {
+      "name": "DM_NAME_LEN",
+      "value": "128",
+      "comment": "",
+      "category": "DM_NAME"
+    },
+    {
+      "name": "DM_UUID_LEN",
+      "value": "129",
+      "comment": "",
+      "category": "DM_UUID"
+    },
+    {
+      "name": "DM_NAME_LIST_FLAG_HAS_UUID",
+      "value": "1",
+      "comment": "",
+      "category": "DM_NAME"
+    },
+    {
+      "name": "DM_NAME_LIST_FLAG_DOESNT_HAVE_UUID",
+      "value": "2",
+      "comment": "",
+      "category": "DM_NAME"
+    },
+    {
+      "name": "DM_IOCTL",
+      "value": "0xfd",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DM_VERSION",
+      "value": "_IOWR(DM_IOCTL, DM_VERSION_CMD, struct dm_ioctl)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DM_REMOVE_ALL",
+      "value": "_IOWR(DM_IOCTL, DM_REMOVE_ALL_CMD, struct dm_ioctl)",
+      "comment": "",
+      "category": "DM_REMOVE"
+    },
+    {
+      "name": "DM_LIST_DEVICES",
+      "value": "_IOWR(DM_IOCTL, DM_LIST_DEVICES_CMD, struct dm_ioctl)",
+      "comment": "",
+      "category": "DM_LIST"
+    },
+    {
+      "name": "DM_DEV_CREATE",
+      "value": "_IOWR(DM_IOCTL, DM_DEV_CREATE_CMD, struct dm_ioctl)",
+      "comment": "",
+      "category": "DM_DEV"
+    },
+    {
+      "name": "DM_DEV_REMOVE",
+      "value": "_IOWR(DM_IOCTL, DM_DEV_REMOVE_CMD, struct dm_ioctl)",
+      "comment": "",
+      "category": "DM_DEV"
+    },
+    {
+      "name": "DM_DEV_RENAME",
+      "value": "_IOWR(DM_IOCTL, DM_DEV_RENAME_CMD, struct dm_ioctl)",
+      "comment": "",
+      "category": "DM_DEV"
+    },
+    {
+      "name": "DM_DEV_SUSPEND",
+      "value": "_IOWR(DM_IOCTL, DM_DEV_SUSPEND_CMD, struct dm_ioctl)",
+      "comment": "",
+      "category": "DM_DEV"
+    },
+    {
+      "name": "DM_DEV_STATUS",
+      "value": "_IOWR(DM_IOCTL, DM_DEV_STATUS_CMD, struct dm_ioctl)",
+      "comment": "",
+      "category": "DM_DEV"
+    },
+    {
+      "name": "DM_DEV_WAIT",
+      "value": "_IOWR(DM_IOCTL, DM_DEV_WAIT_CMD, struct dm_ioctl)",
+      "comment": "",
+      "category": "DM_DEV"
+    },
+    {
+      "name": "DM_DEV_ARM_POLL",
+      "value": "_IOWR(DM_IOCTL, DM_DEV_ARM_POLL_CMD, struct dm_ioctl)",
+      "comment": "",
+      "category": "DM_DEV"
+    },
+    {
+      "name": "DM_TABLE_LOAD",
+      "value": "_IOWR(DM_IOCTL, DM_TABLE_LOAD_CMD, struct dm_ioctl)",
+      "comment": "",
+      "category": "DM_TABLE"
+    },
+    {
+      "name": "DM_TABLE_CLEAR",
+      "value": "_IOWR(DM_IOCTL, DM_TABLE_CLEAR_CMD, struct dm_ioctl)",
+      "comment": "",
+      "category": "DM_TABLE"
+    },
+    {
+      "name": "DM_TABLE_DEPS",
+      "value": "_IOWR(DM_IOCTL, DM_TABLE_DEPS_CMD, struct dm_ioctl)",
+      "comment": "",
+      "category": "DM_TABLE"
+    },
+    {
+      "name": "DM_TABLE_STATUS",
+      "value": "_IOWR(DM_IOCTL, DM_TABLE_STATUS_CMD, struct dm_ioctl)",
+      "comment": "",
+      "category": "DM_TABLE"
+    },
+    {
+      "name": "DM_LIST_VERSIONS",
+      "value": "_IOWR(DM_IOCTL, DM_LIST_VERSIONS_CMD, struct dm_ioctl)",
+      "comment": "",
+      "category": "DM_LIST"
+    },
+    {
+      "name": "DM_GET_TARGET_VERSION",
+      "value": "_IOWR(DM_IOCTL, DM_GET_TARGET_VERSION_CMD, struct dm_ioctl)",
+      "comment": "",
+      "category": "DM_GET"
+    },
+    {
+      "name": "DM_TARGET_MSG",
+      "value": "_IOWR(DM_IOCTL, DM_TARGET_MSG_CMD, struct dm_ioctl)",
+      "comment": "",
+      "category": "DM_TARGET"
+    },
+    {
+      "name": "DM_DEV_SET_GEOMETRY",
+      "value": "_IOWR(DM_IOCTL, DM_DEV_SET_GEOMETRY_CMD, struct dm_ioctl)",
+      "comment": "",
+      "category": "DM_DEV"
+    },
+    {
+      "name": "DM_MPATH_PROBE_PATHS",
+      "value": "_IO(DM_IOCTL, DM_MPATH_PROBE_PATHS_CMD)",
+      "comment": "",
+      "category": "DM_MPATH"
+    },
+    {
+      "name": "DM_VERSION_MAJOR",
+      "value": "4",
+      "comment": "",
+      "category": "DM_VERSION"
+    },
+    {
+      "name": "DM_VERSION_MINOR",
+      "value": "50",
+      "comment": "",
+      "category": "DM_VERSION"
+    },
+    {
+      "name": "DM_VERSION_PATCHLEVEL",
+      "value": "0",
+      "comment": "",
+      "category": "DM_VERSION"
+    },
+    {
+      "name": "DM_VERSION_EXTRA",
+      "value": "\"-ioctl (2025-04-28)\"",
+      "comment": "",
+      "category": "DM_VERSION"
+    },
+    {
+      "name": "DM_READONLY_FLAG",
+      "value": "(1 << 0)",
+      "comment": "In/Out",
+      "category": "DM_READONLY"
+    },
+    {
+      "name": "DM_SUSPEND_FLAG",
+      "value": "(1 << 1)",
+      "comment": "In/Out",
+      "category": "DM_SUSPEND"
+    },
+    {
+      "name": "DM_PERSISTENT_DEV_FLAG",
+      "value": "(1 << 3)",
+      "comment": "In",
+      "category": "DM_PERSISTENT"
+    },
+    {
+      "name": "DM_STATUS_TABLE_FLAG",
+      "value": "(1 << 4)",
+      "comment": "In",
+      "category": "DM_STATUS"
+    },
+    {
+      "name": "DM_ACTIVE_PRESENT_FLAG",
+      "value": "(1 << 5)",
+      "comment": "Out",
+      "category": "DM_ACTIVE"
+    },
+    {
+      "name": "DM_INACTIVE_PRESENT_FLAG",
+      "value": "(1 << 6)",
+      "comment": "Out",
+      "category": "DM_INACTIVE"
+    },
+    {
+      "name": "DM_BUFFER_FULL_FLAG",
+      "value": "(1 << 8)",
+      "comment": "Out",
+      "category": "DM_BUFFER"
+    },
+    {
+      "name": "DM_SKIP_BDGET_FLAG",
+      "value": "(1 << 9)",
+      "comment": "In",
+      "category": "DM_SKIP"
+    },
+    {
+      "name": "DM_SKIP_LOCKFS_FLAG",
+      "value": "(1 << 10)",
+      "comment": "In",
+      "category": "DM_SKIP"
+    },
+    {
+      "name": "DM_NOFLUSH_FLAG",
+      "value": "(1 << 11)",
+      "comment": "In",
+      "category": "DM_NOFLUSH"
+    },
+    {
+      "name": "DM_QUERY_INACTIVE_TABLE_FLAG",
+      "value": "(1 << 12)",
+      "comment": "In",
+      "category": "DM_QUERY"
+    },
+    {
+      "name": "DM_UEVENT_GENERATED_FLAG",
+      "value": "(1 << 13)",
+      "comment": "Out",
+      "category": "DM_UEVENT"
+    },
+    {
+      "name": "DM_UUID_FLAG",
+      "value": "(1 << 14)",
+      "comment": "In",
+      "category": "DM_UUID"
+    },
+    {
+      "name": "DM_SECURE_DATA_FLAG",
+      "value": "(1 << 15)",
+      "comment": "In",
+      "category": "DM_SECURE"
+    },
+    {
+      "name": "DM_DATA_OUT_FLAG",
+      "value": "(1 << 16)",
+      "comment": "Out",
+      "category": "DM_DATA"
+    },
+    {
+      "name": "DM_DEFERRED_REMOVE",
+      "value": "(1 << 17)",
+      "comment": "In/Out",
+      "category": "DM_DEFERRED"
+    },
+    {
+      "name": "DM_INTERNAL_SUSPEND_FLAG",
+      "value": "(1 << 18)",
+      "comment": "Out",
+      "category": "DM_INTERNAL"
+    },
+    {
+      "name": "DM_IMA_MEASUREMENT_FLAG",
+      "value": "(1 << 19)",
+      "comment": "In",
+      "category": "DM_IMA"
+    }
+  ],
+  "structs": [
+    {
+      "name": "dm_ioctl",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "version",
+          "array_size": "3",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "data_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "data_start",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "target_count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "open_count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "event_nr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "padding",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "dev",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "name",
+          "array_size": "DM_NAME_LEN",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "uuid",
+          "array_size": "DM_UUID_LEN",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "data",
+          "array_size": "7",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "dm_target_spec",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "sector_start",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "length",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "status",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "next",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "target_type",
+          "array_size": "DM_MAX_TYPE_NAME",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "dm_target_deps",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "padding",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "dm_name_list",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "dev",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "next",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "dm_target_versions",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "next",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "version",
+          "array_size": "3",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "dm_target_msg",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "sector",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

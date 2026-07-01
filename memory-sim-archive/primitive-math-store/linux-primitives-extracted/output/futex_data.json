@@ -1,0 +1,418 @@
+{
+  "filename": "futex.h",
+  "includes": [
+    "linux/compiler.h",
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "FUTEX_WAIT",
+      "value": "0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FUTEX_WAKE",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FUTEX_FD",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FUTEX_REQUEUE",
+      "value": "3",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FUTEX_CMP_REQUEUE",
+      "value": "4",
+      "comment": "",
+      "category": "FUTEX_CMP"
+    },
+    {
+      "name": "FUTEX_WAKE_OP",
+      "value": "5",
+      "comment": "",
+      "category": "FUTEX_WAKE"
+    },
+    {
+      "name": "FUTEX_LOCK_PI",
+      "value": "6",
+      "comment": "",
+      "category": "FUTEX_LOCK"
+    },
+    {
+      "name": "FUTEX_UNLOCK_PI",
+      "value": "7",
+      "comment": "",
+      "category": "FUTEX_UNLOCK"
+    },
+    {
+      "name": "FUTEX_TRYLOCK_PI",
+      "value": "8",
+      "comment": "",
+      "category": "FUTEX_TRYLOCK"
+    },
+    {
+      "name": "FUTEX_WAIT_BITSET",
+      "value": "9",
+      "comment": "",
+      "category": "FUTEX_WAIT"
+    },
+    {
+      "name": "FUTEX_WAKE_BITSET",
+      "value": "10",
+      "comment": "",
+      "category": "FUTEX_WAKE"
+    },
+    {
+      "name": "FUTEX_WAIT_REQUEUE_PI",
+      "value": "11",
+      "comment": "",
+      "category": "FUTEX_WAIT"
+    },
+    {
+      "name": "FUTEX_CMP_REQUEUE_PI",
+      "value": "12",
+      "comment": "",
+      "category": "FUTEX_CMP"
+    },
+    {
+      "name": "FUTEX_LOCK_PI2",
+      "value": "13",
+      "comment": "",
+      "category": "FUTEX_LOCK"
+    },
+    {
+      "name": "FUTEX_PRIVATE_FLAG",
+      "value": "128",
+      "comment": "",
+      "category": "FUTEX_PRIVATE"
+    },
+    {
+      "name": "FUTEX_CLOCK_REALTIME",
+      "value": "256",
+      "comment": "",
+      "category": "FUTEX_CLOCK"
+    },
+    {
+      "name": "FUTEX_CMD_MASK",
+      "value": "~(FUTEX_PRIVATE_FLAG | FUTEX_CLOCK_REALTIME)",
+      "comment": "",
+      "category": "FUTEX_CMD"
+    },
+    {
+      "name": "FUTEX_WAIT_PRIVATE",
+      "value": "(FUTEX_WAIT | FUTEX_PRIVATE_FLAG)",
+      "comment": "",
+      "category": "FUTEX_WAIT"
+    },
+    {
+      "name": "FUTEX_WAKE_PRIVATE",
+      "value": "(FUTEX_WAKE | FUTEX_PRIVATE_FLAG)",
+      "comment": "",
+      "category": "FUTEX_WAKE"
+    },
+    {
+      "name": "FUTEX_REQUEUE_PRIVATE",
+      "value": "(FUTEX_REQUEUE | FUTEX_PRIVATE_FLAG)",
+      "comment": "",
+      "category": "FUTEX_REQUEUE"
+    },
+    {
+      "name": "FUTEX_CMP_REQUEUE_PRIVATE",
+      "value": "(FUTEX_CMP_REQUEUE | FUTEX_PRIVATE_FLAG)",
+      "comment": "",
+      "category": "FUTEX_CMP"
+    },
+    {
+      "name": "FUTEX_WAKE_OP_PRIVATE",
+      "value": "(FUTEX_WAKE_OP | FUTEX_PRIVATE_FLAG)",
+      "comment": "",
+      "category": "FUTEX_WAKE"
+    },
+    {
+      "name": "FUTEX_LOCK_PI_PRIVATE",
+      "value": "(FUTEX_LOCK_PI | FUTEX_PRIVATE_FLAG)",
+      "comment": "",
+      "category": "FUTEX_LOCK"
+    },
+    {
+      "name": "FUTEX_LOCK_PI2_PRIVATE",
+      "value": "(FUTEX_LOCK_PI2 | FUTEX_PRIVATE_FLAG)",
+      "comment": "",
+      "category": "FUTEX_LOCK"
+    },
+    {
+      "name": "FUTEX_UNLOCK_PI_PRIVATE",
+      "value": "(FUTEX_UNLOCK_PI | FUTEX_PRIVATE_FLAG)",
+      "comment": "",
+      "category": "FUTEX_UNLOCK"
+    },
+    {
+      "name": "FUTEX_TRYLOCK_PI_PRIVATE",
+      "value": "(FUTEX_TRYLOCK_PI | FUTEX_PRIVATE_FLAG)",
+      "comment": "",
+      "category": "FUTEX_TRYLOCK"
+    },
+    {
+      "name": "FUTEX_WAIT_BITSET_PRIVATE",
+      "value": "(FUTEX_WAIT_BITSET | FUTEX_PRIVATE_FLAG)",
+      "comment": "",
+      "category": "FUTEX_WAIT"
+    },
+    {
+      "name": "FUTEX_WAKE_BITSET_PRIVATE",
+      "value": "(FUTEX_WAKE_BITSET | FUTEX_PRIVATE_FLAG)",
+      "comment": "",
+      "category": "FUTEX_WAKE"
+    },
+    {
+      "name": "FUTEX_WAIT_REQUEUE_PI_PRIVATE",
+      "value": "(FUTEX_WAIT_REQUEUE_PI | ",
+      "comment": "",
+      "category": "FUTEX_WAIT"
+    },
+    {
+      "name": "FUTEX_CMP_REQUEUE_PI_PRIVATE",
+      "value": "(FUTEX_CMP_REQUEUE_PI | ",
+      "comment": "",
+      "category": "FUTEX_CMP"
+    },
+    {
+      "name": "FUTEX2_SIZE_U8",
+      "value": "0x00",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FUTEX2_SIZE_U16",
+      "value": "0x01",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FUTEX2_SIZE_U32",
+      "value": "0x02",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FUTEX2_SIZE_U64",
+      "value": "0x03",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FUTEX2_NUMA",
+      "value": "0x04",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FUTEX2_MPOL",
+      "value": "0x08",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FUTEX2_PRIVATE",
+      "value": "FUTEX_PRIVATE_FLAG",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FUTEX2_SIZE_MASK",
+      "value": "0x03",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FUTEX_32",
+      "value": "FUTEX2_SIZE_U32",
+      "comment": "historical accident :-(",
+      "category": ""
+    },
+    {
+      "name": "FUTEX_NO_NODE",
+      "value": "(-1)",
+      "comment": "",
+      "category": "FUTEX_NO"
+    },
+    {
+      "name": "FUTEX_WAITV_MAX",
+      "value": "128",
+      "comment": "",
+      "category": "FUTEX_WAITV"
+    },
+    {
+      "name": "FUTEX_WAITERS",
+      "value": "0x80000000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FUTEX_OWNER_DIED",
+      "value": "0x40000000",
+      "comment": "",
+      "category": "FUTEX_OWNER"
+    },
+    {
+      "name": "FUTEX_TID_MASK",
+      "value": "0x3fffffff",
+      "comment": "",
+      "category": "FUTEX_TID"
+    },
+    {
+      "name": "ROBUST_LIST_LIMIT",
+      "value": "2048",
+      "comment": "",
+      "category": "ROBUST_LIST"
+    },
+    {
+      "name": "FUTEX_BITSET_MATCH_ANY",
+      "value": "0xffffffff",
+      "comment": "",
+      "category": "FUTEX_BITSET"
+    },
+    {
+      "name": "FUTEX_OP_SET",
+      "value": "0",
+      "comment": "*(int *)UADDR2 = OPARG;",
+      "category": "FUTEX_OP"
+    },
+    {
+      "name": "FUTEX_OP_ADD",
+      "value": "1",
+      "comment": "*(int *)UADDR2 += OPARG;",
+      "category": "FUTEX_OP"
+    },
+    {
+      "name": "FUTEX_OP_OR",
+      "value": "2",
+      "comment": "*(int *)UADDR2 |= OPARG;",
+      "category": "FUTEX_OP"
+    },
+    {
+      "name": "FUTEX_OP_ANDN",
+      "value": "3",
+      "comment": "*(int *)UADDR2 &= ~OPARG;",
+      "category": "FUTEX_OP"
+    },
+    {
+      "name": "FUTEX_OP_XOR",
+      "value": "4",
+      "comment": "*(int *)UADDR2 ^= OPARG;",
+      "category": "FUTEX_OP"
+    },
+    {
+      "name": "FUTEX_OP_OPARG_SHIFT",
+      "value": "8",
+      "comment": "Use (1 << OPARG) instead of OPARG.",
+      "category": "FUTEX_OP"
+    },
+    {
+      "name": "FUTEX_OP_CMP_EQ",
+      "value": "0",
+      "comment": "if (oldval == CMPARG) wake",
+      "category": "FUTEX_OP"
+    },
+    {
+      "name": "FUTEX_OP_CMP_NE",
+      "value": "1",
+      "comment": "if (oldval != CMPARG) wake",
+      "category": "FUTEX_OP"
+    },
+    {
+      "name": "FUTEX_OP_CMP_LT",
+      "value": "2",
+      "comment": "if (oldval < CMPARG) wake",
+      "category": "FUTEX_OP"
+    },
+    {
+      "name": "FUTEX_OP_CMP_LE",
+      "value": "3",
+      "comment": "if (oldval <= CMPARG) wake",
+      "category": "FUTEX_OP"
+    },
+    {
+      "name": "FUTEX_OP_CMP_GT",
+      "value": "4",
+      "comment": "if (oldval > CMPARG) wake",
+      "category": "FUTEX_OP"
+    },
+    {
+      "name": "FUTEX_OP_CMP_GE",
+      "value": "5",
+      "comment": "if (oldval >= CMPARG) wake",
+      "category": "FUTEX_OP"
+    }
+  ],
+  "structs": [
+    {
+      "name": "anonymous_0",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "futex_waitv",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "val",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "uaddr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "__reserved",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "robust_list",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "robust_list_head",
+      "fields": [
+        {
+          "type_name": "long",
+          "name": "futex_offset",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

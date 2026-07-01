@@ -1,0 +1,484 @@
+{
+  "filename": "kfd_sysfs.h",
+  "includes": [],
+  "defines": [
+    {
+      "name": "HSA_CAP_HOT_PLUGGABLE",
+      "value": "0x00000001",
+      "comment": "",
+      "category": "HSA_CAP"
+    },
+    {
+      "name": "HSA_CAP_ATS_PRESENT",
+      "value": "0x00000002",
+      "comment": "",
+      "category": "HSA_CAP"
+    },
+    {
+      "name": "HSA_CAP_SHARED_WITH_GRAPHICS",
+      "value": "0x00000004",
+      "comment": "",
+      "category": "HSA_CAP"
+    },
+    {
+      "name": "HSA_CAP_QUEUE_SIZE_POW2",
+      "value": "0x00000008",
+      "comment": "",
+      "category": "HSA_CAP"
+    },
+    {
+      "name": "HSA_CAP_QUEUE_SIZE_32BIT",
+      "value": "0x00000010",
+      "comment": "",
+      "category": "HSA_CAP"
+    },
+    {
+      "name": "HSA_CAP_QUEUE_IDLE_EVENT",
+      "value": "0x00000020",
+      "comment": "",
+      "category": "HSA_CAP"
+    },
+    {
+      "name": "HSA_CAP_VA_LIMIT",
+      "value": "0x00000040",
+      "comment": "",
+      "category": "HSA_CAP"
+    },
+    {
+      "name": "HSA_CAP_WATCH_POINTS_SUPPORTED",
+      "value": "0x00000080",
+      "comment": "",
+      "category": "HSA_CAP"
+    },
+    {
+      "name": "HSA_CAP_WATCH_POINTS_TOTALBITS_MASK",
+      "value": "0x00000f00",
+      "comment": "",
+      "category": "HSA_CAP"
+    },
+    {
+      "name": "HSA_CAP_WATCH_POINTS_TOTALBITS_SHIFT",
+      "value": "8",
+      "comment": "",
+      "category": "HSA_CAP"
+    },
+    {
+      "name": "HSA_CAP_DOORBELL_TYPE_TOTALBITS_MASK",
+      "value": "0x00003000",
+      "comment": "",
+      "category": "HSA_CAP"
+    },
+    {
+      "name": "HSA_CAP_DOORBELL_TYPE_TOTALBITS_SHIFT",
+      "value": "12",
+      "comment": "",
+      "category": "HSA_CAP"
+    },
+    {
+      "name": "HSA_CAP_DOORBELL_TYPE_PRE_1_0",
+      "value": "0x0",
+      "comment": "",
+      "category": "HSA_CAP"
+    },
+    {
+      "name": "HSA_CAP_DOORBELL_TYPE_1_0",
+      "value": "0x1",
+      "comment": "",
+      "category": "HSA_CAP"
+    },
+    {
+      "name": "HSA_CAP_DOORBELL_TYPE_2_0",
+      "value": "0x2",
+      "comment": "",
+      "category": "HSA_CAP"
+    },
+    {
+      "name": "HSA_CAP_AQL_QUEUE_DOUBLE_MAP",
+      "value": "0x00004000",
+      "comment": "",
+      "category": "HSA_CAP"
+    },
+    {
+      "name": "HSA_CAP_TRAP_DEBUG_SUPPORT",
+      "value": "0x00008000",
+      "comment": "",
+      "category": "HSA_CAP"
+    },
+    {
+      "name": "HSA_CAP_TRAP_DEBUG_WAVE_LAUNCH_TRAP_OVERRIDE_SUPPORTED",
+      "value": "0x00010000",
+      "comment": "",
+      "category": "HSA_CAP"
+    },
+    {
+      "name": "HSA_CAP_TRAP_DEBUG_WAVE_LAUNCH_MODE_SUPPORTED",
+      "value": "0x00020000",
+      "comment": "",
+      "category": "HSA_CAP"
+    },
+    {
+      "name": "HSA_CAP_TRAP_DEBUG_PRECISE_MEMORY_OPERATIONS_SUPPORTED",
+      "value": "0x00040000",
+      "comment": "",
+      "category": "HSA_CAP"
+    },
+    {
+      "name": "HSA_CAP_RESERVED_WAS_SRAM_EDCSUPPORTED",
+      "value": "0x00080000",
+      "comment": "",
+      "category": "HSA_CAP"
+    },
+    {
+      "name": "HSA_CAP_MEM_EDCSUPPORTED",
+      "value": "0x00100000",
+      "comment": "",
+      "category": "HSA_CAP"
+    },
+    {
+      "name": "HSA_CAP_RASEVENTNOTIFY",
+      "value": "0x00200000",
+      "comment": "",
+      "category": "HSA_CAP"
+    },
+    {
+      "name": "HSA_CAP_ASIC_REVISION_MASK",
+      "value": "0x03c00000",
+      "comment": "",
+      "category": "HSA_CAP"
+    },
+    {
+      "name": "HSA_CAP_ASIC_REVISION_SHIFT",
+      "value": "22",
+      "comment": "",
+      "category": "HSA_CAP"
+    },
+    {
+      "name": "HSA_CAP_SRAM_EDCSUPPORTED",
+      "value": "0x04000000",
+      "comment": "",
+      "category": "HSA_CAP"
+    },
+    {
+      "name": "HSA_CAP_SVMAPI_SUPPORTED",
+      "value": "0x08000000",
+      "comment": "",
+      "category": "HSA_CAP"
+    },
+    {
+      "name": "HSA_CAP_FLAGS_COHERENTHOSTACCESS",
+      "value": "0x10000000",
+      "comment": "",
+      "category": "HSA_CAP"
+    },
+    {
+      "name": "HSA_CAP_TRAP_DEBUG_FIRMWARE_SUPPORTED",
+      "value": "0x20000000",
+      "comment": "",
+      "category": "HSA_CAP"
+    },
+    {
+      "name": "HSA_CAP_TRAP_DEBUG_PRECISE_ALU_OPERATIONS_SUPPORTED",
+      "value": "0x40000000",
+      "comment": "",
+      "category": "HSA_CAP"
+    },
+    {
+      "name": "HSA_CAP_PER_QUEUE_RESET_SUPPORTED",
+      "value": "0x80000000",
+      "comment": "",
+      "category": "HSA_CAP"
+    },
+    {
+      "name": "HSA_CAP_RESERVED",
+      "value": "0x000f8000",
+      "comment": "",
+      "category": "HSA_CAP"
+    },
+    {
+      "name": "HSA_CAP2_PER_SDMA_QUEUE_RESET_SUPPORTED",
+      "value": "0x00000001",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "HSA_CAP2_TRAP_DEBUG_LDS_OUT_OF_ADDR_RANGE_SUPPORTED",
+      "value": "0x00000002",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "HSA_CAP2_RESERVED",
+      "value": "0xfffffffc",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "HSA_DBG_WATCH_ADDR_MASK_LO_BIT_MASK",
+      "value": "0x0000000f",
+      "comment": "",
+      "category": "HSA_DBG"
+    },
+    {
+      "name": "HSA_DBG_WATCH_ADDR_MASK_LO_BIT_SHIFT",
+      "value": "0",
+      "comment": "",
+      "category": "HSA_DBG"
+    },
+    {
+      "name": "HSA_DBG_WATCH_ADDR_MASK_HI_BIT_MASK",
+      "value": "0x000003f0",
+      "comment": "",
+      "category": "HSA_DBG"
+    },
+    {
+      "name": "HSA_DBG_WATCH_ADDR_MASK_HI_BIT_SHIFT",
+      "value": "4",
+      "comment": "",
+      "category": "HSA_DBG"
+    },
+    {
+      "name": "HSA_DBG_DISPATCH_INFO_ALWAYS_VALID",
+      "value": "0x00000400",
+      "comment": "",
+      "category": "HSA_DBG"
+    },
+    {
+      "name": "HSA_DBG_WATCHPOINTS_EXCLUSIVE",
+      "value": "0x00000800",
+      "comment": "",
+      "category": "HSA_DBG"
+    },
+    {
+      "name": "HSA_DBG_RESERVED",
+      "value": "0xfffffffffffff000ull",
+      "comment": "",
+      "category": "HSA_DBG"
+    },
+    {
+      "name": "HSA_MEM_HEAP_TYPE_SYSTEM",
+      "value": "0",
+      "comment": "",
+      "category": "HSA_MEM"
+    },
+    {
+      "name": "HSA_MEM_HEAP_TYPE_FB_PUBLIC",
+      "value": "1",
+      "comment": "",
+      "category": "HSA_MEM"
+    },
+    {
+      "name": "HSA_MEM_HEAP_TYPE_FB_PRIVATE",
+      "value": "2",
+      "comment": "",
+      "category": "HSA_MEM"
+    },
+    {
+      "name": "HSA_MEM_HEAP_TYPE_GPU_GDS",
+      "value": "3",
+      "comment": "",
+      "category": "HSA_MEM"
+    },
+    {
+      "name": "HSA_MEM_HEAP_TYPE_GPU_LDS",
+      "value": "4",
+      "comment": "",
+      "category": "HSA_MEM"
+    },
+    {
+      "name": "HSA_MEM_HEAP_TYPE_GPU_SCRATCH",
+      "value": "5",
+      "comment": "",
+      "category": "HSA_MEM"
+    },
+    {
+      "name": "HSA_MEM_FLAGS_HOT_PLUGGABLE",
+      "value": "0x00000001",
+      "comment": "",
+      "category": "HSA_MEM"
+    },
+    {
+      "name": "HSA_MEM_FLAGS_NON_VOLATILE",
+      "value": "0x00000002",
+      "comment": "",
+      "category": "HSA_MEM"
+    },
+    {
+      "name": "HSA_MEM_FLAGS_RESERVED",
+      "value": "0xfffffffc",
+      "comment": "",
+      "category": "HSA_MEM"
+    },
+    {
+      "name": "HSA_CACHE_TYPE_DATA",
+      "value": "0x00000001",
+      "comment": "",
+      "category": "HSA_CACHE"
+    },
+    {
+      "name": "HSA_CACHE_TYPE_INSTRUCTION",
+      "value": "0x00000002",
+      "comment": "",
+      "category": "HSA_CACHE"
+    },
+    {
+      "name": "HSA_CACHE_TYPE_CPU",
+      "value": "0x00000004",
+      "comment": "",
+      "category": "HSA_CACHE"
+    },
+    {
+      "name": "HSA_CACHE_TYPE_HSACU",
+      "value": "0x00000008",
+      "comment": "",
+      "category": "HSA_CACHE"
+    },
+    {
+      "name": "HSA_CACHE_TYPE_RESERVED",
+      "value": "0xfffffff0",
+      "comment": "",
+      "category": "HSA_CACHE"
+    },
+    {
+      "name": "HSA_IOLINK_TYPE_UNDEFINED",
+      "value": "0",
+      "comment": "",
+      "category": "HSA_IOLINK"
+    },
+    {
+      "name": "HSA_IOLINK_TYPE_HYPERTRANSPORT",
+      "value": "1",
+      "comment": "",
+      "category": "HSA_IOLINK"
+    },
+    {
+      "name": "HSA_IOLINK_TYPE_PCIEXPRESS",
+      "value": "2",
+      "comment": "",
+      "category": "HSA_IOLINK"
+    },
+    {
+      "name": "HSA_IOLINK_TYPE_AMBA",
+      "value": "3",
+      "comment": "",
+      "category": "HSA_IOLINK"
+    },
+    {
+      "name": "HSA_IOLINK_TYPE_MIPI",
+      "value": "4",
+      "comment": "",
+      "category": "HSA_IOLINK"
+    },
+    {
+      "name": "HSA_IOLINK_TYPE_QPI_1_1",
+      "value": "5",
+      "comment": "",
+      "category": "HSA_IOLINK"
+    },
+    {
+      "name": "HSA_IOLINK_TYPE_RESERVED1",
+      "value": "6",
+      "comment": "",
+      "category": "HSA_IOLINK"
+    },
+    {
+      "name": "HSA_IOLINK_TYPE_RESERVED2",
+      "value": "7",
+      "comment": "",
+      "category": "HSA_IOLINK"
+    },
+    {
+      "name": "HSA_IOLINK_TYPE_RAPID_IO",
+      "value": "8",
+      "comment": "",
+      "category": "HSA_IOLINK"
+    },
+    {
+      "name": "HSA_IOLINK_TYPE_INFINIBAND",
+      "value": "9",
+      "comment": "",
+      "category": "HSA_IOLINK"
+    },
+    {
+      "name": "HSA_IOLINK_TYPE_RESERVED3",
+      "value": "10",
+      "comment": "",
+      "category": "HSA_IOLINK"
+    },
+    {
+      "name": "HSA_IOLINK_TYPE_XGMI",
+      "value": "11",
+      "comment": "",
+      "category": "HSA_IOLINK"
+    },
+    {
+      "name": "HSA_IOLINK_TYPE_XGOP",
+      "value": "12",
+      "comment": "",
+      "category": "HSA_IOLINK"
+    },
+    {
+      "name": "HSA_IOLINK_TYPE_GZ",
+      "value": "13",
+      "comment": "",
+      "category": "HSA_IOLINK"
+    },
+    {
+      "name": "HSA_IOLINK_TYPE_ETHERNET_RDMA",
+      "value": "14",
+      "comment": "",
+      "category": "HSA_IOLINK"
+    },
+    {
+      "name": "HSA_IOLINK_TYPE_RDMA_OTHER",
+      "value": "15",
+      "comment": "",
+      "category": "HSA_IOLINK"
+    },
+    {
+      "name": "HSA_IOLINK_TYPE_OTHER",
+      "value": "16",
+      "comment": "",
+      "category": "HSA_IOLINK"
+    },
+    {
+      "name": "HSA_IOLINK_FLAGS_ENABLED",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "HSA_IOLINK"
+    },
+    {
+      "name": "HSA_IOLINK_FLAGS_NON_COHERENT",
+      "value": "(1 << 1)",
+      "comment": "",
+      "category": "HSA_IOLINK"
+    },
+    {
+      "name": "HSA_IOLINK_FLAGS_NO_ATOMICS_32_BIT",
+      "value": "(1 << 2)",
+      "comment": "",
+      "category": "HSA_IOLINK"
+    },
+    {
+      "name": "HSA_IOLINK_FLAGS_NO_ATOMICS_64_BIT",
+      "value": "(1 << 3)",
+      "comment": "",
+      "category": "HSA_IOLINK"
+    },
+    {
+      "name": "HSA_IOLINK_FLAGS_NO_PEER_TO_PEER_DMA",
+      "value": "(1 << 4)",
+      "comment": "",
+      "category": "HSA_IOLINK"
+    },
+    {
+      "name": "HSA_IOLINK_FLAGS_RESERVED",
+      "value": "0xffffffe0",
+      "comment": "",
+      "category": "HSA_IOLINK"
+    }
+  ],
+  "structs": [],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

@@ -1,0 +1,281 @@
+{
+  "filename": "virtio_mem.h",
+  "includes": [
+    "linux/types.h",
+    "linux/virtio_types.h",
+    "linux/virtio_ids.h",
+    "linux/virtio_config.h"
+  ],
+  "defines": [
+    {
+      "name": "VIRTIO_MEM_F_ACPI_PXM",
+      "value": "0",
+      "comment": "",
+      "category": "VIRTIO_MEM"
+    },
+    {
+      "name": "VIRTIO_MEM_F_UNPLUGGED_INACCESSIBLE",
+      "value": "1",
+      "comment": "",
+      "category": "VIRTIO_MEM"
+    },
+    {
+      "name": "VIRTIO_MEM_F_PERSISTENT_SUSPEND",
+      "value": "2",
+      "comment": "",
+      "category": "VIRTIO_MEM"
+    },
+    {
+      "name": "VIRTIO_MEM_REQ_PLUG",
+      "value": "0",
+      "comment": "",
+      "category": "VIRTIO_MEM"
+    },
+    {
+      "name": "VIRTIO_MEM_REQ_UNPLUG",
+      "value": "1",
+      "comment": "",
+      "category": "VIRTIO_MEM"
+    },
+    {
+      "name": "VIRTIO_MEM_REQ_UNPLUG_ALL",
+      "value": "2",
+      "comment": "",
+      "category": "VIRTIO_MEM"
+    },
+    {
+      "name": "VIRTIO_MEM_REQ_STATE",
+      "value": "3",
+      "comment": "",
+      "category": "VIRTIO_MEM"
+    },
+    {
+      "name": "VIRTIO_MEM_RESP_ACK",
+      "value": "0",
+      "comment": "",
+      "category": "VIRTIO_MEM"
+    },
+    {
+      "name": "VIRTIO_MEM_RESP_NACK",
+      "value": "1",
+      "comment": "",
+      "category": "VIRTIO_MEM"
+    },
+    {
+      "name": "VIRTIO_MEM_RESP_BUSY",
+      "value": "2",
+      "comment": "",
+      "category": "VIRTIO_MEM"
+    },
+    {
+      "name": "VIRTIO_MEM_RESP_ERROR",
+      "value": "3",
+      "comment": "",
+      "category": "VIRTIO_MEM"
+    },
+    {
+      "name": "VIRTIO_MEM_STATE_PLUGGED",
+      "value": "0",
+      "comment": "",
+      "category": "VIRTIO_MEM"
+    },
+    {
+      "name": "VIRTIO_MEM_STATE_UNPLUGGED",
+      "value": "1",
+      "comment": "",
+      "category": "VIRTIO_MEM"
+    },
+    {
+      "name": "VIRTIO_MEM_STATE_MIXED",
+      "value": "2",
+      "comment": "",
+      "category": "VIRTIO_MEM"
+    }
+  ],
+  "structs": [
+    {
+      "name": "virtio_mem_req_plug",
+      "fields": [
+        {
+          "type_name": "__virtio64",
+          "name": "addr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__virtio16",
+          "name": "nb_blocks",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__virtio16",
+          "name": "padding",
+          "array_size": "3",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "virtio_mem_req_unplug",
+      "fields": [
+        {
+          "type_name": "__virtio64",
+          "name": "addr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__virtio16",
+          "name": "nb_blocks",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__virtio16",
+          "name": "padding",
+          "array_size": "3",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "virtio_mem_req_state",
+      "fields": [
+        {
+          "type_name": "__virtio64",
+          "name": "addr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__virtio16",
+          "name": "nb_blocks",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__virtio16",
+          "name": "padding",
+          "array_size": "3",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "virtio_mem_req",
+      "fields": [
+        {
+          "type_name": "__virtio16",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__virtio16",
+          "name": "padding",
+          "array_size": "3",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "virtio_mem_resp_state",
+      "fields": [
+        {
+          "type_name": "__virtio16",
+          "name": "state",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "virtio_mem_resp",
+      "fields": [
+        {
+          "type_name": "__virtio16",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__virtio16",
+          "name": "padding",
+          "array_size": "3",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "virtio_mem_config",
+      "fields": [
+        {
+          "type_name": "__le64",
+          "name": "block_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le16",
+          "name": "node_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "padding",
+          "array_size": "6",
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "addr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "region_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "usable_region_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "plugged_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "requested_size",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

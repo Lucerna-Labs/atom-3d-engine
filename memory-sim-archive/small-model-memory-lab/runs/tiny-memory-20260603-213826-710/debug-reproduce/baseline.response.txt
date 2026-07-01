@@ -1,0 +1,6 @@
+﻿
+
+1. **Enhance Observability**: Enable verbose logging or APM tracing to capture stack traces during the next crash; if logs remain silent, check infrastructure metrics for resource exhaustion like memory spikes.
+2. **Attempt Reproduction**: Run load tests or specific user flows in staging to trigger the issue; if unsuccessful, monitor production traffic closely for temporal patterns.
+3. **Audit Recent Changes**: Review deployment diffs for memory leaks, concurrency bugs, or dependency updates introduced in the last release.
+4. **Isolate and Rollback**: Temporarily disable suspect features or revert to the previous stable version if crashes persist; confirm stability before re-deploying fixes.

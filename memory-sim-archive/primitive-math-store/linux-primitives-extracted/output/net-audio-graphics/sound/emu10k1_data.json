@@ -1,0 +1,1451 @@
+{
+  "filename": "emu10k1.h",
+  "includes": [
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "EMU10K1_FX8010_PCM_COUNT",
+      "value": "8",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "iMAC0",
+      "value": "0x00",
+      "comment": "R = A + (X * Y >> 31)   ; saturation",
+      "category": ""
+    },
+    {
+      "name": "iMAC1",
+      "value": "0x01",
+      "comment": "R = A + (-X * Y >> 31)  ; saturation",
+      "category": ""
+    },
+    {
+      "name": "iMAC2",
+      "value": "0x02",
+      "comment": "R = A + (X * Y >> 31)   ; wraparound",
+      "category": ""
+    },
+    {
+      "name": "iMAC3",
+      "value": "0x03",
+      "comment": "R = A + (-X * Y >> 31)  ; wraparound",
+      "category": ""
+    },
+    {
+      "name": "iMACINT0",
+      "value": "0x04",
+      "comment": "R = A + X * Y\t   ; saturation",
+      "category": ""
+    },
+    {
+      "name": "iMACINT1",
+      "value": "0x05",
+      "comment": "R = A + X * Y\t   ; wraparound (31-bit)",
+      "category": ""
+    },
+    {
+      "name": "iACC3",
+      "value": "0x06",
+      "comment": "R = A + X + Y\t   ; saturation",
+      "category": ""
+    },
+    {
+      "name": "iMACMV",
+      "value": "0x07",
+      "comment": "R = A, acc += X * Y >> 31",
+      "category": ""
+    },
+    {
+      "name": "iANDXOR",
+      "value": "0x08",
+      "comment": "R = (A & X) ^ Y",
+      "category": ""
+    },
+    {
+      "name": "iTSTNEG",
+      "value": "0x09",
+      "comment": "R = (A >= Y) ? X : ~X",
+      "category": ""
+    },
+    {
+      "name": "iLIMITGE",
+      "value": "0x0a",
+      "comment": "R = (A >= Y) ? X : Y",
+      "category": ""
+    },
+    {
+      "name": "iLIMITLT",
+      "value": "0x0b",
+      "comment": "R = (A < Y) ? X : Y",
+      "category": ""
+    },
+    {
+      "name": "iLOG",
+      "value": "0x0c",
+      "comment": "R = linear_data, A (log_data), X (max_exp), Y (format_word)",
+      "category": ""
+    },
+    {
+      "name": "iEXP",
+      "value": "0x0d",
+      "comment": "R = log_data, A (linear_data), X (max_exp), Y (format_word)",
+      "category": ""
+    },
+    {
+      "name": "iINTERP",
+      "value": "0x0e",
+      "comment": "R = A + (X * (Y - A) >> 31)  ; saturation",
+      "category": ""
+    },
+    {
+      "name": "iSKIP",
+      "value": "0x0f",
+      "comment": "R = A (cc_reg), X (count), Y (cc_test)",
+      "category": ""
+    },
+    {
+      "name": "LOWORD_OPX_MASK",
+      "value": "0x000ffc00",
+      "comment": "Instruction operand X",
+      "category": "LOWORD_OPX"
+    },
+    {
+      "name": "LOWORD_OPY_MASK",
+      "value": "0x000003ff",
+      "comment": "Instruction operand Y",
+      "category": "LOWORD_OPY"
+    },
+    {
+      "name": "HIWORD_OPCODE_MASK",
+      "value": "0x00f00000",
+      "comment": "Instruction opcode",
+      "category": "HIWORD_OPCODE"
+    },
+    {
+      "name": "HIWORD_RESULT_MASK",
+      "value": "0x000ffc00",
+      "comment": "Instruction result",
+      "category": "HIWORD_RESULT"
+    },
+    {
+      "name": "HIWORD_OPA_MASK",
+      "value": "0x000003ff",
+      "comment": "Instruction operand A",
+      "category": "HIWORD_OPA"
+    },
+    {
+      "name": "A_LOWORD_OPX_MASK",
+      "value": "0x007ff000",
+      "comment": "",
+      "category": "A_LOWORD"
+    },
+    {
+      "name": "A_LOWORD_OPY_MASK",
+      "value": "0x000007ff",
+      "comment": "",
+      "category": "A_LOWORD"
+    },
+    {
+      "name": "A_HIWORD_OPCODE_MASK",
+      "value": "0x0f000000",
+      "comment": "",
+      "category": "A_HIWORD"
+    },
+    {
+      "name": "A_HIWORD_RESULT_MASK",
+      "value": "0x007ff000",
+      "comment": "",
+      "category": "A_HIWORD"
+    },
+    {
+      "name": "A_HIWORD_OPA_MASK",
+      "value": "0x000007ff",
+      "comment": "",
+      "category": "A_HIWORD"
+    },
+    {
+      "name": "C_00000000",
+      "value": "0x40",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "C_00000001",
+      "value": "0x41",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "C_00000002",
+      "value": "0x42",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "C_00000003",
+      "value": "0x43",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "C_00000004",
+      "value": "0x44",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "C_00000008",
+      "value": "0x45",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "C_00000010",
+      "value": "0x46",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "C_00000020",
+      "value": "0x47",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "C_00000100",
+      "value": "0x48",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "C_00010000",
+      "value": "0x49",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "C_00080000",
+      "value": "0x4a",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "C_10000000",
+      "value": "0x4b",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "C_20000000",
+      "value": "0x4c",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "C_40000000",
+      "value": "0x4d",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "C_80000000",
+      "value": "0x4e",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "C_7fffffff",
+      "value": "0x4f",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "C_ffffffff",
+      "value": "0x50",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "C_fffffffe",
+      "value": "0x51",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "C_c0000000",
+      "value": "0x52",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "C_4f1bbcdc",
+      "value": "0x53",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "C_5a7ef9db",
+      "value": "0x54",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "C_00100000",
+      "value": "0x55",
+      "comment": "??",
+      "category": ""
+    },
+    {
+      "name": "GPR_ACCU",
+      "value": "0x56",
+      "comment": "ACCUM, accumulator",
+      "category": ""
+    },
+    {
+      "name": "GPR_COND",
+      "value": "0x57",
+      "comment": "CCR, condition register",
+      "category": ""
+    },
+    {
+      "name": "GPR_NOISE0",
+      "value": "0x58",
+      "comment": "noise source",
+      "category": ""
+    },
+    {
+      "name": "GPR_NOISE1",
+      "value": "0x59",
+      "comment": "noise source",
+      "category": ""
+    },
+    {
+      "name": "GPR_IRQ",
+      "value": "0x5a",
+      "comment": "IRQ register",
+      "category": ""
+    },
+    {
+      "name": "GPR_DBAC",
+      "value": "0x5b",
+      "comment": "TRAM Delay Base Address Counter",
+      "category": ""
+    },
+    {
+      "name": "A_C_00000000",
+      "value": "0xc0",
+      "comment": "",
+      "category": "A_C"
+    },
+    {
+      "name": "A_C_00000001",
+      "value": "0xc1",
+      "comment": "",
+      "category": "A_C"
+    },
+    {
+      "name": "A_C_00000002",
+      "value": "0xc2",
+      "comment": "",
+      "category": "A_C"
+    },
+    {
+      "name": "A_C_00000003",
+      "value": "0xc3",
+      "comment": "",
+      "category": "A_C"
+    },
+    {
+      "name": "A_C_00000004",
+      "value": "0xc4",
+      "comment": "",
+      "category": "A_C"
+    },
+    {
+      "name": "A_C_00000008",
+      "value": "0xc5",
+      "comment": "",
+      "category": "A_C"
+    },
+    {
+      "name": "A_C_00000010",
+      "value": "0xc6",
+      "comment": "",
+      "category": "A_C"
+    },
+    {
+      "name": "A_C_00000020",
+      "value": "0xc7",
+      "comment": "",
+      "category": "A_C"
+    },
+    {
+      "name": "A_C_00000100",
+      "value": "0xc8",
+      "comment": "",
+      "category": "A_C"
+    },
+    {
+      "name": "A_C_00010000",
+      "value": "0xc9",
+      "comment": "",
+      "category": "A_C"
+    },
+    {
+      "name": "A_C_00000800",
+      "value": "0xca",
+      "comment": "",
+      "category": "A_C"
+    },
+    {
+      "name": "A_C_10000000",
+      "value": "0xcb",
+      "comment": "",
+      "category": "A_C"
+    },
+    {
+      "name": "A_C_20000000",
+      "value": "0xcc",
+      "comment": "",
+      "category": "A_C"
+    },
+    {
+      "name": "A_C_40000000",
+      "value": "0xcd",
+      "comment": "",
+      "category": "A_C"
+    },
+    {
+      "name": "A_C_80000000",
+      "value": "0xce",
+      "comment": "",
+      "category": "A_C"
+    },
+    {
+      "name": "A_C_7fffffff",
+      "value": "0xcf",
+      "comment": "",
+      "category": "A_C"
+    },
+    {
+      "name": "A_C_ffffffff",
+      "value": "0xd0",
+      "comment": "",
+      "category": "A_C"
+    },
+    {
+      "name": "A_C_fffffffe",
+      "value": "0xd1",
+      "comment": "",
+      "category": "A_C"
+    },
+    {
+      "name": "A_C_c0000000",
+      "value": "0xd2",
+      "comment": "",
+      "category": "A_C"
+    },
+    {
+      "name": "A_C_4f1bbcdc",
+      "value": "0xd3",
+      "comment": "",
+      "category": "A_C"
+    },
+    {
+      "name": "A_C_5a7ef9db",
+      "value": "0xd4",
+      "comment": "",
+      "category": "A_C"
+    },
+    {
+      "name": "A_C_00100000",
+      "value": "0xd5",
+      "comment": "",
+      "category": "A_C"
+    },
+    {
+      "name": "A_GPR_ACCU",
+      "value": "0xd6",
+      "comment": "ACCUM, accumulator",
+      "category": "A_GPR"
+    },
+    {
+      "name": "A_GPR_COND",
+      "value": "0xd7",
+      "comment": "CCR, condition register",
+      "category": "A_GPR"
+    },
+    {
+      "name": "A_GPR_NOISE0",
+      "value": "0xd8",
+      "comment": "noise source",
+      "category": "A_GPR"
+    },
+    {
+      "name": "A_GPR_NOISE1",
+      "value": "0xd9",
+      "comment": "noise source",
+      "category": "A_GPR"
+    },
+    {
+      "name": "A_GPR_IRQ",
+      "value": "0xda",
+      "comment": "IRQ register",
+      "category": "A_GPR"
+    },
+    {
+      "name": "A_GPR_DBAC",
+      "value": "0xdb",
+      "comment": "TRAM Delay Base Address Counter - internal",
+      "category": "A_GPR"
+    },
+    {
+      "name": "A_GPR_DBACE",
+      "value": "0xde",
+      "comment": "TRAM Delay Base Address Counter - external",
+      "category": "A_GPR"
+    },
+    {
+      "name": "FXGPREGBASE",
+      "value": "0x100",
+      "comment": "FX general purpose registers base",
+      "category": ""
+    },
+    {
+      "name": "A_FXGPREGBASE",
+      "value": "0x400",
+      "comment": "Audigy GPRs, 0x400 to 0x5ff",
+      "category": ""
+    },
+    {
+      "name": "A_TANKMEMCTLREGBASE",
+      "value": "0x100",
+      "comment": "Tank memory control registers base - only for Audigy",
+      "category": ""
+    },
+    {
+      "name": "A_TANKMEMCTLREG_MASK",
+      "value": "0x1f",
+      "comment": "only 5 bits used - only for Audigy",
+      "category": "A_TANKMEMCTLREG"
+    },
+    {
+      "name": "TANKMEMDATAREGBASE",
+      "value": "0x200",
+      "comment": "Tank memory data registers base",
+      "category": ""
+    },
+    {
+      "name": "TANKMEMDATAREG_MASK",
+      "value": "0x000fffff",
+      "comment": "20 bit tank audio data field",
+      "category": ""
+    },
+    {
+      "name": "TANKMEMADDRREGBASE",
+      "value": "0x300",
+      "comment": "Tank memory address registers base",
+      "category": ""
+    },
+    {
+      "name": "TANKMEMADDRREG_ADDR_MASK",
+      "value": "0x000fffff",
+      "comment": "20 bit tank address field",
+      "category": "TANKMEMADDRREG_ADDR"
+    },
+    {
+      "name": "TANKMEMADDRREG_CLEAR",
+      "value": "0x00800000",
+      "comment": "Clear tank memory",
+      "category": ""
+    },
+    {
+      "name": "TANKMEMADDRREG_ALIGN",
+      "value": "0x00400000",
+      "comment": "Align read or write relative to tank access",
+      "category": ""
+    },
+    {
+      "name": "TANKMEMADDRREG_WRITE",
+      "value": "0x00200000",
+      "comment": "Write to tank memory",
+      "category": ""
+    },
+    {
+      "name": "TANKMEMADDRREG_READ",
+      "value": "0x00100000",
+      "comment": "Read from tank memory",
+      "category": ""
+    },
+    {
+      "name": "CC_REG_NORMALIZED",
+      "value": "C_00000001",
+      "comment": "",
+      "category": "CC_REG"
+    },
+    {
+      "name": "CC_REG_BORROW",
+      "value": "C_00000002",
+      "comment": "",
+      "category": "CC_REG"
+    },
+    {
+      "name": "CC_REG_MINUS",
+      "value": "C_00000004",
+      "comment": "",
+      "category": "CC_REG"
+    },
+    {
+      "name": "CC_REG_ZERO",
+      "value": "C_00000008",
+      "comment": "",
+      "category": "CC_REG"
+    },
+    {
+      "name": "CC_REG_SATURATE",
+      "value": "C_00000010",
+      "comment": "",
+      "category": "CC_REG"
+    },
+    {
+      "name": "CC_REG_NONZERO",
+      "value": "C_00000100",
+      "comment": "",
+      "category": "CC_REG"
+    },
+    {
+      "name": "A_CC_REG_NORMALIZED",
+      "value": "A_C_00000001",
+      "comment": "",
+      "category": "A_CC"
+    },
+    {
+      "name": "A_CC_REG_BORROW",
+      "value": "A_C_00000002",
+      "comment": "",
+      "category": "A_CC"
+    },
+    {
+      "name": "A_CC_REG_MINUS",
+      "value": "A_C_00000004",
+      "comment": "",
+      "category": "A_CC"
+    },
+    {
+      "name": "A_CC_REG_ZERO",
+      "value": "A_C_00000008",
+      "comment": "",
+      "category": "A_CC"
+    },
+    {
+      "name": "A_CC_REG_SATURATE",
+      "value": "A_C_00000010",
+      "comment": "",
+      "category": "A_CC"
+    },
+    {
+      "name": "A_CC_REG_NONZERO",
+      "value": "A_C_00000100",
+      "comment": "",
+      "category": "A_CC"
+    },
+    {
+      "name": "FXBUS_PCM_LEFT",
+      "value": "0x00",
+      "comment": "",
+      "category": "FXBUS_PCM"
+    },
+    {
+      "name": "FXBUS_PCM_RIGHT",
+      "value": "0x01",
+      "comment": "",
+      "category": "FXBUS_PCM"
+    },
+    {
+      "name": "FXBUS_PCM_LEFT_REAR",
+      "value": "0x02",
+      "comment": "",
+      "category": "FXBUS_PCM"
+    },
+    {
+      "name": "FXBUS_PCM_RIGHT_REAR",
+      "value": "0x03",
+      "comment": "",
+      "category": "FXBUS_PCM"
+    },
+    {
+      "name": "FXBUS_MIDI_LEFT",
+      "value": "0x04",
+      "comment": "",
+      "category": "FXBUS_MIDI"
+    },
+    {
+      "name": "FXBUS_MIDI_RIGHT",
+      "value": "0x05",
+      "comment": "",
+      "category": "FXBUS_MIDI"
+    },
+    {
+      "name": "FXBUS_PCM_CENTER",
+      "value": "0x06",
+      "comment": "",
+      "category": "FXBUS_PCM"
+    },
+    {
+      "name": "FXBUS_PCM_LFE",
+      "value": "0x07",
+      "comment": "",
+      "category": "FXBUS_PCM"
+    },
+    {
+      "name": "FXBUS_PCM_LEFT_FRONT",
+      "value": "0x08",
+      "comment": "",
+      "category": "FXBUS_PCM"
+    },
+    {
+      "name": "FXBUS_PCM_RIGHT_FRONT",
+      "value": "0x09",
+      "comment": "",
+      "category": "FXBUS_PCM"
+    },
+    {
+      "name": "FXBUS_MIDI_REVERB",
+      "value": "0x0c",
+      "comment": "",
+      "category": "FXBUS_MIDI"
+    },
+    {
+      "name": "FXBUS_MIDI_CHORUS",
+      "value": "0x0d",
+      "comment": "",
+      "category": "FXBUS_MIDI"
+    },
+    {
+      "name": "FXBUS_PCM_LEFT_SIDE",
+      "value": "0x0e",
+      "comment": "",
+      "category": "FXBUS_PCM"
+    },
+    {
+      "name": "FXBUS_PCM_RIGHT_SIDE",
+      "value": "0x0f",
+      "comment": "",
+      "category": "FXBUS_PCM"
+    },
+    {
+      "name": "FXBUS_PT_LEFT",
+      "value": "0x14",
+      "comment": "",
+      "category": "FXBUS_PT"
+    },
+    {
+      "name": "FXBUS_PT_RIGHT",
+      "value": "0x15",
+      "comment": "",
+      "category": "FXBUS_PT"
+    },
+    {
+      "name": "EXTIN_AC97_L",
+      "value": "0x00",
+      "comment": "AC'97 capture channel - left",
+      "category": ""
+    },
+    {
+      "name": "EXTIN_AC97_R",
+      "value": "0x01",
+      "comment": "AC'97 capture channel - right",
+      "category": ""
+    },
+    {
+      "name": "EXTIN_SPDIF_CD_L",
+      "value": "0x02",
+      "comment": "internal S/PDIF CD - onboard - left",
+      "category": "EXTIN_SPDIF"
+    },
+    {
+      "name": "EXTIN_SPDIF_CD_R",
+      "value": "0x03",
+      "comment": "internal S/PDIF CD - onboard - right",
+      "category": "EXTIN_SPDIF"
+    },
+    {
+      "name": "EXTIN_ZOOM_L",
+      "value": "0x04",
+      "comment": "Zoom Video I2S - left",
+      "category": "EXTIN_ZOOM"
+    },
+    {
+      "name": "EXTIN_ZOOM_R",
+      "value": "0x05",
+      "comment": "Zoom Video I2S - right",
+      "category": "EXTIN_ZOOM"
+    },
+    {
+      "name": "EXTIN_TOSLINK_L",
+      "value": "0x06",
+      "comment": "LiveDrive - TOSLink Optical - left",
+      "category": "EXTIN_TOSLINK"
+    },
+    {
+      "name": "EXTIN_TOSLINK_R",
+      "value": "0x07",
+      "comment": "LiveDrive - TOSLink Optical - right",
+      "category": "EXTIN_TOSLINK"
+    },
+    {
+      "name": "EXTIN_LINE1_L",
+      "value": "0x08",
+      "comment": "LiveDrive - Line/Mic 1 - left",
+      "category": ""
+    },
+    {
+      "name": "EXTIN_LINE1_R",
+      "value": "0x09",
+      "comment": "LiveDrive - Line/Mic 1 - right",
+      "category": ""
+    },
+    {
+      "name": "EXTIN_COAX_SPDIF_L",
+      "value": "0x0a",
+      "comment": "LiveDrive - Coaxial S/PDIF - left",
+      "category": "EXTIN_COAX"
+    },
+    {
+      "name": "EXTIN_COAX_SPDIF_R",
+      "value": "0x0b",
+      "comment": "LiveDrive - Coaxial S/PDIF - right",
+      "category": "EXTIN_COAX"
+    },
+    {
+      "name": "EXTIN_LINE2_L",
+      "value": "0x0c",
+      "comment": "LiveDrive - Line/Mic 2 - left",
+      "category": ""
+    },
+    {
+      "name": "EXTIN_LINE2_R",
+      "value": "0x0d",
+      "comment": "LiveDrive - Line/Mic 2 - right",
+      "category": ""
+    },
+    {
+      "name": "EXTOUT_AC97_L",
+      "value": "0x00",
+      "comment": "AC'97 playback channel - left",
+      "category": ""
+    },
+    {
+      "name": "EXTOUT_AC97_R",
+      "value": "0x01",
+      "comment": "AC'97 playback channel - right",
+      "category": ""
+    },
+    {
+      "name": "EXTOUT_TOSLINK_L",
+      "value": "0x02",
+      "comment": "LiveDrive - TOSLink Optical - left",
+      "category": "EXTOUT_TOSLINK"
+    },
+    {
+      "name": "EXTOUT_TOSLINK_R",
+      "value": "0x03",
+      "comment": "LiveDrive - TOSLink Optical - right",
+      "category": "EXTOUT_TOSLINK"
+    },
+    {
+      "name": "EXTOUT_AC97_CENTER",
+      "value": "0x04",
+      "comment": "SB Live 5.1 - center",
+      "category": ""
+    },
+    {
+      "name": "EXTOUT_AC97_LFE",
+      "value": "0x05",
+      "comment": "SB Live 5.1 - LFE",
+      "category": ""
+    },
+    {
+      "name": "EXTOUT_HEADPHONE_L",
+      "value": "0x06",
+      "comment": "LiveDrive - Headphone - left",
+      "category": "EXTOUT_HEADPHONE"
+    },
+    {
+      "name": "EXTOUT_HEADPHONE_R",
+      "value": "0x07",
+      "comment": "LiveDrive - Headphone - right",
+      "category": "EXTOUT_HEADPHONE"
+    },
+    {
+      "name": "EXTOUT_REAR_L",
+      "value": "0x08",
+      "comment": "Rear channel - left",
+      "category": "EXTOUT_REAR"
+    },
+    {
+      "name": "EXTOUT_REAR_R",
+      "value": "0x09",
+      "comment": "Rear channel - right",
+      "category": "EXTOUT_REAR"
+    },
+    {
+      "name": "EXTOUT_ADC_CAP_L",
+      "value": "0x0a",
+      "comment": "ADC Capture buffer - left",
+      "category": "EXTOUT_ADC"
+    },
+    {
+      "name": "EXTOUT_ADC_CAP_R",
+      "value": "0x0b",
+      "comment": "ADC Capture buffer - right",
+      "category": "EXTOUT_ADC"
+    },
+    {
+      "name": "EXTOUT_MIC_CAP",
+      "value": "0x0c",
+      "comment": "MIC Capture buffer",
+      "category": "EXTOUT_MIC"
+    },
+    {
+      "name": "EXTOUT_AC97_REAR_L",
+      "value": "0x0d",
+      "comment": "SB Live 5.1 (c) 2003 - Rear Left",
+      "category": ""
+    },
+    {
+      "name": "EXTOUT_AC97_REAR_R",
+      "value": "0x0e",
+      "comment": "SB Live 5.1 (c) 2003 - Rear Right",
+      "category": ""
+    },
+    {
+      "name": "EXTOUT_ACENTER",
+      "value": "0x11",
+      "comment": "Analog Center",
+      "category": ""
+    },
+    {
+      "name": "EXTOUT_ALFE",
+      "value": "0x12",
+      "comment": "Analog LFE",
+      "category": ""
+    },
+    {
+      "name": "A_EXTIN_AC97_L",
+      "value": "0x00",
+      "comment": "AC'97 capture channel - left",
+      "category": "A_EXTIN"
+    },
+    {
+      "name": "A_EXTIN_AC97_R",
+      "value": "0x01",
+      "comment": "AC'97 capture channel - right",
+      "category": "A_EXTIN"
+    },
+    {
+      "name": "A_EXTIN_SPDIF_CD_L",
+      "value": "0x02",
+      "comment": "digital CD left",
+      "category": "A_EXTIN"
+    },
+    {
+      "name": "A_EXTIN_SPDIF_CD_R",
+      "value": "0x03",
+      "comment": "digital CD left",
+      "category": "A_EXTIN"
+    },
+    {
+      "name": "A_EXTIN_OPT_SPDIF_L",
+      "value": "0x04",
+      "comment": "audigy drive Optical SPDIF - left",
+      "category": "A_EXTIN"
+    },
+    {
+      "name": "A_EXTIN_OPT_SPDIF_R",
+      "value": "0x05",
+      "comment": "right",
+      "category": "A_EXTIN"
+    },
+    {
+      "name": "A_EXTIN_LINE2_L",
+      "value": "0x08",
+      "comment": "audigy drive line2/mic2 - left",
+      "category": "A_EXTIN"
+    },
+    {
+      "name": "A_EXTIN_LINE2_R",
+      "value": "0x09",
+      "comment": "right",
+      "category": "A_EXTIN"
+    },
+    {
+      "name": "A_EXTIN_ADC_L",
+      "value": "0x0a",
+      "comment": "Philips ADC - left",
+      "category": "A_EXTIN"
+    },
+    {
+      "name": "A_EXTIN_ADC_R",
+      "value": "0x0b",
+      "comment": "right",
+      "category": "A_EXTIN"
+    },
+    {
+      "name": "A_EXTIN_AUX2_L",
+      "value": "0x0c",
+      "comment": "audigy drive aux2 - left",
+      "category": "A_EXTIN"
+    },
+    {
+      "name": "A_EXTIN_AUX2_R",
+      "value": "0x0d",
+      "comment": "- right",
+      "category": "A_EXTIN"
+    },
+    {
+      "name": "A_EXTOUT_FRONT_L",
+      "value": "0x00",
+      "comment": "digital front left",
+      "category": "A_EXTOUT"
+    },
+    {
+      "name": "A_EXTOUT_FRONT_R",
+      "value": "0x01",
+      "comment": "right",
+      "category": "A_EXTOUT"
+    },
+    {
+      "name": "A_EXTOUT_CENTER",
+      "value": "0x02",
+      "comment": "digital front center",
+      "category": "A_EXTOUT"
+    },
+    {
+      "name": "A_EXTOUT_LFE",
+      "value": "0x03",
+      "comment": "digital front lfe",
+      "category": "A_EXTOUT"
+    },
+    {
+      "name": "A_EXTOUT_HEADPHONE_L",
+      "value": "0x04",
+      "comment": "headphone audigy drive left",
+      "category": "A_EXTOUT"
+    },
+    {
+      "name": "A_EXTOUT_HEADPHONE_R",
+      "value": "0x05",
+      "comment": "right",
+      "category": "A_EXTOUT"
+    },
+    {
+      "name": "A_EXTOUT_REAR_L",
+      "value": "0x06",
+      "comment": "digital rear left",
+      "category": "A_EXTOUT"
+    },
+    {
+      "name": "A_EXTOUT_REAR_R",
+      "value": "0x07",
+      "comment": "right",
+      "category": "A_EXTOUT"
+    },
+    {
+      "name": "A_EXTOUT_AFRONT_L",
+      "value": "0x08",
+      "comment": "analog front left",
+      "category": "A_EXTOUT"
+    },
+    {
+      "name": "A_EXTOUT_AFRONT_R",
+      "value": "0x09",
+      "comment": "right",
+      "category": "A_EXTOUT"
+    },
+    {
+      "name": "A_EXTOUT_ACENTER",
+      "value": "0x0a",
+      "comment": "analog center",
+      "category": "A_EXTOUT"
+    },
+    {
+      "name": "A_EXTOUT_ALFE",
+      "value": "0x0b",
+      "comment": "analog LFE",
+      "category": "A_EXTOUT"
+    },
+    {
+      "name": "A_EXTOUT_ASIDE_L",
+      "value": "0x0c",
+      "comment": "analog side left  - Audigy 2 ZS",
+      "category": "A_EXTOUT"
+    },
+    {
+      "name": "A_EXTOUT_ASIDE_R",
+      "value": "0x0d",
+      "comment": "right - Audigy 2 ZS",
+      "category": "A_EXTOUT"
+    },
+    {
+      "name": "A_EXTOUT_AREAR_L",
+      "value": "0x0e",
+      "comment": "analog rear left",
+      "category": "A_EXTOUT"
+    },
+    {
+      "name": "A_EXTOUT_AREAR_R",
+      "value": "0x0f",
+      "comment": "right",
+      "category": "A_EXTOUT"
+    },
+    {
+      "name": "A_EXTOUT_AC97_L",
+      "value": "0x10",
+      "comment": "AC97 left (front)",
+      "category": "A_EXTOUT"
+    },
+    {
+      "name": "A_EXTOUT_AC97_R",
+      "value": "0x11",
+      "comment": "right",
+      "category": "A_EXTOUT"
+    },
+    {
+      "name": "A_EXTOUT_ADC_CAP_L",
+      "value": "0x16",
+      "comment": "ADC capture buffer left",
+      "category": "A_EXTOUT"
+    },
+    {
+      "name": "A_EXTOUT_ADC_CAP_R",
+      "value": "0x17",
+      "comment": "right",
+      "category": "A_EXTOUT"
+    },
+    {
+      "name": "A_EXTOUT_MIC_CAP",
+      "value": "0x18",
+      "comment": "Mic capture buffer",
+      "category": "A_EXTOUT"
+    },
+    {
+      "name": "EMU10K1_DBG_ZC",
+      "value": "0x80000000",
+      "comment": "zero tram counter",
+      "category": ""
+    },
+    {
+      "name": "EMU10K1_DBG_SATURATION_OCCURED",
+      "value": "0x02000000",
+      "comment": "saturation control",
+      "category": ""
+    },
+    {
+      "name": "EMU10K1_DBG_SATURATION_ADDR",
+      "value": "0x01ff0000",
+      "comment": "saturation address",
+      "category": ""
+    },
+    {
+      "name": "EMU10K1_DBG_SINGLE_STEP",
+      "value": "0x00008000",
+      "comment": "single step mode",
+      "category": ""
+    },
+    {
+      "name": "EMU10K1_DBG_STEP",
+      "value": "0x00004000",
+      "comment": "start single step",
+      "category": ""
+    },
+    {
+      "name": "EMU10K1_DBG_CONDITION_CODE",
+      "value": "0x00003e00",
+      "comment": "condition code",
+      "category": ""
+    },
+    {
+      "name": "EMU10K1_DBG_SINGLE_STEP_ADDR",
+      "value": "0x000001ff",
+      "comment": "single step address",
+      "category": ""
+    },
+    {
+      "name": "A_DBG_ZC",
+      "value": "0x40000000",
+      "comment": "zero tram counter",
+      "category": "A_DBG"
+    },
+    {
+      "name": "A_DBG_SATURATION_OCCURED",
+      "value": "0x20000000",
+      "comment": "",
+      "category": "A_DBG"
+    },
+    {
+      "name": "A_DBG_SATURATION_ADDR",
+      "value": "0x0ffc0000",
+      "comment": "",
+      "category": "A_DBG"
+    },
+    {
+      "name": "A_DBG_SINGLE_STEP",
+      "value": "0x00020000",
+      "comment": "Set to zero to start dsp",
+      "category": "A_DBG"
+    },
+    {
+      "name": "A_DBG_STEP",
+      "value": "0x00010000",
+      "comment": "",
+      "category": "A_DBG"
+    },
+    {
+      "name": "A_DBG_CONDITION_CODE",
+      "value": "0x0000f800",
+      "comment": "",
+      "category": "A_DBG"
+    },
+    {
+      "name": "A_DBG_STEP_ADDR",
+      "value": "0x000003ff",
+      "comment": "",
+      "category": "A_DBG"
+    },
+    {
+      "name": "EMU10K1_GPR_TRANSLATION_NONE",
+      "value": "0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EMU10K1_GPR_TRANSLATION_TABLE100",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EMU10K1_GPR_TRANSLATION_BASS",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EMU10K1_GPR_TRANSLATION_TREBLE",
+      "value": "3",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EMU10K1_GPR_TRANSLATION_ONOFF",
+      "value": "4",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EMU10K1_GPR_TRANSLATION_NEGATE",
+      "value": "5",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EMU10K1_GPR_TRANSLATION_NEG_TABLE100",
+      "value": "6",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SNDRV_EMU10K1_VERSION",
+      "value": "SNDRV_PROTOCOL_VERSION(1, 0, 1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SNDRV_EMU10K1_IOCTL_INFO",
+      "value": "_IOR ('H', 0x10, struct snd_emu10k1_fx8010_info)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SNDRV_EMU10K1_IOCTL_CODE_POKE",
+      "value": "_IOW ('H', 0x11, struct snd_emu10k1_fx8010_code)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SNDRV_EMU10K1_IOCTL_CODE_PEEK",
+      "value": "_IOWR('H', 0x12, struct snd_emu10k1_fx8010_code)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SNDRV_EMU10K1_IOCTL_TRAM_SETUP",
+      "value": "_IOW ('H', 0x20, int)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SNDRV_EMU10K1_IOCTL_TRAM_POKE",
+      "value": "_IOW ('H', 0x21, struct snd_emu10k1_fx8010_tram)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SNDRV_EMU10K1_IOCTL_TRAM_PEEK",
+      "value": "_IOWR('H', 0x22, struct snd_emu10k1_fx8010_tram)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SNDRV_EMU10K1_IOCTL_PCM_POKE",
+      "value": "_IOW ('H', 0x30, struct snd_emu10k1_fx8010_pcm_rec)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SNDRV_EMU10K1_IOCTL_PCM_PEEK",
+      "value": "_IOWR('H', 0x31, struct snd_emu10k1_fx8010_pcm_rec)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SNDRV_EMU10K1_IOCTL_PVERSION",
+      "value": "_IOR ('H', 0x40, int)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SNDRV_EMU10K1_IOCTL_STOP",
+      "value": "_IO  ('H', 0x80)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SNDRV_EMU10K1_IOCTL_CONTINUE",
+      "value": "_IO  ('H', 0x81)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SNDRV_EMU10K1_IOCTL_ZERO_TRAM_COUNTER",
+      "value": "_IO ('H', 0x82)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SNDRV_EMU10K1_IOCTL_SINGLE_STEP",
+      "value": "_IOW ('H', 0x83, int)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SNDRV_EMU10K1_IOCTL_DBG_READ",
+      "value": "_IOR ('H', 0x84, int)",
+      "comment": "",
+      "category": ""
+    }
+  ],
+  "structs": [
+    {
+      "name": "snd_emu10k1_fx8010_info",
+      "fields": [
+        {
+          "type_name": "char",
+          "name": "fxbus_names",
+          "array_size": "16][32",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "extin_names",
+          "array_size": "16][32",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "extout_names",
+          "array_size": "32][32",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "emu10k1_ctl_elem_id",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "iface",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_emu10k1_fx8010_control_gpr",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "value",
+          "array_size": "32",
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "min",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "max",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_emu10k1_fx8010_control_old_gpr",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_emu10k1_fx8010_code",
+      "fields": [
+        {
+          "type_name": "char",
+          "name": "name",
+          "array_size": "128",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_emu10k1_fx8010_tram",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_emu10k1_fx8010_pcm_rec",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

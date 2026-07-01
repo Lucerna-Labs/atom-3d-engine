@@ -1,0 +1,6 @@
+﻿
+
+1. **Analyze Logs for "Warnings"**: Identify the specific warning messages (e.g., deprecation notices, memory leaks, or configuration mismatches) and correlate them with the crash time.
+2. **Reproduce in Staging**: Attempt to trigger the crash in a staging environment to confirm the issue and isolate the specific user action or data state causing it.
+3. **Review Recent Changes**: Audit the codebase for recent commits or configuration updates that might have introduced the instability.
+4. **Next Action**: If the issue is reproducible, implement a hotfix or rollback; if not, enable detailed error logging (e.g., stack traces) to capture the exact failure point.

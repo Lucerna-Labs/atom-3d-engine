@@ -1,0 +1,634 @@
+{
+  "filename": "ptrace.h",
+  "includes": [
+    "linux/types.h",
+    "asm/ptrace.h"
+  ],
+  "defines": [
+    {
+      "name": "PTRACE_TRACEME",
+      "value": "0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PTRACE_PEEKTEXT",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PTRACE_PEEKDATA",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PTRACE_PEEKUSR",
+      "value": "3",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PTRACE_POKETEXT",
+      "value": "4",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PTRACE_POKEDATA",
+      "value": "5",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PTRACE_POKEUSR",
+      "value": "6",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PTRACE_CONT",
+      "value": "7",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PTRACE_KILL",
+      "value": "8",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PTRACE_SINGLESTEP",
+      "value": "9",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PTRACE_ATTACH",
+      "value": "16",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PTRACE_DETACH",
+      "value": "17",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PTRACE_SYSCALL",
+      "value": "24",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PTRACE_SETOPTIONS",
+      "value": "0x4200",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PTRACE_GETEVENTMSG",
+      "value": "0x4201",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PTRACE_GETSIGINFO",
+      "value": "0x4202",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PTRACE_SETSIGINFO",
+      "value": "0x4203",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PTRACE_GETREGSET",
+      "value": "0x4204",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PTRACE_SETREGSET",
+      "value": "0x4205",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PTRACE_SEIZE",
+      "value": "0x4206",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PTRACE_INTERRUPT",
+      "value": "0x4207",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PTRACE_LISTEN",
+      "value": "0x4208",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PTRACE_PEEKSIGINFO",
+      "value": "0x4209",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PTRACE_GETSIGMASK",
+      "value": "0x420a",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PTRACE_SETSIGMASK",
+      "value": "0x420b",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PTRACE_SECCOMP_GET_FILTER",
+      "value": "0x420c",
+      "comment": "",
+      "category": "PTRACE_SECCOMP"
+    },
+    {
+      "name": "PTRACE_SECCOMP_GET_METADATA",
+      "value": "0x420d",
+      "comment": "",
+      "category": "PTRACE_SECCOMP"
+    },
+    {
+      "name": "PTRACE_GET_SYSCALL_INFO",
+      "value": "0x420e",
+      "comment": "",
+      "category": "PTRACE_GET"
+    },
+    {
+      "name": "PTRACE_SET_SYSCALL_INFO",
+      "value": "0x4212",
+      "comment": "",
+      "category": "PTRACE_SET"
+    },
+    {
+      "name": "PTRACE_SYSCALL_INFO_NONE",
+      "value": "0",
+      "comment": "",
+      "category": "PTRACE_SYSCALL"
+    },
+    {
+      "name": "PTRACE_SYSCALL_INFO_ENTRY",
+      "value": "1",
+      "comment": "",
+      "category": "PTRACE_SYSCALL"
+    },
+    {
+      "name": "PTRACE_SYSCALL_INFO_EXIT",
+      "value": "2",
+      "comment": "",
+      "category": "PTRACE_SYSCALL"
+    },
+    {
+      "name": "PTRACE_SYSCALL_INFO_SECCOMP",
+      "value": "3",
+      "comment": "",
+      "category": "PTRACE_SYSCALL"
+    },
+    {
+      "name": "PTRACE_GET_RSEQ_CONFIGURATION",
+      "value": "0x420f",
+      "comment": "",
+      "category": "PTRACE_GET"
+    },
+    {
+      "name": "PTRACE_SET_SYSCALL_USER_DISPATCH_CONFIG",
+      "value": "0x4210",
+      "comment": "",
+      "category": "PTRACE_SET"
+    },
+    {
+      "name": "PTRACE_GET_SYSCALL_USER_DISPATCH_CONFIG",
+      "value": "0x4211",
+      "comment": "",
+      "category": "PTRACE_GET"
+    },
+    {
+      "name": "PTRACE_EVENTMSG_SYSCALL_ENTRY",
+      "value": "1",
+      "comment": "",
+      "category": "PTRACE_EVENTMSG"
+    },
+    {
+      "name": "PTRACE_EVENTMSG_SYSCALL_EXIT",
+      "value": "2",
+      "comment": "",
+      "category": "PTRACE_EVENTMSG"
+    },
+    {
+      "name": "PTRACE_PEEKSIGINFO_SHARED",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "PTRACE_PEEKSIGINFO"
+    },
+    {
+      "name": "PTRACE_EVENT_FORK",
+      "value": "1",
+      "comment": "",
+      "category": "PTRACE_EVENT"
+    },
+    {
+      "name": "PTRACE_EVENT_VFORK",
+      "value": "2",
+      "comment": "",
+      "category": "PTRACE_EVENT"
+    },
+    {
+      "name": "PTRACE_EVENT_CLONE",
+      "value": "3",
+      "comment": "",
+      "category": "PTRACE_EVENT"
+    },
+    {
+      "name": "PTRACE_EVENT_EXEC",
+      "value": "4",
+      "comment": "",
+      "category": "PTRACE_EVENT"
+    },
+    {
+      "name": "PTRACE_EVENT_VFORK_DONE",
+      "value": "5",
+      "comment": "",
+      "category": "PTRACE_EVENT"
+    },
+    {
+      "name": "PTRACE_EVENT_EXIT",
+      "value": "6",
+      "comment": "",
+      "category": "PTRACE_EVENT"
+    },
+    {
+      "name": "PTRACE_EVENT_SECCOMP",
+      "value": "7",
+      "comment": "",
+      "category": "PTRACE_EVENT"
+    },
+    {
+      "name": "PTRACE_EVENT_STOP",
+      "value": "128",
+      "comment": "",
+      "category": "PTRACE_EVENT"
+    },
+    {
+      "name": "PTRACE_O_TRACESYSGOOD",
+      "value": "1",
+      "comment": "",
+      "category": "PTRACE_O"
+    },
+    {
+      "name": "PTRACE_O_TRACEFORK",
+      "value": "(1 << PTRACE_EVENT_FORK)",
+      "comment": "",
+      "category": "PTRACE_O"
+    },
+    {
+      "name": "PTRACE_O_TRACEVFORK",
+      "value": "(1 << PTRACE_EVENT_VFORK)",
+      "comment": "",
+      "category": "PTRACE_O"
+    },
+    {
+      "name": "PTRACE_O_TRACECLONE",
+      "value": "(1 << PTRACE_EVENT_CLONE)",
+      "comment": "",
+      "category": "PTRACE_O"
+    },
+    {
+      "name": "PTRACE_O_TRACEEXEC",
+      "value": "(1 << PTRACE_EVENT_EXEC)",
+      "comment": "",
+      "category": "PTRACE_O"
+    },
+    {
+      "name": "PTRACE_O_TRACEVFORKDONE",
+      "value": "(1 << PTRACE_EVENT_VFORK_DONE)",
+      "comment": "",
+      "category": "PTRACE_O"
+    },
+    {
+      "name": "PTRACE_O_TRACEEXIT",
+      "value": "(1 << PTRACE_EVENT_EXIT)",
+      "comment": "",
+      "category": "PTRACE_O"
+    },
+    {
+      "name": "PTRACE_O_TRACESECCOMP",
+      "value": "(1 << PTRACE_EVENT_SECCOMP)",
+      "comment": "",
+      "category": "PTRACE_O"
+    },
+    {
+      "name": "PTRACE_O_EXITKILL",
+      "value": "(1 << 20)",
+      "comment": "",
+      "category": "PTRACE_O"
+    },
+    {
+      "name": "PTRACE_O_SUSPEND_SECCOMP",
+      "value": "(1 << 21)",
+      "comment": "",
+      "category": "PTRACE_O"
+    },
+    {
+      "name": "PTRACE_O_MASK",
+      "value": "(",
+      "comment": "",
+      "category": "PTRACE_O"
+    }
+  ],
+  "structs": [
+    {
+      "name": "ptrace_peeksiginfo_args",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "off",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "nr",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "seccomp_metadata",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "filter_off",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ptrace_syscall_info",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "op",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "arch",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "instruction_pointer",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "stack_pointer",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "nr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "args",
+          "array_size": "6",
+          "comment": ""
+        },
+        {
+          "type_name": "__s64",
+          "name": "rval",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "is_error",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "nr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "args",
+          "array_size": "6",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ret_data",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved2",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_3",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "nr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "args",
+          "array_size": "6",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_4",
+      "fields": [
+        {
+          "type_name": "__s64",
+          "name": "rval",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "is_error",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_5",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "nr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "args",
+          "array_size": "6",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ret_data",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved2",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ptrace_rseq_configuration",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "rseq_abi_pointer",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "rseq_abi_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "signature",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ptrace_sud_config",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "mode",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "selector",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "len",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

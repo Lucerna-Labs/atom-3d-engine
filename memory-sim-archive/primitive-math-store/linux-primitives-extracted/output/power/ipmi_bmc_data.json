@@ -1,0 +1,36 @@
+{
+  "filename": "ipmi_bmc.h",
+  "includes": [
+    "linux/ioctl.h"
+  ],
+  "defines": [
+    {
+      "name": "__IPMI_BMC_IOCTL_MAGIC",
+      "value": "0xB1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPMI_BMC_IOCTL_SET_SMS_ATN",
+      "value": "_IO(__IPMI_BMC_IOCTL_MAGIC, 0x00)",
+      "comment": "",
+      "category": "IPMI_BMC"
+    },
+    {
+      "name": "IPMI_BMC_IOCTL_CLEAR_SMS_ATN",
+      "value": "_IO(__IPMI_BMC_IOCTL_MAGIC, 0x01)",
+      "comment": "",
+      "category": "IPMI_BMC"
+    },
+    {
+      "name": "IPMI_BMC_IOCTL_FORCE_ABORT",
+      "value": "_IO(__IPMI_BMC_IOCTL_MAGIC, 0x02)",
+      "comment": "",
+      "category": "IPMI_BMC"
+    }
+  ],
+  "structs": [],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

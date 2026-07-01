@@ -1,0 +1,19 @@
+﻿**Step 1:** Reproduce Before Repair  
+- Check recent deployments for changes to critical components (e.g., database, API endpoints).  
+- Verify if any new code or configuration introduced a regression.  
+
+**Step 2:** One Variable Moved  
+- Isolate the variable that changed between versions.  
+- Compare logs from pre-deployment and post-deployment runs to identify differences in error patterns.  
+
+**Step 3:** The Loop Ended at the Checkpoint  
+- Identify where the crash occurs (e.g., specific function, file).  
+- Use breakpoints or logging to pinpoint the exact point of failure during execution.  
+
+**Step 4:** Reproduce Beat Reading Logs  
+- Review detailed logs for error messages and stack traces.  
+- Look for patterns in log entries that correlate with deployment times.  
+
+**Uncertainty & Next Action:**  
+- If no clear pattern emerges, consider checking for environment-specific issues (e.g., database connectivity).  
+- **Next action:** Reproduce the crash under controlled conditions to isolate variables systematically.

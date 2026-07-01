@@ -1,0 +1,73 @@
+{
+  "name": "q2_amplifier_low_echo",
+  "description": "Lower-echo Q2 amplifier: keeps strong structural signal but adds more explicit stop/closure pressure.",
+  "shares": {
+    "structural": 0.72,
+    "cognitive": 0.14,
+    "cyber": 0.14
+  },
+  "bridge_count": 300,
+  "anti_echo_multiplier": 6,
+  "q2_amplifier": true,
+  "train_count": 2245,
+  "validation_count": 195,
+  "summary": {
+    "count": 2440,
+    "by_kind": {
+      "anti_echo_stop": 642,
+      "carrier_control": 64,
+      "clean_task_solution": 70,
+      "cognitive_memory": 168,
+      "compact_task_solution": 159,
+      "cyber_memory": 168,
+      "gate_application": 17,
+      "gate_control": 69,
+      "low_echo_stop": 220,
+      "q2_amplifier": 180,
+      "repair_solution": 145,
+      "routed_bridge": 300,
+      "task_solution": 149,
+      "web_association": 66,
+      "web_repair": 23
+    },
+    "by_family": {
+      "adversarial": 183,
+      "analogy": 3,
+      "boundary": 285,
+      "calibration": 7,
+      "classification": 3,
+      "coding": 4,
+      "comparison": 5,
+      "decomposition": 2,
+      "evidence": 2,
+      "format-control": 5,
+      "generalist": 940,
+      "loop-control": 6,
+      "math": 78,
+      "planning": 3,
+      "question-analysis": 2,
+      "reward": 29,
+      "rhetoric": 11,
+      "spatial": 2,
+      "structural": 864,
+      "summarization": 3,
+      "systems": 3
+    },
+    "by_source": {
+      "anti_echo_generator": 540,
+      "bridge_generator": 300,
+      "cognitive_core_v0_1.json": 62,
+      "cognitive_rewards_v0_1.json": 29,
+      "computation_primitives_v0_1.json": 77,
+      "low_echo_generator": 220,
+      "q2_amplifier_generator": 180,
+      "rust_cyber_defender_generated.tsv": 168,
+      "structural_primitive_lora_v0_2": 864
+    }
+  },
+  "files": {
+    "train_jsonl": "C:\\Projects\\small-model-memory-lab\\data\\dataset_mixture_candidates_v0_2\\q2_amplifier_low_echo\\train.jsonl",
+    "validation_jsonl": "C:\\Projects\\small-model-memory-lab\\data\\dataset_mixture_candidates_v0_2\\q2_amplifier_low_echo\\validation.jsonl",
+    "preview": "C:\\Projects\\small-model-memory-lab\\data\\dataset_mixture_candidates_v0_2\\q2_amplifier_low_echo\\preview.json"
+  }
+}

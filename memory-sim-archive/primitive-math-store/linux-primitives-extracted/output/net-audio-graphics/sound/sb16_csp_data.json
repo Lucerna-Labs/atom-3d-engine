@@ -1,0 +1,242 @@
+{
+  "filename": "sb16_csp.h",
+  "includes": [],
+  "defines": [
+    {
+      "name": "SNDRV_SB_CSP_MODE_NONE",
+      "value": "0x00",
+      "comment": "",
+      "category": "SNDRV_SB"
+    },
+    {
+      "name": "SNDRV_SB_CSP_MODE_DSP_READ",
+      "value": "0x01",
+      "comment": "Record from DSP",
+      "category": "SNDRV_SB"
+    },
+    {
+      "name": "SNDRV_SB_CSP_MODE_DSP_WRITE",
+      "value": "0x02",
+      "comment": "Play to DSP",
+      "category": "SNDRV_SB"
+    },
+    {
+      "name": "SNDRV_SB_CSP_MODE_QSOUND",
+      "value": "0x04",
+      "comment": "QSound",
+      "category": "SNDRV_SB"
+    },
+    {
+      "name": "SNDRV_SB_CSP_LOAD_FROMUSER",
+      "value": "0x01",
+      "comment": "",
+      "category": "SNDRV_SB"
+    },
+    {
+      "name": "SNDRV_SB_CSP_LOAD_INITBLOCK",
+      "value": "0x02",
+      "comment": "",
+      "category": "SNDRV_SB"
+    },
+    {
+      "name": "SNDRV_SB_CSP_SAMPLE_8BIT",
+      "value": "0x01",
+      "comment": "",
+      "category": "SNDRV_SB"
+    },
+    {
+      "name": "SNDRV_SB_CSP_SAMPLE_16BIT",
+      "value": "0x02",
+      "comment": "",
+      "category": "SNDRV_SB"
+    },
+    {
+      "name": "SNDRV_SB_CSP_MONO",
+      "value": "0x01",
+      "comment": "",
+      "category": "SNDRV_SB"
+    },
+    {
+      "name": "SNDRV_SB_CSP_STEREO",
+      "value": "0x02",
+      "comment": "",
+      "category": "SNDRV_SB"
+    },
+    {
+      "name": "SNDRV_SB_CSP_RATE_8000",
+      "value": "0x01",
+      "comment": "",
+      "category": "SNDRV_SB"
+    },
+    {
+      "name": "SNDRV_SB_CSP_RATE_11025",
+      "value": "0x02",
+      "comment": "",
+      "category": "SNDRV_SB"
+    },
+    {
+      "name": "SNDRV_SB_CSP_RATE_22050",
+      "value": "0x04",
+      "comment": "",
+      "category": "SNDRV_SB"
+    },
+    {
+      "name": "SNDRV_SB_CSP_RATE_44100",
+      "value": "0x08",
+      "comment": "",
+      "category": "SNDRV_SB"
+    },
+    {
+      "name": "SNDRV_SB_CSP_RATE_ALL",
+      "value": "0x0f",
+      "comment": "",
+      "category": "SNDRV_SB"
+    },
+    {
+      "name": "SNDRV_SB_CSP_ST_IDLE",
+      "value": "0x00",
+      "comment": "",
+      "category": "SNDRV_SB"
+    },
+    {
+      "name": "SNDRV_SB_CSP_ST_LOADED",
+      "value": "0x01",
+      "comment": "",
+      "category": "SNDRV_SB"
+    },
+    {
+      "name": "SNDRV_SB_CSP_ST_RUNNING",
+      "value": "0x02",
+      "comment": "",
+      "category": "SNDRV_SB"
+    },
+    {
+      "name": "SNDRV_SB_CSP_ST_PAUSED",
+      "value": "0x04",
+      "comment": "",
+      "category": "SNDRV_SB"
+    },
+    {
+      "name": "SNDRV_SB_CSP_ST_AUTO",
+      "value": "0x08",
+      "comment": "",
+      "category": "SNDRV_SB"
+    },
+    {
+      "name": "SNDRV_SB_CSP_ST_QSOUND",
+      "value": "0x10",
+      "comment": "",
+      "category": "SNDRV_SB"
+    },
+    {
+      "name": "SNDRV_SB_CSP_QSOUND_MAX_RIGHT",
+      "value": "0x20",
+      "comment": "",
+      "category": "SNDRV_SB"
+    },
+    {
+      "name": "SNDRV_SB_CSP_MAX_MICROCODE_FILE_SIZE",
+      "value": "0x3000",
+      "comment": "",
+      "category": "SNDRV_SB"
+    },
+    {
+      "name": "SNDRV_SB_CSP_IOCTL_INFO",
+      "value": "_IOR('H', 0x10, struct snd_sb_csp_info)",
+      "comment": "",
+      "category": "SNDRV_SB"
+    },
+    {
+      "name": "SNDRV_SB_CSP_IOCTL_LOAD_CODE",
+      "value": "",
+      "comment": "",
+      "category": "SNDRV_SB"
+    },
+    {
+      "name": "SNDRV_SB_CSP_IOCTL_UNLOAD_CODE",
+      "value": "_IO('H', 0x12)",
+      "comment": "",
+      "category": "SNDRV_SB"
+    },
+    {
+      "name": "SNDRV_SB_CSP_IOCTL_START",
+      "value": "_IOW('H', 0x13, struct snd_sb_csp_start)",
+      "comment": "",
+      "category": "SNDRV_SB"
+    },
+    {
+      "name": "SNDRV_SB_CSP_IOCTL_STOP",
+      "value": "_IO('H', 0x14)",
+      "comment": "",
+      "category": "SNDRV_SB"
+    },
+    {
+      "name": "SNDRV_SB_CSP_IOCTL_PAUSE",
+      "value": "_IO('H', 0x15)",
+      "comment": "",
+      "category": "SNDRV_SB"
+    },
+    {
+      "name": "SNDRV_SB_CSP_IOCTL_RESTART",
+      "value": "_IO('H', 0x16)",
+      "comment": "",
+      "category": "SNDRV_SB"
+    }
+  ],
+  "structs": [
+    {
+      "name": "snd_sb_csp_mc_header",
+      "fields": [
+        {
+          "type_name": "char",
+          "name": "codec_name",
+          "array_size": "16",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_sb_csp_microcode",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_sb_csp_start",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "sample_width",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "channels",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_sb_csp_info",
+      "fields": [
+        {
+          "type_name": "char",
+          "name": "codec_name",
+          "array_size": "16",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

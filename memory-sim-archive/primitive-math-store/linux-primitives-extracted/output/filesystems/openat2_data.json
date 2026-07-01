@@ -1,0 +1,74 @@
+{
+  "filename": "openat2.h",
+  "includes": [
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "RESOLVE_NO_XDEV",
+      "value": "0x01 /* Block mount-point crossings",
+      "comment": "",
+      "category": "RESOLVE_NO"
+    },
+    {
+      "name": "RESOLVE_NO_MAGICLINKS",
+      "value": "0x02 /* Block traversal through procfs-style",
+      "comment": "",
+      "category": "RESOLVE_NO"
+    },
+    {
+      "name": "RESOLVE_NO_SYMLINKS",
+      "value": "0x04 /* Block traversal through all symlinks",
+      "comment": "",
+      "category": "RESOLVE_NO"
+    },
+    {
+      "name": "RESOLVE_BENEATH",
+      "value": "0x08 /* Block \"lexical\" trickery like",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RESOLVE_IN_ROOT",
+      "value": "0x10 /* Make all jumps to \"/\" and \"..\"",
+      "comment": "",
+      "category": "RESOLVE_IN"
+    },
+    {
+      "name": "RESOLVE_CACHED",
+      "value": "0x20 /* Only complete if resolution can be",
+      "comment": "",
+      "category": ""
+    }
+  ],
+  "structs": [
+    {
+      "name": "open_how",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "mode",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "resolve",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

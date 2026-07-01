@@ -1,0 +1,849 @@
+{
+  "filename": "mii.h",
+  "includes": [
+    "linux/types.h",
+    "linux/ethtool.h"
+  ],
+  "defines": [
+    {
+      "name": "MII_BMCR",
+      "value": "0x00",
+      "comment": "Basic mode control register",
+      "category": ""
+    },
+    {
+      "name": "MII_BMSR",
+      "value": "0x01",
+      "comment": "Basic mode status register",
+      "category": ""
+    },
+    {
+      "name": "MII_PHYSID1",
+      "value": "0x02",
+      "comment": "PHYS ID 1",
+      "category": ""
+    },
+    {
+      "name": "MII_PHYSID2",
+      "value": "0x03",
+      "comment": "PHYS ID 2",
+      "category": ""
+    },
+    {
+      "name": "MII_ADVERTISE",
+      "value": "0x04",
+      "comment": "Advertisement control reg",
+      "category": ""
+    },
+    {
+      "name": "MII_LPA",
+      "value": "0x05",
+      "comment": "Link partner ability reg",
+      "category": ""
+    },
+    {
+      "name": "MII_EXPANSION",
+      "value": "0x06",
+      "comment": "Expansion register",
+      "category": ""
+    },
+    {
+      "name": "MII_CTRL1000",
+      "value": "0x09",
+      "comment": "1000BASE-T control",
+      "category": ""
+    },
+    {
+      "name": "MII_STAT1000",
+      "value": "0x0a",
+      "comment": "1000BASE-T status",
+      "category": ""
+    },
+    {
+      "name": "MII_MMD_CTRL",
+      "value": "0x0d",
+      "comment": "MMD Access Control Register",
+      "category": "MII_MMD"
+    },
+    {
+      "name": "MII_MMD_DATA",
+      "value": "0x0e",
+      "comment": "MMD Access Data Register",
+      "category": "MII_MMD"
+    },
+    {
+      "name": "MII_ESTATUS",
+      "value": "0x0f",
+      "comment": "Extended Status",
+      "category": ""
+    },
+    {
+      "name": "MII_DCOUNTER",
+      "value": "0x12",
+      "comment": "Disconnect counter",
+      "category": ""
+    },
+    {
+      "name": "MII_FCSCOUNTER",
+      "value": "0x13",
+      "comment": "False carrier counter",
+      "category": ""
+    },
+    {
+      "name": "MII_NWAYTEST",
+      "value": "0x14",
+      "comment": "N-way auto-neg test reg",
+      "category": ""
+    },
+    {
+      "name": "MII_RERRCOUNTER",
+      "value": "0x15",
+      "comment": "Receive error counter",
+      "category": ""
+    },
+    {
+      "name": "MII_SREVISION",
+      "value": "0x16",
+      "comment": "Silicon revision",
+      "category": ""
+    },
+    {
+      "name": "MII_RESV1",
+      "value": "0x17",
+      "comment": "Reserved...",
+      "category": ""
+    },
+    {
+      "name": "MII_LBRERROR",
+      "value": "0x18",
+      "comment": "Lpback, rx, bypass error",
+      "category": ""
+    },
+    {
+      "name": "MII_PHYADDR",
+      "value": "0x19",
+      "comment": "PHY address",
+      "category": ""
+    },
+    {
+      "name": "MII_RESV2",
+      "value": "0x1a",
+      "comment": "Reserved...",
+      "category": ""
+    },
+    {
+      "name": "MII_TPISTATUS",
+      "value": "0x1b",
+      "comment": "TPI status for 10mbps",
+      "category": ""
+    },
+    {
+      "name": "MII_NCONFIG",
+      "value": "0x1c",
+      "comment": "Network interface config",
+      "category": ""
+    },
+    {
+      "name": "BMCR_RESV",
+      "value": "0x003f",
+      "comment": "Unused...",
+      "category": ""
+    },
+    {
+      "name": "BMCR_SPEED1000",
+      "value": "0x0040",
+      "comment": "MSB of Speed (1000)",
+      "category": ""
+    },
+    {
+      "name": "BMCR_CTST",
+      "value": "0x0080",
+      "comment": "Collision test",
+      "category": ""
+    },
+    {
+      "name": "BMCR_FULLDPLX",
+      "value": "0x0100",
+      "comment": "Full duplex",
+      "category": ""
+    },
+    {
+      "name": "BMCR_ANRESTART",
+      "value": "0x0200",
+      "comment": "Auto negotiation restart",
+      "category": ""
+    },
+    {
+      "name": "BMCR_ISOLATE",
+      "value": "0x0400",
+      "comment": "Isolate data paths from MII",
+      "category": ""
+    },
+    {
+      "name": "BMCR_PDOWN",
+      "value": "0x0800",
+      "comment": "Enable low power state",
+      "category": ""
+    },
+    {
+      "name": "BMCR_ANENABLE",
+      "value": "0x1000",
+      "comment": "Enable auto negotiation",
+      "category": ""
+    },
+    {
+      "name": "BMCR_SPEED100",
+      "value": "0x2000",
+      "comment": "Select 100Mbps",
+      "category": ""
+    },
+    {
+      "name": "BMCR_LOOPBACK",
+      "value": "0x4000",
+      "comment": "TXD loopback bits",
+      "category": ""
+    },
+    {
+      "name": "BMCR_RESET",
+      "value": "0x8000",
+      "comment": "Reset to default state",
+      "category": ""
+    },
+    {
+      "name": "BMCR_SPEED10",
+      "value": "0x0000",
+      "comment": "Select 10Mbps",
+      "category": ""
+    },
+    {
+      "name": "BMSR_ERCAP",
+      "value": "0x0001",
+      "comment": "Ext-reg capability",
+      "category": ""
+    },
+    {
+      "name": "BMSR_JCD",
+      "value": "0x0002",
+      "comment": "Jabber detected",
+      "category": ""
+    },
+    {
+      "name": "BMSR_LSTATUS",
+      "value": "0x0004",
+      "comment": "Link status",
+      "category": ""
+    },
+    {
+      "name": "BMSR_ANEGCAPABLE",
+      "value": "0x0008",
+      "comment": "Able to do auto-negotiation",
+      "category": ""
+    },
+    {
+      "name": "BMSR_RFAULT",
+      "value": "0x0010",
+      "comment": "Remote fault detected",
+      "category": ""
+    },
+    {
+      "name": "BMSR_ANEGCOMPLETE",
+      "value": "0x0020",
+      "comment": "Auto-negotiation complete",
+      "category": ""
+    },
+    {
+      "name": "BMSR_RESV",
+      "value": "0x00c0",
+      "comment": "Unused...",
+      "category": ""
+    },
+    {
+      "name": "BMSR_ESTATEN",
+      "value": "0x0100",
+      "comment": "Extended Status in R15",
+      "category": ""
+    },
+    {
+      "name": "BMSR_100HALF2",
+      "value": "0x0200",
+      "comment": "Can do 100BASE-T2 HDX",
+      "category": ""
+    },
+    {
+      "name": "BMSR_100FULL2",
+      "value": "0x0400",
+      "comment": "Can do 100BASE-T2 FDX",
+      "category": ""
+    },
+    {
+      "name": "BMSR_10HALF",
+      "value": "0x0800",
+      "comment": "Can do 10mbps, half-duplex",
+      "category": ""
+    },
+    {
+      "name": "BMSR_10FULL",
+      "value": "0x1000",
+      "comment": "Can do 10mbps, full-duplex",
+      "category": ""
+    },
+    {
+      "name": "BMSR_100HALF",
+      "value": "0x2000",
+      "comment": "Can do 100mbps, half-duplex",
+      "category": ""
+    },
+    {
+      "name": "BMSR_100FULL",
+      "value": "0x4000",
+      "comment": "Can do 100mbps, full-duplex",
+      "category": ""
+    },
+    {
+      "name": "BMSR_100BASE4",
+      "value": "0x8000",
+      "comment": "Can do 100mbps, 4k packets",
+      "category": ""
+    },
+    {
+      "name": "ADVERTISE_SLCT",
+      "value": "0x001f",
+      "comment": "Selector bits",
+      "category": ""
+    },
+    {
+      "name": "ADVERTISE_CSMA",
+      "value": "0x0001",
+      "comment": "Only selector supported",
+      "category": ""
+    },
+    {
+      "name": "ADVERTISE_10HALF",
+      "value": "0x0020",
+      "comment": "Try for 10mbps half-duplex",
+      "category": ""
+    },
+    {
+      "name": "ADVERTISE_1000XFULL",
+      "value": "0x0020",
+      "comment": "Try for 1000BASE-X full-duplex",
+      "category": ""
+    },
+    {
+      "name": "ADVERTISE_10FULL",
+      "value": "0x0040",
+      "comment": "Try for 10mbps full-duplex",
+      "category": ""
+    },
+    {
+      "name": "ADVERTISE_1000XHALF",
+      "value": "0x0040",
+      "comment": "Try for 1000BASE-X half-duplex",
+      "category": ""
+    },
+    {
+      "name": "ADVERTISE_100HALF",
+      "value": "0x0080",
+      "comment": "Try for 100mbps half-duplex",
+      "category": ""
+    },
+    {
+      "name": "ADVERTISE_1000XPAUSE",
+      "value": "0x0080",
+      "comment": "Try for 1000BASE-X pause",
+      "category": ""
+    },
+    {
+      "name": "ADVERTISE_100FULL",
+      "value": "0x0100",
+      "comment": "Try for 100mbps full-duplex",
+      "category": ""
+    },
+    {
+      "name": "ADVERTISE_1000XPSE_ASYM",
+      "value": "0x0100",
+      "comment": "Try for 1000BASE-X asym pause",
+      "category": ""
+    },
+    {
+      "name": "ADVERTISE_100BASE4",
+      "value": "0x0200",
+      "comment": "Try for 100mbps 4k packets",
+      "category": ""
+    },
+    {
+      "name": "ADVERTISE_PAUSE_CAP",
+      "value": "0x0400",
+      "comment": "Try for pause",
+      "category": "ADVERTISE_PAUSE"
+    },
+    {
+      "name": "ADVERTISE_PAUSE_ASYM",
+      "value": "0x0800",
+      "comment": "Try for asymetric pause",
+      "category": "ADVERTISE_PAUSE"
+    },
+    {
+      "name": "ADVERTISE_XNP",
+      "value": "0x1000",
+      "comment": "Extended Next Page",
+      "category": ""
+    },
+    {
+      "name": "ADVERTISE_RESV",
+      "value": "ADVERTISE_XNP",
+      "comment": "Used to be reserved",
+      "category": ""
+    },
+    {
+      "name": "ADVERTISE_RFAULT",
+      "value": "0x2000",
+      "comment": "Say we can detect faults",
+      "category": ""
+    },
+    {
+      "name": "ADVERTISE_LPACK",
+      "value": "0x4000",
+      "comment": "Ack link partners response",
+      "category": ""
+    },
+    {
+      "name": "ADVERTISE_NPAGE",
+      "value": "0x8000",
+      "comment": "Next page bit",
+      "category": ""
+    },
+    {
+      "name": "ADVERTISE_FULL",
+      "value": "(ADVERTISE_100FULL | ADVERTISE_10FULL | ",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ADVERTISE_ALL",
+      "value": "(ADVERTISE_10HALF | ADVERTISE_10FULL | ",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "LPA_SLCT",
+      "value": "0x001f",
+      "comment": "Same as advertise selector",
+      "category": ""
+    },
+    {
+      "name": "LPA_10HALF",
+      "value": "0x0020",
+      "comment": "Can do 10mbps half-duplex",
+      "category": ""
+    },
+    {
+      "name": "LPA_1000XFULL",
+      "value": "0x0020",
+      "comment": "Can do 1000BASE-X full-duplex",
+      "category": ""
+    },
+    {
+      "name": "LPA_10FULL",
+      "value": "0x0040",
+      "comment": "Can do 10mbps full-duplex",
+      "category": ""
+    },
+    {
+      "name": "LPA_1000XHALF",
+      "value": "0x0040",
+      "comment": "Can do 1000BASE-X half-duplex",
+      "category": ""
+    },
+    {
+      "name": "LPA_100HALF",
+      "value": "0x0080",
+      "comment": "Can do 100mbps half-duplex",
+      "category": ""
+    },
+    {
+      "name": "LPA_1000XPAUSE",
+      "value": "0x0080",
+      "comment": "Can do 1000BASE-X pause",
+      "category": ""
+    },
+    {
+      "name": "LPA_100FULL",
+      "value": "0x0100",
+      "comment": "Can do 100mbps full-duplex",
+      "category": ""
+    },
+    {
+      "name": "LPA_1000XPAUSE_ASYM",
+      "value": "0x0100",
+      "comment": "Can do 1000BASE-X pause asym",
+      "category": ""
+    },
+    {
+      "name": "LPA_100BASE4",
+      "value": "0x0200",
+      "comment": "Can do 100mbps 4k packets",
+      "category": ""
+    },
+    {
+      "name": "LPA_PAUSE_CAP",
+      "value": "0x0400",
+      "comment": "Can pause",
+      "category": "LPA_PAUSE"
+    },
+    {
+      "name": "LPA_PAUSE_ASYM",
+      "value": "0x0800",
+      "comment": "Can pause asymetrically",
+      "category": "LPA_PAUSE"
+    },
+    {
+      "name": "LPA_RESV",
+      "value": "0x1000",
+      "comment": "Unused...",
+      "category": ""
+    },
+    {
+      "name": "LPA_RFAULT",
+      "value": "0x2000",
+      "comment": "Link partner faulted",
+      "category": ""
+    },
+    {
+      "name": "LPA_LPACK",
+      "value": "0x4000",
+      "comment": "Link partner acked us",
+      "category": ""
+    },
+    {
+      "name": "LPA_NPAGE",
+      "value": "0x8000",
+      "comment": "Next page bit",
+      "category": ""
+    },
+    {
+      "name": "LPA_DUPLEX",
+      "value": "(LPA_10FULL | LPA_100FULL)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "LPA_100",
+      "value": "(LPA_100FULL | LPA_100HALF | LPA_100BASE4)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EXPANSION_NWAY",
+      "value": "0x0001",
+      "comment": "Can do N-way auto-nego",
+      "category": ""
+    },
+    {
+      "name": "EXPANSION_LCWP",
+      "value": "0x0002",
+      "comment": "Got new RX page code word",
+      "category": ""
+    },
+    {
+      "name": "EXPANSION_ENABLENPAGE",
+      "value": "0x0004",
+      "comment": "This enables npage words",
+      "category": ""
+    },
+    {
+      "name": "EXPANSION_NPCAPABLE",
+      "value": "0x0008",
+      "comment": "Link partner supports npage",
+      "category": ""
+    },
+    {
+      "name": "EXPANSION_MFAULTS",
+      "value": "0x0010",
+      "comment": "Multiple faults detected",
+      "category": ""
+    },
+    {
+      "name": "EXPANSION_RESV",
+      "value": "0xffe0",
+      "comment": "Unused...",
+      "category": ""
+    },
+    {
+      "name": "ESTATUS_1000_XFULL",
+      "value": "0x8000",
+      "comment": "Can do 1000BaseX Full",
+      "category": ""
+    },
+    {
+      "name": "ESTATUS_1000_XHALF",
+      "value": "0x4000",
+      "comment": "Can do 1000BaseX Half",
+      "category": ""
+    },
+    {
+      "name": "ESTATUS_1000_TFULL",
+      "value": "0x2000",
+      "comment": "Can do 1000BT Full",
+      "category": ""
+    },
+    {
+      "name": "ESTATUS_1000_THALF",
+      "value": "0x1000",
+      "comment": "Can do 1000BT Half",
+      "category": ""
+    },
+    {
+      "name": "NWAYTEST_RESV1",
+      "value": "0x00ff",
+      "comment": "Unused...",
+      "category": ""
+    },
+    {
+      "name": "NWAYTEST_LOOPBACK",
+      "value": "0x0100",
+      "comment": "Enable loopback for N-way",
+      "category": ""
+    },
+    {
+      "name": "NWAYTEST_RESV2",
+      "value": "0xfe00",
+      "comment": "Unused...",
+      "category": ""
+    },
+    {
+      "name": "ADVERTISE_SGMII",
+      "value": "0x0001",
+      "comment": "MAC can do SGMII",
+      "category": ""
+    },
+    {
+      "name": "LPA_SGMII",
+      "value": "0x0001",
+      "comment": "PHY can do SGMII",
+      "category": ""
+    },
+    {
+      "name": "LPA_SGMII_SPD_MASK",
+      "value": "0x0c00",
+      "comment": "SGMII speed mask",
+      "category": "LPA_SGMII"
+    },
+    {
+      "name": "LPA_SGMII_FULL_DUPLEX",
+      "value": "0x1000",
+      "comment": "SGMII full duplex",
+      "category": "LPA_SGMII"
+    },
+    {
+      "name": "LPA_SGMII_DPX_SPD_MASK",
+      "value": "0x1C00",
+      "comment": "SGMII duplex and speed bits",
+      "category": "LPA_SGMII"
+    },
+    {
+      "name": "LPA_SGMII_10",
+      "value": "0x0000",
+      "comment": "10Mbps",
+      "category": "LPA_SGMII"
+    },
+    {
+      "name": "LPA_SGMII_10HALF",
+      "value": "0x0000",
+      "comment": "Can do 10mbps half-duplex",
+      "category": "LPA_SGMII"
+    },
+    {
+      "name": "LPA_SGMII_10FULL",
+      "value": "0x1000",
+      "comment": "Can do 10mbps full-duplex",
+      "category": "LPA_SGMII"
+    },
+    {
+      "name": "LPA_SGMII_100",
+      "value": "0x0400",
+      "comment": "100Mbps",
+      "category": "LPA_SGMII"
+    },
+    {
+      "name": "LPA_SGMII_100HALF",
+      "value": "0x0400",
+      "comment": "Can do 100mbps half-duplex",
+      "category": "LPA_SGMII"
+    },
+    {
+      "name": "LPA_SGMII_100FULL",
+      "value": "0x1400",
+      "comment": "Can do 100mbps full-duplex",
+      "category": "LPA_SGMII"
+    },
+    {
+      "name": "LPA_SGMII_1000",
+      "value": "0x0800",
+      "comment": "1000Mbps",
+      "category": "LPA_SGMII"
+    },
+    {
+      "name": "LPA_SGMII_1000HALF",
+      "value": "0x0800",
+      "comment": "Can do 1000mbps half-duplex",
+      "category": "LPA_SGMII"
+    },
+    {
+      "name": "LPA_SGMII_1000FULL",
+      "value": "0x1800",
+      "comment": "Can do 1000mbps full-duplex",
+      "category": "LPA_SGMII"
+    },
+    {
+      "name": "LPA_SGMII_LINK",
+      "value": "0x8000",
+      "comment": "PHY link with copper-side partner",
+      "category": "LPA_SGMII"
+    },
+    {
+      "name": "ADVERTISE_1000FULL",
+      "value": "0x0200",
+      "comment": "Advertise 1000BASE-T full duplex",
+      "category": ""
+    },
+    {
+      "name": "ADVERTISE_1000HALF",
+      "value": "0x0100",
+      "comment": "Advertise 1000BASE-T half duplex",
+      "category": ""
+    },
+    {
+      "name": "CTL1000_PREFER_MASTER",
+      "value": "0x0400",
+      "comment": "prefer to operate as master",
+      "category": ""
+    },
+    {
+      "name": "CTL1000_AS_MASTER",
+      "value": "0x0800",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "CTL1000_ENABLE_MASTER",
+      "value": "0x1000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "LPA_1000MSFAIL",
+      "value": "0x8000",
+      "comment": "Master/Slave resolution failure",
+      "category": ""
+    },
+    {
+      "name": "LPA_1000MSRES",
+      "value": "0x4000",
+      "comment": "Master/Slave resolution status",
+      "category": ""
+    },
+    {
+      "name": "LPA_1000LOCALRXOK",
+      "value": "0x2000",
+      "comment": "Link partner local receiver status",
+      "category": ""
+    },
+    {
+      "name": "LPA_1000REMRXOK",
+      "value": "0x1000",
+      "comment": "Link partner remote receiver status",
+      "category": ""
+    },
+    {
+      "name": "LPA_1000FULL",
+      "value": "0x0800",
+      "comment": "Link partner 1000BASE-T full duplex",
+      "category": ""
+    },
+    {
+      "name": "LPA_1000HALF",
+      "value": "0x0400",
+      "comment": "Link partner 1000BASE-T half duplex",
+      "category": ""
+    },
+    {
+      "name": "FLOW_CTRL_TX",
+      "value": "0x01",
+      "comment": "",
+      "category": "FLOW_CTRL"
+    },
+    {
+      "name": "FLOW_CTRL_RX",
+      "value": "0x02",
+      "comment": "",
+      "category": "FLOW_CTRL"
+    },
+    {
+      "name": "MII_MMD_CTRL_DEVAD_MASK",
+      "value": "0x1f",
+      "comment": "Mask MMD DEVAD",
+      "category": "MII_MMD"
+    },
+    {
+      "name": "MII_MMD_CTRL_ADDR",
+      "value": "0x0000",
+      "comment": "Address",
+      "category": "MII_MMD"
+    },
+    {
+      "name": "MII_MMD_CTRL_NOINCR",
+      "value": "0x4000",
+      "comment": "no post increment",
+      "category": "MII_MMD"
+    },
+    {
+      "name": "MII_MMD_CTRL_INCR_RDWT",
+      "value": "0x8000",
+      "comment": "post increment on reads & writes",
+      "category": "MII_MMD"
+    },
+    {
+      "name": "MII_MMD_CTRL_INCR_ON_WT",
+      "value": "0xC000",
+      "comment": "post increment on writes only",
+      "category": "MII_MMD"
+    }
+  ],
+  "structs": [
+    {
+      "name": "mii_ioctl_data",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "phy_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "reg_num",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "val_in",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "val_out",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

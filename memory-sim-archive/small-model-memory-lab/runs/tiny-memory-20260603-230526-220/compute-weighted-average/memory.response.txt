@@ -1,0 +1,89 @@
+﻿Thinking Process:
+
+1.  **Analyze the Request:**
+    *   Input: A math problem about calculating an average across 5 tests given partial information (3 scores with avg 82, plus two new scores 90 and 76).
+    *   Constraints:
+        *   Use relevant remembered experiences as cognitive cues (carry units, check final units, label confidence, pin task facts before comparing).
+        *   Answer shape: plain arithmetic, repeat given quantities, state final numeric answer with full unit name in ordinary text.
+        *   Concise answer.
+        *   No hidden reasoning tags.
+        *   Include uncertainty and next action when relevant (though this is a deterministic math problem, so uncertainty might be low/none).
+        *   Do not quote the memory patterns or continue the list.
+
+2.  **Task Facts:**
+    *   Number of initial tests: 3
+    *   Average of initial tests: 82
+    *   Next score 1: 90
+    *   Next score 2: 76
+    *   Total tests to average: 5
+
+3.  **Calculation Steps:**
+    *   Sum of first 3 scores = $3 \times 82$.
+    *   Sum of next 2 scores = $90 + 76$.
+    *   Total sum = (Sum of first 3) + (Sum of next 2).
+    *   New Average = Total sum / 5.
+
+4.  **Execute Calculation:**
+    *   $3 \times 82 = 246$ points.
+    *   $90 + 76 = 166$ points.
+    *   Total sum = $246 + 166 = 412$ points.
+    *   Average = $412 / 5$.
+    *   $412 / 5 = 82.4$.
+
+5.  **Apply Cognitive Cues:**
+    *   Carry units: "points" or "test scores". Let's use "points" as the unit for scores.
+    *   Check final units: The result is an average score, so "points" per test or just "points". Usually, averages are expressed in the same unit as the individual items. So "82.4 points".
+    *   Label confidence: High (deterministic math).
+    *   Pin task facts: 3 tests @ 82 avg, scores 90 and 76 added.
+
+6.  **Drafting the Answer:**
+    *   Must repeat given quantities.
+    *   Plain arithmetic setup.
+    *   Final numeric answer with full unit name.
+    *   Concise.
+    *   No hidden tags.
+
+    *Draft:*
+    Total points from first 3 tests = 3 × 82 points = 246 points.
+    Points from next two tests = 90 + 76 = 166 points.
+    Total sum = 246 + 166 = 412 points.
+    Average across all 5 tests = 412 points / 5 tests = 82.4 points.
+    Confidence: High.
+
+    *Refining for constraints:* "Answer shape: use plain arithmetic, repeat the given quantities, and state the final numeric answer with the full unit name in ordinary text."
+    Also need to include uncertainty/next action if relevant. Since it's a math problem, uncertainty is low. I will label confidence as requested by the memory cue ("label confidence as high, medium, or low based on evidence").
+
+    *Revised Draft:*
+    Sum of first 3 tests: 3 × 82 = 246 points.
+    Sum of next 2 tests: 90 + 76 = 166 points.
+    Total sum: 246 + 166 = 412 points.
+    Average across all 5 tests: 412 ÷ 5 = 82.4 points.
+    Confidence: High.
+
+    *Checking constraints again:* "Do not write hidden reasoning tags." -> Okay. "Include uncertainty and next action when relevant." -> Since it's a solved problem, next action isn't really relevant, but I can state the confidence level as per the memory cue instruction ("label confidence..."). The prompt says "Include uncertainty and next action when relevant". For a math calculation, uncertainty is low/none. I will include the confidence label as part of the cognitive cue application.
+
+    *Final Polish:* Ensure units are carried through.
+    3 tests × 82 points/test = 246 points.
+    Next scores: 90 points + 76 points = 166 points.
+    Total: 246 points + 166 points = 412 points.
+    Average: 412 points / 5 tests = 82.4 points per test.
+
+    Let's stick to "points" as the unit name for simplicity, or "test score points". The prompt asks for "full unit name". "points" is standard.
+
+    Wait, checking the memory cue: "Kate pins task facts before comparing so memory cannot reverse them". This implies I should state the facts clearly first.
+    Facts pinned: 3 tests average 82, scores 90 and 76 added. Total 5 tests.
+
+    Final check on "Answer shape": plain arithmetic, repeat given quantities, final numeric answer with full unit name in ordinary text.
+
+    Let's write it out.
+
+    Sum of first 3 tests: 3 × 82 = 246 points.
+    Sum of next 2 tests: 90 + 76 = 166 points.
+    Total sum: 246 + 166 = 412 points.
+    Average across all 5 tests: 412 ÷ 5 = 82.4 points.
+    Confidence: High.
+
+    Is "points" the full unit name? Usually test scores are dimensionless or "points". I'll use "points".
+    The instruction says "Include uncertainty and next action when relevant." Since this is a calculation, there is no uncertainty in the math itself, but I will label confidence as per the memory cue pattern.
+
+    One more check: "Do not quote them or continue

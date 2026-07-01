@@ -1,0 +1,1701 @@
+{
+  "filename": "gfs2_ondisk.h",
+  "includes": [
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "GFS2_MAGIC",
+      "value": "0x01161970",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_BASIC_BLOCK",
+      "value": "512",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_BASIC_BLOCK_SHIFT",
+      "value": "9",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_MOUNT_LOCK",
+      "value": "0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_LIVE_LOCK",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_FREEZE_LOCK",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_RENAME_LOCK",
+      "value": "3",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_CONTROL_LOCK",
+      "value": "4",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_MOUNTED_LOCK",
+      "value": "5",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_FORMAT_NONE",
+      "value": "0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_FORMAT_SB",
+      "value": "100",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_FORMAT_RG",
+      "value": "200",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_FORMAT_RB",
+      "value": "300",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_FORMAT_DI",
+      "value": "400",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_FORMAT_IN",
+      "value": "500",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_FORMAT_LF",
+      "value": "600",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_FORMAT_JD",
+      "value": "700",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_FORMAT_LH",
+      "value": "800",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_FORMAT_LD",
+      "value": "900",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_FORMAT_LB",
+      "value": "1000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_FORMAT_EA",
+      "value": "1600",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_FORMAT_ED",
+      "value": "1700",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_FORMAT_QC",
+      "value": "1400",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_FORMAT_RI",
+      "value": "1100",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_FORMAT_DE",
+      "value": "1200",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_FORMAT_QU",
+      "value": "1500",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_FORMAT_FS",
+      "value": "1802",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_FORMAT_MULTI",
+      "value": "1900",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_METATYPE_NONE",
+      "value": "0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_METATYPE_SB",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_METATYPE_RG",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_METATYPE_RB",
+      "value": "3",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_METATYPE_DI",
+      "value": "4",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_METATYPE_IN",
+      "value": "5",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_METATYPE_LF",
+      "value": "6",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_METATYPE_JD",
+      "value": "7",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_METATYPE_LH",
+      "value": "8",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_METATYPE_LD",
+      "value": "9",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_METATYPE_LB",
+      "value": "12",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_METATYPE_EA",
+      "value": "10",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_METATYPE_ED",
+      "value": "11",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_METATYPE_QC",
+      "value": "14",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_SB_ADDR",
+      "value": "128",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_SB_LOCK",
+      "value": "0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_LOCKNAME_LEN",
+      "value": "64",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_HAS_UUID",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_NBBY",
+      "value": "4",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_BIT_SIZE",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_BIT_MASK",
+      "value": "0x00000003",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_BLKST_FREE",
+      "value": "0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_BLKST_USED",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_BLKST_UNLINKED",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_BLKST_DINODE",
+      "value": "3",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_RGF_JOURNAL",
+      "value": "0x00000001",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_RGF_METAONLY",
+      "value": "0x00000002",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_RGF_DATAONLY",
+      "value": "0x00000004",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_RGF_NOALLOC",
+      "value": "0x00000008",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_RGF_TRIMMED",
+      "value": "0x00000010",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_MAX_META_HEIGHT",
+      "value": "10",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_DIR_MAX_DEPTH",
+      "value": "17",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_DIF_JDATA",
+      "value": "0x00000001",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_DIF_EXHASH",
+      "value": "0x00000002",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_DIF_UNUSED",
+      "value": "0x00000004",
+      "comment": "only in gfs1",
+      "category": ""
+    },
+    {
+      "name": "GFS2_DIF_EA_INDIRECT",
+      "value": "0x00000008",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_DIF_DIRECTIO",
+      "value": "0x00000010",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_DIF_IMMUTABLE",
+      "value": "0x00000020",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_DIF_APPENDONLY",
+      "value": "0x00000040",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_DIF_NOATIME",
+      "value": "0x00000080",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_DIF_SYNC",
+      "value": "0x00000100",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_DIF_SYSTEM",
+      "value": "0x00000200",
+      "comment": "New in gfs2",
+      "category": ""
+    },
+    {
+      "name": "GFS2_DIF_TOPDIR",
+      "value": "0x00000400",
+      "comment": "New in gfs2",
+      "category": ""
+    },
+    {
+      "name": "GFS2_DIF_TRUNC_IN_PROG",
+      "value": "0x20000000",
+      "comment": "New in gfs2",
+      "category": ""
+    },
+    {
+      "name": "GFS2_DIF_INHERIT_DIRECTIO",
+      "value": "0x40000000",
+      "comment": "only in gfs1",
+      "category": ""
+    },
+    {
+      "name": "GFS2_DIF_INHERIT_JDATA",
+      "value": "0x80000000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_FNAMESIZE",
+      "value": "255",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_MIN_DIRENT_SIZE",
+      "value": "(GFS2_DIRENT_SIZE(1))",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_EA_MAX_NAME_LEN",
+      "value": "255",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_EA_MAX_DATA_LEN",
+      "value": "65536",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_EATYPE_UNUSED",
+      "value": "0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_EATYPE_USR",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_EATYPE_SYS",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_EATYPE_SECURITY",
+      "value": "3",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_EATYPE_TRUSTED",
+      "value": "4",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_EATYPE_LAST",
+      "value": "4",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_EAFLAG_LAST",
+      "value": "0x01",
+      "comment": "last ea in block",
+      "category": ""
+    },
+    {
+      "name": "GFS2_LOG_HEAD_UNMOUNT",
+      "value": "0x00000001",
+      "comment": "log is clean",
+      "category": ""
+    },
+    {
+      "name": "GFS2_LOG_HEAD_FLUSH_NORMAL",
+      "value": "0x00000002",
+      "comment": "normal log flush",
+      "category": ""
+    },
+    {
+      "name": "GFS2_LOG_HEAD_FLUSH_SYNC",
+      "value": "0x00000004",
+      "comment": "Sync log flush",
+      "category": ""
+    },
+    {
+      "name": "GFS2_LOG_HEAD_FLUSH_SHUTDOWN",
+      "value": "0x00000008",
+      "comment": "Shutdown log flush",
+      "category": ""
+    },
+    {
+      "name": "GFS2_LOG_HEAD_FLUSH_FREEZE",
+      "value": "0x00000010",
+      "comment": "Freeze flush",
+      "category": ""
+    },
+    {
+      "name": "GFS2_LOG_HEAD_RECOVERY",
+      "value": "0x00000020",
+      "comment": "Journal recovery",
+      "category": ""
+    },
+    {
+      "name": "GFS2_LOG_HEAD_USERSPACE",
+      "value": "0x80000000",
+      "comment": "Written by gfs2-utils",
+      "category": ""
+    },
+    {
+      "name": "GFS2_LFC_SHUTDOWN",
+      "value": "0x00000100",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_LFC_JDATA_WPAGES",
+      "value": "0x00000200",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_LFC_SET_FLAGS",
+      "value": "0x00000400",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_LFC_AIL_EMPTY_GL",
+      "value": "0x00000800",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_LFC_AIL_FLUSH",
+      "value": "0x00001000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_LFC_RGRP_GO_SYNC",
+      "value": "0x00002000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_LFC_INODE_GO_SYNC",
+      "value": "0x00004000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_LFC_INODE_GO_INVAL",
+      "value": "0x00008000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_LFC_FREEZE_GO_SYNC",
+      "value": "0x00010000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_LFC_KILL_SB",
+      "value": "0x00020000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_LFC_DO_SYNC",
+      "value": "0x00040000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_LFC_INPLACE_RESERVE",
+      "value": "0x00080000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_LFC_WRITE_INODE",
+      "value": "0x00100000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_LFC_MAKE_FS_RO",
+      "value": "0x00200000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_LFC_SYNC_FS",
+      "value": "0x00400000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_LFC_EVICT_INODE",
+      "value": "0x00800000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_LFC_TRANS_END",
+      "value": "0x01000000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_LFC_LOGD_JFLUSH_REQD",
+      "value": "0x02000000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_LFC_LOGD_AIL_FLUSH_REQD",
+      "value": "0x04000000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "LH_V1_SIZE",
+      "value": "(offsetofend(struct gfs2_log_header, lh_hash))",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_LOG_DESC_METADATA",
+      "value": "300",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_LOG_DESC_REVOKE",
+      "value": "301",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_LOG_DESC_JDATA",
+      "value": "302",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_INUM_QUANTUM",
+      "value": "1048576",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GFS2_QCF_USER",
+      "value": "0x00000001",
+      "comment": "",
+      "category": ""
+    }
+  ],
+  "structs": [
+    {
+      "name": "gfs2_inum",
+      "fields": [
+        {
+          "type_name": "__be64",
+          "name": "no_formal_ino",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be64",
+          "name": "no_addr",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "gfs2_meta_header",
+      "fields": [
+        {
+          "type_name": "__be32",
+          "name": "mh_magic",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "mh_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be64",
+          "name": "__pad0",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "mh_format",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "mh_jid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "__pad1",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "gfs2_sb",
+      "fields": [
+        {
+          "type_name": "__be32",
+          "name": "sb_fs_format",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "sb_multihost_format",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "__pad0",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "sb_bsize",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "sb_bsize_shift",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "__pad1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "sb_lockproto",
+          "array_size": "GFS2_LOCKNAME_LEN",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "sb_locktable",
+          "array_size": "GFS2_LOCKNAME_LEN",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "sb_uuid",
+          "array_size": "16",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "gfs2_rindex",
+      "fields": [
+        {
+          "type_name": "__be64",
+          "name": "ri_addr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "ri_length",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "__pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be64",
+          "name": "ri_data0",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "ri_data",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "ri_bitbytes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "ri_reserved",
+          "array_size": "64",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "gfs2_inode_lvb",
+      "fields": [
+        {
+          "type_name": "__be32",
+          "name": "ri_magic",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "__pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be64",
+          "name": "ri_generation_deleted",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "gfs2_rgrp_lvb",
+      "fields": [
+        {
+          "type_name": "__be32",
+          "name": "rl_magic",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "rl_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "rl_free",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "rl_dinodes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be64",
+          "name": "rl_igeneration",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "rl_unlinked",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "__pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "gfs2_rgrp",
+      "fields": [
+        {
+          "type_name": "__be32",
+          "name": "rg_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "rg_free",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "rg_dinodes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "__pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "rg_skip",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be64",
+          "name": "rg_igeneration",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be64",
+          "name": "rg_data0",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "rg_data",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "rg_bitbytes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "rg_crc",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "rg_reserved",
+          "array_size": "60",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "gfs2_quota",
+      "fields": [
+        {
+          "type_name": "__be64",
+          "name": "qu_limit",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be64",
+          "name": "qu_warn",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be64",
+          "name": "qu_value",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "qu_reserved",
+          "array_size": "64",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "gfs2_dinode",
+      "fields": [
+        {
+          "type_name": "__be32",
+          "name": "di_mode",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "di_uid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "di_gid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "di_nlink",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be64",
+          "name": "di_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be64",
+          "name": "di_blocks",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be64",
+          "name": "di_atime",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be64",
+          "name": "di_mtime",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be64",
+          "name": "di_ctime",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "di_major",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "di_minor",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be64",
+          "name": "di_goal_meta",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be64",
+          "name": "di_goal_data",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be64",
+          "name": "di_generation",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "di_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "di_payload_format",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "__pad1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be16",
+          "name": "di_height",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "__pad2",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "__pad3",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be16",
+          "name": "di_depth",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "di_entries",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be64",
+          "name": "di_eattr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "di_atime_nsec",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "di_mtime_nsec",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "di_ctime_nsec",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "di_reserved",
+          "array_size": "44",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "gfs2_dirent",
+      "fields": [
+        {
+          "type_name": "__be32",
+          "name": "de_hash",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be16",
+          "name": "de_rec_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be16",
+          "name": "de_name_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be16",
+          "name": "de_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be16",
+          "name": "de_rahead",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "__pad",
+          "array_size": "12",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "de_cookie",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "pad3",
+          "array_size": "8",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_10",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "de_cookie",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "pad3",
+          "array_size": "8",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "gfs2_leaf",
+      "fields": [
+        {
+          "type_name": "__be16",
+          "name": "lf_depth",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be16",
+          "name": "lf_entries",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "lf_dirent_format",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be64",
+          "name": "lf_next",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "lf_reserved",
+          "array_size": "64",
+          "comment": ""
+        },
+        {
+          "type_name": "__be64",
+          "name": "lf_inode",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "lf_dist",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "lf_nsec",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be64",
+          "name": "lf_sec",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "lf_reserved2",
+          "array_size": "40",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_12",
+      "fields": [
+        {
+          "type_name": "__be64",
+          "name": "lf_inode",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "lf_dist",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "lf_nsec",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be64",
+          "name": "lf_sec",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "lf_reserved2",
+          "array_size": "40",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "gfs2_ea_header",
+      "fields": [
+        {
+          "type_name": "__be32",
+          "name": "ea_rec_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "ea_data_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "ea_name_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "ea_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "ea_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "ea_num_ptrs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "__pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "gfs2_log_header",
+      "fields": [
+        {
+          "type_name": "__be64",
+          "name": "lh_sequence",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "lh_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "lh_tail",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "lh_blkno",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "lh_hash",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "lh_crc",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "lh_nsec",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be64",
+          "name": "lh_sec",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be64",
+          "name": "lh_addr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be64",
+          "name": "lh_jinode",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be64",
+          "name": "lh_statfs_addr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be64",
+          "name": "lh_quota_addr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be64",
+          "name": "lh_local_total",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be64",
+          "name": "lh_local_free",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be64",
+          "name": "lh_local_dinodes",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "gfs2_log_descriptor",
+      "fields": [
+        {
+          "type_name": "__be32",
+          "name": "ld_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "ld_length",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "ld_data1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "ld_data2",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "ld_reserved",
+          "array_size": "32",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "gfs2_inum_range",
+      "fields": [
+        {
+          "type_name": "__be64",
+          "name": "ir_start",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be64",
+          "name": "ir_length",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "gfs2_statfs_change",
+      "fields": [
+        {
+          "type_name": "__be64",
+          "name": "sc_total",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be64",
+          "name": "sc_free",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be64",
+          "name": "sc_dinodes",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "gfs2_quota_change",
+      "fields": [
+        {
+          "type_name": "__be64",
+          "name": "qc_change",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "qc_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "qc_id",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "gfs2_quota_lvb",
+      "fields": [
+        {
+          "type_name": "__be32",
+          "name": "qb_magic",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "__pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be64",
+          "name": "qb_limit",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be64",
+          "name": "qb_warn",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be64",
+          "name": "qb_value",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

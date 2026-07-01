@@ -1,0 +1,20 @@
+﻿**Memory Pattern:**  
+Relevant remembered experiences, compressed into cognitive cues:  
+- Probability of independent events = P(A) × P(B|A).  
+
+**Task Analysis:**  
+1. **Total balls:** 5 red + 3 blue = 8 balls.  
+2. **First draw (red):** P(red₁) = 5/8.  
+3. **Second draw (without replacement, still red):** After removing one red ball, 7 balls remain with 4 red → P(red₂|red₁) = 4/7.  
+4. **Combined probability:** Multiply the two conditional probabilities:  
+   \[
+   P(\text{both red}) = \frac{5}{8} \times \frac{4}{7}.
+   \]  
+
+**Calculation (plain arithmetic):**  
+\[
+\frac{5}{8} \times \frac{4}{7} = \frac{20}{56} = \frac{5}{14}.
+\]  
+
+**Final Answer:**  
+The probability both balls are red is **5/14**.

@@ -1,0 +1,208 @@
+{
+  "filename": "cramfs_fs.h",
+  "includes": [
+    "linux/types.h",
+    "linux/magic.h"
+  ],
+  "defines": [
+    {
+      "name": "CRAMFS_SIGNATURE",
+      "value": "\"Compressed ROMFS\"",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "CRAMFS_MODE_WIDTH",
+      "value": "16",
+      "comment": "",
+      "category": "CRAMFS_MODE"
+    },
+    {
+      "name": "CRAMFS_UID_WIDTH",
+      "value": "16",
+      "comment": "",
+      "category": "CRAMFS_UID"
+    },
+    {
+      "name": "CRAMFS_SIZE_WIDTH",
+      "value": "24",
+      "comment": "",
+      "category": "CRAMFS_SIZE"
+    },
+    {
+      "name": "CRAMFS_GID_WIDTH",
+      "value": "8",
+      "comment": "",
+      "category": "CRAMFS_GID"
+    },
+    {
+      "name": "CRAMFS_NAMELEN_WIDTH",
+      "value": "6",
+      "comment": "",
+      "category": "CRAMFS_NAMELEN"
+    },
+    {
+      "name": "CRAMFS_OFFSET_WIDTH",
+      "value": "26",
+      "comment": "",
+      "category": "CRAMFS_OFFSET"
+    },
+    {
+      "name": "CRAMFS_MAXPATHLEN",
+      "value": "(((1 << CRAMFS_NAMELEN_WIDTH) - 1) << 2)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "CRAMFS_FLAG_FSID_VERSION_2",
+      "value": "0x00000001",
+      "comment": "fsid version #2",
+      "category": "CRAMFS_FLAG"
+    },
+    {
+      "name": "CRAMFS_FLAG_SORTED_DIRS",
+      "value": "0x00000002",
+      "comment": "sorted dirs",
+      "category": "CRAMFS_FLAG"
+    },
+    {
+      "name": "CRAMFS_FLAG_HOLES",
+      "value": "0x00000100",
+      "comment": "support for holes",
+      "category": "CRAMFS_FLAG"
+    },
+    {
+      "name": "CRAMFS_FLAG_WRONG_SIGNATURE",
+      "value": "0x00000200",
+      "comment": "reserved",
+      "category": "CRAMFS_FLAG"
+    },
+    {
+      "name": "CRAMFS_FLAG_SHIFTED_ROOT_OFFSET",
+      "value": "0x00000400",
+      "comment": "shifted root fs",
+      "category": "CRAMFS_FLAG"
+    },
+    {
+      "name": "CRAMFS_FLAG_EXT_BLOCK_POINTERS",
+      "value": "0x00000800",
+      "comment": "block pointer extensions",
+      "category": "CRAMFS_FLAG"
+    },
+    {
+      "name": "CRAMFS_SUPPORTED_FLAGS",
+      "value": "( 0x000000ff ",
+      "comment": "",
+      "category": "CRAMFS_SUPPORTED"
+    },
+    {
+      "name": "CRAMFS_BLK_FLAG_UNCOMPRESSED",
+      "value": "(1 << 31)",
+      "comment": "",
+      "category": "CRAMFS_BLK"
+    },
+    {
+      "name": "CRAMFS_BLK_FLAG_DIRECT_PTR",
+      "value": "(1 << 30)",
+      "comment": "",
+      "category": "CRAMFS_BLK"
+    },
+    {
+      "name": "CRAMFS_BLK_FLAGS",
+      "value": "( CRAMFS_BLK_FLAG_UNCOMPRESSED ",
+      "comment": "",
+      "category": "CRAMFS_BLK"
+    },
+    {
+      "name": "CRAMFS_BLK_DIRECT_PTR_SHIFT",
+      "value": "2",
+      "comment": "",
+      "category": "CRAMFS_BLK"
+    }
+  ],
+  "structs": [
+    {
+      "name": "cramfs_inode",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "cramfs_info",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "crc",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "edition",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "blocks",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "files",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "cramfs_super",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "magic",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "future",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "signature",
+          "array_size": "16",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "name",
+          "array_size": "16",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

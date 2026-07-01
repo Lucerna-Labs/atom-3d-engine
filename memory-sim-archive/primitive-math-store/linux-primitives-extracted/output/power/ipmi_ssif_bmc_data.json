@@ -1,0 +1,32 @@
+{
+  "filename": "ipmi_ssif_bmc.h",
+  "includes": [
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "IPMI_SSIF_PAYLOAD_MAX",
+      "value": "254",
+      "comment": "",
+      "category": "IPMI_SSIF"
+    }
+  ],
+  "structs": [
+    {
+      "name": "ipmi_ssif_msg",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "payload",
+          "array_size": "IPMI_SSIF_PAYLOAD_MAX",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

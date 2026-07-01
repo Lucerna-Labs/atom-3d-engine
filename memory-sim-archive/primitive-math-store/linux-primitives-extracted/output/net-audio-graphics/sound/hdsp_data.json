@@ -1,0 +1,141 @@
+{
+  "filename": "hdsp.h",
+  "includes": [
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "HDSP_MATRIX_MIXER_SIZE",
+      "value": "2048",
+      "comment": "",
+      "category": "HDSP_MATRIX"
+    },
+    {
+      "name": "SNDRV_HDSP_IOCTL_GET_PEAK_RMS",
+      "value": "_IOR('H', 0x40, struct hdsp_peak_rms)",
+      "comment": "",
+      "category": "SNDRV_HDSP"
+    },
+    {
+      "name": "SNDRV_HDSP_IOCTL_GET_CONFIG_INFO",
+      "value": "_IOR('H', 0x41, struct hdsp_config_info)",
+      "comment": "",
+      "category": "SNDRV_HDSP"
+    },
+    {
+      "name": "SNDRV_HDSP_IOCTL_UPLOAD_FIRMWARE",
+      "value": "_IOW('H', 0x42, struct hdsp_firmware)",
+      "comment": "",
+      "category": "SNDRV_HDSP"
+    },
+    {
+      "name": "SNDRV_HDSP_IOCTL_GET_VERSION",
+      "value": "_IOR('H', 0x43, struct hdsp_version)",
+      "comment": "",
+      "category": "SNDRV_HDSP"
+    },
+    {
+      "name": "SNDRV_HDSP_IOCTL_GET_MIXER",
+      "value": "_IOR('H', 0x44, struct hdsp_mixer)",
+      "comment": "",
+      "category": "SNDRV_HDSP"
+    },
+    {
+      "name": "SNDRV_HDSP_IOCTL_GET_9632_AEB",
+      "value": "_IOR('H', 0x45, struct hdsp_9632_aeb)",
+      "comment": "",
+      "category": "SNDRV_HDSP"
+    }
+  ],
+  "structs": [
+    {
+      "name": "hdsp_peak_rms",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "input_peaks",
+          "array_size": "26",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "playback_peaks",
+          "array_size": "26",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "output_peaks",
+          "array_size": "28",
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "input_rms",
+          "array_size": "26",
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "playback_rms",
+          "array_size": "26",
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "output_rms",
+          "array_size": "26",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "hdsp_config_info",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "hdsp_firmware",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "hdsp_version",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "hdsp_mixer",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "hdsp_9632_aeb",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "aebi",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "aebo",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

@@ -1,0 +1,213 @@
+{
+  "filename": "inotify.h",
+  "includes": [
+    "linux/fcntl.h",
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "IN_ACCESS",
+      "value": "0x00000001",
+      "comment": "File was accessed",
+      "category": ""
+    },
+    {
+      "name": "IN_MODIFY",
+      "value": "0x00000002",
+      "comment": "File was modified",
+      "category": ""
+    },
+    {
+      "name": "IN_ATTRIB",
+      "value": "0x00000004",
+      "comment": "Metadata changed",
+      "category": ""
+    },
+    {
+      "name": "IN_CLOSE_WRITE",
+      "value": "0x00000008",
+      "comment": "Writable file was closed",
+      "category": "IN_CLOSE"
+    },
+    {
+      "name": "IN_CLOSE_NOWRITE",
+      "value": "0x00000010",
+      "comment": "Unwritable file closed",
+      "category": "IN_CLOSE"
+    },
+    {
+      "name": "IN_OPEN",
+      "value": "0x00000020",
+      "comment": "File was opened",
+      "category": ""
+    },
+    {
+      "name": "IN_MOVED_FROM",
+      "value": "0x00000040",
+      "comment": "File was moved from X",
+      "category": "IN_MOVED"
+    },
+    {
+      "name": "IN_MOVED_TO",
+      "value": "0x00000080",
+      "comment": "File was moved to Y",
+      "category": "IN_MOVED"
+    },
+    {
+      "name": "IN_CREATE",
+      "value": "0x00000100",
+      "comment": "Subfile was created",
+      "category": ""
+    },
+    {
+      "name": "IN_DELETE",
+      "value": "0x00000200",
+      "comment": "Subfile was deleted",
+      "category": ""
+    },
+    {
+      "name": "IN_DELETE_SELF",
+      "value": "0x00000400",
+      "comment": "Self was deleted",
+      "category": "IN_DELETE"
+    },
+    {
+      "name": "IN_MOVE_SELF",
+      "value": "0x00000800",
+      "comment": "Self was moved",
+      "category": "IN_MOVE"
+    },
+    {
+      "name": "IN_UNMOUNT",
+      "value": "0x00002000",
+      "comment": "Backing fs was unmounted",
+      "category": ""
+    },
+    {
+      "name": "IN_Q_OVERFLOW",
+      "value": "0x00004000",
+      "comment": "Event queued overflowed",
+      "category": "IN_Q"
+    },
+    {
+      "name": "IN_IGNORED",
+      "value": "0x00008000",
+      "comment": "File was ignored",
+      "category": ""
+    },
+    {
+      "name": "IN_CLOSE",
+      "value": "(IN_CLOSE_WRITE | IN_CLOSE_NOWRITE)",
+      "comment": "close",
+      "category": ""
+    },
+    {
+      "name": "IN_MOVE",
+      "value": "(IN_MOVED_FROM | IN_MOVED_TO)",
+      "comment": "moves",
+      "category": ""
+    },
+    {
+      "name": "IN_ONLYDIR",
+      "value": "0x01000000",
+      "comment": "only watch the path if it is a directory",
+      "category": ""
+    },
+    {
+      "name": "IN_DONT_FOLLOW",
+      "value": "0x02000000",
+      "comment": "don't follow a sym link",
+      "category": "IN_DONT"
+    },
+    {
+      "name": "IN_EXCL_UNLINK",
+      "value": "0x04000000",
+      "comment": "exclude events on unlinked objects",
+      "category": "IN_EXCL"
+    },
+    {
+      "name": "IN_MASK_CREATE",
+      "value": "0x10000000",
+      "comment": "only create watches",
+      "category": "IN_MASK"
+    },
+    {
+      "name": "IN_MASK_ADD",
+      "value": "0x20000000",
+      "comment": "add to the mask of an already existing watch",
+      "category": "IN_MASK"
+    },
+    {
+      "name": "IN_ISDIR",
+      "value": "0x40000000",
+      "comment": "event occurred against dir",
+      "category": ""
+    },
+    {
+      "name": "IN_ONESHOT",
+      "value": "0x80000000",
+      "comment": "only send event once",
+      "category": ""
+    },
+    {
+      "name": "IN_ALL_EVENTS",
+      "value": "(IN_ACCESS | IN_MODIFY | IN_ATTRIB | IN_CLOSE_WRITE | ",
+      "comment": "",
+      "category": "IN_ALL"
+    },
+    {
+      "name": "IN_CLOEXEC",
+      "value": "O_CLOEXEC",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IN_NONBLOCK",
+      "value": "O_NONBLOCK",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "INOTIFY_IOC_SETNEXTWD",
+      "value": "_IOW('I', 0, __s32)",
+      "comment": "",
+      "category": "INOTIFY_IOC"
+    }
+  ],
+  "structs": [
+    {
+      "name": "inotify_event",
+      "fields": [
+        {
+          "type_name": "__s32",
+          "name": "wd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "mask",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "cookie",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "len",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

@@ -1,0 +1,17 @@
+﻿**Memory Pattern:**  
+Relevant remembered experiences, compressed into cognitive cues:  
+
+- **Task Type:** Probability with replacement or without replacement?  
+  - Without replacement → use multiplication of conditional probabilities.  
+- **Given Quantities:** 5 red balls, 3 blue balls (total = 8).  
+- **Event:** Two balls drawn without replacement.  
+- **Probability Both Red:** P(Red1) × P(Red2 | Red1).  
+
+**Calculation:**  
+P(Red1) = 5/8  
+After drawing one red ball, remaining: 4 red, 3 blue → total 7.  
+P(Red2 | Red1) = 4/7  
+Multiplication: (5/8) × (4/7) = 20/56 = **5/14**  
+
+**Final Answer:**  
+The probability both are red is **5/14**.

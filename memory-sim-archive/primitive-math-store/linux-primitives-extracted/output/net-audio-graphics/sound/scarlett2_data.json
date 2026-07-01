@@ -1,0 +1,92 @@
+{
+  "filename": "scarlett2.h",
+  "includes": [
+    "linux/types.h",
+    "linux/ioctl.h"
+  ],
+  "defines": [
+    {
+      "name": "SCARLETT2_HWDEP_MAJOR",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SCARLETT2_HWDEP_MINOR",
+      "value": "0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SCARLETT2_HWDEP_SUBMINOR",
+      "value": "0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SCARLETT2_HWDEP_VERSION",
+      "value": "",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SCARLETT2_IOCTL_PVERSION",
+      "value": "_IOR('S', 0x60, int)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SCARLETT2_IOCTL_REBOOT",
+      "value": "_IO('S', 0x61)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SCARLETT2_SEGMENT_ID_SETTINGS",
+      "value": "0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SCARLETT2_SEGMENT_ID_FIRMWARE",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SCARLETT2_SEGMENT_ID_COUNT",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SCARLETT2_IOCTL_SELECT_FLASH_SEGMENT",
+      "value": "_IOW('S', 0x62, int)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SCARLETT2_IOCTL_ERASE_FLASH_SEGMENT",
+      "value": "_IO('S', 0x63)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SCARLETT2_IOCTL_GET_ERASE_PROGRESS",
+      "value": "",
+      "comment": "",
+      "category": ""
+    }
+  ],
+  "structs": [
+    {
+      "name": "scarlett2_flash_segment_erase_progress",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

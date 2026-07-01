@@ -1,0 +1,1590 @@
+{
+  "filename": "fs.h",
+  "includes": [
+    "linux/limits.h",
+    "linux/ioctl.h",
+    "linux/types.h",
+    "linux/fscrypt.h",
+    "linux/mount.h"
+  ],
+  "defines": [
+    {
+      "name": "INR_OPEN_CUR",
+      "value": "1024",
+      "comment": "Initial setting for nfile rlimits",
+      "category": "INR_OPEN"
+    },
+    {
+      "name": "INR_OPEN_MAX",
+      "value": "4096",
+      "comment": "Hard limit for nfile rlimits",
+      "category": "INR_OPEN"
+    },
+    {
+      "name": "BLOCK_SIZE_BITS",
+      "value": "10",
+      "comment": "",
+      "category": "BLOCK_SIZE"
+    },
+    {
+      "name": "BLOCK_SIZE",
+      "value": "(1<<BLOCK_SIZE_BITS)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IO_INTEGRITY_CHK_GUARD",
+      "value": "(1U << 0)",
+      "comment": "enforce guard check",
+      "category": "IO_INTEGRITY"
+    },
+    {
+      "name": "IO_INTEGRITY_CHK_REFTAG",
+      "value": "(1U << 1)",
+      "comment": "enforce ref check",
+      "category": "IO_INTEGRITY"
+    },
+    {
+      "name": "IO_INTEGRITY_CHK_APPTAG",
+      "value": "(1U << 2)",
+      "comment": "enforce app check",
+      "category": "IO_INTEGRITY"
+    },
+    {
+      "name": "IO_INTEGRITY_VALID_FLAGS",
+      "value": "(IO_INTEGRITY_CHK_GUARD | ",
+      "comment": "",
+      "category": "IO_INTEGRITY"
+    },
+    {
+      "name": "SEEK_SET",
+      "value": "0",
+      "comment": "seek relative to beginning of file",
+      "category": ""
+    },
+    {
+      "name": "SEEK_CUR",
+      "value": "1",
+      "comment": "seek relative to current file position",
+      "category": ""
+    },
+    {
+      "name": "SEEK_END",
+      "value": "2",
+      "comment": "seek relative to end of file",
+      "category": ""
+    },
+    {
+      "name": "SEEK_DATA",
+      "value": "3",
+      "comment": "seek to the next data",
+      "category": ""
+    },
+    {
+      "name": "SEEK_HOLE",
+      "value": "4",
+      "comment": "seek to the next hole",
+      "category": ""
+    },
+    {
+      "name": "SEEK_MAX",
+      "value": "SEEK_HOLE",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RENAME_NOREPLACE",
+      "value": "(1 << 0)",
+      "comment": "Don't overwrite target",
+      "category": ""
+    },
+    {
+      "name": "RENAME_EXCHANGE",
+      "value": "(1 << 1)",
+      "comment": "Exchange source and dest",
+      "category": ""
+    },
+    {
+      "name": "RENAME_WHITEOUT",
+      "value": "(1 << 2)",
+      "comment": "Whiteout source",
+      "category": ""
+    },
+    {
+      "name": "LBMD_PI_CAP_INTEGRITY",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "LBMD_PI"
+    },
+    {
+      "name": "LBMD_PI_CAP_REFTAG",
+      "value": "(1 << 1)",
+      "comment": "",
+      "category": "LBMD_PI"
+    },
+    {
+      "name": "LBMD_PI_CSUM_NONE",
+      "value": "0",
+      "comment": "",
+      "category": "LBMD_PI"
+    },
+    {
+      "name": "LBMD_PI_CSUM_IP",
+      "value": "1",
+      "comment": "",
+      "category": "LBMD_PI"
+    },
+    {
+      "name": "LBMD_PI_CSUM_CRC16_T10DIF",
+      "value": "2",
+      "comment": "",
+      "category": "LBMD_PI"
+    },
+    {
+      "name": "LBMD_PI_CSUM_CRC64_NVME",
+      "value": "4",
+      "comment": "",
+      "category": "LBMD_PI"
+    },
+    {
+      "name": "LBMD_SIZE_VER0",
+      "value": "16",
+      "comment": "",
+      "category": "LBMD_SIZE"
+    },
+    {
+      "name": "FILE_DEDUPE_RANGE_SAME",
+      "value": "0",
+      "comment": "",
+      "category": "FILE_DEDUPE"
+    },
+    {
+      "name": "FILE_DEDUPE_RANGE_DIFFERS",
+      "value": "1",
+      "comment": "",
+      "category": "FILE_DEDUPE"
+    },
+    {
+      "name": "NR_FILE",
+      "value": "8192",
+      "comment": "this can well be larger on a larger system",
+      "category": ""
+    },
+    {
+      "name": "FILE_ATTR_SIZE_VER0",
+      "value": "24",
+      "comment": "",
+      "category": "FILE_ATTR"
+    },
+    {
+      "name": "FILE_ATTR_SIZE_LATEST",
+      "value": "FILE_ATTR_SIZE_VER0",
+      "comment": "",
+      "category": "FILE_ATTR"
+    },
+    {
+      "name": "FS_XFLAG_REALTIME",
+      "value": "0x00000001",
+      "comment": "data in realtime volume",
+      "category": "FS_XFLAG"
+    },
+    {
+      "name": "FS_XFLAG_PREALLOC",
+      "value": "0x00000002",
+      "comment": "preallocated file extents",
+      "category": "FS_XFLAG"
+    },
+    {
+      "name": "FS_XFLAG_IMMUTABLE",
+      "value": "0x00000008",
+      "comment": "file cannot be modified",
+      "category": "FS_XFLAG"
+    },
+    {
+      "name": "FS_XFLAG_APPEND",
+      "value": "0x00000010",
+      "comment": "all writes append",
+      "category": "FS_XFLAG"
+    },
+    {
+      "name": "FS_XFLAG_SYNC",
+      "value": "0x00000020",
+      "comment": "all writes synchronous",
+      "category": "FS_XFLAG"
+    },
+    {
+      "name": "FS_XFLAG_NOATIME",
+      "value": "0x00000040",
+      "comment": "do not update access time",
+      "category": "FS_XFLAG"
+    },
+    {
+      "name": "FS_XFLAG_NODUMP",
+      "value": "0x00000080",
+      "comment": "do not include in backups",
+      "category": "FS_XFLAG"
+    },
+    {
+      "name": "FS_XFLAG_RTINHERIT",
+      "value": "0x00000100",
+      "comment": "create with rt bit set",
+      "category": "FS_XFLAG"
+    },
+    {
+      "name": "FS_XFLAG_PROJINHERIT",
+      "value": "0x00000200",
+      "comment": "create with parents projid",
+      "category": "FS_XFLAG"
+    },
+    {
+      "name": "FS_XFLAG_NOSYMLINKS",
+      "value": "0x00000400",
+      "comment": "disallow symlink creation",
+      "category": "FS_XFLAG"
+    },
+    {
+      "name": "FS_XFLAG_EXTSIZE",
+      "value": "0x00000800",
+      "comment": "extent size allocator hint",
+      "category": "FS_XFLAG"
+    },
+    {
+      "name": "FS_XFLAG_EXTSZINHERIT",
+      "value": "0x00001000",
+      "comment": "inherit inode extent size",
+      "category": "FS_XFLAG"
+    },
+    {
+      "name": "FS_XFLAG_NODEFRAG",
+      "value": "0x00002000",
+      "comment": "do not defragment",
+      "category": "FS_XFLAG"
+    },
+    {
+      "name": "FS_XFLAG_FILESTREAM",
+      "value": "0x00004000",
+      "comment": "use filestream allocator",
+      "category": "FS_XFLAG"
+    },
+    {
+      "name": "FS_XFLAG_DAX",
+      "value": "0x00008000",
+      "comment": "use DAX for IO",
+      "category": "FS_XFLAG"
+    },
+    {
+      "name": "FS_XFLAG_COWEXTSIZE",
+      "value": "0x00010000",
+      "comment": "CoW extent size allocator hint",
+      "category": "FS_XFLAG"
+    },
+    {
+      "name": "FS_XFLAG_VERITY",
+      "value": "0x00020000",
+      "comment": "fs-verity enabled",
+      "category": "FS_XFLAG"
+    },
+    {
+      "name": "FS_XFLAG_HASATTR",
+      "value": "0x80000000",
+      "comment": "no DIFLAG for this",
+      "category": "FS_XFLAG"
+    },
+    {
+      "name": "BLKROSET",
+      "value": "_IO(0x12,93)",
+      "comment": "set device read-only (0 = read-write)",
+      "category": ""
+    },
+    {
+      "name": "BLKROGET",
+      "value": "_IO(0x12,94)",
+      "comment": "get read-only status (0 = read_write)",
+      "category": ""
+    },
+    {
+      "name": "BLKRRPART",
+      "value": "_IO(0x12,95)",
+      "comment": "re-read partition table",
+      "category": ""
+    },
+    {
+      "name": "BLKGETSIZE",
+      "value": "_IO(0x12,96)",
+      "comment": "return device size /512 (long *arg)",
+      "category": ""
+    },
+    {
+      "name": "BLKFLSBUF",
+      "value": "_IO(0x12,97)",
+      "comment": "flush buffer cache",
+      "category": ""
+    },
+    {
+      "name": "BLKRASET",
+      "value": "_IO(0x12,98)",
+      "comment": "set read ahead for block device",
+      "category": ""
+    },
+    {
+      "name": "BLKRAGET",
+      "value": "_IO(0x12,99)",
+      "comment": "get current read ahead setting",
+      "category": ""
+    },
+    {
+      "name": "BLKFRASET",
+      "value": "_IO(0x12,100)",
+      "comment": "set filesystem (mm/filemap.c) read-ahead",
+      "category": ""
+    },
+    {
+      "name": "BLKFRAGET",
+      "value": "_IO(0x12,101)",
+      "comment": "get filesystem (mm/filemap.c) read-ahead",
+      "category": ""
+    },
+    {
+      "name": "BLKSECTSET",
+      "value": "_IO(0x12,102)",
+      "comment": "set max sectors per request (ll_rw_blk.c)",
+      "category": ""
+    },
+    {
+      "name": "BLKSECTGET",
+      "value": "_IO(0x12,103)",
+      "comment": "get max sectors per request (ll_rw_blk.c)",
+      "category": ""
+    },
+    {
+      "name": "BLKSSZGET",
+      "value": "_IO(0x12,104)",
+      "comment": "get block device sector size",
+      "category": ""
+    },
+    {
+      "name": "BLKPG",
+      "value": "_IO(0x12,105)",
+      "comment": "See blkpg.h",
+      "category": ""
+    },
+    {
+      "name": "BLKELVGET",
+      "value": "_IOR(0x12,106,size_t)",
+      "comment": "elevator get",
+      "category": ""
+    },
+    {
+      "name": "BLKELVSET",
+      "value": "_IOW(0x12,107,size_t)",
+      "comment": "elevator set",
+      "category": ""
+    },
+    {
+      "name": "BLKBSZGET",
+      "value": "_IOR(0x12,112,size_t)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "BLKBSZSET",
+      "value": "_IOW(0x12,113,size_t)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "BLKGETSIZE64",
+      "value": "_IOR(0x12,114,size_t)",
+      "comment": "return device size in bytes (u64 *arg)",
+      "category": ""
+    },
+    {
+      "name": "BLKTRACESETUP",
+      "value": "_IOWR(0x12,115,struct blk_user_trace_setup)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "BLKTRACESTART",
+      "value": "_IO(0x12,116)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "BLKTRACESTOP",
+      "value": "_IO(0x12,117)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "BLKTRACETEARDOWN",
+      "value": "_IO(0x12,118)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "BLKDISCARD",
+      "value": "_IO(0x12,119)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "BLKIOMIN",
+      "value": "_IO(0x12,120)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "BLKIOOPT",
+      "value": "_IO(0x12,121)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "BLKALIGNOFF",
+      "value": "_IO(0x12,122)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "BLKPBSZGET",
+      "value": "_IO(0x12,123)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "BLKDISCARDZEROES",
+      "value": "_IO(0x12,124)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "BLKSECDISCARD",
+      "value": "_IO(0x12,125)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "BLKROTATIONAL",
+      "value": "_IO(0x12,126)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "BLKZEROOUT",
+      "value": "_IO(0x12,127)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "BLKGETDISKSEQ",
+      "value": "_IOR(0x12,128,__u64)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "BLKTRACESETUP2",
+      "value": "_IOWR(0x12, 142, struct blk_user_trace_setup2)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "BMAP_IOCTL",
+      "value": "1",
+      "comment": "obsolete - kept for compatibility",
+      "category": ""
+    },
+    {
+      "name": "FIBMAP",
+      "value": "_IO(0x00,1)",
+      "comment": "bmap access",
+      "category": ""
+    },
+    {
+      "name": "FIGETBSZ",
+      "value": "_IO(0x00,2)",
+      "comment": "get the block size used for bmap",
+      "category": ""
+    },
+    {
+      "name": "FIFREEZE",
+      "value": "_IOWR('X', 119, int)",
+      "comment": "Freeze",
+      "category": ""
+    },
+    {
+      "name": "FITHAW",
+      "value": "_IOWR('X', 120, int)",
+      "comment": "Thaw",
+      "category": ""
+    },
+    {
+      "name": "FITRIM",
+      "value": "_IOWR('X', 121, struct fstrim_range)",
+      "comment": "Trim",
+      "category": ""
+    },
+    {
+      "name": "FICLONE",
+      "value": "_IOW(0x94, 9, int)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FICLONERANGE",
+      "value": "_IOW(0x94, 13, struct file_clone_range)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FIDEDUPERANGE",
+      "value": "_IOWR(0x94, 54, struct file_dedupe_range)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FSLABEL_MAX",
+      "value": "256",
+      "comment": "Max chars for the interface; each fs may differ",
+      "category": ""
+    },
+    {
+      "name": "FS_IOC_GETFLAGS",
+      "value": "_IOR('f', 1, long)",
+      "comment": "",
+      "category": "FS_IOC"
+    },
+    {
+      "name": "FS_IOC_SETFLAGS",
+      "value": "_IOW('f', 2, long)",
+      "comment": "",
+      "category": "FS_IOC"
+    },
+    {
+      "name": "FS_IOC_GETVERSION",
+      "value": "_IOR('v', 1, long)",
+      "comment": "",
+      "category": "FS_IOC"
+    },
+    {
+      "name": "FS_IOC_SETVERSION",
+      "value": "_IOW('v', 2, long)",
+      "comment": "",
+      "category": "FS_IOC"
+    },
+    {
+      "name": "FS_IOC_FIEMAP",
+      "value": "_IOWR('f', 11, struct fiemap)",
+      "comment": "",
+      "category": "FS_IOC"
+    },
+    {
+      "name": "FS_IOC32_GETFLAGS",
+      "value": "_IOR('f', 1, int)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FS_IOC32_SETFLAGS",
+      "value": "_IOW('f', 2, int)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FS_IOC32_GETVERSION",
+      "value": "_IOR('v', 1, int)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FS_IOC32_SETVERSION",
+      "value": "_IOW('v', 2, int)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FS_IOC_FSGETXATTR",
+      "value": "_IOR('X', 31, struct fsxattr)",
+      "comment": "",
+      "category": "FS_IOC"
+    },
+    {
+      "name": "FS_IOC_FSSETXATTR",
+      "value": "_IOW('X', 32, struct fsxattr)",
+      "comment": "",
+      "category": "FS_IOC"
+    },
+    {
+      "name": "FS_IOC_GETFSLABEL",
+      "value": "_IOR(0x94, 49, char[FSLABEL_MAX])",
+      "comment": "",
+      "category": "FS_IOC"
+    },
+    {
+      "name": "FS_IOC_SETFSLABEL",
+      "value": "_IOW(0x94, 50, char[FSLABEL_MAX])",
+      "comment": "",
+      "category": "FS_IOC"
+    },
+    {
+      "name": "FS_IOC_GETFSUUID",
+      "value": "_IOR(0x15, 0, struct fsuuid2)",
+      "comment": "",
+      "category": "FS_IOC"
+    },
+    {
+      "name": "FS_IOC_GETFSSYSFSPATH",
+      "value": "_IOR(0x15, 1, struct fs_sysfs_path)",
+      "comment": "",
+      "category": "FS_IOC"
+    },
+    {
+      "name": "FS_IOC_GETLBMD_CAP",
+      "value": "_IOWR(0x15, 2, struct logical_block_metadata_cap)",
+      "comment": "",
+      "category": "FS_IOC"
+    },
+    {
+      "name": "FS_SECRM_FL",
+      "value": "0x00000001",
+      "comment": "Secure deletion",
+      "category": "FS_SECRM"
+    },
+    {
+      "name": "FS_UNRM_FL",
+      "value": "0x00000002",
+      "comment": "Undelete",
+      "category": "FS_UNRM"
+    },
+    {
+      "name": "FS_COMPR_FL",
+      "value": "0x00000004",
+      "comment": "Compress file",
+      "category": "FS_COMPR"
+    },
+    {
+      "name": "FS_SYNC_FL",
+      "value": "0x00000008",
+      "comment": "Synchronous updates",
+      "category": "FS_SYNC"
+    },
+    {
+      "name": "FS_IMMUTABLE_FL",
+      "value": "0x00000010",
+      "comment": "Immutable file",
+      "category": "FS_IMMUTABLE"
+    },
+    {
+      "name": "FS_APPEND_FL",
+      "value": "0x00000020",
+      "comment": "writes to file may only append",
+      "category": "FS_APPEND"
+    },
+    {
+      "name": "FS_NODUMP_FL",
+      "value": "0x00000040",
+      "comment": "do not dump file",
+      "category": "FS_NODUMP"
+    },
+    {
+      "name": "FS_NOATIME_FL",
+      "value": "0x00000080",
+      "comment": "do not update atime",
+      "category": "FS_NOATIME"
+    },
+    {
+      "name": "FS_DIRTY_FL",
+      "value": "0x00000100",
+      "comment": "",
+      "category": "FS_DIRTY"
+    },
+    {
+      "name": "FS_COMPRBLK_FL",
+      "value": "0x00000200",
+      "comment": "One or more compressed clusters",
+      "category": "FS_COMPRBLK"
+    },
+    {
+      "name": "FS_NOCOMP_FL",
+      "value": "0x00000400",
+      "comment": "Don't compress",
+      "category": "FS_NOCOMP"
+    },
+    {
+      "name": "FS_ENCRYPT_FL",
+      "value": "0x00000800",
+      "comment": "Encrypted file",
+      "category": "FS_ENCRYPT"
+    },
+    {
+      "name": "FS_BTREE_FL",
+      "value": "0x00001000",
+      "comment": "btree format dir",
+      "category": "FS_BTREE"
+    },
+    {
+      "name": "FS_INDEX_FL",
+      "value": "0x00001000",
+      "comment": "hash-indexed directory",
+      "category": "FS_INDEX"
+    },
+    {
+      "name": "FS_IMAGIC_FL",
+      "value": "0x00002000",
+      "comment": "AFS directory",
+      "category": "FS_IMAGIC"
+    },
+    {
+      "name": "FS_JOURNAL_DATA_FL",
+      "value": "0x00004000",
+      "comment": "Reserved for ext3",
+      "category": "FS_JOURNAL"
+    },
+    {
+      "name": "FS_NOTAIL_FL",
+      "value": "0x00008000",
+      "comment": "file tail should not be merged",
+      "category": "FS_NOTAIL"
+    },
+    {
+      "name": "FS_DIRSYNC_FL",
+      "value": "0x00010000",
+      "comment": "dirsync behaviour (directories only)",
+      "category": "FS_DIRSYNC"
+    },
+    {
+      "name": "FS_TOPDIR_FL",
+      "value": "0x00020000",
+      "comment": "Top of directory hierarchies",
+      "category": "FS_TOPDIR"
+    },
+    {
+      "name": "FS_HUGE_FILE_FL",
+      "value": "0x00040000",
+      "comment": "Reserved for ext4",
+      "category": "FS_HUGE"
+    },
+    {
+      "name": "FS_EXTENT_FL",
+      "value": "0x00080000",
+      "comment": "Extents",
+      "category": "FS_EXTENT"
+    },
+    {
+      "name": "FS_VERITY_FL",
+      "value": "0x00100000",
+      "comment": "Verity protected inode",
+      "category": "FS_VERITY"
+    },
+    {
+      "name": "FS_EA_INODE_FL",
+      "value": "0x00200000",
+      "comment": "Inode used for large EA",
+      "category": "FS_EA"
+    },
+    {
+      "name": "FS_EOFBLOCKS_FL",
+      "value": "0x00400000",
+      "comment": "Reserved for ext4",
+      "category": "FS_EOFBLOCKS"
+    },
+    {
+      "name": "FS_NOCOW_FL",
+      "value": "0x00800000",
+      "comment": "Do not cow file",
+      "category": "FS_NOCOW"
+    },
+    {
+      "name": "FS_DAX_FL",
+      "value": "0x02000000",
+      "comment": "Inode is DAX",
+      "category": "FS_DAX"
+    },
+    {
+      "name": "FS_INLINE_DATA_FL",
+      "value": "0x10000000",
+      "comment": "Reserved for ext4",
+      "category": "FS_INLINE"
+    },
+    {
+      "name": "FS_PROJINHERIT_FL",
+      "value": "0x20000000",
+      "comment": "Create with parents projid",
+      "category": "FS_PROJINHERIT"
+    },
+    {
+      "name": "FS_CASEFOLD_FL",
+      "value": "0x40000000",
+      "comment": "Folder is case insensitive",
+      "category": "FS_CASEFOLD"
+    },
+    {
+      "name": "FS_RESERVED_FL",
+      "value": "0x80000000",
+      "comment": "reserved for ext2 lib",
+      "category": "FS_RESERVED"
+    },
+    {
+      "name": "FS_FL_USER_VISIBLE",
+      "value": "0x0003DFFF",
+      "comment": "User visible flags",
+      "category": "FS_FL"
+    },
+    {
+      "name": "FS_FL_USER_MODIFIABLE",
+      "value": "0x000380FF",
+      "comment": "User modifiable flags",
+      "category": "FS_FL"
+    },
+    {
+      "name": "SYNC_FILE_RANGE_WAIT_BEFORE",
+      "value": "1",
+      "comment": "",
+      "category": "SYNC_FILE"
+    },
+    {
+      "name": "SYNC_FILE_RANGE_WRITE",
+      "value": "2",
+      "comment": "",
+      "category": "SYNC_FILE"
+    },
+    {
+      "name": "SYNC_FILE_RANGE_WAIT_AFTER",
+      "value": "4",
+      "comment": "",
+      "category": "SYNC_FILE"
+    },
+    {
+      "name": "SYNC_FILE_RANGE_WRITE_AND_WAIT",
+      "value": "(SYNC_FILE_RANGE_WRITE | ",
+      "comment": "",
+      "category": "SYNC_FILE"
+    },
+    {
+      "name": "RWF_HIPRI",
+      "value": "((__force __kernel_rwf_t)0x00000001)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RWF_DSYNC",
+      "value": "((__force __kernel_rwf_t)0x00000002)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RWF_SYNC",
+      "value": "((__force __kernel_rwf_t)0x00000004)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RWF_NOWAIT",
+      "value": "((__force __kernel_rwf_t)0x00000008)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RWF_APPEND",
+      "value": "((__force __kernel_rwf_t)0x00000010)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RWF_NOAPPEND",
+      "value": "((__force __kernel_rwf_t)0x00000020)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RWF_ATOMIC",
+      "value": "((__force __kernel_rwf_t)0x00000040)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RWF_DONTCACHE",
+      "value": "((__force __kernel_rwf_t)0x00000080)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RWF_NOSIGNAL",
+      "value": "((__force __kernel_rwf_t)0x00000100)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RWF_SUPPORTED",
+      "value": "(RWF_HIPRI | RWF_DSYNC | RWF_SYNC | RWF_NOWAIT |",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PROCFS_IOCTL_MAGIC",
+      "value": "'f'",
+      "comment": "",
+      "category": "PROCFS_IOCTL"
+    },
+    {
+      "name": "PAGEMAP_SCAN",
+      "value": "_IOWR(PROCFS_IOCTL_MAGIC, 16, struct pm_scan_arg)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PAGE_IS_WPALLOWED",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "PAGE_IS"
+    },
+    {
+      "name": "PAGE_IS_WRITTEN",
+      "value": "(1 << 1)",
+      "comment": "",
+      "category": "PAGE_IS"
+    },
+    {
+      "name": "PAGE_IS_FILE",
+      "value": "(1 << 2)",
+      "comment": "",
+      "category": "PAGE_IS"
+    },
+    {
+      "name": "PAGE_IS_PRESENT",
+      "value": "(1 << 3)",
+      "comment": "",
+      "category": "PAGE_IS"
+    },
+    {
+      "name": "PAGE_IS_SWAPPED",
+      "value": "(1 << 4)",
+      "comment": "",
+      "category": "PAGE_IS"
+    },
+    {
+      "name": "PAGE_IS_PFNZERO",
+      "value": "(1 << 5)",
+      "comment": "",
+      "category": "PAGE_IS"
+    },
+    {
+      "name": "PAGE_IS_HUGE",
+      "value": "(1 << 6)",
+      "comment": "",
+      "category": "PAGE_IS"
+    },
+    {
+      "name": "PAGE_IS_SOFT_DIRTY",
+      "value": "(1 << 7)",
+      "comment": "",
+      "category": "PAGE_IS"
+    },
+    {
+      "name": "PAGE_IS_GUARD",
+      "value": "(1 << 8)",
+      "comment": "",
+      "category": "PAGE_IS"
+    },
+    {
+      "name": "PM_SCAN_WP_MATCHING",
+      "value": "(1 << 0)",
+      "comment": "Write protect the pages matched.",
+      "category": "PM_SCAN"
+    },
+    {
+      "name": "PM_SCAN_CHECK_WPASYNC",
+      "value": "(1 << 1)",
+      "comment": "Abort the scan when a non-WP-enabled page is found.",
+      "category": "PM_SCAN"
+    },
+    {
+      "name": "PROCMAP_QUERY",
+      "value": "_IOWR(PROCFS_IOCTL_MAGIC, 17, struct procmap_query)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FS_IOC_SHUTDOWN",
+      "value": "_IOR('X', 125, __u32)",
+      "comment": "",
+      "category": "FS_IOC"
+    },
+    {
+      "name": "FS_SHUTDOWN_FLAGS_DEFAULT",
+      "value": "0x0",
+      "comment": "",
+      "category": "FS_SHUTDOWN"
+    },
+    {
+      "name": "FS_SHUTDOWN_FLAGS_LOGFLUSH",
+      "value": "0x1",
+      "comment": "flush log but not data",
+      "category": "FS_SHUTDOWN"
+    },
+    {
+      "name": "FS_SHUTDOWN_FLAGS_NOLOGFLUSH",
+      "value": "0x2",
+      "comment": "don't flush log nor data",
+      "category": "FS_SHUTDOWN"
+    }
+  ],
+  "structs": [
+    {
+      "name": "file_clone_range",
+      "fields": [
+        {
+          "type_name": "__s64",
+          "name": "src_fd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "src_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "src_length",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "dest_offset",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fstrim_range",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "start",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "minlen",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fsuuid2",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "uuid",
+          "array_size": "16",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fs_sysfs_path",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "name",
+          "array_size": "128",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "logical_block_metadata_cap",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "lbmd_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "lbmd_interval",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "lbmd_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "lbmd_opaque_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "lbmd_opaque_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "lbmd_pi_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "lbmd_pi_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "lbmd_guard_tag_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "lbmd_app_tag_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "lbmd_ref_tag_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "lbmd_storage_tag_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "file_dedupe_range_info",
+      "fields": [
+        {
+          "type_name": "__s64",
+          "name": "dest_fd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "dest_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "bytes_deduped",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "status",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "file_dedupe_range",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "src_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "src_length",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "dest_count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "reserved1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved2",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "files_stat_struct",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "inodes_stat_t",
+      "fields": [
+        {
+          "type_name": "long",
+          "name": "nr_inodes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "long",
+          "name": "nr_unused",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "long",
+          "name": "dummy",
+          "array_size": "5",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fsxattr",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "fsx_xflags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "fsx_extsize",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "fsx_nextents",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "fsx_projid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "fsx_cowextsize",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "file_attr",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "fa_xflags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "fa_extsize",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "fa_nextents",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "fa_projid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "fa_cowextsize",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "page_region",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "start",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "end",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "categories",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "pm_scan_arg",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "start",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "end",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "walk_end",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "vec",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "vec_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "max_pages",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "category_inverted",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "category_mask",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "category_anyof_mask",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "return_mask",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "procmap_query",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "query_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "query_addr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "vma_start",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "vma_end",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "vma_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "vma_page_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "vma_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "inode",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "dev_major",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "dev_minor",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "vma_name_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "build_id_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "vma_name_addr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "build_id_addr",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

@@ -1,0 +1,41 @@
+{
+  "filename": "virtio_fs.h",
+  "includes": [
+    "linux/types.h",
+    "linux/virtio_ids.h",
+    "linux/virtio_config.h",
+    "linux/virtio_types.h"
+  ],
+  "defines": [
+    {
+      "name": "VIRTIO_FS_SHMCAP_ID_CACHE",
+      "value": "0",
+      "comment": "",
+      "category": "VIRTIO_FS"
+    }
+  ],
+  "structs": [
+    {
+      "name": "virtio_fs_config",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "tag",
+          "array_size": "36",
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "num_request_queues",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

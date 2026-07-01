@@ -1,0 +1,407 @@
+{
+  "filename": "if_tun.h",
+  "includes": [
+    "linux/types.h",
+    "linux/if_ether.h",
+    "linux/filter.h"
+  ],
+  "defines": [
+    {
+      "name": "TUN_READQ_SIZE",
+      "value": "500",
+      "comment": "",
+      "category": "TUN_READQ"
+    },
+    {
+      "name": "TUN_TUN_DEV",
+      "value": "IFF_TUN",
+      "comment": "",
+      "category": "TUN_TUN"
+    },
+    {
+      "name": "TUN_TAP_DEV",
+      "value": "IFF_TAP",
+      "comment": "",
+      "category": "TUN_TAP"
+    },
+    {
+      "name": "TUN_TYPE_MASK",
+      "value": "0x000f",
+      "comment": "",
+      "category": "TUN_TYPE"
+    },
+    {
+      "name": "TUNSETNOCSUM",
+      "value": "_IOW('T', 200, int)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "TUNSETDEBUG",
+      "value": "_IOW('T', 201, int)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "TUNSETIFF",
+      "value": "_IOW('T', 202, int)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "TUNSETPERSIST",
+      "value": "_IOW('T', 203, int)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "TUNSETOWNER",
+      "value": "_IOW('T', 204, int)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "TUNSETLINK",
+      "value": "_IOW('T', 205, int)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "TUNSETGROUP",
+      "value": "_IOW('T', 206, int)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "TUNGETFEATURES",
+      "value": "_IOR('T', 207, unsigned int)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "TUNSETOFFLOAD",
+      "value": "_IOW('T', 208, unsigned int)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "TUNSETTXFILTER",
+      "value": "_IOW('T', 209, unsigned int)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "TUNGETIFF",
+      "value": "_IOR('T', 210, unsigned int)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "TUNGETSNDBUF",
+      "value": "_IOR('T', 211, int)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "TUNSETSNDBUF",
+      "value": "_IOW('T', 212, int)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "TUNATTACHFILTER",
+      "value": "_IOW('T', 213, struct sock_fprog)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "TUNDETACHFILTER",
+      "value": "_IOW('T', 214, struct sock_fprog)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "TUNGETVNETHDRSZ",
+      "value": "_IOR('T', 215, int)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "TUNSETVNETHDRSZ",
+      "value": "_IOW('T', 216, int)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "TUNSETQUEUE",
+      "value": "_IOW('T', 217, int)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "TUNSETIFINDEX",
+      "value": "_IOW('T', 218, unsigned int)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "TUNGETFILTER",
+      "value": "_IOR('T', 219, struct sock_fprog)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "TUNSETVNETLE",
+      "value": "_IOW('T', 220, int)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "TUNGETVNETLE",
+      "value": "_IOR('T', 221, int)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "TUNSETVNETBE",
+      "value": "_IOW('T', 222, int)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "TUNGETVNETBE",
+      "value": "_IOR('T', 223, int)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "TUNSETSTEERINGEBPF",
+      "value": "_IOR('T', 224, int)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "TUNSETFILTEREBPF",
+      "value": "_IOR('T', 225, int)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "TUNSETCARRIER",
+      "value": "_IOW('T', 226, int)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "TUNGETDEVNETNS",
+      "value": "_IO('T', 227)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IFF_TUN",
+      "value": "0x0001",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IFF_TAP",
+      "value": "0x0002",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IFF_NAPI",
+      "value": "0x0010",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IFF_NAPI_FRAGS",
+      "value": "0x0020",
+      "comment": "",
+      "category": "IFF_NAPI"
+    },
+    {
+      "name": "IFF_NO_CARRIER",
+      "value": "0x0040",
+      "comment": "",
+      "category": "IFF_NO"
+    },
+    {
+      "name": "IFF_NO_PI",
+      "value": "0x1000",
+      "comment": "",
+      "category": "IFF_NO"
+    },
+    {
+      "name": "IFF_ONE_QUEUE",
+      "value": "0x2000",
+      "comment": "",
+      "category": "IFF_ONE"
+    },
+    {
+      "name": "IFF_VNET_HDR",
+      "value": "0x4000",
+      "comment": "",
+      "category": "IFF_VNET"
+    },
+    {
+      "name": "IFF_TUN_EXCL",
+      "value": "0x8000",
+      "comment": "",
+      "category": "IFF_TUN"
+    },
+    {
+      "name": "IFF_MULTI_QUEUE",
+      "value": "0x0100",
+      "comment": "",
+      "category": "IFF_MULTI"
+    },
+    {
+      "name": "IFF_ATTACH_QUEUE",
+      "value": "0x0200",
+      "comment": "",
+      "category": "IFF_ATTACH"
+    },
+    {
+      "name": "IFF_DETACH_QUEUE",
+      "value": "0x0400",
+      "comment": "",
+      "category": "IFF_DETACH"
+    },
+    {
+      "name": "IFF_PERSIST",
+      "value": "0x0800",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IFF_NOFILTER",
+      "value": "0x1000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "TUN_TX_TIMESTAMP",
+      "value": "1",
+      "comment": "",
+      "category": "TUN_TX"
+    },
+    {
+      "name": "TUN_F_CSUM",
+      "value": "0x01",
+      "comment": "You can hand me unchecksummed packets.",
+      "category": "TUN_F"
+    },
+    {
+      "name": "TUN_F_TSO4",
+      "value": "0x02",
+      "comment": "I can handle TSO for IPv4 packets",
+      "category": "TUN_F"
+    },
+    {
+      "name": "TUN_F_TSO6",
+      "value": "0x04",
+      "comment": "I can handle TSO for IPv6 packets",
+      "category": "TUN_F"
+    },
+    {
+      "name": "TUN_F_TSO_ECN",
+      "value": "0x08",
+      "comment": "I can handle TSO with ECN bits.",
+      "category": "TUN_F"
+    },
+    {
+      "name": "TUN_F_UFO",
+      "value": "0x10",
+      "comment": "I can handle UFO packets",
+      "category": "TUN_F"
+    },
+    {
+      "name": "TUN_F_USO4",
+      "value": "0x20",
+      "comment": "I can handle USO for IPv4 packets",
+      "category": "TUN_F"
+    },
+    {
+      "name": "TUN_F_USO6",
+      "value": "0x40",
+      "comment": "I can handle USO for IPv6 packets",
+      "category": "TUN_F"
+    },
+    {
+      "name": "TUN_F_UDP_TUNNEL_GSO",
+      "value": "0x080",
+      "comment": "",
+      "category": "TUN_F"
+    },
+    {
+      "name": "TUN_F_UDP_TUNNEL_GSO_CSUM",
+      "value": "0x100",
+      "comment": "",
+      "category": "TUN_F"
+    },
+    {
+      "name": "TUN_PKT_STRIP",
+      "value": "0x0001",
+      "comment": "",
+      "category": "TUN_PKT"
+    },
+    {
+      "name": "TUN_FLT_ALLMULTI",
+      "value": "0x0001",
+      "comment": "Accept all multicast packets",
+      "category": "TUN_FLT"
+    }
+  ],
+  "structs": [
+    {
+      "name": "tun_pi",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be16",
+          "name": "proto",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "tun_filter",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "addr",
+          "array_size": "][ETH_ALEN",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

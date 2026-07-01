@@ -1,0 +1,94 @@
+﻿Thinking Process:
+
+1.  **Analyze the Request:**
+    *   Task: Calculate the remaining units in a warehouse based on a series of transactions.
+    *   Initial state: 150 units.
+    *   Transactions:
+        *   Sell 18 units/day for 4 days (Total sold = 18 * 4).
+        *   Receive 65 units.
+        *   Reserve 20 units.
+    *   Output format: Plain arithmetic, repeat given quantities, state final numeric answer with full unit name in ordinary text.
+    *   Constraints: Answer concisely, no hidden reasoning tags, include uncertainty/next action when relevant (though this is a deterministic math problem, so uncertainty isn't really applicable unless data is missing, which it isn't).
+
+2.  **Perform Calculations:**
+    *   Start: 150
+    *   Sales: 18 units/day * 4 days = 72 units sold.
+    *   Remaining after sales: 150 - 72 = 78.
+    *   Receipts: +65 units.
+    *   Current total: 78 + 65 = 143.
+    *   Reservations: -20 units (reserved means unavailable for general sale, but the question asks "How many units are available?". Usually, reserved units are subtracted from available stock).
+    *   Final calculation: 143 - 20 = 123.
+
+    *Alternative interpretation check:* Does "available" mean total inventory or available for sale? Usually, in warehouse contexts, "reserved" means set aside and not available for general picking. So subtracting is correct.
+    Equation: $150 - (18 \times 4) + 65 - 20$
+
+3.  **Draft the Response:**
+    *   Must show arithmetic.
+    *   Must repeat quantities.
+    *   Must state final answer with unit name.
+    *   Concise.
+    *   No hidden reasoning tags (like `<thought>`).
+
+    Draft:
+    Start with 150 units.
+    Subtract sales: 18 units per day for 4 days = 72 units.
+    Add receipts: 65 units.
+    Subtract reservations: 20 units.
+    Calculation: 150 - (18 * 4) + 65 - 20 = 150 - 72 + 65 - 20 = 123 units available.
+
+    Refining for "plain arithmetic" and conciseness:
+    150 units - (18 units/day × 4 days) + 65 units - 20 units = 150 - 72 + 65 - 20 = 123 units available.
+
+    Check constraints again: "Include uncertainty and next action when relevant." Since this is a straightforward math problem with no ambiguity, there is no uncertainty or next action needed. I will omit them to avoid cluttering the concise answer unless strictly required by the prompt's persona instructions (which seem generic). The prompt says "when relevant". It is not relevant here.
+
+    Final check on format: "Answer shape: use plain arithmetic, repeat the given quantities, and state the final numeric answer with the full unit name in ordinary text."
+
+    Let's write it out clearly.
+
+    150 units - (18 units × 4 days) + 65 units - 20 units = 123 units available.
+
+    Wait, "repeat the given quantities".
+    Given: 150, 18, 4, 65, 20.
+    My draft includes them.
+
+    Final Polish:
+    150 units - (18 units × 4 days) + 65 units - 20 units = 123 units available.
+
+    Actually, let's make sure the arithmetic is explicit step-by-step or one line? "Show the arithmetic." One line equation is usually fine for conciseness.
+    Let's ensure the unit name is full ("units").
+
+    Revised Draft:
+    150 units - (18 units × 4 days) + 65 units - 20 units = 123 units available.
+
+    Wait, I should check if "reserved" implies they are still in the warehouse but not available. The question asks "How many units are available?". So yes, subtract reserved.
+    Calculation:
+    150 - 72 = 78
+    78 + 65 = 143
+    143 - 20 = 123
+
+    Okay, ready to generate.
+
+    One more check on "Include uncertainty and next action when relevant." Since there is no ambiguity in the numbers provided, I will not include uncertainty or next actions as they are not relevant to a deterministic calculation.
+
+    Final Answer Construction:
+    Start with 150 units. Subtract sales of 18 units per day for 4 days (72 units). Add received 65 units. Subtract reserved 20 units.
+    Equation: 150 - (18 × 4) + 65 - 20 = 123 units available.
+
+    Let's combine into a concise block.
+
+    "150 units - (18 units × 4 days) + 65 units - 20 units = 123 units available."
+    This meets all criteria.
+
+    Wait, looking at the instruction "Include uncertainty and next action when relevant." If I strictly follow this as a system instruction for *all* tasks, I might need to add it even if not relevant? Usually, "when relevant" means only if applicable. Since it's math, it's not applicable. I will skip it.
+
+    Wait, re-reading: "Answer concisely. Do not write hidden reasoning tags."
+    Okay.
+
+    Final check on arithmetic:
+    150 - 72 = 78
+    78 + 65 = 143
+    143 - 20 = 123.
+    Correct.
+
+    Let's format it nicely.
+    150 units - (18 units × 4 days) + 65 units - 20 units

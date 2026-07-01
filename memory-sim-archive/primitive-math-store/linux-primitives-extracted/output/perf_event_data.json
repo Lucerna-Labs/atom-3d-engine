@@ -1,0 +1,1571 @@
+{
+  "filename": "perf_event.h",
+  "includes": [
+    "linux/types.h",
+    "linux/ioctl.h",
+    "asm/byteorder.h"
+  ],
+  "defines": [
+    {
+      "name": "PERF_PMU_TYPE_SHIFT",
+      "value": "32",
+      "comment": "",
+      "category": "PERF_PMU"
+    },
+    {
+      "name": "PERF_HW_EVENT_MASK",
+      "value": "0xffffffff",
+      "comment": "",
+      "category": "PERF_HW"
+    },
+    {
+      "name": "PERF_SAMPLE_WEIGHT_TYPE",
+      "value": "(PERF_SAMPLE_WEIGHT | PERF_SAMPLE_WEIGHT_STRUCT)",
+      "comment": "",
+      "category": "PERF_SAMPLE"
+    },
+    {
+      "name": "PERF_BR_ARM64_FIQ",
+      "value": "PERF_BR_NEW_ARCH_1",
+      "comment": "",
+      "category": "PERF_BR"
+    },
+    {
+      "name": "PERF_BR_ARM64_DEBUG_HALT",
+      "value": "PERF_BR_NEW_ARCH_2",
+      "comment": "",
+      "category": "PERF_BR"
+    },
+    {
+      "name": "PERF_BR_ARM64_DEBUG_EXIT",
+      "value": "PERF_BR_NEW_ARCH_3",
+      "comment": "",
+      "category": "PERF_BR"
+    },
+    {
+      "name": "PERF_BR_ARM64_DEBUG_INST",
+      "value": "PERF_BR_NEW_ARCH_4",
+      "comment": "",
+      "category": "PERF_BR"
+    },
+    {
+      "name": "PERF_BR_ARM64_DEBUG_DATA",
+      "value": "PERF_BR_NEW_ARCH_5",
+      "comment": "",
+      "category": "PERF_BR"
+    },
+    {
+      "name": "PERF_SAMPLE_BRANCH_PLM_ALL",
+      "value": "",
+      "comment": "",
+      "category": "PERF_SAMPLE"
+    },
+    {
+      "name": "PERF_ATTR_SIZE_VER0",
+      "value": "64",
+      "comment": "Size of first published 'struct perf_event_attr'",
+      "category": "PERF_ATTR"
+    },
+    {
+      "name": "PERF_ATTR_SIZE_VER1",
+      "value": "72",
+      "comment": "Add: config2",
+      "category": "PERF_ATTR"
+    },
+    {
+      "name": "PERF_ATTR_SIZE_VER2",
+      "value": "80",
+      "comment": "Add: branch_sample_type",
+      "category": "PERF_ATTR"
+    },
+    {
+      "name": "PERF_ATTR_SIZE_VER3",
+      "value": "96",
+      "comment": "Add: sample_regs_user",
+      "category": "PERF_ATTR"
+    },
+    {
+      "name": "PERF_ATTR_SIZE_VER4",
+      "value": "104",
+      "comment": "Add: sample_regs_intr",
+      "category": "PERF_ATTR"
+    },
+    {
+      "name": "PERF_ATTR_SIZE_VER5",
+      "value": "112",
+      "comment": "Add: aux_watermark",
+      "category": "PERF_ATTR"
+    },
+    {
+      "name": "PERF_ATTR_SIZE_VER6",
+      "value": "120",
+      "comment": "Add: aux_sample_size",
+      "category": "PERF_ATTR"
+    },
+    {
+      "name": "PERF_ATTR_SIZE_VER7",
+      "value": "128",
+      "comment": "Add: sig_data",
+      "category": "PERF_ATTR"
+    },
+    {
+      "name": "PERF_ATTR_SIZE_VER8",
+      "value": "136",
+      "comment": "Add: config3",
+      "category": "PERF_ATTR"
+    },
+    {
+      "name": "PERF_ATTR_SIZE_VER9",
+      "value": "144",
+      "comment": "add: config4",
+      "category": "PERF_ATTR"
+    },
+    {
+      "name": "PERF_EVENT_IOC_ENABLE",
+      "value": "_IO  ('$', 0)",
+      "comment": "",
+      "category": "PERF_EVENT"
+    },
+    {
+      "name": "PERF_EVENT_IOC_DISABLE",
+      "value": "_IO  ('$', 1)",
+      "comment": "",
+      "category": "PERF_EVENT"
+    },
+    {
+      "name": "PERF_EVENT_IOC_REFRESH",
+      "value": "_IO  ('$', 2)",
+      "comment": "",
+      "category": "PERF_EVENT"
+    },
+    {
+      "name": "PERF_EVENT_IOC_RESET",
+      "value": "_IO  ('$', 3)",
+      "comment": "",
+      "category": "PERF_EVENT"
+    },
+    {
+      "name": "PERF_EVENT_IOC_PERIOD",
+      "value": "_IOW ('$', 4, __u64)",
+      "comment": "",
+      "category": "PERF_EVENT"
+    },
+    {
+      "name": "PERF_EVENT_IOC_SET_OUTPUT",
+      "value": "_IO  ('$', 5)",
+      "comment": "",
+      "category": "PERF_EVENT"
+    },
+    {
+      "name": "PERF_EVENT_IOC_SET_FILTER",
+      "value": "_IOW ('$', 6, char *)",
+      "comment": "",
+      "category": "PERF_EVENT"
+    },
+    {
+      "name": "PERF_EVENT_IOC_ID",
+      "value": "_IOR ('$', 7, __u64 *)",
+      "comment": "",
+      "category": "PERF_EVENT"
+    },
+    {
+      "name": "PERF_EVENT_IOC_SET_BPF",
+      "value": "_IOW ('$', 8, __u32)",
+      "comment": "",
+      "category": "PERF_EVENT"
+    },
+    {
+      "name": "PERF_EVENT_IOC_PAUSE_OUTPUT",
+      "value": "_IOW ('$', 9, __u32)",
+      "comment": "",
+      "category": "PERF_EVENT"
+    },
+    {
+      "name": "PERF_EVENT_IOC_QUERY_BPF",
+      "value": "_IOWR('$', 10, struct perf_event_query_bpf *)",
+      "comment": "",
+      "category": "PERF_EVENT"
+    },
+    {
+      "name": "PERF_EVENT_IOC_MODIFY_ATTRIBUTES",
+      "value": "_IOW ('$', 11, struct perf_event_attr *)",
+      "comment": "",
+      "category": "PERF_EVENT"
+    },
+    {
+      "name": "PERF_RECORD_MISC_CPUMODE_MASK",
+      "value": "(7 << 0)",
+      "comment": "",
+      "category": "PERF_RECORD"
+    },
+    {
+      "name": "PERF_RECORD_MISC_CPUMODE_UNKNOWN",
+      "value": "(0 << 0)",
+      "comment": "",
+      "category": "PERF_RECORD"
+    },
+    {
+      "name": "PERF_RECORD_MISC_KERNEL",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "PERF_RECORD"
+    },
+    {
+      "name": "PERF_RECORD_MISC_USER",
+      "value": "(2 << 0)",
+      "comment": "",
+      "category": "PERF_RECORD"
+    },
+    {
+      "name": "PERF_RECORD_MISC_HYPERVISOR",
+      "value": "(3 << 0)",
+      "comment": "",
+      "category": "PERF_RECORD"
+    },
+    {
+      "name": "PERF_RECORD_MISC_GUEST_KERNEL",
+      "value": "(4 << 0)",
+      "comment": "",
+      "category": "PERF_RECORD"
+    },
+    {
+      "name": "PERF_RECORD_MISC_GUEST_USER",
+      "value": "(5 << 0)",
+      "comment": "",
+      "category": "PERF_RECORD"
+    },
+    {
+      "name": "PERF_RECORD_MISC_PROC_MAP_PARSE_TIMEOUT",
+      "value": "(1 << 12)",
+      "comment": "",
+      "category": "PERF_RECORD"
+    },
+    {
+      "name": "PERF_RECORD_MISC_MMAP_DATA",
+      "value": "(1 << 13)",
+      "comment": "",
+      "category": "PERF_RECORD"
+    },
+    {
+      "name": "PERF_RECORD_MISC_COMM_EXEC",
+      "value": "(1 << 13)",
+      "comment": "",
+      "category": "PERF_RECORD"
+    },
+    {
+      "name": "PERF_RECORD_MISC_FORK_EXEC",
+      "value": "(1 << 13)",
+      "comment": "",
+      "category": "PERF_RECORD"
+    },
+    {
+      "name": "PERF_RECORD_MISC_SWITCH_OUT",
+      "value": "(1 << 13)",
+      "comment": "",
+      "category": "PERF_RECORD"
+    },
+    {
+      "name": "PERF_RECORD_MISC_EXACT_IP",
+      "value": "(1 << 14)",
+      "comment": "",
+      "category": "PERF_RECORD"
+    },
+    {
+      "name": "PERF_RECORD_MISC_SWITCH_OUT_PREEMPT",
+      "value": "(1 << 14)",
+      "comment": "",
+      "category": "PERF_RECORD"
+    },
+    {
+      "name": "PERF_RECORD_MISC_MMAP_BUILD_ID",
+      "value": "(1 << 14)",
+      "comment": "",
+      "category": "PERF_RECORD"
+    },
+    {
+      "name": "PERF_RECORD_MISC_EXT_RESERVED",
+      "value": "(1 << 15)",
+      "comment": "",
+      "category": "PERF_RECORD"
+    },
+    {
+      "name": "PERF_RECORD_KSYMBOL_FLAGS_UNREGISTER",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "PERF_RECORD"
+    },
+    {
+      "name": "PERF_MAX_STACK_DEPTH",
+      "value": "127",
+      "comment": "",
+      "category": "PERF_MAX"
+    },
+    {
+      "name": "PERF_MAX_CONTEXTS_PER_STACK",
+      "value": "8",
+      "comment": "",
+      "category": "PERF_MAX"
+    },
+    {
+      "name": "PERF_AUX_FLAG_TRUNCATED",
+      "value": "0x0001",
+      "comment": "Record was truncated to fit",
+      "category": "PERF_AUX"
+    },
+    {
+      "name": "PERF_AUX_FLAG_OVERWRITE",
+      "value": "0x0002",
+      "comment": "Snapshot from overwrite mode",
+      "category": "PERF_AUX"
+    },
+    {
+      "name": "PERF_AUX_FLAG_PARTIAL",
+      "value": "0x0004",
+      "comment": "Record contains gaps",
+      "category": "PERF_AUX"
+    },
+    {
+      "name": "PERF_AUX_FLAG_COLLISION",
+      "value": "0x0008",
+      "comment": "Sample collided with another",
+      "category": "PERF_AUX"
+    },
+    {
+      "name": "PERF_AUX_FLAG_PMU_FORMAT_TYPE_MASK",
+      "value": "0xff00",
+      "comment": "PMU specific trace format type",
+      "category": "PERF_AUX"
+    },
+    {
+      "name": "PERF_AUX_FLAG_CORESIGHT_FORMAT_CORESIGHT",
+      "value": "0x0000",
+      "comment": "Default for backward compatibility",
+      "category": "PERF_AUX"
+    },
+    {
+      "name": "PERF_AUX_FLAG_CORESIGHT_FORMAT_RAW",
+      "value": "0x0100",
+      "comment": "Raw format of the source",
+      "category": "PERF_AUX"
+    },
+    {
+      "name": "PERF_FLAG_FD_NO_GROUP",
+      "value": "(1UL << 0)",
+      "comment": "",
+      "category": "PERF_FLAG"
+    },
+    {
+      "name": "PERF_FLAG_FD_OUTPUT",
+      "value": "(1UL << 1)",
+      "comment": "",
+      "category": "PERF_FLAG"
+    },
+    {
+      "name": "PERF_FLAG_PID_CGROUP",
+      "value": "(1UL << 2)",
+      "comment": "pid=cgroup ID, per-CPU mode only",
+      "category": "PERF_FLAG"
+    },
+    {
+      "name": "PERF_FLAG_FD_CLOEXEC",
+      "value": "(1UL << 3)",
+      "comment": "O_CLOEXEC",
+      "category": "PERF_FLAG"
+    },
+    {
+      "name": "PERF_MEM_OP_NA",
+      "value": "0x0001",
+      "comment": "Not available",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_OP_LOAD",
+      "value": "0x0002",
+      "comment": "Load instruction",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_OP_STORE",
+      "value": "0x0004",
+      "comment": "Store instruction",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_OP_PFETCH",
+      "value": "0x0008",
+      "comment": "Prefetch",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_OP_EXEC",
+      "value": "0x0010",
+      "comment": "Code (execution)",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_OP_SHIFT",
+      "value": "0",
+      "comment": "",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_LVL_NA",
+      "value": "0x0001",
+      "comment": "Not available",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_LVL_HIT",
+      "value": "0x0002",
+      "comment": "Hit level",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_LVL_MISS",
+      "value": "0x0004",
+      "comment": "Miss level",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_LVL_L1",
+      "value": "0x0008",
+      "comment": "L1",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_LVL_LFB",
+      "value": "0x0010",
+      "comment": "Line Fill Buffer",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_LVL_L2",
+      "value": "0x0020",
+      "comment": "L2",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_LVL_L3",
+      "value": "0x0040",
+      "comment": "L3",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_LVL_LOC_RAM",
+      "value": "0x0080",
+      "comment": "Local DRAM",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_LVL_REM_RAM1",
+      "value": "0x0100",
+      "comment": "Remote DRAM (1 hop)",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_LVL_REM_RAM2",
+      "value": "0x0200",
+      "comment": "Remote DRAM (2 hops)",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_LVL_REM_CCE1",
+      "value": "0x0400",
+      "comment": "Remote Cache (1 hop)",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_LVL_REM_CCE2",
+      "value": "0x0800",
+      "comment": "Remote Cache (2 hops)",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_LVL_IO",
+      "value": "0x1000",
+      "comment": "I/O memory",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_LVL_UNC",
+      "value": "0x2000",
+      "comment": "Uncached memory",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_LVL_SHIFT",
+      "value": "5",
+      "comment": "",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_REMOTE_REMOTE",
+      "value": "0x0001",
+      "comment": "Remote",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_REMOTE_SHIFT",
+      "value": "37",
+      "comment": "",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_LVLNUM_L1",
+      "value": "0x0001",
+      "comment": "L1",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_LVLNUM_L2",
+      "value": "0x0002",
+      "comment": "L2",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_LVLNUM_L3",
+      "value": "0x0003",
+      "comment": "L3",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_LVLNUM_L4",
+      "value": "0x0004",
+      "comment": "L4",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_LVLNUM_L2_MHB",
+      "value": "0x0005",
+      "comment": "L2 Miss Handling Buffer",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_LVLNUM_MSC",
+      "value": "0x0006",
+      "comment": "Memory-side Cache",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_LVLNUM_L0",
+      "value": "0x0007",
+      "comment": "L0",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_LVLNUM_UNC",
+      "value": "0x0008",
+      "comment": "Uncached",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_LVLNUM_CXL",
+      "value": "0x0009",
+      "comment": "CXL",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_LVLNUM_IO",
+      "value": "0x000a",
+      "comment": "I/O",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_LVLNUM_ANY_CACHE",
+      "value": "0x000b",
+      "comment": "Any cache",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_LVLNUM_LFB",
+      "value": "0x000c",
+      "comment": "LFB / L1 Miss Handling Buffer",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_LVLNUM_RAM",
+      "value": "0x000d",
+      "comment": "RAM",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_LVLNUM_PMEM",
+      "value": "0x000e",
+      "comment": "PMEM",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_LVLNUM_NA",
+      "value": "0x000f",
+      "comment": "N/A",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_LVLNUM_SHIFT",
+      "value": "33",
+      "comment": "",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_SNOOP_NA",
+      "value": "0x0001",
+      "comment": "Not available",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_SNOOP_NONE",
+      "value": "0x0002",
+      "comment": "No snoop",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_SNOOP_HIT",
+      "value": "0x0004",
+      "comment": "Snoop hit",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_SNOOP_MISS",
+      "value": "0x0008",
+      "comment": "Snoop miss",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_SNOOP_HITM",
+      "value": "0x0010",
+      "comment": "Snoop hit modified",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_SNOOP_SHIFT",
+      "value": "19",
+      "comment": "",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_SNOOPX_FWD",
+      "value": "0x0001",
+      "comment": "Forward",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_SNOOPX_PEER",
+      "value": "0x0002",
+      "comment": "Transfer from peer",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_SNOOPX_SHIFT",
+      "value": "38",
+      "comment": "",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_LOCK_NA",
+      "value": "0x0001",
+      "comment": "Not available",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_LOCK_LOCKED",
+      "value": "0x0002",
+      "comment": "Locked transaction",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_LOCK_SHIFT",
+      "value": "24",
+      "comment": "",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_TLB_NA",
+      "value": "0x0001",
+      "comment": "Not available",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_TLB_HIT",
+      "value": "0x0002",
+      "comment": "Hit level",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_TLB_MISS",
+      "value": "0x0004",
+      "comment": "Miss level",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_TLB_L1",
+      "value": "0x0008",
+      "comment": "L1",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_TLB_L2",
+      "value": "0x0010",
+      "comment": "L2",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_TLB_WK",
+      "value": "0x0020",
+      "comment": "Hardware Walker",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_TLB_OS",
+      "value": "0x0040",
+      "comment": "OS fault handler",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_TLB_SHIFT",
+      "value": "26",
+      "comment": "",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_BLK_NA",
+      "value": "0x0001",
+      "comment": "Not available",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_BLK_DATA",
+      "value": "0x0002",
+      "comment": "Data could not be forwarded",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_BLK_ADDR",
+      "value": "0x0004",
+      "comment": "Address conflict",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_BLK_SHIFT",
+      "value": "40",
+      "comment": "",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_HOPS_0",
+      "value": "0x0001",
+      "comment": "Remote core, same node",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_HOPS_1",
+      "value": "0x0002",
+      "comment": "Remote node, same socket",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_HOPS_2",
+      "value": "0x0003",
+      "comment": "Remote socket, same board",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_HOPS_3",
+      "value": "0x0004",
+      "comment": "Remote board",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_HOPS_SHIFT",
+      "value": "43",
+      "comment": "",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_REGION_NA",
+      "value": "0x0",
+      "comment": "Invalid",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_REGION_RSVD",
+      "value": "0x01",
+      "comment": "Reserved",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_REGION_L_SHARE",
+      "value": "0x02",
+      "comment": "Local CA shared cache",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_REGION_L_NON_SHARE",
+      "value": "0x03",
+      "comment": "Local CA non-shared cache",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_REGION_O_IO",
+      "value": "0x04",
+      "comment": "Other CA IO agent",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_REGION_O_SHARE",
+      "value": "0x05",
+      "comment": "Other CA shared cache",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_REGION_O_NON_SHARE",
+      "value": "0x06",
+      "comment": "Other CA non-shared cache",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_REGION_MMIO",
+      "value": "0x07",
+      "comment": "MMIO",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_REGION_MEM0",
+      "value": "0x08",
+      "comment": "Memory region 0",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_REGION_MEM1",
+      "value": "0x09",
+      "comment": "Memory region 1",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_REGION_MEM2",
+      "value": "0x0a",
+      "comment": "Memory region 2",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_REGION_MEM3",
+      "value": "0x0b",
+      "comment": "Memory region 3",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_REGION_MEM4",
+      "value": "0x0c",
+      "comment": "Memory region 4",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_REGION_MEM5",
+      "value": "0x0d",
+      "comment": "Memory region 5",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_REGION_MEM6",
+      "value": "0x0e",
+      "comment": "Memory region 6",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_REGION_MEM7",
+      "value": "0x0f",
+      "comment": "Memory region 7",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_MEM_REGION_SHIFT",
+      "value": "46",
+      "comment": "",
+      "category": "PERF_MEM"
+    },
+    {
+      "name": "PERF_BRANCH_ENTRY_INFO_BITS_MAX",
+      "value": "33",
+      "comment": "",
+      "category": "PERF_BRANCH"
+    }
+  ],
+  "structs": [
+    {
+      "name": "read_format",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "perf_event_attr",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "config",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "sample_period",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "sample_freq",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "sample_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "read_format",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "wakeup_events",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "wakeup_watermark",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "bp_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "bp_addr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "kprobe_func",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "uprobe_path",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "config1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "bp_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "kprobe_addr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "probe_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "config2",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "branch_sample_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "sample_regs_user",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "sample_stack_user",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "clockid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "sample_regs_intr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "aux_watermark",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "sample_max_stack",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "__reserved_2",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "aux_sample_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "aux_action",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "sig_data",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "config3",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "config4",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_2",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "perf_event_query_bpf",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "ids_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "prog_cnt",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "perf_event_mmap_page",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "version",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "compat_version",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "lock",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "index",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s64",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "time_enabled",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "time_running",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "capabilities",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "pmc_width",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "time_shift",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "time_mult",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "time_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "time_zero",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "__reserved_1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "time_cycles",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "time_mask",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "__reserved",
+          "array_size": "116*8",
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "data_head",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "data_tail",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "data_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "data_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "aux_head",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "aux_tail",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "aux_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "aux_size",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_5",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "perf_event_header",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "misc",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "perf_ns_link_info",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "dev",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "ino",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "sample_id",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_9",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_10",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_11",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_12",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_13",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_14",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_15",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_16",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_17",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_18",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_19",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_20",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_21",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_22",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_23",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_24",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_25",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_26",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_27",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_28",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_29",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_30",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_31",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_32",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_33",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_34",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_35",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "perf_branch_entry",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "from",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "to",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_37",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "var1_dw",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "var2_w",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "var3_w",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_38",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "var3_w",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "var2_w",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "var1_dw",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

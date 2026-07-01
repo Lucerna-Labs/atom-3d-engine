@@ -1,0 +1,840 @@
+{
+  "filename": "in6.h",
+  "includes": [
+    "linux/types.h",
+    "linux/libc-compat.h"
+  ],
+  "defines": [
+    {
+      "name": "s6_addr",
+      "value": "in6_u.u6_addr8",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "s6_addr16",
+      "value": "in6_u.u6_addr16",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "s6_addr32",
+      "value": "in6_u.u6_addr32",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ipv6mr_acaddr",
+      "value": "ipv6mr_multiaddr",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_FL_A_GET",
+      "value": "0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_FL_A_PUT",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_FL_A_RENEW",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_FL_F_CREATE",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_FL_F_EXCL",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_FL_F_REFLECT",
+      "value": "4",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_FL_F_REMOTE",
+      "value": "8",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_FL_S_NONE",
+      "value": "0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_FL_S_EXCL",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_FL_S_PROCESS",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_FL_S_USER",
+      "value": "3",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_FL_S_ANY",
+      "value": "255",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_FLOWINFO_FLOWLABEL",
+      "value": "0x000fffff",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_FLOWINFO_PRIORITY",
+      "value": "0x0ff00000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_PRIORITY_UNCHARACTERIZED",
+      "value": "0x0000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_PRIORITY_FILLER",
+      "value": "0x0100",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_PRIORITY_UNATTENDED",
+      "value": "0x0200",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_PRIORITY_RESERVED1",
+      "value": "0x0300",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_PRIORITY_BULK",
+      "value": "0x0400",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_PRIORITY_RESERVED2",
+      "value": "0x0500",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_PRIORITY_INTERACTIVE",
+      "value": "0x0600",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_PRIORITY_CONTROL",
+      "value": "0x0700",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_PRIORITY_8",
+      "value": "0x0800",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_PRIORITY_9",
+      "value": "0x0900",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_PRIORITY_10",
+      "value": "0x0a00",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_PRIORITY_11",
+      "value": "0x0b00",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_PRIORITY_12",
+      "value": "0x0c00",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_PRIORITY_13",
+      "value": "0x0d00",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_PRIORITY_14",
+      "value": "0x0e00",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_PRIORITY_15",
+      "value": "0x0f00",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPPROTO_HOPOPTS",
+      "value": "0",
+      "comment": "IPv6 hop-by-hop options",
+      "category": ""
+    },
+    {
+      "name": "IPPROTO_ROUTING",
+      "value": "43",
+      "comment": "IPv6 routing header",
+      "category": ""
+    },
+    {
+      "name": "IPPROTO_FRAGMENT",
+      "value": "44",
+      "comment": "IPv6 fragmentation header",
+      "category": ""
+    },
+    {
+      "name": "IPPROTO_ICMPV6",
+      "value": "58",
+      "comment": "ICMPv6",
+      "category": ""
+    },
+    {
+      "name": "IPPROTO_NONE",
+      "value": "59",
+      "comment": "IPv6 no next header",
+      "category": ""
+    },
+    {
+      "name": "IPPROTO_DSTOPTS",
+      "value": "60",
+      "comment": "IPv6 destination options",
+      "category": ""
+    },
+    {
+      "name": "IPPROTO_MH",
+      "value": "135",
+      "comment": "IPv6 mobility header",
+      "category": ""
+    },
+    {
+      "name": "IPV6_TLV_PAD1",
+      "value": "0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_TLV_PADN",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_TLV_ROUTERALERT",
+      "value": "5",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_TLV_CALIPSO",
+      "value": "7",
+      "comment": "RFC 5570",
+      "category": ""
+    },
+    {
+      "name": "IPV6_TLV_IOAM",
+      "value": "49",
+      "comment": "RFC 9486",
+      "category": ""
+    },
+    {
+      "name": "IPV6_TLV_JUMBO",
+      "value": "194",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_TLV_HAO",
+      "value": "201",
+      "comment": "home address option",
+      "category": ""
+    },
+    {
+      "name": "IPV6_ADDRFORM",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_2292PKTINFO",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_2292HOPOPTS",
+      "value": "3",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_2292DSTOPTS",
+      "value": "4",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_2292RTHDR",
+      "value": "5",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_2292PKTOPTIONS",
+      "value": "6",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_CHECKSUM",
+      "value": "7",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_2292HOPLIMIT",
+      "value": "8",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_NEXTHOP",
+      "value": "9",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_AUTHHDR",
+      "value": "10",
+      "comment": "obsolete",
+      "category": ""
+    },
+    {
+      "name": "IPV6_FLOWINFO",
+      "value": "11",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_UNICAST_HOPS",
+      "value": "16",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_MULTICAST_IF",
+      "value": "17",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_MULTICAST_HOPS",
+      "value": "18",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_MULTICAST_LOOP",
+      "value": "19",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_ADD_MEMBERSHIP",
+      "value": "20",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_DROP_MEMBERSHIP",
+      "value": "21",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_ROUTER_ALERT",
+      "value": "22",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_MTU_DISCOVER",
+      "value": "23",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_MTU",
+      "value": "24",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_RECVERR",
+      "value": "25",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_V6ONLY",
+      "value": "26",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_JOIN_ANYCAST",
+      "value": "27",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_LEAVE_ANYCAST",
+      "value": "28",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_MULTICAST_ALL",
+      "value": "29",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_ROUTER_ALERT_ISOLATE",
+      "value": "30",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_RECVERR_RFC4884",
+      "value": "31",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_PMTUDISC_DONT",
+      "value": "0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_PMTUDISC_WANT",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_PMTUDISC_DO",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_PMTUDISC_PROBE",
+      "value": "3",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_PMTUDISC_INTERFACE",
+      "value": "4",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_PMTUDISC_OMIT",
+      "value": "5",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_FLOWLABEL_MGR",
+      "value": "32",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_FLOWINFO_SEND",
+      "value": "33",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_IPSEC_POLICY",
+      "value": "34",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_XFRM_POLICY",
+      "value": "35",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_HDRINCL",
+      "value": "36",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_RECVPKTINFO",
+      "value": "49",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_PKTINFO",
+      "value": "50",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_RECVHOPLIMIT",
+      "value": "51",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_HOPLIMIT",
+      "value": "52",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_RECVHOPOPTS",
+      "value": "53",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_HOPOPTS",
+      "value": "54",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_RTHDRDSTOPTS",
+      "value": "55",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_RECVRTHDR",
+      "value": "56",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_RTHDR",
+      "value": "57",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_RECVDSTOPTS",
+      "value": "58",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_DSTOPTS",
+      "value": "59",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_RECVPATHMTU",
+      "value": "60",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_PATHMTU",
+      "value": "61",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_DONTFRAG",
+      "value": "62",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_USE_MIN_MTU",
+      "value": "63",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_RECVTCLASS",
+      "value": "66",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_TCLASS",
+      "value": "67",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_AUTOFLOWLABEL",
+      "value": "70",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_ADDR_PREFERENCES",
+      "value": "72",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_PREFER_SRC_TMP",
+      "value": "0x0001",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_PREFER_SRC_PUBLIC",
+      "value": "0x0002",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_PREFER_SRC_PUBTMP_DEFAULT",
+      "value": "0x0100",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_PREFER_SRC_COA",
+      "value": "0x0004",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_PREFER_SRC_HOME",
+      "value": "0x0400",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_PREFER_SRC_CGA",
+      "value": "0x0008",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_PREFER_SRC_NONCGA",
+      "value": "0x0800",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_MINHOPCOUNT",
+      "value": "73",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_ORIGDSTADDR",
+      "value": "74",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_RECVORIGDSTADDR",
+      "value": "IPV6_ORIGDSTADDR",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_TRANSPARENT",
+      "value": "75",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_UNICAST_IF",
+      "value": "76",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_RECVFRAGSIZE",
+      "value": "77",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_FREEBIND",
+      "value": "78",
+      "comment": "",
+      "category": ""
+    }
+  ],
+  "structs": [
+    {
+      "name": "in6_addr",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "u6_addr8",
+          "array_size": "16",
+          "comment": ""
+        },
+        {
+          "type_name": "__be16",
+          "name": "u6_addr16",
+          "array_size": "8",
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "u6_addr32",
+          "array_size": "4",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "sockaddr_in6",
+      "fields": [
+        {
+          "type_name": "__be16",
+          "name": "sin6_port",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "sin6_flowinfo",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "sin6_scope_id",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ipv6_mreq",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "ipv6mr_ifindex",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "in6_flowlabel_req",
+      "fields": [
+        {
+          "type_name": "__be32",
+          "name": "flr_label",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "flr_action",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "flr_share",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "flr_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "flr_expires",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "flr_linger",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "__flr_pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

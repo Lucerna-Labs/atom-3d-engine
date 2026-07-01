@@ -1,0 +1,406 @@
+{
+  "filename": "fcntl.h",
+  "includes": [
+    "asm/fcntl.h",
+    "linux/openat2.h",
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "F_SETLEASE",
+      "value": "(F_LINUX_SPECIFIC_BASE + 0)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "F_GETLEASE",
+      "value": "(F_LINUX_SPECIFIC_BASE + 1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "F_NOTIFY",
+      "value": "(F_LINUX_SPECIFIC_BASE + 2)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "F_DUPFD_QUERY",
+      "value": "(F_LINUX_SPECIFIC_BASE + 3)",
+      "comment": "",
+      "category": "F_DUPFD"
+    },
+    {
+      "name": "F_CREATED_QUERY",
+      "value": "(F_LINUX_SPECIFIC_BASE + 4)",
+      "comment": "",
+      "category": "F_CREATED"
+    },
+    {
+      "name": "F_CANCELLK",
+      "value": "(F_LINUX_SPECIFIC_BASE + 5)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "F_DUPFD_CLOEXEC",
+      "value": "(F_LINUX_SPECIFIC_BASE + 6)",
+      "comment": "",
+      "category": "F_DUPFD"
+    },
+    {
+      "name": "F_SETPIPE_SZ",
+      "value": "(F_LINUX_SPECIFIC_BASE + 7)",
+      "comment": "",
+      "category": "F_SETPIPE"
+    },
+    {
+      "name": "F_GETPIPE_SZ",
+      "value": "(F_LINUX_SPECIFIC_BASE + 8)",
+      "comment": "",
+      "category": "F_GETPIPE"
+    },
+    {
+      "name": "F_ADD_SEALS",
+      "value": "(F_LINUX_SPECIFIC_BASE + 9)",
+      "comment": "",
+      "category": "F_ADD"
+    },
+    {
+      "name": "F_GET_SEALS",
+      "value": "(F_LINUX_SPECIFIC_BASE + 10)",
+      "comment": "",
+      "category": "F_GET"
+    },
+    {
+      "name": "F_SEAL_SEAL",
+      "value": "0x0001",
+      "comment": "prevent further seals from being set",
+      "category": "F_SEAL"
+    },
+    {
+      "name": "F_SEAL_SHRINK",
+      "value": "0x0002",
+      "comment": "prevent file from shrinking",
+      "category": "F_SEAL"
+    },
+    {
+      "name": "F_SEAL_GROW",
+      "value": "0x0004",
+      "comment": "prevent file from growing",
+      "category": "F_SEAL"
+    },
+    {
+      "name": "F_SEAL_WRITE",
+      "value": "0x0008",
+      "comment": "prevent writes",
+      "category": "F_SEAL"
+    },
+    {
+      "name": "F_SEAL_FUTURE_WRITE",
+      "value": "0x0010",
+      "comment": "prevent future writes while mapped",
+      "category": "F_SEAL"
+    },
+    {
+      "name": "F_SEAL_EXEC",
+      "value": "0x0020",
+      "comment": "prevent chmod modifying exec bits",
+      "category": "F_SEAL"
+    },
+    {
+      "name": "F_GET_RW_HINT",
+      "value": "(F_LINUX_SPECIFIC_BASE + 11)",
+      "comment": "",
+      "category": "F_GET"
+    },
+    {
+      "name": "F_SET_RW_HINT",
+      "value": "(F_LINUX_SPECIFIC_BASE + 12)",
+      "comment": "",
+      "category": "F_SET"
+    },
+    {
+      "name": "F_GET_FILE_RW_HINT",
+      "value": "(F_LINUX_SPECIFIC_BASE + 13)",
+      "comment": "",
+      "category": "F_GET"
+    },
+    {
+      "name": "F_SET_FILE_RW_HINT",
+      "value": "(F_LINUX_SPECIFIC_BASE + 14)",
+      "comment": "",
+      "category": "F_SET"
+    },
+    {
+      "name": "RWH_WRITE_LIFE_NOT_SET",
+      "value": "0",
+      "comment": "",
+      "category": "RWH_WRITE"
+    },
+    {
+      "name": "RWH_WRITE_LIFE_NONE",
+      "value": "1",
+      "comment": "",
+      "category": "RWH_WRITE"
+    },
+    {
+      "name": "RWH_WRITE_LIFE_SHORT",
+      "value": "2",
+      "comment": "",
+      "category": "RWH_WRITE"
+    },
+    {
+      "name": "RWH_WRITE_LIFE_MEDIUM",
+      "value": "3",
+      "comment": "",
+      "category": "RWH_WRITE"
+    },
+    {
+      "name": "RWH_WRITE_LIFE_LONG",
+      "value": "4",
+      "comment": "",
+      "category": "RWH_WRITE"
+    },
+    {
+      "name": "RWH_WRITE_LIFE_EXTREME",
+      "value": "5",
+      "comment": "",
+      "category": "RWH_WRITE"
+    },
+    {
+      "name": "RWF_WRITE_LIFE_NOT_SET",
+      "value": "RWH_WRITE_LIFE_NOT_SET",
+      "comment": "",
+      "category": "RWF_WRITE"
+    },
+    {
+      "name": "F_GETDELEG",
+      "value": "(F_LINUX_SPECIFIC_BASE + 15)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "F_SETDELEG",
+      "value": "(F_LINUX_SPECIFIC_BASE + 16)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DN_ACCESS",
+      "value": "0x00000001",
+      "comment": "File accessed",
+      "category": ""
+    },
+    {
+      "name": "DN_MODIFY",
+      "value": "0x00000002",
+      "comment": "File modified",
+      "category": ""
+    },
+    {
+      "name": "DN_CREATE",
+      "value": "0x00000004",
+      "comment": "File created",
+      "category": ""
+    },
+    {
+      "name": "DN_DELETE",
+      "value": "0x00000008",
+      "comment": "File removed",
+      "category": ""
+    },
+    {
+      "name": "DN_RENAME",
+      "value": "0x00000010",
+      "comment": "File renamed",
+      "category": ""
+    },
+    {
+      "name": "DN_ATTRIB",
+      "value": "0x00000020",
+      "comment": "File changed attibutes",
+      "category": ""
+    },
+    {
+      "name": "DN_MULTISHOT",
+      "value": "0x80000000",
+      "comment": "Don't remove notifier",
+      "category": ""
+    },
+    {
+      "name": "AT_FDCWD",
+      "value": "-100    /* Special value for dirfd used to",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PIDFD_SELF_THREAD",
+      "value": "-10000",
+      "comment": "Current thread.",
+      "category": "PIDFD_SELF"
+    },
+    {
+      "name": "PIDFD_SELF_THREAD_GROUP",
+      "value": "-10001",
+      "comment": "Current thread group leader.",
+      "category": "PIDFD_SELF"
+    },
+    {
+      "name": "FD_PIDFS_ROOT",
+      "value": "-10002",
+      "comment": "Root of the pidfs filesystem",
+      "category": "FD_PIDFS"
+    },
+    {
+      "name": "FD_NSFS_ROOT",
+      "value": "-10003",
+      "comment": "Root of the nsfs filesystem",
+      "category": "FD_NSFS"
+    },
+    {
+      "name": "FD_INVALID",
+      "value": "-10009",
+      "comment": "Invalid file descriptor: -10000 - EBADF = -10009",
+      "category": ""
+    },
+    {
+      "name": "AT_SYMLINK_NOFOLLOW",
+      "value": "0x100   /* Do not follow symbolic",
+      "comment": "",
+      "category": "AT_SYMLINK"
+    },
+    {
+      "name": "AT_SYMLINK_FOLLOW",
+      "value": "0x400",
+      "comment": "Follow symbolic links.",
+      "category": "AT_SYMLINK"
+    },
+    {
+      "name": "AT_NO_AUTOMOUNT",
+      "value": "0x800\t/* Suppress terminal automount",
+      "comment": "",
+      "category": "AT_NO"
+    },
+    {
+      "name": "AT_EMPTY_PATH",
+      "value": "0x1000\t/* Allow empty relative",
+      "comment": "",
+      "category": "AT_EMPTY"
+    },
+    {
+      "name": "AT_STATX_SYNC_TYPE",
+      "value": "0x6000",
+      "comment": "Type of synchronisation required from statx()",
+      "category": "AT_STATX"
+    },
+    {
+      "name": "AT_STATX_SYNC_AS_STAT",
+      "value": "0x0000",
+      "comment": "- Do whatever stat() does",
+      "category": "AT_STATX"
+    },
+    {
+      "name": "AT_STATX_FORCE_SYNC",
+      "value": "0x2000",
+      "comment": "- Force the attributes to be sync'd with the server",
+      "category": "AT_STATX"
+    },
+    {
+      "name": "AT_STATX_DONT_SYNC",
+      "value": "0x4000",
+      "comment": "- Don't sync attributes with the server",
+      "category": "AT_STATX"
+    },
+    {
+      "name": "AT_RECURSIVE",
+      "value": "0x8000",
+      "comment": "Apply to the entire subtree",
+      "category": ""
+    },
+    {
+      "name": "AT_RENAME_NOREPLACE",
+      "value": "0x0001",
+      "comment": "",
+      "category": "AT_RENAME"
+    },
+    {
+      "name": "AT_RENAME_EXCHANGE",
+      "value": "0x0002",
+      "comment": "",
+      "category": "AT_RENAME"
+    },
+    {
+      "name": "AT_RENAME_WHITEOUT",
+      "value": "0x0004",
+      "comment": "",
+      "category": "AT_RENAME"
+    },
+    {
+      "name": "AT_EACCESS",
+      "value": "0x200\t/* Test access permitted for",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "AT_REMOVEDIR",
+      "value": "0x200   /* Remove directory instead of",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "AT_HANDLE_FID",
+      "value": "0x200\t/* File handle is needed to compare",
+      "comment": "",
+      "category": "AT_HANDLE"
+    },
+    {
+      "name": "AT_HANDLE_MNT_ID_UNIQUE",
+      "value": "0x001",
+      "comment": "Return the u64 unique mount ID.",
+      "category": "AT_HANDLE"
+    },
+    {
+      "name": "AT_HANDLE_CONNECTABLE",
+      "value": "0x002",
+      "comment": "Request a connectable file handle",
+      "category": "AT_HANDLE"
+    },
+    {
+      "name": "AT_EXECVE_CHECK",
+      "value": "0x10000\t/* Only perform a check if execution",
+      "comment": "",
+      "category": "AT_EXECVE"
+    }
+  ],
+  "structs": [
+    {
+      "name": "delegation",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "d_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "d_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "__pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

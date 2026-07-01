@@ -1,0 +1,118 @@
+{
+  "filename": "in_route.h",
+  "includes": [],
+  "defines": [
+    {
+      "name": "RTCF_DEAD",
+      "value": "RTNH_F_DEAD",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTCF_ONLINK",
+      "value": "RTNH_F_ONLINK",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTCF_NOPMTUDISC",
+      "value": "RTM_F_NOPMTUDISC",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTCF_NOTIFY",
+      "value": "0x00010000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTCF_DIRECTDST",
+      "value": "0x00020000",
+      "comment": "unused",
+      "category": ""
+    },
+    {
+      "name": "RTCF_REDIRECTED",
+      "value": "0x00040000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTCF_TPROXY",
+      "value": "0x00080000",
+      "comment": "unused",
+      "category": ""
+    },
+    {
+      "name": "RTCF_FAST",
+      "value": "0x00200000",
+      "comment": "unused",
+      "category": ""
+    },
+    {
+      "name": "RTCF_MASQ",
+      "value": "0x00400000",
+      "comment": "unused",
+      "category": ""
+    },
+    {
+      "name": "RTCF_SNAT",
+      "value": "0x00800000",
+      "comment": "unused",
+      "category": ""
+    },
+    {
+      "name": "RTCF_DOREDIRECT",
+      "value": "0x01000000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTCF_DIRECTSRC",
+      "value": "0x04000000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTCF_DNAT",
+      "value": "0x08000000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTCF_BROADCAST",
+      "value": "0x10000000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTCF_MULTICAST",
+      "value": "0x20000000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTCF_REJECT",
+      "value": "0x40000000",
+      "comment": "unused",
+      "category": ""
+    },
+    {
+      "name": "RTCF_LOCAL",
+      "value": "0x80000000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTCF_NAT",
+      "value": "(RTCF_DNAT|RTCF_SNAT)",
+      "comment": "",
+      "category": ""
+    }
+  ],
+  "structs": [],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

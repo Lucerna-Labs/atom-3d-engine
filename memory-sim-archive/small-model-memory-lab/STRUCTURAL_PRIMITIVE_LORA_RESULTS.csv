@@ -1,0 +1,4 @@
+model,setup,train_examples,validation_examples,max_steps,score,lift_vs_base,notes
+Qwen/Qwen3-1.7B-Base,base no structural LoRA,0,0,0,2/6,0,"Baseline from the same Kaggle structural eval harness."
+Qwen/Qwen3-1.7B-Base,structural primitive LoRA v0.1,537,47,180,6/6,4,"Real Kaggle model run. Learned the structural behavior but several outputs echoed training-format continuations."
+Qwen/Qwen3-1.7B-Base,cleaned structural primitive LoRA v0.2,320,40,180,6/6,4,"Real Kaggle model run. Same score as v0.1 with no obvious User/Assistant template echo markers in the quick eval, though some repetition remains."

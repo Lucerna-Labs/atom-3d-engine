@@ -1,0 +1,149 @@
+{
+  "filename": "amd-apml.h",
+  "includes": [
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "AMD_SBI_MB_DATA_SIZE",
+      "value": "4",
+      "comment": "",
+      "category": "AMD_SBI"
+    },
+    {
+      "name": "SB_BASE_IOCTL_NR",
+      "value": "0xF9",
+      "comment": "",
+      "category": "SB_BASE"
+    },
+    {
+      "name": "SBRMI_IOCTL_MBOX_CMD",
+      "value": "_IOWR(SB_BASE_IOCTL_NR, 0, struct apml_mbox_msg)",
+      "comment": "",
+      "category": "SBRMI_IOCTL"
+    },
+    {
+      "name": "SBRMI_IOCTL_CPUID_CMD",
+      "value": "_IOWR(SB_BASE_IOCTL_NR, 1, struct apml_cpuid_msg)",
+      "comment": "",
+      "category": "SBRMI_IOCTL"
+    },
+    {
+      "name": "SBRMI_IOCTL_MCAMSR_CMD",
+      "value": "_IOWR(SB_BASE_IOCTL_NR, 2, struct apml_mcamsr_msg)",
+      "comment": "",
+      "category": "SBRMI_IOCTL"
+    },
+    {
+      "name": "SBRMI_IOCTL_REG_XFER_CMD",
+      "value": "_IOWR(SB_BASE_IOCTL_NR, 3, struct apml_reg_xfer_msg)",
+      "comment": "",
+      "category": "SBRMI_IOCTL"
+    }
+  ],
+  "structs": [
+    {
+      "name": "apml_mbox_msg",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "cmd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "mb_in_out",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "fw_ret_code",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "apml_cpuid_msg",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "cpu_in_out",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "fw_ret_code",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "apml_mcamsr_msg",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "mcamsr_in_out",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "fw_ret_code",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "apml_reg_xfer_msg",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "reg_addr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "data_in_out",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "rflag",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

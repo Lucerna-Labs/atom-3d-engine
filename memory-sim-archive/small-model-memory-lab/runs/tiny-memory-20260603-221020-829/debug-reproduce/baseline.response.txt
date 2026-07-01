@@ -1,0 +1,6 @@
+﻿
+
+1. Rollback to previous version to confirm stability; if stable, revert changes, otherwise investigate infrastructure drift.
+2. Enable verbose logging or distributed tracing on the current version; if no new data appears, check agent configuration.
+3. Correlate warning logs with crash timestamps to identify patterns like memory leaks; uncertainty remains if correlations are weak.
+4. Implement targeted fixes and monitor; if crashes persist, increase sampling rate or escalate for infrastructure review.

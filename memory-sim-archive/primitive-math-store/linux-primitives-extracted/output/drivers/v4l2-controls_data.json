@@ -1,0 +1,7795 @@
+{
+  "filename": "v4l2-controls.h",
+  "includes": [
+    "linux/const.h",
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "V4L2_CTRL_CLASS_USER",
+      "value": "0x00980000",
+      "comment": "Old-style 'user' controls",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CTRL_CLASS_CODEC",
+      "value": "0x00990000",
+      "comment": "Stateful codec controls",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CTRL_CLASS_CAMERA",
+      "value": "0x009a0000",
+      "comment": "Camera class controls",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CTRL_CLASS_FM_TX",
+      "value": "0x009b0000",
+      "comment": "FM Modulator controls",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CTRL_CLASS_FLASH",
+      "value": "0x009c0000",
+      "comment": "Camera flash controls",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CTRL_CLASS_JPEG",
+      "value": "0x009d0000",
+      "comment": "JPEG-compression controls",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CTRL_CLASS_IMAGE_SOURCE",
+      "value": "0x009e0000",
+      "comment": "Image source controls",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CTRL_CLASS_IMAGE_PROC",
+      "value": "0x009f0000",
+      "comment": "Image processing controls",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CTRL_CLASS_DV",
+      "value": "0x00a00000",
+      "comment": "Digital Video controls",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CTRL_CLASS_FM_RX",
+      "value": "0x00a10000",
+      "comment": "FM Receiver controls",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CTRL_CLASS_RF_TUNER",
+      "value": "0x00a20000",
+      "comment": "RF tuner controls",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CTRL_CLASS_DETECT",
+      "value": "0x00a30000",
+      "comment": "Detection controls",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CTRL_CLASS_CODEC_STATELESS",
+      "value": "0x00a40000",
+      "comment": "Stateless codecs controls",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CTRL_CLASS_COLORIMETRY",
+      "value": "0x00a50000",
+      "comment": "Colorimetry controls",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_BASE",
+      "value": "(V4L2_CTRL_CLASS_USER | 0x900)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_USER_BASE",
+      "value": "V4L2_CID_BASE",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_USER_CLASS",
+      "value": "(V4L2_CTRL_CLASS_USER | 1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_BRIGHTNESS",
+      "value": "(V4L2_CID_BASE+0)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_CONTRAST",
+      "value": "(V4L2_CID_BASE+1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_SATURATION",
+      "value": "(V4L2_CID_BASE+2)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_HUE",
+      "value": "(V4L2_CID_BASE+3)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_AUDIO_VOLUME",
+      "value": "(V4L2_CID_BASE+5)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_AUDIO_BALANCE",
+      "value": "(V4L2_CID_BASE+6)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_AUDIO_BASS",
+      "value": "(V4L2_CID_BASE+7)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_AUDIO_TREBLE",
+      "value": "(V4L2_CID_BASE+8)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_AUDIO_MUTE",
+      "value": "(V4L2_CID_BASE+9)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_AUDIO_LOUDNESS",
+      "value": "(V4L2_CID_BASE+10)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_BLACK_LEVEL",
+      "value": "(V4L2_CID_BASE+11)",
+      "comment": "Deprecated",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_AUTO_WHITE_BALANCE",
+      "value": "(V4L2_CID_BASE+12)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_DO_WHITE_BALANCE",
+      "value": "(V4L2_CID_BASE+13)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_RED_BALANCE",
+      "value": "(V4L2_CID_BASE+14)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_BLUE_BALANCE",
+      "value": "(V4L2_CID_BASE+15)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_GAMMA",
+      "value": "(V4L2_CID_BASE+16)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_WHITENESS",
+      "value": "(V4L2_CID_GAMMA)",
+      "comment": "Deprecated",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_EXPOSURE",
+      "value": "(V4L2_CID_BASE+17)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_AUTOGAIN",
+      "value": "(V4L2_CID_BASE+18)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_GAIN",
+      "value": "(V4L2_CID_BASE+19)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_HFLIP",
+      "value": "(V4L2_CID_BASE+20)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_VFLIP",
+      "value": "(V4L2_CID_BASE+21)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_POWER_LINE_FREQUENCY",
+      "value": "(V4L2_CID_BASE+24)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_HUE_AUTO",
+      "value": "(V4L2_CID_BASE+25)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_WHITE_BALANCE_TEMPERATURE",
+      "value": "(V4L2_CID_BASE+26)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_SHARPNESS",
+      "value": "(V4L2_CID_BASE+27)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_BACKLIGHT_COMPENSATION",
+      "value": "(V4L2_CID_BASE+28)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_CHROMA_AGC",
+      "value": "(V4L2_CID_BASE+29)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_COLOR_KILLER",
+      "value": "(V4L2_CID_BASE+30)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_COLORFX",
+      "value": "(V4L2_CID_BASE+31)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_AUTOBRIGHTNESS",
+      "value": "(V4L2_CID_BASE+32)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_BAND_STOP_FILTER",
+      "value": "(V4L2_CID_BASE+33)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_ROTATE",
+      "value": "(V4L2_CID_BASE+34)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_BG_COLOR",
+      "value": "(V4L2_CID_BASE+35)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_CHROMA_GAIN",
+      "value": "(V4L2_CID_BASE+36)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_ILLUMINATORS_1",
+      "value": "(V4L2_CID_BASE+37)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_ILLUMINATORS_2",
+      "value": "(V4L2_CID_BASE+38)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MIN_BUFFERS_FOR_CAPTURE",
+      "value": "(V4L2_CID_BASE+39)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MIN_BUFFERS_FOR_OUTPUT",
+      "value": "(V4L2_CID_BASE+40)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_ALPHA_COMPONENT",
+      "value": "(V4L2_CID_BASE+41)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_COLORFX_CBCR",
+      "value": "(V4L2_CID_BASE+42)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_COLORFX_RGB",
+      "value": "(V4L2_CID_BASE+43)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_LASTP1",
+      "value": "(V4L2_CID_BASE+44)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_USER_MEYE_BASE",
+      "value": "(V4L2_CID_USER_BASE + 0x1000)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_USER_BTTV_BASE",
+      "value": "(V4L2_CID_USER_BASE + 0x1010)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_USER_S2255_BASE",
+      "value": "(V4L2_CID_USER_BASE + 0x1030)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_USER_SI476X_BASE",
+      "value": "(V4L2_CID_USER_BASE + 0x1040)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_USER_TI_VPE_BASE",
+      "value": "(V4L2_CID_USER_BASE + 0x1050)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_USER_SAA7134_BASE",
+      "value": "(V4L2_CID_USER_BASE + 0x1060)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_USER_ADV7180_BASE",
+      "value": "(V4L2_CID_USER_BASE + 0x1070)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_USER_TC358743_BASE",
+      "value": "(V4L2_CID_USER_BASE + 0x1080)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_USER_MAX217X_BASE",
+      "value": "(V4L2_CID_USER_BASE + 0x1090)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_USER_IMX_BASE",
+      "value": "(V4L2_CID_USER_BASE + 0x10b0)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_USER_ATMEL_ISC_BASE",
+      "value": "(V4L2_CID_USER_BASE + 0x10c0)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_USER_CODA_BASE",
+      "value": "(V4L2_CID_USER_BASE + 0x10e0)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_USER_CCS_BASE",
+      "value": "(V4L2_CID_USER_BASE + 0x10f0)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_USER_ALLEGRO_BASE",
+      "value": "(V4L2_CID_USER_BASE + 0x1170)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_USER_ISL7998X_BASE",
+      "value": "(V4L2_CID_USER_BASE + 0x1180)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_USER_DW100_BASE",
+      "value": "(V4L2_CID_USER_BASE + 0x1190)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_USER_ASPEED_BASE",
+      "value": "(V4L2_CID_USER_BASE + 0x11a0)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_USER_NPCM_BASE",
+      "value": "(V4L2_CID_USER_BASE + 0x11b0)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_USER_THP7312_BASE",
+      "value": "(V4L2_CID_USER_BASE + 0x11c0)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_USER_UVC_BASE",
+      "value": "(V4L2_CID_USER_BASE + 0x11e0)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_USER_RKISP1_BASE",
+      "value": "(V4L2_CID_USER_BASE + 0x1220)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_USER_MALI_C55_BASE",
+      "value": "(V4L2_CID_USER_BASE + 0x1230)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_CODEC_BASE",
+      "value": "(V4L2_CTRL_CLASS_CODEC | 0x900)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_CODEC_CLASS",
+      "value": "(V4L2_CTRL_CLASS_CODEC | 1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_STREAM_TYPE",
+      "value": "(V4L2_CID_CODEC_BASE+0)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_STREAM_PID_PMT",
+      "value": "(V4L2_CID_CODEC_BASE+1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_STREAM_PID_AUDIO",
+      "value": "(V4L2_CID_CODEC_BASE+2)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_STREAM_PID_VIDEO",
+      "value": "(V4L2_CID_CODEC_BASE+3)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_STREAM_PID_PCR",
+      "value": "(V4L2_CID_CODEC_BASE+4)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_STREAM_PES_ID_AUDIO",
+      "value": "(V4L2_CID_CODEC_BASE+5)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_STREAM_PES_ID_VIDEO",
+      "value": "(V4L2_CID_CODEC_BASE+6)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_STREAM_VBI_FMT",
+      "value": "(V4L2_CID_CODEC_BASE+7)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_AUDIO_SAMPLING_FREQ",
+      "value": "(V4L2_CID_CODEC_BASE+100)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_AUDIO_ENCODING",
+      "value": "(V4L2_CID_CODEC_BASE+101)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_AUDIO_L1_BITRATE",
+      "value": "(V4L2_CID_CODEC_BASE+102)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_AUDIO_L2_BITRATE",
+      "value": "(V4L2_CID_CODEC_BASE+103)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_AUDIO_L3_BITRATE",
+      "value": "(V4L2_CID_CODEC_BASE+104)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_AUDIO_MODE",
+      "value": "(V4L2_CID_CODEC_BASE+105)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_AUDIO_MODE_EXTENSION",
+      "value": "(V4L2_CID_CODEC_BASE+106)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_AUDIO_EMPHASIS",
+      "value": "(V4L2_CID_CODEC_BASE+107)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_AUDIO_CRC",
+      "value": "(V4L2_CID_CODEC_BASE+108)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_AUDIO_MUTE",
+      "value": "(V4L2_CID_CODEC_BASE+109)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_AUDIO_AAC_BITRATE",
+      "value": "(V4L2_CID_CODEC_BASE+110)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_AUDIO_AC3_BITRATE",
+      "value": "(V4L2_CID_CODEC_BASE+111)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_AUDIO_DEC_PLAYBACK",
+      "value": "(V4L2_CID_CODEC_BASE+112)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_AUDIO_DEC_MULTILINGUAL_PLAYBACK",
+      "value": "(V4L2_CID_CODEC_BASE+113)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_ENCODING",
+      "value": "(V4L2_CID_CODEC_BASE+200)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_ASPECT",
+      "value": "(V4L2_CID_CODEC_BASE+201)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_B_FRAMES",
+      "value": "(V4L2_CID_CODEC_BASE+202)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_GOP_SIZE",
+      "value": "(V4L2_CID_CODEC_BASE+203)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_GOP_CLOSURE",
+      "value": "(V4L2_CID_CODEC_BASE+204)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_PULLDOWN",
+      "value": "(V4L2_CID_CODEC_BASE+205)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_BITRATE_MODE",
+      "value": "(V4L2_CID_CODEC_BASE+206)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_BITRATE",
+      "value": "(V4L2_CID_CODEC_BASE+207)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_BITRATE_PEAK",
+      "value": "(V4L2_CID_CODEC_BASE+208)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_TEMPORAL_DECIMATION",
+      "value": "(V4L2_CID_CODEC_BASE+209)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_MUTE",
+      "value": "(V4L2_CID_CODEC_BASE+210)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_MUTE_YUV",
+      "value": "(V4L2_CID_CODEC_BASE+211)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_DECODER_SLICE_INTERFACE",
+      "value": "(V4L2_CID_CODEC_BASE+212)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_DECODER_MPEG4_DEBLOCK_FILTER",
+      "value": "(V4L2_CID_CODEC_BASE+213)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_CYCLIC_INTRA_REFRESH_MB",
+      "value": "(V4L2_CID_CODEC_BASE+214)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_FRAME_RC_ENABLE",
+      "value": "(V4L2_CID_CODEC_BASE+215)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_HEADER_MODE",
+      "value": "(V4L2_CID_CODEC_BASE+216)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_MAX_REF_PIC",
+      "value": "(V4L2_CID_CODEC_BASE+217)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_MB_RC_ENABLE",
+      "value": "(V4L2_CID_CODEC_BASE+218)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_MULTI_SLICE_MAX_BYTES",
+      "value": "(V4L2_CID_CODEC_BASE+219)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_MULTI_SLICE_MAX_MB",
+      "value": "(V4L2_CID_CODEC_BASE+220)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_MULTI_SLICE_MODE",
+      "value": "(V4L2_CID_CODEC_BASE+221)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_VBV_SIZE",
+      "value": "(V4L2_CID_CODEC_BASE+222)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_DEC_PTS",
+      "value": "(V4L2_CID_CODEC_BASE+223)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_DEC_FRAME",
+      "value": "(V4L2_CID_CODEC_BASE+224)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_VBV_DELAY",
+      "value": "(V4L2_CID_CODEC_BASE+225)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_REPEAT_SEQ_HEADER",
+      "value": "(V4L2_CID_CODEC_BASE+226)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_MV_H_SEARCH_RANGE",
+      "value": "(V4L2_CID_CODEC_BASE+227)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_MV_V_SEARCH_RANGE",
+      "value": "(V4L2_CID_CODEC_BASE+228)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_FORCE_KEY_FRAME",
+      "value": "(V4L2_CID_CODEC_BASE+229)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_BASELAYER_PRIORITY_ID",
+      "value": "(V4L2_CID_CODEC_BASE+230)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_AU_DELIMITER",
+      "value": "(V4L2_CID_CODEC_BASE+231)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_LTR_COUNT",
+      "value": "(V4L2_CID_CODEC_BASE+232)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_FRAME_LTR_INDEX",
+      "value": "(V4L2_CID_CODEC_BASE+233)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_USE_LTR_FRAMES",
+      "value": "(V4L2_CID_CODEC_BASE+234)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_DEC_CONCEAL_COLOR",
+      "value": "(V4L2_CID_CODEC_BASE+235)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_INTRA_REFRESH_PERIOD",
+      "value": "(V4L2_CID_CODEC_BASE+236)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_INTRA_REFRESH_PERIOD_TYPE",
+      "value": "(V4L2_CID_CODEC_BASE+237)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_MPEG2_LEVEL",
+      "value": "(V4L2_CID_CODEC_BASE+270)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_MPEG2_PROFILE",
+      "value": "(V4L2_CID_CODEC_BASE+271)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_FWHT_I_FRAME_QP",
+      "value": "(V4L2_CID_CODEC_BASE + 290)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_FWHT_P_FRAME_QP",
+      "value": "(V4L2_CID_CODEC_BASE + 291)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_H263_I_FRAME_QP",
+      "value": "(V4L2_CID_CODEC_BASE+300)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_H263_P_FRAME_QP",
+      "value": "(V4L2_CID_CODEC_BASE+301)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_H263_B_FRAME_QP",
+      "value": "(V4L2_CID_CODEC_BASE+302)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_H263_MIN_QP",
+      "value": "(V4L2_CID_CODEC_BASE+303)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_H263_MAX_QP",
+      "value": "(V4L2_CID_CODEC_BASE+304)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_H264_I_FRAME_QP",
+      "value": "(V4L2_CID_CODEC_BASE+350)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_H264_P_FRAME_QP",
+      "value": "(V4L2_CID_CODEC_BASE+351)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_H264_B_FRAME_QP",
+      "value": "(V4L2_CID_CODEC_BASE+352)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_H264_MIN_QP",
+      "value": "(V4L2_CID_CODEC_BASE+353)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_H264_MAX_QP",
+      "value": "(V4L2_CID_CODEC_BASE+354)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_H264_8X8_TRANSFORM",
+      "value": "(V4L2_CID_CODEC_BASE+355)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_H264_CPB_SIZE",
+      "value": "(V4L2_CID_CODEC_BASE+356)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_H264_ENTROPY_MODE",
+      "value": "(V4L2_CID_CODEC_BASE+357)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_H264_I_PERIOD",
+      "value": "(V4L2_CID_CODEC_BASE+358)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_H264_LEVEL",
+      "value": "(V4L2_CID_CODEC_BASE+359)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_H264_LOOP_FILTER_ALPHA",
+      "value": "(V4L2_CID_CODEC_BASE+360)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_H264_LOOP_FILTER_BETA",
+      "value": "(V4L2_CID_CODEC_BASE+361)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_H264_LOOP_FILTER_MODE",
+      "value": "(V4L2_CID_CODEC_BASE+362)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_H264_PROFILE",
+      "value": "(V4L2_CID_CODEC_BASE+363)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_H264_VUI_EXT_SAR_HEIGHT",
+      "value": "(V4L2_CID_CODEC_BASE+364)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_H264_VUI_EXT_SAR_WIDTH",
+      "value": "(V4L2_CID_CODEC_BASE+365)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_H264_VUI_SAR_ENABLE",
+      "value": "(V4L2_CID_CODEC_BASE+366)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_H264_VUI_SAR_IDC",
+      "value": "(V4L2_CID_CODEC_BASE+367)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_H264_SEI_FRAME_PACKING",
+      "value": "(V4L2_CID_CODEC_BASE+368)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_H264_SEI_FP_CURRENT_FRAME_0",
+      "value": "(V4L2_CID_CODEC_BASE+369)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_H264_SEI_FP_ARRANGEMENT_TYPE",
+      "value": "(V4L2_CID_CODEC_BASE+370)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_H264_FMO",
+      "value": "(V4L2_CID_CODEC_BASE+371)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_H264_FMO_MAP_TYPE",
+      "value": "(V4L2_CID_CODEC_BASE+372)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_H264_FMO_SLICE_GROUP",
+      "value": "(V4L2_CID_CODEC_BASE+373)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_H264_FMO_CHANGE_DIRECTION",
+      "value": "(V4L2_CID_CODEC_BASE+374)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_H264_FMO_CHANGE_RATE",
+      "value": "(V4L2_CID_CODEC_BASE+375)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_H264_FMO_RUN_LENGTH",
+      "value": "(V4L2_CID_CODEC_BASE+376)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_H264_ASO",
+      "value": "(V4L2_CID_CODEC_BASE+377)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_H264_ASO_SLICE_ORDER",
+      "value": "(V4L2_CID_CODEC_BASE+378)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_H264_HIERARCHICAL_CODING",
+      "value": "(V4L2_CID_CODEC_BASE+379)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_H264_HIERARCHICAL_CODING_TYPE",
+      "value": "(V4L2_CID_CODEC_BASE+380)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_H264_HIERARCHICAL_CODING_LAYER",
+      "value": "(V4L2_CID_CODEC_BASE+381)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_H264_HIERARCHICAL_CODING_LAYER_QP",
+      "value": "(V4L2_CID_CODEC_BASE+382)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_H264_CONSTRAINED_INTRA_PREDICTION",
+      "value": "(V4L2_CID_CODEC_BASE+383)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_H264_CHROMA_QP_INDEX_OFFSET",
+      "value": "(V4L2_CID_CODEC_BASE+384)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_H264_I_FRAME_MIN_QP",
+      "value": "(V4L2_CID_CODEC_BASE+385)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_H264_I_FRAME_MAX_QP",
+      "value": "(V4L2_CID_CODEC_BASE+386)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_H264_P_FRAME_MIN_QP",
+      "value": "(V4L2_CID_CODEC_BASE+387)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_H264_P_FRAME_MAX_QP",
+      "value": "(V4L2_CID_CODEC_BASE+388)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_H264_B_FRAME_MIN_QP",
+      "value": "(V4L2_CID_CODEC_BASE+389)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_H264_B_FRAME_MAX_QP",
+      "value": "(V4L2_CID_CODEC_BASE+390)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_H264_HIER_CODING_L0_BR",
+      "value": "(V4L2_CID_CODEC_BASE+391)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_H264_HIER_CODING_L1_BR",
+      "value": "(V4L2_CID_CODEC_BASE+392)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_H264_HIER_CODING_L2_BR",
+      "value": "(V4L2_CID_CODEC_BASE+393)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_H264_HIER_CODING_L3_BR",
+      "value": "(V4L2_CID_CODEC_BASE+394)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_H264_HIER_CODING_L4_BR",
+      "value": "(V4L2_CID_CODEC_BASE+395)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_H264_HIER_CODING_L5_BR",
+      "value": "(V4L2_CID_CODEC_BASE+396)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_H264_HIER_CODING_L6_BR",
+      "value": "(V4L2_CID_CODEC_BASE+397)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_MPEG4_I_FRAME_QP",
+      "value": "(V4L2_CID_CODEC_BASE+400)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_MPEG4_P_FRAME_QP",
+      "value": "(V4L2_CID_CODEC_BASE+401)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_MPEG4_B_FRAME_QP",
+      "value": "(V4L2_CID_CODEC_BASE+402)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_MPEG4_MIN_QP",
+      "value": "(V4L2_CID_CODEC_BASE+403)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_MPEG4_MAX_QP",
+      "value": "(V4L2_CID_CODEC_BASE+404)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_MPEG4_LEVEL",
+      "value": "(V4L2_CID_CODEC_BASE+405)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_MPEG4_PROFILE",
+      "value": "(V4L2_CID_CODEC_BASE+406)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_MPEG4_QPEL",
+      "value": "(V4L2_CID_CODEC_BASE+407)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_VPX_NUM_PARTITIONS",
+      "value": "(V4L2_CID_CODEC_BASE+500)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_VPX_IMD_DISABLE_4X4",
+      "value": "(V4L2_CID_CODEC_BASE+501)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_VPX_NUM_REF_FRAMES",
+      "value": "(V4L2_CID_CODEC_BASE+502)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_VPX_FILTER_LEVEL",
+      "value": "(V4L2_CID_CODEC_BASE+503)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_VPX_FILTER_SHARPNESS",
+      "value": "(V4L2_CID_CODEC_BASE+504)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_VPX_GOLDEN_FRAME_REF_PERIOD",
+      "value": "(V4L2_CID_CODEC_BASE+505)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_VPX_GOLDEN_FRAME_SEL",
+      "value": "(V4L2_CID_CODEC_BASE+506)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_VPX_MIN_QP",
+      "value": "(V4L2_CID_CODEC_BASE+507)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_VPX_MAX_QP",
+      "value": "(V4L2_CID_CODEC_BASE+508)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_VPX_I_FRAME_QP",
+      "value": "(V4L2_CID_CODEC_BASE+509)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_VPX_P_FRAME_QP",
+      "value": "(V4L2_CID_CODEC_BASE+510)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_VP8_PROFILE",
+      "value": "(V4L2_CID_CODEC_BASE+511)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_VPX_PROFILE",
+      "value": "V4L2_CID_MPEG_VIDEO_VP8_PROFILE",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_VP9_PROFILE",
+      "value": "(V4L2_CID_CODEC_BASE+512)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_VP9_LEVEL",
+      "value": "(V4L2_CID_CODEC_BASE+513)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_HEVC_MIN_QP",
+      "value": "(V4L2_CID_CODEC_BASE + 600)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_HEVC_MAX_QP",
+      "value": "(V4L2_CID_CODEC_BASE + 601)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_HEVC_I_FRAME_QP",
+      "value": "(V4L2_CID_CODEC_BASE + 602)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_HEVC_P_FRAME_QP",
+      "value": "(V4L2_CID_CODEC_BASE + 603)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_HEVC_B_FRAME_QP",
+      "value": "(V4L2_CID_CODEC_BASE + 604)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_HEVC_HIER_QP",
+      "value": "(V4L2_CID_CODEC_BASE + 605)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_HEVC_HIER_CODING_TYPE",
+      "value": "(V4L2_CID_CODEC_BASE + 606)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_HEVC_HIER_CODING_LAYER",
+      "value": "(V4L2_CID_CODEC_BASE + 607)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_HEVC_HIER_CODING_L0_QP",
+      "value": "(V4L2_CID_CODEC_BASE + 608)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_HEVC_HIER_CODING_L1_QP",
+      "value": "(V4L2_CID_CODEC_BASE + 609)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_HEVC_HIER_CODING_L2_QP",
+      "value": "(V4L2_CID_CODEC_BASE + 610)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_HEVC_HIER_CODING_L3_QP",
+      "value": "(V4L2_CID_CODEC_BASE + 611)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_HEVC_HIER_CODING_L4_QP",
+      "value": "(V4L2_CID_CODEC_BASE + 612)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_HEVC_HIER_CODING_L5_QP",
+      "value": "(V4L2_CID_CODEC_BASE + 613)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_HEVC_HIER_CODING_L6_QP",
+      "value": "(V4L2_CID_CODEC_BASE + 614)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_HEVC_PROFILE",
+      "value": "(V4L2_CID_CODEC_BASE + 615)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_HEVC_LEVEL",
+      "value": "(V4L2_CID_CODEC_BASE + 616)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_HEVC_FRAME_RATE_RESOLUTION",
+      "value": "(V4L2_CID_CODEC_BASE + 617)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_HEVC_TIER",
+      "value": "(V4L2_CID_CODEC_BASE + 618)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_HEVC_MAX_PARTITION_DEPTH",
+      "value": "(V4L2_CID_CODEC_BASE + 619)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_HEVC_LOOP_FILTER_MODE",
+      "value": "(V4L2_CID_CODEC_BASE + 620)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_HEVC_LF_BETA_OFFSET_DIV2",
+      "value": "(V4L2_CID_CODEC_BASE + 621)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_HEVC_LF_TC_OFFSET_DIV2",
+      "value": "(V4L2_CID_CODEC_BASE + 622)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_HEVC_REFRESH_TYPE",
+      "value": "(V4L2_CID_CODEC_BASE + 623)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_HEVC_REFRESH_PERIOD",
+      "value": "(V4L2_CID_CODEC_BASE + 624)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_HEVC_LOSSLESS_CU",
+      "value": "(V4L2_CID_CODEC_BASE + 625)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_HEVC_CONST_INTRA_PRED",
+      "value": "(V4L2_CID_CODEC_BASE + 626)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_HEVC_WAVEFRONT",
+      "value": "(V4L2_CID_CODEC_BASE + 627)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_HEVC_GENERAL_PB",
+      "value": "(V4L2_CID_CODEC_BASE + 628)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_HEVC_TEMPORAL_ID",
+      "value": "(V4L2_CID_CODEC_BASE + 629)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_HEVC_STRONG_SMOOTHING",
+      "value": "(V4L2_CID_CODEC_BASE + 630)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_HEVC_MAX_NUM_MERGE_MV_MINUS1",
+      "value": "(V4L2_CID_CODEC_BASE + 631)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_HEVC_INTRA_PU_SPLIT",
+      "value": "(V4L2_CID_CODEC_BASE + 632)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_HEVC_TMV_PREDICTION",
+      "value": "(V4L2_CID_CODEC_BASE + 633)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_HEVC_WITHOUT_STARTCODE",
+      "value": "(V4L2_CID_CODEC_BASE + 634)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_HEVC_SIZE_OF_LENGTH_FIELD",
+      "value": "(V4L2_CID_CODEC_BASE + 635)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_HEVC_HIER_CODING_L0_BR",
+      "value": "(V4L2_CID_CODEC_BASE + 636)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_HEVC_HIER_CODING_L1_BR",
+      "value": "(V4L2_CID_CODEC_BASE + 637)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_HEVC_HIER_CODING_L2_BR",
+      "value": "(V4L2_CID_CODEC_BASE + 638)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_HEVC_HIER_CODING_L3_BR",
+      "value": "(V4L2_CID_CODEC_BASE + 639)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_HEVC_HIER_CODING_L4_BR",
+      "value": "(V4L2_CID_CODEC_BASE + 640)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_HEVC_HIER_CODING_L5_BR",
+      "value": "(V4L2_CID_CODEC_BASE + 641)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_HEVC_HIER_CODING_L6_BR",
+      "value": "(V4L2_CID_CODEC_BASE + 642)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_REF_NUMBER_FOR_PFRAMES",
+      "value": "(V4L2_CID_CODEC_BASE + 643)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_PREPEND_SPSPPS_TO_IDR",
+      "value": "(V4L2_CID_CODEC_BASE + 644)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_CONSTANT_QUALITY",
+      "value": "(V4L2_CID_CODEC_BASE + 645)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_FRAME_SKIP_MODE",
+      "value": "(V4L2_CID_CODEC_BASE + 646)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_HEVC_I_FRAME_MIN_QP",
+      "value": "(V4L2_CID_CODEC_BASE + 647)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_HEVC_I_FRAME_MAX_QP",
+      "value": "(V4L2_CID_CODEC_BASE + 648)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_HEVC_P_FRAME_MIN_QP",
+      "value": "(V4L2_CID_CODEC_BASE + 649)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_HEVC_P_FRAME_MAX_QP",
+      "value": "(V4L2_CID_CODEC_BASE + 650)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_HEVC_B_FRAME_MIN_QP",
+      "value": "(V4L2_CID_CODEC_BASE + 651)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_HEVC_B_FRAME_MAX_QP",
+      "value": "(V4L2_CID_CODEC_BASE + 652)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_DEC_DISPLAY_DELAY",
+      "value": "(V4L2_CID_CODEC_BASE + 653)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_DEC_DISPLAY_DELAY_ENABLE",
+      "value": "(V4L2_CID_CODEC_BASE + 654)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_AV1_PROFILE",
+      "value": "(V4L2_CID_CODEC_BASE + 655)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_AV1_LEVEL",
+      "value": "(V4L2_CID_CODEC_BASE + 656)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_VIDEO_AVERAGE_QP",
+      "value": "(V4L2_CID_CODEC_BASE + 657)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_CODEC_CX2341X_BASE",
+      "value": "(V4L2_CTRL_CLASS_CODEC | 0x1000)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_CX2341X_VIDEO_SPATIAL_FILTER_MODE",
+      "value": "(V4L2_CID_CODEC_CX2341X_BASE+0)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_CX2341X_VIDEO_SPATIAL_FILTER",
+      "value": "(V4L2_CID_CODEC_CX2341X_BASE+1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_CX2341X_VIDEO_LUMA_SPATIAL_FILTER_TYPE",
+      "value": "(V4L2_CID_CODEC_CX2341X_BASE+2)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_CX2341X_VIDEO_CHROMA_SPATIAL_FILTER_TYPE",
+      "value": "(V4L2_CID_CODEC_CX2341X_BASE+3)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_CX2341X_VIDEO_TEMPORAL_FILTER_MODE",
+      "value": "(V4L2_CID_CODEC_CX2341X_BASE+4)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_CX2341X_VIDEO_TEMPORAL_FILTER",
+      "value": "(V4L2_CID_CODEC_CX2341X_BASE+5)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_CX2341X_VIDEO_MEDIAN_FILTER_TYPE",
+      "value": "(V4L2_CID_CODEC_CX2341X_BASE+6)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_CX2341X_VIDEO_LUMA_MEDIAN_FILTER_BOTTOM",
+      "value": "(V4L2_CID_CODEC_CX2341X_BASE+7)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_CX2341X_VIDEO_LUMA_MEDIAN_FILTER_TOP",
+      "value": "(V4L2_CID_CODEC_CX2341X_BASE+8)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_CX2341X_VIDEO_CHROMA_MEDIAN_FILTER_BOTTOM",
+      "value": "(V4L2_CID_CODEC_CX2341X_BASE+9)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_CX2341X_VIDEO_CHROMA_MEDIAN_FILTER_TOP",
+      "value": "(V4L2_CID_CODEC_CX2341X_BASE+10)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_CX2341X_STREAM_INSERT_NAV_PACKETS",
+      "value": "(V4L2_CID_CODEC_CX2341X_BASE+11)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_CODEC_MFC51_BASE",
+      "value": "(V4L2_CTRL_CLASS_CODEC | 0x1100)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_MFC51_VIDEO_DECODER_H264_DISPLAY_DELAY",
+      "value": "(V4L2_CID_CODEC_MFC51_BASE+0)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_MFC51_VIDEO_DECODER_H264_DISPLAY_DELAY_ENABLE",
+      "value": "(V4L2_CID_CODEC_MFC51_BASE+1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_MFC51_VIDEO_FRAME_SKIP_MODE",
+      "value": "(V4L2_CID_CODEC_MFC51_BASE+2)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_MFC51_VIDEO_FORCE_FRAME_TYPE",
+      "value": "(V4L2_CID_CODEC_MFC51_BASE+3)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_MFC51_VIDEO_PADDING",
+      "value": "(V4L2_CID_CODEC_MFC51_BASE+4)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_MFC51_VIDEO_PADDING_YUV",
+      "value": "(V4L2_CID_CODEC_MFC51_BASE+5)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_MFC51_VIDEO_RC_FIXED_TARGET_BIT",
+      "value": "(V4L2_CID_CODEC_MFC51_BASE+6)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_MFC51_VIDEO_RC_REACTION_COEFF",
+      "value": "(V4L2_CID_CODEC_MFC51_BASE+7)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_MFC51_VIDEO_H264_ADAPTIVE_RC_ACTIVITY",
+      "value": "(V4L2_CID_CODEC_MFC51_BASE+50)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_MFC51_VIDEO_H264_ADAPTIVE_RC_DARK",
+      "value": "(V4L2_CID_CODEC_MFC51_BASE+51)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_MFC51_VIDEO_H264_ADAPTIVE_RC_SMOOTH",
+      "value": "(V4L2_CID_CODEC_MFC51_BASE+52)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_MFC51_VIDEO_H264_ADAPTIVE_RC_STATIC",
+      "value": "(V4L2_CID_CODEC_MFC51_BASE+53)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_MFC51_VIDEO_H264_NUM_REF_PIC_FOR_P",
+      "value": "(V4L2_CID_CODEC_MFC51_BASE+54)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_CAMERA_CLASS_BASE",
+      "value": "(V4L2_CTRL_CLASS_CAMERA | 0x900)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_CAMERA_CLASS",
+      "value": "(V4L2_CTRL_CLASS_CAMERA | 1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_EXPOSURE_AUTO",
+      "value": "(V4L2_CID_CAMERA_CLASS_BASE+1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_EXPOSURE_ABSOLUTE",
+      "value": "(V4L2_CID_CAMERA_CLASS_BASE+2)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_EXPOSURE_AUTO_PRIORITY",
+      "value": "(V4L2_CID_CAMERA_CLASS_BASE+3)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_PAN_RELATIVE",
+      "value": "(V4L2_CID_CAMERA_CLASS_BASE+4)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_TILT_RELATIVE",
+      "value": "(V4L2_CID_CAMERA_CLASS_BASE+5)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_PAN_RESET",
+      "value": "(V4L2_CID_CAMERA_CLASS_BASE+6)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_TILT_RESET",
+      "value": "(V4L2_CID_CAMERA_CLASS_BASE+7)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_PAN_ABSOLUTE",
+      "value": "(V4L2_CID_CAMERA_CLASS_BASE+8)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_TILT_ABSOLUTE",
+      "value": "(V4L2_CID_CAMERA_CLASS_BASE+9)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_FOCUS_ABSOLUTE",
+      "value": "(V4L2_CID_CAMERA_CLASS_BASE+10)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_FOCUS_RELATIVE",
+      "value": "(V4L2_CID_CAMERA_CLASS_BASE+11)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_FOCUS_AUTO",
+      "value": "(V4L2_CID_CAMERA_CLASS_BASE+12)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_ZOOM_ABSOLUTE",
+      "value": "(V4L2_CID_CAMERA_CLASS_BASE+13)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_ZOOM_RELATIVE",
+      "value": "(V4L2_CID_CAMERA_CLASS_BASE+14)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_ZOOM_CONTINUOUS",
+      "value": "(V4L2_CID_CAMERA_CLASS_BASE+15)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_PRIVACY",
+      "value": "(V4L2_CID_CAMERA_CLASS_BASE+16)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_IRIS_ABSOLUTE",
+      "value": "(V4L2_CID_CAMERA_CLASS_BASE+17)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_IRIS_RELATIVE",
+      "value": "(V4L2_CID_CAMERA_CLASS_BASE+18)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_AUTO_EXPOSURE_BIAS",
+      "value": "(V4L2_CID_CAMERA_CLASS_BASE+19)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_AUTO_N_PRESET_WHITE_BALANCE",
+      "value": "(V4L2_CID_CAMERA_CLASS_BASE+20)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_WIDE_DYNAMIC_RANGE",
+      "value": "(V4L2_CID_CAMERA_CLASS_BASE+21)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_IMAGE_STABILIZATION",
+      "value": "(V4L2_CID_CAMERA_CLASS_BASE+22)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_ISO_SENSITIVITY",
+      "value": "(V4L2_CID_CAMERA_CLASS_BASE+23)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_ISO_SENSITIVITY_AUTO",
+      "value": "(V4L2_CID_CAMERA_CLASS_BASE+24)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_EXPOSURE_METERING",
+      "value": "(V4L2_CID_CAMERA_CLASS_BASE+25)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_SCENE_MODE",
+      "value": "(V4L2_CID_CAMERA_CLASS_BASE+26)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_3A_LOCK",
+      "value": "(V4L2_CID_CAMERA_CLASS_BASE+27)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_LOCK_EXPOSURE",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_LOCK_WHITE_BALANCE",
+      "value": "(1 << 1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_LOCK_FOCUS",
+      "value": "(1 << 2)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_AUTO_FOCUS_START",
+      "value": "(V4L2_CID_CAMERA_CLASS_BASE+28)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_AUTO_FOCUS_STOP",
+      "value": "(V4L2_CID_CAMERA_CLASS_BASE+29)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_AUTO_FOCUS_STATUS",
+      "value": "(V4L2_CID_CAMERA_CLASS_BASE+30)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AUTO_FOCUS_STATUS_IDLE",
+      "value": "(0 << 0)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AUTO_FOCUS_STATUS_BUSY",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AUTO_FOCUS_STATUS_REACHED",
+      "value": "(1 << 1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AUTO_FOCUS_STATUS_FAILED",
+      "value": "(1 << 2)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_AUTO_FOCUS_RANGE",
+      "value": "(V4L2_CID_CAMERA_CLASS_BASE+31)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_PAN_SPEED",
+      "value": "(V4L2_CID_CAMERA_CLASS_BASE+32)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_TILT_SPEED",
+      "value": "(V4L2_CID_CAMERA_CLASS_BASE+33)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_CAMERA_ORIENTATION",
+      "value": "(V4L2_CID_CAMERA_CLASS_BASE+34)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CAMERA_ORIENTATION_FRONT",
+      "value": "0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CAMERA_ORIENTATION_BACK",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CAMERA_ORIENTATION_EXTERNAL",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_CAMERA_SENSOR_ROTATION",
+      "value": "(V4L2_CID_CAMERA_CLASS_BASE+35)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_HDR_SENSOR_MODE",
+      "value": "(V4L2_CID_CAMERA_CLASS_BASE+36)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_FM_TX_CLASS_BASE",
+      "value": "(V4L2_CTRL_CLASS_FM_TX | 0x900)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_FM_TX_CLASS",
+      "value": "(V4L2_CTRL_CLASS_FM_TX | 1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_RDS_TX_DEVIATION",
+      "value": "(V4L2_CID_FM_TX_CLASS_BASE + 1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_RDS_TX_PI",
+      "value": "(V4L2_CID_FM_TX_CLASS_BASE + 2)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_RDS_TX_PTY",
+      "value": "(V4L2_CID_FM_TX_CLASS_BASE + 3)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_RDS_TX_PS_NAME",
+      "value": "(V4L2_CID_FM_TX_CLASS_BASE + 5)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_RDS_TX_RADIO_TEXT",
+      "value": "(V4L2_CID_FM_TX_CLASS_BASE + 6)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_RDS_TX_MONO_STEREO",
+      "value": "(V4L2_CID_FM_TX_CLASS_BASE + 7)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_RDS_TX_ARTIFICIAL_HEAD",
+      "value": "(V4L2_CID_FM_TX_CLASS_BASE + 8)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_RDS_TX_COMPRESSED",
+      "value": "(V4L2_CID_FM_TX_CLASS_BASE + 9)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_RDS_TX_DYNAMIC_PTY",
+      "value": "(V4L2_CID_FM_TX_CLASS_BASE + 10)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_RDS_TX_TRAFFIC_ANNOUNCEMENT",
+      "value": "(V4L2_CID_FM_TX_CLASS_BASE + 11)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_RDS_TX_TRAFFIC_PROGRAM",
+      "value": "(V4L2_CID_FM_TX_CLASS_BASE + 12)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_RDS_TX_MUSIC_SPEECH",
+      "value": "(V4L2_CID_FM_TX_CLASS_BASE + 13)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_RDS_TX_ALT_FREQS_ENABLE",
+      "value": "(V4L2_CID_FM_TX_CLASS_BASE + 14)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_RDS_TX_ALT_FREQS",
+      "value": "(V4L2_CID_FM_TX_CLASS_BASE + 15)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_AUDIO_LIMITER_ENABLED",
+      "value": "(V4L2_CID_FM_TX_CLASS_BASE + 64)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_AUDIO_LIMITER_RELEASE_TIME",
+      "value": "(V4L2_CID_FM_TX_CLASS_BASE + 65)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_AUDIO_LIMITER_DEVIATION",
+      "value": "(V4L2_CID_FM_TX_CLASS_BASE + 66)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_AUDIO_COMPRESSION_ENABLED",
+      "value": "(V4L2_CID_FM_TX_CLASS_BASE + 80)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_AUDIO_COMPRESSION_GAIN",
+      "value": "(V4L2_CID_FM_TX_CLASS_BASE + 81)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_AUDIO_COMPRESSION_THRESHOLD",
+      "value": "(V4L2_CID_FM_TX_CLASS_BASE + 82)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_AUDIO_COMPRESSION_ATTACK_TIME",
+      "value": "(V4L2_CID_FM_TX_CLASS_BASE + 83)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_AUDIO_COMPRESSION_RELEASE_TIME",
+      "value": "(V4L2_CID_FM_TX_CLASS_BASE + 84)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_PILOT_TONE_ENABLED",
+      "value": "(V4L2_CID_FM_TX_CLASS_BASE + 96)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_PILOT_TONE_DEVIATION",
+      "value": "(V4L2_CID_FM_TX_CLASS_BASE + 97)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_PILOT_TONE_FREQUENCY",
+      "value": "(V4L2_CID_FM_TX_CLASS_BASE + 98)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_TUNE_PREEMPHASIS",
+      "value": "(V4L2_CID_FM_TX_CLASS_BASE + 112)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_TUNE_POWER_LEVEL",
+      "value": "(V4L2_CID_FM_TX_CLASS_BASE + 113)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_TUNE_ANTENNA_CAPACITOR",
+      "value": "(V4L2_CID_FM_TX_CLASS_BASE + 114)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_FLASH_CLASS_BASE",
+      "value": "(V4L2_CTRL_CLASS_FLASH | 0x900)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_FLASH_CLASS",
+      "value": "(V4L2_CTRL_CLASS_FLASH | 1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_FLASH_LED_MODE",
+      "value": "(V4L2_CID_FLASH_CLASS_BASE + 1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_FLASH_STROBE_SOURCE",
+      "value": "(V4L2_CID_FLASH_CLASS_BASE + 2)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_FLASH_STROBE",
+      "value": "(V4L2_CID_FLASH_CLASS_BASE + 3)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_FLASH_STROBE_STOP",
+      "value": "(V4L2_CID_FLASH_CLASS_BASE + 4)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_FLASH_STROBE_STATUS",
+      "value": "(V4L2_CID_FLASH_CLASS_BASE + 5)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_FLASH_TIMEOUT",
+      "value": "(V4L2_CID_FLASH_CLASS_BASE + 6)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_FLASH_INTENSITY",
+      "value": "(V4L2_CID_FLASH_CLASS_BASE + 7)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_FLASH_TORCH_INTENSITY",
+      "value": "(V4L2_CID_FLASH_CLASS_BASE + 8)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_FLASH_INDICATOR_INTENSITY",
+      "value": "(V4L2_CID_FLASH_CLASS_BASE + 9)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_FLASH_FAULT",
+      "value": "(V4L2_CID_FLASH_CLASS_BASE + 10)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_FLASH_FAULT_OVER_VOLTAGE",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_FLASH_FAULT_TIMEOUT",
+      "value": "(1 << 1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_FLASH_FAULT_OVER_TEMPERATURE",
+      "value": "(1 << 2)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_FLASH_FAULT_SHORT_CIRCUIT",
+      "value": "(1 << 3)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_FLASH_FAULT_OVER_CURRENT",
+      "value": "(1 << 4)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_FLASH_FAULT_INDICATOR",
+      "value": "(1 << 5)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_FLASH_FAULT_UNDER_VOLTAGE",
+      "value": "(1 << 6)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_FLASH_FAULT_INPUT_VOLTAGE",
+      "value": "(1 << 7)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_FLASH_FAULT_LED_OVER_TEMPERATURE",
+      "value": "(1 << 8)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_FLASH_CHARGE",
+      "value": "(V4L2_CID_FLASH_CLASS_BASE + 11)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_FLASH_READY",
+      "value": "(V4L2_CID_FLASH_CLASS_BASE + 12)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_FLASH_DURATION",
+      "value": "(V4L2_CID_FLASH_CLASS_BASE + 13)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_FLASH_STROBE_OE",
+      "value": "(V4L2_CID_FLASH_CLASS_BASE + 14)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_JPEG_CLASS_BASE",
+      "value": "(V4L2_CTRL_CLASS_JPEG | 0x900)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_JPEG_CLASS",
+      "value": "(V4L2_CTRL_CLASS_JPEG | 1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_JPEG_CHROMA_SUBSAMPLING",
+      "value": "(V4L2_CID_JPEG_CLASS_BASE + 1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_JPEG_RESTART_INTERVAL",
+      "value": "(V4L2_CID_JPEG_CLASS_BASE + 2)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_JPEG_COMPRESSION_QUALITY",
+      "value": "(V4L2_CID_JPEG_CLASS_BASE + 3)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_JPEG_ACTIVE_MARKER",
+      "value": "(V4L2_CID_JPEG_CLASS_BASE + 4)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_JPEG_ACTIVE_MARKER_APP0",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_JPEG_ACTIVE_MARKER_APP1",
+      "value": "(1 << 1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_JPEG_ACTIVE_MARKER_COM",
+      "value": "(1 << 16)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_JPEG_ACTIVE_MARKER_DQT",
+      "value": "(1 << 17)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_JPEG_ACTIVE_MARKER_DHT",
+      "value": "(1 << 18)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_IMAGE_SOURCE_CLASS_BASE",
+      "value": "(V4L2_CTRL_CLASS_IMAGE_SOURCE | 0x900)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_IMAGE_SOURCE_CLASS",
+      "value": "(V4L2_CTRL_CLASS_IMAGE_SOURCE | 1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_VBLANK",
+      "value": "(V4L2_CID_IMAGE_SOURCE_CLASS_BASE + 1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_HBLANK",
+      "value": "(V4L2_CID_IMAGE_SOURCE_CLASS_BASE + 2)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_ANALOGUE_GAIN",
+      "value": "(V4L2_CID_IMAGE_SOURCE_CLASS_BASE + 3)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_TEST_PATTERN_RED",
+      "value": "(V4L2_CID_IMAGE_SOURCE_CLASS_BASE + 4)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_TEST_PATTERN_GREENR",
+      "value": "(V4L2_CID_IMAGE_SOURCE_CLASS_BASE + 5)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_TEST_PATTERN_BLUE",
+      "value": "(V4L2_CID_IMAGE_SOURCE_CLASS_BASE + 6)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_TEST_PATTERN_GREENB",
+      "value": "(V4L2_CID_IMAGE_SOURCE_CLASS_BASE + 7)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_UNIT_CELL_SIZE",
+      "value": "(V4L2_CID_IMAGE_SOURCE_CLASS_BASE + 8)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_NOTIFY_GAINS",
+      "value": "(V4L2_CID_IMAGE_SOURCE_CLASS_BASE + 9)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_IMAGE_PROC_CLASS_BASE",
+      "value": "(V4L2_CTRL_CLASS_IMAGE_PROC | 0x900)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_IMAGE_PROC_CLASS",
+      "value": "(V4L2_CTRL_CLASS_IMAGE_PROC | 1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_LINK_FREQ",
+      "value": "(V4L2_CID_IMAGE_PROC_CLASS_BASE + 1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_PIXEL_RATE",
+      "value": "(V4L2_CID_IMAGE_PROC_CLASS_BASE + 2)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_TEST_PATTERN",
+      "value": "(V4L2_CID_IMAGE_PROC_CLASS_BASE + 3)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_DEINTERLACING_MODE",
+      "value": "(V4L2_CID_IMAGE_PROC_CLASS_BASE + 4)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_DIGITAL_GAIN",
+      "value": "(V4L2_CID_IMAGE_PROC_CLASS_BASE + 5)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_DV_CLASS_BASE",
+      "value": "(V4L2_CTRL_CLASS_DV | 0x900)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_DV_CLASS",
+      "value": "(V4L2_CTRL_CLASS_DV | 1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_DV_TX_HOTPLUG",
+      "value": "(V4L2_CID_DV_CLASS_BASE + 1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_DV_TX_RXSENSE",
+      "value": "(V4L2_CID_DV_CLASS_BASE + 2)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_DV_TX_EDID_PRESENT",
+      "value": "(V4L2_CID_DV_CLASS_BASE + 3)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_DV_TX_MODE",
+      "value": "(V4L2_CID_DV_CLASS_BASE + 4)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_DV_TX_RGB_RANGE",
+      "value": "(V4L2_CID_DV_CLASS_BASE + 5)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_DV_TX_IT_CONTENT_TYPE",
+      "value": "(V4L2_CID_DV_CLASS_BASE + 6)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_DV_RX_POWER_PRESENT",
+      "value": "(V4L2_CID_DV_CLASS_BASE + 100)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_DV_RX_RGB_RANGE",
+      "value": "(V4L2_CID_DV_CLASS_BASE + 101)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_DV_RX_IT_CONTENT_TYPE",
+      "value": "(V4L2_CID_DV_CLASS_BASE + 102)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_FM_RX_CLASS_BASE",
+      "value": "(V4L2_CTRL_CLASS_FM_RX | 0x900)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_FM_RX_CLASS",
+      "value": "(V4L2_CTRL_CLASS_FM_RX | 1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_TUNE_DEEMPHASIS",
+      "value": "(V4L2_CID_FM_RX_CLASS_BASE + 1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_RDS_RECEPTION",
+      "value": "(V4L2_CID_FM_RX_CLASS_BASE + 2)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_RDS_RX_PTY",
+      "value": "(V4L2_CID_FM_RX_CLASS_BASE + 3)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_RDS_RX_PS_NAME",
+      "value": "(V4L2_CID_FM_RX_CLASS_BASE + 4)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_RDS_RX_RADIO_TEXT",
+      "value": "(V4L2_CID_FM_RX_CLASS_BASE + 5)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_RDS_RX_TRAFFIC_ANNOUNCEMENT",
+      "value": "(V4L2_CID_FM_RX_CLASS_BASE + 6)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_RDS_RX_TRAFFIC_PROGRAM",
+      "value": "(V4L2_CID_FM_RX_CLASS_BASE + 7)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_RDS_RX_MUSIC_SPEECH",
+      "value": "(V4L2_CID_FM_RX_CLASS_BASE + 8)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_RF_TUNER_CLASS_BASE",
+      "value": "(V4L2_CTRL_CLASS_RF_TUNER | 0x900)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_RF_TUNER_CLASS",
+      "value": "(V4L2_CTRL_CLASS_RF_TUNER | 1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_RF_TUNER_BANDWIDTH_AUTO",
+      "value": "(V4L2_CID_RF_TUNER_CLASS_BASE + 11)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_RF_TUNER_BANDWIDTH",
+      "value": "(V4L2_CID_RF_TUNER_CLASS_BASE + 12)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_RF_TUNER_RF_GAIN",
+      "value": "(V4L2_CID_RF_TUNER_CLASS_BASE + 32)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_RF_TUNER_LNA_GAIN_AUTO",
+      "value": "(V4L2_CID_RF_TUNER_CLASS_BASE + 41)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_RF_TUNER_LNA_GAIN",
+      "value": "(V4L2_CID_RF_TUNER_CLASS_BASE + 42)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_RF_TUNER_MIXER_GAIN_AUTO",
+      "value": "(V4L2_CID_RF_TUNER_CLASS_BASE + 51)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_RF_TUNER_MIXER_GAIN",
+      "value": "(V4L2_CID_RF_TUNER_CLASS_BASE + 52)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_RF_TUNER_IF_GAIN_AUTO",
+      "value": "(V4L2_CID_RF_TUNER_CLASS_BASE + 61)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_RF_TUNER_IF_GAIN",
+      "value": "(V4L2_CID_RF_TUNER_CLASS_BASE + 62)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_RF_TUNER_PLL_LOCK",
+      "value": "(V4L2_CID_RF_TUNER_CLASS_BASE + 91)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_DETECT_CLASS_BASE",
+      "value": "(V4L2_CTRL_CLASS_DETECT | 0x900)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_DETECT_CLASS",
+      "value": "(V4L2_CTRL_CLASS_DETECT | 1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_DETECT_MD_MODE",
+      "value": "(V4L2_CID_DETECT_CLASS_BASE + 1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_DETECT_MD_GLOBAL_THRESHOLD",
+      "value": "(V4L2_CID_DETECT_CLASS_BASE + 2)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_DETECT_MD_THRESHOLD_GRID",
+      "value": "(V4L2_CID_DETECT_CLASS_BASE + 3)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_DETECT_MD_REGION_GRID",
+      "value": "(V4L2_CID_DETECT_CLASS_BASE + 4)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_CODEC_STATELESS_BASE",
+      "value": "(V4L2_CTRL_CLASS_CODEC_STATELESS | 0x900)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_CODEC_STATELESS_CLASS",
+      "value": "(V4L2_CTRL_CLASS_CODEC_STATELESS | 1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_STATELESS_H264_DECODE_MODE",
+      "value": "(V4L2_CID_CODEC_STATELESS_BASE + 0)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_STATELESS_H264_START_CODE",
+      "value": "(V4L2_CID_CODEC_STATELESS_BASE + 1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_H264_SPS_CONSTRAINT_SET0_FLAG",
+      "value": "0x01",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_H264_SPS_CONSTRAINT_SET1_FLAG",
+      "value": "0x02",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_H264_SPS_CONSTRAINT_SET2_FLAG",
+      "value": "0x04",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_H264_SPS_CONSTRAINT_SET3_FLAG",
+      "value": "0x08",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_H264_SPS_CONSTRAINT_SET4_FLAG",
+      "value": "0x10",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_H264_SPS_CONSTRAINT_SET5_FLAG",
+      "value": "0x20",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_H264_SPS_FLAG_SEPARATE_COLOUR_PLANE",
+      "value": "0x01",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_H264_SPS_FLAG_QPPRIME_Y_ZERO_TRANSFORM_BYPASS",
+      "value": "0x02",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_H264_SPS_FLAG_DELTA_PIC_ORDER_ALWAYS_ZERO",
+      "value": "0x04",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_H264_SPS_FLAG_GAPS_IN_FRAME_NUM_VALUE_ALLOWED",
+      "value": "0x08",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_H264_SPS_FLAG_FRAME_MBS_ONLY",
+      "value": "0x10",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_H264_SPS_FLAG_MB_ADAPTIVE_FRAME_FIELD",
+      "value": "0x20",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_H264_SPS_FLAG_DIRECT_8X8_INFERENCE",
+      "value": "0x40",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_STATELESS_H264_SPS",
+      "value": "(V4L2_CID_CODEC_STATELESS_BASE + 2)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_H264_PPS_FLAG_ENTROPY_CODING_MODE",
+      "value": "0x0001",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_H264_PPS_FLAG_BOTTOM_FIELD_PIC_ORDER_IN_FRAME_PRESENT",
+      "value": "0x0002",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_H264_PPS_FLAG_WEIGHTED_PRED",
+      "value": "0x0004",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_H264_PPS_FLAG_DEBLOCKING_FILTER_CONTROL_PRESENT",
+      "value": "0x0008",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_H264_PPS_FLAG_CONSTRAINED_INTRA_PRED",
+      "value": "0x0010",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_H264_PPS_FLAG_REDUNDANT_PIC_CNT_PRESENT",
+      "value": "0x0020",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_H264_PPS_FLAG_TRANSFORM_8X8_MODE",
+      "value": "0x0040",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_H264_PPS_FLAG_SCALING_MATRIX_PRESENT",
+      "value": "0x0080",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_STATELESS_H264_PPS",
+      "value": "(V4L2_CID_CODEC_STATELESS_BASE + 3)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_STATELESS_H264_SCALING_MATRIX",
+      "value": "(V4L2_CID_CODEC_STATELESS_BASE + 4)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_STATELESS_H264_PRED_WEIGHTS",
+      "value": "(V4L2_CID_CODEC_STATELESS_BASE + 5)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_H264_TOP_FIELD_REF",
+      "value": "0x1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_H264_BOTTOM_FIELD_REF",
+      "value": "0x2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_H264_FRAME_REF",
+      "value": "0x3",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_H264_NUM_DPB_ENTRIES",
+      "value": "16",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_H264_REF_LIST_LEN",
+      "value": "(2 * V4L2_H264_NUM_DPB_ENTRIES)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_H264_SLICE_TYPE_P",
+      "value": "0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_H264_SLICE_TYPE_B",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_H264_SLICE_TYPE_I",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_H264_SLICE_TYPE_SP",
+      "value": "3",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_H264_SLICE_TYPE_SI",
+      "value": "4",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_H264_SLICE_FLAG_DIRECT_SPATIAL_MV_PRED",
+      "value": "0x01",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_H264_SLICE_FLAG_SP_FOR_SWITCH",
+      "value": "0x02",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_STATELESS_H264_SLICE_PARAMS",
+      "value": "(V4L2_CID_CODEC_STATELESS_BASE + 6)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_H264_DPB_ENTRY_FLAG_VALID",
+      "value": "0x01",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_H264_DPB_ENTRY_FLAG_ACTIVE",
+      "value": "0x02",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_H264_DPB_ENTRY_FLAG_LONG_TERM",
+      "value": "0x04",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_H264_DPB_ENTRY_FLAG_FIELD",
+      "value": "0x08",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_H264_DECODE_PARAM_FLAG_IDR_PIC",
+      "value": "0x01",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_H264_DECODE_PARAM_FLAG_FIELD_PIC",
+      "value": "0x02",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_H264_DECODE_PARAM_FLAG_BOTTOM_FIELD",
+      "value": "0x04",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_H264_DECODE_PARAM_FLAG_PFRAME",
+      "value": "0x08",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_H264_DECODE_PARAM_FLAG_BFRAME",
+      "value": "0x10",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_STATELESS_H264_DECODE_PARAMS",
+      "value": "(V4L2_CID_CODEC_STATELESS_BASE + 7)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_FWHT_VERSION",
+      "value": "3",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_FWHT_FL_IS_INTERLACED",
+      "value": "_BITUL(0)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_FWHT_FL_IS_BOTTOM_FIRST",
+      "value": "_BITUL(1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_FWHT_FL_IS_ALTERNATE",
+      "value": "_BITUL(2)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_FWHT_FL_IS_BOTTOM_FIELD",
+      "value": "_BITUL(3)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_FWHT_FL_LUMA_IS_UNCOMPRESSED",
+      "value": "_BITUL(4)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_FWHT_FL_CB_IS_UNCOMPRESSED",
+      "value": "_BITUL(5)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_FWHT_FL_CR_IS_UNCOMPRESSED",
+      "value": "_BITUL(6)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_FWHT_FL_CHROMA_FULL_HEIGHT",
+      "value": "_BITUL(7)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_FWHT_FL_CHROMA_FULL_WIDTH",
+      "value": "_BITUL(8)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_FWHT_FL_ALPHA_IS_UNCOMPRESSED",
+      "value": "_BITUL(9)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_FWHT_FL_I_FRAME",
+      "value": "_BITUL(10)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_FWHT_FL_COMPONENTS_NUM_MSK",
+      "value": "GENMASK(18, 16)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_FWHT_FL_COMPONENTS_NUM_OFFSET",
+      "value": "16",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_FWHT_FL_PIXENC_MSK",
+      "value": "GENMASK(20, 19)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_FWHT_FL_PIXENC_OFFSET",
+      "value": "19",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_FWHT_FL_PIXENC_YUV",
+      "value": "(1 << V4L2_FWHT_FL_PIXENC_OFFSET)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_FWHT_FL_PIXENC_RGB",
+      "value": "(2 << V4L2_FWHT_FL_PIXENC_OFFSET)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_FWHT_FL_PIXENC_HSV",
+      "value": "(3 << V4L2_FWHT_FL_PIXENC_OFFSET)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_STATELESS_FWHT_PARAMS",
+      "value": "(V4L2_CID_CODEC_STATELESS_BASE + 100)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_VP8_SEGMENT_FLAG_ENABLED",
+      "value": "0x01",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_VP8_SEGMENT_FLAG_UPDATE_MAP",
+      "value": "0x02",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_VP8_SEGMENT_FLAG_UPDATE_FEATURE_DATA",
+      "value": "0x04",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_VP8_SEGMENT_FLAG_DELTA_VALUE_MODE",
+      "value": "0x08",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_VP8_LF_ADJ_ENABLE",
+      "value": "0x01",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_VP8_LF_DELTA_UPDATE",
+      "value": "0x02",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_VP8_LF_FILTER_TYPE_SIMPLE",
+      "value": "0x04",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_VP8_COEFF_PROB_CNT",
+      "value": "11",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_VP8_MV_PROB_CNT",
+      "value": "19",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_VP8_FRAME_FLAG_KEY_FRAME",
+      "value": "0x01",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_VP8_FRAME_FLAG_EXPERIMENTAL",
+      "value": "0x02",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_VP8_FRAME_FLAG_SHOW_FRAME",
+      "value": "0x04",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_VP8_FRAME_FLAG_MB_NO_SKIP_COEFF",
+      "value": "0x08",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_VP8_FRAME_FLAG_SIGN_BIAS_GOLDEN",
+      "value": "0x10",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_VP8_FRAME_FLAG_SIGN_BIAS_ALT",
+      "value": "0x20",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_STATELESS_VP8_FRAME",
+      "value": "(V4L2_CID_CODEC_STATELESS_BASE + 200)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_MPEG2_SEQ_FLAG_PROGRESSIVE",
+      "value": "0x01",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_STATELESS_MPEG2_SEQUENCE",
+      "value": "(V4L2_CID_CODEC_STATELESS_BASE+220)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_MPEG2_PIC_CODING_TYPE_I",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_MPEG2_PIC_CODING_TYPE_P",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_MPEG2_PIC_CODING_TYPE_B",
+      "value": "3",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_MPEG2_PIC_CODING_TYPE_D",
+      "value": "4",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_MPEG2_PIC_TOP_FIELD",
+      "value": "0x1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_MPEG2_PIC_BOTTOM_FIELD",
+      "value": "0x2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_MPEG2_PIC_FRAME",
+      "value": "0x3",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_MPEG2_PIC_FLAG_TOP_FIELD_FIRST",
+      "value": "0x0001",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_MPEG2_PIC_FLAG_FRAME_PRED_DCT",
+      "value": "0x0002",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_MPEG2_PIC_FLAG_CONCEALMENT_MV",
+      "value": "0x0004",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_MPEG2_PIC_FLAG_Q_SCALE_TYPE",
+      "value": "0x0008",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_MPEG2_PIC_FLAG_INTRA_VLC",
+      "value": "0x0010",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_MPEG2_PIC_FLAG_ALT_SCAN",
+      "value": "0x0020",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_MPEG2_PIC_FLAG_REPEAT_FIRST",
+      "value": "0x0040",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_MPEG2_PIC_FLAG_PROGRESSIVE",
+      "value": "0x0080",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_STATELESS_MPEG2_PICTURE",
+      "value": "(V4L2_CID_CODEC_STATELESS_BASE+221)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_STATELESS_MPEG2_QUANTISATION",
+      "value": "(V4L2_CID_CODEC_STATELESS_BASE+222)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_STATELESS_HEVC_SPS",
+      "value": "(V4L2_CID_CODEC_STATELESS_BASE + 400)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_STATELESS_HEVC_PPS",
+      "value": "(V4L2_CID_CODEC_STATELESS_BASE + 401)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_STATELESS_HEVC_SLICE_PARAMS",
+      "value": "(V4L2_CID_CODEC_STATELESS_BASE + 402)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_STATELESS_HEVC_SCALING_MATRIX",
+      "value": "(V4L2_CID_CODEC_STATELESS_BASE + 403)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_STATELESS_HEVC_DECODE_PARAMS",
+      "value": "(V4L2_CID_CODEC_STATELESS_BASE + 404)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_STATELESS_HEVC_DECODE_MODE",
+      "value": "(V4L2_CID_CODEC_STATELESS_BASE + 405)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_STATELESS_HEVC_START_CODE",
+      "value": "(V4L2_CID_CODEC_STATELESS_BASE + 406)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_STATELESS_HEVC_ENTRY_POINT_OFFSETS",
+      "value": "(V4L2_CID_CODEC_STATELESS_BASE + 407)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_STATELESS_HEVC_EXT_SPS_ST_RPS",
+      "value": "(V4L2_CID_CODEC_STATELESS_BASE + 408)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_STATELESS_HEVC_EXT_SPS_LT_RPS",
+      "value": "(V4L2_CID_CODEC_STATELESS_BASE + 409)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_HEVC_SLICE_TYPE_B",
+      "value": "0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_HEVC_SLICE_TYPE_P",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_HEVC_SLICE_TYPE_I",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_HEVC_SPS_FLAG_SEPARATE_COLOUR_PLANE",
+      "value": "(1ULL << 0)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_HEVC_SPS_FLAG_SCALING_LIST_ENABLED",
+      "value": "(1ULL << 1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_HEVC_SPS_FLAG_AMP_ENABLED",
+      "value": "(1ULL << 2)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_HEVC_SPS_FLAG_SAMPLE_ADAPTIVE_OFFSET",
+      "value": "(1ULL << 3)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_HEVC_SPS_FLAG_PCM_ENABLED",
+      "value": "(1ULL << 4)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_HEVC_SPS_FLAG_PCM_LOOP_FILTER_DISABLED",
+      "value": "(1ULL << 5)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_HEVC_SPS_FLAG_LONG_TERM_REF_PICS_PRESENT",
+      "value": "(1ULL << 6)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_HEVC_SPS_FLAG_SPS_TEMPORAL_MVP_ENABLED",
+      "value": "(1ULL << 7)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_HEVC_SPS_FLAG_STRONG_INTRA_SMOOTHING_ENABLED",
+      "value": "(1ULL << 8)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_HEVC_PPS_FLAG_DEPENDENT_SLICE_SEGMENT_ENABLED",
+      "value": "(1ULL << 0)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_HEVC_PPS_FLAG_OUTPUT_FLAG_PRESENT",
+      "value": "(1ULL << 1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_HEVC_PPS_FLAG_SIGN_DATA_HIDING_ENABLED",
+      "value": "(1ULL << 2)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_HEVC_PPS_FLAG_CABAC_INIT_PRESENT",
+      "value": "(1ULL << 3)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_HEVC_PPS_FLAG_CONSTRAINED_INTRA_PRED",
+      "value": "(1ULL << 4)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_HEVC_PPS_FLAG_TRANSFORM_SKIP_ENABLED",
+      "value": "(1ULL << 5)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_HEVC_PPS_FLAG_CU_QP_DELTA_ENABLED",
+      "value": "(1ULL << 6)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_HEVC_PPS_FLAG_PPS_SLICE_CHROMA_QP_OFFSETS_PRESENT",
+      "value": "(1ULL << 7)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_HEVC_PPS_FLAG_WEIGHTED_PRED",
+      "value": "(1ULL << 8)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_HEVC_PPS_FLAG_WEIGHTED_BIPRED",
+      "value": "(1ULL << 9)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_HEVC_PPS_FLAG_TRANSQUANT_BYPASS_ENABLED",
+      "value": "(1ULL << 10)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_HEVC_PPS_FLAG_TILES_ENABLED",
+      "value": "(1ULL << 11)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_HEVC_PPS_FLAG_ENTROPY_CODING_SYNC_ENABLED",
+      "value": "(1ULL << 12)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_HEVC_PPS_FLAG_LOOP_FILTER_ACROSS_TILES_ENABLED",
+      "value": "(1ULL << 13)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_HEVC_PPS_FLAG_PPS_LOOP_FILTER_ACROSS_SLICES_ENABLED",
+      "value": "(1ULL << 14)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_HEVC_PPS_FLAG_DEBLOCKING_FILTER_OVERRIDE_ENABLED",
+      "value": "(1ULL << 15)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_HEVC_PPS_FLAG_PPS_DISABLE_DEBLOCKING_FILTER",
+      "value": "(1ULL << 16)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_HEVC_PPS_FLAG_LISTS_MODIFICATION_PRESENT",
+      "value": "(1ULL << 17)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_HEVC_PPS_FLAG_SLICE_SEGMENT_HEADER_EXTENSION_PRESENT",
+      "value": "(1ULL << 18)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_HEVC_PPS_FLAG_DEBLOCKING_FILTER_CONTROL_PRESENT",
+      "value": "(1ULL << 19)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_HEVC_PPS_FLAG_UNIFORM_SPACING",
+      "value": "(1ULL << 20)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_HEVC_DPB_ENTRY_LONG_TERM_REFERENCE",
+      "value": "0x01",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_HEVC_SEI_PIC_STRUCT_FRAME",
+      "value": "0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_HEVC_SEI_PIC_STRUCT_TOP_FIELD",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_HEVC_SEI_PIC_STRUCT_BOTTOM_FIELD",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_HEVC_SEI_PIC_STRUCT_TOP_BOTTOM",
+      "value": "3",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_HEVC_SEI_PIC_STRUCT_BOTTOM_TOP",
+      "value": "4",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_HEVC_SEI_PIC_STRUCT_TOP_BOTTOM_TOP",
+      "value": "5",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_HEVC_SEI_PIC_STRUCT_BOTTOM_TOP_BOTTOM",
+      "value": "6",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_HEVC_SEI_PIC_STRUCT_FRAME_DOUBLING",
+      "value": "7",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_HEVC_SEI_PIC_STRUCT_FRAME_TRIPLING",
+      "value": "8",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_HEVC_SEI_PIC_STRUCT_TOP_PAIRED_PREVIOUS_BOTTOM",
+      "value": "9",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_HEVC_SEI_PIC_STRUCT_BOTTOM_PAIRED_PREVIOUS_TOP",
+      "value": "10",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_HEVC_SEI_PIC_STRUCT_TOP_PAIRED_NEXT_BOTTOM",
+      "value": "11",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_HEVC_SEI_PIC_STRUCT_BOTTOM_PAIRED_NEXT_TOP",
+      "value": "12",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_HEVC_DPB_ENTRIES_NUM_MAX",
+      "value": "16",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_HEVC_SLICE_PARAMS_FLAG_SLICE_SAO_LUMA",
+      "value": "(1ULL << 0)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_HEVC_SLICE_PARAMS_FLAG_SLICE_SAO_CHROMA",
+      "value": "(1ULL << 1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_HEVC_SLICE_PARAMS_FLAG_SLICE_TEMPORAL_MVP_ENABLED",
+      "value": "(1ULL << 2)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_HEVC_SLICE_PARAMS_FLAG_MVD_L1_ZERO",
+      "value": "(1ULL << 3)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_HEVC_SLICE_PARAMS_FLAG_CABAC_INIT",
+      "value": "(1ULL << 4)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_HEVC_SLICE_PARAMS_FLAG_COLLOCATED_FROM_L0",
+      "value": "(1ULL << 5)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_HEVC_SLICE_PARAMS_FLAG_USE_INTEGER_MV",
+      "value": "(1ULL << 6)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_HEVC_SLICE_PARAMS_FLAG_SLICE_DEBLOCKING_FILTER_DISABLED",
+      "value": "(1ULL << 7)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_HEVC_SLICE_PARAMS_FLAG_SLICE_LOOP_FILTER_ACROSS_SLICES_ENABLED",
+      "value": "(1ULL << 8)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_HEVC_SLICE_PARAMS_FLAG_DEPENDENT_SLICE_SEGMENT",
+      "value": "(1ULL << 9)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_HEVC_DECODE_PARAM_FLAG_IRAP_PIC",
+      "value": "0x1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_HEVC_DECODE_PARAM_FLAG_IDR_PIC",
+      "value": "0x2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_HEVC_DECODE_PARAM_FLAG_NO_OUTPUT_OF_PRIOR",
+      "value": "0x4",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_HEVC_EXT_SPS_ST_RPS_FLAG_INTER_REF_PIC_SET_PRED",
+      "value": "0x1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_HEVC_EXT_SPS_LT_RPS_FLAG_USED_LT",
+      "value": "0x1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_VP9_LOOP_FILTER_FLAG_DELTA_ENABLED",
+      "value": "0x1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_VP9_LOOP_FILTER_FLAG_DELTA_UPDATE",
+      "value": "0x2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_VP9_SEGMENTATION_FLAG_ENABLED",
+      "value": "0x01",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_VP9_SEGMENTATION_FLAG_UPDATE_MAP",
+      "value": "0x02",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_VP9_SEGMENTATION_FLAG_TEMPORAL_UPDATE",
+      "value": "0x04",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_VP9_SEGMENTATION_FLAG_UPDATE_DATA",
+      "value": "0x08",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_VP9_SEGMENTATION_FLAG_ABS_OR_DELTA_UPDATE",
+      "value": "0x10",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_VP9_SEG_LVL_ALT_Q",
+      "value": "0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_VP9_SEG_LVL_ALT_L",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_VP9_SEG_LVL_REF_FRAME",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_VP9_SEG_LVL_SKIP",
+      "value": "3",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_VP9_SEG_LVL_MAX",
+      "value": "4",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_VP9_SEGMENT_FEATURE_ENABLED_MASK",
+      "value": "0xf",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_VP9_FRAME_FLAG_KEY_FRAME",
+      "value": "0x001",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_VP9_FRAME_FLAG_SHOW_FRAME",
+      "value": "0x002",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_VP9_FRAME_FLAG_ERROR_RESILIENT",
+      "value": "0x004",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_VP9_FRAME_FLAG_INTRA_ONLY",
+      "value": "0x008",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_VP9_FRAME_FLAG_ALLOW_HIGH_PREC_MV",
+      "value": "0x010",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_VP9_FRAME_FLAG_REFRESH_FRAME_CTX",
+      "value": "0x020",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_VP9_FRAME_FLAG_PARALLEL_DEC_MODE",
+      "value": "0x040",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_VP9_FRAME_FLAG_X_SUBSAMPLING",
+      "value": "0x080",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_VP9_FRAME_FLAG_Y_SUBSAMPLING",
+      "value": "0x100",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_VP9_FRAME_FLAG_COLOR_RANGE_FULL_SWING",
+      "value": "0x200",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_VP9_SIGN_BIAS_LAST",
+      "value": "0x1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_VP9_SIGN_BIAS_GOLDEN",
+      "value": "0x2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_VP9_SIGN_BIAS_ALT",
+      "value": "0x4",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_VP9_RESET_FRAME_CTX_NONE",
+      "value": "0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_VP9_RESET_FRAME_CTX_SPEC",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_VP9_RESET_FRAME_CTX_ALL",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_VP9_INTERP_FILTER_EIGHTTAP",
+      "value": "0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_VP9_INTERP_FILTER_EIGHTTAP_SMOOTH",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_VP9_INTERP_FILTER_EIGHTTAP_SHARP",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_VP9_INTERP_FILTER_BILINEAR",
+      "value": "3",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_VP9_INTERP_FILTER_SWITCHABLE",
+      "value": "4",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_VP9_REFERENCE_MODE_SINGLE_REFERENCE",
+      "value": "0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_VP9_REFERENCE_MODE_COMPOUND_REFERENCE",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_VP9_REFERENCE_MODE_SELECT",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_VP9_PROFILE_MAX",
+      "value": "3",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_STATELESS_VP9_FRAME",
+      "value": "(V4L2_CID_CODEC_STATELESS_BASE + 300)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_VP9_NUM_FRAME_CTX",
+      "value": "4",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_STATELESS_VP9_COMPRESSED_HDR",
+      "value": "(V4L2_CID_CODEC_STATELESS_BASE + 301)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_VP9_TX_MODE_ONLY_4X4",
+      "value": "0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_VP9_TX_MODE_ALLOW_8X8",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_VP9_TX_MODE_ALLOW_16X16",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_VP9_TX_MODE_ALLOW_32X32",
+      "value": "3",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_VP9_TX_MODE_SELECT",
+      "value": "4",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AV1_TOTAL_REFS_PER_FRAME",
+      "value": "8",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AV1_CDEF_MAX",
+      "value": "8",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AV1_NUM_PLANES_MAX",
+      "value": "3",
+      "comment": "1 if monochrome, 3 otherwise",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AV1_MAX_SEGMENTS",
+      "value": "8",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AV1_MAX_OPERATING_POINTS",
+      "value": "(1 << 5)",
+      "comment": "5 bits to encode",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AV1_REFS_PER_FRAME",
+      "value": "7",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AV1_MAX_NUM_Y_POINTS",
+      "value": "(1 << 4)",
+      "comment": "4 bits to encode",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AV1_MAX_NUM_CB_POINTS",
+      "value": "(1 << 4)",
+      "comment": "4 bits to encode",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AV1_MAX_NUM_CR_POINTS",
+      "value": "(1 << 4)",
+      "comment": "4 bits to encode",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AV1_AR_COEFFS_SIZE",
+      "value": "25",
+      "comment": "(2 * 3 * (3 + 1)) + 1",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AV1_MAX_NUM_PLANES",
+      "value": "3",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AV1_MAX_TILE_COLS",
+      "value": "64",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AV1_MAX_TILE_ROWS",
+      "value": "64",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AV1_MAX_TILE_COUNT",
+      "value": "512",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AV1_SEQUENCE_FLAG_STILL_PICTURE",
+      "value": "0x00000001",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AV1_SEQUENCE_FLAG_USE_128X128_SUPERBLOCK",
+      "value": "0x00000002",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AV1_SEQUENCE_FLAG_ENABLE_FILTER_INTRA",
+      "value": "0x00000004",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AV1_SEQUENCE_FLAG_ENABLE_INTRA_EDGE_FILTER",
+      "value": "0x00000008",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AV1_SEQUENCE_FLAG_ENABLE_INTERINTRA_COMPOUND",
+      "value": "0x00000010",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AV1_SEQUENCE_FLAG_ENABLE_MASKED_COMPOUND",
+      "value": "0x00000020",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AV1_SEQUENCE_FLAG_ENABLE_WARPED_MOTION",
+      "value": "0x00000040",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AV1_SEQUENCE_FLAG_ENABLE_DUAL_FILTER",
+      "value": "0x00000080",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AV1_SEQUENCE_FLAG_ENABLE_ORDER_HINT",
+      "value": "0x00000100",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AV1_SEQUENCE_FLAG_ENABLE_JNT_COMP",
+      "value": "0x00000200",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AV1_SEQUENCE_FLAG_ENABLE_REF_FRAME_MVS",
+      "value": "0x00000400",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AV1_SEQUENCE_FLAG_ENABLE_SUPERRES",
+      "value": "0x00000800",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AV1_SEQUENCE_FLAG_ENABLE_CDEF",
+      "value": "0x00001000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AV1_SEQUENCE_FLAG_ENABLE_RESTORATION",
+      "value": "0x00002000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AV1_SEQUENCE_FLAG_MONO_CHROME",
+      "value": "0x00004000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AV1_SEQUENCE_FLAG_COLOR_RANGE",
+      "value": "0x00008000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AV1_SEQUENCE_FLAG_SUBSAMPLING_X",
+      "value": "0x00010000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AV1_SEQUENCE_FLAG_SUBSAMPLING_Y",
+      "value": "0x00020000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AV1_SEQUENCE_FLAG_FILM_GRAIN_PARAMS_PRESENT",
+      "value": "0x00040000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AV1_SEQUENCE_FLAG_SEPARATE_UV_DELTA_Q",
+      "value": "0x00080000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_STATELESS_AV1_SEQUENCE",
+      "value": "(V4L2_CID_CODEC_STATELESS_BASE + 500)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_STATELESS_AV1_TILE_GROUP_ENTRY",
+      "value": "(V4L2_CID_CODEC_STATELESS_BASE + 501)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AV1_GLOBAL_MOTION_FLAG_IS_GLOBAL",
+      "value": "0x1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AV1_GLOBAL_MOTION_FLAG_IS_ROT_ZOOM",
+      "value": "0x2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AV1_GLOBAL_MOTION_FLAG_IS_TRANSLATION",
+      "value": "0x4",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AV1_LOOP_RESTORATION_FLAG_USES_LR",
+      "value": "0x1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AV1_LOOP_RESTORATION_FLAG_USES_CHROMA_LR",
+      "value": "0x2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AV1_SEGMENTATION_FLAG_ENABLED",
+      "value": "0x1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AV1_SEGMENTATION_FLAG_UPDATE_MAP",
+      "value": "0x2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AV1_SEGMENTATION_FLAG_TEMPORAL_UPDATE",
+      "value": "0x4",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AV1_SEGMENTATION_FLAG_UPDATE_DATA",
+      "value": "0x8",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AV1_SEGMENTATION_FLAG_SEG_ID_PRE_SKIP",
+      "value": "0x10",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AV1_LOOP_FILTER_FLAG_DELTA_ENABLED",
+      "value": "0x1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AV1_LOOP_FILTER_FLAG_DELTA_UPDATE",
+      "value": "0x2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AV1_LOOP_FILTER_FLAG_DELTA_LF_PRESENT",
+      "value": "0x4",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AV1_LOOP_FILTER_FLAG_DELTA_LF_MULTI",
+      "value": "0x8",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AV1_QUANTIZATION_FLAG_DIFF_UV_DELTA",
+      "value": "0x1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AV1_QUANTIZATION_FLAG_USING_QMATRIX",
+      "value": "0x2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AV1_QUANTIZATION_FLAG_DELTA_Q_PRESENT",
+      "value": "0x4",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AV1_TILE_INFO_FLAG_UNIFORM_TILE_SPACING",
+      "value": "0x1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AV1_FRAME_FLAG_SHOW_FRAME",
+      "value": "0x00000001",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AV1_FRAME_FLAG_SHOWABLE_FRAME",
+      "value": "0x00000002",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AV1_FRAME_FLAG_ERROR_RESILIENT_MODE",
+      "value": "0x00000004",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AV1_FRAME_FLAG_DISABLE_CDF_UPDATE",
+      "value": "0x00000008",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AV1_FRAME_FLAG_ALLOW_SCREEN_CONTENT_TOOLS",
+      "value": "0x00000010",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AV1_FRAME_FLAG_FORCE_INTEGER_MV",
+      "value": "0x00000020",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AV1_FRAME_FLAG_ALLOW_INTRABC",
+      "value": "0x00000040",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AV1_FRAME_FLAG_USE_SUPERRES",
+      "value": "0x00000080",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AV1_FRAME_FLAG_ALLOW_HIGH_PRECISION_MV",
+      "value": "0x00000100",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AV1_FRAME_FLAG_IS_MOTION_MODE_SWITCHABLE",
+      "value": "0x00000200",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AV1_FRAME_FLAG_USE_REF_FRAME_MVS",
+      "value": "0x00000400",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AV1_FRAME_FLAG_DISABLE_FRAME_END_UPDATE_CDF",
+      "value": "0x00000800",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AV1_FRAME_FLAG_ALLOW_WARPED_MOTION",
+      "value": "0x00001000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AV1_FRAME_FLAG_REFERENCE_SELECT",
+      "value": "0x00002000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AV1_FRAME_FLAG_REDUCED_TX_SET",
+      "value": "0x00004000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AV1_FRAME_FLAG_SKIP_MODE_ALLOWED",
+      "value": "0x00008000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AV1_FRAME_FLAG_SKIP_MODE_PRESENT",
+      "value": "0x00010000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AV1_FRAME_FLAG_FRAME_SIZE_OVERRIDE",
+      "value": "0x00020000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AV1_FRAME_FLAG_BUFFER_REMOVAL_TIME_PRESENT",
+      "value": "0x00040000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AV1_FRAME_FLAG_FRAME_REFS_SHORT_SIGNALING",
+      "value": "0x00080000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_STATELESS_AV1_FRAME",
+      "value": "(V4L2_CID_CODEC_STATELESS_BASE + 502)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AV1_FILM_GRAIN_FLAG_APPLY_GRAIN",
+      "value": "0x1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AV1_FILM_GRAIN_FLAG_UPDATE_GRAIN",
+      "value": "0x2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AV1_FILM_GRAIN_FLAG_CHROMA_SCALING_FROM_LUMA",
+      "value": "0x4",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AV1_FILM_GRAIN_FLAG_OVERLAP",
+      "value": "0x8",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_AV1_FILM_GRAIN_FLAG_CLIP_TO_RESTRICTED_RANGE",
+      "value": "0x10",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_STATELESS_AV1_FILM_GRAIN",
+      "value": "(V4L2_CID_CODEC_STATELESS_BASE + 505)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CTRL_CLASS_MPEG",
+      "value": "V4L2_CTRL_CLASS_CODEC",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_CLASS",
+      "value": "V4L2_CID_CODEC_CLASS",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_BASE",
+      "value": "V4L2_CID_CODEC_BASE",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_CX2341X_BASE",
+      "value": "V4L2_CID_CODEC_CX2341X_BASE",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_MPEG_MFC51_BASE",
+      "value": "V4L2_CID_CODEC_MFC51_BASE",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_COLORIMETRY_CLASS_BASE",
+      "value": "(V4L2_CTRL_CLASS_COLORIMETRY | 0x900)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_COLORIMETRY_CLASS",
+      "value": "(V4L2_CTRL_CLASS_COLORIMETRY | 1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_COLORIMETRY_HDR10_CLL_INFO",
+      "value": "(V4L2_CID_COLORIMETRY_CLASS_BASE + 0)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_CID_COLORIMETRY_HDR10_MASTERING_DISPLAY",
+      "value": "(V4L2_CID_COLORIMETRY_CLASS_BASE + 1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_HDR10_MASTERING_PRIMARIES_X_LOW",
+      "value": "5",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_HDR10_MASTERING_PRIMARIES_X_HIGH",
+      "value": "37000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_HDR10_MASTERING_PRIMARIES_Y_LOW",
+      "value": "5",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_HDR10_MASTERING_PRIMARIES_Y_HIGH",
+      "value": "42000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_HDR10_MASTERING_WHITE_POINT_X_LOW",
+      "value": "5",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_HDR10_MASTERING_WHITE_POINT_X_HIGH",
+      "value": "37000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_HDR10_MASTERING_WHITE_POINT_Y_LOW",
+      "value": "5",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_HDR10_MASTERING_WHITE_POINT_Y_HIGH",
+      "value": "42000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_HDR10_MASTERING_MAX_LUMA_LOW",
+      "value": "50000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_HDR10_MASTERING_MAX_LUMA_HIGH",
+      "value": "100000000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_HDR10_MASTERING_MIN_LUMA_LOW",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_HDR10_MASTERING_MIN_LUMA_HIGH",
+      "value": "50000",
+      "comment": "",
+      "category": ""
+    }
+  ],
+  "structs": [
+    {
+      "name": "v4l2_ctrl_h264_sps",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "profile_idc",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "constraint_set_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "level_idc",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "seq_parameter_set_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "chroma_format_idc",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "bit_depth_luma_minus8",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "bit_depth_chroma_minus8",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "log2_max_frame_num_minus4",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "pic_order_cnt_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "log2_max_pic_order_cnt_lsb_minus4",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "max_num_ref_frames",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "num_ref_frames_in_pic_order_cnt_cycle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "offset_for_ref_frame",
+          "array_size": "255",
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "offset_for_non_ref_pic",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "offset_for_top_to_bottom_field",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "pic_width_in_mbs_minus1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "pic_height_in_map_units_minus1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "v4l2_ctrl_h264_pps",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "pic_parameter_set_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "seq_parameter_set_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "num_slice_groups_minus1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "num_ref_idx_l0_default_active_minus1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "num_ref_idx_l1_default_active_minus1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "weighted_bipred_idc",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s8",
+          "name": "pic_init_qp_minus26",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s8",
+          "name": "pic_init_qs_minus26",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s8",
+          "name": "chroma_qp_index_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s8",
+          "name": "second_chroma_qp_index_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "v4l2_ctrl_h264_scaling_matrix",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "scaling_list_4x4",
+          "array_size": "6][16",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "scaling_list_8x8",
+          "array_size": "6][64",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "v4l2_h264_weight_factors",
+      "fields": [
+        {
+          "type_name": "__s16",
+          "name": "luma_weight",
+          "array_size": "32",
+          "comment": ""
+        },
+        {
+          "type_name": "__s16",
+          "name": "luma_offset",
+          "array_size": "32",
+          "comment": ""
+        },
+        {
+          "type_name": "__s16",
+          "name": "chroma_weight",
+          "array_size": "32][2",
+          "comment": ""
+        },
+        {
+          "type_name": "__s16",
+          "name": "chroma_offset",
+          "array_size": "32][2",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "v4l2_ctrl_h264_pred_weights",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "luma_log2_weight_denom",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "chroma_log2_weight_denom",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "v4l2_h264_reference",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "fields",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "index",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "v4l2_ctrl_h264_slice_params",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "header_bit_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "first_mb_in_slice",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "slice_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "colour_plane_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "redundant_pic_cnt",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "cabac_init_idc",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s8",
+          "name": "slice_qp_delta",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s8",
+          "name": "slice_qs_delta",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "disable_deblocking_filter_idc",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s8",
+          "name": "slice_alpha_c0_offset_div2",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s8",
+          "name": "slice_beta_offset_div2",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "num_ref_idx_l0_active_minus1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "num_ref_idx_l1_active_minus1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "v4l2_h264_dpb_entry",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "reference_ts",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pic_num",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "frame_num",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "fields",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reserved",
+          "array_size": "5",
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "top_field_order_cnt",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "bottom_field_order_cnt",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "v4l2_ctrl_h264_decode_params",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "nal_ref_idc",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "frame_num",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "top_field_order_cnt",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "bottom_field_order_cnt",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "idr_pic_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "pic_order_cnt_lsb",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "delta_pic_order_cnt_bottom",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "delta_pic_order_cnt0",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "delta_pic_order_cnt1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "dec_ref_pic_marking_bit_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pic_order_cnt_bit_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "slice_group_change_cycle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "v4l2_ctrl_fwht_params",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "backward_ref_ts",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "version",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "width",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "height",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "colorspace",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "xfer_func",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ycbcr_enc",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "quantization",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "v4l2_vp8_segment",
+      "fields": [
+        {
+          "type_name": "__s8",
+          "name": "quant_update",
+          "array_size": "4",
+          "comment": ""
+        },
+        {
+          "type_name": "__s8",
+          "name": "lf_update",
+          "array_size": "4",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "segment_probs",
+          "array_size": "3",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "padding",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "v4l2_vp8_loop_filter",
+      "fields": [
+        {
+          "type_name": "__s8",
+          "name": "ref_frm_delta",
+          "array_size": "4",
+          "comment": ""
+        },
+        {
+          "type_name": "__s8",
+          "name": "mb_mode_delta",
+          "array_size": "4",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "sharpness_level",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "level",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "padding",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "v4l2_vp8_quantization",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "y_ac_qi",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s8",
+          "name": "y_dc_delta",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s8",
+          "name": "y2_dc_delta",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s8",
+          "name": "y2_ac_delta",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s8",
+          "name": "uv_dc_delta",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s8",
+          "name": "uv_ac_delta",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "padding",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "v4l2_vp8_entropy",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "coeff_probs",
+          "array_size": "4][8][3][V4L2_VP8_COEFF_PROB_CNT",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "y_mode_probs",
+          "array_size": "4",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "uv_mode_probs",
+          "array_size": "3",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "mv_probs",
+          "array_size": "2][V4L2_VP8_MV_PROB_CNT",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "padding",
+          "array_size": "3",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "v4l2_vp8_entropy_coder_state",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "range",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "value",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "bit_count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "padding",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "v4l2_ctrl_vp8_frame",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "width",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "height",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "horizontal_scale",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "vertical_scale",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "version",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "prob_skip_false",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "prob_intra",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "prob_last",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "prob_gf",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "num_dct_parts",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "first_part_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "first_part_header_bits",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "dct_part_sizes",
+          "array_size": "8",
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "last_frame_ts",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "golden_frame_ts",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "alt_frame_ts",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "v4l2_ctrl_mpeg2_sequence",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "horizontal_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "vertical_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "vbv_buffer_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "profile_and_level_indication",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "chroma_format",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "v4l2_ctrl_mpeg2_picture",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "backward_ref_ts",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "forward_ref_ts",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "f_code",
+          "array_size": "2][2",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "picture_coding_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "picture_structure",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "intra_dc_precision",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reserved",
+          "array_size": "5",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "v4l2_ctrl_mpeg2_quantisation",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "intra_quantiser_matrix",
+          "array_size": "64",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "non_intra_quantiser_matrix",
+          "array_size": "64",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "chroma_intra_quantiser_matrix",
+          "array_size": "64",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "chroma_non_intra_quantiser_matrix",
+          "array_size": "64",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "v4l2_ctrl_hevc_sps",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "video_parameter_set_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "seq_parameter_set_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "pic_width_in_luma_samples",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "pic_height_in_luma_samples",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "bit_depth_luma_minus8",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "bit_depth_chroma_minus8",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "log2_max_pic_order_cnt_lsb_minus4",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "sps_max_dec_pic_buffering_minus1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "sps_max_num_reorder_pics",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "sps_max_latency_increase_plus1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "log2_min_luma_coding_block_size_minus3",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "log2_diff_max_min_luma_coding_block_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "log2_min_luma_transform_block_size_minus2",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "log2_diff_max_min_luma_transform_block_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "max_transform_hierarchy_depth_inter",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "max_transform_hierarchy_depth_intra",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "pcm_sample_bit_depth_luma_minus1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "pcm_sample_bit_depth_chroma_minus1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "log2_min_pcm_luma_coding_block_size_minus3",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "log2_diff_max_min_pcm_luma_coding_block_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "num_short_term_ref_pic_sets",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "num_long_term_ref_pics_sps",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "chroma_format_idc",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "sps_max_sub_layers_minus1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reserved",
+          "array_size": "6",
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "v4l2_ctrl_hevc_pps",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "pic_parameter_set_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "num_extra_slice_header_bits",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "num_ref_idx_l0_default_active_minus1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "num_ref_idx_l1_default_active_minus1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s8",
+          "name": "init_qp_minus26",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "diff_cu_qp_delta_depth",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s8",
+          "name": "pps_cb_qp_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s8",
+          "name": "pps_cr_qp_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "num_tile_columns_minus1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "num_tile_rows_minus1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "column_width_minus1",
+          "array_size": "20",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "row_height_minus1",
+          "array_size": "22",
+          "comment": ""
+        },
+        {
+          "type_name": "__s8",
+          "name": "pps_beta_offset_div2",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s8",
+          "name": "pps_tc_offset_div2",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "log2_parallel_merge_level_minus2",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "v4l2_hevc_dpb_entry",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "timestamp",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "field_pic",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "pic_order_cnt_val",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "v4l2_hevc_pred_weight_table",
+      "fields": [
+        {
+          "type_name": "__s8",
+          "name": "delta_luma_weight_l0",
+          "array_size": "V4L2_HEVC_DPB_ENTRIES_NUM_MAX",
+          "comment": ""
+        },
+        {
+          "type_name": "__s8",
+          "name": "luma_offset_l0",
+          "array_size": "V4L2_HEVC_DPB_ENTRIES_NUM_MAX",
+          "comment": ""
+        },
+        {
+          "type_name": "__s8",
+          "name": "delta_chroma_weight_l0",
+          "array_size": "V4L2_HEVC_DPB_ENTRIES_NUM_MAX][2",
+          "comment": ""
+        },
+        {
+          "type_name": "__s8",
+          "name": "chroma_offset_l0",
+          "array_size": "V4L2_HEVC_DPB_ENTRIES_NUM_MAX][2",
+          "comment": ""
+        },
+        {
+          "type_name": "__s8",
+          "name": "delta_luma_weight_l1",
+          "array_size": "V4L2_HEVC_DPB_ENTRIES_NUM_MAX",
+          "comment": ""
+        },
+        {
+          "type_name": "__s8",
+          "name": "luma_offset_l1",
+          "array_size": "V4L2_HEVC_DPB_ENTRIES_NUM_MAX",
+          "comment": ""
+        },
+        {
+          "type_name": "__s8",
+          "name": "delta_chroma_weight_l1",
+          "array_size": "V4L2_HEVC_DPB_ENTRIES_NUM_MAX][2",
+          "comment": ""
+        },
+        {
+          "type_name": "__s8",
+          "name": "chroma_offset_l1",
+          "array_size": "V4L2_HEVC_DPB_ENTRIES_NUM_MAX][2",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "luma_log2_weight_denom",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s8",
+          "name": "delta_chroma_log2_weight_denom",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "v4l2_ctrl_hevc_slice_params",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "bit_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "data_byte_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "num_entry_point_offsets",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "nal_unit_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "nuh_temporal_id_plus1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "slice_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "colour_plane_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "slice_pic_order_cnt",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "num_ref_idx_l0_active_minus1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "num_ref_idx_l1_active_minus1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "collocated_ref_idx",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "five_minus_max_num_merge_cand",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s8",
+          "name": "slice_qp_delta",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s8",
+          "name": "slice_cb_qp_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s8",
+          "name": "slice_cr_qp_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s8",
+          "name": "slice_act_y_qp_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s8",
+          "name": "slice_act_cb_qp_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s8",
+          "name": "slice_act_cr_qp_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s8",
+          "name": "slice_beta_offset_div2",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s8",
+          "name": "slice_tc_offset_div2",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "pic_struct",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reserved0",
+          "array_size": "3",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "slice_segment_addr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "ref_idx_l0",
+          "array_size": "V4L2_HEVC_DPB_ENTRIES_NUM_MAX",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "ref_idx_l1",
+          "array_size": "V4L2_HEVC_DPB_ENTRIES_NUM_MAX",
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "short_term_ref_pic_set_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "long_term_ref_pic_set_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reserved1",
+          "array_size": "2",
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "v4l2_ctrl_hevc_decode_params",
+      "fields": [
+        {
+          "type_name": "__s32",
+          "name": "pic_order_cnt_val",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "short_term_ref_pic_set_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "long_term_ref_pic_set_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "num_active_dpb_entries",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "num_poc_st_curr_before",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "num_poc_st_curr_after",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "num_poc_lt_curr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "poc_st_curr_before",
+          "array_size": "V4L2_HEVC_DPB_ENTRIES_NUM_MAX",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "poc_st_curr_after",
+          "array_size": "V4L2_HEVC_DPB_ENTRIES_NUM_MAX",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "poc_lt_curr",
+          "array_size": "V4L2_HEVC_DPB_ENTRIES_NUM_MAX",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "num_delta_pocs_of_ref_rps_idx",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reserved",
+          "array_size": "3",
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "v4l2_ctrl_hevc_scaling_matrix",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "scaling_list_4x4",
+          "array_size": "6][16",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "scaling_list_8x8",
+          "array_size": "6][64",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "scaling_list_16x16",
+          "array_size": "6][64",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "scaling_list_32x32",
+          "array_size": "2][64",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "scaling_list_dc_coef_16x16",
+          "array_size": "6",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "scaling_list_dc_coef_32x32",
+          "array_size": "2",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "v4l2_ctrl_hevc_ext_sps_st_rps",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "delta_idx_minus1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "delta_rps_sign",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "num_negative_pics",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "num_positive_pics",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "used_by_curr_pic",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "use_delta_flag",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "abs_delta_rps_minus1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "delta_poc_s0_minus1",
+          "array_size": "16",
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "delta_poc_s1_minus1",
+          "array_size": "16",
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "v4l2_ctrl_hevc_ext_sps_lt_rps",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "lt_ref_pic_poc_lsb_sps",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "v4l2_vp9_loop_filter",
+      "fields": [
+        {
+          "type_name": "__s8",
+          "name": "ref_deltas",
+          "array_size": "4",
+          "comment": ""
+        },
+        {
+          "type_name": "__s8",
+          "name": "mode_deltas",
+          "array_size": "2",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "level",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "sharpness",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reserved",
+          "array_size": "7",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "v4l2_vp9_quantization",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "base_q_idx",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s8",
+          "name": "delta_q_y_dc",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s8",
+          "name": "delta_q_uv_dc",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s8",
+          "name": "delta_q_uv_ac",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reserved",
+          "array_size": "4",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "v4l2_vp9_segmentation",
+      "fields": [
+        {
+          "type_name": "__s16",
+          "name": "feature_data",
+          "array_size": "8][4",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "feature_enabled",
+          "array_size": "8",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "tree_probs",
+          "array_size": "7",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "pred_probs",
+          "array_size": "3",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reserved",
+          "array_size": "5",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "v4l2_ctrl_vp9_frame",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "compressed_header_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "uncompressed_header_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "frame_width_minus_1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "frame_height_minus_1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "render_width_minus_1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "render_height_minus_1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "last_frame_ts",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "golden_frame_ts",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "alt_frame_ts",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "ref_frame_sign_bias",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reset_frame_context",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "frame_context_idx",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "profile",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "bit_depth",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "interpolation_filter",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "tile_cols_log2",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "tile_rows_log2",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reference_mode",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reserved",
+          "array_size": "7",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "v4l2_vp9_mv_probs",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "joint",
+          "array_size": "3",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "sign",
+          "array_size": "2",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "classes",
+          "array_size": "2][10",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "class0_bit",
+          "array_size": "2",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "bits",
+          "array_size": "2][10",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "class0_fr",
+          "array_size": "2][2][3",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "fr",
+          "array_size": "2][3",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "class0_hp",
+          "array_size": "2",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "hp",
+          "array_size": "2",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "v4l2_ctrl_vp9_compressed_hdr",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "tx_mode",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "tx8",
+          "array_size": "2][1",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "tx16",
+          "array_size": "2][2",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "tx32",
+          "array_size": "2][3",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "coef",
+          "array_size": "4][2][2][6][6][3",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "skip",
+          "array_size": "3",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "inter_mode",
+          "array_size": "7][3",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "interp_filter",
+          "array_size": "4][2",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "is_inter",
+          "array_size": "4",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "comp_mode",
+          "array_size": "5",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "single_ref",
+          "array_size": "5][2",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "comp_ref",
+          "array_size": "5",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "y_mode",
+          "array_size": "4][9",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "uv_mode",
+          "array_size": "10][9",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "partition",
+          "array_size": "16][3",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "v4l2_ctrl_av1_sequence",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "seq_profile",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "order_hint_bits",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "bit_depth",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "max_frame_width_minus_1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "max_frame_height_minus_1",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "v4l2_ctrl_av1_tile_group_entry",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "tile_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tile_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tile_row",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tile_col",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "v4l2_av1_global_motion",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "flags",
+          "array_size": "V4L2_AV1_TOTAL_REFS_PER_FRAME",
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "params",
+          "array_size": "V4L2_AV1_TOTAL_REFS_PER_FRAME][6",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "invalid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reserved",
+          "array_size": "3",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "v4l2_av1_loop_restoration",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "lr_unit_shift",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "lr_uv_shift",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "loop_restoration_size",
+          "array_size": "V4L2_AV1_MAX_NUM_PLANES",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "v4l2_av1_cdef",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "damping_minus_3",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "bits",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "y_pri_strength",
+          "array_size": "V4L2_AV1_CDEF_MAX",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "y_sec_strength",
+          "array_size": "V4L2_AV1_CDEF_MAX",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "uv_pri_strength",
+          "array_size": "V4L2_AV1_CDEF_MAX",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "uv_sec_strength",
+          "array_size": "V4L2_AV1_CDEF_MAX",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "v4l2_av1_segmentation",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "last_active_seg_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "feature_enabled",
+          "array_size": "V4L2_AV1_MAX_SEGMENTS",
+          "comment": ""
+        },
+        {
+          "type_name": "__s16",
+          "name": "feature_data",
+          "array_size": "V4L2_AV1_MAX_SEGMENTS][V4L2_AV1_SEG_LVL_MAX",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "v4l2_av1_loop_filter",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "level",
+          "array_size": "4",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "sharpness",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s8",
+          "name": "ref_deltas",
+          "array_size": "V4L2_AV1_TOTAL_REFS_PER_FRAME",
+          "comment": ""
+        },
+        {
+          "type_name": "__s8",
+          "name": "mode_deltas",
+          "array_size": "2",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "delta_lf_res",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "v4l2_av1_quantization",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "base_q_idx",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s8",
+          "name": "delta_q_y_dc",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s8",
+          "name": "delta_q_u_dc",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s8",
+          "name": "delta_q_u_ac",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s8",
+          "name": "delta_q_v_dc",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s8",
+          "name": "delta_q_v_ac",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "qm_y",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "qm_u",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "qm_v",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "delta_q_res",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "v4l2_av1_tile_info",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "context_update_tile_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "tile_cols",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "tile_rows",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "mi_col_starts",
+          "array_size": "V4L2_AV1_MAX_TILE_COLS + 1",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "mi_row_starts",
+          "array_size": "V4L2_AV1_MAX_TILE_ROWS + 1",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "width_in_sbs_minus_1",
+          "array_size": "V4L2_AV1_MAX_TILE_COLS",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "height_in_sbs_minus_1",
+          "array_size": "V4L2_AV1_MAX_TILE_ROWS",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "tile_size_bytes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reserved",
+          "array_size": "3",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "v4l2_ctrl_av1_frame",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "superres_denom",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "skip_mode_frame",
+          "array_size": "2",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "primary_ref_frame",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "order_hint",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "upscaled_width",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "frame_width_minus_1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "frame_height_minus_1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "render_width_minus_1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "render_height_minus_1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "current_frame_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "buffer_removal_time",
+          "array_size": "V4L2_AV1_MAX_OPERATING_POINTS",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reserved",
+          "array_size": "4",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "order_hints",
+          "array_size": "V4L2_AV1_TOTAL_REFS_PER_FRAME",
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "reference_frame_ts",
+          "array_size": "V4L2_AV1_TOTAL_REFS_PER_FRAME",
+          "comment": ""
+        },
+        {
+          "type_name": "__s8",
+          "name": "ref_frame_idx",
+          "array_size": "V4L2_AV1_REFS_PER_FRAME",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "refresh_frame_flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "v4l2_ctrl_av1_film_grain",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "cr_mult",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "grain_seed",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "film_grain_params_ref_idx",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "num_y_points",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "point_y_value",
+          "array_size": "V4L2_AV1_MAX_NUM_Y_POINTS",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "point_y_scaling",
+          "array_size": "V4L2_AV1_MAX_NUM_Y_POINTS",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "num_cb_points",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "point_cb_value",
+          "array_size": "V4L2_AV1_MAX_NUM_CB_POINTS",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "point_cb_scaling",
+          "array_size": "V4L2_AV1_MAX_NUM_CB_POINTS",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "num_cr_points",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "point_cr_value",
+          "array_size": "V4L2_AV1_MAX_NUM_CR_POINTS",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "point_cr_scaling",
+          "array_size": "V4L2_AV1_MAX_NUM_CR_POINTS",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "grain_scaling_minus_8",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "ar_coeff_lag",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "ar_coeffs_y_plus_128",
+          "array_size": "V4L2_AV1_AR_COEFFS_SIZE",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "ar_coeffs_cb_plus_128",
+          "array_size": "V4L2_AV1_AR_COEFFS_SIZE",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "ar_coeffs_cr_plus_128",
+          "array_size": "V4L2_AV1_AR_COEFFS_SIZE",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "ar_coeff_shift_minus_6",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "grain_scale_shift",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "cb_mult",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "cb_luma_mult",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "cr_luma_mult",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "cb_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "cr_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reserved",
+          "array_size": "4",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "v4l2_ctrl_hdr10_cll_info",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "max_content_light_level",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "max_pic_average_light_level",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "v4l2_ctrl_hdr10_mastering_display",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "display_primaries_x",
+          "array_size": "3",
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "display_primaries_y",
+          "array_size": "3",
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "white_point_x",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "white_point_y",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "max_display_mastering_luminance",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "min_display_mastering_luminance",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

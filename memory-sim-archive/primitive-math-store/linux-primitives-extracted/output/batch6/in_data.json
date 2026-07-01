@@ -1,0 +1,958 @@
+{
+  "filename": "in.h",
+  "includes": [
+    "linux/types.h",
+    "linux/stddef.h",
+    "linux/libc-compat.h",
+    "linux/socket.h",
+    "asm/byteorder.h"
+  ],
+  "defines": [
+    {
+      "name": "IPPROTO_IP",
+      "value": "IPPROTO_IP",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPPROTO_ICMP",
+      "value": "IPPROTO_ICMP",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPPROTO_IGMP",
+      "value": "IPPROTO_IGMP",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPPROTO_IPIP",
+      "value": "IPPROTO_IPIP",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPPROTO_TCP",
+      "value": "IPPROTO_TCP",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPPROTO_EGP",
+      "value": "IPPROTO_EGP",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPPROTO_PUP",
+      "value": "IPPROTO_PUP",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPPROTO_UDP",
+      "value": "IPPROTO_UDP",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPPROTO_IDP",
+      "value": "IPPROTO_IDP",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPPROTO_TP",
+      "value": "IPPROTO_TP",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPPROTO_DCCP",
+      "value": "IPPROTO_DCCP",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPPROTO_IPV6",
+      "value": "IPPROTO_IPV6",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPPROTO_RSVP",
+      "value": "IPPROTO_RSVP",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPPROTO_GRE",
+      "value": "IPPROTO_GRE",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPPROTO_ESP",
+      "value": "IPPROTO_ESP",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPPROTO_AH",
+      "value": "IPPROTO_AH",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPPROTO_MTP",
+      "value": "IPPROTO_MTP",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPPROTO_BEETPH",
+      "value": "IPPROTO_BEETPH",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPPROTO_ENCAP",
+      "value": "IPPROTO_ENCAP",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPPROTO_PIM",
+      "value": "IPPROTO_PIM",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPPROTO_COMP",
+      "value": "IPPROTO_COMP",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPPROTO_L2TP",
+      "value": "IPPROTO_L2TP",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPPROTO_SCTP",
+      "value": "IPPROTO_SCTP",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPPROTO_UDPLITE",
+      "value": "IPPROTO_UDPLITE",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPPROTO_MPLS",
+      "value": "IPPROTO_MPLS",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPPROTO_ETHERNET",
+      "value": "IPPROTO_ETHERNET",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPPROTO_AGGFRAG",
+      "value": "IPPROTO_AGGFRAG",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPPROTO_RAW",
+      "value": "IPPROTO_RAW",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPPROTO_SMC",
+      "value": "IPPROTO_SMC",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPPROTO_MPTCP",
+      "value": "IPPROTO_MPTCP",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IP_TOS",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IP_TTL",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IP_HDRINCL",
+      "value": "3",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IP_OPTIONS",
+      "value": "4",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IP_ROUTER_ALERT",
+      "value": "5",
+      "comment": "",
+      "category": "IP_ROUTER"
+    },
+    {
+      "name": "IP_RECVOPTS",
+      "value": "6",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IP_RETOPTS",
+      "value": "7",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IP_PKTINFO",
+      "value": "8",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IP_PKTOPTIONS",
+      "value": "9",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IP_MTU_DISCOVER",
+      "value": "10",
+      "comment": "",
+      "category": "IP_MTU"
+    },
+    {
+      "name": "IP_RECVERR",
+      "value": "11",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IP_RECVTTL",
+      "value": "12",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IP_RECVTOS",
+      "value": "13",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IP_MTU",
+      "value": "14",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IP_FREEBIND",
+      "value": "15",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IP_IPSEC_POLICY",
+      "value": "16",
+      "comment": "",
+      "category": "IP_IPSEC"
+    },
+    {
+      "name": "IP_XFRM_POLICY",
+      "value": "17",
+      "comment": "",
+      "category": "IP_XFRM"
+    },
+    {
+      "name": "IP_PASSSEC",
+      "value": "18",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IP_TRANSPARENT",
+      "value": "19",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IP_RECVRETOPTS",
+      "value": "IP_RETOPTS",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IP_ORIGDSTADDR",
+      "value": "20",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IP_RECVORIGDSTADDR",
+      "value": "IP_ORIGDSTADDR",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IP_MINTTL",
+      "value": "21",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IP_NODEFRAG",
+      "value": "22",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IP_CHECKSUM",
+      "value": "23",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IP_BIND_ADDRESS_NO_PORT",
+      "value": "24",
+      "comment": "",
+      "category": "IP_BIND"
+    },
+    {
+      "name": "IP_RECVFRAGSIZE",
+      "value": "25",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IP_RECVERR_RFC4884",
+      "value": "26",
+      "comment": "",
+      "category": "IP_RECVERR"
+    },
+    {
+      "name": "IP_PMTUDISC_DONT",
+      "value": "0",
+      "comment": "Never send DF frames",
+      "category": "IP_PMTUDISC"
+    },
+    {
+      "name": "IP_PMTUDISC_WANT",
+      "value": "1",
+      "comment": "Use per route hints",
+      "category": "IP_PMTUDISC"
+    },
+    {
+      "name": "IP_PMTUDISC_DO",
+      "value": "2",
+      "comment": "Always DF",
+      "category": "IP_PMTUDISC"
+    },
+    {
+      "name": "IP_PMTUDISC_PROBE",
+      "value": "3",
+      "comment": "Ignore dst pmtu",
+      "category": "IP_PMTUDISC"
+    },
+    {
+      "name": "IP_PMTUDISC_INTERFACE",
+      "value": "4",
+      "comment": "",
+      "category": "IP_PMTUDISC"
+    },
+    {
+      "name": "IP_PMTUDISC_OMIT",
+      "value": "5",
+      "comment": "",
+      "category": "IP_PMTUDISC"
+    },
+    {
+      "name": "IP_MULTICAST_IF",
+      "value": "32",
+      "comment": "",
+      "category": "IP_MULTICAST"
+    },
+    {
+      "name": "IP_MULTICAST_TTL",
+      "value": "33",
+      "comment": "",
+      "category": "IP_MULTICAST"
+    },
+    {
+      "name": "IP_MULTICAST_LOOP",
+      "value": "34",
+      "comment": "",
+      "category": "IP_MULTICAST"
+    },
+    {
+      "name": "IP_ADD_MEMBERSHIP",
+      "value": "35",
+      "comment": "",
+      "category": "IP_ADD"
+    },
+    {
+      "name": "IP_DROP_MEMBERSHIP",
+      "value": "36",
+      "comment": "",
+      "category": "IP_DROP"
+    },
+    {
+      "name": "IP_UNBLOCK_SOURCE",
+      "value": "37",
+      "comment": "",
+      "category": "IP_UNBLOCK"
+    },
+    {
+      "name": "IP_BLOCK_SOURCE",
+      "value": "38",
+      "comment": "",
+      "category": "IP_BLOCK"
+    },
+    {
+      "name": "IP_ADD_SOURCE_MEMBERSHIP",
+      "value": "39",
+      "comment": "",
+      "category": "IP_ADD"
+    },
+    {
+      "name": "IP_DROP_SOURCE_MEMBERSHIP",
+      "value": "40",
+      "comment": "",
+      "category": "IP_DROP"
+    },
+    {
+      "name": "IP_MSFILTER",
+      "value": "41",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "MCAST_JOIN_GROUP",
+      "value": "42",
+      "comment": "",
+      "category": "MCAST_JOIN"
+    },
+    {
+      "name": "MCAST_BLOCK_SOURCE",
+      "value": "43",
+      "comment": "",
+      "category": "MCAST_BLOCK"
+    },
+    {
+      "name": "MCAST_UNBLOCK_SOURCE",
+      "value": "44",
+      "comment": "",
+      "category": "MCAST_UNBLOCK"
+    },
+    {
+      "name": "MCAST_LEAVE_GROUP",
+      "value": "45",
+      "comment": "",
+      "category": "MCAST_LEAVE"
+    },
+    {
+      "name": "MCAST_JOIN_SOURCE_GROUP",
+      "value": "46",
+      "comment": "",
+      "category": "MCAST_JOIN"
+    },
+    {
+      "name": "MCAST_LEAVE_SOURCE_GROUP",
+      "value": "47",
+      "comment": "",
+      "category": "MCAST_LEAVE"
+    },
+    {
+      "name": "MCAST_MSFILTER",
+      "value": "48",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IP_MULTICAST_ALL",
+      "value": "49",
+      "comment": "",
+      "category": "IP_MULTICAST"
+    },
+    {
+      "name": "IP_UNICAST_IF",
+      "value": "50",
+      "comment": "",
+      "category": "IP_UNICAST"
+    },
+    {
+      "name": "IP_LOCAL_PORT_RANGE",
+      "value": "51",
+      "comment": "",
+      "category": "IP_LOCAL"
+    },
+    {
+      "name": "IP_PROTOCOL",
+      "value": "52",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "MCAST_EXCLUDE",
+      "value": "0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "MCAST_INCLUDE",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IP_DEFAULT_MULTICAST_TTL",
+      "value": "1",
+      "comment": "",
+      "category": "IP_DEFAULT"
+    },
+    {
+      "name": "IP_DEFAULT_MULTICAST_LOOP",
+      "value": "1",
+      "comment": "",
+      "category": "IP_DEFAULT"
+    },
+    {
+      "name": "__SOCK_SIZE__",
+      "value": "16",
+      "comment": "sizeof(struct sockaddr)",
+      "category": ""
+    },
+    {
+      "name": "sin_zero",
+      "value": "__pad",
+      "comment": "for BSD UNIX comp. -FvK",
+      "category": ""
+    },
+    {
+      "name": "IN_CLASSA_NET",
+      "value": "0xff000000",
+      "comment": "",
+      "category": "IN_CLASSA"
+    },
+    {
+      "name": "IN_CLASSA_NSHIFT",
+      "value": "24",
+      "comment": "",
+      "category": "IN_CLASSA"
+    },
+    {
+      "name": "IN_CLASSA_HOST",
+      "value": "(0xffffffff & ~IN_CLASSA_NET)",
+      "comment": "",
+      "category": "IN_CLASSA"
+    },
+    {
+      "name": "IN_CLASSA_MAX",
+      "value": "128",
+      "comment": "",
+      "category": "IN_CLASSA"
+    },
+    {
+      "name": "IN_CLASSB_NET",
+      "value": "0xffff0000",
+      "comment": "",
+      "category": "IN_CLASSB"
+    },
+    {
+      "name": "IN_CLASSB_NSHIFT",
+      "value": "16",
+      "comment": "",
+      "category": "IN_CLASSB"
+    },
+    {
+      "name": "IN_CLASSB_HOST",
+      "value": "(0xffffffff & ~IN_CLASSB_NET)",
+      "comment": "",
+      "category": "IN_CLASSB"
+    },
+    {
+      "name": "IN_CLASSB_MAX",
+      "value": "65536",
+      "comment": "",
+      "category": "IN_CLASSB"
+    },
+    {
+      "name": "IN_CLASSC_NET",
+      "value": "0xffffff00",
+      "comment": "",
+      "category": "IN_CLASSC"
+    },
+    {
+      "name": "IN_CLASSC_NSHIFT",
+      "value": "8",
+      "comment": "",
+      "category": "IN_CLASSC"
+    },
+    {
+      "name": "IN_CLASSC_HOST",
+      "value": "(0xffffffff & ~IN_CLASSC_NET)",
+      "comment": "",
+      "category": "IN_CLASSC"
+    },
+    {
+      "name": "IN_MULTICAST_NET",
+      "value": "0xe0000000",
+      "comment": "",
+      "category": "IN_MULTICAST"
+    },
+    {
+      "name": "IN_CLASSE_NET",
+      "value": "0xffffffff",
+      "comment": "",
+      "category": "IN_CLASSE"
+    },
+    {
+      "name": "IN_CLASSE_NSHIFT",
+      "value": "0",
+      "comment": "",
+      "category": "IN_CLASSE"
+    },
+    {
+      "name": "INADDR_ANY",
+      "value": "((unsigned long int) 0x00000000)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "INADDR_BROADCAST",
+      "value": "((unsigned long int) 0xffffffff)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "INADDR_NONE",
+      "value": "((unsigned long int) 0xffffffff)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "INADDR_DUMMY",
+      "value": "((unsigned long int) 0xc0000008)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IN_LOOPBACKNET",
+      "value": "127",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "INADDR_LOOPBACK",
+      "value": "0x7f000001",
+      "comment": "127.0.0.1",
+      "category": ""
+    },
+    {
+      "name": "INADDR_UNSPEC_GROUP",
+      "value": "0xe0000000U",
+      "comment": "224.0.0.0",
+      "category": "INADDR_UNSPEC"
+    },
+    {
+      "name": "INADDR_ALLHOSTS_GROUP",
+      "value": "0xe0000001U",
+      "comment": "224.0.0.1",
+      "category": "INADDR_ALLHOSTS"
+    },
+    {
+      "name": "INADDR_ALLRTRS_GROUP",
+      "value": "0xe0000002U",
+      "comment": "224.0.0.2",
+      "category": "INADDR_ALLRTRS"
+    },
+    {
+      "name": "INADDR_ALLSNOOPERS_GROUP",
+      "value": "0xe000006aU",
+      "comment": "224.0.0.106",
+      "category": "INADDR_ALLSNOOPERS"
+    },
+    {
+      "name": "INADDR_MAX_LOCAL_GROUP",
+      "value": "0xe00000ffU",
+      "comment": "224.0.0.255",
+      "category": "INADDR_MAX"
+    }
+  ],
+  "structs": [
+    {
+      "name": "in_addr",
+      "fields": [
+        {
+          "type_name": "__be32",
+          "name": "s_addr",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ip_mreq",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ip_mreqn",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "imr_ifindex",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ip_mreq_source",
+      "fields": [
+        {
+          "type_name": "__be32",
+          "name": "imr_multiaddr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "imr_interface",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "imr_sourceaddr",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ip_msfilter",
+      "fields": [
+        {
+          "type_name": "__be32",
+          "name": "imsf_multiaddr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "imsf_interface",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "imsf_fmode",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "imsf_numsrc",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "imsf_slist",
+          "array_size": "1",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "group_req",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "gr_interface",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "group_source_req",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "gsr_interface",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "group_filter",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "gf_interface_aux",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "gf_fmode_aux",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "gf_numsrc_aux",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "gf_interface",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "gf_fmode",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "gf_numsrc",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_8",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "gf_interface_aux",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "gf_fmode_aux",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "gf_numsrc_aux",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_9",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "gf_interface",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "gf_fmode",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "gf_numsrc",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "in_pktinfo",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "ipi_ifindex",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "sockaddr_in",
+      "fields": [
+        {
+          "type_name": "__kernel_sa_family_t",
+          "name": "sin_family",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be16",
+          "name": "sin_port",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

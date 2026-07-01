@@ -1,0 +1,310 @@
+======================================================================
+SIMULATION REPORT: rl_dense_250_baseline
+======================================================================
+
+Domains: rhetoric, logic
+Total memories: 247
+Total behaviors: 13
+Uncovered behaviors: 0
+Echo chains: 68
+Isolated memories: 101
+Echo connectivity: 59.1%
+Cross-domain connections: 44
+
+--- OVERALL SCORE: 0.918 ---
+
+--- PRESSURE PASS RATES ---
+       low: 100.0%
+    medium: 100.0%
+      high: 100.0%
+
+--- BEHAVIOR COVERAGE ---
+  ✓ L-001: Necessary vs Sufficient (38 memories) [LB] echo:12→16
+  ✓ L-002: Counterexample Construction (38 memories) [LB] echo:17→16
+  ✓ L-003: Chain Validation (29 memories) [LB] echo:9→12
+  ✓ L-004: Scope Recognition (38 memories) [LB] echo:17→16
+  ✓ L-005: Conditional Reasoning (28 memories) [LB] echo:9→14
+  ✓ L-006: Hidden Assumption Extraction (38 memories) [LB] echo:14→17
+  ✓ R-001: Claim Identification (38 memories) [LB] echo:11→8
+  ✓ R-002: Evidence Evaluation (38 memories) [LB] echo:11→8
+  ✓ R-003: Warrant Detection (47 memories) [LB] echo:19→17
+  ✓ R-004: Fallacy Recognition (19 memories) [LB] echo:7→5
+  ✓ R-005: Kairos Detection (38 memories) [LB] echo:11→12
+  ✓ R-006: Enthymeme Reconstruction (38 memories) [LB] echo:14→12
+  ✓ R-007: Audience Awareness (38 memories) [LB] echo:11→12
+
+--- ECHO CHAINS ---
+  chain_0: RHE-000 → RHE-027
+    Domains: rhetoric
+    Behaviors: R-001, R-002
+    Strength: 1.00
+  chain_1: LOG-241 → RHE-004
+    Domains: logic, rhetoric
+    Behaviors: R-001, L-006, R-003, R-002
+    Strength: 1.00
+  chain_2: RHE-005 → RHE-022
+    Domains: rhetoric
+    Behaviors: R-001, R-002
+    Strength: 1.00
+  chain_3: RHE-007 → RHE-011
+    Domains: rhetoric
+    Behaviors: R-001, R-002
+    Strength: 1.00
+  chain_4: LOG-156 → LOG-163 → RHE-009 → RHE-079 → RHE-088
+    Domains: logic, rhetoric
+    Behaviors: R-001, R-007, R-002, L-004, R-005
+    Strength: 1.00
+  chain_5: LOG-152 → RHE-012
+    Domains: logic, rhetoric
+    Behaviors: R-001, L-002, R-002, L-004
+    Strength: 1.00
+  chain_6: LOG-209 → RHE-014
+    Domains: logic, rhetoric
+    Behaviors: R-001, L-005, L-001, R-002
+    Strength: 1.00
+  chain_7: LOG-233 → RHE-019
+    Domains: logic, rhetoric
+    Behaviors: R-001, L-006, R-003, R-002
+    Strength: 1.00
+  chain_8: RHE-020 → RHE-035
+    Domains: rhetoric
+    Behaviors: R-001, R-002
+    Strength: 1.00
+  chain_9: LOG-186 → RHE-021 → RHE-042
+    Domains: logic, rhetoric
+    Behaviors: R-001, R-002, L-006, R-003, L-003
+    Strength: 1.00
+  chain_10: LOG-158 → RHE-025
+    Domains: logic, rhetoric
+    Behaviors: R-001, L-002, R-002, L-004
+    Strength: 1.00
+  chain_11: LOG-138 → LOG-209 → RHE-030
+    Domains: logic, rhetoric
+    Behaviors: R-001, L-005, L-001, R-002
+    Strength: 1.00
+  chain_12: LOG-245 → RHE-031
+    Domains: logic, rhetoric
+    Behaviors: R-001, L-006, R-003, R-002
+    Strength: 1.00
+  chain_13: LOG-208 → RHE-032
+    Domains: logic, rhetoric
+    Behaviors: R-001, L-002, R-002, L-004
+    Strength: 1.00
+  chain_14: LOG-216 → RHE-034 → RHE-056
+    Domains: logic, rhetoric
+    Behaviors: R-001, R-002, L-005, R-003, R-006
+    Strength: 1.00
+  chain_15: LOG-159 → LOG-164 → RHE-038
+    Domains: logic, rhetoric
+    Behaviors: R-006, L-002, R-003, L-004
+    Strength: 1.00
+  chain_16: LOG-175 → LOG-185 → RHE-039 → RHE-094 → RHE-130
+    Domains: logic, rhetoric
+    Behaviors: R-007, L-006, R-003, L-003, R-005
+    Strength: 1.00
+  chain_17: RHE-040 → RHE-045
+    Domains: rhetoric
+    Behaviors: R-006, R-003
+    Strength: 1.00
+  chain_18: LOG-224 → RHE-041
+    Domains: logic, rhetoric
+    Behaviors: R-006, L-005, L-001, R-003
+    Strength: 1.00
+  chain_19: LOG-138 → RHE-030 → RHE-044
+    Domains: logic, rhetoric
+    Behaviors: R-001, R-002, L-005, R-003, R-006
+    Strength: 1.00
+  chain_20: RHE-047 → RHE-054
+    Domains: rhetoric
+    Behaviors: R-006, R-003
+    Strength: 1.00
+  chain_21: LOG-143 → RHE-051
+    Domains: logic, rhetoric
+    Behaviors: R-006, L-001, R-003
+    Strength: 1.00
+  chain_22: LOG-154 → LOG-218 → RHE-057 → RHE-085
+    Domains: logic, rhetoric
+    Behaviors: R-004, R-007, L-005, L-004, R-005
+    Strength: 1.00
+  chain_23: RHE-058 → RHE-068
+    Domains: rhetoric
+    Behaviors: R-004
+    Strength: 1.00
+  chain_24: LOG-215 → LOG-216 → RHE-060
+    Domains: logic, rhetoric
+    Behaviors: R-004, L-005, L-001
+    Strength: 1.00
+  chain_25: LOG-234 → RHE-063
+    Domains: logic, rhetoric
+    Behaviors: R-004, L-006, L-003
+    Strength: 1.00
+  chain_26: RHE-064 → RHE-069
+    Domains: rhetoric
+    Behaviors: R-004
+    Strength: 1.00
+  chain_27: LOG-191 → RHE-066
+    Domains: logic, rhetoric
+    Behaviors: R-004, L-002, L-004
+    Strength: 1.00
+  chain_28: LOG-140 → LOG-144 → RHE-067
+    Domains: logic, rhetoric
+    Behaviors: R-004, L-005, L-001
+    Strength: 1.00
+  chain_29: LOG-197 → RHE-071
+    Domains: logic, rhetoric
+    Behaviors: R-004, L-002, L-004
+    Strength: 1.00
+  chain_30: LOG-244 → RHE-074
+    Domains: logic, rhetoric
+    Behaviors: R-004, L-006, L-003
+    Strength: 1.00
+  chain_31: LOG-156 → LOG-163 → RHE-079 → RHE-081 → RHE-088
+    Domains: logic, rhetoric
+    Behaviors: L-002, R-007, R-005, L-004
+    Strength: 1.00
+  chain_32: LOG-228 → RHE-082
+    Domains: logic, rhetoric
+    Behaviors: L-006, R-007, L-003, R-005
+    Strength: 1.00
+  chain_33: LOG-192 → LOG-198 → RHE-084 → RHE-105
+    Domains: logic, rhetoric
+    Behaviors: R-007, L-004, R-003, R-005, R-006
+    Strength: 1.00
+  chain_34: LOG-165 → LOG-239 → LOG-246 → RHE-090 → RHE-127
+    Domains: logic, rhetoric
+    Behaviors: R-007, L-004, L-006, R-003, L-003
+    Strength: 1.00
+  chain_35: LOG-167 → LOG-201 → RHE-091
+    Domains: logic, rhetoric
+    Behaviors: L-002, R-007, R-005, L-004
+    Strength: 1.00
+  chain_36: LOG-184 → LOG-195 → RHE-095
+    Domains: logic, rhetoric
+    Behaviors: L-004, L-006, R-003, L-003, R-006
+    Strength: 1.00
+  chain_37: RHE-096 → RHE-103
+    Domains: rhetoric
+    Behaviors: R-006, R-003
+    Strength: 1.00
+  chain_38: LOG-224 → RHE-099
+    Domains: logic, rhetoric
+    Behaviors: R-006, L-005, L-001, R-003
+    Strength: 1.00
+  chain_39: LOG-189 → LOG-233 → RHE-100
+    Domains: logic, rhetoric
+    Behaviors: R-006, L-006, R-003, L-003
+    Strength: 1.00
+  chain_40: LOG-213 → RHE-102
+    Domains: logic, rhetoric
+    Behaviors: R-006, L-005, L-001, R-003
+    Strength: 1.00
+  chain_41: LOG-188 → RHE-107 → RHE-132
+    Domains: logic, rhetoric
+    Behaviors: R-007, L-006, R-003, L-003, R-005
+    Strength: 1.00
+  chain_42: LOG-171 → LOG-229 → RHE-108
+    Domains: logic, rhetoric
+    Behaviors: R-006, L-006, R-003, L-003
+    Strength: 1.00
+  chain_43: LOG-177 → RHE-110
+    Domains: logic, rhetoric
+    Behaviors: R-006, L-006, R-003, L-003
+    Strength: 1.00
+  chain_44: RHE-111 → RHE-112
+    Domains: rhetoric
+    Behaviors: R-006, R-003
+    Strength: 1.00
+  chain_45: LOG-142 → RHE-114
+    Domains: logic, rhetoric
+    Behaviors: L-005, L-001, R-007, R-005
+    Strength: 1.00
+  chain_46: RHE-117 → RHE-126
+    Domains: rhetoric
+    Behaviors: R-007, R-005
+    Strength: 1.00
+  chain_47: LOG-138 → RHE-030 → RHE-121
+    Domains: logic, rhetoric
+    Behaviors: R-001, R-007, R-002, L-005, R-005
+    Strength: 1.00
+  chain_48: LOG-236 → LOG-243 → RHE-124
+    Domains: logic, rhetoric
+    Behaviors: R-007, L-006, R-003, L-003, R-005
+    Strength: 1.00
+  chain_49: LOG-175 → LOG-185 → RHE-039 → RHE-125
+    Domains: logic, rhetoric
+    Behaviors: R-007, L-006, R-003, L-003, R-005
+    Strength: 1.00
+  chain_50: RHE-128 → RHE-132
+    Domains: rhetoric
+    Behaviors: R-007, R-005
+    Strength: 1.00
+  chain_51: LOG-149 → RHE-131
+    Domains: logic, rhetoric
+    Behaviors: L-001, R-007, R-005
+    Strength: 1.00
+  chain_52: LOG-134 → LOG-226
+    Domains: logic
+    Behaviors: L-005, L-001
+    Strength: 1.00
+  chain_53: LOG-139 → RHE-011
+    Domains: logic, rhetoric
+    Behaviors: R-001, L-001, R-002
+    Strength: 1.00
+  chain_54: LOG-146 → LOG-147 → LOG-218 → RHE-040 → RHE-057
+    Domains: logic, rhetoric
+    Behaviors: R-004, L-005, R-003, R-006, L-001
+    Strength: 1.00
+  chain_55: LOG-148 → LOG-212
+    Domains: logic
+    Behaviors: L-005, L-001
+    Strength: 1.00
+  chain_56: LOG-161 → LOG-196
+    Domains: logic
+    Behaviors: L-002, L-004
+    Strength: 1.00
+  chain_57: LOG-159 → LOG-164 → LOG-168
+    Domains: logic
+    Behaviors: L-002, L-004
+    Strength: 1.00
+  chain_58: LOG-169 → LOG-193
+    Domains: logic
+    Behaviors: L-002, L-004
+    Strength: 1.00
+  chain_59: LOG-173 → LOG-174
+    Domains: logic
+    Behaviors: L-006, L-003
+    Strength: 1.00
+  chain_60: LOG-181 → RHE-091
+    Domains: logic, rhetoric
+    Behaviors: L-006, R-007, L-003, R-005
+    Strength: 1.00
+  chain_61: LOG-194 → LOG-203
+    Domains: logic
+    Behaviors: L-002, L-004
+    Strength: 1.00
+  chain_62: LOG-192 → LOG-200
+    Domains: logic
+    Behaviors: L-002, L-004
+    Strength: 1.00
+  chain_63: LOG-202 → LOG-204
+    Domains: logic
+    Behaviors: L-002, L-004
+    Strength: 1.00
+  chain_64: LOG-219 → LOG-223
+    Domains: logic
+    Behaviors: L-005, L-001
+    Strength: 1.00
+  chain_65: LOG-220 → LOG-221
+    Domains: logic
+    Behaviors: L-005, L-001
+    Strength: 1.00
+  chain_66: LOG-230 → RHE-011
+    Domains: logic, rhetoric
+    Behaviors: R-001, L-006, L-003, R-002
+    Strength: 1.00
+  chain_67: LOG-231 → LOG-234
+    Domains: logic
+    Behaviors: L-006, R-003, L-003
+    Strength: 1.00
+
+======================================================================

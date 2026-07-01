@@ -1,0 +1,912 @@
+{
+  "filename": "vc4_drm.h",
+  "includes": [
+    "drm.h"
+  ],
+  "defines": [
+    {
+      "name": "DRM_VC4_SUBMIT_CL",
+      "value": "0x00",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_VC4_WAIT_SEQNO",
+      "value": "0x01",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_VC4_WAIT_BO",
+      "value": "0x02",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_VC4_CREATE_BO",
+      "value": "0x03",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_VC4_MMAP_BO",
+      "value": "0x04",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_VC4_CREATE_SHADER_BO",
+      "value": "0x05",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_VC4_GET_HANG_STATE",
+      "value": "0x06",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_VC4_GET_PARAM",
+      "value": "0x07",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_VC4_SET_TILING",
+      "value": "0x08",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_VC4_GET_TILING",
+      "value": "0x09",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_VC4_LABEL_BO",
+      "value": "0x0a",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_VC4_GEM_MADVISE",
+      "value": "0x0b",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_VC4_PERFMON_CREATE",
+      "value": "0x0c",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_VC4_PERFMON_DESTROY",
+      "value": "0x0d",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_VC4_PERFMON_GET_VALUES",
+      "value": "0x0e",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_IOCTL_VC4_SUBMIT_CL",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_VC4_SUBMIT_CL, struct drm_vc4_submit_cl)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_VC4_WAIT_SEQNO",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_VC4_WAIT_SEQNO, struct drm_vc4_wait_seqno)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_VC4_WAIT_BO",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_VC4_WAIT_BO, struct drm_vc4_wait_bo)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_VC4_CREATE_BO",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_VC4_CREATE_BO, struct drm_vc4_create_bo)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_VC4_MMAP_BO",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_VC4_MMAP_BO, struct drm_vc4_mmap_bo)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_VC4_CREATE_SHADER_BO",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_VC4_CREATE_SHADER_BO, struct drm_vc4_create_shader_bo)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_VC4_GET_HANG_STATE",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_VC4_GET_HANG_STATE, struct drm_vc4_get_hang_state)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_VC4_GET_PARAM",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_VC4_GET_PARAM, struct drm_vc4_get_param)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_VC4_SET_TILING",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_VC4_SET_TILING, struct drm_vc4_set_tiling)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_VC4_GET_TILING",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_VC4_GET_TILING, struct drm_vc4_get_tiling)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_VC4_LABEL_BO",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_VC4_LABEL_BO, struct drm_vc4_label_bo)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_VC4_GEM_MADVISE",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_VC4_GEM_MADVISE, struct drm_vc4_gem_madvise)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_VC4_PERFMON_CREATE",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_VC4_PERFMON_CREATE, struct drm_vc4_perfmon_create)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_VC4_PERFMON_DESTROY",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_VC4_PERFMON_DESTROY, struct drm_vc4_perfmon_destroy)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_VC4_PERFMON_GET_VALUES",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_VC4_PERFMON_GET_VALUES, struct drm_vc4_perfmon_get_values)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "VC4_SUBMIT_RCL_SURFACE_READ_IS_FULL_RES",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "VC4_SUBMIT_CL_USE_CLEAR_COLOR",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "VC4_SUBMIT_CL_FIXED_RCL_ORDER",
+      "value": "(1 << 1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "VC4_SUBMIT_CL_RCL_ORDER_INCREASING_X",
+      "value": "(1 << 2)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "VC4_SUBMIT_CL_RCL_ORDER_INCREASING_Y",
+      "value": "(1 << 3)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_VC4_PARAM_V3D_IDENT0",
+      "value": "0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_VC4_PARAM_V3D_IDENT1",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_VC4_PARAM_V3D_IDENT2",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_VC4_PARAM_SUPPORTS_BRANCHES",
+      "value": "3",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_VC4_PARAM_SUPPORTS_ETC1",
+      "value": "4",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_VC4_PARAM_SUPPORTS_THREADED_FS",
+      "value": "5",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_VC4_PARAM_SUPPORTS_FIXED_RCL_ORDER",
+      "value": "6",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_VC4_PARAM_SUPPORTS_MADVISE",
+      "value": "7",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_VC4_PARAM_SUPPORTS_PERFMON",
+      "value": "8",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "VC4_MADV_WILLNEED",
+      "value": "0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "VC4_MADV_DONTNEED",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "__VC4_MADV_PURGED",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "__VC4_MADV_NOTSUPP",
+      "value": "3",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_VC4_MAX_PERF_COUNTERS",
+      "value": "16",
+      "comment": "",
+      "category": ""
+    }
+  ],
+  "structs": [
+    {
+      "name": "drm_vc4_submit_rcl_surface",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "hindex",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "bits",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_vc4_submit_cl",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "bin_cl",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "shader_rec",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "uniforms",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "bo_handles",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "bin_cl_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "shader_rec_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "shader_rec_count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "uniforms_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "bo_handle_count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "width",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "height",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "min_x_tile",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "min_y_tile",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "max_x_tile",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "max_y_tile",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "clear_color",
+          "array_size": "2",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "clear_z",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "clear_s",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "seqno",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "perfmonid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "in_sync",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "out_sync",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad2",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_vc4_wait_seqno",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "seqno",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "timeout_ns",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_vc4_wait_bo",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "timeout_ns",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_vc4_create_bo",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_vc4_mmap_bo",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_vc4_create_shader_bo",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "data",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_vc4_get_hang_state_bo",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "paddr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_vc4_get_hang_state",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "bo",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "bo_count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "vpmbase",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "dbge",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "fdbgo",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "fdbgb",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "fdbgr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "fdbgs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "errstat",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": "16",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_vc4_get_param",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "param",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "value",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_vc4_get_tiling",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "modifier",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_vc4_set_tiling",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "modifier",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_vc4_label_bo",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "name",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_vc4_gem_madvise",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "madv",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "retained",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_vc4_perfmon_create",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ncounters",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "events",
+          "array_size": "DRM_VC4_MAX_PERF_COUNTERS",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_vc4_perfmon_destroy",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_vc4_perfmon_get_values",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "values_ptr",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

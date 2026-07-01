@@ -1,0 +1,14 @@
+﻿
+
+1. **Reproduce Before Repair**
+   - **Action:** Reproduce the crash in a staging environment.
+   - **Uncertainty:** If it fails to reproduce, isolate the smallest trigger.
+   - **Next Action:** Roll back the deploy and reproduce again.
+
+2. **Isolate the Variable**
+   - **Action:** Move one variable to test its effect.
+   - **Uncertainty:** If multiple variables move together, success can be as useless as failure.
+   - **Next Action:** Reset and move one variable to see if the crash persists.
+
+3. **Calibrate Confidence**
+   - **Action:** Label confidence based on evidence:

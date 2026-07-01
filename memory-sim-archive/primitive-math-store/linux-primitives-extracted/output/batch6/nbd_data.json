@@ -1,0 +1,237 @@
+{
+  "filename": "nbd.h",
+  "includes": [
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "NBD_SET_SOCK",
+      "value": "_IO( 0xab, 0 )",
+      "comment": "",
+      "category": "NBD_SET"
+    },
+    {
+      "name": "NBD_SET_BLKSIZE",
+      "value": "_IO( 0xab, 1 )",
+      "comment": "",
+      "category": "NBD_SET"
+    },
+    {
+      "name": "NBD_SET_SIZE",
+      "value": "_IO( 0xab, 2 )",
+      "comment": "",
+      "category": "NBD_SET"
+    },
+    {
+      "name": "NBD_DO_IT",
+      "value": "_IO( 0xab, 3 )",
+      "comment": "",
+      "category": "NBD_DO"
+    },
+    {
+      "name": "NBD_CLEAR_SOCK",
+      "value": "_IO( 0xab, 4 )",
+      "comment": "",
+      "category": "NBD_CLEAR"
+    },
+    {
+      "name": "NBD_CLEAR_QUE",
+      "value": "_IO( 0xab, 5 )",
+      "comment": "",
+      "category": "NBD_CLEAR"
+    },
+    {
+      "name": "NBD_PRINT_DEBUG",
+      "value": "_IO( 0xab, 6 )",
+      "comment": "",
+      "category": "NBD_PRINT"
+    },
+    {
+      "name": "NBD_SET_SIZE_BLOCKS",
+      "value": "_IO( 0xab, 7 )",
+      "comment": "",
+      "category": "NBD_SET"
+    },
+    {
+      "name": "NBD_DISCONNECT",
+      "value": "_IO( 0xab, 8 )",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NBD_SET_TIMEOUT",
+      "value": "_IO( 0xab, 9 )",
+      "comment": "",
+      "category": "NBD_SET"
+    },
+    {
+      "name": "NBD_SET_FLAGS",
+      "value": "_IO( 0xab, 10)",
+      "comment": "",
+      "category": "NBD_SET"
+    },
+    {
+      "name": "NBD_FLAG_HAS_FLAGS",
+      "value": "(1 << 0)",
+      "comment": "nbd-server supports flags",
+      "category": "NBD_FLAG"
+    },
+    {
+      "name": "NBD_FLAG_READ_ONLY",
+      "value": "(1 << 1)",
+      "comment": "device is read-only",
+      "category": "NBD_FLAG"
+    },
+    {
+      "name": "NBD_FLAG_SEND_FLUSH",
+      "value": "(1 << 2)",
+      "comment": "can flush writeback cache",
+      "category": "NBD_FLAG"
+    },
+    {
+      "name": "NBD_FLAG_SEND_FUA",
+      "value": "(1 << 3)",
+      "comment": "send FUA (forced unit access)",
+      "category": "NBD_FLAG"
+    },
+    {
+      "name": "NBD_FLAG_ROTATIONAL",
+      "value": "(1 << 4)",
+      "comment": "device is rotational",
+      "category": "NBD_FLAG"
+    },
+    {
+      "name": "NBD_FLAG_SEND_TRIM",
+      "value": "(1 << 5)",
+      "comment": "send trim/discard",
+      "category": "NBD_FLAG"
+    },
+    {
+      "name": "NBD_FLAG_SEND_WRITE_ZEROES",
+      "value": "(1 << 6)",
+      "comment": "supports WRITE_ZEROES",
+      "category": "NBD_FLAG"
+    },
+    {
+      "name": "NBD_FLAG_CAN_MULTI_CONN",
+      "value": "(1 << 8)",
+      "comment": "Server supports multiple connections per export.",
+      "category": "NBD_FLAG"
+    },
+    {
+      "name": "NBD_CMD_FLAG_FUA",
+      "value": "(1 << 16)",
+      "comment": "FUA (forced unit access) op",
+      "category": "NBD_CMD"
+    },
+    {
+      "name": "NBD_CMD_FLAG_NO_HOLE",
+      "value": "(1 << 17)",
+      "comment": "Do not punch a hole for WRITE_ZEROES",
+      "category": "NBD_CMD"
+    },
+    {
+      "name": "NBD_CFLAG_DESTROY_ON_DISCONNECT",
+      "value": "(1 << 0) /* delete the nbd device on",
+      "comment": "",
+      "category": "NBD_CFLAG"
+    },
+    {
+      "name": "NBD_CFLAG_DISCONNECT_ON_CLOSE",
+      "value": "(1 << 1) /* disconnect the nbd device on",
+      "comment": "",
+      "category": "NBD_CFLAG"
+    },
+    {
+      "name": "NBD_REQUEST_MAGIC",
+      "value": "0x25609513",
+      "comment": "",
+      "category": "NBD_REQUEST"
+    },
+    {
+      "name": "NBD_REPLY_MAGIC",
+      "value": "0x67446698",
+      "comment": "",
+      "category": "NBD_REPLY"
+    }
+  ],
+  "structs": [
+    {
+      "name": "nbd_request",
+      "fields": [
+        {
+          "type_name": "__be32",
+          "name": "magic",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be64",
+          "name": "cookie",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "handle",
+          "array_size": "8",
+          "comment": ""
+        },
+        {
+          "type_name": "__be64",
+          "name": "from",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "len",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "nbd_reply",
+      "fields": [
+        {
+          "type_name": "__be32",
+          "name": "magic",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "error",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be64",
+          "name": "cookie",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "handle",
+          "array_size": "8",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

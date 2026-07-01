@@ -1,0 +1,68 @@
+======================================================================
+SIMULATION REPORT: logic_causal
+======================================================================
+
+Domains: logic, causal
+Total memories: 33
+Total behaviors: 11
+Uncovered behaviors: 0
+Echo chains: 8
+Isolated memories: 19
+Echo connectivity: 42.4%
+Cross-domain connections: 6
+
+--- OVERALL SCORE: 0.885 ---
+
+--- PRESSURE PASS RATES ---
+       low: 100.0%
+    medium: 100.0%
+      high: 100.0%
+
+--- BEHAVIOR COVERAGE ---
+  ✓ C-001: Correlation vs Causation (5 memories) [LB] echo:2→1
+  ✓ C-002: Causal Chain Tracing (5 memories) echo:1→1
+  ✓ C-003: Confounding Variable Identification (6 memories) [LB] echo:2→1
+  ✓ C-004: Intervention Thinking (6 memories) echo:1→1
+  ✓ C-005: Multiple Causation Recognition (3 memories) echo:1→1
+  ✓ L-001: Necessary vs Sufficient (9 memories) [LB] echo:2→2
+  ✓ L-002: Counterexample Construction (6 memories) echo:2→2
+  ✓ L-003: Chain Validation (5 memories) echo:0→1
+  ✓ L-004: Scope Recognition (6 memories) echo:2→2
+  ✓ L-005: Conditional Reasoning (5 memories) [LB] echo:1→1
+  ✓ L-006: Hidden Assumption Extraction (6 memories) echo:0→1
+
+--- ECHO CHAINS ---
+  chain_0: LOG-003 → LOG-009
+    Domains: logic
+    Behaviors: L-004, L-002
+    Strength: 1.00
+  chain_1: CAU-023 → LOG-004
+    Domains: causal, logic
+    Behaviors: L-004, L-002, C-004, C-002
+    Strength: 1.00
+  chain_2: CAU-024 → LOG-005
+    Domains: causal, logic
+    Behaviors: C-003, L-004, L-002, C-001
+    Strength: 1.00
+  chain_3: CAU-018 → LOG-008
+    Domains: causal, logic
+    Behaviors: L-006, C-003, L-003, C-001
+    Strength: 1.00
+  chain_4: CAU-030 → LOG-012
+    Domains: causal, logic
+    Behaviors: C-005, L-001, L-005
+    Strength: 1.00
+  chain_5: CAU-029 → LOG-013
+    Domains: causal, logic
+    Behaviors: L-005, L-001, C-004, C-002
+    Strength: 1.00
+  chain_6: CAU-026 → LOG-008
+    Domains: causal, logic
+    Behaviors: L-006, C-003, L-003, C-001
+    Strength: 1.00
+  chain_7: CAU-030 → CAU-032
+    Domains: causal
+    Behaviors: C-005, L-001
+    Strength: 1.00
+
+======================================================================

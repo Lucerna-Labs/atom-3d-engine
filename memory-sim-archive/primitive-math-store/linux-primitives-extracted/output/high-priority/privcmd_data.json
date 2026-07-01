@@ -1,0 +1,410 @@
+{
+  "filename": "privcmd.h",
+  "includes": [
+    "linux/types.h",
+    "linux/compiler.h",
+    "xen/interface/xen.h"
+  ],
+  "defines": [
+    {
+      "name": "PRIVCMD_MMAPBATCH_MFN_ERROR",
+      "value": "0xf0000000U",
+      "comment": "",
+      "category": "PRIVCMD_MMAPBATCH"
+    },
+    {
+      "name": "PRIVCMD_MMAPBATCH_PAGED_ERROR",
+      "value": "0x80000000U",
+      "comment": "",
+      "category": "PRIVCMD_MMAPBATCH"
+    },
+    {
+      "name": "PRIVCMD_IRQFD_FLAG_DEASSIGN",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "PRIVCMD_IRQFD"
+    },
+    {
+      "name": "PRIVCMD_IOEVENTFD_FLAG_DEASSIGN",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "PRIVCMD_IOEVENTFD"
+    },
+    {
+      "name": "IOCTL_PRIVCMD_HYPERCALL",
+      "value": "",
+      "comment": "",
+      "category": "IOCTL_PRIVCMD"
+    },
+    {
+      "name": "IOCTL_PRIVCMD_MMAP",
+      "value": "",
+      "comment": "",
+      "category": "IOCTL_PRIVCMD"
+    },
+    {
+      "name": "IOCTL_PRIVCMD_MMAPBATCH",
+      "value": "",
+      "comment": "",
+      "category": "IOCTL_PRIVCMD"
+    },
+    {
+      "name": "IOCTL_PRIVCMD_MMAPBATCH_V2",
+      "value": "",
+      "comment": "",
+      "category": "IOCTL_PRIVCMD"
+    },
+    {
+      "name": "IOCTL_PRIVCMD_DM_OP",
+      "value": "",
+      "comment": "",
+      "category": "IOCTL_PRIVCMD"
+    },
+    {
+      "name": "IOCTL_PRIVCMD_RESTRICT",
+      "value": "",
+      "comment": "",
+      "category": "IOCTL_PRIVCMD"
+    },
+    {
+      "name": "IOCTL_PRIVCMD_MMAP_RESOURCE",
+      "value": "",
+      "comment": "",
+      "category": "IOCTL_PRIVCMD"
+    },
+    {
+      "name": "IOCTL_PRIVCMD_IRQFD",
+      "value": "",
+      "comment": "",
+      "category": "IOCTL_PRIVCMD"
+    },
+    {
+      "name": "IOCTL_PRIVCMD_IOEVENTFD",
+      "value": "",
+      "comment": "",
+      "category": "IOCTL_PRIVCMD"
+    },
+    {
+      "name": "IOCTL_PRIVCMD_PCIDEV_GET_GSI",
+      "value": "",
+      "comment": "",
+      "category": "IOCTL_PRIVCMD"
+    }
+  ],
+  "structs": [
+    {
+      "name": "privcmd_hypercall",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "op",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "arg",
+          "array_size": "5",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "privcmd_mmap_entry",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "va",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "mfn",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "npages",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "privcmd_mmap",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "num",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "domid_t",
+          "name": "dom",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "privcmd_mmapbatch",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "num",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "domid_t",
+          "name": "dom",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "addr",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "privcmd_mmapbatch_v2",
+      "fields": [
+        {
+          "type_name": "domid_t",
+          "name": "dom",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "addr",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "privcmd_dm_op_buf",
+      "fields": [
+        {
+          "type_name": "size_t",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "privcmd_dm_op",
+      "fields": [
+        {
+          "type_name": "domid_t",
+          "name": "dom",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "num",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "privcmd_mmap_resource",
+      "fields": [
+        {
+          "type_name": "domid_t",
+          "name": "dom",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "idx",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "num",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "addr",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "privcmd_irqfd",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "dm_op",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "fd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "domid_t",
+          "name": "dom",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "pad",
+          "array_size": "2",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "privcmd_ioeventfd",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "ioreq",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "ports",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "addr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "addr_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "event_fd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "vcpus",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "vq",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "domid_t",
+          "name": "dom",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "pad",
+          "array_size": "2",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "privcmd_pcidev_get_gsi",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "sbdf",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "gsi",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

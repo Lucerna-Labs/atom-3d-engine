@@ -1,0 +1,250 @@
+{
+  "filename": "bfs_fs.h",
+  "includes": [
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "BFS_BSIZE_BITS",
+      "value": "9",
+      "comment": "",
+      "category": "BFS_BSIZE"
+    },
+    {
+      "name": "BFS_BSIZE",
+      "value": "(1<<BFS_BSIZE_BITS)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "BFS_MAGIC",
+      "value": "0x1BADFACE",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "BFS_ROOT_INO",
+      "value": "2",
+      "comment": "",
+      "category": "BFS_ROOT"
+    },
+    {
+      "name": "BFS_INODES_PER_BLOCK",
+      "value": "8",
+      "comment": "",
+      "category": "BFS_INODES"
+    },
+    {
+      "name": "BFS_VDIR",
+      "value": "2L",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "BFS_VREG",
+      "value": "1L",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "BFS_NAMELEN",
+      "value": "14",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "BFS_DIRENT_SIZE",
+      "value": "16",
+      "comment": "",
+      "category": "BFS_DIRENT"
+    },
+    {
+      "name": "BFS_DIRS_PER_BLOCK",
+      "value": "32",
+      "comment": "",
+      "category": "BFS_DIRS"
+    }
+  ],
+  "structs": [
+    {
+      "name": "bfs_inode",
+      "fields": [
+        {
+          "type_name": "__le16",
+          "name": "i_ino",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "i_unused",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "i_sblock",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "i_eblock",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "i_eoffset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "i_vtype",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "i_mode",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "i_uid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "i_gid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "i_nlink",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "i_atime",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "i_mtime",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "i_ctime",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "i_padding",
+          "array_size": "4",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "bfs_dirent",
+      "fields": [
+        {
+          "type_name": "__le16",
+          "name": "ino",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "name",
+          "array_size": "BFS_NAMELEN",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "bfs_super_block",
+      "fields": [
+        {
+          "type_name": "__le32",
+          "name": "s_magic",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "s_start",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "s_end",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "s_from",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "s_to",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "s_bfrom",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "s_bto",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "s_fsname",
+          "array_size": "6",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "s_volume",
+          "array_size": "6",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "s_padding",
+          "array_size": "118",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

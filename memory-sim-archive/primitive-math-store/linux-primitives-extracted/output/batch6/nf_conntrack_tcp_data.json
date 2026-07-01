@@ -1,0 +1,86 @@
+{
+  "filename": "nf_conntrack_tcp.h",
+  "includes": [
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "TCP_CONNTRACK_SYN_SENT2",
+      "value": "TCP_CONNTRACK_LISTEN",
+      "comment": "",
+      "category": "TCP_CONNTRACK"
+    },
+    {
+      "name": "IP_CT_TCP_FLAG_WINDOW_SCALE",
+      "value": "0x01",
+      "comment": "",
+      "category": "IP_CT"
+    },
+    {
+      "name": "IP_CT_TCP_FLAG_SACK_PERM",
+      "value": "0x02",
+      "comment": "",
+      "category": "IP_CT"
+    },
+    {
+      "name": "IP_CT_TCP_FLAG_CLOSE_INIT",
+      "value": "0x04",
+      "comment": "",
+      "category": "IP_CT"
+    },
+    {
+      "name": "IP_CT_TCP_FLAG_BE_LIBERAL",
+      "value": "0x08",
+      "comment": "",
+      "category": "IP_CT"
+    },
+    {
+      "name": "IP_CT_TCP_FLAG_DATA_UNACKNOWLEDGED",
+      "value": "0x10",
+      "comment": "",
+      "category": "IP_CT"
+    },
+    {
+      "name": "IP_CT_TCP_FLAG_MAXACK_SET",
+      "value": "0x20",
+      "comment": "",
+      "category": "IP_CT"
+    },
+    {
+      "name": "IP_CT_EXP_CHALLENGE_ACK",
+      "value": "0x40",
+      "comment": "",
+      "category": "IP_CT"
+    },
+    {
+      "name": "IP_CT_TCP_SIMULTANEOUS_OPEN",
+      "value": "0x80",
+      "comment": "",
+      "category": "IP_CT"
+    }
+  ],
+  "structs": [
+    {
+      "name": "nf_ct_tcp_flags",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "mask",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

@@ -1,0 +1,73 @@
+{
+  "name": "routed_tri_structural_65",
+  "description": "Primary routed candidate: structural primitives carry most signal, cognitive gives broad transfer, cyber keeps source boundaries.",
+  "shares": {
+    "structural": 0.65,
+    "cognitive": 0.2,
+    "cyber": 0.15
+  },
+  "bridge_count": 180,
+  "anti_echo_multiplier": 2,
+  "q2_amplifier": false,
+  "train_count": 1435,
+  "validation_count": 125,
+  "summary": {
+    "count": 1560,
+    "by_kind": {
+      "anti_echo_stop": 285,
+      "carrier_control": 60,
+      "clean_task_solution": 65,
+      "cognitive_memory": 240,
+      "compact_task_solution": 155,
+      "cyber_memory": 180,
+      "gate_application": 14,
+      "gate_control": 57,
+      "repair_solution": 129,
+      "routed_bridge": 180,
+      "task_solution": 130,
+      "web_association": 50,
+      "web_repair": 15
+    },
+    "by_family": {
+      "adversarial": 130,
+      "adversarial-reading": 2,
+      "analogy": 2,
+      "boundary": 230,
+      "calibration": 3,
+      "causality": 2,
+      "classification": 6,
+      "coding": 9,
+      "comparison": 6,
+      "decomposition": 3,
+      "evidence": 3,
+      "format-control": 7,
+      "generalist": 180,
+      "loop-control": 9,
+      "math": 113,
+      "orientation": 5,
+      "planning": 8,
+      "question-analysis": 2,
+      "reward": 33,
+      "rhetoric": 10,
+      "source-evaluation": 4,
+      "spatial": 6,
+      "structural": 780,
+      "summarization": 3,
+      "systems": 4
+    },
+    "by_source": {
+      "anti_echo_generator": 180,
+      "bridge_generator": 180,
+      "cognitive_core_v0_1.json": 100,
+      "cognitive_rewards_v0_1.json": 33,
+      "computation_primitives_v0_1.json": 107,
+      "rust_cyber_defender_generated.tsv": 180,
+      "structural_primitive_lora_v0_2": 780
+    }
+  },
+  "files": {
+    "train_jsonl": "C:\\Projects\\small-model-memory-lab\\data\\dataset_mixture_candidates_v0_1\\routed_tri_structural_65\\train.jsonl",
+    "validation_jsonl": "C:\\Projects\\small-model-memory-lab\\data\\dataset_mixture_candidates_v0_1\\routed_tri_structural_65\\validation.jsonl",
+    "preview": "C:\\Projects\\small-model-memory-lab\\data\\dataset_mixture_candidates_v0_1\\routed_tri_structural_65\\preview.json"
+  }
+}

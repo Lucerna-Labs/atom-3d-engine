@@ -1,0 +1,99 @@
+{
+  "filename": "net.h",
+  "includes": [
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "DVB_NET_FEEDTYPE_MPE",
+      "value": "0",
+      "comment": "multi protocol encapsulation",
+      "category": "DVB_NET"
+    },
+    {
+      "name": "DVB_NET_FEEDTYPE_ULE",
+      "value": "1",
+      "comment": "ultra lightweight encapsulation",
+      "category": "DVB_NET"
+    },
+    {
+      "name": "NET_ADD_IF",
+      "value": "_IOWR('o', 52, struct dvb_net_if)",
+      "comment": "",
+      "category": "NET_ADD"
+    },
+    {
+      "name": "NET_REMOVE_IF",
+      "value": "_IO('o', 53)",
+      "comment": "",
+      "category": "NET_REMOVE"
+    },
+    {
+      "name": "NET_GET_IF",
+      "value": "_IOWR('o', 54, struct dvb_net_if)",
+      "comment": "",
+      "category": "NET_GET"
+    },
+    {
+      "name": "__NET_ADD_IF_OLD",
+      "value": "_IOWR('o', 52, struct __dvb_net_if_old)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "__NET_GET_IF_OLD",
+      "value": "_IOWR('o', 54, struct __dvb_net_if_old)",
+      "comment": "",
+      "category": ""
+    }
+  ],
+  "structs": [
+    {
+      "name": "dvb_net_if",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "pid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "if_num",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "feedtype",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "__dvb_net_if_old",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "pid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "if_num",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

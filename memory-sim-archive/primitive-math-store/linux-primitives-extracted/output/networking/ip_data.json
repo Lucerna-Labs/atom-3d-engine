@@ -1,0 +1,544 @@
+{
+  "filename": "ip.h",
+  "includes": [
+    "linux/types.h",
+    "linux/stddef.h",
+    "asm/byteorder.h"
+  ],
+  "defines": [
+    {
+      "name": "IPTOS_TOS_MASK",
+      "value": "0x1E",
+      "comment": "",
+      "category": "IPTOS_TOS"
+    },
+    {
+      "name": "IPTOS_LOWDELAY",
+      "value": "0x10",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPTOS_THROUGHPUT",
+      "value": "0x08",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPTOS_RELIABILITY",
+      "value": "0x04",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPTOS_MINCOST",
+      "value": "0x02",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPTOS_PREC_MASK",
+      "value": "0xE0",
+      "comment": "",
+      "category": "IPTOS_PREC"
+    },
+    {
+      "name": "IPTOS_PREC_NETCONTROL",
+      "value": "0xe0",
+      "comment": "",
+      "category": "IPTOS_PREC"
+    },
+    {
+      "name": "IPTOS_PREC_INTERNETCONTROL",
+      "value": "0xc0",
+      "comment": "",
+      "category": "IPTOS_PREC"
+    },
+    {
+      "name": "IPTOS_PREC_CRITIC_ECP",
+      "value": "0xa0",
+      "comment": "",
+      "category": "IPTOS_PREC"
+    },
+    {
+      "name": "IPTOS_PREC_FLASHOVERRIDE",
+      "value": "0x80",
+      "comment": "",
+      "category": "IPTOS_PREC"
+    },
+    {
+      "name": "IPTOS_PREC_FLASH",
+      "value": "0x60",
+      "comment": "",
+      "category": "IPTOS_PREC"
+    },
+    {
+      "name": "IPTOS_PREC_IMMEDIATE",
+      "value": "0x40",
+      "comment": "",
+      "category": "IPTOS_PREC"
+    },
+    {
+      "name": "IPTOS_PREC_PRIORITY",
+      "value": "0x20",
+      "comment": "",
+      "category": "IPTOS_PREC"
+    },
+    {
+      "name": "IPTOS_PREC_ROUTINE",
+      "value": "0x00",
+      "comment": "",
+      "category": "IPTOS_PREC"
+    },
+    {
+      "name": "IPOPT_COPY",
+      "value": "0x80",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPOPT_CLASS_MASK",
+      "value": "0x60",
+      "comment": "",
+      "category": "IPOPT_CLASS"
+    },
+    {
+      "name": "IPOPT_NUMBER_MASK",
+      "value": "0x1f",
+      "comment": "",
+      "category": "IPOPT_NUMBER"
+    },
+    {
+      "name": "IPOPT_CONTROL",
+      "value": "0x00",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPOPT_RESERVED1",
+      "value": "0x20",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPOPT_MEASUREMENT",
+      "value": "0x40",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPOPT_RESERVED2",
+      "value": "0x60",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPOPT_END",
+      "value": "(0 |IPOPT_CONTROL)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPOPT_NOOP",
+      "value": "(1 |IPOPT_CONTROL)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPOPT_SEC",
+      "value": "(2 |IPOPT_CONTROL|IPOPT_COPY)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPOPT_LSRR",
+      "value": "(3 |IPOPT_CONTROL|IPOPT_COPY)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPOPT_TIMESTAMP",
+      "value": "(4 |IPOPT_MEASUREMENT)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPOPT_CIPSO",
+      "value": "(6 |IPOPT_CONTROL|IPOPT_COPY)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPOPT_RR",
+      "value": "(7 |IPOPT_CONTROL)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPOPT_SID",
+      "value": "(8 |IPOPT_CONTROL|IPOPT_COPY)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPOPT_SSRR",
+      "value": "(9 |IPOPT_CONTROL|IPOPT_COPY)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPOPT_RA",
+      "value": "(20|IPOPT_CONTROL|IPOPT_COPY)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPVERSION",
+      "value": "4",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "MAXTTL",
+      "value": "255",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPDEFTTL",
+      "value": "64",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPOPT_OPTVAL",
+      "value": "0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPOPT_OLEN",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPOPT_OFFSET",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPOPT_MINOFF",
+      "value": "4",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "MAX_IPOPTLEN",
+      "value": "40",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPOPT_NOP",
+      "value": "IPOPT_NOOP",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPOPT_EOL",
+      "value": "IPOPT_END",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPOPT_TS",
+      "value": "IPOPT_TIMESTAMP",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPOPT_TS_TSONLY",
+      "value": "0",
+      "comment": "timestamps only",
+      "category": "IPOPT_TS"
+    },
+    {
+      "name": "IPOPT_TS_TSANDADDR",
+      "value": "1",
+      "comment": "timestamps and addresses",
+      "category": "IPOPT_TS"
+    },
+    {
+      "name": "IPOPT_TS_PRESPEC",
+      "value": "3",
+      "comment": "specified modules only",
+      "category": "IPOPT_TS"
+    },
+    {
+      "name": "IPV4_BEET_PHMAXLEN",
+      "value": "8",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV4_DEVCONF_MAX",
+      "value": "(__IPV4_DEVCONF_MAX - 1)",
+      "comment": "",
+      "category": ""
+    }
+  ],
+  "structs": [
+    {
+      "name": "iphdr",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "tos",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be16",
+          "name": "tot_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be16",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be16",
+          "name": "frag_off",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "ttl",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "protocol",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__sum16",
+          "name": "check",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "saddr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "daddr",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ip_auth_hdr",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "nexthdr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "hdrlen",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be16",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "spi",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "seq_no",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ip_esp_hdr",
+      "fields": [
+        {
+          "type_name": "__be32",
+          "name": "spi",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "seq_no",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ip_comp_hdr",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "nexthdr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be16",
+          "name": "cpi",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ip_beet_phdr",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "nexthdr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "hdrlen",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "padlen",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ip_iptfs_hdr",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "subtype",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be16",
+          "name": "block_offset",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ip_iptfs_cc_hdr",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "subtype",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be16",
+          "name": "block_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "loss_rate",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be64",
+          "name": "rtt_adelay_xdelay",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "tval",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "techo",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

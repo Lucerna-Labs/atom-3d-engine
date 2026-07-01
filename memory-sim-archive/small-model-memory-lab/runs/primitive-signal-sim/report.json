@@ -1,0 +1,328 @@
+{
+  "description": "Simulation of primitive signal hardening under quantization-like activation noise.",
+  "iterations_per_task": 500,
+  "tasks": [
+    {
+      "task_id": "rate_printer",
+      "family": "math",
+      "required": [
+        "EXTRACT_GIVENS",
+        "MAP_RELATION",
+        "UNIT_TRACK",
+        "STEP_COMPUTE",
+        "VERIFY_RESULT"
+      ],
+      "distractors": [
+        "COMPARE_AXES",
+        "SOURCE_BOUNDARY"
+      ],
+      "pressure": 0.58
+    },
+    {
+      "task_id": "ratio_mixture",
+      "family": "math",
+      "required": [
+        "EXTRACT_GIVENS",
+        "MAP_RELATION",
+        "STEP_COMPUTE",
+        "VERIFY_RESULT"
+      ],
+      "distractors": [
+        "DANGER_CHECK",
+        "ORIGINAL_TASK_RETURN"
+      ],
+      "pressure": 0.62
+    },
+    {
+      "task_id": "probability_without_replacement",
+      "family": "math",
+      "required": [
+        "EXTRACT_GIVENS",
+        "MAP_RELATION",
+        "STEP_COMPUTE",
+        "VERIFY_RESULT",
+        "UNCERTAINTY_BOUND"
+      ],
+      "distractors": [
+        "COMPARE_AXES",
+        "SOURCE_BOUNDARY"
+      ],
+      "pressure": 0.78
+    },
+    {
+      "task_id": "source_injection_summary",
+      "family": "boundary",
+      "required": [
+        "SOURCE_BOUNDARY",
+        "ORIGINAL_TASK_RETURN",
+        "DANGER_CHECK",
+        "VERIFY_RESULT"
+      ],
+      "distractors": [
+        "STEP_COMPUTE",
+        "UNIT_TRACK"
+      ],
+      "pressure": 0.84
+    },
+    {
+      "task_id": "loaded_argument",
+      "family": "rhetoric",
+      "required": [
+        "EXTRACT_GIVENS",
+        "COMPARE_AXES",
+        "UNCERTAINTY_BOUND",
+        "DANGER_CHECK"
+      ],
+      "distractors": [
+        "UNIT_TRACK",
+        "STEP_COMPUTE"
+      ],
+      "pressure": 0.71
+    },
+    {
+      "task_id": "spatial_exit",
+      "family": "spatial",
+      "required": [
+        "EXTRACT_GIVENS",
+        "MAP_RELATION",
+        "DANGER_CHECK",
+        "VERIFY_RESULT"
+      ],
+      "distractors": [
+        "COMPARE_AXES",
+        "UNIT_TRACK"
+      ],
+      "pressure": 0.67
+    },
+    {
+      "task_id": "ambiguous_report",
+      "family": "generalist",
+      "required": [
+        "EXTRACT_GIVENS",
+        "SOURCE_BOUNDARY",
+        "UNCERTAINTY_BOUND",
+        "VERIFY_RESULT"
+      ],
+      "distractors": [
+        "STEP_COMPUTE",
+        "UNIT_TRACK"
+      ],
+      "pressure": 0.69
+    },
+    {
+      "task_id": "multi_step_schedule",
+      "family": "math",
+      "required": [
+        "EXTRACT_GIVENS",
+        "MAP_RELATION",
+        "UNIT_TRACK",
+        "STEP_COMPUTE",
+        "VERIFY_RESULT"
+      ],
+      "distractors": [
+        "SOURCE_BOUNDARY",
+        "COMPARE_AXES"
+      ],
+      "pressure": 0.74
+    }
+  ],
+  "primitives": [
+    "EXTRACT_GIVENS",
+    "SOURCE_BOUNDARY",
+    "MAP_RELATION",
+    "UNIT_TRACK",
+    "STEP_COMPUTE",
+    "VERIFY_RESULT",
+    "COMPARE_AXES",
+    "UNCERTAINTY_BOUND",
+    "ORIGINAL_TASK_RETURN",
+    "DANGER_CHECK"
+  ],
+  "summary": [
+    {
+      "quant": "damaged_q2",
+      "mode": "baseline",
+      "trials": 4000,
+      "pass_rate": 0.0022,
+      "mean_score": 0.0546,
+      "classified_rate": 0.315,
+      "cascade_rate": 0.5617,
+      "avg_distractors": 0.4338
+    },
+    {
+      "quant": "damaged_q2",
+      "mode": "memories_only",
+      "trials": 4000,
+      "pass_rate": 0.0103,
+      "mean_score": 0.1259,
+      "classified_rate": 0.4738,
+      "cascade_rate": 0.4592,
+      "avg_distractors": 0.4173
+    },
+    {
+      "quant": "damaged_q2",
+      "mode": "memories_plus_primitives",
+      "trials": 4000,
+      "pass_rate": 0.0932,
+      "mean_score": 0.3498,
+      "classified_rate": 0.5435,
+      "cascade_rate": 0.2893,
+      "avg_distractors": 0.329
+    },
+    {
+      "quant": "damaged_q2",
+      "mode": "primitives_only",
+      "trials": 4000,
+      "pass_rate": 0.0485,
+      "mean_score": 0.258,
+      "classified_rate": 0.433,
+      "cascade_rate": 0.3382,
+      "avg_distractors": 0.355
+    },
+    {
+      "quant": "damaged_q3",
+      "mode": "baseline",
+      "trials": 4000,
+      "pass_rate": 0.0553,
+      "mean_score": 0.2838,
+      "classified_rate": 0.5312,
+      "cascade_rate": 0.2675,
+      "avg_distractors": 0.269
+    },
+    {
+      "quant": "damaged_q3",
+      "mode": "memories_only",
+      "trials": 4000,
+      "pass_rate": 0.1155,
+      "mean_score": 0.4181,
+      "classified_rate": 0.7013,
+      "cascade_rate": 0.2117,
+      "avg_distractors": 0.2575
+    },
+    {
+      "quant": "damaged_q3",
+      "mode": "memories_plus_primitives",
+      "trials": 4000,
+      "pass_rate": 0.4108,
+      "mean_score": 0.6792,
+      "classified_rate": 0.7412,
+      "cascade_rate": 0.1335,
+      "avg_distractors": 0.2072
+    },
+    {
+      "quant": "damaged_q3",
+      "mode": "primitives_only",
+      "trials": 4000,
+      "pass_rate": 0.2777,
+      "mean_score": 0.585,
+      "classified_rate": 0.648,
+      "cascade_rate": 0.1505,
+      "avg_distractors": 0.2135
+    },
+    {
+      "quant": "healthy_q6",
+      "mode": "baseline",
+      "trials": 4000,
+      "pass_rate": 0.3905,
+      "mean_score": 0.6812,
+      "classified_rate": 0.7913,
+      "cascade_rate": 0.0798,
+      "avg_distractors": 0.122
+    },
+    {
+      "quant": "healthy_q6",
+      "mode": "memories_only",
+      "trials": 4000,
+      "pass_rate": 0.6295,
+      "mean_score": 0.8305,
+      "classified_rate": 0.9313,
+      "cascade_rate": 0.0545,
+      "avg_distractors": 0.1155
+    },
+    {
+      "quant": "healthy_q6",
+      "mode": "memories_plus_primitives",
+      "trials": 4000,
+      "pass_rate": 0.8928,
+      "mean_score": 0.9534,
+      "classified_rate": 0.9577,
+      "cascade_rate": 0.0455,
+      "avg_distractors": 0.0985
+    },
+    {
+      "quant": "healthy_q6",
+      "mode": "primitives_only",
+      "trials": 4000,
+      "pass_rate": 0.801,
+      "mean_score": 0.9154,
+      "classified_rate": 0.8538,
+      "cascade_rate": 0.0432,
+      "avg_distractors": 0.1027
+    }
+  ],
+  "lift": [
+    {
+      "quant": "damaged_q2",
+      "mode": "memories_only",
+      "pass_lift": 0.0081,
+      "score_lift": 0.0713,
+      "cascade_delta": -0.1025
+    },
+    {
+      "quant": "damaged_q2",
+      "mode": "memories_plus_primitives",
+      "pass_lift": 0.091,
+      "score_lift": 0.2952,
+      "cascade_delta": -0.2724
+    },
+    {
+      "quant": "damaged_q2",
+      "mode": "primitives_only",
+      "pass_lift": 0.0463,
+      "score_lift": 0.2034,
+      "cascade_delta": -0.2235
+    },
+    {
+      "quant": "damaged_q3",
+      "mode": "memories_only",
+      "pass_lift": 0.0602,
+      "score_lift": 0.1343,
+      "cascade_delta": -0.0558
+    },
+    {
+      "quant": "damaged_q3",
+      "mode": "memories_plus_primitives",
+      "pass_lift": 0.3555,
+      "score_lift": 0.3954,
+      "cascade_delta": -0.134
+    },
+    {
+      "quant": "damaged_q3",
+      "mode": "primitives_only",
+      "pass_lift": 0.2224,
+      "score_lift": 0.3012,
+      "cascade_delta": -0.117
+    },
+    {
+      "quant": "healthy_q6",
+      "mode": "memories_only",
+      "pass_lift": 0.239,
+      "score_lift": 0.1493,
+      "cascade_delta": -0.0253
+    },
+    {
+      "quant": "healthy_q6",
+      "mode": "memories_plus_primitives",
+      "pass_lift": 0.5023,
+      "score_lift": 0.2722,
+      "cascade_delta": -0.0343
+    },
+    {
+      "quant": "healthy_q6",
+      "mode": "primitives_only",
+      "pass_lift": 0.4105,
+      "score_lift": 0.2342,
+      "cascade_delta": -0.0366
+    }
+  ]
+}

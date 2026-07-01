@@ -1,0 +1,841 @@
+{
+  "filename": "if_packet.h",
+  "includes": [
+    "asm/byteorder.h",
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "PACKET_HOST",
+      "value": "0",
+      "comment": "To us",
+      "category": ""
+    },
+    {
+      "name": "PACKET_BROADCAST",
+      "value": "1",
+      "comment": "To all",
+      "category": ""
+    },
+    {
+      "name": "PACKET_MULTICAST",
+      "value": "2",
+      "comment": "To group",
+      "category": ""
+    },
+    {
+      "name": "PACKET_OTHERHOST",
+      "value": "3",
+      "comment": "To someone else",
+      "category": ""
+    },
+    {
+      "name": "PACKET_OUTGOING",
+      "value": "4",
+      "comment": "Outgoing of any type",
+      "category": ""
+    },
+    {
+      "name": "PACKET_LOOPBACK",
+      "value": "5",
+      "comment": "MC/BRD frame looped back",
+      "category": ""
+    },
+    {
+      "name": "PACKET_USER",
+      "value": "6",
+      "comment": "To user space",
+      "category": ""
+    },
+    {
+      "name": "PACKET_KERNEL",
+      "value": "7",
+      "comment": "To kernel space",
+      "category": ""
+    },
+    {
+      "name": "PACKET_FASTROUTE",
+      "value": "6",
+      "comment": "Fastrouted frame",
+      "category": ""
+    },
+    {
+      "name": "PACKET_ADD_MEMBERSHIP",
+      "value": "1",
+      "comment": "",
+      "category": "PACKET_ADD"
+    },
+    {
+      "name": "PACKET_DROP_MEMBERSHIP",
+      "value": "2",
+      "comment": "",
+      "category": "PACKET_DROP"
+    },
+    {
+      "name": "PACKET_RECV_OUTPUT",
+      "value": "3",
+      "comment": "",
+      "category": "PACKET_RECV"
+    },
+    {
+      "name": "PACKET_RX_RING",
+      "value": "5",
+      "comment": "",
+      "category": "PACKET_RX"
+    },
+    {
+      "name": "PACKET_STATISTICS",
+      "value": "6",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PACKET_COPY_THRESH",
+      "value": "7",
+      "comment": "",
+      "category": "PACKET_COPY"
+    },
+    {
+      "name": "PACKET_AUXDATA",
+      "value": "8",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PACKET_ORIGDEV",
+      "value": "9",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PACKET_VERSION",
+      "value": "10",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PACKET_HDRLEN",
+      "value": "11",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PACKET_RESERVE",
+      "value": "12",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PACKET_TX_RING",
+      "value": "13",
+      "comment": "",
+      "category": "PACKET_TX"
+    },
+    {
+      "name": "PACKET_LOSS",
+      "value": "14",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PACKET_VNET_HDR",
+      "value": "15",
+      "comment": "",
+      "category": "PACKET_VNET"
+    },
+    {
+      "name": "PACKET_TX_TIMESTAMP",
+      "value": "16",
+      "comment": "",
+      "category": "PACKET_TX"
+    },
+    {
+      "name": "PACKET_TIMESTAMP",
+      "value": "17",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PACKET_FANOUT",
+      "value": "18",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PACKET_TX_HAS_OFF",
+      "value": "19",
+      "comment": "",
+      "category": "PACKET_TX"
+    },
+    {
+      "name": "PACKET_QDISC_BYPASS",
+      "value": "20",
+      "comment": "",
+      "category": "PACKET_QDISC"
+    },
+    {
+      "name": "PACKET_ROLLOVER_STATS",
+      "value": "21",
+      "comment": "",
+      "category": "PACKET_ROLLOVER"
+    },
+    {
+      "name": "PACKET_FANOUT_DATA",
+      "value": "22",
+      "comment": "",
+      "category": "PACKET_FANOUT"
+    },
+    {
+      "name": "PACKET_IGNORE_OUTGOING",
+      "value": "23",
+      "comment": "",
+      "category": "PACKET_IGNORE"
+    },
+    {
+      "name": "PACKET_VNET_HDR_SZ",
+      "value": "24",
+      "comment": "",
+      "category": "PACKET_VNET"
+    },
+    {
+      "name": "PACKET_FANOUT_HASH",
+      "value": "0",
+      "comment": "",
+      "category": "PACKET_FANOUT"
+    },
+    {
+      "name": "PACKET_FANOUT_LB",
+      "value": "1",
+      "comment": "",
+      "category": "PACKET_FANOUT"
+    },
+    {
+      "name": "PACKET_FANOUT_CPU",
+      "value": "2",
+      "comment": "",
+      "category": "PACKET_FANOUT"
+    },
+    {
+      "name": "PACKET_FANOUT_ROLLOVER",
+      "value": "3",
+      "comment": "",
+      "category": "PACKET_FANOUT"
+    },
+    {
+      "name": "PACKET_FANOUT_RND",
+      "value": "4",
+      "comment": "",
+      "category": "PACKET_FANOUT"
+    },
+    {
+      "name": "PACKET_FANOUT_QM",
+      "value": "5",
+      "comment": "",
+      "category": "PACKET_FANOUT"
+    },
+    {
+      "name": "PACKET_FANOUT_CBPF",
+      "value": "6",
+      "comment": "",
+      "category": "PACKET_FANOUT"
+    },
+    {
+      "name": "PACKET_FANOUT_EBPF",
+      "value": "7",
+      "comment": "",
+      "category": "PACKET_FANOUT"
+    },
+    {
+      "name": "PACKET_FANOUT_FLAG_ROLLOVER",
+      "value": "0x1000",
+      "comment": "",
+      "category": "PACKET_FANOUT"
+    },
+    {
+      "name": "PACKET_FANOUT_FLAG_UNIQUEID",
+      "value": "0x2000",
+      "comment": "",
+      "category": "PACKET_FANOUT"
+    },
+    {
+      "name": "PACKET_FANOUT_FLAG_IGNORE_OUTGOING",
+      "value": "0x4000",
+      "comment": "",
+      "category": "PACKET_FANOUT"
+    },
+    {
+      "name": "PACKET_FANOUT_FLAG_DEFRAG",
+      "value": "0x8000",
+      "comment": "",
+      "category": "PACKET_FANOUT"
+    },
+    {
+      "name": "TP_STATUS_KERNEL",
+      "value": "0",
+      "comment": "",
+      "category": "TP_STATUS"
+    },
+    {
+      "name": "TP_STATUS_USER",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "TP_STATUS"
+    },
+    {
+      "name": "TP_STATUS_COPY",
+      "value": "(1 << 1)",
+      "comment": "",
+      "category": "TP_STATUS"
+    },
+    {
+      "name": "TP_STATUS_LOSING",
+      "value": "(1 << 2)",
+      "comment": "",
+      "category": "TP_STATUS"
+    },
+    {
+      "name": "TP_STATUS_CSUMNOTREADY",
+      "value": "(1 << 3)",
+      "comment": "",
+      "category": "TP_STATUS"
+    },
+    {
+      "name": "TP_STATUS_VLAN_VALID",
+      "value": "(1 << 4)",
+      "comment": "auxdata has valid tp_vlan_tci",
+      "category": "TP_STATUS"
+    },
+    {
+      "name": "TP_STATUS_BLK_TMO",
+      "value": "(1 << 5)",
+      "comment": "",
+      "category": "TP_STATUS"
+    },
+    {
+      "name": "TP_STATUS_VLAN_TPID_VALID",
+      "value": "(1 << 6)",
+      "comment": "auxdata has valid tp_vlan_tpid",
+      "category": "TP_STATUS"
+    },
+    {
+      "name": "TP_STATUS_CSUM_VALID",
+      "value": "(1 << 7)",
+      "comment": "",
+      "category": "TP_STATUS"
+    },
+    {
+      "name": "TP_STATUS_GSO_TCP",
+      "value": "(1 << 8)",
+      "comment": "",
+      "category": "TP_STATUS"
+    },
+    {
+      "name": "TP_STATUS_AVAILABLE",
+      "value": "0",
+      "comment": "",
+      "category": "TP_STATUS"
+    },
+    {
+      "name": "TP_STATUS_SEND_REQUEST",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "TP_STATUS"
+    },
+    {
+      "name": "TP_STATUS_SENDING",
+      "value": "(1 << 1)",
+      "comment": "",
+      "category": "TP_STATUS"
+    },
+    {
+      "name": "TP_STATUS_WRONG_FORMAT",
+      "value": "(1 << 2)",
+      "comment": "",
+      "category": "TP_STATUS"
+    },
+    {
+      "name": "TP_STATUS_TS_SOFTWARE",
+      "value": "(1 << 29)",
+      "comment": "",
+      "category": "TP_STATUS"
+    },
+    {
+      "name": "TP_STATUS_TS_SYS_HARDWARE",
+      "value": "(1 << 30)",
+      "comment": "deprecated, never set",
+      "category": "TP_STATUS"
+    },
+    {
+      "name": "TP_STATUS_TS_RAW_HARDWARE",
+      "value": "(1U << 31)",
+      "comment": "",
+      "category": "TP_STATUS"
+    },
+    {
+      "name": "TP_FT_REQ_FILL_RXHASH",
+      "value": "0x1",
+      "comment": "",
+      "category": "TP_FT"
+    },
+    {
+      "name": "TPACKET_ALIGNMENT",
+      "value": "16",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "TPACKET_HDRLEN",
+      "value": "(TPACKET_ALIGN(sizeof(struct tpacket_hdr)) + sizeof(struct sockaddr_ll))",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "TPACKET2_HDRLEN",
+      "value": "(TPACKET_ALIGN(sizeof(struct tpacket2_hdr)) + sizeof(struct sockaddr_ll))",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "TPACKET3_HDRLEN",
+      "value": "(TPACKET_ALIGN(sizeof(struct tpacket3_hdr)) + sizeof(struct sockaddr_ll))",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PACKET_MR_MULTICAST",
+      "value": "0",
+      "comment": "",
+      "category": "PACKET_MR"
+    },
+    {
+      "name": "PACKET_MR_PROMISC",
+      "value": "1",
+      "comment": "",
+      "category": "PACKET_MR"
+    },
+    {
+      "name": "PACKET_MR_ALLMULTI",
+      "value": "2",
+      "comment": "",
+      "category": "PACKET_MR"
+    },
+    {
+      "name": "PACKET_MR_UNICAST",
+      "value": "3",
+      "comment": "",
+      "category": "PACKET_MR"
+    }
+  ],
+  "structs": [
+    {
+      "name": "sockaddr_pkt",
+      "fields": [
+        {
+          "type_name": "__be16",
+          "name": "spkt_protocol",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "sockaddr_ll",
+      "fields": [
+        {
+          "type_name": "__be16",
+          "name": "sll_protocol",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "sll_ifindex",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "tpacket_stats",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "tpacket_stats_v3",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "tpacket_rollover_stats",
+      "fields": [
+        {
+          "type_name": "__aligned_u64",
+          "name": "tp_all",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__aligned_u64",
+          "name": "tp_huge",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__aligned_u64",
+          "name": "tp_failed",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "tpacket_auxdata",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "tp_status",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tp_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tp_snaplen",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "tp_mac",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "tp_net",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "tp_vlan_tci",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "tp_vlan_tpid",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "tpacket_hdr",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "tpacket2_hdr",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "tp_status",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tp_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tp_snaplen",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "tp_mac",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "tp_net",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tp_sec",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tp_nsec",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "tp_vlan_tci",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "tp_vlan_tpid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "tp_padding",
+          "array_size": "4",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "tpacket_hdr_variant1",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "tp_rxhash",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tp_vlan_tci",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "tp_vlan_tpid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "tp_padding",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "tpacket3_hdr",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "tp_next_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tp_sec",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tp_nsec",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tp_snaplen",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tp_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tp_status",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "tp_mac",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "tp_net",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "tp_padding",
+          "array_size": "8",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "tpacket_bd_ts",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "tpacket_hdr_v1",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "block_status",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "num_pkts",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "offset_to_first_pkt",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "blk_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__aligned_u64",
+          "name": "seq_num",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "tpacket_block_desc",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "version",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "offset_to_priv",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "tpacket_req",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "tpacket_req3",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "packet_mreq",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "mr_ifindex",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fanout_args",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "type_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "type_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "max_num_members",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

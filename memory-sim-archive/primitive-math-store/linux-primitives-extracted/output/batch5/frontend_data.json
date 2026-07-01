@@ -1,0 +1,998 @@
+{
+  "filename": "frontend.h",
+  "includes": [
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "DTV_UNDEFINED",
+      "value": "0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DTV_TUNE",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DTV_CLEAR",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DTV_FREQUENCY",
+      "value": "3",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DTV_MODULATION",
+      "value": "4",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DTV_BANDWIDTH_HZ",
+      "value": "5",
+      "comment": "",
+      "category": "DTV_BANDWIDTH"
+    },
+    {
+      "name": "DTV_INVERSION",
+      "value": "6",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DTV_DISEQC_MASTER",
+      "value": "7",
+      "comment": "",
+      "category": "DTV_DISEQC"
+    },
+    {
+      "name": "DTV_SYMBOL_RATE",
+      "value": "8",
+      "comment": "",
+      "category": "DTV_SYMBOL"
+    },
+    {
+      "name": "DTV_INNER_FEC",
+      "value": "9",
+      "comment": "",
+      "category": "DTV_INNER"
+    },
+    {
+      "name": "DTV_VOLTAGE",
+      "value": "10",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DTV_TONE",
+      "value": "11",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DTV_PILOT",
+      "value": "12",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DTV_ROLLOFF",
+      "value": "13",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DTV_DISEQC_SLAVE_REPLY",
+      "value": "14",
+      "comment": "",
+      "category": "DTV_DISEQC"
+    },
+    {
+      "name": "DTV_FE_CAPABILITY_COUNT",
+      "value": "15",
+      "comment": "",
+      "category": "DTV_FE"
+    },
+    {
+      "name": "DTV_FE_CAPABILITY",
+      "value": "16",
+      "comment": "",
+      "category": "DTV_FE"
+    },
+    {
+      "name": "DTV_DELIVERY_SYSTEM",
+      "value": "17",
+      "comment": "",
+      "category": "DTV_DELIVERY"
+    },
+    {
+      "name": "DTV_ISDBT_PARTIAL_RECEPTION",
+      "value": "18",
+      "comment": "",
+      "category": "DTV_ISDBT"
+    },
+    {
+      "name": "DTV_ISDBT_SOUND_BROADCASTING",
+      "value": "19",
+      "comment": "",
+      "category": "DTV_ISDBT"
+    },
+    {
+      "name": "DTV_ISDBT_SB_SUBCHANNEL_ID",
+      "value": "20",
+      "comment": "",
+      "category": "DTV_ISDBT"
+    },
+    {
+      "name": "DTV_ISDBT_SB_SEGMENT_IDX",
+      "value": "21",
+      "comment": "",
+      "category": "DTV_ISDBT"
+    },
+    {
+      "name": "DTV_ISDBT_SB_SEGMENT_COUNT",
+      "value": "22",
+      "comment": "",
+      "category": "DTV_ISDBT"
+    },
+    {
+      "name": "DTV_ISDBT_LAYERA_FEC",
+      "value": "23",
+      "comment": "",
+      "category": "DTV_ISDBT"
+    },
+    {
+      "name": "DTV_ISDBT_LAYERA_MODULATION",
+      "value": "24",
+      "comment": "",
+      "category": "DTV_ISDBT"
+    },
+    {
+      "name": "DTV_ISDBT_LAYERA_SEGMENT_COUNT",
+      "value": "25",
+      "comment": "",
+      "category": "DTV_ISDBT"
+    },
+    {
+      "name": "DTV_ISDBT_LAYERA_TIME_INTERLEAVING",
+      "value": "26",
+      "comment": "",
+      "category": "DTV_ISDBT"
+    },
+    {
+      "name": "DTV_ISDBT_LAYERB_FEC",
+      "value": "27",
+      "comment": "",
+      "category": "DTV_ISDBT"
+    },
+    {
+      "name": "DTV_ISDBT_LAYERB_MODULATION",
+      "value": "28",
+      "comment": "",
+      "category": "DTV_ISDBT"
+    },
+    {
+      "name": "DTV_ISDBT_LAYERB_SEGMENT_COUNT",
+      "value": "29",
+      "comment": "",
+      "category": "DTV_ISDBT"
+    },
+    {
+      "name": "DTV_ISDBT_LAYERB_TIME_INTERLEAVING",
+      "value": "30",
+      "comment": "",
+      "category": "DTV_ISDBT"
+    },
+    {
+      "name": "DTV_ISDBT_LAYERC_FEC",
+      "value": "31",
+      "comment": "",
+      "category": "DTV_ISDBT"
+    },
+    {
+      "name": "DTV_ISDBT_LAYERC_MODULATION",
+      "value": "32",
+      "comment": "",
+      "category": "DTV_ISDBT"
+    },
+    {
+      "name": "DTV_ISDBT_LAYERC_SEGMENT_COUNT",
+      "value": "33",
+      "comment": "",
+      "category": "DTV_ISDBT"
+    },
+    {
+      "name": "DTV_ISDBT_LAYERC_TIME_INTERLEAVING",
+      "value": "34",
+      "comment": "",
+      "category": "DTV_ISDBT"
+    },
+    {
+      "name": "DTV_API_VERSION",
+      "value": "35",
+      "comment": "",
+      "category": "DTV_API"
+    },
+    {
+      "name": "DTV_CODE_RATE_HP",
+      "value": "36",
+      "comment": "",
+      "category": "DTV_CODE"
+    },
+    {
+      "name": "DTV_CODE_RATE_LP",
+      "value": "37",
+      "comment": "",
+      "category": "DTV_CODE"
+    },
+    {
+      "name": "DTV_GUARD_INTERVAL",
+      "value": "38",
+      "comment": "",
+      "category": "DTV_GUARD"
+    },
+    {
+      "name": "DTV_TRANSMISSION_MODE",
+      "value": "39",
+      "comment": "",
+      "category": "DTV_TRANSMISSION"
+    },
+    {
+      "name": "DTV_HIERARCHY",
+      "value": "40",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DTV_ISDBT_LAYER_ENABLED",
+      "value": "41",
+      "comment": "",
+      "category": "DTV_ISDBT"
+    },
+    {
+      "name": "DTV_STREAM_ID",
+      "value": "42",
+      "comment": "",
+      "category": "DTV_STREAM"
+    },
+    {
+      "name": "DTV_ISDBS_TS_ID_LEGACY",
+      "value": "DTV_STREAM_ID",
+      "comment": "",
+      "category": "DTV_ISDBS"
+    },
+    {
+      "name": "DTV_DVBT2_PLP_ID_LEGACY",
+      "value": "43",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DTV_ENUM_DELSYS",
+      "value": "44",
+      "comment": "",
+      "category": "DTV_ENUM"
+    },
+    {
+      "name": "DTV_ATSCMH_FIC_VER",
+      "value": "45",
+      "comment": "",
+      "category": "DTV_ATSCMH"
+    },
+    {
+      "name": "DTV_ATSCMH_PARADE_ID",
+      "value": "46",
+      "comment": "",
+      "category": "DTV_ATSCMH"
+    },
+    {
+      "name": "DTV_ATSCMH_NOG",
+      "value": "47",
+      "comment": "",
+      "category": "DTV_ATSCMH"
+    },
+    {
+      "name": "DTV_ATSCMH_TNOG",
+      "value": "48",
+      "comment": "",
+      "category": "DTV_ATSCMH"
+    },
+    {
+      "name": "DTV_ATSCMH_SGN",
+      "value": "49",
+      "comment": "",
+      "category": "DTV_ATSCMH"
+    },
+    {
+      "name": "DTV_ATSCMH_PRC",
+      "value": "50",
+      "comment": "",
+      "category": "DTV_ATSCMH"
+    },
+    {
+      "name": "DTV_ATSCMH_RS_FRAME_MODE",
+      "value": "51",
+      "comment": "",
+      "category": "DTV_ATSCMH"
+    },
+    {
+      "name": "DTV_ATSCMH_RS_FRAME_ENSEMBLE",
+      "value": "52",
+      "comment": "",
+      "category": "DTV_ATSCMH"
+    },
+    {
+      "name": "DTV_ATSCMH_RS_CODE_MODE_PRI",
+      "value": "53",
+      "comment": "",
+      "category": "DTV_ATSCMH"
+    },
+    {
+      "name": "DTV_ATSCMH_RS_CODE_MODE_SEC",
+      "value": "54",
+      "comment": "",
+      "category": "DTV_ATSCMH"
+    },
+    {
+      "name": "DTV_ATSCMH_SCCC_BLOCK_MODE",
+      "value": "55",
+      "comment": "",
+      "category": "DTV_ATSCMH"
+    },
+    {
+      "name": "DTV_ATSCMH_SCCC_CODE_MODE_A",
+      "value": "56",
+      "comment": "",
+      "category": "DTV_ATSCMH"
+    },
+    {
+      "name": "DTV_ATSCMH_SCCC_CODE_MODE_B",
+      "value": "57",
+      "comment": "",
+      "category": "DTV_ATSCMH"
+    },
+    {
+      "name": "DTV_ATSCMH_SCCC_CODE_MODE_C",
+      "value": "58",
+      "comment": "",
+      "category": "DTV_ATSCMH"
+    },
+    {
+      "name": "DTV_ATSCMH_SCCC_CODE_MODE_D",
+      "value": "59",
+      "comment": "",
+      "category": "DTV_ATSCMH"
+    },
+    {
+      "name": "DTV_INTERLEAVING",
+      "value": "60",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DTV_LNA",
+      "value": "61",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DTV_STAT_SIGNAL_STRENGTH",
+      "value": "62",
+      "comment": "",
+      "category": "DTV_STAT"
+    },
+    {
+      "name": "DTV_STAT_CNR",
+      "value": "63",
+      "comment": "",
+      "category": "DTV_STAT"
+    },
+    {
+      "name": "DTV_STAT_PRE_ERROR_BIT_COUNT",
+      "value": "64",
+      "comment": "",
+      "category": "DTV_STAT"
+    },
+    {
+      "name": "DTV_STAT_PRE_TOTAL_BIT_COUNT",
+      "value": "65",
+      "comment": "",
+      "category": "DTV_STAT"
+    },
+    {
+      "name": "DTV_STAT_POST_ERROR_BIT_COUNT",
+      "value": "66",
+      "comment": "",
+      "category": "DTV_STAT"
+    },
+    {
+      "name": "DTV_STAT_POST_TOTAL_BIT_COUNT",
+      "value": "67",
+      "comment": "",
+      "category": "DTV_STAT"
+    },
+    {
+      "name": "DTV_STAT_ERROR_BLOCK_COUNT",
+      "value": "68",
+      "comment": "",
+      "category": "DTV_STAT"
+    },
+    {
+      "name": "DTV_STAT_TOTAL_BLOCK_COUNT",
+      "value": "69",
+      "comment": "",
+      "category": "DTV_STAT"
+    },
+    {
+      "name": "DTV_SCRAMBLING_SEQUENCE_INDEX",
+      "value": "70",
+      "comment": "",
+      "category": "DTV_SCRAMBLING"
+    },
+    {
+      "name": "DTV_MAX_COMMAND",
+      "value": "DTV_SCRAMBLING_SEQUENCE_INDEX",
+      "comment": "",
+      "category": "DTV_MAX"
+    },
+    {
+      "name": "SYS_DVBC_ANNEX_AC",
+      "value": "SYS_DVBC_ANNEX_A",
+      "comment": "",
+      "category": "SYS_DVBC"
+    },
+    {
+      "name": "SYS_DMBTH",
+      "value": "SYS_DTMB",
+      "comment": "DMB-TH is legacy name, use DTMB",
+      "category": ""
+    },
+    {
+      "name": "NO_STREAM_ID_FILTER",
+      "value": "(~0U)",
+      "comment": "",
+      "category": "NO_STREAM"
+    },
+    {
+      "name": "LNA_AUTO",
+      "value": "(~0U)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "MAX_DTV_STATS",
+      "value": "4",
+      "comment": "",
+      "category": "MAX_DTV"
+    },
+    {
+      "name": "DTV_IOCTL_MAX_MSGS",
+      "value": "64",
+      "comment": "",
+      "category": "DTV_IOCTL"
+    },
+    {
+      "name": "FE_TUNE_MODE_ONESHOT",
+      "value": "0x01",
+      "comment": "",
+      "category": "FE_TUNE"
+    },
+    {
+      "name": "FE_GET_INFO",
+      "value": "_IOR('o', 61, struct dvb_frontend_info)",
+      "comment": "",
+      "category": "FE_GET"
+    },
+    {
+      "name": "FE_DISEQC_RESET_OVERLOAD",
+      "value": "_IO('o', 62)",
+      "comment": "",
+      "category": "FE_DISEQC"
+    },
+    {
+      "name": "FE_DISEQC_SEND_MASTER_CMD",
+      "value": "_IOW('o', 63, struct dvb_diseqc_master_cmd)",
+      "comment": "",
+      "category": "FE_DISEQC"
+    },
+    {
+      "name": "FE_DISEQC_RECV_SLAVE_REPLY",
+      "value": "_IOR('o', 64, struct dvb_diseqc_slave_reply)",
+      "comment": "",
+      "category": "FE_DISEQC"
+    },
+    {
+      "name": "FE_DISEQC_SEND_BURST",
+      "value": "_IO('o', 65)",
+      "comment": "fe_sec_mini_cmd_t",
+      "category": "FE_DISEQC"
+    },
+    {
+      "name": "FE_SET_TONE",
+      "value": "_IO('o', 66)",
+      "comment": "fe_sec_tone_mode_t",
+      "category": "FE_SET"
+    },
+    {
+      "name": "FE_SET_VOLTAGE",
+      "value": "_IO('o', 67)",
+      "comment": "fe_sec_voltage_t",
+      "category": "FE_SET"
+    },
+    {
+      "name": "FE_ENABLE_HIGH_LNB_VOLTAGE",
+      "value": "_IO('o', 68)",
+      "comment": "int",
+      "category": "FE_ENABLE"
+    },
+    {
+      "name": "FE_READ_STATUS",
+      "value": "_IOR('o', 69, fe_status_t)",
+      "comment": "",
+      "category": "FE_READ"
+    },
+    {
+      "name": "FE_READ_BER",
+      "value": "_IOR('o', 70, __u32)",
+      "comment": "",
+      "category": "FE_READ"
+    },
+    {
+      "name": "FE_READ_SIGNAL_STRENGTH",
+      "value": "_IOR('o', 71, __u16)",
+      "comment": "",
+      "category": "FE_READ"
+    },
+    {
+      "name": "FE_READ_SNR",
+      "value": "_IOR('o', 72, __u16)",
+      "comment": "",
+      "category": "FE_READ"
+    },
+    {
+      "name": "FE_READ_UNCORRECTED_BLOCKS",
+      "value": "_IOR('o', 73, __u32)",
+      "comment": "",
+      "category": "FE_READ"
+    },
+    {
+      "name": "FE_SET_FRONTEND_TUNE_MODE",
+      "value": "_IO('o', 81)",
+      "comment": "unsigned int",
+      "category": "FE_SET"
+    },
+    {
+      "name": "FE_GET_EVENT",
+      "value": "_IOR('o', 78, struct dvb_frontend_event)",
+      "comment": "",
+      "category": "FE_GET"
+    },
+    {
+      "name": "FE_DISHNETWORK_SEND_LEGACY_CMD",
+      "value": "_IO('o', 80)",
+      "comment": "unsigned int",
+      "category": "FE_DISHNETWORK"
+    },
+    {
+      "name": "FE_SET_PROPERTY",
+      "value": "_IOW('o', 82, struct dtv_properties)",
+      "comment": "",
+      "category": "FE_SET"
+    },
+    {
+      "name": "FE_GET_PROPERTY",
+      "value": "_IOR('o', 83, struct dtv_properties)",
+      "comment": "",
+      "category": "FE_GET"
+    },
+    {
+      "name": "FE_SET_FRONTEND",
+      "value": "_IOW('o', 76, struct dvb_frontend_parameters)",
+      "comment": "",
+      "category": "FE_SET"
+    },
+    {
+      "name": "FE_GET_FRONTEND",
+      "value": "_IOR('o', 77, struct dvb_frontend_parameters)",
+      "comment": "",
+      "category": "FE_GET"
+    }
+  ],
+  "structs": [
+    {
+      "name": "dvb_frontend_info",
+      "fields": [
+        {
+          "type_name": "char",
+          "name": "name",
+          "array_size": "128",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "frequency_min",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "frequency_max",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "frequency_stepsize",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "frequency_tolerance",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "symbol_rate_min",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "symbol_rate_max",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "symbol_rate_tolerance",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "notifier_delay",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "dvb_diseqc_master_cmd",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "msg",
+          "array_size": "6",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "msg_len",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "dvb_diseqc_slave_reply",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "msg",
+          "array_size": "4",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "msg_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "timeout",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "dtv_stats",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "scale",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "uvalue",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s64",
+          "name": "svalue",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": true
+    },
+    {
+      "name": "dtv_fe_stats",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "len",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "dtv_property",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "cmd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved",
+          "array_size": "3",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "data",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "data",
+          "array_size": "32",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved1",
+          "array_size": "3",
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "result",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_6",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "data",
+          "array_size": "32",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved1",
+          "array_size": "3",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "dtv_properties",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "num",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "dvb_qpsk_parameters",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "symbol_rate",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "fe_code_rate_t",
+          "name": "fec_inner",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "dvb_qam_parameters",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "symbol_rate",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "fe_code_rate_t",
+          "name": "fec_inner",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "fe_modulation_t",
+          "name": "modulation",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "dvb_vsb_parameters",
+      "fields": [
+        {
+          "type_name": "fe_modulation_t",
+          "name": "modulation",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "dvb_ofdm_parameters",
+      "fields": [
+        {
+          "type_name": "fe_bandwidth_t",
+          "name": "bandwidth",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "fe_code_rate_t",
+          "name": "code_rate_HP",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "fe_code_rate_t",
+          "name": "code_rate_LP",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "fe_modulation_t",
+          "name": "constellation",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "fe_transmit_mode_t",
+          "name": "transmission_mode",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "fe_guard_interval_t",
+          "name": "guard_interval",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "fe_hierarchy_t",
+          "name": "hierarchy_information",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "dvb_frontend_parameters",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "frequency",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "fe_spectral_inversion_t",
+          "name": "inversion",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "dvb_frontend_event",
+      "fields": [
+        {
+          "type_name": "fe_status_t",
+          "name": "status",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [
+    "fe_sec_voltage_t",
+    "fe_caps_t",
+    "fe_type_t",
+    "fe_sec_tone_mode_t",
+    "fe_sec_mini_cmd_t",
+    "fe_status_t",
+    "fe_spectral_inversion_t",
+    "fe_code_rate_t",
+    "fe_modulation_t",
+    "fe_transmit_mode_t",
+    "fe_bandwidth_t",
+    "fe_guard_interval_t",
+    "fe_hierarchy_t",
+    "fe_pilot_t",
+    "fe_rolloff_t",
+    "fe_delivery_system_t"
+  ],
+  "enums": {}
+}

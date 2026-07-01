@@ -1,0 +1,75 @@
+{
+  "name": "q2_structural_amplifier",
+  "description": "Stress candidate for badly damaged Q2: heavier repeated structural signal with explicit clean-stop restraints.",
+  "shares": {
+    "structural": 0.7,
+    "cognitive": 0.15,
+    "cyber": 0.15
+  },
+  "bridge_count": 260,
+  "anti_echo_multiplier": 4,
+  "q2_amplifier": true,
+  "train_count": 1840,
+  "validation_count": 160,
+  "summary": {
+    "count": 2000,
+    "by_kind": {
+      "anti_echo_stop": 472,
+      "carrier_control": 63,
+      "clean_task_solution": 57,
+      "cognitive_memory": 180,
+      "compact_task_solution": 148,
+      "cyber_memory": 180,
+      "gate_application": 11,
+      "gate_control": 84,
+      "q2_amplifier": 180,
+      "repair_solution": 152,
+      "routed_bridge": 260,
+      "task_solution": 135,
+      "web_association": 67,
+      "web_repair": 11
+    },
+    "by_family": {
+      "adversarial": 177,
+      "adversarial-reading": 5,
+      "analogy": 4,
+      "boundary": 263,
+      "calibration": 3,
+      "causality": 2,
+      "classification": 3,
+      "coding": 3,
+      "comparison": 6,
+      "decomposition": 3,
+      "evidence": 4,
+      "format-control": 2,
+      "generalist": 540,
+      "loop-control": 4,
+      "math": 81,
+      "orientation": 3,
+      "planning": 5,
+      "question-analysis": 1,
+      "reward": 25,
+      "rhetoric": 13,
+      "source-evaluation": 3,
+      "spatial": 3,
+      "structural": 840,
+      "summarization": 6,
+      "systems": 1
+    },
+    "by_source": {
+      "anti_echo_generator": 360,
+      "bridge_generator": 260,
+      "cognitive_core_v0_1.json": 76,
+      "cognitive_rewards_v0_1.json": 25,
+      "computation_primitives_v0_1.json": 79,
+      "q2_amplifier_generator": 180,
+      "rust_cyber_defender_generated.tsv": 180,
+      "structural_primitive_lora_v0_2": 840
+    }
+  },
+  "files": {
+    "train_jsonl": "C:\\Projects\\small-model-memory-lab\\data\\dataset_mixture_candidates_v0_1\\q2_structural_amplifier\\train.jsonl",
+    "validation_jsonl": "C:\\Projects\\small-model-memory-lab\\data\\dataset_mixture_candidates_v0_1\\q2_structural_amplifier\\validation.jsonl",
+    "preview": "C:\\Projects\\small-model-memory-lab\\data\\dataset_mixture_candidates_v0_1\\q2_structural_amplifier\\preview.json"
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "name": "q3_stability_tri_72",
+  "description": "Q3-focused stability candidate with heavier structural substrate and more clean-stop pressure.",
+  "shares": {
+    "structural": 0.72,
+    "cognitive": 0.18,
+    "cyber": 0.1
+  },
+  "bridge_count": 260,
+  "anti_echo_multiplier": 5,
+  "q2_amplifier": false,
+  "train_count": 1757,
+  "validation_count": 153,
+  "summary": {
+    "count": 1910,
+    "by_kind": {
+      "anti_echo_stop": 564,
+      "carrier_control": 55,
+      "clean_task_solution": 63,
+      "cognitive_memory": 216,
+      "compact_task_solution": 145,
+      "cyber_memory": 120,
+      "gate_application": 15,
+      "gate_control": 61,
+      "repair_solution": 167,
+      "routed_bridge": 260,
+      "task_solution": 166,
+      "web_association": 64,
+      "web_repair": 14
+    },
+    "by_family": {
+      "adversarial": 146,
+      "adversarial-reading": 2,
+      "analogy": 6,
+      "boundary": 234,
+      "calibration": 16,
+      "causality": 5,
+      "classification": 3,
+      "coding": 12,
+      "comparison": 2,
+      "decomposition": 2,
+      "evidence": 3,
+      "format-control": 1,
+      "generalist": 450,
+      "loop-control": 5,
+      "math": 84,
+      "orientation": 4,
+      "planning": 4,
+      "question-analysis": 5,
+      "reward": 37,
+      "rhetoric": 13,
+      "source-evaluation": 3,
+      "spatial": 2,
+      "structural": 864,
+      "summarization": 4,
+      "systems": 3
+    },
+    "by_source": {
+      "anti_echo_generator": 450,
+      "bridge_generator": 260,
+      "cognitive_core_v0_1.json": 90,
+      "cognitive_rewards_v0_1.json": 37,
+      "computation_primitives_v0_1.json": 89,
+      "rust_cyber_defender_generated.tsv": 120,
+      "structural_primitive_lora_v0_2": 864
+    }
+  },
+  "files": {
+    "train_jsonl": "C:\\Projects\\small-model-memory-lab\\data\\dataset_mixture_candidates_v0_2\\q3_stability_tri_72\\train.jsonl",
+    "validation_jsonl": "C:\\Projects\\small-model-memory-lab\\data\\dataset_mixture_candidates_v0_2\\q3_stability_tri_72\\validation.jsonl",
+    "preview": "C:\\Projects\\small-model-memory-lab\\data\\dataset_mixture_candidates_v0_2\\q3_stability_tri_72\\preview.json"
+  }
+}

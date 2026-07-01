@@ -1,0 +1,76 @@
+{
+  "filename": "if_slip.h",
+  "includes": [],
+  "defines": [
+    {
+      "name": "SL_MODE_SLIP",
+      "value": "0",
+      "comment": "",
+      "category": "SL_MODE"
+    },
+    {
+      "name": "SL_MODE_CSLIP",
+      "value": "1",
+      "comment": "",
+      "category": "SL_MODE"
+    },
+    {
+      "name": "SL_MODE_KISS",
+      "value": "4",
+      "comment": "",
+      "category": "SL_MODE"
+    },
+    {
+      "name": "SL_OPT_SIXBIT",
+      "value": "2",
+      "comment": "",
+      "category": "SL_OPT"
+    },
+    {
+      "name": "SL_OPT_ADAPTIVE",
+      "value": "8",
+      "comment": "",
+      "category": "SL_OPT"
+    },
+    {
+      "name": "SIOCSKEEPALIVE",
+      "value": "(SIOCDEVPRIVATE)",
+      "comment": "Set keepalive timeout in sec",
+      "category": ""
+    },
+    {
+      "name": "SIOCGKEEPALIVE",
+      "value": "(SIOCDEVPRIVATE+1)",
+      "comment": "Get keepalive timeout",
+      "category": ""
+    },
+    {
+      "name": "SIOCSOUTFILL",
+      "value": "(SIOCDEVPRIVATE+2)",
+      "comment": "Set outfill timeout",
+      "category": ""
+    },
+    {
+      "name": "SIOCGOUTFILL",
+      "value": "(SIOCDEVPRIVATE+3)",
+      "comment": "Get outfill timeout",
+      "category": ""
+    },
+    {
+      "name": "SIOCSLEASE",
+      "value": "(SIOCDEVPRIVATE+4)",
+      "comment": "Set \"leased\" line type",
+      "category": ""
+    },
+    {
+      "name": "SIOCGLEASE",
+      "value": "(SIOCDEVPRIVATE+5)",
+      "comment": "Get line type",
+      "category": ""
+    }
+  ],
+  "structs": [],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

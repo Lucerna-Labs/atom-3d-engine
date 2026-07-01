@@ -1,0 +1,4 @@
+﻿1. **Correlate Logs**: Search for the specific stack trace or error context immediately preceding the crash timestamp, as the fatal cause may be buried in a warning or a race condition not flagged as "fatal."
+2. **Reproduce Locally**: Attempt to replicate the crash using the exact deployment configuration and recent code changes in a staging environment to isolate the trigger.
+3. **Check Resource Metrics**: Analyze CPU, memory, and database connection pools during the crash window to rule out resource exhaustion or timeout cascades.
+4. **Rollback or Isolate**: If the root cause remains unclear, revert to the previous stable version to restore service, then proceed with a targeted code review of the recent changes.

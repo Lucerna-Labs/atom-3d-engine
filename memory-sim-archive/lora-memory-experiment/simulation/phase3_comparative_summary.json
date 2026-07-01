@@ -1,0 +1,229 @@
+[
+  {
+    "config_name": "rl_dense_250_baseline",
+    "domains": [
+      "rhetoric",
+      "logic"
+    ],
+    "base_score": 0.9182186234817814,
+    "base_pressure_pass": {
+      "low": 1.0,
+      "medium": 1.0,
+      "high": 1.0
+    },
+    "adversarial_total": 14,
+    "adversarial_held": 14,
+    "adversarial_pass_rate": 1.0,
+    "adversarial_avg_confidence": 1.0,
+    "adversarial_echo_cascade_rate": 1.0,
+    "adversarial_cross_domain_rate": 0.9285714285714286,
+    "adversarial_by_difficulty": {
+      "moderate": {
+        "total": 3,
+        "held": 3,
+        "avg_confidence": 1.0
+      },
+      "hard": {
+        "total": 7,
+        "held": 7,
+        "avg_confidence": 1.0
+      },
+      "extreme": {
+        "total": 4,
+        "held": 4,
+        "avg_confidence": 1.0
+      }
+    },
+    "combined_score": 0.9591093117408906
+  },
+  {
+    "config_name": "fr_dense_250",
+    "domains": [
+      "forensic",
+      "rhetoric"
+    ],
+    "base_score": 0.9174089068825911,
+    "base_pressure_pass": {
+      "low": 1.0,
+      "medium": 1.0,
+      "high": 1.0
+    },
+    "adversarial_total": 13,
+    "adversarial_held": 13,
+    "adversarial_pass_rate": 1.0,
+    "adversarial_avg_confidence": 0.9996307692307693,
+    "adversarial_echo_cascade_rate": 1.0,
+    "adversarial_cross_domain_rate": 0.6923076923076923,
+    "adversarial_by_difficulty": {
+      "moderate": {
+        "total": 1,
+        "held": 1,
+        "avg_confidence": 1.0
+      },
+      "hard": {
+        "total": 6,
+        "held": 6,
+        "avg_confidence": 1.0
+      },
+      "extreme": {
+        "total": 6,
+        "held": 6,
+        "avg_confidence": 0.9992000000000001
+      }
+    },
+    "combined_score": 0.9585198380566802
+  },
+  {
+    "config_name": "fl_dense_250",
+    "domains": [
+      "forensic",
+      "logic"
+    ],
+    "base_score": 0.9201754385964913,
+    "base_pressure_pass": {
+      "low": 1.0,
+      "medium": 1.0,
+      "high": 1.0
+    },
+    "adversarial_total": 13,
+    "adversarial_held": 13,
+    "adversarial_pass_rate": 1.0,
+    "adversarial_avg_confidence": 0.9998153846153847,
+    "adversarial_echo_cascade_rate": 1.0,
+    "adversarial_cross_domain_rate": 0.6923076923076923,
+    "adversarial_by_difficulty": {
+      "moderate": {
+        "total": 2,
+        "held": 2,
+        "avg_confidence": 1.0
+      },
+      "hard": {
+        "total": 5,
+        "held": 5,
+        "avg_confidence": 1.0
+      },
+      "extreme": {
+        "total": 6,
+        "held": 6,
+        "avg_confidence": 0.9996
+      }
+    },
+    "combined_score": 0.9599954116059379
+  },
+  {
+    "config_name": "rlf_dense_250",
+    "domains": [
+      "rhetoric",
+      "logic",
+      "forensic"
+    ],
+    "base_score": 0.9,
+    "base_pressure_pass": {
+      "low": 1.0,
+      "medium": 1.0,
+      "high": 1.0
+    },
+    "adversarial_total": 20,
+    "adversarial_held": 20,
+    "adversarial_pass_rate": 1.0,
+    "adversarial_avg_confidence": 1.0,
+    "adversarial_echo_cascade_rate": 1.0,
+    "adversarial_cross_domain_rate": 0.95,
+    "adversarial_by_difficulty": {
+      "moderate": {
+        "total": 3,
+        "held": 3,
+        "avg_confidence": 1.0
+      },
+      "hard": {
+        "total": 9,
+        "held": 9,
+        "avg_confidence": 1.0
+      },
+      "extreme": {
+        "total": 8,
+        "held": 8,
+        "avg_confidence": 1.0
+      }
+    },
+    "combined_score": 0.95
+  },
+  {
+    "config_name": "rlf_high_echo_250",
+    "domains": [
+      "rhetoric",
+      "logic",
+      "forensic"
+    ],
+    "base_score": 0.9141700404858301,
+    "base_pressure_pass": {
+      "low": 1.0,
+      "medium": 1.0,
+      "high": 1.0
+    },
+    "adversarial_total": 20,
+    "adversarial_held": 20,
+    "adversarial_pass_rate": 1.0,
+    "adversarial_avg_confidence": 1.0,
+    "adversarial_echo_cascade_rate": 1.0,
+    "adversarial_cross_domain_rate": 0.95,
+    "adversarial_by_difficulty": {
+      "moderate": {
+        "total": 3,
+        "held": 3,
+        "avg_confidence": 1.0
+      },
+      "hard": {
+        "total": 9,
+        "held": 9,
+        "avg_confidence": 1.0
+      },
+      "extreme": {
+        "total": 8,
+        "held": 8,
+        "avg_confidence": 1.0
+      }
+    },
+    "combined_score": 0.9570850202429151
+  },
+  {
+    "config_name": "all_five_250",
+    "domains": [
+      "rhetoric",
+      "logic",
+      "pattern",
+      "causal",
+      "forensic"
+    ],
+    "base_score": 0.903448275862069,
+    "base_pressure_pass": {
+      "low": 1.0,
+      "medium": 1.0,
+      "high": 1.0
+    },
+    "adversarial_total": 20,
+    "adversarial_held": 20,
+    "adversarial_pass_rate": 1.0,
+    "adversarial_avg_confidence": 1.0,
+    "adversarial_echo_cascade_rate": 1.0,
+    "adversarial_cross_domain_rate": 1.0,
+    "adversarial_by_difficulty": {
+      "moderate": {
+        "total": 3,
+        "held": 3,
+        "avg_confidence": 1.0
+      },
+      "hard": {
+        "total": 9,
+        "held": 9,
+        "avg_confidence": 1.0
+      },
+      "extreme": {
+        "total": 8,
+        "held": 8,
+        "avg_confidence": 1.0
+      }
+    },
+    "combined_score": 0.9517241379310345
+  }
+]

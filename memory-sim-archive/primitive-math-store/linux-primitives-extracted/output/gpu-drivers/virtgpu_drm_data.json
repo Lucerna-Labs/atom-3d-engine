@@ -1,0 +1,885 @@
+{
+  "filename": "virtgpu_drm.h",
+  "includes": [
+    "drm.h"
+  ],
+  "defines": [
+    {
+      "name": "DRM_VIRTGPU_MAP",
+      "value": "0x01",
+      "comment": "",
+      "category": "DRM_VIRTGPU"
+    },
+    {
+      "name": "DRM_VIRTGPU_EXECBUFFER",
+      "value": "0x02",
+      "comment": "",
+      "category": "DRM_VIRTGPU"
+    },
+    {
+      "name": "DRM_VIRTGPU_GETPARAM",
+      "value": "0x03",
+      "comment": "",
+      "category": "DRM_VIRTGPU"
+    },
+    {
+      "name": "DRM_VIRTGPU_RESOURCE_CREATE",
+      "value": "0x04",
+      "comment": "",
+      "category": "DRM_VIRTGPU"
+    },
+    {
+      "name": "DRM_VIRTGPU_RESOURCE_INFO",
+      "value": "0x05",
+      "comment": "",
+      "category": "DRM_VIRTGPU"
+    },
+    {
+      "name": "DRM_VIRTGPU_TRANSFER_FROM_HOST",
+      "value": "0x06",
+      "comment": "",
+      "category": "DRM_VIRTGPU"
+    },
+    {
+      "name": "DRM_VIRTGPU_TRANSFER_TO_HOST",
+      "value": "0x07",
+      "comment": "",
+      "category": "DRM_VIRTGPU"
+    },
+    {
+      "name": "DRM_VIRTGPU_WAIT",
+      "value": "0x08",
+      "comment": "",
+      "category": "DRM_VIRTGPU"
+    },
+    {
+      "name": "DRM_VIRTGPU_GET_CAPS",
+      "value": "0x09",
+      "comment": "",
+      "category": "DRM_VIRTGPU"
+    },
+    {
+      "name": "DRM_VIRTGPU_RESOURCE_CREATE_BLOB",
+      "value": "0x0a",
+      "comment": "",
+      "category": "DRM_VIRTGPU"
+    },
+    {
+      "name": "DRM_VIRTGPU_CONTEXT_INIT",
+      "value": "0x0b",
+      "comment": "",
+      "category": "DRM_VIRTGPU"
+    },
+    {
+      "name": "VIRTGPU_EXECBUF_FENCE_FD_IN",
+      "value": "0x01",
+      "comment": "",
+      "category": "VIRTGPU_EXECBUF"
+    },
+    {
+      "name": "VIRTGPU_EXECBUF_FENCE_FD_OUT",
+      "value": "0x02",
+      "comment": "",
+      "category": "VIRTGPU_EXECBUF"
+    },
+    {
+      "name": "VIRTGPU_EXECBUF_RING_IDX",
+      "value": "0x04",
+      "comment": "",
+      "category": "VIRTGPU_EXECBUF"
+    },
+    {
+      "name": "VIRTGPU_EXECBUF_FLAGS",
+      "value": "(",
+      "comment": "",
+      "category": "VIRTGPU_EXECBUF"
+    },
+    {
+      "name": "VIRTGPU_EXECBUF_SYNCOBJ_RESET",
+      "value": "0x01",
+      "comment": "",
+      "category": "VIRTGPU_EXECBUF"
+    },
+    {
+      "name": "VIRTGPU_EXECBUF_SYNCOBJ_FLAGS",
+      "value": "( ",
+      "comment": "",
+      "category": "VIRTGPU_EXECBUF"
+    },
+    {
+      "name": "VIRTGPU_PARAM_3D_FEATURES",
+      "value": "1",
+      "comment": "do we have 3D features in the hw",
+      "category": "VIRTGPU_PARAM"
+    },
+    {
+      "name": "VIRTGPU_PARAM_CAPSET_QUERY_FIX",
+      "value": "2",
+      "comment": "do we have the capset fix",
+      "category": "VIRTGPU_PARAM"
+    },
+    {
+      "name": "VIRTGPU_PARAM_RESOURCE_BLOB",
+      "value": "3",
+      "comment": "DRM_VIRTGPU_RESOURCE_CREATE_BLOB",
+      "category": "VIRTGPU_PARAM"
+    },
+    {
+      "name": "VIRTGPU_PARAM_HOST_VISIBLE",
+      "value": "4",
+      "comment": "Host blob resources are mappable",
+      "category": "VIRTGPU_PARAM"
+    },
+    {
+      "name": "VIRTGPU_PARAM_CROSS_DEVICE",
+      "value": "5",
+      "comment": "Cross virtio-device resource sharing",
+      "category": "VIRTGPU_PARAM"
+    },
+    {
+      "name": "VIRTGPU_PARAM_CONTEXT_INIT",
+      "value": "6",
+      "comment": "DRM_VIRTGPU_CONTEXT_INIT",
+      "category": "VIRTGPU_PARAM"
+    },
+    {
+      "name": "VIRTGPU_PARAM_SUPPORTED_CAPSET_IDs",
+      "value": "7",
+      "comment": "Bitmask of supported capability set ids",
+      "category": "VIRTGPU_PARAM"
+    },
+    {
+      "name": "VIRTGPU_PARAM_EXPLICIT_DEBUG_NAME",
+      "value": "8",
+      "comment": "Ability to set debug name from userspace",
+      "category": "VIRTGPU_PARAM"
+    },
+    {
+      "name": "VIRTGPU_WAIT_NOWAIT",
+      "value": "1",
+      "comment": "like it",
+      "category": "VIRTGPU_WAIT"
+    },
+    {
+      "name": "VIRTGPU_DRM_CAPSET_VIRGL",
+      "value": "1",
+      "comment": "",
+      "category": "VIRTGPU_DRM"
+    },
+    {
+      "name": "VIRTGPU_DRM_CAPSET_VIRGL2",
+      "value": "2",
+      "comment": "",
+      "category": "VIRTGPU_DRM"
+    },
+    {
+      "name": "VIRTGPU_DRM_CAPSET_GFXSTREAM_VULKAN",
+      "value": "3",
+      "comment": "",
+      "category": "VIRTGPU_DRM"
+    },
+    {
+      "name": "VIRTGPU_DRM_CAPSET_VENUS",
+      "value": "4",
+      "comment": "",
+      "category": "VIRTGPU_DRM"
+    },
+    {
+      "name": "VIRTGPU_DRM_CAPSET_CROSS_DOMAIN",
+      "value": "5",
+      "comment": "",
+      "category": "VIRTGPU_DRM"
+    },
+    {
+      "name": "VIRTGPU_DRM_CAPSET_DRM",
+      "value": "6",
+      "comment": "",
+      "category": "VIRTGPU_DRM"
+    },
+    {
+      "name": "VIRTGPU_BLOB_MEM_GUEST",
+      "value": "0x0001",
+      "comment": "",
+      "category": "VIRTGPU_BLOB"
+    },
+    {
+      "name": "VIRTGPU_BLOB_MEM_HOST3D",
+      "value": "0x0002",
+      "comment": "",
+      "category": "VIRTGPU_BLOB"
+    },
+    {
+      "name": "VIRTGPU_BLOB_MEM_HOST3D_GUEST",
+      "value": "0x0003",
+      "comment": "",
+      "category": "VIRTGPU_BLOB"
+    },
+    {
+      "name": "VIRTGPU_BLOB_FLAG_USE_MAPPABLE",
+      "value": "0x0001",
+      "comment": "",
+      "category": "VIRTGPU_BLOB"
+    },
+    {
+      "name": "VIRTGPU_BLOB_FLAG_USE_SHAREABLE",
+      "value": "0x0002",
+      "comment": "",
+      "category": "VIRTGPU_BLOB"
+    },
+    {
+      "name": "VIRTGPU_BLOB_FLAG_USE_CROSS_DEVICE",
+      "value": "0x0004",
+      "comment": "",
+      "category": "VIRTGPU_BLOB"
+    },
+    {
+      "name": "VIRTGPU_CONTEXT_PARAM_CAPSET_ID",
+      "value": "0x0001",
+      "comment": "",
+      "category": "VIRTGPU_CONTEXT"
+    },
+    {
+      "name": "VIRTGPU_CONTEXT_PARAM_NUM_RINGS",
+      "value": "0x0002",
+      "comment": "",
+      "category": "VIRTGPU_CONTEXT"
+    },
+    {
+      "name": "VIRTGPU_CONTEXT_PARAM_POLL_RINGS_MASK",
+      "value": "0x0003",
+      "comment": "",
+      "category": "VIRTGPU_CONTEXT"
+    },
+    {
+      "name": "VIRTGPU_CONTEXT_PARAM_DEBUG_NAME",
+      "value": "0x0004",
+      "comment": "",
+      "category": "VIRTGPU_CONTEXT"
+    },
+    {
+      "name": "VIRTGPU_EVENT_FENCE_SIGNALED",
+      "value": "0x90000000",
+      "comment": "",
+      "category": "VIRTGPU_EVENT"
+    },
+    {
+      "name": "DRM_IOCTL_VIRTGPU_MAP",
+      "value": "",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_VIRTGPU_EXECBUFFER",
+      "value": "",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_VIRTGPU_GETPARAM",
+      "value": "",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_VIRTGPU_RESOURCE_CREATE",
+      "value": "",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_VIRTGPU_RESOURCE_INFO",
+      "value": "",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_VIRTGPU_TRANSFER_FROM_HOST",
+      "value": "",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_VIRTGPU_TRANSFER_TO_HOST",
+      "value": "",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_VIRTGPU_WAIT",
+      "value": "",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_VIRTGPU_GET_CAPS",
+      "value": "",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_VIRTGPU_RESOURCE_CREATE_BLOB",
+      "value": "",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_VIRTGPU_CONTEXT_INIT",
+      "value": "",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    }
+  ],
+  "structs": [
+    {
+      "name": "drm_virtgpu_map",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_virtgpu_execbuffer_syncobj",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "point",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_virtgpu_execbuffer",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "command",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "bo_handles",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "num_bo_handles",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "fence_fd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ring_idx",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "syncobj_stride",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "num_in_syncobjs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "num_out_syncobjs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "in_syncobjs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "out_syncobjs",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_virtgpu_getparam",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "param",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "value",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_virtgpu_resource_create",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "target",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "format",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "bind",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "width",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "height",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "depth",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "array_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "last_level",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "nr_samples",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "bo_handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "res_handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "stride",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_virtgpu_resource_info",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "bo_handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "res_handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "blob_mem",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_virtgpu_3d_box",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "x",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "y",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "z",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "w",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "h",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "d",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_virtgpu_3d_transfer_to_host",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "bo_handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "level",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "stride",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "layer_stride",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_virtgpu_3d_transfer_from_host",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "bo_handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "level",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "stride",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "layer_stride",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_virtgpu_3d_wait",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_virtgpu_get_caps",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "cap_set_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "cap_set_ver",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "addr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_virtgpu_resource_create_blob",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "blob_mem",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "blob_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "bo_handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "res_handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "cmd_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "cmd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "blob_id",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_virtgpu_context_set_param",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "param",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "value",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_virtgpu_context_init",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "num_params",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "ctx_set_params",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

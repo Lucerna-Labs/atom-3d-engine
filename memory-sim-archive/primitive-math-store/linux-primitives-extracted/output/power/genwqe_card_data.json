@@ -1,0 +1,1370 @@
+{
+  "filename": "genwqe_card.h",
+  "includes": [
+    "linux/types.h",
+    "linux/ioctl.h"
+  ],
+  "defines": [
+    {
+      "name": "GENWQE_DEVNAME",
+      "value": "\"genwqe\"",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GENWQE_TYPE_ALTERA_230",
+      "value": "0x00",
+      "comment": "GenWQE4 Stratix-IV-230",
+      "category": "GENWQE_TYPE"
+    },
+    {
+      "name": "GENWQE_TYPE_ALTERA_530",
+      "value": "0x01",
+      "comment": "GenWQE4 Stratix-IV-530",
+      "category": "GENWQE_TYPE"
+    },
+    {
+      "name": "GENWQE_TYPE_ALTERA_A4",
+      "value": "0x02",
+      "comment": "GenWQE5 A4 Stratix-V-A4",
+      "category": "GENWQE_TYPE"
+    },
+    {
+      "name": "GENWQE_TYPE_ALTERA_A7",
+      "value": "0x03",
+      "comment": "GenWQE5 A7 Stratix-V-A7",
+      "category": "GENWQE_TYPE"
+    },
+    {
+      "name": "GENWQE_SLU_OFFS",
+      "value": "GENWQE_UID_OFFS(0)",
+      "comment": "",
+      "category": "GENWQE_SLU"
+    },
+    {
+      "name": "GENWQE_HSU_OFFS",
+      "value": "GENWQE_UID_OFFS(1)",
+      "comment": "",
+      "category": "GENWQE_HSU"
+    },
+    {
+      "name": "GENWQE_APP_OFFS",
+      "value": "GENWQE_UID_OFFS(2)",
+      "comment": "",
+      "category": "GENWQE_APP"
+    },
+    {
+      "name": "GENWQE_MAX_UNITS",
+      "value": "3",
+      "comment": "",
+      "category": "GENWQE_MAX"
+    },
+    {
+      "name": "IO_EXTENDED_ERROR_POINTER",
+      "value": "0x00000048",
+      "comment": "",
+      "category": "IO_EXTENDED"
+    },
+    {
+      "name": "IO_ERROR_INJECT_SELECTOR",
+      "value": "0x00000060",
+      "comment": "",
+      "category": "IO_ERROR"
+    },
+    {
+      "name": "IO_EXTENDED_DIAG_SELECTOR",
+      "value": "0x00000070",
+      "comment": "",
+      "category": "IO_EXTENDED"
+    },
+    {
+      "name": "IO_EXTENDED_DIAG_READ_MBX",
+      "value": "0x00000078",
+      "comment": "",
+      "category": "IO_EXTENDED"
+    },
+    {
+      "name": "IO_SLU_UNITCFG",
+      "value": "0x00000000",
+      "comment": "",
+      "category": "IO_SLU"
+    },
+    {
+      "name": "IO_SLU_UNITCFG_TYPE_MASK",
+      "value": "0x000000000ff00000",
+      "comment": "27:20",
+      "category": "IO_SLU"
+    },
+    {
+      "name": "IO_SLU_FIR",
+      "value": "0x00000008",
+      "comment": "read only, wr direct",
+      "category": "IO_SLU"
+    },
+    {
+      "name": "IO_SLU_FIR_CLR",
+      "value": "0x00000010",
+      "comment": "read and clear",
+      "category": "IO_SLU"
+    },
+    {
+      "name": "IO_SLU_FEC",
+      "value": "0x00000018",
+      "comment": "",
+      "category": "IO_SLU"
+    },
+    {
+      "name": "IO_SLU_ERR_ACT_MASK",
+      "value": "0x00000020",
+      "comment": "",
+      "category": "IO_SLU"
+    },
+    {
+      "name": "IO_SLU_ERR_ATTN_MASK",
+      "value": "0x00000028",
+      "comment": "",
+      "category": "IO_SLU"
+    },
+    {
+      "name": "IO_SLU_FIRX1_ACT_MASK",
+      "value": "0x00000030",
+      "comment": "",
+      "category": "IO_SLU"
+    },
+    {
+      "name": "IO_SLU_FIRX0_ACT_MASK",
+      "value": "0x00000038",
+      "comment": "",
+      "category": "IO_SLU"
+    },
+    {
+      "name": "IO_SLU_SEC_LEM_DEBUG_OVR",
+      "value": "0x00000040",
+      "comment": "",
+      "category": "IO_SLU"
+    },
+    {
+      "name": "IO_SLU_EXTENDED_ERR_PTR",
+      "value": "0x00000048",
+      "comment": "",
+      "category": "IO_SLU"
+    },
+    {
+      "name": "IO_SLU_COMMON_CONFIG",
+      "value": "0x00000060",
+      "comment": "",
+      "category": "IO_SLU"
+    },
+    {
+      "name": "IO_SLU_FLASH_FIR",
+      "value": "0x00000108",
+      "comment": "",
+      "category": "IO_SLU"
+    },
+    {
+      "name": "IO_SLU_SLC_FIR",
+      "value": "0x00000110",
+      "comment": "",
+      "category": "IO_SLU"
+    },
+    {
+      "name": "IO_SLU_RIU_TRAP",
+      "value": "0x00000280",
+      "comment": "",
+      "category": "IO_SLU"
+    },
+    {
+      "name": "IO_SLU_FLASH_FEC",
+      "value": "0x00000308",
+      "comment": "",
+      "category": "IO_SLU"
+    },
+    {
+      "name": "IO_SLU_SLC_FEC",
+      "value": "0x00000310",
+      "comment": "",
+      "category": "IO_SLU"
+    },
+    {
+      "name": "IO_SLC_QUEUE_SEGMENT",
+      "value": "0x00010000",
+      "comment": "",
+      "category": "IO_SLC"
+    },
+    {
+      "name": "IO_SLC_VF_QUEUE_SEGMENT",
+      "value": "0x00050000",
+      "comment": "",
+      "category": "IO_SLC"
+    },
+    {
+      "name": "IO_SLC_QUEUE_OFFSET",
+      "value": "0x00010008",
+      "comment": "",
+      "category": "IO_SLC"
+    },
+    {
+      "name": "IO_SLC_VF_QUEUE_OFFSET",
+      "value": "0x00050008",
+      "comment": "",
+      "category": "IO_SLC"
+    },
+    {
+      "name": "IO_SLC_QUEUE_CONFIG",
+      "value": "0x00010010",
+      "comment": "",
+      "category": "IO_SLC"
+    },
+    {
+      "name": "IO_SLC_VF_QUEUE_CONFIG",
+      "value": "0x00050010",
+      "comment": "",
+      "category": "IO_SLC"
+    },
+    {
+      "name": "IO_SLC_APPJOB_TIMEOUT",
+      "value": "0x00010018",
+      "comment": "",
+      "category": "IO_SLC"
+    },
+    {
+      "name": "IO_SLC_VF_APPJOB_TIMEOUT",
+      "value": "0x00050018",
+      "comment": "",
+      "category": "IO_SLC"
+    },
+    {
+      "name": "TIMEOUT_250MS",
+      "value": "0x0000000f",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "HEARTBEAT_DISABLE",
+      "value": "0x0000ff00",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IO_SLC_QUEUE_INITSQN",
+      "value": "0x00010020",
+      "comment": "",
+      "category": "IO_SLC"
+    },
+    {
+      "name": "IO_SLC_VF_QUEUE_INITSQN",
+      "value": "0x00050020",
+      "comment": "",
+      "category": "IO_SLC"
+    },
+    {
+      "name": "IO_SLC_QUEUE_WRAP",
+      "value": "0x00010028",
+      "comment": "",
+      "category": "IO_SLC"
+    },
+    {
+      "name": "IO_SLC_VF_QUEUE_WRAP",
+      "value": "0x00050028",
+      "comment": "",
+      "category": "IO_SLC"
+    },
+    {
+      "name": "IO_SLC_QUEUE_STATUS",
+      "value": "0x00010100",
+      "comment": "",
+      "category": "IO_SLC"
+    },
+    {
+      "name": "IO_SLC_VF_QUEUE_STATUS",
+      "value": "0x00050100",
+      "comment": "",
+      "category": "IO_SLC"
+    },
+    {
+      "name": "IO_SLC_QUEUE_WTIME",
+      "value": "0x00010030",
+      "comment": "",
+      "category": "IO_SLC"
+    },
+    {
+      "name": "IO_SLC_VF_QUEUE_WTIME",
+      "value": "0x00050030",
+      "comment": "",
+      "category": "IO_SLC"
+    },
+    {
+      "name": "IO_SLC_QUEUE_ERRCNTS",
+      "value": "0x00010038",
+      "comment": "",
+      "category": "IO_SLC"
+    },
+    {
+      "name": "IO_SLC_VF_QUEUE_ERRCNTS",
+      "value": "0x00050038",
+      "comment": "",
+      "category": "IO_SLC"
+    },
+    {
+      "name": "IO_SLC_QUEUE_LRW",
+      "value": "0x00010040",
+      "comment": "",
+      "category": "IO_SLC"
+    },
+    {
+      "name": "IO_SLC_VF_QUEUE_LRW",
+      "value": "0x00050040",
+      "comment": "",
+      "category": "IO_SLC"
+    },
+    {
+      "name": "IO_SLC_FREE_RUNNING_TIMER",
+      "value": "0x00010108",
+      "comment": "",
+      "category": "IO_SLC"
+    },
+    {
+      "name": "IO_SLC_VF_FREE_RUNNING_TIMER",
+      "value": "0x00050108",
+      "comment": "",
+      "category": "IO_SLC"
+    },
+    {
+      "name": "IO_PF_SLC_VIRTUAL_REGION",
+      "value": "0x00050000",
+      "comment": "",
+      "category": "IO_PF"
+    },
+    {
+      "name": "IO_PF_SLC_VIRTUAL_WINDOW",
+      "value": "0x00060000",
+      "comment": "",
+      "category": "IO_PF"
+    },
+    {
+      "name": "IO_SLC_CFGREG_GFIR",
+      "value": "0x00020000",
+      "comment": "",
+      "category": "IO_SLC"
+    },
+    {
+      "name": "GFIR_ERR_TRIGGER",
+      "value": "0x0000ffff",
+      "comment": "",
+      "category": "GFIR_ERR"
+    },
+    {
+      "name": "IO_SLC_CFGREG_SOFTRESET",
+      "value": "0x00020018",
+      "comment": "",
+      "category": "IO_SLC"
+    },
+    {
+      "name": "IO_SLC_MISC_DEBUG",
+      "value": "0x00020060",
+      "comment": "",
+      "category": "IO_SLC"
+    },
+    {
+      "name": "IO_SLC_MISC_DEBUG_CLR",
+      "value": "0x00020068",
+      "comment": "",
+      "category": "IO_SLC"
+    },
+    {
+      "name": "IO_SLC_MISC_DEBUG_SET",
+      "value": "0x00020070",
+      "comment": "",
+      "category": "IO_SLC"
+    },
+    {
+      "name": "IO_SLU_TEMPERATURE_SENSOR",
+      "value": "0x00030000",
+      "comment": "",
+      "category": "IO_SLU"
+    },
+    {
+      "name": "IO_SLU_TEMPERATURE_CONFIG",
+      "value": "0x00030008",
+      "comment": "",
+      "category": "IO_SLU"
+    },
+    {
+      "name": "IO_SLU_VOLTAGE_CONTROL",
+      "value": "0x00030080",
+      "comment": "",
+      "category": "IO_SLU"
+    },
+    {
+      "name": "IO_SLU_VOLTAGE_NOMINAL",
+      "value": "0x00000000",
+      "comment": "",
+      "category": "IO_SLU"
+    },
+    {
+      "name": "IO_SLU_VOLTAGE_DOWN5",
+      "value": "0x00000006",
+      "comment": "",
+      "category": "IO_SLU"
+    },
+    {
+      "name": "IO_SLU_VOLTAGE_UP5",
+      "value": "0x00000007",
+      "comment": "",
+      "category": "IO_SLU"
+    },
+    {
+      "name": "IO_SLU_LEDCONTROL",
+      "value": "0x00030100",
+      "comment": "",
+      "category": "IO_SLU"
+    },
+    {
+      "name": "IO_SLU_FLASH_DIRECTACCESS",
+      "value": "0x00040010",
+      "comment": "",
+      "category": "IO_SLU"
+    },
+    {
+      "name": "IO_SLU_FLASH_DIRECTACCESS2",
+      "value": "0x00040020",
+      "comment": "",
+      "category": "IO_SLU"
+    },
+    {
+      "name": "IO_SLU_FLASH_CMDINTF",
+      "value": "0x00040030",
+      "comment": "",
+      "category": "IO_SLU"
+    },
+    {
+      "name": "IO_SLU_BITSTREAM",
+      "value": "0x00040040",
+      "comment": "",
+      "category": "IO_SLU"
+    },
+    {
+      "name": "IO_HSU_ERR_BEHAVIOR",
+      "value": "0x01001010",
+      "comment": "",
+      "category": "IO_HSU"
+    },
+    {
+      "name": "IO_SLC2_SQB_TRAP",
+      "value": "0x00062000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IO_SLC2_QUEUE_MANAGER_TRAP",
+      "value": "0x00062008",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IO_SLC2_FLS_MASTER_TRAP",
+      "value": "0x00062010",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IO_HSU_UNITCFG",
+      "value": "0x01000000",
+      "comment": "",
+      "category": "IO_HSU"
+    },
+    {
+      "name": "IO_HSU_FIR",
+      "value": "0x01000008",
+      "comment": "",
+      "category": "IO_HSU"
+    },
+    {
+      "name": "IO_HSU_FIR_CLR",
+      "value": "0x01000010",
+      "comment": "",
+      "category": "IO_HSU"
+    },
+    {
+      "name": "IO_HSU_FEC",
+      "value": "0x01000018",
+      "comment": "",
+      "category": "IO_HSU"
+    },
+    {
+      "name": "IO_HSU_ERR_ACT_MASK",
+      "value": "0x01000020",
+      "comment": "",
+      "category": "IO_HSU"
+    },
+    {
+      "name": "IO_HSU_ERR_ATTN_MASK",
+      "value": "0x01000028",
+      "comment": "",
+      "category": "IO_HSU"
+    },
+    {
+      "name": "IO_HSU_FIRX1_ACT_MASK",
+      "value": "0x01000030",
+      "comment": "",
+      "category": "IO_HSU"
+    },
+    {
+      "name": "IO_HSU_FIRX0_ACT_MASK",
+      "value": "0x01000038",
+      "comment": "",
+      "category": "IO_HSU"
+    },
+    {
+      "name": "IO_HSU_SEC_LEM_DEBUG_OVR",
+      "value": "0x01000040",
+      "comment": "",
+      "category": "IO_HSU"
+    },
+    {
+      "name": "IO_HSU_EXTENDED_ERR_PTR",
+      "value": "0x01000048",
+      "comment": "",
+      "category": "IO_HSU"
+    },
+    {
+      "name": "IO_HSU_COMMON_CONFIG",
+      "value": "0x01000060",
+      "comment": "",
+      "category": "IO_HSU"
+    },
+    {
+      "name": "IO_APP_UNITCFG",
+      "value": "0x02000000",
+      "comment": "",
+      "category": "IO_APP"
+    },
+    {
+      "name": "IO_APP_FIR",
+      "value": "0x02000008",
+      "comment": "",
+      "category": "IO_APP"
+    },
+    {
+      "name": "IO_APP_FIR_CLR",
+      "value": "0x02000010",
+      "comment": "",
+      "category": "IO_APP"
+    },
+    {
+      "name": "IO_APP_FEC",
+      "value": "0x02000018",
+      "comment": "",
+      "category": "IO_APP"
+    },
+    {
+      "name": "IO_APP_ERR_ACT_MASK",
+      "value": "0x02000020",
+      "comment": "",
+      "category": "IO_APP"
+    },
+    {
+      "name": "IO_APP_ERR_ATTN_MASK",
+      "value": "0x02000028",
+      "comment": "",
+      "category": "IO_APP"
+    },
+    {
+      "name": "IO_APP_FIRX1_ACT_MASK",
+      "value": "0x02000030",
+      "comment": "",
+      "category": "IO_APP"
+    },
+    {
+      "name": "IO_APP_FIRX0_ACT_MASK",
+      "value": "0x02000038",
+      "comment": "",
+      "category": "IO_APP"
+    },
+    {
+      "name": "IO_APP_SEC_LEM_DEBUG_OVR",
+      "value": "0x02000040",
+      "comment": "",
+      "category": "IO_APP"
+    },
+    {
+      "name": "IO_APP_EXTENDED_ERR_PTR",
+      "value": "0x02000048",
+      "comment": "",
+      "category": "IO_APP"
+    },
+    {
+      "name": "IO_APP_COMMON_CONFIG",
+      "value": "0x02000060",
+      "comment": "",
+      "category": "IO_APP"
+    },
+    {
+      "name": "IO_APP_DEBUG_REG_01",
+      "value": "0x02010000",
+      "comment": "",
+      "category": "IO_APP"
+    },
+    {
+      "name": "IO_APP_DEBUG_REG_02",
+      "value": "0x02010008",
+      "comment": "",
+      "category": "IO_APP"
+    },
+    {
+      "name": "IO_APP_DEBUG_REG_03",
+      "value": "0x02010010",
+      "comment": "",
+      "category": "IO_APP"
+    },
+    {
+      "name": "IO_APP_DEBUG_REG_04",
+      "value": "0x02010018",
+      "comment": "",
+      "category": "IO_APP"
+    },
+    {
+      "name": "IO_APP_DEBUG_REG_05",
+      "value": "0x02010020",
+      "comment": "",
+      "category": "IO_APP"
+    },
+    {
+      "name": "IO_APP_DEBUG_REG_06",
+      "value": "0x02010028",
+      "comment": "",
+      "category": "IO_APP"
+    },
+    {
+      "name": "IO_APP_DEBUG_REG_07",
+      "value": "0x02010030",
+      "comment": "",
+      "category": "IO_APP"
+    },
+    {
+      "name": "IO_APP_DEBUG_REG_08",
+      "value": "0x02010038",
+      "comment": "",
+      "category": "IO_APP"
+    },
+    {
+      "name": "IO_APP_DEBUG_REG_09",
+      "value": "0x02010040",
+      "comment": "",
+      "category": "IO_APP"
+    },
+    {
+      "name": "IO_APP_DEBUG_REG_10",
+      "value": "0x02010048",
+      "comment": "",
+      "category": "IO_APP"
+    },
+    {
+      "name": "IO_APP_DEBUG_REG_11",
+      "value": "0x02010050",
+      "comment": "",
+      "category": "IO_APP"
+    },
+    {
+      "name": "IO_APP_DEBUG_REG_12",
+      "value": "0x02010058",
+      "comment": "",
+      "category": "IO_APP"
+    },
+    {
+      "name": "IO_APP_DEBUG_REG_13",
+      "value": "0x02010060",
+      "comment": "",
+      "category": "IO_APP"
+    },
+    {
+      "name": "IO_APP_DEBUG_REG_14",
+      "value": "0x02010068",
+      "comment": "",
+      "category": "IO_APP"
+    },
+    {
+      "name": "IO_APP_DEBUG_REG_15",
+      "value": "0x02010070",
+      "comment": "",
+      "category": "IO_APP"
+    },
+    {
+      "name": "IO_APP_DEBUG_REG_16",
+      "value": "0x02010078",
+      "comment": "",
+      "category": "IO_APP"
+    },
+    {
+      "name": "IO_APP_DEBUG_REG_17",
+      "value": "0x02010080",
+      "comment": "",
+      "category": "IO_APP"
+    },
+    {
+      "name": "IO_APP_DEBUG_REG_18",
+      "value": "0x02010088",
+      "comment": "",
+      "category": "IO_APP"
+    },
+    {
+      "name": "IO_ILLEGAL_VALUE",
+      "value": "0xffffffffffffffffull",
+      "comment": "",
+      "category": "IO_ILLEGAL"
+    },
+    {
+      "name": "DDCB_ACFUNC_SLU",
+      "value": "0x00",
+      "comment": "chip service layer unit",
+      "category": "DDCB_ACFUNC"
+    },
+    {
+      "name": "DDCB_ACFUNC_APP",
+      "value": "0x01",
+      "comment": "chip application",
+      "category": "DDCB_ACFUNC"
+    },
+    {
+      "name": "DDCB_RETC_IDLE",
+      "value": "0x0000",
+      "comment": "Unexecuted/DDCB created",
+      "category": "DDCB_RETC"
+    },
+    {
+      "name": "DDCB_RETC_PENDING",
+      "value": "0x0101",
+      "comment": "Pending Execution",
+      "category": "DDCB_RETC"
+    },
+    {
+      "name": "DDCB_RETC_COMPLETE",
+      "value": "0x0102",
+      "comment": "Cmd complete. No error",
+      "category": "DDCB_RETC"
+    },
+    {
+      "name": "DDCB_RETC_FAULT",
+      "value": "0x0104",
+      "comment": "App Err, recoverable",
+      "category": "DDCB_RETC"
+    },
+    {
+      "name": "DDCB_RETC_ERROR",
+      "value": "0x0108",
+      "comment": "App Err, non-recoverable",
+      "category": "DDCB_RETC"
+    },
+    {
+      "name": "DDCB_RETC_FORCED_ERROR",
+      "value": "0x01ff",
+      "comment": "overwritten by driver",
+      "category": "DDCB_RETC"
+    },
+    {
+      "name": "DDCB_RETC_UNEXEC",
+      "value": "0x0110",
+      "comment": "Unexe/Removed from queue",
+      "category": "DDCB_RETC"
+    },
+    {
+      "name": "DDCB_RETC_TERM",
+      "value": "0x0120",
+      "comment": "Terminated",
+      "category": "DDCB_RETC"
+    },
+    {
+      "name": "DDCB_RETC_RES0",
+      "value": "0x0140",
+      "comment": "Reserved",
+      "category": "DDCB_RETC"
+    },
+    {
+      "name": "DDCB_RETC_RES1",
+      "value": "0x0180",
+      "comment": "Reserved",
+      "category": "DDCB_RETC"
+    },
+    {
+      "name": "DDCB_OPT_ECHO_FORCE_NO",
+      "value": "0x0000",
+      "comment": "ECHO DDCB",
+      "category": "DDCB_OPT"
+    },
+    {
+      "name": "DDCB_OPT_ECHO_FORCE_102",
+      "value": "0x0001",
+      "comment": "force return code",
+      "category": "DDCB_OPT"
+    },
+    {
+      "name": "DDCB_OPT_ECHO_FORCE_104",
+      "value": "0x0002",
+      "comment": "",
+      "category": "DDCB_OPT"
+    },
+    {
+      "name": "DDCB_OPT_ECHO_FORCE_108",
+      "value": "0x0003",
+      "comment": "",
+      "category": "DDCB_OPT"
+    },
+    {
+      "name": "DDCB_OPT_ECHO_FORCE_110",
+      "value": "0x0004",
+      "comment": "only on PF !",
+      "category": "DDCB_OPT"
+    },
+    {
+      "name": "DDCB_OPT_ECHO_FORCE_120",
+      "value": "0x0005",
+      "comment": "",
+      "category": "DDCB_OPT"
+    },
+    {
+      "name": "DDCB_OPT_ECHO_FORCE_140",
+      "value": "0x0006",
+      "comment": "",
+      "category": "DDCB_OPT"
+    },
+    {
+      "name": "DDCB_OPT_ECHO_FORCE_180",
+      "value": "0x0007",
+      "comment": "",
+      "category": "DDCB_OPT"
+    },
+    {
+      "name": "DDCB_OPT_ECHO_COPY_NONE",
+      "value": "(0 << 5)",
+      "comment": "",
+      "category": "DDCB_OPT"
+    },
+    {
+      "name": "DDCB_OPT_ECHO_COPY_ALL",
+      "value": "(1 << 5)",
+      "comment": "",
+      "category": "DDCB_OPT"
+    },
+    {
+      "name": "SLCMD_ECHO_SYNC",
+      "value": "0x00",
+      "comment": "PF/VF",
+      "category": "SLCMD_ECHO"
+    },
+    {
+      "name": "SLCMD_MOVE_FLASH",
+      "value": "0x06",
+      "comment": "PF only",
+      "category": "SLCMD_MOVE"
+    },
+    {
+      "name": "SLCMD_MOVE_FLASH_FLAGS_MODE",
+      "value": "0x03",
+      "comment": "bit 0 and 1 used for mode",
+      "category": "SLCMD_MOVE"
+    },
+    {
+      "name": "SLCMD_MOVE_FLASH_FLAGS_DLOAD",
+      "value": "0",
+      "comment": "mode: download",
+      "category": "SLCMD_MOVE"
+    },
+    {
+      "name": "SLCMD_MOVE_FLASH_FLAGS_EMUL",
+      "value": "1",
+      "comment": "mode: emulation",
+      "category": "SLCMD_MOVE"
+    },
+    {
+      "name": "SLCMD_MOVE_FLASH_FLAGS_UPLOAD",
+      "value": "2",
+      "comment": "mode: upload",
+      "category": "SLCMD_MOVE"
+    },
+    {
+      "name": "SLCMD_MOVE_FLASH_FLAGS_VERIFY",
+      "value": "3",
+      "comment": "mode: verify",
+      "category": "SLCMD_MOVE"
+    },
+    {
+      "name": "SLCMD_MOVE_FLASH_FLAG_NOTAP",
+      "value": "(1 << 2)",
+      "comment": "just dump DDCB and exit",
+      "category": "SLCMD_MOVE"
+    },
+    {
+      "name": "SLCMD_MOVE_FLASH_FLAG_POLL",
+      "value": "(1 << 3)",
+      "comment": "wait for RETC >= 0102",
+      "category": "SLCMD_MOVE"
+    },
+    {
+      "name": "SLCMD_MOVE_FLASH_FLAG_PARTITION",
+      "value": "(1 << 4)",
+      "comment": "",
+      "category": "SLCMD_MOVE"
+    },
+    {
+      "name": "SLCMD_MOVE_FLASH_FLAG_ERASE",
+      "value": "(1 << 5)",
+      "comment": "",
+      "category": "SLCMD_MOVE"
+    },
+    {
+      "name": "DDCB_LENGTH",
+      "value": "256",
+      "comment": "for debug data",
+      "category": ""
+    },
+    {
+      "name": "DDCB_ASIV_LENGTH",
+      "value": "104",
+      "comment": "len of the DDCB ASIV array",
+      "category": "DDCB_ASIV"
+    },
+    {
+      "name": "DDCB_ASIV_LENGTH_ATS",
+      "value": "96",
+      "comment": "ASIV in ATS architecture",
+      "category": "DDCB_ASIV"
+    },
+    {
+      "name": "DDCB_ASV_LENGTH",
+      "value": "64",
+      "comment": "len of the DDCB ASV array",
+      "category": "DDCB_ASV"
+    },
+    {
+      "name": "DDCB_FIXUPS",
+      "value": "12",
+      "comment": "maximum number of fixups",
+      "category": ""
+    },
+    {
+      "name": "ATS_TYPE_DATA",
+      "value": "0x0ull",
+      "comment": "data",
+      "category": "ATS_TYPE"
+    },
+    {
+      "name": "ATS_TYPE_FLAT_RD",
+      "value": "0x4ull",
+      "comment": "flat buffer read only",
+      "category": "ATS_TYPE"
+    },
+    {
+      "name": "ATS_TYPE_FLAT_RDWR",
+      "value": "0x5ull",
+      "comment": "flat buffer read/write",
+      "category": "ATS_TYPE"
+    },
+    {
+      "name": "ATS_TYPE_SGL_RD",
+      "value": "0x6ull",
+      "comment": "sgl read only",
+      "category": "ATS_TYPE"
+    },
+    {
+      "name": "ATS_TYPE_SGL_RDWR",
+      "value": "0x7ull",
+      "comment": "sgl read/write",
+      "category": "ATS_TYPE"
+    },
+    {
+      "name": "GENWQE_IOC_CODE",
+      "value": "0xa5",
+      "comment": "",
+      "category": "GENWQE_IOC"
+    },
+    {
+      "name": "GENWQE_READ_REG64",
+      "value": "_IOR(GENWQE_IOC_CODE, 30, struct genwqe_reg_io)",
+      "comment": "",
+      "category": "GENWQE_READ"
+    },
+    {
+      "name": "GENWQE_WRITE_REG64",
+      "value": "_IOW(GENWQE_IOC_CODE, 31, struct genwqe_reg_io)",
+      "comment": "",
+      "category": "GENWQE_WRITE"
+    },
+    {
+      "name": "GENWQE_READ_REG32",
+      "value": "_IOR(GENWQE_IOC_CODE, 32, struct genwqe_reg_io)",
+      "comment": "",
+      "category": "GENWQE_READ"
+    },
+    {
+      "name": "GENWQE_WRITE_REG32",
+      "value": "_IOW(GENWQE_IOC_CODE, 33, struct genwqe_reg_io)",
+      "comment": "",
+      "category": "GENWQE_WRITE"
+    },
+    {
+      "name": "GENWQE_READ_REG16",
+      "value": "_IOR(GENWQE_IOC_CODE, 34, struct genwqe_reg_io)",
+      "comment": "",
+      "category": "GENWQE_READ"
+    },
+    {
+      "name": "GENWQE_WRITE_REG16",
+      "value": "_IOW(GENWQE_IOC_CODE, 35, struct genwqe_reg_io)",
+      "comment": "",
+      "category": "GENWQE_WRITE"
+    },
+    {
+      "name": "GENWQE_GET_CARD_STATE",
+      "value": "_IOR(GENWQE_IOC_CODE, 36,\tenum genwqe_card_state)",
+      "comment": "",
+      "category": "GENWQE_GET"
+    },
+    {
+      "name": "GENWQE_PIN_MEM",
+      "value": "_IOWR(GENWQE_IOC_CODE, 40, struct genwqe_mem)",
+      "comment": "",
+      "category": "GENWQE_PIN"
+    },
+    {
+      "name": "GENWQE_UNPIN_MEM",
+      "value": "_IOWR(GENWQE_IOC_CODE, 41, struct genwqe_mem)",
+      "comment": "",
+      "category": "GENWQE_UNPIN"
+    },
+    {
+      "name": "GENWQE_EXECUTE_DDCB",
+      "value": "",
+      "comment": "",
+      "category": "GENWQE_EXECUTE"
+    },
+    {
+      "name": "GENWQE_EXECUTE_RAW_DDCB",
+      "value": "",
+      "comment": "",
+      "category": "GENWQE_EXECUTE"
+    },
+    {
+      "name": "GENWQE_SLU_UPDATE",
+      "value": "_IOWR(GENWQE_IOC_CODE, 80, struct genwqe_bitstream)",
+      "comment": "",
+      "category": "GENWQE_SLU"
+    },
+    {
+      "name": "GENWQE_SLU_READ",
+      "value": "_IOWR(GENWQE_IOC_CODE, 81, struct genwqe_bitstream)",
+      "comment": "",
+      "category": "GENWQE_SLU"
+    }
+  ],
+  "structs": [
+    {
+      "name": "genwqe_reg_io",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "num",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "val64",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "genwqe_bitstream",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "data_addr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "crc",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "target_addr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "partition",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "uid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "slu_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "app_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "retc",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "attn",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "progress",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "genwqe_debug_data",
+      "fields": [
+        {
+          "type_name": "char",
+          "name": "driver_version",
+          "array_size": "64",
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "slu_unitcfg",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "app_unitcfg",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "ddcb_before",
+          "array_size": "DDCB_LENGTH",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "ddcb_prev",
+          "array_size": "DDCB_LENGTH",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "ddcb_finished",
+          "array_size": "DDCB_LENGTH",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "genwqe_ddcb_cmd",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "next_addr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "acfunc",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "cmd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "asiv_length",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "asv_length",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "cmdopts",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "retc",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "attn",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "vcrc",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "progress",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "deque_ts",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "cmplt_ts",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "disp_ts",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "ddata_addr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "asv",
+          "array_size": "DDCB_ASV_LENGTH",
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "ats",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "asiv",
+          "array_size": "DDCB_ASIV_LENGTH_ATS",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "__asiv",
+          "array_size": "DDCB_ASIV_LENGTH",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_4",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "ats",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "asiv",
+          "array_size": "DDCB_ASIV_LENGTH_ATS",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "genwqe_mem",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "addr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "direction",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

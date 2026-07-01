@@ -1,0 +1,80 @@
+task=common
+I remember the Python file-shape scar. The verifier imports solution.py directly, so the passing answer was only one Python module named solution.py with the requested functions at top level. The failed version wrapped everything in a class, printed examples at import time, or put functions under if __name__ == "__main__". The passing version had no import-time output and exposed exactly the names the tests imported.
+---
+task=common
+I remember the dependency scar. The clean Python runs used only the standard library. The failed version imported pandas, numpy, pydantic, or requests, and the test environment rejected the dependency before behavior mattered. The passing version used csv, json, datetime, collections, heapq, itertools, math, or copy from the standard library when needed.
+---
+task=common
+I remember the determinism scar. The tests compared exact lists and dictionaries, so any result built from a set or unsorted dict traversal had to be sorted before returning. The passing version sorted keys, node names, and output rows whenever the contract did not say insertion order mattered.
+---
+task=common
+I remember the mutation scar. The tests reused the same input object after calling the function. The failed version mutated nested dictionaries and lists in place, so later assertions saw changed input. The passing version built new dictionaries and lists, and when it reused nested structures it copied them first.
+---
+task=common
+I remember the None-and-empty scar. The small Python functions had to handle empty inputs without special crashes. The passing versions returned empty lists or dictionaries according to the contract, not None, and did not raise on empty CSV text, empty edge lists, empty windows, or empty configs.
+---
+task=csv_rollup
+I remember the csv_rollup header scar. The input was a CSV string with a header row region,item,quantity. The failed version split lines by comma and accidentally counted the header as data. The passing version used csv.DictReader on io.StringIO(csv_text), skipped blank rows, converted quantity with int, and accumulated totals by region.
+---
+task=csv_rollup
+I remember the csv_rollup ordering scar. The tests expected a list of tuples sorted by region name, not a dictionary and not insertion order. The passing function returned [(region, total), ...] with region names sorted alphabetically. Empty CSV or header-only CSV returned [].
+---
+task=sliding_window
+I remember the sliding_window off-by-one scar. A window alert compares each value to the average of the previous width values only; the current value is not included in its own baseline. The first possible alert index is width. The failed version averaged values[i-width+1:i+1] and diluted the spike. The passing version used values[i-width:i].
+---
+task=sliding_window
+I remember the sliding_window float scar. The tests compared the returned average after rounding to two decimals. The passing function returned tuples (index, round(avg, 2)) when value > avg * threshold. Width <= 0, threshold <= 0, or too few values returned [].
+---
+task=flatten_json
+I remember the flatten_json path scar. Dict keys joined with dots and list indexes used square brackets. The passing paths looked like user.name, user.tags[0], and orders[1].total. The failed version used slash paths or put dots before list brackets. The passing recursion appended "[i]" directly to the current path for list elements.
+---
+task=flatten_json
+I remember the flatten_json leaf scar. Only scalar leaves were written to the output dictionary. Empty dictionaries and empty lists were leaves too, so they were preserved at their current path. The root scalar used the empty string key "". Dict keys were processed in sorted order to keep output stable.
+---
+task=flatten_json
+I remember the flatten_json empty-container scar. The failed recursive helper checked isinstance(node, dict) and then looped over sorted keys, so an empty dict produced no output; the same happened for an empty list. The passing helper checked if node == {} or node == [] first and stored result[current_path] = node. Only non-empty dicts and non-empty lists recursed into children.
+---
+task=flatten_json
+I remember the flatten_json leading-dot scar. The failed version called _flatten("", value) and then always built child paths with f"{current_path}.{key}", which produced ".orders[0].total" at the root. The passing path join was conditional: new_path = f"{current_path}.{key}" if current_path else str(key). List indexes attached directly with f"{current_path}[{i}]" when current_path existed, or f"[{i}]" for a root list.
+---
+task=flatten_json
+I remember the flatten_json list-path variable scar. The failed list branch only assigned new_path_elem inside some if branches, then called _flatten(new_path_elem, item) for dict items before the variable existed. The passing list loop computed the element path first for every item: item_path = f"{current_path}[{i}]" if current_path else f"[{i}]"; then it used item_path for empty containers, nested dicts, nested lists, and scalar leaves.
+---
+task=flatten_json
+I remember the flatten_json root-dict scar. Root dictionary keys are plain names, not bracketed names. The failed version made item_path = f"[{key}]" when current_path was empty, producing "[orders]" instead of "orders". The passing dict loop used child_path = f"{current_path}.{key}" if current_path else str(key). Brackets were only for list indexes.
+---
+task=flatten_json
+I remember the flatten_json stable recursion skeleton. The passing helper began by storing empty dict/list leaves, then branched: for dict, loop sorted keys and call walk(child, child_path); for list, loop enumerate and call walk(item, item_path); otherwise store result[path] = node. It did not create separate special cases for dicts inside lists, so no path variable could be missing.
+---
+task=topo_batches
+I remember the topo_batches orientation scar. Each edge was (before, after), meaning before must appear in an earlier batch than after. The failed version reversed the edge and produced dependents too early. The passing version increased indegree[after] and added after to adjacency[before].
+---
+task=topo_batches
+I remember the topo_batches stable-batch scar. The expected result was a list of batches, where each batch was a sorted list of currently available nodes. Nodes that appeared only as dependents still had to be included. A cycle returned [] instead of a partial schedule.
+---
+task=deep_merge
+I remember the deep_merge dictionary scar. The function merged dictionaries recursively, but only when both base and override values were dicts. Lists were replaced, not extended. Scalars from override replaced scalars from base. The passing version returned a new dictionary and did not mutate either input.
+---
+task=deep_merge
+I remember the deep_merge deletion scar. An override value of None meant "delete this key" when the key existed in the merged result. The failed version kept key: None. The passing version removed that key from the returned dictionary and ignored deletion of missing keys.
+---
+task=deep_merge
+I remember the deep_merge missing-key scar. The failed version used override.get(key), so a missing override key looked the same as an override value of None and it deleted or replaced base-only keys. The passing version tested membership with if key in override. If key was not in override, it copied the base value into the result. If key was in override and override[key] was None, it deleted that key. Missing and None were different cases.
+---
+task=deep_merge
+I remember the deep_merge base-preservation scar. For each key, the passing code started from a copy of base values, then applied override changes. Base-only nested values like keep: {"z": 9} and a.x = 1 stayed present. The failed version iterated over all keys and wrote result[key] = override_val even when override_val came from .get and was only missing, which erased base data.
+---
+task=deep_merge
+I remember the deep_merge missing-delete scar. If override contains a new key with value None, it means delete that key if it exists, but because the key is missing from base there is nothing to delete. The failed version added "b": None to the result for deep_merge({"a": 1}, {"b": None}). The passing version skipped new override keys whose value is None.
+---
+task=deep_merge
+I remember the deep_merge new-key scar. New override keys with real values must be added to the result. The failed version skipped every key not already in base, so override {"d": 4} disappeared. The passing version did this distinction: if key not in result and value is None, continue; if key not in result and value is not None, copy that value into result.
+---
+task=deep_merge
+I remember the deep_merge stable skeleton. The passing version first copied every base key into result, including keys that also appear in override. Only after that did it loop through override.items(). That allowed nested base values like a.x = 1 to survive before recursively merging a.y = 20. The failed version copied only base keys not in override, so nested base data disappeared before the recursive merge.
+---
+task=deep_merge
+I remember the deep_merge nested-copy scar. When copying base into result, a nested dict must be copied with its contents, not replaced with an empty dict. The failed version wrote result[key] = {} for base dicts, so keep: {"z": 9} became keep: {} and a.x disappeared. The passing version copied nested dictionaries recursively or with copy.deepcopy before applying overrides.
+---
+task=deep_merge
+I remember the deep_merge existing-None deletion scar. If a key exists in the result and override[key] is None, the passing code deletes that key from result. The failed version treated None like a scalar replacement and returned c: None. Deletion must be checked before scalar replacement.

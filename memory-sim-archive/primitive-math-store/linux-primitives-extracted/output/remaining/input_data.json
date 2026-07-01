@@ -1,0 +1,962 @@
+{
+  "filename": "input.h",
+  "includes": [
+    "sys/time.h",
+    "sys/ioctl.h",
+    "sys/types.h",
+    "linux/types.h",
+    "input-event-codes.h"
+  ],
+  "defines": [
+    {
+      "name": "input_event_sec",
+      "value": "time.tv_sec",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "input_event_usec",
+      "value": "time.tv_usec",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "input_event_sec",
+      "value": "__sec",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "input_event_usec",
+      "value": "__usec",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EV_VERSION",
+      "value": "0x010001",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "INPUT_KEYMAP_BY_INDEX",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "INPUT_KEYMAP"
+    },
+    {
+      "name": "EVIOCGVERSION",
+      "value": "_IOR('E', 0x01, int)",
+      "comment": "get driver version",
+      "category": ""
+    },
+    {
+      "name": "EVIOCGID",
+      "value": "_IOR('E', 0x02, struct input_id)",
+      "comment": "get device ID",
+      "category": ""
+    },
+    {
+      "name": "EVIOCGREP",
+      "value": "_IOR('E', 0x03, unsigned int[2])",
+      "comment": "get repeat settings",
+      "category": ""
+    },
+    {
+      "name": "EVIOCSREP",
+      "value": "_IOW('E', 0x03, unsigned int[2])",
+      "comment": "set repeat settings",
+      "category": ""
+    },
+    {
+      "name": "EVIOCGKEYCODE",
+      "value": "_IOR('E', 0x04, unsigned int[2])",
+      "comment": "get keycode",
+      "category": ""
+    },
+    {
+      "name": "EVIOCGKEYCODE_V2",
+      "value": "_IOR('E', 0x04, struct input_keymap_entry)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EVIOCSKEYCODE",
+      "value": "_IOW('E', 0x04, unsigned int[2])",
+      "comment": "set keycode",
+      "category": ""
+    },
+    {
+      "name": "EVIOCSKEYCODE_V2",
+      "value": "_IOW('E', 0x04, struct input_keymap_entry)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EVIOCSFF",
+      "value": "_IOW('E', 0x80, struct ff_effect)",
+      "comment": "send a force effect to a force feedback device",
+      "category": ""
+    },
+    {
+      "name": "EVIOCRMFF",
+      "value": "_IOW('E', 0x81, int)",
+      "comment": "Erase a force effect",
+      "category": ""
+    },
+    {
+      "name": "EVIOCGEFFECTS",
+      "value": "_IOR('E', 0x84, int)",
+      "comment": "Report number of effects playable at the same time",
+      "category": ""
+    },
+    {
+      "name": "EVIOCGRAB",
+      "value": "_IOW('E', 0x90, int)",
+      "comment": "Grab/Release device",
+      "category": ""
+    },
+    {
+      "name": "EVIOCREVOKE",
+      "value": "_IOW('E', 0x91, int)",
+      "comment": "Revoke device access",
+      "category": ""
+    },
+    {
+      "name": "EVIOCGMASK",
+      "value": "_IOR('E', 0x92, struct input_mask)",
+      "comment": "Get event-masks",
+      "category": ""
+    },
+    {
+      "name": "EVIOCSMASK",
+      "value": "_IOW('E', 0x93, struct input_mask)",
+      "comment": "Set event-masks",
+      "category": ""
+    },
+    {
+      "name": "EVIOCSCLOCKID",
+      "value": "_IOW('E', 0xa0, int)",
+      "comment": "Set clockid to be used for timestamps",
+      "category": ""
+    },
+    {
+      "name": "ID_BUS",
+      "value": "0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ID_VENDOR",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ID_PRODUCT",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ID_VERSION",
+      "value": "3",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "BUS_PCI",
+      "value": "0x01",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "BUS_ISAPNP",
+      "value": "0x02",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "BUS_USB",
+      "value": "0x03",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "BUS_HIL",
+      "value": "0x04",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "BUS_BLUETOOTH",
+      "value": "0x05",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "BUS_VIRTUAL",
+      "value": "0x06",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "BUS_ISA",
+      "value": "0x10",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "BUS_I8042",
+      "value": "0x11",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "BUS_XTKBD",
+      "value": "0x12",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "BUS_RS232",
+      "value": "0x13",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "BUS_GAMEPORT",
+      "value": "0x14",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "BUS_PARPORT",
+      "value": "0x15",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "BUS_AMIGA",
+      "value": "0x16",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "BUS_ADB",
+      "value": "0x17",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "BUS_I2C",
+      "value": "0x18",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "BUS_HOST",
+      "value": "0x19",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "BUS_GSC",
+      "value": "0x1A",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "BUS_ATARI",
+      "value": "0x1B",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "BUS_SPI",
+      "value": "0x1C",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "BUS_RMI",
+      "value": "0x1D",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "BUS_CEC",
+      "value": "0x1E",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "BUS_INTEL_ISHTP",
+      "value": "0x1F",
+      "comment": "",
+      "category": "BUS_INTEL"
+    },
+    {
+      "name": "BUS_AMD_SFH",
+      "value": "0x20",
+      "comment": "",
+      "category": "BUS_AMD"
+    },
+    {
+      "name": "BUS_SDW",
+      "value": "0x21",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "MT_TOOL_FINGER",
+      "value": "0x00",
+      "comment": "",
+      "category": "MT_TOOL"
+    },
+    {
+      "name": "MT_TOOL_PEN",
+      "value": "0x01",
+      "comment": "",
+      "category": "MT_TOOL"
+    },
+    {
+      "name": "MT_TOOL_PALM",
+      "value": "0x02",
+      "comment": "",
+      "category": "MT_TOOL"
+    },
+    {
+      "name": "MT_TOOL_DIAL",
+      "value": "0x0a",
+      "comment": "",
+      "category": "MT_TOOL"
+    },
+    {
+      "name": "MT_TOOL_MAX",
+      "value": "0x0f",
+      "comment": "",
+      "category": "MT_TOOL"
+    },
+    {
+      "name": "FF_STATUS_STOPPED",
+      "value": "0x00",
+      "comment": "",
+      "category": "FF_STATUS"
+    },
+    {
+      "name": "FF_STATUS_PLAYING",
+      "value": "0x01",
+      "comment": "",
+      "category": "FF_STATUS"
+    },
+    {
+      "name": "FF_STATUS_MAX",
+      "value": "0x01",
+      "comment": "",
+      "category": "FF_STATUS"
+    },
+    {
+      "name": "FF_HAPTIC",
+      "value": "0x4f",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FF_RUMBLE",
+      "value": "0x50",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FF_PERIODIC",
+      "value": "0x51",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FF_CONSTANT",
+      "value": "0x52",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FF_SPRING",
+      "value": "0x53",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FF_FRICTION",
+      "value": "0x54",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FF_DAMPER",
+      "value": "0x55",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FF_INERTIA",
+      "value": "0x56",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FF_RAMP",
+      "value": "0x57",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FF_EFFECT_MIN",
+      "value": "FF_HAPTIC",
+      "comment": "",
+      "category": "FF_EFFECT"
+    },
+    {
+      "name": "FF_EFFECT_MAX",
+      "value": "FF_RAMP",
+      "comment": "",
+      "category": "FF_EFFECT"
+    },
+    {
+      "name": "FF_SQUARE",
+      "value": "0x58",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FF_TRIANGLE",
+      "value": "0x59",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FF_SINE",
+      "value": "0x5a",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FF_SAW_UP",
+      "value": "0x5b",
+      "comment": "",
+      "category": "FF_SAW"
+    },
+    {
+      "name": "FF_SAW_DOWN",
+      "value": "0x5c",
+      "comment": "",
+      "category": "FF_SAW"
+    },
+    {
+      "name": "FF_CUSTOM",
+      "value": "0x5d",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FF_WAVEFORM_MIN",
+      "value": "FF_SQUARE",
+      "comment": "",
+      "category": "FF_WAVEFORM"
+    },
+    {
+      "name": "FF_WAVEFORM_MAX",
+      "value": "FF_CUSTOM",
+      "comment": "",
+      "category": "FF_WAVEFORM"
+    },
+    {
+      "name": "FF_GAIN",
+      "value": "0x60",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FF_AUTOCENTER",
+      "value": "0x61",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FF_MAX_EFFECTS",
+      "value": "FF_GAIN",
+      "comment": "",
+      "category": "FF_MAX"
+    },
+    {
+      "name": "FF_MAX",
+      "value": "0x7f",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FF_CNT",
+      "value": "(FF_MAX+1)",
+      "comment": "",
+      "category": ""
+    }
+  ],
+  "structs": [
+    {
+      "name": "input_event",
+      "fields": [
+        {
+          "type_name": "__kernel_ulong_t",
+          "name": "__sec",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__kernel_ulong_t",
+          "name": "__usec",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "code",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "value",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "input_id",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "bustype",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "vendor",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "product",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "version",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "input_absinfo",
+      "fields": [
+        {
+          "type_name": "__s32",
+          "name": "value",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "minimum",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "maximum",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "fuzz",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "flat",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "resolution",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "input_keymap_entry",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "index",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "keycode",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "scancode",
+          "array_size": "32",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "input_mask",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "codes_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "codes_ptr",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "input_mt_request_layout",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ff_replay",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "length",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "delay",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ff_trigger",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "button",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "interval",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ff_envelope",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "attack_length",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "attack_level",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "fade_length",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "fade_level",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ff_constant_effect",
+      "fields": [
+        {
+          "type_name": "__s16",
+          "name": "level",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ff_ramp_effect",
+      "fields": [
+        {
+          "type_name": "__s16",
+          "name": "start_level",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s16",
+          "name": "end_level",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ff_condition_effect",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "right_saturation",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "left_saturation",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s16",
+          "name": "right_coeff",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s16",
+          "name": "left_coeff",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "deadband",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s16",
+          "name": "center",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ff_periodic_effect",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "waveform",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "period",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s16",
+          "name": "magnitude",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s16",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "phase",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "custom_len",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ff_rumble_effect",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "strong_magnitude",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "weak_magnitude",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ff_haptic_effect",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "hid_usage",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "vendor_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "vendor_waveform_page",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "intensity",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "repeat_count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "retrigger_period",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ff_effect",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s16",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "direction",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

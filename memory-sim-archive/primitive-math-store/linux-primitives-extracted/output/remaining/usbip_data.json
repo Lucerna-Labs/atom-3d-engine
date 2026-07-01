@@ -1,0 +1,112 @@
+{
+  "filename": "usbip.h",
+  "includes": [],
+  "defines": [
+    {
+      "name": "USBIP_URB_SHORT_NOT_OK",
+      "value": "0x0001",
+      "comment": "",
+      "category": "USBIP_URB"
+    },
+    {
+      "name": "USBIP_URB_ISO_ASAP",
+      "value": "0x0002",
+      "comment": "",
+      "category": "USBIP_URB"
+    },
+    {
+      "name": "USBIP_URB_NO_TRANSFER_DMA_MAP",
+      "value": "0x0004",
+      "comment": "",
+      "category": "USBIP_URB"
+    },
+    {
+      "name": "USBIP_URB_ZERO_PACKET",
+      "value": "0x0040",
+      "comment": "",
+      "category": "USBIP_URB"
+    },
+    {
+      "name": "USBIP_URB_NO_INTERRUPT",
+      "value": "0x0080",
+      "comment": "",
+      "category": "USBIP_URB"
+    },
+    {
+      "name": "USBIP_URB_FREE_BUFFER",
+      "value": "0x0100",
+      "comment": "",
+      "category": "USBIP_URB"
+    },
+    {
+      "name": "USBIP_URB_DIR_IN",
+      "value": "0x0200",
+      "comment": "",
+      "category": "USBIP_URB"
+    },
+    {
+      "name": "USBIP_URB_DIR_OUT",
+      "value": "0",
+      "comment": "",
+      "category": "USBIP_URB"
+    },
+    {
+      "name": "USBIP_URB_DIR_MASK",
+      "value": "USBIP_URB_DIR_IN",
+      "comment": "",
+      "category": "USBIP_URB"
+    },
+    {
+      "name": "USBIP_URB_DMA_MAP_SINGLE",
+      "value": "0x00010000",
+      "comment": "",
+      "category": "USBIP_URB"
+    },
+    {
+      "name": "USBIP_URB_DMA_MAP_PAGE",
+      "value": "0x00020000",
+      "comment": "",
+      "category": "USBIP_URB"
+    },
+    {
+      "name": "USBIP_URB_DMA_MAP_SG",
+      "value": "0x00040000",
+      "comment": "",
+      "category": "USBIP_URB"
+    },
+    {
+      "name": "USBIP_URB_MAP_LOCAL",
+      "value": "0x00080000",
+      "comment": "",
+      "category": "USBIP_URB"
+    },
+    {
+      "name": "USBIP_URB_SETUP_MAP_SINGLE",
+      "value": "0x00100000",
+      "comment": "",
+      "category": "USBIP_URB"
+    },
+    {
+      "name": "USBIP_URB_SETUP_MAP_LOCAL",
+      "value": "0x00200000",
+      "comment": "",
+      "category": "USBIP_URB"
+    },
+    {
+      "name": "USBIP_URB_DMA_SG_COMBINED",
+      "value": "0x00400000",
+      "comment": "",
+      "category": "USBIP_URB"
+    },
+    {
+      "name": "USBIP_URB_ALIGNED_TEMP_BUFFER",
+      "value": "0x00800000",
+      "comment": "",
+      "category": "USBIP_URB"
+    }
+  ],
+  "structs": [],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

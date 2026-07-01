@@ -1,0 +1,305 @@
+{
+  "filename": "mroute6.h",
+  "includes": [
+    "linux/const.h",
+    "linux/types.h",
+    "linux/sockios.h",
+    "linux/in6.h"
+  ],
+  "defines": [
+    {
+      "name": "MRT6_BASE",
+      "value": "200",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "MRT6_INIT",
+      "value": "(MRT6_BASE)",
+      "comment": "Activate the kernel mroute code",
+      "category": ""
+    },
+    {
+      "name": "MRT6_DONE",
+      "value": "(MRT6_BASE+1)",
+      "comment": "Shutdown the kernel mroute",
+      "category": ""
+    },
+    {
+      "name": "MRT6_ADD_MIF",
+      "value": "(MRT6_BASE+2)",
+      "comment": "Add a virtual interface",
+      "category": ""
+    },
+    {
+      "name": "MRT6_DEL_MIF",
+      "value": "(MRT6_BASE+3)",
+      "comment": "Delete a virtual interface",
+      "category": ""
+    },
+    {
+      "name": "MRT6_ADD_MFC",
+      "value": "(MRT6_BASE+4)",
+      "comment": "Add a multicast forwarding entry",
+      "category": ""
+    },
+    {
+      "name": "MRT6_DEL_MFC",
+      "value": "(MRT6_BASE+5)",
+      "comment": "Delete a multicast forwarding entry",
+      "category": ""
+    },
+    {
+      "name": "MRT6_VERSION",
+      "value": "(MRT6_BASE+6)",
+      "comment": "Get the kernel multicast version",
+      "category": ""
+    },
+    {
+      "name": "MRT6_ASSERT",
+      "value": "(MRT6_BASE+7)",
+      "comment": "Activate PIM assert mode",
+      "category": ""
+    },
+    {
+      "name": "MRT6_PIM",
+      "value": "(MRT6_BASE+8)",
+      "comment": "enable PIM code",
+      "category": ""
+    },
+    {
+      "name": "MRT6_TABLE",
+      "value": "(MRT6_BASE+9)",
+      "comment": "Specify mroute table ID",
+      "category": ""
+    },
+    {
+      "name": "MRT6_ADD_MFC_PROXY",
+      "value": "(MRT6_BASE+10)",
+      "comment": "Add a (*,*|G) mfc entry",
+      "category": ""
+    },
+    {
+      "name": "MRT6_DEL_MFC_PROXY",
+      "value": "(MRT6_BASE+11)",
+      "comment": "Del a (*,*|G) mfc entry",
+      "category": ""
+    },
+    {
+      "name": "MRT6_FLUSH",
+      "value": "(MRT6_BASE+12)",
+      "comment": "Flush all mfc entries and/or vifs",
+      "category": ""
+    },
+    {
+      "name": "MRT6_MAX",
+      "value": "(MRT6_BASE+12)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SIOCGETMIFCNT_IN6",
+      "value": "SIOCPROTOPRIVATE",
+      "comment": "IP protocol privates",
+      "category": ""
+    },
+    {
+      "name": "SIOCGETSGCNT_IN6",
+      "value": "(SIOCPROTOPRIVATE+1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SIOCGETRPF",
+      "value": "(SIOCPROTOPRIVATE+2)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "MRT6_FLUSH_MFC",
+      "value": "1",
+      "comment": "Flush multicast entries",
+      "category": ""
+    },
+    {
+      "name": "MRT6_FLUSH_MFC_STATIC",
+      "value": "2",
+      "comment": "Flush static multicast entries",
+      "category": ""
+    },
+    {
+      "name": "MRT6_FLUSH_MIFS",
+      "value": "4",
+      "comment": "Flushing multicast vifs",
+      "category": ""
+    },
+    {
+      "name": "MRT6_FLUSH_MIFS_STATIC",
+      "value": "8",
+      "comment": "Flush static multicast vifs",
+      "category": ""
+    },
+    {
+      "name": "MAXMIFS",
+      "value": "32",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ALL_MIFS",
+      "value": "((mifi_t)(-1))",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IF_SETSIZE",
+      "value": "256",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NIFBITS",
+      "value": "(sizeof(if_mask) * 8)",
+      "comment": "bits per mask",
+      "category": ""
+    },
+    {
+      "name": "MIFF_REGISTER",
+      "value": "0x1",
+      "comment": "register vif",
+      "category": ""
+    },
+    {
+      "name": "MRT6MSG_NOCACHE",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "MRT6MSG_WRONGMIF",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "MRT6MSG_WHOLEPKT",
+      "value": "3",
+      "comment": "used for use level encap",
+      "category": ""
+    },
+    {
+      "name": "MRT6MSG_WRMIFWHOLE",
+      "value": "4",
+      "comment": "For PIM Register and assert processing",
+      "category": ""
+    },
+    {
+      "name": "IP6MRA_CREPORT_MAX",
+      "value": "(__IP6MRA_CREPORT_MAX - 1)",
+      "comment": "",
+      "category": ""
+    }
+  ],
+  "structs": [
+    {
+      "name": "if_set",
+      "fields": [
+        {
+          "type_name": "if_mask",
+          "name": "ifs_bits",
+          "array_size": "__KERNEL_DIV_ROUND_UP(IF_SETSIZE, NIFBITS)",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "mif6ctl",
+      "fields": [
+        {
+          "type_name": "mifi_t",
+          "name": "mif6c_mifi",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "mif6c_pifi",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "mf6cctl",
+      "fields": [
+        {
+          "type_name": "mifi_t",
+          "name": "mf6cc_parent",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "sioc_sg_req6",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "sioc_mif_req6",
+      "fields": [
+        {
+          "type_name": "mifi_t",
+          "name": "mifi",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "mrt6msg",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "im6_mbz",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "im6_msgtype",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "im6_mif",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "im6_pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [
+    "if_set"
+  ],
+  "enums": {}
+}

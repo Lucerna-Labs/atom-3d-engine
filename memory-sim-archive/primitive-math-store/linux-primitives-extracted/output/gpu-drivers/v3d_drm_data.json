@@ -1,0 +1,1177 @@
+{
+  "filename": "v3d_drm.h",
+  "includes": [
+    "drm.h"
+  ],
+  "defines": [
+    {
+      "name": "DRM_V3D_SUBMIT_CL",
+      "value": "0x00",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_V3D_WAIT_BO",
+      "value": "0x01",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_V3D_CREATE_BO",
+      "value": "0x02",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_V3D_MMAP_BO",
+      "value": "0x03",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_V3D_GET_PARAM",
+      "value": "0x04",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_V3D_GET_BO_OFFSET",
+      "value": "0x05",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_V3D_SUBMIT_TFU",
+      "value": "0x06",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_V3D_SUBMIT_CSD",
+      "value": "0x07",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_V3D_PERFMON_CREATE",
+      "value": "0x08",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_V3D_PERFMON_DESTROY",
+      "value": "0x09",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_V3D_PERFMON_GET_VALUES",
+      "value": "0x0a",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_V3D_SUBMIT_CPU",
+      "value": "0x0b",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_V3D_PERFMON_GET_COUNTER",
+      "value": "0x0c",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_V3D_PERFMON_SET_GLOBAL",
+      "value": "0x0d",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_IOCTL_V3D_SUBMIT_CL",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_V3D_SUBMIT_CL, struct drm_v3d_submit_cl)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_V3D_WAIT_BO",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_V3D_WAIT_BO, struct drm_v3d_wait_bo)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_V3D_CREATE_BO",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_V3D_CREATE_BO, struct drm_v3d_create_bo)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_V3D_MMAP_BO",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_V3D_MMAP_BO, struct drm_v3d_mmap_bo)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_V3D_GET_PARAM",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_V3D_GET_PARAM, struct drm_v3d_get_param)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_V3D_GET_BO_OFFSET",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_V3D_GET_BO_OFFSET, struct drm_v3d_get_bo_offset)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_V3D_SUBMIT_TFU",
+      "value": "DRM_IOW(DRM_COMMAND_BASE + DRM_V3D_SUBMIT_TFU, struct drm_v3d_submit_tfu)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_V3D_SUBMIT_CSD",
+      "value": "DRM_IOW(DRM_COMMAND_BASE + DRM_V3D_SUBMIT_CSD, struct drm_v3d_submit_csd)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_V3D_PERFMON_CREATE",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_V3D_PERFMON_CREATE, ",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_V3D_PERFMON_DESTROY",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_V3D_PERFMON_DESTROY, ",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_V3D_PERFMON_GET_VALUES",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_V3D_PERFMON_GET_VALUES, ",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_V3D_SUBMIT_CPU",
+      "value": "DRM_IOW(DRM_COMMAND_BASE + DRM_V3D_SUBMIT_CPU, struct drm_v3d_submit_cpu)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_V3D_PERFMON_GET_COUNTER",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_V3D_PERFMON_GET_COUNTER, ",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_V3D_PERFMON_SET_GLOBAL",
+      "value": "DRM_IOW(DRM_COMMAND_BASE + DRM_V3D_PERFMON_SET_GLOBAL, ",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_V3D_SUBMIT_CL_FLUSH_CACHE",
+      "value": "0x01",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_V3D_SUBMIT_EXTENSION",
+      "value": "0x02",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_V3D_EXT_ID_MULTI_SYNC",
+      "value": "0x01",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_V3D_EXT_ID_CPU_INDIRECT_CSD",
+      "value": "0x02",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_V3D_EXT_ID_CPU_TIMESTAMP_QUERY",
+      "value": "0x03",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_V3D_EXT_ID_CPU_RESET_TIMESTAMP_QUERY",
+      "value": "0x04",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_V3D_EXT_ID_CPU_COPY_TIMESTAMP_QUERY",
+      "value": "0x05",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_V3D_EXT_ID_CPU_RESET_PERFORMANCE_QUERY",
+      "value": "0x06",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_V3D_EXT_ID_CPU_COPY_PERFORMANCE_QUERY",
+      "value": "0x07",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_V3D_MAX_PERF_COUNTERS",
+      "value": "32",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_V3D_PERFCNT_MAX_NAME",
+      "value": "64",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_V3D_PERFCNT_MAX_CATEGORY",
+      "value": "32",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_V3D_PERFCNT_MAX_DESCRIPTION",
+      "value": "256",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_V3D_PERFMON_CLEAR_GLOBAL",
+      "value": "0x0001",
+      "comment": "",
+      "category": ""
+    }
+  ],
+  "structs": [
+    {
+      "name": "drm_v3d_extension",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "next",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_v3d_sem",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "point",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "mbz",
+          "array_size": "2",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_v3d_multi_sync",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "in_syncs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "out_syncs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "in_sync_count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "out_sync_count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "wait_stage",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_v3d_submit_cl",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "bcl_start",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "bcl_end",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "rcl_start",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "rcl_end",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "in_sync_bcl",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "in_sync_rcl",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "out_sync",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "qma",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "qms",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "qts",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "bo_handles",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "bo_handle_count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "perfmon_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "extensions",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_v3d_wait_bo",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "timeout_ns",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_v3d_create_bo",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_v3d_mmap_bo",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_v3d_get_param",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "param",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "value",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_v3d_get_bo_offset",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_v3d_submit_tfu",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "icfg",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "iia",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "iis",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ica",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "iua",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ioa",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ios",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "coef",
+          "array_size": "4",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "bo_handles",
+          "array_size": "4",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "in_sync",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "out_sync",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "extensions",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ioc",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_10",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "ioc",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_v3d_submit_csd",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "cfg",
+          "array_size": "7",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "coef",
+          "array_size": "4",
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "bo_handles",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "bo_handle_count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "in_sync",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "out_sync",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "perfmon_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "extensions",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_v3d_indirect_csd",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "indirect",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "wg_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "wg_uniform_offsets",
+          "array_size": "3",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_v3d_timestamp_query",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "offsets",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "syncs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_v3d_reset_timestamp_query",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "syncs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "count",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_v3d_copy_timestamp_query",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "do_64bit",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "do_partial",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "availability_bit",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "stride",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "offsets",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "syncs",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_v3d_reset_performance_query",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "syncs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "nperfmons",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "kperfmon_ids",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_v3d_copy_performance_query",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "do_64bit",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "do_partial",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "availability_bit",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "stride",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "nperfmons",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ncounters",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "syncs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "kperfmon_ids",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_v3d_submit_cpu",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "bo_handles",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "bo_handle_count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "extensions",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_v3d_perfmon_create",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ncounters",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "counters",
+          "array_size": "DRM_V3D_MAX_PERF_COUNTERS",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_v3d_perfmon_destroy",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_v3d_perfmon_get_values",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "values_ptr",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_v3d_perfmon_get_counter",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "counter",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "name",
+          "array_size": "DRM_V3D_PERFCNT_MAX_NAME",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "category",
+          "array_size": "DRM_V3D_PERFCNT_MAX_CATEGORY",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "description",
+          "array_size": "DRM_V3D_PERFCNT_MAX_DESCRIPTION",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reserved",
+          "array_size": "7",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_v3d_perfmon_set_global",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

@@ -1,0 +1,21 @@
+{
+  "model": "sshleifer/tiny-gpt2",
+  "layer_container": "transformer.h",
+  "layer_index": 1,
+  "num_layers": 2,
+  "strength": 1.0,
+  "vector_norm": 0.0065704165026545525,
+  "prompt": "Solve: Four printers make 480 pages in 6 minutes. How long for 3 printers to make 720 pages?",
+  "positive_examples": [
+    "I solve the problem by preserving each intermediate value, carrying units, and checking the final answer against the task.",
+    "For arithmetic, I compute the setup explicitly, keep signs and units visible, and verify the result before answering.",
+    "A careful calculation names the known quantities, writes each operation, and states the final value with units."
+  ],
+  "negative_examples": [
+    "I answer quickly from a vague impression and skip intermediate values.",
+    "I blend quantities together, drop units, and trust the first number that sounds plausible.",
+    "A rushed answer guesses the result without checking the arithmetic path."
+  ],
+  "baseline": "Solve: Four printers make 480 pages in 6 minutes. How long for 3 printers to make 720 pages? factors factors factors factors factors factors factors factors factors factors factors factors factors factors factors factors factors factors factors factors factors factors factors factors factors factors factors factors factors factors factors factors factors factors factors factors factors factors factors factors",
+  "steered": "Solve: Four printers make 480 pages in 6 minutes. How long for 3 printers to make 720 pages? factors factors factors factors factors factors factors factors factors factors factors factors factors factors factors factors factors factors factors factors factors factors factors factors factors factors factors factors factors factors factors factors factors factors factors factors factors factors factors factors"
+}

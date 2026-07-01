@@ -1,0 +1,584 @@
+{
+  "filename": "prctl.h",
+  "includes": [
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "PR_SET_PDEATHSIG",
+      "value": "1",
+      "comment": "Second arg is a signal",
+      "category": "PR_SET"
+    },
+    {
+      "name": "PR_GET_PDEATHSIG",
+      "value": "2",
+      "comment": "Second arg is a ptr to return the signal",
+      "category": "PR_GET"
+    },
+    {
+      "name": "PR_GET_DUMPABLE",
+      "value": "3",
+      "comment": "",
+      "category": "PR_GET"
+    },
+    {
+      "name": "PR_SET_DUMPABLE",
+      "value": "4",
+      "comment": "",
+      "category": "PR_SET"
+    },
+    {
+      "name": "PR_GET_UNALIGN",
+      "value": "5",
+      "comment": "",
+      "category": "PR_GET"
+    },
+    {
+      "name": "PR_SET_UNALIGN",
+      "value": "6",
+      "comment": "",
+      "category": "PR_SET"
+    },
+    {
+      "name": "PR_GET_KEEPCAPS",
+      "value": "7",
+      "comment": "",
+      "category": "PR_GET"
+    },
+    {
+      "name": "PR_SET_KEEPCAPS",
+      "value": "8",
+      "comment": "",
+      "category": "PR_SET"
+    },
+    {
+      "name": "PR_GET_FPEMU",
+      "value": "9",
+      "comment": "",
+      "category": "PR_GET"
+    },
+    {
+      "name": "PR_SET_FPEMU",
+      "value": "10",
+      "comment": "",
+      "category": "PR_SET"
+    },
+    {
+      "name": "PR_GET_FPEXC",
+      "value": "11",
+      "comment": "",
+      "category": "PR_GET"
+    },
+    {
+      "name": "PR_SET_FPEXC",
+      "value": "12",
+      "comment": "",
+      "category": "PR_SET"
+    },
+    {
+      "name": "PR_GET_TIMING",
+      "value": "13",
+      "comment": "",
+      "category": "PR_GET"
+    },
+    {
+      "name": "PR_SET_TIMING",
+      "value": "14",
+      "comment": "",
+      "category": "PR_SET"
+    },
+    {
+      "name": "PR_SET_NAME",
+      "value": "15",
+      "comment": "Set process name",
+      "category": "PR_SET"
+    },
+    {
+      "name": "PR_GET_NAME",
+      "value": "16",
+      "comment": "Get process name",
+      "category": "PR_GET"
+    },
+    {
+      "name": "PR_GET_ENDIAN",
+      "value": "19",
+      "comment": "",
+      "category": "PR_GET"
+    },
+    {
+      "name": "PR_SET_ENDIAN",
+      "value": "20",
+      "comment": "",
+      "category": "PR_SET"
+    },
+    {
+      "name": "PR_GET_SECCOMP",
+      "value": "21",
+      "comment": "",
+      "category": "PR_GET"
+    },
+    {
+      "name": "PR_SET_SECCOMP",
+      "value": "22",
+      "comment": "",
+      "category": "PR_SET"
+    },
+    {
+      "name": "PR_CAPBSET_READ",
+      "value": "23",
+      "comment": "",
+      "category": "PR_CAPBSET"
+    },
+    {
+      "name": "PR_CAPBSET_DROP",
+      "value": "24",
+      "comment": "",
+      "category": "PR_CAPBSET"
+    },
+    {
+      "name": "PR_GET_TSC",
+      "value": "25",
+      "comment": "",
+      "category": "PR_GET"
+    },
+    {
+      "name": "PR_SET_TSC",
+      "value": "26",
+      "comment": "",
+      "category": "PR_SET"
+    },
+    {
+      "name": "PR_GET_SECUREBITS",
+      "value": "27",
+      "comment": "",
+      "category": "PR_GET"
+    },
+    {
+      "name": "PR_SET_SECUREBITS",
+      "value": "28",
+      "comment": "",
+      "category": "PR_SET"
+    },
+    {
+      "name": "PR_SET_TIMERSLACK",
+      "value": "29",
+      "comment": "",
+      "category": "PR_SET"
+    },
+    {
+      "name": "PR_GET_TIMERSLACK",
+      "value": "30",
+      "comment": "",
+      "category": "PR_GET"
+    },
+    {
+      "name": "PR_TASK_PERF_EVENTS_DISABLE",
+      "value": "31",
+      "comment": "",
+      "category": "PR_TASK"
+    },
+    {
+      "name": "PR_TASK_PERF_EVENTS_ENABLE",
+      "value": "32",
+      "comment": "",
+      "category": "PR_TASK"
+    },
+    {
+      "name": "PR_MCE_KILL",
+      "value": "33",
+      "comment": "",
+      "category": "PR_MCE"
+    },
+    {
+      "name": "PR_MCE_KILL_GET",
+      "value": "34",
+      "comment": "",
+      "category": "PR_MCE"
+    },
+    {
+      "name": "PR_SET_MM",
+      "value": "35",
+      "comment": "",
+      "category": "PR_SET"
+    },
+    {
+      "name": "PR_SET_PTRACER",
+      "value": "0x59616d61",
+      "comment": "",
+      "category": "PR_SET"
+    },
+    {
+      "name": "PR_SET_CHILD_SUBREAPER",
+      "value": "36",
+      "comment": "",
+      "category": "PR_SET"
+    },
+    {
+      "name": "PR_GET_CHILD_SUBREAPER",
+      "value": "37",
+      "comment": "",
+      "category": "PR_GET"
+    },
+    {
+      "name": "PR_SET_NO_NEW_PRIVS",
+      "value": "38",
+      "comment": "",
+      "category": "PR_SET"
+    },
+    {
+      "name": "PR_GET_NO_NEW_PRIVS",
+      "value": "39",
+      "comment": "",
+      "category": "PR_GET"
+    },
+    {
+      "name": "PR_GET_TID_ADDRESS",
+      "value": "40",
+      "comment": "",
+      "category": "PR_GET"
+    },
+    {
+      "name": "PR_SET_THP_DISABLE",
+      "value": "41",
+      "comment": "",
+      "category": "PR_SET"
+    },
+    {
+      "name": "PR_GET_THP_DISABLE",
+      "value": "42",
+      "comment": "",
+      "category": "PR_GET"
+    },
+    {
+      "name": "PR_MPX_ENABLE_MANAGEMENT",
+      "value": "43",
+      "comment": "",
+      "category": "PR_MPX"
+    },
+    {
+      "name": "PR_MPX_DISABLE_MANAGEMENT",
+      "value": "44",
+      "comment": "",
+      "category": "PR_MPX"
+    },
+    {
+      "name": "PR_SET_FP_MODE",
+      "value": "45",
+      "comment": "",
+      "category": "PR_SET"
+    },
+    {
+      "name": "PR_GET_FP_MODE",
+      "value": "46",
+      "comment": "",
+      "category": "PR_GET"
+    },
+    {
+      "name": "PR_CAP_AMBIENT",
+      "value": "47",
+      "comment": "",
+      "category": "PR_CAP"
+    },
+    {
+      "name": "PR_SVE_SET_VL",
+      "value": "50",
+      "comment": "set task vector length",
+      "category": "PR_SVE"
+    },
+    {
+      "name": "PR_SVE_GET_VL",
+      "value": "51",
+      "comment": "get task vector length",
+      "category": "PR_SVE"
+    },
+    {
+      "name": "PR_GET_SPECULATION_CTRL",
+      "value": "52",
+      "comment": "",
+      "category": "PR_GET"
+    },
+    {
+      "name": "PR_SET_SPECULATION_CTRL",
+      "value": "53",
+      "comment": "",
+      "category": "PR_SET"
+    },
+    {
+      "name": "PR_PAC_RESET_KEYS",
+      "value": "54",
+      "comment": "",
+      "category": "PR_PAC"
+    },
+    {
+      "name": "PR_SET_TAGGED_ADDR_CTRL",
+      "value": "55",
+      "comment": "",
+      "category": "PR_SET"
+    },
+    {
+      "name": "PR_GET_TAGGED_ADDR_CTRL",
+      "value": "56",
+      "comment": "",
+      "category": "PR_GET"
+    },
+    {
+      "name": "PR_SET_IO_FLUSHER",
+      "value": "57",
+      "comment": "",
+      "category": "PR_SET"
+    },
+    {
+      "name": "PR_GET_IO_FLUSHER",
+      "value": "58",
+      "comment": "",
+      "category": "PR_GET"
+    },
+    {
+      "name": "PR_SET_SYSCALL_USER_DISPATCH",
+      "value": "59",
+      "comment": "",
+      "category": "PR_SET"
+    },
+    {
+      "name": "PR_PAC_SET_ENABLED_KEYS",
+      "value": "60",
+      "comment": "",
+      "category": "PR_PAC"
+    },
+    {
+      "name": "PR_PAC_GET_ENABLED_KEYS",
+      "value": "61",
+      "comment": "",
+      "category": "PR_PAC"
+    },
+    {
+      "name": "PR_SCHED_CORE",
+      "value": "62",
+      "comment": "",
+      "category": "PR_SCHED"
+    },
+    {
+      "name": "PR_SME_SET_VL",
+      "value": "63",
+      "comment": "set task vector length",
+      "category": "PR_SME"
+    },
+    {
+      "name": "PR_SME_GET_VL",
+      "value": "64",
+      "comment": "get task vector length",
+      "category": "PR_SME"
+    },
+    {
+      "name": "PR_SET_MDWE",
+      "value": "65",
+      "comment": "",
+      "category": "PR_SET"
+    },
+    {
+      "name": "PR_GET_MDWE",
+      "value": "66",
+      "comment": "",
+      "category": "PR_GET"
+    },
+    {
+      "name": "PR_SET_VMA",
+      "value": "0x53564d41",
+      "comment": "",
+      "category": "PR_SET"
+    },
+    {
+      "name": "PR_GET_AUXV",
+      "value": "0x41555856",
+      "comment": "",
+      "category": "PR_GET"
+    },
+    {
+      "name": "PR_SET_MEMORY_MERGE",
+      "value": "67",
+      "comment": "",
+      "category": "PR_SET"
+    },
+    {
+      "name": "PR_GET_MEMORY_MERGE",
+      "value": "68",
+      "comment": "",
+      "category": "PR_GET"
+    },
+    {
+      "name": "PR_RISCV_V_SET_CONTROL",
+      "value": "69",
+      "comment": "",
+      "category": "PR_RISCV"
+    },
+    {
+      "name": "PR_RISCV_V_GET_CONTROL",
+      "value": "70",
+      "comment": "",
+      "category": "PR_RISCV"
+    },
+    {
+      "name": "PR_RISCV_SET_ICACHE_FLUSH_CTX",
+      "value": "71",
+      "comment": "",
+      "category": "PR_RISCV"
+    },
+    {
+      "name": "PR_PPC_GET_DEXCR",
+      "value": "72",
+      "comment": "",
+      "category": "PR_PPC"
+    },
+    {
+      "name": "PR_PPC_SET_DEXCR",
+      "value": "73",
+      "comment": "",
+      "category": "PR_PPC"
+    },
+    {
+      "name": "PR_GET_SHADOW_STACK_STATUS",
+      "value": "74",
+      "comment": "",
+      "category": "PR_GET"
+    },
+    {
+      "name": "PR_SET_SHADOW_STACK_STATUS",
+      "value": "75",
+      "comment": "",
+      "category": "PR_SET"
+    },
+    {
+      "name": "PR_LOCK_SHADOW_STACK_STATUS",
+      "value": "76",
+      "comment": "",
+      "category": "PR_LOCK"
+    },
+    {
+      "name": "PR_TIMER_CREATE_RESTORE_IDS",
+      "value": "77",
+      "comment": "",
+      "category": "PR_TIMER"
+    },
+    {
+      "name": "PR_FUTEX_HASH",
+      "value": "78",
+      "comment": "",
+      "category": "PR_FUTEX"
+    },
+    {
+      "name": "PR_RSEQ_SLICE_EXTENSION",
+      "value": "79",
+      "comment": "",
+      "category": "PR_RSEQ"
+    },
+    {
+      "name": "PR_GET_CFI",
+      "value": "80",
+      "comment": "",
+      "category": "PR_GET"
+    },
+    {
+      "name": "PR_SET_CFI",
+      "value": "81",
+      "comment": "",
+      "category": "PR_SET"
+    },
+    {
+      "name": "PR_CFI_BRANCH_LANDING_PADS",
+      "value": "0",
+      "comment": "",
+      "category": "PR_CFI"
+    }
+  ],
+  "structs": [
+    {
+      "name": "prctl_mm_map",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "start_code",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "end_code",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "start_data",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "end_data",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "start_brk",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "brk",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "start_stack",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "arg_start",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "arg_end",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "env_start",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "env_end",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "auxv_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "exe_fd",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

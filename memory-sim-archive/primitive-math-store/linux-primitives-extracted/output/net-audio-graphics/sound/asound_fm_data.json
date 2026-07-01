@@ -1,0 +1,174 @@
+{
+  "filename": "asound_fm.h",
+  "includes": [],
+  "defines": [
+    {
+      "name": "SNDRV_DM_FM_MODE_OPL2",
+      "value": "0x00",
+      "comment": "",
+      "category": "SNDRV_DM"
+    },
+    {
+      "name": "SNDRV_DM_FM_MODE_OPL3",
+      "value": "0x01",
+      "comment": "",
+      "category": "SNDRV_DM"
+    },
+    {
+      "name": "SNDRV_DM_FM_IOCTL_INFO",
+      "value": "_IOR('H', 0x20, struct snd_dm_fm_info)",
+      "comment": "",
+      "category": "SNDRV_DM"
+    },
+    {
+      "name": "SNDRV_DM_FM_IOCTL_RESET",
+      "value": "_IO ('H', 0x21)",
+      "comment": "",
+      "category": "SNDRV_DM"
+    },
+    {
+      "name": "SNDRV_DM_FM_IOCTL_PLAY_NOTE",
+      "value": "_IOW('H', 0x22, struct snd_dm_fm_note)",
+      "comment": "",
+      "category": "SNDRV_DM"
+    },
+    {
+      "name": "SNDRV_DM_FM_IOCTL_SET_VOICE",
+      "value": "_IOW('H', 0x23, struct snd_dm_fm_voice)",
+      "comment": "",
+      "category": "SNDRV_DM"
+    },
+    {
+      "name": "SNDRV_DM_FM_IOCTL_SET_PARAMS",
+      "value": "_IOW('H', 0x24, struct snd_dm_fm_params)",
+      "comment": "",
+      "category": "SNDRV_DM"
+    },
+    {
+      "name": "SNDRV_DM_FM_IOCTL_SET_MODE",
+      "value": "_IOW('H', 0x25, int)",
+      "comment": "",
+      "category": "SNDRV_DM"
+    },
+    {
+      "name": "SNDRV_DM_FM_IOCTL_SET_CONNECTION",
+      "value": "_IOW('H', 0x26, int)",
+      "comment": "",
+      "category": "SNDRV_DM"
+    },
+    {
+      "name": "SNDRV_DM_FM_IOCTL_CLEAR_PATCHES",
+      "value": "_IO ('H', 0x40)",
+      "comment": "",
+      "category": "SNDRV_DM"
+    },
+    {
+      "name": "SNDRV_DM_FM_OSS_IOCTL_RESET",
+      "value": "0x20",
+      "comment": "",
+      "category": "SNDRV_DM"
+    },
+    {
+      "name": "SNDRV_DM_FM_OSS_IOCTL_PLAY_NOTE",
+      "value": "0x21",
+      "comment": "",
+      "category": "SNDRV_DM"
+    },
+    {
+      "name": "SNDRV_DM_FM_OSS_IOCTL_SET_VOICE",
+      "value": "0x22",
+      "comment": "",
+      "category": "SNDRV_DM"
+    },
+    {
+      "name": "SNDRV_DM_FM_OSS_IOCTL_SET_PARAMS",
+      "value": "0x23",
+      "comment": "",
+      "category": "SNDRV_DM"
+    },
+    {
+      "name": "SNDRV_DM_FM_OSS_IOCTL_SET_MODE",
+      "value": "0x24",
+      "comment": "",
+      "category": "SNDRV_DM"
+    },
+    {
+      "name": "SNDRV_DM_FM_OSS_IOCTL_SET_OPL",
+      "value": "0x25",
+      "comment": "",
+      "category": "SNDRV_DM"
+    },
+    {
+      "name": "FM_KEY_SBI",
+      "value": "\"SBI\\032\"",
+      "comment": "",
+      "category": "FM_KEY"
+    },
+    {
+      "name": "FM_KEY_2OP",
+      "value": "\"2OP\\032\"",
+      "comment": "",
+      "category": "FM_KEY"
+    },
+    {
+      "name": "FM_KEY_4OP",
+      "value": "\"4OP\\032\"",
+      "comment": "",
+      "category": "FM_KEY"
+    }
+  ],
+  "structs": [
+    {
+      "name": "snd_dm_fm_info",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_dm_fm_voice",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_dm_fm_note",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_dm_fm_params",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "sbi_patch",
+      "fields": [
+        {
+          "type_name": "char",
+          "name": "key",
+          "array_size": "4",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "name",
+          "array_size": "25",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "extension",
+          "array_size": "7",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

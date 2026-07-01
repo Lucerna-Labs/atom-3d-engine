@@ -1,0 +1,33 @@
+{
+  "dataset": "ordo_rust_memory_lora_v0_1",
+  "source_rust_lab": "C:\\Projects\\Rust Simulation for Synthetic Memory Specialist",
+  "runs": [
+    "ordo-extended-suite-20260608-185020",
+    "ordo-extended-suite-20260608-185527",
+    "ordo-build-suite-20260608-175755",
+    "ordo-runtime-memory-20260608-173725"
+  ],
+  "code_examples": 24,
+  "memory_examples": 79,
+  "train_count": 91,
+  "validation_count": 12,
+  "tasks": [
+    "audit_timeline",
+    "backpressure_scheduler",
+    "cost_ledger",
+    "fanout_join",
+    "intersection_fabric",
+    "mini_runtime",
+    "node_registry",
+    "ordo_runtime",
+    "preload_planner",
+    "retry_fallback",
+    "signal_mesh",
+    "workflow_codec"
+  ],
+  "notes": [
+    "Only passed real Cargo-test artifacts are used as code targets.",
+    "Memory scar rows encode the API, CLI, and behavior details that moved the 12-task suite from 0/12 to 10/12.",
+    "Failed generated crates are excluded from assistant targets."
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "name": "cyber_structural_25_75",
+  "description": "Source-boundary candidate for prompt-injection and authority-separation behavior.",
+  "shares": {
+    "structural": 0.75,
+    "cognitive": 0.0,
+    "cyber": 0.25
+  },
+  "bridge_count": 160,
+  "anti_echo_multiplier": 2,
+  "q2_amplifier": false,
+  "train_count": 1417,
+  "validation_count": 123,
+  "summary": {
+    "count": 1540,
+    "by_kind": {
+      "anti_echo_stop": 300,
+      "carrier_control": 64,
+      "clean_task_solution": 79,
+      "compact_task_solution": 138,
+      "cyber_memory": 300,
+      "gate_application": 17,
+      "gate_control": 82,
+      "repair_solution": 174,
+      "routed_bridge": 160,
+      "task_solution": 156,
+      "web_association": 58,
+      "web_repair": 12
+    },
+    "by_family": {
+      "adversarial": 186,
+      "boundary": 274,
+      "generalist": 180,
+      "structural": 900
+    },
+    "by_source": {
+      "anti_echo_generator": 180,
+      "bridge_generator": 160,
+      "rust_cyber_defender_generated.tsv": 300,
+      "structural_primitive_lora_v0_2": 900
+    }
+  },
+  "files": {
+    "train_jsonl": "C:\\Projects\\small-model-memory-lab\\data\\dataset_mixture_candidates_v0_1\\cyber_structural_25_75\\train.jsonl",
+    "validation_jsonl": "C:\\Projects\\small-model-memory-lab\\data\\dataset_mixture_candidates_v0_1\\cyber_structural_25_75\\validation.jsonl",
+    "preview": "C:\\Projects\\small-model-memory-lab\\data\\dataset_mixture_candidates_v0_1\\cyber_structural_25_75\\preview.json"
+  }
+}

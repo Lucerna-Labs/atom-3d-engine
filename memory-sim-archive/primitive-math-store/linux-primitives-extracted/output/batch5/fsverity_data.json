@@ -1,0 +1,271 @@
+{
+  "filename": "fsverity.h",
+  "includes": [
+    "linux/ioctl.h",
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "FS_VERITY_HASH_ALG_SHA256",
+      "value": "1",
+      "comment": "",
+      "category": "FS_VERITY"
+    },
+    {
+      "name": "FS_VERITY_HASH_ALG_SHA512",
+      "value": "2",
+      "comment": "",
+      "category": "FS_VERITY"
+    },
+    {
+      "name": "FS_VERITY_METADATA_TYPE_MERKLE_TREE",
+      "value": "1",
+      "comment": "",
+      "category": "FS_VERITY"
+    },
+    {
+      "name": "FS_VERITY_METADATA_TYPE_DESCRIPTOR",
+      "value": "2",
+      "comment": "",
+      "category": "FS_VERITY"
+    },
+    {
+      "name": "FS_VERITY_METADATA_TYPE_SIGNATURE",
+      "value": "3",
+      "comment": "",
+      "category": "FS_VERITY"
+    },
+    {
+      "name": "FS_IOC_ENABLE_VERITY",
+      "value": "_IOW('f', 133, struct fsverity_enable_arg)",
+      "comment": "",
+      "category": "FS_IOC"
+    },
+    {
+      "name": "FS_IOC_MEASURE_VERITY",
+      "value": "_IOWR('f', 134, struct fsverity_digest)",
+      "comment": "",
+      "category": "FS_IOC"
+    },
+    {
+      "name": "FS_IOC_READ_VERITY_METADATA",
+      "value": "",
+      "comment": "",
+      "category": "FS_IOC"
+    }
+  ],
+  "structs": [
+    {
+      "name": "fsverity_enable_arg",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "version",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "hash_algorithm",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "block_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "salt_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "salt_ptr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "sig_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "__reserved1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "sig_ptr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "__reserved2",
+          "array_size": "11",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fsverity_digest",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "digest_algorithm",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "digest_size",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fsverity_descriptor",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "version",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "hash_algorithm",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "log_blocksize",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "salt_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "sig_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "__reserved_0x04",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "data_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "root_hash",
+          "array_size": "64",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "salt",
+          "array_size": "32",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "__reserved",
+          "array_size": "144",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fsverity_formatted_digest",
+      "fields": [
+        {
+          "type_name": "char",
+          "name": "magic",
+          "array_size": "8",
+          "comment": ""
+        },
+        {
+          "type_name": "__le16",
+          "name": "digest_algorithm",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le16",
+          "name": "digest_size",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fsverity_read_metadata_arg",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "metadata_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "length",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "buf_ptr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "__reserved",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

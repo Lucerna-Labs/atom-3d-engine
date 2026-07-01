@@ -1,0 +1,728 @@
+{
+  "filename": "firewire.h",
+  "includes": [
+    "linux/ioctl.h",
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "SNDRV_FIREWIRE_EVENT_LOCK_STATUS",
+      "value": "0x000010cc",
+      "comment": "",
+      "category": "SNDRV_FIREWIRE"
+    },
+    {
+      "name": "SNDRV_FIREWIRE_EVENT_DICE_NOTIFICATION",
+      "value": "0xd1ce004e",
+      "comment": "",
+      "category": "SNDRV_FIREWIRE"
+    },
+    {
+      "name": "SNDRV_FIREWIRE_EVENT_EFW_RESPONSE",
+      "value": "0x4e617475",
+      "comment": "",
+      "category": "SNDRV_FIREWIRE"
+    },
+    {
+      "name": "SNDRV_FIREWIRE_EVENT_DIGI00X_MESSAGE",
+      "value": "0x746e736c",
+      "comment": "",
+      "category": "SNDRV_FIREWIRE"
+    },
+    {
+      "name": "SNDRV_FIREWIRE_EVENT_MOTU_NOTIFICATION",
+      "value": "0x64776479",
+      "comment": "",
+      "category": "SNDRV_FIREWIRE"
+    },
+    {
+      "name": "SNDRV_FIREWIRE_EVENT_TASCAM_CONTROL",
+      "value": "0x7473636d",
+      "comment": "",
+      "category": "SNDRV_FIREWIRE"
+    },
+    {
+      "name": "SNDRV_FIREWIRE_EVENT_MOTU_REGISTER_DSP_CHANGE",
+      "value": "0x4d545244",
+      "comment": "",
+      "category": "SNDRV_FIREWIRE"
+    },
+    {
+      "name": "SNDRV_FIREWIRE_EVENT_FF400_MESSAGE",
+      "value": "0x4f6c6761",
+      "comment": "",
+      "category": "SNDRV_FIREWIRE"
+    },
+    {
+      "name": "SND_EFW_TRANSACTION_USER_SEQNUM_MAX",
+      "value": "((__u32)((__u16)~0) - 1)",
+      "comment": "",
+      "category": "SND_EFW"
+    },
+    {
+      "name": "SNDRV_FIREWIRE_IOCTL_GET_INFO",
+      "value": "_IOR('H', 0xf8, struct snd_firewire_get_info)",
+      "comment": "",
+      "category": "SNDRV_FIREWIRE"
+    },
+    {
+      "name": "SNDRV_FIREWIRE_IOCTL_LOCK",
+      "value": "_IO('H', 0xf9)",
+      "comment": "",
+      "category": "SNDRV_FIREWIRE"
+    },
+    {
+      "name": "SNDRV_FIREWIRE_IOCTL_UNLOCK",
+      "value": "_IO('H', 0xfa)",
+      "comment": "",
+      "category": "SNDRV_FIREWIRE"
+    },
+    {
+      "name": "SNDRV_FIREWIRE_IOCTL_TASCAM_STATE",
+      "value": "_IOR('H', 0xfb, struct snd_firewire_tascam_state)",
+      "comment": "",
+      "category": "SNDRV_FIREWIRE"
+    },
+    {
+      "name": "SNDRV_FIREWIRE_IOCTL_MOTU_REGISTER_DSP_METER",
+      "value": "_IOR('H', 0xfc, struct snd_firewire_motu_register_dsp_meter)",
+      "comment": "",
+      "category": "SNDRV_FIREWIRE"
+    },
+    {
+      "name": "SNDRV_FIREWIRE_IOCTL_MOTU_COMMAND_DSP_METER",
+      "value": "_IOR('H', 0xfd, struct snd_firewire_motu_command_dsp_meter)",
+      "comment": "",
+      "category": "SNDRV_FIREWIRE"
+    },
+    {
+      "name": "SNDRV_FIREWIRE_IOCTL_MOTU_REGISTER_DSP_PARAMETER",
+      "value": "_IOR('H', 0xfe, struct snd_firewire_motu_register_dsp_parameter)",
+      "comment": "",
+      "category": "SNDRV_FIREWIRE"
+    },
+    {
+      "name": "SNDRV_FIREWIRE_TYPE_DICE",
+      "value": "1",
+      "comment": "",
+      "category": "SNDRV_FIREWIRE"
+    },
+    {
+      "name": "SNDRV_FIREWIRE_TYPE_FIREWORKS",
+      "value": "2",
+      "comment": "",
+      "category": "SNDRV_FIREWIRE"
+    },
+    {
+      "name": "SNDRV_FIREWIRE_TYPE_BEBOB",
+      "value": "3",
+      "comment": "",
+      "category": "SNDRV_FIREWIRE"
+    },
+    {
+      "name": "SNDRV_FIREWIRE_TYPE_OXFW",
+      "value": "4",
+      "comment": "",
+      "category": "SNDRV_FIREWIRE"
+    },
+    {
+      "name": "SNDRV_FIREWIRE_TYPE_DIGI00X",
+      "value": "5",
+      "comment": "",
+      "category": "SNDRV_FIREWIRE"
+    },
+    {
+      "name": "SNDRV_FIREWIRE_TYPE_TASCAM",
+      "value": "6",
+      "comment": "",
+      "category": "SNDRV_FIREWIRE"
+    },
+    {
+      "name": "SNDRV_FIREWIRE_TYPE_MOTU",
+      "value": "7",
+      "comment": "",
+      "category": "SNDRV_FIREWIRE"
+    },
+    {
+      "name": "SNDRV_FIREWIRE_TYPE_FIREFACE",
+      "value": "8",
+      "comment": "",
+      "category": "SNDRV_FIREWIRE"
+    },
+    {
+      "name": "SNDRV_FIREWIRE_TASCAM_STATE_COUNT",
+      "value": "64",
+      "comment": "",
+      "category": "SNDRV_FIREWIRE"
+    },
+    {
+      "name": "SNDRV_FIREWIRE_MOTU_REGISTER_DSP_METER_INPUT_COUNT",
+      "value": "24",
+      "comment": "",
+      "category": "SNDRV_FIREWIRE"
+    },
+    {
+      "name": "SNDRV_FIREWIRE_MOTU_REGISTER_DSP_METER_OUTPUT_COUNT",
+      "value": "24",
+      "comment": "",
+      "category": "SNDRV_FIREWIRE"
+    },
+    {
+      "name": "SNDRV_FIREWIRE_MOTU_REGISTER_DSP_METER_COUNT",
+      "value": "",
+      "comment": "",
+      "category": "SNDRV_FIREWIRE"
+    },
+    {
+      "name": "SNDRV_FIREWIRE_MOTU_REGISTER_DSP_MIXER_COUNT",
+      "value": "4",
+      "comment": "",
+      "category": "SNDRV_FIREWIRE"
+    },
+    {
+      "name": "SNDRV_FIREWIRE_MOTU_REGISTER_DSP_MIXER_SRC_COUNT",
+      "value": "20",
+      "comment": "",
+      "category": "SNDRV_FIREWIRE"
+    },
+    {
+      "name": "SNDRV_FIREWIRE_MOTU_REGISTER_DSP_INPUT_COUNT",
+      "value": "10",
+      "comment": "",
+      "category": "SNDRV_FIREWIRE"
+    },
+    {
+      "name": "SNDRV_FIREWIRE_MOTU_REGISTER_DSP_ALIGNED_INPUT_COUNT",
+      "value": "(SNDRV_FIREWIRE_MOTU_REGISTER_DSP_INPUT_COUNT + 2)",
+      "comment": "",
+      "category": "SNDRV_FIREWIRE"
+    },
+    {
+      "name": "SNDRV_FIREWIRE_MOTU_COMMAND_DSP_METER_COUNT",
+      "value": "400",
+      "comment": "",
+      "category": "SNDRV_FIREWIRE"
+    }
+  ],
+  "structs": [
+    {
+      "name": "snd_firewire_event_common",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_firewire_event_lock_status",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_firewire_event_dice_notification",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_efw_transaction",
+      "fields": [
+        {
+          "type_name": "__be32",
+          "name": "length",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "version",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "seqnum",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "category",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "command",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "status",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_firewire_event_efw_response",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_firewire_event_digi00x_message",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "message",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_firewire_event_motu_notification",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "message",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_firewire_tascam_change",
+      "fields": [
+        {
+          "type_name": "__be32",
+          "name": "before",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "after",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_firewire_event_tascam_control",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_firewire_event_motu_register_dsp_change",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "count",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_firewire_event_ff400_message",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "message",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tstamp",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_11",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "message",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tstamp",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_firewire_get_info",
+      "fields": [
+        {
+          "type_name": "char",
+          "name": "device_name",
+          "array_size": "16",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_firewire_tascam_state",
+      "fields": [
+        {
+          "type_name": "__be32",
+          "name": "data",
+          "array_size": "SNDRV_FIREWIRE_TASCAM_STATE_COUNT",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_firewire_motu_register_dsp_meter",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "data",
+          "array_size": "SNDRV_FIREWIRE_MOTU_REGISTER_DSP_METER_COUNT",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_firewire_motu_register_dsp_parameter",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "gain",
+          "array_size": "SNDRV_FIREWIRE_MOTU_REGISTER_DSP_MIXER_SRC_COUNT",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "pan",
+          "array_size": "SNDRV_FIREWIRE_MOTU_REGISTER_DSP_MIXER_SRC_COUNT",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "flag",
+          "array_size": "SNDRV_FIREWIRE_MOTU_REGISTER_DSP_MIXER_SRC_COUNT",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "paired_balance",
+          "array_size": "SNDRV_FIREWIRE_MOTU_REGISTER_DSP_MIXER_SRC_COUNT",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "paired_width",
+          "array_size": "SNDRV_FIREWIRE_MOTU_REGISTER_DSP_MIXER_SRC_COUNT",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "paired_volume",
+          "array_size": "SNDRV_FIREWIRE_MOTU_REGISTER_DSP_MIXER_COUNT",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "paired_flag",
+          "array_size": "SNDRV_FIREWIRE_MOTU_REGISTER_DSP_MIXER_COUNT",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "main_paired_volume",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "hp_paired_volume",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "hp_paired_assignment",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reserved",
+          "array_size": "5",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "boost_flag",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "nominal_level_flag",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reserved",
+          "array_size": "6",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "gain_and_invert",
+          "array_size": "SNDRV_FIREWIRE_MOTU_REGISTER_DSP_ALIGNED_INPUT_COUNT",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "flag",
+          "array_size": "SNDRV_FIREWIRE_MOTU_REGISTER_DSP_ALIGNED_INPUT_COUNT",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reserved",
+          "array_size": "64",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_16",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "gain",
+          "array_size": "SNDRV_FIREWIRE_MOTU_REGISTER_DSP_MIXER_SRC_COUNT",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "pan",
+          "array_size": "SNDRV_FIREWIRE_MOTU_REGISTER_DSP_MIXER_SRC_COUNT",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "flag",
+          "array_size": "SNDRV_FIREWIRE_MOTU_REGISTER_DSP_MIXER_SRC_COUNT",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "paired_balance",
+          "array_size": "SNDRV_FIREWIRE_MOTU_REGISTER_DSP_MIXER_SRC_COUNT",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "paired_width",
+          "array_size": "SNDRV_FIREWIRE_MOTU_REGISTER_DSP_MIXER_SRC_COUNT",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "paired_volume",
+          "array_size": "SNDRV_FIREWIRE_MOTU_REGISTER_DSP_MIXER_COUNT",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "paired_flag",
+          "array_size": "SNDRV_FIREWIRE_MOTU_REGISTER_DSP_MIXER_COUNT",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_17",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "gain",
+          "array_size": "SNDRV_FIREWIRE_MOTU_REGISTER_DSP_MIXER_SRC_COUNT",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "pan",
+          "array_size": "SNDRV_FIREWIRE_MOTU_REGISTER_DSP_MIXER_SRC_COUNT",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "flag",
+          "array_size": "SNDRV_FIREWIRE_MOTU_REGISTER_DSP_MIXER_SRC_COUNT",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "paired_balance",
+          "array_size": "SNDRV_FIREWIRE_MOTU_REGISTER_DSP_MIXER_SRC_COUNT",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "paired_width",
+          "array_size": "SNDRV_FIREWIRE_MOTU_REGISTER_DSP_MIXER_SRC_COUNT",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_18",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "paired_volume",
+          "array_size": "SNDRV_FIREWIRE_MOTU_REGISTER_DSP_MIXER_COUNT",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "paired_flag",
+          "array_size": "SNDRV_FIREWIRE_MOTU_REGISTER_DSP_MIXER_COUNT",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_19",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "main_paired_volume",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "hp_paired_volume",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "hp_paired_assignment",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reserved",
+          "array_size": "5",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_20",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "boost_flag",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "nominal_level_flag",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reserved",
+          "array_size": "6",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_21",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "gain_and_invert",
+          "array_size": "SNDRV_FIREWIRE_MOTU_REGISTER_DSP_ALIGNED_INPUT_COUNT",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "flag",
+          "array_size": "SNDRV_FIREWIRE_MOTU_REGISTER_DSP_ALIGNED_INPUT_COUNT",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_firewire_motu_command_dsp_meter",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "data",
+          "array_size": "SNDRV_FIREWIRE_MOTU_COMMAND_DSP_METER_COUNT",
+          "comment": ""
+        },
+        {
+          "type_name": "float",
+          "name": "data",
+          "array_size": "SNDRV_FIREWIRE_MOTU_COMMAND_DSP_METER_COUNT",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

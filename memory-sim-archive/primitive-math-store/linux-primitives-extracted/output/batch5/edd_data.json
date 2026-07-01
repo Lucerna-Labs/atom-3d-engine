@@ -1,0 +1,979 @@
+{
+  "filename": "edd.h",
+  "includes": [
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "EDDNR",
+      "value": "0x1e9\t\t/* addr of number of edd_info structs at EDDBUF",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EDDBUF",
+      "value": "0xd00",
+      "comment": "addr of edd_info structs in boot_params",
+      "category": ""
+    },
+    {
+      "name": "EDDMAXNR",
+      "value": "6",
+      "comment": "number of edd_info structs starting at EDDBUF",
+      "category": ""
+    },
+    {
+      "name": "EDDEXTSIZE",
+      "value": "8",
+      "comment": "change these if you muck with the structures",
+      "category": ""
+    },
+    {
+      "name": "EDDPARMSIZE",
+      "value": "74",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "CHECKEXTENSIONSPRESENT",
+      "value": "0x41",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GETDEVICEPARAMETERS",
+      "value": "0x48",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "LEGACYGETDEVICEPARAMETERS",
+      "value": "0x08",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EDDMAGIC1",
+      "value": "0x55AA",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EDDMAGIC2",
+      "value": "0xAA55",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "READ_SECTORS",
+      "value": "0x02",
+      "comment": "int13 AH=0x02 is READ_SECTORS command",
+      "category": ""
+    },
+    {
+      "name": "EDD_MBR_SIG_OFFSET",
+      "value": "0x1B8",
+      "comment": "offset of signature in the MBR",
+      "category": "EDD_MBR"
+    },
+    {
+      "name": "EDD_MBR_SIG_BUF",
+      "value": "0x290",
+      "comment": "addr in boot params",
+      "category": "EDD_MBR"
+    },
+    {
+      "name": "EDD_MBR_SIG_MAX",
+      "value": "16",
+      "comment": "max number of signatures to store",
+      "category": "EDD_MBR"
+    },
+    {
+      "name": "EDD_MBR_SIG_NR_BUF",
+      "value": "0x1ea  /* addr of number of MBR signtaures at EDD_MBR_SIG_BUF",
+      "comment": "",
+      "category": "EDD_MBR"
+    },
+    {
+      "name": "EDD_EXT_FIXED_DISK_ACCESS",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "EDD_EXT"
+    },
+    {
+      "name": "EDD_EXT_DEVICE_LOCKING_AND_EJECTING",
+      "value": "(1 << 1)",
+      "comment": "",
+      "category": "EDD_EXT"
+    },
+    {
+      "name": "EDD_EXT_ENHANCED_DISK_DRIVE_SUPPORT",
+      "value": "(1 << 2)",
+      "comment": "",
+      "category": "EDD_EXT"
+    },
+    {
+      "name": "EDD_EXT_64BIT_EXTENSIONS",
+      "value": "(1 << 3)",
+      "comment": "",
+      "category": "EDD_EXT"
+    },
+    {
+      "name": "EDD_INFO_DMA_BOUNDARY_ERROR_TRANSPARENT",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "EDD_INFO"
+    },
+    {
+      "name": "EDD_INFO_GEOMETRY_VALID",
+      "value": "(1 << 1)",
+      "comment": "",
+      "category": "EDD_INFO"
+    },
+    {
+      "name": "EDD_INFO_REMOVABLE",
+      "value": "(1 << 2)",
+      "comment": "",
+      "category": "EDD_INFO"
+    },
+    {
+      "name": "EDD_INFO_WRITE_VERIFY",
+      "value": "(1 << 3)",
+      "comment": "",
+      "category": "EDD_INFO"
+    },
+    {
+      "name": "EDD_INFO_MEDIA_CHANGE_NOTIFICATION",
+      "value": "(1 << 4)",
+      "comment": "",
+      "category": "EDD_INFO"
+    },
+    {
+      "name": "EDD_INFO_LOCKABLE",
+      "value": "(1 << 5)",
+      "comment": "",
+      "category": "EDD_INFO"
+    },
+    {
+      "name": "EDD_INFO_NO_MEDIA_PRESENT",
+      "value": "(1 << 6)",
+      "comment": "",
+      "category": "EDD_INFO"
+    },
+    {
+      "name": "EDD_INFO_USE_INT13_FN50",
+      "value": "(1 << 7)",
+      "comment": "",
+      "category": "EDD_INFO"
+    }
+  ],
+  "structs": [
+    {
+      "name": "edd_device_params",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "length",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "info_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "num_default_cylinders",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "num_default_heads",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "sectors_per_track",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "number_of_sectors",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "bytes_per_sector",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "dpte_ptr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "key",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "device_path_info_length",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reserved2",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "reserved3",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "host_bus_type",
+          "array_size": "4",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "interface_type",
+          "array_size": "8",
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "base_address",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "reserved1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved2",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "bus",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "slot",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "function",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "channel",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "device",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reserved1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "reserved2",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved3",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "reserved4",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "device",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "lun",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reserved1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reserved2",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved3",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "reserved4",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "lun",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "reserved1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved2",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "serial_number",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "eui",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "wwid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "lun",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "identity_tag",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "array_number",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "reserved2",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "device",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reserved1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "reserved2",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved3",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "reserved4",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "reserved1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "reserved2",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reserved4",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "checksum",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": true
+    },
+    {
+      "name": "anonymous_1",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "base_address",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "reserved1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved2",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_2",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "bus",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "slot",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "function",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "channel",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_3",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_4",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_5",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_6",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_7",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "device",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reserved1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "reserved2",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved3",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "reserved4",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_8",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "device",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "lun",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reserved1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reserved2",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved3",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "reserved4",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_9",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "lun",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "reserved1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved2",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_10",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "serial_number",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_11",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "eui",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_12",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "wwid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "lun",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_13",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "identity_tag",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_14",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "array_number",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "reserved2",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_15",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "device",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reserved1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "reserved2",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved3",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "reserved4",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_16",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "reserved1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "reserved2",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "edd_info",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "device",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "version",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "interface_support",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "legacy_max_cylinder",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "legacy_max_head",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "legacy_sectors_per_track",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "edd",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

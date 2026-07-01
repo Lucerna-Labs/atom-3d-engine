@@ -1,0 +1,20 @@
+﻿
+
+1. **Reproduce Before Repair**
+   - **Action**: Reproduce the crash in a controlled environment (e.g., staging) to isolate the issue.
+   - **Uncertainty**: If the crash is intermittent, use a test harness or automated regression testing to simulate the conditions.
+
+2. **One Variable Moved**
+   - **Action**: Identify and isolate the variable that changed after the deploy (e.g., a new dependency, configuration, or code change).
+   - **Uncertainty**: If multiple variables changed, use a dependency graph or version control to trace the changes.
+
+3. **Relevant Remembered Experiences**
+   - **Action**: Recall past similar issues and their resolutions. Use these as a pattern for troubleshooting.
+   - **Uncertainty**: If past experiences are unclear, consult the team or documentation for similar cases.
+
+4. **Compressed into Cognitive Cues**
+   - **Action**: Use the following cognitive cues to guide the debugging process:
+     - **Crash Log Analysis**: Look for error messages, stack traces, and warnings.
+     - **Dependency Check**: Verify that all dependencies are up to date and compatible.
+     - **Configuration Review**: Ensure that all configurations are correct and consistent.
+

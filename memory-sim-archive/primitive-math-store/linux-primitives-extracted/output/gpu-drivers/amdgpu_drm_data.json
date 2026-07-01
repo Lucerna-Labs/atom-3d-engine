@@ -1,0 +1,4668 @@
+{
+  "filename": "amdgpu_drm.h",
+  "includes": [
+    "drm.h"
+  ],
+  "defines": [
+    {
+      "name": "DRM_AMDGPU_GEM_CREATE",
+      "value": "0x00",
+      "comment": "",
+      "category": "DRM_AMDGPU"
+    },
+    {
+      "name": "DRM_AMDGPU_GEM_MMAP",
+      "value": "0x01",
+      "comment": "",
+      "category": "DRM_AMDGPU"
+    },
+    {
+      "name": "DRM_AMDGPU_CTX",
+      "value": "0x02",
+      "comment": "",
+      "category": "DRM_AMDGPU"
+    },
+    {
+      "name": "DRM_AMDGPU_BO_LIST",
+      "value": "0x03",
+      "comment": "",
+      "category": "DRM_AMDGPU"
+    },
+    {
+      "name": "DRM_AMDGPU_CS",
+      "value": "0x04",
+      "comment": "",
+      "category": "DRM_AMDGPU"
+    },
+    {
+      "name": "DRM_AMDGPU_INFO",
+      "value": "0x05",
+      "comment": "",
+      "category": "DRM_AMDGPU"
+    },
+    {
+      "name": "DRM_AMDGPU_GEM_METADATA",
+      "value": "0x06",
+      "comment": "",
+      "category": "DRM_AMDGPU"
+    },
+    {
+      "name": "DRM_AMDGPU_GEM_WAIT_IDLE",
+      "value": "0x07",
+      "comment": "",
+      "category": "DRM_AMDGPU"
+    },
+    {
+      "name": "DRM_AMDGPU_GEM_VA",
+      "value": "0x08",
+      "comment": "",
+      "category": "DRM_AMDGPU"
+    },
+    {
+      "name": "DRM_AMDGPU_WAIT_CS",
+      "value": "0x09",
+      "comment": "",
+      "category": "DRM_AMDGPU"
+    },
+    {
+      "name": "DRM_AMDGPU_GEM_OP",
+      "value": "0x10",
+      "comment": "",
+      "category": "DRM_AMDGPU"
+    },
+    {
+      "name": "DRM_AMDGPU_GEM_USERPTR",
+      "value": "0x11",
+      "comment": "",
+      "category": "DRM_AMDGPU"
+    },
+    {
+      "name": "DRM_AMDGPU_WAIT_FENCES",
+      "value": "0x12",
+      "comment": "",
+      "category": "DRM_AMDGPU"
+    },
+    {
+      "name": "DRM_AMDGPU_VM",
+      "value": "0x13",
+      "comment": "",
+      "category": "DRM_AMDGPU"
+    },
+    {
+      "name": "DRM_AMDGPU_FENCE_TO_HANDLE",
+      "value": "0x14",
+      "comment": "",
+      "category": "DRM_AMDGPU"
+    },
+    {
+      "name": "DRM_AMDGPU_SCHED",
+      "value": "0x15",
+      "comment": "",
+      "category": "DRM_AMDGPU"
+    },
+    {
+      "name": "DRM_AMDGPU_USERQ",
+      "value": "0x16",
+      "comment": "",
+      "category": "DRM_AMDGPU"
+    },
+    {
+      "name": "DRM_AMDGPU_USERQ_SIGNAL",
+      "value": "0x17",
+      "comment": "",
+      "category": "DRM_AMDGPU"
+    },
+    {
+      "name": "DRM_AMDGPU_USERQ_WAIT",
+      "value": "0x18",
+      "comment": "",
+      "category": "DRM_AMDGPU"
+    },
+    {
+      "name": "DRM_AMDGPU_GEM_LIST_HANDLES",
+      "value": "0x19",
+      "comment": "",
+      "category": "DRM_AMDGPU"
+    },
+    {
+      "name": "DRM_IOCTL_AMDGPU_GEM_CREATE",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_AMDGPU_GEM_CREATE, union drm_amdgpu_gem_create)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_AMDGPU_GEM_MMAP",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_AMDGPU_GEM_MMAP, union drm_amdgpu_gem_mmap)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_AMDGPU_CTX",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_AMDGPU_CTX, union drm_amdgpu_ctx)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_AMDGPU_BO_LIST",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_AMDGPU_BO_LIST, union drm_amdgpu_bo_list)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_AMDGPU_CS",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_AMDGPU_CS, union drm_amdgpu_cs)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_AMDGPU_INFO",
+      "value": "DRM_IOW(DRM_COMMAND_BASE + DRM_AMDGPU_INFO, struct drm_amdgpu_info)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_AMDGPU_GEM_METADATA",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_AMDGPU_GEM_METADATA, struct drm_amdgpu_gem_metadata)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_AMDGPU_GEM_WAIT_IDLE",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_AMDGPU_GEM_WAIT_IDLE, union drm_amdgpu_gem_wait_idle)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_AMDGPU_GEM_VA",
+      "value": "DRM_IOW(DRM_COMMAND_BASE + DRM_AMDGPU_GEM_VA, struct drm_amdgpu_gem_va)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_AMDGPU_WAIT_CS",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_AMDGPU_WAIT_CS, union drm_amdgpu_wait_cs)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_AMDGPU_GEM_OP",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_AMDGPU_GEM_OP, struct drm_amdgpu_gem_op)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_AMDGPU_GEM_USERPTR",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_AMDGPU_GEM_USERPTR, struct drm_amdgpu_gem_userptr)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_AMDGPU_WAIT_FENCES",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_AMDGPU_WAIT_FENCES, union drm_amdgpu_wait_fences)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_AMDGPU_VM",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_AMDGPU_VM, union drm_amdgpu_vm)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_AMDGPU_FENCE_TO_HANDLE",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_AMDGPU_FENCE_TO_HANDLE, union drm_amdgpu_fence_to_handle)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_AMDGPU_SCHED",
+      "value": "DRM_IOW(DRM_COMMAND_BASE + DRM_AMDGPU_SCHED, union drm_amdgpu_sched)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_AMDGPU_USERQ",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_AMDGPU_USERQ, union drm_amdgpu_userq)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_AMDGPU_USERQ_SIGNAL",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_AMDGPU_USERQ_SIGNAL, struct drm_amdgpu_userq_signal)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_AMDGPU_USERQ_WAIT",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_AMDGPU_USERQ_WAIT, struct drm_amdgpu_userq_wait)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_AMDGPU_GEM_LIST_HANDLES",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_AMDGPU_GEM_LIST_HANDLES, struct drm_amdgpu_gem_list_handles)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "AMDGPU_GEM_DOMAIN_CPU",
+      "value": "0x1",
+      "comment": "",
+      "category": "AMDGPU_GEM"
+    },
+    {
+      "name": "AMDGPU_GEM_DOMAIN_GTT",
+      "value": "0x2",
+      "comment": "",
+      "category": "AMDGPU_GEM"
+    },
+    {
+      "name": "AMDGPU_GEM_DOMAIN_VRAM",
+      "value": "0x4",
+      "comment": "",
+      "category": "AMDGPU_GEM"
+    },
+    {
+      "name": "AMDGPU_GEM_DOMAIN_GDS",
+      "value": "0x8",
+      "comment": "",
+      "category": "AMDGPU_GEM"
+    },
+    {
+      "name": "AMDGPU_GEM_DOMAIN_GWS",
+      "value": "0x10",
+      "comment": "",
+      "category": "AMDGPU_GEM"
+    },
+    {
+      "name": "AMDGPU_GEM_DOMAIN_OA",
+      "value": "0x20",
+      "comment": "",
+      "category": "AMDGPU_GEM"
+    },
+    {
+      "name": "AMDGPU_GEM_DOMAIN_DOORBELL",
+      "value": "0x40",
+      "comment": "",
+      "category": "AMDGPU_GEM"
+    },
+    {
+      "name": "AMDGPU_GEM_DOMAIN_MASK",
+      "value": "(AMDGPU_GEM_DOMAIN_CPU | ",
+      "comment": "",
+      "category": "AMDGPU_GEM"
+    },
+    {
+      "name": "AMDGPU_GEM_CREATE_CPU_ACCESS_REQUIRED",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "AMDGPU_GEM"
+    },
+    {
+      "name": "AMDGPU_GEM_CREATE_NO_CPU_ACCESS",
+      "value": "(1 << 1)",
+      "comment": "",
+      "category": "AMDGPU_GEM"
+    },
+    {
+      "name": "AMDGPU_GEM_CREATE_CPU_GTT_USWC",
+      "value": "(1 << 2)",
+      "comment": "",
+      "category": "AMDGPU_GEM"
+    },
+    {
+      "name": "AMDGPU_GEM_CREATE_VRAM_CLEARED",
+      "value": "(1 << 3)",
+      "comment": "",
+      "category": "AMDGPU_GEM"
+    },
+    {
+      "name": "AMDGPU_GEM_CREATE_VRAM_CONTIGUOUS",
+      "value": "(1 << 5)",
+      "comment": "",
+      "category": "AMDGPU_GEM"
+    },
+    {
+      "name": "AMDGPU_GEM_CREATE_VM_ALWAYS_VALID",
+      "value": "(1 << 6)",
+      "comment": "",
+      "category": "AMDGPU_GEM"
+    },
+    {
+      "name": "AMDGPU_GEM_CREATE_EXPLICIT_SYNC",
+      "value": "(1 << 7)",
+      "comment": "",
+      "category": "AMDGPU_GEM"
+    },
+    {
+      "name": "AMDGPU_GEM_CREATE_CP_MQD_GFX9",
+      "value": "(1 << 8)",
+      "comment": "",
+      "category": "AMDGPU_GEM"
+    },
+    {
+      "name": "AMDGPU_GEM_CREATE_VRAM_WIPE_ON_RELEASE",
+      "value": "(1 << 9)",
+      "comment": "",
+      "category": "AMDGPU_GEM"
+    },
+    {
+      "name": "AMDGPU_GEM_CREATE_ENCRYPTED",
+      "value": "(1 << 10)",
+      "comment": "",
+      "category": "AMDGPU_GEM"
+    },
+    {
+      "name": "AMDGPU_GEM_CREATE_PREEMPTIBLE",
+      "value": "(1 << 11)",
+      "comment": "",
+      "category": "AMDGPU_GEM"
+    },
+    {
+      "name": "AMDGPU_GEM_CREATE_DISCARDABLE",
+      "value": "(1 << 12)",
+      "comment": "",
+      "category": "AMDGPU_GEM"
+    },
+    {
+      "name": "AMDGPU_GEM_CREATE_COHERENT",
+      "value": "(1 << 13)",
+      "comment": "",
+      "category": "AMDGPU_GEM"
+    },
+    {
+      "name": "AMDGPU_GEM_CREATE_UNCACHED",
+      "value": "(1 << 14)",
+      "comment": "",
+      "category": "AMDGPU_GEM"
+    },
+    {
+      "name": "AMDGPU_GEM_CREATE_EXT_COHERENT",
+      "value": "(1 << 15)",
+      "comment": "",
+      "category": "AMDGPU_GEM"
+    },
+    {
+      "name": "AMDGPU_GEM_CREATE_GFX12_DCC",
+      "value": "(1 << 16)",
+      "comment": "",
+      "category": "AMDGPU_GEM"
+    },
+    {
+      "name": "AMDGPU_BO_LIST_OP_CREATE",
+      "value": "0",
+      "comment": "",
+      "category": "AMDGPU_BO"
+    },
+    {
+      "name": "AMDGPU_BO_LIST_OP_DESTROY",
+      "value": "1",
+      "comment": "",
+      "category": "AMDGPU_BO"
+    },
+    {
+      "name": "AMDGPU_BO_LIST_OP_UPDATE",
+      "value": "2",
+      "comment": "",
+      "category": "AMDGPU_BO"
+    },
+    {
+      "name": "AMDGPU_CTX_OP_ALLOC_CTX",
+      "value": "1",
+      "comment": "",
+      "category": "AMDGPU_CTX"
+    },
+    {
+      "name": "AMDGPU_CTX_OP_FREE_CTX",
+      "value": "2",
+      "comment": "",
+      "category": "AMDGPU_CTX"
+    },
+    {
+      "name": "AMDGPU_CTX_OP_QUERY_STATE",
+      "value": "3",
+      "comment": "",
+      "category": "AMDGPU_CTX"
+    },
+    {
+      "name": "AMDGPU_CTX_OP_QUERY_STATE2",
+      "value": "4",
+      "comment": "",
+      "category": "AMDGPU_CTX"
+    },
+    {
+      "name": "AMDGPU_CTX_OP_GET_STABLE_PSTATE",
+      "value": "5",
+      "comment": "",
+      "category": "AMDGPU_CTX"
+    },
+    {
+      "name": "AMDGPU_CTX_OP_SET_STABLE_PSTATE",
+      "value": "6",
+      "comment": "",
+      "category": "AMDGPU_CTX"
+    },
+    {
+      "name": "AMDGPU_CTX_NO_RESET",
+      "value": "0",
+      "comment": "",
+      "category": "AMDGPU_CTX"
+    },
+    {
+      "name": "AMDGPU_CTX_GUILTY_RESET",
+      "value": "1",
+      "comment": "",
+      "category": "AMDGPU_CTX"
+    },
+    {
+      "name": "AMDGPU_CTX_INNOCENT_RESET",
+      "value": "2",
+      "comment": "",
+      "category": "AMDGPU_CTX"
+    },
+    {
+      "name": "AMDGPU_CTX_UNKNOWN_RESET",
+      "value": "3",
+      "comment": "",
+      "category": "AMDGPU_CTX"
+    },
+    {
+      "name": "AMDGPU_CTX_QUERY2_FLAGS_RESET",
+      "value": "(1<<0)",
+      "comment": "",
+      "category": "AMDGPU_CTX"
+    },
+    {
+      "name": "AMDGPU_CTX_QUERY2_FLAGS_VRAMLOST",
+      "value": "(1<<1)",
+      "comment": "",
+      "category": "AMDGPU_CTX"
+    },
+    {
+      "name": "AMDGPU_CTX_QUERY2_FLAGS_GUILTY",
+      "value": "(1<<2)",
+      "comment": "",
+      "category": "AMDGPU_CTX"
+    },
+    {
+      "name": "AMDGPU_CTX_QUERY2_FLAGS_RAS_CE",
+      "value": "(1<<3)",
+      "comment": "",
+      "category": "AMDGPU_CTX"
+    },
+    {
+      "name": "AMDGPU_CTX_QUERY2_FLAGS_RAS_UE",
+      "value": "(1<<4)",
+      "comment": "",
+      "category": "AMDGPU_CTX"
+    },
+    {
+      "name": "AMDGPU_CTX_QUERY2_FLAGS_RESET_IN_PROGRESS",
+      "value": "(1<<5)",
+      "comment": "",
+      "category": "AMDGPU_CTX"
+    },
+    {
+      "name": "AMDGPU_CTX_PRIORITY_UNSET",
+      "value": "-2048",
+      "comment": "",
+      "category": "AMDGPU_CTX"
+    },
+    {
+      "name": "AMDGPU_CTX_PRIORITY_VERY_LOW",
+      "value": "-1023",
+      "comment": "",
+      "category": "AMDGPU_CTX"
+    },
+    {
+      "name": "AMDGPU_CTX_PRIORITY_LOW",
+      "value": "-512",
+      "comment": "",
+      "category": "AMDGPU_CTX"
+    },
+    {
+      "name": "AMDGPU_CTX_PRIORITY_NORMAL",
+      "value": "0",
+      "comment": "",
+      "category": "AMDGPU_CTX"
+    },
+    {
+      "name": "AMDGPU_CTX_PRIORITY_HIGH",
+      "value": "512",
+      "comment": "",
+      "category": "AMDGPU_CTX"
+    },
+    {
+      "name": "AMDGPU_CTX_PRIORITY_VERY_HIGH",
+      "value": "1023",
+      "comment": "",
+      "category": "AMDGPU_CTX"
+    },
+    {
+      "name": "AMDGPU_CTX_STABLE_PSTATE_FLAGS_MASK",
+      "value": "0xf",
+      "comment": "",
+      "category": "AMDGPU_CTX"
+    },
+    {
+      "name": "AMDGPU_CTX_STABLE_PSTATE_NONE",
+      "value": "0",
+      "comment": "",
+      "category": "AMDGPU_CTX"
+    },
+    {
+      "name": "AMDGPU_CTX_STABLE_PSTATE_STANDARD",
+      "value": "1",
+      "comment": "",
+      "category": "AMDGPU_CTX"
+    },
+    {
+      "name": "AMDGPU_CTX_STABLE_PSTATE_MIN_SCLK",
+      "value": "2",
+      "comment": "",
+      "category": "AMDGPU_CTX"
+    },
+    {
+      "name": "AMDGPU_CTX_STABLE_PSTATE_MIN_MCLK",
+      "value": "3",
+      "comment": "",
+      "category": "AMDGPU_CTX"
+    },
+    {
+      "name": "AMDGPU_CTX_STABLE_PSTATE_PEAK",
+      "value": "4",
+      "comment": "",
+      "category": "AMDGPU_CTX"
+    },
+    {
+      "name": "AMDGPU_USERQ_OP_CREATE",
+      "value": "1",
+      "comment": "",
+      "category": "AMDGPU_USERQ"
+    },
+    {
+      "name": "AMDGPU_USERQ_OP_FREE",
+      "value": "2",
+      "comment": "",
+      "category": "AMDGPU_USERQ"
+    },
+    {
+      "name": "AMDGPU_USERQ_CREATE_FLAGS_QUEUE_PRIORITY_MASK",
+      "value": "0x3",
+      "comment": "",
+      "category": "AMDGPU_USERQ"
+    },
+    {
+      "name": "AMDGPU_USERQ_CREATE_FLAGS_QUEUE_PRIORITY_SHIFT",
+      "value": "0",
+      "comment": "",
+      "category": "AMDGPU_USERQ"
+    },
+    {
+      "name": "AMDGPU_USERQ_CREATE_FLAGS_QUEUE_PRIORITY_NORMAL_LOW",
+      "value": "0",
+      "comment": "",
+      "category": "AMDGPU_USERQ"
+    },
+    {
+      "name": "AMDGPU_USERQ_CREATE_FLAGS_QUEUE_PRIORITY_LOW",
+      "value": "1",
+      "comment": "",
+      "category": "AMDGPU_USERQ"
+    },
+    {
+      "name": "AMDGPU_USERQ_CREATE_FLAGS_QUEUE_PRIORITY_NORMAL_HIGH",
+      "value": "2",
+      "comment": "",
+      "category": "AMDGPU_USERQ"
+    },
+    {
+      "name": "AMDGPU_USERQ_CREATE_FLAGS_QUEUE_PRIORITY_HIGH",
+      "value": "3",
+      "comment": "admin only",
+      "category": "AMDGPU_USERQ"
+    },
+    {
+      "name": "AMDGPU_USERQ_CREATE_FLAGS_QUEUE_SECURE",
+      "value": "(1 << 2)",
+      "comment": "",
+      "category": "AMDGPU_USERQ"
+    },
+    {
+      "name": "AMDGPU_VM_OP_RESERVE_VMID",
+      "value": "1",
+      "comment": "",
+      "category": "AMDGPU_VM"
+    },
+    {
+      "name": "AMDGPU_VM_OP_UNRESERVE_VMID",
+      "value": "2",
+      "comment": "",
+      "category": "AMDGPU_VM"
+    },
+    {
+      "name": "AMDGPU_SCHED_OP_PROCESS_PRIORITY_OVERRIDE",
+      "value": "1",
+      "comment": "",
+      "category": "AMDGPU_SCHED"
+    },
+    {
+      "name": "AMDGPU_SCHED_OP_CONTEXT_PRIORITY_OVERRIDE",
+      "value": "2",
+      "comment": "",
+      "category": "AMDGPU_SCHED"
+    },
+    {
+      "name": "AMDGPU_GEM_USERPTR_READONLY",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "AMDGPU_GEM"
+    },
+    {
+      "name": "AMDGPU_GEM_USERPTR_ANONONLY",
+      "value": "(1 << 1)",
+      "comment": "",
+      "category": "AMDGPU_GEM"
+    },
+    {
+      "name": "AMDGPU_GEM_USERPTR_VALIDATE",
+      "value": "(1 << 2)",
+      "comment": "",
+      "category": "AMDGPU_GEM"
+    },
+    {
+      "name": "AMDGPU_GEM_USERPTR_REGISTER",
+      "value": "(1 << 3)",
+      "comment": "",
+      "category": "AMDGPU_GEM"
+    },
+    {
+      "name": "AMDGPU_TILING_ARRAY_MODE_SHIFT",
+      "value": "0",
+      "comment": "",
+      "category": "AMDGPU_TILING"
+    },
+    {
+      "name": "AMDGPU_TILING_ARRAY_MODE_MASK",
+      "value": "0xf",
+      "comment": "",
+      "category": "AMDGPU_TILING"
+    },
+    {
+      "name": "AMDGPU_TILING_PIPE_CONFIG_SHIFT",
+      "value": "4",
+      "comment": "",
+      "category": "AMDGPU_TILING"
+    },
+    {
+      "name": "AMDGPU_TILING_PIPE_CONFIG_MASK",
+      "value": "0x1f",
+      "comment": "",
+      "category": "AMDGPU_TILING"
+    },
+    {
+      "name": "AMDGPU_TILING_TILE_SPLIT_SHIFT",
+      "value": "9",
+      "comment": "",
+      "category": "AMDGPU_TILING"
+    },
+    {
+      "name": "AMDGPU_TILING_TILE_SPLIT_MASK",
+      "value": "0x7",
+      "comment": "",
+      "category": "AMDGPU_TILING"
+    },
+    {
+      "name": "AMDGPU_TILING_MICRO_TILE_MODE_SHIFT",
+      "value": "12",
+      "comment": "",
+      "category": "AMDGPU_TILING"
+    },
+    {
+      "name": "AMDGPU_TILING_MICRO_TILE_MODE_MASK",
+      "value": "0x7",
+      "comment": "",
+      "category": "AMDGPU_TILING"
+    },
+    {
+      "name": "AMDGPU_TILING_BANK_WIDTH_SHIFT",
+      "value": "15",
+      "comment": "",
+      "category": "AMDGPU_TILING"
+    },
+    {
+      "name": "AMDGPU_TILING_BANK_WIDTH_MASK",
+      "value": "0x3",
+      "comment": "",
+      "category": "AMDGPU_TILING"
+    },
+    {
+      "name": "AMDGPU_TILING_BANK_HEIGHT_SHIFT",
+      "value": "17",
+      "comment": "",
+      "category": "AMDGPU_TILING"
+    },
+    {
+      "name": "AMDGPU_TILING_BANK_HEIGHT_MASK",
+      "value": "0x3",
+      "comment": "",
+      "category": "AMDGPU_TILING"
+    },
+    {
+      "name": "AMDGPU_TILING_MACRO_TILE_ASPECT_SHIFT",
+      "value": "19",
+      "comment": "",
+      "category": "AMDGPU_TILING"
+    },
+    {
+      "name": "AMDGPU_TILING_MACRO_TILE_ASPECT_MASK",
+      "value": "0x3",
+      "comment": "",
+      "category": "AMDGPU_TILING"
+    },
+    {
+      "name": "AMDGPU_TILING_NUM_BANKS_SHIFT",
+      "value": "21",
+      "comment": "",
+      "category": "AMDGPU_TILING"
+    },
+    {
+      "name": "AMDGPU_TILING_NUM_BANKS_MASK",
+      "value": "0x3",
+      "comment": "",
+      "category": "AMDGPU_TILING"
+    },
+    {
+      "name": "AMDGPU_TILING_SWIZZLE_MODE_SHIFT",
+      "value": "0",
+      "comment": "",
+      "category": "AMDGPU_TILING"
+    },
+    {
+      "name": "AMDGPU_TILING_SWIZZLE_MODE_MASK",
+      "value": "0x1f",
+      "comment": "",
+      "category": "AMDGPU_TILING"
+    },
+    {
+      "name": "AMDGPU_TILING_DCC_OFFSET_256B_SHIFT",
+      "value": "5",
+      "comment": "",
+      "category": "AMDGPU_TILING"
+    },
+    {
+      "name": "AMDGPU_TILING_DCC_OFFSET_256B_MASK",
+      "value": "0xFFFFFF",
+      "comment": "",
+      "category": "AMDGPU_TILING"
+    },
+    {
+      "name": "AMDGPU_TILING_DCC_PITCH_MAX_SHIFT",
+      "value": "29",
+      "comment": "",
+      "category": "AMDGPU_TILING"
+    },
+    {
+      "name": "AMDGPU_TILING_DCC_PITCH_MAX_MASK",
+      "value": "0x3FFF",
+      "comment": "",
+      "category": "AMDGPU_TILING"
+    },
+    {
+      "name": "AMDGPU_TILING_DCC_INDEPENDENT_64B_SHIFT",
+      "value": "43",
+      "comment": "",
+      "category": "AMDGPU_TILING"
+    },
+    {
+      "name": "AMDGPU_TILING_DCC_INDEPENDENT_64B_MASK",
+      "value": "0x1",
+      "comment": "",
+      "category": "AMDGPU_TILING"
+    },
+    {
+      "name": "AMDGPU_TILING_DCC_INDEPENDENT_128B_SHIFT",
+      "value": "44",
+      "comment": "",
+      "category": "AMDGPU_TILING"
+    },
+    {
+      "name": "AMDGPU_TILING_DCC_INDEPENDENT_128B_MASK",
+      "value": "0x1",
+      "comment": "",
+      "category": "AMDGPU_TILING"
+    },
+    {
+      "name": "AMDGPU_TILING_SCANOUT_SHIFT",
+      "value": "63",
+      "comment": "",
+      "category": "AMDGPU_TILING"
+    },
+    {
+      "name": "AMDGPU_TILING_SCANOUT_MASK",
+      "value": "0x1",
+      "comment": "",
+      "category": "AMDGPU_TILING"
+    },
+    {
+      "name": "AMDGPU_TILING_GFX12_SWIZZLE_MODE_SHIFT",
+      "value": "0",
+      "comment": "",
+      "category": "AMDGPU_TILING"
+    },
+    {
+      "name": "AMDGPU_TILING_GFX12_SWIZZLE_MODE_MASK",
+      "value": "0x7",
+      "comment": "",
+      "category": "AMDGPU_TILING"
+    },
+    {
+      "name": "AMDGPU_TILING_GFX12_DCC_MAX_COMPRESSED_BLOCK_SHIFT",
+      "value": "3",
+      "comment": "",
+      "category": "AMDGPU_TILING"
+    },
+    {
+      "name": "AMDGPU_TILING_GFX12_DCC_MAX_COMPRESSED_BLOCK_MASK",
+      "value": "0x3",
+      "comment": "0:64B, 1:128B, 2:256B",
+      "category": "AMDGPU_TILING"
+    },
+    {
+      "name": "AMDGPU_TILING_GFX12_DCC_NUMBER_TYPE_SHIFT",
+      "value": "5",
+      "comment": "",
+      "category": "AMDGPU_TILING"
+    },
+    {
+      "name": "AMDGPU_TILING_GFX12_DCC_NUMBER_TYPE_MASK",
+      "value": "0x7",
+      "comment": "CB_COLOR0_INFO.NUMBER_TYPE",
+      "category": "AMDGPU_TILING"
+    },
+    {
+      "name": "AMDGPU_TILING_GFX12_DCC_DATA_FORMAT_SHIFT",
+      "value": "8",
+      "comment": "",
+      "category": "AMDGPU_TILING"
+    },
+    {
+      "name": "AMDGPU_TILING_GFX12_DCC_DATA_FORMAT_MASK",
+      "value": "0x3f",
+      "comment": "[0:4]:CB_COLOR0_INFO.FORMAT, [5]:MM",
+      "category": "AMDGPU_TILING"
+    },
+    {
+      "name": "AMDGPU_TILING_GFX12_DCC_WRITE_COMPRESS_DISABLE_SHIFT",
+      "value": "14",
+      "comment": "",
+      "category": "AMDGPU_TILING"
+    },
+    {
+      "name": "AMDGPU_TILING_GFX12_DCC_WRITE_COMPRESS_DISABLE_MASK",
+      "value": "0x1",
+      "comment": "",
+      "category": "AMDGPU_TILING"
+    },
+    {
+      "name": "AMDGPU_TILING_GFX12_SCANOUT_SHIFT",
+      "value": "63",
+      "comment": "",
+      "category": "AMDGPU_TILING"
+    },
+    {
+      "name": "AMDGPU_TILING_GFX12_SCANOUT_MASK",
+      "value": "0x1",
+      "comment": "",
+      "category": "AMDGPU_TILING"
+    },
+    {
+      "name": "AMDGPU_GEM_METADATA_OP_SET_METADATA",
+      "value": "1",
+      "comment": "",
+      "category": "AMDGPU_GEM"
+    },
+    {
+      "name": "AMDGPU_GEM_METADATA_OP_GET_METADATA",
+      "value": "2",
+      "comment": "",
+      "category": "AMDGPU_GEM"
+    },
+    {
+      "name": "AMDGPU_GEM_OP_GET_GEM_CREATE_INFO",
+      "value": "0",
+      "comment": "",
+      "category": "AMDGPU_GEM"
+    },
+    {
+      "name": "AMDGPU_GEM_OP_SET_PLACEMENT",
+      "value": "1",
+      "comment": "",
+      "category": "AMDGPU_GEM"
+    },
+    {
+      "name": "AMDGPU_GEM_OP_GET_MAPPING_INFO",
+      "value": "2",
+      "comment": "",
+      "category": "AMDGPU_GEM"
+    },
+    {
+      "name": "AMDGPU_GEM_LIST_HANDLES_FLAG_IS_IMPORT",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "AMDGPU_GEM"
+    },
+    {
+      "name": "AMDGPU_VA_OP_MAP",
+      "value": "1",
+      "comment": "",
+      "category": "AMDGPU_VA"
+    },
+    {
+      "name": "AMDGPU_VA_OP_UNMAP",
+      "value": "2",
+      "comment": "",
+      "category": "AMDGPU_VA"
+    },
+    {
+      "name": "AMDGPU_VA_OP_CLEAR",
+      "value": "3",
+      "comment": "",
+      "category": "AMDGPU_VA"
+    },
+    {
+      "name": "AMDGPU_VA_OP_REPLACE",
+      "value": "4",
+      "comment": "",
+      "category": "AMDGPU_VA"
+    },
+    {
+      "name": "AMDGPU_VM_DELAY_UPDATE",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "AMDGPU_VM"
+    },
+    {
+      "name": "AMDGPU_VM_PAGE_READABLE",
+      "value": "(1 << 1)",
+      "comment": "",
+      "category": "AMDGPU_VM"
+    },
+    {
+      "name": "AMDGPU_VM_PAGE_WRITEABLE",
+      "value": "(1 << 2)",
+      "comment": "",
+      "category": "AMDGPU_VM"
+    },
+    {
+      "name": "AMDGPU_VM_PAGE_EXECUTABLE",
+      "value": "(1 << 3)",
+      "comment": "",
+      "category": "AMDGPU_VM"
+    },
+    {
+      "name": "AMDGPU_VM_PAGE_PRT",
+      "value": "(1 << 4)",
+      "comment": "",
+      "category": "AMDGPU_VM"
+    },
+    {
+      "name": "AMDGPU_VM_MTYPE_MASK",
+      "value": "(0xf << 5)",
+      "comment": "",
+      "category": "AMDGPU_VM"
+    },
+    {
+      "name": "AMDGPU_VM_MTYPE_DEFAULT",
+      "value": "(0 << 5)",
+      "comment": "",
+      "category": "AMDGPU_VM"
+    },
+    {
+      "name": "AMDGPU_VM_MTYPE_NC",
+      "value": "(1 << 5)",
+      "comment": "",
+      "category": "AMDGPU_VM"
+    },
+    {
+      "name": "AMDGPU_VM_MTYPE_WC",
+      "value": "(2 << 5)",
+      "comment": "",
+      "category": "AMDGPU_VM"
+    },
+    {
+      "name": "AMDGPU_VM_MTYPE_CC",
+      "value": "(3 << 5)",
+      "comment": "",
+      "category": "AMDGPU_VM"
+    },
+    {
+      "name": "AMDGPU_VM_MTYPE_UC",
+      "value": "(4 << 5)",
+      "comment": "",
+      "category": "AMDGPU_VM"
+    },
+    {
+      "name": "AMDGPU_VM_MTYPE_RW",
+      "value": "(5 << 5)",
+      "comment": "",
+      "category": "AMDGPU_VM"
+    },
+    {
+      "name": "AMDGPU_VM_PAGE_NOALLOC",
+      "value": "(1 << 9)",
+      "comment": "",
+      "category": "AMDGPU_VM"
+    },
+    {
+      "name": "AMDGPU_HW_IP_GFX",
+      "value": "0",
+      "comment": "",
+      "category": "AMDGPU_HW"
+    },
+    {
+      "name": "AMDGPU_HW_IP_COMPUTE",
+      "value": "1",
+      "comment": "",
+      "category": "AMDGPU_HW"
+    },
+    {
+      "name": "AMDGPU_HW_IP_DMA",
+      "value": "2",
+      "comment": "",
+      "category": "AMDGPU_HW"
+    },
+    {
+      "name": "AMDGPU_HW_IP_UVD",
+      "value": "3",
+      "comment": "",
+      "category": "AMDGPU_HW"
+    },
+    {
+      "name": "AMDGPU_HW_IP_VCE",
+      "value": "4",
+      "comment": "",
+      "category": "AMDGPU_HW"
+    },
+    {
+      "name": "AMDGPU_HW_IP_UVD_ENC",
+      "value": "5",
+      "comment": "",
+      "category": "AMDGPU_HW"
+    },
+    {
+      "name": "AMDGPU_HW_IP_VCN_DEC",
+      "value": "6",
+      "comment": "",
+      "category": "AMDGPU_HW"
+    },
+    {
+      "name": "AMDGPU_HW_IP_VCN_ENC",
+      "value": "7",
+      "comment": "",
+      "category": "AMDGPU_HW"
+    },
+    {
+      "name": "AMDGPU_HW_IP_VCN_JPEG",
+      "value": "8",
+      "comment": "",
+      "category": "AMDGPU_HW"
+    },
+    {
+      "name": "AMDGPU_HW_IP_VPE",
+      "value": "9",
+      "comment": "",
+      "category": "AMDGPU_HW"
+    },
+    {
+      "name": "AMDGPU_HW_IP_NUM",
+      "value": "10",
+      "comment": "",
+      "category": "AMDGPU_HW"
+    },
+    {
+      "name": "AMDGPU_HW_IP_INSTANCE_MAX_COUNT",
+      "value": "1",
+      "comment": "",
+      "category": "AMDGPU_HW"
+    },
+    {
+      "name": "AMDGPU_CHUNK_ID_IB",
+      "value": "0x01",
+      "comment": "",
+      "category": "AMDGPU_CHUNK"
+    },
+    {
+      "name": "AMDGPU_CHUNK_ID_FENCE",
+      "value": "0x02",
+      "comment": "",
+      "category": "AMDGPU_CHUNK"
+    },
+    {
+      "name": "AMDGPU_CHUNK_ID_DEPENDENCIES",
+      "value": "0x03",
+      "comment": "",
+      "category": "AMDGPU_CHUNK"
+    },
+    {
+      "name": "AMDGPU_CHUNK_ID_SYNCOBJ_IN",
+      "value": "0x04",
+      "comment": "",
+      "category": "AMDGPU_CHUNK"
+    },
+    {
+      "name": "AMDGPU_CHUNK_ID_SYNCOBJ_OUT",
+      "value": "0x05",
+      "comment": "",
+      "category": "AMDGPU_CHUNK"
+    },
+    {
+      "name": "AMDGPU_CHUNK_ID_BO_HANDLES",
+      "value": "0x06",
+      "comment": "",
+      "category": "AMDGPU_CHUNK"
+    },
+    {
+      "name": "AMDGPU_CHUNK_ID_SCHEDULED_DEPENDENCIES",
+      "value": "0x07",
+      "comment": "",
+      "category": "AMDGPU_CHUNK"
+    },
+    {
+      "name": "AMDGPU_CHUNK_ID_SYNCOBJ_TIMELINE_WAIT",
+      "value": "0x08",
+      "comment": "",
+      "category": "AMDGPU_CHUNK"
+    },
+    {
+      "name": "AMDGPU_CHUNK_ID_SYNCOBJ_TIMELINE_SIGNAL",
+      "value": "0x09",
+      "comment": "",
+      "category": "AMDGPU_CHUNK"
+    },
+    {
+      "name": "AMDGPU_CHUNK_ID_CP_GFX_SHADOW",
+      "value": "0x0a",
+      "comment": "",
+      "category": "AMDGPU_CHUNK"
+    },
+    {
+      "name": "AMDGPU_IB_FLAG_CE",
+      "value": "(1<<0)",
+      "comment": "",
+      "category": "AMDGPU_IB"
+    },
+    {
+      "name": "AMDGPU_IB_FLAG_PREAMBLE",
+      "value": "(1<<1)",
+      "comment": "",
+      "category": "AMDGPU_IB"
+    },
+    {
+      "name": "AMDGPU_IB_FLAG_PREEMPT",
+      "value": "(1<<2)",
+      "comment": "",
+      "category": "AMDGPU_IB"
+    },
+    {
+      "name": "AMDGPU_IB_FLAG_TC_WB_NOT_INVALIDATE",
+      "value": "(1 << 3)",
+      "comment": "",
+      "category": "AMDGPU_IB"
+    },
+    {
+      "name": "AMDGPU_IB_FLAG_RESET_GDS_MAX_WAVE_ID",
+      "value": "(1 << 4)",
+      "comment": "",
+      "category": "AMDGPU_IB"
+    },
+    {
+      "name": "AMDGPU_IB_FLAGS_SECURE",
+      "value": "(1 << 5)",
+      "comment": "",
+      "category": "AMDGPU_IB"
+    },
+    {
+      "name": "AMDGPU_IB_FLAG_EMIT_MEM_SYNC",
+      "value": "(1 << 6)",
+      "comment": "",
+      "category": "AMDGPU_IB"
+    },
+    {
+      "name": "AMDGPU_FENCE_TO_HANDLE_GET_SYNCOBJ",
+      "value": "0",
+      "comment": "",
+      "category": "AMDGPU_FENCE"
+    },
+    {
+      "name": "AMDGPU_FENCE_TO_HANDLE_GET_SYNCOBJ_FD",
+      "value": "1",
+      "comment": "",
+      "category": "AMDGPU_FENCE"
+    },
+    {
+      "name": "AMDGPU_FENCE_TO_HANDLE_GET_SYNC_FILE_FD",
+      "value": "2",
+      "comment": "",
+      "category": "AMDGPU_FENCE"
+    },
+    {
+      "name": "AMDGPU_CS_CHUNK_CP_GFX_SHADOW_FLAGS_INIT_SHADOW",
+      "value": "0x1",
+      "comment": "",
+      "category": "AMDGPU_CS"
+    },
+    {
+      "name": "AMDGPU_IDS_FLAGS_FUSION",
+      "value": "0x01",
+      "comment": "",
+      "category": "AMDGPU_IDS"
+    },
+    {
+      "name": "AMDGPU_IDS_FLAGS_PREEMPTION",
+      "value": "0x02",
+      "comment": "",
+      "category": "AMDGPU_IDS"
+    },
+    {
+      "name": "AMDGPU_IDS_FLAGS_TMZ",
+      "value": "0x04",
+      "comment": "",
+      "category": "AMDGPU_IDS"
+    },
+    {
+      "name": "AMDGPU_IDS_FLAGS_CONFORMANT_TRUNC_COORD",
+      "value": "0x08",
+      "comment": "",
+      "category": "AMDGPU_IDS"
+    },
+    {
+      "name": "AMDGPU_IDS_FLAGS_GANG_SUBMIT",
+      "value": "0x10",
+      "comment": "",
+      "category": "AMDGPU_IDS"
+    },
+    {
+      "name": "AMDGPU_IDS_FLAGS_MODE_MASK",
+      "value": "0x300",
+      "comment": "",
+      "category": "AMDGPU_IDS"
+    },
+    {
+      "name": "AMDGPU_IDS_FLAGS_MODE_SHIFT",
+      "value": "0x8",
+      "comment": "",
+      "category": "AMDGPU_IDS"
+    },
+    {
+      "name": "AMDGPU_IDS_FLAGS_MODE_PF",
+      "value": "0x0",
+      "comment": "",
+      "category": "AMDGPU_IDS"
+    },
+    {
+      "name": "AMDGPU_IDS_FLAGS_MODE_VF",
+      "value": "0x1",
+      "comment": "",
+      "category": "AMDGPU_IDS"
+    },
+    {
+      "name": "AMDGPU_IDS_FLAGS_MODE_PT",
+      "value": "0x2",
+      "comment": "",
+      "category": "AMDGPU_IDS"
+    },
+    {
+      "name": "AMDGPU_INFO_ACCEL_WORKING",
+      "value": "0x00",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_CRTC_FROM_ID",
+      "value": "0x01",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_HW_IP_INFO",
+      "value": "0x02",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_HW_IP_COUNT",
+      "value": "0x03",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_TIMESTAMP",
+      "value": "0x05",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_FW_VERSION",
+      "value": "0x0e",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_FW_VCE",
+      "value": "0x1",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_FW_UVD",
+      "value": "0x2",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_FW_GMC",
+      "value": "0x03",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_FW_GFX_ME",
+      "value": "0x04",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_FW_GFX_PFP",
+      "value": "0x05",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_FW_GFX_CE",
+      "value": "0x06",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_FW_GFX_RLC",
+      "value": "0x07",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_FW_GFX_MEC",
+      "value": "0x08",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_FW_SMC",
+      "value": "0x0a",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_FW_SDMA",
+      "value": "0x0b",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_FW_SOS",
+      "value": "0x0c",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_FW_ASD",
+      "value": "0x0d",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_FW_VCN",
+      "value": "0x0e",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_FW_GFX_RLC_RESTORE_LIST_CNTL",
+      "value": "0x0f",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_FW_GFX_RLC_RESTORE_LIST_GPM_MEM",
+      "value": "0x10",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_FW_GFX_RLC_RESTORE_LIST_SRM_MEM",
+      "value": "0x11",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_FW_DMCU",
+      "value": "0x12",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_FW_TA",
+      "value": "0x13",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_FW_DMCUB",
+      "value": "0x14",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_FW_TOC",
+      "value": "0x15",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_FW_CAP",
+      "value": "0x16",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_FW_GFX_RLCP",
+      "value": "0x17",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_FW_GFX_RLCV",
+      "value": "0x18",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_FW_MES_KIQ",
+      "value": "0x19",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_FW_MES",
+      "value": "0x1a",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_FW_IMU",
+      "value": "0x1b",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_FW_VPE",
+      "value": "0x1c",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_NUM_BYTES_MOVED",
+      "value": "0x0f",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_VRAM_USAGE",
+      "value": "0x10",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_GTT_USAGE",
+      "value": "0x11",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_GDS_CONFIG",
+      "value": "0x13",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_VRAM_GTT",
+      "value": "0x14",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_READ_MMR_REG",
+      "value": "0x15",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_DEV_INFO",
+      "value": "0x16",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_VIS_VRAM_USAGE",
+      "value": "0x17",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_NUM_EVICTIONS",
+      "value": "0x18",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_MEMORY",
+      "value": "0x19",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_VCE_CLOCK_TABLE",
+      "value": "0x1A",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_VBIOS",
+      "value": "0x1B",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_VBIOS_SIZE",
+      "value": "0x1",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_VBIOS_IMAGE",
+      "value": "0x2",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_VBIOS_INFO",
+      "value": "0x3",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_NUM_HANDLES",
+      "value": "0x1C",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_SENSOR",
+      "value": "0x1D",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_SENSOR_GFX_SCLK",
+      "value": "0x1",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_SENSOR_GFX_MCLK",
+      "value": "0x2",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_SENSOR_GPU_TEMP",
+      "value": "0x3",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_SENSOR_GPU_LOAD",
+      "value": "0x4",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_SENSOR_GPU_AVG_POWER",
+      "value": "0x5",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_SENSOR_VDDNB",
+      "value": "0x6",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_SENSOR_VDDGFX",
+      "value": "0x7",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_SENSOR_STABLE_PSTATE_GFX_SCLK",
+      "value": "0x8",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_SENSOR_STABLE_PSTATE_GFX_MCLK",
+      "value": "0x9",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_SENSOR_PEAK_PSTATE_GFX_SCLK",
+      "value": "0xa",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_SENSOR_PEAK_PSTATE_GFX_MCLK",
+      "value": "0xb",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_SENSOR_GPU_INPUT_POWER",
+      "value": "0xc",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_NUM_VRAM_CPU_PAGE_FAULTS",
+      "value": "0x1E",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_VRAM_LOST_COUNTER",
+      "value": "0x1F",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_RAS_ENABLED_FEATURES",
+      "value": "0x20",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_RAS_ENABLED_UMC",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_RAS_ENABLED_SDMA",
+      "value": "(1 << 1)",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_RAS_ENABLED_GFX",
+      "value": "(1 << 2)",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_RAS_ENABLED_MMHUB",
+      "value": "(1 << 3)",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_RAS_ENABLED_ATHUB",
+      "value": "(1 << 4)",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_RAS_ENABLED_PCIE",
+      "value": "(1 << 5)",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_RAS_ENABLED_HDP",
+      "value": "(1 << 6)",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_RAS_ENABLED_XGMI",
+      "value": "(1 << 7)",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_RAS_ENABLED_DF",
+      "value": "(1 << 8)",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_RAS_ENABLED_SMN",
+      "value": "(1 << 9)",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_RAS_ENABLED_SEM",
+      "value": "(1 << 10)",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_RAS_ENABLED_MP0",
+      "value": "(1 << 11)",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_RAS_ENABLED_MP1",
+      "value": "(1 << 12)",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_RAS_ENABLED_FUSE",
+      "value": "(1 << 13)",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_VIDEO_CAPS",
+      "value": "0x21",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_VIDEO_CAPS_DECODE",
+      "value": "0",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_VIDEO_CAPS_ENCODE",
+      "value": "1",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_MAX_IBS",
+      "value": "0x22",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_GPUVM_FAULT",
+      "value": "0x23",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_UQ_FW_AREAS",
+      "value": "0x24",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_MMR_SE_INDEX_SHIFT",
+      "value": "0",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_MMR_SE_INDEX_MASK",
+      "value": "0xff",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_MMR_SH_INDEX_SHIFT",
+      "value": "8",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_MMR_SH_INDEX_MASK",
+      "value": "0xff",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_VRAM_TYPE_UNKNOWN",
+      "value": "0",
+      "comment": "",
+      "category": "AMDGPU_VRAM"
+    },
+    {
+      "name": "AMDGPU_VRAM_TYPE_GDDR1",
+      "value": "1",
+      "comment": "",
+      "category": "AMDGPU_VRAM"
+    },
+    {
+      "name": "AMDGPU_VRAM_TYPE_DDR2",
+      "value": "2",
+      "comment": "",
+      "category": "AMDGPU_VRAM"
+    },
+    {
+      "name": "AMDGPU_VRAM_TYPE_GDDR3",
+      "value": "3",
+      "comment": "",
+      "category": "AMDGPU_VRAM"
+    },
+    {
+      "name": "AMDGPU_VRAM_TYPE_GDDR4",
+      "value": "4",
+      "comment": "",
+      "category": "AMDGPU_VRAM"
+    },
+    {
+      "name": "AMDGPU_VRAM_TYPE_GDDR5",
+      "value": "5",
+      "comment": "",
+      "category": "AMDGPU_VRAM"
+    },
+    {
+      "name": "AMDGPU_VRAM_TYPE_HBM",
+      "value": "6",
+      "comment": "",
+      "category": "AMDGPU_VRAM"
+    },
+    {
+      "name": "AMDGPU_VRAM_TYPE_DDR3",
+      "value": "7",
+      "comment": "",
+      "category": "AMDGPU_VRAM"
+    },
+    {
+      "name": "AMDGPU_VRAM_TYPE_DDR4",
+      "value": "8",
+      "comment": "",
+      "category": "AMDGPU_VRAM"
+    },
+    {
+      "name": "AMDGPU_VRAM_TYPE_GDDR6",
+      "value": "9",
+      "comment": "",
+      "category": "AMDGPU_VRAM"
+    },
+    {
+      "name": "AMDGPU_VRAM_TYPE_DDR5",
+      "value": "10",
+      "comment": "",
+      "category": "AMDGPU_VRAM"
+    },
+    {
+      "name": "AMDGPU_VRAM_TYPE_LPDDR4",
+      "value": "11",
+      "comment": "",
+      "category": "AMDGPU_VRAM"
+    },
+    {
+      "name": "AMDGPU_VRAM_TYPE_LPDDR5",
+      "value": "12",
+      "comment": "",
+      "category": "AMDGPU_VRAM"
+    },
+    {
+      "name": "AMDGPU_VRAM_TYPE_HBM3E",
+      "value": "13",
+      "comment": "",
+      "category": "AMDGPU_VRAM"
+    },
+    {
+      "name": "AMDGPU_VRAM_TYPE_HBM4",
+      "value": "14",
+      "comment": "",
+      "category": "AMDGPU_VRAM"
+    },
+    {
+      "name": "AMDGPU_VCE_CLOCK_TABLE_ENTRIES",
+      "value": "6",
+      "comment": "",
+      "category": "AMDGPU_VCE"
+    },
+    {
+      "name": "AMDGPU_INFO_VIDEO_CAPS_CODEC_IDX_MPEG2",
+      "value": "0",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_VIDEO_CAPS_CODEC_IDX_MPEG4",
+      "value": "1",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_VIDEO_CAPS_CODEC_IDX_VC1",
+      "value": "2",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_VIDEO_CAPS_CODEC_IDX_MPEG4_AVC",
+      "value": "3",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_VIDEO_CAPS_CODEC_IDX_HEVC",
+      "value": "4",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_VIDEO_CAPS_CODEC_IDX_JPEG",
+      "value": "5",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_VIDEO_CAPS_CODEC_IDX_VP9",
+      "value": "6",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_VIDEO_CAPS_CODEC_IDX_AV1",
+      "value": "7",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_INFO_VIDEO_CAPS_CODEC_IDX_COUNT",
+      "value": "8",
+      "comment": "",
+      "category": "AMDGPU_INFO"
+    },
+    {
+      "name": "AMDGPU_VMHUB_TYPE_MASK",
+      "value": "0xff",
+      "comment": "",
+      "category": "AMDGPU_VMHUB"
+    },
+    {
+      "name": "AMDGPU_VMHUB_TYPE_SHIFT",
+      "value": "0",
+      "comment": "",
+      "category": "AMDGPU_VMHUB"
+    },
+    {
+      "name": "AMDGPU_VMHUB_TYPE_GFX",
+      "value": "0",
+      "comment": "",
+      "category": "AMDGPU_VMHUB"
+    },
+    {
+      "name": "AMDGPU_VMHUB_TYPE_MM0",
+      "value": "1",
+      "comment": "",
+      "category": "AMDGPU_VMHUB"
+    },
+    {
+      "name": "AMDGPU_VMHUB_TYPE_MM1",
+      "value": "2",
+      "comment": "",
+      "category": "AMDGPU_VMHUB"
+    },
+    {
+      "name": "AMDGPU_VMHUB_IDX_MASK",
+      "value": "0xff00",
+      "comment": "",
+      "category": "AMDGPU_VMHUB"
+    },
+    {
+      "name": "AMDGPU_VMHUB_IDX_SHIFT",
+      "value": "8",
+      "comment": "",
+      "category": "AMDGPU_VMHUB"
+    },
+    {
+      "name": "AMDGPU_FAMILY_UNKNOWN",
+      "value": "0",
+      "comment": "",
+      "category": "AMDGPU_FAMILY"
+    },
+    {
+      "name": "AMDGPU_FAMILY_SI",
+      "value": "110",
+      "comment": "Hainan, Oland, Verde, Pitcairn, Tahiti",
+      "category": "AMDGPU_FAMILY"
+    },
+    {
+      "name": "AMDGPU_FAMILY_CI",
+      "value": "120",
+      "comment": "Bonaire, Hawaii",
+      "category": "AMDGPU_FAMILY"
+    },
+    {
+      "name": "AMDGPU_FAMILY_KV",
+      "value": "125",
+      "comment": "Kaveri, Kabini, Mullins",
+      "category": "AMDGPU_FAMILY"
+    },
+    {
+      "name": "AMDGPU_FAMILY_VI",
+      "value": "130",
+      "comment": "Iceland, Tonga",
+      "category": "AMDGPU_FAMILY"
+    },
+    {
+      "name": "AMDGPU_FAMILY_CZ",
+      "value": "135",
+      "comment": "Carrizo, Stoney",
+      "category": "AMDGPU_FAMILY"
+    },
+    {
+      "name": "AMDGPU_FAMILY_AI",
+      "value": "141",
+      "comment": "Vega10",
+      "category": "AMDGPU_FAMILY"
+    },
+    {
+      "name": "AMDGPU_FAMILY_RV",
+      "value": "142",
+      "comment": "Raven",
+      "category": "AMDGPU_FAMILY"
+    },
+    {
+      "name": "AMDGPU_FAMILY_NV",
+      "value": "143",
+      "comment": "Navi10",
+      "category": "AMDGPU_FAMILY"
+    },
+    {
+      "name": "AMDGPU_FAMILY_VGH",
+      "value": "144",
+      "comment": "Van Gogh",
+      "category": "AMDGPU_FAMILY"
+    },
+    {
+      "name": "AMDGPU_FAMILY_GC_11_0_0",
+      "value": "145",
+      "comment": "GC 11.0.0",
+      "category": "AMDGPU_FAMILY"
+    },
+    {
+      "name": "AMDGPU_FAMILY_YC",
+      "value": "146",
+      "comment": "Yellow Carp",
+      "category": "AMDGPU_FAMILY"
+    },
+    {
+      "name": "AMDGPU_FAMILY_GC_11_0_1",
+      "value": "148",
+      "comment": "GC 11.0.1",
+      "category": "AMDGPU_FAMILY"
+    },
+    {
+      "name": "AMDGPU_FAMILY_GC_10_3_6",
+      "value": "149",
+      "comment": "GC 10.3.6",
+      "category": "AMDGPU_FAMILY"
+    },
+    {
+      "name": "AMDGPU_FAMILY_GC_10_3_7",
+      "value": "151",
+      "comment": "GC 10.3.7",
+      "category": "AMDGPU_FAMILY"
+    },
+    {
+      "name": "AMDGPU_FAMILY_GC_11_5_0",
+      "value": "150",
+      "comment": "GC 11.5.0",
+      "category": "AMDGPU_FAMILY"
+    },
+    {
+      "name": "AMDGPU_FAMILY_GC_11_5_4",
+      "value": "154",
+      "comment": "GC 11.5.4",
+      "category": "AMDGPU_FAMILY"
+    },
+    {
+      "name": "AMDGPU_FAMILY_GC_12_0_0",
+      "value": "152",
+      "comment": "GC 12.0.0",
+      "category": "AMDGPU_FAMILY"
+    }
+  ],
+  "structs": [
+    {
+      "name": "drm_amdgpu_gem_create_in",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "bo_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "alignment",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "domains",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "domain_flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_amdgpu_gem_create_out",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "_pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_amdgpu_bo_list_in",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "operation",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "list_handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "bo_number",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "bo_info_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "bo_info_ptr",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_amdgpu_bo_list_entry",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "bo_handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "bo_priority",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_amdgpu_bo_list_out",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "list_handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "_pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_amdgpu_ctx_in",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "op",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ctx_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "priority",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_6",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "ctx_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "_pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_7",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "hangs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reset_status",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_8",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "_pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_amdgpu_userq_in",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "op",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "queue_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ip_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "doorbell_handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "doorbell_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "queue_va",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "queue_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "rptr_va",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "wptr_va",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "mqd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "mqd_size",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_amdgpu_userq_out",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "queue_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "_pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_amdgpu_userq_mqd_gfx11",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "shadow_va",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "csa_va",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_amdgpu_userq_mqd_sdma_gfx11",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "csa_va",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_amdgpu_userq_mqd_compute_gfx11",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "eop_va",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_amdgpu_userq_signal",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "queue_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "syncobj_handles",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "num_syncobj_handles",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "pad0",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "bo_read_handles",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "bo_write_handles",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "num_bo_read_handles",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "num_bo_write_handles",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_amdgpu_userq_fence_info",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "va",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "value",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_amdgpu_userq_wait",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "waitq_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "syncobj_handles",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "syncobj_timeline_handles",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "syncobj_timeline_points",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "bo_read_handles",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "bo_write_handles",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "num_syncobj_timeline_handles",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "num_fences",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "num_syncobj_handles",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "pad0",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "num_bo_read_handles",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "num_bo_write_handles",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "out_fences",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_amdgpu_vm_in",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "op",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_amdgpu_vm_out",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_amdgpu_sched_in",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "op",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "fd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "priority",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ctx_id",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_amdgpu_gem_userptr",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "addr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_amdgpu_gem_metadata",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "op",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "tiling_info",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "data_size_bytes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "data",
+          "array_size": "64",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_22",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "tiling_info",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "data_size_bytes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "data",
+          "array_size": "64",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_amdgpu_gem_mmap_in",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "_pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_amdgpu_gem_mmap_out",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "addr_ptr",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_amdgpu_gem_wait_idle_in",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "timeout",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_amdgpu_gem_wait_idle_out",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "status",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "domain",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_amdgpu_wait_cs_in",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "timeout",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ip_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ip_instance",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ring",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ctx_id",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_amdgpu_wait_cs_out",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "status",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_amdgpu_fence",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "ctx_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ip_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ip_instance",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ring",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "seq_no",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_amdgpu_wait_fences_in",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "fences",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "fence_count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "wait_all",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "timeout_ns",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_amdgpu_wait_fences_out",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "status",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "first_signaled",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_amdgpu_gem_vm_entry",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "addr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_amdgpu_gem_op",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "op",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "value",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "num_entries",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "padding",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_amdgpu_gem_list_handles",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "entries",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "num_entries",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "padding",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_amdgpu_gem_list_handles_entry",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "gem_handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "preferred_domains",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "alloc_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "alignment",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_amdgpu_gem_va",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "_pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "operation",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "va_address",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "offset_in_bo",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "map_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "vm_timeline_point",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "vm_timeline_syncobj_out",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "num_syncobj_handles",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "input_fence_syncobj_handles",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_amdgpu_cs_chunk",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "chunk_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "length_dw",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "chunk_data",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_amdgpu_cs_in",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "ctx_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "bo_list_handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "num_chunks",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "chunks",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_amdgpu_cs_out",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_amdgpu_cs_chunk_ib",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "_pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "va_start",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ib_bytes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ip_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ip_instance",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ring",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_amdgpu_cs_chunk_dep",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "ip_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ip_instance",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ring",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ctx_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_amdgpu_cs_chunk_fence",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_amdgpu_cs_chunk_sem",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_amdgpu_cs_chunk_syncobj",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "point",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_45",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "what",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_46",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_amdgpu_cs_chunk_data",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_amdgpu_cs_chunk_cp_gfx_shadow",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "shadow_va",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "csa_va",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "gds_va",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_amdgpu_query_fw",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "fw_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ip_instance",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "index",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "_pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_amdgpu_info",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "return_pointer",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "return_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "query",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "_pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ip_instance",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "dword_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "instance",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_51",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "_pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_52",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ip_instance",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_53",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "dword_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "instance",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_54",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_55",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_56",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_amdgpu_info_gds",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "gds_gfx_partition_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "compute_partition_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "gds_total_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "gws_per_gfx_partition",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "gws_per_compute_partition",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "oa_per_gfx_partition",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "oa_per_compute_partition",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "_pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_amdgpu_info_vram_gtt",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "vram_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "vram_cpu_accessible_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "gtt_size",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_amdgpu_heap_info",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "total_heap_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "usable_heap_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "heap_usage",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "max_allocation",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_amdgpu_memory_info",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_amdgpu_info_firmware",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "ver",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "feature",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_amdgpu_info_vbios",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "name",
+          "array_size": "64",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "vbios_pn",
+          "array_size": "64",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "version",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "vbios_ver_str",
+          "array_size": "32",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "date",
+          "array_size": "32",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_amdgpu_info_device",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "device_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "chip_rev",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "external_rev",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pci_rev",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "family",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "num_shader_engines",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "num_shader_arrays_per_engine",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "gpu_counter_freq",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "max_engine_clock",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "max_memory_clock",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "cu_active_number",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "cu_ao_mask",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "cu_bitmap",
+          "array_size": "4][4",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "enabled_rb_pipes_mask",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "num_rb_pipes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "num_hw_gfx_contexts",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pcie_gen",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "ids_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "virtual_address_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "virtual_address_max",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "virtual_address_alignment",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pte_fragment_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "gart_page_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ce_ram_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "vram_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "vram_bit_width",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "vce_harvest_config",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "gc_double_offchip_lds_buf",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "prim_buf_gpu_addr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "pos_buf_gpu_addr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "cntl_sb_buf_gpu_addr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "param_buf_gpu_addr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "prim_buf_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pos_buf_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "cntl_sb_buf_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "param_buf_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "wave_front_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "num_shader_visible_vgprs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "num_cu_per_sh",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "num_tcc_blocks",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "gs_vgt_table_depth",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "gs_prim_buffer_depth",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "max_gs_waves_per_vgt",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pcie_num_lanes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "cu_ao_bitmap",
+          "array_size": "4][4",
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "high_va_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "high_va_max",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pa_sc_tile_steering_override",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "tcc_disabled_mask",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "min_engine_clock",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "min_memory_clock",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tcp_cache_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "num_sqc_per_wgp",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "sqc_data_cache_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "sqc_inst_cache_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "gl1c_cache_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "gl2c_cache_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "mall_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "enabled_rb_pipes_mask_hi",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "shadow_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "shadow_alignment",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "csa_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "csa_alignment",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "userq_ip_mask",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_amdgpu_info_hw_ip",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "hw_ip_version_major",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "hw_ip_version_minor",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "capabilities_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ib_start_alignment",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ib_size_alignment",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "available_rings",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ip_discovery_version",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "userq_num_slots",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_amdgpu_info_num_handles",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "uvd_max_handles",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "uvd_used_handles",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_amdgpu_info_vce_clock_table_entry",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "sclk",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "mclk",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "eclk",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_amdgpu_info_vce_clock_table",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "num_valid_entries",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_amdgpu_info_video_codec_info",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "valid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "max_width",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "max_height",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "max_pixels_per_frame",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "max_level",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_amdgpu_info_video_caps",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_amdgpu_info_gpuvm_fault",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "addr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "status",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "vmhub",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_amdgpu_info_uq_metadata_gfx",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "shadow_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "shadow_alignment",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "csa_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "csa_alignment",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_amdgpu_info_uq_metadata_compute",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "eop_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "eop_alignment",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_amdgpu_info_uq_metadata_sdma",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "csa_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "csa_alignment",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_amdgpu_info_uq_metadata",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

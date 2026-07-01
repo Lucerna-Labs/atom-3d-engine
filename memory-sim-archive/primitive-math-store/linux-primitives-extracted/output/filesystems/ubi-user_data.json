@@ -1,0 +1,497 @@
+{
+  "filename": "ubi-user.h",
+  "includes": [
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "UBI_VOL_NUM_AUTO",
+      "value": "(-1)",
+      "comment": "",
+      "category": "UBI_VOL"
+    },
+    {
+      "name": "UBI_DEV_NUM_AUTO",
+      "value": "(-1)",
+      "comment": "",
+      "category": "UBI_DEV"
+    },
+    {
+      "name": "UBI_MAX_VOLUME_NAME",
+      "value": "127",
+      "comment": "",
+      "category": "UBI_MAX"
+    },
+    {
+      "name": "UBI_IOC_MAGIC",
+      "value": "'o'",
+      "comment": "",
+      "category": "UBI_IOC"
+    },
+    {
+      "name": "UBI_IOCMKVOL",
+      "value": "_IOW(UBI_IOC_MAGIC, 0, struct ubi_mkvol_req)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "UBI_IOCRMVOL",
+      "value": "_IOW(UBI_IOC_MAGIC, 1, __s32)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "UBI_IOCRSVOL",
+      "value": "_IOW(UBI_IOC_MAGIC, 2, struct ubi_rsvol_req)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "UBI_IOCRNVOL",
+      "value": "_IOW(UBI_IOC_MAGIC, 3, struct ubi_rnvol_req)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "UBI_IOCRPEB",
+      "value": "_IOW(UBI_IOC_MAGIC, 4, __s32)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "UBI_IOCSPEB",
+      "value": "_IOW(UBI_IOC_MAGIC, 5, __s32)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "UBI_IOCECNFO",
+      "value": "_IOWR(UBI_IOC_MAGIC, 6, struct ubi_ecinfo_req)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "UBI_CTRL_IOC_MAGIC",
+      "value": "'o'",
+      "comment": "",
+      "category": "UBI_CTRL"
+    },
+    {
+      "name": "UBI_IOCATT",
+      "value": "_IOW(UBI_CTRL_IOC_MAGIC, 64, struct ubi_attach_req)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "UBI_IOCDET",
+      "value": "_IOW(UBI_CTRL_IOC_MAGIC, 65, __s32)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "UBI_VOL_IOC_MAGIC",
+      "value": "'O'",
+      "comment": "",
+      "category": "UBI_VOL"
+    },
+    {
+      "name": "UBI_IOCVOLUP",
+      "value": "_IOW(UBI_VOL_IOC_MAGIC, 0, __s64)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "UBI_IOCEBER",
+      "value": "_IOW(UBI_VOL_IOC_MAGIC, 1, __s32)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "UBI_IOCEBCH",
+      "value": "_IOW(UBI_VOL_IOC_MAGIC, 2, __s32)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "UBI_IOCEBMAP",
+      "value": "_IOW(UBI_VOL_IOC_MAGIC, 3, struct ubi_map_req)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "UBI_IOCEBUNMAP",
+      "value": "_IOW(UBI_VOL_IOC_MAGIC, 4, __s32)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "UBI_IOCEBISMAP",
+      "value": "_IOR(UBI_VOL_IOC_MAGIC, 5, __s32)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "UBI_IOCSETVOLPROP",
+      "value": "_IOW(UBI_VOL_IOC_MAGIC, 6, ",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "UBI_IOCVOLCRBLK",
+      "value": "_IOW(UBI_VOL_IOC_MAGIC, 7, struct ubi_blkcreate_req)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "UBI_IOCVOLRMBLK",
+      "value": "_IO(UBI_VOL_IOC_MAGIC, 8)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "MAX_UBI_MTD_NAME_LEN",
+      "value": "127",
+      "comment": "",
+      "category": "MAX_UBI"
+    },
+    {
+      "name": "UBI_MAX_RNVOL",
+      "value": "32",
+      "comment": "",
+      "category": "UBI_MAX"
+    },
+    {
+      "name": "UBI_VOL_VALID_FLGS",
+      "value": "(UBI_VOL_SKIP_CRC_CHECK_FLG)",
+      "comment": "",
+      "category": "UBI_VOL"
+    }
+  ],
+  "structs": [
+    {
+      "name": "ubi_attach_req",
+      "fields": [
+        {
+          "type_name": "__s32",
+          "name": "ubi_num",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "mtd_num",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "vid_hdr_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s16",
+          "name": "max_beb_per1024",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s8",
+          "name": "disable_fm",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s8",
+          "name": "need_resv_pool",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s8",
+          "name": "padding",
+          "array_size": "8",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ubi_mkvol_req",
+      "fields": [
+        {
+          "type_name": "__s32",
+          "name": "vol_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "alignment",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s64",
+          "name": "bytes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s8",
+          "name": "vol_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s16",
+          "name": "name_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s8",
+          "name": "padding2",
+          "array_size": "4",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "name",
+          "array_size": "UBI_MAX_VOLUME_NAME + 1",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ubi_rsvol_req",
+      "fields": [
+        {
+          "type_name": "__s64",
+          "name": "bytes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "vol_id",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ubi_rnvol_req",
+      "fields": [
+        {
+          "type_name": "__s32",
+          "name": "count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s8",
+          "name": "padding1",
+          "array_size": "12",
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "vol_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s16",
+          "name": "name_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s8",
+          "name": "padding2",
+          "array_size": "2",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "name",
+          "array_size": "UBI_MAX_VOLUME_NAME + 1",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_4",
+      "fields": [
+        {
+          "type_name": "__s32",
+          "name": "vol_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s16",
+          "name": "name_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s8",
+          "name": "padding2",
+          "array_size": "2",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "name",
+          "array_size": "UBI_MAX_VOLUME_NAME + 1",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ubi_ecinfo_req",
+      "fields": [
+        {
+          "type_name": "__s32",
+          "name": "start",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "length",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "read_length",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s8",
+          "name": "padding",
+          "array_size": "16",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ubi_leb_change_req",
+      "fields": [
+        {
+          "type_name": "__s32",
+          "name": "lnum",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "bytes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s8",
+          "name": "dtype",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s8",
+          "name": "padding",
+          "array_size": "7",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ubi_map_req",
+      "fields": [
+        {
+          "type_name": "__s32",
+          "name": "lnum",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s8",
+          "name": "dtype",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s8",
+          "name": "padding",
+          "array_size": "3",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ubi_set_vol_prop_req",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "property",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "padding",
+          "array_size": "7",
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "value",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ubi_blkcreate_req",
+      "fields": [
+        {
+          "type_name": "__s8",
+          "name": "padding",
+          "array_size": "128",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

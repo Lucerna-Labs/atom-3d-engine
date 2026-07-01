@@ -1,0 +1,220 @@
+{
+  "filename": "filter.h",
+  "includes": [
+    "linux/compiler.h",
+    "linux/types.h",
+    "linux/bpf_common.h"
+  ],
+  "defines": [
+    {
+      "name": "BPF_MAJOR_VERSION",
+      "value": "1",
+      "comment": "",
+      "category": "BPF_MAJOR"
+    },
+    {
+      "name": "BPF_MINOR_VERSION",
+      "value": "1",
+      "comment": "",
+      "category": "BPF_MINOR"
+    },
+    {
+      "name": "BPF_A",
+      "value": "0x10",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "BPF_TAX",
+      "value": "0x00",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "BPF_TXA",
+      "value": "0x80",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "BPF_MEMWORDS",
+      "value": "16",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SKF_AD_OFF",
+      "value": "(-0x1000)",
+      "comment": "",
+      "category": "SKF_AD"
+    },
+    {
+      "name": "SKF_AD_PROTOCOL",
+      "value": "0",
+      "comment": "",
+      "category": "SKF_AD"
+    },
+    {
+      "name": "SKF_AD_PKTTYPE",
+      "value": "4",
+      "comment": "",
+      "category": "SKF_AD"
+    },
+    {
+      "name": "SKF_AD_IFINDEX",
+      "value": "8",
+      "comment": "",
+      "category": "SKF_AD"
+    },
+    {
+      "name": "SKF_AD_NLATTR",
+      "value": "12",
+      "comment": "",
+      "category": "SKF_AD"
+    },
+    {
+      "name": "SKF_AD_NLATTR_NEST",
+      "value": "16",
+      "comment": "",
+      "category": "SKF_AD"
+    },
+    {
+      "name": "SKF_AD_MARK",
+      "value": "20",
+      "comment": "",
+      "category": "SKF_AD"
+    },
+    {
+      "name": "SKF_AD_QUEUE",
+      "value": "24",
+      "comment": "",
+      "category": "SKF_AD"
+    },
+    {
+      "name": "SKF_AD_HATYPE",
+      "value": "28",
+      "comment": "",
+      "category": "SKF_AD"
+    },
+    {
+      "name": "SKF_AD_RXHASH",
+      "value": "32",
+      "comment": "",
+      "category": "SKF_AD"
+    },
+    {
+      "name": "SKF_AD_CPU",
+      "value": "36",
+      "comment": "",
+      "category": "SKF_AD"
+    },
+    {
+      "name": "SKF_AD_ALU_XOR_X",
+      "value": "40",
+      "comment": "",
+      "category": "SKF_AD"
+    },
+    {
+      "name": "SKF_AD_VLAN_TAG",
+      "value": "44",
+      "comment": "",
+      "category": "SKF_AD"
+    },
+    {
+      "name": "SKF_AD_VLAN_TAG_PRESENT",
+      "value": "48",
+      "comment": "",
+      "category": "SKF_AD"
+    },
+    {
+      "name": "SKF_AD_PAY_OFFSET",
+      "value": "52",
+      "comment": "",
+      "category": "SKF_AD"
+    },
+    {
+      "name": "SKF_AD_RANDOM",
+      "value": "56",
+      "comment": "",
+      "category": "SKF_AD"
+    },
+    {
+      "name": "SKF_AD_VLAN_TPID",
+      "value": "60",
+      "comment": "",
+      "category": "SKF_AD"
+    },
+    {
+      "name": "SKF_AD_MAX",
+      "value": "64",
+      "comment": "",
+      "category": "SKF_AD"
+    },
+    {
+      "name": "SKF_NET_OFF",
+      "value": "(-0x100000)",
+      "comment": "",
+      "category": "SKF_NET"
+    },
+    {
+      "name": "SKF_LL_OFF",
+      "value": "(-0x200000)",
+      "comment": "",
+      "category": "SKF_LL"
+    },
+    {
+      "name": "BPF_NET_OFF",
+      "value": "SKF_NET_OFF",
+      "comment": "",
+      "category": "BPF_NET"
+    },
+    {
+      "name": "BPF_LL_OFF",
+      "value": "SKF_LL_OFF",
+      "comment": "",
+      "category": "BPF_LL"
+    }
+  ],
+  "structs": [
+    {
+      "name": "sock_filter",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "code",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "jt",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "jf",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "k",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "sock_fprog",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

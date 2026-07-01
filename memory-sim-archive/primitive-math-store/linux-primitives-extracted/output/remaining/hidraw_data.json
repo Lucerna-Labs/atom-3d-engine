@@ -1,0 +1,106 @@
+{
+  "filename": "hidraw.h",
+  "includes": [
+    "linux/hid.h",
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "HIDIOCGRDESCSIZE",
+      "value": "_IOR('H', 0x01, int)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "HIDIOCGRDESC",
+      "value": "_IOR('H', 0x02, struct hidraw_report_descriptor)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "HIDIOCGRAWINFO",
+      "value": "_IOR('H', 0x03, struct hidraw_devinfo)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "HIDIOCREVOKE",
+      "value": "_IOW('H', 0x0D, int)",
+      "comment": "Revoke device access",
+      "category": ""
+    },
+    {
+      "name": "HIDIOCTL_LAST",
+      "value": "_IOC_NR(HIDIOCREVOKE)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "HIDRAW_FIRST_MINOR",
+      "value": "0",
+      "comment": "",
+      "category": "HIDRAW_FIRST"
+    },
+    {
+      "name": "HIDRAW_MAX_DEVICES",
+      "value": "64",
+      "comment": "",
+      "category": "HIDRAW_MAX"
+    },
+    {
+      "name": "HIDRAW_BUFFER_SIZE",
+      "value": "64",
+      "comment": "",
+      "category": "HIDRAW_BUFFER"
+    }
+  ],
+  "structs": [
+    {
+      "name": "hidraw_report_descriptor",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "value",
+          "array_size": "HID_MAX_DESCRIPTOR_SIZE",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "hidraw_devinfo",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "bustype",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s16",
+          "name": "vendor",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s16",
+          "name": "product",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

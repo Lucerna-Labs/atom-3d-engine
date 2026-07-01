@@ -1,0 +1,1493 @@
+{
+  "filename": "hdreg.h",
+  "includes": [
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "HDIO_DRIVE_CMD_HDR_SIZE",
+      "value": "(4 * sizeof(__u8))",
+      "comment": "",
+      "category": "HDIO_DRIVE"
+    },
+    {
+      "name": "HDIO_DRIVE_HOB_HDR_SIZE",
+      "value": "(8 * sizeof(__u8))",
+      "comment": "",
+      "category": "HDIO_DRIVE"
+    },
+    {
+      "name": "HDIO_DRIVE_TASK_HDR_SIZE",
+      "value": "(8 * sizeof(__u8))",
+      "comment": "",
+      "category": "HDIO_DRIVE"
+    },
+    {
+      "name": "IDE_DRIVE_TASK_NO_DATA",
+      "value": "0",
+      "comment": "",
+      "category": "IDE_DRIVE"
+    },
+    {
+      "name": "IDE_DRIVE_TASK_INVALID",
+      "value": "-1",
+      "comment": "",
+      "category": "IDE_DRIVE"
+    },
+    {
+      "name": "IDE_DRIVE_TASK_SET_XFER",
+      "value": "1",
+      "comment": "",
+      "category": "IDE_DRIVE"
+    },
+    {
+      "name": "IDE_DRIVE_TASK_IN",
+      "value": "2",
+      "comment": "",
+      "category": "IDE_DRIVE"
+    },
+    {
+      "name": "IDE_DRIVE_TASK_OUT",
+      "value": "3",
+      "comment": "",
+      "category": "IDE_DRIVE"
+    },
+    {
+      "name": "IDE_DRIVE_TASK_RAW_WRITE",
+      "value": "4",
+      "comment": "",
+      "category": "IDE_DRIVE"
+    },
+    {
+      "name": "IDE_TASKFILE_STD_IN_FLAGS",
+      "value": "0xFE",
+      "comment": "",
+      "category": "IDE_TASKFILE"
+    },
+    {
+      "name": "IDE_HOB_STD_IN_FLAGS",
+      "value": "0x3C",
+      "comment": "",
+      "category": "IDE_HOB"
+    },
+    {
+      "name": "IDE_TASKFILE_STD_OUT_FLAGS",
+      "value": "0xFE",
+      "comment": "",
+      "category": "IDE_TASKFILE"
+    },
+    {
+      "name": "IDE_HOB_STD_OUT_FLAGS",
+      "value": "0x3C",
+      "comment": "",
+      "category": "IDE_HOB"
+    },
+    {
+      "name": "TASKFILE_NO_DATA",
+      "value": "0x0000",
+      "comment": "",
+      "category": "TASKFILE_NO"
+    },
+    {
+      "name": "TASKFILE_IN",
+      "value": "0x0001",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "TASKFILE_MULTI_IN",
+      "value": "0x0002",
+      "comment": "",
+      "category": "TASKFILE_MULTI"
+    },
+    {
+      "name": "TASKFILE_OUT",
+      "value": "0x0004",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "TASKFILE_MULTI_OUT",
+      "value": "0x0008",
+      "comment": "",
+      "category": "TASKFILE_MULTI"
+    },
+    {
+      "name": "TASKFILE_IN_OUT",
+      "value": "0x0010",
+      "comment": "",
+      "category": "TASKFILE_IN"
+    },
+    {
+      "name": "TASKFILE_IN_DMA",
+      "value": "0x0020",
+      "comment": "",
+      "category": "TASKFILE_IN"
+    },
+    {
+      "name": "TASKFILE_OUT_DMA",
+      "value": "0x0040",
+      "comment": "",
+      "category": "TASKFILE_OUT"
+    },
+    {
+      "name": "TASKFILE_IN_DMAQ",
+      "value": "0x0080",
+      "comment": "",
+      "category": "TASKFILE_IN"
+    },
+    {
+      "name": "TASKFILE_OUT_DMAQ",
+      "value": "0x0100",
+      "comment": "",
+      "category": "TASKFILE_OUT"
+    },
+    {
+      "name": "TASKFILE_P_IN",
+      "value": "0x0200",
+      "comment": "",
+      "category": "TASKFILE_P"
+    },
+    {
+      "name": "TASKFILE_P_OUT",
+      "value": "0x0400",
+      "comment": "",
+      "category": "TASKFILE_P"
+    },
+    {
+      "name": "TASKFILE_P_IN_DMA",
+      "value": "0x0800",
+      "comment": "",
+      "category": "TASKFILE_P"
+    },
+    {
+      "name": "TASKFILE_P_OUT_DMA",
+      "value": "0x1000",
+      "comment": "",
+      "category": "TASKFILE_P"
+    },
+    {
+      "name": "TASKFILE_P_IN_DMAQ",
+      "value": "0x2000",
+      "comment": "",
+      "category": "TASKFILE_P"
+    },
+    {
+      "name": "TASKFILE_P_OUT_DMAQ",
+      "value": "0x4000",
+      "comment": "",
+      "category": "TASKFILE_P"
+    },
+    {
+      "name": "TASKFILE_48",
+      "value": "0x8000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "TASKFILE_INVALID",
+      "value": "0x7fff",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "WIN_NOP",
+      "value": "0x00",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "CFA_REQ_EXT_ERROR_CODE",
+      "value": "0x03",
+      "comment": "CFA Request Extended Error Code",
+      "category": "CFA_REQ"
+    },
+    {
+      "name": "WIN_SRST",
+      "value": "0x08",
+      "comment": "ATAPI soft reset command",
+      "category": ""
+    },
+    {
+      "name": "WIN_DEVICE_RESET",
+      "value": "0x08",
+      "comment": "",
+      "category": "WIN_DEVICE"
+    },
+    {
+      "name": "WIN_RECAL",
+      "value": "0x10",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "WIN_RESTORE",
+      "value": "WIN_RECAL",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "WIN_READ",
+      "value": "0x20",
+      "comment": "28-Bit",
+      "category": ""
+    },
+    {
+      "name": "WIN_READ_ONCE",
+      "value": "0x21",
+      "comment": "28-Bit without retries",
+      "category": "WIN_READ"
+    },
+    {
+      "name": "WIN_READ_LONG",
+      "value": "0x22",
+      "comment": "28-Bit",
+      "category": "WIN_READ"
+    },
+    {
+      "name": "WIN_READ_LONG_ONCE",
+      "value": "0x23",
+      "comment": "28-Bit without retries",
+      "category": "WIN_READ"
+    },
+    {
+      "name": "WIN_READ_EXT",
+      "value": "0x24",
+      "comment": "48-Bit",
+      "category": "WIN_READ"
+    },
+    {
+      "name": "WIN_READDMA_EXT",
+      "value": "0x25",
+      "comment": "48-Bit",
+      "category": "WIN_READDMA"
+    },
+    {
+      "name": "WIN_READDMA_QUEUED_EXT",
+      "value": "0x26",
+      "comment": "48-Bit",
+      "category": "WIN_READDMA"
+    },
+    {
+      "name": "WIN_READ_NATIVE_MAX_EXT",
+      "value": "0x27",
+      "comment": "48-Bit",
+      "category": "WIN_READ"
+    },
+    {
+      "name": "WIN_MULTREAD_EXT",
+      "value": "0x29",
+      "comment": "48-Bit",
+      "category": "WIN_MULTREAD"
+    },
+    {
+      "name": "WIN_WRITE",
+      "value": "0x30",
+      "comment": "28-Bit",
+      "category": ""
+    },
+    {
+      "name": "WIN_WRITE_ONCE",
+      "value": "0x31",
+      "comment": "28-Bit without retries",
+      "category": "WIN_WRITE"
+    },
+    {
+      "name": "WIN_WRITE_LONG",
+      "value": "0x32",
+      "comment": "28-Bit",
+      "category": "WIN_WRITE"
+    },
+    {
+      "name": "WIN_WRITE_LONG_ONCE",
+      "value": "0x33",
+      "comment": "28-Bit without retries",
+      "category": "WIN_WRITE"
+    },
+    {
+      "name": "WIN_WRITE_EXT",
+      "value": "0x34",
+      "comment": "48-Bit",
+      "category": "WIN_WRITE"
+    },
+    {
+      "name": "WIN_WRITEDMA_EXT",
+      "value": "0x35",
+      "comment": "48-Bit",
+      "category": "WIN_WRITEDMA"
+    },
+    {
+      "name": "WIN_WRITEDMA_QUEUED_EXT",
+      "value": "0x36",
+      "comment": "48-Bit",
+      "category": "WIN_WRITEDMA"
+    },
+    {
+      "name": "WIN_SET_MAX_EXT",
+      "value": "0x37",
+      "comment": "48-Bit",
+      "category": "WIN_SET"
+    },
+    {
+      "name": "CFA_WRITE_SECT_WO_ERASE",
+      "value": "0x38",
+      "comment": "CFA Write Sectors without erase",
+      "category": "CFA_WRITE"
+    },
+    {
+      "name": "WIN_MULTWRITE_EXT",
+      "value": "0x39",
+      "comment": "48-Bit",
+      "category": "WIN_MULTWRITE"
+    },
+    {
+      "name": "WIN_WRITE_VERIFY",
+      "value": "0x3C",
+      "comment": "28-Bit",
+      "category": "WIN_WRITE"
+    },
+    {
+      "name": "WIN_VERIFY",
+      "value": "0x40",
+      "comment": "28-Bit - Read Verify Sectors",
+      "category": ""
+    },
+    {
+      "name": "WIN_VERIFY_ONCE",
+      "value": "0x41",
+      "comment": "28-Bit - without retries",
+      "category": "WIN_VERIFY"
+    },
+    {
+      "name": "WIN_VERIFY_EXT",
+      "value": "0x42",
+      "comment": "48-Bit",
+      "category": "WIN_VERIFY"
+    },
+    {
+      "name": "WIN_FORMAT",
+      "value": "0x50",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "WIN_INIT",
+      "value": "0x60",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "WIN_SEEK",
+      "value": "0x70",
+      "comment": "0x70-0x7F Reserved",
+      "category": ""
+    },
+    {
+      "name": "CFA_TRANSLATE_SECTOR",
+      "value": "0x87",
+      "comment": "CFA Translate Sector",
+      "category": "CFA_TRANSLATE"
+    },
+    {
+      "name": "WIN_DIAGNOSE",
+      "value": "0x90",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "WIN_SPECIFY",
+      "value": "0x91",
+      "comment": "set drive geometry translation",
+      "category": ""
+    },
+    {
+      "name": "WIN_DOWNLOAD_MICROCODE",
+      "value": "0x92",
+      "comment": "",
+      "category": "WIN_DOWNLOAD"
+    },
+    {
+      "name": "WIN_STANDBYNOW2",
+      "value": "0x94",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "WIN_STANDBY2",
+      "value": "0x96",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "WIN_SETIDLE2",
+      "value": "0x97",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "WIN_CHECKPOWERMODE2",
+      "value": "0x98",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "WIN_SLEEPNOW2",
+      "value": "0x99",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "WIN_PACKETCMD",
+      "value": "0xA0",
+      "comment": "Send a packet command.",
+      "category": ""
+    },
+    {
+      "name": "WIN_PIDENTIFY",
+      "value": "0xA1",
+      "comment": "identify ATAPI device",
+      "category": ""
+    },
+    {
+      "name": "WIN_QUEUED_SERVICE",
+      "value": "0xA2",
+      "comment": "",
+      "category": "WIN_QUEUED"
+    },
+    {
+      "name": "WIN_SMART",
+      "value": "0xB0",
+      "comment": "self-monitoring and reporting",
+      "category": ""
+    },
+    {
+      "name": "CFA_ERASE_SECTORS",
+      "value": "0xC0",
+      "comment": "",
+      "category": "CFA_ERASE"
+    },
+    {
+      "name": "WIN_MULTREAD",
+      "value": "0xC4",
+      "comment": "read sectors using multiple mode",
+      "category": ""
+    },
+    {
+      "name": "WIN_MULTWRITE",
+      "value": "0xC5",
+      "comment": "write sectors using multiple mode",
+      "category": ""
+    },
+    {
+      "name": "WIN_SETMULT",
+      "value": "0xC6",
+      "comment": "enable/disable multiple mode",
+      "category": ""
+    },
+    {
+      "name": "WIN_READDMA_QUEUED",
+      "value": "0xC7",
+      "comment": "read sectors using Queued DMA transfers",
+      "category": "WIN_READDMA"
+    },
+    {
+      "name": "WIN_READDMA",
+      "value": "0xC8",
+      "comment": "read sectors using DMA transfers",
+      "category": ""
+    },
+    {
+      "name": "WIN_READDMA_ONCE",
+      "value": "0xC9",
+      "comment": "28-Bit - without retries",
+      "category": "WIN_READDMA"
+    },
+    {
+      "name": "WIN_WRITEDMA",
+      "value": "0xCA",
+      "comment": "write sectors using DMA transfers",
+      "category": ""
+    },
+    {
+      "name": "WIN_WRITEDMA_ONCE",
+      "value": "0xCB",
+      "comment": "28-Bit - without retries",
+      "category": "WIN_WRITEDMA"
+    },
+    {
+      "name": "WIN_WRITEDMA_QUEUED",
+      "value": "0xCC",
+      "comment": "write sectors using Queued DMA transfers",
+      "category": "WIN_WRITEDMA"
+    },
+    {
+      "name": "CFA_WRITE_MULTI_WO_ERASE",
+      "value": "0xCD",
+      "comment": "CFA Write multiple without erase",
+      "category": "CFA_WRITE"
+    },
+    {
+      "name": "WIN_GETMEDIASTATUS",
+      "value": "0xDA",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "WIN_ACKMEDIACHANGE",
+      "value": "0xDB",
+      "comment": "ATA-1, ATA-2 vendor",
+      "category": ""
+    },
+    {
+      "name": "WIN_POSTBOOT",
+      "value": "0xDC",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "WIN_PREBOOT",
+      "value": "0xDD",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "WIN_DOORLOCK",
+      "value": "0xDE",
+      "comment": "lock door on removable drives",
+      "category": ""
+    },
+    {
+      "name": "WIN_DOORUNLOCK",
+      "value": "0xDF",
+      "comment": "unlock door on removable drives",
+      "category": ""
+    },
+    {
+      "name": "WIN_STANDBYNOW1",
+      "value": "0xE0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "WIN_IDLEIMMEDIATE",
+      "value": "0xE1",
+      "comment": "force drive to become \"ready\"",
+      "category": ""
+    },
+    {
+      "name": "WIN_STANDBY",
+      "value": "0xE2",
+      "comment": "Set device in Standby Mode",
+      "category": ""
+    },
+    {
+      "name": "WIN_SETIDLE1",
+      "value": "0xE3",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "WIN_READ_BUFFER",
+      "value": "0xE4",
+      "comment": "force read only 1 sector",
+      "category": "WIN_READ"
+    },
+    {
+      "name": "WIN_CHECKPOWERMODE1",
+      "value": "0xE5",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "WIN_SLEEPNOW1",
+      "value": "0xE6",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "WIN_FLUSH_CACHE",
+      "value": "0xE7",
+      "comment": "",
+      "category": "WIN_FLUSH"
+    },
+    {
+      "name": "WIN_WRITE_BUFFER",
+      "value": "0xE8",
+      "comment": "force write only 1 sector",
+      "category": "WIN_WRITE"
+    },
+    {
+      "name": "WIN_WRITE_SAME",
+      "value": "0xE9",
+      "comment": "read ata-2 to use",
+      "category": "WIN_WRITE"
+    },
+    {
+      "name": "WIN_FLUSH_CACHE_EXT",
+      "value": "0xEA",
+      "comment": "48-Bit",
+      "category": "WIN_FLUSH"
+    },
+    {
+      "name": "WIN_IDENTIFY",
+      "value": "0xEC",
+      "comment": "ask drive to identify itself",
+      "category": ""
+    },
+    {
+      "name": "WIN_MEDIAEJECT",
+      "value": "0xED",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "WIN_IDENTIFY_DMA",
+      "value": "0xEE",
+      "comment": "same as WIN_IDENTIFY, but DMA",
+      "category": "WIN_IDENTIFY"
+    },
+    {
+      "name": "WIN_SETFEATURES",
+      "value": "0xEF",
+      "comment": "set special drive features",
+      "category": ""
+    },
+    {
+      "name": "EXABYTE_ENABLE_NEST",
+      "value": "0xF0",
+      "comment": "",
+      "category": "EXABYTE_ENABLE"
+    },
+    {
+      "name": "WIN_SECURITY_SET_PASS",
+      "value": "0xF1",
+      "comment": "",
+      "category": "WIN_SECURITY"
+    },
+    {
+      "name": "WIN_SECURITY_UNLOCK",
+      "value": "0xF2",
+      "comment": "",
+      "category": "WIN_SECURITY"
+    },
+    {
+      "name": "WIN_SECURITY_ERASE_PREPARE",
+      "value": "0xF3",
+      "comment": "",
+      "category": "WIN_SECURITY"
+    },
+    {
+      "name": "WIN_SECURITY_ERASE_UNIT",
+      "value": "0xF4",
+      "comment": "",
+      "category": "WIN_SECURITY"
+    },
+    {
+      "name": "WIN_SECURITY_FREEZE_LOCK",
+      "value": "0xF5",
+      "comment": "",
+      "category": "WIN_SECURITY"
+    },
+    {
+      "name": "WIN_SECURITY_DISABLE",
+      "value": "0xF6",
+      "comment": "",
+      "category": "WIN_SECURITY"
+    },
+    {
+      "name": "WIN_READ_NATIVE_MAX",
+      "value": "0xF8",
+      "comment": "return the native maximum address",
+      "category": "WIN_READ"
+    },
+    {
+      "name": "WIN_SET_MAX",
+      "value": "0xF9",
+      "comment": "",
+      "category": "WIN_SET"
+    },
+    {
+      "name": "DISABLE_SEAGATE",
+      "value": "0xFB",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SMART_READ_VALUES",
+      "value": "0xD0",
+      "comment": "",
+      "category": "SMART_READ"
+    },
+    {
+      "name": "SMART_READ_THRESHOLDS",
+      "value": "0xD1",
+      "comment": "",
+      "category": "SMART_READ"
+    },
+    {
+      "name": "SMART_AUTOSAVE",
+      "value": "0xD2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SMART_SAVE",
+      "value": "0xD3",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SMART_IMMEDIATE_OFFLINE",
+      "value": "0xD4",
+      "comment": "",
+      "category": "SMART_IMMEDIATE"
+    },
+    {
+      "name": "SMART_READ_LOG_SECTOR",
+      "value": "0xD5",
+      "comment": "",
+      "category": "SMART_READ"
+    },
+    {
+      "name": "SMART_WRITE_LOG_SECTOR",
+      "value": "0xD6",
+      "comment": "",
+      "category": "SMART_WRITE"
+    },
+    {
+      "name": "SMART_WRITE_THRESHOLDS",
+      "value": "0xD7",
+      "comment": "",
+      "category": "SMART_WRITE"
+    },
+    {
+      "name": "SMART_ENABLE",
+      "value": "0xD8",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SMART_DISABLE",
+      "value": "0xD9",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SMART_STATUS",
+      "value": "0xDA",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SMART_AUTO_OFFLINE",
+      "value": "0xDB",
+      "comment": "",
+      "category": "SMART_AUTO"
+    },
+    {
+      "name": "SMART_LCYL_PASS",
+      "value": "0x4F",
+      "comment": "",
+      "category": "SMART_LCYL"
+    },
+    {
+      "name": "SMART_HCYL_PASS",
+      "value": "0xC2",
+      "comment": "",
+      "category": "SMART_HCYL"
+    },
+    {
+      "name": "SETFEATURES_EN_8BIT",
+      "value": "0x01",
+      "comment": "Enable 8-Bit Transfers",
+      "category": "SETFEATURES_EN"
+    },
+    {
+      "name": "SETFEATURES_EN_WCACHE",
+      "value": "0x02",
+      "comment": "Enable write cache",
+      "category": "SETFEATURES_EN"
+    },
+    {
+      "name": "SETFEATURES_DIS_DEFECT",
+      "value": "0x04",
+      "comment": "Disable Defect Management",
+      "category": "SETFEATURES_DIS"
+    },
+    {
+      "name": "SETFEATURES_EN_APM",
+      "value": "0x05",
+      "comment": "Enable advanced power management",
+      "category": "SETFEATURES_EN"
+    },
+    {
+      "name": "SETFEATURES_EN_SAME_R",
+      "value": "0x22",
+      "comment": "for a region ATA-1",
+      "category": "SETFEATURES_EN"
+    },
+    {
+      "name": "SETFEATURES_DIS_MSN",
+      "value": "0x31",
+      "comment": "Disable Media Status Notification",
+      "category": "SETFEATURES_DIS"
+    },
+    {
+      "name": "SETFEATURES_DIS_RETRY",
+      "value": "0x33",
+      "comment": "Disable Retry",
+      "category": "SETFEATURES_DIS"
+    },
+    {
+      "name": "SETFEATURES_EN_AAM",
+      "value": "0x42",
+      "comment": "Enable Automatic Acoustic Management",
+      "category": "SETFEATURES_EN"
+    },
+    {
+      "name": "SETFEATURES_RW_LONG",
+      "value": "0x44",
+      "comment": "Set Length of VS bytes",
+      "category": "SETFEATURES_RW"
+    },
+    {
+      "name": "SETFEATURES_SET_CACHE",
+      "value": "0x54",
+      "comment": "Set Cache segments to SC Reg. Val",
+      "category": "SETFEATURES_SET"
+    },
+    {
+      "name": "SETFEATURES_DIS_RLA",
+      "value": "0x55",
+      "comment": "Disable read look-ahead feature",
+      "category": "SETFEATURES_DIS"
+    },
+    {
+      "name": "SETFEATURES_EN_RI",
+      "value": "0x5D",
+      "comment": "Enable release interrupt",
+      "category": "SETFEATURES_EN"
+    },
+    {
+      "name": "SETFEATURES_EN_SI",
+      "value": "0x5E",
+      "comment": "Enable SERVICE interrupt",
+      "category": "SETFEATURES_EN"
+    },
+    {
+      "name": "SETFEATURES_DIS_RPOD",
+      "value": "0x66",
+      "comment": "Disable reverting to power on defaults",
+      "category": "SETFEATURES_DIS"
+    },
+    {
+      "name": "SETFEATURES_DIS_ECC",
+      "value": "0x77",
+      "comment": "Disable ECC byte count",
+      "category": "SETFEATURES_DIS"
+    },
+    {
+      "name": "SETFEATURES_DIS_8BIT",
+      "value": "0x81",
+      "comment": "Disable 8-Bit Transfers",
+      "category": "SETFEATURES_DIS"
+    },
+    {
+      "name": "SETFEATURES_DIS_WCACHE",
+      "value": "0x82",
+      "comment": "Disable write cache",
+      "category": "SETFEATURES_DIS"
+    },
+    {
+      "name": "SETFEATURES_EN_DEFECT",
+      "value": "0x84",
+      "comment": "Enable Defect Management",
+      "category": "SETFEATURES_EN"
+    },
+    {
+      "name": "SETFEATURES_DIS_APM",
+      "value": "0x85",
+      "comment": "Disable advanced power management",
+      "category": "SETFEATURES_DIS"
+    },
+    {
+      "name": "SETFEATURES_EN_ECC",
+      "value": "0x88",
+      "comment": "Enable ECC byte count",
+      "category": "SETFEATURES_EN"
+    },
+    {
+      "name": "SETFEATURES_EN_MSN",
+      "value": "0x95",
+      "comment": "Enable Media Status Notification",
+      "category": "SETFEATURES_EN"
+    },
+    {
+      "name": "SETFEATURES_EN_RETRY",
+      "value": "0x99",
+      "comment": "Enable Retry",
+      "category": "SETFEATURES_EN"
+    },
+    {
+      "name": "SETFEATURES_EN_RLA",
+      "value": "0xAA",
+      "comment": "Enable read look-ahead feature",
+      "category": "SETFEATURES_EN"
+    },
+    {
+      "name": "SETFEATURES_PREFETCH",
+      "value": "0xAB",
+      "comment": "Sets drive prefetch value",
+      "category": ""
+    },
+    {
+      "name": "SETFEATURES_EN_REST",
+      "value": "0xAC",
+      "comment": "ATA-1",
+      "category": "SETFEATURES_EN"
+    },
+    {
+      "name": "SETFEATURES_4B_RW_LONG",
+      "value": "0xBB",
+      "comment": "Set Length of 4 bytes",
+      "category": ""
+    },
+    {
+      "name": "SETFEATURES_DIS_AAM",
+      "value": "0xC2",
+      "comment": "Disable Automatic Acoustic Management",
+      "category": "SETFEATURES_DIS"
+    },
+    {
+      "name": "SETFEATURES_EN_RPOD",
+      "value": "0xCC",
+      "comment": "Enable reverting to power on defaults",
+      "category": "SETFEATURES_EN"
+    },
+    {
+      "name": "SETFEATURES_DIS_RI",
+      "value": "0xDD",
+      "comment": "Disable release interrupt ATAPI",
+      "category": "SETFEATURES_DIS"
+    },
+    {
+      "name": "SETFEATURES_EN_SAME_M",
+      "value": "0xDD",
+      "comment": "for a entire device ATA-1",
+      "category": "SETFEATURES_EN"
+    },
+    {
+      "name": "SETFEATURES_DIS_SI",
+      "value": "0xDE",
+      "comment": "Disable SERVICE interrupt ATAPI",
+      "category": "SETFEATURES_DIS"
+    },
+    {
+      "name": "SECURITY_SET_PASSWORD",
+      "value": "0xBA",
+      "comment": "",
+      "category": "SECURITY_SET"
+    },
+    {
+      "name": "SECURITY_UNLOCK",
+      "value": "0xBB",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SECURITY_ERASE_PREPARE",
+      "value": "0xBC",
+      "comment": "",
+      "category": "SECURITY_ERASE"
+    },
+    {
+      "name": "SECURITY_ERASE_UNIT",
+      "value": "0xBD",
+      "comment": "",
+      "category": "SECURITY_ERASE"
+    },
+    {
+      "name": "SECURITY_FREEZE_LOCK",
+      "value": "0xBE",
+      "comment": "",
+      "category": "SECURITY_FREEZE"
+    },
+    {
+      "name": "SECURITY_DISABLE_PASSWORD",
+      "value": "0xBF",
+      "comment": "",
+      "category": "SECURITY_DISABLE"
+    },
+    {
+      "name": "HDIO_GETGEO",
+      "value": "0x0301",
+      "comment": "get device geometry",
+      "category": ""
+    },
+    {
+      "name": "HDIO_GET_UNMASKINTR",
+      "value": "0x0302",
+      "comment": "get current unmask setting",
+      "category": "HDIO_GET"
+    },
+    {
+      "name": "HDIO_GET_MULTCOUNT",
+      "value": "0x0304",
+      "comment": "get current IDE blockmode setting",
+      "category": "HDIO_GET"
+    },
+    {
+      "name": "HDIO_GET_QDMA",
+      "value": "0x0305",
+      "comment": "get use-qdma flag",
+      "category": "HDIO_GET"
+    },
+    {
+      "name": "HDIO_SET_XFER",
+      "value": "0x0306",
+      "comment": "set transfer rate via proc",
+      "category": "HDIO_SET"
+    },
+    {
+      "name": "HDIO_OBSOLETE_IDENTITY",
+      "value": "0x0307",
+      "comment": "OBSOLETE, DO NOT USE: returns 142 bytes",
+      "category": "HDIO_OBSOLETE"
+    },
+    {
+      "name": "HDIO_GET_KEEPSETTINGS",
+      "value": "0x0308",
+      "comment": "get keep-settings-on-reset flag",
+      "category": "HDIO_GET"
+    },
+    {
+      "name": "HDIO_GET_32BIT",
+      "value": "0x0309",
+      "comment": "get current io_32bit setting",
+      "category": "HDIO_GET"
+    },
+    {
+      "name": "HDIO_GET_NOWERR",
+      "value": "0x030a",
+      "comment": "get ignore-write-error flag",
+      "category": "HDIO_GET"
+    },
+    {
+      "name": "HDIO_GET_DMA",
+      "value": "0x030b",
+      "comment": "get use-dma flag",
+      "category": "HDIO_GET"
+    },
+    {
+      "name": "HDIO_GET_NICE",
+      "value": "0x030c",
+      "comment": "get nice flags",
+      "category": "HDIO_GET"
+    },
+    {
+      "name": "HDIO_GET_IDENTITY",
+      "value": "0x030d",
+      "comment": "get IDE identification info",
+      "category": "HDIO_GET"
+    },
+    {
+      "name": "HDIO_GET_WCACHE",
+      "value": "0x030e",
+      "comment": "get write cache mode on|off",
+      "category": "HDIO_GET"
+    },
+    {
+      "name": "HDIO_GET_ACOUSTIC",
+      "value": "0x030f",
+      "comment": "get acoustic value",
+      "category": "HDIO_GET"
+    },
+    {
+      "name": "HDIO_GET_ADDRESS",
+      "value": "0x0310",
+      "comment": " ",
+      "category": "HDIO_GET"
+    },
+    {
+      "name": "HDIO_GET_BUSSTATE",
+      "value": "0x031a",
+      "comment": "get the bus state of the hwif",
+      "category": "HDIO_GET"
+    },
+    {
+      "name": "HDIO_TRISTATE_HWIF",
+      "value": "0x031b",
+      "comment": "execute a channel tristate",
+      "category": "HDIO_TRISTATE"
+    },
+    {
+      "name": "HDIO_DRIVE_RESET",
+      "value": "0x031c",
+      "comment": "execute a device reset",
+      "category": "HDIO_DRIVE"
+    },
+    {
+      "name": "HDIO_DRIVE_TASKFILE",
+      "value": "0x031d",
+      "comment": "execute raw taskfile",
+      "category": "HDIO_DRIVE"
+    },
+    {
+      "name": "HDIO_DRIVE_TASK",
+      "value": "0x031e",
+      "comment": "execute task and special drive command",
+      "category": "HDIO_DRIVE"
+    },
+    {
+      "name": "HDIO_DRIVE_CMD",
+      "value": "0x031f",
+      "comment": "execute a special drive command",
+      "category": "HDIO_DRIVE"
+    },
+    {
+      "name": "HDIO_DRIVE_CMD_AEB",
+      "value": "HDIO_DRIVE_TASK",
+      "comment": "",
+      "category": "HDIO_DRIVE"
+    },
+    {
+      "name": "HDIO_SET_MULTCOUNT",
+      "value": "0x0321",
+      "comment": "change IDE blockmode",
+      "category": "HDIO_SET"
+    },
+    {
+      "name": "HDIO_SET_UNMASKINTR",
+      "value": "0x0322",
+      "comment": "permit other irqs during I/O",
+      "category": "HDIO_SET"
+    },
+    {
+      "name": "HDIO_SET_KEEPSETTINGS",
+      "value": "0x0323",
+      "comment": "keep ioctl settings on reset",
+      "category": "HDIO_SET"
+    },
+    {
+      "name": "HDIO_SET_32BIT",
+      "value": "0x0324",
+      "comment": "change io_32bit flags",
+      "category": "HDIO_SET"
+    },
+    {
+      "name": "HDIO_SET_NOWERR",
+      "value": "0x0325",
+      "comment": "change ignore-write-error flag",
+      "category": "HDIO_SET"
+    },
+    {
+      "name": "HDIO_SET_DMA",
+      "value": "0x0326",
+      "comment": "change use-dma flag",
+      "category": "HDIO_SET"
+    },
+    {
+      "name": "HDIO_SET_PIO_MODE",
+      "value": "0x0327",
+      "comment": "reconfig interface to new speed",
+      "category": "HDIO_SET"
+    },
+    {
+      "name": "HDIO_SCAN_HWIF",
+      "value": "0x0328",
+      "comment": "register and (re)scan interface",
+      "category": "HDIO_SCAN"
+    },
+    {
+      "name": "HDIO_UNREGISTER_HWIF",
+      "value": "0x032a",
+      "comment": "unregister interface",
+      "category": "HDIO_UNREGISTER"
+    },
+    {
+      "name": "HDIO_SET_NICE",
+      "value": "0x0329",
+      "comment": "set nice flags",
+      "category": "HDIO_SET"
+    },
+    {
+      "name": "HDIO_SET_WCACHE",
+      "value": "0x032b",
+      "comment": "change write cache enable-disable",
+      "category": "HDIO_SET"
+    },
+    {
+      "name": "HDIO_SET_ACOUSTIC",
+      "value": "0x032c",
+      "comment": "change acoustic behavior",
+      "category": "HDIO_SET"
+    },
+    {
+      "name": "HDIO_SET_BUSSTATE",
+      "value": "0x032d",
+      "comment": "set the bus state of the hwif",
+      "category": "HDIO_SET"
+    },
+    {
+      "name": "HDIO_SET_QDMA",
+      "value": "0x032e",
+      "comment": "change use-qdma flag",
+      "category": "HDIO_SET"
+    },
+    {
+      "name": "HDIO_SET_ADDRESS",
+      "value": "0x032f",
+      "comment": "change lba addressing modes",
+      "category": "HDIO_SET"
+    },
+    {
+      "name": "IDE_NICE_DSC_OVERLAP",
+      "value": "(0)",
+      "comment": "per the DSC overlap protocol",
+      "category": "IDE_NICE"
+    },
+    {
+      "name": "IDE_NICE_ATAPI_OVERLAP",
+      "value": "(1)",
+      "comment": "not supported yet",
+      "category": "IDE_NICE"
+    },
+    {
+      "name": "IDE_NICE_1",
+      "value": "(3)",
+      "comment": "when probably won't affect us much",
+      "category": "IDE_NICE"
+    },
+    {
+      "name": "IDE_NICE_0",
+      "value": "(2)",
+      "comment": "when sure that it won't affect us",
+      "category": "IDE_NICE"
+    },
+    {
+      "name": "IDE_NICE_2",
+      "value": "(4)",
+      "comment": "when we know it's on our expense",
+      "category": "IDE_NICE"
+    }
+  ],
+  "structs": [
+    {
+      "name": "anonymous_0",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ide_task_request_s",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "io_ports",
+          "array_size": "8",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "hob_ports",
+          "array_size": "8",
+          "comment": ""
+        },
+        {
+          "type_name": "ide_reg_valid_t",
+          "name": "out_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "ide_reg_valid_t",
+          "name": "in_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "data_phase",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "req_cmd",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ide_ioctl_request_s",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "hd_drive_cmd_hdr",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "command",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "sector_number",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "feature",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "sector_count",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "hd_drive_task_hdr",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "data",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "feature",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "sector_count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "sector_number",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "low_cylinder",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "high_cylinder",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "device_head",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "command",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "hd_drive_hob_hdr",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "data",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "feature",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "sector_count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "sector_number",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "low_cylinder",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "high_cylinder",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "device_head",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "control",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "hd_geometry",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "hd_driveid",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [
+    "ide_reg_valid_s",
+    "ide_task_request_s",
+    "ide_ioctl_request_s",
+    "hd_drive_task_hdr",
+    "hd_drive_hob_hdr"
+  ],
+  "enums": {}
+}

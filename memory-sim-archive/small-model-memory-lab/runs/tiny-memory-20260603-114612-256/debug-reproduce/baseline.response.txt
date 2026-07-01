@@ -1,0 +1,5 @@
+﻿
+1) Reproduce reliably: capture the exact request path, headers, and payload that triggers the crash; use a staging environment with the same data and traffic mix.
+2) Isolate the change: diff the new deploy against the last stable version; enable request tracing and structured logs with correlation IDs to pinpoint the failing component.
+3) Narrow the failure: add targeted logs and metrics around the suspected area (e.g., DB queries, external calls, memory usage); use a debugger or profiler to capture stack traces and resource states at the crash point.
+4) Fix and verify: implement the minimal fix, run automated tests and load tests, and monitor the same metrics/logs to confirm the crash no longer occurs.

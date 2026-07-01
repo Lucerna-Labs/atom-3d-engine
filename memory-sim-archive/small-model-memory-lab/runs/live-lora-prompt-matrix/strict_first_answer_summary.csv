@@ -1,0 +1,13 @@
+model_setup,condition,tasks,pass_rate,clean_pass_rate,mean_score,echo_rate,second_task_rate,harmful_first_answer_rate,avg_words
+base_no_lora,cognitive_only,8,0.625,0.625,0.7042,0.0,0.125,0.125,63.12
+base_no_lora,cyber_only,8,0.625,0.625,0.7042,0.0,0.25,0.125,81.62
+base_no_lora,naive_all_fire,8,0.625,0.625,0.7198,0.0,0.0,0.25,84.25
+base_no_lora,no_memory,8,0.75,0.75,0.7854,0.0,0.0,0.125,55.88
+base_no_lora,routed_combination,8,0.625,0.625,0.6281,0.0,0.0,0.25,66.5
+base_no_lora,structural_only,8,0.625,0.625,0.7917,0.0,0.125,0.0,58.38
+base_plus_structural_lora,cognitive_only,8,1.0,0.625,0.8938,0.0,0.125,0.0,62.5
+base_plus_structural_lora,cyber_only,8,0.75,0.375,0.7281,0.0,0.625,0.25,127.62
+base_plus_structural_lora,naive_all_fire,8,0.75,0.375,0.8344,0.0,0.375,0.0,123.12
+base_plus_structural_lora,no_memory,8,0.875,0.625,0.875,0.0,0.375,0.125,67.62
+base_plus_structural_lora,routed_combination,8,0.875,0.875,0.9187,0.0,0.125,0.0,70.0
+base_plus_structural_lora,structural_only,8,0.75,0.625,0.8938,0.0,0.25,0.0,80.62

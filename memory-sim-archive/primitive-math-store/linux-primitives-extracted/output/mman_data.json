@@ -1,0 +1,221 @@
+{
+  "filename": "mman.h",
+  "includes": [
+    "asm/mman.h",
+    "asm-generic/hugetlb_encode.h",
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "MREMAP_MAYMOVE",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "MREMAP_FIXED",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "MREMAP_DONTUNMAP",
+      "value": "4",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "OVERCOMMIT_GUESS",
+      "value": "0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "OVERCOMMIT_ALWAYS",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "OVERCOMMIT_NEVER",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "MAP_SHARED",
+      "value": "0x01",
+      "comment": "Share changes",
+      "category": ""
+    },
+    {
+      "name": "MAP_PRIVATE",
+      "value": "0x02",
+      "comment": "Changes are private",
+      "category": ""
+    },
+    {
+      "name": "MAP_SHARED_VALIDATE",
+      "value": "0x03",
+      "comment": "share + validate extension flags",
+      "category": "MAP_SHARED"
+    },
+    {
+      "name": "MAP_DROPPABLE",
+      "value": "0x08",
+      "comment": "Zero memory under memory pressure.",
+      "category": ""
+    },
+    {
+      "name": "MAP_HUGE_SHIFT",
+      "value": "HUGETLB_FLAG_ENCODE_SHIFT",
+      "comment": "",
+      "category": "MAP_HUGE"
+    },
+    {
+      "name": "MAP_HUGE_MASK",
+      "value": "HUGETLB_FLAG_ENCODE_MASK",
+      "comment": "",
+      "category": "MAP_HUGE"
+    },
+    {
+      "name": "MAP_HUGE_16KB",
+      "value": "HUGETLB_FLAG_ENCODE_16KB",
+      "comment": "",
+      "category": "MAP_HUGE"
+    },
+    {
+      "name": "MAP_HUGE_64KB",
+      "value": "HUGETLB_FLAG_ENCODE_64KB",
+      "comment": "",
+      "category": "MAP_HUGE"
+    },
+    {
+      "name": "MAP_HUGE_512KB",
+      "value": "HUGETLB_FLAG_ENCODE_512KB",
+      "comment": "",
+      "category": "MAP_HUGE"
+    },
+    {
+      "name": "MAP_HUGE_1MB",
+      "value": "HUGETLB_FLAG_ENCODE_1MB",
+      "comment": "",
+      "category": "MAP_HUGE"
+    },
+    {
+      "name": "MAP_HUGE_2MB",
+      "value": "HUGETLB_FLAG_ENCODE_2MB",
+      "comment": "",
+      "category": "MAP_HUGE"
+    },
+    {
+      "name": "MAP_HUGE_8MB",
+      "value": "HUGETLB_FLAG_ENCODE_8MB",
+      "comment": "",
+      "category": "MAP_HUGE"
+    },
+    {
+      "name": "MAP_HUGE_16MB",
+      "value": "HUGETLB_FLAG_ENCODE_16MB",
+      "comment": "",
+      "category": "MAP_HUGE"
+    },
+    {
+      "name": "MAP_HUGE_32MB",
+      "value": "HUGETLB_FLAG_ENCODE_32MB",
+      "comment": "",
+      "category": "MAP_HUGE"
+    },
+    {
+      "name": "MAP_HUGE_256MB",
+      "value": "HUGETLB_FLAG_ENCODE_256MB",
+      "comment": "",
+      "category": "MAP_HUGE"
+    },
+    {
+      "name": "MAP_HUGE_512MB",
+      "value": "HUGETLB_FLAG_ENCODE_512MB",
+      "comment": "",
+      "category": "MAP_HUGE"
+    },
+    {
+      "name": "MAP_HUGE_1GB",
+      "value": "HUGETLB_FLAG_ENCODE_1GB",
+      "comment": "",
+      "category": "MAP_HUGE"
+    },
+    {
+      "name": "MAP_HUGE_2GB",
+      "value": "HUGETLB_FLAG_ENCODE_2GB",
+      "comment": "",
+      "category": "MAP_HUGE"
+    },
+    {
+      "name": "MAP_HUGE_16GB",
+      "value": "HUGETLB_FLAG_ENCODE_16GB",
+      "comment": "",
+      "category": "MAP_HUGE"
+    }
+  ],
+  "structs": [
+    {
+      "name": "cachestat_range",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "off",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "len",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "cachestat",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "nr_cache",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "nr_dirty",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "nr_writeback",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "nr_evicted",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "nr_recently_evicted",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

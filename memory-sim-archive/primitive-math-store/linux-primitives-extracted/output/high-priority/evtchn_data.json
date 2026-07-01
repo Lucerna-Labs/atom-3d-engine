@@ -1,0 +1,108 @@
+{
+  "filename": "evtchn.h",
+  "includes": [],
+  "defines": [
+    {
+      "name": "IOCTL_EVTCHN_BIND_VIRQ",
+      "value": "",
+      "comment": "",
+      "category": "IOCTL_EVTCHN"
+    },
+    {
+      "name": "IOCTL_EVTCHN_BIND_INTERDOMAIN",
+      "value": "",
+      "comment": "",
+      "category": "IOCTL_EVTCHN"
+    },
+    {
+      "name": "IOCTL_EVTCHN_BIND_UNBOUND_PORT",
+      "value": "",
+      "comment": "",
+      "category": "IOCTL_EVTCHN"
+    },
+    {
+      "name": "IOCTL_EVTCHN_UNBIND",
+      "value": "",
+      "comment": "",
+      "category": "IOCTL_EVTCHN"
+    },
+    {
+      "name": "IOCTL_EVTCHN_NOTIFY",
+      "value": "",
+      "comment": "",
+      "category": "IOCTL_EVTCHN"
+    },
+    {
+      "name": "IOCTL_EVTCHN_RESET",
+      "value": "",
+      "comment": "",
+      "category": "IOCTL_EVTCHN"
+    },
+    {
+      "name": "IOCTL_EVTCHN_RESTRICT_DOMID",
+      "value": "",
+      "comment": "",
+      "category": "IOCTL_EVTCHN"
+    },
+    {
+      "name": "IOCTL_EVTCHN_BIND_STATIC",
+      "value": "",
+      "comment": "",
+      "category": "IOCTL_EVTCHN"
+    }
+  ],
+  "structs": [
+    {
+      "name": "ioctl_evtchn_bind_virq",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ioctl_evtchn_bind_interdomain",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ioctl_evtchn_bind_unbound_port",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ioctl_evtchn_unbind",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ioctl_evtchn_notify",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ioctl_evtchn_restrict_domid",
+      "fields": [
+        {
+          "type_name": "domid_t",
+          "name": "domid",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ioctl_evtchn_bind",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

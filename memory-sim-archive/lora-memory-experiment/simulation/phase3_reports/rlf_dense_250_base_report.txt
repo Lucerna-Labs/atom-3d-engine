@@ -1,0 +1,240 @@
+======================================================================
+SIMULATION REPORT: rlf_dense_250
+======================================================================
+
+Domains: rhetoric, logic, forensic
+Total memories: 190
+Total behaviors: 19
+Uncovered behaviors: 0
+Echo chains: 49
+Isolated memories: 95
+Echo connectivity: 50.0%
+Cross-domain connections: 40
+
+--- OVERALL SCORE: 0.900 ---
+
+--- PRESSURE PASS RATES ---
+       low: 100.0%
+    medium: 100.0%
+      high: 100.0%
+
+--- BEHAVIOR COVERAGE ---
+  ✓ F-001: Deception Detection (20 memories) [LB] echo:10→5
+  ✓ F-002: Statement Analysis (15 memories) [LB] echo:9→3
+  ✓ F-003: Threat Assessment (20 memories) [LB] echo:5→8
+  ✓ F-004: Behavioral Baseline Reading (15 memories) [LB] echo:5→5
+  ✓ F-005: Criminal Thinking Pattern Recognition (10 memories) [LB] echo:3→6
+  ✓ F-006: Victim Psychology Awareness (10 memories) [LB] echo:3→4
+  ✓ L-001: Necessary vs Sufficient (20 memories) [LB] echo:10→7
+  ✓ L-002: Counterexample Construction (20 memories) [LB] echo:5→7
+  ✓ L-003: Chain Validation (15 memories) [LB] echo:2→2
+  ✓ L-004: Scope Recognition (20 memories) [LB] echo:5→7
+  ✓ L-005: Conditional Reasoning (15 memories) [LB] echo:7→5
+  ✓ L-006: Hidden Assumption Extraction (20 memories) [LB] echo:2→4
+  ✓ R-001: Claim Identification (20 memories) [LB] echo:6→7
+  ✓ R-002: Evidence Evaluation (20 memories) [LB] echo:6→7
+  ✓ R-003: Warrant Detection (25 memories) [LB] echo:2→6
+  ✓ R-004: Fallacy Recognition (20 memories) [LB] echo:4→6
+  ✓ R-005: Kairos Detection (20 memories) [LB] echo:5→6
+  ✓ R-006: Enthymeme Reconstruction (25 memories) [LB] echo:4→5
+  ✓ R-007: Audience Awareness (30 memories) [LB] echo:8→10
+
+--- ECHO CHAINS ---
+  chain_0: FOR-152 → RHE-000
+    Domains: rhetoric, forensic
+    Behaviors: F-001, F-003, R-001, R-002
+    Strength: 1.00
+  chain_1: FOR-177 → RHE-001
+    Domains: rhetoric, forensic
+    Behaviors: R-004, F-005, R-001, R-002
+    Strength: 1.00
+  chain_2: RHE-003 → RHE-005
+    Domains: rhetoric
+    Behaviors: R-001, R-002
+    Strength: 1.00
+  chain_3: FOR-135 → FOR-138 → RHE-004
+    Domains: rhetoric, forensic
+    Behaviors: R-001, F-002, F-001, R-002, F-003
+    Strength: 1.00
+  chain_4: FOR-181 → LOG-075 → RHE-006 → RHE-019
+    Domains: logic, rhetoric, forensic
+    Behaviors: R-001, R-007, F-006, R-002, L-005
+    Strength: 1.00
+  chain_5: FOR-157 → RHE-010
+    Domains: rhetoric, forensic
+    Behaviors: R-001, F-004, F-003, R-002
+    Strength: 1.00
+  chain_6: LOG-075 → RHE-012 → RHE-019
+    Domains: logic, rhetoric
+    Behaviors: R-001, L-005, L-001, R-002
+    Strength: 1.00
+  chain_7: RHE-013 → RHE-016
+    Domains: rhetoric
+    Behaviors: R-001, R-002
+    Strength: 1.00
+  chain_8: LOG-096 → RHE-017
+    Domains: logic, rhetoric
+    Behaviors: R-001, L-006, L-003, R-002
+    Strength: 1.00
+  chain_9: LOG-093 → RHE-021
+    Domains: logic, rhetoric
+    Behaviors: R-006, L-006, R-003, L-003
+    Strength: 1.00
+  chain_10: FOR-181 → LOG-074 → LOG-075 → LOG-079 → RHE-019 → RHE-023
+    Domains: logic, rhetoric, forensic
+    Behaviors: R-001, R-007, F-006, R-002, L-005
+    Strength: 1.00
+  chain_11: LOG-114 → RHE-028
+    Domains: logic, rhetoric
+    Behaviors: R-006, L-005, L-001, R-003
+    Strength: 1.00
+  chain_12: LOG-129 → RHE-036
+    Domains: logic, rhetoric
+    Behaviors: R-004, L-006, R-003
+    Strength: 1.00
+  chain_13: FOR-186 → RHE-042
+    Domains: rhetoric, forensic
+    Behaviors: R-007, F-006, R-005
+    Strength: 1.00
+  chain_14: FOR-142 → RHE-043
+    Domains: rhetoric, forensic
+    Behaviors: F-001, R-005, R-007, F-002
+    Strength: 1.00
+  chain_15: LOG-111 → RHE-045 → RHE-069
+    Domains: logic, rhetoric
+    Behaviors: L-005, L-001, R-007, R-005
+    Strength: 1.00
+  chain_16: FOR-178 → LOG-108 → RHE-047
+    Domains: logic, rhetoric, forensic
+    Behaviors: R-004, R-007, F-005, L-004, R-005
+    Strength: 1.00
+  chain_17: LOG-102 → RHE-048
+    Domains: logic, rhetoric
+    Behaviors: L-002, R-007, R-005, L-004
+    Strength: 1.00
+  chain_18: FOR-146 → RHE-052
+    Domains: rhetoric, forensic
+    Behaviors: F-001, R-003, F-002, R-006
+    Strength: 1.00
+  chain_19: LOG-106 → RHE-053
+    Domains: logic, rhetoric
+    Behaviors: R-006, L-002, R-003, L-004
+    Strength: 1.00
+  chain_20: FOR-177 → RHE-055
+    Domains: rhetoric, forensic
+    Behaviors: R-004, F-005, R-003, R-006
+    Strength: 1.00
+  chain_21: LOG-085 → RHE-064
+    Domains: logic, rhetoric
+    Behaviors: L-002, R-007, R-005, L-004
+    Strength: 1.00
+  chain_22: FOR-184 → FOR-188 → RHE-065
+    Domains: rhetoric, forensic
+    Behaviors: R-007, F-006, R-005
+    Strength: 1.00
+  chain_23: LOG-077 → RHE-066
+    Domains: logic, rhetoric
+    Behaviors: L-005, L-001, R-007, R-005
+    Strength: 1.00
+  chain_24: FOR-181 → LOG-070 → LOG-074 → LOG-075 → LOG-079 → RHE-019 → RHE-068
+    Domains: logic, rhetoric, forensic
+    Behaviors: R-001, R-007, F-006, R-002, L-005
+    Strength: 1.00
+  chain_25: FOR-186 → LOG-078
+    Domains: logic, forensic
+    Behaviors: L-001, R-007, F-006
+    Strength: 1.00
+  chain_26: FOR-141 → LOG-080
+    Domains: logic, forensic
+    Behaviors: F-002, L-002, R-006, L-004
+    Strength: 1.00
+  chain_27: FOR-135 → FOR-138 → FOR-171 → LOG-084 → LOG-088
+    Domains: logic, forensic
+    Behaviors: F-002, R-004, F-001, F-005, L-004
+    Strength: 1.00
+  chain_28: FOR-141 → LOG-087
+    Domains: logic, forensic
+    Behaviors: F-002, L-002, R-006, L-004
+    Strength: 1.00
+  chain_29: FOR-130 → LOG-092
+    Domains: logic, forensic
+    Behaviors: F-001, L-006, L-003, F-002
+    Strength: 1.00
+  chain_30: FOR-176 → LOG-094
+    Domains: logic, forensic
+    Behaviors: R-004, F-005, L-006, L-003
+    Strength: 1.00
+  chain_31: FOR-142 → LOG-100
+    Domains: logic, forensic
+    Behaviors: F-001, L-002, F-002, L-004
+    Strength: 1.00
+  chain_32: FOR-180 → LOG-103
+    Domains: logic, forensic
+    Behaviors: L-002, R-007, F-006, L-004
+    Strength: 1.00
+  chain_33: LOG-110 → LOG-117
+    Domains: logic
+    Behaviors: L-005, L-001
+    Strength: 1.00
+  chain_34: LOG-077 → LOG-112
+    Domains: logic
+    Behaviors: L-005, L-001
+    Strength: 1.00
+  chain_35: FOR-135 → FOR-171 → LOG-084 → LOG-088 → LOG-113
+    Domains: logic, forensic
+    Behaviors: R-004, F-001, F-005, L-004, L-005
+    Strength: 1.00
+  chain_36: FOR-170 → LOG-115
+    Domains: logic, forensic
+    Behaviors: R-004, F-005, L-001, L-005
+    Strength: 1.00
+  chain_37: FOR-164 → LOG-118
+    Domains: logic, forensic
+    Behaviors: P-002, F-004, L-001, L-005
+    Strength: 1.00
+  chain_38: LOG-093 → LOG-125
+    Domains: logic
+    Behaviors: L-006, R-003, L-003
+    Strength: 1.00
+  chain_39: FOR-130 → FOR-132 → FOR-140 → FOR-147 → FOR-158
+    Domains: forensic
+    Behaviors: F-001, F-003, R-006, F-002
+    Strength: 1.00
+  chain_40: FOR-133 → RHE-003
+    Domains: rhetoric, forensic
+    Behaviors: F-001, F-003, R-001, R-002
+    Strength: 1.00
+  chain_41: FOR-144 → LOG-087
+    Domains: logic, forensic
+    Behaviors: F-001, L-002, F-002, L-004
+    Strength: 1.00
+  chain_42: FOR-151 → FOR-163
+    Domains: forensic
+    Behaviors: F-004, F-003
+    Strength: 1.00
+  chain_43: FOR-153 → FOR-168
+    Domains: forensic
+    Behaviors: P-002, F-004, F-003
+    Strength: 1.00
+  chain_44: FOR-156 → FOR-169 → LOG-113
+    Domains: logic, forensic
+    Behaviors: F-001, F-004, L-005, L-001, F-003
+    Strength: 1.00
+  chain_45: FOR-162 → FOR-167
+    Domains: forensic
+    Behaviors: P-002, F-004, F-003
+    Strength: 1.00
+  chain_46: FOR-173 → RHE-065
+    Domains: rhetoric, forensic
+    Behaviors: R-004, F-005, R-007, R-005
+    Strength: 1.00
+  chain_47: FOR-174 → RHE-004
+    Domains: rhetoric, forensic
+    Behaviors: R-004, F-005, R-001, R-002
+    Strength: 1.00
+  chain_48: FOR-175 → FOR-178 → LOG-108
+    Domains: logic, forensic
+    Behaviors: R-004, F-005, L-002, L-004
+    Strength: 1.00
+
+======================================================================

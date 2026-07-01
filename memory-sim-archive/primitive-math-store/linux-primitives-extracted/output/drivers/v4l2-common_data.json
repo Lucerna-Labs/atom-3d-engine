@@ -1,0 +1,164 @@
+{
+  "filename": "v4l2-common.h",
+  "includes": [
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "V4L2_SEL_TGT_CROP",
+      "value": "0x0000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_SEL_TGT_CROP_DEFAULT",
+      "value": "0x0001",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_SEL_TGT_CROP_BOUNDS",
+      "value": "0x0002",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_SEL_TGT_NATIVE_SIZE",
+      "value": "0x0003",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_SEL_TGT_COMPOSE",
+      "value": "0x0100",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_SEL_TGT_COMPOSE_DEFAULT",
+      "value": "0x0101",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_SEL_TGT_COMPOSE_BOUNDS",
+      "value": "0x0102",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_SEL_TGT_COMPOSE_PADDED",
+      "value": "0x0103",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_SEL_FLAG_GE",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_SEL_FLAG_LE",
+      "value": "(1 << 1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_SEL_FLAG_KEEP_CONFIG",
+      "value": "(1 << 2)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_SEL_TGT_CROP_ACTIVE",
+      "value": "V4L2_SEL_TGT_CROP",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_SEL_TGT_COMPOSE_ACTIVE",
+      "value": "V4L2_SEL_TGT_COMPOSE",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_SUBDEV_SEL_TGT_CROP_ACTUAL",
+      "value": "V4L2_SEL_TGT_CROP",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_SUBDEV_SEL_TGT_COMPOSE_ACTUAL",
+      "value": "V4L2_SEL_TGT_COMPOSE",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_SUBDEV_SEL_TGT_CROP_BOUNDS",
+      "value": "V4L2_SEL_TGT_CROP_BOUNDS",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_SUBDEV_SEL_TGT_COMPOSE_BOUNDS",
+      "value": "V4L2_SEL_TGT_COMPOSE_BOUNDS",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_SUBDEV_SEL_FLAG_SIZE_GE",
+      "value": "V4L2_SEL_FLAG_GE",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_SUBDEV_SEL_FLAG_SIZE_LE",
+      "value": "V4L2_SEL_FLAG_LE",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V4L2_SUBDEV_SEL_FLAG_KEEP_CONFIG",
+      "value": "V4L2_SEL_FLAG_KEEP_CONFIG",
+      "comment": "",
+      "category": ""
+    }
+  ],
+  "structs": [
+    {
+      "name": "v4l2_edid",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "start_block",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "blocks",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved",
+          "array_size": "5",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

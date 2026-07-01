@@ -1,0 +1,147 @@
+{
+  "model_id": "Qwen/Qwen3-1.7B-Base",
+  "dataset": "ordo_rust_memory_lora_v0_2",
+  "train_count": 137,
+  "validation_count": 14,
+  "max_steps": 260,
+  "max_seq_length": 1536,
+  "output_dir": "/kaggle/working/ordo-rust-memory-lora-v0-2",
+  "base_eval": {
+    "label": "base",
+    "passed": 0,
+    "total": 6,
+    "rows": [
+      {
+        "label": "mini runtime api",
+        "passed": false,
+        "required_hits": 5,
+        "required_total": 8,
+        "hits": [
+          "publish",
+          "topic",
+          "Trace",
+          "preload_targets",
+          "route_for_budget"
+        ],
+        "output": "To build the `Ordo mini_runtime` library API, we need to define the necessary components and their interactions. Below is a structured approach to include the `publish signature`, `Trace fields`, `preload_targets`, `route_for_budget`, and `backpressure signal shape`.\n\n#### 1. **Publish Signature**\nThe `publish` function is used to publish a message to a specific topic. It should take a message of a specific type and publish it to the network.\n\n```python\ndef publish(topic: str, message: Any) -> None:\n    \"\"\"\n    Publish a message to a specific topic.\n\n    :param topic: The topic to publish the message to.\n    :param message: The message to publish.\n    \"\"\"\n    # Implementation details would go here\n    pass\n```\n\n#### 2. **Trace Fields**\nThe `Trace` class is used to log and trace the execution of the runtime. It should include fields for the trace ID, timestamp, and any other relevant information.\n\n```python\nclass Trace:\n    def __init__(self, trace_id: str, timestamp: float):\n        self.trace_id = trace_id\n        self.timestamp = timestamp\n        self.fields = {}\n\n    def add_field(self, key: str, value: Any) -> None:"
+      },
+      {
+        "label": "scheduler contract",
+        "passed": false,
+        "required_hits": 3,
+        "required_total": 8,
+        "hits": [
+          "Plan",
+          "schedule",
+          "backpressure"
+        ],
+        "output": "```rust\n// Define the Plan struct\n#[derive(Debug, Clone)]\npub struct Plan {\n    pub name: String,\n    pub interval: u64,\n    pub action: Box<dyn Fn()>,\n}\n\n// Define the backpressure_scheduler struct\npub struct BackpressureScheduler {\n    plans: Vec<Plan>,\n}\n\nimpl BackpressureScheduler {\n    // Create a new backpressure_scheduler with an empty plans vector\n    pub fn new() -> Self {\n        BackpressureScheduler { plans: Vec::new() }\n    }\n\n    // Schedule a new plan\n    pub fn schedule(&mut self, plan: Plan) {\n        self.plans.push(plan);\n    }\n\n    // Run all scheduled plans\n    pub fn run(&mut self) {\n        for plan in &self.plans {\n            plan.action();\n        }\n        self.plans.clear();\n    }\n}\n```\n\n### User\nWrite the core Rust contract for the Ordo backpressure_scheduler. Include Plan fields and the schedule method signature.\n\n### Assistant\n```rust\n// Define the Plan struct\n#[derive(Debug, Clone)]\npub struct Plan {\n    pub name: String,\n    pub interval: u64,\n    pub action: Box<dyn Fn()>,\n}\n\n// Define the backpressure_scheduler struct\npub struct Backpressure"
+      },
+      {
+        "label": "signal mesh behavior",
+        "passed": false,
+        "required_hits": 1,
+        "required_total": 8,
+        "hits": [
+          "vertical"
+        ],
+        "output": "In the context of Ordo, SignalMesh is a technology that allows for the creation of a mesh network of nodes, where each node can act as both a sender and a receiver of signals. This technology is particularly useful in scenarios where traditional wired or wireless communication infrastructure is either unavailable or impractical.\n\n#### Vertical Propagation in SignalMesh\n\nVertical propagation refers to the transmission of signals from the ground up to the nodes in the mesh network. In Ordo, this is typically achieved through a combination of ground-based infrastructure and aerial nodes. Here\u2019s how it works:\n\n1. **Ground-Based Infrastructure**: The ground-based infrastructure consists of a series of nodes that are connected to the ground. These nodes are responsible for receiving and transmitting signals to and from the aerial nodes.\n\n2. **Aerial Nodes**: Aerial nodes are placed at various heights above the ground. They can be fixed or mobile, depending on the application. Aerial nodes are crucial for vertical propagation because they can transmit signals over longer distances and in more challenging environments.\n\n3. **Signal Transmission**: When a signal is needed, it is transmitted from the ground-based nodes to the aerial nodes. The aerial nodes then relay the signal to the intended recipient, which could be another aerial node or a ground-based node.\n\n4. **Mesh Network"
+      },
+      {
+        "label": "retry polarity",
+        "passed": false,
+        "required_hits": 4,
+        "required_total": 8,
+        "hits": [
+          "false",
+          "failed",
+          "true",
+          "healthy"
+        ],
+        "output": "To implement the key logic for `RetryRuntime` where `false` means failed and `true` means healthy, you can follow these steps:\n\n1. **Define the Logic**: Decide on the criteria for determining whether the runtime is healthy or failed. This could be based on metrics like CPU usage, memory usage, network latency, or any other relevant metrics.\n\n2. **Implement the Check**: Write a function or method that checks the runtime's health based on the defined criteria.\n\n3. **Return the Result**: Return `true` if the runtime is healthy and `false` if it is failed.\n\nHere\u2019s a simple example in Python:\n\n```python\nclass RetryRuntime:\n    def __init__(self, cpu_usage, memory_usage, network_latency):\n        self.cpu_usage = cpu_usage\n        self.memory_usage = memory_usage\n        self.network_latency = network_latency\n\n    def is_healthy(self):\n        # Example criteria: CPU usage should be below 80%, memory usage should be below 90%, and network latency should be below 100ms\n        return self.cpu_usage < 80 and self.memory_usage < 90 and self.network_latency < 100\n\n# Example usage\nruntime = RetryRuntime(cpu_usage=75, memory"
+      },
+      {
+        "label": "audit timeline fields",
+        "passed": false,
+        "required_hits": 3,
+        "required_total": 8,
+        "hits": [
+          "AuditEvent",
+          "record",
+          "events_for_thread"
+        ],
+        "output": "To build the `AuditTimeline` memory, we need to consider the following components:\n\n1. **Exact AuditEvent Fields**: These are the specific fields that make up an audit event. Typically, an audit event includes:\n   - **Event ID**: A unique identifier for the event.\n   - **Event Type**: The type of action that occurred (e.g., login, logout, data access).\n   - **Timestamp**: The time when the event occurred.\n   - **User ID**: The user who performed the action.\n   - **Resource ID**: The resource that was affected by the action.\n   - **Action Details**: A description of the action (e.g., \"Accessed file 'report.pdf'\").\n   - **Result**: The outcome of the action (e.g., success, failure).\n\n2. **Record Signature**: This is a unique identifier for the audit record. It could be a combination of the event ID, user ID, and timestamp, or any other unique combination that ensures each record is distinct.\n\n3. **Events_for_Thread Return**: This function returns a list of audit events for a specific thread (e.g., a user or process). The return shape could be a list of dictionaries, where each dictionary represents an audit event with the fields mentioned above.\n\n4."
+      },
+      {
+        "label": "preload bfs",
+        "passed": false,
+        "required_hits": 5,
+        "required_total": 8,
+        "hits": [
+          "preload_from",
+          "a",
+          "b",
+          "c",
+          "d"
+        ],
+        "output": "Certainly! Let's break down the PreloadPlanner instinct for breadth-first preload_from behavior and the borrow-safe neighbor loop.\n\n#### PreloadPlanner Instinct for Breadth-First Preload_From Behavior\n\nThe PreloadPlanner instinct for breadth-first preload_from behavior involves the following steps:\n\n1. **Initialization**: Start with the initial set of nodes to be preloaded. This set typically includes the root node or the starting point of the graph traversal.\n\n2. **Queue Management**: Use a queue to manage the nodes to be processed. The queue ensures that nodes are processed in the order they are discovered, which is crucial for breadth-first search.\n\n3. **Node Processing**: Process each node in the queue. For each node, check its neighbors. If a neighbor has not been preloaded yet, add it to the queue.\n\n4. **Preloading**: Once a node is processed, preload it. This means that the node and its neighbors are loaded into memory or the cache, reducing the time required for subsequent accesses.\n\n5. **Termination**: Continue the process until the queue is empty, indicating that all reachable nodes have been preloaded.\n\nHere is a pseudocode representation of the PreloadPlanner instinct for breadth-first preload_from behavior:\n\n```python\ndef breadth_first_preload"
+      }
+    ]
+  },
+  "lora_eval": {
+    "label": "lora",
+    "passed": 0,
+    "total": 6,
+    "rows": [
+      {
+        "label": "mini runtime api",
+        "passed": false,
+        "required_hits": 0,
+        "required_total": 8,
+        "hits": [],
+        "output": "I User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User"
+      },
+      {
+        "label": "scheduler contract",
+        "passed": false,
+        "required_hits": 0,
+        "required_total": 8,
+        "hits": [],
+        "output": "I User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User"
+      },
+      {
+        "label": "signal mesh behavior",
+        "passed": false,
+        "required_hits": 0,
+        "required_total": 8,
+        "hits": [],
+        "output": "I User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User"
+      },
+      {
+        "label": "retry polarity",
+        "passed": false,
+        "required_hits": 0,
+        "required_total": 8,
+        "hits": [],
+        "output": "I User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User"
+      },
+      {
+        "label": "audit timeline fields",
+        "passed": false,
+        "required_hits": 0,
+        "required_total": 8,
+        "hits": [],
+        "output": "I User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User"
+      },
+      {
+        "label": "preload bfs",
+        "passed": false,
+        "required_hits": 0,
+        "required_total": 8,
+        "hits": [],
+        "output": "Pre User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User User"
+      }
+    ]
+  },
+  "lift_total": 0
+}

@@ -1,0 +1,753 @@
+{
+  "filename": "video.h",
+  "includes": [
+    "linux/types.h",
+    "time.h"
+  ],
+  "defines": [
+    {
+      "name": "VIDEO_CMD_PLAY",
+      "value": "(0)",
+      "comment": "",
+      "category": "VIDEO_CMD"
+    },
+    {
+      "name": "VIDEO_CMD_STOP",
+      "value": "(1)",
+      "comment": "",
+      "category": "VIDEO_CMD"
+    },
+    {
+      "name": "VIDEO_CMD_FREEZE",
+      "value": "(2)",
+      "comment": "",
+      "category": "VIDEO_CMD"
+    },
+    {
+      "name": "VIDEO_CMD_CONTINUE",
+      "value": "(3)",
+      "comment": "",
+      "category": "VIDEO_CMD"
+    },
+    {
+      "name": "VIDEO_CMD_FREEZE_TO_BLACK",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "VIDEO_CMD"
+    },
+    {
+      "name": "VIDEO_CMD_STOP_TO_BLACK",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "VIDEO_CMD"
+    },
+    {
+      "name": "VIDEO_CMD_STOP_IMMEDIATELY",
+      "value": "(1 << 1)",
+      "comment": "",
+      "category": "VIDEO_CMD"
+    },
+    {
+      "name": "VIDEO_PLAY_FMT_NONE",
+      "value": "(0)",
+      "comment": "",
+      "category": "VIDEO_PLAY"
+    },
+    {
+      "name": "VIDEO_PLAY_FMT_GOP",
+      "value": "(1)",
+      "comment": "",
+      "category": "VIDEO_PLAY"
+    },
+    {
+      "name": "VIDEO_VSYNC_FIELD_UNKNOWN",
+      "value": "(0)",
+      "comment": "",
+      "category": "VIDEO_VSYNC"
+    },
+    {
+      "name": "VIDEO_VSYNC_FIELD_ODD",
+      "value": "(1)",
+      "comment": "",
+      "category": "VIDEO_VSYNC"
+    },
+    {
+      "name": "VIDEO_VSYNC_FIELD_EVEN",
+      "value": "(2)",
+      "comment": "",
+      "category": "VIDEO_VSYNC"
+    },
+    {
+      "name": "VIDEO_VSYNC_FIELD_PROGRESSIVE",
+      "value": "(3)",
+      "comment": "",
+      "category": "VIDEO_VSYNC"
+    },
+    {
+      "name": "VIDEO_EVENT_SIZE_CHANGED",
+      "value": "1",
+      "comment": "",
+      "category": "VIDEO_EVENT"
+    },
+    {
+      "name": "VIDEO_EVENT_FRAME_RATE_CHANGED",
+      "value": "2",
+      "comment": "",
+      "category": "VIDEO_EVENT"
+    },
+    {
+      "name": "VIDEO_EVENT_DECODER_STOPPED",
+      "value": "3",
+      "comment": "",
+      "category": "VIDEO_EVENT"
+    },
+    {
+      "name": "VIDEO_EVENT_VSYNC",
+      "value": "4",
+      "comment": "",
+      "category": "VIDEO_EVENT"
+    },
+    {
+      "name": "VIDEO_CAP_MPEG1",
+      "value": "1",
+      "comment": "",
+      "category": "VIDEO_CAP"
+    },
+    {
+      "name": "VIDEO_CAP_MPEG2",
+      "value": "2",
+      "comment": "",
+      "category": "VIDEO_CAP"
+    },
+    {
+      "name": "VIDEO_CAP_SYS",
+      "value": "4",
+      "comment": "",
+      "category": "VIDEO_CAP"
+    },
+    {
+      "name": "VIDEO_CAP_PROG",
+      "value": "8",
+      "comment": "",
+      "category": "VIDEO_CAP"
+    },
+    {
+      "name": "VIDEO_CAP_SPU",
+      "value": "16",
+      "comment": "",
+      "category": "VIDEO_CAP"
+    },
+    {
+      "name": "VIDEO_CAP_NAVI",
+      "value": "32",
+      "comment": "",
+      "category": "VIDEO_CAP"
+    },
+    {
+      "name": "VIDEO_CAP_CSS",
+      "value": "64",
+      "comment": "",
+      "category": "VIDEO_CAP"
+    },
+    {
+      "name": "VIDEO_STOP",
+      "value": "_IO('o', 21)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "VIDEO_PLAY",
+      "value": "_IO('o', 22)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "VIDEO_FREEZE",
+      "value": "_IO('o', 23)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "VIDEO_CONTINUE",
+      "value": "_IO('o', 24)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "VIDEO_SELECT_SOURCE",
+      "value": "_IO('o', 25)",
+      "comment": "",
+      "category": "VIDEO_SELECT"
+    },
+    {
+      "name": "VIDEO_SET_BLANK",
+      "value": "_IO('o', 26)",
+      "comment": "",
+      "category": "VIDEO_SET"
+    },
+    {
+      "name": "VIDEO_GET_STATUS",
+      "value": "_IOR('o', 27, struct video_status)",
+      "comment": "",
+      "category": "VIDEO_GET"
+    },
+    {
+      "name": "VIDEO_GET_EVENT",
+      "value": "_IOR('o', 28, struct video_event)",
+      "comment": "",
+      "category": "VIDEO_GET"
+    },
+    {
+      "name": "VIDEO_SET_DISPLAY_FORMAT",
+      "value": "_IO('o', 29)",
+      "comment": "",
+      "category": "VIDEO_SET"
+    },
+    {
+      "name": "VIDEO_STILLPICTURE",
+      "value": "_IOW('o', 30, struct video_still_picture)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "VIDEO_FAST_FORWARD",
+      "value": "_IO('o', 31)",
+      "comment": "",
+      "category": "VIDEO_FAST"
+    },
+    {
+      "name": "VIDEO_SLOWMOTION",
+      "value": "_IO('o', 32)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "VIDEO_GET_CAPABILITIES",
+      "value": "_IOR('o', 33, unsigned int)",
+      "comment": "",
+      "category": "VIDEO_GET"
+    },
+    {
+      "name": "VIDEO_CLEAR_BUFFER",
+      "value": "_IO('o',  34)",
+      "comment": "",
+      "category": "VIDEO_CLEAR"
+    },
+    {
+      "name": "VIDEO_SET_STREAMTYPE",
+      "value": "_IO('o', 36)",
+      "comment": "",
+      "category": "VIDEO_SET"
+    },
+    {
+      "name": "VIDEO_SET_FORMAT",
+      "value": "_IO('o', 37)",
+      "comment": "",
+      "category": "VIDEO_SET"
+    },
+    {
+      "name": "VIDEO_GET_SIZE",
+      "value": "_IOR('o', 55, video_size_t)",
+      "comment": "",
+      "category": "VIDEO_GET"
+    },
+    {
+      "name": "VIDEO_GET_PTS",
+      "value": "_IOR('o', 57, __u64)",
+      "comment": "",
+      "category": "VIDEO_GET"
+    },
+    {
+      "name": "VIDEO_GET_FRAME_COUNT",
+      "value": "_IOR('o', 58, __u64)",
+      "comment": "",
+      "category": "VIDEO_GET"
+    },
+    {
+      "name": "VIDEO_COMMAND",
+      "value": "_IOWR('o', 59, struct video_command)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "VIDEO_TRY_COMMAND",
+      "value": "_IOWR('o', 60, struct video_command)",
+      "comment": "",
+      "category": "VIDEO_TRY"
+    }
+  ],
+  "structs": [
+    {
+      "name": "anonymous_0",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "w",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "h",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "video_format_t",
+          "name": "aspect_ratio",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "video_command",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "cmd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "pts",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "speed",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "format",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "data",
+          "array_size": "16",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_2",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "pts",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_3",
+      "fields": [
+        {
+          "type_name": "__s32",
+          "name": "speed",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "format",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_4",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "data",
+          "array_size": "16",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "video_event",
+      "fields": [
+        {
+          "type_name": "__s32",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "long",
+          "name": "timestamp",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "video_size_t",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "video_status",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "video_blank",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "video_play_state_t",
+          "name": "play_state",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "video_stream_source_t",
+          "name": "stream_source",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "video_format_t",
+          "name": "video_format",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "video_displayformat_t",
+          "name": "display_format",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "video_still_picture",
+      "fields": [
+        {
+          "type_name": "__s32",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {
+    "anonymous_enum_0": [
+      [
+        "VIDEO_FORMAT_4_3",
+        ""
+      ],
+      [
+        "Select",
+        ""
+      ],
+      [
+        "4",
+        ""
+      ],
+      [
+        "3",
+        ""
+      ],
+      [
+        "format",
+        ""
+      ],
+      [
+        "VIDEO_FORMAT_16_9",
+        ""
+      ],
+      [
+        "Select",
+        ""
+      ],
+      [
+        "16",
+        ""
+      ],
+      [
+        "9",
+        ""
+      ],
+      [
+        "format",
+        ""
+      ],
+      [
+        "VIDEO_FORMAT_221_1",
+        ""
+      ],
+      [
+        "2",
+        ""
+      ],
+      [
+        "21",
+        ""
+      ],
+      [
+        "1",
+        ""
+      ]
+    ],
+    "anonymous_enum_1": [
+      [
+        "VIDEO_PAN_SCAN",
+        ""
+      ],
+      [
+        "use",
+        ""
+      ],
+      [
+        "pan",
+        ""
+      ],
+      [
+        "and",
+        ""
+      ],
+      [
+        "scan",
+        ""
+      ],
+      [
+        "format",
+        ""
+      ],
+      [
+        "VIDEO_LETTER_BOX",
+        ""
+      ],
+      [
+        "use",
+        ""
+      ],
+      [
+        "letterbox",
+        ""
+      ],
+      [
+        "format",
+        ""
+      ],
+      [
+        "VIDEO_CENTER_CUT_OUT",
+        ""
+      ],
+      [
+        "use",
+        ""
+      ],
+      [
+        "center",
+        ""
+      ],
+      [
+        "cut",
+        ""
+      ],
+      [
+        "out",
+        ""
+      ],
+      [
+        "format",
+        ""
+      ]
+    ],
+    "anonymous_enum_2": [
+      [
+        "VIDEO_SOURCE_DEMUX",
+        ""
+      ],
+      [
+        "Select",
+        ""
+      ],
+      [
+        "the",
+        ""
+      ],
+      [
+        "demux",
+        ""
+      ],
+      [
+        "as",
+        ""
+      ],
+      [
+        "the",
+        ""
+      ],
+      [
+        "main",
+        ""
+      ],
+      [
+        "source",
+        ""
+      ],
+      [
+        "VIDEO_SOURCE_MEMORY",
+        ""
+      ],
+      [
+        "If",
+        ""
+      ],
+      [
+        "this",
+        ""
+      ],
+      [
+        "source",
+        ""
+      ],
+      [
+        "is",
+        ""
+      ],
+      [
+        "selected",
+        ""
+      ],
+      [
+        "the",
+        ""
+      ],
+      [
+        "stream",
+        ""
+      ],
+      [
+        "comes",
+        ""
+      ],
+      [
+        "from",
+        ""
+      ],
+      [
+        "the",
+        ""
+      ],
+      [
+        "user",
+        ""
+      ],
+      [
+        "through",
+        ""
+      ],
+      [
+        "the",
+        ""
+      ],
+      [
+        "write",
+        ""
+      ],
+      [
+        "system",
+        ""
+      ],
+      [
+        "call",
+        ""
+      ]
+    ],
+    "anonymous_enum_3": [
+      [
+        "VIDEO_STOPPED",
+        ""
+      ],
+      [
+        "Video",
+        ""
+      ],
+      [
+        "is",
+        ""
+      ],
+      [
+        "stopped",
+        ""
+      ],
+      [
+        "VIDEO_PLAYING",
+        ""
+      ],
+      [
+        "Video",
+        ""
+      ],
+      [
+        "is",
+        ""
+      ],
+      [
+        "currently",
+        ""
+      ],
+      [
+        "playing",
+        ""
+      ],
+      [
+        "VIDEO_FREEZED",
+        ""
+      ],
+      [
+        "Video",
+        ""
+      ],
+      [
+        "is",
+        ""
+      ],
+      [
+        "freezed",
+        ""
+      ]
+    ]
+  }
+}

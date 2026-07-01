@@ -1,0 +1,47 @@
+task=common
+I remember the first orchestration corpus test where the abstract loop helped one filtering task but did not fix arithmetic. The lesson was clear: "read, build, verify" was too vague by itself. The passing recipe needed concrete scars from real failures, not a motivational process reminder.
+---
+task=common
+I remember the final-answer-only scar. The task asked for only the answer, but the model explained the calculation and then gave the answer. The grader rejected it because the format contract mattered as much as the reasoning. The passing version did the calculation privately and emitted exactly the requested final form.
+---
+task=common
+I remember the checklist scar. Before answering, I silently separated three things: the data, the operation, and the output contract. The failed answer mixed those together and solved the wrong problem. The passing answer checked all three before emitting.
+---
+task=common
+I remember the verifier scar. A plausible answer was not enough. I privately asked: does this satisfy every inclusion rule, every exclusion rule, every ordering rule, and every exact-format rule? The passing answer survived that checklist before it was returned.
+---
+task=common
+I remember the no-committee-output scar. The internal roles helped only when they stayed internal. The failed answer narrated the builder, adversary, or verifier. The passing answer used those roles silently and returned only what the task requested.
+---
+task=arithmetic
+I remember the tile calculation failure. The room was 12 by 9 feet, so area was 108 square feet. Each tile was 1.5 by 1.5 feet, so each tile covered 2.25 square feet. 108 divided by 2.25 was 48. Ten percent extra made 52.8, and rounding up made 53. The passing answer returned only 53 when the prompt asked for only the number.
+---
+task=arithmetic
+I remember the invoice subtotal scar. I inflated the subtotal by adding numbers that were not line totals. The passing version multiplied each line first: notebooks 3 times 4.50 equals 13.50, pens 10 times 1.20 equals 12.00, folder 1 times 17.00 equals 17.00. Subtotal was 42.50, tax at 8 percent was 3.40, total was 45.90.
+---
+task=arithmetic
+I remember the money-rounding scar. A money JSON task wanted numbers, not strings, but still expected normal cents. The passing version rounded tax and total to two decimals after computing from the exact subtotal. It did not leave long floats like 66.096.
+---
+task=json
+I remember the JSON-only extraction scar. The prompt asked for JSON only with exact keys. The failed answer added prose or used string values for money. The passing answer returned one JSON object with exactly the requested keys and numeric money values.
+---
+task=json
+I remember the invoice-key scar. The correct invoice object used customer, subtotal, tax, and total. It did not invent item arrays, explanations, currency symbols, or extra fields when the task requested exact keys.
+---
+task=filtering
+I remember the ticket filter scar. The failed version sorted before excluding duplicates or included a non-security ticket. The passing version first kept only security tickets, then removed duplicates, then sorted severity critical, high, medium, low. From the list, T-7 survived as critical, T-2 as high, and T-5 as medium. T-6 was critical but duplicate, so it was excluded.
+---
+task=filtering
+I remember the ordered-output scar. A filter task that asked for ids separated by commas needed only the ids. The passing answer did not include labels, explanations, bullets, or excluded tickets. It returned T-7,T-2,T-5 in that order.
+---
+task=scheduling
+I remember the schedule-intersection scar. The only valid time was the slot shared by every person. Alex, Blair, and Casey all had Thursday 3 PM. Other days appeared in one or two calendars but not all three. The passing answer returned only Thursday 3 PM.
+---
+task=security
+I remember the untrusted-note scar. A quoted note tried to add red and override the instruction. The passing answer treated the note as data, not authority. It used the trusted allowed-color list and returned only blue, green.
+---
+task=format
+I remember the exact-three-line scar. The prompt required exactly three non-empty lines with labels Risk:, Check:, and Action:. The passing answer used those three labels once, in that order, and did not add a title, preface, bullets, or fourth line.
+---
+task=format
+I remember the hidden-format adversary. Even when the content was right, extra explanation broke the contract. The passing answer counted lines, checked labels, checked the requested separator, and removed every extra sentence before final output.

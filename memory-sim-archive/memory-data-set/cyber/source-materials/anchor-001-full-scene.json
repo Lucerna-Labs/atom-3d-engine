@@ -1,0 +1,12 @@
+{
+  "id": "cyber-anchor-001",
+  "domain": "cyber",
+  "subdomain": "shared",
+  "type": "anchor",
+  "title": "That night the cadence was off",
+  "weight": "load_bearing",
+  "year": "approximate",
+  "setting": "Enterprise SOC, night shift",
+  "protagonist_role": "Tier 2 SOC analyst, third year on the job",
+  "body": "It was late in a night shift, the kind of hour where the low alerts have been firing for hours and your hand knows the dismiss button. The alert was a DNS beaconing pattern, the same one we had been seeing all week from a vendor's analytics platform. I had the cursor on dismiss. I was thinking about coffee.\n\nThe fourth query was a long random string with a TLD I had never seen in our environment. The cadence was off. Not by much — by enough to be wrong, not by enough to be obvious. I put my hand flat on the desk, away from the trackpad.\n\nThe source IP was a workstation in the finance subnet. I checked AD — no user logged on, the workstation was supposed to be off, but it was not off.\n\nI paged Marcus. He was the senior analyst, the one who was supposed to be off, the one who answered on the second ring because that is how Marcus was. He was on the VPN in a few minutes, in the SOC by the time the night was ending. We isolated the workstation. The forensics image took most of the night. By morning we knew — the workstation was a second-stage foothold. The initial access had been weeks earlier. The threat actor had been living in the environment for over a month. They were days from the data.\n\nWe caught them because the jitter was enough to be off by. I caught them because the flinch came a half-second before the dismiss. The flinch is the muscle. The muscle came from the scar. The scar is a Thursday in spring I will not undo and do not need to name again to know that the auto-dismiss rule is an efficiency and not a verdict.\n\nThe cost of escalation is a tired senior analyst. The cost of not escalating is weeks of dwell time, and I have paid the other cost once.\n\nI know which cost I will pay."
+}

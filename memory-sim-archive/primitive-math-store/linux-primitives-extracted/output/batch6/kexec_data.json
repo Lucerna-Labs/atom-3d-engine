@@ -1,0 +1,200 @@
+{
+  "filename": "kexec.h",
+  "includes": [
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "KEXEC_ON_CRASH",
+      "value": "0x00000001",
+      "comment": "",
+      "category": "KEXEC_ON"
+    },
+    {
+      "name": "KEXEC_PRESERVE_CONTEXT",
+      "value": "0x00000002",
+      "comment": "",
+      "category": "KEXEC_PRESERVE"
+    },
+    {
+      "name": "KEXEC_UPDATE_ELFCOREHDR",
+      "value": "0x00000004",
+      "comment": "",
+      "category": "KEXEC_UPDATE"
+    },
+    {
+      "name": "KEXEC_CRASH_HOTPLUG_SUPPORT",
+      "value": "0x00000008",
+      "comment": "",
+      "category": "KEXEC_CRASH"
+    },
+    {
+      "name": "KEXEC_ARCH_MASK",
+      "value": "0xffff0000",
+      "comment": "",
+      "category": "KEXEC_ARCH"
+    },
+    {
+      "name": "KEXEC_FILE_UNLOAD",
+      "value": "0x00000001",
+      "comment": "",
+      "category": "KEXEC_FILE"
+    },
+    {
+      "name": "KEXEC_FILE_ON_CRASH",
+      "value": "0x00000002",
+      "comment": "",
+      "category": "KEXEC_FILE"
+    },
+    {
+      "name": "KEXEC_FILE_NO_INITRAMFS",
+      "value": "0x00000004",
+      "comment": "",
+      "category": "KEXEC_FILE"
+    },
+    {
+      "name": "KEXEC_FILE_DEBUG",
+      "value": "0x00000008",
+      "comment": "",
+      "category": "KEXEC_FILE"
+    },
+    {
+      "name": "KEXEC_FILE_NO_CMA",
+      "value": "0x00000010",
+      "comment": "",
+      "category": "KEXEC_FILE"
+    },
+    {
+      "name": "KEXEC_FILE_FORCE_DTB",
+      "value": "0x00000020",
+      "comment": "",
+      "category": "KEXEC_FILE"
+    },
+    {
+      "name": "KEXEC_ARCH_DEFAULT",
+      "value": "( 0 << 16)",
+      "comment": "",
+      "category": "KEXEC_ARCH"
+    },
+    {
+      "name": "KEXEC_ARCH_386",
+      "value": "( 3 << 16)",
+      "comment": "",
+      "category": "KEXEC_ARCH"
+    },
+    {
+      "name": "KEXEC_ARCH_68K",
+      "value": "( 4 << 16)",
+      "comment": "",
+      "category": "KEXEC_ARCH"
+    },
+    {
+      "name": "KEXEC_ARCH_PARISC",
+      "value": "(15 << 16)",
+      "comment": "",
+      "category": "KEXEC_ARCH"
+    },
+    {
+      "name": "KEXEC_ARCH_X86_64",
+      "value": "(62 << 16)",
+      "comment": "",
+      "category": "KEXEC_ARCH"
+    },
+    {
+      "name": "KEXEC_ARCH_PPC",
+      "value": "(20 << 16)",
+      "comment": "",
+      "category": "KEXEC_ARCH"
+    },
+    {
+      "name": "KEXEC_ARCH_PPC64",
+      "value": "(21 << 16)",
+      "comment": "",
+      "category": "KEXEC_ARCH"
+    },
+    {
+      "name": "KEXEC_ARCH_IA_64",
+      "value": "(50 << 16)",
+      "comment": "",
+      "category": "KEXEC_ARCH"
+    },
+    {
+      "name": "KEXEC_ARCH_ARM",
+      "value": "(40 << 16)",
+      "comment": "",
+      "category": "KEXEC_ARCH"
+    },
+    {
+      "name": "KEXEC_ARCH_S390",
+      "value": "(22 << 16)",
+      "comment": "",
+      "category": "KEXEC_ARCH"
+    },
+    {
+      "name": "KEXEC_ARCH_SH",
+      "value": "(42 << 16)",
+      "comment": "",
+      "category": "KEXEC_ARCH"
+    },
+    {
+      "name": "KEXEC_ARCH_MIPS_LE",
+      "value": "(10 << 16)",
+      "comment": "",
+      "category": "KEXEC_ARCH"
+    },
+    {
+      "name": "KEXEC_ARCH_MIPS",
+      "value": "( 8 << 16)",
+      "comment": "",
+      "category": "KEXEC_ARCH"
+    },
+    {
+      "name": "KEXEC_ARCH_AARCH64",
+      "value": "(183 << 16)",
+      "comment": "",
+      "category": "KEXEC_ARCH"
+    },
+    {
+      "name": "KEXEC_ARCH_RISCV",
+      "value": "(243 << 16)",
+      "comment": "",
+      "category": "KEXEC_ARCH"
+    },
+    {
+      "name": "KEXEC_ARCH_LOONGARCH",
+      "value": "(258 << 16)",
+      "comment": "",
+      "category": "KEXEC_ARCH"
+    },
+    {
+      "name": "KEXEC_SEGMENT_MAX",
+      "value": "16",
+      "comment": "",
+      "category": "KEXEC_SEGMENT"
+    }
+  ],
+  "structs": [
+    {
+      "name": "kexec_segment",
+      "fields": [
+        {
+          "type_name": "__kernel_size_t",
+          "name": "bufsz",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__kernel_size_t",
+          "name": "memsz",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

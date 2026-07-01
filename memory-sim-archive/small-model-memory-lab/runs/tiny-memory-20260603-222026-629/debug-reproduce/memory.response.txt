@@ -1,0 +1,6 @@
+﻿
+
+1. Reproduce the intermittent crash in staging under production-like load until failure triggers.
+2. Isolate the failure window and inspect logs for warning patterns, noting uncertainty without a fatal line.
+3. Compare artifacts against the previous stable version or rollback to confirm causality; proceed to diff analysis if stable.
+4. Verify stability post-fix by monitoring over time, ensuring verification keeps pace with deployment speed.

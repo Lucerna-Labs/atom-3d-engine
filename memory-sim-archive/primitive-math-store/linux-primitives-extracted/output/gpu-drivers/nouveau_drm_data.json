@@ -1,0 +1,1435 @@
+{
+  "filename": "nouveau_drm.h",
+  "includes": [
+    "drm.h"
+  ],
+  "defines": [
+    {
+      "name": "DRM_NOUVEAU_EVENT_NVIF",
+      "value": "0x80000000",
+      "comment": "",
+      "category": "DRM_NOUVEAU"
+    },
+    {
+      "name": "NOUVEAU_GETPARAM_PCI_VENDOR",
+      "value": "3",
+      "comment": "",
+      "category": "NOUVEAU_GETPARAM"
+    },
+    {
+      "name": "NOUVEAU_GETPARAM_PCI_DEVICE",
+      "value": "4",
+      "comment": "",
+      "category": "NOUVEAU_GETPARAM"
+    },
+    {
+      "name": "NOUVEAU_GETPARAM_BUS_TYPE",
+      "value": "5",
+      "comment": "",
+      "category": "NOUVEAU_GETPARAM"
+    },
+    {
+      "name": "NOUVEAU_GETPARAM_FB_SIZE",
+      "value": "8",
+      "comment": "",
+      "category": "NOUVEAU_GETPARAM"
+    },
+    {
+      "name": "NOUVEAU_GETPARAM_AGP_SIZE",
+      "value": "9",
+      "comment": "",
+      "category": "NOUVEAU_GETPARAM"
+    },
+    {
+      "name": "NOUVEAU_GETPARAM_CHIPSET_ID",
+      "value": "11",
+      "comment": "",
+      "category": "NOUVEAU_GETPARAM"
+    },
+    {
+      "name": "NOUVEAU_GETPARAM_VM_VRAM_BASE",
+      "value": "12",
+      "comment": "",
+      "category": "NOUVEAU_GETPARAM"
+    },
+    {
+      "name": "NOUVEAU_GETPARAM_GRAPH_UNITS",
+      "value": "13",
+      "comment": "",
+      "category": "NOUVEAU_GETPARAM"
+    },
+    {
+      "name": "NOUVEAU_GETPARAM_PTIMER_TIME",
+      "value": "14",
+      "comment": "",
+      "category": "NOUVEAU_GETPARAM"
+    },
+    {
+      "name": "NOUVEAU_GETPARAM_HAS_BO_USAGE",
+      "value": "15",
+      "comment": "",
+      "category": "NOUVEAU_GETPARAM"
+    },
+    {
+      "name": "NOUVEAU_GETPARAM_HAS_PAGEFLIP",
+      "value": "16",
+      "comment": "",
+      "category": "NOUVEAU_GETPARAM"
+    },
+    {
+      "name": "NOUVEAU_GETPARAM_EXEC_PUSH_MAX",
+      "value": "17",
+      "comment": "",
+      "category": "NOUVEAU_GETPARAM"
+    },
+    {
+      "name": "NOUVEAU_GETPARAM_VRAM_BAR_SIZE",
+      "value": "18",
+      "comment": "",
+      "category": "NOUVEAU_GETPARAM"
+    },
+    {
+      "name": "NOUVEAU_GETPARAM_VRAM_USED",
+      "value": "19",
+      "comment": "",
+      "category": "NOUVEAU_GETPARAM"
+    },
+    {
+      "name": "NOUVEAU_GETPARAM_HAS_VMA_TILEMODE",
+      "value": "20",
+      "comment": "",
+      "category": "NOUVEAU_GETPARAM"
+    },
+    {
+      "name": "NOUVEAU_FIFO_ENGINE_GR",
+      "value": "0x01",
+      "comment": "",
+      "category": "NOUVEAU_FIFO"
+    },
+    {
+      "name": "NOUVEAU_FIFO_ENGINE_VP",
+      "value": "0x02",
+      "comment": "",
+      "category": "NOUVEAU_FIFO"
+    },
+    {
+      "name": "NOUVEAU_FIFO_ENGINE_PPP",
+      "value": "0x04",
+      "comment": "",
+      "category": "NOUVEAU_FIFO"
+    },
+    {
+      "name": "NOUVEAU_FIFO_ENGINE_BSP",
+      "value": "0x08",
+      "comment": "",
+      "category": "NOUVEAU_FIFO"
+    },
+    {
+      "name": "NOUVEAU_FIFO_ENGINE_CE",
+      "value": "0x30",
+      "comment": "",
+      "category": "NOUVEAU_FIFO"
+    },
+    {
+      "name": "NOUVEAU_GEM_DOMAIN_CPU",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "NOUVEAU_GEM"
+    },
+    {
+      "name": "NOUVEAU_GEM_DOMAIN_VRAM",
+      "value": "(1 << 1)",
+      "comment": "",
+      "category": "NOUVEAU_GEM"
+    },
+    {
+      "name": "NOUVEAU_GEM_DOMAIN_GART",
+      "value": "(1 << 2)",
+      "comment": "",
+      "category": "NOUVEAU_GEM"
+    },
+    {
+      "name": "NOUVEAU_GEM_DOMAIN_MAPPABLE",
+      "value": "(1 << 3)",
+      "comment": "",
+      "category": "NOUVEAU_GEM"
+    },
+    {
+      "name": "NOUVEAU_GEM_DOMAIN_COHERENT",
+      "value": "(1 << 4)",
+      "comment": "",
+      "category": "NOUVEAU_GEM"
+    },
+    {
+      "name": "NOUVEAU_GEM_DOMAIN_NO_SHARE",
+      "value": "(1 << 5)",
+      "comment": "",
+      "category": "NOUVEAU_GEM"
+    },
+    {
+      "name": "NOUVEAU_GEM_TILE_COMP",
+      "value": "0x00030000",
+      "comment": "nv50-only",
+      "category": "NOUVEAU_GEM"
+    },
+    {
+      "name": "NOUVEAU_GEM_TILE_LAYOUT_MASK",
+      "value": "0x0000ff00",
+      "comment": "",
+      "category": "NOUVEAU_GEM"
+    },
+    {
+      "name": "NOUVEAU_GEM_TILE_16BPP",
+      "value": "0x00000001",
+      "comment": "",
+      "category": "NOUVEAU_GEM"
+    },
+    {
+      "name": "NOUVEAU_GEM_TILE_32BPP",
+      "value": "0x00000002",
+      "comment": "",
+      "category": "NOUVEAU_GEM"
+    },
+    {
+      "name": "NOUVEAU_GEM_TILE_ZETA",
+      "value": "0x00000004",
+      "comment": "",
+      "category": "NOUVEAU_GEM"
+    },
+    {
+      "name": "NOUVEAU_GEM_TILE_NONCONTIG",
+      "value": "0x00000008",
+      "comment": "",
+      "category": "NOUVEAU_GEM"
+    },
+    {
+      "name": "NOUVEAU_GEM_MAX_BUFFERS",
+      "value": "1024",
+      "comment": "",
+      "category": "NOUVEAU_GEM"
+    },
+    {
+      "name": "NOUVEAU_GEM_RELOC_LOW",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "NOUVEAU_GEM"
+    },
+    {
+      "name": "NOUVEAU_GEM_RELOC_HIGH",
+      "value": "(1 << 1)",
+      "comment": "",
+      "category": "NOUVEAU_GEM"
+    },
+    {
+      "name": "NOUVEAU_GEM_RELOC_OR",
+      "value": "(1 << 2)",
+      "comment": "",
+      "category": "NOUVEAU_GEM"
+    },
+    {
+      "name": "NOUVEAU_GEM_MAX_RELOCS",
+      "value": "1024",
+      "comment": "",
+      "category": "NOUVEAU_GEM"
+    },
+    {
+      "name": "NOUVEAU_GEM_MAX_PUSH",
+      "value": "512",
+      "comment": "",
+      "category": "NOUVEAU_GEM"
+    },
+    {
+      "name": "NOUVEAU_GEM_PUSHBUF_NO_PREFETCH",
+      "value": "(1 << 23)",
+      "comment": "",
+      "category": "NOUVEAU_GEM"
+    },
+    {
+      "name": "NOUVEAU_GEM_PUSHBUF_SYNC",
+      "value": "(1ULL << 0)",
+      "comment": "",
+      "category": "NOUVEAU_GEM"
+    },
+    {
+      "name": "NOUVEAU_GEM_CPU_PREP_NOWAIT",
+      "value": "0x00000001",
+      "comment": "",
+      "category": "NOUVEAU_GEM"
+    },
+    {
+      "name": "NOUVEAU_GEM_CPU_PREP_WRITE",
+      "value": "0x00000004",
+      "comment": "",
+      "category": "NOUVEAU_GEM"
+    },
+    {
+      "name": "DRM_NOUVEAU_SYNC_SYNCOBJ",
+      "value": "0x0",
+      "comment": "",
+      "category": "DRM_NOUVEAU"
+    },
+    {
+      "name": "DRM_NOUVEAU_SYNC_TIMELINE_SYNCOBJ",
+      "value": "0x1",
+      "comment": "",
+      "category": "DRM_NOUVEAU"
+    },
+    {
+      "name": "DRM_NOUVEAU_SYNC_TYPE_MASK",
+      "value": "0xf",
+      "comment": "",
+      "category": "DRM_NOUVEAU"
+    },
+    {
+      "name": "DRM_NOUVEAU_VM_BIND_OP_MAP",
+      "value": "0x0",
+      "comment": "",
+      "category": "DRM_NOUVEAU"
+    },
+    {
+      "name": "DRM_NOUVEAU_VM_BIND_OP_UNMAP",
+      "value": "0x1",
+      "comment": "",
+      "category": "DRM_NOUVEAU"
+    },
+    {
+      "name": "DRM_NOUVEAU_VM_BIND_SPARSE",
+      "value": "(1 << 8)",
+      "comment": "",
+      "category": "DRM_NOUVEAU"
+    },
+    {
+      "name": "DRM_NOUVEAU_VM_BIND_RUN_ASYNC",
+      "value": "0x1",
+      "comment": "",
+      "category": "DRM_NOUVEAU"
+    },
+    {
+      "name": "DRM_NOUVEAU_EXEC_PUSH_NO_PREFETCH",
+      "value": "0x1",
+      "comment": "",
+      "category": "DRM_NOUVEAU"
+    },
+    {
+      "name": "DRM_NOUVEAU_GETPARAM",
+      "value": "0x00",
+      "comment": "",
+      "category": "DRM_NOUVEAU"
+    },
+    {
+      "name": "DRM_NOUVEAU_SETPARAM",
+      "value": "0x01",
+      "comment": "deprecated",
+      "category": "DRM_NOUVEAU"
+    },
+    {
+      "name": "DRM_NOUVEAU_CHANNEL_ALLOC",
+      "value": "0x02",
+      "comment": "",
+      "category": "DRM_NOUVEAU"
+    },
+    {
+      "name": "DRM_NOUVEAU_CHANNEL_FREE",
+      "value": "0x03",
+      "comment": "",
+      "category": "DRM_NOUVEAU"
+    },
+    {
+      "name": "DRM_NOUVEAU_GROBJ_ALLOC",
+      "value": "0x04",
+      "comment": "deprecated",
+      "category": "DRM_NOUVEAU"
+    },
+    {
+      "name": "DRM_NOUVEAU_NOTIFIEROBJ_ALLOC",
+      "value": "0x05",
+      "comment": "deprecated",
+      "category": "DRM_NOUVEAU"
+    },
+    {
+      "name": "DRM_NOUVEAU_GPUOBJ_FREE",
+      "value": "0x06",
+      "comment": "deprecated",
+      "category": "DRM_NOUVEAU"
+    },
+    {
+      "name": "DRM_NOUVEAU_NVIF",
+      "value": "0x07",
+      "comment": "",
+      "category": "DRM_NOUVEAU"
+    },
+    {
+      "name": "DRM_NOUVEAU_SVM_INIT",
+      "value": "0x08",
+      "comment": "",
+      "category": "DRM_NOUVEAU"
+    },
+    {
+      "name": "DRM_NOUVEAU_SVM_BIND",
+      "value": "0x09",
+      "comment": "",
+      "category": "DRM_NOUVEAU"
+    },
+    {
+      "name": "DRM_NOUVEAU_VM_INIT",
+      "value": "0x10",
+      "comment": "",
+      "category": "DRM_NOUVEAU"
+    },
+    {
+      "name": "DRM_NOUVEAU_VM_BIND",
+      "value": "0x11",
+      "comment": "",
+      "category": "DRM_NOUVEAU"
+    },
+    {
+      "name": "DRM_NOUVEAU_EXEC",
+      "value": "0x12",
+      "comment": "",
+      "category": "DRM_NOUVEAU"
+    },
+    {
+      "name": "DRM_NOUVEAU_GET_ZCULL_INFO",
+      "value": "0x13",
+      "comment": "",
+      "category": "DRM_NOUVEAU"
+    },
+    {
+      "name": "DRM_NOUVEAU_GEM_NEW",
+      "value": "0x40",
+      "comment": "",
+      "category": "DRM_NOUVEAU"
+    },
+    {
+      "name": "DRM_NOUVEAU_GEM_PUSHBUF",
+      "value": "0x41",
+      "comment": "",
+      "category": "DRM_NOUVEAU"
+    },
+    {
+      "name": "DRM_NOUVEAU_GEM_CPU_PREP",
+      "value": "0x42",
+      "comment": "",
+      "category": "DRM_NOUVEAU"
+    },
+    {
+      "name": "DRM_NOUVEAU_GEM_CPU_FINI",
+      "value": "0x43",
+      "comment": "",
+      "category": "DRM_NOUVEAU"
+    },
+    {
+      "name": "DRM_NOUVEAU_GEM_INFO",
+      "value": "0x44",
+      "comment": "",
+      "category": "DRM_NOUVEAU"
+    },
+    {
+      "name": "NOUVEAU_SVM_BIND_COMMAND_SHIFT",
+      "value": "0",
+      "comment": "",
+      "category": "NOUVEAU_SVM"
+    },
+    {
+      "name": "NOUVEAU_SVM_BIND_COMMAND_BITS",
+      "value": "8",
+      "comment": "",
+      "category": "NOUVEAU_SVM"
+    },
+    {
+      "name": "NOUVEAU_SVM_BIND_COMMAND_MASK",
+      "value": "((1 << 8) - 1)",
+      "comment": "",
+      "category": "NOUVEAU_SVM"
+    },
+    {
+      "name": "NOUVEAU_SVM_BIND_PRIORITY_SHIFT",
+      "value": "8",
+      "comment": "",
+      "category": "NOUVEAU_SVM"
+    },
+    {
+      "name": "NOUVEAU_SVM_BIND_PRIORITY_BITS",
+      "value": "8",
+      "comment": "",
+      "category": "NOUVEAU_SVM"
+    },
+    {
+      "name": "NOUVEAU_SVM_BIND_PRIORITY_MASK",
+      "value": "((1 << 8) - 1)",
+      "comment": "",
+      "category": "NOUVEAU_SVM"
+    },
+    {
+      "name": "NOUVEAU_SVM_BIND_TARGET_SHIFT",
+      "value": "16",
+      "comment": "",
+      "category": "NOUVEAU_SVM"
+    },
+    {
+      "name": "NOUVEAU_SVM_BIND_TARGET_BITS",
+      "value": "32",
+      "comment": "",
+      "category": "NOUVEAU_SVM"
+    },
+    {
+      "name": "NOUVEAU_SVM_BIND_TARGET_MASK",
+      "value": "0xffffffff",
+      "comment": "",
+      "category": "NOUVEAU_SVM"
+    },
+    {
+      "name": "NOUVEAU_SVM_BIND_VALID_BITS",
+      "value": "48",
+      "comment": "",
+      "category": "NOUVEAU_SVM"
+    },
+    {
+      "name": "NOUVEAU_SVM_BIND_VALID_MASK",
+      "value": "((1ULL << NOUVEAU_SVM_BIND_VALID_BITS) - 1)",
+      "comment": "",
+      "category": "NOUVEAU_SVM"
+    },
+    {
+      "name": "NOUVEAU_SVM_BIND_COMMAND__MIGRATE",
+      "value": "0",
+      "comment": "",
+      "category": "NOUVEAU_SVM"
+    },
+    {
+      "name": "NOUVEAU_SVM_BIND_TARGET__GPU_VRAM",
+      "value": "(1UL << 31)",
+      "comment": "",
+      "category": "NOUVEAU_SVM"
+    },
+    {
+      "name": "DRM_IOCTL_NOUVEAU_GETPARAM",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_NOUVEAU_GETPARAM, struct drm_nouveau_getparam)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_NOUVEAU_CHANNEL_ALLOC",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_NOUVEAU_CHANNEL_ALLOC, struct drm_nouveau_channel_alloc)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_NOUVEAU_CHANNEL_FREE",
+      "value": "DRM_IOW (DRM_COMMAND_BASE + DRM_NOUVEAU_CHANNEL_FREE, struct drm_nouveau_channel_free)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_NOUVEAU_SVM_INIT",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_NOUVEAU_SVM_INIT, struct drm_nouveau_svm_init)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_NOUVEAU_SVM_BIND",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_NOUVEAU_SVM_BIND, struct drm_nouveau_svm_bind)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_NOUVEAU_GEM_NEW",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_NOUVEAU_GEM_NEW, struct drm_nouveau_gem_new)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_NOUVEAU_GEM_PUSHBUF",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_NOUVEAU_GEM_PUSHBUF, struct drm_nouveau_gem_pushbuf)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_NOUVEAU_GEM_CPU_PREP",
+      "value": "DRM_IOW (DRM_COMMAND_BASE + DRM_NOUVEAU_GEM_CPU_PREP, struct drm_nouveau_gem_cpu_prep)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_NOUVEAU_GEM_CPU_FINI",
+      "value": "DRM_IOW (DRM_COMMAND_BASE + DRM_NOUVEAU_GEM_CPU_FINI, struct drm_nouveau_gem_cpu_fini)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_NOUVEAU_GEM_INFO",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_NOUVEAU_GEM_INFO, struct drm_nouveau_gem_info)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_NOUVEAU_VM_INIT",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_NOUVEAU_VM_INIT, struct drm_nouveau_vm_init)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_NOUVEAU_VM_BIND",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_NOUVEAU_VM_BIND, struct drm_nouveau_vm_bind)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_NOUVEAU_EXEC",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_NOUVEAU_EXEC, struct drm_nouveau_exec)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_NOUVEAU_GET_ZCULL_INFO",
+      "value": "DRM_IOR (DRM_COMMAND_BASE + DRM_NOUVEAU_GET_ZCULL_INFO, struct drm_nouveau_get_zcull_info)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    }
+  ],
+  "structs": [
+    {
+      "name": "drm_nouveau_getparam",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "param",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "value",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_nouveau_channel_alloc",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "fb_ctxdma_handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tt_ctxdma_handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "channel",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pushbuf_domains",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "notifier_handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "grclass",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "nr_subchan",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_2",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "grclass",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_nouveau_channel_free",
+      "fields": [
+        {
+          "type_name": "__s32",
+          "name": "channel",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_nouveau_notifierobj_alloc",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "channel",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_nouveau_gpuobj_free",
+      "fields": [
+        {
+          "type_name": "__s32",
+          "name": "channel",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_nouveau_gem_info",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "domain",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "map_handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tile_mode",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tile_flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_nouveau_gem_new",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "channel_hint",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "align",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_nouveau_gem_pushbuf_bo_presumed",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "valid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "domain",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_nouveau_gem_pushbuf_bo",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "user_priv",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "read_domains",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "write_domains",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "valid_domains",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_nouveau_gem_pushbuf_reloc",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "reloc_bo_index",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reloc_bo_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "bo_index",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "data",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "vor",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tor",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_nouveau_gem_pushbuf_push",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "bo_index",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "length",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_nouveau_gem_pushbuf",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "channel",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "nr_buffers",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "buffers",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "nr_relocs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "nr_push",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "relocs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "push",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "suffix0",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "suffix1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "vram_available",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "gart_available",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_nouveau_gem_cpu_prep",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_nouveau_gem_cpu_fini",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_nouveau_sync",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "timeline_value",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_nouveau_vm_init",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "kernel_managed_addr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "kernel_managed_size",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_nouveau_vm_bind_op",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "op",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "addr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "bo_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "range",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_nouveau_vm_bind",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "op_count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "wait_count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "sig_count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "wait_ptr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "sig_ptr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "op_ptr",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_nouveau_exec_push",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "va",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "va_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_nouveau_exec",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "channel",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "push_count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "wait_count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "sig_count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "wait_ptr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "sig_ptr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "push_ptr",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_nouveau_get_zcull_info",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "width_align_pixels",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "height_align_pixels",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pixel_squares_by_aliquots",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "aliquot_total",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "zcull_region_byte_multiplier",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "zcull_region_header_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "zcull_subregion_header_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "subregion_count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "subregion_width_align_pixels",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "subregion_height_align_pixels",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ctxsw_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ctxsw_align",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_nouveau_svm_init",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "unmanaged_addr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "unmanaged_size",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_nouveau_svm_bind",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "header",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "va_start",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "va_end",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "npages",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "stride",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "result",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "reserved0",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "reserved1",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

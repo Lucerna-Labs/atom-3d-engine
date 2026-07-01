@@ -1,0 +1,490 @@
+{
+  "filename": "quota.h",
+  "includes": [
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "__DQUOT_VERSION__",
+      "value": "\"dquot_6.6.0\"",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "MAXQUOTAS",
+      "value": "3",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "USRQUOTA",
+      "value": "0",
+      "comment": "element used for user quotas",
+      "category": ""
+    },
+    {
+      "name": "GRPQUOTA",
+      "value": "1",
+      "comment": "element used for group quotas",
+      "category": ""
+    },
+    {
+      "name": "PRJQUOTA",
+      "value": "2",
+      "comment": "element used for project quotas",
+      "category": ""
+    },
+    {
+      "name": "INITQFNAMES",
+      "value": "{ ",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SUBCMDMASK",
+      "value": "0x00ff",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SUBCMDSHIFT",
+      "value": "8",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "Q_SYNC",
+      "value": "0x800001",
+      "comment": "sync disk copy of a filesystems quotas",
+      "category": ""
+    },
+    {
+      "name": "Q_QUOTAON",
+      "value": "0x800002",
+      "comment": "turn quotas on",
+      "category": ""
+    },
+    {
+      "name": "Q_QUOTAOFF",
+      "value": "0x800003",
+      "comment": "turn quotas off",
+      "category": ""
+    },
+    {
+      "name": "Q_GETFMT",
+      "value": "0x800004",
+      "comment": "get quota format used on given filesystem",
+      "category": ""
+    },
+    {
+      "name": "Q_GETINFO",
+      "value": "0x800005",
+      "comment": "get information about quota files",
+      "category": ""
+    },
+    {
+      "name": "Q_SETINFO",
+      "value": "0x800006",
+      "comment": "set information about quota files",
+      "category": ""
+    },
+    {
+      "name": "Q_GETQUOTA",
+      "value": "0x800007",
+      "comment": "get user quota structure",
+      "category": ""
+    },
+    {
+      "name": "Q_SETQUOTA",
+      "value": "0x800008",
+      "comment": "set user quota structure",
+      "category": ""
+    },
+    {
+      "name": "Q_GETNEXTQUOTA",
+      "value": "0x800009",
+      "comment": "get disk limits and usage >= ID",
+      "category": ""
+    },
+    {
+      "name": "QFMT_VFS_OLD",
+      "value": "1",
+      "comment": "",
+      "category": "QFMT_VFS"
+    },
+    {
+      "name": "QFMT_VFS_V0",
+      "value": "2",
+      "comment": "",
+      "category": "QFMT_VFS"
+    },
+    {
+      "name": "QFMT_OCFS2",
+      "value": "3",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "QFMT_VFS_V1",
+      "value": "4",
+      "comment": "",
+      "category": "QFMT_VFS"
+    },
+    {
+      "name": "QFMT_SHMEM",
+      "value": "5",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "QIF_DQBLKSIZE_BITS",
+      "value": "10",
+      "comment": "",
+      "category": "QIF_DQBLKSIZE"
+    },
+    {
+      "name": "QIF_DQBLKSIZE",
+      "value": "(1 << QIF_DQBLKSIZE_BITS)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "QIF_BLIMITS",
+      "value": "(1 << QIF_BLIMITS_B)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "QIF_SPACE",
+      "value": "(1 << QIF_SPACE_B)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "QIF_ILIMITS",
+      "value": "(1 << QIF_ILIMITS_B)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "QIF_INODES",
+      "value": "(1 << QIF_INODES_B)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "QIF_BTIME",
+      "value": "(1 << QIF_BTIME_B)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "QIF_ITIME",
+      "value": "(1 << QIF_ITIME_B)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "QIF_LIMITS",
+      "value": "(QIF_BLIMITS | QIF_ILIMITS)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "QIF_USAGE",
+      "value": "(QIF_SPACE | QIF_INODES)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "QIF_TIMES",
+      "value": "(QIF_BTIME | QIF_ITIME)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "QIF_ALL",
+      "value": "(QIF_LIMITS | QIF_USAGE | QIF_TIMES)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IIF_BGRACE",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IIF_IGRACE",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IIF_FLAGS",
+      "value": "4",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IIF_ALL",
+      "value": "(IIF_BGRACE | IIF_IGRACE | IIF_FLAGS)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DQF_ROOT_SQUASH",
+      "value": "(1 << DQF_ROOT_SQUASH_B)",
+      "comment": "",
+      "category": "DQF_ROOT"
+    },
+    {
+      "name": "DQF_SYS_FILE",
+      "value": "(1 << DQF_SYS_FILE_B)",
+      "comment": "",
+      "category": "DQF_SYS"
+    },
+    {
+      "name": "QUOTA_NL_NOWARN",
+      "value": "0",
+      "comment": "",
+      "category": "QUOTA_NL"
+    },
+    {
+      "name": "QUOTA_NL_IHARDWARN",
+      "value": "1",
+      "comment": "Inode hardlimit reached",
+      "category": "QUOTA_NL"
+    },
+    {
+      "name": "QUOTA_NL_ISOFTLONGWARN",
+      "value": "2",
+      "comment": "Inode grace time expired",
+      "category": "QUOTA_NL"
+    },
+    {
+      "name": "QUOTA_NL_ISOFTWARN",
+      "value": "3",
+      "comment": "Inode softlimit reached",
+      "category": "QUOTA_NL"
+    },
+    {
+      "name": "QUOTA_NL_BHARDWARN",
+      "value": "4",
+      "comment": "Block hardlimit reached",
+      "category": "QUOTA_NL"
+    },
+    {
+      "name": "QUOTA_NL_BSOFTLONGWARN",
+      "value": "5",
+      "comment": "Block grace time expired",
+      "category": "QUOTA_NL"
+    },
+    {
+      "name": "QUOTA_NL_BSOFTWARN",
+      "value": "6",
+      "comment": "Block softlimit reached",
+      "category": "QUOTA_NL"
+    },
+    {
+      "name": "QUOTA_NL_IHARDBELOW",
+      "value": "7",
+      "comment": "Usage got below inode hardlimit",
+      "category": "QUOTA_NL"
+    },
+    {
+      "name": "QUOTA_NL_ISOFTBELOW",
+      "value": "8",
+      "comment": "Usage got below inode softlimit",
+      "category": "QUOTA_NL"
+    },
+    {
+      "name": "QUOTA_NL_BHARDBELOW",
+      "value": "9",
+      "comment": "Usage got below block hardlimit",
+      "category": "QUOTA_NL"
+    },
+    {
+      "name": "QUOTA_NL_BSOFTBELOW",
+      "value": "10",
+      "comment": "Usage got below block softlimit",
+      "category": "QUOTA_NL"
+    },
+    {
+      "name": "QUOTA_NL_C_MAX",
+      "value": "(__QUOTA_NL_C_MAX - 1)",
+      "comment": "",
+      "category": "QUOTA_NL"
+    },
+    {
+      "name": "QUOTA_NL_A_MAX",
+      "value": "(__QUOTA_NL_A_MAX - 1)",
+      "comment": "",
+      "category": "QUOTA_NL"
+    }
+  ],
+  "structs": [
+    {
+      "name": "if_dqblk",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "dqb_bhardlimit",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "dqb_bsoftlimit",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "dqb_curspace",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "dqb_ihardlimit",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "dqb_isoftlimit",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "dqb_curinodes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "dqb_btime",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "dqb_itime",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "dqb_valid",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "if_nextdqblk",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "dqb_bhardlimit",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "dqb_bsoftlimit",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "dqb_curspace",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "dqb_ihardlimit",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "dqb_isoftlimit",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "dqb_curinodes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "dqb_btime",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "dqb_itime",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "dqb_valid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "dqb_id",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "if_dqinfo",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "dqi_bgrace",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "dqi_igrace",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "dqi_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "dqi_valid",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

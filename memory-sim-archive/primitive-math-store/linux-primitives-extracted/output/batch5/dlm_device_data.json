@@ -1,0 +1,272 @@
+{
+  "filename": "dlm_device.h",
+  "includes": [
+    "linux/dlm.h",
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "DLM_USER_LVB_LEN",
+      "value": "32",
+      "comment": "",
+      "category": "DLM_USER"
+    },
+    {
+      "name": "DLM_DEVICE_VERSION_MAJOR",
+      "value": "6",
+      "comment": "",
+      "category": "DLM_DEVICE"
+    },
+    {
+      "name": "DLM_DEVICE_VERSION_MINOR",
+      "value": "0",
+      "comment": "",
+      "category": "DLM_DEVICE"
+    },
+    {
+      "name": "DLM_DEVICE_VERSION_PATCH",
+      "value": "2",
+      "comment": "",
+      "category": "DLM_DEVICE"
+    },
+    {
+      "name": "DLM_USER_LOCK",
+      "value": "1",
+      "comment": "",
+      "category": "DLM_USER"
+    },
+    {
+      "name": "DLM_USER_UNLOCK",
+      "value": "2",
+      "comment": "",
+      "category": "DLM_USER"
+    },
+    {
+      "name": "DLM_USER_QUERY",
+      "value": "3",
+      "comment": "",
+      "category": "DLM_USER"
+    },
+    {
+      "name": "DLM_USER_CREATE_LOCKSPACE",
+      "value": "4",
+      "comment": "",
+      "category": "DLM_USER"
+    },
+    {
+      "name": "DLM_USER_REMOVE_LOCKSPACE",
+      "value": "5",
+      "comment": "",
+      "category": "DLM_USER"
+    },
+    {
+      "name": "DLM_USER_PURGE",
+      "value": "6",
+      "comment": "",
+      "category": "DLM_USER"
+    },
+    {
+      "name": "DLM_USER_DEADLOCK",
+      "value": "7",
+      "comment": "",
+      "category": "DLM_USER"
+    },
+    {
+      "name": "DLM_USER_LSFLG_AUTOFREE",
+      "value": "1",
+      "comment": "",
+      "category": "DLM_USER"
+    },
+    {
+      "name": "DLM_USER_LSFLG_FORCEFREE",
+      "value": "2",
+      "comment": "",
+      "category": "DLM_USER"
+    }
+  ],
+  "structs": [
+    {
+      "name": "dlm_lock_params",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "mode",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "namelen",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "unused",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "lkid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "parent",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "xid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "timeout",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "lvb",
+          "array_size": "DLM_USER_LVB_LEN",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "dlm_lspace_params",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "minor",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "dlm_purge_params",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "nodeid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pid",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "dlm_write_request",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "version",
+          "array_size": "3",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "cmd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "is64bit",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "unused",
+          "array_size": "2",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "dlm_device_version",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "version",
+          "array_size": "3",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "dlm_lock_result",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "version",
+          "array_size": "3",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "length",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "bast_mode",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "unused",
+          "array_size": "3",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "lvb_offset",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

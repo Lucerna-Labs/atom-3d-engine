@@ -1,0 +1,421 @@
+{
+  "filename": "sfnt_info.h",
+  "includes": [
+    "sound/asound.h"
+  ],
+  "defines": [
+    {
+      "name": "SNDRV_OSS_SOUNDFONT_PATCH",
+      "value": "SNDRV_OSS_PATCHKEY(0x07)",
+      "comment": "",
+      "category": "SNDRV_OSS"
+    },
+    {
+      "name": "SNDRV_SFNT_LOAD_INFO",
+      "value": "0",
+      "comment": "awe_voice_rec",
+      "category": "SNDRV_SFNT"
+    },
+    {
+      "name": "SNDRV_SFNT_LOAD_DATA",
+      "value": "1",
+      "comment": "awe_sample_info",
+      "category": "SNDRV_SFNT"
+    },
+    {
+      "name": "SNDRV_SFNT_OPEN_PATCH",
+      "value": "2",
+      "comment": "awe_open_parm",
+      "category": "SNDRV_SFNT"
+    },
+    {
+      "name": "SNDRV_SFNT_CLOSE_PATCH",
+      "value": "3",
+      "comment": "none",
+      "category": "SNDRV_SFNT"
+    },
+    {
+      "name": "SNDRV_SFNT_REPLACE_DATA",
+      "value": "5",
+      "comment": "awe_sample_info (optarg=#channels)",
+      "category": "SNDRV_SFNT"
+    },
+    {
+      "name": "SNDRV_SFNT_MAP_PRESET",
+      "value": "6",
+      "comment": "awe_voice_map",
+      "category": "SNDRV_SFNT"
+    },
+    {
+      "name": "SNDRV_SFNT_PROBE_DATA",
+      "value": "8",
+      "comment": "optarg=sample",
+      "category": "SNDRV_SFNT"
+    },
+    {
+      "name": "SNDRV_SFNT_REMOVE_INFO",
+      "value": "9",
+      "comment": "optarg=(bank<<8)|instr",
+      "category": "SNDRV_SFNT"
+    },
+    {
+      "name": "SNDRV_SFNT_PATCH_NAME_LEN",
+      "value": "32",
+      "comment": "",
+      "category": "SNDRV_SFNT"
+    },
+    {
+      "name": "SNDRV_SFNT_PAT_TYPE_MISC",
+      "value": "0",
+      "comment": "",
+      "category": "SNDRV_SFNT"
+    },
+    {
+      "name": "SNDRV_SFNT_PAT_TYPE_GUS",
+      "value": "6",
+      "comment": "",
+      "category": "SNDRV_SFNT"
+    },
+    {
+      "name": "SNDRV_SFNT_PAT_TYPE_MAP",
+      "value": "7",
+      "comment": "",
+      "category": "SNDRV_SFNT"
+    },
+    {
+      "name": "SNDRV_SFNT_PAT_LOCKED",
+      "value": "0x100",
+      "comment": "lock the samples",
+      "category": "SNDRV_SFNT"
+    },
+    {
+      "name": "SNDRV_SFNT_PAT_SHARED",
+      "value": "0x200",
+      "comment": "sample is shared",
+      "category": "SNDRV_SFNT"
+    },
+    {
+      "name": "SNDRV_SFNT_MODE_ROMSOUND",
+      "value": "0x8000",
+      "comment": "",
+      "category": "SNDRV_SFNT"
+    },
+    {
+      "name": "SNDRV_SFNT_MODE_STEREO",
+      "value": "1",
+      "comment": "",
+      "category": "SNDRV_SFNT"
+    },
+    {
+      "name": "SNDRV_SFNT_MODE_LOOPING",
+      "value": "2",
+      "comment": "",
+      "category": "SNDRV_SFNT"
+    },
+    {
+      "name": "SNDRV_SFNT_MODE_NORELEASE",
+      "value": "4",
+      "comment": "obsolete",
+      "category": "SNDRV_SFNT"
+    },
+    {
+      "name": "SNDRV_SFNT_MODE_INIT_PARM",
+      "value": "8",
+      "comment": "",
+      "category": "SNDRV_SFNT"
+    },
+    {
+      "name": "SNDRV_SFNT_WR_APPEND",
+      "value": "0",
+      "comment": "append anyway",
+      "category": "SNDRV_SFNT"
+    },
+    {
+      "name": "SNDRV_SFNT_WR_EXCLUSIVE",
+      "value": "1",
+      "comment": "skip if already exists",
+      "category": "SNDRV_SFNT"
+    },
+    {
+      "name": "SNDRV_SFNT_WR_REPLACE",
+      "value": "2",
+      "comment": "replace if already exists",
+      "category": "SNDRV_SFNT"
+    },
+    {
+      "name": "SNDRV_SFNT_SAMPLE_8BITS",
+      "value": "1",
+      "comment": "wave data is 8bits",
+      "category": "SNDRV_SFNT"
+    },
+    {
+      "name": "SNDRV_SFNT_SAMPLE_UNSIGNED",
+      "value": "2",
+      "comment": "wave data is unsigned",
+      "category": "SNDRV_SFNT"
+    },
+    {
+      "name": "SNDRV_SFNT_SAMPLE_NO_BLANK",
+      "value": "4",
+      "comment": "no blank loop is attached",
+      "category": "SNDRV_SFNT"
+    },
+    {
+      "name": "SNDRV_SFNT_SAMPLE_SINGLESHOT",
+      "value": "8",
+      "comment": "single-shot w/o loop",
+      "category": "SNDRV_SFNT"
+    },
+    {
+      "name": "SNDRV_SFNT_SAMPLE_BIDIR_LOOP",
+      "value": "16",
+      "comment": "bidirectional looping",
+      "category": "SNDRV_SFNT"
+    },
+    {
+      "name": "SNDRV_SFNT_SAMPLE_STEREO_LEFT",
+      "value": "32",
+      "comment": "stereo left sound",
+      "category": "SNDRV_SFNT"
+    },
+    {
+      "name": "SNDRV_SFNT_SAMPLE_STEREO_RIGHT",
+      "value": "64",
+      "comment": "stereo right sound",
+      "category": "SNDRV_SFNT"
+    },
+    {
+      "name": "SNDRV_SFNT_SAMPLE_REVERSE_LOOP",
+      "value": "128",
+      "comment": "reverse looping",
+      "category": "SNDRV_SFNT"
+    },
+    {
+      "name": "SNDRV_EMUX_HWDEP_NAME",
+      "value": "\"Emux WaveTable\"",
+      "comment": "",
+      "category": "SNDRV_EMUX"
+    },
+    {
+      "name": "SNDRV_EMUX_VERSION",
+      "value": "((1 << 16) | (0 << 8) | 0)",
+      "comment": "1.0.0",
+      "category": "SNDRV_EMUX"
+    },
+    {
+      "name": "SNDRV_EMUX_IOCTL_VERSION",
+      "value": "_IOR('H', 0x80, unsigned int)",
+      "comment": "",
+      "category": "SNDRV_EMUX"
+    },
+    {
+      "name": "SNDRV_EMUX_IOCTL_LOAD_PATCH",
+      "value": "_IOWR('H', 0x81, struct soundfont_patch_info)",
+      "comment": "",
+      "category": "SNDRV_EMUX"
+    },
+    {
+      "name": "SNDRV_EMUX_IOCTL_RESET_SAMPLES",
+      "value": "_IO('H', 0x82)",
+      "comment": "",
+      "category": "SNDRV_EMUX"
+    },
+    {
+      "name": "SNDRV_EMUX_IOCTL_REMOVE_LAST_SAMPLES",
+      "value": "_IO('H', 0x83)",
+      "comment": "",
+      "category": "SNDRV_EMUX"
+    },
+    {
+      "name": "SNDRV_EMUX_IOCTL_MEM_AVAIL",
+      "value": "_IOW('H', 0x84, int)",
+      "comment": "",
+      "category": "SNDRV_EMUX"
+    },
+    {
+      "name": "SNDRV_EMUX_IOCTL_MISC_MODE",
+      "value": "_IOWR('H', 0x84, struct snd_emux_misc_mode)",
+      "comment": "",
+      "category": "SNDRV_EMUX"
+    }
+  ],
+  "structs": [
+    {
+      "name": "soundfont_patch_info",
+      "fields": [
+        {
+          "type_name": "short",
+          "name": "device_no",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "short",
+          "name": "optarg",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "short",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "short",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "soundfont_open_parm",
+      "fields": [
+        {
+          "type_name": "short",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "name",
+          "array_size": "SNDRV_SFNT_PATCH_NAME_LEN",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "soundfont_voice_parm",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "soundfont_voice_info",
+      "fields": [
+        {
+          "type_name": "short",
+          "name": "rate_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "short",
+          "name": "root",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "short",
+          "name": "tune",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "short",
+          "name": "exclusiveClass",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "short",
+          "name": "scaleTuning",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "soundfont_voice_rec_hdr",
+      "fields": [
+        {
+          "type_name": "char",
+          "name": "nvoices",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "write_mode",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "soundfont_sample_info",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "short",
+          "name": "dummy",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "soundfont_voice_map",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_emux_misc_mode",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "port",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "mode",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "value",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "value2",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

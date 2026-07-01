@@ -1,0 +1,2869 @@
+{
+  "filename": "btrfs_tree.h",
+  "includes": [
+    "linux/btrfs.h",
+    "linux/types.h",
+    "linux/stddef.h",
+    "stddef.h"
+  ],
+  "defines": [
+    {
+      "name": "BTRFS_MAGIC",
+      "value": "0x4D5F53665248425FULL",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "BTRFS_MAX_LEVEL",
+      "value": "8",
+      "comment": "",
+      "category": "BTRFS_MAX"
+    },
+    {
+      "name": "BTRFS_NAME_LEN",
+      "value": "255",
+      "comment": "",
+      "category": "BTRFS_NAME"
+    },
+    {
+      "name": "BTRFS_LINK_MAX",
+      "value": "65535U",
+      "comment": "",
+      "category": "BTRFS_LINK"
+    },
+    {
+      "name": "BTRFS_ROOT_TREE_OBJECTID",
+      "value": "1ULL",
+      "comment": "",
+      "category": "BTRFS_ROOT"
+    },
+    {
+      "name": "BTRFS_EXTENT_TREE_OBJECTID",
+      "value": "2ULL",
+      "comment": "",
+      "category": "BTRFS_EXTENT"
+    },
+    {
+      "name": "BTRFS_CHUNK_TREE_OBJECTID",
+      "value": "3ULL",
+      "comment": "",
+      "category": "BTRFS_CHUNK"
+    },
+    {
+      "name": "BTRFS_DEV_TREE_OBJECTID",
+      "value": "4ULL",
+      "comment": "",
+      "category": "BTRFS_DEV"
+    },
+    {
+      "name": "BTRFS_FS_TREE_OBJECTID",
+      "value": "5ULL",
+      "comment": "",
+      "category": "BTRFS_FS"
+    },
+    {
+      "name": "BTRFS_ROOT_TREE_DIR_OBJECTID",
+      "value": "6ULL",
+      "comment": "",
+      "category": "BTRFS_ROOT"
+    },
+    {
+      "name": "BTRFS_CSUM_TREE_OBJECTID",
+      "value": "7ULL",
+      "comment": "",
+      "category": "BTRFS_CSUM"
+    },
+    {
+      "name": "BTRFS_QUOTA_TREE_OBJECTID",
+      "value": "8ULL",
+      "comment": "",
+      "category": "BTRFS_QUOTA"
+    },
+    {
+      "name": "BTRFS_UUID_TREE_OBJECTID",
+      "value": "9ULL",
+      "comment": "",
+      "category": "BTRFS_UUID"
+    },
+    {
+      "name": "BTRFS_FREE_SPACE_TREE_OBJECTID",
+      "value": "10ULL",
+      "comment": "",
+      "category": "BTRFS_FREE"
+    },
+    {
+      "name": "BTRFS_BLOCK_GROUP_TREE_OBJECTID",
+      "value": "11ULL",
+      "comment": "",
+      "category": "BTRFS_BLOCK"
+    },
+    {
+      "name": "BTRFS_RAID_STRIPE_TREE_OBJECTID",
+      "value": "12ULL",
+      "comment": "",
+      "category": "BTRFS_RAID"
+    },
+    {
+      "name": "BTRFS_REMAP_TREE_OBJECTID",
+      "value": "13ULL",
+      "comment": "",
+      "category": "BTRFS_REMAP"
+    },
+    {
+      "name": "BTRFS_DEV_STATS_OBJECTID",
+      "value": "0ULL",
+      "comment": "",
+      "category": "BTRFS_DEV"
+    },
+    {
+      "name": "BTRFS_BALANCE_OBJECTID",
+      "value": "-4ULL",
+      "comment": "",
+      "category": "BTRFS_BALANCE"
+    },
+    {
+      "name": "BTRFS_ORPHAN_OBJECTID",
+      "value": "-5ULL",
+      "comment": "",
+      "category": "BTRFS_ORPHAN"
+    },
+    {
+      "name": "BTRFS_TREE_LOG_OBJECTID",
+      "value": "-6ULL",
+      "comment": "",
+      "category": "BTRFS_TREE"
+    },
+    {
+      "name": "BTRFS_TREE_LOG_FIXUP_OBJECTID",
+      "value": "-7ULL",
+      "comment": "",
+      "category": "BTRFS_TREE"
+    },
+    {
+      "name": "BTRFS_TREE_RELOC_OBJECTID",
+      "value": "-8ULL",
+      "comment": "",
+      "category": "BTRFS_TREE"
+    },
+    {
+      "name": "BTRFS_DATA_RELOC_TREE_OBJECTID",
+      "value": "-9ULL",
+      "comment": "",
+      "category": "BTRFS_DATA"
+    },
+    {
+      "name": "BTRFS_EXTENT_CSUM_OBJECTID",
+      "value": "-10ULL",
+      "comment": "",
+      "category": "BTRFS_EXTENT"
+    },
+    {
+      "name": "BTRFS_FREE_SPACE_OBJECTID",
+      "value": "-11ULL",
+      "comment": "",
+      "category": "BTRFS_FREE"
+    },
+    {
+      "name": "BTRFS_FREE_INO_OBJECTID",
+      "value": "-12ULL",
+      "comment": "",
+      "category": "BTRFS_FREE"
+    },
+    {
+      "name": "BTRFS_MULTIPLE_OBJECTIDS",
+      "value": "-255ULL",
+      "comment": "",
+      "category": "BTRFS_MULTIPLE"
+    },
+    {
+      "name": "BTRFS_FIRST_FREE_OBJECTID",
+      "value": "256ULL",
+      "comment": "",
+      "category": "BTRFS_FIRST"
+    },
+    {
+      "name": "BTRFS_LAST_FREE_OBJECTID",
+      "value": "-256ULL",
+      "comment": "",
+      "category": "BTRFS_LAST"
+    },
+    {
+      "name": "BTRFS_FIRST_CHUNK_TREE_OBJECTID",
+      "value": "256ULL",
+      "comment": "",
+      "category": "BTRFS_FIRST"
+    },
+    {
+      "name": "BTRFS_DEV_ITEMS_OBJECTID",
+      "value": "1ULL",
+      "comment": "",
+      "category": "BTRFS_DEV"
+    },
+    {
+      "name": "BTRFS_BTREE_INODE_OBJECTID",
+      "value": "1",
+      "comment": "",
+      "category": "BTRFS_BTREE"
+    },
+    {
+      "name": "BTRFS_EMPTY_SUBVOL_DIR_OBJECTID",
+      "value": "2",
+      "comment": "",
+      "category": "BTRFS_EMPTY"
+    },
+    {
+      "name": "BTRFS_DEV_REPLACE_DEVID",
+      "value": "0ULL",
+      "comment": "",
+      "category": "BTRFS_DEV"
+    },
+    {
+      "name": "BTRFS_INODE_ITEM_KEY",
+      "value": "1",
+      "comment": "",
+      "category": "BTRFS_INODE"
+    },
+    {
+      "name": "BTRFS_INODE_REF_KEY",
+      "value": "12",
+      "comment": "",
+      "category": "BTRFS_INODE"
+    },
+    {
+      "name": "BTRFS_INODE_EXTREF_KEY",
+      "value": "13",
+      "comment": "",
+      "category": "BTRFS_INODE"
+    },
+    {
+      "name": "BTRFS_XATTR_ITEM_KEY",
+      "value": "24",
+      "comment": "",
+      "category": "BTRFS_XATTR"
+    },
+    {
+      "name": "BTRFS_VERITY_DESC_ITEM_KEY",
+      "value": "36",
+      "comment": "",
+      "category": "BTRFS_VERITY"
+    },
+    {
+      "name": "BTRFS_VERITY_MERKLE_ITEM_KEY",
+      "value": "37",
+      "comment": "",
+      "category": "BTRFS_VERITY"
+    },
+    {
+      "name": "BTRFS_ORPHAN_ITEM_KEY",
+      "value": "48",
+      "comment": "",
+      "category": "BTRFS_ORPHAN"
+    },
+    {
+      "name": "BTRFS_DIR_LOG_ITEM_KEY",
+      "value": "60",
+      "comment": "",
+      "category": "BTRFS_DIR"
+    },
+    {
+      "name": "BTRFS_DIR_LOG_INDEX_KEY",
+      "value": "72",
+      "comment": "",
+      "category": "BTRFS_DIR"
+    },
+    {
+      "name": "BTRFS_DIR_ITEM_KEY",
+      "value": "84",
+      "comment": "",
+      "category": "BTRFS_DIR"
+    },
+    {
+      "name": "BTRFS_DIR_INDEX_KEY",
+      "value": "96",
+      "comment": "",
+      "category": "BTRFS_DIR"
+    },
+    {
+      "name": "BTRFS_EXTENT_DATA_KEY",
+      "value": "108",
+      "comment": "",
+      "category": "BTRFS_EXTENT"
+    },
+    {
+      "name": "BTRFS_EXTENT_CSUM_KEY",
+      "value": "128",
+      "comment": "",
+      "category": "BTRFS_EXTENT"
+    },
+    {
+      "name": "BTRFS_ROOT_ITEM_KEY",
+      "value": "132",
+      "comment": "",
+      "category": "BTRFS_ROOT"
+    },
+    {
+      "name": "BTRFS_ROOT_BACKREF_KEY",
+      "value": "144",
+      "comment": "",
+      "category": "BTRFS_ROOT"
+    },
+    {
+      "name": "BTRFS_ROOT_REF_KEY",
+      "value": "156",
+      "comment": "",
+      "category": "BTRFS_ROOT"
+    },
+    {
+      "name": "BTRFS_EXTENT_ITEM_KEY",
+      "value": "168",
+      "comment": "",
+      "category": "BTRFS_EXTENT"
+    },
+    {
+      "name": "BTRFS_METADATA_ITEM_KEY",
+      "value": "169",
+      "comment": "",
+      "category": "BTRFS_METADATA"
+    },
+    {
+      "name": "BTRFS_EXTENT_OWNER_REF_KEY",
+      "value": "172",
+      "comment": "",
+      "category": "BTRFS_EXTENT"
+    },
+    {
+      "name": "BTRFS_TREE_BLOCK_REF_KEY",
+      "value": "176",
+      "comment": "",
+      "category": "BTRFS_TREE"
+    },
+    {
+      "name": "BTRFS_EXTENT_DATA_REF_KEY",
+      "value": "178",
+      "comment": "",
+      "category": "BTRFS_EXTENT"
+    },
+    {
+      "name": "BTRFS_SHARED_BLOCK_REF_KEY",
+      "value": "182",
+      "comment": "",
+      "category": "BTRFS_SHARED"
+    },
+    {
+      "name": "BTRFS_SHARED_DATA_REF_KEY",
+      "value": "184",
+      "comment": "",
+      "category": "BTRFS_SHARED"
+    },
+    {
+      "name": "BTRFS_BLOCK_GROUP_ITEM_KEY",
+      "value": "192",
+      "comment": "",
+      "category": "BTRFS_BLOCK"
+    },
+    {
+      "name": "BTRFS_FREE_SPACE_INFO_KEY",
+      "value": "198",
+      "comment": "",
+      "category": "BTRFS_FREE"
+    },
+    {
+      "name": "BTRFS_FREE_SPACE_EXTENT_KEY",
+      "value": "199",
+      "comment": "",
+      "category": "BTRFS_FREE"
+    },
+    {
+      "name": "BTRFS_FREE_SPACE_BITMAP_KEY",
+      "value": "200",
+      "comment": "",
+      "category": "BTRFS_FREE"
+    },
+    {
+      "name": "BTRFS_DEV_EXTENT_KEY",
+      "value": "204",
+      "comment": "",
+      "category": "BTRFS_DEV"
+    },
+    {
+      "name": "BTRFS_DEV_ITEM_KEY",
+      "value": "216",
+      "comment": "",
+      "category": "BTRFS_DEV"
+    },
+    {
+      "name": "BTRFS_CHUNK_ITEM_KEY",
+      "value": "228",
+      "comment": "",
+      "category": "BTRFS_CHUNK"
+    },
+    {
+      "name": "BTRFS_RAID_STRIPE_KEY",
+      "value": "230",
+      "comment": "",
+      "category": "BTRFS_RAID"
+    },
+    {
+      "name": "BTRFS_IDENTITY_REMAP_KEY",
+      "value": "234",
+      "comment": "",
+      "category": "BTRFS_IDENTITY"
+    },
+    {
+      "name": "BTRFS_REMAP_KEY",
+      "value": "235",
+      "comment": "",
+      "category": "BTRFS_REMAP"
+    },
+    {
+      "name": "BTRFS_REMAP_BACKREF_KEY",
+      "value": "236",
+      "comment": "",
+      "category": "BTRFS_REMAP"
+    },
+    {
+      "name": "BTRFS_QGROUP_STATUS_KEY",
+      "value": "240",
+      "comment": "",
+      "category": "BTRFS_QGROUP"
+    },
+    {
+      "name": "BTRFS_QGROUP_INFO_KEY",
+      "value": "242",
+      "comment": "",
+      "category": "BTRFS_QGROUP"
+    },
+    {
+      "name": "BTRFS_QGROUP_LIMIT_KEY",
+      "value": "244",
+      "comment": "",
+      "category": "BTRFS_QGROUP"
+    },
+    {
+      "name": "BTRFS_QGROUP_RELATION_KEY",
+      "value": "246",
+      "comment": "",
+      "category": "BTRFS_QGROUP"
+    },
+    {
+      "name": "BTRFS_BALANCE_ITEM_KEY",
+      "value": "248",
+      "comment": "",
+      "category": "BTRFS_BALANCE"
+    },
+    {
+      "name": "BTRFS_TEMPORARY_ITEM_KEY",
+      "value": "248",
+      "comment": "",
+      "category": "BTRFS_TEMPORARY"
+    },
+    {
+      "name": "BTRFS_DEV_STATS_KEY",
+      "value": "249",
+      "comment": "",
+      "category": "BTRFS_DEV"
+    },
+    {
+      "name": "BTRFS_PERSISTENT_ITEM_KEY",
+      "value": "249",
+      "comment": "",
+      "category": "BTRFS_PERSISTENT"
+    },
+    {
+      "name": "BTRFS_DEV_REPLACE_KEY",
+      "value": "250",
+      "comment": "",
+      "category": "BTRFS_DEV"
+    },
+    {
+      "name": "BTRFS_UUID_KEY_SUBVOL",
+      "value": "251",
+      "comment": "for UUIDs assigned to subvols",
+      "category": "BTRFS_UUID"
+    },
+    {
+      "name": "BTRFS_UUID_KEY_RECEIVED_SUBVOL",
+      "value": "252\t/* for UUIDs assigned to",
+      "comment": "",
+      "category": "BTRFS_UUID"
+    },
+    {
+      "name": "BTRFS_STRING_ITEM_KEY",
+      "value": "253",
+      "comment": "",
+      "category": "BTRFS_STRING"
+    },
+    {
+      "name": "BTRFS_MAX_METADATA_BLOCKSIZE",
+      "value": "65536",
+      "comment": "",
+      "category": "BTRFS_MAX"
+    },
+    {
+      "name": "BTRFS_CSUM_SIZE",
+      "value": "32",
+      "comment": "",
+      "category": "BTRFS_CSUM"
+    },
+    {
+      "name": "BTRFS_FT_UNKNOWN",
+      "value": "0",
+      "comment": "",
+      "category": "BTRFS_FT"
+    },
+    {
+      "name": "BTRFS_FT_REG_FILE",
+      "value": "1",
+      "comment": "",
+      "category": "BTRFS_FT"
+    },
+    {
+      "name": "BTRFS_FT_DIR",
+      "value": "2",
+      "comment": "",
+      "category": "BTRFS_FT"
+    },
+    {
+      "name": "BTRFS_FT_CHRDEV",
+      "value": "3",
+      "comment": "",
+      "category": "BTRFS_FT"
+    },
+    {
+      "name": "BTRFS_FT_BLKDEV",
+      "value": "4",
+      "comment": "",
+      "category": "BTRFS_FT"
+    },
+    {
+      "name": "BTRFS_FT_FIFO",
+      "value": "5",
+      "comment": "",
+      "category": "BTRFS_FT"
+    },
+    {
+      "name": "BTRFS_FT_SOCK",
+      "value": "6",
+      "comment": "",
+      "category": "BTRFS_FT"
+    },
+    {
+      "name": "BTRFS_FT_SYMLINK",
+      "value": "7",
+      "comment": "",
+      "category": "BTRFS_FT"
+    },
+    {
+      "name": "BTRFS_FT_XATTR",
+      "value": "8",
+      "comment": "",
+      "category": "BTRFS_FT"
+    },
+    {
+      "name": "BTRFS_FT_MAX",
+      "value": "9",
+      "comment": "",
+      "category": "BTRFS_FT"
+    },
+    {
+      "name": "BTRFS_FT_ENCRYPTED",
+      "value": "0x80",
+      "comment": "",
+      "category": "BTRFS_FT"
+    },
+    {
+      "name": "BTRFS_INODE_NODATASUM",
+      "value": "(1U << 0)",
+      "comment": "",
+      "category": "BTRFS_INODE"
+    },
+    {
+      "name": "BTRFS_INODE_NODATACOW",
+      "value": "(1U << 1)",
+      "comment": "",
+      "category": "BTRFS_INODE"
+    },
+    {
+      "name": "BTRFS_INODE_READONLY",
+      "value": "(1U << 2)",
+      "comment": "",
+      "category": "BTRFS_INODE"
+    },
+    {
+      "name": "BTRFS_INODE_NOCOMPRESS",
+      "value": "(1U << 3)",
+      "comment": "",
+      "category": "BTRFS_INODE"
+    },
+    {
+      "name": "BTRFS_INODE_PREALLOC",
+      "value": "(1U << 4)",
+      "comment": "",
+      "category": "BTRFS_INODE"
+    },
+    {
+      "name": "BTRFS_INODE_SYNC",
+      "value": "(1U << 5)",
+      "comment": "",
+      "category": "BTRFS_INODE"
+    },
+    {
+      "name": "BTRFS_INODE_IMMUTABLE",
+      "value": "(1U << 6)",
+      "comment": "",
+      "category": "BTRFS_INODE"
+    },
+    {
+      "name": "BTRFS_INODE_APPEND",
+      "value": "(1U << 7)",
+      "comment": "",
+      "category": "BTRFS_INODE"
+    },
+    {
+      "name": "BTRFS_INODE_NODUMP",
+      "value": "(1U << 8)",
+      "comment": "",
+      "category": "BTRFS_INODE"
+    },
+    {
+      "name": "BTRFS_INODE_NOATIME",
+      "value": "(1U << 9)",
+      "comment": "",
+      "category": "BTRFS_INODE"
+    },
+    {
+      "name": "BTRFS_INODE_DIRSYNC",
+      "value": "(1U << 10)",
+      "comment": "",
+      "category": "BTRFS_INODE"
+    },
+    {
+      "name": "BTRFS_INODE_COMPRESS",
+      "value": "(1U << 11)",
+      "comment": "",
+      "category": "BTRFS_INODE"
+    },
+    {
+      "name": "BTRFS_INODE_ROOT_ITEM_INIT",
+      "value": "(1U << 31)",
+      "comment": "",
+      "category": "BTRFS_INODE"
+    },
+    {
+      "name": "BTRFS_INODE_FLAG_MASK",
+      "value": "",
+      "comment": "",
+      "category": "BTRFS_INODE"
+    },
+    {
+      "name": "BTRFS_INODE_RO_VERITY",
+      "value": "(1U << 0)",
+      "comment": "",
+      "category": "BTRFS_INODE"
+    },
+    {
+      "name": "BTRFS_INODE_RO_FLAG_MASK",
+      "value": "(BTRFS_INODE_RO_VERITY)",
+      "comment": "",
+      "category": "BTRFS_INODE"
+    },
+    {
+      "name": "BTRFS_SYSTEM_CHUNK_ARRAY_SIZE",
+      "value": "2048",
+      "comment": "",
+      "category": "BTRFS_SYSTEM"
+    },
+    {
+      "name": "BTRFS_NUM_BACKUP_ROOTS",
+      "value": "4",
+      "comment": "",
+      "category": "BTRFS_NUM"
+    },
+    {
+      "name": "BTRFS_FREE_SPACE_EXTENT",
+      "value": "1",
+      "comment": "",
+      "category": "BTRFS_FREE"
+    },
+    {
+      "name": "BTRFS_FREE_SPACE_BITMAP",
+      "value": "2",
+      "comment": "",
+      "category": "BTRFS_FREE"
+    },
+    {
+      "name": "BTRFS_HEADER_FLAG_WRITTEN",
+      "value": "(1ULL << 0)",
+      "comment": "",
+      "category": "BTRFS_HEADER"
+    },
+    {
+      "name": "BTRFS_HEADER_FLAG_RELOC",
+      "value": "(1ULL << 1)",
+      "comment": "",
+      "category": "BTRFS_HEADER"
+    },
+    {
+      "name": "BTRFS_SUPER_FLAG_ERROR",
+      "value": "(1ULL << 2)",
+      "comment": "",
+      "category": "BTRFS_SUPER"
+    },
+    {
+      "name": "BTRFS_SUPER_FLAG_SEEDING",
+      "value": "(1ULL << 32)",
+      "comment": "",
+      "category": "BTRFS_SUPER"
+    },
+    {
+      "name": "BTRFS_SUPER_FLAG_METADUMP",
+      "value": "(1ULL << 33)",
+      "comment": "",
+      "category": "BTRFS_SUPER"
+    },
+    {
+      "name": "BTRFS_SUPER_FLAG_METADUMP_V2",
+      "value": "(1ULL << 34)",
+      "comment": "",
+      "category": "BTRFS_SUPER"
+    },
+    {
+      "name": "BTRFS_SUPER_FLAG_CHANGING_FSID",
+      "value": "(1ULL << 35)",
+      "comment": "",
+      "category": "BTRFS_SUPER"
+    },
+    {
+      "name": "BTRFS_SUPER_FLAG_CHANGING_FSID_V2",
+      "value": "(1ULL << 36)",
+      "comment": "",
+      "category": "BTRFS_SUPER"
+    },
+    {
+      "name": "BTRFS_SUPER_FLAG_CHANGING_BG_TREE",
+      "value": "(1ULL << 38)",
+      "comment": "",
+      "category": "BTRFS_SUPER"
+    },
+    {
+      "name": "BTRFS_SUPER_FLAG_CHANGING_DATA_CSUM",
+      "value": "(1ULL << 39)",
+      "comment": "",
+      "category": "BTRFS_SUPER"
+    },
+    {
+      "name": "BTRFS_SUPER_FLAG_CHANGING_META_CSUM",
+      "value": "(1ULL << 40)",
+      "comment": "",
+      "category": "BTRFS_SUPER"
+    },
+    {
+      "name": "BTRFS_EXTENT_FLAG_DATA",
+      "value": "(1ULL << 0)",
+      "comment": "",
+      "category": "BTRFS_EXTENT"
+    },
+    {
+      "name": "BTRFS_EXTENT_FLAG_TREE_BLOCK",
+      "value": "(1ULL << 1)",
+      "comment": "",
+      "category": "BTRFS_EXTENT"
+    },
+    {
+      "name": "BTRFS_BLOCK_FLAG_FULL_BACKREF",
+      "value": "(1ULL << 8)",
+      "comment": "",
+      "category": "BTRFS_BLOCK"
+    },
+    {
+      "name": "BTRFS_BACKREF_REV_MAX",
+      "value": "256",
+      "comment": "",
+      "category": "BTRFS_BACKREF"
+    },
+    {
+      "name": "BTRFS_BACKREF_REV_SHIFT",
+      "value": "56",
+      "comment": "",
+      "category": "BTRFS_BACKREF"
+    },
+    {
+      "name": "BTRFS_BACKREF_REV_MASK",
+      "value": "(((u64)BTRFS_BACKREF_REV_MAX - 1) << ",
+      "comment": "",
+      "category": "BTRFS_BACKREF"
+    },
+    {
+      "name": "BTRFS_OLD_BACKREF_REV",
+      "value": "0",
+      "comment": "",
+      "category": "BTRFS_OLD"
+    },
+    {
+      "name": "BTRFS_MIXED_BACKREF_REV",
+      "value": "1",
+      "comment": "",
+      "category": "BTRFS_MIXED"
+    },
+    {
+      "name": "BTRFS_EXTENT_FLAG_SUPER",
+      "value": "(1ULL << 48)",
+      "comment": "",
+      "category": "BTRFS_EXTENT"
+    },
+    {
+      "name": "BTRFS_ROOT_SUBVOL_RDONLY",
+      "value": "(1ULL << 0)",
+      "comment": "",
+      "category": "BTRFS_ROOT"
+    },
+    {
+      "name": "BTRFS_ROOT_SUBVOL_DEAD",
+      "value": "(1ULL << 48)",
+      "comment": "",
+      "category": "BTRFS_ROOT"
+    },
+    {
+      "name": "BTRFS_DEV_REPLACE_ITEM_CONT_READING_FROM_SRCDEV_MODE_ALWAYS",
+      "value": "0",
+      "comment": "",
+      "category": "BTRFS_DEV"
+    },
+    {
+      "name": "BTRFS_DEV_REPLACE_ITEM_CONT_READING_FROM_SRCDEV_MODE_AVOID",
+      "value": "1",
+      "comment": "",
+      "category": "BTRFS_DEV"
+    },
+    {
+      "name": "BTRFS_BLOCK_GROUP_DATA",
+      "value": "(1ULL << 0)",
+      "comment": "",
+      "category": "BTRFS_BLOCK"
+    },
+    {
+      "name": "BTRFS_BLOCK_GROUP_SYSTEM",
+      "value": "(1ULL << 1)",
+      "comment": "",
+      "category": "BTRFS_BLOCK"
+    },
+    {
+      "name": "BTRFS_BLOCK_GROUP_METADATA",
+      "value": "(1ULL << 2)",
+      "comment": "",
+      "category": "BTRFS_BLOCK"
+    },
+    {
+      "name": "BTRFS_BLOCK_GROUP_RAID0",
+      "value": "(1ULL << 3)",
+      "comment": "",
+      "category": "BTRFS_BLOCK"
+    },
+    {
+      "name": "BTRFS_BLOCK_GROUP_RAID1",
+      "value": "(1ULL << 4)",
+      "comment": "",
+      "category": "BTRFS_BLOCK"
+    },
+    {
+      "name": "BTRFS_BLOCK_GROUP_DUP",
+      "value": "(1ULL << 5)",
+      "comment": "",
+      "category": "BTRFS_BLOCK"
+    },
+    {
+      "name": "BTRFS_BLOCK_GROUP_RAID10",
+      "value": "(1ULL << 6)",
+      "comment": "",
+      "category": "BTRFS_BLOCK"
+    },
+    {
+      "name": "BTRFS_BLOCK_GROUP_RAID5",
+      "value": "(1ULL << 7)",
+      "comment": "",
+      "category": "BTRFS_BLOCK"
+    },
+    {
+      "name": "BTRFS_BLOCK_GROUP_RAID6",
+      "value": "(1ULL << 8)",
+      "comment": "",
+      "category": "BTRFS_BLOCK"
+    },
+    {
+      "name": "BTRFS_BLOCK_GROUP_RAID1C3",
+      "value": "(1ULL << 9)",
+      "comment": "",
+      "category": "BTRFS_BLOCK"
+    },
+    {
+      "name": "BTRFS_BLOCK_GROUP_RAID1C4",
+      "value": "(1ULL << 10)",
+      "comment": "",
+      "category": "BTRFS_BLOCK"
+    },
+    {
+      "name": "BTRFS_BLOCK_GROUP_REMAPPED",
+      "value": "(1ULL << 11)",
+      "comment": "",
+      "category": "BTRFS_BLOCK"
+    },
+    {
+      "name": "BTRFS_BLOCK_GROUP_METADATA_REMAP",
+      "value": "(1ULL << 12)",
+      "comment": "",
+      "category": "BTRFS_BLOCK"
+    },
+    {
+      "name": "BTRFS_BLOCK_GROUP_RESERVED",
+      "value": "(BTRFS_AVAIL_ALLOC_BIT_SINGLE | ",
+      "comment": "",
+      "category": "BTRFS_BLOCK"
+    },
+    {
+      "name": "BTRFS_BLOCK_GROUP_TYPE_MASK",
+      "value": "(BTRFS_BLOCK_GROUP_DATA |    ",
+      "comment": "",
+      "category": "BTRFS_BLOCK"
+    },
+    {
+      "name": "BTRFS_BLOCK_GROUP_PROFILE_MASK",
+      "value": "(BTRFS_BLOCK_GROUP_RAID0 |   ",
+      "comment": "",
+      "category": "BTRFS_BLOCK"
+    },
+    {
+      "name": "BTRFS_BLOCK_GROUP_RAID56_MASK",
+      "value": "(BTRFS_BLOCK_GROUP_RAID5 |   ",
+      "comment": "",
+      "category": "BTRFS_BLOCK"
+    },
+    {
+      "name": "BTRFS_BLOCK_GROUP_RAID1_MASK",
+      "value": "(BTRFS_BLOCK_GROUP_RAID1 |   ",
+      "comment": "",
+      "category": "BTRFS_BLOCK"
+    },
+    {
+      "name": "BTRFS_AVAIL_ALLOC_BIT_SINGLE",
+      "value": "(1ULL << 48)",
+      "comment": "",
+      "category": "BTRFS_AVAIL"
+    },
+    {
+      "name": "BTRFS_SPACE_INFO_GLOBAL_RSV",
+      "value": "(1ULL << 49)",
+      "comment": "",
+      "category": "BTRFS_SPACE"
+    },
+    {
+      "name": "BTRFS_EXTENDED_PROFILE_MASK",
+      "value": "(BTRFS_BLOCK_GROUP_PROFILE_MASK | ",
+      "comment": "",
+      "category": "BTRFS_EXTENDED"
+    },
+    {
+      "name": "BTRFS_FREE_SPACE_USING_BITMAPS",
+      "value": "(1UL << 0)",
+      "comment": "",
+      "category": "BTRFS_FREE"
+    },
+    {
+      "name": "BTRFS_FREE_SPACE_FLAGS_MASK",
+      "value": "(BTRFS_FREE_SPACE_USING_BITMAPS)",
+      "comment": "",
+      "category": "BTRFS_FREE"
+    },
+    {
+      "name": "BTRFS_QGROUP_LEVEL_SHIFT",
+      "value": "48",
+      "comment": "",
+      "category": "BTRFS_QGROUP"
+    },
+    {
+      "name": "BTRFS_QGROUP_STATUS_FLAG_ON",
+      "value": "(1ULL << 0)",
+      "comment": "",
+      "category": "BTRFS_QGROUP"
+    },
+    {
+      "name": "BTRFS_QGROUP_STATUS_FLAG_RESCAN",
+      "value": "(1ULL << 1)",
+      "comment": "",
+      "category": "BTRFS_QGROUP"
+    },
+    {
+      "name": "BTRFS_QGROUP_STATUS_FLAG_INCONSISTENT",
+      "value": "(1ULL << 2)",
+      "comment": "",
+      "category": "BTRFS_QGROUP"
+    },
+    {
+      "name": "BTRFS_QGROUP_STATUS_FLAG_SIMPLE_MODE",
+      "value": "(1ULL << 3)",
+      "comment": "",
+      "category": "BTRFS_QGROUP"
+    },
+    {
+      "name": "BTRFS_QGROUP_STATUS_FLAGS_MASK",
+      "value": "(BTRFS_QGROUP_STATUS_FLAG_ON |\t\t",
+      "comment": "",
+      "category": "BTRFS_QGROUP"
+    },
+    {
+      "name": "BTRFS_QGROUP_STATUS_VERSION",
+      "value": "1",
+      "comment": "",
+      "category": "BTRFS_QGROUP"
+    }
+  ],
+  "structs": [
+    {
+      "name": "btrfs_disk_key",
+      "fields": [
+        {
+          "type_name": "__le64",
+          "name": "objectid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_key",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "objectid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_header",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "csum",
+          "array_size": "BTRFS_CSUM_SIZE",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "fsid",
+          "array_size": "BTRFS_FSID_SIZE",
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "bytenr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "chunk_tree_uuid",
+          "array_size": "BTRFS_UUID_SIZE",
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "generation",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "owner",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "nritems",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "level",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_root_backup",
+      "fields": [
+        {
+          "type_name": "__le64",
+          "name": "tree_root",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "tree_root_gen",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "chunk_root",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "chunk_root_gen",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "extent_root",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "extent_root_gen",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "fs_root",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "fs_root_gen",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "dev_root",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "dev_root_gen",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "csum_root",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "csum_root_gen",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "total_bytes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "bytes_used",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "num_devices",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "unused_64",
+          "array_size": "4",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "tree_root_level",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "chunk_root_level",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "extent_root_level",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "fs_root_level",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "dev_root_level",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "csum_root_level",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "unused_8",
+          "array_size": "10",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_item",
+      "fields": [
+        {
+          "type_name": "__le32",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_leaf",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_key_ptr",
+      "fields": [
+        {
+          "type_name": "__le64",
+          "name": "blockptr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "generation",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_node",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_dev_item",
+      "fields": [
+        {
+          "type_name": "__le64",
+          "name": "devid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "total_bytes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "bytes_used",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "io_align",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "io_width",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "sector_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "generation",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "start_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "dev_group",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "seek_speed",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "bandwidth",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "uuid",
+          "array_size": "BTRFS_UUID_SIZE",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "fsid",
+          "array_size": "BTRFS_UUID_SIZE",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_stripe",
+      "fields": [
+        {
+          "type_name": "__le64",
+          "name": "devid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "dev_uuid",
+          "array_size": "BTRFS_UUID_SIZE",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_chunk",
+      "fields": [
+        {
+          "type_name": "__le64",
+          "name": "length",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "owner",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "stripe_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "io_align",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "io_width",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "sector_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le16",
+          "name": "num_stripes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le16",
+          "name": "sub_stripes",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_super_block",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "csum",
+          "array_size": "BTRFS_CSUM_SIZE",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "fsid",
+          "array_size": "BTRFS_FSID_SIZE",
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "bytenr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "magic",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "generation",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "root",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "chunk_root",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "log_root",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "__unused_log_root_transid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "total_bytes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "bytes_used",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "root_dir_objectid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "num_devices",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "sectorsize",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "nodesize",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "__unused_leafsize",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "stripesize",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "sys_chunk_array_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "chunk_root_generation",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "compat_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "compat_ro_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "incompat_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le16",
+          "name": "csum_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "root_level",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "chunk_root_level",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "log_root_level",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "label",
+          "array_size": "BTRFS_LABEL_SIZE",
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "cache_generation",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "uuid_tree_generation",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "metadata_uuid",
+          "array_size": "BTRFS_FSID_SIZE",
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "nr_global_roots",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "remap_root",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "remap_root_generation",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "remap_root_level",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reserved",
+          "array_size": "199",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "sys_chunk_array",
+          "array_size": "BTRFS_SYSTEM_CHUNK_ARRAY_SIZE",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "padding",
+          "array_size": "565",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_free_space_entry",
+      "fields": [
+        {
+          "type_name": "__le64",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "bytes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_free_space_header",
+      "fields": [
+        {
+          "type_name": "__le64",
+          "name": "generation",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "num_entries",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "num_bitmaps",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_raid_stride",
+      "fields": [
+        {
+          "type_name": "__le64",
+          "name": "devid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "physical",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_stripe_extent",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_extent_item",
+      "fields": [
+        {
+          "type_name": "__le64",
+          "name": "refs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "generation",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_extent_item_v0",
+      "fields": [
+        {
+          "type_name": "__le32",
+          "name": "refs",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_tree_block_info",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "level",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_extent_data_ref",
+      "fields": [
+        {
+          "type_name": "__le64",
+          "name": "root",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "objectid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "count",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_shared_data_ref",
+      "fields": [
+        {
+          "type_name": "__le32",
+          "name": "count",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_extent_owner_ref",
+      "fields": [
+        {
+          "type_name": "__le64",
+          "name": "root_id",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_extent_inline_ref",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_dev_extent",
+      "fields": [
+        {
+          "type_name": "__le64",
+          "name": "chunk_tree",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "chunk_objectid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "chunk_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "length",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "chunk_tree_uuid",
+          "array_size": "BTRFS_UUID_SIZE",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_inode_ref",
+      "fields": [
+        {
+          "type_name": "__le64",
+          "name": "index",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le16",
+          "name": "name_len",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_inode_extref",
+      "fields": [
+        {
+          "type_name": "__le64",
+          "name": "parent_objectid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "index",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le16",
+          "name": "name_len",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_timespec",
+      "fields": [
+        {
+          "type_name": "__le64",
+          "name": "sec",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "nsec",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_inode_item",
+      "fields": [
+        {
+          "type_name": "__le64",
+          "name": "generation",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "transid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "nbytes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "block_group",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "nlink",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "uid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "gid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "mode",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "rdev",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "sequence",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "reserved",
+          "array_size": "4",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_dir_log_item",
+      "fields": [
+        {
+          "type_name": "__le64",
+          "name": "end",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_dir_item",
+      "fields": [
+        {
+          "type_name": "__le64",
+          "name": "transid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le16",
+          "name": "data_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le16",
+          "name": "name_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_root_item",
+      "fields": [
+        {
+          "type_name": "__le64",
+          "name": "generation",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "root_dirid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "bytenr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "byte_limit",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "bytes_used",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "last_snapshot",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "refs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "drop_level",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "level",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "generation_v2",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "uuid",
+          "array_size": "BTRFS_UUID_SIZE",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "parent_uuid",
+          "array_size": "BTRFS_UUID_SIZE",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "received_uuid",
+          "array_size": "BTRFS_UUID_SIZE",
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "ctransid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "otransid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "stransid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "rtransid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "reserved",
+          "array_size": "8",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_root_ref",
+      "fields": [
+        {
+          "type_name": "__le64",
+          "name": "dirid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "sequence",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le16",
+          "name": "name_len",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_disk_balance_args",
+      "fields": [
+        {
+          "type_name": "__le64",
+          "name": "profiles",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "usage",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "usage_min",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "usage_max",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "devid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "pstart",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "pend",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "vstart",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "vend",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "target",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "limit",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "limit_min",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "limit_max",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "stripes_min",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "stripes_max",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "unused",
+          "array_size": "6",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_33",
+      "fields": [
+        {
+          "type_name": "__le32",
+          "name": "usage_min",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "usage_max",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_34",
+      "fields": [
+        {
+          "type_name": "__le32",
+          "name": "limit_min",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "limit_max",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_balance_item",
+      "fields": [
+        {
+          "type_name": "__le64",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "unused",
+          "array_size": "4",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_file_extent_item",
+      "fields": [
+        {
+          "type_name": "__le64",
+          "name": "generation",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "ram_bytes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "compression",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "encryption",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le16",
+          "name": "other_encoding",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "disk_bytenr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "disk_num_bytes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "num_bytes",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_csum_item",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "csum",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_dev_stats_item",
+      "fields": [
+        {
+          "type_name": "__le64",
+          "name": "values",
+          "array_size": "BTRFS_DEV_STAT_VALUES_MAX",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_dev_replace_item",
+      "fields": [
+        {
+          "type_name": "__le64",
+          "name": "src_devid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "cursor_left",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "cursor_right",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "cont_reading_from_srcdev_mode",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "replace_state",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "time_started",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "time_stopped",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "num_write_errors",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "num_uncorrectable_read_errors",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_block_group_item",
+      "fields": [
+        {
+          "type_name": "__le64",
+          "name": "used",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "chunk_objectid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_block_group_item_v2",
+      "fields": [
+        {
+          "type_name": "__le64",
+          "name": "used",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "chunk_objectid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "remap_bytes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "identity_remap_count",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_free_space_info",
+      "fields": [
+        {
+          "type_name": "__le32",
+          "name": "extent_count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_qgroup_status_item",
+      "fields": [
+        {
+          "type_name": "__le64",
+          "name": "version",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "generation",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "rescan",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "enable_gen",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_qgroup_info_item",
+      "fields": [
+        {
+          "type_name": "__le64",
+          "name": "generation",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "rfer",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "rfer_cmpr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "excl",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "excl_cmpr",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_qgroup_limit_item",
+      "fields": [
+        {
+          "type_name": "__le64",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "max_rfer",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "max_excl",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "rsv_rfer",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "rsv_excl",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_verity_descriptor_item",
+      "fields": [
+        {
+          "type_name": "__le64",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "reserved",
+          "array_size": "2",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "encryption",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "btrfs_remap_item",
+      "fields": [
+        {
+          "type_name": "__le64",
+          "name": "address",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

@@ -1,0 +1,48 @@
+{
+  "name": "q4_boundary_pair_72_28",
+  "description": "Q4 boundary pair: structural plus cyber/source-boundary memories, no cognitive breadth.",
+  "shares": {
+    "structural": 0.72,
+    "cognitive": 0.0,
+    "cyber": 0.28
+  },
+  "bridge_count": 220,
+  "anti_echo_multiplier": 3,
+  "q2_amplifier": false,
+  "train_count": 1555,
+  "validation_count": 135,
+  "summary": {
+    "count": 1690,
+    "by_kind": {
+      "anti_echo_stop": 389,
+      "carrier_control": 51,
+      "clean_task_solution": 78,
+      "compact_task_solution": 163,
+      "cyber_memory": 336,
+      "gate_application": 16,
+      "gate_control": 76,
+      "repair_solution": 148,
+      "routed_bridge": 220,
+      "task_solution": 152,
+      "web_association": 49,
+      "web_repair": 12
+    },
+    "by_family": {
+      "adversarial": 203,
+      "boundary": 353,
+      "generalist": 270,
+      "structural": 864
+    },
+    "by_source": {
+      "anti_echo_generator": 270,
+      "bridge_generator": 220,
+      "rust_cyber_defender_generated.tsv": 336,
+      "structural_primitive_lora_v0_2": 864
+    }
+  },
+  "files": {
+    "train_jsonl": "C:\\Projects\\small-model-memory-lab\\data\\dataset_mixture_candidates_v0_2\\q4_boundary_pair_72_28\\train.jsonl",
+    "validation_jsonl": "C:\\Projects\\small-model-memory-lab\\data\\dataset_mixture_candidates_v0_2\\q4_boundary_pair_72_28\\validation.jsonl",
+    "preview": "C:\\Projects\\small-model-memory-lab\\data\\dataset_mixture_candidates_v0_2\\q4_boundary_pair_72_28\\preview.json"
+  }
+}

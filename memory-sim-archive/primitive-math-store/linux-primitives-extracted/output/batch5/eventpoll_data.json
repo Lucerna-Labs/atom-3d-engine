@@ -1,0 +1,214 @@
+{
+  "filename": "eventpoll.h",
+  "includes": [
+    "linux/fcntl.h",
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "EPOLL_CLOEXEC",
+      "value": "O_CLOEXEC",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EPOLL_CTL_ADD",
+      "value": "1",
+      "comment": "",
+      "category": "EPOLL_CTL"
+    },
+    {
+      "name": "EPOLL_CTL_DEL",
+      "value": "2",
+      "comment": "",
+      "category": "EPOLL_CTL"
+    },
+    {
+      "name": "EPOLL_CTL_MOD",
+      "value": "3",
+      "comment": "",
+      "category": "EPOLL_CTL"
+    },
+    {
+      "name": "EPOLLIN",
+      "value": "(__force __poll_t)0x00000001",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EPOLLPRI",
+      "value": "(__force __poll_t)0x00000002",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EPOLLOUT",
+      "value": "(__force __poll_t)0x00000004",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EPOLLERR",
+      "value": "(__force __poll_t)0x00000008",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EPOLLHUP",
+      "value": "(__force __poll_t)0x00000010",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EPOLLNVAL",
+      "value": "(__force __poll_t)0x00000020",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EPOLLRDNORM",
+      "value": "(__force __poll_t)0x00000040",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EPOLLRDBAND",
+      "value": "(__force __poll_t)0x00000080",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EPOLLWRNORM",
+      "value": "(__force __poll_t)0x00000100",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EPOLLWRBAND",
+      "value": "(__force __poll_t)0x00000200",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EPOLLMSG",
+      "value": "(__force __poll_t)0x00000400",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EPOLLRDHUP",
+      "value": "(__force __poll_t)0x00002000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EPOLL_URING_WAKE",
+      "value": "((__force __poll_t)(1U << 27))",
+      "comment": "",
+      "category": "EPOLL_URING"
+    },
+    {
+      "name": "EPOLLEXCLUSIVE",
+      "value": "((__force __poll_t)(1U << 28))",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EPOLLWAKEUP",
+      "value": "((__force __poll_t)(1U << 29))",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EPOLLONESHOT",
+      "value": "((__force __poll_t)(1U << 30))",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EPOLLET",
+      "value": "((__force __poll_t)(1U << 31))",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EPOLL_PACKED",
+      "value": "__attribute__((packed))",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EPOLL_IOC_TYPE",
+      "value": "0x8A",
+      "comment": "",
+      "category": "EPOLL_IOC"
+    },
+    {
+      "name": "EPIOCSPARAMS",
+      "value": "_IOW(EPOLL_IOC_TYPE, 0x01, struct epoll_params)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EPIOCGPARAMS",
+      "value": "_IOR(EPOLL_IOC_TYPE, 0x02, struct epoll_params)",
+      "comment": "",
+      "category": ""
+    }
+  ],
+  "structs": [
+    {
+      "name": "epoll_event",
+      "fields": [
+        {
+          "type_name": "__poll_t",
+          "name": "events",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "data",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "epoll_params",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "busy_poll_usecs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "busy_poll_budget",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "prefer_busy_poll",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "__pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

@@ -1,0 +1,99 @@
+﻿Thinking Process:
+
+1.  **Analyze the Request:**
+    *   Input Task: A warehouse problem involving units, sales, receipts, and reservations.
+    *   Constraints:
+        *   Use plain arithmetic.
+        *   Repeat given quantities.
+        *   State final numeric answer with full unit name in ordinary text.
+        *   Answer concisely.
+        *   Do not write hidden reasoning tags.
+        *   Include uncertainty and next action when relevant (though this is a deterministic math problem, so uncertainty might be minimal or non-existent unless the prompt implies ambiguity).
+        *   Use background patterns from "Relevant remembered experiences" (carry units, turn word quantities into variables/relations, usability beats private logic) without quoting them.
+    *   Goal: Calculate available units after transactions.
+
+2.  **Extract Data:**
+    *   Start: 150 units
+    *   Sell: 18 units/day for 4 days
+    *   Receive: 65 units
+    *   Reserve: 20 units
+    *   Question: How many units are available?
+
+3.  **Perform Calculation:**
+    *   Initial stock = 150 units
+    *   Sold total = 18 units/day * 4 days = 72 units
+    *   Remaining after sales = 150 - 72 = 78 units
+    *   Add received = 78 + 65 = 143 units
+    *   Subtract reserved = 143 - 20 = 123 units
+
+4.  **Format Output:**
+    *   Plain arithmetic.
+    *   Repeat quantities (150, 18, 4, 65, 20).
+    *   Final answer with full unit name ("units").
+    *   Concise.
+    *   Check units throughout (as per memory pattern).
+
+5.  **Drafting the Response:**
+    *   Start: 150 units
+    *   Sales: 18 units × 4 days = 72 units
+    *   Receipts: +65 units
+    *   Reservations: -20 units
+    *   Calculation: 150 - (18 × 4) + 65 - 20
+    *   Step-by-step: 150 - 72 = 78; 78 + 65 = 143; 143 - 20 = 123.
+    *   Final Answer: 123 units.
+
+6.  **Refining for Constraints:**
+    *   "Include uncertainty and next action when relevant." Since this is a straightforward math problem with no ambiguity, uncertainty isn't really applicable unless I interpret the prompt strictly. However, usually, in deterministic tasks, stating confidence or noting that the calculation assumes standard inventory logic fits the pattern of usability. But the instruction says "when relevant". It's not relevant here as the numbers are fixed. I will focus on the arithmetic and units.
+    *   "Do not write hidden reasoning tags." -> No `<thought>` blocks in final output (already handled).
+    *   "Use only the memory patterns that fit the task." -> Carry units, turn word quantities into variables/relations.
+
+7.  **Final Polish:**
+    Start with 150 units. Subtract sales of 18 units per day for 4 days (72 units). Add received 65 units. Subtract reserved 20 units.
+    Arithmetic: 150 - (18 × 4) + 65 - 20 = 123.
+    Final answer: 123 units.
+
+    Let's make it look like plain arithmetic as requested.
+
+    150 units - (18 units/day × 4 days) + 65 units - 20 units = ?
+    150 units - 72 units + 65 units - 20 units = 123 units.
+
+    Wait, check the "Include uncertainty and next action when relevant" instruction again. If there's no ambiguity, I don't need to force it. But sometimes these prompts want a specific format regarding confidence. Given the strict math nature, I will stick to the calculation but ensure the unit name is explicit.
+
+    Revised Plan:
+    1. State initial quantity.
+    2. Show sales calculation with units.
+    3. Show addition and subtraction with units.
+    4. Final result with full unit name.
+
+    Draft:
+    Start: 150 units
+    Sales: 18 units × 4 days = 72 units
+    Received: +65 units
+    Reserved: -20 units
+    Calculation: 150 units - 72 units + 65 units - 20 units = 123 units.
+
+    Final Answer: 123 units available.
+
+    Wait, I need to check if "uncertainty" is required even if not relevant? "Include uncertainty and next action when relevant." implies conditional inclusion. Since it's a math problem with fixed inputs, there is no uncertainty. I will omit it to avoid hallucination.
+
+    Final check on constraints:
+    - Plain arithmetic: Yes.
+    - Repeat given quantities: Yes (150, 18, 4, 65, 20).
+    - State final numeric answer with full unit name in ordinary text: Yes ("123 units").
+    - Concise: Yes.
+    - No hidden reasoning tags: Yes.
+
+    Let's assemble.
+
+    Start: 150 units
+    Sold: 18 units × 4 days = 72 units
+    Received: +65 units
+    Reserved: -20 units
+    Total available: 150 units - 72 units + 65 units - 20 units = 123 units.
+
+    This looks good. I will ensure the unit name is "units" as per the prompt's usage.
+
+    One more check on memory patterns: "carry units through the calculation and check the final units". My draft does this. "turn word quantities into variables, relations, and units". Done. "usability beats private logic". The answer should be clear to a user.
+
+    Final Output Construction.
+    150 units - (18 units × 4

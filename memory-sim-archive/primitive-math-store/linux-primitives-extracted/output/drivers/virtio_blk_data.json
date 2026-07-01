@@ -1,0 +1,756 @@
+{
+  "filename": "virtio_blk.h",
+  "includes": [
+    "linux/types.h",
+    "linux/virtio_ids.h",
+    "linux/virtio_config.h",
+    "linux/virtio_types.h"
+  ],
+  "defines": [
+    {
+      "name": "VIRTIO_BLK_F_SIZE_MAX",
+      "value": "1",
+      "comment": "Indicates maximum segment size",
+      "category": "VIRTIO_BLK"
+    },
+    {
+      "name": "VIRTIO_BLK_F_SEG_MAX",
+      "value": "2",
+      "comment": "Indicates maximum # of segments",
+      "category": "VIRTIO_BLK"
+    },
+    {
+      "name": "VIRTIO_BLK_F_GEOMETRY",
+      "value": "4",
+      "comment": "Legacy geometry available",
+      "category": "VIRTIO_BLK"
+    },
+    {
+      "name": "VIRTIO_BLK_F_RO",
+      "value": "5",
+      "comment": "Disk is read-only",
+      "category": "VIRTIO_BLK"
+    },
+    {
+      "name": "VIRTIO_BLK_F_BLK_SIZE",
+      "value": "6",
+      "comment": "Block size of disk is available",
+      "category": "VIRTIO_BLK"
+    },
+    {
+      "name": "VIRTIO_BLK_F_TOPOLOGY",
+      "value": "10",
+      "comment": "Topology information is available",
+      "category": "VIRTIO_BLK"
+    },
+    {
+      "name": "VIRTIO_BLK_F_MQ",
+      "value": "12",
+      "comment": "support more than one vq",
+      "category": "VIRTIO_BLK"
+    },
+    {
+      "name": "VIRTIO_BLK_F_DISCARD",
+      "value": "13",
+      "comment": "DISCARD is supported",
+      "category": "VIRTIO_BLK"
+    },
+    {
+      "name": "VIRTIO_BLK_F_WRITE_ZEROES",
+      "value": "14",
+      "comment": "WRITE ZEROES is supported",
+      "category": "VIRTIO_BLK"
+    },
+    {
+      "name": "VIRTIO_BLK_F_SECURE_ERASE",
+      "value": "16",
+      "comment": "Secure Erase is supported",
+      "category": "VIRTIO_BLK"
+    },
+    {
+      "name": "VIRTIO_BLK_F_ZONED",
+      "value": "17",
+      "comment": "Zoned block device",
+      "category": "VIRTIO_BLK"
+    },
+    {
+      "name": "VIRTIO_BLK_F_BARRIER",
+      "value": "0",
+      "comment": "Does host support barriers?",
+      "category": "VIRTIO_BLK"
+    },
+    {
+      "name": "VIRTIO_BLK_F_SCSI",
+      "value": "7",
+      "comment": "Supports scsi command passthru",
+      "category": "VIRTIO_BLK"
+    },
+    {
+      "name": "VIRTIO_BLK_F_FLUSH",
+      "value": "9",
+      "comment": "Flush command supported",
+      "category": "VIRTIO_BLK"
+    },
+    {
+      "name": "VIRTIO_BLK_F_CONFIG_WCE",
+      "value": "11",
+      "comment": "Writeback mode available in config",
+      "category": "VIRTIO_BLK"
+    },
+    {
+      "name": "VIRTIO_BLK_F_WCE",
+      "value": "VIRTIO_BLK_F_FLUSH",
+      "comment": "",
+      "category": "VIRTIO_BLK"
+    },
+    {
+      "name": "VIRTIO_BLK_ID_BYTES",
+      "value": "20",
+      "comment": "ID string length",
+      "category": "VIRTIO_BLK"
+    },
+    {
+      "name": "VIRTIO_BLK_T_IN",
+      "value": "0",
+      "comment": "",
+      "category": "VIRTIO_BLK"
+    },
+    {
+      "name": "VIRTIO_BLK_T_OUT",
+      "value": "1",
+      "comment": "",
+      "category": "VIRTIO_BLK"
+    },
+    {
+      "name": "VIRTIO_BLK_T_SCSI_CMD",
+      "value": "2",
+      "comment": "",
+      "category": "VIRTIO_BLK"
+    },
+    {
+      "name": "VIRTIO_BLK_T_FLUSH",
+      "value": "4",
+      "comment": "",
+      "category": "VIRTIO_BLK"
+    },
+    {
+      "name": "VIRTIO_BLK_T_GET_ID",
+      "value": "8",
+      "comment": "",
+      "category": "VIRTIO_BLK"
+    },
+    {
+      "name": "VIRTIO_BLK_T_DISCARD",
+      "value": "11",
+      "comment": "",
+      "category": "VIRTIO_BLK"
+    },
+    {
+      "name": "VIRTIO_BLK_T_WRITE_ZEROES",
+      "value": "13",
+      "comment": "",
+      "category": "VIRTIO_BLK"
+    },
+    {
+      "name": "VIRTIO_BLK_T_SECURE_ERASE",
+      "value": "14",
+      "comment": "",
+      "category": "VIRTIO_BLK"
+    },
+    {
+      "name": "VIRTIO_BLK_T_ZONE_APPEND",
+      "value": "15",
+      "comment": "",
+      "category": "VIRTIO_BLK"
+    },
+    {
+      "name": "VIRTIO_BLK_T_ZONE_REPORT",
+      "value": "16",
+      "comment": "",
+      "category": "VIRTIO_BLK"
+    },
+    {
+      "name": "VIRTIO_BLK_T_ZONE_OPEN",
+      "value": "18",
+      "comment": "",
+      "category": "VIRTIO_BLK"
+    },
+    {
+      "name": "VIRTIO_BLK_T_ZONE_CLOSE",
+      "value": "20",
+      "comment": "",
+      "category": "VIRTIO_BLK"
+    },
+    {
+      "name": "VIRTIO_BLK_T_ZONE_FINISH",
+      "value": "22",
+      "comment": "",
+      "category": "VIRTIO_BLK"
+    },
+    {
+      "name": "VIRTIO_BLK_T_ZONE_RESET",
+      "value": "24",
+      "comment": "",
+      "category": "VIRTIO_BLK"
+    },
+    {
+      "name": "VIRTIO_BLK_T_ZONE_RESET_ALL",
+      "value": "26",
+      "comment": "",
+      "category": "VIRTIO_BLK"
+    },
+    {
+      "name": "VIRTIO_BLK_T_BARRIER",
+      "value": "0x80000000",
+      "comment": "",
+      "category": "VIRTIO_BLK"
+    },
+    {
+      "name": "VIRTIO_BLK_Z_NONE",
+      "value": "0",
+      "comment": "",
+      "category": "VIRTIO_BLK"
+    },
+    {
+      "name": "VIRTIO_BLK_Z_HM",
+      "value": "1",
+      "comment": "",
+      "category": "VIRTIO_BLK"
+    },
+    {
+      "name": "VIRTIO_BLK_Z_HA",
+      "value": "2",
+      "comment": "",
+      "category": "VIRTIO_BLK"
+    },
+    {
+      "name": "VIRTIO_BLK_ZT_CONV",
+      "value": "1",
+      "comment": "",
+      "category": "VIRTIO_BLK"
+    },
+    {
+      "name": "VIRTIO_BLK_ZT_SWR",
+      "value": "2",
+      "comment": "",
+      "category": "VIRTIO_BLK"
+    },
+    {
+      "name": "VIRTIO_BLK_ZT_SWP",
+      "value": "3",
+      "comment": "",
+      "category": "VIRTIO_BLK"
+    },
+    {
+      "name": "VIRTIO_BLK_ZS_NOT_WP",
+      "value": "0",
+      "comment": "",
+      "category": "VIRTIO_BLK"
+    },
+    {
+      "name": "VIRTIO_BLK_ZS_EMPTY",
+      "value": "1",
+      "comment": "",
+      "category": "VIRTIO_BLK"
+    },
+    {
+      "name": "VIRTIO_BLK_ZS_IOPEN",
+      "value": "2",
+      "comment": "",
+      "category": "VIRTIO_BLK"
+    },
+    {
+      "name": "VIRTIO_BLK_ZS_EOPEN",
+      "value": "3",
+      "comment": "",
+      "category": "VIRTIO_BLK"
+    },
+    {
+      "name": "VIRTIO_BLK_ZS_CLOSED",
+      "value": "4",
+      "comment": "",
+      "category": "VIRTIO_BLK"
+    },
+    {
+      "name": "VIRTIO_BLK_ZS_RDONLY",
+      "value": "13",
+      "comment": "",
+      "category": "VIRTIO_BLK"
+    },
+    {
+      "name": "VIRTIO_BLK_ZS_FULL",
+      "value": "14",
+      "comment": "",
+      "category": "VIRTIO_BLK"
+    },
+    {
+      "name": "VIRTIO_BLK_ZS_OFFLINE",
+      "value": "15",
+      "comment": "",
+      "category": "VIRTIO_BLK"
+    },
+    {
+      "name": "VIRTIO_BLK_WRITE_ZEROES_FLAG_UNMAP",
+      "value": "0x00000001",
+      "comment": "",
+      "category": "VIRTIO_BLK"
+    },
+    {
+      "name": "VIRTIO_BLK_S_OK",
+      "value": "0",
+      "comment": "",
+      "category": "VIRTIO_BLK"
+    },
+    {
+      "name": "VIRTIO_BLK_S_IOERR",
+      "value": "1",
+      "comment": "",
+      "category": "VIRTIO_BLK"
+    },
+    {
+      "name": "VIRTIO_BLK_S_UNSUPP",
+      "value": "2",
+      "comment": "",
+      "category": "VIRTIO_BLK"
+    },
+    {
+      "name": "VIRTIO_BLK_S_ZONE_INVALID_CMD",
+      "value": "3",
+      "comment": "",
+      "category": "VIRTIO_BLK"
+    },
+    {
+      "name": "VIRTIO_BLK_S_ZONE_UNALIGNED_WP",
+      "value": "4",
+      "comment": "",
+      "category": "VIRTIO_BLK"
+    },
+    {
+      "name": "VIRTIO_BLK_S_ZONE_OPEN_RESOURCE",
+      "value": "5",
+      "comment": "",
+      "category": "VIRTIO_BLK"
+    },
+    {
+      "name": "VIRTIO_BLK_S_ZONE_ACTIVE_RESOURCE",
+      "value": "6",
+      "comment": "",
+      "category": "VIRTIO_BLK"
+    }
+  ],
+  "structs": [
+    {
+      "name": "virtio_blk_config",
+      "fields": [
+        {
+          "type_name": "__virtio64",
+          "name": "capacity",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__virtio32",
+          "name": "size_max",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__virtio32",
+          "name": "seg_max",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__virtio16",
+          "name": "cylinders",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "heads",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "sectors",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__virtio32",
+          "name": "blk_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "physical_block_exp",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "alignment_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__virtio16",
+          "name": "min_io_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__virtio32",
+          "name": "opt_io_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "wce",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "unused",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__virtio16",
+          "name": "num_queues",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__virtio32",
+          "name": "max_discard_sectors",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__virtio32",
+          "name": "max_discard_seg",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__virtio32",
+          "name": "discard_sector_alignment",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__virtio32",
+          "name": "max_write_zeroes_sectors",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__virtio32",
+          "name": "max_write_zeroes_seg",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "write_zeroes_may_unmap",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "unused1",
+          "array_size": "3",
+          "comment": ""
+        },
+        {
+          "type_name": "__virtio32",
+          "name": "max_secure_erase_sectors",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__virtio32",
+          "name": "max_secure_erase_seg",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__virtio32",
+          "name": "secure_erase_sector_alignment",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__virtio32",
+          "name": "zone_sectors",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__virtio32",
+          "name": "max_open_zones",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__virtio32",
+          "name": "max_active_zones",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__virtio32",
+          "name": "max_append_sectors",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__virtio32",
+          "name": "write_granularity",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "model",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "unused2",
+          "array_size": "3",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "virtio_blk_geometry",
+      "fields": [
+        {
+          "type_name": "__virtio16",
+          "name": "cylinders",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "heads",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "sectors",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "virtio_blk_zoned_characteristics",
+      "fields": [
+        {
+          "type_name": "__virtio32",
+          "name": "zone_sectors",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__virtio32",
+          "name": "max_open_zones",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__virtio32",
+          "name": "max_active_zones",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__virtio32",
+          "name": "max_append_sectors",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__virtio32",
+          "name": "write_granularity",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "model",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "unused2",
+          "array_size": "3",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "virtio_blk_outhdr",
+      "fields": [
+        {
+          "type_name": "__virtio32",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__virtio32",
+          "name": "ioprio",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__virtio64",
+          "name": "sector",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "virtio_blk_zone_descriptor",
+      "fields": [
+        {
+          "type_name": "__virtio64",
+          "name": "z_cap",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__virtio64",
+          "name": "z_start",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__virtio64",
+          "name": "z_wp",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "z_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "z_state",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reserved",
+          "array_size": "38",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "virtio_blk_zone_report",
+      "fields": [
+        {
+          "type_name": "__virtio64",
+          "name": "nr_zones",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reserved",
+          "array_size": "56",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "virtio_blk_discard_write_zeroes",
+      "fields": [
+        {
+          "type_name": "__le64",
+          "name": "sector",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "num_sectors",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "virtio_scsi_inhdr",
+      "fields": [
+        {
+          "type_name": "__virtio32",
+          "name": "errors",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__virtio32",
+          "name": "data_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__virtio32",
+          "name": "sense_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__virtio32",
+          "name": "residual",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

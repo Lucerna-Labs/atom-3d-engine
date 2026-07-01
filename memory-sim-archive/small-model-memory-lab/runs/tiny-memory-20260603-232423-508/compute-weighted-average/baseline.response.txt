@@ -1,0 +1,108 @@
+﻿Thinking Process:
+
+1.  **Analyze the Request:**
+    *   Task: Calculate the new average of 5 test scores given the average of the first 3 and the values of the next 2.
+    *   Input Data:
+        *   First 3 tests average = 82.
+        *   Next two scores = 90 and 76.
+    *   Constraint: Show setup briefly. Answer concisely. Do not write hidden reasoning tags. Include uncertainty and next action when relevant (though this is a math problem with definite data, so uncertainty/next action might not be strictly necessary unless the prompt implies ambiguity, but I should follow the instruction "Include uncertainty and next action when relevant"). Since it's a straightforward calculation, there is no uncertainty. However, the instruction says "when relevant". If not relevant, I don't need to force it. But looking at the system instructions for this specific task type (often associated with safety or reasoning checks), I should be careful. Wait, the prompt asks me to "Include uncertainty and next action when relevant." This is a standard instruction for some models to indicate confidence or follow-up steps. For a math problem, there's no uncertainty. I will focus on the calculation.
+    *   Constraint: Do not write hidden reasoning tags (like `<thought>`).
+
+2.  **Calculate:**
+    *   Sum of first 3 tests = $82 \times 3 = 246$.
+    *   Sum of next 2 tests = $90 + 76 = 166$.
+    *   Total sum = $246 + 166 = 412$.
+    *   Total number of tests = $3 + 2 = 5$.
+    *   New average = $412 / 5$.
+    *   Calculation: $400/5 = 80$, $12/5 = 2.4$. So, $82.4$.
+
+3.  **Draft the Response:**
+    *   Setup: $(82 \times 3 + 90 + 76) / 5$.
+    *   Result: 82.4.
+    *   Check constraints: Concise? Yes. No hidden tags? Yes. Uncertainty/Next action? Not relevant for a deterministic math problem, but I can add a note if needed. Actually, the instruction "Include uncertainty and next action when relevant" usually applies to open-ended queries or safety-sensitive topics. For a math fact, it's not relevant. I will omit it to keep it concise as requested ("Answer concisely").
+
+4.  **Final Polish:**
+    *   Sum of first 3: $82 \times 3 = 246$.
+    *   Total sum: $246 + 90 + 76 = 412$.
+    *   Average: $412 / 5 = 82.4$.
+
+    Let's write it out clearly.
+
+    Setup: $\frac{(3 \times 82) + 90 + 76}{5}$
+    Calculation: $\frac{246 + 166}{5} = \frac{412}{5} = 82.4$
+
+    Wait, I need to check if there's any ambiguity. No. The data is clear.
+    Is "Include uncertainty and next action when relevant" a strict requirement even if not relevant? Usually, it means "if applicable". Since it's not applicable here, I won't force it.
+
+    Final check on constraints: "Do not write hidden reasoning tags." -> Okay. "Answer concisely." -> Okay.
+
+    Draft:
+    Sum of first 3 tests = $82 \times 3 = 246$.
+    Total sum = $246 + 90 + 76 = 412$.
+    Average = $412 / 5 = 82.4$.
+
+    Or even more concise:
+    Setup: $\frac{(3 \times 82) + 90 + 76}{5} = \frac{412}{5}$
+    Answer: 82.4
+
+    Let's combine for clarity and brevity.
+
+    Wait, I should double check the instruction "Include uncertainty and next action when relevant." If this is a specific system prompt requirement that expects me to acknowledge limitations even in math (e.g., "Assuming scores are exact..."), I might add it. But usually, for simple math, it's not needed. I will stick to the direct answer.
+
+    Actually, looking at the instruction again: "Include uncertainty and next action when relevant." Since this is a deterministic calculation, there is no uncertainty. I will proceed without adding unnecessary fluff.
+
+    Final Plan:
+    1. State sum of first 3.
+    2. Add new scores.
+    3. Divide by 5.
+    4. State final average.
+
+    Text:
+    Sum of first 3 tests: $82 \times 3 = 246$.
+    Total sum: $246 + 90 + 76 = 412$.
+    Average across 5 tests: $412 / 5 = 82.4$.
+
+    This is concise and shows the setup.
+
+    Wait, I need to make sure I don't use markdown that looks like hidden tags. Just plain text or standard math formatting.
+
+    Revised Plan:
+    Setup: $\frac{(3 \times 82) + 90 + 76}{5}$
+    Calculation: $\frac{246 + 166}{5} = \frac{412}{5} = 82.4$
+
+    Let's write it as a sentence or two.
+
+    "Sum of first 3 scores is $82 \times 3 = 246$. Total sum for 5 tests is $246 + 90 + 76 = 412$. The average is $412 / 5 = 82.4$."
+
+    This meets all criteria.
+
+    Wait, one more check on "Include uncertainty and next action when relevant". If I interpret this strictly as a system instruction that *must* be followed if there's any doubt, but here there isn't. However, sometimes these prompts are testing the model's ability to follow specific formatting instructions even for simple tasks. But since it says "when relevant", and math problems don't have uncertainty, I will skip it.
+
+    Wait, is there any ambiguity? "3 test scores with an average of 82". Could be weighted? No, standard arithmetic mean implied. "Next two scores". Standard addition. No uncertainty.
+
+    Okay, ready to generate.
+
+    One more thing: The prompt says "Do not write hidden reasoning tags." This usually means don't output `<thought>` blocks. I will ensure the final output is clean.
+
+    Final check on conciseness.
+    Setup: $(3 \times 82 + 90 + 76) / 5$
+    Result: $412 / 5 = 82.4$
+
+    That's very concise. I'll expand slightly to show the steps clearly as requested ("Show the setup briefly").
+
+    Final Output Construction:
+    Sum of first 3 tests: $82 \times 3 = 246$.
+    Total sum: $246 + 90 + 76 = 412$.
+    Average: $412 / 5 = 82.4$.
+
+    This is good.
+
+    Wait, I need to check if there are any safety issues. No.
+    Is there any reason to include uncertainty? Only if the input was vague. It isn't.
+    Okay, proceeding.
+
+    Wait, I should re-read "Include uncertainty and next action when relevant."
+    If I am an AI assistant, sometimes this instruction is meant for cases where information might be missing or the task requires further steps (like "I need more info"). Here, all info is present. So it is not relevant.
+
+    Okay, final version.
+    Sum of first 3 tests: $82 \times 3 =

@@ -1,0 +1,196 @@
+{
+  "filename": "romfs_fs.h",
+  "includes": [
+    "linux/types.h",
+    "linux/fs.h"
+  ],
+  "defines": [
+    {
+      "name": "ROMBSIZE",
+      "value": "BLOCK_SIZE",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ROMBSBITS",
+      "value": "BLOCK_SIZE_BITS",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ROMBMASK",
+      "value": "(ROMBSIZE-1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ROMFS_MAGIC",
+      "value": "0x7275",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ROMFS_MAXFN",
+      "value": "128",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ROMSB_WORD0",
+      "value": "__mk4('-','r','o','m')",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ROMSB_WORD1",
+      "value": "__mk4('1','f','s','-')",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ROMFH_TYPE",
+      "value": "7",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ROMFH_HRD",
+      "value": "0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ROMFH_DIR",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ROMFH_REG",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ROMFH_SYM",
+      "value": "3",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ROMFH_BLK",
+      "value": "4",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ROMFH_CHR",
+      "value": "5",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ROMFH_SCK",
+      "value": "6",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ROMFH_FIF",
+      "value": "7",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ROMFH_EXEC",
+      "value": "8",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ROMFH_SIZE",
+      "value": "16",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ROMFH_PAD",
+      "value": "(ROMFH_SIZE-1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ROMFH_MASK",
+      "value": "(~ROMFH_PAD)",
+      "comment": "",
+      "category": ""
+    }
+  ],
+  "structs": [
+    {
+      "name": "romfs_super_block",
+      "fields": [
+        {
+          "type_name": "__be32",
+          "name": "word0",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "word1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "checksum",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "romfs_inode",
+      "fields": [
+        {
+          "type_name": "__be32",
+          "name": "next",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "spec",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "checksum",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

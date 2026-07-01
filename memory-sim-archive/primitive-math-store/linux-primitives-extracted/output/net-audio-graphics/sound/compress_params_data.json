@@ -1,0 +1,1348 @@
+{
+  "filename": "compress_params.h",
+  "includes": [
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "MAX_NUM_CODECS",
+      "value": "32",
+      "comment": "",
+      "category": "MAX_NUM"
+    },
+    {
+      "name": "MAX_NUM_CODEC_DESCRIPTORS",
+      "value": "32",
+      "comment": "",
+      "category": "MAX_NUM"
+    },
+    {
+      "name": "MAX_NUM_BITRATES",
+      "value": "32",
+      "comment": "",
+      "category": "MAX_NUM"
+    },
+    {
+      "name": "MAX_NUM_SAMPLE_RATES",
+      "value": "32",
+      "comment": "",
+      "category": "MAX_NUM"
+    },
+    {
+      "name": "SND_AUDIOCODEC_PCM",
+      "value": "((__u32) 0x00000001)",
+      "comment": "",
+      "category": "SND_AUDIOCODEC"
+    },
+    {
+      "name": "SND_AUDIOCODEC_MP3",
+      "value": "((__u32) 0x00000002)",
+      "comment": "",
+      "category": "SND_AUDIOCODEC"
+    },
+    {
+      "name": "SND_AUDIOCODEC_AMR",
+      "value": "((__u32) 0x00000003)",
+      "comment": "",
+      "category": "SND_AUDIOCODEC"
+    },
+    {
+      "name": "SND_AUDIOCODEC_AMRWB",
+      "value": "((__u32) 0x00000004)",
+      "comment": "",
+      "category": "SND_AUDIOCODEC"
+    },
+    {
+      "name": "SND_AUDIOCODEC_AMRWBPLUS",
+      "value": "((__u32) 0x00000005)",
+      "comment": "",
+      "category": "SND_AUDIOCODEC"
+    },
+    {
+      "name": "SND_AUDIOCODEC_AAC",
+      "value": "((__u32) 0x00000006)",
+      "comment": "",
+      "category": "SND_AUDIOCODEC"
+    },
+    {
+      "name": "SND_AUDIOCODEC_WMA",
+      "value": "((__u32) 0x00000007)",
+      "comment": "",
+      "category": "SND_AUDIOCODEC"
+    },
+    {
+      "name": "SND_AUDIOCODEC_REAL",
+      "value": "((__u32) 0x00000008)",
+      "comment": "",
+      "category": "SND_AUDIOCODEC"
+    },
+    {
+      "name": "SND_AUDIOCODEC_VORBIS",
+      "value": "((__u32) 0x00000009)",
+      "comment": "",
+      "category": "SND_AUDIOCODEC"
+    },
+    {
+      "name": "SND_AUDIOCODEC_FLAC",
+      "value": "((__u32) 0x0000000A)",
+      "comment": "",
+      "category": "SND_AUDIOCODEC"
+    },
+    {
+      "name": "SND_AUDIOCODEC_IEC61937",
+      "value": "((__u32) 0x0000000B)",
+      "comment": "",
+      "category": "SND_AUDIOCODEC"
+    },
+    {
+      "name": "SND_AUDIOCODEC_G723_1",
+      "value": "((__u32) 0x0000000C)",
+      "comment": "",
+      "category": "SND_AUDIOCODEC"
+    },
+    {
+      "name": "SND_AUDIOCODEC_G729",
+      "value": "((__u32) 0x0000000D)",
+      "comment": "",
+      "category": "SND_AUDIOCODEC"
+    },
+    {
+      "name": "SND_AUDIOCODEC_BESPOKE",
+      "value": "((__u32) 0x0000000E)",
+      "comment": "",
+      "category": "SND_AUDIOCODEC"
+    },
+    {
+      "name": "SND_AUDIOCODEC_ALAC",
+      "value": "((__u32) 0x0000000F)",
+      "comment": "",
+      "category": "SND_AUDIOCODEC"
+    },
+    {
+      "name": "SND_AUDIOCODEC_APE",
+      "value": "((__u32) 0x00000010)",
+      "comment": "",
+      "category": "SND_AUDIOCODEC"
+    },
+    {
+      "name": "SND_AUDIOCODEC_OPUS_RAW",
+      "value": "((__u32) 0x00000011)",
+      "comment": "",
+      "category": "SND_AUDIOCODEC"
+    },
+    {
+      "name": "SND_AUDIOCODEC_MAX",
+      "value": "SND_AUDIOCODEC_OPUS_RAW",
+      "comment": "",
+      "category": "SND_AUDIOCODEC"
+    },
+    {
+      "name": "SND_AUDIOPROFILE_PCM",
+      "value": "((__u32) 0x00000001)",
+      "comment": "",
+      "category": "SND_AUDIOPROFILE"
+    },
+    {
+      "name": "SND_AUDIOCHANMODE_MP3_MONO",
+      "value": "((__u32) 0x00000001)",
+      "comment": "",
+      "category": "SND_AUDIOCHANMODE"
+    },
+    {
+      "name": "SND_AUDIOCHANMODE_MP3_STEREO",
+      "value": "((__u32) 0x00000002)",
+      "comment": "",
+      "category": "SND_AUDIOCHANMODE"
+    },
+    {
+      "name": "SND_AUDIOCHANMODE_MP3_JOINTSTEREO",
+      "value": "((__u32) 0x00000004)",
+      "comment": "",
+      "category": "SND_AUDIOCHANMODE"
+    },
+    {
+      "name": "SND_AUDIOCHANMODE_MP3_DUAL",
+      "value": "((__u32) 0x00000008)",
+      "comment": "",
+      "category": "SND_AUDIOCHANMODE"
+    },
+    {
+      "name": "SND_AUDIOPROFILE_AMR",
+      "value": "((__u32) 0x00000001)",
+      "comment": "",
+      "category": "SND_AUDIOPROFILE"
+    },
+    {
+      "name": "SND_AUDIOMODE_AMR_DTX_OFF",
+      "value": "((__u32) 0x00000001)",
+      "comment": "",
+      "category": "SND_AUDIOMODE"
+    },
+    {
+      "name": "SND_AUDIOMODE_AMR_VAD1",
+      "value": "((__u32) 0x00000002)",
+      "comment": "",
+      "category": "SND_AUDIOMODE"
+    },
+    {
+      "name": "SND_AUDIOMODE_AMR_VAD2",
+      "value": "((__u32) 0x00000004)",
+      "comment": "",
+      "category": "SND_AUDIOMODE"
+    },
+    {
+      "name": "SND_AUDIOSTREAMFORMAT_UNDEFINED",
+      "value": "((__u32) 0x00000000)",
+      "comment": "",
+      "category": "SND_AUDIOSTREAMFORMAT"
+    },
+    {
+      "name": "SND_AUDIOSTREAMFORMAT_CONFORMANCE",
+      "value": "((__u32) 0x00000001)",
+      "comment": "",
+      "category": "SND_AUDIOSTREAMFORMAT"
+    },
+    {
+      "name": "SND_AUDIOSTREAMFORMAT_IF1",
+      "value": "((__u32) 0x00000002)",
+      "comment": "",
+      "category": "SND_AUDIOSTREAMFORMAT"
+    },
+    {
+      "name": "SND_AUDIOSTREAMFORMAT_IF2",
+      "value": "((__u32) 0x00000004)",
+      "comment": "",
+      "category": "SND_AUDIOSTREAMFORMAT"
+    },
+    {
+      "name": "SND_AUDIOSTREAMFORMAT_FSF",
+      "value": "((__u32) 0x00000008)",
+      "comment": "",
+      "category": "SND_AUDIOSTREAMFORMAT"
+    },
+    {
+      "name": "SND_AUDIOSTREAMFORMAT_RTPPAYLOAD",
+      "value": "((__u32) 0x00000010)",
+      "comment": "",
+      "category": "SND_AUDIOSTREAMFORMAT"
+    },
+    {
+      "name": "SND_AUDIOSTREAMFORMAT_ITU",
+      "value": "((__u32) 0x00000020)",
+      "comment": "",
+      "category": "SND_AUDIOSTREAMFORMAT"
+    },
+    {
+      "name": "SND_AUDIOPROFILE_AMRWB",
+      "value": "((__u32) 0x00000001)",
+      "comment": "",
+      "category": "SND_AUDIOPROFILE"
+    },
+    {
+      "name": "SND_AUDIOMODE_AMRWB_DTX_OFF",
+      "value": "((__u32) 0x00000001)",
+      "comment": "",
+      "category": "SND_AUDIOMODE"
+    },
+    {
+      "name": "SND_AUDIOMODE_AMRWB_VAD1",
+      "value": "((__u32) 0x00000002)",
+      "comment": "",
+      "category": "SND_AUDIOMODE"
+    },
+    {
+      "name": "SND_AUDIOMODE_AMRWB_VAD2",
+      "value": "((__u32) 0x00000004)",
+      "comment": "",
+      "category": "SND_AUDIOMODE"
+    },
+    {
+      "name": "SND_AUDIOPROFILE_AMRWBPLUS",
+      "value": "((__u32) 0x00000001)",
+      "comment": "",
+      "category": "SND_AUDIOPROFILE"
+    },
+    {
+      "name": "SND_AUDIOPROFILE_AAC",
+      "value": "((__u32) 0x00000001)",
+      "comment": "",
+      "category": "SND_AUDIOPROFILE"
+    },
+    {
+      "name": "SND_AUDIOMODE_AAC_MAIN",
+      "value": "((__u32) 0x00000001)",
+      "comment": "",
+      "category": "SND_AUDIOMODE"
+    },
+    {
+      "name": "SND_AUDIOMODE_AAC_LC",
+      "value": "((__u32) 0x00000002)",
+      "comment": "",
+      "category": "SND_AUDIOMODE"
+    },
+    {
+      "name": "SND_AUDIOMODE_AAC_SSR",
+      "value": "((__u32) 0x00000004)",
+      "comment": "",
+      "category": "SND_AUDIOMODE"
+    },
+    {
+      "name": "SND_AUDIOMODE_AAC_LTP",
+      "value": "((__u32) 0x00000008)",
+      "comment": "",
+      "category": "SND_AUDIOMODE"
+    },
+    {
+      "name": "SND_AUDIOMODE_AAC_HE",
+      "value": "((__u32) 0x00000010)",
+      "comment": "",
+      "category": "SND_AUDIOMODE"
+    },
+    {
+      "name": "SND_AUDIOMODE_AAC_SCALABLE",
+      "value": "((__u32) 0x00000020)",
+      "comment": "",
+      "category": "SND_AUDIOMODE"
+    },
+    {
+      "name": "SND_AUDIOMODE_AAC_ERLC",
+      "value": "((__u32) 0x00000040)",
+      "comment": "",
+      "category": "SND_AUDIOMODE"
+    },
+    {
+      "name": "SND_AUDIOMODE_AAC_LD",
+      "value": "((__u32) 0x00000080)",
+      "comment": "",
+      "category": "SND_AUDIOMODE"
+    },
+    {
+      "name": "SND_AUDIOMODE_AAC_HE_PS",
+      "value": "((__u32) 0x00000100)",
+      "comment": "",
+      "category": "SND_AUDIOMODE"
+    },
+    {
+      "name": "SND_AUDIOMODE_AAC_HE_MPS",
+      "value": "((__u32) 0x00000200)",
+      "comment": "",
+      "category": "SND_AUDIOMODE"
+    },
+    {
+      "name": "SND_AUDIOSTREAMFORMAT_MP2ADTS",
+      "value": "((__u32) 0x00000001)",
+      "comment": "",
+      "category": "SND_AUDIOSTREAMFORMAT"
+    },
+    {
+      "name": "SND_AUDIOSTREAMFORMAT_MP4ADTS",
+      "value": "((__u32) 0x00000002)",
+      "comment": "",
+      "category": "SND_AUDIOSTREAMFORMAT"
+    },
+    {
+      "name": "SND_AUDIOSTREAMFORMAT_MP4LOAS",
+      "value": "((__u32) 0x00000004)",
+      "comment": "",
+      "category": "SND_AUDIOSTREAMFORMAT"
+    },
+    {
+      "name": "SND_AUDIOSTREAMFORMAT_MP4LATM",
+      "value": "((__u32) 0x00000008)",
+      "comment": "",
+      "category": "SND_AUDIOSTREAMFORMAT"
+    },
+    {
+      "name": "SND_AUDIOSTREAMFORMAT_ADIF",
+      "value": "((__u32) 0x00000010)",
+      "comment": "",
+      "category": "SND_AUDIOSTREAMFORMAT"
+    },
+    {
+      "name": "SND_AUDIOSTREAMFORMAT_MP4FF",
+      "value": "((__u32) 0x00000020)",
+      "comment": "",
+      "category": "SND_AUDIOSTREAMFORMAT"
+    },
+    {
+      "name": "SND_AUDIOSTREAMFORMAT_RAW",
+      "value": "((__u32) 0x00000040)",
+      "comment": "",
+      "category": "SND_AUDIOSTREAMFORMAT"
+    },
+    {
+      "name": "SND_AUDIOPROFILE_WMA7",
+      "value": "((__u32) 0x00000001)",
+      "comment": "",
+      "category": "SND_AUDIOPROFILE"
+    },
+    {
+      "name": "SND_AUDIOPROFILE_WMA8",
+      "value": "((__u32) 0x00000002)",
+      "comment": "",
+      "category": "SND_AUDIOPROFILE"
+    },
+    {
+      "name": "SND_AUDIOPROFILE_WMA9",
+      "value": "((__u32) 0x00000004)",
+      "comment": "",
+      "category": "SND_AUDIOPROFILE"
+    },
+    {
+      "name": "SND_AUDIOPROFILE_WMA10",
+      "value": "((__u32) 0x00000008)",
+      "comment": "",
+      "category": "SND_AUDIOPROFILE"
+    },
+    {
+      "name": "SND_AUDIOPROFILE_WMA9_PRO",
+      "value": "((__u32) 0x00000010)",
+      "comment": "",
+      "category": "SND_AUDIOPROFILE"
+    },
+    {
+      "name": "SND_AUDIOPROFILE_WMA9_LOSSLESS",
+      "value": "((__u32) 0x00000020)",
+      "comment": "",
+      "category": "SND_AUDIOPROFILE"
+    },
+    {
+      "name": "SND_AUDIOPROFILE_WMA10_LOSSLESS",
+      "value": "((__u32) 0x00000040)",
+      "comment": "",
+      "category": "SND_AUDIOPROFILE"
+    },
+    {
+      "name": "SND_AUDIOMODE_WMA_LEVEL1",
+      "value": "((__u32) 0x00000001)",
+      "comment": "",
+      "category": "SND_AUDIOMODE"
+    },
+    {
+      "name": "SND_AUDIOMODE_WMA_LEVEL2",
+      "value": "((__u32) 0x00000002)",
+      "comment": "",
+      "category": "SND_AUDIOMODE"
+    },
+    {
+      "name": "SND_AUDIOMODE_WMA_LEVEL3",
+      "value": "((__u32) 0x00000004)",
+      "comment": "",
+      "category": "SND_AUDIOMODE"
+    },
+    {
+      "name": "SND_AUDIOMODE_WMA_LEVEL4",
+      "value": "((__u32) 0x00000008)",
+      "comment": "",
+      "category": "SND_AUDIOMODE"
+    },
+    {
+      "name": "SND_AUDIOMODE_WMAPRO_LEVELM0",
+      "value": "((__u32) 0x00000010)",
+      "comment": "",
+      "category": "SND_AUDIOMODE"
+    },
+    {
+      "name": "SND_AUDIOMODE_WMAPRO_LEVELM1",
+      "value": "((__u32) 0x00000020)",
+      "comment": "",
+      "category": "SND_AUDIOMODE"
+    },
+    {
+      "name": "SND_AUDIOMODE_WMAPRO_LEVELM2",
+      "value": "((__u32) 0x00000040)",
+      "comment": "",
+      "category": "SND_AUDIOMODE"
+    },
+    {
+      "name": "SND_AUDIOMODE_WMAPRO_LEVELM3",
+      "value": "((__u32) 0x00000080)",
+      "comment": "",
+      "category": "SND_AUDIOMODE"
+    },
+    {
+      "name": "SND_AUDIOSTREAMFORMAT_WMA_ASF",
+      "value": "((__u32) 0x00000001)",
+      "comment": "",
+      "category": "SND_AUDIOSTREAMFORMAT"
+    },
+    {
+      "name": "SND_AUDIOSTREAMFORMAT_WMA_NOASF_HDR",
+      "value": "((__u32) 0x00000002)",
+      "comment": "",
+      "category": "SND_AUDIOSTREAMFORMAT"
+    },
+    {
+      "name": "SND_AUDIOPROFILE_REALAUDIO",
+      "value": "((__u32) 0x00000001)",
+      "comment": "",
+      "category": "SND_AUDIOPROFILE"
+    },
+    {
+      "name": "SND_AUDIOMODE_REALAUDIO_G2",
+      "value": "((__u32) 0x00000001)",
+      "comment": "",
+      "category": "SND_AUDIOMODE"
+    },
+    {
+      "name": "SND_AUDIOMODE_REALAUDIO_8",
+      "value": "((__u32) 0x00000002)",
+      "comment": "",
+      "category": "SND_AUDIOMODE"
+    },
+    {
+      "name": "SND_AUDIOMODE_REALAUDIO_10",
+      "value": "((__u32) 0x00000004)",
+      "comment": "",
+      "category": "SND_AUDIOMODE"
+    },
+    {
+      "name": "SND_AUDIOMODE_REALAUDIO_SURROUND",
+      "value": "((__u32) 0x00000008)",
+      "comment": "",
+      "category": "SND_AUDIOMODE"
+    },
+    {
+      "name": "SND_AUDIOPROFILE_VORBIS",
+      "value": "((__u32) 0x00000001)",
+      "comment": "",
+      "category": "SND_AUDIOPROFILE"
+    },
+    {
+      "name": "SND_AUDIOMODE_VORBIS",
+      "value": "((__u32) 0x00000001)",
+      "comment": "",
+      "category": "SND_AUDIOMODE"
+    },
+    {
+      "name": "SND_AUDIOPROFILE_FLAC",
+      "value": "((__u32) 0x00000001)",
+      "comment": "",
+      "category": "SND_AUDIOPROFILE"
+    },
+    {
+      "name": "SND_AUDIOMODE_FLAC_LEVEL0",
+      "value": "((__u32) 0x00000001)",
+      "comment": "",
+      "category": "SND_AUDIOMODE"
+    },
+    {
+      "name": "SND_AUDIOMODE_FLAC_LEVEL1",
+      "value": "((__u32) 0x00000002)",
+      "comment": "",
+      "category": "SND_AUDIOMODE"
+    },
+    {
+      "name": "SND_AUDIOMODE_FLAC_LEVEL2",
+      "value": "((__u32) 0x00000004)",
+      "comment": "",
+      "category": "SND_AUDIOMODE"
+    },
+    {
+      "name": "SND_AUDIOMODE_FLAC_LEVEL3",
+      "value": "((__u32) 0x00000008)",
+      "comment": "",
+      "category": "SND_AUDIOMODE"
+    },
+    {
+      "name": "SND_AUDIOMODE_FLAC_LEVEL4",
+      "value": "((__u32) 0x00000010)",
+      "comment": "",
+      "category": "SND_AUDIOMODE"
+    },
+    {
+      "name": "SND_AUDIOMODE_FLAC_LEVEL5",
+      "value": "((__u32) 0x00000020)",
+      "comment": "",
+      "category": "SND_AUDIOMODE"
+    },
+    {
+      "name": "SND_AUDIOMODE_FLAC_LEVEL6",
+      "value": "((__u32) 0x00000040)",
+      "comment": "",
+      "category": "SND_AUDIOMODE"
+    },
+    {
+      "name": "SND_AUDIOMODE_FLAC_LEVEL7",
+      "value": "((__u32) 0x00000080)",
+      "comment": "",
+      "category": "SND_AUDIOMODE"
+    },
+    {
+      "name": "SND_AUDIOMODE_FLAC_LEVEL8",
+      "value": "((__u32) 0x00000100)",
+      "comment": "",
+      "category": "SND_AUDIOMODE"
+    },
+    {
+      "name": "SND_AUDIOSTREAMFORMAT_FLAC",
+      "value": "((__u32) 0x00000001)",
+      "comment": "",
+      "category": "SND_AUDIOSTREAMFORMAT"
+    },
+    {
+      "name": "SND_AUDIOSTREAMFORMAT_FLAC_OGG",
+      "value": "((__u32) 0x00000002)",
+      "comment": "",
+      "category": "SND_AUDIOSTREAMFORMAT"
+    },
+    {
+      "name": "SND_AUDIOPROFILE_IEC61937",
+      "value": "((__u32) 0x00000001)",
+      "comment": "",
+      "category": "SND_AUDIOPROFILE"
+    },
+    {
+      "name": "SND_AUDIOPROFILE_IEC61937_SPDIF",
+      "value": "((__u32) 0x00000002)",
+      "comment": "",
+      "category": "SND_AUDIOPROFILE"
+    },
+    {
+      "name": "SND_AUDIOMODE_IEC_REF_STREAM_HEADER",
+      "value": "((__u32) 0x00000000)",
+      "comment": "",
+      "category": "SND_AUDIOMODE"
+    },
+    {
+      "name": "SND_AUDIOMODE_IEC_LPCM",
+      "value": "((__u32) 0x00000001)",
+      "comment": "",
+      "category": "SND_AUDIOMODE"
+    },
+    {
+      "name": "SND_AUDIOMODE_IEC_AC3",
+      "value": "((__u32) 0x00000002)",
+      "comment": "",
+      "category": "SND_AUDIOMODE"
+    },
+    {
+      "name": "SND_AUDIOMODE_IEC_MPEG1",
+      "value": "((__u32) 0x00000004)",
+      "comment": "",
+      "category": "SND_AUDIOMODE"
+    },
+    {
+      "name": "SND_AUDIOMODE_IEC_MP3",
+      "value": "((__u32) 0x00000008)",
+      "comment": "",
+      "category": "SND_AUDIOMODE"
+    },
+    {
+      "name": "SND_AUDIOMODE_IEC_MPEG2",
+      "value": "((__u32) 0x00000010)",
+      "comment": "",
+      "category": "SND_AUDIOMODE"
+    },
+    {
+      "name": "SND_AUDIOMODE_IEC_AACLC",
+      "value": "((__u32) 0x00000020)",
+      "comment": "",
+      "category": "SND_AUDIOMODE"
+    },
+    {
+      "name": "SND_AUDIOMODE_IEC_DTS",
+      "value": "((__u32) 0x00000040)",
+      "comment": "",
+      "category": "SND_AUDIOMODE"
+    },
+    {
+      "name": "SND_AUDIOMODE_IEC_ATRAC",
+      "value": "((__u32) 0x00000080)",
+      "comment": "",
+      "category": "SND_AUDIOMODE"
+    },
+    {
+      "name": "SND_AUDIOMODE_IEC_SACD",
+      "value": "((__u32) 0x00000100)",
+      "comment": "",
+      "category": "SND_AUDIOMODE"
+    },
+    {
+      "name": "SND_AUDIOMODE_IEC_EAC3",
+      "value": "((__u32) 0x00000200)",
+      "comment": "",
+      "category": "SND_AUDIOMODE"
+    },
+    {
+      "name": "SND_AUDIOMODE_IEC_DTS_HD",
+      "value": "((__u32) 0x00000400)",
+      "comment": "",
+      "category": "SND_AUDIOMODE"
+    },
+    {
+      "name": "SND_AUDIOMODE_IEC_MLP",
+      "value": "((__u32) 0x00000800)",
+      "comment": "",
+      "category": "SND_AUDIOMODE"
+    },
+    {
+      "name": "SND_AUDIOMODE_IEC_DST",
+      "value": "((__u32) 0x00001000)",
+      "comment": "",
+      "category": "SND_AUDIOMODE"
+    },
+    {
+      "name": "SND_AUDIOMODE_IEC_WMAPRO",
+      "value": "((__u32) 0x00002000)",
+      "comment": "",
+      "category": "SND_AUDIOMODE"
+    },
+    {
+      "name": "SND_AUDIOMODE_IEC_REF_CXT",
+      "value": "((__u32) 0x00004000)",
+      "comment": "",
+      "category": "SND_AUDIOMODE"
+    },
+    {
+      "name": "SND_AUDIOMODE_IEC_HE_AAC",
+      "value": "((__u32) 0x00008000)",
+      "comment": "",
+      "category": "SND_AUDIOMODE"
+    },
+    {
+      "name": "SND_AUDIOMODE_IEC_HE_AAC2",
+      "value": "((__u32) 0x00010000)",
+      "comment": "",
+      "category": "SND_AUDIOMODE"
+    },
+    {
+      "name": "SND_AUDIOMODE_IEC_MPEG_SURROUND",
+      "value": "((__u32) 0x00020000)",
+      "comment": "",
+      "category": "SND_AUDIOMODE"
+    },
+    {
+      "name": "SND_AUDIOPROFILE_G723_1",
+      "value": "((__u32) 0x00000001)",
+      "comment": "",
+      "category": "SND_AUDIOPROFILE"
+    },
+    {
+      "name": "SND_AUDIOMODE_G723_1_ANNEX_A",
+      "value": "((__u32) 0x00000001)",
+      "comment": "",
+      "category": "SND_AUDIOMODE"
+    },
+    {
+      "name": "SND_AUDIOMODE_G723_1_ANNEX_B",
+      "value": "((__u32) 0x00000002)",
+      "comment": "",
+      "category": "SND_AUDIOMODE"
+    },
+    {
+      "name": "SND_AUDIOMODE_G723_1_ANNEX_C",
+      "value": "((__u32) 0x00000004)",
+      "comment": "",
+      "category": "SND_AUDIOMODE"
+    },
+    {
+      "name": "SND_AUDIOPROFILE_G729",
+      "value": "((__u32) 0x00000001)",
+      "comment": "",
+      "category": "SND_AUDIOPROFILE"
+    },
+    {
+      "name": "SND_AUDIOMODE_G729_ANNEX_A",
+      "value": "((__u32) 0x00000001)",
+      "comment": "",
+      "category": "SND_AUDIOMODE"
+    },
+    {
+      "name": "SND_AUDIOMODE_G729_ANNEX_B",
+      "value": "((__u32) 0x00000002)",
+      "comment": "",
+      "category": "SND_AUDIOMODE"
+    },
+    {
+      "name": "SND_RATECONTROLMODE_CONSTANTBITRATE",
+      "value": "((__u32) 0x00000001)",
+      "comment": "",
+      "category": "SND_RATECONTROLMODE"
+    },
+    {
+      "name": "SND_RATECONTROLMODE_VARIABLEBITRATE",
+      "value": "((__u32) 0x00000002)",
+      "comment": "",
+      "category": "SND_RATECONTROLMODE"
+    }
+  ],
+  "structs": [
+    {
+      "name": "snd_enc_wma",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "super_block_align",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_enc_vorbis",
+      "fields": [
+        {
+          "type_name": "__s32",
+          "name": "quality",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "managed",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "max_bit_rate",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "min_bit_rate",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "downmix",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_enc_real",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "quant_bits",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "start_region",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "num_regions",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_enc_flac",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "num",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "gain",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_enc_generic",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "bw",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "reserved",
+          "array_size": "15",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_dec_flac",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "sample_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "min_blk_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "max_blk_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "min_frame_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "max_frame_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_dec_wma",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "encoder_option",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "adv_encoder_option",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "adv_encoder_option2",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_dec_alac",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "frame_length",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "compatible_version",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "pb",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "mb",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "kb",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "max_run",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "max_frame_bytes",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_dec_ape",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "compatible_version",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "compression_level",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "format_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "blocks_per_frame",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "final_frame_blocks",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "total_frames",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "seek_table_present",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_dec_opus",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "version",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "num_channels",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "pre_skip",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "sample_rate",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "output_gain",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "mapping_family",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "stream_count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "coupled_count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "channel_map",
+          "array_size": "8",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_dec_opus_ch_map",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "stream_count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "coupled_count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "channel_map",
+          "array_size": "8",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_11",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "out_sample_rate",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_codec_desc_src",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "out_sample_rate_min",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "out_sample_rate_max",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "snd_codec_desc",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "max_ch",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "sample_rates",
+          "array_size": "MAX_NUM_SAMPLE_RATES",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "num_sample_rates",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "bit_rate",
+          "array_size": "MAX_NUM_BITRATES",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "num_bitrates",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "rate_control",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "profiles",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "modes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "formats",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "min_buffer",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pcm_formats",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "u_space",
+          "array_size": "6",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved",
+          "array_size": "8",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": true
+    },
+    {
+      "name": "snd_codec",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ch_in",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ch_out",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "sample_rate",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "bit_rate",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "rate_control",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "profile",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "level",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ch_mode",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "format",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "align",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pcm_format",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved",
+          "array_size": "2",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

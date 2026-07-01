@@ -1,0 +1,3045 @@
+{
+  "filename": "fuse.h",
+  "includes": [
+    "linux/types.h",
+    "stdint.h"
+  ],
+  "defines": [
+    {
+      "name": "FUSE_KERNEL_VERSION",
+      "value": "7",
+      "comment": "",
+      "category": "FUSE_KERNEL"
+    },
+    {
+      "name": "FUSE_KERNEL_MINOR_VERSION",
+      "value": "45",
+      "comment": "",
+      "category": "FUSE_KERNEL"
+    },
+    {
+      "name": "FUSE_ROOT_ID",
+      "value": "1",
+      "comment": "",
+      "category": "FUSE_ROOT"
+    },
+    {
+      "name": "FATTR_MODE",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FATTR_UID",
+      "value": "(1 << 1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FATTR_GID",
+      "value": "(1 << 2)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FATTR_SIZE",
+      "value": "(1 << 3)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FATTR_ATIME",
+      "value": "(1 << 4)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FATTR_MTIME",
+      "value": "(1 << 5)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FATTR_FH",
+      "value": "(1 << 6)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FATTR_ATIME_NOW",
+      "value": "(1 << 7)",
+      "comment": "",
+      "category": "FATTR_ATIME"
+    },
+    {
+      "name": "FATTR_MTIME_NOW",
+      "value": "(1 << 8)",
+      "comment": "",
+      "category": "FATTR_MTIME"
+    },
+    {
+      "name": "FATTR_LOCKOWNER",
+      "value": "(1 << 9)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FATTR_CTIME",
+      "value": "(1 << 10)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FATTR_KILL_SUIDGID",
+      "value": "(1 << 11)",
+      "comment": "",
+      "category": "FATTR_KILL"
+    },
+    {
+      "name": "FOPEN_DIRECT_IO",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "FOPEN_DIRECT"
+    },
+    {
+      "name": "FOPEN_KEEP_CACHE",
+      "value": "(1 << 1)",
+      "comment": "",
+      "category": "FOPEN_KEEP"
+    },
+    {
+      "name": "FOPEN_NONSEEKABLE",
+      "value": "(1 << 2)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FOPEN_CACHE_DIR",
+      "value": "(1 << 3)",
+      "comment": "",
+      "category": "FOPEN_CACHE"
+    },
+    {
+      "name": "FOPEN_STREAM",
+      "value": "(1 << 4)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FOPEN_NOFLUSH",
+      "value": "(1 << 5)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FOPEN_PARALLEL_DIRECT_WRITES",
+      "value": "(1 << 6)",
+      "comment": "",
+      "category": "FOPEN_PARALLEL"
+    },
+    {
+      "name": "FOPEN_PASSTHROUGH",
+      "value": "(1 << 7)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FUSE_ASYNC_READ",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "FUSE_ASYNC"
+    },
+    {
+      "name": "FUSE_POSIX_LOCKS",
+      "value": "(1 << 1)",
+      "comment": "",
+      "category": "FUSE_POSIX"
+    },
+    {
+      "name": "FUSE_FILE_OPS",
+      "value": "(1 << 2)",
+      "comment": "",
+      "category": "FUSE_FILE"
+    },
+    {
+      "name": "FUSE_ATOMIC_O_TRUNC",
+      "value": "(1 << 3)",
+      "comment": "",
+      "category": "FUSE_ATOMIC"
+    },
+    {
+      "name": "FUSE_EXPORT_SUPPORT",
+      "value": "(1 << 4)",
+      "comment": "",
+      "category": "FUSE_EXPORT"
+    },
+    {
+      "name": "FUSE_BIG_WRITES",
+      "value": "(1 << 5)",
+      "comment": "",
+      "category": "FUSE_BIG"
+    },
+    {
+      "name": "FUSE_DONT_MASK",
+      "value": "(1 << 6)",
+      "comment": "",
+      "category": "FUSE_DONT"
+    },
+    {
+      "name": "FUSE_SPLICE_WRITE",
+      "value": "(1 << 7)",
+      "comment": "",
+      "category": "FUSE_SPLICE"
+    },
+    {
+      "name": "FUSE_SPLICE_MOVE",
+      "value": "(1 << 8)",
+      "comment": "",
+      "category": "FUSE_SPLICE"
+    },
+    {
+      "name": "FUSE_SPLICE_READ",
+      "value": "(1 << 9)",
+      "comment": "",
+      "category": "FUSE_SPLICE"
+    },
+    {
+      "name": "FUSE_FLOCK_LOCKS",
+      "value": "(1 << 10)",
+      "comment": "",
+      "category": "FUSE_FLOCK"
+    },
+    {
+      "name": "FUSE_HAS_IOCTL_DIR",
+      "value": "(1 << 11)",
+      "comment": "",
+      "category": "FUSE_HAS"
+    },
+    {
+      "name": "FUSE_AUTO_INVAL_DATA",
+      "value": "(1 << 12)",
+      "comment": "",
+      "category": "FUSE_AUTO"
+    },
+    {
+      "name": "FUSE_DO_READDIRPLUS",
+      "value": "(1 << 13)",
+      "comment": "",
+      "category": "FUSE_DO"
+    },
+    {
+      "name": "FUSE_READDIRPLUS_AUTO",
+      "value": "(1 << 14)",
+      "comment": "",
+      "category": "FUSE_READDIRPLUS"
+    },
+    {
+      "name": "FUSE_ASYNC_DIO",
+      "value": "(1 << 15)",
+      "comment": "",
+      "category": "FUSE_ASYNC"
+    },
+    {
+      "name": "FUSE_WRITEBACK_CACHE",
+      "value": "(1 << 16)",
+      "comment": "",
+      "category": "FUSE_WRITEBACK"
+    },
+    {
+      "name": "FUSE_NO_OPEN_SUPPORT",
+      "value": "(1 << 17)",
+      "comment": "",
+      "category": "FUSE_NO"
+    },
+    {
+      "name": "FUSE_PARALLEL_DIROPS",
+      "value": "(1 << 18)",
+      "comment": "",
+      "category": "FUSE_PARALLEL"
+    },
+    {
+      "name": "FUSE_HANDLE_KILLPRIV",
+      "value": "(1 << 19)",
+      "comment": "",
+      "category": "FUSE_HANDLE"
+    },
+    {
+      "name": "FUSE_POSIX_ACL",
+      "value": "(1 << 20)",
+      "comment": "",
+      "category": "FUSE_POSIX"
+    },
+    {
+      "name": "FUSE_ABORT_ERROR",
+      "value": "(1 << 21)",
+      "comment": "",
+      "category": "FUSE_ABORT"
+    },
+    {
+      "name": "FUSE_MAX_PAGES",
+      "value": "(1 << 22)",
+      "comment": "",
+      "category": "FUSE_MAX"
+    },
+    {
+      "name": "FUSE_CACHE_SYMLINKS",
+      "value": "(1 << 23)",
+      "comment": "",
+      "category": "FUSE_CACHE"
+    },
+    {
+      "name": "FUSE_NO_OPENDIR_SUPPORT",
+      "value": "(1 << 24)",
+      "comment": "",
+      "category": "FUSE_NO"
+    },
+    {
+      "name": "FUSE_EXPLICIT_INVAL_DATA",
+      "value": "(1 << 25)",
+      "comment": "",
+      "category": "FUSE_EXPLICIT"
+    },
+    {
+      "name": "FUSE_MAP_ALIGNMENT",
+      "value": "(1 << 26)",
+      "comment": "",
+      "category": "FUSE_MAP"
+    },
+    {
+      "name": "FUSE_SUBMOUNTS",
+      "value": "(1 << 27)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FUSE_HANDLE_KILLPRIV_V2",
+      "value": "(1 << 28)",
+      "comment": "",
+      "category": "FUSE_HANDLE"
+    },
+    {
+      "name": "FUSE_SETXATTR_EXT",
+      "value": "(1 << 29)",
+      "comment": "",
+      "category": "FUSE_SETXATTR"
+    },
+    {
+      "name": "FUSE_INIT_EXT",
+      "value": "(1 << 30)",
+      "comment": "",
+      "category": "FUSE_INIT"
+    },
+    {
+      "name": "FUSE_INIT_RESERVED",
+      "value": "(1 << 31)",
+      "comment": "",
+      "category": "FUSE_INIT"
+    },
+    {
+      "name": "FUSE_SECURITY_CTX",
+      "value": "(1ULL << 32)",
+      "comment": "",
+      "category": "FUSE_SECURITY"
+    },
+    {
+      "name": "FUSE_HAS_INODE_DAX",
+      "value": "(1ULL << 33)",
+      "comment": "",
+      "category": "FUSE_HAS"
+    },
+    {
+      "name": "FUSE_CREATE_SUPP_GROUP",
+      "value": "(1ULL << 34)",
+      "comment": "",
+      "category": "FUSE_CREATE"
+    },
+    {
+      "name": "FUSE_HAS_EXPIRE_ONLY",
+      "value": "(1ULL << 35)",
+      "comment": "",
+      "category": "FUSE_HAS"
+    },
+    {
+      "name": "FUSE_DIRECT_IO_ALLOW_MMAP",
+      "value": "(1ULL << 36)",
+      "comment": "",
+      "category": "FUSE_DIRECT"
+    },
+    {
+      "name": "FUSE_PASSTHROUGH",
+      "value": "(1ULL << 37)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FUSE_NO_EXPORT_SUPPORT",
+      "value": "(1ULL << 38)",
+      "comment": "",
+      "category": "FUSE_NO"
+    },
+    {
+      "name": "FUSE_HAS_RESEND",
+      "value": "(1ULL << 39)",
+      "comment": "",
+      "category": "FUSE_HAS"
+    },
+    {
+      "name": "FUSE_DIRECT_IO_RELAX",
+      "value": "FUSE_DIRECT_IO_ALLOW_MMAP",
+      "comment": "",
+      "category": "FUSE_DIRECT"
+    },
+    {
+      "name": "FUSE_ALLOW_IDMAP",
+      "value": "(1ULL << 40)",
+      "comment": "",
+      "category": "FUSE_ALLOW"
+    },
+    {
+      "name": "FUSE_OVER_IO_URING",
+      "value": "(1ULL << 41)",
+      "comment": "",
+      "category": "FUSE_OVER"
+    },
+    {
+      "name": "FUSE_REQUEST_TIMEOUT",
+      "value": "(1ULL << 42)",
+      "comment": "",
+      "category": "FUSE_REQUEST"
+    },
+    {
+      "name": "CUSE_UNRESTRICTED_IOCTL",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "CUSE_UNRESTRICTED"
+    },
+    {
+      "name": "FUSE_RELEASE_FLUSH",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "FUSE_RELEASE"
+    },
+    {
+      "name": "FUSE_RELEASE_FLOCK_UNLOCK",
+      "value": "(1 << 1)",
+      "comment": "",
+      "category": "FUSE_RELEASE"
+    },
+    {
+      "name": "FUSE_GETATTR_FH",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "FUSE_GETATTR"
+    },
+    {
+      "name": "FUSE_LK_FLOCK",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "FUSE_LK"
+    },
+    {
+      "name": "FUSE_WRITE_CACHE",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "FUSE_WRITE"
+    },
+    {
+      "name": "FUSE_WRITE_LOCKOWNER",
+      "value": "(1 << 1)",
+      "comment": "",
+      "category": "FUSE_WRITE"
+    },
+    {
+      "name": "FUSE_WRITE_KILL_SUIDGID",
+      "value": "(1 << 2)",
+      "comment": "",
+      "category": "FUSE_WRITE"
+    },
+    {
+      "name": "FUSE_WRITE_KILL_PRIV",
+      "value": "FUSE_WRITE_KILL_SUIDGID",
+      "comment": "",
+      "category": "FUSE_WRITE"
+    },
+    {
+      "name": "FUSE_READ_LOCKOWNER",
+      "value": "(1 << 1)",
+      "comment": "",
+      "category": "FUSE_READ"
+    },
+    {
+      "name": "FUSE_IOCTL_COMPAT",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "FUSE_IOCTL"
+    },
+    {
+      "name": "FUSE_IOCTL_UNRESTRICTED",
+      "value": "(1 << 1)",
+      "comment": "",
+      "category": "FUSE_IOCTL"
+    },
+    {
+      "name": "FUSE_IOCTL_RETRY",
+      "value": "(1 << 2)",
+      "comment": "",
+      "category": "FUSE_IOCTL"
+    },
+    {
+      "name": "FUSE_IOCTL_32BIT",
+      "value": "(1 << 3)",
+      "comment": "",
+      "category": "FUSE_IOCTL"
+    },
+    {
+      "name": "FUSE_IOCTL_DIR",
+      "value": "(1 << 4)",
+      "comment": "",
+      "category": "FUSE_IOCTL"
+    },
+    {
+      "name": "FUSE_IOCTL_COMPAT_X32",
+      "value": "(1 << 5)",
+      "comment": "",
+      "category": "FUSE_IOCTL"
+    },
+    {
+      "name": "FUSE_IOCTL_MAX_IOV",
+      "value": "256",
+      "comment": "",
+      "category": "FUSE_IOCTL"
+    },
+    {
+      "name": "FUSE_POLL_SCHEDULE_NOTIFY",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "FUSE_POLL"
+    },
+    {
+      "name": "FUSE_FSYNC_FDATASYNC",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "FUSE_FSYNC"
+    },
+    {
+      "name": "FUSE_ATTR_SUBMOUNT",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "FUSE_ATTR"
+    },
+    {
+      "name": "FUSE_ATTR_DAX",
+      "value": "(1 << 1)",
+      "comment": "",
+      "category": "FUSE_ATTR"
+    },
+    {
+      "name": "FUSE_OPEN_KILL_SUIDGID",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "FUSE_OPEN"
+    },
+    {
+      "name": "FUSE_SETXATTR_ACL_KILL_SGID",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "FUSE_SETXATTR"
+    },
+    {
+      "name": "FUSE_EXPIRE_ONLY",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "FUSE_EXPIRE"
+    },
+    {
+      "name": "FUSE_MIN_READ_BUFFER",
+      "value": "8192",
+      "comment": "",
+      "category": "FUSE_MIN"
+    },
+    {
+      "name": "FUSE_COMPAT_ENTRY_OUT_SIZE",
+      "value": "120",
+      "comment": "",
+      "category": "FUSE_COMPAT"
+    },
+    {
+      "name": "FUSE_COMPAT_ATTR_OUT_SIZE",
+      "value": "96",
+      "comment": "",
+      "category": "FUSE_COMPAT"
+    },
+    {
+      "name": "FUSE_COMPAT_MKNOD_IN_SIZE",
+      "value": "8",
+      "comment": "",
+      "category": "FUSE_COMPAT"
+    },
+    {
+      "name": "FUSE_COMPAT_WRITE_IN_SIZE",
+      "value": "24",
+      "comment": "",
+      "category": "FUSE_COMPAT"
+    },
+    {
+      "name": "FUSE_COMPAT_STATFS_SIZE",
+      "value": "48",
+      "comment": "",
+      "category": "FUSE_COMPAT"
+    },
+    {
+      "name": "FUSE_COMPAT_SETXATTR_IN_SIZE",
+      "value": "8",
+      "comment": "",
+      "category": "FUSE_COMPAT"
+    },
+    {
+      "name": "FUSE_COMPAT_INIT_OUT_SIZE",
+      "value": "8",
+      "comment": "",
+      "category": "FUSE_COMPAT"
+    },
+    {
+      "name": "FUSE_COMPAT_22_INIT_OUT_SIZE",
+      "value": "24",
+      "comment": "",
+      "category": "FUSE_COMPAT"
+    },
+    {
+      "name": "CUSE_INIT_INFO_MAX",
+      "value": "4096",
+      "comment": "",
+      "category": "CUSE_INIT"
+    },
+    {
+      "name": "FUSE_UNIQUE_RESEND",
+      "value": "(1ULL << 63)",
+      "comment": "",
+      "category": "FUSE_UNIQUE"
+    },
+    {
+      "name": "FUSE_INVALID_UIDGID",
+      "value": "((uint32_t)(-1))",
+      "comment": "",
+      "category": "FUSE_INVALID"
+    },
+    {
+      "name": "FUSE_NAME_OFFSET",
+      "value": "offsetof(struct fuse_dirent, name)",
+      "comment": "",
+      "category": "FUSE_NAME"
+    },
+    {
+      "name": "FUSE_NAME_OFFSET_DIRENTPLUS",
+      "value": "",
+      "comment": "",
+      "category": "FUSE_NAME"
+    },
+    {
+      "name": "FUSE_DEV_IOC_MAGIC",
+      "value": "229",
+      "comment": "",
+      "category": "FUSE_DEV"
+    },
+    {
+      "name": "FUSE_DEV_IOC_CLONE",
+      "value": "_IOR(FUSE_DEV_IOC_MAGIC, 0, uint32_t)",
+      "comment": "",
+      "category": "FUSE_DEV"
+    },
+    {
+      "name": "FUSE_DEV_IOC_BACKING_OPEN",
+      "value": "_IOW(FUSE_DEV_IOC_MAGIC, 1, ",
+      "comment": "",
+      "category": "FUSE_DEV"
+    },
+    {
+      "name": "FUSE_DEV_IOC_BACKING_CLOSE",
+      "value": "_IOW(FUSE_DEV_IOC_MAGIC, 2, uint32_t)",
+      "comment": "",
+      "category": "FUSE_DEV"
+    },
+    {
+      "name": "FUSE_DEV_IOC_SYNC_INIT",
+      "value": "_IO(FUSE_DEV_IOC_MAGIC, 3)",
+      "comment": "",
+      "category": "FUSE_DEV"
+    },
+    {
+      "name": "FUSE_SETUPMAPPING_FLAG_WRITE",
+      "value": "(1ull << 0)",
+      "comment": "",
+      "category": "FUSE_SETUPMAPPING"
+    },
+    {
+      "name": "FUSE_SETUPMAPPING_FLAG_READ",
+      "value": "(1ull << 1)",
+      "comment": "",
+      "category": "FUSE_SETUPMAPPING"
+    },
+    {
+      "name": "FUSE_REMOVEMAPPING_MAX_ENTRY",
+      "value": "",
+      "comment": "",
+      "category": "FUSE_REMOVEMAPPING"
+    },
+    {
+      "name": "FUSE_URING_IN_OUT_HEADER_SZ",
+      "value": "128",
+      "comment": "",
+      "category": "FUSE_URING"
+    },
+    {
+      "name": "FUSE_URING_OP_IN_OUT_SZ",
+      "value": "128",
+      "comment": "",
+      "category": "FUSE_URING"
+    }
+  ],
+  "structs": [
+    {
+      "name": "fuse_attr",
+      "fields": [
+        {
+          "type_name": "uint64_t",
+          "name": "ino",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint64_t",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint64_t",
+          "name": "blocks",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint64_t",
+          "name": "atime",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint64_t",
+          "name": "mtime",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint64_t",
+          "name": "ctime",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "atimensec",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "mtimensec",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "ctimensec",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "mode",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "nlink",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "uid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "gid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "rdev",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "blksize",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fuse_sx_time",
+      "fields": [
+        {
+          "type_name": "int64_t",
+          "name": "tv_sec",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "tv_nsec",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int32_t",
+          "name": "__reserved",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fuse_statx",
+      "fields": [
+        {
+          "type_name": "uint32_t",
+          "name": "mask",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "blksize",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint64_t",
+          "name": "attributes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "nlink",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "uid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "gid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint16_t",
+          "name": "mode",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint16_t",
+          "name": "__spare0",
+          "array_size": "1",
+          "comment": ""
+        },
+        {
+          "type_name": "uint64_t",
+          "name": "ino",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint64_t",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint64_t",
+          "name": "blocks",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint64_t",
+          "name": "attributes_mask",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "rdev_major",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "rdev_minor",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "dev_major",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "dev_minor",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint64_t",
+          "name": "__spare2",
+          "array_size": "14",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fuse_kstatfs",
+      "fields": [
+        {
+          "type_name": "uint64_t",
+          "name": "blocks",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint64_t",
+          "name": "bfree",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint64_t",
+          "name": "bavail",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint64_t",
+          "name": "files",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint64_t",
+          "name": "ffree",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "bsize",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "namelen",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "frsize",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "padding",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "spare",
+          "array_size": "6",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fuse_file_lock",
+      "fields": [
+        {
+          "type_name": "uint64_t",
+          "name": "start",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint64_t",
+          "name": "end",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "pid",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fuse_entry_out",
+      "fields": [
+        {
+          "type_name": "uint64_t",
+          "name": "nodeid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint64_t",
+          "name": "generation",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint64_t",
+          "name": "entry_valid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint64_t",
+          "name": "attr_valid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "entry_valid_nsec",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "attr_valid_nsec",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fuse_forget_in",
+      "fields": [
+        {
+          "type_name": "uint64_t",
+          "name": "nlookup",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fuse_forget_one",
+      "fields": [
+        {
+          "type_name": "uint64_t",
+          "name": "nodeid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint64_t",
+          "name": "nlookup",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fuse_batch_forget_in",
+      "fields": [
+        {
+          "type_name": "uint32_t",
+          "name": "count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "dummy",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fuse_getattr_in",
+      "fields": [
+        {
+          "type_name": "uint32_t",
+          "name": "getattr_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "dummy",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint64_t",
+          "name": "fh",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fuse_attr_out",
+      "fields": [
+        {
+          "type_name": "uint64_t",
+          "name": "attr_valid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "attr_valid_nsec",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "dummy",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fuse_statx_in",
+      "fields": [
+        {
+          "type_name": "uint32_t",
+          "name": "getattr_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint64_t",
+          "name": "fh",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "sx_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "sx_mask",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fuse_statx_out",
+      "fields": [
+        {
+          "type_name": "uint64_t",
+          "name": "attr_valid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "attr_valid_nsec",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint64_t",
+          "name": "spare",
+          "array_size": "2",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fuse_mknod_in",
+      "fields": [
+        {
+          "type_name": "uint32_t",
+          "name": "mode",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "rdev",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "umask",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "padding",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fuse_mkdir_in",
+      "fields": [
+        {
+          "type_name": "uint32_t",
+          "name": "mode",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "umask",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fuse_rename_in",
+      "fields": [
+        {
+          "type_name": "uint64_t",
+          "name": "newdir",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fuse_rename2_in",
+      "fields": [
+        {
+          "type_name": "uint64_t",
+          "name": "newdir",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "padding",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fuse_link_in",
+      "fields": [
+        {
+          "type_name": "uint64_t",
+          "name": "oldnodeid",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fuse_setattr_in",
+      "fields": [
+        {
+          "type_name": "uint32_t",
+          "name": "valid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "padding",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint64_t",
+          "name": "fh",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint64_t",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint64_t",
+          "name": "lock_owner",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint64_t",
+          "name": "atime",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint64_t",
+          "name": "mtime",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint64_t",
+          "name": "ctime",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "atimensec",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "mtimensec",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "ctimensec",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "mode",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "unused4",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "uid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "gid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "unused5",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fuse_open_in",
+      "fields": [
+        {
+          "type_name": "uint32_t",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "open_flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fuse_create_in",
+      "fields": [
+        {
+          "type_name": "uint32_t",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "mode",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "umask",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "open_flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fuse_open_out",
+      "fields": [
+        {
+          "type_name": "uint64_t",
+          "name": "fh",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "open_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int32_t",
+          "name": "backing_id",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fuse_release_in",
+      "fields": [
+        {
+          "type_name": "uint64_t",
+          "name": "fh",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "release_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint64_t",
+          "name": "lock_owner",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fuse_flush_in",
+      "fields": [
+        {
+          "type_name": "uint64_t",
+          "name": "fh",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "unused",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "padding",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint64_t",
+          "name": "lock_owner",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fuse_read_in",
+      "fields": [
+        {
+          "type_name": "uint64_t",
+          "name": "fh",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint64_t",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "read_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint64_t",
+          "name": "lock_owner",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "padding",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fuse_write_in",
+      "fields": [
+        {
+          "type_name": "uint64_t",
+          "name": "fh",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint64_t",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "write_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint64_t",
+          "name": "lock_owner",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "padding",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fuse_write_out",
+      "fields": [
+        {
+          "type_name": "uint32_t",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "padding",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fuse_statfs_out",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fuse_fsync_in",
+      "fields": [
+        {
+          "type_name": "uint64_t",
+          "name": "fh",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "fsync_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "padding",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fuse_setxattr_in",
+      "fields": [
+        {
+          "type_name": "uint32_t",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "setxattr_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "padding",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fuse_getxattr_in",
+      "fields": [
+        {
+          "type_name": "uint32_t",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "padding",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fuse_getxattr_out",
+      "fields": [
+        {
+          "type_name": "uint32_t",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "padding",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fuse_lk_in",
+      "fields": [
+        {
+          "type_name": "uint64_t",
+          "name": "fh",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint64_t",
+          "name": "owner",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "lk_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "padding",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fuse_lk_out",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fuse_access_in",
+      "fields": [
+        {
+          "type_name": "uint32_t",
+          "name": "mask",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "padding",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fuse_init_in",
+      "fields": [
+        {
+          "type_name": "uint32_t",
+          "name": "major",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "minor",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "max_readahead",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "flags2",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "unused",
+          "array_size": "11",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fuse_init_out",
+      "fields": [
+        {
+          "type_name": "uint32_t",
+          "name": "major",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "minor",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "max_readahead",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint16_t",
+          "name": "max_background",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint16_t",
+          "name": "congestion_threshold",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "max_write",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "time_gran",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint16_t",
+          "name": "max_pages",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint16_t",
+          "name": "map_alignment",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "flags2",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "max_stack_depth",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint16_t",
+          "name": "request_timeout",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint16_t",
+          "name": "unused",
+          "array_size": "11",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "cuse_init_in",
+      "fields": [
+        {
+          "type_name": "uint32_t",
+          "name": "major",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "minor",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "unused",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "cuse_init_out",
+      "fields": [
+        {
+          "type_name": "uint32_t",
+          "name": "major",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "minor",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "unused",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "max_read",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "max_write",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "dev_major",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "dev_minor",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "spare",
+          "array_size": "10",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fuse_interrupt_in",
+      "fields": [
+        {
+          "type_name": "uint64_t",
+          "name": "unique",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fuse_bmap_in",
+      "fields": [
+        {
+          "type_name": "uint64_t",
+          "name": "block",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "blocksize",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "padding",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fuse_bmap_out",
+      "fields": [
+        {
+          "type_name": "uint64_t",
+          "name": "block",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fuse_ioctl_in",
+      "fields": [
+        {
+          "type_name": "uint64_t",
+          "name": "fh",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "cmd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint64_t",
+          "name": "arg",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "in_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "out_size",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fuse_ioctl_iovec",
+      "fields": [
+        {
+          "type_name": "uint64_t",
+          "name": "base",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint64_t",
+          "name": "len",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fuse_ioctl_out",
+      "fields": [
+        {
+          "type_name": "int32_t",
+          "name": "result",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "in_iovs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "out_iovs",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fuse_poll_in",
+      "fields": [
+        {
+          "type_name": "uint64_t",
+          "name": "fh",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint64_t",
+          "name": "kh",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "events",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fuse_poll_out",
+      "fields": [
+        {
+          "type_name": "uint32_t",
+          "name": "revents",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "padding",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fuse_notify_poll_wakeup_out",
+      "fields": [
+        {
+          "type_name": "uint64_t",
+          "name": "kh",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fuse_fallocate_in",
+      "fields": [
+        {
+          "type_name": "uint64_t",
+          "name": "fh",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint64_t",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint64_t",
+          "name": "length",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "mode",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "padding",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fuse_in_header",
+      "fields": [
+        {
+          "type_name": "uint32_t",
+          "name": "len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "opcode",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint64_t",
+          "name": "unique",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint64_t",
+          "name": "nodeid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "uid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "gid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "pid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint16_t",
+          "name": "total_extlen",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint16_t",
+          "name": "padding",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fuse_out_header",
+      "fields": [
+        {
+          "type_name": "uint32_t",
+          "name": "len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int32_t",
+          "name": "error",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint64_t",
+          "name": "unique",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fuse_dirent",
+      "fields": [
+        {
+          "type_name": "uint64_t",
+          "name": "ino",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint64_t",
+          "name": "off",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "namelen",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fuse_direntplus",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fuse_notify_inval_inode_out",
+      "fields": [
+        {
+          "type_name": "uint64_t",
+          "name": "ino",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int64_t",
+          "name": "off",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int64_t",
+          "name": "len",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fuse_notify_inval_entry_out",
+      "fields": [
+        {
+          "type_name": "uint64_t",
+          "name": "parent",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "namelen",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fuse_notify_delete_out",
+      "fields": [
+        {
+          "type_name": "uint64_t",
+          "name": "parent",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint64_t",
+          "name": "child",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "namelen",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "padding",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fuse_notify_store_out",
+      "fields": [
+        {
+          "type_name": "uint64_t",
+          "name": "nodeid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint64_t",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "padding",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fuse_notify_retrieve_out",
+      "fields": [
+        {
+          "type_name": "uint64_t",
+          "name": "notify_unique",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint64_t",
+          "name": "nodeid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint64_t",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "padding",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fuse_notify_retrieve_in",
+      "fields": [
+        {
+          "type_name": "uint64_t",
+          "name": "dummy1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint64_t",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "dummy2",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint64_t",
+          "name": "dummy3",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint64_t",
+          "name": "dummy4",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fuse_notify_prune_out",
+      "fields": [
+        {
+          "type_name": "uint32_t",
+          "name": "count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "padding",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint64_t",
+          "name": "spare",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fuse_backing_map",
+      "fields": [
+        {
+          "type_name": "int32_t",
+          "name": "fd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint64_t",
+          "name": "padding",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fuse_lseek_in",
+      "fields": [
+        {
+          "type_name": "uint64_t",
+          "name": "fh",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint64_t",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "whence",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "padding",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fuse_lseek_out",
+      "fields": [
+        {
+          "type_name": "uint64_t",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fuse_copy_file_range_in",
+      "fields": [
+        {
+          "type_name": "uint64_t",
+          "name": "fh_in",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint64_t",
+          "name": "off_in",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint64_t",
+          "name": "nodeid_out",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint64_t",
+          "name": "fh_out",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint64_t",
+          "name": "off_out",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint64_t",
+          "name": "len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint64_t",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fuse_copy_file_range_out",
+      "fields": [
+        {
+          "type_name": "uint64_t",
+          "name": "bytes_copied",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fuse_setupmapping_in",
+      "fields": [
+        {
+          "type_name": "uint64_t",
+          "name": "fh",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint64_t",
+          "name": "foffset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint64_t",
+          "name": "len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint64_t",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint64_t",
+          "name": "moffset",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fuse_removemapping_in",
+      "fields": [
+        {
+          "type_name": "uint32_t",
+          "name": "count",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fuse_removemapping_one",
+      "fields": [
+        {
+          "type_name": "uint64_t",
+          "name": "moffset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint64_t",
+          "name": "len",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fuse_syncfs_in",
+      "fields": [
+        {
+          "type_name": "uint64_t",
+          "name": "padding",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fuse_secctx",
+      "fields": [
+        {
+          "type_name": "uint32_t",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "padding",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fuse_secctx_header",
+      "fields": [
+        {
+          "type_name": "uint32_t",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "nr_secctx",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fuse_ext_header",
+      "fields": [
+        {
+          "type_name": "uint32_t",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fuse_supp_groups",
+      "fields": [
+        {
+          "type_name": "uint32_t",
+          "name": "nr_groups",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fuse_uring_ent_in_out",
+      "fields": [
+        {
+          "type_name": "uint64_t",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint64_t",
+          "name": "commit_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "payload_sz",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint32_t",
+          "name": "padding",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint64_t",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fuse_uring_req_header",
+      "fields": [
+        {
+          "type_name": "char",
+          "name": "in_out",
+          "array_size": "FUSE_URING_IN_OUT_HEADER_SZ",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "op_in",
+          "array_size": "FUSE_URING_OP_IN_OUT_SZ",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fuse_uring_cmd_req",
+      "fields": [
+        {
+          "type_name": "uint64_t",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint64_t",
+          "name": "commit_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint16_t",
+          "name": "qid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "uint8_t",
+          "name": "padding",
+          "array_size": "6",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

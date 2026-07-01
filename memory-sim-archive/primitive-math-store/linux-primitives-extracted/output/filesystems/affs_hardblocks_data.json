@@ -1,0 +1,333 @@
+{
+  "filename": "affs_hardblocks.h",
+  "includes": [
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "IDNAME_RIGIDDISK",
+      "value": "0x5244534B",
+      "comment": "\"RDSK\"",
+      "category": ""
+    },
+    {
+      "name": "IDNAME_PARTITION",
+      "value": "0x50415254",
+      "comment": "\"PART\"",
+      "category": ""
+    },
+    {
+      "name": "RDB_ALLOCATION_LIMIT",
+      "value": "16",
+      "comment": "",
+      "category": "RDB_ALLOCATION"
+    }
+  ],
+  "structs": [
+    {
+      "name": "RigidDiskBlock",
+      "fields": [
+        {
+          "type_name": "__be32",
+          "name": "rdb_ID",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "rdb_SummedLongs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "rdb_ChkSum",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "rdb_HostID",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "rdb_BlockBytes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "rdb_Flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "rdb_BadBlockList",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "rdb_PartitionList",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "rdb_FileSysHeaderList",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "rdb_DriveInit",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "rdb_Reserved1",
+          "array_size": "6",
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "rdb_Cylinders",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "rdb_Sectors",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "rdb_Heads",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "rdb_Interleave",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "rdb_Park",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "rdb_Reserved2",
+          "array_size": "3",
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "rdb_WritePreComp",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "rdb_ReducedWrite",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "rdb_StepRate",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "rdb_Reserved3",
+          "array_size": "5",
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "rdb_RDBBlocksLo",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "rdb_RDBBlocksHi",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "rdb_LoCylinder",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "rdb_HiCylinder",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "rdb_CylBlocks",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "rdb_AutoParkSeconds",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "rdb_HighRDSKBlock",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "rdb_Reserved4",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "rdb_DiskVendor",
+          "array_size": "8",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "rdb_DiskProduct",
+          "array_size": "16",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "rdb_DiskRevision",
+          "array_size": "4",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "rdb_ControllerVendor",
+          "array_size": "8",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "rdb_ControllerProduct",
+          "array_size": "16",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "rdb_ControllerRevision",
+          "array_size": "4",
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "rdb_Reserved5",
+          "array_size": "10",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "PartitionBlock",
+      "fields": [
+        {
+          "type_name": "__be32",
+          "name": "pb_ID",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "pb_SummedLongs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "pb_ChkSum",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "pb_HostID",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "pb_Next",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "pb_Flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "pb_Reserved1",
+          "array_size": "2",
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "pb_DevFlags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "pb_DriveName",
+          "array_size": "32",
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "pb_Reserved2",
+          "array_size": "15",
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "pb_Environment",
+          "array_size": "17",
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "pb_EReserved",
+          "array_size": "15",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

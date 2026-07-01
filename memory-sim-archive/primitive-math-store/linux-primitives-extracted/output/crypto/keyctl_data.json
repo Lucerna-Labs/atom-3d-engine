@@ -1,0 +1,545 @@
+{
+  "filename": "keyctl.h",
+  "includes": [
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "KEY_SPEC_THREAD_KEYRING",
+      "value": "-1",
+      "comment": "- key ID for thread-specific keyring",
+      "category": "KEY_SPEC"
+    },
+    {
+      "name": "KEY_SPEC_PROCESS_KEYRING",
+      "value": "-2",
+      "comment": "- key ID for process-specific keyring",
+      "category": "KEY_SPEC"
+    },
+    {
+      "name": "KEY_SPEC_SESSION_KEYRING",
+      "value": "-3",
+      "comment": "- key ID for session-specific keyring",
+      "category": "KEY_SPEC"
+    },
+    {
+      "name": "KEY_SPEC_USER_KEYRING",
+      "value": "-4",
+      "comment": "- key ID for UID-specific keyring",
+      "category": "KEY_SPEC"
+    },
+    {
+      "name": "KEY_SPEC_USER_SESSION_KEYRING",
+      "value": "-5",
+      "comment": "- key ID for UID-session keyring",
+      "category": "KEY_SPEC"
+    },
+    {
+      "name": "KEY_SPEC_GROUP_KEYRING",
+      "value": "-6",
+      "comment": "- key ID for GID-specific keyring",
+      "category": "KEY_SPEC"
+    },
+    {
+      "name": "KEY_SPEC_REQKEY_AUTH_KEY",
+      "value": "-7",
+      "comment": "- key ID for assumed request_key auth key",
+      "category": "KEY_SPEC"
+    },
+    {
+      "name": "KEY_SPEC_REQUESTOR_KEYRING",
+      "value": "-8",
+      "comment": "- key ID for request_key() dest keyring",
+      "category": "KEY_SPEC"
+    },
+    {
+      "name": "KEY_REQKEY_DEFL_NO_CHANGE",
+      "value": "-1",
+      "comment": "",
+      "category": "KEY_REQKEY"
+    },
+    {
+      "name": "KEY_REQKEY_DEFL_DEFAULT",
+      "value": "0",
+      "comment": "",
+      "category": "KEY_REQKEY"
+    },
+    {
+      "name": "KEY_REQKEY_DEFL_THREAD_KEYRING",
+      "value": "1",
+      "comment": "",
+      "category": "KEY_REQKEY"
+    },
+    {
+      "name": "KEY_REQKEY_DEFL_PROCESS_KEYRING",
+      "value": "2",
+      "comment": "",
+      "category": "KEY_REQKEY"
+    },
+    {
+      "name": "KEY_REQKEY_DEFL_SESSION_KEYRING",
+      "value": "3",
+      "comment": "",
+      "category": "KEY_REQKEY"
+    },
+    {
+      "name": "KEY_REQKEY_DEFL_USER_KEYRING",
+      "value": "4",
+      "comment": "",
+      "category": "KEY_REQKEY"
+    },
+    {
+      "name": "KEY_REQKEY_DEFL_USER_SESSION_KEYRING",
+      "value": "5",
+      "comment": "",
+      "category": "KEY_REQKEY"
+    },
+    {
+      "name": "KEY_REQKEY_DEFL_GROUP_KEYRING",
+      "value": "6",
+      "comment": "",
+      "category": "KEY_REQKEY"
+    },
+    {
+      "name": "KEY_REQKEY_DEFL_REQUESTOR_KEYRING",
+      "value": "7",
+      "comment": "",
+      "category": "KEY_REQKEY"
+    },
+    {
+      "name": "KEYCTL_GET_KEYRING_ID",
+      "value": "0",
+      "comment": "ask for a keyring's ID",
+      "category": "KEYCTL_GET"
+    },
+    {
+      "name": "KEYCTL_JOIN_SESSION_KEYRING",
+      "value": "1",
+      "comment": "join or start named session keyring",
+      "category": "KEYCTL_JOIN"
+    },
+    {
+      "name": "KEYCTL_UPDATE",
+      "value": "2",
+      "comment": "update a key",
+      "category": ""
+    },
+    {
+      "name": "KEYCTL_REVOKE",
+      "value": "3",
+      "comment": "revoke a key",
+      "category": ""
+    },
+    {
+      "name": "KEYCTL_CHOWN",
+      "value": "4",
+      "comment": "set ownership of a key",
+      "category": ""
+    },
+    {
+      "name": "KEYCTL_SETPERM",
+      "value": "5",
+      "comment": "set perms on a key",
+      "category": ""
+    },
+    {
+      "name": "KEYCTL_DESCRIBE",
+      "value": "6",
+      "comment": "describe a key",
+      "category": ""
+    },
+    {
+      "name": "KEYCTL_CLEAR",
+      "value": "7",
+      "comment": "clear contents of a keyring",
+      "category": ""
+    },
+    {
+      "name": "KEYCTL_LINK",
+      "value": "8",
+      "comment": "link a key into a keyring",
+      "category": ""
+    },
+    {
+      "name": "KEYCTL_UNLINK",
+      "value": "9",
+      "comment": "unlink a key from a keyring",
+      "category": ""
+    },
+    {
+      "name": "KEYCTL_SEARCH",
+      "value": "10",
+      "comment": "search for a key in a keyring",
+      "category": ""
+    },
+    {
+      "name": "KEYCTL_READ",
+      "value": "11",
+      "comment": "read a key or keyring's contents",
+      "category": ""
+    },
+    {
+      "name": "KEYCTL_INSTANTIATE",
+      "value": "12",
+      "comment": "instantiate a partially constructed key",
+      "category": ""
+    },
+    {
+      "name": "KEYCTL_NEGATE",
+      "value": "13",
+      "comment": "negate a partially constructed key",
+      "category": ""
+    },
+    {
+      "name": "KEYCTL_SET_REQKEY_KEYRING",
+      "value": "14",
+      "comment": "set default request-key keyring",
+      "category": "KEYCTL_SET"
+    },
+    {
+      "name": "KEYCTL_SET_TIMEOUT",
+      "value": "15",
+      "comment": "set key timeout",
+      "category": "KEYCTL_SET"
+    },
+    {
+      "name": "KEYCTL_ASSUME_AUTHORITY",
+      "value": "16",
+      "comment": "assume request_key() authorisation",
+      "category": "KEYCTL_ASSUME"
+    },
+    {
+      "name": "KEYCTL_GET_SECURITY",
+      "value": "17",
+      "comment": "get key security label",
+      "category": "KEYCTL_GET"
+    },
+    {
+      "name": "KEYCTL_SESSION_TO_PARENT",
+      "value": "18",
+      "comment": "apply session keyring to parent process",
+      "category": "KEYCTL_SESSION"
+    },
+    {
+      "name": "KEYCTL_REJECT",
+      "value": "19",
+      "comment": "reject a partially constructed key",
+      "category": ""
+    },
+    {
+      "name": "KEYCTL_INSTANTIATE_IOV",
+      "value": "20",
+      "comment": "instantiate a partially constructed key",
+      "category": "KEYCTL_INSTANTIATE"
+    },
+    {
+      "name": "KEYCTL_INVALIDATE",
+      "value": "21",
+      "comment": "invalidate a key",
+      "category": ""
+    },
+    {
+      "name": "KEYCTL_GET_PERSISTENT",
+      "value": "22",
+      "comment": "get a user's persistent keyring",
+      "category": "KEYCTL_GET"
+    },
+    {
+      "name": "KEYCTL_DH_COMPUTE",
+      "value": "23",
+      "comment": "Compute Diffie-Hellman values",
+      "category": "KEYCTL_DH"
+    },
+    {
+      "name": "KEYCTL_PKEY_QUERY",
+      "value": "24",
+      "comment": "Query public key parameters",
+      "category": "KEYCTL_PKEY"
+    },
+    {
+      "name": "KEYCTL_PKEY_ENCRYPT",
+      "value": "25",
+      "comment": "Encrypt a blob using a public key",
+      "category": "KEYCTL_PKEY"
+    },
+    {
+      "name": "KEYCTL_PKEY_DECRYPT",
+      "value": "26",
+      "comment": "Decrypt a blob using a public key",
+      "category": "KEYCTL_PKEY"
+    },
+    {
+      "name": "KEYCTL_PKEY_SIGN",
+      "value": "27",
+      "comment": "Create a public key signature",
+      "category": "KEYCTL_PKEY"
+    },
+    {
+      "name": "KEYCTL_PKEY_VERIFY",
+      "value": "28",
+      "comment": "Verify a public key signature",
+      "category": "KEYCTL_PKEY"
+    },
+    {
+      "name": "KEYCTL_RESTRICT_KEYRING",
+      "value": "29",
+      "comment": "Restrict keys allowed to link to a keyring",
+      "category": "KEYCTL_RESTRICT"
+    },
+    {
+      "name": "KEYCTL_MOVE",
+      "value": "30",
+      "comment": "Move keys between keyrings",
+      "category": ""
+    },
+    {
+      "name": "KEYCTL_CAPABILITIES",
+      "value": "31",
+      "comment": "Find capabilities of keyrings subsystem",
+      "category": ""
+    },
+    {
+      "name": "KEYCTL_WATCH_KEY",
+      "value": "32",
+      "comment": "Watch a key or ring of keys for changes",
+      "category": "KEYCTL_WATCH"
+    },
+    {
+      "name": "KEYCTL_SUPPORTS_ENCRYPT",
+      "value": "0x01",
+      "comment": "",
+      "category": "KEYCTL_SUPPORTS"
+    },
+    {
+      "name": "KEYCTL_SUPPORTS_DECRYPT",
+      "value": "0x02",
+      "comment": "",
+      "category": "KEYCTL_SUPPORTS"
+    },
+    {
+      "name": "KEYCTL_SUPPORTS_SIGN",
+      "value": "0x04",
+      "comment": "",
+      "category": "KEYCTL_SUPPORTS"
+    },
+    {
+      "name": "KEYCTL_SUPPORTS_VERIFY",
+      "value": "0x08",
+      "comment": "",
+      "category": "KEYCTL_SUPPORTS"
+    },
+    {
+      "name": "KEYCTL_MOVE_EXCL",
+      "value": "0x00000001",
+      "comment": "Do not displace from the to-keyring",
+      "category": "KEYCTL_MOVE"
+    },
+    {
+      "name": "KEYCTL_CAPS0_CAPABILITIES",
+      "value": "0x01",
+      "comment": "KEYCTL_CAPABILITIES supported",
+      "category": ""
+    },
+    {
+      "name": "KEYCTL_CAPS0_PERSISTENT_KEYRINGS",
+      "value": "0x02",
+      "comment": "Persistent keyrings enabled",
+      "category": ""
+    },
+    {
+      "name": "KEYCTL_CAPS0_DIFFIE_HELLMAN",
+      "value": "0x04",
+      "comment": "Diffie-Hellman computation enabled",
+      "category": ""
+    },
+    {
+      "name": "KEYCTL_CAPS0_PUBLIC_KEY",
+      "value": "0x08",
+      "comment": "Public key ops enabled",
+      "category": ""
+    },
+    {
+      "name": "KEYCTL_CAPS0_BIG_KEY",
+      "value": "0x10",
+      "comment": "big_key-type enabled",
+      "category": ""
+    },
+    {
+      "name": "KEYCTL_CAPS0_INVALIDATE",
+      "value": "0x20",
+      "comment": "KEYCTL_INVALIDATE supported",
+      "category": ""
+    },
+    {
+      "name": "KEYCTL_CAPS0_RESTRICT_KEYRING",
+      "value": "0x40",
+      "comment": "KEYCTL_RESTRICT_KEYRING supported",
+      "category": ""
+    },
+    {
+      "name": "KEYCTL_CAPS0_MOVE",
+      "value": "0x80",
+      "comment": "KEYCTL_MOVE supported",
+      "category": ""
+    },
+    {
+      "name": "KEYCTL_CAPS1_NS_KEYRING_NAME",
+      "value": "0x01",
+      "comment": "Keyring names are per-user_namespace",
+      "category": ""
+    },
+    {
+      "name": "KEYCTL_CAPS1_NS_KEY_TAG",
+      "value": "0x02",
+      "comment": "Key indexing can include a namespace tag",
+      "category": ""
+    },
+    {
+      "name": "KEYCTL_CAPS1_NOTIFICATIONS",
+      "value": "0x04",
+      "comment": "Keys generate watchable notifications",
+      "category": ""
+    }
+  ],
+  "structs": [
+    {
+      "name": "keyctl_dh_params",
+      "fields": [
+        {
+          "type_name": "__s32",
+          "name": "private",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "priv",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "prime",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "base",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "keyctl_kdf_params",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "otherinfolen",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "__spare",
+          "array_size": "8",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "keyctl_pkey_query",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "supported_ops",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "key_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "max_data_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "max_sig_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "max_enc_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "max_dec_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "__spare",
+          "array_size": "10",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "keyctl_pkey_params",
+      "fields": [
+        {
+          "type_name": "__s32",
+          "name": "key_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "in_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "out_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "in2_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "__spare",
+          "array_size": "7",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

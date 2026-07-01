@@ -1,0 +1,665 @@
+{
+  "filename": "mtio.h",
+  "includes": [
+    "linux/types.h",
+    "linux/ioctl.h"
+  ],
+  "defines": [
+    {
+      "name": "MTRESET",
+      "value": "0",
+      "comment": "+reset drive in case of problems",
+      "category": ""
+    },
+    {
+      "name": "MTFSF",
+      "value": "1\t/* forward space over FileMark,",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "MTBSF",
+      "value": "2",
+      "comment": "backward space FileMark (position before FM)",
+      "category": ""
+    },
+    {
+      "name": "MTFSR",
+      "value": "3",
+      "comment": "forward space record",
+      "category": ""
+    },
+    {
+      "name": "MTBSR",
+      "value": "4",
+      "comment": "backward space record",
+      "category": ""
+    },
+    {
+      "name": "MTWEOF",
+      "value": "5",
+      "comment": "write an end-of-file record (mark)",
+      "category": ""
+    },
+    {
+      "name": "MTREW",
+      "value": "6",
+      "comment": "rewind",
+      "category": ""
+    },
+    {
+      "name": "MTOFFL",
+      "value": "7",
+      "comment": "rewind and put the drive offline (eject?)",
+      "category": ""
+    },
+    {
+      "name": "MTNOP",
+      "value": "8",
+      "comment": "no op, set status only (read with MTIOCGET)",
+      "category": ""
+    },
+    {
+      "name": "MTRETEN",
+      "value": "9",
+      "comment": "retension tape",
+      "category": ""
+    },
+    {
+      "name": "MTBSFM",
+      "value": "10",
+      "comment": "+backward space FileMark, position at FM",
+      "category": ""
+    },
+    {
+      "name": "MTFSFM",
+      "value": "11",
+      "comment": "+forward space FileMark, position at FM",
+      "category": ""
+    },
+    {
+      "name": "MTEOM",
+      "value": "12\t/* goto end of recorded media (for appending files).",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "MTERASE",
+      "value": "13",
+      "comment": "erase tape -- be careful!",
+      "category": ""
+    },
+    {
+      "name": "MTRAS1",
+      "value": "14",
+      "comment": "run self test 1 (nondestructive)",
+      "category": ""
+    },
+    {
+      "name": "MTRAS2",
+      "value": "15",
+      "comment": "run self test 2 (destructive)",
+      "category": ""
+    },
+    {
+      "name": "MTRAS3",
+      "value": "16",
+      "comment": "reserved for self test 3",
+      "category": ""
+    },
+    {
+      "name": "MTSETBLK",
+      "value": "20",
+      "comment": "set block length (SCSI)",
+      "category": ""
+    },
+    {
+      "name": "MTSETDENSITY",
+      "value": "21",
+      "comment": "set tape density (SCSI)",
+      "category": ""
+    },
+    {
+      "name": "MTSEEK",
+      "value": "22",
+      "comment": "seek to block (Tandberg, etc.)",
+      "category": ""
+    },
+    {
+      "name": "MTTELL",
+      "value": "23",
+      "comment": "tell block (Tandberg, etc.)",
+      "category": ""
+    },
+    {
+      "name": "MTSETDRVBUFFER",
+      "value": "24",
+      "comment": "set the drive buffering according to SCSI-2",
+      "category": ""
+    },
+    {
+      "name": "MTFSS",
+      "value": "25",
+      "comment": "space forward over setmarks",
+      "category": ""
+    },
+    {
+      "name": "MTBSS",
+      "value": "26",
+      "comment": "space backward over setmarks",
+      "category": ""
+    },
+    {
+      "name": "MTWSM",
+      "value": "27",
+      "comment": "write setmarks",
+      "category": ""
+    },
+    {
+      "name": "MTLOCK",
+      "value": "28",
+      "comment": "lock the drive door",
+      "category": ""
+    },
+    {
+      "name": "MTUNLOCK",
+      "value": "29",
+      "comment": "unlock the drive door",
+      "category": ""
+    },
+    {
+      "name": "MTLOAD",
+      "value": "30",
+      "comment": "execute the SCSI load command",
+      "category": ""
+    },
+    {
+      "name": "MTUNLOAD",
+      "value": "31",
+      "comment": "execute the SCSI unload command",
+      "category": ""
+    },
+    {
+      "name": "MTCOMPRESSION",
+      "value": "32",
+      "comment": "control compression with SCSI mode page 15",
+      "category": ""
+    },
+    {
+      "name": "MTSETPART",
+      "value": "33",
+      "comment": "Change the active tape partition",
+      "category": ""
+    },
+    {
+      "name": "MTMKPART",
+      "value": "34",
+      "comment": "Format the tape with one or two partitions",
+      "category": ""
+    },
+    {
+      "name": "MTWEOFI",
+      "value": "35",
+      "comment": "write an end-of-file record (mark) in immediate mode",
+      "category": ""
+    },
+    {
+      "name": "MT_ISUNKNOWN",
+      "value": "0x01",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "MT_ISQIC02",
+      "value": "0x02",
+      "comment": "Generic QIC-02 tape streamer",
+      "category": ""
+    },
+    {
+      "name": "MT_ISWT5150",
+      "value": "0x03",
+      "comment": "Wangtek 5150EQ, QIC-150, QIC-02",
+      "category": ""
+    },
+    {
+      "name": "MT_ISARCHIVE_5945L2",
+      "value": "0x04",
+      "comment": "Archive 5945L-2, QIC-24, QIC-02?",
+      "category": "MT_ISARCHIVE"
+    },
+    {
+      "name": "MT_ISCMSJ500",
+      "value": "0x05",
+      "comment": "CMS Jumbo 500 (QIC-02?)",
+      "category": ""
+    },
+    {
+      "name": "MT_ISTDC3610",
+      "value": "0x06",
+      "comment": "Tandberg 6310, QIC-24",
+      "category": ""
+    },
+    {
+      "name": "MT_ISARCHIVE_VP60I",
+      "value": "0x07",
+      "comment": "Archive VP60i, QIC-02",
+      "category": "MT_ISARCHIVE"
+    },
+    {
+      "name": "MT_ISARCHIVE_2150L",
+      "value": "0x08",
+      "comment": "Archive Viper 2150L",
+      "category": "MT_ISARCHIVE"
+    },
+    {
+      "name": "MT_ISARCHIVE_2060L",
+      "value": "0x09",
+      "comment": "Archive Viper 2060L",
+      "category": "MT_ISARCHIVE"
+    },
+    {
+      "name": "MT_ISARCHIVESC499",
+      "value": "0x0A",
+      "comment": "Archive SC-499 QIC-36 controller",
+      "category": ""
+    },
+    {
+      "name": "MT_ISQIC02_ALL_FEATURES",
+      "value": "0x0F",
+      "comment": "Generic QIC-02 with all features",
+      "category": ""
+    },
+    {
+      "name": "MT_ISWT5099EEN24",
+      "value": "0x11",
+      "comment": "Wangtek 5099-een24, 60MB, QIC-24",
+      "category": ""
+    },
+    {
+      "name": "MT_ISTEAC_MT2ST",
+      "value": "0x12",
+      "comment": "Teac MT-2ST 155mb drive, Teac DC-1 card (Wangtek type)",
+      "category": "MT_ISTEAC"
+    },
+    {
+      "name": "MT_ISEVEREX_FT40A",
+      "value": "0x32",
+      "comment": "Everex FT40A (QIC-40)",
+      "category": "MT_ISEVEREX"
+    },
+    {
+      "name": "MT_ISDDS1",
+      "value": "0x51",
+      "comment": "DDS device without partitions",
+      "category": ""
+    },
+    {
+      "name": "MT_ISDDS2",
+      "value": "0x52",
+      "comment": "DDS device with partitions",
+      "category": ""
+    },
+    {
+      "name": "MT_ISONSTREAM_SC",
+      "value": "0x61   /* OnStream SCSI tape drives (SC-x0)",
+      "comment": "",
+      "category": "MT_ISONSTREAM"
+    },
+    {
+      "name": "MT_ISSCSI1",
+      "value": "0x71",
+      "comment": "Generic ANSI SCSI-1 tape unit",
+      "category": ""
+    },
+    {
+      "name": "MT_ISSCSI2",
+      "value": "0x72",
+      "comment": "Generic ANSI SCSI-2 tape unit",
+      "category": ""
+    },
+    {
+      "name": "MT_ISFTAPE_UNKNOWN",
+      "value": "0x800000",
+      "comment": "obsolete",
+      "category": "MT_ISFTAPE"
+    },
+    {
+      "name": "MT_ISFTAPE_FLAG",
+      "value": "0x800000",
+      "comment": "",
+      "category": "MT_ISFTAPE"
+    },
+    {
+      "name": "MTIOCTOP",
+      "value": "_IOW('m', 1, struct mtop)",
+      "comment": "do a mag tape op",
+      "category": ""
+    },
+    {
+      "name": "MTIOCGET",
+      "value": "_IOR('m', 2, struct mtget)",
+      "comment": "get tape status",
+      "category": ""
+    },
+    {
+      "name": "MTIOCPOS",
+      "value": "_IOR('m', 3, struct mtpos)",
+      "comment": "get tape position",
+      "category": ""
+    },
+    {
+      "name": "MT_ST_BLKSIZE_SHIFT",
+      "value": "0",
+      "comment": "",
+      "category": "MT_ST"
+    },
+    {
+      "name": "MT_ST_BLKSIZE_MASK",
+      "value": "0xffffff",
+      "comment": "",
+      "category": "MT_ST"
+    },
+    {
+      "name": "MT_ST_DENSITY_SHIFT",
+      "value": "24",
+      "comment": "",
+      "category": "MT_ST"
+    },
+    {
+      "name": "MT_ST_DENSITY_MASK",
+      "value": "0xff000000",
+      "comment": "",
+      "category": "MT_ST"
+    },
+    {
+      "name": "MT_ST_SOFTERR_SHIFT",
+      "value": "0",
+      "comment": "",
+      "category": "MT_ST"
+    },
+    {
+      "name": "MT_ST_SOFTERR_MASK",
+      "value": "0xffff",
+      "comment": "",
+      "category": "MT_ST"
+    },
+    {
+      "name": "MT_ST_OPTIONS",
+      "value": "0xf0000000",
+      "comment": "",
+      "category": "MT_ST"
+    },
+    {
+      "name": "MT_ST_BOOLEANS",
+      "value": "0x10000000",
+      "comment": "",
+      "category": "MT_ST"
+    },
+    {
+      "name": "MT_ST_SETBOOLEANS",
+      "value": "0x30000000",
+      "comment": "",
+      "category": "MT_ST"
+    },
+    {
+      "name": "MT_ST_CLEARBOOLEANS",
+      "value": "0x40000000",
+      "comment": "",
+      "category": "MT_ST"
+    },
+    {
+      "name": "MT_ST_WRITE_THRESHOLD",
+      "value": "0x20000000",
+      "comment": "",
+      "category": "MT_ST"
+    },
+    {
+      "name": "MT_ST_DEF_BLKSIZE",
+      "value": "0x50000000",
+      "comment": "",
+      "category": "MT_ST"
+    },
+    {
+      "name": "MT_ST_DEF_OPTIONS",
+      "value": "0x60000000",
+      "comment": "",
+      "category": "MT_ST"
+    },
+    {
+      "name": "MT_ST_TIMEOUTS",
+      "value": "0x70000000",
+      "comment": "",
+      "category": "MT_ST"
+    },
+    {
+      "name": "MT_ST_SET_TIMEOUT",
+      "value": "(MT_ST_TIMEOUTS | 0x000000)",
+      "comment": "",
+      "category": "MT_ST"
+    },
+    {
+      "name": "MT_ST_SET_LONG_TIMEOUT",
+      "value": "(MT_ST_TIMEOUTS | 0x100000)",
+      "comment": "",
+      "category": "MT_ST"
+    },
+    {
+      "name": "MT_ST_SET_CLN",
+      "value": "0x80000000",
+      "comment": "",
+      "category": "MT_ST"
+    },
+    {
+      "name": "MT_ST_BUFFER_WRITES",
+      "value": "0x1",
+      "comment": "",
+      "category": "MT_ST"
+    },
+    {
+      "name": "MT_ST_ASYNC_WRITES",
+      "value": "0x2",
+      "comment": "",
+      "category": "MT_ST"
+    },
+    {
+      "name": "MT_ST_READ_AHEAD",
+      "value": "0x4",
+      "comment": "",
+      "category": "MT_ST"
+    },
+    {
+      "name": "MT_ST_DEBUGGING",
+      "value": "0x8",
+      "comment": "",
+      "category": "MT_ST"
+    },
+    {
+      "name": "MT_ST_TWO_FM",
+      "value": "0x10",
+      "comment": "",
+      "category": "MT_ST"
+    },
+    {
+      "name": "MT_ST_FAST_MTEOM",
+      "value": "0x20",
+      "comment": "",
+      "category": "MT_ST"
+    },
+    {
+      "name": "MT_ST_AUTO_LOCK",
+      "value": "0x40",
+      "comment": "",
+      "category": "MT_ST"
+    },
+    {
+      "name": "MT_ST_DEF_WRITES",
+      "value": "0x80",
+      "comment": "",
+      "category": "MT_ST"
+    },
+    {
+      "name": "MT_ST_CAN_BSR",
+      "value": "0x100",
+      "comment": "",
+      "category": "MT_ST"
+    },
+    {
+      "name": "MT_ST_NO_BLKLIMS",
+      "value": "0x200",
+      "comment": "",
+      "category": "MT_ST"
+    },
+    {
+      "name": "MT_ST_CAN_PARTITIONS",
+      "value": "0x400",
+      "comment": "",
+      "category": "MT_ST"
+    },
+    {
+      "name": "MT_ST_SCSI2LOGICAL",
+      "value": "0x800",
+      "comment": "",
+      "category": "MT_ST"
+    },
+    {
+      "name": "MT_ST_SYSV",
+      "value": "0x1000",
+      "comment": "",
+      "category": "MT_ST"
+    },
+    {
+      "name": "MT_ST_NOWAIT",
+      "value": "0x2000",
+      "comment": "",
+      "category": "MT_ST"
+    },
+    {
+      "name": "MT_ST_SILI",
+      "value": "0x4000",
+      "comment": "",
+      "category": "MT_ST"
+    },
+    {
+      "name": "MT_ST_NOWAIT_EOF",
+      "value": "0x8000",
+      "comment": "",
+      "category": "MT_ST"
+    },
+    {
+      "name": "MT_ST_CLEAR_DEFAULT",
+      "value": "0xfffff",
+      "comment": "",
+      "category": "MT_ST"
+    },
+    {
+      "name": "MT_ST_DEF_DENSITY",
+      "value": "(MT_ST_DEF_OPTIONS | 0x100000)",
+      "comment": "",
+      "category": "MT_ST"
+    },
+    {
+      "name": "MT_ST_DEF_COMPRESSION",
+      "value": "(MT_ST_DEF_OPTIONS | 0x200000)",
+      "comment": "",
+      "category": "MT_ST"
+    },
+    {
+      "name": "MT_ST_DEF_DRVBUFFER",
+      "value": "(MT_ST_DEF_OPTIONS | 0x300000)",
+      "comment": "",
+      "category": "MT_ST"
+    },
+    {
+      "name": "MT_ST_HPLOADER_OFFSET",
+      "value": "10000",
+      "comment": "",
+      "category": "MT_ST"
+    }
+  ],
+  "structs": [
+    {
+      "name": "mtop",
+      "fields": [
+        {
+          "type_name": "short",
+          "name": "mt_op",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "mt_count",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "mtget",
+      "fields": [
+        {
+          "type_name": "long",
+          "name": "mt_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "long",
+          "name": "mt_resid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "long",
+          "name": "mt_dsreg",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "long",
+          "name": "mt_gstat",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "long",
+          "name": "mt_erreg",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__kernel_daddr_t",
+          "name": "mt_fileno",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__kernel_daddr_t",
+          "name": "mt_blkno",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "mtpos",
+      "fields": [
+        {
+          "type_name": "long",
+          "name": "mt_blkno",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

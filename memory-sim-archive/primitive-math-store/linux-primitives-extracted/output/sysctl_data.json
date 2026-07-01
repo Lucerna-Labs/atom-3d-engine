@@ -1,0 +1,40 @@
+{
+  "filename": "sysctl.h",
+  "includes": [
+    "linux/const.h",
+    "linux/types.h",
+    "linux/compiler.h"
+  ],
+  "defines": [
+    {
+      "name": "CTL_MAXNAME",
+      "value": "10\t\t/* how many path components do we allow in a",
+      "comment": "",
+      "category": ""
+    }
+  ],
+  "structs": [
+    {
+      "name": "__sysctl_args",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "nlen",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "size_t",
+          "name": "newlen",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

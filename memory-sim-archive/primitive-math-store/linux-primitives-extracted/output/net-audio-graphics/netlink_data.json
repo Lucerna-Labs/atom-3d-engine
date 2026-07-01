@@ -1,0 +1,325 @@
+{
+  "filename": "netlink.h",
+  "includes": [
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "CAN_CTRLMODE_LOOPBACK",
+      "value": "0x01",
+      "comment": "Loopback mode",
+      "category": "CAN_CTRLMODE"
+    },
+    {
+      "name": "CAN_CTRLMODE_LISTENONLY",
+      "value": "0x02",
+      "comment": "Listen-only mode",
+      "category": "CAN_CTRLMODE"
+    },
+    {
+      "name": "CAN_CTRLMODE_3_SAMPLES",
+      "value": "0x04",
+      "comment": "Triple sampling mode",
+      "category": "CAN_CTRLMODE"
+    },
+    {
+      "name": "CAN_CTRLMODE_ONE_SHOT",
+      "value": "0x08",
+      "comment": "One-Shot mode",
+      "category": "CAN_CTRLMODE"
+    },
+    {
+      "name": "CAN_CTRLMODE_BERR_REPORTING",
+      "value": "0x10",
+      "comment": "Bus-error reporting",
+      "category": "CAN_CTRLMODE"
+    },
+    {
+      "name": "CAN_CTRLMODE_FD",
+      "value": "0x20",
+      "comment": "CAN FD mode",
+      "category": "CAN_CTRLMODE"
+    },
+    {
+      "name": "CAN_CTRLMODE_PRESUME_ACK",
+      "value": "0x40",
+      "comment": "Ignore missing CAN ACKs",
+      "category": "CAN_CTRLMODE"
+    },
+    {
+      "name": "CAN_CTRLMODE_FD_NON_ISO",
+      "value": "0x80",
+      "comment": "CAN FD in non-ISO mode",
+      "category": "CAN_CTRLMODE"
+    },
+    {
+      "name": "CAN_CTRLMODE_CC_LEN8_DLC",
+      "value": "0x100",
+      "comment": "Classic CAN DLC option",
+      "category": "CAN_CTRLMODE"
+    },
+    {
+      "name": "CAN_CTRLMODE_TDC_AUTO",
+      "value": "0x200",
+      "comment": "FD transceiver automatically calculates TDCV",
+      "category": "CAN_CTRLMODE"
+    },
+    {
+      "name": "CAN_CTRLMODE_TDC_MANUAL",
+      "value": "0x400",
+      "comment": "FD TDCV is manually set up by user",
+      "category": "CAN_CTRLMODE"
+    },
+    {
+      "name": "CAN_CTRLMODE_RESTRICTED",
+      "value": "0x800",
+      "comment": "Restricted operation mode",
+      "category": "CAN_CTRLMODE"
+    },
+    {
+      "name": "CAN_CTRLMODE_XL",
+      "value": "0x1000",
+      "comment": "CAN XL mode",
+      "category": "CAN_CTRLMODE"
+    },
+    {
+      "name": "CAN_CTRLMODE_XL_TDC_AUTO",
+      "value": "0x2000",
+      "comment": "XL transceiver automatically calculates TDCV",
+      "category": "CAN_CTRLMODE"
+    },
+    {
+      "name": "CAN_CTRLMODE_XL_TDC_MANUAL",
+      "value": "0x4000",
+      "comment": "XL TDCV is manually set up by user",
+      "category": "CAN_CTRLMODE"
+    },
+    {
+      "name": "CAN_CTRLMODE_XL_TMS",
+      "value": "0x8000",
+      "comment": "Transceiver Mode Switching",
+      "category": "CAN_CTRLMODE"
+    },
+    {
+      "name": "CAN_TERMINATION_DISABLED",
+      "value": "0",
+      "comment": "",
+      "category": "CAN_TERMINATION"
+    }
+  ],
+  "structs": [
+    {
+      "name": "can_bittiming",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "bitrate",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "sample_point",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tq",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "prop_seg",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "phase_seg1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "phase_seg2",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "sjw",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "brp",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "can_bittiming_const",
+      "fields": [
+        {
+          "type_name": "char",
+          "name": "name",
+          "array_size": "16",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tseg1_min",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tseg1_max",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tseg2_min",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tseg2_max",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "sjw_max",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "brp_min",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "brp_max",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "brp_inc",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "can_clock",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "freq",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "can_berr_counter",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "txerr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "rxerr",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "can_ctrlmode",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "mask",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "can_device_stats",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "bus_error",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "error_warning",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "error_passive",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "bus_off",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "arbitration_lost",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "restarts",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

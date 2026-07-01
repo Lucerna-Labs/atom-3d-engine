@@ -1,0 +1,58 @@
+{
+  "filename": "hid.h",
+  "includes": [],
+  "defines": [
+    {
+      "name": "USB_INTERFACE_CLASS_HID",
+      "value": "3",
+      "comment": "",
+      "category": "USB_INTERFACE"
+    },
+    {
+      "name": "USB_INTERFACE_SUBCLASS_BOOT",
+      "value": "1",
+      "comment": "",
+      "category": "USB_INTERFACE"
+    },
+    {
+      "name": "USB_INTERFACE_PROTOCOL_KEYBOARD",
+      "value": "1",
+      "comment": "",
+      "category": "USB_INTERFACE"
+    },
+    {
+      "name": "USB_INTERFACE_PROTOCOL_MOUSE",
+      "value": "2",
+      "comment": "",
+      "category": "USB_INTERFACE"
+    },
+    {
+      "name": "HID_DT_HID",
+      "value": "(USB_TYPE_CLASS | 0x01)",
+      "comment": "",
+      "category": "HID_DT"
+    },
+    {
+      "name": "HID_DT_REPORT",
+      "value": "(USB_TYPE_CLASS | 0x02)",
+      "comment": "",
+      "category": "HID_DT"
+    },
+    {
+      "name": "HID_DT_PHYSICAL",
+      "value": "(USB_TYPE_CLASS | 0x03)",
+      "comment": "",
+      "category": "HID_DT"
+    },
+    {
+      "name": "HID_MAX_DESCRIPTOR_SIZE",
+      "value": "4096",
+      "comment": "",
+      "category": "HID_MAX"
+    }
+  ],
+  "structs": [],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

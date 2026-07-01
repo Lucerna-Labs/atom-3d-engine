@@ -1,0 +1,24 @@
+{
+  "name": "structural_primitive_lora_v0_2",
+  "created": "2026-06-05",
+  "purpose": "Cleaned structural primitive dataset for hybrid/gated LoRA training.",
+  "source": "C:\\Projects\\small-model-memory-lab\\data\\structural_primitive_lora_v0_1",
+  "sft_example_count": 360,
+  "train_count": 320,
+  "validation_count": 40,
+  "changes_from_v0_1": [
+    "kept task_solution, compact_task_solution, and repair_solution substrate",
+    "reduced long memory recall/application rows",
+    "added explicit gate open/close examples",
+    "added web association repair examples",
+    "added carrier/no-drift examples",
+    "added anti-echo clean-stop examples",
+    "responses end with final-answer or stop behavior and avoid second task continuations"
+  ],
+  "target_adapter": "balanced gated + web + carrier LoRA",
+  "files": {
+    "train_jsonl": "C:\\Projects\\small-model-memory-lab\\data\\structural_primitive_lora_v0_2\\train.jsonl",
+    "validation_jsonl": "C:\\Projects\\small-model-memory-lab\\data\\structural_primitive_lora_v0_2\\validation.jsonl",
+    "preview": "C:\\Projects\\small-model-memory-lab\\data\\structural_primitive_lora_v0_2\\preview.json"
+  }
+}

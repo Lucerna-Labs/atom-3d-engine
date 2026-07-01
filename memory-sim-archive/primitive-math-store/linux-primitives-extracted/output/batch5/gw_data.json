@@ -1,0 +1,265 @@
+{
+  "filename": "gw.h",
+  "includes": [
+    "linux/types.h",
+    "linux/can.h"
+  ],
+  "defines": [
+    {
+      "name": "CGW_TYPE_MAX",
+      "value": "(__CGW_TYPE_MAX - 1)",
+      "comment": "",
+      "category": "CGW_TYPE"
+    },
+    {
+      "name": "CGW_MAX",
+      "value": "(__CGW_MAX - 1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "CGW_FLAGS_CAN_ECHO",
+      "value": "0x01",
+      "comment": "",
+      "category": "CGW_FLAGS"
+    },
+    {
+      "name": "CGW_FLAGS_CAN_SRC_TSTAMP",
+      "value": "0x02",
+      "comment": "",
+      "category": "CGW_FLAGS"
+    },
+    {
+      "name": "CGW_FLAGS_CAN_IIF_TX_OK",
+      "value": "0x04",
+      "comment": "",
+      "category": "CGW_FLAGS"
+    },
+    {
+      "name": "CGW_FLAGS_CAN_FD",
+      "value": "0x08",
+      "comment": "",
+      "category": "CGW_FLAGS"
+    },
+    {
+      "name": "CGW_MOD_FUNCS",
+      "value": "4",
+      "comment": "AND OR XOR SET",
+      "category": "CGW_MOD"
+    },
+    {
+      "name": "CGW_MOD_ID",
+      "value": "0x01",
+      "comment": "",
+      "category": "CGW_MOD"
+    },
+    {
+      "name": "CGW_MOD_DLC",
+      "value": "0x02",
+      "comment": "Classical CAN data length code",
+      "category": "CGW_MOD"
+    },
+    {
+      "name": "CGW_MOD_LEN",
+      "value": "CGW_MOD_DLC",
+      "comment": "CAN FD (plain) data length",
+      "category": "CGW_MOD"
+    },
+    {
+      "name": "CGW_MOD_DATA",
+      "value": "0x04",
+      "comment": "",
+      "category": "CGW_MOD"
+    },
+    {
+      "name": "CGW_MOD_FLAGS",
+      "value": "0x08",
+      "comment": "CAN FD flags",
+      "category": "CGW_MOD"
+    },
+    {
+      "name": "CGW_FRAME_MODS",
+      "value": "4",
+      "comment": "ID DLC/LEN DATA FLAGS",
+      "category": "CGW_FRAME"
+    },
+    {
+      "name": "MAX_MODFUNCTIONS",
+      "value": "(CGW_MOD_FUNCS * CGW_FRAME_MODS)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "CGW_MODATTR_LEN",
+      "value": "sizeof(struct cgw_frame_mod)",
+      "comment": "",
+      "category": "CGW_MODATTR"
+    },
+    {
+      "name": "CGW_FDMODATTR_LEN",
+      "value": "sizeof(struct cgw_fdframe_mod)",
+      "comment": "",
+      "category": "CGW_FDMODATTR"
+    },
+    {
+      "name": "CGW_CS_XOR_LEN",
+      "value": "sizeof(struct cgw_csum_xor)",
+      "comment": "",
+      "category": "CGW_CS"
+    },
+    {
+      "name": "CGW_CS_CRC8_LEN",
+      "value": "sizeof(struct cgw_csum_crc8)",
+      "comment": "",
+      "category": "CGW_CS"
+    },
+    {
+      "name": "CGW_CRC8PRF_MAX",
+      "value": "(__CGW_CRC8PRF_MAX - 1)",
+      "comment": "",
+      "category": ""
+    }
+  ],
+  "structs": [
+    {
+      "name": "rtcanmsg",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "can_family",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "gwtype",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "cgw_frame_mod",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "modtype",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "cgw_fdframe_mod",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "modtype",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "cgw_csum_xor",
+      "fields": [
+        {
+          "type_name": "__s8",
+          "name": "from_idx",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s8",
+          "name": "to_idx",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s8",
+          "name": "result_idx",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "init_xor_val",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "cgw_csum_crc8",
+      "fields": [
+        {
+          "type_name": "__s8",
+          "name": "from_idx",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s8",
+          "name": "to_idx",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s8",
+          "name": "result_idx",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "init_crc_val",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "final_xor_val",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "crctab",
+          "array_size": "256",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "profile",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "profile_data",
+          "array_size": "20",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

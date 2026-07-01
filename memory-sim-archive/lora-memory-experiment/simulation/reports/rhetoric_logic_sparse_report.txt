@@ -1,0 +1,58 @@
+======================================================================
+SIMULATION REPORT: rhetoric_logic_sparse
+======================================================================
+
+Domains: rhetoric, logic
+Total memories: 26
+Total behaviors: 13
+Uncovered behaviors: 0
+Echo chains: 4
+Isolated memories: 17
+Echo connectivity: 34.6%
+Cross-domain connections: 2
+
+--- OVERALL SCORE: 0.869 ---
+
+--- PRESSURE PASS RATES ---
+       low: 100.0%
+    medium: 100.0%
+      high: 92.3%
+
+--- BEHAVIOR COVERAGE ---
+  ✓ L-001: Necessary vs Sufficient (4 memories)
+  ✓ L-002: Counterexample Construction (4 memories) [LB] echo:2→2
+  ✓ L-003: Chain Validation (3 memories)
+  ✓ L-004: Scope Recognition (4 memories) [LB] echo:2→2
+  ✓ L-005: Conditional Reasoning (3 memories)
+  ✓ L-006: Hidden Assumption Extraction (4 memories)
+  ✓ R-001: Claim Identification (4 memories) echo:2→1
+  ✓ R-002: Evidence Evaluation (4 memories) echo:2→1
+  ✓ R-003: Warrant Detection (5 memories) echo:1→1
+  ✓ R-004: Fallacy Recognition (2 memories)
+  ✓ R-005: Kairos Detection (4 memories) [LB] echo:0→1
+  ✓ R-006: Enthymeme Reconstruction (4 memories) echo:1→1
+  ✓ R-007: Audience Awareness (4 memories) [LB] echo:0→1
+
+--- ECHO CHAINS ---
+  chain_0: LOG-016 → LOG-021 → RHE-000
+    Domains: logic, rhetoric
+    Behaviors: L-004, L-002, R-001, R-002
+    Strength: 1.00
+  chain_1: RHE-002 → RHE-003
+    Domains: rhetoric
+    Behaviors: R-001, R-002
+    Strength: 1.00
+  chain_2: RHE-005 → RHE-011
+    Domains: rhetoric
+    Behaviors: R-003, R-006
+    Strength: 1.00
+  chain_3: LOG-020 → RHE-013
+    Domains: logic, rhetoric
+    Behaviors: R-007, L-004, L-002, R-005
+    Strength: 1.00
+
+--- PRESSURE FAILURES (1) ---
+  S-011     high Fallacy Recognition: conf=0.43 deg=0.40 (rhetoric)
+    Coverage: 2 memories, load_bearing: False, echoes: False
+
+======================================================================

@@ -1,0 +1,4 @@
+﻿1. **Correlate timing with logs**: Match the crash timestamps from the web app with the server logs to identify if warnings precede the failure; acknowledge that "no clear fatal line" suggests a silent exception or resource leak.
+2. **Enable detailed tracing**: Temporarily increase log verbosity (e.g., switch from `WARN` to `DEBUG` or enable stack traces) to capture the exact point of failure, noting that this may require a quick rollback if it impacts performance.
+3. **Review recent deployment artifacts**: Check the specific code changes or dependency updates from the recent deploy that coincided with the crash, as intermittent issues often stem from new logic paths or environment mismatches.
+4. **Execute a targeted test**: Reproduce the crash in a staging environment using the exact steps that triggered it in production; if reproduction fails, proceed to a full rollback as the safest

@@ -1,0 +1,396 @@
+{
+  "filename": "pmu.h",
+  "includes": [
+    "linux/ioctl.h"
+  ],
+  "defines": [
+    {
+      "name": "PMU_DRIVER_VERSION",
+      "value": "2",
+      "comment": "",
+      "category": "PMU_DRIVER"
+    },
+    {
+      "name": "PMU_POWER_CTRL0",
+      "value": "0x10",
+      "comment": "control power of some devices",
+      "category": "PMU_POWER"
+    },
+    {
+      "name": "PMU_POWER_CTRL",
+      "value": "0x11",
+      "comment": "control power of some devices",
+      "category": "PMU_POWER"
+    },
+    {
+      "name": "PMU_ADB_CMD",
+      "value": "0x20",
+      "comment": "send ADB packet",
+      "category": "PMU_ADB"
+    },
+    {
+      "name": "PMU_ADB_POLL_OFF",
+      "value": "0x21",
+      "comment": "disable ADB auto-poll",
+      "category": "PMU_ADB"
+    },
+    {
+      "name": "PMU_WRITE_XPRAM",
+      "value": "0x32",
+      "comment": "write eXtended Parameter RAM",
+      "category": "PMU_WRITE"
+    },
+    {
+      "name": "PMU_WRITE_NVRAM",
+      "value": "0x33",
+      "comment": "write non-volatile RAM",
+      "category": "PMU_WRITE"
+    },
+    {
+      "name": "PMU_READ_XPRAM",
+      "value": "0x3a",
+      "comment": "read eXtended Parameter RAM",
+      "category": "PMU_READ"
+    },
+    {
+      "name": "PMU_READ_NVRAM",
+      "value": "0x3b",
+      "comment": "read non-volatile RAM",
+      "category": "PMU_READ"
+    },
+    {
+      "name": "PMU_SET_RTC",
+      "value": "0x30",
+      "comment": "set real-time clock",
+      "category": "PMU_SET"
+    },
+    {
+      "name": "PMU_READ_RTC",
+      "value": "0x38",
+      "comment": "read real-time clock",
+      "category": "PMU_READ"
+    },
+    {
+      "name": "PMU_SET_VOLBUTTON",
+      "value": "0x40",
+      "comment": "set volume up/down position",
+      "category": "PMU_SET"
+    },
+    {
+      "name": "PMU_BACKLIGHT_BRIGHT",
+      "value": "0x41",
+      "comment": "set backlight brightness",
+      "category": "PMU_BACKLIGHT"
+    },
+    {
+      "name": "PMU_GET_VOLBUTTON",
+      "value": "0x48",
+      "comment": "get volume up/down position",
+      "category": "PMU_GET"
+    },
+    {
+      "name": "PMU_PCEJECT",
+      "value": "0x4c",
+      "comment": "eject PC-card from slot",
+      "category": ""
+    },
+    {
+      "name": "PMU_BATTERY_STATE",
+      "value": "0x6b",
+      "comment": "report battery state etc.",
+      "category": "PMU_BATTERY"
+    },
+    {
+      "name": "PMU_SMART_BATTERY_STATE",
+      "value": "0x6f",
+      "comment": "report battery state (new way)",
+      "category": "PMU_SMART"
+    },
+    {
+      "name": "PMU_SET_INTR_MASK",
+      "value": "0x70",
+      "comment": "set PMU interrupt mask",
+      "category": "PMU_SET"
+    },
+    {
+      "name": "PMU_INT_ACK",
+      "value": "0x78",
+      "comment": "read interrupt bits",
+      "category": "PMU_INT"
+    },
+    {
+      "name": "PMU_SHUTDOWN",
+      "value": "0x7e",
+      "comment": "turn power off",
+      "category": ""
+    },
+    {
+      "name": "PMU_CPU_SPEED",
+      "value": "0x7d",
+      "comment": "control CPU speed on some models",
+      "category": "PMU_CPU"
+    },
+    {
+      "name": "PMU_SLEEP",
+      "value": "0x7f",
+      "comment": "put CPU to sleep",
+      "category": ""
+    },
+    {
+      "name": "PMU_POWER_EVENTS",
+      "value": "0x8f",
+      "comment": "Send power-event commands to PMU",
+      "category": "PMU_POWER"
+    },
+    {
+      "name": "PMU_I2C_CMD",
+      "value": "0x9a",
+      "comment": "I2C operations",
+      "category": ""
+    },
+    {
+      "name": "PMU_RESET",
+      "value": "0xd0",
+      "comment": "reset CPU",
+      "category": ""
+    },
+    {
+      "name": "PMU_GET_BRIGHTBUTTON",
+      "value": "0xd9",
+      "comment": "report brightness up/down pos",
+      "category": "PMU_GET"
+    },
+    {
+      "name": "PMU_GET_COVER",
+      "value": "0xdc",
+      "comment": "report cover open/closed",
+      "category": "PMU_GET"
+    },
+    {
+      "name": "PMU_SYSTEM_READY",
+      "value": "0xdf",
+      "comment": "tell PMU we are awake",
+      "category": "PMU_SYSTEM"
+    },
+    {
+      "name": "PMU_GET_VERSION",
+      "value": "0xea",
+      "comment": "read the PMU version",
+      "category": "PMU_GET"
+    },
+    {
+      "name": "PMU_POW0_ON",
+      "value": "0x80",
+      "comment": "OR this to power ON the device",
+      "category": ""
+    },
+    {
+      "name": "PMU_POW0_OFF",
+      "value": "0x00",
+      "comment": "leave bit 7 to 0 to power it OFF",
+      "category": ""
+    },
+    {
+      "name": "PMU_POW0_HARD_DRIVE",
+      "value": "0x04",
+      "comment": "Hard drive power (on wallstreet/lombard ?)",
+      "category": ""
+    },
+    {
+      "name": "PMU_POW_ON",
+      "value": "0x80",
+      "comment": "OR this to power ON the device",
+      "category": "PMU_POW"
+    },
+    {
+      "name": "PMU_POW_OFF",
+      "value": "0x00",
+      "comment": "leave bit 7 to 0 to power it OFF",
+      "category": "PMU_POW"
+    },
+    {
+      "name": "PMU_POW_BACKLIGHT",
+      "value": "0x01",
+      "comment": "backlight power",
+      "category": "PMU_POW"
+    },
+    {
+      "name": "PMU_POW_CHARGER",
+      "value": "0x02",
+      "comment": "battery charger power",
+      "category": "PMU_POW"
+    },
+    {
+      "name": "PMU_POW_IRLED",
+      "value": "0x04",
+      "comment": "IR led power (on wallstreet)",
+      "category": "PMU_POW"
+    },
+    {
+      "name": "PMU_POW_MEDIABAY",
+      "value": "0x08",
+      "comment": "media bay power (wallstreet/lombard ?)",
+      "category": "PMU_POW"
+    },
+    {
+      "name": "PMU_INT_PCEJECT",
+      "value": "0x04",
+      "comment": "PC-card eject buttons",
+      "category": "PMU_INT"
+    },
+    {
+      "name": "PMU_INT_SNDBRT",
+      "value": "0x08",
+      "comment": "sound/brightness up/down buttons",
+      "category": "PMU_INT"
+    },
+    {
+      "name": "PMU_INT_ADB",
+      "value": "0x10",
+      "comment": "ADB autopoll or reply data",
+      "category": "PMU_INT"
+    },
+    {
+      "name": "PMU_INT_BATTERY",
+      "value": "0x20",
+      "comment": "Battery state change",
+      "category": "PMU_INT"
+    },
+    {
+      "name": "PMU_INT_ENVIRONMENT",
+      "value": "0x40",
+      "comment": "Environment interrupts",
+      "category": "PMU_INT"
+    },
+    {
+      "name": "PMU_INT_TICK",
+      "value": "0x80",
+      "comment": "1-second tick interrupt",
+      "category": "PMU_INT"
+    },
+    {
+      "name": "PMU_INT_ADB_AUTO",
+      "value": "0x04",
+      "comment": "ADB autopoll, when PMU_INT_ADB",
+      "category": "PMU_INT"
+    },
+    {
+      "name": "PMU_INT_WAITING_CHARGER",
+      "value": "0x01",
+      "comment": "???",
+      "category": "PMU_INT"
+    },
+    {
+      "name": "PMU_INT_AUTO_SRQ_POLL",
+      "value": "0x02",
+      "comment": "???",
+      "category": "PMU_INT"
+    },
+    {
+      "name": "PMU_ENV_LID_CLOSED",
+      "value": "0x01",
+      "comment": "The lid is closed",
+      "category": "PMU_ENV"
+    },
+    {
+      "name": "PMU_I2C_MODE_SIMPLE",
+      "value": "0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PMU_I2C_MODE_STDSUB",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PMU_I2C_MODE_COMBINED",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PMU_I2C_BUS_STATUS",
+      "value": "0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PMU_I2C_BUS_SYSCLK",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PMU_I2C_BUS_POWER",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PMU_I2C_STATUS_OK",
+      "value": "0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PMU_I2C_STATUS_DATAREAD",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PMU_I2C_STATUS_BUSY",
+      "value": "0xfe",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PMU_IOC_SLEEP",
+      "value": "_IO('B', 0)",
+      "comment": "",
+      "category": "PMU_IOC"
+    },
+    {
+      "name": "PMU_IOC_GET_BACKLIGHT",
+      "value": "_IOR('B', 1, size_t)",
+      "comment": "",
+      "category": "PMU_IOC"
+    },
+    {
+      "name": "PMU_IOC_SET_BACKLIGHT",
+      "value": "_IOW('B', 2, size_t)",
+      "comment": "",
+      "category": "PMU_IOC"
+    },
+    {
+      "name": "PMU_IOC_GET_MODEL",
+      "value": "_IOR('B', 3, size_t)",
+      "comment": "",
+      "category": "PMU_IOC"
+    },
+    {
+      "name": "PMU_IOC_HAS_ADB",
+      "value": "_IOR('B', 4, size_t)",
+      "comment": "",
+      "category": "PMU_IOC"
+    },
+    {
+      "name": "PMU_IOC_CAN_SLEEP",
+      "value": "_IOR('B', 5, size_t)",
+      "comment": "",
+      "category": "PMU_IOC"
+    },
+    {
+      "name": "PMU_IOC_GRAB_BACKLIGHT",
+      "value": "_IOR('B', 6, size_t)",
+      "comment": "",
+      "category": "PMU_IOC"
+    }
+  ],
+  "structs": [],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

@@ -1,0 +1,80 @@
+{
+  "filename": "skl-tplg-interface.h",
+  "includes": [
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "SKL_CONTROL_TYPE_BYTE_TLV",
+      "value": "0x100",
+      "comment": "",
+      "category": "SKL_CONTROL"
+    },
+    {
+      "name": "SKL_CONTROL_TYPE_MIC_SELECT",
+      "value": "0x102",
+      "comment": "",
+      "category": "SKL_CONTROL"
+    },
+    {
+      "name": "SKL_CONTROL_TYPE_MULTI_IO_SELECT",
+      "value": "0x103",
+      "comment": "",
+      "category": "SKL_CONTROL"
+    },
+    {
+      "name": "SKL_CONTROL_TYPE_MULTI_IO_SELECT_DMIC",
+      "value": "0x104",
+      "comment": "",
+      "category": "SKL_CONTROL"
+    },
+    {
+      "name": "HDA_SST_CFG_MAX",
+      "value": "900",
+      "comment": "size of copier cfg",
+      "category": "HDA_SST"
+    },
+    {
+      "name": "MAX_IN_QUEUE",
+      "value": "8",
+      "comment": "",
+      "category": "MAX_IN"
+    },
+    {
+      "name": "MAX_OUT_QUEUE",
+      "value": "8",
+      "comment": "",
+      "category": "MAX_OUT"
+    },
+    {
+      "name": "SKL_UUID_STR_SZ",
+      "value": "40",
+      "comment": "",
+      "category": "SKL_UUID"
+    }
+  ],
+  "structs": [
+    {
+      "name": "skl_dfw_algo_data",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "param_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "max",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

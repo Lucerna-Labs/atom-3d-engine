@@ -1,0 +1,687 @@
+{
+  "filename": "tee.h",
+  "includes": [
+    "linux/ioctl.h",
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "TEE_IOC_MAGIC",
+      "value": "0xa4",
+      "comment": "",
+      "category": "TEE_IOC"
+    },
+    {
+      "name": "TEE_IOC_BASE",
+      "value": "0",
+      "comment": "",
+      "category": "TEE_IOC"
+    },
+    {
+      "name": "TEE_MAX_ARG_SIZE",
+      "value": "4096",
+      "comment": "",
+      "category": "TEE_MAX"
+    },
+    {
+      "name": "TEE_GEN_CAP_GP",
+      "value": "(1 << 0)",
+      "comment": "GlobalPlatform compliant TEE",
+      "category": "TEE_GEN"
+    },
+    {
+      "name": "TEE_GEN_CAP_PRIVILEGED",
+      "value": "(1 << 1)",
+      "comment": "Privileged device (for supplicant)",
+      "category": "TEE_GEN"
+    },
+    {
+      "name": "TEE_GEN_CAP_REG_MEM",
+      "value": "(1 << 2)",
+      "comment": "Supports registering shared memory",
+      "category": "TEE_GEN"
+    },
+    {
+      "name": "TEE_GEN_CAP_MEMREF_NULL",
+      "value": "(1 << 3)",
+      "comment": "NULL MemRef support",
+      "category": "TEE_GEN"
+    },
+    {
+      "name": "TEE_GEN_CAP_OBJREF",
+      "value": "(1 << 4)",
+      "comment": "Supports generic object reference",
+      "category": "TEE_GEN"
+    },
+    {
+      "name": "TEE_MEMREF_NULL",
+      "value": "((__u64)(-1))",
+      "comment": "NULL MemRef Buffer",
+      "category": "TEE_MEMREF"
+    },
+    {
+      "name": "TEE_OBJREF_NULL",
+      "value": "((__u64)(-1))",
+      "comment": "NULL ObjRef Object",
+      "category": "TEE_OBJREF"
+    },
+    {
+      "name": "TEE_IMPL_ID_OPTEE",
+      "value": "1",
+      "comment": "",
+      "category": "TEE_IMPL"
+    },
+    {
+      "name": "TEE_IMPL_ID_AMDTEE",
+      "value": "2",
+      "comment": "",
+      "category": "TEE_IMPL"
+    },
+    {
+      "name": "TEE_IMPL_ID_TSTEE",
+      "value": "3",
+      "comment": "",
+      "category": "TEE_IMPL"
+    },
+    {
+      "name": "TEE_IMPL_ID_QTEE",
+      "value": "4",
+      "comment": "",
+      "category": "TEE_IMPL"
+    },
+    {
+      "name": "TEE_OPTEE_CAP_TZ",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "TEE_OPTEE"
+    },
+    {
+      "name": "TEE_IOC_VERSION",
+      "value": "_IOR(TEE_IOC_MAGIC, TEE_IOC_BASE + 0, ",
+      "comment": "",
+      "category": "TEE_IOC"
+    },
+    {
+      "name": "TEE_IOC_SHM_ALLOC",
+      "value": "_IOWR(TEE_IOC_MAGIC, TEE_IOC_BASE + 1, ",
+      "comment": "",
+      "category": "TEE_IOC"
+    },
+    {
+      "name": "TEE_IOCTL_PARAM_ATTR_TYPE_NONE",
+      "value": "0",
+      "comment": "parameter not used",
+      "category": "TEE_IOCTL"
+    },
+    {
+      "name": "TEE_IOCTL_PARAM_ATTR_TYPE_VALUE_INPUT",
+      "value": "1",
+      "comment": "",
+      "category": "TEE_IOCTL"
+    },
+    {
+      "name": "TEE_IOCTL_PARAM_ATTR_TYPE_VALUE_OUTPUT",
+      "value": "2",
+      "comment": "",
+      "category": "TEE_IOCTL"
+    },
+    {
+      "name": "TEE_IOCTL_PARAM_ATTR_TYPE_VALUE_INOUT",
+      "value": "3",
+      "comment": "input and output",
+      "category": "TEE_IOCTL"
+    },
+    {
+      "name": "TEE_IOCTL_PARAM_ATTR_TYPE_MEMREF_INPUT",
+      "value": "5",
+      "comment": "",
+      "category": "TEE_IOCTL"
+    },
+    {
+      "name": "TEE_IOCTL_PARAM_ATTR_TYPE_MEMREF_OUTPUT",
+      "value": "6",
+      "comment": "",
+      "category": "TEE_IOCTL"
+    },
+    {
+      "name": "TEE_IOCTL_PARAM_ATTR_TYPE_MEMREF_INOUT",
+      "value": "7",
+      "comment": "input and output",
+      "category": "TEE_IOCTL"
+    },
+    {
+      "name": "TEE_IOCTL_PARAM_ATTR_TYPE_UBUF_INPUT",
+      "value": "8",
+      "comment": "",
+      "category": "TEE_IOCTL"
+    },
+    {
+      "name": "TEE_IOCTL_PARAM_ATTR_TYPE_UBUF_OUTPUT",
+      "value": "9",
+      "comment": "",
+      "category": "TEE_IOCTL"
+    },
+    {
+      "name": "TEE_IOCTL_PARAM_ATTR_TYPE_UBUF_INOUT",
+      "value": "10",
+      "comment": "input and output",
+      "category": "TEE_IOCTL"
+    },
+    {
+      "name": "TEE_IOCTL_PARAM_ATTR_TYPE_OBJREF_INPUT",
+      "value": "11",
+      "comment": "",
+      "category": "TEE_IOCTL"
+    },
+    {
+      "name": "TEE_IOCTL_PARAM_ATTR_TYPE_OBJREF_OUTPUT",
+      "value": "12",
+      "comment": "",
+      "category": "TEE_IOCTL"
+    },
+    {
+      "name": "TEE_IOCTL_PARAM_ATTR_TYPE_OBJREF_INOUT",
+      "value": "13",
+      "comment": "",
+      "category": "TEE_IOCTL"
+    },
+    {
+      "name": "TEE_IOCTL_PARAM_ATTR_TYPE_MASK",
+      "value": "0xff",
+      "comment": "",
+      "category": "TEE_IOCTL"
+    },
+    {
+      "name": "TEE_IOCTL_PARAM_ATTR_META",
+      "value": "0x100",
+      "comment": "",
+      "category": "TEE_IOCTL"
+    },
+    {
+      "name": "TEE_IOCTL_PARAM_ATTR_MASK",
+      "value": "",
+      "comment": "",
+      "category": "TEE_IOCTL"
+    },
+    {
+      "name": "TEE_IOCTL_LOGIN_PUBLIC",
+      "value": "0",
+      "comment": "",
+      "category": "TEE_IOCTL"
+    },
+    {
+      "name": "TEE_IOCTL_LOGIN_USER",
+      "value": "1",
+      "comment": "",
+      "category": "TEE_IOCTL"
+    },
+    {
+      "name": "TEE_IOCTL_LOGIN_GROUP",
+      "value": "2",
+      "comment": "",
+      "category": "TEE_IOCTL"
+    },
+    {
+      "name": "TEE_IOCTL_LOGIN_APPLICATION",
+      "value": "4",
+      "comment": "",
+      "category": "TEE_IOCTL"
+    },
+    {
+      "name": "TEE_IOCTL_LOGIN_USER_APPLICATION",
+      "value": "5",
+      "comment": "",
+      "category": "TEE_IOCTL"
+    },
+    {
+      "name": "TEE_IOCTL_LOGIN_GROUP_APPLICATION",
+      "value": "6",
+      "comment": "",
+      "category": "TEE_IOCTL"
+    },
+    {
+      "name": "TEE_IOCTL_LOGIN_REE_KERNEL_MIN",
+      "value": "0x80000000",
+      "comment": "",
+      "category": "TEE_IOCTL"
+    },
+    {
+      "name": "TEE_IOCTL_LOGIN_REE_KERNEL_MAX",
+      "value": "0xBFFFFFFF",
+      "comment": "",
+      "category": "TEE_IOCTL"
+    },
+    {
+      "name": "TEE_IOCTL_LOGIN_REE_KERNEL",
+      "value": "0x80000000",
+      "comment": "",
+      "category": "TEE_IOCTL"
+    },
+    {
+      "name": "TEE_IOCTL_UUID_LEN",
+      "value": "16",
+      "comment": "",
+      "category": "TEE_IOCTL"
+    },
+    {
+      "name": "TEE_IOC_OPEN_SESSION",
+      "value": "_IOR(TEE_IOC_MAGIC, TEE_IOC_BASE + 2, ",
+      "comment": "",
+      "category": "TEE_IOC"
+    },
+    {
+      "name": "TEE_IOC_INVOKE",
+      "value": "_IOR(TEE_IOC_MAGIC, TEE_IOC_BASE + 3, ",
+      "comment": "",
+      "category": "TEE_IOC"
+    },
+    {
+      "name": "TEE_IOC_CANCEL",
+      "value": "_IOR(TEE_IOC_MAGIC, TEE_IOC_BASE + 4, ",
+      "comment": "",
+      "category": "TEE_IOC"
+    },
+    {
+      "name": "TEE_IOC_CLOSE_SESSION",
+      "value": "_IOR(TEE_IOC_MAGIC, TEE_IOC_BASE + 5, ",
+      "comment": "",
+      "category": "TEE_IOC"
+    },
+    {
+      "name": "TEE_IOC_SUPPL_RECV",
+      "value": "_IOR(TEE_IOC_MAGIC, TEE_IOC_BASE + 6, ",
+      "comment": "",
+      "category": "TEE_IOC"
+    },
+    {
+      "name": "TEE_IOC_SUPPL_SEND",
+      "value": "_IOR(TEE_IOC_MAGIC, TEE_IOC_BASE + 7, ",
+      "comment": "",
+      "category": "TEE_IOC"
+    },
+    {
+      "name": "TEE_IOC_SHM_REGISTER_FD",
+      "value": "_IOWR(TEE_IOC_MAGIC, TEE_IOC_BASE + 8, ",
+      "comment": "",
+      "category": "TEE_IOC"
+    },
+    {
+      "name": "TEE_IOC_SHM_REGISTER",
+      "value": "_IOWR(TEE_IOC_MAGIC, TEE_IOC_BASE + 9, ",
+      "comment": "",
+      "category": "TEE_IOC"
+    },
+    {
+      "name": "TEE_IOC_OBJECT_INVOKE",
+      "value": "_IOR(TEE_IOC_MAGIC, TEE_IOC_BASE + 10, ",
+      "comment": "",
+      "category": "TEE_IOC"
+    }
+  ],
+  "structs": [
+    {
+      "name": "tee_ioctl_version_data",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "impl_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "impl_caps",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "gen_caps",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "tee_ioctl_shm_alloc_data",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "tee_ioctl_buf_data",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "buf_ptr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "buf_len",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "tee_ioctl_param",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "attr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "a",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "b",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "c",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "tee_ioctl_open_session_arg",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "uuid",
+          "array_size": "TEE_IOCTL_UUID_LEN",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "clnt_uuid",
+          "array_size": "TEE_IOCTL_UUID_LEN",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "clnt_login",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "cancel_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "session",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ret",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ret_origin",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "num_params",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "tee_ioctl_invoke_arg",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "func",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "session",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "cancel_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ret",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ret_origin",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "num_params",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "tee_ioctl_cancel_arg",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "cancel_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "session",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "tee_ioctl_close_session_arg",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "session",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "tee_iocl_supp_recv_arg",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "func",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "num_params",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "tee_iocl_supp_send_arg",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "ret",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "num_params",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "tee_ioctl_shm_register_data",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "addr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "length",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "tee_ioctl_shm_register_fd_data",
+      "fields": [
+        {
+          "type_name": "__s64",
+          "name": "fd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "tee_ioctl_object_invoke_arg",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "op",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ret",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "num_params",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

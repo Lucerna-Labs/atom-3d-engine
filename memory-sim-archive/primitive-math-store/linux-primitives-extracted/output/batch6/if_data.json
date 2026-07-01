@@ -1,0 +1,476 @@
+{
+  "filename": "if.h",
+  "includes": [
+    "linux/libc-compat.h",
+    "linux/types.h",
+    "linux/socket.h",
+    "linux/compiler.h",
+    "sys/socket.h",
+    "linux/hdlc/ioctl.h"
+  ],
+  "defines": [
+    {
+      "name": "IFNAMSIZ",
+      "value": "16",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IFALIASZ",
+      "value": "256",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ALTIFNAMSIZ",
+      "value": "128",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IFF_UP",
+      "value": "IFF_UP",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IFF_BROADCAST",
+      "value": "IFF_BROADCAST",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IFF_DEBUG",
+      "value": "IFF_DEBUG",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IFF_LOOPBACK",
+      "value": "IFF_LOOPBACK",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IFF_POINTOPOINT",
+      "value": "IFF_POINTOPOINT",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IFF_NOTRAILERS",
+      "value": "IFF_NOTRAILERS",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IFF_RUNNING",
+      "value": "IFF_RUNNING",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IFF_NOARP",
+      "value": "IFF_NOARP",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IFF_PROMISC",
+      "value": "IFF_PROMISC",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IFF_ALLMULTI",
+      "value": "IFF_ALLMULTI",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IFF_MASTER",
+      "value": "IFF_MASTER",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IFF_SLAVE",
+      "value": "IFF_SLAVE",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IFF_MULTICAST",
+      "value": "IFF_MULTICAST",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IFF_PORTSEL",
+      "value": "IFF_PORTSEL",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IFF_AUTOMEDIA",
+      "value": "IFF_AUTOMEDIA",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IFF_DYNAMIC",
+      "value": "IFF_DYNAMIC",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IFF_LOWER_UP",
+      "value": "IFF_LOWER_UP",
+      "comment": "",
+      "category": "IFF_LOWER"
+    },
+    {
+      "name": "IFF_DORMANT",
+      "value": "IFF_DORMANT",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IFF_ECHO",
+      "value": "IFF_ECHO",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IFF_VOLATILE",
+      "value": "(IFF_LOOPBACK|IFF_POINTOPOINT|IFF_BROADCAST|IFF_ECHO|",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IF_GET_IFACE",
+      "value": "0x0001",
+      "comment": "for querying only",
+      "category": "IF_GET"
+    },
+    {
+      "name": "IF_GET_PROTO",
+      "value": "0x0002",
+      "comment": "",
+      "category": "IF_GET"
+    },
+    {
+      "name": "IF_IFACE_V35",
+      "value": "0x1000",
+      "comment": "V.35 serial interface",
+      "category": "IF_IFACE"
+    },
+    {
+      "name": "IF_IFACE_V24",
+      "value": "0x1001",
+      "comment": "V.24 serial interface",
+      "category": "IF_IFACE"
+    },
+    {
+      "name": "IF_IFACE_X21",
+      "value": "0x1002",
+      "comment": "X.21 serial interface",
+      "category": "IF_IFACE"
+    },
+    {
+      "name": "IF_IFACE_T1",
+      "value": "0x1003",
+      "comment": "T1 telco serial interface",
+      "category": "IF_IFACE"
+    },
+    {
+      "name": "IF_IFACE_E1",
+      "value": "0x1004",
+      "comment": "E1 telco serial interface",
+      "category": "IF_IFACE"
+    },
+    {
+      "name": "IF_IFACE_SYNC_SERIAL",
+      "value": "0x1005",
+      "comment": "can't be set by software",
+      "category": "IF_IFACE"
+    },
+    {
+      "name": "IF_IFACE_X21D",
+      "value": "0x1006",
+      "comment": "X.21 Dual Clocking (FarSite)",
+      "category": "IF_IFACE"
+    },
+    {
+      "name": "IF_PROTO_HDLC",
+      "value": "0x2000",
+      "comment": "raw HDLC protocol",
+      "category": "IF_PROTO"
+    },
+    {
+      "name": "IF_PROTO_PPP",
+      "value": "0x2001",
+      "comment": "PPP protocol",
+      "category": "IF_PROTO"
+    },
+    {
+      "name": "IF_PROTO_CISCO",
+      "value": "0x2002",
+      "comment": "Cisco HDLC protocol",
+      "category": "IF_PROTO"
+    },
+    {
+      "name": "IF_PROTO_FR",
+      "value": "0x2003",
+      "comment": "Frame Relay protocol",
+      "category": "IF_PROTO"
+    },
+    {
+      "name": "IF_PROTO_FR_ADD_PVC",
+      "value": "0x2004",
+      "comment": "Create FR PVC",
+      "category": "IF_PROTO"
+    },
+    {
+      "name": "IF_PROTO_FR_DEL_PVC",
+      "value": "0x2005",
+      "comment": "Delete FR PVC",
+      "category": "IF_PROTO"
+    },
+    {
+      "name": "IF_PROTO_X25",
+      "value": "0x2006",
+      "comment": "X.25",
+      "category": "IF_PROTO"
+    },
+    {
+      "name": "IF_PROTO_HDLC_ETH",
+      "value": "0x2007",
+      "comment": "raw HDLC, Ethernet emulation",
+      "category": "IF_PROTO"
+    },
+    {
+      "name": "IF_PROTO_FR_ADD_ETH_PVC",
+      "value": "0x2008",
+      "comment": "Create FR Ethernet-bridged PVC",
+      "category": "IF_PROTO"
+    },
+    {
+      "name": "IF_PROTO_FR_DEL_ETH_PVC",
+      "value": "0x2009",
+      "comment": "Delete FR Ethernet-bridged PVC",
+      "category": "IF_PROTO"
+    },
+    {
+      "name": "IF_PROTO_FR_PVC",
+      "value": "0x200A",
+      "comment": "for reading PVC status",
+      "category": "IF_PROTO"
+    },
+    {
+      "name": "IF_PROTO_FR_ETH_PVC",
+      "value": "0x200B",
+      "comment": "",
+      "category": "IF_PROTO"
+    },
+    {
+      "name": "IF_PROTO_RAW",
+      "value": "0x200C",
+      "comment": "RAW Socket",
+      "category": "IF_PROTO"
+    },
+    {
+      "name": "IFHWADDRLEN",
+      "value": "6",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ifr_name",
+      "value": "ifr_ifrn.ifrn_name",
+      "comment": "interface name",
+      "category": ""
+    },
+    {
+      "name": "ifr_hwaddr",
+      "value": "ifr_ifru.ifru_hwaddr",
+      "comment": "MAC address",
+      "category": ""
+    },
+    {
+      "name": "ifr_addr",
+      "value": "ifr_ifru.ifru_addr",
+      "comment": "address",
+      "category": ""
+    },
+    {
+      "name": "ifr_dstaddr",
+      "value": "ifr_ifru.ifru_dstaddr",
+      "comment": "other end of p-p lnk",
+      "category": ""
+    },
+    {
+      "name": "ifr_broadaddr",
+      "value": "ifr_ifru.ifru_broadaddr",
+      "comment": "broadcast address",
+      "category": ""
+    },
+    {
+      "name": "ifr_netmask",
+      "value": "ifr_ifru.ifru_netmask",
+      "comment": "interface net mask",
+      "category": ""
+    },
+    {
+      "name": "ifr_flags",
+      "value": "ifr_ifru.ifru_flags",
+      "comment": "flags",
+      "category": ""
+    },
+    {
+      "name": "ifr_metric",
+      "value": "ifr_ifru.ifru_ivalue",
+      "comment": "metric",
+      "category": ""
+    },
+    {
+      "name": "ifr_mtu",
+      "value": "ifr_ifru.ifru_mtu",
+      "comment": "mtu",
+      "category": ""
+    },
+    {
+      "name": "ifr_map",
+      "value": "ifr_ifru.ifru_map",
+      "comment": "device map",
+      "category": ""
+    },
+    {
+      "name": "ifr_slave",
+      "value": "ifr_ifru.ifru_slave",
+      "comment": "slave device",
+      "category": ""
+    },
+    {
+      "name": "ifr_data",
+      "value": "ifr_ifru.ifru_data",
+      "comment": "for use by interface",
+      "category": ""
+    },
+    {
+      "name": "ifr_ifindex",
+      "value": "ifr_ifru.ifru_ivalue",
+      "comment": "interface index",
+      "category": ""
+    },
+    {
+      "name": "ifr_bandwidth",
+      "value": "ifr_ifru.ifru_ivalue",
+      "comment": "link bandwidth",
+      "category": ""
+    },
+    {
+      "name": "ifr_qlen",
+      "value": "ifr_ifru.ifru_ivalue",
+      "comment": "Queue length",
+      "category": ""
+    },
+    {
+      "name": "ifr_newname",
+      "value": "ifr_ifru.ifru_newname",
+      "comment": "New name",
+      "category": ""
+    },
+    {
+      "name": "ifr_settings",
+      "value": "ifr_ifru.ifru_settings",
+      "comment": "Device/proto settings",
+      "category": ""
+    },
+    {
+      "name": "ifc_buf",
+      "value": "ifc_ifcu.ifcu_buf",
+      "comment": "buffer address",
+      "category": ""
+    },
+    {
+      "name": "ifc_req",
+      "value": "ifc_ifcu.ifcu_req",
+      "comment": "array of structures",
+      "category": ""
+    }
+  ],
+  "structs": [
+    {
+      "name": "ifmap",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "if_settings",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ifreq",
+      "fields": [
+        {
+          "type_name": "char",
+          "name": "ifrn_name",
+          "array_size": "IFNAMSIZ",
+          "comment": ""
+        },
+        {
+          "type_name": "short",
+          "name": "ifru_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "ifru_ivalue",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "ifru_mtu",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "ifru_slave",
+          "array_size": "IFNAMSIZ",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "ifru_newname",
+          "array_size": "IFNAMSIZ",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ifconf",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "ifc_len",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

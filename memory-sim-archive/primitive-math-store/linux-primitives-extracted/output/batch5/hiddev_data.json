@@ -1,0 +1,573 @@
+{
+  "filename": "hiddev.h",
+  "includes": [
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "HID_STRING_SIZE",
+      "value": "256",
+      "comment": "",
+      "category": "HID_STRING"
+    },
+    {
+      "name": "HID_REPORT_ID_UNKNOWN",
+      "value": "0xffffffff",
+      "comment": "",
+      "category": "HID_REPORT"
+    },
+    {
+      "name": "HID_REPORT_ID_FIRST",
+      "value": "0x00000100",
+      "comment": "",
+      "category": "HID_REPORT"
+    },
+    {
+      "name": "HID_REPORT_ID_NEXT",
+      "value": "0x00000200",
+      "comment": "",
+      "category": "HID_REPORT"
+    },
+    {
+      "name": "HID_REPORT_ID_MASK",
+      "value": "0x000000ff",
+      "comment": "",
+      "category": "HID_REPORT"
+    },
+    {
+      "name": "HID_REPORT_ID_MAX",
+      "value": "0x000000ff",
+      "comment": "",
+      "category": "HID_REPORT"
+    },
+    {
+      "name": "HID_REPORT_TYPE_INPUT",
+      "value": "1",
+      "comment": "",
+      "category": "HID_REPORT"
+    },
+    {
+      "name": "HID_REPORT_TYPE_OUTPUT",
+      "value": "2",
+      "comment": "",
+      "category": "HID_REPORT"
+    },
+    {
+      "name": "HID_REPORT_TYPE_FEATURE",
+      "value": "3",
+      "comment": "",
+      "category": "HID_REPORT"
+    },
+    {
+      "name": "HID_REPORT_TYPE_MIN",
+      "value": "1",
+      "comment": "",
+      "category": "HID_REPORT"
+    },
+    {
+      "name": "HID_REPORT_TYPE_MAX",
+      "value": "3",
+      "comment": "",
+      "category": "HID_REPORT"
+    },
+    {
+      "name": "HID_FIELD_CONSTANT",
+      "value": "0x001",
+      "comment": "",
+      "category": "HID_FIELD"
+    },
+    {
+      "name": "HID_FIELD_VARIABLE",
+      "value": "0x002",
+      "comment": "",
+      "category": "HID_FIELD"
+    },
+    {
+      "name": "HID_FIELD_RELATIVE",
+      "value": "0x004",
+      "comment": "",
+      "category": "HID_FIELD"
+    },
+    {
+      "name": "HID_FIELD_WRAP",
+      "value": "0x008",
+      "comment": "",
+      "category": "HID_FIELD"
+    },
+    {
+      "name": "HID_FIELD_NONLINEAR",
+      "value": "0x010",
+      "comment": "",
+      "category": "HID_FIELD"
+    },
+    {
+      "name": "HID_FIELD_NO_PREFERRED",
+      "value": "0x020",
+      "comment": "",
+      "category": "HID_FIELD"
+    },
+    {
+      "name": "HID_FIELD_NULL_STATE",
+      "value": "0x040",
+      "comment": "",
+      "category": "HID_FIELD"
+    },
+    {
+      "name": "HID_FIELD_VOLATILE",
+      "value": "0x080",
+      "comment": "",
+      "category": "HID_FIELD"
+    },
+    {
+      "name": "HID_FIELD_BUFFERED_BYTE",
+      "value": "0x100",
+      "comment": "",
+      "category": "HID_FIELD"
+    },
+    {
+      "name": "HID_MAX_MULTI_USAGES",
+      "value": "1024",
+      "comment": "",
+      "category": "HID_MAX"
+    },
+    {
+      "name": "HID_FIELD_INDEX_NONE",
+      "value": "0xffffffff",
+      "comment": "",
+      "category": "HID_FIELD"
+    },
+    {
+      "name": "HID_VERSION",
+      "value": "0x010004",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "HIDIOCGVERSION",
+      "value": "_IOR('H', 0x01, int)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "HIDIOCAPPLICATION",
+      "value": "_IO('H', 0x02)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "HIDIOCGDEVINFO",
+      "value": "_IOR('H', 0x03, struct hiddev_devinfo)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "HIDIOCGSTRING",
+      "value": "_IOR('H', 0x04, struct hiddev_string_descriptor)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "HIDIOCINITREPORT",
+      "value": "_IO('H', 0x05)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "HIDIOCGREPORT",
+      "value": "_IOW('H', 0x07, struct hiddev_report_info)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "HIDIOCSREPORT",
+      "value": "_IOW('H', 0x08, struct hiddev_report_info)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "HIDIOCGREPORTINFO",
+      "value": "_IOWR('H', 0x09, struct hiddev_report_info)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "HIDIOCGFIELDINFO",
+      "value": "_IOWR('H', 0x0A, struct hiddev_field_info)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "HIDIOCGUSAGE",
+      "value": "_IOWR('H', 0x0B, struct hiddev_usage_ref)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "HIDIOCSUSAGE",
+      "value": "_IOW('H', 0x0C, struct hiddev_usage_ref)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "HIDIOCGUCODE",
+      "value": "_IOWR('H', 0x0D, struct hiddev_usage_ref)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "HIDIOCGFLAG",
+      "value": "_IOR('H', 0x0E, int)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "HIDIOCSFLAG",
+      "value": "_IOW('H', 0x0F, int)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "HIDIOCGCOLLECTIONINDEX",
+      "value": "_IOW('H', 0x10, struct hiddev_usage_ref)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "HIDIOCGCOLLECTIONINFO",
+      "value": "_IOWR('H', 0x11, struct hiddev_collection_info)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "HIDIOCGUSAGES",
+      "value": "_IOWR('H', 0x13, struct hiddev_usage_ref_multi)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "HIDIOCSUSAGES",
+      "value": "_IOW('H', 0x14, struct hiddev_usage_ref_multi)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "HIDDEV_FLAG_UREF",
+      "value": "0x1",
+      "comment": "",
+      "category": "HIDDEV_FLAG"
+    },
+    {
+      "name": "HIDDEV_FLAG_REPORT",
+      "value": "0x2",
+      "comment": "",
+      "category": "HIDDEV_FLAG"
+    },
+    {
+      "name": "HIDDEV_FLAGS",
+      "value": "0x3",
+      "comment": "",
+      "category": ""
+    }
+  ],
+  "structs": [
+    {
+      "name": "hiddev_event",
+      "fields": [
+        {
+          "type_name": "unsigned",
+          "name": "hid",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "hiddev_devinfo",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "bustype",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "busnum",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "devnum",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ifnum",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s16",
+          "name": "vendor",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s16",
+          "name": "product",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s16",
+          "name": "version",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "num_applications",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "hiddev_collection_info",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "index",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "usage",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "level",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "hiddev_string_descriptor",
+      "fields": [
+        {
+          "type_name": "__s32",
+          "name": "index",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "value",
+          "array_size": "HID_STRING_SIZE",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "hiddev_report_info",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "report_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "report_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "num_fields",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "hiddev_field_info",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "report_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "report_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "field_index",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "maxusage",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "physical",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "logical",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "application",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "logical_minimum",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "logical_maximum",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "physical_minimum",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "physical_maximum",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "unit_exponent",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "unit",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "hiddev_usage_ref",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "report_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "report_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "field_index",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "usage_index",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "usage_code",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "value",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "hiddev_usage_ref_multi",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "num_values",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "values",
+          "array_size": "HID_MAX_MULTI_USAGES",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

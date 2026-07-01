@@ -1,0 +1,213 @@
+{
+  "filename": "nfnetlink.h",
+  "includes": [
+    "linux/types.h",
+    "linux/netfilter/nfnetlink_compat.h"
+  ],
+  "defines": [
+    {
+      "name": "NFNLGRP_NONE",
+      "value": "NFNLGRP_NONE",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NFNLGRP_CONNTRACK_NEW",
+      "value": "NFNLGRP_CONNTRACK_NEW",
+      "comment": "",
+      "category": "NFNLGRP_CONNTRACK"
+    },
+    {
+      "name": "NFNLGRP_CONNTRACK_UPDATE",
+      "value": "NFNLGRP_CONNTRACK_UPDATE",
+      "comment": "",
+      "category": "NFNLGRP_CONNTRACK"
+    },
+    {
+      "name": "NFNLGRP_CONNTRACK_DESTROY",
+      "value": "NFNLGRP_CONNTRACK_DESTROY",
+      "comment": "",
+      "category": "NFNLGRP_CONNTRACK"
+    },
+    {
+      "name": "NFNLGRP_CONNTRACK_EXP_NEW",
+      "value": "NFNLGRP_CONNTRACK_EXP_NEW",
+      "comment": "",
+      "category": "NFNLGRP_CONNTRACK"
+    },
+    {
+      "name": "NFNLGRP_CONNTRACK_EXP_UPDATE",
+      "value": "NFNLGRP_CONNTRACK_EXP_UPDATE",
+      "comment": "",
+      "category": "NFNLGRP_CONNTRACK"
+    },
+    {
+      "name": "NFNLGRP_CONNTRACK_EXP_DESTROY",
+      "value": "NFNLGRP_CONNTRACK_EXP_DESTROY",
+      "comment": "",
+      "category": "NFNLGRP_CONNTRACK"
+    },
+    {
+      "name": "NFNLGRP_NFTABLES",
+      "value": "NFNLGRP_NFTABLES",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NFNLGRP_ACCT_QUOTA",
+      "value": "NFNLGRP_ACCT_QUOTA",
+      "comment": "",
+      "category": "NFNLGRP_ACCT"
+    },
+    {
+      "name": "NFNLGRP_NFTRACE",
+      "value": "NFNLGRP_NFTRACE",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NFNLGRP_MAX",
+      "value": "(__NFNLGRP_MAX - 1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NFNETLINK_V0",
+      "value": "0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NFNL_SUBSYS_NONE",
+      "value": "0",
+      "comment": "",
+      "category": "NFNL_SUBSYS"
+    },
+    {
+      "name": "NFNL_SUBSYS_CTNETLINK",
+      "value": "1",
+      "comment": "",
+      "category": "NFNL_SUBSYS"
+    },
+    {
+      "name": "NFNL_SUBSYS_CTNETLINK_EXP",
+      "value": "2",
+      "comment": "",
+      "category": "NFNL_SUBSYS"
+    },
+    {
+      "name": "NFNL_SUBSYS_QUEUE",
+      "value": "3",
+      "comment": "",
+      "category": "NFNL_SUBSYS"
+    },
+    {
+      "name": "NFNL_SUBSYS_ULOG",
+      "value": "4",
+      "comment": "",
+      "category": "NFNL_SUBSYS"
+    },
+    {
+      "name": "NFNL_SUBSYS_OSF",
+      "value": "5",
+      "comment": "",
+      "category": "NFNL_SUBSYS"
+    },
+    {
+      "name": "NFNL_SUBSYS_IPSET",
+      "value": "6",
+      "comment": "",
+      "category": "NFNL_SUBSYS"
+    },
+    {
+      "name": "NFNL_SUBSYS_ACCT",
+      "value": "7",
+      "comment": "",
+      "category": "NFNL_SUBSYS"
+    },
+    {
+      "name": "NFNL_SUBSYS_CTNETLINK_TIMEOUT",
+      "value": "8",
+      "comment": "",
+      "category": "NFNL_SUBSYS"
+    },
+    {
+      "name": "NFNL_SUBSYS_CTHELPER",
+      "value": "9",
+      "comment": "",
+      "category": "NFNL_SUBSYS"
+    },
+    {
+      "name": "NFNL_SUBSYS_NFTABLES",
+      "value": "10",
+      "comment": "",
+      "category": "NFNL_SUBSYS"
+    },
+    {
+      "name": "NFNL_SUBSYS_NFT_COMPAT",
+      "value": "11",
+      "comment": "",
+      "category": "NFNL_SUBSYS"
+    },
+    {
+      "name": "NFNL_SUBSYS_HOOK",
+      "value": "12",
+      "comment": "",
+      "category": "NFNL_SUBSYS"
+    },
+    {
+      "name": "NFNL_SUBSYS_COUNT",
+      "value": "13",
+      "comment": "",
+      "category": "NFNL_SUBSYS"
+    },
+    {
+      "name": "NFNL_MSG_BATCH_BEGIN",
+      "value": "NLMSG_MIN_TYPE",
+      "comment": "",
+      "category": "NFNL_MSG"
+    },
+    {
+      "name": "NFNL_MSG_BATCH_END",
+      "value": "NLMSG_MIN_TYPE+1",
+      "comment": "",
+      "category": "NFNL_MSG"
+    },
+    {
+      "name": "NFNL_BATCH_MAX",
+      "value": "(__NFNL_BATCH_MAX - 1)",
+      "comment": "",
+      "category": "NFNL_BATCH"
+    }
+  ],
+  "structs": [
+    {
+      "name": "nfgenmsg",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "nfgen_family",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "version",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be16",
+          "name": "res_id",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

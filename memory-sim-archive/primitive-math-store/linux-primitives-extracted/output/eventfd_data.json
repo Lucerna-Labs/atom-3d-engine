@@ -1,0 +1,30 @@
+{
+  "filename": "eventfd.h",
+  "includes": [
+    "linux/fcntl.h"
+  ],
+  "defines": [
+    {
+      "name": "EFD_SEMAPHORE",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EFD_CLOEXEC",
+      "value": "O_CLOEXEC",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EFD_NONBLOCK",
+      "value": "O_NONBLOCK",
+      "comment": "",
+      "category": ""
+    }
+  ],
+  "structs": [],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

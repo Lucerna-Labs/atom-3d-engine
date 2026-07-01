@@ -1,0 +1,47 @@
+{
+  "filename": "if_vlan.h",
+  "includes": [],
+  "defines": [],
+  "structs": [
+    {
+      "name": "vlan_ioctl_args",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "cmd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "device1",
+          "array_size": "24",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "device2",
+          "array_size": "24",
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "VID",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "short",
+          "name": "vlan_qos",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

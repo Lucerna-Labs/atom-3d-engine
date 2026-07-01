@@ -1,0 +1,420 @@
+{
+  "filename": "md_u.h",
+  "includes": [],
+  "defines": [
+    {
+      "name": "MD_MAJOR_VERSION",
+      "value": "0",
+      "comment": "",
+      "category": "MD_MAJOR"
+    },
+    {
+      "name": "MD_MINOR_VERSION",
+      "value": "90",
+      "comment": "",
+      "category": "MD_MINOR"
+    },
+    {
+      "name": "MD_PATCHLEVEL_VERSION",
+      "value": "3",
+      "comment": "",
+      "category": "MD_PATCHLEVEL"
+    },
+    {
+      "name": "RAID_VERSION",
+      "value": "_IOR (MD_MAJOR, 0x10, mdu_version_t)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GET_ARRAY_INFO",
+      "value": "_IOR (MD_MAJOR, 0x11, mdu_array_info_t)",
+      "comment": "",
+      "category": "GET_ARRAY"
+    },
+    {
+      "name": "GET_DISK_INFO",
+      "value": "_IOR (MD_MAJOR, 0x12, mdu_disk_info_t)",
+      "comment": "",
+      "category": "GET_DISK"
+    },
+    {
+      "name": "RAID_AUTORUN",
+      "value": "_IO (MD_MAJOR, 0x14)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GET_BITMAP_FILE",
+      "value": "_IOR (MD_MAJOR, 0x15, mdu_bitmap_file_t)",
+      "comment": "",
+      "category": "GET_BITMAP"
+    },
+    {
+      "name": "CLEAR_ARRAY",
+      "value": "_IO (MD_MAJOR, 0x20)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ADD_NEW_DISK",
+      "value": "_IOW (MD_MAJOR, 0x21, mdu_disk_info_t)",
+      "comment": "",
+      "category": "ADD_NEW"
+    },
+    {
+      "name": "HOT_REMOVE_DISK",
+      "value": "_IO (MD_MAJOR, 0x22)",
+      "comment": "",
+      "category": "HOT_REMOVE"
+    },
+    {
+      "name": "SET_ARRAY_INFO",
+      "value": "_IOW (MD_MAJOR, 0x23, mdu_array_info_t)",
+      "comment": "",
+      "category": "SET_ARRAY"
+    },
+    {
+      "name": "SET_DISK_INFO",
+      "value": "_IO (MD_MAJOR, 0x24)",
+      "comment": "",
+      "category": "SET_DISK"
+    },
+    {
+      "name": "WRITE_RAID_INFO",
+      "value": "_IO (MD_MAJOR, 0x25)",
+      "comment": "",
+      "category": "WRITE_RAID"
+    },
+    {
+      "name": "UNPROTECT_ARRAY",
+      "value": "_IO (MD_MAJOR, 0x26)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PROTECT_ARRAY",
+      "value": "_IO (MD_MAJOR, 0x27)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "HOT_ADD_DISK",
+      "value": "_IO (MD_MAJOR, 0x28)",
+      "comment": "",
+      "category": "HOT_ADD"
+    },
+    {
+      "name": "SET_DISK_FAULTY",
+      "value": "_IO (MD_MAJOR, 0x29)",
+      "comment": "",
+      "category": "SET_DISK"
+    },
+    {
+      "name": "HOT_GENERATE_ERROR",
+      "value": "_IO (MD_MAJOR, 0x2a)",
+      "comment": "",
+      "category": "HOT_GENERATE"
+    },
+    {
+      "name": "SET_BITMAP_FILE",
+      "value": "_IOW (MD_MAJOR, 0x2b, int)",
+      "comment": "",
+      "category": "SET_BITMAP"
+    },
+    {
+      "name": "RUN_ARRAY",
+      "value": "_IOW (MD_MAJOR, 0x30, mdu_param_t)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "STOP_ARRAY",
+      "value": "_IO (MD_MAJOR, 0x32)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "STOP_ARRAY_RO",
+      "value": "_IO (MD_MAJOR, 0x33)",
+      "comment": "",
+      "category": "STOP_ARRAY"
+    },
+    {
+      "name": "RESTART_ARRAY_RW",
+      "value": "_IO (MD_MAJOR, 0x34)",
+      "comment": "",
+      "category": "RESTART_ARRAY"
+    },
+    {
+      "name": "CLUSTERED_DISK_NACK",
+      "value": "_IO (MD_MAJOR, 0x35)",
+      "comment": "",
+      "category": "CLUSTERED_DISK"
+    },
+    {
+      "name": "MdpMinorShift",
+      "value": "6",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "LEVEL_LINEAR",
+      "value": "(-1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "LEVEL_NONE",
+      "value": "(-1000000)",
+      "comment": "",
+      "category": ""
+    }
+  ],
+  "structs": [
+    {
+      "name": "mdu_version_s",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "major",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "minor",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "patchlevel",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "mdu_array_info_s",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "major_version",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "minor_version",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "patch_version",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "level",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "nr_disks",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "raid_disks",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "md_minor",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "not_persistent",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "state",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "active_disks",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "working_disks",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "failed_disks",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "spare_disks",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "layout",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "chunk_size",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "mdu_disk_info_s",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "number",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "major",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "minor",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "raid_disk",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "state",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "mdu_start_info_s",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "major",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "minor",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "raid_disk",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "state",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "mdu_bitmap_file_s",
+      "fields": [
+        {
+          "type_name": "char",
+          "name": "pathname",
+          "array_size": "4096",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "mdu_param_s",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "personality",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "chunk_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "max_fault",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [
+    "mdu_version_s",
+    "mdu_array_info_s",
+    "mdu_disk_info_s",
+    "mdu_start_info_s",
+    "mdu_bitmap_file_s",
+    "mdu_param_s"
+  ],
+  "enums": {}
+}

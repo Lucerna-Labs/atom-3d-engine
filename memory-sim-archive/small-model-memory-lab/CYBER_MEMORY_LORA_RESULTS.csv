@@ -1,0 +1,5 @@
+model,setup,strict_total,strict_attacks,strict_benign,behavioral_total,behavioral_attacks,behavioral_benign,notes
+Qwen/Qwen3-1.7B,"instruct, no memories",3/12,0/8,3/4,3/12,0/8,3/4,"Off-the-shelf instruct baseline on the same 12-probe cyber set."
+Qwen/Qwen3-1.7B-Base,"base plus cyber-memory LoRA",7/12,3/8,4/4,12/12,8/8,4/4,"First successful LoRA trained from 360 generated cyber memories and 720 SFT examples."
+Qwen/Qwen3-1.7B,"instruct plus cyber-memory LoRA",5/12,1/8,4/4,7/12,4/8,3/4,"Same base-trained LoRA attached to the instruct model; improves over instruct-only but shows distribution mismatch."
+Qwen/Qwen3-4B-Base,"4B LoRA attempt on Kaggle P100",not completed,not completed,not completed,not completed,not completed,not completed,"P100 16GB loaded the model but hit CUDA OOM during PEFT preparation; requires QLoRA on a better GPU or local Blackwell setup."

@@ -1,0 +1,347 @@
+{
+  "filename": "acct.h",
+  "includes": [
+    "linux/types.h",
+    "asm/param.h",
+    "asm/byteorder.h"
+  ],
+  "defines": [
+    {
+      "name": "ACCT_COMM",
+      "value": "16",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "AFORK",
+      "value": "0x01",
+      "comment": "... executed fork, but did not exec",
+      "category": ""
+    },
+    {
+      "name": "ASU",
+      "value": "0x02",
+      "comment": "... used super-user privileges",
+      "category": ""
+    },
+    {
+      "name": "ACOMPAT",
+      "value": "0x04",
+      "comment": "... used compatibility mode (VAX only not used)",
+      "category": ""
+    },
+    {
+      "name": "ACORE",
+      "value": "0x08",
+      "comment": "... dumped core",
+      "category": ""
+    },
+    {
+      "name": "AXSIG",
+      "value": "0x10",
+      "comment": "... was killed by a signal",
+      "category": ""
+    },
+    {
+      "name": "AGROUP",
+      "value": "0x20",
+      "comment": "... was the last task of the process (task group)",
+      "category": ""
+    },
+    {
+      "name": "ACCT_BYTEORDER",
+      "value": "0x80",
+      "comment": "accounting file is big endian",
+      "category": ""
+    },
+    {
+      "name": "ACCT_BYTEORDER",
+      "value": "0x00",
+      "comment": "accounting file is little endian",
+      "category": ""
+    },
+    {
+      "name": "ACCT_VERSION",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "AHZ",
+      "value": "(HZ)",
+      "comment": "",
+      "category": ""
+    }
+  ],
+  "structs": [
+    {
+      "name": "acct",
+      "fields": [
+        {
+          "type_name": "char",
+          "name": "ac_flag",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "ac_version",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "ac_uid16",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "ac_gid16",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "ac_tty",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ac_btime",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "comp_t",
+          "name": "ac_utime",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "comp_t",
+          "name": "ac_stime",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "comp_t",
+          "name": "ac_etime",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "comp_t",
+          "name": "ac_mem",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "comp_t",
+          "name": "ac_io",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "comp_t",
+          "name": "ac_rw",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "comp_t",
+          "name": "ac_minflt",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "comp_t",
+          "name": "ac_majflt",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "comp_t",
+          "name": "ac_swaps",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "ac_ahz",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ac_exitcode",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "ac_comm",
+          "array_size": "ACCT_COMM + 1",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "ac_etime_hi",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "ac_etime_lo",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ac_uid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ac_gid",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "acct_v3",
+      "fields": [
+        {
+          "type_name": "char",
+          "name": "ac_flag",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "ac_version",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "ac_tty",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ac_exitcode",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ac_uid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ac_gid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ac_pid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ac_ppid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ac_btime",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ac_etime",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "float",
+          "name": "ac_etime",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "comp_t",
+          "name": "ac_utime",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "comp_t",
+          "name": "ac_stime",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "comp_t",
+          "name": "ac_mem",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "comp_t",
+          "name": "ac_io",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "comp_t",
+          "name": "ac_rw",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "comp_t",
+          "name": "ac_minflt",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "comp_t",
+          "name": "ac_majflt",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "comp_t",
+          "name": "ac_swaps",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "ac_comm",
+          "array_size": "ACCT_COMM",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

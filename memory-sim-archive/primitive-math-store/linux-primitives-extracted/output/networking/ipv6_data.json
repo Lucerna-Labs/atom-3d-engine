@@ -1,0 +1,254 @@
+{
+  "filename": "ipv6.h",
+  "includes": [
+    "linux/libc-compat.h",
+    "linux/types.h",
+    "linux/stddef.h",
+    "linux/in6.h",
+    "asm/byteorder.h"
+  ],
+  "defines": [
+    {
+      "name": "IPV6_MIN_MTU",
+      "value": "1280",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_SRCRT_STRICT",
+      "value": "0x01",
+      "comment": "Deprecated; will be removed",
+      "category": ""
+    },
+    {
+      "name": "IPV6_SRCRT_TYPE_0",
+      "value": "0",
+      "comment": "Deprecated; will be removed",
+      "category": ""
+    },
+    {
+      "name": "IPV6_SRCRT_TYPE_2",
+      "value": "2",
+      "comment": "IPv6 type 2 Routing Header",
+      "category": ""
+    },
+    {
+      "name": "IPV6_SRCRT_TYPE_3",
+      "value": "3",
+      "comment": "RPL Segment Routing with IPv6",
+      "category": ""
+    },
+    {
+      "name": "IPV6_SRCRT_TYPE_4",
+      "value": "4",
+      "comment": "Segment Routing with IPv6",
+      "category": ""
+    },
+    {
+      "name": "ipv6_destopt_hdr",
+      "value": "ipv6_opt_hdr",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ipv6_hopopt_hdr",
+      "value": "ipv6_opt_hdr",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IPV6_OPT_ROUTERALERT_MLD",
+      "value": "0x0000",
+      "comment": "MLD(RFC2710)",
+      "category": ""
+    },
+    {
+      "name": "rt0_type",
+      "value": "rt_hdr.type",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "rt2_type",
+      "value": "rt_hdr.type",
+      "comment": "",
+      "category": ""
+    }
+  ],
+  "structs": [
+    {
+      "name": "in6_pktinfo",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "ipi6_ifindex",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ip6_mtuinfo",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "ip6m_mtu",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "in6_ifreq",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "ifr6_prefixlen",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "ifr6_ifindex",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ipv6_rt_hdr",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "nexthdr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "hdrlen",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "segments_left",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ipv6_opt_hdr",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "nexthdr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "hdrlen",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "rt0_hdr",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "rt2_hdr",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ipv6_destopt_hao",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "length",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ipv6hdr",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "flow_lbl",
+          "array_size": "3",
+          "comment": ""
+        },
+        {
+          "type_name": "__be16",
+          "name": "payload_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "nexthdr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "hop_limit",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

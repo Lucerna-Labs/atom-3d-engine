@@ -1,0 +1,674 @@
+{
+  "filename": "ext4.h",
+  "includes": [
+    "linux/fiemap.h",
+    "linux/fs.h",
+    "linux/ioctl.h",
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "EXT4_IOC_GETVERSION",
+      "value": "_IOR('f', 3, long)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EXT4_IOC_SETVERSION",
+      "value": "_IOW('f', 4, long)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EXT4_IOC_GETVERSION_OLD",
+      "value": "FS_IOC_GETVERSION",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EXT4_IOC_SETVERSION_OLD",
+      "value": "FS_IOC_SETVERSION",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EXT4_IOC_GETRSVSZ",
+      "value": "_IOR('f', 5, long)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EXT4_IOC_SETRSVSZ",
+      "value": "_IOW('f', 6, long)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EXT4_IOC_GROUP_EXTEND",
+      "value": "_IOW('f', 7, unsigned long)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EXT4_IOC_GROUP_ADD",
+      "value": "_IOW('f', 8, struct ext4_new_group_input)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EXT4_IOC_MIGRATE",
+      "value": "_IO('f', 9)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EXT4_IOC_ALLOC_DA_BLKS",
+      "value": "_IO('f', 12)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EXT4_IOC_MOVE_EXT",
+      "value": "_IOWR('f', 15, struct move_extent)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EXT4_IOC_RESIZE_FS",
+      "value": "_IOW('f', 16, __u64)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EXT4_IOC_SWAP_BOOT",
+      "value": "_IO('f', 17)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EXT4_IOC_PRECACHE_EXTENTS",
+      "value": "_IO('f', 18)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EXT4_IOC_CLEAR_ES_CACHE",
+      "value": "_IO('f', 40)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EXT4_IOC_GETSTATE",
+      "value": "_IOW('f', 41, __u32)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EXT4_IOC_GET_ES_CACHE",
+      "value": "_IOWR('f', 42, struct fiemap)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EXT4_IOC_CHECKPOINT",
+      "value": "_IOW('f', 43, __u32)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EXT4_IOC_GETFSUUID",
+      "value": "_IOR('f', 44, struct fsuuid)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EXT4_IOC_SETFSUUID",
+      "value": "_IOW('f', 44, struct fsuuid)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EXT4_IOC_GET_TUNE_SB_PARAM",
+      "value": "_IOR('f', 45, struct ext4_tune_sb_params)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EXT4_IOC_SET_TUNE_SB_PARAM",
+      "value": "_IOW('f', 46, struct ext4_tune_sb_params)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EXT4_IOC_SHUTDOWN",
+      "value": "_IOR('X', 125, __u32)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EXT4_IOC32_GETVERSION",
+      "value": "_IOR('f', 3, int)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EXT4_IOC32_SETVERSION",
+      "value": "_IOW('f', 4, int)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EXT4_IOC32_GETRSVSZ",
+      "value": "_IOR('f', 5, int)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EXT4_IOC32_SETRSVSZ",
+      "value": "_IOW('f', 6, int)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EXT4_IOC32_GROUP_EXTEND",
+      "value": "_IOW('f', 7, unsigned int)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EXT4_IOC32_GROUP_ADD",
+      "value": "_IOW('f', 8, struct compat_ext4_new_group_input)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EXT4_IOC32_GETVERSION_OLD",
+      "value": "FS_IOC32_GETVERSION",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EXT4_IOC32_SETVERSION_OLD",
+      "value": "FS_IOC32_SETVERSION",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EXT4_STATE_FLAG_EXT_PRECACHED",
+      "value": "0x00000001",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EXT4_STATE_FLAG_NEW",
+      "value": "0x00000002",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EXT4_STATE_FLAG_NEWENTRY",
+      "value": "0x00000004",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EXT4_STATE_FLAG_DA_ALLOC_CLOSE",
+      "value": "0x00000008",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EXT4_IOC_CHECKPOINT_FLAG_DISCARD",
+      "value": "0x1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EXT4_IOC_CHECKPOINT_FLAG_ZEROOUT",
+      "value": "0x2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EXT4_IOC_CHECKPOINT_FLAG_DRY_RUN",
+      "value": "0x4",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EXT4_IOC_CHECKPOINT_FLAG_VALID",
+      "value": "(EXT4_IOC_CHECKPOINT_FLAG_DISCARD | ",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EXT4_GOING_FLAGS_DEFAULT",
+      "value": "0x0",
+      "comment": "going down",
+      "category": ""
+    },
+    {
+      "name": "EXT4_GOING_FLAGS_LOGFLUSH",
+      "value": "0x1",
+      "comment": "flush log but not data",
+      "category": ""
+    },
+    {
+      "name": "EXT4_GOING_FLAGS_NOLOGFLUSH",
+      "value": "0x2",
+      "comment": "don't flush log nor data",
+      "category": ""
+    },
+    {
+      "name": "EXT4_TUNE_FL_ERRORS_BEHAVIOR",
+      "value": "0x00000001",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EXT4_TUNE_FL_MNT_COUNT",
+      "value": "0x00000002",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EXT4_TUNE_FL_MAX_MNT_COUNT",
+      "value": "0x00000004",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EXT4_TUNE_FL_CHECKINTRVAL",
+      "value": "0x00000008",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EXT4_TUNE_FL_LAST_CHECK_TIME",
+      "value": "0x00000010",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EXT4_TUNE_FL_RESERVED_BLOCKS",
+      "value": "0x00000020",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EXT4_TUNE_FL_RESERVED_UID",
+      "value": "0x00000040",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EXT4_TUNE_FL_RESERVED_GID",
+      "value": "0x00000080",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EXT4_TUNE_FL_DEFAULT_MNT_OPTS",
+      "value": "0x00000100",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EXT4_TUNE_FL_DEF_HASH_ALG",
+      "value": "0x00000200",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EXT4_TUNE_FL_RAID_STRIDE",
+      "value": "0x00000400",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EXT4_TUNE_FL_RAID_STRIPE_WIDTH",
+      "value": "0x00000800",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EXT4_TUNE_FL_MOUNT_OPTS",
+      "value": "0x00001000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EXT4_TUNE_FL_FEATURES",
+      "value": "0x00002000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EXT4_TUNE_FL_EDIT_FEATURES",
+      "value": "0x00004000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EXT4_TUNE_FL_FORCE_FSCK",
+      "value": "0x00008000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EXT4_TUNE_FL_ENCODING",
+      "value": "0x00010000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EXT4_TUNE_FL_ENCODING_FLAGS",
+      "value": "0x00020000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EXT4_FIEMAP_EXTENT_HOLE",
+      "value": "0x08000000",
+      "comment": "",
+      "category": ""
+    }
+  ],
+  "structs": [
+    {
+      "name": "fsuuid",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "fsu_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "fsu_flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "move_extent",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "donor_fd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "orig_start",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "donor_start",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "moved_len",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ext4_new_group_input",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "group",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "block_bitmap",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "inode_bitmap",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "inode_table",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "blocks_count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "reserved_blocks",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "unused",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ext4_tune_sb_params",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "set_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "checkinterval",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "errors_behavior",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "mnt_count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "max_mnt_count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "raid_stride",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "last_check_time",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "reserved_blocks",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "blocks_count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "default_mnt_opts",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved_uid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved_gid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "raid_stripe_width",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "encoding",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "encoding_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "def_hash_alg",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "pad_1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "pad_2",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "feature_compat",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "feature_incompat",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "feature_ro_compat",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "set_feature_compat_mask",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "set_feature_incompat_mask",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "set_feature_ro_compat_mask",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "clear_feature_compat_mask",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "clear_feature_incompat_mask",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "clear_feature_ro_compat_mask",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "mount_opts",
+          "array_size": "64",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "pad",
+          "array_size": "68",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

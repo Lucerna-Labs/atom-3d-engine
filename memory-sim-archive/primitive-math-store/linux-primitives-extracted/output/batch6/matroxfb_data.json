@@ -1,0 +1,125 @@
+{
+  "filename": "matroxfb.h",
+  "includes": [
+    "asm/ioctl.h",
+    "linux/types.h",
+    "linux/videodev2.h",
+    "linux/fb.h"
+  ],
+  "defines": [
+    {
+      "name": "MATROXFB_OUTPUT_PRIMARY",
+      "value": "0x0000",
+      "comment": "",
+      "category": "MATROXFB_OUTPUT"
+    },
+    {
+      "name": "MATROXFB_OUTPUT_SECONDARY",
+      "value": "0x0001",
+      "comment": "",
+      "category": "MATROXFB_OUTPUT"
+    },
+    {
+      "name": "MATROXFB_OUTPUT_DFP",
+      "value": "0x0002",
+      "comment": "",
+      "category": "MATROXFB_OUTPUT"
+    },
+    {
+      "name": "MATROXFB_OUTPUT_MODE_PAL",
+      "value": "0x0001",
+      "comment": "",
+      "category": "MATROXFB_OUTPUT"
+    },
+    {
+      "name": "MATROXFB_OUTPUT_MODE_NTSC",
+      "value": "0x0002",
+      "comment": "",
+      "category": "MATROXFB_OUTPUT"
+    },
+    {
+      "name": "MATROXFB_OUTPUT_MODE_MONITOR",
+      "value": "0x0080",
+      "comment": "",
+      "category": "MATROXFB_OUTPUT"
+    },
+    {
+      "name": "MATROXFB_SET_OUTPUT_MODE",
+      "value": "_IOW('n',0xFA,size_t)",
+      "comment": "",
+      "category": "MATROXFB_SET"
+    },
+    {
+      "name": "MATROXFB_GET_OUTPUT_MODE",
+      "value": "_IOWR('n',0xFA,size_t)",
+      "comment": "",
+      "category": "MATROXFB_GET"
+    },
+    {
+      "name": "MATROXFB_OUTPUT_CONN_PRIMARY",
+      "value": "(1 << MATROXFB_OUTPUT_PRIMARY)",
+      "comment": "",
+      "category": "MATROXFB_OUTPUT"
+    },
+    {
+      "name": "MATROXFB_OUTPUT_CONN_SECONDARY",
+      "value": "(1 << MATROXFB_OUTPUT_SECONDARY)",
+      "comment": "",
+      "category": "MATROXFB_OUTPUT"
+    },
+    {
+      "name": "MATROXFB_OUTPUT_CONN_DFP",
+      "value": "(1 << MATROXFB_OUTPUT_DFP)",
+      "comment": "",
+      "category": "MATROXFB_OUTPUT"
+    },
+    {
+      "name": "MATROXFB_SET_OUTPUT_CONNECTION",
+      "value": "_IOW('n',0xF8,size_t)",
+      "comment": "",
+      "category": "MATROXFB_SET"
+    },
+    {
+      "name": "MATROXFB_GET_OUTPUT_CONNECTION",
+      "value": "_IOR('n',0xF8,size_t)",
+      "comment": "",
+      "category": "MATROXFB_GET"
+    },
+    {
+      "name": "MATROXFB_GET_AVAILABLE_OUTPUTS",
+      "value": "_IOR('n',0xF9,size_t)",
+      "comment": "",
+      "category": "MATROXFB_GET"
+    },
+    {
+      "name": "MATROXFB_GET_ALL_OUTPUTS",
+      "value": "_IOR('n',0xFB,size_t)",
+      "comment": "",
+      "category": "MATROXFB_GET"
+    }
+  ],
+  "structs": [
+    {
+      "name": "matroxioc_output_mode",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "output",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "mode",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

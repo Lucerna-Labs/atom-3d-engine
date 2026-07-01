@@ -1,0 +1,128 @@
+{
+  "filename": "udp.h",
+  "includes": [
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "UDP_CORK",
+      "value": "1",
+      "comment": "Never send partially complete segments",
+      "category": ""
+    },
+    {
+      "name": "UDP_ENCAP",
+      "value": "100",
+      "comment": "Set the socket to accept encapsulated packets",
+      "category": ""
+    },
+    {
+      "name": "UDP_NO_CHECK6_TX",
+      "value": "101",
+      "comment": "Disable sending checksum for UDP6X",
+      "category": "UDP_NO"
+    },
+    {
+      "name": "UDP_NO_CHECK6_RX",
+      "value": "102",
+      "comment": "Disable accepting checksum for UDP6",
+      "category": "UDP_NO"
+    },
+    {
+      "name": "UDP_SEGMENT",
+      "value": "103",
+      "comment": "Set GSO segmentation size",
+      "category": ""
+    },
+    {
+      "name": "UDP_GRO",
+      "value": "104",
+      "comment": "This socket can receive UDP GRO packets",
+      "category": ""
+    },
+    {
+      "name": "UDP_ENCAP_ESPINUDP_NON_IKE",
+      "value": "1",
+      "comment": "unused  draft-ietf-ipsec-nat-t-ike-00/01",
+      "category": "UDP_ENCAP"
+    },
+    {
+      "name": "UDP_ENCAP_ESPINUDP",
+      "value": "2",
+      "comment": "draft-ietf-ipsec-udp-encaps-06",
+      "category": "UDP_ENCAP"
+    },
+    {
+      "name": "UDP_ENCAP_L2TPINUDP",
+      "value": "3",
+      "comment": "rfc2661",
+      "category": "UDP_ENCAP"
+    },
+    {
+      "name": "UDP_ENCAP_GTP0",
+      "value": "4",
+      "comment": "GSM TS 09.60",
+      "category": "UDP_ENCAP"
+    },
+    {
+      "name": "UDP_ENCAP_GTP1U",
+      "value": "5",
+      "comment": "3GPP TS 29.060",
+      "category": "UDP_ENCAP"
+    },
+    {
+      "name": "UDP_ENCAP_RXRPC",
+      "value": "6",
+      "comment": "",
+      "category": "UDP_ENCAP"
+    },
+    {
+      "name": "TCP_ENCAP_ESPINTCP",
+      "value": "7",
+      "comment": "Yikes, this is really xfrm encap types.",
+      "category": "TCP_ENCAP"
+    },
+    {
+      "name": "UDP_ENCAP_OVPNINUDP",
+      "value": "8",
+      "comment": "OpenVPN traffic",
+      "category": "UDP_ENCAP"
+    }
+  ],
+  "structs": [
+    {
+      "name": "udphdr",
+      "fields": [
+        {
+          "type_name": "__be16",
+          "name": "source",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be16",
+          "name": "dest",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be16",
+          "name": "len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__sum16",
+          "name": "check",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

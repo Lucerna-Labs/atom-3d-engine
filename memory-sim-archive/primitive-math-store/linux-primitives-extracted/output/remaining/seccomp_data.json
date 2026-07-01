@@ -1,0 +1,373 @@
+{
+  "filename": "seccomp.h",
+  "includes": [
+    "linux/compiler.h",
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "SECCOMP_MODE_DISABLED",
+      "value": "0",
+      "comment": "seccomp is not in use.",
+      "category": "SECCOMP_MODE"
+    },
+    {
+      "name": "SECCOMP_MODE_STRICT",
+      "value": "1",
+      "comment": "uses hard-coded filter.",
+      "category": "SECCOMP_MODE"
+    },
+    {
+      "name": "SECCOMP_MODE_FILTER",
+      "value": "2",
+      "comment": "uses user-supplied filter.",
+      "category": "SECCOMP_MODE"
+    },
+    {
+      "name": "SECCOMP_SET_MODE_STRICT",
+      "value": "0",
+      "comment": "",
+      "category": "SECCOMP_SET"
+    },
+    {
+      "name": "SECCOMP_SET_MODE_FILTER",
+      "value": "1",
+      "comment": "",
+      "category": "SECCOMP_SET"
+    },
+    {
+      "name": "SECCOMP_GET_ACTION_AVAIL",
+      "value": "2",
+      "comment": "",
+      "category": "SECCOMP_GET"
+    },
+    {
+      "name": "SECCOMP_GET_NOTIF_SIZES",
+      "value": "3",
+      "comment": "",
+      "category": "SECCOMP_GET"
+    },
+    {
+      "name": "SECCOMP_FILTER_FLAG_TSYNC",
+      "value": "(1UL << 0)",
+      "comment": "",
+      "category": "SECCOMP_FILTER"
+    },
+    {
+      "name": "SECCOMP_FILTER_FLAG_LOG",
+      "value": "(1UL << 1)",
+      "comment": "",
+      "category": "SECCOMP_FILTER"
+    },
+    {
+      "name": "SECCOMP_FILTER_FLAG_SPEC_ALLOW",
+      "value": "(1UL << 2)",
+      "comment": "",
+      "category": "SECCOMP_FILTER"
+    },
+    {
+      "name": "SECCOMP_FILTER_FLAG_NEW_LISTENER",
+      "value": "(1UL << 3)",
+      "comment": "",
+      "category": "SECCOMP_FILTER"
+    },
+    {
+      "name": "SECCOMP_FILTER_FLAG_TSYNC_ESRCH",
+      "value": "(1UL << 4)",
+      "comment": "",
+      "category": "SECCOMP_FILTER"
+    },
+    {
+      "name": "SECCOMP_FILTER_FLAG_WAIT_KILLABLE_RECV",
+      "value": "(1UL << 5)",
+      "comment": "",
+      "category": "SECCOMP_FILTER"
+    },
+    {
+      "name": "SECCOMP_RET_KILL_PROCESS",
+      "value": "0x80000000U",
+      "comment": "kill the process",
+      "category": "SECCOMP_RET"
+    },
+    {
+      "name": "SECCOMP_RET_KILL_THREAD",
+      "value": "0x00000000U",
+      "comment": "kill the thread",
+      "category": "SECCOMP_RET"
+    },
+    {
+      "name": "SECCOMP_RET_KILL",
+      "value": "SECCOMP_RET_KILL_THREAD",
+      "comment": "",
+      "category": "SECCOMP_RET"
+    },
+    {
+      "name": "SECCOMP_RET_TRAP",
+      "value": "0x00030000U",
+      "comment": "disallow and force a SIGSYS",
+      "category": "SECCOMP_RET"
+    },
+    {
+      "name": "SECCOMP_RET_ERRNO",
+      "value": "0x00050000U",
+      "comment": "returns an errno",
+      "category": "SECCOMP_RET"
+    },
+    {
+      "name": "SECCOMP_RET_USER_NOTIF",
+      "value": "0x7fc00000U",
+      "comment": "notifies userspace",
+      "category": "SECCOMP_RET"
+    },
+    {
+      "name": "SECCOMP_RET_TRACE",
+      "value": "0x7ff00000U",
+      "comment": "pass to a tracer or disallow",
+      "category": "SECCOMP_RET"
+    },
+    {
+      "name": "SECCOMP_RET_LOG",
+      "value": "0x7ffc0000U",
+      "comment": "allow after logging",
+      "category": "SECCOMP_RET"
+    },
+    {
+      "name": "SECCOMP_RET_ALLOW",
+      "value": "0x7fff0000U",
+      "comment": "allow",
+      "category": "SECCOMP_RET"
+    },
+    {
+      "name": "SECCOMP_RET_ACTION_FULL",
+      "value": "0xffff0000U",
+      "comment": "",
+      "category": "SECCOMP_RET"
+    },
+    {
+      "name": "SECCOMP_RET_ACTION",
+      "value": "0x7fff0000U",
+      "comment": "",
+      "category": "SECCOMP_RET"
+    },
+    {
+      "name": "SECCOMP_RET_DATA",
+      "value": "0x0000ffffU",
+      "comment": "",
+      "category": "SECCOMP_RET"
+    },
+    {
+      "name": "SECCOMP_USER_NOTIF_FLAG_CONTINUE",
+      "value": "(1UL << 0)",
+      "comment": "",
+      "category": "SECCOMP_USER"
+    },
+    {
+      "name": "SECCOMP_USER_NOTIF_FD_SYNC_WAKE_UP",
+      "value": "(1UL << 0)",
+      "comment": "",
+      "category": "SECCOMP_USER"
+    },
+    {
+      "name": "SECCOMP_ADDFD_FLAG_SETFD",
+      "value": "(1UL << 0)",
+      "comment": "Specify remote fd",
+      "category": "SECCOMP_ADDFD"
+    },
+    {
+      "name": "SECCOMP_ADDFD_FLAG_SEND",
+      "value": "(1UL << 1)",
+      "comment": "Addfd and return it, atomically",
+      "category": "SECCOMP_ADDFD"
+    },
+    {
+      "name": "SECCOMP_IOC_MAGIC",
+      "value": "'!'",
+      "comment": "",
+      "category": "SECCOMP_IOC"
+    },
+    {
+      "name": "SECCOMP_IOCTL_NOTIF_RECV",
+      "value": "SECCOMP_IOWR(0, struct seccomp_notif)",
+      "comment": "",
+      "category": "SECCOMP_IOCTL"
+    },
+    {
+      "name": "SECCOMP_IOCTL_NOTIF_SEND",
+      "value": "SECCOMP_IOWR(1,\t",
+      "comment": "",
+      "category": "SECCOMP_IOCTL"
+    },
+    {
+      "name": "SECCOMP_IOCTL_NOTIF_ID_VALID",
+      "value": "SECCOMP_IOW(2, __u64)",
+      "comment": "",
+      "category": "SECCOMP_IOCTL"
+    },
+    {
+      "name": "SECCOMP_IOCTL_NOTIF_ADDFD",
+      "value": "SECCOMP_IOW(3, ",
+      "comment": "",
+      "category": "SECCOMP_IOCTL"
+    },
+    {
+      "name": "SECCOMP_IOCTL_NOTIF_SET_FLAGS",
+      "value": "SECCOMP_IOW(4, __u64)",
+      "comment": "",
+      "category": "SECCOMP_IOCTL"
+    }
+  ],
+  "structs": [
+    {
+      "name": "seccomp_data",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "nr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "arch",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "instruction_pointer",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "args",
+          "array_size": "6",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "seccomp_notif_sizes",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "seccomp_notif",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "seccomp_notif_resp",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "seccomp_data",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "seccomp_notif",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "seccomp_notif_resp",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s64",
+          "name": "val",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "error",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "seccomp_notif_addfd",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "srcfd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "newfd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "newfd_flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

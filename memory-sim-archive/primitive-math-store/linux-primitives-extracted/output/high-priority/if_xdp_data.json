@@ -1,0 +1,466 @@
+{
+  "filename": "if_xdp.h",
+  "includes": [
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "XDP_SHARED_UMEM",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "XDP_SHARED"
+    },
+    {
+      "name": "XDP_COPY",
+      "value": "(1 << 1)",
+      "comment": "Force copy-mode",
+      "category": ""
+    },
+    {
+      "name": "XDP_ZEROCOPY",
+      "value": "(1 << 2)",
+      "comment": "Force zero-copy mode",
+      "category": ""
+    },
+    {
+      "name": "XDP_USE_NEED_WAKEUP",
+      "value": "(1 << 3)",
+      "comment": "",
+      "category": "XDP_USE"
+    },
+    {
+      "name": "XDP_USE_SG",
+      "value": "(1 << 4)",
+      "comment": "",
+      "category": "XDP_USE"
+    },
+    {
+      "name": "XDP_UMEM_UNALIGNED_CHUNK_FLAG",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "XDP_UMEM"
+    },
+    {
+      "name": "XDP_UMEM_TX_SW_CSUM",
+      "value": "(1 << 1)",
+      "comment": "",
+      "category": "XDP_UMEM"
+    },
+    {
+      "name": "XDP_UMEM_TX_METADATA_LEN",
+      "value": "(1 << 2)",
+      "comment": "",
+      "category": "XDP_UMEM"
+    },
+    {
+      "name": "XDP_RING_NEED_WAKEUP",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "XDP_RING"
+    },
+    {
+      "name": "XDP_MMAP_OFFSETS",
+      "value": "1",
+      "comment": "",
+      "category": "XDP_MMAP"
+    },
+    {
+      "name": "XDP_RX_RING",
+      "value": "2",
+      "comment": "",
+      "category": "XDP_RX"
+    },
+    {
+      "name": "XDP_TX_RING",
+      "value": "3",
+      "comment": "",
+      "category": "XDP_TX"
+    },
+    {
+      "name": "XDP_UMEM_REG",
+      "value": "4",
+      "comment": "",
+      "category": "XDP_UMEM"
+    },
+    {
+      "name": "XDP_UMEM_FILL_RING",
+      "value": "5",
+      "comment": "",
+      "category": "XDP_UMEM"
+    },
+    {
+      "name": "XDP_UMEM_COMPLETION_RING",
+      "value": "6",
+      "comment": "",
+      "category": "XDP_UMEM"
+    },
+    {
+      "name": "XDP_STATISTICS",
+      "value": "7",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "XDP_OPTIONS",
+      "value": "8",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "XDP_MAX_TX_SKB_BUDGET",
+      "value": "9",
+      "comment": "",
+      "category": "XDP_MAX"
+    },
+    {
+      "name": "XDP_OPTIONS_ZEROCOPY",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "XDP_OPTIONS"
+    },
+    {
+      "name": "XDP_PGOFF_RX_RING",
+      "value": "0",
+      "comment": "",
+      "category": "XDP_PGOFF"
+    },
+    {
+      "name": "XDP_PGOFF_TX_RING",
+      "value": "0x80000000",
+      "comment": "",
+      "category": "XDP_PGOFF"
+    },
+    {
+      "name": "XDP_UMEM_PGOFF_FILL_RING",
+      "value": "0x100000000ULL",
+      "comment": "",
+      "category": "XDP_UMEM"
+    },
+    {
+      "name": "XDP_UMEM_PGOFF_COMPLETION_RING",
+      "value": "0x180000000ULL",
+      "comment": "",
+      "category": "XDP_UMEM"
+    },
+    {
+      "name": "XSK_UNALIGNED_BUF_OFFSET_SHIFT",
+      "value": "48",
+      "comment": "",
+      "category": "XSK_UNALIGNED"
+    },
+    {
+      "name": "XSK_UNALIGNED_BUF_ADDR_MASK",
+      "value": "",
+      "comment": "",
+      "category": "XSK_UNALIGNED"
+    },
+    {
+      "name": "XDP_TXMD_FLAGS_TIMESTAMP",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "XDP_TXMD"
+    },
+    {
+      "name": "XDP_TXMD_FLAGS_CHECKSUM",
+      "value": "(1 << 1)",
+      "comment": "",
+      "category": "XDP_TXMD"
+    },
+    {
+      "name": "XDP_TXMD_FLAGS_LAUNCH_TIME",
+      "value": "(1 << 2)",
+      "comment": "",
+      "category": "XDP_TXMD"
+    },
+    {
+      "name": "XDP_PKT_CONTD",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "XDP_PKT"
+    },
+    {
+      "name": "XDP_TX_METADATA",
+      "value": "(1 << 1)",
+      "comment": "",
+      "category": "XDP_TX"
+    }
+  ],
+  "structs": [
+    {
+      "name": "sockaddr_xdp",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "sxdp_family",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "sxdp_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "sxdp_ifindex",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "sxdp_queue_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "sxdp_shared_umem_fd",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "xdp_ring_offset",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "producer",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "consumer",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "desc",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "xdp_mmap_offsets",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "xdp_umem_reg",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "addr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "chunk_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "headroom",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tx_metadata_len",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "xdp_statistics",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "rx_dropped",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "rx_invalid_descs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "tx_invalid_descs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "rx_ring_full",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "rx_fill_ring_empty_descs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "tx_ring_empty_descs",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "xdp_options",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "xsk_tx_metadata",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "csum_start",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "csum_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "launch_time",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "tx_timestamp",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_7",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "csum_start",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "csum_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "launch_time",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_8",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "tx_timestamp",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "xdp_desc",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "addr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "options",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

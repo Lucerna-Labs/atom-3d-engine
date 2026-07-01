@@ -1,0 +1,36 @@
+# Keep this archive Git-friendly if more source folders are merged later.
+models/
+**/models/
+target/
+**/target/
+node_modules/
+**/node_modules/
+__pycache__/
+**/__pycache__/
+.venv/
+**/.venv/
+venv/
+**/venv/
+env/
+**/env/
+.vs/
+**/.vs/
+
+# Raw training/checkpoint bulk. Canonical adapter safetensors are explicitly
+# added when needed and tracked via Git LFS.
+checkpoint-*/
+**/checkpoint-*/
+*.gguf
+*.pt
+*.pth
+*.bin
+*.onnx
+*.npz
+*.npy
+*.pkl
+*.parquet
+*.arrow
+*.zip
+*.7z
+*.rar
+

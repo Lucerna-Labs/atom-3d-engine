@@ -1,0 +1,550 @@
+{
+  "filename": "capability.h",
+  "includes": [
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "_LINUX_CAPABILITY_VERSION_1",
+      "value": "0x19980330",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "_LINUX_CAPABILITY_U32S_1",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "_LINUX_CAPABILITY_VERSION_2",
+      "value": "0x20071026",
+      "comment": "deprecated - use v3",
+      "category": ""
+    },
+    {
+      "name": "_LINUX_CAPABILITY_U32S_2",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "_LINUX_CAPABILITY_VERSION_3",
+      "value": "0x20080522",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "_LINUX_CAPABILITY_U32S_3",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "VFS_CAP_REVISION_MASK",
+      "value": "0xFF000000",
+      "comment": "",
+      "category": "VFS_CAP"
+    },
+    {
+      "name": "VFS_CAP_REVISION_SHIFT",
+      "value": "24",
+      "comment": "",
+      "category": "VFS_CAP"
+    },
+    {
+      "name": "VFS_CAP_FLAGS_MASK",
+      "value": "~VFS_CAP_REVISION_MASK",
+      "comment": "",
+      "category": "VFS_CAP"
+    },
+    {
+      "name": "VFS_CAP_FLAGS_EFFECTIVE",
+      "value": "0x000001",
+      "comment": "",
+      "category": "VFS_CAP"
+    },
+    {
+      "name": "VFS_CAP_REVISION_1",
+      "value": "0x01000000",
+      "comment": "",
+      "category": "VFS_CAP"
+    },
+    {
+      "name": "VFS_CAP_U32_1",
+      "value": "1",
+      "comment": "",
+      "category": "VFS_CAP"
+    },
+    {
+      "name": "XATTR_CAPS_SZ_1",
+      "value": "(sizeof(__le32)*(1 + 2*VFS_CAP_U32_1))",
+      "comment": "",
+      "category": "XATTR_CAPS"
+    },
+    {
+      "name": "VFS_CAP_REVISION_2",
+      "value": "0x02000000",
+      "comment": "",
+      "category": "VFS_CAP"
+    },
+    {
+      "name": "VFS_CAP_U32_2",
+      "value": "2",
+      "comment": "",
+      "category": "VFS_CAP"
+    },
+    {
+      "name": "XATTR_CAPS_SZ_2",
+      "value": "(sizeof(__le32)*(1 + 2*VFS_CAP_U32_2))",
+      "comment": "",
+      "category": "XATTR_CAPS"
+    },
+    {
+      "name": "VFS_CAP_REVISION_3",
+      "value": "0x03000000",
+      "comment": "",
+      "category": "VFS_CAP"
+    },
+    {
+      "name": "VFS_CAP_U32_3",
+      "value": "2",
+      "comment": "",
+      "category": "VFS_CAP"
+    },
+    {
+      "name": "XATTR_CAPS_SZ_3",
+      "value": "(sizeof(__le32)*(2 + 2*VFS_CAP_U32_3))",
+      "comment": "",
+      "category": "XATTR_CAPS"
+    },
+    {
+      "name": "XATTR_CAPS_SZ",
+      "value": "XATTR_CAPS_SZ_3",
+      "comment": "",
+      "category": "XATTR_CAPS"
+    },
+    {
+      "name": "VFS_CAP_U32",
+      "value": "VFS_CAP_U32_3",
+      "comment": "",
+      "category": "VFS_CAP"
+    },
+    {
+      "name": "VFS_CAP_REVISION",
+      "value": "VFS_CAP_REVISION_3",
+      "comment": "",
+      "category": "VFS_CAP"
+    },
+    {
+      "name": "_LINUX_CAPABILITY_VERSION",
+      "value": "_LINUX_CAPABILITY_VERSION_1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "_LINUX_CAPABILITY_U32S",
+      "value": "_LINUX_CAPABILITY_U32S_1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "CAP_CHOWN",
+      "value": "0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "CAP_DAC_OVERRIDE",
+      "value": "1",
+      "comment": "",
+      "category": "CAP_DAC"
+    },
+    {
+      "name": "CAP_DAC_READ_SEARCH",
+      "value": "2",
+      "comment": "",
+      "category": "CAP_DAC"
+    },
+    {
+      "name": "CAP_FOWNER",
+      "value": "3",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "CAP_FSETID",
+      "value": "4",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "CAP_KILL",
+      "value": "5",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "CAP_SETGID",
+      "value": "6",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "CAP_SETUID",
+      "value": "7",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "CAP_SETPCAP",
+      "value": "8",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "CAP_LINUX_IMMUTABLE",
+      "value": "9",
+      "comment": "",
+      "category": "CAP_LINUX"
+    },
+    {
+      "name": "CAP_NET_BIND_SERVICE",
+      "value": "10",
+      "comment": "",
+      "category": "CAP_NET"
+    },
+    {
+      "name": "CAP_NET_BROADCAST",
+      "value": "11",
+      "comment": "",
+      "category": "CAP_NET"
+    },
+    {
+      "name": "CAP_NET_ADMIN",
+      "value": "12",
+      "comment": "",
+      "category": "CAP_NET"
+    },
+    {
+      "name": "CAP_NET_RAW",
+      "value": "13",
+      "comment": "",
+      "category": "CAP_NET"
+    },
+    {
+      "name": "CAP_IPC_LOCK",
+      "value": "14",
+      "comment": "",
+      "category": "CAP_IPC"
+    },
+    {
+      "name": "CAP_IPC_OWNER",
+      "value": "15",
+      "comment": "",
+      "category": "CAP_IPC"
+    },
+    {
+      "name": "CAP_SYS_MODULE",
+      "value": "16",
+      "comment": "",
+      "category": "CAP_SYS"
+    },
+    {
+      "name": "CAP_SYS_RAWIO",
+      "value": "17",
+      "comment": "",
+      "category": "CAP_SYS"
+    },
+    {
+      "name": "CAP_SYS_CHROOT",
+      "value": "18",
+      "comment": "",
+      "category": "CAP_SYS"
+    },
+    {
+      "name": "CAP_SYS_PTRACE",
+      "value": "19",
+      "comment": "",
+      "category": "CAP_SYS"
+    },
+    {
+      "name": "CAP_SYS_PACCT",
+      "value": "20",
+      "comment": "",
+      "category": "CAP_SYS"
+    },
+    {
+      "name": "CAP_SYS_ADMIN",
+      "value": "21",
+      "comment": "",
+      "category": "CAP_SYS"
+    },
+    {
+      "name": "CAP_SYS_BOOT",
+      "value": "22",
+      "comment": "",
+      "category": "CAP_SYS"
+    },
+    {
+      "name": "CAP_SYS_NICE",
+      "value": "23",
+      "comment": "",
+      "category": "CAP_SYS"
+    },
+    {
+      "name": "CAP_SYS_RESOURCE",
+      "value": "24",
+      "comment": "",
+      "category": "CAP_SYS"
+    },
+    {
+      "name": "CAP_SYS_TIME",
+      "value": "25",
+      "comment": "",
+      "category": "CAP_SYS"
+    },
+    {
+      "name": "CAP_SYS_TTY_CONFIG",
+      "value": "26",
+      "comment": "",
+      "category": "CAP_SYS"
+    },
+    {
+      "name": "CAP_MKNOD",
+      "value": "27",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "CAP_LEASE",
+      "value": "28",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "CAP_AUDIT_WRITE",
+      "value": "29",
+      "comment": "",
+      "category": "CAP_AUDIT"
+    },
+    {
+      "name": "CAP_AUDIT_CONTROL",
+      "value": "30",
+      "comment": "",
+      "category": "CAP_AUDIT"
+    },
+    {
+      "name": "CAP_SETFCAP",
+      "value": "31",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "CAP_MAC_OVERRIDE",
+      "value": "32",
+      "comment": "",
+      "category": "CAP_MAC"
+    },
+    {
+      "name": "CAP_MAC_ADMIN",
+      "value": "33",
+      "comment": "",
+      "category": "CAP_MAC"
+    },
+    {
+      "name": "CAP_SYSLOG",
+      "value": "34",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "CAP_WAKE_ALARM",
+      "value": "35",
+      "comment": "",
+      "category": "CAP_WAKE"
+    },
+    {
+      "name": "CAP_BLOCK_SUSPEND",
+      "value": "36",
+      "comment": "",
+      "category": "CAP_BLOCK"
+    },
+    {
+      "name": "CAP_AUDIT_READ",
+      "value": "37",
+      "comment": "",
+      "category": "CAP_AUDIT"
+    },
+    {
+      "name": "CAP_PERFMON",
+      "value": "38",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "CAP_BPF",
+      "value": "39",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "CAP_CHECKPOINT_RESTORE",
+      "value": "40",
+      "comment": "",
+      "category": "CAP_CHECKPOINT"
+    },
+    {
+      "name": "CAP_LAST_CAP",
+      "value": "CAP_CHECKPOINT_RESTORE",
+      "comment": "",
+      "category": "CAP_LAST"
+    }
+  ],
+  "structs": [
+    {
+      "name": "__user_cap_header_struct",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "version",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "pid",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "__user_cap_data_struct",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "effective",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "permitted",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "inheritable",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "vfs_cap_data",
+      "fields": [
+        {
+          "type_name": "__le32",
+          "name": "magic_etc",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "permitted",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "inheritable",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_3",
+      "fields": [
+        {
+          "type_name": "__le32",
+          "name": "permitted",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "inheritable",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "vfs_ns_cap_data",
+      "fields": [
+        {
+          "type_name": "__le32",
+          "name": "magic_etc",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "permitted",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "inheritable",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "rootid",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_5",
+      "fields": [
+        {
+          "type_name": "__le32",
+          "name": "permitted",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "inheritable",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [
+    "__user_cap_header_struct",
+    "__user"
+  ],
+  "enums": {}
+}

@@ -1,0 +1,132 @@
+{
+  "filename": "mempolicy.h",
+  "includes": [
+    "linux/errno.h"
+  ],
+  "defines": [
+    {
+      "name": "MPOL_F_STATIC_NODES",
+      "value": "(1 << 15)",
+      "comment": "",
+      "category": "MPOL_F"
+    },
+    {
+      "name": "MPOL_F_RELATIVE_NODES",
+      "value": "(1 << 14)",
+      "comment": "",
+      "category": "MPOL_F"
+    },
+    {
+      "name": "MPOL_F_NUMA_BALANCING",
+      "value": "(1 << 13)",
+      "comment": "Optimize with NUMA balancing if possible",
+      "category": "MPOL_F"
+    },
+    {
+      "name": "MPOL_MODE_FLAGS",
+      "value": "",
+      "comment": "",
+      "category": "MPOL_MODE"
+    },
+    {
+      "name": "MPOL_USER_NODEMASK_FLAGS",
+      "value": "(MPOL_F_STATIC_NODES | MPOL_F_RELATIVE_NODES)",
+      "comment": "",
+      "category": "MPOL_USER"
+    },
+    {
+      "name": "MPOL_F_NODE",
+      "value": "(1<<0)",
+      "comment": "return next IL mode instead of node mask",
+      "category": "MPOL_F"
+    },
+    {
+      "name": "MPOL_F_ADDR",
+      "value": "(1<<1)",
+      "comment": "look up vma using address",
+      "category": "MPOL_F"
+    },
+    {
+      "name": "MPOL_F_MEMS_ALLOWED",
+      "value": "(1<<2)",
+      "comment": "return allowed memories",
+      "category": "MPOL_F"
+    },
+    {
+      "name": "MPOL_MF_STRICT",
+      "value": "(1<<0)",
+      "comment": "Verify existing pages in the mapping",
+      "category": "MPOL_MF"
+    },
+    {
+      "name": "MPOL_MF_MOVE",
+      "value": "(1<<1)\t/* Move pages owned by this process to conform",
+      "comment": "",
+      "category": "MPOL_MF"
+    },
+    {
+      "name": "MPOL_MF_MOVE_ALL",
+      "value": "(1<<2)",
+      "comment": "Move every page to conform to policy",
+      "category": "MPOL_MF"
+    },
+    {
+      "name": "MPOL_MF_LAZY",
+      "value": "(1<<3)",
+      "comment": "UNSUPPORTED FLAG: Lazy migrate on fault",
+      "category": "MPOL_MF"
+    },
+    {
+      "name": "MPOL_MF_INTERNAL",
+      "value": "(1<<4)",
+      "comment": "Internal flags start here",
+      "category": "MPOL_MF"
+    },
+    {
+      "name": "MPOL_MF_VALID",
+      "value": "(MPOL_MF_STRICT   | \t",
+      "comment": "",
+      "category": "MPOL_MF"
+    },
+    {
+      "name": "MPOL_F_SHARED",
+      "value": "(1 << 0)",
+      "comment": "identify shared policies",
+      "category": "MPOL_F"
+    },
+    {
+      "name": "MPOL_F_MOF",
+      "value": "(1 << 3)",
+      "comment": "this policy wants migrate on fault",
+      "category": "MPOL_F"
+    },
+    {
+      "name": "MPOL_F_MORON",
+      "value": "(1 << 4)",
+      "comment": "Migrate On protnone Reference On Node",
+      "category": "MPOL_F"
+    },
+    {
+      "name": "RECLAIM_ZONE",
+      "value": "(1<<0)",
+      "comment": "Enable zone reclaim",
+      "category": ""
+    },
+    {
+      "name": "RECLAIM_WRITE",
+      "value": "(1<<1)",
+      "comment": "Writeout pages during reclaim",
+      "category": ""
+    },
+    {
+      "name": "RECLAIM_UNMAP",
+      "value": "(1<<2)",
+      "comment": "Unmap pages during reclaim",
+      "category": ""
+    }
+  ],
+  "structs": [],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

@@ -1,0 +1,394 @@
+{
+  "filename": "ipmi_msgdefs.h",
+  "includes": [],
+  "defines": [
+    {
+      "name": "IPMI_NETFN_SENSOR_EVENT_REQUEST",
+      "value": "0x04",
+      "comment": "",
+      "category": "IPMI_NETFN"
+    },
+    {
+      "name": "IPMI_NETFN_SENSOR_EVENT_RESPONSE",
+      "value": "0x05",
+      "comment": "",
+      "category": "IPMI_NETFN"
+    },
+    {
+      "name": "IPMI_GET_EVENT_RECEIVER_CMD",
+      "value": "0x01",
+      "comment": "",
+      "category": "IPMI_GET"
+    },
+    {
+      "name": "IPMI_NETFN_APP_REQUEST",
+      "value": "0x06",
+      "comment": "",
+      "category": "IPMI_NETFN"
+    },
+    {
+      "name": "IPMI_NETFN_APP_RESPONSE",
+      "value": "0x07",
+      "comment": "",
+      "category": "IPMI_NETFN"
+    },
+    {
+      "name": "IPMI_GET_DEVICE_ID_CMD",
+      "value": "0x01",
+      "comment": "",
+      "category": "IPMI_GET"
+    },
+    {
+      "name": "IPMI_COLD_RESET_CMD",
+      "value": "0x02",
+      "comment": "",
+      "category": "IPMI_COLD"
+    },
+    {
+      "name": "IPMI_WARM_RESET_CMD",
+      "value": "0x03",
+      "comment": "",
+      "category": "IPMI_WARM"
+    },
+    {
+      "name": "IPMI_CLEAR_MSG_FLAGS_CMD",
+      "value": "0x30",
+      "comment": "",
+      "category": "IPMI_CLEAR"
+    },
+    {
+      "name": "IPMI_GET_DEVICE_GUID_CMD",
+      "value": "0x08",
+      "comment": "",
+      "category": "IPMI_GET"
+    },
+    {
+      "name": "IPMI_GET_MSG_FLAGS_CMD",
+      "value": "0x31",
+      "comment": "",
+      "category": "IPMI_GET"
+    },
+    {
+      "name": "IPMI_SEND_MSG_CMD",
+      "value": "0x34",
+      "comment": "",
+      "category": "IPMI_SEND"
+    },
+    {
+      "name": "IPMI_GET_MSG_CMD",
+      "value": "0x33",
+      "comment": "",
+      "category": "IPMI_GET"
+    },
+    {
+      "name": "IPMI_SET_BMC_GLOBAL_ENABLES_CMD",
+      "value": "0x2e",
+      "comment": "",
+      "category": "IPMI_SET"
+    },
+    {
+      "name": "IPMI_GET_BMC_GLOBAL_ENABLES_CMD",
+      "value": "0x2f",
+      "comment": "",
+      "category": "IPMI_GET"
+    },
+    {
+      "name": "IPMI_READ_EVENT_MSG_BUFFER_CMD",
+      "value": "0x35",
+      "comment": "",
+      "category": "IPMI_READ"
+    },
+    {
+      "name": "IPMI_GET_CHANNEL_INFO_CMD",
+      "value": "0x42",
+      "comment": "",
+      "category": "IPMI_GET"
+    },
+    {
+      "name": "IPMI_BMC_RCV_MSG_INTR",
+      "value": "0x01",
+      "comment": "",
+      "category": "IPMI_BMC"
+    },
+    {
+      "name": "IPMI_BMC_EVT_MSG_INTR",
+      "value": "0x02",
+      "comment": "",
+      "category": "IPMI_BMC"
+    },
+    {
+      "name": "IPMI_BMC_EVT_MSG_BUFF",
+      "value": "0x04",
+      "comment": "",
+      "category": "IPMI_BMC"
+    },
+    {
+      "name": "IPMI_BMC_SYS_LOG",
+      "value": "0x08",
+      "comment": "",
+      "category": "IPMI_BMC"
+    },
+    {
+      "name": "IPMI_NETFN_STORAGE_REQUEST",
+      "value": "0x0a",
+      "comment": "",
+      "category": "IPMI_NETFN"
+    },
+    {
+      "name": "IPMI_NETFN_STORAGE_RESPONSE",
+      "value": "0x0b",
+      "comment": "",
+      "category": "IPMI_NETFN"
+    },
+    {
+      "name": "IPMI_ADD_SEL_ENTRY_CMD",
+      "value": "0x44",
+      "comment": "",
+      "category": "IPMI_ADD"
+    },
+    {
+      "name": "IPMI_NETFN_FIRMWARE_REQUEST",
+      "value": "0x08",
+      "comment": "",
+      "category": "IPMI_NETFN"
+    },
+    {
+      "name": "IPMI_NETFN_FIRMWARE_RESPONSE",
+      "value": "0x09",
+      "comment": "",
+      "category": "IPMI_NETFN"
+    },
+    {
+      "name": "IPMI_BMC_SLAVE_ADDR",
+      "value": "0x20",
+      "comment": "",
+      "category": "IPMI_BMC"
+    },
+    {
+      "name": "IPMI_MAX_MSG_LENGTH",
+      "value": "272",
+      "comment": "multiple of 16",
+      "category": "IPMI_MAX"
+    },
+    {
+      "name": "IPMI_CC_NO_ERROR",
+      "value": "0x00",
+      "comment": "",
+      "category": "IPMI_CC"
+    },
+    {
+      "name": "IPMI_NODE_BUSY_ERR",
+      "value": "0xc0",
+      "comment": "",
+      "category": "IPMI_NODE"
+    },
+    {
+      "name": "IPMI_INVALID_COMMAND_ERR",
+      "value": "0xc1",
+      "comment": "",
+      "category": "IPMI_INVALID"
+    },
+    {
+      "name": "IPMI_TIMEOUT_ERR",
+      "value": "0xc3",
+      "comment": "",
+      "category": "IPMI_TIMEOUT"
+    },
+    {
+      "name": "IPMI_ERR_MSG_TRUNCATED",
+      "value": "0xc6",
+      "comment": "",
+      "category": "IPMI_ERR"
+    },
+    {
+      "name": "IPMI_REQ_LEN_INVALID_ERR",
+      "value": "0xc7",
+      "comment": "",
+      "category": "IPMI_REQ"
+    },
+    {
+      "name": "IPMI_REQ_LEN_EXCEEDED_ERR",
+      "value": "0xc8",
+      "comment": "",
+      "category": "IPMI_REQ"
+    },
+    {
+      "name": "IPMI_DEVICE_IN_FW_UPDATE_ERR",
+      "value": "0xd1",
+      "comment": "",
+      "category": "IPMI_DEVICE"
+    },
+    {
+      "name": "IPMI_DEVICE_IN_INIT_ERR",
+      "value": "0xd2",
+      "comment": "",
+      "category": "IPMI_DEVICE"
+    },
+    {
+      "name": "IPMI_NOT_IN_MY_STATE_ERR",
+      "value": "0xd5",
+      "comment": "IPMI 2.0",
+      "category": "IPMI_NOT"
+    },
+    {
+      "name": "IPMI_LOST_ARBITRATION_ERR",
+      "value": "0x81",
+      "comment": "",
+      "category": "IPMI_LOST"
+    },
+    {
+      "name": "IPMI_BUS_ERR",
+      "value": "0x82",
+      "comment": "",
+      "category": "IPMI_BUS"
+    },
+    {
+      "name": "IPMI_NAK_ON_WRITE_ERR",
+      "value": "0x83",
+      "comment": "",
+      "category": "IPMI_NAK"
+    },
+    {
+      "name": "IPMI_ERR_UNSPECIFIED",
+      "value": "0xff",
+      "comment": "",
+      "category": "IPMI_ERR"
+    },
+    {
+      "name": "IPMI_CHANNEL_PROTOCOL_IPMB",
+      "value": "1",
+      "comment": "",
+      "category": "IPMI_CHANNEL"
+    },
+    {
+      "name": "IPMI_CHANNEL_PROTOCOL_ICMB",
+      "value": "2",
+      "comment": "",
+      "category": "IPMI_CHANNEL"
+    },
+    {
+      "name": "IPMI_CHANNEL_PROTOCOL_SMBUS",
+      "value": "4",
+      "comment": "",
+      "category": "IPMI_CHANNEL"
+    },
+    {
+      "name": "IPMI_CHANNEL_PROTOCOL_KCS",
+      "value": "5",
+      "comment": "",
+      "category": "IPMI_CHANNEL"
+    },
+    {
+      "name": "IPMI_CHANNEL_PROTOCOL_SMIC",
+      "value": "6",
+      "comment": "",
+      "category": "IPMI_CHANNEL"
+    },
+    {
+      "name": "IPMI_CHANNEL_PROTOCOL_BT10",
+      "value": "7",
+      "comment": "",
+      "category": "IPMI_CHANNEL"
+    },
+    {
+      "name": "IPMI_CHANNEL_PROTOCOL_BT15",
+      "value": "8",
+      "comment": "",
+      "category": "IPMI_CHANNEL"
+    },
+    {
+      "name": "IPMI_CHANNEL_PROTOCOL_TMODE",
+      "value": "9",
+      "comment": "",
+      "category": "IPMI_CHANNEL"
+    },
+    {
+      "name": "IPMI_CHANNEL_MEDIUM_IPMB",
+      "value": "1",
+      "comment": "",
+      "category": "IPMI_CHANNEL"
+    },
+    {
+      "name": "IPMI_CHANNEL_MEDIUM_ICMB10",
+      "value": "2",
+      "comment": "",
+      "category": "IPMI_CHANNEL"
+    },
+    {
+      "name": "IPMI_CHANNEL_MEDIUM_ICMB09",
+      "value": "3",
+      "comment": "",
+      "category": "IPMI_CHANNEL"
+    },
+    {
+      "name": "IPMI_CHANNEL_MEDIUM_8023LAN",
+      "value": "4",
+      "comment": "",
+      "category": "IPMI_CHANNEL"
+    },
+    {
+      "name": "IPMI_CHANNEL_MEDIUM_ASYNC",
+      "value": "5",
+      "comment": "",
+      "category": "IPMI_CHANNEL"
+    },
+    {
+      "name": "IPMI_CHANNEL_MEDIUM_OTHER_LAN",
+      "value": "6",
+      "comment": "",
+      "category": "IPMI_CHANNEL"
+    },
+    {
+      "name": "IPMI_CHANNEL_MEDIUM_PCI_SMBUS",
+      "value": "7",
+      "comment": "",
+      "category": "IPMI_CHANNEL"
+    },
+    {
+      "name": "IPMI_CHANNEL_MEDIUM_SMBUS1",
+      "value": "8",
+      "comment": "",
+      "category": "IPMI_CHANNEL"
+    },
+    {
+      "name": "IPMI_CHANNEL_MEDIUM_SMBUS2",
+      "value": "9",
+      "comment": "",
+      "category": "IPMI_CHANNEL"
+    },
+    {
+      "name": "IPMI_CHANNEL_MEDIUM_USB1",
+      "value": "10",
+      "comment": "",
+      "category": "IPMI_CHANNEL"
+    },
+    {
+      "name": "IPMI_CHANNEL_MEDIUM_USB2",
+      "value": "11",
+      "comment": "",
+      "category": "IPMI_CHANNEL"
+    },
+    {
+      "name": "IPMI_CHANNEL_MEDIUM_SYSINTF",
+      "value": "12",
+      "comment": "",
+      "category": "IPMI_CHANNEL"
+    },
+    {
+      "name": "IPMI_CHANNEL_MEDIUM_OEM_MIN",
+      "value": "0x60",
+      "comment": "",
+      "category": "IPMI_CHANNEL"
+    },
+    {
+      "name": "IPMI_CHANNEL_MEDIUM_OEM_MAX",
+      "value": "0x7f",
+      "comment": "",
+      "category": "IPMI_CHANNEL"
+    }
+  ],
+  "structs": [],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

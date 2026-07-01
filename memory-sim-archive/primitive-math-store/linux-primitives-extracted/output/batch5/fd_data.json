@@ -1,0 +1,625 @@
+{
+  "filename": "fd.h",
+  "includes": [
+    "linux/ioctl.h",
+    "linux/compiler.h"
+  ],
+  "defines": [
+    {
+      "name": "FD_STRETCH",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FD_SWAPSIDES",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FD_ZEROBASED",
+      "value": "4",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FD_SECTBASEMASK",
+      "value": "0x3FC",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FD_2M",
+      "value": "0x4",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FD_SIZECODEMASK",
+      "value": "0x38",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FD_PERP",
+      "value": "0x40",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FDCLRPRM",
+      "value": "_IO(2, 0x41)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FDSETPRM",
+      "value": "_IOW(2, 0x42, struct floppy_struct)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FDSETMEDIAPRM",
+      "value": "FDSETPRM",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FDDEFPRM",
+      "value": "_IOW(2, 0x43, struct floppy_struct)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FDGETPRM",
+      "value": "_IOR(2, 0x04, struct floppy_struct)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FDDEFMEDIAPRM",
+      "value": "FDDEFPRM",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FDGETMEDIAPRM",
+      "value": "FDGETPRM",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FDMSGON",
+      "value": "_IO(2,0x45)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FDMSGOFF",
+      "value": "_IO(2,0x46)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FD_FILL_BYTE",
+      "value": "0xF6",
+      "comment": "format fill byte.",
+      "category": "FD_FILL"
+    },
+    {
+      "name": "FDFMTBEG",
+      "value": "_IO(2,0x47)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FDFMTTRK",
+      "value": "_IOW(2,0x48, struct format_descr)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FDFMTEND",
+      "value": "_IO(2,0x49)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FDSETEMSGTRESH",
+      "value": "_IO(2,0x4a)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FDFLUSH",
+      "value": "_IO(2,0x4b)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FDSETMAXERRS",
+      "value": "_IOW(2, 0x4c, struct floppy_max_errors)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FDGETMAXERRS",
+      "value": "_IOR(2, 0x0e, struct floppy_max_errors)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FDGETDRVTYP",
+      "value": "_IOR(2, 0x0f, floppy_drive_name)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FTD_MSG",
+      "value": "0x10",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FD_BROKEN_DCL",
+      "value": "0x20",
+      "comment": "",
+      "category": "FD_BROKEN"
+    },
+    {
+      "name": "FD_DEBUG",
+      "value": "0x02",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FD_SILENT_DCL_CLEAR",
+      "value": "0x4",
+      "comment": "",
+      "category": "FD_SILENT"
+    },
+    {
+      "name": "FD_INVERTED_DCL",
+      "value": "0x80 /* must be 0x80, because of hardware",
+      "comment": "",
+      "category": "FD_INVERTED"
+    },
+    {
+      "name": "FD_AUTODETECT_SIZE",
+      "value": "8",
+      "comment": "",
+      "category": "FD_AUTODETECT"
+    },
+    {
+      "name": "FDSETDRVPRM",
+      "value": "_IOW(2, 0x90, struct floppy_drive_params)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FDGETDRVPRM",
+      "value": "_IOR(2, 0x11, struct floppy_drive_params)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FD_NEED_TWADDLE",
+      "value": "(1 << FD_NEED_TWADDLE_BIT)",
+      "comment": "",
+      "category": "FD_NEED"
+    },
+    {
+      "name": "FD_VERIFY",
+      "value": "(1 << FD_VERIFY_BIT)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FD_DISK_NEWCHANGE",
+      "value": "(1 << FD_DISK_NEWCHANGE_BIT)",
+      "comment": "",
+      "category": "FD_DISK"
+    },
+    {
+      "name": "FD_DISK_CHANGED",
+      "value": "(1 << FD_DISK_CHANGED_BIT)",
+      "comment": "",
+      "category": "FD_DISK"
+    },
+    {
+      "name": "FD_DISK_WRITABLE",
+      "value": "(1 << FD_DISK_WRITABLE_BIT)",
+      "comment": "",
+      "category": "FD_DISK"
+    },
+    {
+      "name": "FDGETDRVSTAT",
+      "value": "_IOR(2, 0x12, struct floppy_drive_struct)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FDPOLLDRVSTAT",
+      "value": "_IOR(2, 0x13, struct floppy_drive_struct)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FDRESET",
+      "value": "_IO(2, 0x54)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FD_DRIVER_VERSION",
+      "value": "0x100",
+      "comment": "",
+      "category": "FD_DRIVER"
+    },
+    {
+      "name": "FDGETFDCSTAT",
+      "value": "_IOR(2, 0x15, struct floppy_fdc_state)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FDWERRORCLR",
+      "value": "_IO(2, 0x56)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FDWERRORGET",
+      "value": "_IOR(2, 0x17, struct floppy_write_errors)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FD_RAW_READ",
+      "value": "1",
+      "comment": "",
+      "category": "FD_RAW"
+    },
+    {
+      "name": "FD_RAW_WRITE",
+      "value": "2",
+      "comment": "",
+      "category": "FD_RAW"
+    },
+    {
+      "name": "FD_RAW_NO_MOTOR",
+      "value": "4",
+      "comment": "",
+      "category": "FD_RAW"
+    },
+    {
+      "name": "FD_RAW_DISK_CHANGE",
+      "value": "4",
+      "comment": "out: disk change flag was set",
+      "category": "FD_RAW"
+    },
+    {
+      "name": "FD_RAW_INTR",
+      "value": "8",
+      "comment": "wait for an interrupt",
+      "category": "FD_RAW"
+    },
+    {
+      "name": "FD_RAW_SPIN",
+      "value": "0x10",
+      "comment": "spin up the disk for this command",
+      "category": "FD_RAW"
+    },
+    {
+      "name": "FD_RAW_NO_MOTOR_AFTER",
+      "value": "0x20 /* switch the motor off after command",
+      "comment": "",
+      "category": "FD_RAW"
+    },
+    {
+      "name": "FD_RAW_NEED_DISK",
+      "value": "0x40",
+      "comment": "this command needs a disk to be present",
+      "category": "FD_RAW"
+    },
+    {
+      "name": "FD_RAW_NEED_SEEK",
+      "value": "0x80",
+      "comment": "this command uses an implied seek (soft)",
+      "category": "FD_RAW"
+    },
+    {
+      "name": "FD_RAW_MORE",
+      "value": "0x100",
+      "comment": "more records follow",
+      "category": "FD_RAW"
+    },
+    {
+      "name": "FD_RAW_STOP_IF_FAILURE",
+      "value": "0x200",
+      "comment": "stop if we encounter a failure",
+      "category": "FD_RAW"
+    },
+    {
+      "name": "FD_RAW_STOP_IF_SUCCESS",
+      "value": "0x400",
+      "comment": "stop if command successful",
+      "category": "FD_RAW"
+    },
+    {
+      "name": "FD_RAW_SOFTFAILURE",
+      "value": "0x800 /* consider the return value for failure",
+      "comment": "",
+      "category": "FD_RAW"
+    },
+    {
+      "name": "FD_RAW_FAILURE",
+      "value": "0x10000",
+      "comment": "command sent to fdc, fdc returned error",
+      "category": "FD_RAW"
+    },
+    {
+      "name": "FD_RAW_HARDFAILURE",
+      "value": "0x20000",
+      "comment": "fdc had to be reset, or timed out",
+      "category": "FD_RAW"
+    },
+    {
+      "name": "FD_RAW_CMD_SIZE",
+      "value": "16",
+      "comment": "",
+      "category": "FD_RAW"
+    },
+    {
+      "name": "FD_RAW_REPLY_SIZE",
+      "value": "16",
+      "comment": "",
+      "category": "FD_RAW"
+    },
+    {
+      "name": "FD_RAW_CMD_FULLSIZE",
+      "value": "(FD_RAW_CMD_SIZE + 1 + FD_RAW_REPLY_SIZE)",
+      "comment": "",
+      "category": "FD_RAW"
+    },
+    {
+      "name": "FDRAWCMD",
+      "value": "_IO(2, 0x58)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FDTWADDLE",
+      "value": "_IO(2, 0x59)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FDEJECT",
+      "value": "_IO(2, 0x5a)",
+      "comment": "",
+      "category": ""
+    }
+  ],
+  "structs": [
+    {
+      "name": "floppy_struct",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "format_descr",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "floppy_max_errors",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "floppy_drive_params",
+      "fields": [
+        {
+          "type_name": "char",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "read_track",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "short",
+          "name": "autodetect",
+          "array_size": "FD_AUTODETECT_SIZE",
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "checkfreq",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "native_format",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "floppy_drive_struct",
+      "fields": [
+        {
+          "type_name": "short",
+          "name": "probed_format",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "short",
+          "name": "track",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "short",
+          "name": "maxblock",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "short",
+          "name": "maxtrack",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "generation",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "keep_data",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "fd_ref",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "fd_device",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "bufblocks",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "floppy_fdc_state",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "spec1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "spec2",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "dtr",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "floppy_write_errors",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "first_error_generation",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "last_error_generation",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "floppy_raw_cmd",
+      "fields": [
+        {
+          "type_name": "long",
+          "name": "length",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "long",
+          "name": "phys_length",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "buffer_length",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "track",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "resultcode",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "reserved1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "reserved2",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_8",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

@@ -1,0 +1,195 @@
+{
+  "filename": "fiemap.h",
+  "includes": [
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "FIEMAP_MAX_OFFSET",
+      "value": "(~0ULL)",
+      "comment": "",
+      "category": "FIEMAP_MAX"
+    },
+    {
+      "name": "FIEMAP_FLAG_SYNC",
+      "value": "0x00000001",
+      "comment": "sync file data before map",
+      "category": "FIEMAP_FLAG"
+    },
+    {
+      "name": "FIEMAP_FLAG_XATTR",
+      "value": "0x00000002",
+      "comment": "map extended attribute tree",
+      "category": "FIEMAP_FLAG"
+    },
+    {
+      "name": "FIEMAP_FLAG_CACHE",
+      "value": "0x00000004",
+      "comment": "request caching of the extents",
+      "category": "FIEMAP_FLAG"
+    },
+    {
+      "name": "FIEMAP_FLAGS_COMPAT",
+      "value": "(FIEMAP_FLAG_SYNC | FIEMAP_FLAG_XATTR)",
+      "comment": "",
+      "category": "FIEMAP_FLAGS"
+    },
+    {
+      "name": "FIEMAP_EXTENT_LAST",
+      "value": "0x00000001",
+      "comment": "Last extent in file.",
+      "category": "FIEMAP_EXTENT"
+    },
+    {
+      "name": "FIEMAP_EXTENT_UNKNOWN",
+      "value": "0x00000002",
+      "comment": "Data location unknown.",
+      "category": "FIEMAP_EXTENT"
+    },
+    {
+      "name": "FIEMAP_EXTENT_DELALLOC",
+      "value": "0x00000004 /* Location still pending.",
+      "comment": "",
+      "category": "FIEMAP_EXTENT"
+    },
+    {
+      "name": "FIEMAP_EXTENT_ENCODED",
+      "value": "0x00000008 /* Data can not be read",
+      "comment": "",
+      "category": "FIEMAP_EXTENT"
+    },
+    {
+      "name": "FIEMAP_EXTENT_DATA_ENCRYPTED",
+      "value": "0x00000080 /* Data is encrypted by fs.",
+      "comment": "",
+      "category": "FIEMAP_EXTENT"
+    },
+    {
+      "name": "FIEMAP_EXTENT_NOT_ALIGNED",
+      "value": "0x00000100 /* Extent offsets may not be",
+      "comment": "",
+      "category": "FIEMAP_EXTENT"
+    },
+    {
+      "name": "FIEMAP_EXTENT_DATA_INLINE",
+      "value": "0x00000200 /* Data mixed with metadata.",
+      "comment": "",
+      "category": "FIEMAP_EXTENT"
+    },
+    {
+      "name": "FIEMAP_EXTENT_DATA_TAIL",
+      "value": "0x00000400 /* Multiple files in block.",
+      "comment": "",
+      "category": "FIEMAP_EXTENT"
+    },
+    {
+      "name": "FIEMAP_EXTENT_UNWRITTEN",
+      "value": "0x00000800 /* Space allocated, but",
+      "comment": "",
+      "category": "FIEMAP_EXTENT"
+    },
+    {
+      "name": "FIEMAP_EXTENT_MERGED",
+      "value": "0x00001000 /* File does not natively",
+      "comment": "",
+      "category": "FIEMAP_EXTENT"
+    },
+    {
+      "name": "FIEMAP_EXTENT_SHARED",
+      "value": "0x00002000 /* Space shared with other",
+      "comment": "",
+      "category": "FIEMAP_EXTENT"
+    }
+  ],
+  "structs": [
+    {
+      "name": "fiemap_extent",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "fe_logical",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "fe_physical",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "fe_length",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "fe_reserved64",
+          "array_size": "2",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "fe_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "fe_reserved",
+          "array_size": "3",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fiemap",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "fm_start",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "fm_length",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "fm_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "fm_mapped_extents",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "fm_extent_count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "fm_reserved",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

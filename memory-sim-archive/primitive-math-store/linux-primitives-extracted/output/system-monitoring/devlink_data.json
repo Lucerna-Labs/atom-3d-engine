@@ -1,0 +1,126 @@
+{
+  "filename": "devlink.h",
+  "includes": [
+    "linux/const.h"
+  ],
+  "defines": [
+    {
+      "name": "DEVLINK_GENL_NAME",
+      "value": "\"devlink\"",
+      "comment": "",
+      "category": "DEVLINK_GENL"
+    },
+    {
+      "name": "DEVLINK_GENL_VERSION",
+      "value": "0x1",
+      "comment": "",
+      "category": "DEVLINK_GENL"
+    },
+    {
+      "name": "DEVLINK_GENL_MCGRP_CONFIG_NAME",
+      "value": "\"config\"",
+      "comment": "",
+      "category": "DEVLINK_GENL"
+    },
+    {
+      "name": "DEVLINK_INDEX_BUS_NAME",
+      "value": "\"devlink_index\"",
+      "comment": "",
+      "category": "DEVLINK_INDEX"
+    },
+    {
+      "name": "DEVLINK_CMD_ESWITCH_MODE_GET",
+      "value": "/* obsolete, never use this! */ ",
+      "comment": "",
+      "category": "DEVLINK_CMD"
+    },
+    {
+      "name": "DEVLINK_CMD_ESWITCH_MODE_SET",
+      "value": "/* obsolete, never use this! */ ",
+      "comment": "",
+      "category": "DEVLINK_CMD"
+    },
+    {
+      "name": "DEVLINK_SB_THRESHOLD_TO_ALPHA_MAX",
+      "value": "20",
+      "comment": "",
+      "category": "DEVLINK_SB"
+    },
+    {
+      "name": "DEVLINK_RATE_TCS_MAX",
+      "value": "8",
+      "comment": "",
+      "category": "DEVLINK_RATE"
+    },
+    {
+      "name": "DEVLINK_RATE_TC_INDEX_MAX",
+      "value": "(DEVLINK_RATE_TCS_MAX - 1)",
+      "comment": "",
+      "category": "DEVLINK_RATE"
+    },
+    {
+      "name": "DEVLINK_FLASH_OVERWRITE_SETTINGS",
+      "value": "_BITUL(DEVLINK_FLASH_OVERWRITE_SETTINGS_BIT)",
+      "comment": "",
+      "category": "DEVLINK_FLASH"
+    },
+    {
+      "name": "DEVLINK_FLASH_OVERWRITE_IDENTIFIERS",
+      "value": "_BITUL(DEVLINK_FLASH_OVERWRITE_IDENTIFIERS_BIT)",
+      "comment": "",
+      "category": "DEVLINK_FLASH"
+    },
+    {
+      "name": "DEVLINK_SUPPORTED_FLASH_OVERWRITE_SECTIONS",
+      "value": "",
+      "comment": "",
+      "category": "DEVLINK_SUPPORTED"
+    },
+    {
+      "name": "DEVLINK_RELOAD_LIMITS_VALID_MASK",
+      "value": "(_BITUL(__DEVLINK_RELOAD_LIMIT_MAX) - 1)",
+      "comment": "",
+      "category": "DEVLINK_RELOAD"
+    },
+    {
+      "name": "DEVLINK_RESOURCE_SCOPE_DEV",
+      "value": "",
+      "comment": "",
+      "category": "DEVLINK_RESOURCE"
+    },
+    {
+      "name": "DEVLINK_RESOURCE_SCOPE_PORT",
+      "value": "",
+      "comment": "",
+      "category": "DEVLINK_RESOURCE"
+    },
+    {
+      "name": "DEVLINK_PORT_FN_CAP_ROCE",
+      "value": "_BITUL(DEVLINK_PORT_FN_ATTR_CAP_ROCE_BIT)",
+      "comment": "",
+      "category": "DEVLINK_PORT"
+    },
+    {
+      "name": "DEVLINK_PORT_FN_CAP_MIGRATABLE",
+      "value": "",
+      "comment": "",
+      "category": "DEVLINK_PORT"
+    },
+    {
+      "name": "DEVLINK_PORT_FN_CAP_IPSEC_CRYPTO",
+      "value": "_BITUL(DEVLINK_PORT_FN_ATTR_CAP_IPSEC_CRYPTO_BIT)",
+      "comment": "",
+      "category": "DEVLINK_PORT"
+    },
+    {
+      "name": "DEVLINK_PORT_FN_CAP_IPSEC_PACKET",
+      "value": "_BITUL(DEVLINK_PORT_FN_ATTR_CAP_IPSEC_PACKET_BIT)",
+      "comment": "",
+      "category": "DEVLINK_PORT"
+    }
+  ],
+  "structs": [],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

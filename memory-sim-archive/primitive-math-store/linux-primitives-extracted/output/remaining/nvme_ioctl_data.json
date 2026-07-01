@@ -1,0 +1,539 @@
+{
+  "filename": "nvme_ioctl.h",
+  "includes": [
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "nvme_admin_cmd",
+      "value": "nvme_passthru_cmd",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NVME_IOCTL_ID",
+      "value": "_IO('N', 0x40)",
+      "comment": "",
+      "category": "NVME_IOCTL"
+    },
+    {
+      "name": "NVME_IOCTL_ADMIN_CMD",
+      "value": "_IOWR('N', 0x41, struct nvme_admin_cmd)",
+      "comment": "",
+      "category": "NVME_IOCTL"
+    },
+    {
+      "name": "NVME_IOCTL_SUBMIT_IO",
+      "value": "_IOW('N', 0x42, struct nvme_user_io)",
+      "comment": "",
+      "category": "NVME_IOCTL"
+    },
+    {
+      "name": "NVME_IOCTL_IO_CMD",
+      "value": "_IOWR('N', 0x43, struct nvme_passthru_cmd)",
+      "comment": "",
+      "category": "NVME_IOCTL"
+    },
+    {
+      "name": "NVME_IOCTL_RESET",
+      "value": "_IO('N', 0x44)",
+      "comment": "",
+      "category": "NVME_IOCTL"
+    },
+    {
+      "name": "NVME_IOCTL_SUBSYS_RESET",
+      "value": "_IO('N', 0x45)",
+      "comment": "",
+      "category": "NVME_IOCTL"
+    },
+    {
+      "name": "NVME_IOCTL_RESCAN",
+      "value": "_IO('N', 0x46)",
+      "comment": "",
+      "category": "NVME_IOCTL"
+    },
+    {
+      "name": "NVME_IOCTL_ADMIN64_CMD",
+      "value": "_IOWR('N', 0x47, struct nvme_passthru_cmd64)",
+      "comment": "",
+      "category": "NVME_IOCTL"
+    },
+    {
+      "name": "NVME_IOCTL_IO64_CMD",
+      "value": "_IOWR('N', 0x48, struct nvme_passthru_cmd64)",
+      "comment": "",
+      "category": "NVME_IOCTL"
+    },
+    {
+      "name": "NVME_IOCTL_IO64_CMD_VEC",
+      "value": "_IOWR('N', 0x49, struct nvme_passthru_cmd64)",
+      "comment": "",
+      "category": "NVME_IOCTL"
+    },
+    {
+      "name": "NVME_URING_CMD_IO",
+      "value": "_IOWR('N', 0x80, struct nvme_uring_cmd)",
+      "comment": "",
+      "category": "NVME_URING"
+    },
+    {
+      "name": "NVME_URING_CMD_IO_VEC",
+      "value": "_IOWR('N', 0x81, struct nvme_uring_cmd)",
+      "comment": "",
+      "category": "NVME_URING"
+    },
+    {
+      "name": "NVME_URING_CMD_ADMIN",
+      "value": "_IOWR('N', 0x82, struct nvme_uring_cmd)",
+      "comment": "",
+      "category": "NVME_URING"
+    },
+    {
+      "name": "NVME_URING_CMD_ADMIN_VEC",
+      "value": "_IOWR('N', 0x83, struct nvme_uring_cmd)",
+      "comment": "",
+      "category": "NVME_URING"
+    }
+  ],
+  "structs": [
+    {
+      "name": "nvme_user_io",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "opcode",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "control",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "nblocks",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "rsvd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "metadata",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "addr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "slba",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "dsmgmt",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reftag",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "apptag",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "appmask",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "nvme_passthru_cmd",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "opcode",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "rsvd1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "nsid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "cdw2",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "cdw3",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "metadata",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "addr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "metadata_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "data_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "cdw10",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "cdw11",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "cdw12",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "cdw13",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "cdw14",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "cdw15",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "timeout_ms",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "result",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "nvme_passthru_cmd64",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "opcode",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "rsvd1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "nsid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "cdw2",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "cdw3",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "metadata",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "addr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "metadata_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "data_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "vec_cnt",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "cdw10",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "cdw11",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "cdw12",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "cdw13",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "cdw14",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "cdw15",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "timeout_ms",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "rsvd2",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "result",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "nvme_uring_cmd",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "opcode",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "rsvd1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "nsid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "cdw2",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "cdw3",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "metadata",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "addr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "metadata_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "data_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "cdw10",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "cdw11",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "cdw12",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "cdw13",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "cdw14",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "cdw15",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "timeout_ms",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "rsvd2",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

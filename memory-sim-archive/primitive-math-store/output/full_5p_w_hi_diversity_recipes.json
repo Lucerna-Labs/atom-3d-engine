@@ -1,0 +1,2501 @@
+{
+  "metadata": {
+    "timestamp": "2026-06-24T00:49:33.937140+00:00",
+    "seed": 42,
+    "n_primitives": 5,
+    "top_recipes": 50,
+    "seed_pool_size": 50,
+    "n_domains": 7,
+    "catalog_path": "D:\\MINIMAX-PRIMITVE-SIMULATIONS\\src\\primitive_catalog_full.json",
+    "catalog_size": 939,
+    "weights": {
+      "cross_domain_bonus": 50.0,
+      "multi_category_bonus": 30.0,
+      "root_atom_diversity": 15.0,
+      "real_wall_diversity": 10.0,
+      "base_per_primitive": 50.0
+    },
+    "runtime_seconds": 33.70827388763428,
+    "enum_counts": {
+      "5-tuple": 2118760
+    },
+    "scoring_summary": {
+      "total_recipes_scored": 2118760,
+      "max_score": 585.0,
+      "min_score": 325.0,
+      "mean_score": 479.06833006097906,
+      "cross_domain_count": 2118424,
+      "cross_domain_pct": 99.98414166776794,
+      "wiring_pattern_counts": {
+        "fusion ranking": 2118760
+      },
+      "domain_pair_counts": {
+        "cryptography-advanced": 1268092,
+        "agentic-reasoning": 1268092,
+        "formal-verification": 1268092,
+        "networking": 1268092,
+        "combinatorial-optimization": 1268092,
+        "causal-inference": 1268092,
+        "statistics-probability": 406456
+      },
+      "root_atom_counts": {
+        "combine": 2118634,
+        "sample": 1032752,
+        "project": 748006,
+        "order": 584821,
+        "compare": 406456,
+        "hash": 406456,
+        "scan": 211876
+      }
+    }
+  },
+  "recipes": [
+    {
+      "primitives": [
+        "algorithm-of-thoughts",
+        "bdd-symbolic-model-checking",
+        "chromatic-dispersion",
+        "fiat-shamir-heuristic",
+        "program-aided-language-model"
+      ],
+      "domains": [
+        "agentic-reasoning",
+        "formal-verification",
+        "networking",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "agentic-reasoning",
+        "formal-verification",
+        "networking",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "score": 585.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification",
+        "networking"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification",
+        "networking"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "order",
+        "scan",
+        "compare",
+        "hash",
+        "project",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 cryptography-advanced \u2192 formal-verification \u2192 networking\n**Components:**\n  - algorithm-of-thoughts (agentic-reasoning): AoT: embed algorithmic structures (DFS, BFS, tree, graph) into LLM reasoning; LLM serves as state evaluator, not full searcher; uses few-shot examples of algorithmic patterns.\n  - bdd-symbolic-model-checking (formal-verification): Binary Decision Diagram (BDD): canonical representation of Boolean functions; ROBDD = reduced ordered BDD (unique canonical form). BDD-based symbolic model checking uses BDDs to represent state sets and transition relations.\n  - chromatic-dispersion (networking): Wavelength-dependent propagation velocity causing pulse broadening: \u0394\u03c4 = D\u00b7L\u00b7\u0394\u03bb.\n  - fiat-shamir-heuristic (cryptography-advanced): Transform an interactive sigma protocol into a non-interactive proof: replace verifier's random challenge c with H(a || transcript), where H is a cryptographic hash. Prover generates c = H(a) then z without verifier interaction.\n  - program-aided-language-model (agentic-reasoning): PAL (Program-Aided Language Model): LLM generates executable code to solve reasoning tasks; code executor computes result; LLM interprets output.\n**Real walls (combined):**\n  - [algorithm-of-thoughts] LLM as state evaluator may misjudge search frontier\n  - [algorithm-of-thoughts] algorithm must fit problem structure\n  - [algorithm-of-thoughts] not general-purpose\n  - [bdd-symbolic-model-checking] BDD explosion for some functions (multipliers, cryptographic functions)\n  - [bdd-symbolic-model-checking] variable ordering problem is NP-hard\n  - [bdd-symbolic-model-checking] dynamic variable reordering helps\n  - [chromatic-dispersion] D (ps/nm/km) varies with fiber type\n  - [chromatic-dispersion] uncompensated dispersion limits bit rate \u00d7 distance product\n  - [fiat-shamir-heuristic] Random oracle model required\n  - [fiat-shamir-heuristic] Fiat-Shamir can introduce insecurity if protocol has subtle issues (e.g.,\u5403\u5b8c =\u5403\u5b8c attack)\n  - [fiat-shamir-heuristic] not all protocols safely transform\n  - [program-aided-language-model] Code generation errors (syntax, logic)\n  - [program-aided-language-model] execution sandboxing\n  - [program-aided-language-model] Python vs\n  - [program-aided-language-model] LLM arithmetic (PAL reduces LLM math errors)"
+    },
+    {
+      "primitives": [
+        "algorithm-of-thoughts",
+        "bdd-symbolic-model-checking",
+        "fiat-shamir-heuristic",
+        "program-aided-language-model",
+        "self-consistency"
+      ],
+      "domains": [
+        "agentic-reasoning",
+        "formal-verification",
+        "cryptography-advanced",
+        "agentic-reasoning",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "agentic-reasoning",
+        "formal-verification",
+        "cryptography-advanced",
+        "agentic-reasoning",
+        "agentic-reasoning"
+      ],
+      "score": 585.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "order",
+        "scan",
+        "hash",
+        "project",
+        "sample",
+        "compare"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 cryptography-advanced \u2192 formal-verification\n**Components:**\n  - algorithm-of-thoughts (agentic-reasoning): AoT: embed algorithmic structures (DFS, BFS, tree, graph) into LLM reasoning; LLM serves as state evaluator, not full searcher; uses few-shot examples of algorithmic patterns.\n  - bdd-symbolic-model-checking (formal-verification): Binary Decision Diagram (BDD): canonical representation of Boolean functions; ROBDD = reduced ordered BDD (unique canonical form). BDD-based symbolic model checking uses BDDs to represent state sets and transition relations.\n  - fiat-shamir-heuristic (cryptography-advanced): Transform an interactive sigma protocol into a non-interactive proof: replace verifier's random challenge c with H(a || transcript), where H is a cryptographic hash. Prover generates c = H(a) then z without verifier interaction.\n  - program-aided-language-model (agentic-reasoning): PAL (Program-Aided Language Model): LLM generates executable code to solve reasoning tasks; code executor computes result; LLM interprets output.\n  - self-consistency (agentic-reasoning): Self-consistency: sample multiple reasoning paths (CoT or ReAct), aggregate answers via majority vote. Improves CoT by trading inference cost for accuracy.\n**Real walls (combined):**\n  - [algorithm-of-thoughts] LLM as state evaluator may misjudge search frontier\n  - [algorithm-of-thoughts] algorithm must fit problem structure\n  - [algorithm-of-thoughts] not general-purpose\n  - [bdd-symbolic-model-checking] BDD explosion for some functions (multipliers, cryptographic functions)\n  - [bdd-symbolic-model-checking] variable ordering problem is NP-hard\n  - [bdd-symbolic-model-checking] dynamic variable reordering helps\n  - [fiat-shamir-heuristic] Random oracle model required\n  - [fiat-shamir-heuristic] Fiat-Shamir can introduce insecurity if protocol has subtle issues (e.g.,\u5403\u5b8c =\u5403\u5b8c attack)\n  - [fiat-shamir-heuristic] not all protocols safely transform\n  - [program-aided-language-model] Code generation errors (syntax, logic)\n  - [program-aided-language-model] execution sandboxing\n  - [program-aided-language-model] Python vs\n  - [program-aided-language-model] LLM arithmetic (PAL reduces LLM math errors)\n  - [self-consistency] Answer aggregation tricky for open-ended outputs (need string matching or LLM-as-judge)\n  - [self-consistency] marginal gains after n=10\u201320"
+    },
+    {
+      "primitives": [
+        "bayesian-posterior-inference",
+        "bdd-symbolic-model-checking",
+        "chromatic-dispersion",
+        "fiat-shamir-heuristic",
+        "program-aided-language-model"
+      ],
+      "domains": [
+        "statistics-probability",
+        "formal-verification",
+        "networking",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "statistics-probability",
+        "formal-verification",
+        "networking",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "score": 585.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification",
+        "networking",
+        "statistics-probability"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification",
+        "networking",
+        "statistics-probability"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "order",
+        "scan",
+        "compare",
+        "hash",
+        "project",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 cryptography-advanced \u2192 formal-verification \u2192 networking \u2192 statistics-probability\n**Components:**\n  - bayesian-posterior-inference (statistics-probability): Bayesian inference: compute posterior p(\u03b8 | x) = p(x | \u03b8)\u00b7p(\u03b8) / p(x). Prior p(\u03b8) encodes domain knowledge; posterior combines data + prior; predictive posterior p(x_new | x) = \u222b p(x_new | \u03b8)\u00b7p(\u03b8 | x) d\u03b8.\n  - bdd-symbolic-model-checking (formal-verification): Binary Decision Diagram (BDD): canonical representation of Boolean functions; ROBDD = reduced ordered BDD (unique canonical form). BDD-based symbolic model checking uses BDDs to represent state sets and transition relations.\n  - chromatic-dispersion (networking): Wavelength-dependent propagation velocity causing pulse broadening: \u0394\u03c4 = D\u00b7L\u00b7\u0394\u03bb.\n  - fiat-shamir-heuristic (cryptography-advanced): Transform an interactive sigma protocol into a non-interactive proof: replace verifier's random challenge c with H(a || transcript), where H is a cryptographic hash. Prover generates c = H(a) then z without verifier interaction.\n  - program-aided-language-model (agentic-reasoning): PAL (Program-Aided Language Model): LLM generates executable code to solve reasoning tasks; code executor computes result; LLM interprets output.\n**Real walls (combined):**\n  - [bayesian-posterior-inference] Prior sensitivity: posterior can be prior-dominated if data is sparse\n  - [bayesian-posterior-inference] Jeffreys prior = uninformative\n  - [bayesian-posterior-inference] conjugate priors simplify\n  - [bdd-symbolic-model-checking] BDD explosion for some functions (multipliers, cryptographic functions)\n  - [bdd-symbolic-model-checking] variable ordering problem is NP-hard\n  - [bdd-symbolic-model-checking] dynamic variable reordering helps\n  - [chromatic-dispersion] D (ps/nm/km) varies with fiber type\n  - [chromatic-dispersion] uncompensated dispersion limits bit rate \u00d7 distance product\n  - [fiat-shamir-heuristic] Random oracle model required\n  - [fiat-shamir-heuristic] Fiat-Shamir can introduce insecurity if protocol has subtle issues (e.g.,\u5403\u5b8c =\u5403\u5b8c attack)\n  - [fiat-shamir-heuristic] not all protocols safely transform\n  - [program-aided-language-model] Code generation errors (syntax, logic)\n  - [program-aided-language-model] execution sandboxing\n  - [program-aided-language-model] Python vs\n  - [program-aided-language-model] LLM arithmetic (PAL reduces LLM math errors)"
+    },
+    {
+      "primitives": [
+        "bayesian-posterior-inference",
+        "bdd-symbolic-model-checking",
+        "fiat-shamir-heuristic",
+        "program-aided-language-model",
+        "self-consistency"
+      ],
+      "domains": [
+        "statistics-probability",
+        "formal-verification",
+        "cryptography-advanced",
+        "agentic-reasoning",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "statistics-probability",
+        "formal-verification",
+        "cryptography-advanced",
+        "agentic-reasoning",
+        "agentic-reasoning"
+      ],
+      "score": 585.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification",
+        "statistics-probability"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification",
+        "statistics-probability"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "order",
+        "scan",
+        "hash",
+        "project",
+        "sample",
+        "compare"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 cryptography-advanced \u2192 formal-verification \u2192 statistics-probability\n**Components:**\n  - bayesian-posterior-inference (statistics-probability): Bayesian inference: compute posterior p(\u03b8 | x) = p(x | \u03b8)\u00b7p(\u03b8) / p(x). Prior p(\u03b8) encodes domain knowledge; posterior combines data + prior; predictive posterior p(x_new | x) = \u222b p(x_new | \u03b8)\u00b7p(\u03b8 | x) d\u03b8.\n  - bdd-symbolic-model-checking (formal-verification): Binary Decision Diagram (BDD): canonical representation of Boolean functions; ROBDD = reduced ordered BDD (unique canonical form). BDD-based symbolic model checking uses BDDs to represent state sets and transition relations.\n  - fiat-shamir-heuristic (cryptography-advanced): Transform an interactive sigma protocol into a non-interactive proof: replace verifier's random challenge c with H(a || transcript), where H is a cryptographic hash. Prover generates c = H(a) then z without verifier interaction.\n  - program-aided-language-model (agentic-reasoning): PAL (Program-Aided Language Model): LLM generates executable code to solve reasoning tasks; code executor computes result; LLM interprets output.\n  - self-consistency (agentic-reasoning): Self-consistency: sample multiple reasoning paths (CoT or ReAct), aggregate answers via majority vote. Improves CoT by trading inference cost for accuracy.\n**Real walls (combined):**\n  - [bayesian-posterior-inference] Prior sensitivity: posterior can be prior-dominated if data is sparse\n  - [bayesian-posterior-inference] Jeffreys prior = uninformative\n  - [bayesian-posterior-inference] conjugate priors simplify\n  - [bdd-symbolic-model-checking] BDD explosion for some functions (multipliers, cryptographic functions)\n  - [bdd-symbolic-model-checking] variable ordering problem is NP-hard\n  - [bdd-symbolic-model-checking] dynamic variable reordering helps\n  - [fiat-shamir-heuristic] Random oracle model required\n  - [fiat-shamir-heuristic] Fiat-Shamir can introduce insecurity if protocol has subtle issues (e.g.,\u5403\u5b8c =\u5403\u5b8c attack)\n  - [fiat-shamir-heuristic] not all protocols safely transform\n  - [program-aided-language-model] Code generation errors (syntax, logic)\n  - [program-aided-language-model] execution sandboxing\n  - [program-aided-language-model] Python vs\n  - [program-aided-language-model] LLM arithmetic (PAL reduces LLM math errors)\n  - [self-consistency] Answer aggregation tricky for open-ended outputs (need string matching or LLM-as-judge)\n  - [self-consistency] marginal gains after n=10\u201320"
+    },
+    {
+      "primitives": [
+        "bdd-symbolic-model-checking",
+        "branch-and-cut",
+        "chromatic-dispersion",
+        "fiat-shamir-heuristic",
+        "program-aided-language-model"
+      ],
+      "domains": [
+        "formal-verification",
+        "combinatorial-optimization",
+        "networking",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "formal-verification",
+        "combinatorial-optimization",
+        "networking",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "score": 585.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "formal-verification",
+        "networking"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "formal-verification",
+        "networking"
+      ],
+      "root_atoms_used": [
+        "order",
+        "combine",
+        "scan",
+        "compare",
+        "hash",
+        "project",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 combinatorial-optimization \u2192 cryptography-advanced \u2192 formal-verification \u2192 networking\n**Components:**\n  - bdd-symbolic-model-checking (formal-verification): Binary Decision Diagram (BDD): canonical representation of Boolean functions; ROBDD = reduced ordered BDD (unique canonical form). BDD-based symbolic model checking uses BDDs to represent state sets and transition relations.\n  - branch-and-cut (combinatorial-optimization): Branch-and-cut: B&B + cutting planes added at nodes. Cuts tighten LP relaxation without removing integer solutions.\n  - chromatic-dispersion (networking): Wavelength-dependent propagation velocity causing pulse broadening: \u0394\u03c4 = D\u00b7L\u00b7\u0394\u03bb.\n  - fiat-shamir-heuristic (cryptography-advanced): Transform an interactive sigma protocol into a non-interactive proof: replace verifier's random challenge c with H(a || transcript), where H is a cryptographic hash. Prover generates c = H(a) then z without verifier interaction.\n  - program-aided-language-model (agentic-reasoning): PAL (Program-Aided Language Model): LLM generates executable code to solve reasoning tasks; code executor computes result; LLM interprets output.\n**Real walls (combined):**\n  - [bdd-symbolic-model-checking] BDD explosion for some functions (multipliers, cryptographic functions)\n  - [bdd-symbolic-model-checking] variable ordering problem is NP-hard\n  - [bdd-symbolic-model-checking] dynamic variable reordering helps\n  - [branch-and-cut] Cut selection: too many cuts = expensive LP solves\n  - [branch-and-cut] too few = weak bound\n  - [branch-and-cut] GMI cuts are most effective\n  - [chromatic-dispersion] D (ps/nm/km) varies with fiber type\n  - [chromatic-dispersion] uncompensated dispersion limits bit rate \u00d7 distance product\n  - [fiat-shamir-heuristic] Random oracle model required\n  - [fiat-shamir-heuristic] Fiat-Shamir can introduce insecurity if protocol has subtle issues (e.g.,\u5403\u5b8c =\u5403\u5b8c attack)\n  - [fiat-shamir-heuristic] not all protocols safely transform\n  - [program-aided-language-model] Code generation errors (syntax, logic)\n  - [program-aided-language-model] execution sandboxing\n  - [program-aided-language-model] Python vs\n  - [program-aided-language-model] LLM arithmetic (PAL reduces LLM math errors)"
+    },
+    {
+      "primitives": [
+        "bdd-symbolic-model-checking",
+        "branch-and-cut",
+        "fiat-shamir-heuristic",
+        "program-aided-language-model",
+        "self-consistency"
+      ],
+      "domains": [
+        "formal-verification",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "agentic-reasoning",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "formal-verification",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "agentic-reasoning",
+        "agentic-reasoning"
+      ],
+      "score": 585.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "formal-verification"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "formal-verification"
+      ],
+      "root_atoms_used": [
+        "order",
+        "combine",
+        "scan",
+        "hash",
+        "project",
+        "sample",
+        "compare"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 combinatorial-optimization \u2192 cryptography-advanced \u2192 formal-verification\n**Components:**\n  - bdd-symbolic-model-checking (formal-verification): Binary Decision Diagram (BDD): canonical representation of Boolean functions; ROBDD = reduced ordered BDD (unique canonical form). BDD-based symbolic model checking uses BDDs to represent state sets and transition relations.\n  - branch-and-cut (combinatorial-optimization): Branch-and-cut: B&B + cutting planes added at nodes. Cuts tighten LP relaxation without removing integer solutions.\n  - fiat-shamir-heuristic (cryptography-advanced): Transform an interactive sigma protocol into a non-interactive proof: replace verifier's random challenge c with H(a || transcript), where H is a cryptographic hash. Prover generates c = H(a) then z without verifier interaction.\n  - program-aided-language-model (agentic-reasoning): PAL (Program-Aided Language Model): LLM generates executable code to solve reasoning tasks; code executor computes result; LLM interprets output.\n  - self-consistency (agentic-reasoning): Self-consistency: sample multiple reasoning paths (CoT or ReAct), aggregate answers via majority vote. Improves CoT by trading inference cost for accuracy.\n**Real walls (combined):**\n  - [bdd-symbolic-model-checking] BDD explosion for some functions (multipliers, cryptographic functions)\n  - [bdd-symbolic-model-checking] variable ordering problem is NP-hard\n  - [bdd-symbolic-model-checking] dynamic variable reordering helps\n  - [branch-and-cut] Cut selection: too many cuts = expensive LP solves\n  - [branch-and-cut] too few = weak bound\n  - [branch-and-cut] GMI cuts are most effective\n  - [fiat-shamir-heuristic] Random oracle model required\n  - [fiat-shamir-heuristic] Fiat-Shamir can introduce insecurity if protocol has subtle issues (e.g.,\u5403\u5b8c =\u5403\u5b8c attack)\n  - [fiat-shamir-heuristic] not all protocols safely transform\n  - [program-aided-language-model] Code generation errors (syntax, logic)\n  - [program-aided-language-model] execution sandboxing\n  - [program-aided-language-model] Python vs\n  - [program-aided-language-model] LLM arithmetic (PAL reduces LLM math errors)\n  - [self-consistency] Answer aggregation tricky for open-ended outputs (need string matching or LLM-as-judge)\n  - [self-consistency] marginal gains after n=10\u201320"
+    },
+    {
+      "primitives": [
+        "bdd-symbolic-model-checking",
+        "bulm-model-checking",
+        "chromatic-dispersion",
+        "fiat-shamir-heuristic",
+        "program-aided-language-model"
+      ],
+      "domains": [
+        "formal-verification",
+        "formal-verification",
+        "networking",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "formal-verification",
+        "formal-verification",
+        "networking",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "score": 585.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification",
+        "networking"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification",
+        "networking"
+      ],
+      "root_atoms_used": [
+        "order",
+        "combine",
+        "scan",
+        "compare",
+        "hash",
+        "project",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 cryptography-advanced \u2192 formal-verification \u2192 networking\n**Components:**\n  - bdd-symbolic-model-checking (formal-verification): Binary Decision Diagram (BDD): canonical representation of Boolean functions; ROBDD = reduced ordered BDD (unique canonical form). BDD-based symbolic model checking uses BDDs to represent state sets and transition relations.\n  - bulm-model-checking (formal-verification): Bounded Model Checking (BMC): unroll the state transition system for k steps and check if a property violation (counterexample) exists in \u2264 k steps. Encode as SAT or SMT formula: \u00ac\u03c6 at step k.\n  - chromatic-dispersion (networking): Wavelength-dependent propagation velocity causing pulse broadening: \u0394\u03c4 = D\u00b7L\u00b7\u0394\u03bb.\n  - fiat-shamir-heuristic (cryptography-advanced): Transform an interactive sigma protocol into a non-interactive proof: replace verifier's random challenge c with H(a || transcript), where H is a cryptographic hash. Prover generates c = H(a) then z without verifier interaction.\n  - program-aided-language-model (agentic-reasoning): PAL (Program-Aided Language Model): LLM generates executable code to solve reasoning tasks; code executor computes result; LLM interprets output.\n**Real walls (combined):**\n  - [bdd-symbolic-model-checking] BDD explosion for some functions (multipliers, cryptographic functions)\n  - [bdd-symbolic-model-checking] variable ordering problem is NP-hard\n  - [bdd-symbolic-model-checking] dynamic variable reordering helps\n  - [bulm-model-checking] Completeness threshold: k must reach the diameter of the state graph\n  - [bulm-model-checking] for liveness, need deeper unrolling\n  - [bulm-model-checking] k-induction (inductive invariants for k > diameter)\n  - [chromatic-dispersion] D (ps/nm/km) varies with fiber type\n  - [chromatic-dispersion] uncompensated dispersion limits bit rate \u00d7 distance product\n  - [fiat-shamir-heuristic] Random oracle model required\n  - [fiat-shamir-heuristic] Fiat-Shamir can introduce insecurity if protocol has subtle issues (e.g.,\u5403\u5b8c =\u5403\u5b8c attack)\n  - [fiat-shamir-heuristic] not all protocols safely transform\n  - [program-aided-language-model] Code generation errors (syntax, logic)\n  - [program-aided-language-model] execution sandboxing\n  - [program-aided-language-model] Python vs\n  - [program-aided-language-model] LLM arithmetic (PAL reduces LLM math errors)"
+    },
+    {
+      "primitives": [
+        "bdd-symbolic-model-checking",
+        "bulm-model-checking",
+        "fiat-shamir-heuristic",
+        "program-aided-language-model",
+        "self-consistency"
+      ],
+      "domains": [
+        "formal-verification",
+        "formal-verification",
+        "cryptography-advanced",
+        "agentic-reasoning",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "formal-verification",
+        "formal-verification",
+        "cryptography-advanced",
+        "agentic-reasoning",
+        "agentic-reasoning"
+      ],
+      "score": 585.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification"
+      ],
+      "root_atoms_used": [
+        "order",
+        "combine",
+        "scan",
+        "hash",
+        "project",
+        "sample",
+        "compare"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 cryptography-advanced \u2192 formal-verification\n**Components:**\n  - bdd-symbolic-model-checking (formal-verification): Binary Decision Diagram (BDD): canonical representation of Boolean functions; ROBDD = reduced ordered BDD (unique canonical form). BDD-based symbolic model checking uses BDDs to represent state sets and transition relations.\n  - bulm-model-checking (formal-verification): Bounded Model Checking (BMC): unroll the state transition system for k steps and check if a property violation (counterexample) exists in \u2264 k steps. Encode as SAT or SMT formula: \u00ac\u03c6 at step k.\n  - fiat-shamir-heuristic (cryptography-advanced): Transform an interactive sigma protocol into a non-interactive proof: replace verifier's random challenge c with H(a || transcript), where H is a cryptographic hash. Prover generates c = H(a) then z without verifier interaction.\n  - program-aided-language-model (agentic-reasoning): PAL (Program-Aided Language Model): LLM generates executable code to solve reasoning tasks; code executor computes result; LLM interprets output.\n  - self-consistency (agentic-reasoning): Self-consistency: sample multiple reasoning paths (CoT or ReAct), aggregate answers via majority vote. Improves CoT by trading inference cost for accuracy.\n**Real walls (combined):**\n  - [bdd-symbolic-model-checking] BDD explosion for some functions (multipliers, cryptographic functions)\n  - [bdd-symbolic-model-checking] variable ordering problem is NP-hard\n  - [bdd-symbolic-model-checking] dynamic variable reordering helps\n  - [bulm-model-checking] Completeness threshold: k must reach the diameter of the state graph\n  - [bulm-model-checking] for liveness, need deeper unrolling\n  - [bulm-model-checking] k-induction (inductive invariants for k > diameter)\n  - [fiat-shamir-heuristic] Random oracle model required\n  - [fiat-shamir-heuristic] Fiat-Shamir can introduce insecurity if protocol has subtle issues (e.g.,\u5403\u5b8c =\u5403\u5b8c attack)\n  - [fiat-shamir-heuristic] not all protocols safely transform\n  - [program-aided-language-model] Code generation errors (syntax, logic)\n  - [program-aided-language-model] execution sandboxing\n  - [program-aided-language-model] Python vs\n  - [program-aided-language-model] LLM arithmetic (PAL reduces LLM math errors)\n  - [self-consistency] Answer aggregation tricky for open-ended outputs (need string matching or LLM-as-judge)\n  - [self-consistency] marginal gains after n=10\u201320"
+    },
+    {
+      "primitives": [
+        "bdd-symbolic-model-checking",
+        "chromatic-dispersion",
+        "computation-tree-logic",
+        "fiat-shamir-heuristic",
+        "program-aided-language-model"
+      ],
+      "domains": [
+        "formal-verification",
+        "networking",
+        "formal-verification",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "formal-verification",
+        "networking",
+        "formal-verification",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "score": 585.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification",
+        "networking"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification",
+        "networking"
+      ],
+      "root_atoms_used": [
+        "order",
+        "combine",
+        "scan",
+        "compare",
+        "hash",
+        "project",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 cryptography-advanced \u2192 formal-verification \u2192 networking\n**Components:**\n  - bdd-symbolic-model-checking (formal-verification): Binary Decision Diagram (BDD): canonical representation of Boolean functions; ROBDD = reduced ordered BDD (unique canonical form). BDD-based symbolic model checking uses BDDs to represent state sets and transition relations.\n  - chromatic-dispersion (networking): Wavelength-dependent propagation velocity causing pulse broadening: \u0394\u03c4 = D\u00b7L\u00b7\u0394\u03bb.\n  - computation-tree-logic (formal-verification): CTL: branching-time temporal logic with path quantifiers (A = all paths, E = exists path) and temporal operators (X = next, F = eventually, G = always, U = until, W = weak until). Model checking: labeling algorithm.\n  - fiat-shamir-heuristic (cryptography-advanced): Transform an interactive sigma protocol into a non-interactive proof: replace verifier's random challenge c with H(a || transcript), where H is a cryptographic hash. Prover generates c = H(a) then z without verifier interaction.\n  - program-aided-language-model (agentic-reasoning): PAL (Program-Aided Language Model): LLM generates executable code to solve reasoning tasks; code executor computes result; LLM interprets output.\n**Real walls (combined):**\n  - [bdd-symbolic-model-checking] BDD explosion for some functions (multipliers, cryptographic functions)\n  - [bdd-symbolic-model-checking] variable ordering problem is NP-hard\n  - [bdd-symbolic-model-checking] dynamic variable reordering helps\n  - [chromatic-dispersion] D (ps/nm/km) varies with fiber type\n  - [chromatic-dispersion] uncompensated dispersion limits bit rate \u00d7 distance product\n  - [computation-tree-logic] Expressive enough for many properties\n  - [computation-tree-logic] CTL cannot express some properties (e.g., \"always eventually p holds on all paths\" = AG EF p)\n  - [computation-tree-logic] CTL* (full branching time) is more expressive\n  - [fiat-shamir-heuristic] Random oracle model required\n  - [fiat-shamir-heuristic] Fiat-Shamir can introduce insecurity if protocol has subtle issues (e.g.,\u5403\u5b8c =\u5403\u5b8c attack)\n  - [fiat-shamir-heuristic] not all protocols safely transform\n  - [program-aided-language-model] Code generation errors (syntax, logic)\n  - [program-aided-language-model] execution sandboxing\n  - [program-aided-language-model] Python vs\n  - [program-aided-language-model] LLM arithmetic (PAL reduces LLM math errors)"
+    },
+    {
+      "primitives": [
+        "bdd-symbolic-model-checking",
+        "chromatic-dispersion",
+        "counterexample-guided-abstraction-refinement",
+        "fiat-shamir-heuristic",
+        "program-aided-language-model"
+      ],
+      "domains": [
+        "formal-verification",
+        "networking",
+        "formal-verification",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "formal-verification",
+        "networking",
+        "formal-verification",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "score": 585.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification",
+        "networking"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification",
+        "networking"
+      ],
+      "root_atoms_used": [
+        "order",
+        "combine",
+        "scan",
+        "compare",
+        "hash",
+        "project",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 cryptography-advanced \u2192 formal-verification \u2192 networking\n**Components:**\n  - bdd-symbolic-model-checking (formal-verification): Binary Decision Diagram (BDD): canonical representation of Boolean functions; ROBDD = reduced ordered BDD (unique canonical form). BDD-based symbolic model checking uses BDDs to represent state sets and transition relations.\n  - chromatic-dispersion (networking): Wavelength-dependent propagation velocity causing pulse broadening: \u0394\u03c4 = D\u00b7L\u00b7\u0394\u03bb.\n  - counterexample-guided-abstraction-refinement (formal-verification): CEGAR: iteratively (1) abstract model \u2192 (2) check abstract model \u2192 (3) if abstract counterexample is spurious, refine abstraction using Craig interpolation \u2192 repeat. Used for infinite-state or large finite-state systems.\n  - fiat-shamir-heuristic (cryptography-advanced): Transform an interactive sigma protocol into a non-interactive proof: replace verifier's random challenge c with H(a || transcript), where H is a cryptographic hash. Prover generates c = H(a) then z without verifier interaction.\n  - program-aided-language-model (agentic-reasoning): PAL (Program-Aided Language Model): LLM generates executable code to solve reasoning tasks; code executor computes result; LLM interprets output.\n**Real walls (combined):**\n  - [bdd-symbolic-model-checking] BDD explosion for some functions (multipliers, cryptographic functions)\n  - [bdd-symbolic-model-checking] variable ordering problem is NP-hard\n  - [bdd-symbolic-model-checking] dynamic variable reordering helps\n  - [chromatic-dispersion] D (ps/nm/km) varies with fiber type\n  - [chromatic-dispersion] uncompensated dispersion limits bit rate \u00d7 distance product\n  - [counterexample-guided-abstraction-refinement] Spurious counterexamples must be traceable to predicates\n  - [counterexample-guided-abstraction-refinement] predicate discovery is the hard part\n  - [counterexample-guided-abstraction-refinement] too many predicates \u2192 abstraction too concrete (BDD explosion)\n  - [fiat-shamir-heuristic] Random oracle model required\n  - [fiat-shamir-heuristic] Fiat-Shamir can introduce insecurity if protocol has subtle issues (e.g.,\u5403\u5b8c =\u5403\u5b8c attack)\n  - [fiat-shamir-heuristic] not all protocols safely transform\n  - [program-aided-language-model] Code generation errors (syntax, logic)\n  - [program-aided-language-model] execution sandboxing\n  - [program-aided-language-model] Python vs\n  - [program-aided-language-model] LLM arithmetic (PAL reduces LLM math errors)"
+    },
+    {
+      "primitives": [
+        "bdd-symbolic-model-checking",
+        "chromatic-dispersion",
+        "cutting-planes",
+        "fiat-shamir-heuristic",
+        "program-aided-language-model"
+      ],
+      "domains": [
+        "formal-verification",
+        "networking",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "formal-verification",
+        "networking",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "score": 585.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "formal-verification",
+        "networking"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "formal-verification",
+        "networking"
+      ],
+      "root_atoms_used": [
+        "order",
+        "combine",
+        "scan",
+        "compare",
+        "project",
+        "hash",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 combinatorial-optimization \u2192 cryptography-advanced \u2192 formal-verification \u2192 networking\n**Components:**\n  - bdd-symbolic-model-checking (formal-verification): Binary Decision Diagram (BDD): canonical representation of Boolean functions; ROBDD = reduced ordered BDD (unique canonical form). BDD-based symbolic model checking uses BDDs to represent state sets and transition relations.\n  - chromatic-dispersion (networking): Wavelength-dependent propagation velocity causing pulse broadening: \u0394\u03c4 = D\u00b7L\u00b7\u0394\u03bb.\n  - cutting-planes (combinatorial-optimization): Cutting planes: valid inequalities that cut off fractional LP solutions. Gomory mixed integer (GMI), MIR, lift-and-project.\n  - fiat-shamir-heuristic (cryptography-advanced): Transform an interactive sigma protocol into a non-interactive proof: replace verifier's random challenge c with H(a || transcript), where H is a cryptographic hash. Prover generates c = H(a) then z without verifier interaction.\n  - program-aided-language-model (agentic-reasoning): PAL (Program-Aided Language Model): LLM generates executable code to solve reasoning tasks; code executor computes result; LLM interprets output.\n**Real walls (combined):**\n  - [bdd-symbolic-model-checking] BDD explosion for some functions (multipliers, cryptographic functions)\n  - [bdd-symbolic-model-checking] variable ordering problem is NP-hard\n  - [bdd-symbolic-model-checking] dynamic variable reordering helps\n  - [chromatic-dispersion] D (ps/nm/km) varies with fiber type\n  - [chromatic-dispersion] uncompensated dispersion limits bit rate \u00d7 distance product\n  - [cutting-planes] Different problem classes have specialized cuts\n  - [cutting-planes] TSP has subtour elimination\n  - [cutting-planes] packing has cover inequalities\n  - [fiat-shamir-heuristic] Random oracle model required\n  - [fiat-shamir-heuristic] Fiat-Shamir can introduce insecurity if protocol has subtle issues (e.g.,\u5403\u5b8c =\u5403\u5b8c attack)\n  - [fiat-shamir-heuristic] not all protocols safely transform\n  - [program-aided-language-model] Code generation errors (syntax, logic)\n  - [program-aided-language-model] execution sandboxing\n  - [program-aided-language-model] Python vs\n  - [program-aided-language-model] LLM arithmetic (PAL reduces LLM math errors)"
+    },
+    {
+      "primitives": [
+        "bdd-symbolic-model-checking",
+        "chromatic-dispersion",
+        "fiat-shamir-heuristic",
+        "graph-of-thought",
+        "program-aided-language-model"
+      ],
+      "domains": [
+        "formal-verification",
+        "networking",
+        "cryptography-advanced",
+        "agentic-reasoning",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "formal-verification",
+        "networking",
+        "cryptography-advanced",
+        "agentic-reasoning",
+        "agentic-reasoning"
+      ],
+      "score": 585.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification",
+        "networking"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification",
+        "networking"
+      ],
+      "root_atoms_used": [
+        "order",
+        "combine",
+        "scan",
+        "compare",
+        "hash",
+        "project",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 cryptography-advanced \u2192 formal-verification \u2192 networking\n**Components:**\n  - bdd-symbolic-model-checking (formal-verification): Binary Decision Diagram (BDD): canonical representation of Boolean functions; ROBDD = reduced ordered BDD (unique canonical form). BDD-based symbolic model checking uses BDDs to represent state sets and transition relations.\n  - chromatic-dispersion (networking): Wavelength-dependent propagation velocity causing pulse broadening: \u0394\u03c4 = D\u00b7L\u00b7\u0394\u03bb.\n  - fiat-shamir-heuristic (cryptography-advanced): Transform an interactive sigma protocol into a non-interactive proof: replace verifier's random challenge c with H(a || transcript), where H is a cryptographic hash. Prover generates c = H(a) then z without verifier interaction.\n  - graph-of-thought (agentic-reasoning): Graph-of-Thought (GoT): model reasoning as DAG; nodes = reasoning units (thought, fact, conclusion); edges = dependencies; supports non-linear, cyclic, and self-referential thought.\n  - program-aided-language-model (agentic-reasoning): PAL (Program-Aided Language Model): LLM generates executable code to solve reasoning tasks; code executor computes result; LLM interprets output.\n**Real walls (combined):**\n  - [bdd-symbolic-model-checking] BDD explosion for some functions (multipliers, cryptographic functions)\n  - [bdd-symbolic-model-checking] variable ordering problem is NP-hard\n  - [bdd-symbolic-model-checking] dynamic variable reordering helps\n  - [chromatic-dispersion] D (ps/nm/km) varies with fiber type\n  - [chromatic-dispersion] uncompensated dispersion limits bit rate \u00d7 distance product\n  - [fiat-shamir-heuristic] Random oracle model required\n  - [fiat-shamir-heuristic] Fiat-Shamir can introduce insecurity if protocol has subtle issues (e.g.,\u5403\u5b8c =\u5403\u5b8c attack)\n  - [fiat-shamir-heuristic] not all protocols safely transform\n  - [graph-of-thought] Cycle detection and handling\n  - [graph-of-thought] graph consistency maintenance\n  - [graph-of-thought] no established benchmark for GoT quality\n  - [program-aided-language-model] Code generation errors (syntax, logic)\n  - [program-aided-language-model] execution sandboxing\n  - [program-aided-language-model] Python vs\n  - [program-aided-language-model] LLM arithmetic (PAL reduces LLM math errors)"
+    },
+    {
+      "primitives": [
+        "bdd-symbolic-model-checking",
+        "chromatic-dispersion",
+        "fiat-shamir-heuristic",
+        "groth16-snark",
+        "program-aided-language-model"
+      ],
+      "domains": [
+        "formal-verification",
+        "networking",
+        "cryptography-advanced",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "formal-verification",
+        "networking",
+        "cryptography-advanced",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "score": 585.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification",
+        "networking"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification",
+        "networking"
+      ],
+      "root_atoms_used": [
+        "order",
+        "combine",
+        "scan",
+        "compare",
+        "hash",
+        "project",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 cryptography-advanced \u2192 formal-verification \u2192 networking\n**Components:**\n  - bdd-symbolic-model-checking (formal-verification): Binary Decision Diagram (BDD): canonical representation of Boolean functions; ROBDD = reduced ordered BDD (unique canonical form). BDD-based symbolic model checking uses BDDs to represent state sets and transition relations.\n  - chromatic-dispersion (networking): Wavelength-dependent propagation velocity causing pulse broadening: \u0394\u03c4 = D\u00b7L\u00b7\u0394\u03bb.\n  - fiat-shamir-heuristic (cryptography-advanced): Transform an interactive sigma protocol into a non-interactive proof: replace verifier's random challenge c with H(a || transcript), where H is a cryptographic hash. Prover generates c = H(a) then z without verifier interaction.\n  - groth16-snark (cryptography-advanced): Groth16: pairing-based SNARK with proof = (A, B, C) \u2208 G\u2081 \u00d7 G\u2082 \u00d7 G\u2081; 3 pairings to verify; proof size = 3 elements (very short). Circuit-specific trusted setup (P = setup + preprocessing).\n  - program-aided-language-model (agentic-reasoning): PAL (Program-Aided Language Model): LLM generates executable code to solve reasoning tasks; code executor computes result; LLM interprets output.\n**Real walls (combined):**\n  - [bdd-symbolic-model-checking] BDD explosion for some functions (multipliers, cryptographic functions)\n  - [bdd-symbolic-model-checking] variable ordering problem is NP-hard\n  - [bdd-symbolic-model-checking] dynamic variable reordering helps\n  - [chromatic-dispersion] D (ps/nm/km) varies with fiber type\n  - [chromatic-dispersion] uncompensated dispersion limits bit rate \u00d7 distance product\n  - [fiat-shamir-heuristic] Random oracle model required\n  - [fiat-shamir-heuristic] Fiat-Shamir can introduce insecurity if protocol has subtle issues (e.g.,\u5403\u5b8c =\u5403\u5b8c attack)\n  - [fiat-shamir-heuristic] not all protocols safely transform\n  - [groth16-snark] Trusted setup is circuit-specific (toxic waste \u2192 must destroy)\n  - [groth16-snark] per-circuit ceremony\n  - [groth16-snark] proofs not universal (cannot verify different circuits with same proving/verification keys)\n  - [program-aided-language-model] Code generation errors (syntax, logic)\n  - [program-aided-language-model] execution sandboxing\n  - [program-aided-language-model] Python vs\n  - [program-aided-language-model] LLM arithmetic (PAL reduces LLM math errors)"
+    },
+    {
+      "primitives": [
+        "bdd-symbolic-model-checking",
+        "chromatic-dispersion",
+        "fiat-shamir-heuristic",
+        "linear-temporal-logic",
+        "program-aided-language-model"
+      ],
+      "domains": [
+        "formal-verification",
+        "networking",
+        "cryptography-advanced",
+        "formal-verification",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "formal-verification",
+        "networking",
+        "cryptography-advanced",
+        "formal-verification",
+        "agentic-reasoning"
+      ],
+      "score": 585.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification",
+        "networking"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification",
+        "networking"
+      ],
+      "root_atoms_used": [
+        "order",
+        "combine",
+        "scan",
+        "compare",
+        "hash",
+        "project",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 cryptography-advanced \u2192 formal-verification \u2192 networking\n**Components:**\n  - bdd-symbolic-model-checking (formal-verification): Binary Decision Diagram (BDD): canonical representation of Boolean functions; ROBDD = reduced ordered BDD (unique canonical form). BDD-based symbolic model checking uses BDDs to represent state sets and transition relations.\n  - chromatic-dispersion (networking): Wavelength-dependent propagation velocity causing pulse broadening: \u0394\u03c4 = D\u00b7L\u00b7\u0394\u03bb.\n  - fiat-shamir-heuristic (cryptography-advanced): Transform an interactive sigma protocol into a non-interactive proof: replace verifier's random challenge c with H(a || transcript), where H is a cryptographic hash. Prover generates c = H(a) then z without verifier interaction.\n  - linear-temporal-logic (formal-verification): LTL: temporal logic over single execution path; operators: X (next), U (until), R (release), F (finally), G (globally). Encodes \u03c9-regular properties. Safety (G \u00acbad), liveness (F good), fairness (GF can).\n  - program-aided-language-model (agentic-reasoning): PAL (Program-Aided Language Model): LLM generates executable code to solve reasoning tasks; code executor computes result; LLM interprets output.\n**Real walls (combined):**\n  - [bdd-symbolic-model-checking] BDD explosion for some functions (multipliers, cryptographic functions)\n  - [bdd-symbolic-model-checking] variable ordering problem is NP-hard\n  - [bdd-symbolic-model-checking] dynamic variable reordering helps\n  - [chromatic-dispersion] D (ps/nm/km) varies with fiber type\n  - [chromatic-dispersion] uncompensated dispersion limits bit rate \u00d7 distance product\n  - [fiat-shamir-heuristic] Random oracle model required\n  - [fiat-shamir-heuristic] Fiat-Shamir can introduce insecurity if protocol has subtle issues (e.g.,\u5403\u5b8c =\u5403\u5b8c attack)\n  - [fiat-shamir-heuristic] not all protocols safely transform\n  - [linear-temporal-logic] LTL model checking is PSPACE-complete (in |TS|)\n  - [linear-temporal-logic] explicit-state MC has complexity O(|TS| \u00b7 2^|\u03c6|)\n  - [linear-temporal-logic] symbolic is PSPACE in practice\n  - [program-aided-language-model] Code generation errors (syntax, logic)\n  - [program-aided-language-model] execution sandboxing\n  - [program-aided-language-model] Python vs\n  - [program-aided-language-model] LLM arithmetic (PAL reduces LLM math errors)"
+    },
+    {
+      "primitives": [
+        "bdd-symbolic-model-checking",
+        "chromatic-dispersion",
+        "fiat-shamir-heuristic",
+        "maximum-likelihood-estimation",
+        "program-aided-language-model"
+      ],
+      "domains": [
+        "formal-verification",
+        "networking",
+        "cryptography-advanced",
+        "statistics-probability",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "formal-verification",
+        "networking",
+        "cryptography-advanced",
+        "statistics-probability",
+        "agentic-reasoning"
+      ],
+      "score": 585.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification",
+        "networking",
+        "statistics-probability"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification",
+        "networking",
+        "statistics-probability"
+      ],
+      "root_atoms_used": [
+        "order",
+        "combine",
+        "scan",
+        "compare",
+        "hash",
+        "project",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 cryptography-advanced \u2192 formal-verification \u2192 networking \u2192 statistics-probability\n**Components:**\n  - bdd-symbolic-model-checking (formal-verification): Binary Decision Diagram (BDD): canonical representation of Boolean functions; ROBDD = reduced ordered BDD (unique canonical form). BDD-based symbolic model checking uses BDDs to represent state sets and transition relations.\n  - chromatic-dispersion (networking): Wavelength-dependent propagation velocity causing pulse broadening: \u0394\u03c4 = D\u00b7L\u00b7\u0394\u03bb.\n  - fiat-shamir-heuristic (cryptography-advanced): Transform an interactive sigma protocol into a non-interactive proof: replace verifier's random challenge c with H(a || transcript), where H is a cryptographic hash. Prover generates c = H(a) then z without verifier interaction.\n  - maximum-likelihood-estimation (statistics-probability): MLE: choose parameter \u03b8 to maximize likelihood L(\u03b8; x) = P(x | \u03b8). Equivalently maximize log-likelihood \u2113(\u03b8; x) = \u03a3 log P(x\u1d62 | \u03b8). Consistent (as n \u2192 \u221e) and asymptotically efficient (lowest variance among unbiased estimators).\n  - program-aided-language-model (agentic-reasoning): PAL (Program-Aided Language Model): LLM generates executable code to solve reasoning tasks; code executor computes result; LLM interprets output.\n**Real walls (combined):**\n  - [bdd-symbolic-model-checking] BDD explosion for some functions (multipliers, cryptographic functions)\n  - [bdd-symbolic-model-checking] variable ordering problem is NP-hard\n  - [bdd-symbolic-model-checking] dynamic variable reordering helps\n  - [chromatic-dispersion] D (ps/nm/km) varies with fiber type\n  - [chromatic-dispersion] uncompensated dispersion limits bit rate \u00d7 distance product\n  - [fiat-shamir-heuristic] Random oracle model required\n  - [fiat-shamir-heuristic] Fiat-Shamir can introduce insecurity if protocol has subtle issues (e.g.,\u5403\u5b8c =\u5403\u5b8c attack)\n  - [fiat-shamir-heuristic] not all protocols safely transform\n  - [maximum-likelihood-estimation] Non-convex likelihoods \u2192 multiple local maxima\n  - [maximum-likelihood-estimation] flat likelihood \u2192 high variance\n  - [maximum-likelihood-estimation] regularization may be needed\n  - [program-aided-language-model] Code generation errors (syntax, logic)\n  - [program-aided-language-model] execution sandboxing\n  - [program-aided-language-model] Python vs\n  - [program-aided-language-model] LLM arithmetic (PAL reduces LLM math errors)"
+    },
+    {
+      "primitives": [
+        "bdd-symbolic-model-checking",
+        "chromatic-dispersion",
+        "fiat-shamir-heuristic",
+        "merkle-commitment",
+        "program-aided-language-model"
+      ],
+      "domains": [
+        "formal-verification",
+        "networking",
+        "cryptography-advanced",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "formal-verification",
+        "networking",
+        "cryptography-advanced",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "score": 585.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification",
+        "networking"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification",
+        "networking"
+      ],
+      "root_atoms_used": [
+        "order",
+        "combine",
+        "scan",
+        "compare",
+        "hash",
+        "project",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 cryptography-advanced \u2192 formal-verification \u2192 networking\n**Components:**\n  - bdd-symbolic-model-checking (formal-verification): Binary Decision Diagram (BDD): canonical representation of Boolean functions; ROBDD = reduced ordered BDD (unique canonical form). BDD-based symbolic model checking uses BDDs to represent state sets and transition relations.\n  - chromatic-dispersion (networking): Wavelength-dependent propagation velocity causing pulse broadening: \u0394\u03c4 = D\u00b7L\u00b7\u0394\u03bb.\n  - fiat-shamir-heuristic (cryptography-advanced): Transform an interactive sigma protocol into a non-interactive proof: replace verifier's random challenge c with H(a || transcript), where H is a cryptographic hash. Prover generates c = H(a) then z without verifier interaction.\n  - merkle-commitment (cryptography-advanced): Merkle commitment: hash data into a binary tree, commit to root hash; opening = path of sibling hashes to root. Post-quantum secure (only requires collision-resistant hash).\n  - program-aided-language-model (agentic-reasoning): PAL (Program-Aided Language Model): LLM generates executable code to solve reasoning tasks; code executor computes result; LLM interprets output.\n**Real walls (combined):**\n  - [bdd-symbolic-model-checking] BDD explosion for some functions (multipliers, cryptographic functions)\n  - [bdd-symbolic-model-checking] variable ordering problem is NP-hard\n  - [bdd-symbolic-model-checking] dynamic variable reordering helps\n  - [chromatic-dispersion] D (ps/nm/km) varies with fiber type\n  - [chromatic-dispersion] uncompensated dispersion limits bit rate \u00d7 distance product\n  - [fiat-shamir-heuristic] Random oracle model required\n  - [fiat-shamir-heuristic] Fiat-Shamir can introduce insecurity if protocol has subtle issues (e.g.,\u5403\u5b8c =\u5403\u5b8c attack)\n  - [fiat-shamir-heuristic] not all protocols safely transform\n  - [merkle-commitment] Tree construction O(n) for n data items\n  - [merkle-commitment] bandwidth of proofs\n  - [merkle-commitment] not additive-homomorphic\n  - [program-aided-language-model] Code generation errors (syntax, logic)\n  - [program-aided-language-model] execution sandboxing\n  - [program-aided-language-model] Python vs\n  - [program-aided-language-model] LLM arithmetic (PAL reduces LLM math errors)"
+    },
+    {
+      "primitives": [
+        "bdd-symbolic-model-checking",
+        "chromatic-dispersion",
+        "fiat-shamir-heuristic",
+        "partial-order-reduction",
+        "program-aided-language-model"
+      ],
+      "domains": [
+        "formal-verification",
+        "networking",
+        "cryptography-advanced",
+        "formal-verification",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "formal-verification",
+        "networking",
+        "cryptography-advanced",
+        "formal-verification",
+        "agentic-reasoning"
+      ],
+      "score": 585.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification",
+        "networking"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification",
+        "networking"
+      ],
+      "root_atoms_used": [
+        "order",
+        "combine",
+        "scan",
+        "compare",
+        "hash",
+        "project",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 cryptography-advanced \u2192 formal-verification \u2192 networking\n**Components:**\n  - bdd-symbolic-model-checking (formal-verification): Binary Decision Diagram (BDD): canonical representation of Boolean functions; ROBDD = reduced ordered BDD (unique canonical form). BDD-based symbolic model checking uses BDDs to represent state sets and transition relations.\n  - chromatic-dispersion (networking): Wavelength-dependent propagation velocity causing pulse broadening: \u0394\u03c4 = D\u00b7L\u00b7\u0394\u03bb.\n  - fiat-shamir-heuristic (cryptography-advanced): Transform an interactive sigma protocol into a non-interactive proof: replace verifier's random challenge c with H(a || transcript), where H is a cryptographic hash. Prover generates c = H(a) then z without verifier interaction.\n  - partial-order-reduction (formal-verification): POR: reduce state space by exploring only one representative execution per equivalence class of concurrent events. Ample set, persistent set, sleep set algorithms. Independence \u2192 commutativity \u2192 reduced exploration.\n  - program-aided-language-model (agentic-reasoning): PAL (Program-Aided Language Model): LLM generates executable code to solve reasoning tasks; code executor computes result; LLM interprets output.\n**Real walls (combined):**\n  - [bdd-symbolic-model-checking] BDD explosion for some functions (multipliers, cryptographic functions)\n  - [bdd-symbolic-model-checking] variable ordering problem is NP-hard\n  - [bdd-symbolic-model-checking] dynamic variable reordering helps\n  - [chromatic-dispersion] D (ps/nm/km) varies with fiber type\n  - [chromatic-dispersion] uncompensated dispersion limits bit rate \u00d7 distance product\n  - [fiat-shamir-heuristic] Random oracle model required\n  - [fiat-shamir-heuristic] Fiat-Shamir can introduce insecurity if protocol has subtle issues (e.g.,\u5403\u5b8c =\u5403\u5b8c attack)\n  - [fiat-shamir-heuristic] not all protocols safely transform\n  - [partial-order-reduction] POR must preserve properties being checked (safety vs. liveness require different reductions)\n  - [partial-order-reduction] deadlocks may be missed without care\n  - [partial-order-reduction] not all reductions are interchangeable\n  - [program-aided-language-model] Code generation errors (syntax, logic)\n  - [program-aided-language-model] execution sandboxing\n  - [program-aided-language-model] Python vs\n  - [program-aided-language-model] LLM arithmetic (PAL reduces LLM math errors)"
+    },
+    {
+      "primitives": [
+        "bdd-symbolic-model-checking",
+        "chromatic-dispersion",
+        "fiat-shamir-heuristic",
+        "polynomial-commitment",
+        "program-aided-language-model"
+      ],
+      "domains": [
+        "formal-verification",
+        "networking",
+        "cryptography-advanced",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "formal-verification",
+        "networking",
+        "cryptography-advanced",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "score": 585.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification",
+        "networking"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification",
+        "networking"
+      ],
+      "root_atoms_used": [
+        "order",
+        "combine",
+        "scan",
+        "compare",
+        "hash",
+        "project",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 cryptography-advanced \u2192 formal-verification \u2192 networking\n**Components:**\n  - bdd-symbolic-model-checking (formal-verification): Binary Decision Diagram (BDD): canonical representation of Boolean functions; ROBDD = reduced ordered BDD (unique canonical form). BDD-based symbolic model checking uses BDDs to represent state sets and transition relations.\n  - chromatic-dispersion (networking): Wavelength-dependent propagation velocity causing pulse broadening: \u0394\u03c4 = D\u00b7L\u00b7\u0394\u03bb.\n  - fiat-shamir-heuristic (cryptography-advanced): Transform an interactive sigma protocol into a non-interactive proof: replace verifier's random challenge c with H(a || transcript), where H is a cryptographic hash. Prover generates c = H(a) then z without verifier interaction.\n  - polynomial-commitment (cryptography-advanced): Commitment to a polynomial f(x) = \u03a3 a\u1d62x\u2071 such that later the committer can prove statements about f at arbitrary points without revealing the full polynomial. KZG (Kate-Zaverucha-Goldberg) uses trusted setup + pairing.\n  - program-aided-language-model (agentic-reasoning): PAL (Program-Aided Language Model): LLM generates executable code to solve reasoning tasks; code executor computes result; LLM interprets output.\n**Real walls (combined):**\n  - [bdd-symbolic-model-checking] BDD explosion for some functions (multipliers, cryptographic functions)\n  - [bdd-symbolic-model-checking] variable ordering problem is NP-hard\n  - [bdd-symbolic-model-checking] dynamic variable reordering helps\n  - [chromatic-dispersion] D (ps/nm/km) varies with fiber type\n  - [chromatic-dispersion] uncompensated dispersion limits bit rate \u00d7 distance product\n  - [fiat-shamir-heuristic] Random oracle model required\n  - [fiat-shamir-heuristic] Fiat-Shamir can introduce insecurity if protocol has subtle issues (e.g.,\u5403\u5b8c =\u5403\u5b8c attack)\n  - [fiat-shamir-heuristic] not all protocols safely transform\n  - [polynomial-commitment] KZG requires a trusted setup ceremony (toxic waste must be destroyed)\n  - [polynomial-commitment] DARK (Diophantine) uses no trusted setup\n  - [polynomial-commitment] IPA (inner product argument) is post-quantum\n  - [program-aided-language-model] Code generation errors (syntax, logic)\n  - [program-aided-language-model] execution sandboxing\n  - [program-aided-language-model] Python vs\n  - [program-aided-language-model] LLM arithmetic (PAL reduces LLM math errors)"
+    },
+    {
+      "primitives": [
+        "bdd-symbolic-model-checking",
+        "chromatic-dispersion",
+        "fiat-shamir-heuristic",
+        "program-aided-language-model",
+        "react-reasoning-acting"
+      ],
+      "domains": [
+        "formal-verification",
+        "networking",
+        "cryptography-advanced",
+        "agentic-reasoning",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "formal-verification",
+        "networking",
+        "cryptography-advanced",
+        "agentic-reasoning",
+        "agentic-reasoning"
+      ],
+      "score": 585.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification",
+        "networking"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification",
+        "networking"
+      ],
+      "root_atoms_used": [
+        "order",
+        "combine",
+        "scan",
+        "compare",
+        "hash",
+        "project",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 cryptography-advanced \u2192 formal-verification \u2192 networking\n**Components:**\n  - bdd-symbolic-model-checking (formal-verification): Binary Decision Diagram (BDD): canonical representation of Boolean functions; ROBDD = reduced ordered BDD (unique canonical form). BDD-based symbolic model checking uses BDDs to represent state sets and transition relations.\n  - chromatic-dispersion (networking): Wavelength-dependent propagation velocity causing pulse broadening: \u0394\u03c4 = D\u00b7L\u00b7\u0394\u03bb.\n  - fiat-shamir-heuristic (cryptography-advanced): Transform an interactive sigma protocol into a non-interactive proof: replace verifier's random challenge c with H(a || transcript), where H is a cryptographic hash. Prover generates c = H(a) then z without verifier interaction.\n  - program-aided-language-model (agentic-reasoning): PAL (Program-Aided Language Model): LLM generates executable code to solve reasoning tasks; code executor computes result; LLM interprets output.\n  - react-reasoning-acting (agentic-reasoning): ReAct (Reasoning + Acting): interleave thought steps with tool actions; thought = reason about situation; action = call tool; observation = tool result; repeat until done.\n**Real walls (combined):**\n  - [bdd-symbolic-model-checking] BDD explosion for some functions (multipliers, cryptographic functions)\n  - [bdd-symbolic-model-checking] variable ordering problem is NP-hard\n  - [bdd-symbolic-model-checking] dynamic variable reordering helps\n  - [chromatic-dispersion] D (ps/nm/km) varies with fiber type\n  - [chromatic-dispersion] uncompensated dispersion limits bit rate \u00d7 distance product\n  - [fiat-shamir-heuristic] Random oracle model required\n  - [fiat-shamir-heuristic] Fiat-Shamir can introduce insecurity if protocol has subtle issues (e.g.,\u5403\u5b8c =\u5403\u5b8c attack)\n  - [fiat-shamir-heuristic] not all protocols safely transform\n  - [program-aided-language-model] Code generation errors (syntax, logic)\n  - [program-aided-language-model] execution sandboxing\n  - [program-aided-language-model] Python vs\n  - [program-aided-language-model] LLM arithmetic (PAL reduces LLM math errors)\n  - [react-reasoning-acting] Tool call errors cascade\n  - [react-reasoning-acting] loop detection needed (max iterations)\n  - [react-reasoning-acting] action space quality determines success rate"
+    },
+    {
+      "primitives": [
+        "bdd-symbolic-model-checking",
+        "chromatic-dispersion",
+        "fiat-shamir-heuristic",
+        "program-aided-language-model",
+        "symmetry-reduction"
+      ],
+      "domains": [
+        "formal-verification",
+        "networking",
+        "cryptography-advanced",
+        "agentic-reasoning",
+        "formal-verification"
+      ],
+      "categories": [
+        "formal-verification",
+        "networking",
+        "cryptography-advanced",
+        "agentic-reasoning",
+        "formal-verification"
+      ],
+      "score": 585.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification",
+        "networking"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification",
+        "networking"
+      ],
+      "root_atoms_used": [
+        "order",
+        "combine",
+        "scan",
+        "compare",
+        "hash",
+        "project",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 cryptography-advanced \u2192 formal-verification \u2192 networking\n**Components:**\n  - bdd-symbolic-model-checking (formal-verification): Binary Decision Diagram (BDD): canonical representation of Boolean functions; ROBDD = reduced ordered BDD (unique canonical form). BDD-based symbolic model checking uses BDDs to represent state sets and transition relations.\n  - chromatic-dispersion (networking): Wavelength-dependent propagation velocity causing pulse broadening: \u0394\u03c4 = D\u00b7L\u00b7\u0394\u03bb.\n  - fiat-shamir-heuristic (cryptography-advanced): Transform an interactive sigma protocol into a non-interactive proof: replace verifier's random challenge c with H(a || transcript), where H is a cryptographic hash. Prover generates c = H(a) then z without verifier interaction.\n  - program-aided-language-model (agentic-reasoning): PAL (Program-Aided Language Model): LLM generates executable code to solve reasoning tasks; code executor computes result; LLM interprets output.\n  - symmetry-reduction (formal-verification): Exploit symmetries in the state space (e.g., interchangeable processes, identical components) to reduce the explored state graph. Quotient system = original / symmetry group.\n**Real walls (combined):**\n  - [bdd-symbolic-model-checking] BDD explosion for some functions (multipliers, cryptographic functions)\n  - [bdd-symbolic-model-checking] variable ordering problem is NP-hard\n  - [bdd-symbolic-model-checking] dynamic variable reordering helps\n  - [chromatic-dispersion] D (ps/nm/km) varies with fiber type\n  - [chromatic-dispersion] uncompensated dispersion limits bit rate \u00d7 distance product\n  - [fiat-shamir-heuristic] Random oracle model required\n  - [fiat-shamir-heuristic] Fiat-Shamir can introduce insecurity if protocol has subtle issues (e.g.,\u5403\u5b8c =\u5403\u5b8c attack)\n  - [fiat-shamir-heuristic] not all protocols safely transform\n  - [program-aided-language-model] Code generation errors (syntax, logic)\n  - [program-aided-language-model] execution sandboxing\n  - [program-aided-language-model] Python vs\n  - [program-aided-language-model] LLM arithmetic (PAL reduces LLM math errors)\n  - [symmetry-reduction] Symmetric systems are a special case\n  - [symmetry-reduction] detecting automorphism group of labeled transition system is expensive\n  - [symmetry-reduction] orbit bisimulation"
+    },
+    {
+      "primitives": [
+        "bdd-symbolic-model-checking",
+        "computation-tree-logic",
+        "fiat-shamir-heuristic",
+        "program-aided-language-model",
+        "self-consistency"
+      ],
+      "domains": [
+        "formal-verification",
+        "formal-verification",
+        "cryptography-advanced",
+        "agentic-reasoning",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "formal-verification",
+        "formal-verification",
+        "cryptography-advanced",
+        "agentic-reasoning",
+        "agentic-reasoning"
+      ],
+      "score": 585.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification"
+      ],
+      "root_atoms_used": [
+        "order",
+        "combine",
+        "scan",
+        "hash",
+        "project",
+        "sample",
+        "compare"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 cryptography-advanced \u2192 formal-verification\n**Components:**\n  - bdd-symbolic-model-checking (formal-verification): Binary Decision Diagram (BDD): canonical representation of Boolean functions; ROBDD = reduced ordered BDD (unique canonical form). BDD-based symbolic model checking uses BDDs to represent state sets and transition relations.\n  - computation-tree-logic (formal-verification): CTL: branching-time temporal logic with path quantifiers (A = all paths, E = exists path) and temporal operators (X = next, F = eventually, G = always, U = until, W = weak until). Model checking: labeling algorithm.\n  - fiat-shamir-heuristic (cryptography-advanced): Transform an interactive sigma protocol into a non-interactive proof: replace verifier's random challenge c with H(a || transcript), where H is a cryptographic hash. Prover generates c = H(a) then z without verifier interaction.\n  - program-aided-language-model (agentic-reasoning): PAL (Program-Aided Language Model): LLM generates executable code to solve reasoning tasks; code executor computes result; LLM interprets output.\n  - self-consistency (agentic-reasoning): Self-consistency: sample multiple reasoning paths (CoT or ReAct), aggregate answers via majority vote. Improves CoT by trading inference cost for accuracy.\n**Real walls (combined):**\n  - [bdd-symbolic-model-checking] BDD explosion for some functions (multipliers, cryptographic functions)\n  - [bdd-symbolic-model-checking] variable ordering problem is NP-hard\n  - [bdd-symbolic-model-checking] dynamic variable reordering helps\n  - [computation-tree-logic] Expressive enough for many properties\n  - [computation-tree-logic] CTL cannot express some properties (e.g., \"always eventually p holds on all paths\" = AG EF p)\n  - [computation-tree-logic] CTL* (full branching time) is more expressive\n  - [fiat-shamir-heuristic] Random oracle model required\n  - [fiat-shamir-heuristic] Fiat-Shamir can introduce insecurity if protocol has subtle issues (e.g.,\u5403\u5b8c =\u5403\u5b8c attack)\n  - [fiat-shamir-heuristic] not all protocols safely transform\n  - [program-aided-language-model] Code generation errors (syntax, logic)\n  - [program-aided-language-model] execution sandboxing\n  - [program-aided-language-model] Python vs\n  - [program-aided-language-model] LLM arithmetic (PAL reduces LLM math errors)\n  - [self-consistency] Answer aggregation tricky for open-ended outputs (need string matching or LLM-as-judge)\n  - [self-consistency] marginal gains after n=10\u201320"
+    },
+    {
+      "primitives": [
+        "bdd-symbolic-model-checking",
+        "counterexample-guided-abstraction-refinement",
+        "fiat-shamir-heuristic",
+        "program-aided-language-model",
+        "self-consistency"
+      ],
+      "domains": [
+        "formal-verification",
+        "formal-verification",
+        "cryptography-advanced",
+        "agentic-reasoning",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "formal-verification",
+        "formal-verification",
+        "cryptography-advanced",
+        "agentic-reasoning",
+        "agentic-reasoning"
+      ],
+      "score": 585.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification"
+      ],
+      "root_atoms_used": [
+        "order",
+        "combine",
+        "scan",
+        "hash",
+        "project",
+        "sample",
+        "compare"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 cryptography-advanced \u2192 formal-verification\n**Components:**\n  - bdd-symbolic-model-checking (formal-verification): Binary Decision Diagram (BDD): canonical representation of Boolean functions; ROBDD = reduced ordered BDD (unique canonical form). BDD-based symbolic model checking uses BDDs to represent state sets and transition relations.\n  - counterexample-guided-abstraction-refinement (formal-verification): CEGAR: iteratively (1) abstract model \u2192 (2) check abstract model \u2192 (3) if abstract counterexample is spurious, refine abstraction using Craig interpolation \u2192 repeat. Used for infinite-state or large finite-state systems.\n  - fiat-shamir-heuristic (cryptography-advanced): Transform an interactive sigma protocol into a non-interactive proof: replace verifier's random challenge c with H(a || transcript), where H is a cryptographic hash. Prover generates c = H(a) then z without verifier interaction.\n  - program-aided-language-model (agentic-reasoning): PAL (Program-Aided Language Model): LLM generates executable code to solve reasoning tasks; code executor computes result; LLM interprets output.\n  - self-consistency (agentic-reasoning): Self-consistency: sample multiple reasoning paths (CoT or ReAct), aggregate answers via majority vote. Improves CoT by trading inference cost for accuracy.\n**Real walls (combined):**\n  - [bdd-symbolic-model-checking] BDD explosion for some functions (multipliers, cryptographic functions)\n  - [bdd-symbolic-model-checking] variable ordering problem is NP-hard\n  - [bdd-symbolic-model-checking] dynamic variable reordering helps\n  - [counterexample-guided-abstraction-refinement] Spurious counterexamples must be traceable to predicates\n  - [counterexample-guided-abstraction-refinement] predicate discovery is the hard part\n  - [counterexample-guided-abstraction-refinement] too many predicates \u2192 abstraction too concrete (BDD explosion)\n  - [fiat-shamir-heuristic] Random oracle model required\n  - [fiat-shamir-heuristic] Fiat-Shamir can introduce insecurity if protocol has subtle issues (e.g.,\u5403\u5b8c =\u5403\u5b8c attack)\n  - [fiat-shamir-heuristic] not all protocols safely transform\n  - [program-aided-language-model] Code generation errors (syntax, logic)\n  - [program-aided-language-model] execution sandboxing\n  - [program-aided-language-model] Python vs\n  - [program-aided-language-model] LLM arithmetic (PAL reduces LLM math errors)\n  - [self-consistency] Answer aggregation tricky for open-ended outputs (need string matching or LLM-as-judge)\n  - [self-consistency] marginal gains after n=10\u201320"
+    },
+    {
+      "primitives": [
+        "bdd-symbolic-model-checking",
+        "cutting-planes",
+        "fiat-shamir-heuristic",
+        "program-aided-language-model",
+        "self-consistency"
+      ],
+      "domains": [
+        "formal-verification",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "agentic-reasoning",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "formal-verification",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "agentic-reasoning",
+        "agentic-reasoning"
+      ],
+      "score": 585.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "formal-verification"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "formal-verification"
+      ],
+      "root_atoms_used": [
+        "order",
+        "combine",
+        "scan",
+        "project",
+        "hash",
+        "sample",
+        "compare"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 combinatorial-optimization \u2192 cryptography-advanced \u2192 formal-verification\n**Components:**\n  - bdd-symbolic-model-checking (formal-verification): Binary Decision Diagram (BDD): canonical representation of Boolean functions; ROBDD = reduced ordered BDD (unique canonical form). BDD-based symbolic model checking uses BDDs to represent state sets and transition relations.\n  - cutting-planes (combinatorial-optimization): Cutting planes: valid inequalities that cut off fractional LP solutions. Gomory mixed integer (GMI), MIR, lift-and-project.\n  - fiat-shamir-heuristic (cryptography-advanced): Transform an interactive sigma protocol into a non-interactive proof: replace verifier's random challenge c with H(a || transcript), where H is a cryptographic hash. Prover generates c = H(a) then z without verifier interaction.\n  - program-aided-language-model (agentic-reasoning): PAL (Program-Aided Language Model): LLM generates executable code to solve reasoning tasks; code executor computes result; LLM interprets output.\n  - self-consistency (agentic-reasoning): Self-consistency: sample multiple reasoning paths (CoT or ReAct), aggregate answers via majority vote. Improves CoT by trading inference cost for accuracy.\n**Real walls (combined):**\n  - [bdd-symbolic-model-checking] BDD explosion for some functions (multipliers, cryptographic functions)\n  - [bdd-symbolic-model-checking] variable ordering problem is NP-hard\n  - [bdd-symbolic-model-checking] dynamic variable reordering helps\n  - [cutting-planes] Different problem classes have specialized cuts\n  - [cutting-planes] TSP has subtour elimination\n  - [cutting-planes] packing has cover inequalities\n  - [fiat-shamir-heuristic] Random oracle model required\n  - [fiat-shamir-heuristic] Fiat-Shamir can introduce insecurity if protocol has subtle issues (e.g.,\u5403\u5b8c =\u5403\u5b8c attack)\n  - [fiat-shamir-heuristic] not all protocols safely transform\n  - [program-aided-language-model] Code generation errors (syntax, logic)\n  - [program-aided-language-model] execution sandboxing\n  - [program-aided-language-model] Python vs\n  - [program-aided-language-model] LLM arithmetic (PAL reduces LLM math errors)\n  - [self-consistency] Answer aggregation tricky for open-ended outputs (need string matching or LLM-as-judge)\n  - [self-consistency] marginal gains after n=10\u201320"
+    },
+    {
+      "primitives": [
+        "bdd-symbolic-model-checking",
+        "cutting-planes",
+        "merkle-commitment",
+        "program-aided-language-model",
+        "self-consistency"
+      ],
+      "domains": [
+        "formal-verification",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "agentic-reasoning",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "formal-verification",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "agentic-reasoning",
+        "agentic-reasoning"
+      ],
+      "score": 585.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "formal-verification"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "formal-verification"
+      ],
+      "root_atoms_used": [
+        "order",
+        "combine",
+        "scan",
+        "project",
+        "hash",
+        "compare",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 combinatorial-optimization \u2192 cryptography-advanced \u2192 formal-verification\n**Components:**\n  - bdd-symbolic-model-checking (formal-verification): Binary Decision Diagram (BDD): canonical representation of Boolean functions; ROBDD = reduced ordered BDD (unique canonical form). BDD-based symbolic model checking uses BDDs to represent state sets and transition relations.\n  - cutting-planes (combinatorial-optimization): Cutting planes: valid inequalities that cut off fractional LP solutions. Gomory mixed integer (GMI), MIR, lift-and-project.\n  - merkle-commitment (cryptography-advanced): Merkle commitment: hash data into a binary tree, commit to root hash; opening = path of sibling hashes to root. Post-quantum secure (only requires collision-resistant hash).\n  - program-aided-language-model (agentic-reasoning): PAL (Program-Aided Language Model): LLM generates executable code to solve reasoning tasks; code executor computes result; LLM interprets output.\n  - self-consistency (agentic-reasoning): Self-consistency: sample multiple reasoning paths (CoT or ReAct), aggregate answers via majority vote. Improves CoT by trading inference cost for accuracy.\n**Real walls (combined):**\n  - [bdd-symbolic-model-checking] BDD explosion for some functions (multipliers, cryptographic functions)\n  - [bdd-symbolic-model-checking] variable ordering problem is NP-hard\n  - [bdd-symbolic-model-checking] dynamic variable reordering helps\n  - [cutting-planes] Different problem classes have specialized cuts\n  - [cutting-planes] TSP has subtour elimination\n  - [cutting-planes] packing has cover inequalities\n  - [merkle-commitment] Tree construction O(n) for n data items\n  - [merkle-commitment] bandwidth of proofs\n  - [merkle-commitment] not additive-homomorphic\n  - [program-aided-language-model] Code generation errors (syntax, logic)\n  - [program-aided-language-model] execution sandboxing\n  - [program-aided-language-model] Python vs\n  - [program-aided-language-model] LLM arithmetic (PAL reduces LLM math errors)\n  - [self-consistency] Answer aggregation tricky for open-ended outputs (need string matching or LLM-as-judge)\n  - [self-consistency] marginal gains after n=10\u201320"
+    },
+    {
+      "primitives": [
+        "bdd-symbolic-model-checking",
+        "fiat-shamir-heuristic",
+        "graph-of-thought",
+        "program-aided-language-model",
+        "self-consistency"
+      ],
+      "domains": [
+        "formal-verification",
+        "cryptography-advanced",
+        "agentic-reasoning",
+        "agentic-reasoning",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "formal-verification",
+        "cryptography-advanced",
+        "agentic-reasoning",
+        "agentic-reasoning",
+        "agentic-reasoning"
+      ],
+      "score": 585.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification"
+      ],
+      "root_atoms_used": [
+        "order",
+        "combine",
+        "scan",
+        "hash",
+        "project",
+        "sample",
+        "compare"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 cryptography-advanced \u2192 formal-verification\n**Components:**\n  - bdd-symbolic-model-checking (formal-verification): Binary Decision Diagram (BDD): canonical representation of Boolean functions; ROBDD = reduced ordered BDD (unique canonical form). BDD-based symbolic model checking uses BDDs to represent state sets and transition relations.\n  - fiat-shamir-heuristic (cryptography-advanced): Transform an interactive sigma protocol into a non-interactive proof: replace verifier's random challenge c with H(a || transcript), where H is a cryptographic hash. Prover generates c = H(a) then z without verifier interaction.\n  - graph-of-thought (agentic-reasoning): Graph-of-Thought (GoT): model reasoning as DAG; nodes = reasoning units (thought, fact, conclusion); edges = dependencies; supports non-linear, cyclic, and self-referential thought.\n  - program-aided-language-model (agentic-reasoning): PAL (Program-Aided Language Model): LLM generates executable code to solve reasoning tasks; code executor computes result; LLM interprets output.\n  - self-consistency (agentic-reasoning): Self-consistency: sample multiple reasoning paths (CoT or ReAct), aggregate answers via majority vote. Improves CoT by trading inference cost for accuracy.\n**Real walls (combined):**\n  - [bdd-symbolic-model-checking] BDD explosion for some functions (multipliers, cryptographic functions)\n  - [bdd-symbolic-model-checking] variable ordering problem is NP-hard\n  - [bdd-symbolic-model-checking] dynamic variable reordering helps\n  - [fiat-shamir-heuristic] Random oracle model required\n  - [fiat-shamir-heuristic] Fiat-Shamir can introduce insecurity if protocol has subtle issues (e.g.,\u5403\u5b8c =\u5403\u5b8c attack)\n  - [fiat-shamir-heuristic] not all protocols safely transform\n  - [graph-of-thought] Cycle detection and handling\n  - [graph-of-thought] graph consistency maintenance\n  - [graph-of-thought] no established benchmark for GoT quality\n  - [program-aided-language-model] Code generation errors (syntax, logic)\n  - [program-aided-language-model] execution sandboxing\n  - [program-aided-language-model] Python vs\n  - [program-aided-language-model] LLM arithmetic (PAL reduces LLM math errors)\n  - [self-consistency] Answer aggregation tricky for open-ended outputs (need string matching or LLM-as-judge)\n  - [self-consistency] marginal gains after n=10\u201320"
+    },
+    {
+      "primitives": [
+        "bdd-symbolic-model-checking",
+        "fiat-shamir-heuristic",
+        "groth16-snark",
+        "program-aided-language-model",
+        "self-consistency"
+      ],
+      "domains": [
+        "formal-verification",
+        "cryptography-advanced",
+        "cryptography-advanced",
+        "agentic-reasoning",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "formal-verification",
+        "cryptography-advanced",
+        "cryptography-advanced",
+        "agentic-reasoning",
+        "agentic-reasoning"
+      ],
+      "score": 585.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification"
+      ],
+      "root_atoms_used": [
+        "order",
+        "combine",
+        "scan",
+        "hash",
+        "project",
+        "sample",
+        "compare"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 cryptography-advanced \u2192 formal-verification\n**Components:**\n  - bdd-symbolic-model-checking (formal-verification): Binary Decision Diagram (BDD): canonical representation of Boolean functions; ROBDD = reduced ordered BDD (unique canonical form). BDD-based symbolic model checking uses BDDs to represent state sets and transition relations.\n  - fiat-shamir-heuristic (cryptography-advanced): Transform an interactive sigma protocol into a non-interactive proof: replace verifier's random challenge c with H(a || transcript), where H is a cryptographic hash. Prover generates c = H(a) then z without verifier interaction.\n  - groth16-snark (cryptography-advanced): Groth16: pairing-based SNARK with proof = (A, B, C) \u2208 G\u2081 \u00d7 G\u2082 \u00d7 G\u2081; 3 pairings to verify; proof size = 3 elements (very short). Circuit-specific trusted setup (P = setup + preprocessing).\n  - program-aided-language-model (agentic-reasoning): PAL (Program-Aided Language Model): LLM generates executable code to solve reasoning tasks; code executor computes result; LLM interprets output.\n  - self-consistency (agentic-reasoning): Self-consistency: sample multiple reasoning paths (CoT or ReAct), aggregate answers via majority vote. Improves CoT by trading inference cost for accuracy.\n**Real walls (combined):**\n  - [bdd-symbolic-model-checking] BDD explosion for some functions (multipliers, cryptographic functions)\n  - [bdd-symbolic-model-checking] variable ordering problem is NP-hard\n  - [bdd-symbolic-model-checking] dynamic variable reordering helps\n  - [fiat-shamir-heuristic] Random oracle model required\n  - [fiat-shamir-heuristic] Fiat-Shamir can introduce insecurity if protocol has subtle issues (e.g.,\u5403\u5b8c =\u5403\u5b8c attack)\n  - [fiat-shamir-heuristic] not all protocols safely transform\n  - [groth16-snark] Trusted setup is circuit-specific (toxic waste \u2192 must destroy)\n  - [groth16-snark] per-circuit ceremony\n  - [groth16-snark] proofs not universal (cannot verify different circuits with same proving/verification keys)\n  - [program-aided-language-model] Code generation errors (syntax, logic)\n  - [program-aided-language-model] execution sandboxing\n  - [program-aided-language-model] Python vs\n  - [program-aided-language-model] LLM arithmetic (PAL reduces LLM math errors)\n  - [self-consistency] Answer aggregation tricky for open-ended outputs (need string matching or LLM-as-judge)\n  - [self-consistency] marginal gains after n=10\u201320"
+    },
+    {
+      "primitives": [
+        "bdd-symbolic-model-checking",
+        "fiat-shamir-heuristic",
+        "linear-temporal-logic",
+        "program-aided-language-model",
+        "self-consistency"
+      ],
+      "domains": [
+        "formal-verification",
+        "cryptography-advanced",
+        "formal-verification",
+        "agentic-reasoning",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "formal-verification",
+        "cryptography-advanced",
+        "formal-verification",
+        "agentic-reasoning",
+        "agentic-reasoning"
+      ],
+      "score": 585.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification"
+      ],
+      "root_atoms_used": [
+        "order",
+        "combine",
+        "scan",
+        "hash",
+        "project",
+        "sample",
+        "compare"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 cryptography-advanced \u2192 formal-verification\n**Components:**\n  - bdd-symbolic-model-checking (formal-verification): Binary Decision Diagram (BDD): canonical representation of Boolean functions; ROBDD = reduced ordered BDD (unique canonical form). BDD-based symbolic model checking uses BDDs to represent state sets and transition relations.\n  - fiat-shamir-heuristic (cryptography-advanced): Transform an interactive sigma protocol into a non-interactive proof: replace verifier's random challenge c with H(a || transcript), where H is a cryptographic hash. Prover generates c = H(a) then z without verifier interaction.\n  - linear-temporal-logic (formal-verification): LTL: temporal logic over single execution path; operators: X (next), U (until), R (release), F (finally), G (globally). Encodes \u03c9-regular properties. Safety (G \u00acbad), liveness (F good), fairness (GF can).\n  - program-aided-language-model (agentic-reasoning): PAL (Program-Aided Language Model): LLM generates executable code to solve reasoning tasks; code executor computes result; LLM interprets output.\n  - self-consistency (agentic-reasoning): Self-consistency: sample multiple reasoning paths (CoT or ReAct), aggregate answers via majority vote. Improves CoT by trading inference cost for accuracy.\n**Real walls (combined):**\n  - [bdd-symbolic-model-checking] BDD explosion for some functions (multipliers, cryptographic functions)\n  - [bdd-symbolic-model-checking] variable ordering problem is NP-hard\n  - [bdd-symbolic-model-checking] dynamic variable reordering helps\n  - [fiat-shamir-heuristic] Random oracle model required\n  - [fiat-shamir-heuristic] Fiat-Shamir can introduce insecurity if protocol has subtle issues (e.g.,\u5403\u5b8c =\u5403\u5b8c attack)\n  - [fiat-shamir-heuristic] not all protocols safely transform\n  - [linear-temporal-logic] LTL model checking is PSPACE-complete (in |TS|)\n  - [linear-temporal-logic] explicit-state MC has complexity O(|TS| \u00b7 2^|\u03c6|)\n  - [linear-temporal-logic] symbolic is PSPACE in practice\n  - [program-aided-language-model] Code generation errors (syntax, logic)\n  - [program-aided-language-model] execution sandboxing\n  - [program-aided-language-model] Python vs\n  - [program-aided-language-model] LLM arithmetic (PAL reduces LLM math errors)\n  - [self-consistency] Answer aggregation tricky for open-ended outputs (need string matching or LLM-as-judge)\n  - [self-consistency] marginal gains after n=10\u201320"
+    },
+    {
+      "primitives": [
+        "bdd-symbolic-model-checking",
+        "fiat-shamir-heuristic",
+        "maximum-likelihood-estimation",
+        "program-aided-language-model",
+        "self-consistency"
+      ],
+      "domains": [
+        "formal-verification",
+        "cryptography-advanced",
+        "statistics-probability",
+        "agentic-reasoning",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "formal-verification",
+        "cryptography-advanced",
+        "statistics-probability",
+        "agentic-reasoning",
+        "agentic-reasoning"
+      ],
+      "score": 585.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification",
+        "statistics-probability"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification",
+        "statistics-probability"
+      ],
+      "root_atoms_used": [
+        "order",
+        "combine",
+        "scan",
+        "hash",
+        "project",
+        "sample",
+        "compare"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 cryptography-advanced \u2192 formal-verification \u2192 statistics-probability\n**Components:**\n  - bdd-symbolic-model-checking (formal-verification): Binary Decision Diagram (BDD): canonical representation of Boolean functions; ROBDD = reduced ordered BDD (unique canonical form). BDD-based symbolic model checking uses BDDs to represent state sets and transition relations.\n  - fiat-shamir-heuristic (cryptography-advanced): Transform an interactive sigma protocol into a non-interactive proof: replace verifier's random challenge c with H(a || transcript), where H is a cryptographic hash. Prover generates c = H(a) then z without verifier interaction.\n  - maximum-likelihood-estimation (statistics-probability): MLE: choose parameter \u03b8 to maximize likelihood L(\u03b8; x) = P(x | \u03b8). Equivalently maximize log-likelihood \u2113(\u03b8; x) = \u03a3 log P(x\u1d62 | \u03b8). Consistent (as n \u2192 \u221e) and asymptotically efficient (lowest variance among unbiased estimators).\n  - program-aided-language-model (agentic-reasoning): PAL (Program-Aided Language Model): LLM generates executable code to solve reasoning tasks; code executor computes result; LLM interprets output.\n  - self-consistency (agentic-reasoning): Self-consistency: sample multiple reasoning paths (CoT or ReAct), aggregate answers via majority vote. Improves CoT by trading inference cost for accuracy.\n**Real walls (combined):**\n  - [bdd-symbolic-model-checking] BDD explosion for some functions (multipliers, cryptographic functions)\n  - [bdd-symbolic-model-checking] variable ordering problem is NP-hard\n  - [bdd-symbolic-model-checking] dynamic variable reordering helps\n  - [fiat-shamir-heuristic] Random oracle model required\n  - [fiat-shamir-heuristic] Fiat-Shamir can introduce insecurity if protocol has subtle issues (e.g.,\u5403\u5b8c =\u5403\u5b8c attack)\n  - [fiat-shamir-heuristic] not all protocols safely transform\n  - [maximum-likelihood-estimation] Non-convex likelihoods \u2192 multiple local maxima\n  - [maximum-likelihood-estimation] flat likelihood \u2192 high variance\n  - [maximum-likelihood-estimation] regularization may be needed\n  - [program-aided-language-model] Code generation errors (syntax, logic)\n  - [program-aided-language-model] execution sandboxing\n  - [program-aided-language-model] Python vs\n  - [program-aided-language-model] LLM arithmetic (PAL reduces LLM math errors)\n  - [self-consistency] Answer aggregation tricky for open-ended outputs (need string matching or LLM-as-judge)\n  - [self-consistency] marginal gains after n=10\u201320"
+    },
+    {
+      "primitives": [
+        "bdd-symbolic-model-checking",
+        "fiat-shamir-heuristic",
+        "merkle-commitment",
+        "program-aided-language-model",
+        "self-consistency"
+      ],
+      "domains": [
+        "formal-verification",
+        "cryptography-advanced",
+        "cryptography-advanced",
+        "agentic-reasoning",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "formal-verification",
+        "cryptography-advanced",
+        "cryptography-advanced",
+        "agentic-reasoning",
+        "agentic-reasoning"
+      ],
+      "score": 585.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification"
+      ],
+      "root_atoms_used": [
+        "order",
+        "combine",
+        "scan",
+        "hash",
+        "project",
+        "sample",
+        "compare"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 cryptography-advanced \u2192 formal-verification\n**Components:**\n  - bdd-symbolic-model-checking (formal-verification): Binary Decision Diagram (BDD): canonical representation of Boolean functions; ROBDD = reduced ordered BDD (unique canonical form). BDD-based symbolic model checking uses BDDs to represent state sets and transition relations.\n  - fiat-shamir-heuristic (cryptography-advanced): Transform an interactive sigma protocol into a non-interactive proof: replace verifier's random challenge c with H(a || transcript), where H is a cryptographic hash. Prover generates c = H(a) then z without verifier interaction.\n  - merkle-commitment (cryptography-advanced): Merkle commitment: hash data into a binary tree, commit to root hash; opening = path of sibling hashes to root. Post-quantum secure (only requires collision-resistant hash).\n  - program-aided-language-model (agentic-reasoning): PAL (Program-Aided Language Model): LLM generates executable code to solve reasoning tasks; code executor computes result; LLM interprets output.\n  - self-consistency (agentic-reasoning): Self-consistency: sample multiple reasoning paths (CoT or ReAct), aggregate answers via majority vote. Improves CoT by trading inference cost for accuracy.\n**Real walls (combined):**\n  - [bdd-symbolic-model-checking] BDD explosion for some functions (multipliers, cryptographic functions)\n  - [bdd-symbolic-model-checking] variable ordering problem is NP-hard\n  - [bdd-symbolic-model-checking] dynamic variable reordering helps\n  - [fiat-shamir-heuristic] Random oracle model required\n  - [fiat-shamir-heuristic] Fiat-Shamir can introduce insecurity if protocol has subtle issues (e.g.,\u5403\u5b8c =\u5403\u5b8c attack)\n  - [fiat-shamir-heuristic] not all protocols safely transform\n  - [merkle-commitment] Tree construction O(n) for n data items\n  - [merkle-commitment] bandwidth of proofs\n  - [merkle-commitment] not additive-homomorphic\n  - [program-aided-language-model] Code generation errors (syntax, logic)\n  - [program-aided-language-model] execution sandboxing\n  - [program-aided-language-model] Python vs\n  - [program-aided-language-model] LLM arithmetic (PAL reduces LLM math errors)\n  - [self-consistency] Answer aggregation tricky for open-ended outputs (need string matching or LLM-as-judge)\n  - [self-consistency] marginal gains after n=10\u201320"
+    },
+    {
+      "primitives": [
+        "bdd-symbolic-model-checking",
+        "fiat-shamir-heuristic",
+        "partial-order-reduction",
+        "program-aided-language-model",
+        "self-consistency"
+      ],
+      "domains": [
+        "formal-verification",
+        "cryptography-advanced",
+        "formal-verification",
+        "agentic-reasoning",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "formal-verification",
+        "cryptography-advanced",
+        "formal-verification",
+        "agentic-reasoning",
+        "agentic-reasoning"
+      ],
+      "score": 585.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification"
+      ],
+      "root_atoms_used": [
+        "order",
+        "combine",
+        "scan",
+        "hash",
+        "project",
+        "sample",
+        "compare"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 cryptography-advanced \u2192 formal-verification\n**Components:**\n  - bdd-symbolic-model-checking (formal-verification): Binary Decision Diagram (BDD): canonical representation of Boolean functions; ROBDD = reduced ordered BDD (unique canonical form). BDD-based symbolic model checking uses BDDs to represent state sets and transition relations.\n  - fiat-shamir-heuristic (cryptography-advanced): Transform an interactive sigma protocol into a non-interactive proof: replace verifier's random challenge c with H(a || transcript), where H is a cryptographic hash. Prover generates c = H(a) then z without verifier interaction.\n  - partial-order-reduction (formal-verification): POR: reduce state space by exploring only one representative execution per equivalence class of concurrent events. Ample set, persistent set, sleep set algorithms. Independence \u2192 commutativity \u2192 reduced exploration.\n  - program-aided-language-model (agentic-reasoning): PAL (Program-Aided Language Model): LLM generates executable code to solve reasoning tasks; code executor computes result; LLM interprets output.\n  - self-consistency (agentic-reasoning): Self-consistency: sample multiple reasoning paths (CoT or ReAct), aggregate answers via majority vote. Improves CoT by trading inference cost for accuracy.\n**Real walls (combined):**\n  - [bdd-symbolic-model-checking] BDD explosion for some functions (multipliers, cryptographic functions)\n  - [bdd-symbolic-model-checking] variable ordering problem is NP-hard\n  - [bdd-symbolic-model-checking] dynamic variable reordering helps\n  - [fiat-shamir-heuristic] Random oracle model required\n  - [fiat-shamir-heuristic] Fiat-Shamir can introduce insecurity if protocol has subtle issues (e.g.,\u5403\u5b8c =\u5403\u5b8c attack)\n  - [fiat-shamir-heuristic] not all protocols safely transform\n  - [partial-order-reduction] POR must preserve properties being checked (safety vs. liveness require different reductions)\n  - [partial-order-reduction] deadlocks may be missed without care\n  - [partial-order-reduction] not all reductions are interchangeable\n  - [program-aided-language-model] Code generation errors (syntax, logic)\n  - [program-aided-language-model] execution sandboxing\n  - [program-aided-language-model] Python vs\n  - [program-aided-language-model] LLM arithmetic (PAL reduces LLM math errors)\n  - [self-consistency] Answer aggregation tricky for open-ended outputs (need string matching or LLM-as-judge)\n  - [self-consistency] marginal gains after n=10\u201320"
+    },
+    {
+      "primitives": [
+        "bdd-symbolic-model-checking",
+        "fiat-shamir-heuristic",
+        "polynomial-commitment",
+        "program-aided-language-model",
+        "self-consistency"
+      ],
+      "domains": [
+        "formal-verification",
+        "cryptography-advanced",
+        "cryptography-advanced",
+        "agentic-reasoning",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "formal-verification",
+        "cryptography-advanced",
+        "cryptography-advanced",
+        "agentic-reasoning",
+        "agentic-reasoning"
+      ],
+      "score": 585.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification"
+      ],
+      "root_atoms_used": [
+        "order",
+        "combine",
+        "scan",
+        "hash",
+        "project",
+        "sample",
+        "compare"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 cryptography-advanced \u2192 formal-verification\n**Components:**\n  - bdd-symbolic-model-checking (formal-verification): Binary Decision Diagram (BDD): canonical representation of Boolean functions; ROBDD = reduced ordered BDD (unique canonical form). BDD-based symbolic model checking uses BDDs to represent state sets and transition relations.\n  - fiat-shamir-heuristic (cryptography-advanced): Transform an interactive sigma protocol into a non-interactive proof: replace verifier's random challenge c with H(a || transcript), where H is a cryptographic hash. Prover generates c = H(a) then z without verifier interaction.\n  - polynomial-commitment (cryptography-advanced): Commitment to a polynomial f(x) = \u03a3 a\u1d62x\u2071 such that later the committer can prove statements about f at arbitrary points without revealing the full polynomial. KZG (Kate-Zaverucha-Goldberg) uses trusted setup + pairing.\n  - program-aided-language-model (agentic-reasoning): PAL (Program-Aided Language Model): LLM generates executable code to solve reasoning tasks; code executor computes result; LLM interprets output.\n  - self-consistency (agentic-reasoning): Self-consistency: sample multiple reasoning paths (CoT or ReAct), aggregate answers via majority vote. Improves CoT by trading inference cost for accuracy.\n**Real walls (combined):**\n  - [bdd-symbolic-model-checking] BDD explosion for some functions (multipliers, cryptographic functions)\n  - [bdd-symbolic-model-checking] variable ordering problem is NP-hard\n  - [bdd-symbolic-model-checking] dynamic variable reordering helps\n  - [fiat-shamir-heuristic] Random oracle model required\n  - [fiat-shamir-heuristic] Fiat-Shamir can introduce insecurity if protocol has subtle issues (e.g.,\u5403\u5b8c =\u5403\u5b8c attack)\n  - [fiat-shamir-heuristic] not all protocols safely transform\n  - [polynomial-commitment] KZG requires a trusted setup ceremony (toxic waste must be destroyed)\n  - [polynomial-commitment] DARK (Diophantine) uses no trusted setup\n  - [polynomial-commitment] IPA (inner product argument) is post-quantum\n  - [program-aided-language-model] Code generation errors (syntax, logic)\n  - [program-aided-language-model] execution sandboxing\n  - [program-aided-language-model] Python vs\n  - [program-aided-language-model] LLM arithmetic (PAL reduces LLM math errors)\n  - [self-consistency] Answer aggregation tricky for open-ended outputs (need string matching or LLM-as-judge)\n  - [self-consistency] marginal gains after n=10\u201320"
+    },
+    {
+      "primitives": [
+        "bdd-symbolic-model-checking",
+        "fiat-shamir-heuristic",
+        "program-aided-language-model",
+        "react-reasoning-acting",
+        "self-consistency"
+      ],
+      "domains": [
+        "formal-verification",
+        "cryptography-advanced",
+        "agentic-reasoning",
+        "agentic-reasoning",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "formal-verification",
+        "cryptography-advanced",
+        "agentic-reasoning",
+        "agentic-reasoning",
+        "agentic-reasoning"
+      ],
+      "score": 585.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification"
+      ],
+      "root_atoms_used": [
+        "order",
+        "combine",
+        "scan",
+        "hash",
+        "project",
+        "sample",
+        "compare"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 cryptography-advanced \u2192 formal-verification\n**Components:**\n  - bdd-symbolic-model-checking (formal-verification): Binary Decision Diagram (BDD): canonical representation of Boolean functions; ROBDD = reduced ordered BDD (unique canonical form). BDD-based symbolic model checking uses BDDs to represent state sets and transition relations.\n  - fiat-shamir-heuristic (cryptography-advanced): Transform an interactive sigma protocol into a non-interactive proof: replace verifier's random challenge c with H(a || transcript), where H is a cryptographic hash. Prover generates c = H(a) then z without verifier interaction.\n  - program-aided-language-model (agentic-reasoning): PAL (Program-Aided Language Model): LLM generates executable code to solve reasoning tasks; code executor computes result; LLM interprets output.\n  - react-reasoning-acting (agentic-reasoning): ReAct (Reasoning + Acting): interleave thought steps with tool actions; thought = reason about situation; action = call tool; observation = tool result; repeat until done.\n  - self-consistency (agentic-reasoning): Self-consistency: sample multiple reasoning paths (CoT or ReAct), aggregate answers via majority vote. Improves CoT by trading inference cost for accuracy.\n**Real walls (combined):**\n  - [bdd-symbolic-model-checking] BDD explosion for some functions (multipliers, cryptographic functions)\n  - [bdd-symbolic-model-checking] variable ordering problem is NP-hard\n  - [bdd-symbolic-model-checking] dynamic variable reordering helps\n  - [fiat-shamir-heuristic] Random oracle model required\n  - [fiat-shamir-heuristic] Fiat-Shamir can introduce insecurity if protocol has subtle issues (e.g.,\u5403\u5b8c =\u5403\u5b8c attack)\n  - [fiat-shamir-heuristic] not all protocols safely transform\n  - [program-aided-language-model] Code generation errors (syntax, logic)\n  - [program-aided-language-model] execution sandboxing\n  - [program-aided-language-model] Python vs\n  - [program-aided-language-model] LLM arithmetic (PAL reduces LLM math errors)\n  - [react-reasoning-acting] Tool call errors cascade\n  - [react-reasoning-acting] loop detection needed (max iterations)\n  - [react-reasoning-acting] action space quality determines success rate\n  - [self-consistency] Answer aggregation tricky for open-ended outputs (need string matching or LLM-as-judge)\n  - [self-consistency] marginal gains after n=10\u201320"
+    },
+    {
+      "primitives": [
+        "bdd-symbolic-model-checking",
+        "fiat-shamir-heuristic",
+        "program-aided-language-model",
+        "self-consistency",
+        "symmetry-reduction"
+      ],
+      "domains": [
+        "formal-verification",
+        "cryptography-advanced",
+        "agentic-reasoning",
+        "agentic-reasoning",
+        "formal-verification"
+      ],
+      "categories": [
+        "formal-verification",
+        "cryptography-advanced",
+        "agentic-reasoning",
+        "agentic-reasoning",
+        "formal-verification"
+      ],
+      "score": 585.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification"
+      ],
+      "root_atoms_used": [
+        "order",
+        "combine",
+        "scan",
+        "hash",
+        "project",
+        "sample",
+        "compare"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 cryptography-advanced \u2192 formal-verification\n**Components:**\n  - bdd-symbolic-model-checking (formal-verification): Binary Decision Diagram (BDD): canonical representation of Boolean functions; ROBDD = reduced ordered BDD (unique canonical form). BDD-based symbolic model checking uses BDDs to represent state sets and transition relations.\n  - fiat-shamir-heuristic (cryptography-advanced): Transform an interactive sigma protocol into a non-interactive proof: replace verifier's random challenge c with H(a || transcript), where H is a cryptographic hash. Prover generates c = H(a) then z without verifier interaction.\n  - program-aided-language-model (agentic-reasoning): PAL (Program-Aided Language Model): LLM generates executable code to solve reasoning tasks; code executor computes result; LLM interprets output.\n  - self-consistency (agentic-reasoning): Self-consistency: sample multiple reasoning paths (CoT or ReAct), aggregate answers via majority vote. Improves CoT by trading inference cost for accuracy.\n  - symmetry-reduction (formal-verification): Exploit symmetries in the state space (e.g., interchangeable processes, identical components) to reduce the explored state graph. Quotient system = original / symmetry group.\n**Real walls (combined):**\n  - [bdd-symbolic-model-checking] BDD explosion for some functions (multipliers, cryptographic functions)\n  - [bdd-symbolic-model-checking] variable ordering problem is NP-hard\n  - [bdd-symbolic-model-checking] dynamic variable reordering helps\n  - [fiat-shamir-heuristic] Random oracle model required\n  - [fiat-shamir-heuristic] Fiat-Shamir can introduce insecurity if protocol has subtle issues (e.g.,\u5403\u5b8c =\u5403\u5b8c attack)\n  - [fiat-shamir-heuristic] not all protocols safely transform\n  - [program-aided-language-model] Code generation errors (syntax, logic)\n  - [program-aided-language-model] execution sandboxing\n  - [program-aided-language-model] Python vs\n  - [program-aided-language-model] LLM arithmetic (PAL reduces LLM math errors)\n  - [self-consistency] Answer aggregation tricky for open-ended outputs (need string matching or LLM-as-judge)\n  - [self-consistency] marginal gains after n=10\u201320\n  - [symmetry-reduction] Symmetric systems are a special case\n  - [symmetry-reduction] detecting automorphism group of labeled transition system is expensive\n  - [symmetry-reduction] orbit bisimulation"
+    },
+    {
+      "primitives": [
+        "algorithm-of-thoughts",
+        "bayesian-posterior-inference",
+        "bdd-symbolic-model-checking",
+        "fiat-shamir-heuristic",
+        "program-aided-language-model"
+      ],
+      "domains": [
+        "agentic-reasoning",
+        "statistics-probability",
+        "formal-verification",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "agentic-reasoning",
+        "statistics-probability",
+        "formal-verification",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "score": 580.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification",
+        "statistics-probability"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification",
+        "statistics-probability"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "order",
+        "scan",
+        "hash",
+        "project",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 cryptography-advanced \u2192 formal-verification \u2192 statistics-probability\n**Components:**\n  - algorithm-of-thoughts (agentic-reasoning): AoT: embed algorithmic structures (DFS, BFS, tree, graph) into LLM reasoning; LLM serves as state evaluator, not full searcher; uses few-shot examples of algorithmic patterns.\n  - bayesian-posterior-inference (statistics-probability): Bayesian inference: compute posterior p(\u03b8 | x) = p(x | \u03b8)\u00b7p(\u03b8) / p(x). Prior p(\u03b8) encodes domain knowledge; posterior combines data + prior; predictive posterior p(x_new | x) = \u222b p(x_new | \u03b8)\u00b7p(\u03b8 | x) d\u03b8.\n  - bdd-symbolic-model-checking (formal-verification): Binary Decision Diagram (BDD): canonical representation of Boolean functions; ROBDD = reduced ordered BDD (unique canonical form). BDD-based symbolic model checking uses BDDs to represent state sets and transition relations.\n  - fiat-shamir-heuristic (cryptography-advanced): Transform an interactive sigma protocol into a non-interactive proof: replace verifier's random challenge c with H(a || transcript), where H is a cryptographic hash. Prover generates c = H(a) then z without verifier interaction.\n  - program-aided-language-model (agentic-reasoning): PAL (Program-Aided Language Model): LLM generates executable code to solve reasoning tasks; code executor computes result; LLM interprets output.\n**Real walls (combined):**\n  - [algorithm-of-thoughts] LLM as state evaluator may misjudge search frontier\n  - [algorithm-of-thoughts] algorithm must fit problem structure\n  - [algorithm-of-thoughts] not general-purpose\n  - [bayesian-posterior-inference] Prior sensitivity: posterior can be prior-dominated if data is sparse\n  - [bayesian-posterior-inference] Jeffreys prior = uninformative\n  - [bayesian-posterior-inference] conjugate priors simplify\n  - [bdd-symbolic-model-checking] BDD explosion for some functions (multipliers, cryptographic functions)\n  - [bdd-symbolic-model-checking] variable ordering problem is NP-hard\n  - [bdd-symbolic-model-checking] dynamic variable reordering helps\n  - [fiat-shamir-heuristic] Random oracle model required\n  - [fiat-shamir-heuristic] Fiat-Shamir can introduce insecurity if protocol has subtle issues (e.g.,\u5403\u5b8c =\u5403\u5b8c attack)\n  - [fiat-shamir-heuristic] not all protocols safely transform\n  - [program-aided-language-model] Code generation errors (syntax, logic)\n  - [program-aided-language-model] execution sandboxing\n  - [program-aided-language-model] Python vs\n  - [program-aided-language-model] LLM arithmetic (PAL reduces LLM math errors)"
+    },
+    {
+      "primitives": [
+        "algorithm-of-thoughts",
+        "bdd-symbolic-model-checking",
+        "branch-and-cut",
+        "fiat-shamir-heuristic",
+        "program-aided-language-model"
+      ],
+      "domains": [
+        "agentic-reasoning",
+        "formal-verification",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "agentic-reasoning",
+        "formal-verification",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "score": 580.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "formal-verification"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "formal-verification"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "order",
+        "scan",
+        "hash",
+        "project",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 combinatorial-optimization \u2192 cryptography-advanced \u2192 formal-verification\n**Components:**\n  - algorithm-of-thoughts (agentic-reasoning): AoT: embed algorithmic structures (DFS, BFS, tree, graph) into LLM reasoning; LLM serves as state evaluator, not full searcher; uses few-shot examples of algorithmic patterns.\n  - bdd-symbolic-model-checking (formal-verification): Binary Decision Diagram (BDD): canonical representation of Boolean functions; ROBDD = reduced ordered BDD (unique canonical form). BDD-based symbolic model checking uses BDDs to represent state sets and transition relations.\n  - branch-and-cut (combinatorial-optimization): Branch-and-cut: B&B + cutting planes added at nodes. Cuts tighten LP relaxation without removing integer solutions.\n  - fiat-shamir-heuristic (cryptography-advanced): Transform an interactive sigma protocol into a non-interactive proof: replace verifier's random challenge c with H(a || transcript), where H is a cryptographic hash. Prover generates c = H(a) then z without verifier interaction.\n  - program-aided-language-model (agentic-reasoning): PAL (Program-Aided Language Model): LLM generates executable code to solve reasoning tasks; code executor computes result; LLM interprets output.\n**Real walls (combined):**\n  - [algorithm-of-thoughts] LLM as state evaluator may misjudge search frontier\n  - [algorithm-of-thoughts] algorithm must fit problem structure\n  - [algorithm-of-thoughts] not general-purpose\n  - [bdd-symbolic-model-checking] BDD explosion for some functions (multipliers, cryptographic functions)\n  - [bdd-symbolic-model-checking] variable ordering problem is NP-hard\n  - [bdd-symbolic-model-checking] dynamic variable reordering helps\n  - [branch-and-cut] Cut selection: too many cuts = expensive LP solves\n  - [branch-and-cut] too few = weak bound\n  - [branch-and-cut] GMI cuts are most effective\n  - [fiat-shamir-heuristic] Random oracle model required\n  - [fiat-shamir-heuristic] Fiat-Shamir can introduce insecurity if protocol has subtle issues (e.g.,\u5403\u5b8c =\u5403\u5b8c attack)\n  - [fiat-shamir-heuristic] not all protocols safely transform\n  - [program-aided-language-model] Code generation errors (syntax, logic)\n  - [program-aided-language-model] execution sandboxing\n  - [program-aided-language-model] Python vs\n  - [program-aided-language-model] LLM arithmetic (PAL reduces LLM math errors)"
+    },
+    {
+      "primitives": [
+        "algorithm-of-thoughts",
+        "bdd-symbolic-model-checking",
+        "bulm-model-checking",
+        "fiat-shamir-heuristic",
+        "program-aided-language-model"
+      ],
+      "domains": [
+        "agentic-reasoning",
+        "formal-verification",
+        "formal-verification",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "agentic-reasoning",
+        "formal-verification",
+        "formal-verification",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "score": 580.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "order",
+        "scan",
+        "hash",
+        "project",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 cryptography-advanced \u2192 formal-verification\n**Components:**\n  - algorithm-of-thoughts (agentic-reasoning): AoT: embed algorithmic structures (DFS, BFS, tree, graph) into LLM reasoning; LLM serves as state evaluator, not full searcher; uses few-shot examples of algorithmic patterns.\n  - bdd-symbolic-model-checking (formal-verification): Binary Decision Diagram (BDD): canonical representation of Boolean functions; ROBDD = reduced ordered BDD (unique canonical form). BDD-based symbolic model checking uses BDDs to represent state sets and transition relations.\n  - bulm-model-checking (formal-verification): Bounded Model Checking (BMC): unroll the state transition system for k steps and check if a property violation (counterexample) exists in \u2264 k steps. Encode as SAT or SMT formula: \u00ac\u03c6 at step k.\n  - fiat-shamir-heuristic (cryptography-advanced): Transform an interactive sigma protocol into a non-interactive proof: replace verifier's random challenge c with H(a || transcript), where H is a cryptographic hash. Prover generates c = H(a) then z without verifier interaction.\n  - program-aided-language-model (agentic-reasoning): PAL (Program-Aided Language Model): LLM generates executable code to solve reasoning tasks; code executor computes result; LLM interprets output.\n**Real walls (combined):**\n  - [algorithm-of-thoughts] LLM as state evaluator may misjudge search frontier\n  - [algorithm-of-thoughts] algorithm must fit problem structure\n  - [algorithm-of-thoughts] not general-purpose\n  - [bdd-symbolic-model-checking] BDD explosion for some functions (multipliers, cryptographic functions)\n  - [bdd-symbolic-model-checking] variable ordering problem is NP-hard\n  - [bdd-symbolic-model-checking] dynamic variable reordering helps\n  - [bulm-model-checking] Completeness threshold: k must reach the diameter of the state graph\n  - [bulm-model-checking] for liveness, need deeper unrolling\n  - [bulm-model-checking] k-induction (inductive invariants for k > diameter)\n  - [fiat-shamir-heuristic] Random oracle model required\n  - [fiat-shamir-heuristic] Fiat-Shamir can introduce insecurity if protocol has subtle issues (e.g.,\u5403\u5b8c =\u5403\u5b8c attack)\n  - [fiat-shamir-heuristic] not all protocols safely transform\n  - [program-aided-language-model] Code generation errors (syntax, logic)\n  - [program-aided-language-model] execution sandboxing\n  - [program-aided-language-model] Python vs\n  - [program-aided-language-model] LLM arithmetic (PAL reduces LLM math errors)"
+    },
+    {
+      "primitives": [
+        "algorithm-of-thoughts",
+        "bdd-symbolic-model-checking",
+        "computation-tree-logic",
+        "fiat-shamir-heuristic",
+        "program-aided-language-model"
+      ],
+      "domains": [
+        "agentic-reasoning",
+        "formal-verification",
+        "formal-verification",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "agentic-reasoning",
+        "formal-verification",
+        "formal-verification",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "score": 580.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "order",
+        "scan",
+        "hash",
+        "project",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 cryptography-advanced \u2192 formal-verification\n**Components:**\n  - algorithm-of-thoughts (agentic-reasoning): AoT: embed algorithmic structures (DFS, BFS, tree, graph) into LLM reasoning; LLM serves as state evaluator, not full searcher; uses few-shot examples of algorithmic patterns.\n  - bdd-symbolic-model-checking (formal-verification): Binary Decision Diagram (BDD): canonical representation of Boolean functions; ROBDD = reduced ordered BDD (unique canonical form). BDD-based symbolic model checking uses BDDs to represent state sets and transition relations.\n  - computation-tree-logic (formal-verification): CTL: branching-time temporal logic with path quantifiers (A = all paths, E = exists path) and temporal operators (X = next, F = eventually, G = always, U = until, W = weak until). Model checking: labeling algorithm.\n  - fiat-shamir-heuristic (cryptography-advanced): Transform an interactive sigma protocol into a non-interactive proof: replace verifier's random challenge c with H(a || transcript), where H is a cryptographic hash. Prover generates c = H(a) then z without verifier interaction.\n  - program-aided-language-model (agentic-reasoning): PAL (Program-Aided Language Model): LLM generates executable code to solve reasoning tasks; code executor computes result; LLM interprets output.\n**Real walls (combined):**\n  - [algorithm-of-thoughts] LLM as state evaluator may misjudge search frontier\n  - [algorithm-of-thoughts] algorithm must fit problem structure\n  - [algorithm-of-thoughts] not general-purpose\n  - [bdd-symbolic-model-checking] BDD explosion for some functions (multipliers, cryptographic functions)\n  - [bdd-symbolic-model-checking] variable ordering problem is NP-hard\n  - [bdd-symbolic-model-checking] dynamic variable reordering helps\n  - [computation-tree-logic] Expressive enough for many properties\n  - [computation-tree-logic] CTL cannot express some properties (e.g., \"always eventually p holds on all paths\" = AG EF p)\n  - [computation-tree-logic] CTL* (full branching time) is more expressive\n  - [fiat-shamir-heuristic] Random oracle model required\n  - [fiat-shamir-heuristic] Fiat-Shamir can introduce insecurity if protocol has subtle issues (e.g.,\u5403\u5b8c =\u5403\u5b8c attack)\n  - [fiat-shamir-heuristic] not all protocols safely transform\n  - [program-aided-language-model] Code generation errors (syntax, logic)\n  - [program-aided-language-model] execution sandboxing\n  - [program-aided-language-model] Python vs\n  - [program-aided-language-model] LLM arithmetic (PAL reduces LLM math errors)"
+    },
+    {
+      "primitives": [
+        "algorithm-of-thoughts",
+        "bdd-symbolic-model-checking",
+        "counterexample-guided-abstraction-refinement",
+        "fiat-shamir-heuristic",
+        "program-aided-language-model"
+      ],
+      "domains": [
+        "agentic-reasoning",
+        "formal-verification",
+        "formal-verification",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "agentic-reasoning",
+        "formal-verification",
+        "formal-verification",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "score": 580.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "order",
+        "scan",
+        "hash",
+        "project",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 cryptography-advanced \u2192 formal-verification\n**Components:**\n  - algorithm-of-thoughts (agentic-reasoning): AoT: embed algorithmic structures (DFS, BFS, tree, graph) into LLM reasoning; LLM serves as state evaluator, not full searcher; uses few-shot examples of algorithmic patterns.\n  - bdd-symbolic-model-checking (formal-verification): Binary Decision Diagram (BDD): canonical representation of Boolean functions; ROBDD = reduced ordered BDD (unique canonical form). BDD-based symbolic model checking uses BDDs to represent state sets and transition relations.\n  - counterexample-guided-abstraction-refinement (formal-verification): CEGAR: iteratively (1) abstract model \u2192 (2) check abstract model \u2192 (3) if abstract counterexample is spurious, refine abstraction using Craig interpolation \u2192 repeat. Used for infinite-state or large finite-state systems.\n  - fiat-shamir-heuristic (cryptography-advanced): Transform an interactive sigma protocol into a non-interactive proof: replace verifier's random challenge c with H(a || transcript), where H is a cryptographic hash. Prover generates c = H(a) then z without verifier interaction.\n  - program-aided-language-model (agentic-reasoning): PAL (Program-Aided Language Model): LLM generates executable code to solve reasoning tasks; code executor computes result; LLM interprets output.\n**Real walls (combined):**\n  - [algorithm-of-thoughts] LLM as state evaluator may misjudge search frontier\n  - [algorithm-of-thoughts] algorithm must fit problem structure\n  - [algorithm-of-thoughts] not general-purpose\n  - [bdd-symbolic-model-checking] BDD explosion for some functions (multipliers, cryptographic functions)\n  - [bdd-symbolic-model-checking] variable ordering problem is NP-hard\n  - [bdd-symbolic-model-checking] dynamic variable reordering helps\n  - [counterexample-guided-abstraction-refinement] Spurious counterexamples must be traceable to predicates\n  - [counterexample-guided-abstraction-refinement] predicate discovery is the hard part\n  - [counterexample-guided-abstraction-refinement] too many predicates \u2192 abstraction too concrete (BDD explosion)\n  - [fiat-shamir-heuristic] Random oracle model required\n  - [fiat-shamir-heuristic] Fiat-Shamir can introduce insecurity if protocol has subtle issues (e.g.,\u5403\u5b8c =\u5403\u5b8c attack)\n  - [fiat-shamir-heuristic] not all protocols safely transform\n  - [program-aided-language-model] Code generation errors (syntax, logic)\n  - [program-aided-language-model] execution sandboxing\n  - [program-aided-language-model] Python vs\n  - [program-aided-language-model] LLM arithmetic (PAL reduces LLM math errors)"
+    },
+    {
+      "primitives": [
+        "algorithm-of-thoughts",
+        "bdd-symbolic-model-checking",
+        "cutting-planes",
+        "fiat-shamir-heuristic",
+        "program-aided-language-model"
+      ],
+      "domains": [
+        "agentic-reasoning",
+        "formal-verification",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "agentic-reasoning",
+        "formal-verification",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "score": 580.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "formal-verification"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "formal-verification"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "order",
+        "scan",
+        "project",
+        "hash",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 combinatorial-optimization \u2192 cryptography-advanced \u2192 formal-verification\n**Components:**\n  - algorithm-of-thoughts (agentic-reasoning): AoT: embed algorithmic structures (DFS, BFS, tree, graph) into LLM reasoning; LLM serves as state evaluator, not full searcher; uses few-shot examples of algorithmic patterns.\n  - bdd-symbolic-model-checking (formal-verification): Binary Decision Diagram (BDD): canonical representation of Boolean functions; ROBDD = reduced ordered BDD (unique canonical form). BDD-based symbolic model checking uses BDDs to represent state sets and transition relations.\n  - cutting-planes (combinatorial-optimization): Cutting planes: valid inequalities that cut off fractional LP solutions. Gomory mixed integer (GMI), MIR, lift-and-project.\n  - fiat-shamir-heuristic (cryptography-advanced): Transform an interactive sigma protocol into a non-interactive proof: replace verifier's random challenge c with H(a || transcript), where H is a cryptographic hash. Prover generates c = H(a) then z without verifier interaction.\n  - program-aided-language-model (agentic-reasoning): PAL (Program-Aided Language Model): LLM generates executable code to solve reasoning tasks; code executor computes result; LLM interprets output.\n**Real walls (combined):**\n  - [algorithm-of-thoughts] LLM as state evaluator may misjudge search frontier\n  - [algorithm-of-thoughts] algorithm must fit problem structure\n  - [algorithm-of-thoughts] not general-purpose\n  - [bdd-symbolic-model-checking] BDD explosion for some functions (multipliers, cryptographic functions)\n  - [bdd-symbolic-model-checking] variable ordering problem is NP-hard\n  - [bdd-symbolic-model-checking] dynamic variable reordering helps\n  - [cutting-planes] Different problem classes have specialized cuts\n  - [cutting-planes] TSP has subtour elimination\n  - [cutting-planes] packing has cover inequalities\n  - [fiat-shamir-heuristic] Random oracle model required\n  - [fiat-shamir-heuristic] Fiat-Shamir can introduce insecurity if protocol has subtle issues (e.g.,\u5403\u5b8c =\u5403\u5b8c attack)\n  - [fiat-shamir-heuristic] not all protocols safely transform\n  - [program-aided-language-model] Code generation errors (syntax, logic)\n  - [program-aided-language-model] execution sandboxing\n  - [program-aided-language-model] Python vs\n  - [program-aided-language-model] LLM arithmetic (PAL reduces LLM math errors)"
+    },
+    {
+      "primitives": [
+        "algorithm-of-thoughts",
+        "bdd-symbolic-model-checking",
+        "fiat-shamir-heuristic",
+        "graph-of-thought",
+        "program-aided-language-model"
+      ],
+      "domains": [
+        "agentic-reasoning",
+        "formal-verification",
+        "cryptography-advanced",
+        "agentic-reasoning",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "agentic-reasoning",
+        "formal-verification",
+        "cryptography-advanced",
+        "agentic-reasoning",
+        "agentic-reasoning"
+      ],
+      "score": 580.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "order",
+        "scan",
+        "hash",
+        "project",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 cryptography-advanced \u2192 formal-verification\n**Components:**\n  - algorithm-of-thoughts (agentic-reasoning): AoT: embed algorithmic structures (DFS, BFS, tree, graph) into LLM reasoning; LLM serves as state evaluator, not full searcher; uses few-shot examples of algorithmic patterns.\n  - bdd-symbolic-model-checking (formal-verification): Binary Decision Diagram (BDD): canonical representation of Boolean functions; ROBDD = reduced ordered BDD (unique canonical form). BDD-based symbolic model checking uses BDDs to represent state sets and transition relations.\n  - fiat-shamir-heuristic (cryptography-advanced): Transform an interactive sigma protocol into a non-interactive proof: replace verifier's random challenge c with H(a || transcript), where H is a cryptographic hash. Prover generates c = H(a) then z without verifier interaction.\n  - graph-of-thought (agentic-reasoning): Graph-of-Thought (GoT): model reasoning as DAG; nodes = reasoning units (thought, fact, conclusion); edges = dependencies; supports non-linear, cyclic, and self-referential thought.\n  - program-aided-language-model (agentic-reasoning): PAL (Program-Aided Language Model): LLM generates executable code to solve reasoning tasks; code executor computes result; LLM interprets output.\n**Real walls (combined):**\n  - [algorithm-of-thoughts] LLM as state evaluator may misjudge search frontier\n  - [algorithm-of-thoughts] algorithm must fit problem structure\n  - [algorithm-of-thoughts] not general-purpose\n  - [bdd-symbolic-model-checking] BDD explosion for some functions (multipliers, cryptographic functions)\n  - [bdd-symbolic-model-checking] variable ordering problem is NP-hard\n  - [bdd-symbolic-model-checking] dynamic variable reordering helps\n  - [fiat-shamir-heuristic] Random oracle model required\n  - [fiat-shamir-heuristic] Fiat-Shamir can introduce insecurity if protocol has subtle issues (e.g.,\u5403\u5b8c =\u5403\u5b8c attack)\n  - [fiat-shamir-heuristic] not all protocols safely transform\n  - [graph-of-thought] Cycle detection and handling\n  - [graph-of-thought] graph consistency maintenance\n  - [graph-of-thought] no established benchmark for GoT quality\n  - [program-aided-language-model] Code generation errors (syntax, logic)\n  - [program-aided-language-model] execution sandboxing\n  - [program-aided-language-model] Python vs\n  - [program-aided-language-model] LLM arithmetic (PAL reduces LLM math errors)"
+    },
+    {
+      "primitives": [
+        "algorithm-of-thoughts",
+        "bdd-symbolic-model-checking",
+        "fiat-shamir-heuristic",
+        "groth16-snark",
+        "program-aided-language-model"
+      ],
+      "domains": [
+        "agentic-reasoning",
+        "formal-verification",
+        "cryptography-advanced",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "agentic-reasoning",
+        "formal-verification",
+        "cryptography-advanced",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "score": 580.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "order",
+        "scan",
+        "hash",
+        "project",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 cryptography-advanced \u2192 formal-verification\n**Components:**\n  - algorithm-of-thoughts (agentic-reasoning): AoT: embed algorithmic structures (DFS, BFS, tree, graph) into LLM reasoning; LLM serves as state evaluator, not full searcher; uses few-shot examples of algorithmic patterns.\n  - bdd-symbolic-model-checking (formal-verification): Binary Decision Diagram (BDD): canonical representation of Boolean functions; ROBDD = reduced ordered BDD (unique canonical form). BDD-based symbolic model checking uses BDDs to represent state sets and transition relations.\n  - fiat-shamir-heuristic (cryptography-advanced): Transform an interactive sigma protocol into a non-interactive proof: replace verifier's random challenge c with H(a || transcript), where H is a cryptographic hash. Prover generates c = H(a) then z without verifier interaction.\n  - groth16-snark (cryptography-advanced): Groth16: pairing-based SNARK with proof = (A, B, C) \u2208 G\u2081 \u00d7 G\u2082 \u00d7 G\u2081; 3 pairings to verify; proof size = 3 elements (very short). Circuit-specific trusted setup (P = setup + preprocessing).\n  - program-aided-language-model (agentic-reasoning): PAL (Program-Aided Language Model): LLM generates executable code to solve reasoning tasks; code executor computes result; LLM interprets output.\n**Real walls (combined):**\n  - [algorithm-of-thoughts] LLM as state evaluator may misjudge search frontier\n  - [algorithm-of-thoughts] algorithm must fit problem structure\n  - [algorithm-of-thoughts] not general-purpose\n  - [bdd-symbolic-model-checking] BDD explosion for some functions (multipliers, cryptographic functions)\n  - [bdd-symbolic-model-checking] variable ordering problem is NP-hard\n  - [bdd-symbolic-model-checking] dynamic variable reordering helps\n  - [fiat-shamir-heuristic] Random oracle model required\n  - [fiat-shamir-heuristic] Fiat-Shamir can introduce insecurity if protocol has subtle issues (e.g.,\u5403\u5b8c =\u5403\u5b8c attack)\n  - [fiat-shamir-heuristic] not all protocols safely transform\n  - [groth16-snark] Trusted setup is circuit-specific (toxic waste \u2192 must destroy)\n  - [groth16-snark] per-circuit ceremony\n  - [groth16-snark] proofs not universal (cannot verify different circuits with same proving/verification keys)\n  - [program-aided-language-model] Code generation errors (syntax, logic)\n  - [program-aided-language-model] execution sandboxing\n  - [program-aided-language-model] Python vs\n  - [program-aided-language-model] LLM arithmetic (PAL reduces LLM math errors)"
+    },
+    {
+      "primitives": [
+        "algorithm-of-thoughts",
+        "bdd-symbolic-model-checking",
+        "fiat-shamir-heuristic",
+        "linear-temporal-logic",
+        "program-aided-language-model"
+      ],
+      "domains": [
+        "agentic-reasoning",
+        "formal-verification",
+        "cryptography-advanced",
+        "formal-verification",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "agentic-reasoning",
+        "formal-verification",
+        "cryptography-advanced",
+        "formal-verification",
+        "agentic-reasoning"
+      ],
+      "score": 580.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "order",
+        "scan",
+        "hash",
+        "project",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 cryptography-advanced \u2192 formal-verification\n**Components:**\n  - algorithm-of-thoughts (agentic-reasoning): AoT: embed algorithmic structures (DFS, BFS, tree, graph) into LLM reasoning; LLM serves as state evaluator, not full searcher; uses few-shot examples of algorithmic patterns.\n  - bdd-symbolic-model-checking (formal-verification): Binary Decision Diagram (BDD): canonical representation of Boolean functions; ROBDD = reduced ordered BDD (unique canonical form). BDD-based symbolic model checking uses BDDs to represent state sets and transition relations.\n  - fiat-shamir-heuristic (cryptography-advanced): Transform an interactive sigma protocol into a non-interactive proof: replace verifier's random challenge c with H(a || transcript), where H is a cryptographic hash. Prover generates c = H(a) then z without verifier interaction.\n  - linear-temporal-logic (formal-verification): LTL: temporal logic over single execution path; operators: X (next), U (until), R (release), F (finally), G (globally). Encodes \u03c9-regular properties. Safety (G \u00acbad), liveness (F good), fairness (GF can).\n  - program-aided-language-model (agentic-reasoning): PAL (Program-Aided Language Model): LLM generates executable code to solve reasoning tasks; code executor computes result; LLM interprets output.\n**Real walls (combined):**\n  - [algorithm-of-thoughts] LLM as state evaluator may misjudge search frontier\n  - [algorithm-of-thoughts] algorithm must fit problem structure\n  - [algorithm-of-thoughts] not general-purpose\n  - [bdd-symbolic-model-checking] BDD explosion for some functions (multipliers, cryptographic functions)\n  - [bdd-symbolic-model-checking] variable ordering problem is NP-hard\n  - [bdd-symbolic-model-checking] dynamic variable reordering helps\n  - [fiat-shamir-heuristic] Random oracle model required\n  - [fiat-shamir-heuristic] Fiat-Shamir can introduce insecurity if protocol has subtle issues (e.g.,\u5403\u5b8c =\u5403\u5b8c attack)\n  - [fiat-shamir-heuristic] not all protocols safely transform\n  - [linear-temporal-logic] LTL model checking is PSPACE-complete (in |TS|)\n  - [linear-temporal-logic] explicit-state MC has complexity O(|TS| \u00b7 2^|\u03c6|)\n  - [linear-temporal-logic] symbolic is PSPACE in practice\n  - [program-aided-language-model] Code generation errors (syntax, logic)\n  - [program-aided-language-model] execution sandboxing\n  - [program-aided-language-model] Python vs\n  - [program-aided-language-model] LLM arithmetic (PAL reduces LLM math errors)"
+    },
+    {
+      "primitives": [
+        "algorithm-of-thoughts",
+        "bdd-symbolic-model-checking",
+        "fiat-shamir-heuristic",
+        "maximum-likelihood-estimation",
+        "program-aided-language-model"
+      ],
+      "domains": [
+        "agentic-reasoning",
+        "formal-verification",
+        "cryptography-advanced",
+        "statistics-probability",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "agentic-reasoning",
+        "formal-verification",
+        "cryptography-advanced",
+        "statistics-probability",
+        "agentic-reasoning"
+      ],
+      "score": 580.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification",
+        "statistics-probability"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification",
+        "statistics-probability"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "order",
+        "scan",
+        "hash",
+        "project",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 cryptography-advanced \u2192 formal-verification \u2192 statistics-probability\n**Components:**\n  - algorithm-of-thoughts (agentic-reasoning): AoT: embed algorithmic structures (DFS, BFS, tree, graph) into LLM reasoning; LLM serves as state evaluator, not full searcher; uses few-shot examples of algorithmic patterns.\n  - bdd-symbolic-model-checking (formal-verification): Binary Decision Diagram (BDD): canonical representation of Boolean functions; ROBDD = reduced ordered BDD (unique canonical form). BDD-based symbolic model checking uses BDDs to represent state sets and transition relations.\n  - fiat-shamir-heuristic (cryptography-advanced): Transform an interactive sigma protocol into a non-interactive proof: replace verifier's random challenge c with H(a || transcript), where H is a cryptographic hash. Prover generates c = H(a) then z without verifier interaction.\n  - maximum-likelihood-estimation (statistics-probability): MLE: choose parameter \u03b8 to maximize likelihood L(\u03b8; x) = P(x | \u03b8). Equivalently maximize log-likelihood \u2113(\u03b8; x) = \u03a3 log P(x\u1d62 | \u03b8). Consistent (as n \u2192 \u221e) and asymptotically efficient (lowest variance among unbiased estimators).\n  - program-aided-language-model (agentic-reasoning): PAL (Program-Aided Language Model): LLM generates executable code to solve reasoning tasks; code executor computes result; LLM interprets output.\n**Real walls (combined):**\n  - [algorithm-of-thoughts] LLM as state evaluator may misjudge search frontier\n  - [algorithm-of-thoughts] algorithm must fit problem structure\n  - [algorithm-of-thoughts] not general-purpose\n  - [bdd-symbolic-model-checking] BDD explosion for some functions (multipliers, cryptographic functions)\n  - [bdd-symbolic-model-checking] variable ordering problem is NP-hard\n  - [bdd-symbolic-model-checking] dynamic variable reordering helps\n  - [fiat-shamir-heuristic] Random oracle model required\n  - [fiat-shamir-heuristic] Fiat-Shamir can introduce insecurity if protocol has subtle issues (e.g.,\u5403\u5b8c =\u5403\u5b8c attack)\n  - [fiat-shamir-heuristic] not all protocols safely transform\n  - [maximum-likelihood-estimation] Non-convex likelihoods \u2192 multiple local maxima\n  - [maximum-likelihood-estimation] flat likelihood \u2192 high variance\n  - [maximum-likelihood-estimation] regularization may be needed\n  - [program-aided-language-model] Code generation errors (syntax, logic)\n  - [program-aided-language-model] execution sandboxing\n  - [program-aided-language-model] Python vs\n  - [program-aided-language-model] LLM arithmetic (PAL reduces LLM math errors)"
+    },
+    {
+      "primitives": [
+        "algorithm-of-thoughts",
+        "bdd-symbolic-model-checking",
+        "fiat-shamir-heuristic",
+        "merkle-commitment",
+        "program-aided-language-model"
+      ],
+      "domains": [
+        "agentic-reasoning",
+        "formal-verification",
+        "cryptography-advanced",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "agentic-reasoning",
+        "formal-verification",
+        "cryptography-advanced",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "score": 580.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "order",
+        "scan",
+        "hash",
+        "project",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 cryptography-advanced \u2192 formal-verification\n**Components:**\n  - algorithm-of-thoughts (agentic-reasoning): AoT: embed algorithmic structures (DFS, BFS, tree, graph) into LLM reasoning; LLM serves as state evaluator, not full searcher; uses few-shot examples of algorithmic patterns.\n  - bdd-symbolic-model-checking (formal-verification): Binary Decision Diagram (BDD): canonical representation of Boolean functions; ROBDD = reduced ordered BDD (unique canonical form). BDD-based symbolic model checking uses BDDs to represent state sets and transition relations.\n  - fiat-shamir-heuristic (cryptography-advanced): Transform an interactive sigma protocol into a non-interactive proof: replace verifier's random challenge c with H(a || transcript), where H is a cryptographic hash. Prover generates c = H(a) then z without verifier interaction.\n  - merkle-commitment (cryptography-advanced): Merkle commitment: hash data into a binary tree, commit to root hash; opening = path of sibling hashes to root. Post-quantum secure (only requires collision-resistant hash).\n  - program-aided-language-model (agentic-reasoning): PAL (Program-Aided Language Model): LLM generates executable code to solve reasoning tasks; code executor computes result; LLM interprets output.\n**Real walls (combined):**\n  - [algorithm-of-thoughts] LLM as state evaluator may misjudge search frontier\n  - [algorithm-of-thoughts] algorithm must fit problem structure\n  - [algorithm-of-thoughts] not general-purpose\n  - [bdd-symbolic-model-checking] BDD explosion for some functions (multipliers, cryptographic functions)\n  - [bdd-symbolic-model-checking] variable ordering problem is NP-hard\n  - [bdd-symbolic-model-checking] dynamic variable reordering helps\n  - [fiat-shamir-heuristic] Random oracle model required\n  - [fiat-shamir-heuristic] Fiat-Shamir can introduce insecurity if protocol has subtle issues (e.g.,\u5403\u5b8c =\u5403\u5b8c attack)\n  - [fiat-shamir-heuristic] not all protocols safely transform\n  - [merkle-commitment] Tree construction O(n) for n data items\n  - [merkle-commitment] bandwidth of proofs\n  - [merkle-commitment] not additive-homomorphic\n  - [program-aided-language-model] Code generation errors (syntax, logic)\n  - [program-aided-language-model] execution sandboxing\n  - [program-aided-language-model] Python vs\n  - [program-aided-language-model] LLM arithmetic (PAL reduces LLM math errors)"
+    },
+    {
+      "primitives": [
+        "algorithm-of-thoughts",
+        "bdd-symbolic-model-checking",
+        "fiat-shamir-heuristic",
+        "partial-order-reduction",
+        "program-aided-language-model"
+      ],
+      "domains": [
+        "agentic-reasoning",
+        "formal-verification",
+        "cryptography-advanced",
+        "formal-verification",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "agentic-reasoning",
+        "formal-verification",
+        "cryptography-advanced",
+        "formal-verification",
+        "agentic-reasoning"
+      ],
+      "score": 580.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "order",
+        "scan",
+        "hash",
+        "project",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 cryptography-advanced \u2192 formal-verification\n**Components:**\n  - algorithm-of-thoughts (agentic-reasoning): AoT: embed algorithmic structures (DFS, BFS, tree, graph) into LLM reasoning; LLM serves as state evaluator, not full searcher; uses few-shot examples of algorithmic patterns.\n  - bdd-symbolic-model-checking (formal-verification): Binary Decision Diagram (BDD): canonical representation of Boolean functions; ROBDD = reduced ordered BDD (unique canonical form). BDD-based symbolic model checking uses BDDs to represent state sets and transition relations.\n  - fiat-shamir-heuristic (cryptography-advanced): Transform an interactive sigma protocol into a non-interactive proof: replace verifier's random challenge c with H(a || transcript), where H is a cryptographic hash. Prover generates c = H(a) then z without verifier interaction.\n  - partial-order-reduction (formal-verification): POR: reduce state space by exploring only one representative execution per equivalence class of concurrent events. Ample set, persistent set, sleep set algorithms. Independence \u2192 commutativity \u2192 reduced exploration.\n  - program-aided-language-model (agentic-reasoning): PAL (Program-Aided Language Model): LLM generates executable code to solve reasoning tasks; code executor computes result; LLM interprets output.\n**Real walls (combined):**\n  - [algorithm-of-thoughts] LLM as state evaluator may misjudge search frontier\n  - [algorithm-of-thoughts] algorithm must fit problem structure\n  - [algorithm-of-thoughts] not general-purpose\n  - [bdd-symbolic-model-checking] BDD explosion for some functions (multipliers, cryptographic functions)\n  - [bdd-symbolic-model-checking] variable ordering problem is NP-hard\n  - [bdd-symbolic-model-checking] dynamic variable reordering helps\n  - [fiat-shamir-heuristic] Random oracle model required\n  - [fiat-shamir-heuristic] Fiat-Shamir can introduce insecurity if protocol has subtle issues (e.g.,\u5403\u5b8c =\u5403\u5b8c attack)\n  - [fiat-shamir-heuristic] not all protocols safely transform\n  - [partial-order-reduction] POR must preserve properties being checked (safety vs. liveness require different reductions)\n  - [partial-order-reduction] deadlocks may be missed without care\n  - [partial-order-reduction] not all reductions are interchangeable\n  - [program-aided-language-model] Code generation errors (syntax, logic)\n  - [program-aided-language-model] execution sandboxing\n  - [program-aided-language-model] Python vs\n  - [program-aided-language-model] LLM arithmetic (PAL reduces LLM math errors)"
+    },
+    {
+      "primitives": [
+        "algorithm-of-thoughts",
+        "bdd-symbolic-model-checking",
+        "fiat-shamir-heuristic",
+        "polynomial-commitment",
+        "program-aided-language-model"
+      ],
+      "domains": [
+        "agentic-reasoning",
+        "formal-verification",
+        "cryptography-advanced",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "agentic-reasoning",
+        "formal-verification",
+        "cryptography-advanced",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "score": 580.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "order",
+        "scan",
+        "hash",
+        "project",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 cryptography-advanced \u2192 formal-verification\n**Components:**\n  - algorithm-of-thoughts (agentic-reasoning): AoT: embed algorithmic structures (DFS, BFS, tree, graph) into LLM reasoning; LLM serves as state evaluator, not full searcher; uses few-shot examples of algorithmic patterns.\n  - bdd-symbolic-model-checking (formal-verification): Binary Decision Diagram (BDD): canonical representation of Boolean functions; ROBDD = reduced ordered BDD (unique canonical form). BDD-based symbolic model checking uses BDDs to represent state sets and transition relations.\n  - fiat-shamir-heuristic (cryptography-advanced): Transform an interactive sigma protocol into a non-interactive proof: replace verifier's random challenge c with H(a || transcript), where H is a cryptographic hash. Prover generates c = H(a) then z without verifier interaction.\n  - polynomial-commitment (cryptography-advanced): Commitment to a polynomial f(x) = \u03a3 a\u1d62x\u2071 such that later the committer can prove statements about f at arbitrary points without revealing the full polynomial. KZG (Kate-Zaverucha-Goldberg) uses trusted setup + pairing.\n  - program-aided-language-model (agentic-reasoning): PAL (Program-Aided Language Model): LLM generates executable code to solve reasoning tasks; code executor computes result; LLM interprets output.\n**Real walls (combined):**\n  - [algorithm-of-thoughts] LLM as state evaluator may misjudge search frontier\n  - [algorithm-of-thoughts] algorithm must fit problem structure\n  - [algorithm-of-thoughts] not general-purpose\n  - [bdd-symbolic-model-checking] BDD explosion for some functions (multipliers, cryptographic functions)\n  - [bdd-symbolic-model-checking] variable ordering problem is NP-hard\n  - [bdd-symbolic-model-checking] dynamic variable reordering helps\n  - [fiat-shamir-heuristic] Random oracle model required\n  - [fiat-shamir-heuristic] Fiat-Shamir can introduce insecurity if protocol has subtle issues (e.g.,\u5403\u5b8c =\u5403\u5b8c attack)\n  - [fiat-shamir-heuristic] not all protocols safely transform\n  - [polynomial-commitment] KZG requires a trusted setup ceremony (toxic waste must be destroyed)\n  - [polynomial-commitment] DARK (Diophantine) uses no trusted setup\n  - [polynomial-commitment] IPA (inner product argument) is post-quantum\n  - [program-aided-language-model] Code generation errors (syntax, logic)\n  - [program-aided-language-model] execution sandboxing\n  - [program-aided-language-model] Python vs\n  - [program-aided-language-model] LLM arithmetic (PAL reduces LLM math errors)"
+    },
+    {
+      "primitives": [
+        "algorithm-of-thoughts",
+        "bdd-symbolic-model-checking",
+        "fiat-shamir-heuristic",
+        "program-aided-language-model",
+        "react-reasoning-acting"
+      ],
+      "domains": [
+        "agentic-reasoning",
+        "formal-verification",
+        "cryptography-advanced",
+        "agentic-reasoning",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "agentic-reasoning",
+        "formal-verification",
+        "cryptography-advanced",
+        "agentic-reasoning",
+        "agentic-reasoning"
+      ],
+      "score": 580.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "order",
+        "scan",
+        "hash",
+        "project",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 cryptography-advanced \u2192 formal-verification\n**Components:**\n  - algorithm-of-thoughts (agentic-reasoning): AoT: embed algorithmic structures (DFS, BFS, tree, graph) into LLM reasoning; LLM serves as state evaluator, not full searcher; uses few-shot examples of algorithmic patterns.\n  - bdd-symbolic-model-checking (formal-verification): Binary Decision Diagram (BDD): canonical representation of Boolean functions; ROBDD = reduced ordered BDD (unique canonical form). BDD-based symbolic model checking uses BDDs to represent state sets and transition relations.\n  - fiat-shamir-heuristic (cryptography-advanced): Transform an interactive sigma protocol into a non-interactive proof: replace verifier's random challenge c with H(a || transcript), where H is a cryptographic hash. Prover generates c = H(a) then z without verifier interaction.\n  - program-aided-language-model (agentic-reasoning): PAL (Program-Aided Language Model): LLM generates executable code to solve reasoning tasks; code executor computes result; LLM interprets output.\n  - react-reasoning-acting (agentic-reasoning): ReAct (Reasoning + Acting): interleave thought steps with tool actions; thought = reason about situation; action = call tool; observation = tool result; repeat until done.\n**Real walls (combined):**\n  - [algorithm-of-thoughts] LLM as state evaluator may misjudge search frontier\n  - [algorithm-of-thoughts] algorithm must fit problem structure\n  - [algorithm-of-thoughts] not general-purpose\n  - [bdd-symbolic-model-checking] BDD explosion for some functions (multipliers, cryptographic functions)\n  - [bdd-symbolic-model-checking] variable ordering problem is NP-hard\n  - [bdd-symbolic-model-checking] dynamic variable reordering helps\n  - [fiat-shamir-heuristic] Random oracle model required\n  - [fiat-shamir-heuristic] Fiat-Shamir can introduce insecurity if protocol has subtle issues (e.g.,\u5403\u5b8c =\u5403\u5b8c attack)\n  - [fiat-shamir-heuristic] not all protocols safely transform\n  - [program-aided-language-model] Code generation errors (syntax, logic)\n  - [program-aided-language-model] execution sandboxing\n  - [program-aided-language-model] Python vs\n  - [program-aided-language-model] LLM arithmetic (PAL reduces LLM math errors)\n  - [react-reasoning-acting] Tool call errors cascade\n  - [react-reasoning-acting] loop detection needed (max iterations)\n  - [react-reasoning-acting] action space quality determines success rate"
+    },
+    {
+      "primitives": [
+        "algorithm-of-thoughts",
+        "bdd-symbolic-model-checking",
+        "fiat-shamir-heuristic",
+        "program-aided-language-model",
+        "symmetry-reduction"
+      ],
+      "domains": [
+        "agentic-reasoning",
+        "formal-verification",
+        "cryptography-advanced",
+        "agentic-reasoning",
+        "formal-verification"
+      ],
+      "categories": [
+        "agentic-reasoning",
+        "formal-verification",
+        "cryptography-advanced",
+        "agentic-reasoning",
+        "formal-verification"
+      ],
+      "score": 580.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "order",
+        "scan",
+        "hash",
+        "project",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 cryptography-advanced \u2192 formal-verification\n**Components:**\n  - algorithm-of-thoughts (agentic-reasoning): AoT: embed algorithmic structures (DFS, BFS, tree, graph) into LLM reasoning; LLM serves as state evaluator, not full searcher; uses few-shot examples of algorithmic patterns.\n  - bdd-symbolic-model-checking (formal-verification): Binary Decision Diagram (BDD): canonical representation of Boolean functions; ROBDD = reduced ordered BDD (unique canonical form). BDD-based symbolic model checking uses BDDs to represent state sets and transition relations.\n  - fiat-shamir-heuristic (cryptography-advanced): Transform an interactive sigma protocol into a non-interactive proof: replace verifier's random challenge c with H(a || transcript), where H is a cryptographic hash. Prover generates c = H(a) then z without verifier interaction.\n  - program-aided-language-model (agentic-reasoning): PAL (Program-Aided Language Model): LLM generates executable code to solve reasoning tasks; code executor computes result; LLM interprets output.\n  - symmetry-reduction (formal-verification): Exploit symmetries in the state space (e.g., interchangeable processes, identical components) to reduce the explored state graph. Quotient system = original / symmetry group.\n**Real walls (combined):**\n  - [algorithm-of-thoughts] LLM as state evaluator may misjudge search frontier\n  - [algorithm-of-thoughts] algorithm must fit problem structure\n  - [algorithm-of-thoughts] not general-purpose\n  - [bdd-symbolic-model-checking] BDD explosion for some functions (multipliers, cryptographic functions)\n  - [bdd-symbolic-model-checking] variable ordering problem is NP-hard\n  - [bdd-symbolic-model-checking] dynamic variable reordering helps\n  - [fiat-shamir-heuristic] Random oracle model required\n  - [fiat-shamir-heuristic] Fiat-Shamir can introduce insecurity if protocol has subtle issues (e.g.,\u5403\u5b8c =\u5403\u5b8c attack)\n  - [fiat-shamir-heuristic] not all protocols safely transform\n  - [program-aided-language-model] Code generation errors (syntax, logic)\n  - [program-aided-language-model] execution sandboxing\n  - [program-aided-language-model] Python vs\n  - [program-aided-language-model] LLM arithmetic (PAL reduces LLM math errors)\n  - [symmetry-reduction] Symmetric systems are a special case\n  - [symmetry-reduction] detecting automorphism group of labeled transition system is expensive\n  - [symmetry-reduction] orbit bisimulation"
+    },
+    {
+      "primitives": [
+        "bayesian-posterior-inference",
+        "bdd-symbolic-model-checking",
+        "branch-and-cut",
+        "fiat-shamir-heuristic",
+        "program-aided-language-model"
+      ],
+      "domains": [
+        "statistics-probability",
+        "formal-verification",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "statistics-probability",
+        "formal-verification",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "score": 580.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "formal-verification",
+        "statistics-probability"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "formal-verification",
+        "statistics-probability"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "order",
+        "scan",
+        "hash",
+        "project",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 combinatorial-optimization \u2192 cryptography-advanced \u2192 formal-verification \u2192 statistics-probability\n**Components:**\n  - bayesian-posterior-inference (statistics-probability): Bayesian inference: compute posterior p(\u03b8 | x) = p(x | \u03b8)\u00b7p(\u03b8) / p(x). Prior p(\u03b8) encodes domain knowledge; posterior combines data + prior; predictive posterior p(x_new | x) = \u222b p(x_new | \u03b8)\u00b7p(\u03b8 | x) d\u03b8.\n  - bdd-symbolic-model-checking (formal-verification): Binary Decision Diagram (BDD): canonical representation of Boolean functions; ROBDD = reduced ordered BDD (unique canonical form). BDD-based symbolic model checking uses BDDs to represent state sets and transition relations.\n  - branch-and-cut (combinatorial-optimization): Branch-and-cut: B&B + cutting planes added at nodes. Cuts tighten LP relaxation without removing integer solutions.\n  - fiat-shamir-heuristic (cryptography-advanced): Transform an interactive sigma protocol into a non-interactive proof: replace verifier's random challenge c with H(a || transcript), where H is a cryptographic hash. Prover generates c = H(a) then z without verifier interaction.\n  - program-aided-language-model (agentic-reasoning): PAL (Program-Aided Language Model): LLM generates executable code to solve reasoning tasks; code executor computes result; LLM interprets output.\n**Real walls (combined):**\n  - [bayesian-posterior-inference] Prior sensitivity: posterior can be prior-dominated if data is sparse\n  - [bayesian-posterior-inference] Jeffreys prior = uninformative\n  - [bayesian-posterior-inference] conjugate priors simplify\n  - [bdd-symbolic-model-checking] BDD explosion for some functions (multipliers, cryptographic functions)\n  - [bdd-symbolic-model-checking] variable ordering problem is NP-hard\n  - [bdd-symbolic-model-checking] dynamic variable reordering helps\n  - [branch-and-cut] Cut selection: too many cuts = expensive LP solves\n  - [branch-and-cut] too few = weak bound\n  - [branch-and-cut] GMI cuts are most effective\n  - [fiat-shamir-heuristic] Random oracle model required\n  - [fiat-shamir-heuristic] Fiat-Shamir can introduce insecurity if protocol has subtle issues (e.g.,\u5403\u5b8c =\u5403\u5b8c attack)\n  - [fiat-shamir-heuristic] not all protocols safely transform\n  - [program-aided-language-model] Code generation errors (syntax, logic)\n  - [program-aided-language-model] execution sandboxing\n  - [program-aided-language-model] Python vs\n  - [program-aided-language-model] LLM arithmetic (PAL reduces LLM math errors)"
+    },
+    {
+      "primitives": [
+        "bayesian-posterior-inference",
+        "bdd-symbolic-model-checking",
+        "bulm-model-checking",
+        "fiat-shamir-heuristic",
+        "program-aided-language-model"
+      ],
+      "domains": [
+        "statistics-probability",
+        "formal-verification",
+        "formal-verification",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "statistics-probability",
+        "formal-verification",
+        "formal-verification",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "score": 580.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification",
+        "statistics-probability"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "cryptography-advanced",
+        "formal-verification",
+        "statistics-probability"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "order",
+        "scan",
+        "hash",
+        "project",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 cryptography-advanced \u2192 formal-verification \u2192 statistics-probability\n**Components:**\n  - bayesian-posterior-inference (statistics-probability): Bayesian inference: compute posterior p(\u03b8 | x) = p(x | \u03b8)\u00b7p(\u03b8) / p(x). Prior p(\u03b8) encodes domain knowledge; posterior combines data + prior; predictive posterior p(x_new | x) = \u222b p(x_new | \u03b8)\u00b7p(\u03b8 | x) d\u03b8.\n  - bdd-symbolic-model-checking (formal-verification): Binary Decision Diagram (BDD): canonical representation of Boolean functions; ROBDD = reduced ordered BDD (unique canonical form). BDD-based symbolic model checking uses BDDs to represent state sets and transition relations.\n  - bulm-model-checking (formal-verification): Bounded Model Checking (BMC): unroll the state transition system for k steps and check if a property violation (counterexample) exists in \u2264 k steps. Encode as SAT or SMT formula: \u00ac\u03c6 at step k.\n  - fiat-shamir-heuristic (cryptography-advanced): Transform an interactive sigma protocol into a non-interactive proof: replace verifier's random challenge c with H(a || transcript), where H is a cryptographic hash. Prover generates c = H(a) then z without verifier interaction.\n  - program-aided-language-model (agentic-reasoning): PAL (Program-Aided Language Model): LLM generates executable code to solve reasoning tasks; code executor computes result; LLM interprets output.\n**Real walls (combined):**\n  - [bayesian-posterior-inference] Prior sensitivity: posterior can be prior-dominated if data is sparse\n  - [bayesian-posterior-inference] Jeffreys prior = uninformative\n  - [bayesian-posterior-inference] conjugate priors simplify\n  - [bdd-symbolic-model-checking] BDD explosion for some functions (multipliers, cryptographic functions)\n  - [bdd-symbolic-model-checking] variable ordering problem is NP-hard\n  - [bdd-symbolic-model-checking] dynamic variable reordering helps\n  - [bulm-model-checking] Completeness threshold: k must reach the diameter of the state graph\n  - [bulm-model-checking] for liveness, need deeper unrolling\n  - [bulm-model-checking] k-induction (inductive invariants for k > diameter)\n  - [fiat-shamir-heuristic] Random oracle model required\n  - [fiat-shamir-heuristic] Fiat-Shamir can introduce insecurity if protocol has subtle issues (e.g.,\u5403\u5b8c =\u5403\u5b8c attack)\n  - [fiat-shamir-heuristic] not all protocols safely transform\n  - [program-aided-language-model] Code generation errors (syntax, logic)\n  - [program-aided-language-model] execution sandboxing\n  - [program-aided-language-model] Python vs\n  - [program-aided-language-model] LLM arithmetic (PAL reduces LLM math errors)"
+    }
+  ]
+}

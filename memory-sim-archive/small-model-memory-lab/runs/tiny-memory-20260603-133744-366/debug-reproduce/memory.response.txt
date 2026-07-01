@@ -1,0 +1,4 @@
+﻿1. **Reproduce the failure**: Trigger the intermittent crash in a staging environment to generate fresh logs, as the current logs lack a clear fatal line.
+2. **Analyze compressed cues**: Apply the "speed harms verification" pattern by checking if recent performance optimizations skipped necessary data validation steps.
+3. **Identify uncertainty**: Acknowledge that without a definitive error stack trace, the root cause remains probabilistic (e.g., race condition vs. resource exhaustion).
+4. **Next action**: Implement targeted logging around the suspected verification bottleneck and deploy a fix only after confirming the reproduction scenario is resolved.

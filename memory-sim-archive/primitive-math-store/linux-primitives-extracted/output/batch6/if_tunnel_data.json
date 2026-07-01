@@ -1,0 +1,428 @@
+{
+  "filename": "if_tunnel.h",
+  "includes": [
+    "linux/types.h",
+    "linux/if.h",
+    "linux/ip.h",
+    "linux/in6.h",
+    "asm/byteorder.h"
+  ],
+  "defines": [
+    {
+      "name": "SIOCGETTUNNEL",
+      "value": "(SIOCDEVPRIVATE + 0)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SIOCADDTUNNEL",
+      "value": "(SIOCDEVPRIVATE + 1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SIOCDELTUNNEL",
+      "value": "(SIOCDEVPRIVATE + 2)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SIOCCHGTUNNEL",
+      "value": "(SIOCDEVPRIVATE + 3)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SIOCGETPRL",
+      "value": "(SIOCDEVPRIVATE + 4)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SIOCADDPRL",
+      "value": "(SIOCDEVPRIVATE + 5)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SIOCDELPRL",
+      "value": "(SIOCDEVPRIVATE + 6)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SIOCCHGPRL",
+      "value": "(SIOCDEVPRIVATE + 7)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SIOCGET6RD",
+      "value": "(SIOCDEVPRIVATE + 8)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SIOCADD6RD",
+      "value": "(SIOCDEVPRIVATE + 9)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SIOCDEL6RD",
+      "value": "(SIOCDEVPRIVATE + 10)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SIOCCHG6RD",
+      "value": "(SIOCDEVPRIVATE + 11)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GRE_CSUM",
+      "value": "__cpu_to_be16(0x8000)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GRE_ROUTING",
+      "value": "__cpu_to_be16(0x4000)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GRE_KEY",
+      "value": "__cpu_to_be16(0x2000)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GRE_SEQ",
+      "value": "__cpu_to_be16(0x1000)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GRE_STRICT",
+      "value": "__cpu_to_be16(0x0800)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GRE_REC",
+      "value": "__cpu_to_be16(0x0700)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GRE_ACK",
+      "value": "__cpu_to_be16(0x0080)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GRE_FLAGS",
+      "value": "__cpu_to_be16(0x0078)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GRE_VERSION",
+      "value": "__cpu_to_be16(0x0007)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GRE_VERSION_0",
+      "value": "__cpu_to_be16(0x0000)",
+      "comment": "",
+      "category": "GRE_VERSION"
+    },
+    {
+      "name": "GRE_VERSION_1",
+      "value": "__cpu_to_be16(0x0001)",
+      "comment": "",
+      "category": "GRE_VERSION"
+    },
+    {
+      "name": "GRE_PROTO_PPP",
+      "value": "__cpu_to_be16(0x880b)",
+      "comment": "",
+      "category": "GRE_PROTO"
+    },
+    {
+      "name": "GRE_PPTP_KEY_MASK",
+      "value": "__cpu_to_be32(0xffff)",
+      "comment": "",
+      "category": "GRE_PPTP"
+    },
+    {
+      "name": "IFLA_IPTUN_MAX",
+      "value": "(__IFLA_IPTUN_MAX - 1)",
+      "comment": "",
+      "category": "IFLA_IPTUN"
+    },
+    {
+      "name": "TUNNEL_ENCAP_FLAG_CSUM",
+      "value": "(1<<0)",
+      "comment": "",
+      "category": "TUNNEL_ENCAP"
+    },
+    {
+      "name": "TUNNEL_ENCAP_FLAG_CSUM6",
+      "value": "(1<<1)",
+      "comment": "",
+      "category": "TUNNEL_ENCAP"
+    },
+    {
+      "name": "TUNNEL_ENCAP_FLAG_REMCSUM",
+      "value": "(1<<2)",
+      "comment": "",
+      "category": "TUNNEL_ENCAP"
+    },
+    {
+      "name": "SIT_ISATAP",
+      "value": "0x0001",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PRL_DEFAULT",
+      "value": "0x0001",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IFLA_GRE_MAX",
+      "value": "(__IFLA_GRE_MAX - 1)",
+      "comment": "",
+      "category": "IFLA_GRE"
+    },
+    {
+      "name": "VTI_ISVTI",
+      "value": "((__force __be16)0x0001)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IFLA_VTI_MAX",
+      "value": "(__IFLA_VTI_MAX - 1)",
+      "comment": "",
+      "category": "IFLA_VTI"
+    },
+    {
+      "name": "TUNNEL_CSUM",
+      "value": "__cpu_to_be16(0x01)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "TUNNEL_ROUTING",
+      "value": "__cpu_to_be16(0x02)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "TUNNEL_KEY",
+      "value": "__cpu_to_be16(0x04)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "TUNNEL_SEQ",
+      "value": "__cpu_to_be16(0x08)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "TUNNEL_STRICT",
+      "value": "__cpu_to_be16(0x10)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "TUNNEL_REC",
+      "value": "__cpu_to_be16(0x20)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "TUNNEL_VERSION",
+      "value": "__cpu_to_be16(0x40)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "TUNNEL_NO_KEY",
+      "value": "__cpu_to_be16(0x80)",
+      "comment": "",
+      "category": "TUNNEL_NO"
+    },
+    {
+      "name": "TUNNEL_DONT_FRAGMENT",
+      "value": "__cpu_to_be16(0x0100)",
+      "comment": "",
+      "category": "TUNNEL_DONT"
+    },
+    {
+      "name": "TUNNEL_OAM",
+      "value": "__cpu_to_be16(0x0200)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "TUNNEL_CRIT_OPT",
+      "value": "__cpu_to_be16(0x0400)",
+      "comment": "",
+      "category": "TUNNEL_CRIT"
+    },
+    {
+      "name": "TUNNEL_GENEVE_OPT",
+      "value": "__cpu_to_be16(0x0800)",
+      "comment": "",
+      "category": "TUNNEL_GENEVE"
+    },
+    {
+      "name": "TUNNEL_VXLAN_OPT",
+      "value": "__cpu_to_be16(0x1000)",
+      "comment": "",
+      "category": "TUNNEL_VXLAN"
+    },
+    {
+      "name": "TUNNEL_NOCACHE",
+      "value": "__cpu_to_be16(0x2000)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "TUNNEL_ERSPAN_OPT",
+      "value": "__cpu_to_be16(0x4000)",
+      "comment": "",
+      "category": "TUNNEL_ERSPAN"
+    },
+    {
+      "name": "TUNNEL_GTP_OPT",
+      "value": "__cpu_to_be16(0x8000)",
+      "comment": "",
+      "category": "TUNNEL_GTP"
+    },
+    {
+      "name": "TUNNEL_OPTIONS_PRESENT",
+      "value": "",
+      "comment": "",
+      "category": "TUNNEL_OPTIONS"
+    }
+  ],
+  "structs": [
+    {
+      "name": "ip_tunnel_parm",
+      "fields": [
+        {
+          "type_name": "char",
+          "name": "name",
+          "array_size": "IFNAMSIZ",
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "link",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be16",
+          "name": "i_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be16",
+          "name": "o_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "i_key",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "o_key",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ip_tunnel_prl",
+      "fields": [
+        {
+          "type_name": "__be32",
+          "name": "addr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "__reserved",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "datalen",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "__reserved2",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ip_tunnel_6rd",
+      "fields": [
+        {
+          "type_name": "__be32",
+          "name": "relay_prefix",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "prefixlen",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "relay_prefixlen",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

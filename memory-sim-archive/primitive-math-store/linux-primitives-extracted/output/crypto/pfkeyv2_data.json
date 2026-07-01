@@ -1,0 +1,1619 @@
+{
+  "filename": "pfkeyv2.h",
+  "includes": [
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "PF_KEY_V2",
+      "value": "2",
+      "comment": "",
+      "category": "PF_KEY"
+    },
+    {
+      "name": "PFKEYV2_REVISION",
+      "value": "199806L",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SADB_RESERVED",
+      "value": "0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SADB_GETSPI",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SADB_UPDATE",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SADB_ADD",
+      "value": "3",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SADB_DELETE",
+      "value": "4",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SADB_GET",
+      "value": "5",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SADB_ACQUIRE",
+      "value": "6",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SADB_REGISTER",
+      "value": "7",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SADB_EXPIRE",
+      "value": "8",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SADB_FLUSH",
+      "value": "9",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SADB_DUMP",
+      "value": "10",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SADB_X_PROMISC",
+      "value": "11",
+      "comment": "",
+      "category": "SADB_X"
+    },
+    {
+      "name": "SADB_X_PCHANGE",
+      "value": "12",
+      "comment": "",
+      "category": "SADB_X"
+    },
+    {
+      "name": "SADB_X_SPDUPDATE",
+      "value": "13",
+      "comment": "",
+      "category": "SADB_X"
+    },
+    {
+      "name": "SADB_X_SPDADD",
+      "value": "14",
+      "comment": "",
+      "category": "SADB_X"
+    },
+    {
+      "name": "SADB_X_SPDDELETE",
+      "value": "15",
+      "comment": "",
+      "category": "SADB_X"
+    },
+    {
+      "name": "SADB_X_SPDGET",
+      "value": "16",
+      "comment": "",
+      "category": "SADB_X"
+    },
+    {
+      "name": "SADB_X_SPDACQUIRE",
+      "value": "17",
+      "comment": "",
+      "category": "SADB_X"
+    },
+    {
+      "name": "SADB_X_SPDDUMP",
+      "value": "18",
+      "comment": "",
+      "category": "SADB_X"
+    },
+    {
+      "name": "SADB_X_SPDFLUSH",
+      "value": "19",
+      "comment": "",
+      "category": "SADB_X"
+    },
+    {
+      "name": "SADB_X_SPDSETIDX",
+      "value": "20",
+      "comment": "",
+      "category": "SADB_X"
+    },
+    {
+      "name": "SADB_X_SPDEXPIRE",
+      "value": "21",
+      "comment": "",
+      "category": "SADB_X"
+    },
+    {
+      "name": "SADB_X_SPDDELETE2",
+      "value": "22",
+      "comment": "",
+      "category": "SADB_X"
+    },
+    {
+      "name": "SADB_X_NAT_T_NEW_MAPPING",
+      "value": "23",
+      "comment": "",
+      "category": "SADB_X"
+    },
+    {
+      "name": "SADB_X_MIGRATE",
+      "value": "24",
+      "comment": "",
+      "category": "SADB_X"
+    },
+    {
+      "name": "SADB_MAX",
+      "value": "24",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SADB_SAFLAGS_PFS",
+      "value": "1",
+      "comment": "",
+      "category": "SADB_SAFLAGS"
+    },
+    {
+      "name": "SADB_SAFLAGS_NOPMTUDISC",
+      "value": "0x20000000",
+      "comment": "",
+      "category": "SADB_SAFLAGS"
+    },
+    {
+      "name": "SADB_SAFLAGS_DECAP_DSCP",
+      "value": "0x40000000",
+      "comment": "",
+      "category": "SADB_SAFLAGS"
+    },
+    {
+      "name": "SADB_SAFLAGS_NOECN",
+      "value": "0x80000000",
+      "comment": "",
+      "category": "SADB_SAFLAGS"
+    },
+    {
+      "name": "SADB_SASTATE_LARVAL",
+      "value": "0",
+      "comment": "",
+      "category": "SADB_SASTATE"
+    },
+    {
+      "name": "SADB_SASTATE_MATURE",
+      "value": "1",
+      "comment": "",
+      "category": "SADB_SASTATE"
+    },
+    {
+      "name": "SADB_SASTATE_DYING",
+      "value": "2",
+      "comment": "",
+      "category": "SADB_SASTATE"
+    },
+    {
+      "name": "SADB_SASTATE_DEAD",
+      "value": "3",
+      "comment": "",
+      "category": "SADB_SASTATE"
+    },
+    {
+      "name": "SADB_SASTATE_MAX",
+      "value": "3",
+      "comment": "",
+      "category": "SADB_SASTATE"
+    },
+    {
+      "name": "SADB_SATYPE_UNSPEC",
+      "value": "0",
+      "comment": "",
+      "category": "SADB_SATYPE"
+    },
+    {
+      "name": "SADB_SATYPE_AH",
+      "value": "2",
+      "comment": "",
+      "category": "SADB_SATYPE"
+    },
+    {
+      "name": "SADB_SATYPE_ESP",
+      "value": "3",
+      "comment": "",
+      "category": "SADB_SATYPE"
+    },
+    {
+      "name": "SADB_SATYPE_RSVP",
+      "value": "5",
+      "comment": "",
+      "category": "SADB_SATYPE"
+    },
+    {
+      "name": "SADB_SATYPE_OSPFV2",
+      "value": "6",
+      "comment": "",
+      "category": "SADB_SATYPE"
+    },
+    {
+      "name": "SADB_SATYPE_RIPV2",
+      "value": "7",
+      "comment": "",
+      "category": "SADB_SATYPE"
+    },
+    {
+      "name": "SADB_SATYPE_MIP",
+      "value": "8",
+      "comment": "",
+      "category": "SADB_SATYPE"
+    },
+    {
+      "name": "SADB_X_SATYPE_IPCOMP",
+      "value": "9",
+      "comment": "",
+      "category": "SADB_X"
+    },
+    {
+      "name": "SADB_SATYPE_MAX",
+      "value": "9",
+      "comment": "",
+      "category": "SADB_SATYPE"
+    },
+    {
+      "name": "SADB_AALG_NONE",
+      "value": "0",
+      "comment": "",
+      "category": "SADB_AALG"
+    },
+    {
+      "name": "SADB_AALG_MD5HMAC",
+      "value": "2",
+      "comment": "",
+      "category": "SADB_AALG"
+    },
+    {
+      "name": "SADB_AALG_SHA1HMAC",
+      "value": "3",
+      "comment": "",
+      "category": "SADB_AALG"
+    },
+    {
+      "name": "SADB_X_AALG_SHA2_256HMAC",
+      "value": "5",
+      "comment": "",
+      "category": "SADB_X"
+    },
+    {
+      "name": "SADB_X_AALG_SHA2_384HMAC",
+      "value": "6",
+      "comment": "",
+      "category": "SADB_X"
+    },
+    {
+      "name": "SADB_X_AALG_SHA2_512HMAC",
+      "value": "7",
+      "comment": "",
+      "category": "SADB_X"
+    },
+    {
+      "name": "SADB_X_AALG_RIPEMD160HMAC",
+      "value": "8",
+      "comment": "",
+      "category": "SADB_X"
+    },
+    {
+      "name": "SADB_X_AALG_AES_XCBC_MAC",
+      "value": "9",
+      "comment": "",
+      "category": "SADB_X"
+    },
+    {
+      "name": "SADB_X_AALG_SM3_256HMAC",
+      "value": "10",
+      "comment": "",
+      "category": "SADB_X"
+    },
+    {
+      "name": "SADB_X_AALG_NULL",
+      "value": "251",
+      "comment": "kame",
+      "category": "SADB_X"
+    },
+    {
+      "name": "SADB_AALG_MAX",
+      "value": "251",
+      "comment": "",
+      "category": "SADB_AALG"
+    },
+    {
+      "name": "SADB_EALG_NONE",
+      "value": "0",
+      "comment": "",
+      "category": "SADB_EALG"
+    },
+    {
+      "name": "SADB_EALG_DESCBC",
+      "value": "2",
+      "comment": "",
+      "category": "SADB_EALG"
+    },
+    {
+      "name": "SADB_EALG_3DESCBC",
+      "value": "3",
+      "comment": "",
+      "category": "SADB_EALG"
+    },
+    {
+      "name": "SADB_X_EALG_CASTCBC",
+      "value": "6",
+      "comment": "",
+      "category": "SADB_X"
+    },
+    {
+      "name": "SADB_X_EALG_BLOWFISHCBC",
+      "value": "7",
+      "comment": "",
+      "category": "SADB_X"
+    },
+    {
+      "name": "SADB_EALG_NULL",
+      "value": "11",
+      "comment": "",
+      "category": "SADB_EALG"
+    },
+    {
+      "name": "SADB_X_EALG_AESCBC",
+      "value": "12",
+      "comment": "",
+      "category": "SADB_X"
+    },
+    {
+      "name": "SADB_X_EALG_AESCTR",
+      "value": "13",
+      "comment": "",
+      "category": "SADB_X"
+    },
+    {
+      "name": "SADB_X_EALG_AES_CCM_ICV8",
+      "value": "14",
+      "comment": "",
+      "category": "SADB_X"
+    },
+    {
+      "name": "SADB_X_EALG_AES_CCM_ICV12",
+      "value": "15",
+      "comment": "",
+      "category": "SADB_X"
+    },
+    {
+      "name": "SADB_X_EALG_AES_CCM_ICV16",
+      "value": "16",
+      "comment": "",
+      "category": "SADB_X"
+    },
+    {
+      "name": "SADB_X_EALG_AES_GCM_ICV8",
+      "value": "18",
+      "comment": "",
+      "category": "SADB_X"
+    },
+    {
+      "name": "SADB_X_EALG_AES_GCM_ICV12",
+      "value": "19",
+      "comment": "",
+      "category": "SADB_X"
+    },
+    {
+      "name": "SADB_X_EALG_AES_GCM_ICV16",
+      "value": "20",
+      "comment": "",
+      "category": "SADB_X"
+    },
+    {
+      "name": "SADB_X_EALG_CAMELLIACBC",
+      "value": "22",
+      "comment": "",
+      "category": "SADB_X"
+    },
+    {
+      "name": "SADB_X_EALG_NULL_AES_GMAC",
+      "value": "23",
+      "comment": "",
+      "category": "SADB_X"
+    },
+    {
+      "name": "SADB_X_EALG_SM4CBC",
+      "value": "24",
+      "comment": "",
+      "category": "SADB_X"
+    },
+    {
+      "name": "SADB_EALG_MAX",
+      "value": "253",
+      "comment": "last EALG",
+      "category": "SADB_EALG"
+    },
+    {
+      "name": "SADB_X_EALG_SERPENTCBC",
+      "value": "252",
+      "comment": "draft-ietf-ipsec-ciph-aes-cbc-00",
+      "category": "SADB_X"
+    },
+    {
+      "name": "SADB_X_EALG_TWOFISHCBC",
+      "value": "253",
+      "comment": "draft-ietf-ipsec-ciph-aes-cbc-00",
+      "category": "SADB_X"
+    },
+    {
+      "name": "SADB_X_CALG_NONE",
+      "value": "0",
+      "comment": "",
+      "category": "SADB_X"
+    },
+    {
+      "name": "SADB_X_CALG_OUI",
+      "value": "1",
+      "comment": "",
+      "category": "SADB_X"
+    },
+    {
+      "name": "SADB_X_CALG_DEFLATE",
+      "value": "2",
+      "comment": "",
+      "category": "SADB_X"
+    },
+    {
+      "name": "SADB_X_CALG_LZS",
+      "value": "3",
+      "comment": "",
+      "category": "SADB_X"
+    },
+    {
+      "name": "SADB_X_CALG_LZJH",
+      "value": "4",
+      "comment": "",
+      "category": "SADB_X"
+    },
+    {
+      "name": "SADB_X_CALG_MAX",
+      "value": "4",
+      "comment": "",
+      "category": "SADB_X"
+    },
+    {
+      "name": "SADB_EXT_RESERVED",
+      "value": "0",
+      "comment": "",
+      "category": "SADB_EXT"
+    },
+    {
+      "name": "SADB_EXT_SA",
+      "value": "1",
+      "comment": "",
+      "category": "SADB_EXT"
+    },
+    {
+      "name": "SADB_EXT_LIFETIME_CURRENT",
+      "value": "2",
+      "comment": "",
+      "category": "SADB_EXT"
+    },
+    {
+      "name": "SADB_EXT_LIFETIME_HARD",
+      "value": "3",
+      "comment": "",
+      "category": "SADB_EXT"
+    },
+    {
+      "name": "SADB_EXT_LIFETIME_SOFT",
+      "value": "4",
+      "comment": "",
+      "category": "SADB_EXT"
+    },
+    {
+      "name": "SADB_EXT_ADDRESS_SRC",
+      "value": "5",
+      "comment": "",
+      "category": "SADB_EXT"
+    },
+    {
+      "name": "SADB_EXT_ADDRESS_DST",
+      "value": "6",
+      "comment": "",
+      "category": "SADB_EXT"
+    },
+    {
+      "name": "SADB_EXT_ADDRESS_PROXY",
+      "value": "7",
+      "comment": "",
+      "category": "SADB_EXT"
+    },
+    {
+      "name": "SADB_EXT_KEY_AUTH",
+      "value": "8",
+      "comment": "",
+      "category": "SADB_EXT"
+    },
+    {
+      "name": "SADB_EXT_KEY_ENCRYPT",
+      "value": "9",
+      "comment": "",
+      "category": "SADB_EXT"
+    },
+    {
+      "name": "SADB_EXT_IDENTITY_SRC",
+      "value": "10",
+      "comment": "",
+      "category": "SADB_EXT"
+    },
+    {
+      "name": "SADB_EXT_IDENTITY_DST",
+      "value": "11",
+      "comment": "",
+      "category": "SADB_EXT"
+    },
+    {
+      "name": "SADB_EXT_SENSITIVITY",
+      "value": "12",
+      "comment": "",
+      "category": "SADB_EXT"
+    },
+    {
+      "name": "SADB_EXT_PROPOSAL",
+      "value": "13",
+      "comment": "",
+      "category": "SADB_EXT"
+    },
+    {
+      "name": "SADB_EXT_SUPPORTED_AUTH",
+      "value": "14",
+      "comment": "",
+      "category": "SADB_EXT"
+    },
+    {
+      "name": "SADB_EXT_SUPPORTED_ENCRYPT",
+      "value": "15",
+      "comment": "",
+      "category": "SADB_EXT"
+    },
+    {
+      "name": "SADB_EXT_SPIRANGE",
+      "value": "16",
+      "comment": "",
+      "category": "SADB_EXT"
+    },
+    {
+      "name": "SADB_X_EXT_KMPRIVATE",
+      "value": "17",
+      "comment": "",
+      "category": "SADB_X"
+    },
+    {
+      "name": "SADB_X_EXT_POLICY",
+      "value": "18",
+      "comment": "",
+      "category": "SADB_X"
+    },
+    {
+      "name": "SADB_X_EXT_SA2",
+      "value": "19",
+      "comment": "",
+      "category": "SADB_X"
+    },
+    {
+      "name": "SADB_X_EXT_NAT_T_TYPE",
+      "value": "20",
+      "comment": "",
+      "category": "SADB_X"
+    },
+    {
+      "name": "SADB_X_EXT_NAT_T_SPORT",
+      "value": "21",
+      "comment": "",
+      "category": "SADB_X"
+    },
+    {
+      "name": "SADB_X_EXT_NAT_T_DPORT",
+      "value": "22",
+      "comment": "",
+      "category": "SADB_X"
+    },
+    {
+      "name": "SADB_X_EXT_NAT_T_OA",
+      "value": "23",
+      "comment": "",
+      "category": "SADB_X"
+    },
+    {
+      "name": "SADB_X_EXT_SEC_CTX",
+      "value": "24",
+      "comment": "",
+      "category": "SADB_X"
+    },
+    {
+      "name": "SADB_X_EXT_KMADDRESS",
+      "value": "25",
+      "comment": "",
+      "category": "SADB_X"
+    },
+    {
+      "name": "SADB_X_EXT_FILTER",
+      "value": "26",
+      "comment": "",
+      "category": "SADB_X"
+    },
+    {
+      "name": "SADB_EXT_MAX",
+      "value": "26",
+      "comment": "",
+      "category": "SADB_EXT"
+    },
+    {
+      "name": "SADB_IDENTTYPE_RESERVED",
+      "value": "0",
+      "comment": "",
+      "category": "SADB_IDENTTYPE"
+    },
+    {
+      "name": "SADB_IDENTTYPE_PREFIX",
+      "value": "1",
+      "comment": "",
+      "category": "SADB_IDENTTYPE"
+    },
+    {
+      "name": "SADB_IDENTTYPE_FQDN",
+      "value": "2",
+      "comment": "",
+      "category": "SADB_IDENTTYPE"
+    },
+    {
+      "name": "SADB_IDENTTYPE_USERFQDN",
+      "value": "3",
+      "comment": "",
+      "category": "SADB_IDENTTYPE"
+    },
+    {
+      "name": "SADB_IDENTTYPE_MAX",
+      "value": "3",
+      "comment": "",
+      "category": "SADB_IDENTTYPE"
+    }
+  ],
+  "structs": [
+    {
+      "name": "sadb_msg",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "sadb_msg_version",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "sadb_msg_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "sadb_msg_errno",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "sadb_msg_satype",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "sadb_msg_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "sadb_msg_reserved",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "sadb_msg_seq",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "sadb_msg_pid",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "sadb_ext",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "sadb_ext_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "sadb_ext_type",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "sadb_sa",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "sadb_sa_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "sadb_sa_exttype",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "sadb_sa_spi",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "sadb_sa_replay",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "sadb_sa_state",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "sadb_sa_auth",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "sadb_sa_encrypt",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "sadb_sa_flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "sadb_lifetime",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "sadb_lifetime_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "sadb_lifetime_exttype",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "sadb_lifetime_allocations",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "sadb_lifetime_bytes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "sadb_lifetime_addtime",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "sadb_lifetime_usetime",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "sadb_address",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "sadb_address_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "sadb_address_exttype",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "sadb_address_proto",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "sadb_address_prefixlen",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "sadb_address_reserved",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "sadb_key",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "sadb_key_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "sadb_key_exttype",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "sadb_key_bits",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "sadb_key_reserved",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "sadb_ident",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "sadb_ident_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "sadb_ident_exttype",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "sadb_ident_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "sadb_ident_reserved",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "sadb_ident_id",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "sadb_sens",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "sadb_sens_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "sadb_sens_exttype",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "sadb_sens_dpd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "sadb_sens_sens_level",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "sadb_sens_sens_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "sadb_sens_integ_level",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "sadb_sens_integ_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "sadb_sens_reserved",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "sadb_prop",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "sadb_prop_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "sadb_prop_exttype",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "sadb_prop_replay",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "sadb_prop_reserved",
+          "array_size": "3",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "sadb_comb",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "sadb_comb_auth",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "sadb_comb_encrypt",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "sadb_comb_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "sadb_comb_auth_minbits",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "sadb_comb_auth_maxbits",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "sadb_comb_encrypt_minbits",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "sadb_comb_encrypt_maxbits",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "sadb_comb_reserved",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "sadb_comb_soft_allocations",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "sadb_comb_hard_allocations",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "sadb_comb_soft_bytes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "sadb_comb_hard_bytes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "sadb_comb_soft_addtime",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "sadb_comb_hard_addtime",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "sadb_comb_soft_usetime",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "sadb_comb_hard_usetime",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "sadb_supported",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "sadb_supported_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "sadb_supported_exttype",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "sadb_supported_reserved",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "sadb_alg",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "sadb_alg_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "sadb_alg_ivlen",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "sadb_alg_minbits",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "sadb_alg_maxbits",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "sadb_alg_reserved",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "sadb_spirange",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "sadb_spirange_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "sadb_spirange_exttype",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "sadb_spirange_min",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "sadb_spirange_max",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "sadb_spirange_reserved",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "sadb_x_kmprivate",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "sadb_x_kmprivate_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "sadb_x_kmprivate_exttype",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "sadb_x_kmprivate_reserved",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "sadb_x_sa2",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "sadb_x_sa2_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "sadb_x_sa2_exttype",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "sadb_x_sa2_mode",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "sadb_x_sa2_reserved1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "sadb_x_sa2_reserved2",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "sadb_x_sa2_sequence",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "sadb_x_sa2_reqid",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "sadb_x_policy",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "sadb_x_policy_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "sadb_x_policy_exttype",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "sadb_x_policy_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "sadb_x_policy_dir",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "sadb_x_policy_reserved",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "sadb_x_policy_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "sadb_x_policy_priority",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "sadb_x_ipsecrequest",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "sadb_x_ipsecrequest_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "sadb_x_ipsecrequest_proto",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "sadb_x_ipsecrequest_mode",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "sadb_x_ipsecrequest_level",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "sadb_x_ipsecrequest_reserved1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "sadb_x_ipsecrequest_reqid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "sadb_x_ipsecrequest_reserved2",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "sadb_x_nat_t_type",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "sadb_x_nat_t_type_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "sadb_x_nat_t_type_exttype",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "sadb_x_nat_t_type_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "sadb_x_nat_t_type_reserved",
+          "array_size": "3",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "sadb_x_nat_t_port",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "sadb_x_nat_t_port_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "sadb_x_nat_t_port_exttype",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be16",
+          "name": "sadb_x_nat_t_port_port",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "sadb_x_nat_t_port_reserved",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "sadb_x_sec_ctx",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "sadb_x_sec_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "sadb_x_sec_exttype",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "sadb_x_ctx_alg",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "sadb_x_ctx_doi",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "sadb_x_ctx_len",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "sadb_x_kmaddress",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "sadb_x_kmaddress_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "sadb_x_kmaddress_exttype",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "sadb_x_kmaddress_reserved",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "sadb_x_filter",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "sadb_x_filter_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "sadb_x_filter_exttype",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "sadb_x_filter_saddr",
+          "array_size": "4",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "sadb_x_filter_daddr",
+          "array_size": "4",
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "sadb_x_filter_family",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "sadb_x_filter_splen",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "sadb_x_filter_dplen",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

@@ -1,0 +1,10 @@
+FROM C:\Users\jgali\.lmstudio\models\WhiteRabbitNeo\WhiteRabbitNeo-V3-7B-GGUF\WhiteRabbitNeo_WhiteRabbitNeo-V3-7B-Q8_0.gguf
+
+# WhiteRabbitNeo V3 7B - Security-focused model
+# Offensive + defensive cybersecurity capabilities
+# Requires human-in-the-loop approval before any actions
+
+PARAMETER temperature 0.7
+PARAMETER top_p 0.9
+PARAMETER stop "<|eot_id|>"
+PARAMETER stop "<|end_of_text|>"

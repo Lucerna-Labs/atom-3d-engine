@@ -1,0 +1,1371 @@
+{
+  "filename": "if_link.h",
+  "includes": [
+    "linux/types.h",
+    "linux/netlink.h"
+  ],
+  "defines": [
+    {
+      "name": "IFLA_COST",
+      "value": "IFLA_COST",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IFLA_PRIORITY",
+      "value": "IFLA_PRIORITY",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IFLA_MASTER",
+      "value": "IFLA_MASTER",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IFLA_WIRELESS",
+      "value": "IFLA_WIRELESS",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IFLA_PROTINFO",
+      "value": "IFLA_PROTINFO",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IFLA_TXQLEN",
+      "value": "IFLA_TXQLEN",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IFLA_MAP",
+      "value": "IFLA_MAP",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IFLA_WEIGHT",
+      "value": "IFLA_WEIGHT",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IFLA_LINKINFO",
+      "value": "IFLA_LINKINFO",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IFLA_PROMISCUITY",
+      "value": "IFLA_PROMISCUITY",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IFLA_MAX",
+      "value": "(__IFLA_MAX - 1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IFLA_INET_MAX",
+      "value": "(__IFLA_INET_MAX - 1)",
+      "comment": "",
+      "category": "IFLA_INET"
+    },
+    {
+      "name": "IFLA_INET6_MAX",
+      "value": "(__IFLA_INET6_MAX - 1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IFLA_BR_MAX",
+      "value": "(__IFLA_BR_MAX - 1)",
+      "comment": "",
+      "category": "IFLA_BR"
+    },
+    {
+      "name": "BR_STP_MODE_MAX",
+      "value": "(__BR_STP_MODE_MAX - 1)",
+      "comment": "",
+      "category": "BR_STP"
+    },
+    {
+      "name": "IFLA_BRPORT_MAX",
+      "value": "(__IFLA_BRPORT_MAX - 1)",
+      "comment": "",
+      "category": "IFLA_BRPORT"
+    },
+    {
+      "name": "IFLA_INFO_MAX",
+      "value": "(__IFLA_INFO_MAX - 1)",
+      "comment": "",
+      "category": "IFLA_INFO"
+    },
+    {
+      "name": "IFLA_VLAN_MAX",
+      "value": "(__IFLA_VLAN_MAX - 1)",
+      "comment": "",
+      "category": "IFLA_VLAN"
+    },
+    {
+      "name": "IFLA_VLAN_QOS_MAX",
+      "value": "(__IFLA_VLAN_QOS_MAX - 1)",
+      "comment": "",
+      "category": "IFLA_VLAN"
+    },
+    {
+      "name": "IFLA_MACVLAN_MAX",
+      "value": "(__IFLA_MACVLAN_MAX - 1)",
+      "comment": "",
+      "category": "IFLA_MACVLAN"
+    },
+    {
+      "name": "MACVLAN_FLAG_NOPROMISC",
+      "value": "1",
+      "comment": "",
+      "category": "MACVLAN_FLAG"
+    },
+    {
+      "name": "MACVLAN_FLAG_NODST",
+      "value": "2",
+      "comment": "skip dst macvlan if matching src macvlan",
+      "category": "MACVLAN_FLAG"
+    },
+    {
+      "name": "IFLA_VRF_MAX",
+      "value": "(__IFLA_VRF_MAX - 1)",
+      "comment": "",
+      "category": "IFLA_VRF"
+    },
+    {
+      "name": "IFLA_VRF_PORT_MAX",
+      "value": "(__IFLA_VRF_PORT_MAX - 1)",
+      "comment": "",
+      "category": "IFLA_VRF"
+    },
+    {
+      "name": "IFLA_MACSEC_MAX",
+      "value": "(__IFLA_MACSEC_MAX - 1)",
+      "comment": "",
+      "category": "IFLA_MACSEC"
+    },
+    {
+      "name": "IFLA_XFRM_MAX",
+      "value": "(__IFLA_XFRM_MAX - 1)",
+      "comment": "",
+      "category": "IFLA_XFRM"
+    },
+    {
+      "name": "IFLA_IPVLAN_MAX",
+      "value": "(__IFLA_IPVLAN_MAX - 1)",
+      "comment": "",
+      "category": "IFLA_IPVLAN"
+    },
+    {
+      "name": "IPVLAN_F_PRIVATE",
+      "value": "0x01",
+      "comment": "",
+      "category": "IPVLAN_F"
+    },
+    {
+      "name": "IPVLAN_F_VEPA",
+      "value": "0x02",
+      "comment": "",
+      "category": "IPVLAN_F"
+    },
+    {
+      "name": "IFLA_NETKIT_MAX",
+      "value": "(__IFLA_NETKIT_MAX - 1)",
+      "comment": "",
+      "category": "IFLA_NETKIT"
+    },
+    {
+      "name": "TUNNEL_MSG_FLAG_STATS",
+      "value": "0x01",
+      "comment": "",
+      "category": "TUNNEL_MSG"
+    },
+    {
+      "name": "TUNNEL_MSG_VALID_USER_FLAGS",
+      "value": "TUNNEL_MSG_FLAG_STATS",
+      "comment": "",
+      "category": "TUNNEL_MSG"
+    },
+    {
+      "name": "VNIFILTER_ENTRY_STATS_MAX",
+      "value": "(__VNIFILTER_ENTRY_STATS_MAX - 1)",
+      "comment": "",
+      "category": "VNIFILTER_ENTRY"
+    },
+    {
+      "name": "VXLAN_VNIFILTER_ENTRY_MAX",
+      "value": "(__VXLAN_VNIFILTER_ENTRY_MAX - 1)",
+      "comment": "",
+      "category": "VXLAN_VNIFILTER"
+    },
+    {
+      "name": "VXLAN_VNIFILTER_MAX",
+      "value": "(__VXLAN_VNIFILTER_MAX - 1)",
+      "comment": "",
+      "category": "VXLAN_VNIFILTER"
+    },
+    {
+      "name": "IFLA_VXLAN_MAX",
+      "value": "(__IFLA_VXLAN_MAX - 1)",
+      "comment": "",
+      "category": "IFLA_VXLAN"
+    },
+    {
+      "name": "IFLA_GENEVE_MAX",
+      "value": "(__IFLA_GENEVE_MAX - 1)",
+      "comment": "",
+      "category": "IFLA_GENEVE"
+    },
+    {
+      "name": "IFLA_BAREUDP_MAX",
+      "value": "(__IFLA_BAREUDP_MAX - 1)",
+      "comment": "",
+      "category": "IFLA_BAREUDP"
+    },
+    {
+      "name": "IFLA_PPP_MAX",
+      "value": "(__IFLA_PPP_MAX - 1)",
+      "comment": "",
+      "category": "IFLA_PPP"
+    },
+    {
+      "name": "IFLA_GTP_MAX",
+      "value": "(__IFLA_GTP_MAX - 1)",
+      "comment": "",
+      "category": "IFLA_GTP"
+    },
+    {
+      "name": "IFLA_BOND_MAX",
+      "value": "(__IFLA_BOND_MAX - 1)",
+      "comment": "",
+      "category": "IFLA_BOND"
+    },
+    {
+      "name": "IFLA_BOND_AD_INFO_MAX",
+      "value": "(__IFLA_BOND_AD_INFO_MAX - 1)",
+      "comment": "",
+      "category": "IFLA_BOND"
+    },
+    {
+      "name": "IFLA_BOND_SLAVE_MAX",
+      "value": "(__IFLA_BOND_SLAVE_MAX - 1)",
+      "comment": "",
+      "category": "IFLA_BOND"
+    },
+    {
+      "name": "IFLA_VF_INFO_MAX",
+      "value": "(__IFLA_VF_INFO_MAX - 1)",
+      "comment": "",
+      "category": "IFLA_VF"
+    },
+    {
+      "name": "IFLA_VF_MAX",
+      "value": "(__IFLA_VF_MAX - 1)",
+      "comment": "",
+      "category": "IFLA_VF"
+    },
+    {
+      "name": "IFLA_VF_VLAN_INFO_MAX",
+      "value": "(__IFLA_VF_VLAN_INFO_MAX - 1)",
+      "comment": "",
+      "category": "IFLA_VF"
+    },
+    {
+      "name": "MAX_VLAN_LIST_LEN",
+      "value": "1",
+      "comment": "",
+      "category": "MAX_VLAN"
+    },
+    {
+      "name": "IFLA_VF_STATS_MAX",
+      "value": "(__IFLA_VF_STATS_MAX - 1)",
+      "comment": "",
+      "category": "IFLA_VF"
+    },
+    {
+      "name": "IFLA_VF_PORT_MAX",
+      "value": "(__IFLA_VF_PORT_MAX - 1)",
+      "comment": "",
+      "category": "IFLA_VF"
+    },
+    {
+      "name": "IFLA_PORT_MAX",
+      "value": "(__IFLA_PORT_MAX - 1)",
+      "comment": "",
+      "category": "IFLA_PORT"
+    },
+    {
+      "name": "PORT_PROFILE_MAX",
+      "value": "40",
+      "comment": "",
+      "category": "PORT_PROFILE"
+    },
+    {
+      "name": "PORT_UUID_MAX",
+      "value": "16",
+      "comment": "",
+      "category": "PORT_UUID"
+    },
+    {
+      "name": "PORT_SELF_VF",
+      "value": "-1",
+      "comment": "",
+      "category": "PORT_SELF"
+    },
+    {
+      "name": "IFLA_IPOIB_MAX",
+      "value": "(__IFLA_IPOIB_MAX - 1)",
+      "comment": "",
+      "category": "IFLA_IPOIB"
+    },
+    {
+      "name": "IFLA_HSR_MAX",
+      "value": "(__IFLA_HSR_MAX - 1)",
+      "comment": "",
+      "category": "IFLA_HSR"
+    },
+    {
+      "name": "IFLA_STATS_MAX",
+      "value": "(__IFLA_STATS_MAX - 1)",
+      "comment": "",
+      "category": "IFLA_STATS"
+    },
+    {
+      "name": "IFLA_STATS_GETSET_MAX",
+      "value": "(__IFLA_STATS_GETSET_MAX - 1)",
+      "comment": "",
+      "category": "IFLA_STATS"
+    },
+    {
+      "name": "LINK_XSTATS_TYPE_MAX",
+      "value": "(__LINK_XSTATS_TYPE_MAX - 1)",
+      "comment": "",
+      "category": "LINK_XSTATS"
+    },
+    {
+      "name": "IFLA_OFFLOAD_XSTATS_MAX",
+      "value": "(__IFLA_OFFLOAD_XSTATS_MAX - 1)",
+      "comment": "",
+      "category": "IFLA_OFFLOAD"
+    },
+    {
+      "name": "IFLA_OFFLOAD_XSTATS_HW_S_INFO_MAX",
+      "value": "",
+      "comment": "",
+      "category": "IFLA_OFFLOAD"
+    },
+    {
+      "name": "XDP_FLAGS_UPDATE_IF_NOEXIST",
+      "value": "(1U << 0)",
+      "comment": "",
+      "category": "XDP_FLAGS"
+    },
+    {
+      "name": "XDP_FLAGS_SKB_MODE",
+      "value": "(1U << 1)",
+      "comment": "",
+      "category": "XDP_FLAGS"
+    },
+    {
+      "name": "XDP_FLAGS_DRV_MODE",
+      "value": "(1U << 2)",
+      "comment": "",
+      "category": "XDP_FLAGS"
+    },
+    {
+      "name": "XDP_FLAGS_HW_MODE",
+      "value": "(1U << 3)",
+      "comment": "",
+      "category": "XDP_FLAGS"
+    },
+    {
+      "name": "XDP_FLAGS_REPLACE",
+      "value": "(1U << 4)",
+      "comment": "",
+      "category": "XDP_FLAGS"
+    },
+    {
+      "name": "XDP_FLAGS_MODES",
+      "value": "(XDP_FLAGS_SKB_MODE | ",
+      "comment": "",
+      "category": "XDP_FLAGS"
+    },
+    {
+      "name": "XDP_FLAGS_MASK",
+      "value": "(XDP_FLAGS_UPDATE_IF_NOEXIST | ",
+      "comment": "",
+      "category": "XDP_FLAGS"
+    },
+    {
+      "name": "IFLA_XDP_MAX",
+      "value": "(__IFLA_XDP_MAX - 1)",
+      "comment": "",
+      "category": "IFLA_XDP"
+    },
+    {
+      "name": "IFLA_TUN_MAX",
+      "value": "(__IFLA_TUN_MAX - 1)",
+      "comment": "",
+      "category": "IFLA_TUN"
+    },
+    {
+      "name": "RMNET_FLAGS_INGRESS_DEAGGREGATION",
+      "value": "(1U << 0)",
+      "comment": "",
+      "category": "RMNET_FLAGS"
+    },
+    {
+      "name": "RMNET_FLAGS_INGRESS_MAP_COMMANDS",
+      "value": "(1U << 1)",
+      "comment": "",
+      "category": "RMNET_FLAGS"
+    },
+    {
+      "name": "RMNET_FLAGS_INGRESS_MAP_CKSUMV4",
+      "value": "(1U << 2)",
+      "comment": "",
+      "category": "RMNET_FLAGS"
+    },
+    {
+      "name": "RMNET_FLAGS_EGRESS_MAP_CKSUMV4",
+      "value": "(1U << 3)",
+      "comment": "",
+      "category": "RMNET_FLAGS"
+    },
+    {
+      "name": "RMNET_FLAGS_INGRESS_MAP_CKSUMV5",
+      "value": "(1U << 4)",
+      "comment": "",
+      "category": "RMNET_FLAGS"
+    },
+    {
+      "name": "RMNET_FLAGS_EGRESS_MAP_CKSUMV5",
+      "value": "(1U << 5)",
+      "comment": "",
+      "category": "RMNET_FLAGS"
+    },
+    {
+      "name": "IFLA_RMNET_MAX",
+      "value": "(__IFLA_RMNET_MAX - 1)",
+      "comment": "",
+      "category": "IFLA_RMNET"
+    },
+    {
+      "name": "IFLA_MCTP_MAX",
+      "value": "(__IFLA_MCTP_MAX - 1)",
+      "comment": "",
+      "category": "IFLA_MCTP"
+    },
+    {
+      "name": "IFLA_DSA_MAX",
+      "value": "(__IFLA_DSA_MAX - 1)",
+      "comment": "",
+      "category": "IFLA_DSA"
+    },
+    {
+      "name": "IFLA_OVPN_MAX",
+      "value": "(__IFLA_OVPN_MAX - 1)",
+      "comment": "",
+      "category": "IFLA_OVPN"
+    }
+  ],
+  "structs": [
+    {
+      "name": "rtnl_link_stats",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "rx_packets",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tx_packets",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "rx_bytes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tx_bytes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "rx_errors",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tx_errors",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "rx_dropped",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tx_dropped",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "multicast",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "collisions",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "rx_length_errors",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "rx_over_errors",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "rx_crc_errors",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "rx_frame_errors",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "rx_fifo_errors",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "rx_missed_errors",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tx_aborted_errors",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tx_carrier_errors",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tx_fifo_errors",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tx_heartbeat_errors",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tx_window_errors",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "rx_compressed",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tx_compressed",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "rx_nohandler",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "rtnl_link_stats64",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "rx_packets",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "tx_packets",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "rx_bytes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "tx_bytes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "rx_errors",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "tx_errors",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "rx_dropped",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "tx_dropped",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "multicast",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "collisions",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "rx_length_errors",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "rx_over_errors",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "rx_crc_errors",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "rx_frame_errors",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "rx_fifo_errors",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "rx_missed_errors",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "tx_aborted_errors",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "tx_carrier_errors",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "tx_fifo_errors",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "tx_heartbeat_errors",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "tx_window_errors",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "rx_compressed",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "tx_compressed",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "rx_nohandler",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "rx_otherhost_dropped",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "rtnl_hw_stats64",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "rx_packets",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "tx_packets",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "rx_bytes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "tx_bytes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "rx_errors",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "tx_errors",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "rx_dropped",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "tx_dropped",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "multicast",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "rtnl_link_ifmap",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "mem_start",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "mem_end",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "base_addr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "irq",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "dma",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "port",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ifla_bridge_id",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "prio",
+          "array_size": "2",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "addr",
+          "array_size": "6",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ifla_cacheinfo",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "max_reasm_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tstamp",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reachable_time",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "retrans_time",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ifla_vlan_flags",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "mask",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ifla_vlan_qos_mapping",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "from",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "to",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "tunnel_msg",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "family",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "reserved2",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ifindex",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ifla_vxlan_port_range",
+      "fields": [
+        {
+          "type_name": "__be16",
+          "name": "low",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be16",
+          "name": "high",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ifla_geneve_port_range",
+      "fields": [
+        {
+          "type_name": "__be16",
+          "name": "low",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be16",
+          "name": "high",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ifla_vf_mac",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "vf",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "mac",
+          "array_size": "32",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ifla_vf_broadcast",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "broadcast",
+          "array_size": "32",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ifla_vf_vlan",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "vf",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "vlan",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "qos",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ifla_vf_vlan_info",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "vf",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "vlan",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "qos",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be16",
+          "name": "vlan_proto",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ifla_vf_tx_rate",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "vf",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "rate",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ifla_vf_rate",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "vf",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "min_tx_rate",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "max_tx_rate",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ifla_vf_spoofchk",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "vf",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "setting",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ifla_vf_guid",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "vf",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "guid",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ifla_vf_link_state",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "vf",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "link_state",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ifla_vf_rss_query_en",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "vf",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "setting",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ifla_vf_trust",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "vf",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "setting",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ifla_port_vsi",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "vsi_mgr_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "vsi_type_id",
+          "array_size": "3",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "vsi_type_version",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "pad",
+          "array_size": "3",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "if_stats_msg",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "family",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "pad1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "pad2",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ifindex",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "filter_mask",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ifla_rmnet_flags",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "mask",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

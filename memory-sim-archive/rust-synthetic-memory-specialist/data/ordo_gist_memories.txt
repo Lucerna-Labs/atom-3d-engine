@@ -1,0 +1,41 @@
+task=common
+I remember learning that an Ordo app is a graph of named nodes joined by edges, and that a flow does not search the graph. It starts at one node and walks the first outgoing edge in insertion order, then the first outgoing edge from there, building a path until no edge remains. The shape that always held was a simple Vec of (from, to) string pairs walked in the order they were added.
+---
+task=common
+I remember that Ordo edges come in two kinds. A plain connect just links two nodes. A ramp is a promotion: when a flow crosses a ramp it is elevated, so the trace marks promoted true and the promotion count goes up; coming back down to a plain node is a demotion. The clean shape stored each node's elevation as a plain string like "local" or "parallel" and flipped it as ramps were crossed.
+---
+task=common
+I remember that flowing or publishing through an Ordo graph produces a Trace, and the Trace is plain data: a thread id, the path of node names, whether it was promoted, and a list of signal strings. The runtime's job is to walk the graph and fill that struct; everything the tests read lives on the Trace.
+---
+task=common
+I remember the emergent-thread rule. Thread ids are not assigned up front; each flow takes the next id as it happens. With a fresh runtime the first flow is thread 1. The pattern that passed read the current next-id into the trace first, then incremented the counter afterward, so the first publish always reported thread=1.
+---
+task=common
+I remember how Ordo carries pressure. A node with zero capacity does not stop the flow; it lets it through and records a signal of the form backpressure:<node>. Signals are just strings collected onto the trace as the flow passes, and the same shape carries other events like retry:<node>. Capacity defaulted to effectively unlimited and only became zero when explicitly set.
+---
+task=common
+I remember that Ordo output is machine-exact and assembled from the trace by joining. A path prints as node names joined by ">", and a list of signals prints as the strings joined by ",". There were never spaces around the ">", never labels beyond the contract, and never a trailing summary line.
+---
+task=common
+I remember that Ordo apps reuse a few secondary ideas. Intersections are the nodes shared between two flows, and a transfer happens at the first shared node. Budget routing picks the first candidate that fits within a budget. Preload targets are simply the downstream nodes of a node. Costs, when they exist, are integers, never floats inside a compared struct.
+---
+task=common
+I remember the crate shape that every Ordo app shared. It was one standard-library-only crate named rust_ordo_ext with a lib.rs and a main.rs, and the binary imported its types from rust_ordo_ext by that exact package name. No external crates, no second binary.
+---
+task=common
+I remember that the public Ordo types are plain data structs with String fields, never invented enums, and they derive Clone, Debug, PartialEq, and Eq because the tests build and compare them directly. The rule that kept Eq legal was to keep f64 out of any compared struct: a cost or multiplier was stored as an integer or kept private, never as a public float inside an Eq type.
+---
+task=common
+I remember the API discipline that kept the library compiling. The runtime exposed new() plus mutating setup methods like add_node, connect, and add_ramp that returned (), so the helper types they touched (the edge list, the per-node state) could stay private. Only the trace-shaped structs the tests construct were public. Query methods returned those public traces.
+---
+task=common
+I remember the main.rs shape for every Ordo CLI. It imported the Read trait beside std::io, read all of stdin into a String, looped over input.lines(), split each line on whitespace, and matched on the first token as the command name. Each command called one runtime method and printed exactly the contract line for that command and nothing else.
+---
+task=common
+I remember the ownership shape that stopped the borrow errors. The runtime owned its Strings: nodes, edges, and trace fields were owned String values, not borrowed &str tied to a temporary. The path was built by pushing owned node names, and current position was tracked as a String, never as a reference into a value that was about to move.
+---
+task=common
+I remember the &[&str] rule. When a function received candidates as &[&str], the loop that held was `for &candidate in candidates` so candidate was a &str, which then worked directly as a key against a HashMap<String, _> via get. Storing pairs as Vec<(String, String)> and comparing with owned == avoided the tuple-key lifetime traps entirely.
+---
+task=common
+I remember that an Ordo runtime is built from the message metaphor, not a generic actor or pub-sub library. Messages move along declared edges between nodes; nothing reaches into another node's internals; the trace is the record of how a message traveled. Keeping that model in mind made the small structural choices fall out naturally instead of being guessed.

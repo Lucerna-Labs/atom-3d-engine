@@ -1,0 +1,517 @@
+{
+  "filename": "sockios.h",
+  "includes": [
+    "asm/bitsperlong.h",
+    "asm/sockios.h"
+  ],
+  "defines": [
+    {
+      "name": "SIOCINQ",
+      "value": "FIONREAD",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SIOCOUTQ",
+      "value": "TIOCOUTQ",
+      "comment": "output queue size (not sent + not acked)",
+      "category": ""
+    },
+    {
+      "name": "SOCK_IOC_TYPE",
+      "value": "0x89",
+      "comment": "",
+      "category": "SOCK_IOC"
+    },
+    {
+      "name": "SIOCGSTAMP_NEW",
+      "value": "_IOR(SOCK_IOC_TYPE, 0x06, long long[2])",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SIOCGSTAMPNS_NEW",
+      "value": "_IOR(SOCK_IOC_TYPE, 0x07, long long[2])",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SIOCGSTAMP",
+      "value": "SIOCGSTAMP_OLD",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SIOCGSTAMPNS",
+      "value": "SIOCGSTAMPNS_OLD",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SIOCGSTAMP",
+      "value": "((sizeof(struct timeval))  == 8 ? ",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SIOCGSTAMPNS",
+      "value": "((sizeof(struct timespec)) == 8 ? ",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SIOCADDRT",
+      "value": "0x890B",
+      "comment": "add routing table entry",
+      "category": ""
+    },
+    {
+      "name": "SIOCDELRT",
+      "value": "0x890C",
+      "comment": "delete routing table entry",
+      "category": ""
+    },
+    {
+      "name": "SIOCRTMSG",
+      "value": "0x890D",
+      "comment": "unused",
+      "category": ""
+    },
+    {
+      "name": "SIOCGIFNAME",
+      "value": "0x8910",
+      "comment": "get iface name",
+      "category": ""
+    },
+    {
+      "name": "SIOCSIFLINK",
+      "value": "0x8911",
+      "comment": "set iface channel",
+      "category": ""
+    },
+    {
+      "name": "SIOCGIFCONF",
+      "value": "0x8912",
+      "comment": "get iface list",
+      "category": ""
+    },
+    {
+      "name": "SIOCGIFFLAGS",
+      "value": "0x8913",
+      "comment": "get flags",
+      "category": ""
+    },
+    {
+      "name": "SIOCSIFFLAGS",
+      "value": "0x8914",
+      "comment": "set flags",
+      "category": ""
+    },
+    {
+      "name": "SIOCGIFADDR",
+      "value": "0x8915",
+      "comment": "get PA address",
+      "category": ""
+    },
+    {
+      "name": "SIOCSIFADDR",
+      "value": "0x8916",
+      "comment": "set PA address",
+      "category": ""
+    },
+    {
+      "name": "SIOCGIFDSTADDR",
+      "value": "0x8917",
+      "comment": "get remote PA address",
+      "category": ""
+    },
+    {
+      "name": "SIOCSIFDSTADDR",
+      "value": "0x8918",
+      "comment": "set remote PA address",
+      "category": ""
+    },
+    {
+      "name": "SIOCGIFBRDADDR",
+      "value": "0x8919",
+      "comment": "get broadcast PA address",
+      "category": ""
+    },
+    {
+      "name": "SIOCSIFBRDADDR",
+      "value": "0x891a",
+      "comment": "set broadcast PA address",
+      "category": ""
+    },
+    {
+      "name": "SIOCGIFNETMASK",
+      "value": "0x891b",
+      "comment": "get network PA mask",
+      "category": ""
+    },
+    {
+      "name": "SIOCSIFNETMASK",
+      "value": "0x891c",
+      "comment": "set network PA mask",
+      "category": ""
+    },
+    {
+      "name": "SIOCGIFMETRIC",
+      "value": "0x891d",
+      "comment": "get metric",
+      "category": ""
+    },
+    {
+      "name": "SIOCSIFMETRIC",
+      "value": "0x891e",
+      "comment": "set metric",
+      "category": ""
+    },
+    {
+      "name": "SIOCGIFMEM",
+      "value": "0x891f",
+      "comment": "get memory address (BSD)",
+      "category": ""
+    },
+    {
+      "name": "SIOCSIFMEM",
+      "value": "0x8920",
+      "comment": "set memory address (BSD)",
+      "category": ""
+    },
+    {
+      "name": "SIOCGIFMTU",
+      "value": "0x8921",
+      "comment": "get MTU size",
+      "category": ""
+    },
+    {
+      "name": "SIOCSIFMTU",
+      "value": "0x8922",
+      "comment": "set MTU size",
+      "category": ""
+    },
+    {
+      "name": "SIOCSIFNAME",
+      "value": "0x8923",
+      "comment": "set interface name",
+      "category": ""
+    },
+    {
+      "name": "SIOCSIFHWADDR",
+      "value": "0x8924",
+      "comment": "set hardware address",
+      "category": ""
+    },
+    {
+      "name": "SIOCGIFENCAP",
+      "value": "0x8925",
+      "comment": "get/set encapsulations",
+      "category": ""
+    },
+    {
+      "name": "SIOCSIFENCAP",
+      "value": "0x8926",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SIOCGIFHWADDR",
+      "value": "0x8927",
+      "comment": "Get hardware address",
+      "category": ""
+    },
+    {
+      "name": "SIOCGIFSLAVE",
+      "value": "0x8929",
+      "comment": "Driver slaving support",
+      "category": ""
+    },
+    {
+      "name": "SIOCSIFSLAVE",
+      "value": "0x8930",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SIOCADDMULTI",
+      "value": "0x8931",
+      "comment": "Multicast address lists",
+      "category": ""
+    },
+    {
+      "name": "SIOCDELMULTI",
+      "value": "0x8932",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SIOCGIFINDEX",
+      "value": "0x8933",
+      "comment": "name -> if_index mapping",
+      "category": ""
+    },
+    {
+      "name": "SIOGIFINDEX",
+      "value": "SIOCGIFINDEX",
+      "comment": "misprint compatibility :-)",
+      "category": ""
+    },
+    {
+      "name": "SIOCSIFPFLAGS",
+      "value": "0x8934",
+      "comment": "set/get extended flags set",
+      "category": ""
+    },
+    {
+      "name": "SIOCGIFPFLAGS",
+      "value": "0x8935",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SIOCDIFADDR",
+      "value": "0x8936",
+      "comment": "delete PA address",
+      "category": ""
+    },
+    {
+      "name": "SIOCSIFHWBROADCAST",
+      "value": "0x8937",
+      "comment": "set hardware broadcast addr",
+      "category": ""
+    },
+    {
+      "name": "SIOCGIFCOUNT",
+      "value": "0x8938",
+      "comment": "get number of devices",
+      "category": ""
+    },
+    {
+      "name": "SIOCGIFBR",
+      "value": "0x8940",
+      "comment": "Bridging support",
+      "category": ""
+    },
+    {
+      "name": "SIOCSIFBR",
+      "value": "0x8941",
+      "comment": "Set bridging options",
+      "category": ""
+    },
+    {
+      "name": "SIOCGIFTXQLEN",
+      "value": "0x8942",
+      "comment": "Get the tx queue length",
+      "category": ""
+    },
+    {
+      "name": "SIOCSIFTXQLEN",
+      "value": "0x8943",
+      "comment": "Set the tx queue length",
+      "category": ""
+    },
+    {
+      "name": "SIOCETHTOOL",
+      "value": "0x8946",
+      "comment": "Ethtool interface",
+      "category": ""
+    },
+    {
+      "name": "SIOCGMIIPHY",
+      "value": "0x8947",
+      "comment": "Get address of MII PHY in use.",
+      "category": ""
+    },
+    {
+      "name": "SIOCGMIIREG",
+      "value": "0x8948",
+      "comment": "Read MII PHY register.",
+      "category": ""
+    },
+    {
+      "name": "SIOCSMIIREG",
+      "value": "0x8949",
+      "comment": "Write MII PHY register.",
+      "category": ""
+    },
+    {
+      "name": "SIOCWANDEV",
+      "value": "0x894A",
+      "comment": "get/set netdev parameters",
+      "category": ""
+    },
+    {
+      "name": "SIOCOUTQNSD",
+      "value": "0x894B",
+      "comment": "output queue size (not sent only)",
+      "category": ""
+    },
+    {
+      "name": "SIOCGSKNS",
+      "value": "0x894C",
+      "comment": "get socket network namespace",
+      "category": ""
+    },
+    {
+      "name": "SIOCDARP",
+      "value": "0x8953",
+      "comment": "delete ARP table entry",
+      "category": ""
+    },
+    {
+      "name": "SIOCGARP",
+      "value": "0x8954",
+      "comment": "get ARP table entry",
+      "category": ""
+    },
+    {
+      "name": "SIOCSARP",
+      "value": "0x8955",
+      "comment": "set ARP table entry",
+      "category": ""
+    },
+    {
+      "name": "SIOCDRARP",
+      "value": "0x8960",
+      "comment": "delete RARP table entry",
+      "category": ""
+    },
+    {
+      "name": "SIOCGRARP",
+      "value": "0x8961",
+      "comment": "get RARP table entry",
+      "category": ""
+    },
+    {
+      "name": "SIOCSRARP",
+      "value": "0x8962",
+      "comment": "set RARP table entry",
+      "category": ""
+    },
+    {
+      "name": "SIOCGIFMAP",
+      "value": "0x8970",
+      "comment": "Get device parameters",
+      "category": ""
+    },
+    {
+      "name": "SIOCSIFMAP",
+      "value": "0x8971",
+      "comment": "Set device parameters",
+      "category": ""
+    },
+    {
+      "name": "SIOCADDDLCI",
+      "value": "0x8980",
+      "comment": "Create new DLCI device",
+      "category": ""
+    },
+    {
+      "name": "SIOCDELDLCI",
+      "value": "0x8981",
+      "comment": "Delete DLCI device",
+      "category": ""
+    },
+    {
+      "name": "SIOCGIFVLAN",
+      "value": "0x8982",
+      "comment": "802.1Q VLAN support",
+      "category": ""
+    },
+    {
+      "name": "SIOCSIFVLAN",
+      "value": "0x8983",
+      "comment": "Set 802.1Q VLAN options",
+      "category": ""
+    },
+    {
+      "name": "SIOCBONDENSLAVE",
+      "value": "0x8990",
+      "comment": "enslave a device to the bond",
+      "category": ""
+    },
+    {
+      "name": "SIOCBONDRELEASE",
+      "value": "0x8991",
+      "comment": "release a slave from the bond",
+      "category": ""
+    },
+    {
+      "name": "SIOCBONDSETHWADDR",
+      "value": "0x8992",
+      "comment": "set the hw addr of the bond",
+      "category": ""
+    },
+    {
+      "name": "SIOCBONDSLAVEINFOQUERY",
+      "value": "0x8993",
+      "comment": "rtn info about slave state",
+      "category": ""
+    },
+    {
+      "name": "SIOCBONDINFOQUERY",
+      "value": "0x8994",
+      "comment": "rtn info about bond state",
+      "category": ""
+    },
+    {
+      "name": "SIOCBONDCHANGEACTIVE",
+      "value": "0x8995",
+      "comment": "update to a new active slave",
+      "category": ""
+    },
+    {
+      "name": "SIOCBRADDBR",
+      "value": "0x89a0",
+      "comment": "create new bridge device",
+      "category": ""
+    },
+    {
+      "name": "SIOCBRDELBR",
+      "value": "0x89a1",
+      "comment": "remove bridge device",
+      "category": ""
+    },
+    {
+      "name": "SIOCBRADDIF",
+      "value": "0x89a2",
+      "comment": "add interface to bridge",
+      "category": ""
+    },
+    {
+      "name": "SIOCBRDELIF",
+      "value": "0x89a3",
+      "comment": "remove interface from bridge",
+      "category": ""
+    },
+    {
+      "name": "SIOCSHWTSTAMP",
+      "value": "0x89b0",
+      "comment": "set and get config",
+      "category": ""
+    },
+    {
+      "name": "SIOCGHWTSTAMP",
+      "value": "0x89b1",
+      "comment": "get config",
+      "category": ""
+    },
+    {
+      "name": "SIOCDEVPRIVATE",
+      "value": "0x89F0",
+      "comment": "to 89FF",
+      "category": ""
+    },
+    {
+      "name": "SIOCPROTOPRIVATE",
+      "value": "0x89E0",
+      "comment": "to 89EF",
+      "category": ""
+    }
+  ],
+  "structs": [],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

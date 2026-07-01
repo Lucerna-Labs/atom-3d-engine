@@ -1,0 +1,1345 @@
+{
+  "filename": "virtio_pci.h",
+  "includes": [
+    "linux/types.h",
+    "linux/const.h"
+  ],
+  "defines": [
+    {
+      "name": "VIRTIO_PCI_HOST_FEATURES",
+      "value": "0",
+      "comment": "",
+      "category": "VIRTIO_PCI"
+    },
+    {
+      "name": "VIRTIO_PCI_GUEST_FEATURES",
+      "value": "4",
+      "comment": "",
+      "category": "VIRTIO_PCI"
+    },
+    {
+      "name": "VIRTIO_PCI_QUEUE_PFN",
+      "value": "8",
+      "comment": "",
+      "category": "VIRTIO_PCI"
+    },
+    {
+      "name": "VIRTIO_PCI_QUEUE_NUM",
+      "value": "12",
+      "comment": "",
+      "category": "VIRTIO_PCI"
+    },
+    {
+      "name": "VIRTIO_PCI_QUEUE_SEL",
+      "value": "14",
+      "comment": "",
+      "category": "VIRTIO_PCI"
+    },
+    {
+      "name": "VIRTIO_PCI_QUEUE_NOTIFY",
+      "value": "16",
+      "comment": "",
+      "category": "VIRTIO_PCI"
+    },
+    {
+      "name": "VIRTIO_PCI_STATUS",
+      "value": "18",
+      "comment": "",
+      "category": "VIRTIO_PCI"
+    },
+    {
+      "name": "VIRTIO_PCI_ISR",
+      "value": "19",
+      "comment": "",
+      "category": "VIRTIO_PCI"
+    },
+    {
+      "name": "VIRTIO_MSI_CONFIG_VECTOR",
+      "value": "20",
+      "comment": "",
+      "category": "VIRTIO_MSI"
+    },
+    {
+      "name": "VIRTIO_MSI_QUEUE_VECTOR",
+      "value": "22",
+      "comment": "",
+      "category": "VIRTIO_MSI"
+    },
+    {
+      "name": "VIRTIO_PCI_ABI_VERSION",
+      "value": "0",
+      "comment": "",
+      "category": "VIRTIO_PCI"
+    },
+    {
+      "name": "VIRTIO_PCI_QUEUE_ADDR_SHIFT",
+      "value": "12",
+      "comment": "",
+      "category": "VIRTIO_PCI"
+    },
+    {
+      "name": "VIRTIO_PCI_VRING_ALIGN",
+      "value": "4096",
+      "comment": "",
+      "category": "VIRTIO_PCI"
+    },
+    {
+      "name": "VIRTIO_PCI_ISR_CONFIG",
+      "value": "0x2",
+      "comment": "",
+      "category": "VIRTIO_PCI"
+    },
+    {
+      "name": "VIRTIO_MSI_NO_VECTOR",
+      "value": "0xffff",
+      "comment": "",
+      "category": "VIRTIO_MSI"
+    },
+    {
+      "name": "VIRTIO_PCI_CAP_COMMON_CFG",
+      "value": "1",
+      "comment": "",
+      "category": "VIRTIO_PCI"
+    },
+    {
+      "name": "VIRTIO_PCI_CAP_NOTIFY_CFG",
+      "value": "2",
+      "comment": "",
+      "category": "VIRTIO_PCI"
+    },
+    {
+      "name": "VIRTIO_PCI_CAP_ISR_CFG",
+      "value": "3",
+      "comment": "",
+      "category": "VIRTIO_PCI"
+    },
+    {
+      "name": "VIRTIO_PCI_CAP_DEVICE_CFG",
+      "value": "4",
+      "comment": "",
+      "category": "VIRTIO_PCI"
+    },
+    {
+      "name": "VIRTIO_PCI_CAP_PCI_CFG",
+      "value": "5",
+      "comment": "",
+      "category": "VIRTIO_PCI"
+    },
+    {
+      "name": "VIRTIO_PCI_CAP_SHARED_MEMORY_CFG",
+      "value": "8",
+      "comment": "",
+      "category": "VIRTIO_PCI"
+    },
+    {
+      "name": "VIRTIO_PCI_CAP_VENDOR_CFG",
+      "value": "9",
+      "comment": "",
+      "category": "VIRTIO_PCI"
+    },
+    {
+      "name": "VIRTIO_PCI_CAP_VNDR",
+      "value": "0",
+      "comment": "",
+      "category": "VIRTIO_PCI"
+    },
+    {
+      "name": "VIRTIO_PCI_CAP_NEXT",
+      "value": "1",
+      "comment": "",
+      "category": "VIRTIO_PCI"
+    },
+    {
+      "name": "VIRTIO_PCI_CAP_LEN",
+      "value": "2",
+      "comment": "",
+      "category": "VIRTIO_PCI"
+    },
+    {
+      "name": "VIRTIO_PCI_CAP_CFG_TYPE",
+      "value": "3",
+      "comment": "",
+      "category": "VIRTIO_PCI"
+    },
+    {
+      "name": "VIRTIO_PCI_CAP_BAR",
+      "value": "4",
+      "comment": "",
+      "category": "VIRTIO_PCI"
+    },
+    {
+      "name": "VIRTIO_PCI_CAP_OFFSET",
+      "value": "8",
+      "comment": "",
+      "category": "VIRTIO_PCI"
+    },
+    {
+      "name": "VIRTIO_PCI_CAP_LENGTH",
+      "value": "12",
+      "comment": "",
+      "category": "VIRTIO_PCI"
+    },
+    {
+      "name": "VIRTIO_PCI_NOTIFY_CAP_MULT",
+      "value": "16",
+      "comment": "",
+      "category": "VIRTIO_PCI"
+    },
+    {
+      "name": "VIRTIO_PCI_COMMON_DFSELECT",
+      "value": "0",
+      "comment": "",
+      "category": "VIRTIO_PCI"
+    },
+    {
+      "name": "VIRTIO_PCI_COMMON_DF",
+      "value": "4",
+      "comment": "",
+      "category": "VIRTIO_PCI"
+    },
+    {
+      "name": "VIRTIO_PCI_COMMON_GFSELECT",
+      "value": "8",
+      "comment": "",
+      "category": "VIRTIO_PCI"
+    },
+    {
+      "name": "VIRTIO_PCI_COMMON_GF",
+      "value": "12",
+      "comment": "",
+      "category": "VIRTIO_PCI"
+    },
+    {
+      "name": "VIRTIO_PCI_COMMON_MSIX",
+      "value": "16",
+      "comment": "",
+      "category": "VIRTIO_PCI"
+    },
+    {
+      "name": "VIRTIO_PCI_COMMON_NUMQ",
+      "value": "18",
+      "comment": "",
+      "category": "VIRTIO_PCI"
+    },
+    {
+      "name": "VIRTIO_PCI_COMMON_STATUS",
+      "value": "20",
+      "comment": "",
+      "category": "VIRTIO_PCI"
+    },
+    {
+      "name": "VIRTIO_PCI_COMMON_CFGGENERATION",
+      "value": "21",
+      "comment": "",
+      "category": "VIRTIO_PCI"
+    },
+    {
+      "name": "VIRTIO_PCI_COMMON_Q_SELECT",
+      "value": "22",
+      "comment": "",
+      "category": "VIRTIO_PCI"
+    },
+    {
+      "name": "VIRTIO_PCI_COMMON_Q_SIZE",
+      "value": "24",
+      "comment": "",
+      "category": "VIRTIO_PCI"
+    },
+    {
+      "name": "VIRTIO_PCI_COMMON_Q_MSIX",
+      "value": "26",
+      "comment": "",
+      "category": "VIRTIO_PCI"
+    },
+    {
+      "name": "VIRTIO_PCI_COMMON_Q_ENABLE",
+      "value": "28",
+      "comment": "",
+      "category": "VIRTIO_PCI"
+    },
+    {
+      "name": "VIRTIO_PCI_COMMON_Q_NOFF",
+      "value": "30",
+      "comment": "",
+      "category": "VIRTIO_PCI"
+    },
+    {
+      "name": "VIRTIO_PCI_COMMON_Q_DESCLO",
+      "value": "32",
+      "comment": "",
+      "category": "VIRTIO_PCI"
+    },
+    {
+      "name": "VIRTIO_PCI_COMMON_Q_DESCHI",
+      "value": "36",
+      "comment": "",
+      "category": "VIRTIO_PCI"
+    },
+    {
+      "name": "VIRTIO_PCI_COMMON_Q_AVAILLO",
+      "value": "40",
+      "comment": "",
+      "category": "VIRTIO_PCI"
+    },
+    {
+      "name": "VIRTIO_PCI_COMMON_Q_AVAILHI",
+      "value": "44",
+      "comment": "",
+      "category": "VIRTIO_PCI"
+    },
+    {
+      "name": "VIRTIO_PCI_COMMON_Q_USEDLO",
+      "value": "48",
+      "comment": "",
+      "category": "VIRTIO_PCI"
+    },
+    {
+      "name": "VIRTIO_PCI_COMMON_Q_USEDHI",
+      "value": "52",
+      "comment": "",
+      "category": "VIRTIO_PCI"
+    },
+    {
+      "name": "VIRTIO_PCI_COMMON_Q_NDATA",
+      "value": "56",
+      "comment": "",
+      "category": "VIRTIO_PCI"
+    },
+    {
+      "name": "VIRTIO_PCI_COMMON_Q_RESET",
+      "value": "58",
+      "comment": "",
+      "category": "VIRTIO_PCI"
+    },
+    {
+      "name": "VIRTIO_PCI_COMMON_ADM_Q_IDX",
+      "value": "60",
+      "comment": "",
+      "category": "VIRTIO_PCI"
+    },
+    {
+      "name": "VIRTIO_PCI_COMMON_ADM_Q_NUM",
+      "value": "62",
+      "comment": "",
+      "category": "VIRTIO_PCI"
+    },
+    {
+      "name": "VIRTIO_ADMIN_STATUS_OK",
+      "value": "0",
+      "comment": "",
+      "category": "VIRTIO_ADMIN"
+    },
+    {
+      "name": "VIRTIO_ADMIN_CMD_LIST_QUERY",
+      "value": "0x0",
+      "comment": "",
+      "category": "VIRTIO_ADMIN"
+    },
+    {
+      "name": "VIRTIO_ADMIN_CMD_LIST_USE",
+      "value": "0x1",
+      "comment": "",
+      "category": "VIRTIO_ADMIN"
+    },
+    {
+      "name": "VIRTIO_ADMIN_GROUP_TYPE_SELF",
+      "value": "0x0",
+      "comment": "",
+      "category": "VIRTIO_ADMIN"
+    },
+    {
+      "name": "VIRTIO_ADMIN_GROUP_TYPE_SRIOV",
+      "value": "0x1",
+      "comment": "",
+      "category": "VIRTIO_ADMIN"
+    },
+    {
+      "name": "VIRTIO_ADMIN_CMD_LEGACY_COMMON_CFG_WRITE",
+      "value": "0x2",
+      "comment": "",
+      "category": "VIRTIO_ADMIN"
+    },
+    {
+      "name": "VIRTIO_ADMIN_CMD_LEGACY_COMMON_CFG_READ",
+      "value": "0x3",
+      "comment": "",
+      "category": "VIRTIO_ADMIN"
+    },
+    {
+      "name": "VIRTIO_ADMIN_CMD_LEGACY_DEV_CFG_WRITE",
+      "value": "0x4",
+      "comment": "",
+      "category": "VIRTIO_ADMIN"
+    },
+    {
+      "name": "VIRTIO_ADMIN_CMD_LEGACY_DEV_CFG_READ",
+      "value": "0x5",
+      "comment": "",
+      "category": "VIRTIO_ADMIN"
+    },
+    {
+      "name": "VIRTIO_ADMIN_CMD_LEGACY_NOTIFY_INFO",
+      "value": "0x6",
+      "comment": "",
+      "category": "VIRTIO_ADMIN"
+    },
+    {
+      "name": "VIRTIO_ADMIN_CMD_CAP_ID_LIST_QUERY",
+      "value": "0x7",
+      "comment": "",
+      "category": "VIRTIO_ADMIN"
+    },
+    {
+      "name": "VIRTIO_ADMIN_CMD_DEVICE_CAP_GET",
+      "value": "0x8",
+      "comment": "",
+      "category": "VIRTIO_ADMIN"
+    },
+    {
+      "name": "VIRTIO_ADMIN_CMD_DRIVER_CAP_SET",
+      "value": "0x9",
+      "comment": "",
+      "category": "VIRTIO_ADMIN"
+    },
+    {
+      "name": "VIRTIO_ADMIN_CMD_RESOURCE_OBJ_CREATE",
+      "value": "0xa",
+      "comment": "",
+      "category": "VIRTIO_ADMIN"
+    },
+    {
+      "name": "VIRTIO_ADMIN_CMD_RESOURCE_OBJ_DESTROY",
+      "value": "0xd",
+      "comment": "",
+      "category": "VIRTIO_ADMIN"
+    },
+    {
+      "name": "VIRTIO_ADMIN_CMD_DEV_PARTS_METADATA_GET",
+      "value": "0xe",
+      "comment": "",
+      "category": "VIRTIO_ADMIN"
+    },
+    {
+      "name": "VIRTIO_ADMIN_CMD_DEV_PARTS_GET",
+      "value": "0xf",
+      "comment": "",
+      "category": "VIRTIO_ADMIN"
+    },
+    {
+      "name": "VIRTIO_ADMIN_CMD_DEV_PARTS_SET",
+      "value": "0x10",
+      "comment": "",
+      "category": "VIRTIO_ADMIN"
+    },
+    {
+      "name": "VIRTIO_ADMIN_CMD_DEV_MODE_SET",
+      "value": "0x11",
+      "comment": "",
+      "category": "VIRTIO_ADMIN"
+    },
+    {
+      "name": "VIRTIO_ADMIN_CMD_NOTIFY_INFO_FLAGS_END",
+      "value": "0",
+      "comment": "",
+      "category": "VIRTIO_ADMIN"
+    },
+    {
+      "name": "VIRTIO_ADMIN_CMD_NOTIFY_INFO_FLAGS_OWNER_DEV",
+      "value": "0x1",
+      "comment": "",
+      "category": "VIRTIO_ADMIN"
+    },
+    {
+      "name": "VIRTIO_ADMIN_CMD_NOTIFY_INFO_FLAGS_OWNER_MEM",
+      "value": "0x2",
+      "comment": "",
+      "category": "VIRTIO_ADMIN"
+    },
+    {
+      "name": "VIRTIO_ADMIN_CMD_MAX_NOTIFY_INFO",
+      "value": "4",
+      "comment": "",
+      "category": "VIRTIO_ADMIN"
+    },
+    {
+      "name": "VIRTIO_DEV_PARTS_CAP",
+      "value": "0x0000",
+      "comment": "",
+      "category": "VIRTIO_DEV"
+    },
+    {
+      "name": "MAX_CAP_ID",
+      "value": "__KERNEL_DIV_ROUND_UP(VIRTIO_DEV_PARTS_CAP + 1, 64)",
+      "comment": "",
+      "category": "MAX_CAP"
+    },
+    {
+      "name": "VIRTIO_RESOURCE_OBJ_DEV_PARTS",
+      "value": "0",
+      "comment": "",
+      "category": "VIRTIO_RESOURCE"
+    },
+    {
+      "name": "VIRTIO_RESOURCE_OBJ_DEV_PARTS_TYPE_GET",
+      "value": "0",
+      "comment": "",
+      "category": "VIRTIO_RESOURCE"
+    },
+    {
+      "name": "VIRTIO_RESOURCE_OBJ_DEV_PARTS_TYPE_SET",
+      "value": "1",
+      "comment": "",
+      "category": "VIRTIO_RESOURCE"
+    },
+    {
+      "name": "VIRTIO_ADMIN_CMD_DEV_PARTS_METADATA_TYPE_SIZE",
+      "value": "0",
+      "comment": "",
+      "category": "VIRTIO_ADMIN"
+    },
+    {
+      "name": "VIRTIO_ADMIN_CMD_DEV_PARTS_METADATA_TYPE_COUNT",
+      "value": "1",
+      "comment": "",
+      "category": "VIRTIO_ADMIN"
+    },
+    {
+      "name": "VIRTIO_ADMIN_CMD_DEV_PARTS_METADATA_TYPE_LIST",
+      "value": "2",
+      "comment": "",
+      "category": "VIRTIO_ADMIN"
+    },
+    {
+      "name": "VIRTIO_DEV_PART_F_OPTIONAL",
+      "value": "0",
+      "comment": "",
+      "category": "VIRTIO_DEV"
+    },
+    {
+      "name": "VIRTIO_ADMIN_CMD_DEV_PARTS_GET_TYPE_SELECTED",
+      "value": "0",
+      "comment": "",
+      "category": "VIRTIO_ADMIN"
+    },
+    {
+      "name": "VIRTIO_ADMIN_CMD_DEV_PARTS_GET_TYPE_ALL",
+      "value": "1",
+      "comment": "",
+      "category": "VIRTIO_ADMIN"
+    },
+    {
+      "name": "VIRTIO_ADMIN_CMD_DEV_MODE_F_STOPPED",
+      "value": "0",
+      "comment": "",
+      "category": "VIRTIO_ADMIN"
+    }
+  ],
+  "structs": [
+    {
+      "name": "virtio_pci_cap",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "cap_vndr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "cap_next",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "cap_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "cfg_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "bar",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "padding",
+          "array_size": "2",
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "length",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "virtio_pci_vndr_data",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "cap_vndr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "cap_next",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "cap_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "cfg_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "vendor_id",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "virtio_pci_cap64",
+      "fields": [
+        {
+          "type_name": "__le32",
+          "name": "offset_hi",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "length_hi",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "virtio_pci_notify_cap",
+      "fields": [
+        {
+          "type_name": "__le32",
+          "name": "notify_off_multiplier",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "virtio_pci_common_cfg",
+      "fields": [
+        {
+          "type_name": "__le32",
+          "name": "device_feature_select",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "device_feature",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "guest_feature_select",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "guest_feature",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le16",
+          "name": "msix_config",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le16",
+          "name": "num_queues",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "device_status",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "config_generation",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le16",
+          "name": "queue_select",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le16",
+          "name": "queue_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le16",
+          "name": "queue_msix_vector",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le16",
+          "name": "queue_enable",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le16",
+          "name": "queue_notify_off",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "queue_desc_lo",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "queue_desc_hi",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "queue_avail_lo",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "queue_avail_hi",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "queue_used_lo",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "queue_used_hi",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "virtio_pci_modern_common_cfg",
+      "fields": [
+        {
+          "type_name": "__le16",
+          "name": "queue_notify_data",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le16",
+          "name": "queue_reset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le16",
+          "name": "admin_queue_index",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le16",
+          "name": "admin_queue_num",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "virtio_pci_cfg_cap",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "pci_cfg_data",
+          "array_size": "4",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "virtio_admin_cmd_hdr",
+      "fields": [
+        {
+          "type_name": "__le16",
+          "name": "opcode",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le16",
+          "name": "group_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reserved1",
+          "array_size": "12",
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "group_member_id",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "virtio_admin_cmd_status",
+      "fields": [
+        {
+          "type_name": "__le16",
+          "name": "status",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le16",
+          "name": "status_qualifier",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reserved2",
+          "array_size": "4",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "virtio_admin_cmd_legacy_wr_data",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reserved",
+          "array_size": "7",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "virtio_admin_cmd_legacy_rd_data",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "virtio_admin_cmd_notify_info_data",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "bar",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "padding",
+          "array_size": "6",
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "virtio_admin_cmd_notify_info_result",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "virtio_dev_parts_cap",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "get_parts_resource_objects_limit",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "set_parts_resource_objects_limit",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "virtio_admin_cmd_query_cap_id_result",
+      "fields": [
+        {
+          "type_name": "__le64",
+          "name": "supported_caps",
+          "array_size": "MAX_CAP_ID",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "virtio_admin_cmd_cap_get_data",
+      "fields": [
+        {
+          "type_name": "__le16",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reserved",
+          "array_size": "6",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "virtio_admin_cmd_cap_set_data",
+      "fields": [
+        {
+          "type_name": "__le16",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reserved",
+          "array_size": "6",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "virtio_admin_cmd_resource_obj_cmd_hdr",
+      "fields": [
+        {
+          "type_name": "__le16",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reserved",
+          "array_size": "2",
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "virtio_admin_cmd_resource_obj_create_data",
+      "fields": [
+        {
+          "type_name": "__le64",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "virtio_resource_obj_dev_parts",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reserved",
+          "array_size": "7",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "virtio_admin_cmd_dev_parts_metadata_data",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reserved",
+          "array_size": "7",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "virtio_dev_part_hdr",
+      "fields": [
+        {
+          "type_name": "__le16",
+          "name": "part_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le16",
+          "name": "index",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reserved",
+          "array_size": "6",
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "length",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_22",
+      "fields": [
+        {
+          "type_name": "__le32",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_23",
+      "fields": [
+        {
+          "type_name": "__le16",
+          "name": "index",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reserved",
+          "array_size": "6",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "virtio_dev_part",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "virtio_admin_cmd_dev_parts_metadata_result",
+      "fields": [
+        {
+          "type_name": "__le32",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_26",
+      "fields": [
+        {
+          "type_name": "__le32",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_27",
+      "fields": [
+        {
+          "type_name": "__le32",
+          "name": "count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_28",
+      "fields": [
+        {
+          "type_name": "__le32",
+          "name": "count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "virtio_admin_cmd_dev_parts_get_data",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reserved",
+          "array_size": "7",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "virtio_admin_cmd_dev_parts_set_data",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "virtio_admin_cmd_dev_mode_set_data",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

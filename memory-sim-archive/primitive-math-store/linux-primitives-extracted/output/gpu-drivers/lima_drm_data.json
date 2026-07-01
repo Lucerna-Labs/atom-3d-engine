@@ -1,0 +1,492 @@
+{
+  "filename": "lima_drm.h",
+  "includes": [
+    "drm.h"
+  ],
+  "defines": [
+    {
+      "name": "LIMA_BO_FLAG_HEAP",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "LIMA_BO"
+    },
+    {
+      "name": "LIMA_SUBMIT_BO_READ",
+      "value": "0x01",
+      "comment": "",
+      "category": "LIMA_SUBMIT"
+    },
+    {
+      "name": "LIMA_SUBMIT_BO_WRITE",
+      "value": "0x02",
+      "comment": "",
+      "category": "LIMA_SUBMIT"
+    },
+    {
+      "name": "LIMA_GP_FRAME_REG_NUM",
+      "value": "6",
+      "comment": "",
+      "category": "LIMA_GP"
+    },
+    {
+      "name": "LIMA_PP_FRAME_REG_NUM",
+      "value": "23",
+      "comment": "",
+      "category": "LIMA_PP"
+    },
+    {
+      "name": "LIMA_PP_WB_REG_NUM",
+      "value": "12",
+      "comment": "",
+      "category": "LIMA_PP"
+    },
+    {
+      "name": "LIMA_PIPE_GP",
+      "value": "0x00",
+      "comment": "",
+      "category": "LIMA_PIPE"
+    },
+    {
+      "name": "LIMA_PIPE_PP",
+      "value": "0x01",
+      "comment": "",
+      "category": "LIMA_PIPE"
+    },
+    {
+      "name": "LIMA_SUBMIT_FLAG_EXPLICIT_FENCE",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "LIMA_SUBMIT"
+    },
+    {
+      "name": "LIMA_GEM_WAIT_READ",
+      "value": "0x01",
+      "comment": "",
+      "category": "LIMA_GEM"
+    },
+    {
+      "name": "LIMA_GEM_WAIT_WRITE",
+      "value": "0x02",
+      "comment": "",
+      "category": "LIMA_GEM"
+    },
+    {
+      "name": "DRM_LIMA_GET_PARAM",
+      "value": "0x00",
+      "comment": "",
+      "category": "DRM_LIMA"
+    },
+    {
+      "name": "DRM_LIMA_GEM_CREATE",
+      "value": "0x01",
+      "comment": "",
+      "category": "DRM_LIMA"
+    },
+    {
+      "name": "DRM_LIMA_GEM_INFO",
+      "value": "0x02",
+      "comment": "",
+      "category": "DRM_LIMA"
+    },
+    {
+      "name": "DRM_LIMA_GEM_SUBMIT",
+      "value": "0x03",
+      "comment": "",
+      "category": "DRM_LIMA"
+    },
+    {
+      "name": "DRM_LIMA_GEM_WAIT",
+      "value": "0x04",
+      "comment": "",
+      "category": "DRM_LIMA"
+    },
+    {
+      "name": "DRM_LIMA_CTX_CREATE",
+      "value": "0x05",
+      "comment": "",
+      "category": "DRM_LIMA"
+    },
+    {
+      "name": "DRM_LIMA_CTX_FREE",
+      "value": "0x06",
+      "comment": "",
+      "category": "DRM_LIMA"
+    },
+    {
+      "name": "DRM_IOCTL_LIMA_GET_PARAM",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_LIMA_GET_PARAM, struct drm_lima_get_param)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_LIMA_GEM_CREATE",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_LIMA_GEM_CREATE, struct drm_lima_gem_create)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_LIMA_GEM_INFO",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_LIMA_GEM_INFO, struct drm_lima_gem_info)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_LIMA_GEM_SUBMIT",
+      "value": "DRM_IOW(DRM_COMMAND_BASE + DRM_LIMA_GEM_SUBMIT, struct drm_lima_gem_submit)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_LIMA_GEM_WAIT",
+      "value": "DRM_IOW(DRM_COMMAND_BASE + DRM_LIMA_GEM_WAIT, struct drm_lima_gem_wait)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_LIMA_CTX_CREATE",
+      "value": "DRM_IOR(DRM_COMMAND_BASE + DRM_LIMA_CTX_CREATE, struct drm_lima_ctx_create)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_LIMA_CTX_FREE",
+      "value": "DRM_IOW(DRM_COMMAND_BASE + DRM_LIMA_CTX_FREE, struct drm_lima_ctx_free)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    }
+  ],
+  "structs": [
+    {
+      "name": "drm_lima_get_param",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "param",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "value",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_lima_gem_create",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_lima_gem_info",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "va",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_lima_gem_submit_bo",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_lima_gp_frame",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "frame",
+          "array_size": "LIMA_GP_FRAME_REG_NUM",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_lima_m400_pp_frame",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "frame",
+          "array_size": "LIMA_PP_FRAME_REG_NUM",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "num_pp",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "wb",
+          "array_size": "3 * LIMA_PP_WB_REG_NUM",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "plbu_array_address",
+          "array_size": "4",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "fragment_stack_address",
+          "array_size": "4",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_lima_m450_pp_frame",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "frame",
+          "array_size": "LIMA_PP_FRAME_REG_NUM",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "num_pp",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "wb",
+          "array_size": "3 * LIMA_PP_WB_REG_NUM",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "use_dlbu",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "_pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "plbu_array_address",
+          "array_size": "8",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "dlbu_regs",
+          "array_size": "4",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "fragment_stack_address",
+          "array_size": "8",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_lima_gem_submit",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "ctx",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pipe",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "nr_bos",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "frame_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "bos",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "frame",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "out_sync",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "in_sync",
+          "array_size": "2",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_lima_gem_wait",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "op",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s64",
+          "name": "timeout_ns",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_lima_ctx_create",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "_pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_lima_ctx_free",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "_pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

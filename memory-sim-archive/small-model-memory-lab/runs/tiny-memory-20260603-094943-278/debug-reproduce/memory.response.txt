@@ -1,0 +1,13 @@
+﻿
+
+1. **Reproduce Before Repair**
+   - **Action:** Reproduce the crash in a controlled environment.
+   - **Uncertainty:** If the crash is intermittent, use a staging environment or a test user to trigger the issue.
+
+2. **One Variable Moved**
+   - **Action:** Isolate the variable that changed after the deploy.
+   - **Uncertainty:** Check for recent changes in dependencies, configuration, or code that might have introduced the issue.
+
+3. **The Confidence Label Saved the Answer**
+   - **Action:** Identify the specific warning or error message that appears during the crash.
+   - **Uncertainty:** The confidence label might

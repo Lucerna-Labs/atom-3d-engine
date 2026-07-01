@@ -1,0 +1,44 @@
+{
+  "filename": "timerfd.h",
+  "includes": [
+    "linux/types.h",
+    "linux/fcntl.h",
+    "linux/ioctl.h"
+  ],
+  "defines": [
+    {
+      "name": "TFD_TIMER_ABSTIME",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "TFD_TIMER"
+    },
+    {
+      "name": "TFD_TIMER_CANCEL_ON_SET",
+      "value": "(1 << 1)",
+      "comment": "",
+      "category": "TFD_TIMER"
+    },
+    {
+      "name": "TFD_CLOEXEC",
+      "value": "O_CLOEXEC",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "TFD_NONBLOCK",
+      "value": "O_NONBLOCK",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "TFD_IOC_SET_TICKS",
+      "value": "_IOW('T', 0, __u64)",
+      "comment": "",
+      "category": "TFD_IOC"
+    }
+  ],
+  "structs": [],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

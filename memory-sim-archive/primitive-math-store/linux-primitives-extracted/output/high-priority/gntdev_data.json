@@ -1,0 +1,421 @@
+{
+  "filename": "gntdev.h",
+  "includes": [
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "IOCTL_GNTDEV_MAP_GRANT_REF",
+      "value": "",
+      "comment": "",
+      "category": "IOCTL_GNTDEV"
+    },
+    {
+      "name": "IOCTL_GNTDEV_UNMAP_GRANT_REF",
+      "value": "",
+      "comment": "",
+      "category": "IOCTL_GNTDEV"
+    },
+    {
+      "name": "IOCTL_GNTDEV_GET_OFFSET_FOR_VADDR",
+      "value": "",
+      "comment": "",
+      "category": "IOCTL_GNTDEV"
+    },
+    {
+      "name": "IOCTL_GNTDEV_SET_MAX_GRANTS",
+      "value": "",
+      "comment": "",
+      "category": "IOCTL_GNTDEV"
+    },
+    {
+      "name": "IOCTL_GNTDEV_SET_UNMAP_NOTIFY",
+      "value": "",
+      "comment": "",
+      "category": "IOCTL_GNTDEV"
+    },
+    {
+      "name": "IOCTL_GNTDEV_GRANT_COPY",
+      "value": "",
+      "comment": "",
+      "category": "IOCTL_GNTDEV"
+    },
+    {
+      "name": "UNMAP_NOTIFY_CLEAR_BYTE",
+      "value": "0x1",
+      "comment": "",
+      "category": "UNMAP_NOTIFY"
+    },
+    {
+      "name": "UNMAP_NOTIFY_SEND_EVENT",
+      "value": "0x2",
+      "comment": "",
+      "category": "UNMAP_NOTIFY"
+    },
+    {
+      "name": "GNTDEV_DMA_FLAG_WC",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "GNTDEV_DMA"
+    },
+    {
+      "name": "GNTDEV_DMA_FLAG_COHERENT",
+      "value": "(1 << 1)",
+      "comment": "",
+      "category": "GNTDEV_DMA"
+    },
+    {
+      "name": "IOCTL_GNTDEV_DMABUF_EXP_FROM_REFS",
+      "value": "",
+      "comment": "",
+      "category": "IOCTL_GNTDEV"
+    },
+    {
+      "name": "IOCTL_GNTDEV_DMABUF_EXP_WAIT_RELEASED",
+      "value": "",
+      "comment": "",
+      "category": "IOCTL_GNTDEV"
+    },
+    {
+      "name": "IOCTL_GNTDEV_DMABUF_IMP_TO_REFS",
+      "value": "",
+      "comment": "",
+      "category": "IOCTL_GNTDEV"
+    },
+    {
+      "name": "IOCTL_GNTDEV_DMABUF_IMP_RELEASE",
+      "value": "",
+      "comment": "",
+      "category": "IOCTL_GNTDEV"
+    }
+  ],
+  "structs": [
+    {
+      "name": "ioctl_gntdev_grant_ref",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "domid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ref",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ioctl_gntdev_map_grant_ref",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "index",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ioctl_gntdev_unmap_grant_ref",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "index",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ioctl_gntdev_get_offset_for_vaddr",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "vaddr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ioctl_gntdev_set_max_grants",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "count",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ioctl_gntdev_unmap_notify",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "index",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "action",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "event_channel_port",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "gntdev_grant_copy_segment",
+      "fields": [
+        {
+          "type_name": "grant_ref_t",
+          "name": "ref",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "domid_t",
+          "name": "domid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s16",
+          "name": "status",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_7",
+      "fields": [
+        {
+          "type_name": "grant_ref_t",
+          "name": "ref",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "domid_t",
+          "name": "domid",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ioctl_gntdev_grant_copy",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ioctl_gntdev_dmabuf_exp_from_refs",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "fd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "domid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "refs",
+          "array_size": "1",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ioctl_gntdev_dmabuf_exp_wait_released",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "fd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "wait_to_ms",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ioctl_gntdev_dmabuf_imp_to_refs",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "fd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "domid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "refs",
+          "array_size": "1",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ioctl_gntdev_dmabuf_imp_release",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "fd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

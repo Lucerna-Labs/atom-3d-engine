@@ -1,0 +1,2615 @@
+{
+  "metadata": {
+    "timestamp": "2026-06-24T13:38:28.749461+00:00",
+    "seed": 42,
+    "n_primitives": 5,
+    "top_recipes": 50,
+    "seed_pool_size": 40,
+    "n_domains": 8,
+    "catalog_path": "D:\\MINIMAX-PRIMITVE-SIMULATIONS\\src\\rag_primitives_catalog.json",
+    "catalog_size": 41,
+    "weights": {
+      "cross_domain_bonus": 50.0,
+      "multi_category_bonus": 30.0,
+      "root_atom_diversity": 5.0,
+      "real_wall_diversity": 2.0,
+      "base_per_primitive": 50.0
+    },
+    "runtime_seconds": 10.831144571304321,
+    "enum_counts": {
+      "5-tuple": 658008
+    },
+    "scoring_summary": {
+      "total_recipes_scored": 658008,
+      "max_score": 413.0,
+      "min_score": 304.0,
+      "mean_score": 394.35329357697776,
+      "cross_domain_count": 657940,
+      "cross_domain_pct": 99.98966577913946,
+      "wiring_pattern_counts": {
+        "fusion ranking": 658008
+      },
+      "domain_pair_counts": {
+        "retrieval": 456632,
+        "workflow": 379752,
+        "decomposition": 379752,
+        "synthesis": 281016,
+        "gating": 281016,
+        "reranking": 281016,
+        "scoring": 281016,
+        "filtering": 281016
+      },
+      "root_atom_counts": {
+        "combine": 657952,
+        "compare": 649440,
+        "order": 631674,
+        "scale": 615504,
+        "fold": 420672,
+        "project": 333376,
+        "sample": 281016,
+        "hash": 82251,
+        "scan": 82251
+      }
+    }
+  },
+  "recipes": [
+    {
+      "primitives": [
+        "bm25-retrieval",
+        "dedup-merge",
+        "dense-embedding-retrieval",
+        "parallel-fan-out",
+        "rag-fusion"
+      ],
+      "domains": [
+        "retrieval",
+        "synthesis",
+        "retrieval",
+        "gating",
+        "workflow"
+      ],
+      "categories": [
+        "retrieval",
+        "synthesis",
+        "retrieval",
+        "gating",
+        "workflow"
+      ],
+      "score": 413.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "gating",
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "unique_domains": [
+        "gating",
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "scale",
+        "fold",
+        "compare",
+        "hash",
+        "project",
+        "scan",
+        "sample",
+        "order"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** gating \u2192 retrieval \u2192 synthesis \u2192 workflow\n**Components:**\n  - bm25-retrieval (retrieval): Probabilistic relevance ranking with TF saturation and document length normalization. Industry standard for sparse retrieval.\n  - dedup-merge (synthesis): Remove near-duplicate chunks (cosine or NCD > threshold) and merge their content.\n  - dense-embedding-retrieval (retrieval): Dense embedding via neural model (bge-m3, qwen3-embedding); cosine similarity in d-dim space. Bridges vocabulary gap.\n  - parallel-fan-out (gating): Run multiple retrievers in parallel; combine. Higher quality but higher cost.\n  - rag-fusion (workflow): Generate N query variants via LLM, retrieve each, RRF-fuse results. Higher recall than single query.\n**Real walls (combined):**\n  - [bm25-retrieval] BM25F (fielded) needed for structured docs.\n  - [bm25-retrieval] k1=1.5, b=0.75 are defaults but rarely optimal.\n  - [bm25-retrieval] Cannot bridge vocabulary gap (no synonym handling).\n  - [bm25-retrieval] Fails on long-tail terms without IDF smoothing.\n  - [dedup-merge] Threshold tuning per corpus.\n  - [dedup-merge] May merge complementary info from near-duplicates that look the same.\n  - [dedup-merge] Computational cost: O(N^2) naive, O(N log N) with LSH.\n  - [dense-embedding-retrieval] Requires GPU or fast inference endpoint.\n  - [dense-embedding-retrieval] Latency: 10-50ms per query on CPU; 5-10ms on GPU.\n  - [dense-embedding-retrieval] Quality varies by model size; bge-m3 (566M) often beats qwen3-4b on small fixtures.\n  - [dense-embedding-retrieval] Cannot embed documents longer than model's context window.\n  - [dense-embedding-retrieval] Non-deterministic across model versions.\n  - [parallel-fan-out] Cost = sum of all parallel runs.\n  - [parallel-fan-out] Diminishing returns past 3-4 parallel retrievers.\n  - [parallel-fan-out] Result combination is non-trivial (RRF, voting, etc.).\n  - [rag-fusion] N variants: 3-5 typical.\n  - [rag-fusion] Cost = N * retrieve.\n  - [rag-fusion] Diminishing returns past N=5.\n  - [rag-fusion] Quality depends on LLM-generated variants."
+    },
+    {
+      "primitives": [
+        "bm25-retrieval",
+        "dedup-merge",
+        "dense-embedding-retrieval",
+        "parallel-fan-out",
+        "react-workflow"
+      ],
+      "domains": [
+        "retrieval",
+        "synthesis",
+        "retrieval",
+        "gating",
+        "workflow"
+      ],
+      "categories": [
+        "retrieval",
+        "synthesis",
+        "retrieval",
+        "gating",
+        "workflow"
+      ],
+      "score": 413.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "gating",
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "unique_domains": [
+        "gating",
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "scale",
+        "fold",
+        "compare",
+        "hash",
+        "project",
+        "scan",
+        "order",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** gating \u2192 retrieval \u2192 synthesis \u2192 workflow\n**Components:**\n  - bm25-retrieval (retrieval): Probabilistic relevance ranking with TF saturation and document length normalization. Industry standard for sparse retrieval.\n  - dedup-merge (synthesis): Remove near-duplicate chunks (cosine or NCD > threshold) and merge their content.\n  - dense-embedding-retrieval (retrieval): Dense embedding via neural model (bge-m3, qwen3-embedding); cosine similarity in d-dim space. Bridges vocabulary gap.\n  - parallel-fan-out (gating): Run multiple retrievers in parallel; combine. Higher quality but higher cost.\n  - react-workflow (workflow): Reasoning + Acting loop: LLM reasons about what to retrieve next, retrieves, observes, repeats.\n**Real walls (combined):**\n  - [bm25-retrieval] BM25F (fielded) needed for structured docs.\n  - [bm25-retrieval] k1=1.5, b=0.75 are defaults but rarely optimal.\n  - [bm25-retrieval] Cannot bridge vocabulary gap (no synonym handling).\n  - [bm25-retrieval] Fails on long-tail terms without IDF smoothing.\n  - [dedup-merge] Threshold tuning per corpus.\n  - [dedup-merge] May merge complementary info from near-duplicates that look the same.\n  - [dedup-merge] Computational cost: O(N^2) naive, O(N log N) with LSH.\n  - [dense-embedding-retrieval] Requires GPU or fast inference endpoint.\n  - [dense-embedding-retrieval] Latency: 10-50ms per query on CPU; 5-10ms on GPU.\n  - [dense-embedding-retrieval] Quality varies by model size; bge-m3 (566M) often beats qwen3-4b on small fixtures.\n  - [dense-embedding-retrieval] Cannot embed documents longer than model's context window.\n  - [dense-embedding-retrieval] Non-deterministic across model versions.\n  - [parallel-fan-out] Cost = sum of all parallel runs.\n  - [parallel-fan-out] Diminishing returns past 3-4 parallel retrievers.\n  - [parallel-fan-out] Result combination is non-trivial (RRF, voting, etc.).\n  - [react-workflow] LLM hallucination in reasoning step.\n  - [react-workflow] Action space must be well-defined.\n  - [react-workflow] Termination conditions matter.\n  - [react-workflow] Quality depends on LLM's instruction-following."
+    },
+    {
+      "primitives": [
+        "bm25-retrieval",
+        "dedup-merge",
+        "dense-embedding-retrieval",
+        "parallel-fan-out",
+        "self-ask-workflow"
+      ],
+      "domains": [
+        "retrieval",
+        "synthesis",
+        "retrieval",
+        "gating",
+        "workflow"
+      ],
+      "categories": [
+        "retrieval",
+        "synthesis",
+        "retrieval",
+        "gating",
+        "workflow"
+      ],
+      "score": 413.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "gating",
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "unique_domains": [
+        "gating",
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "scale",
+        "fold",
+        "compare",
+        "hash",
+        "project",
+        "scan",
+        "order",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** gating \u2192 retrieval \u2192 synthesis \u2192 workflow\n**Components:**\n  - bm25-retrieval (retrieval): Probabilistic relevance ranking with TF saturation and document length normalization. Industry standard for sparse retrieval.\n  - dedup-merge (synthesis): Remove near-duplicate chunks (cosine or NCD > threshold) and merge their content.\n  - dense-embedding-retrieval (retrieval): Dense embedding via neural model (bge-m3, qwen3-embedding); cosine similarity in d-dim space. Bridges vocabulary gap.\n  - parallel-fan-out (gating): Run multiple retrievers in parallel; combine. Higher quality but higher cost.\n  - self-ask-workflow (workflow): LLM asks itself clarifying questions, retrieves, asks more, then answers. For complex multi-step queries.\n**Real walls (combined):**\n  - [bm25-retrieval] BM25F (fielded) needed for structured docs.\n  - [bm25-retrieval] k1=1.5, b=0.75 are defaults but rarely optimal.\n  - [bm25-retrieval] Cannot bridge vocabulary gap (no synonym handling).\n  - [bm25-retrieval] Fails on long-tail terms without IDF smoothing.\n  - [dedup-merge] Threshold tuning per corpus.\n  - [dedup-merge] May merge complementary info from near-duplicates that look the same.\n  - [dedup-merge] Computational cost: O(N^2) naive, O(N log N) with LSH.\n  - [dense-embedding-retrieval] Requires GPU or fast inference endpoint.\n  - [dense-embedding-retrieval] Latency: 10-50ms per query on CPU; 5-10ms on GPU.\n  - [dense-embedding-retrieval] Quality varies by model size; bge-m3 (566M) often beats qwen3-4b on small fixtures.\n  - [dense-embedding-retrieval] Cannot embed documents longer than model's context window.\n  - [dense-embedding-retrieval] Non-deterministic across model versions.\n  - [parallel-fan-out] Cost = sum of all parallel runs.\n  - [parallel-fan-out] Diminishing returns past 3-4 parallel retrievers.\n  - [parallel-fan-out] Result combination is non-trivial (RRF, voting, etc.).\n  - [self-ask-workflow] LLM may get stuck in loops.\n  - [self-ask-workflow] Question quality depends on LLM.\n  - [self-ask-workflow] Cost is unpredictable.\n  - [self-ask-workflow] Stop conditions are critical."
+    },
+    {
+      "primitives": [
+        "bm25-retrieval",
+        "dedup-merge",
+        "dense-embedding-retrieval",
+        "parallel-fan-out",
+        "tree-of-retrieval"
+      ],
+      "domains": [
+        "retrieval",
+        "synthesis",
+        "retrieval",
+        "gating",
+        "workflow"
+      ],
+      "categories": [
+        "retrieval",
+        "synthesis",
+        "retrieval",
+        "gating",
+        "workflow"
+      ],
+      "score": 413.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "gating",
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "unique_domains": [
+        "gating",
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "scale",
+        "fold",
+        "compare",
+        "hash",
+        "project",
+        "scan",
+        "sample",
+        "order"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** gating \u2192 retrieval \u2192 synthesis \u2192 workflow\n**Components:**\n  - bm25-retrieval (retrieval): Probabilistic relevance ranking with TF saturation and document length normalization. Industry standard for sparse retrieval.\n  - dedup-merge (synthesis): Remove near-duplicate chunks (cosine or NCD > threshold) and merge their content.\n  - dense-embedding-retrieval (retrieval): Dense embedding via neural model (bge-m3, qwen3-embedding); cosine similarity in d-dim space. Bridges vocabulary gap.\n  - parallel-fan-out (gating): Run multiple retrievers in parallel; combine. Higher quality but higher cost.\n  - tree-of-retrieval (workflow): Branching retrieval: explore multiple paths, prune low-confidence branches.\n**Real walls (combined):**\n  - [bm25-retrieval] BM25F (fielded) needed for structured docs.\n  - [bm25-retrieval] k1=1.5, b=0.75 are defaults but rarely optimal.\n  - [bm25-retrieval] Cannot bridge vocabulary gap (no synonym handling).\n  - [bm25-retrieval] Fails on long-tail terms without IDF smoothing.\n  - [dedup-merge] Threshold tuning per corpus.\n  - [dedup-merge] May merge complementary info from near-duplicates that look the same.\n  - [dedup-merge] Computational cost: O(N^2) naive, O(N log N) with LSH.\n  - [dense-embedding-retrieval] Requires GPU or fast inference endpoint.\n  - [dense-embedding-retrieval] Latency: 10-50ms per query on CPU; 5-10ms on GPU.\n  - [dense-embedding-retrieval] Quality varies by model size; bge-m3 (566M) often beats qwen3-4b on small fixtures.\n  - [dense-embedding-retrieval] Cannot embed documents longer than model's context window.\n  - [dense-embedding-retrieval] Non-deterministic across model versions.\n  - [parallel-fan-out] Cost = sum of all parallel runs.\n  - [parallel-fan-out] Diminishing returns past 3-4 parallel retrievers.\n  - [parallel-fan-out] Result combination is non-trivial (RRF, voting, etc.).\n  - [tree-of-retrieval] Tree width must be bounded (3-5 typical).\n  - [tree-of-retrieval] Pruning threshold tuning.\n  - [tree-of-retrieval] Combine step at root must reconcile branches.\n  - [tree-of-retrieval] Cost grows exponentially without pruning."
+    },
+    {
+      "primitives": [
+        "chain-of-retrieval",
+        "dedup-merge",
+        "dense-embedding-retrieval",
+        "parallel-fan-out",
+        "rag-fusion"
+      ],
+      "domains": [
+        "workflow",
+        "synthesis",
+        "retrieval",
+        "gating",
+        "workflow"
+      ],
+      "categories": [
+        "workflow",
+        "synthesis",
+        "retrieval",
+        "gating",
+        "workflow"
+      ],
+      "score": 413.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "gating",
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "unique_domains": [
+        "gating",
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "root_atoms_used": [
+        "order",
+        "combine",
+        "fold",
+        "compare",
+        "hash",
+        "project",
+        "scale",
+        "scan",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** gating \u2192 retrieval \u2192 synthesis \u2192 workflow\n**Components:**\n  - chain-of-retrieval (workflow): Sequential retrieval: each step depends on previous answer. For multi-hop queries.\n  - dedup-merge (synthesis): Remove near-duplicate chunks (cosine or NCD > threshold) and merge their content.\n  - dense-embedding-retrieval (retrieval): Dense embedding via neural model (bge-m3, qwen3-embedding); cosine similarity in d-dim space. Bridges vocabulary gap.\n  - parallel-fan-out (gating): Run multiple retrievers in parallel; combine. Higher quality but higher cost.\n  - rag-fusion (workflow): Generate N query variants via LLM, retrieve each, RRF-fuse results. Higher recall than single query.\n**Real walls (combined):**\n  - [chain-of-retrieval] Latency compounds (steps are sequential).\n  - [chain-of-retrieval] Error compounds: bad first answer \u2192 bad second.\n  - [chain-of-retrieval] Cost grows with hops.\n  - [chain-of-retrieval] Stop condition (when to stop?) is non-trivial.\n  - [dedup-merge] Threshold tuning per corpus.\n  - [dedup-merge] May merge complementary info from near-duplicates that look the same.\n  - [dedup-merge] Computational cost: O(N^2) naive, O(N log N) with LSH.\n  - [dense-embedding-retrieval] Requires GPU or fast inference endpoint.\n  - [dense-embedding-retrieval] Latency: 10-50ms per query on CPU; 5-10ms on GPU.\n  - [dense-embedding-retrieval] Quality varies by model size; bge-m3 (566M) often beats qwen3-4b on small fixtures.\n  - [dense-embedding-retrieval] Cannot embed documents longer than model's context window.\n  - [dense-embedding-retrieval] Non-deterministic across model versions.\n  - [parallel-fan-out] Cost = sum of all parallel runs.\n  - [parallel-fan-out] Diminishing returns past 3-4 parallel retrievers.\n  - [parallel-fan-out] Result combination is non-trivial (RRF, voting, etc.).\n  - [rag-fusion] N variants: 3-5 typical.\n  - [rag-fusion] Cost = N * retrieve.\n  - [rag-fusion] Diminishing returns past N=5.\n  - [rag-fusion] Quality depends on LLM-generated variants."
+    },
+    {
+      "primitives": [
+        "chain-of-retrieval",
+        "dedup-merge",
+        "dense-embedding-retrieval",
+        "parallel-fan-out",
+        "react-workflow"
+      ],
+      "domains": [
+        "workflow",
+        "synthesis",
+        "retrieval",
+        "gating",
+        "workflow"
+      ],
+      "categories": [
+        "workflow",
+        "synthesis",
+        "retrieval",
+        "gating",
+        "workflow"
+      ],
+      "score": 413.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "gating",
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "unique_domains": [
+        "gating",
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "root_atoms_used": [
+        "order",
+        "combine",
+        "fold",
+        "compare",
+        "hash",
+        "project",
+        "scale",
+        "scan",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** gating \u2192 retrieval \u2192 synthesis \u2192 workflow\n**Components:**\n  - chain-of-retrieval (workflow): Sequential retrieval: each step depends on previous answer. For multi-hop queries.\n  - dedup-merge (synthesis): Remove near-duplicate chunks (cosine or NCD > threshold) and merge their content.\n  - dense-embedding-retrieval (retrieval): Dense embedding via neural model (bge-m3, qwen3-embedding); cosine similarity in d-dim space. Bridges vocabulary gap.\n  - parallel-fan-out (gating): Run multiple retrievers in parallel; combine. Higher quality but higher cost.\n  - react-workflow (workflow): Reasoning + Acting loop: LLM reasons about what to retrieve next, retrieves, observes, repeats.\n**Real walls (combined):**\n  - [chain-of-retrieval] Latency compounds (steps are sequential).\n  - [chain-of-retrieval] Error compounds: bad first answer \u2192 bad second.\n  - [chain-of-retrieval] Cost grows with hops.\n  - [chain-of-retrieval] Stop condition (when to stop?) is non-trivial.\n  - [dedup-merge] Threshold tuning per corpus.\n  - [dedup-merge] May merge complementary info from near-duplicates that look the same.\n  - [dedup-merge] Computational cost: O(N^2) naive, O(N log N) with LSH.\n  - [dense-embedding-retrieval] Requires GPU or fast inference endpoint.\n  - [dense-embedding-retrieval] Latency: 10-50ms per query on CPU; 5-10ms on GPU.\n  - [dense-embedding-retrieval] Quality varies by model size; bge-m3 (566M) often beats qwen3-4b on small fixtures.\n  - [dense-embedding-retrieval] Cannot embed documents longer than model's context window.\n  - [dense-embedding-retrieval] Non-deterministic across model versions.\n  - [parallel-fan-out] Cost = sum of all parallel runs.\n  - [parallel-fan-out] Diminishing returns past 3-4 parallel retrievers.\n  - [parallel-fan-out] Result combination is non-trivial (RRF, voting, etc.).\n  - [react-workflow] LLM hallucination in reasoning step.\n  - [react-workflow] Action space must be well-defined.\n  - [react-workflow] Termination conditions matter.\n  - [react-workflow] Quality depends on LLM's instruction-following."
+    },
+    {
+      "primitives": [
+        "chain-of-retrieval",
+        "dedup-merge",
+        "dense-embedding-retrieval",
+        "parallel-fan-out",
+        "self-ask-workflow"
+      ],
+      "domains": [
+        "workflow",
+        "synthesis",
+        "retrieval",
+        "gating",
+        "workflow"
+      ],
+      "categories": [
+        "workflow",
+        "synthesis",
+        "retrieval",
+        "gating",
+        "workflow"
+      ],
+      "score": 413.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "gating",
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "unique_domains": [
+        "gating",
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "root_atoms_used": [
+        "order",
+        "combine",
+        "fold",
+        "compare",
+        "hash",
+        "project",
+        "scale",
+        "scan",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** gating \u2192 retrieval \u2192 synthesis \u2192 workflow\n**Components:**\n  - chain-of-retrieval (workflow): Sequential retrieval: each step depends on previous answer. For multi-hop queries.\n  - dedup-merge (synthesis): Remove near-duplicate chunks (cosine or NCD > threshold) and merge their content.\n  - dense-embedding-retrieval (retrieval): Dense embedding via neural model (bge-m3, qwen3-embedding); cosine similarity in d-dim space. Bridges vocabulary gap.\n  - parallel-fan-out (gating): Run multiple retrievers in parallel; combine. Higher quality but higher cost.\n  - self-ask-workflow (workflow): LLM asks itself clarifying questions, retrieves, asks more, then answers. For complex multi-step queries.\n**Real walls (combined):**\n  - [chain-of-retrieval] Latency compounds (steps are sequential).\n  - [chain-of-retrieval] Error compounds: bad first answer \u2192 bad second.\n  - [chain-of-retrieval] Cost grows with hops.\n  - [chain-of-retrieval] Stop condition (when to stop?) is non-trivial.\n  - [dedup-merge] Threshold tuning per corpus.\n  - [dedup-merge] May merge complementary info from near-duplicates that look the same.\n  - [dedup-merge] Computational cost: O(N^2) naive, O(N log N) with LSH.\n  - [dense-embedding-retrieval] Requires GPU or fast inference endpoint.\n  - [dense-embedding-retrieval] Latency: 10-50ms per query on CPU; 5-10ms on GPU.\n  - [dense-embedding-retrieval] Quality varies by model size; bge-m3 (566M) often beats qwen3-4b on small fixtures.\n  - [dense-embedding-retrieval] Cannot embed documents longer than model's context window.\n  - [dense-embedding-retrieval] Non-deterministic across model versions.\n  - [parallel-fan-out] Cost = sum of all parallel runs.\n  - [parallel-fan-out] Diminishing returns past 3-4 parallel retrievers.\n  - [parallel-fan-out] Result combination is non-trivial (RRF, voting, etc.).\n  - [self-ask-workflow] LLM may get stuck in loops.\n  - [self-ask-workflow] Question quality depends on LLM.\n  - [self-ask-workflow] Cost is unpredictable.\n  - [self-ask-workflow] Stop conditions are critical."
+    },
+    {
+      "primitives": [
+        "chain-of-retrieval",
+        "dedup-merge",
+        "dense-embedding-retrieval",
+        "parallel-fan-out",
+        "tree-of-retrieval"
+      ],
+      "domains": [
+        "workflow",
+        "synthesis",
+        "retrieval",
+        "gating",
+        "workflow"
+      ],
+      "categories": [
+        "workflow",
+        "synthesis",
+        "retrieval",
+        "gating",
+        "workflow"
+      ],
+      "score": 413.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "gating",
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "unique_domains": [
+        "gating",
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "root_atoms_used": [
+        "order",
+        "combine",
+        "fold",
+        "compare",
+        "hash",
+        "project",
+        "scale",
+        "scan",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** gating \u2192 retrieval \u2192 synthesis \u2192 workflow\n**Components:**\n  - chain-of-retrieval (workflow): Sequential retrieval: each step depends on previous answer. For multi-hop queries.\n  - dedup-merge (synthesis): Remove near-duplicate chunks (cosine or NCD > threshold) and merge their content.\n  - dense-embedding-retrieval (retrieval): Dense embedding via neural model (bge-m3, qwen3-embedding); cosine similarity in d-dim space. Bridges vocabulary gap.\n  - parallel-fan-out (gating): Run multiple retrievers in parallel; combine. Higher quality but higher cost.\n  - tree-of-retrieval (workflow): Branching retrieval: explore multiple paths, prune low-confidence branches.\n**Real walls (combined):**\n  - [chain-of-retrieval] Latency compounds (steps are sequential).\n  - [chain-of-retrieval] Error compounds: bad first answer \u2192 bad second.\n  - [chain-of-retrieval] Cost grows with hops.\n  - [chain-of-retrieval] Stop condition (when to stop?) is non-trivial.\n  - [dedup-merge] Threshold tuning per corpus.\n  - [dedup-merge] May merge complementary info from near-duplicates that look the same.\n  - [dedup-merge] Computational cost: O(N^2) naive, O(N log N) with LSH.\n  - [dense-embedding-retrieval] Requires GPU or fast inference endpoint.\n  - [dense-embedding-retrieval] Latency: 10-50ms per query on CPU; 5-10ms on GPU.\n  - [dense-embedding-retrieval] Quality varies by model size; bge-m3 (566M) often beats qwen3-4b on small fixtures.\n  - [dense-embedding-retrieval] Cannot embed documents longer than model's context window.\n  - [dense-embedding-retrieval] Non-deterministic across model versions.\n  - [parallel-fan-out] Cost = sum of all parallel runs.\n  - [parallel-fan-out] Diminishing returns past 3-4 parallel retrievers.\n  - [parallel-fan-out] Result combination is non-trivial (RRF, voting, etc.).\n  - [tree-of-retrieval] Tree width must be bounded (3-5 typical).\n  - [tree-of-retrieval] Pruning threshold tuning.\n  - [tree-of-retrieval] Combine step at root must reconcile branches.\n  - [tree-of-retrieval] Cost grows exponentially without pruning."
+    },
+    {
+      "primitives": [
+        "dedup-merge",
+        "dense-embedding-retrieval",
+        "hierarchical-decomposition",
+        "parallel-fan-out",
+        "rag-fusion"
+      ],
+      "domains": [
+        "synthesis",
+        "retrieval",
+        "decomposition",
+        "gating",
+        "workflow"
+      ],
+      "categories": [
+        "synthesis",
+        "retrieval",
+        "decomposition",
+        "gating",
+        "workflow"
+      ],
+      "score": 413.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "decomposition",
+        "gating",
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "unique_domains": [
+        "decomposition",
+        "gating",
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "root_atoms_used": [
+        "compare",
+        "combine",
+        "hash",
+        "project",
+        "scale",
+        "order",
+        "fold",
+        "scan",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** decomposition \u2192 gating \u2192 retrieval \u2192 synthesis \u2192 workflow\n**Components:**\n  - dedup-merge (synthesis): Remove near-duplicate chunks (cosine or NCD > threshold) and merge their content.\n  - dense-embedding-retrieval (retrieval): Dense embedding via neural model (bge-m3, qwen3-embedding); cosine similarity in d-dim space. Bridges vocabulary gap.\n  - hierarchical-decomposition (decomposition): Recursive decomposition: sub-Qs split further if they're still complex. Tree of questions.\n  - parallel-fan-out (gating): Run multiple retrievers in parallel; combine. Higher quality but higher cost.\n  - rag-fusion (workflow): Generate N query variants via LLM, retrieve each, RRF-fuse results. Higher recall than single query.\n**Real walls (combined):**\n  - [dedup-merge] Threshold tuning per corpus.\n  - [dedup-merge] May merge complementary info from near-duplicates that look the same.\n  - [dedup-merge] Computational cost: O(N^2) naive, O(N log N) with LSH.\n  - [dense-embedding-retrieval] Requires GPU or fast inference endpoint.\n  - [dense-embedding-retrieval] Latency: 10-50ms per query on CPU; 5-10ms on GPU.\n  - [dense-embedding-retrieval] Quality varies by model size; bge-m3 (566M) often beats qwen3-4b on small fixtures.\n  - [dense-embedding-retrieval] Cannot embed documents longer than model's context window.\n  - [dense-embedding-retrieval] Non-deterministic across model versions.\n  - [hierarchical-decomposition] Recursion depth must be bounded (3-4 typical).\n  - [hierarchical-decomposition] Leaves must be atomic; intermediate nodes need partial answers.\n  - [hierarchical-decomposition] Cost multiplies per level: 1 \u2192 N \u2192 N^2 in worst case.\n  - [hierarchical-decomposition] Aggregation at parent nodes can lose information.\n  - [parallel-fan-out] Cost = sum of all parallel runs.\n  - [parallel-fan-out] Diminishing returns past 3-4 parallel retrievers.\n  - [parallel-fan-out] Result combination is non-trivial (RRF, voting, etc.).\n  - [rag-fusion] N variants: 3-5 typical.\n  - [rag-fusion] Cost = N * retrieve.\n  - [rag-fusion] Diminishing returns past N=5.\n  - [rag-fusion] Quality depends on LLM-generated variants."
+    },
+    {
+      "primitives": [
+        "dedup-merge",
+        "dense-embedding-retrieval",
+        "hierarchical-decomposition",
+        "parallel-fan-out",
+        "react-workflow"
+      ],
+      "domains": [
+        "synthesis",
+        "retrieval",
+        "decomposition",
+        "gating",
+        "workflow"
+      ],
+      "categories": [
+        "synthesis",
+        "retrieval",
+        "decomposition",
+        "gating",
+        "workflow"
+      ],
+      "score": 413.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "decomposition",
+        "gating",
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "unique_domains": [
+        "decomposition",
+        "gating",
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "root_atoms_used": [
+        "compare",
+        "combine",
+        "hash",
+        "project",
+        "scale",
+        "order",
+        "fold",
+        "scan",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** decomposition \u2192 gating \u2192 retrieval \u2192 synthesis \u2192 workflow\n**Components:**\n  - dedup-merge (synthesis): Remove near-duplicate chunks (cosine or NCD > threshold) and merge their content.\n  - dense-embedding-retrieval (retrieval): Dense embedding via neural model (bge-m3, qwen3-embedding); cosine similarity in d-dim space. Bridges vocabulary gap.\n  - hierarchical-decomposition (decomposition): Recursive decomposition: sub-Qs split further if they're still complex. Tree of questions.\n  - parallel-fan-out (gating): Run multiple retrievers in parallel; combine. Higher quality but higher cost.\n  - react-workflow (workflow): Reasoning + Acting loop: LLM reasons about what to retrieve next, retrieves, observes, repeats.\n**Real walls (combined):**\n  - [dedup-merge] Threshold tuning per corpus.\n  - [dedup-merge] May merge complementary info from near-duplicates that look the same.\n  - [dedup-merge] Computational cost: O(N^2) naive, O(N log N) with LSH.\n  - [dense-embedding-retrieval] Requires GPU or fast inference endpoint.\n  - [dense-embedding-retrieval] Latency: 10-50ms per query on CPU; 5-10ms on GPU.\n  - [dense-embedding-retrieval] Quality varies by model size; bge-m3 (566M) often beats qwen3-4b on small fixtures.\n  - [dense-embedding-retrieval] Cannot embed documents longer than model's context window.\n  - [dense-embedding-retrieval] Non-deterministic across model versions.\n  - [hierarchical-decomposition] Recursion depth must be bounded (3-4 typical).\n  - [hierarchical-decomposition] Leaves must be atomic; intermediate nodes need partial answers.\n  - [hierarchical-decomposition] Cost multiplies per level: 1 \u2192 N \u2192 N^2 in worst case.\n  - [hierarchical-decomposition] Aggregation at parent nodes can lose information.\n  - [parallel-fan-out] Cost = sum of all parallel runs.\n  - [parallel-fan-out] Diminishing returns past 3-4 parallel retrievers.\n  - [parallel-fan-out] Result combination is non-trivial (RRF, voting, etc.).\n  - [react-workflow] LLM hallucination in reasoning step.\n  - [react-workflow] Action space must be well-defined.\n  - [react-workflow] Termination conditions matter.\n  - [react-workflow] Quality depends on LLM's instruction-following."
+    },
+    {
+      "primitives": [
+        "dedup-merge",
+        "dense-embedding-retrieval",
+        "hierarchical-decomposition",
+        "parallel-fan-out",
+        "self-ask-workflow"
+      ],
+      "domains": [
+        "synthesis",
+        "retrieval",
+        "decomposition",
+        "gating",
+        "workflow"
+      ],
+      "categories": [
+        "synthesis",
+        "retrieval",
+        "decomposition",
+        "gating",
+        "workflow"
+      ],
+      "score": 413.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "decomposition",
+        "gating",
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "unique_domains": [
+        "decomposition",
+        "gating",
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "root_atoms_used": [
+        "compare",
+        "combine",
+        "hash",
+        "project",
+        "scale",
+        "order",
+        "fold",
+        "scan",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** decomposition \u2192 gating \u2192 retrieval \u2192 synthesis \u2192 workflow\n**Components:**\n  - dedup-merge (synthesis): Remove near-duplicate chunks (cosine or NCD > threshold) and merge their content.\n  - dense-embedding-retrieval (retrieval): Dense embedding via neural model (bge-m3, qwen3-embedding); cosine similarity in d-dim space. Bridges vocabulary gap.\n  - hierarchical-decomposition (decomposition): Recursive decomposition: sub-Qs split further if they're still complex. Tree of questions.\n  - parallel-fan-out (gating): Run multiple retrievers in parallel; combine. Higher quality but higher cost.\n  - self-ask-workflow (workflow): LLM asks itself clarifying questions, retrieves, asks more, then answers. For complex multi-step queries.\n**Real walls (combined):**\n  - [dedup-merge] Threshold tuning per corpus.\n  - [dedup-merge] May merge complementary info from near-duplicates that look the same.\n  - [dedup-merge] Computational cost: O(N^2) naive, O(N log N) with LSH.\n  - [dense-embedding-retrieval] Requires GPU or fast inference endpoint.\n  - [dense-embedding-retrieval] Latency: 10-50ms per query on CPU; 5-10ms on GPU.\n  - [dense-embedding-retrieval] Quality varies by model size; bge-m3 (566M) often beats qwen3-4b on small fixtures.\n  - [dense-embedding-retrieval] Cannot embed documents longer than model's context window.\n  - [dense-embedding-retrieval] Non-deterministic across model versions.\n  - [hierarchical-decomposition] Recursion depth must be bounded (3-4 typical).\n  - [hierarchical-decomposition] Leaves must be atomic; intermediate nodes need partial answers.\n  - [hierarchical-decomposition] Cost multiplies per level: 1 \u2192 N \u2192 N^2 in worst case.\n  - [hierarchical-decomposition] Aggregation at parent nodes can lose information.\n  - [parallel-fan-out] Cost = sum of all parallel runs.\n  - [parallel-fan-out] Diminishing returns past 3-4 parallel retrievers.\n  - [parallel-fan-out] Result combination is non-trivial (RRF, voting, etc.).\n  - [self-ask-workflow] LLM may get stuck in loops.\n  - [self-ask-workflow] Question quality depends on LLM.\n  - [self-ask-workflow] Cost is unpredictable.\n  - [self-ask-workflow] Stop conditions are critical."
+    },
+    {
+      "primitives": [
+        "dedup-merge",
+        "dense-embedding-retrieval",
+        "hierarchical-decomposition",
+        "parallel-fan-out",
+        "tree-of-retrieval"
+      ],
+      "domains": [
+        "synthesis",
+        "retrieval",
+        "decomposition",
+        "gating",
+        "workflow"
+      ],
+      "categories": [
+        "synthesis",
+        "retrieval",
+        "decomposition",
+        "gating",
+        "workflow"
+      ],
+      "score": 413.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "decomposition",
+        "gating",
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "unique_domains": [
+        "decomposition",
+        "gating",
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "root_atoms_used": [
+        "compare",
+        "combine",
+        "hash",
+        "project",
+        "scale",
+        "order",
+        "fold",
+        "scan",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** decomposition \u2192 gating \u2192 retrieval \u2192 synthesis \u2192 workflow\n**Components:**\n  - dedup-merge (synthesis): Remove near-duplicate chunks (cosine or NCD > threshold) and merge their content.\n  - dense-embedding-retrieval (retrieval): Dense embedding via neural model (bge-m3, qwen3-embedding); cosine similarity in d-dim space. Bridges vocabulary gap.\n  - hierarchical-decomposition (decomposition): Recursive decomposition: sub-Qs split further if they're still complex. Tree of questions.\n  - parallel-fan-out (gating): Run multiple retrievers in parallel; combine. Higher quality but higher cost.\n  - tree-of-retrieval (workflow): Branching retrieval: explore multiple paths, prune low-confidence branches.\n**Real walls (combined):**\n  - [dedup-merge] Threshold tuning per corpus.\n  - [dedup-merge] May merge complementary info from near-duplicates that look the same.\n  - [dedup-merge] Computational cost: O(N^2) naive, O(N log N) with LSH.\n  - [dense-embedding-retrieval] Requires GPU or fast inference endpoint.\n  - [dense-embedding-retrieval] Latency: 10-50ms per query on CPU; 5-10ms on GPU.\n  - [dense-embedding-retrieval] Quality varies by model size; bge-m3 (566M) often beats qwen3-4b on small fixtures.\n  - [dense-embedding-retrieval] Cannot embed documents longer than model's context window.\n  - [dense-embedding-retrieval] Non-deterministic across model versions.\n  - [hierarchical-decomposition] Recursion depth must be bounded (3-4 typical).\n  - [hierarchical-decomposition] Leaves must be atomic; intermediate nodes need partial answers.\n  - [hierarchical-decomposition] Cost multiplies per level: 1 \u2192 N \u2192 N^2 in worst case.\n  - [hierarchical-decomposition] Aggregation at parent nodes can lose information.\n  - [parallel-fan-out] Cost = sum of all parallel runs.\n  - [parallel-fan-out] Diminishing returns past 3-4 parallel retrievers.\n  - [parallel-fan-out] Result combination is non-trivial (RRF, voting, etc.).\n  - [tree-of-retrieval] Tree width must be bounded (3-5 typical).\n  - [tree-of-retrieval] Pruning threshold tuning.\n  - [tree-of-retrieval] Combine step at root must reconcile branches.\n  - [tree-of-retrieval] Cost grows exponentially without pruning."
+    },
+    {
+      "primitives": [
+        "dedup-merge",
+        "dense-embedding-retrieval",
+        "ncd-retrieval",
+        "parallel-fan-out",
+        "rag-fusion"
+      ],
+      "domains": [
+        "synthesis",
+        "retrieval",
+        "retrieval",
+        "gating",
+        "workflow"
+      ],
+      "categories": [
+        "synthesis",
+        "retrieval",
+        "retrieval",
+        "gating",
+        "workflow"
+      ],
+      "score": 413.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "gating",
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "unique_domains": [
+        "gating",
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "root_atoms_used": [
+        "compare",
+        "combine",
+        "hash",
+        "project",
+        "scale",
+        "fold",
+        "scan",
+        "sample",
+        "order"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** gating \u2192 retrieval \u2192 synthesis \u2192 workflow\n**Components:**\n  - dedup-merge (synthesis): Remove near-duplicate chunks (cosine or NCD > threshold) and merge their content.\n  - dense-embedding-retrieval (retrieval): Dense embedding via neural model (bge-m3, qwen3-embedding); cosine similarity in d-dim space. Bridges vocabulary gap.\n  - ncd-retrieval (retrieval): Normalized Compression Distance: similarity = (C(xy) - min(C(x),C(y))) / max(C(x),C(y)). Cross-vocabulary similarity.\n  - parallel-fan-out (gating): Run multiple retrievers in parallel; combine. Higher quality but higher cost.\n  - rag-fusion (workflow): Generate N query variants via LLM, retrieve each, RRF-fuse results. Higher recall than single query.\n**Real walls (combined):**\n  - [dedup-merge] Threshold tuning per corpus.\n  - [dedup-merge] May merge complementary info from near-duplicates that look the same.\n  - [dedup-merge] Computational cost: O(N^2) naive, O(N log N) with LSH.\n  - [dense-embedding-retrieval] Requires GPU or fast inference endpoint.\n  - [dense-embedding-retrieval] Latency: 10-50ms per query on CPU; 5-10ms on GPU.\n  - [dense-embedding-retrieval] Quality varies by model size; bge-m3 (566M) often beats qwen3-4b on small fixtures.\n  - [dense-embedding-retrieval] Cannot embed documents longer than model's context window.\n  - [dense-embedding-retrieval] Non-deterministic across model versions.\n  - [ncd-retrieval] Compression quality varies by algorithm (bzip2, lzma, zstd).\n  - [ncd-retrieval] Computationally expensive vs cosine (10-100x).\n  - [ncd-retrieval] Biased toward compressible text.\n  - [ncd-retrieval] Effective cross-vocabulary but slow at scale.\n  - [parallel-fan-out] Cost = sum of all parallel runs.\n  - [parallel-fan-out] Diminishing returns past 3-4 parallel retrievers.\n  - [parallel-fan-out] Result combination is non-trivial (RRF, voting, etc.).\n  - [rag-fusion] N variants: 3-5 typical.\n  - [rag-fusion] Cost = N * retrieve.\n  - [rag-fusion] Diminishing returns past N=5.\n  - [rag-fusion] Quality depends on LLM-generated variants."
+    },
+    {
+      "primitives": [
+        "dedup-merge",
+        "dense-embedding-retrieval",
+        "ncd-retrieval",
+        "parallel-fan-out",
+        "react-workflow"
+      ],
+      "domains": [
+        "synthesis",
+        "retrieval",
+        "retrieval",
+        "gating",
+        "workflow"
+      ],
+      "categories": [
+        "synthesis",
+        "retrieval",
+        "retrieval",
+        "gating",
+        "workflow"
+      ],
+      "score": 413.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "gating",
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "unique_domains": [
+        "gating",
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "root_atoms_used": [
+        "compare",
+        "combine",
+        "hash",
+        "project",
+        "scale",
+        "fold",
+        "scan",
+        "order",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** gating \u2192 retrieval \u2192 synthesis \u2192 workflow\n**Components:**\n  - dedup-merge (synthesis): Remove near-duplicate chunks (cosine or NCD > threshold) and merge their content.\n  - dense-embedding-retrieval (retrieval): Dense embedding via neural model (bge-m3, qwen3-embedding); cosine similarity in d-dim space. Bridges vocabulary gap.\n  - ncd-retrieval (retrieval): Normalized Compression Distance: similarity = (C(xy) - min(C(x),C(y))) / max(C(x),C(y)). Cross-vocabulary similarity.\n  - parallel-fan-out (gating): Run multiple retrievers in parallel; combine. Higher quality but higher cost.\n  - react-workflow (workflow): Reasoning + Acting loop: LLM reasons about what to retrieve next, retrieves, observes, repeats.\n**Real walls (combined):**\n  - [dedup-merge] Threshold tuning per corpus.\n  - [dedup-merge] May merge complementary info from near-duplicates that look the same.\n  - [dedup-merge] Computational cost: O(N^2) naive, O(N log N) with LSH.\n  - [dense-embedding-retrieval] Requires GPU or fast inference endpoint.\n  - [dense-embedding-retrieval] Latency: 10-50ms per query on CPU; 5-10ms on GPU.\n  - [dense-embedding-retrieval] Quality varies by model size; bge-m3 (566M) often beats qwen3-4b on small fixtures.\n  - [dense-embedding-retrieval] Cannot embed documents longer than model's context window.\n  - [dense-embedding-retrieval] Non-deterministic across model versions.\n  - [ncd-retrieval] Compression quality varies by algorithm (bzip2, lzma, zstd).\n  - [ncd-retrieval] Computationally expensive vs cosine (10-100x).\n  - [ncd-retrieval] Biased toward compressible text.\n  - [ncd-retrieval] Effective cross-vocabulary but slow at scale.\n  - [parallel-fan-out] Cost = sum of all parallel runs.\n  - [parallel-fan-out] Diminishing returns past 3-4 parallel retrievers.\n  - [parallel-fan-out] Result combination is non-trivial (RRF, voting, etc.).\n  - [react-workflow] LLM hallucination in reasoning step.\n  - [react-workflow] Action space must be well-defined.\n  - [react-workflow] Termination conditions matter.\n  - [react-workflow] Quality depends on LLM's instruction-following."
+    },
+    {
+      "primitives": [
+        "dedup-merge",
+        "dense-embedding-retrieval",
+        "ncd-retrieval",
+        "parallel-fan-out",
+        "self-ask-workflow"
+      ],
+      "domains": [
+        "synthesis",
+        "retrieval",
+        "retrieval",
+        "gating",
+        "workflow"
+      ],
+      "categories": [
+        "synthesis",
+        "retrieval",
+        "retrieval",
+        "gating",
+        "workflow"
+      ],
+      "score": 413.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "gating",
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "unique_domains": [
+        "gating",
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "root_atoms_used": [
+        "compare",
+        "combine",
+        "hash",
+        "project",
+        "scale",
+        "fold",
+        "scan",
+        "order",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** gating \u2192 retrieval \u2192 synthesis \u2192 workflow\n**Components:**\n  - dedup-merge (synthesis): Remove near-duplicate chunks (cosine or NCD > threshold) and merge their content.\n  - dense-embedding-retrieval (retrieval): Dense embedding via neural model (bge-m3, qwen3-embedding); cosine similarity in d-dim space. Bridges vocabulary gap.\n  - ncd-retrieval (retrieval): Normalized Compression Distance: similarity = (C(xy) - min(C(x),C(y))) / max(C(x),C(y)). Cross-vocabulary similarity.\n  - parallel-fan-out (gating): Run multiple retrievers in parallel; combine. Higher quality but higher cost.\n  - self-ask-workflow (workflow): LLM asks itself clarifying questions, retrieves, asks more, then answers. For complex multi-step queries.\n**Real walls (combined):**\n  - [dedup-merge] Threshold tuning per corpus.\n  - [dedup-merge] May merge complementary info from near-duplicates that look the same.\n  - [dedup-merge] Computational cost: O(N^2) naive, O(N log N) with LSH.\n  - [dense-embedding-retrieval] Requires GPU or fast inference endpoint.\n  - [dense-embedding-retrieval] Latency: 10-50ms per query on CPU; 5-10ms on GPU.\n  - [dense-embedding-retrieval] Quality varies by model size; bge-m3 (566M) often beats qwen3-4b on small fixtures.\n  - [dense-embedding-retrieval] Cannot embed documents longer than model's context window.\n  - [dense-embedding-retrieval] Non-deterministic across model versions.\n  - [ncd-retrieval] Compression quality varies by algorithm (bzip2, lzma, zstd).\n  - [ncd-retrieval] Computationally expensive vs cosine (10-100x).\n  - [ncd-retrieval] Biased toward compressible text.\n  - [ncd-retrieval] Effective cross-vocabulary but slow at scale.\n  - [parallel-fan-out] Cost = sum of all parallel runs.\n  - [parallel-fan-out] Diminishing returns past 3-4 parallel retrievers.\n  - [parallel-fan-out] Result combination is non-trivial (RRF, voting, etc.).\n  - [self-ask-workflow] LLM may get stuck in loops.\n  - [self-ask-workflow] Question quality depends on LLM.\n  - [self-ask-workflow] Cost is unpredictable.\n  - [self-ask-workflow] Stop conditions are critical."
+    },
+    {
+      "primitives": [
+        "dedup-merge",
+        "dense-embedding-retrieval",
+        "ncd-retrieval",
+        "parallel-fan-out",
+        "tree-of-retrieval"
+      ],
+      "domains": [
+        "synthesis",
+        "retrieval",
+        "retrieval",
+        "gating",
+        "workflow"
+      ],
+      "categories": [
+        "synthesis",
+        "retrieval",
+        "retrieval",
+        "gating",
+        "workflow"
+      ],
+      "score": 413.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "gating",
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "unique_domains": [
+        "gating",
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "root_atoms_used": [
+        "compare",
+        "combine",
+        "hash",
+        "project",
+        "scale",
+        "fold",
+        "scan",
+        "sample",
+        "order"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** gating \u2192 retrieval \u2192 synthesis \u2192 workflow\n**Components:**\n  - dedup-merge (synthesis): Remove near-duplicate chunks (cosine or NCD > threshold) and merge their content.\n  - dense-embedding-retrieval (retrieval): Dense embedding via neural model (bge-m3, qwen3-embedding); cosine similarity in d-dim space. Bridges vocabulary gap.\n  - ncd-retrieval (retrieval): Normalized Compression Distance: similarity = (C(xy) - min(C(x),C(y))) / max(C(x),C(y)). Cross-vocabulary similarity.\n  - parallel-fan-out (gating): Run multiple retrievers in parallel; combine. Higher quality but higher cost.\n  - tree-of-retrieval (workflow): Branching retrieval: explore multiple paths, prune low-confidence branches.\n**Real walls (combined):**\n  - [dedup-merge] Threshold tuning per corpus.\n  - [dedup-merge] May merge complementary info from near-duplicates that look the same.\n  - [dedup-merge] Computational cost: O(N^2) naive, O(N log N) with LSH.\n  - [dense-embedding-retrieval] Requires GPU or fast inference endpoint.\n  - [dense-embedding-retrieval] Latency: 10-50ms per query on CPU; 5-10ms on GPU.\n  - [dense-embedding-retrieval] Quality varies by model size; bge-m3 (566M) often beats qwen3-4b on small fixtures.\n  - [dense-embedding-retrieval] Cannot embed documents longer than model's context window.\n  - [dense-embedding-retrieval] Non-deterministic across model versions.\n  - [ncd-retrieval] Compression quality varies by algorithm (bzip2, lzma, zstd).\n  - [ncd-retrieval] Computationally expensive vs cosine (10-100x).\n  - [ncd-retrieval] Biased toward compressible text.\n  - [ncd-retrieval] Effective cross-vocabulary but slow at scale.\n  - [parallel-fan-out] Cost = sum of all parallel runs.\n  - [parallel-fan-out] Diminishing returns past 3-4 parallel retrievers.\n  - [parallel-fan-out] Result combination is non-trivial (RRF, voting, etc.).\n  - [tree-of-retrieval] Tree width must be bounded (3-5 typical).\n  - [tree-of-retrieval] Pruning threshold tuning.\n  - [tree-of-retrieval] Combine step at root must reconcile branches.\n  - [tree-of-retrieval] Cost grows exponentially without pruning."
+    },
+    {
+      "primitives": [
+        "abstractive-synthesis",
+        "bm25-retrieval",
+        "dedup-merge",
+        "dense-embedding-retrieval",
+        "rag-fusion"
+      ],
+      "domains": [
+        "synthesis",
+        "retrieval",
+        "synthesis",
+        "retrieval",
+        "workflow"
+      ],
+      "categories": [
+        "synthesis",
+        "retrieval",
+        "synthesis",
+        "retrieval",
+        "workflow"
+      ],
+      "score": 412.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "unique_domains": [
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "order",
+        "compare",
+        "scale",
+        "fold",
+        "hash",
+        "project",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** retrieval \u2192 synthesis \u2192 workflow\n**Components:**\n  - abstractive-synthesis (synthesis): LLM generates answer from retrieved context. Most flexible; can reason over multiple chunks.\n  - bm25-retrieval (retrieval): Probabilistic relevance ranking with TF saturation and document length normalization. Industry standard for sparse retrieval.\n  - dedup-merge (synthesis): Remove near-duplicate chunks (cosine or NCD > threshold) and merge their content.\n  - dense-embedding-retrieval (retrieval): Dense embedding via neural model (bge-m3, qwen3-embedding); cosine similarity in d-dim space. Bridges vocabulary gap.\n  - rag-fusion (workflow): Generate N query variants via LLM, retrieve each, RRF-fuse results. Higher recall than single query.\n**Real walls (combined):**\n  - [abstractive-synthesis] Hallucination: LLM may invent info not in context.\n  - [abstractive-synthesis] Context window: limited to model's input size.\n  - [abstractive-synthesis] Latency: 100-500ms per generation.\n  - [abstractive-synthesis] Cost: GPT-4-class models are $0.01-$0.10 per answer.\n  - [abstractive-synthesis] Quality depends on retrieved context quality.\n  - [bm25-retrieval] BM25F (fielded) needed for structured docs.\n  - [bm25-retrieval] k1=1.5, b=0.75 are defaults but rarely optimal.\n  - [bm25-retrieval] Cannot bridge vocabulary gap (no synonym handling).\n  - [bm25-retrieval] Fails on long-tail terms without IDF smoothing.\n  - [dedup-merge] Threshold tuning per corpus.\n  - [dedup-merge] May merge complementary info from near-duplicates that look the same.\n  - [dedup-merge] Computational cost: O(N^2) naive, O(N log N) with LSH.\n  - [dense-embedding-retrieval] Requires GPU or fast inference endpoint.\n  - [dense-embedding-retrieval] Latency: 10-50ms per query on CPU; 5-10ms on GPU.\n  - [dense-embedding-retrieval] Quality varies by model size; bge-m3 (566M) often beats qwen3-4b on small fixtures.\n  - [dense-embedding-retrieval] Cannot embed documents longer than model's context window.\n  - [dense-embedding-retrieval] Non-deterministic across model versions.\n  - [rag-fusion] N variants: 3-5 typical.\n  - [rag-fusion] Cost = N * retrieve.\n  - [rag-fusion] Diminishing returns past N=5.\n  - [rag-fusion] Quality depends on LLM-generated variants."
+    },
+    {
+      "primitives": [
+        "abstractive-synthesis",
+        "bm25-retrieval",
+        "dedup-merge",
+        "dense-embedding-retrieval",
+        "react-workflow"
+      ],
+      "domains": [
+        "synthesis",
+        "retrieval",
+        "synthesis",
+        "retrieval",
+        "workflow"
+      ],
+      "categories": [
+        "synthesis",
+        "retrieval",
+        "synthesis",
+        "retrieval",
+        "workflow"
+      ],
+      "score": 412.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "unique_domains": [
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "order",
+        "compare",
+        "scale",
+        "fold",
+        "hash",
+        "project",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** retrieval \u2192 synthesis \u2192 workflow\n**Components:**\n  - abstractive-synthesis (synthesis): LLM generates answer from retrieved context. Most flexible; can reason over multiple chunks.\n  - bm25-retrieval (retrieval): Probabilistic relevance ranking with TF saturation and document length normalization. Industry standard for sparse retrieval.\n  - dedup-merge (synthesis): Remove near-duplicate chunks (cosine or NCD > threshold) and merge their content.\n  - dense-embedding-retrieval (retrieval): Dense embedding via neural model (bge-m3, qwen3-embedding); cosine similarity in d-dim space. Bridges vocabulary gap.\n  - react-workflow (workflow): Reasoning + Acting loop: LLM reasons about what to retrieve next, retrieves, observes, repeats.\n**Real walls (combined):**\n  - [abstractive-synthesis] Hallucination: LLM may invent info not in context.\n  - [abstractive-synthesis] Context window: limited to model's input size.\n  - [abstractive-synthesis] Latency: 100-500ms per generation.\n  - [abstractive-synthesis] Cost: GPT-4-class models are $0.01-$0.10 per answer.\n  - [abstractive-synthesis] Quality depends on retrieved context quality.\n  - [bm25-retrieval] BM25F (fielded) needed for structured docs.\n  - [bm25-retrieval] k1=1.5, b=0.75 are defaults but rarely optimal.\n  - [bm25-retrieval] Cannot bridge vocabulary gap (no synonym handling).\n  - [bm25-retrieval] Fails on long-tail terms without IDF smoothing.\n  - [dedup-merge] Threshold tuning per corpus.\n  - [dedup-merge] May merge complementary info from near-duplicates that look the same.\n  - [dedup-merge] Computational cost: O(N^2) naive, O(N log N) with LSH.\n  - [dense-embedding-retrieval] Requires GPU or fast inference endpoint.\n  - [dense-embedding-retrieval] Latency: 10-50ms per query on CPU; 5-10ms on GPU.\n  - [dense-embedding-retrieval] Quality varies by model size; bge-m3 (566M) often beats qwen3-4b on small fixtures.\n  - [dense-embedding-retrieval] Cannot embed documents longer than model's context window.\n  - [dense-embedding-retrieval] Non-deterministic across model versions.\n  - [react-workflow] LLM hallucination in reasoning step.\n  - [react-workflow] Action space must be well-defined.\n  - [react-workflow] Termination conditions matter.\n  - [react-workflow] Quality depends on LLM's instruction-following."
+    },
+    {
+      "primitives": [
+        "abstractive-synthesis",
+        "bm25-retrieval",
+        "dedup-merge",
+        "dense-embedding-retrieval",
+        "self-ask-workflow"
+      ],
+      "domains": [
+        "synthesis",
+        "retrieval",
+        "synthesis",
+        "retrieval",
+        "workflow"
+      ],
+      "categories": [
+        "synthesis",
+        "retrieval",
+        "synthesis",
+        "retrieval",
+        "workflow"
+      ],
+      "score": 412.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "unique_domains": [
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "order",
+        "compare",
+        "scale",
+        "fold",
+        "hash",
+        "project",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** retrieval \u2192 synthesis \u2192 workflow\n**Components:**\n  - abstractive-synthesis (synthesis): LLM generates answer from retrieved context. Most flexible; can reason over multiple chunks.\n  - bm25-retrieval (retrieval): Probabilistic relevance ranking with TF saturation and document length normalization. Industry standard for sparse retrieval.\n  - dedup-merge (synthesis): Remove near-duplicate chunks (cosine or NCD > threshold) and merge their content.\n  - dense-embedding-retrieval (retrieval): Dense embedding via neural model (bge-m3, qwen3-embedding); cosine similarity in d-dim space. Bridges vocabulary gap.\n  - self-ask-workflow (workflow): LLM asks itself clarifying questions, retrieves, asks more, then answers. For complex multi-step queries.\n**Real walls (combined):**\n  - [abstractive-synthesis] Hallucination: LLM may invent info not in context.\n  - [abstractive-synthesis] Context window: limited to model's input size.\n  - [abstractive-synthesis] Latency: 100-500ms per generation.\n  - [abstractive-synthesis] Cost: GPT-4-class models are $0.01-$0.10 per answer.\n  - [abstractive-synthesis] Quality depends on retrieved context quality.\n  - [bm25-retrieval] BM25F (fielded) needed for structured docs.\n  - [bm25-retrieval] k1=1.5, b=0.75 are defaults but rarely optimal.\n  - [bm25-retrieval] Cannot bridge vocabulary gap (no synonym handling).\n  - [bm25-retrieval] Fails on long-tail terms without IDF smoothing.\n  - [dedup-merge] Threshold tuning per corpus.\n  - [dedup-merge] May merge complementary info from near-duplicates that look the same.\n  - [dedup-merge] Computational cost: O(N^2) naive, O(N log N) with LSH.\n  - [dense-embedding-retrieval] Requires GPU or fast inference endpoint.\n  - [dense-embedding-retrieval] Latency: 10-50ms per query on CPU; 5-10ms on GPU.\n  - [dense-embedding-retrieval] Quality varies by model size; bge-m3 (566M) often beats qwen3-4b on small fixtures.\n  - [dense-embedding-retrieval] Cannot embed documents longer than model's context window.\n  - [dense-embedding-retrieval] Non-deterministic across model versions.\n  - [self-ask-workflow] LLM may get stuck in loops.\n  - [self-ask-workflow] Question quality depends on LLM.\n  - [self-ask-workflow] Cost is unpredictable.\n  - [self-ask-workflow] Stop conditions are critical."
+    },
+    {
+      "primitives": [
+        "abstractive-synthesis",
+        "bm25-retrieval",
+        "dedup-merge",
+        "dense-embedding-retrieval",
+        "tree-of-retrieval"
+      ],
+      "domains": [
+        "synthesis",
+        "retrieval",
+        "synthesis",
+        "retrieval",
+        "workflow"
+      ],
+      "categories": [
+        "synthesis",
+        "retrieval",
+        "synthesis",
+        "retrieval",
+        "workflow"
+      ],
+      "score": 412.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "unique_domains": [
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "order",
+        "compare",
+        "scale",
+        "fold",
+        "hash",
+        "project",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** retrieval \u2192 synthesis \u2192 workflow\n**Components:**\n  - abstractive-synthesis (synthesis): LLM generates answer from retrieved context. Most flexible; can reason over multiple chunks.\n  - bm25-retrieval (retrieval): Probabilistic relevance ranking with TF saturation and document length normalization. Industry standard for sparse retrieval.\n  - dedup-merge (synthesis): Remove near-duplicate chunks (cosine or NCD > threshold) and merge their content.\n  - dense-embedding-retrieval (retrieval): Dense embedding via neural model (bge-m3, qwen3-embedding); cosine similarity in d-dim space. Bridges vocabulary gap.\n  - tree-of-retrieval (workflow): Branching retrieval: explore multiple paths, prune low-confidence branches.\n**Real walls (combined):**\n  - [abstractive-synthesis] Hallucination: LLM may invent info not in context.\n  - [abstractive-synthesis] Context window: limited to model's input size.\n  - [abstractive-synthesis] Latency: 100-500ms per generation.\n  - [abstractive-synthesis] Cost: GPT-4-class models are $0.01-$0.10 per answer.\n  - [abstractive-synthesis] Quality depends on retrieved context quality.\n  - [bm25-retrieval] BM25F (fielded) needed for structured docs.\n  - [bm25-retrieval] k1=1.5, b=0.75 are defaults but rarely optimal.\n  - [bm25-retrieval] Cannot bridge vocabulary gap (no synonym handling).\n  - [bm25-retrieval] Fails on long-tail terms without IDF smoothing.\n  - [dedup-merge] Threshold tuning per corpus.\n  - [dedup-merge] May merge complementary info from near-duplicates that look the same.\n  - [dedup-merge] Computational cost: O(N^2) naive, O(N log N) with LSH.\n  - [dense-embedding-retrieval] Requires GPU or fast inference endpoint.\n  - [dense-embedding-retrieval] Latency: 10-50ms per query on CPU; 5-10ms on GPU.\n  - [dense-embedding-retrieval] Quality varies by model size; bge-m3 (566M) often beats qwen3-4b on small fixtures.\n  - [dense-embedding-retrieval] Cannot embed documents longer than model's context window.\n  - [dense-embedding-retrieval] Non-deterministic across model versions.\n  - [tree-of-retrieval] Tree width must be bounded (3-5 typical).\n  - [tree-of-retrieval] Pruning threshold tuning.\n  - [tree-of-retrieval] Combine step at root must reconcile branches.\n  - [tree-of-retrieval] Cost grows exponentially without pruning."
+    },
+    {
+      "primitives": [
+        "abstractive-synthesis",
+        "bm25-retrieval",
+        "dense-embedding-retrieval",
+        "parallel-fan-out",
+        "rag-fusion"
+      ],
+      "domains": [
+        "synthesis",
+        "retrieval",
+        "retrieval",
+        "gating",
+        "workflow"
+      ],
+      "categories": [
+        "synthesis",
+        "retrieval",
+        "retrieval",
+        "gating",
+        "workflow"
+      ],
+      "score": 412.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "gating",
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "unique_domains": [
+        "gating",
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "order",
+        "compare",
+        "scale",
+        "fold",
+        "project",
+        "scan",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** gating \u2192 retrieval \u2192 synthesis \u2192 workflow\n**Components:**\n  - abstractive-synthesis (synthesis): LLM generates answer from retrieved context. Most flexible; can reason over multiple chunks.\n  - bm25-retrieval (retrieval): Probabilistic relevance ranking with TF saturation and document length normalization. Industry standard for sparse retrieval.\n  - dense-embedding-retrieval (retrieval): Dense embedding via neural model (bge-m3, qwen3-embedding); cosine similarity in d-dim space. Bridges vocabulary gap.\n  - parallel-fan-out (gating): Run multiple retrievers in parallel; combine. Higher quality but higher cost.\n  - rag-fusion (workflow): Generate N query variants via LLM, retrieve each, RRF-fuse results. Higher recall than single query.\n**Real walls (combined):**\n  - [abstractive-synthesis] Hallucination: LLM may invent info not in context.\n  - [abstractive-synthesis] Context window: limited to model's input size.\n  - [abstractive-synthesis] Latency: 100-500ms per generation.\n  - [abstractive-synthesis] Cost: GPT-4-class models are $0.01-$0.10 per answer.\n  - [abstractive-synthesis] Quality depends on retrieved context quality.\n  - [bm25-retrieval] BM25F (fielded) needed for structured docs.\n  - [bm25-retrieval] k1=1.5, b=0.75 are defaults but rarely optimal.\n  - [bm25-retrieval] Cannot bridge vocabulary gap (no synonym handling).\n  - [bm25-retrieval] Fails on long-tail terms without IDF smoothing.\n  - [dense-embedding-retrieval] Requires GPU or fast inference endpoint.\n  - [dense-embedding-retrieval] Latency: 10-50ms per query on CPU; 5-10ms on GPU.\n  - [dense-embedding-retrieval] Quality varies by model size; bge-m3 (566M) often beats qwen3-4b on small fixtures.\n  - [dense-embedding-retrieval] Cannot embed documents longer than model's context window.\n  - [dense-embedding-retrieval] Non-deterministic across model versions.\n  - [parallel-fan-out] Cost = sum of all parallel runs.\n  - [parallel-fan-out] Diminishing returns past 3-4 parallel retrievers.\n  - [parallel-fan-out] Result combination is non-trivial (RRF, voting, etc.).\n  - [rag-fusion] N variants: 3-5 typical.\n  - [rag-fusion] Cost = N * retrieve.\n  - [rag-fusion] Diminishing returns past N=5.\n  - [rag-fusion] Quality depends on LLM-generated variants."
+    },
+    {
+      "primitives": [
+        "abstractive-synthesis",
+        "bm25-retrieval",
+        "dense-embedding-retrieval",
+        "parallel-fan-out",
+        "react-workflow"
+      ],
+      "domains": [
+        "synthesis",
+        "retrieval",
+        "retrieval",
+        "gating",
+        "workflow"
+      ],
+      "categories": [
+        "synthesis",
+        "retrieval",
+        "retrieval",
+        "gating",
+        "workflow"
+      ],
+      "score": 412.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "gating",
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "unique_domains": [
+        "gating",
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "order",
+        "compare",
+        "scale",
+        "fold",
+        "project",
+        "scan",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** gating \u2192 retrieval \u2192 synthesis \u2192 workflow\n**Components:**\n  - abstractive-synthesis (synthesis): LLM generates answer from retrieved context. Most flexible; can reason over multiple chunks.\n  - bm25-retrieval (retrieval): Probabilistic relevance ranking with TF saturation and document length normalization. Industry standard for sparse retrieval.\n  - dense-embedding-retrieval (retrieval): Dense embedding via neural model (bge-m3, qwen3-embedding); cosine similarity in d-dim space. Bridges vocabulary gap.\n  - parallel-fan-out (gating): Run multiple retrievers in parallel; combine. Higher quality but higher cost.\n  - react-workflow (workflow): Reasoning + Acting loop: LLM reasons about what to retrieve next, retrieves, observes, repeats.\n**Real walls (combined):**\n  - [abstractive-synthesis] Hallucination: LLM may invent info not in context.\n  - [abstractive-synthesis] Context window: limited to model's input size.\n  - [abstractive-synthesis] Latency: 100-500ms per generation.\n  - [abstractive-synthesis] Cost: GPT-4-class models are $0.01-$0.10 per answer.\n  - [abstractive-synthesis] Quality depends on retrieved context quality.\n  - [bm25-retrieval] BM25F (fielded) needed for structured docs.\n  - [bm25-retrieval] k1=1.5, b=0.75 are defaults but rarely optimal.\n  - [bm25-retrieval] Cannot bridge vocabulary gap (no synonym handling).\n  - [bm25-retrieval] Fails on long-tail terms without IDF smoothing.\n  - [dense-embedding-retrieval] Requires GPU or fast inference endpoint.\n  - [dense-embedding-retrieval] Latency: 10-50ms per query on CPU; 5-10ms on GPU.\n  - [dense-embedding-retrieval] Quality varies by model size; bge-m3 (566M) often beats qwen3-4b on small fixtures.\n  - [dense-embedding-retrieval] Cannot embed documents longer than model's context window.\n  - [dense-embedding-retrieval] Non-deterministic across model versions.\n  - [parallel-fan-out] Cost = sum of all parallel runs.\n  - [parallel-fan-out] Diminishing returns past 3-4 parallel retrievers.\n  - [parallel-fan-out] Result combination is non-trivial (RRF, voting, etc.).\n  - [react-workflow] LLM hallucination in reasoning step.\n  - [react-workflow] Action space must be well-defined.\n  - [react-workflow] Termination conditions matter.\n  - [react-workflow] Quality depends on LLM's instruction-following."
+    },
+    {
+      "primitives": [
+        "abstractive-synthesis",
+        "bm25-retrieval",
+        "dense-embedding-retrieval",
+        "parallel-fan-out",
+        "self-ask-workflow"
+      ],
+      "domains": [
+        "synthesis",
+        "retrieval",
+        "retrieval",
+        "gating",
+        "workflow"
+      ],
+      "categories": [
+        "synthesis",
+        "retrieval",
+        "retrieval",
+        "gating",
+        "workflow"
+      ],
+      "score": 412.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "gating",
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "unique_domains": [
+        "gating",
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "order",
+        "compare",
+        "scale",
+        "fold",
+        "project",
+        "scan",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** gating \u2192 retrieval \u2192 synthesis \u2192 workflow\n**Components:**\n  - abstractive-synthesis (synthesis): LLM generates answer from retrieved context. Most flexible; can reason over multiple chunks.\n  - bm25-retrieval (retrieval): Probabilistic relevance ranking with TF saturation and document length normalization. Industry standard for sparse retrieval.\n  - dense-embedding-retrieval (retrieval): Dense embedding via neural model (bge-m3, qwen3-embedding); cosine similarity in d-dim space. Bridges vocabulary gap.\n  - parallel-fan-out (gating): Run multiple retrievers in parallel; combine. Higher quality but higher cost.\n  - self-ask-workflow (workflow): LLM asks itself clarifying questions, retrieves, asks more, then answers. For complex multi-step queries.\n**Real walls (combined):**\n  - [abstractive-synthesis] Hallucination: LLM may invent info not in context.\n  - [abstractive-synthesis] Context window: limited to model's input size.\n  - [abstractive-synthesis] Latency: 100-500ms per generation.\n  - [abstractive-synthesis] Cost: GPT-4-class models are $0.01-$0.10 per answer.\n  - [abstractive-synthesis] Quality depends on retrieved context quality.\n  - [bm25-retrieval] BM25F (fielded) needed for structured docs.\n  - [bm25-retrieval] k1=1.5, b=0.75 are defaults but rarely optimal.\n  - [bm25-retrieval] Cannot bridge vocabulary gap (no synonym handling).\n  - [bm25-retrieval] Fails on long-tail terms without IDF smoothing.\n  - [dense-embedding-retrieval] Requires GPU or fast inference endpoint.\n  - [dense-embedding-retrieval] Latency: 10-50ms per query on CPU; 5-10ms on GPU.\n  - [dense-embedding-retrieval] Quality varies by model size; bge-m3 (566M) often beats qwen3-4b on small fixtures.\n  - [dense-embedding-retrieval] Cannot embed documents longer than model's context window.\n  - [dense-embedding-retrieval] Non-deterministic across model versions.\n  - [parallel-fan-out] Cost = sum of all parallel runs.\n  - [parallel-fan-out] Diminishing returns past 3-4 parallel retrievers.\n  - [parallel-fan-out] Result combination is non-trivial (RRF, voting, etc.).\n  - [self-ask-workflow] LLM may get stuck in loops.\n  - [self-ask-workflow] Question quality depends on LLM.\n  - [self-ask-workflow] Cost is unpredictable.\n  - [self-ask-workflow] Stop conditions are critical."
+    },
+    {
+      "primitives": [
+        "abstractive-synthesis",
+        "bm25-retrieval",
+        "dense-embedding-retrieval",
+        "parallel-fan-out",
+        "tree-of-retrieval"
+      ],
+      "domains": [
+        "synthesis",
+        "retrieval",
+        "retrieval",
+        "gating",
+        "workflow"
+      ],
+      "categories": [
+        "synthesis",
+        "retrieval",
+        "retrieval",
+        "gating",
+        "workflow"
+      ],
+      "score": 412.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "gating",
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "unique_domains": [
+        "gating",
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "order",
+        "compare",
+        "scale",
+        "fold",
+        "project",
+        "scan",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** gating \u2192 retrieval \u2192 synthesis \u2192 workflow\n**Components:**\n  - abstractive-synthesis (synthesis): LLM generates answer from retrieved context. Most flexible; can reason over multiple chunks.\n  - bm25-retrieval (retrieval): Probabilistic relevance ranking with TF saturation and document length normalization. Industry standard for sparse retrieval.\n  - dense-embedding-retrieval (retrieval): Dense embedding via neural model (bge-m3, qwen3-embedding); cosine similarity in d-dim space. Bridges vocabulary gap.\n  - parallel-fan-out (gating): Run multiple retrievers in parallel; combine. Higher quality but higher cost.\n  - tree-of-retrieval (workflow): Branching retrieval: explore multiple paths, prune low-confidence branches.\n**Real walls (combined):**\n  - [abstractive-synthesis] Hallucination: LLM may invent info not in context.\n  - [abstractive-synthesis] Context window: limited to model's input size.\n  - [abstractive-synthesis] Latency: 100-500ms per generation.\n  - [abstractive-synthesis] Cost: GPT-4-class models are $0.01-$0.10 per answer.\n  - [abstractive-synthesis] Quality depends on retrieved context quality.\n  - [bm25-retrieval] BM25F (fielded) needed for structured docs.\n  - [bm25-retrieval] k1=1.5, b=0.75 are defaults but rarely optimal.\n  - [bm25-retrieval] Cannot bridge vocabulary gap (no synonym handling).\n  - [bm25-retrieval] Fails on long-tail terms without IDF smoothing.\n  - [dense-embedding-retrieval] Requires GPU or fast inference endpoint.\n  - [dense-embedding-retrieval] Latency: 10-50ms per query on CPU; 5-10ms on GPU.\n  - [dense-embedding-retrieval] Quality varies by model size; bge-m3 (566M) often beats qwen3-4b on small fixtures.\n  - [dense-embedding-retrieval] Cannot embed documents longer than model's context window.\n  - [dense-embedding-retrieval] Non-deterministic across model versions.\n  - [parallel-fan-out] Cost = sum of all parallel runs.\n  - [parallel-fan-out] Diminishing returns past 3-4 parallel retrievers.\n  - [parallel-fan-out] Result combination is non-trivial (RRF, voting, etc.).\n  - [tree-of-retrieval] Tree width must be bounded (3-5 typical).\n  - [tree-of-retrieval] Pruning threshold tuning.\n  - [tree-of-retrieval] Combine step at root must reconcile branches.\n  - [tree-of-retrieval] Cost grows exponentially without pruning."
+    },
+    {
+      "primitives": [
+        "abstractive-synthesis",
+        "chain-of-retrieval",
+        "dedup-merge",
+        "dense-embedding-retrieval",
+        "rag-fusion"
+      ],
+      "domains": [
+        "synthesis",
+        "workflow",
+        "synthesis",
+        "retrieval",
+        "workflow"
+      ],
+      "categories": [
+        "synthesis",
+        "workflow",
+        "synthesis",
+        "retrieval",
+        "workflow"
+      ],
+      "score": 412.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "unique_domains": [
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "order",
+        "compare",
+        "fold",
+        "hash",
+        "project",
+        "scale",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** retrieval \u2192 synthesis \u2192 workflow\n**Components:**\n  - abstractive-synthesis (synthesis): LLM generates answer from retrieved context. Most flexible; can reason over multiple chunks.\n  - chain-of-retrieval (workflow): Sequential retrieval: each step depends on previous answer. For multi-hop queries.\n  - dedup-merge (synthesis): Remove near-duplicate chunks (cosine or NCD > threshold) and merge their content.\n  - dense-embedding-retrieval (retrieval): Dense embedding via neural model (bge-m3, qwen3-embedding); cosine similarity in d-dim space. Bridges vocabulary gap.\n  - rag-fusion (workflow): Generate N query variants via LLM, retrieve each, RRF-fuse results. Higher recall than single query.\n**Real walls (combined):**\n  - [abstractive-synthesis] Hallucination: LLM may invent info not in context.\n  - [abstractive-synthesis] Context window: limited to model's input size.\n  - [abstractive-synthesis] Latency: 100-500ms per generation.\n  - [abstractive-synthesis] Cost: GPT-4-class models are $0.01-$0.10 per answer.\n  - [abstractive-synthesis] Quality depends on retrieved context quality.\n  - [chain-of-retrieval] Latency compounds (steps are sequential).\n  - [chain-of-retrieval] Error compounds: bad first answer \u2192 bad second.\n  - [chain-of-retrieval] Cost grows with hops.\n  - [chain-of-retrieval] Stop condition (when to stop?) is non-trivial.\n  - [dedup-merge] Threshold tuning per corpus.\n  - [dedup-merge] May merge complementary info from near-duplicates that look the same.\n  - [dedup-merge] Computational cost: O(N^2) naive, O(N log N) with LSH.\n  - [dense-embedding-retrieval] Requires GPU or fast inference endpoint.\n  - [dense-embedding-retrieval] Latency: 10-50ms per query on CPU; 5-10ms on GPU.\n  - [dense-embedding-retrieval] Quality varies by model size; bge-m3 (566M) often beats qwen3-4b on small fixtures.\n  - [dense-embedding-retrieval] Cannot embed documents longer than model's context window.\n  - [dense-embedding-retrieval] Non-deterministic across model versions.\n  - [rag-fusion] N variants: 3-5 typical.\n  - [rag-fusion] Cost = N * retrieve.\n  - [rag-fusion] Diminishing returns past N=5.\n  - [rag-fusion] Quality depends on LLM-generated variants."
+    },
+    {
+      "primitives": [
+        "abstractive-synthesis",
+        "chain-of-retrieval",
+        "dedup-merge",
+        "dense-embedding-retrieval",
+        "react-workflow"
+      ],
+      "domains": [
+        "synthesis",
+        "workflow",
+        "synthesis",
+        "retrieval",
+        "workflow"
+      ],
+      "categories": [
+        "synthesis",
+        "workflow",
+        "synthesis",
+        "retrieval",
+        "workflow"
+      ],
+      "score": 412.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "unique_domains": [
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "order",
+        "compare",
+        "fold",
+        "hash",
+        "project",
+        "scale",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** retrieval \u2192 synthesis \u2192 workflow\n**Components:**\n  - abstractive-synthesis (synthesis): LLM generates answer from retrieved context. Most flexible; can reason over multiple chunks.\n  - chain-of-retrieval (workflow): Sequential retrieval: each step depends on previous answer. For multi-hop queries.\n  - dedup-merge (synthesis): Remove near-duplicate chunks (cosine or NCD > threshold) and merge their content.\n  - dense-embedding-retrieval (retrieval): Dense embedding via neural model (bge-m3, qwen3-embedding); cosine similarity in d-dim space. Bridges vocabulary gap.\n  - react-workflow (workflow): Reasoning + Acting loop: LLM reasons about what to retrieve next, retrieves, observes, repeats.\n**Real walls (combined):**\n  - [abstractive-synthesis] Hallucination: LLM may invent info not in context.\n  - [abstractive-synthesis] Context window: limited to model's input size.\n  - [abstractive-synthesis] Latency: 100-500ms per generation.\n  - [abstractive-synthesis] Cost: GPT-4-class models are $0.01-$0.10 per answer.\n  - [abstractive-synthesis] Quality depends on retrieved context quality.\n  - [chain-of-retrieval] Latency compounds (steps are sequential).\n  - [chain-of-retrieval] Error compounds: bad first answer \u2192 bad second.\n  - [chain-of-retrieval] Cost grows with hops.\n  - [chain-of-retrieval] Stop condition (when to stop?) is non-trivial.\n  - [dedup-merge] Threshold tuning per corpus.\n  - [dedup-merge] May merge complementary info from near-duplicates that look the same.\n  - [dedup-merge] Computational cost: O(N^2) naive, O(N log N) with LSH.\n  - [dense-embedding-retrieval] Requires GPU or fast inference endpoint.\n  - [dense-embedding-retrieval] Latency: 10-50ms per query on CPU; 5-10ms on GPU.\n  - [dense-embedding-retrieval] Quality varies by model size; bge-m3 (566M) often beats qwen3-4b on small fixtures.\n  - [dense-embedding-retrieval] Cannot embed documents longer than model's context window.\n  - [dense-embedding-retrieval] Non-deterministic across model versions.\n  - [react-workflow] LLM hallucination in reasoning step.\n  - [react-workflow] Action space must be well-defined.\n  - [react-workflow] Termination conditions matter.\n  - [react-workflow] Quality depends on LLM's instruction-following."
+    },
+    {
+      "primitives": [
+        "abstractive-synthesis",
+        "chain-of-retrieval",
+        "dedup-merge",
+        "dense-embedding-retrieval",
+        "self-ask-workflow"
+      ],
+      "domains": [
+        "synthesis",
+        "workflow",
+        "synthesis",
+        "retrieval",
+        "workflow"
+      ],
+      "categories": [
+        "synthesis",
+        "workflow",
+        "synthesis",
+        "retrieval",
+        "workflow"
+      ],
+      "score": 412.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "unique_domains": [
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "order",
+        "compare",
+        "fold",
+        "hash",
+        "project",
+        "scale",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** retrieval \u2192 synthesis \u2192 workflow\n**Components:**\n  - abstractive-synthesis (synthesis): LLM generates answer from retrieved context. Most flexible; can reason over multiple chunks.\n  - chain-of-retrieval (workflow): Sequential retrieval: each step depends on previous answer. For multi-hop queries.\n  - dedup-merge (synthesis): Remove near-duplicate chunks (cosine or NCD > threshold) and merge their content.\n  - dense-embedding-retrieval (retrieval): Dense embedding via neural model (bge-m3, qwen3-embedding); cosine similarity in d-dim space. Bridges vocabulary gap.\n  - self-ask-workflow (workflow): LLM asks itself clarifying questions, retrieves, asks more, then answers. For complex multi-step queries.\n**Real walls (combined):**\n  - [abstractive-synthesis] Hallucination: LLM may invent info not in context.\n  - [abstractive-synthesis] Context window: limited to model's input size.\n  - [abstractive-synthesis] Latency: 100-500ms per generation.\n  - [abstractive-synthesis] Cost: GPT-4-class models are $0.01-$0.10 per answer.\n  - [abstractive-synthesis] Quality depends on retrieved context quality.\n  - [chain-of-retrieval] Latency compounds (steps are sequential).\n  - [chain-of-retrieval] Error compounds: bad first answer \u2192 bad second.\n  - [chain-of-retrieval] Cost grows with hops.\n  - [chain-of-retrieval] Stop condition (when to stop?) is non-trivial.\n  - [dedup-merge] Threshold tuning per corpus.\n  - [dedup-merge] May merge complementary info from near-duplicates that look the same.\n  - [dedup-merge] Computational cost: O(N^2) naive, O(N log N) with LSH.\n  - [dense-embedding-retrieval] Requires GPU or fast inference endpoint.\n  - [dense-embedding-retrieval] Latency: 10-50ms per query on CPU; 5-10ms on GPU.\n  - [dense-embedding-retrieval] Quality varies by model size; bge-m3 (566M) often beats qwen3-4b on small fixtures.\n  - [dense-embedding-retrieval] Cannot embed documents longer than model's context window.\n  - [dense-embedding-retrieval] Non-deterministic across model versions.\n  - [self-ask-workflow] LLM may get stuck in loops.\n  - [self-ask-workflow] Question quality depends on LLM.\n  - [self-ask-workflow] Cost is unpredictable.\n  - [self-ask-workflow] Stop conditions are critical."
+    },
+    {
+      "primitives": [
+        "abstractive-synthesis",
+        "chain-of-retrieval",
+        "dedup-merge",
+        "dense-embedding-retrieval",
+        "tree-of-retrieval"
+      ],
+      "domains": [
+        "synthesis",
+        "workflow",
+        "synthesis",
+        "retrieval",
+        "workflow"
+      ],
+      "categories": [
+        "synthesis",
+        "workflow",
+        "synthesis",
+        "retrieval",
+        "workflow"
+      ],
+      "score": 412.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "unique_domains": [
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "order",
+        "compare",
+        "fold",
+        "hash",
+        "project",
+        "scale",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** retrieval \u2192 synthesis \u2192 workflow\n**Components:**\n  - abstractive-synthesis (synthesis): LLM generates answer from retrieved context. Most flexible; can reason over multiple chunks.\n  - chain-of-retrieval (workflow): Sequential retrieval: each step depends on previous answer. For multi-hop queries.\n  - dedup-merge (synthesis): Remove near-duplicate chunks (cosine or NCD > threshold) and merge their content.\n  - dense-embedding-retrieval (retrieval): Dense embedding via neural model (bge-m3, qwen3-embedding); cosine similarity in d-dim space. Bridges vocabulary gap.\n  - tree-of-retrieval (workflow): Branching retrieval: explore multiple paths, prune low-confidence branches.\n**Real walls (combined):**\n  - [abstractive-synthesis] Hallucination: LLM may invent info not in context.\n  - [abstractive-synthesis] Context window: limited to model's input size.\n  - [abstractive-synthesis] Latency: 100-500ms per generation.\n  - [abstractive-synthesis] Cost: GPT-4-class models are $0.01-$0.10 per answer.\n  - [abstractive-synthesis] Quality depends on retrieved context quality.\n  - [chain-of-retrieval] Latency compounds (steps are sequential).\n  - [chain-of-retrieval] Error compounds: bad first answer \u2192 bad second.\n  - [chain-of-retrieval] Cost grows with hops.\n  - [chain-of-retrieval] Stop condition (when to stop?) is non-trivial.\n  - [dedup-merge] Threshold tuning per corpus.\n  - [dedup-merge] May merge complementary info from near-duplicates that look the same.\n  - [dedup-merge] Computational cost: O(N^2) naive, O(N log N) with LSH.\n  - [dense-embedding-retrieval] Requires GPU or fast inference endpoint.\n  - [dense-embedding-retrieval] Latency: 10-50ms per query on CPU; 5-10ms on GPU.\n  - [dense-embedding-retrieval] Quality varies by model size; bge-m3 (566M) often beats qwen3-4b on small fixtures.\n  - [dense-embedding-retrieval] Cannot embed documents longer than model's context window.\n  - [dense-embedding-retrieval] Non-deterministic across model versions.\n  - [tree-of-retrieval] Tree width must be bounded (3-5 typical).\n  - [tree-of-retrieval] Pruning threshold tuning.\n  - [tree-of-retrieval] Combine step at root must reconcile branches.\n  - [tree-of-retrieval] Cost grows exponentially without pruning."
+    },
+    {
+      "primitives": [
+        "abstractive-synthesis",
+        "chain-of-retrieval",
+        "dense-embedding-retrieval",
+        "parallel-fan-out",
+        "rag-fusion"
+      ],
+      "domains": [
+        "synthesis",
+        "workflow",
+        "retrieval",
+        "gating",
+        "workflow"
+      ],
+      "categories": [
+        "synthesis",
+        "workflow",
+        "retrieval",
+        "gating",
+        "workflow"
+      ],
+      "score": 412.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "gating",
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "unique_domains": [
+        "gating",
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "order",
+        "compare",
+        "fold",
+        "project",
+        "scale",
+        "scan",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** gating \u2192 retrieval \u2192 synthesis \u2192 workflow\n**Components:**\n  - abstractive-synthesis (synthesis): LLM generates answer from retrieved context. Most flexible; can reason over multiple chunks.\n  - chain-of-retrieval (workflow): Sequential retrieval: each step depends on previous answer. For multi-hop queries.\n  - dense-embedding-retrieval (retrieval): Dense embedding via neural model (bge-m3, qwen3-embedding); cosine similarity in d-dim space. Bridges vocabulary gap.\n  - parallel-fan-out (gating): Run multiple retrievers in parallel; combine. Higher quality but higher cost.\n  - rag-fusion (workflow): Generate N query variants via LLM, retrieve each, RRF-fuse results. Higher recall than single query.\n**Real walls (combined):**\n  - [abstractive-synthesis] Hallucination: LLM may invent info not in context.\n  - [abstractive-synthesis] Context window: limited to model's input size.\n  - [abstractive-synthesis] Latency: 100-500ms per generation.\n  - [abstractive-synthesis] Cost: GPT-4-class models are $0.01-$0.10 per answer.\n  - [abstractive-synthesis] Quality depends on retrieved context quality.\n  - [chain-of-retrieval] Latency compounds (steps are sequential).\n  - [chain-of-retrieval] Error compounds: bad first answer \u2192 bad second.\n  - [chain-of-retrieval] Cost grows with hops.\n  - [chain-of-retrieval] Stop condition (when to stop?) is non-trivial.\n  - [dense-embedding-retrieval] Requires GPU or fast inference endpoint.\n  - [dense-embedding-retrieval] Latency: 10-50ms per query on CPU; 5-10ms on GPU.\n  - [dense-embedding-retrieval] Quality varies by model size; bge-m3 (566M) often beats qwen3-4b on small fixtures.\n  - [dense-embedding-retrieval] Cannot embed documents longer than model's context window.\n  - [dense-embedding-retrieval] Non-deterministic across model versions.\n  - [parallel-fan-out] Cost = sum of all parallel runs.\n  - [parallel-fan-out] Diminishing returns past 3-4 parallel retrievers.\n  - [parallel-fan-out] Result combination is non-trivial (RRF, voting, etc.).\n  - [rag-fusion] N variants: 3-5 typical.\n  - [rag-fusion] Cost = N * retrieve.\n  - [rag-fusion] Diminishing returns past N=5.\n  - [rag-fusion] Quality depends on LLM-generated variants."
+    },
+    {
+      "primitives": [
+        "abstractive-synthesis",
+        "chain-of-retrieval",
+        "dense-embedding-retrieval",
+        "parallel-fan-out",
+        "react-workflow"
+      ],
+      "domains": [
+        "synthesis",
+        "workflow",
+        "retrieval",
+        "gating",
+        "workflow"
+      ],
+      "categories": [
+        "synthesis",
+        "workflow",
+        "retrieval",
+        "gating",
+        "workflow"
+      ],
+      "score": 412.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "gating",
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "unique_domains": [
+        "gating",
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "order",
+        "compare",
+        "fold",
+        "project",
+        "scale",
+        "scan",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** gating \u2192 retrieval \u2192 synthesis \u2192 workflow\n**Components:**\n  - abstractive-synthesis (synthesis): LLM generates answer from retrieved context. Most flexible; can reason over multiple chunks.\n  - chain-of-retrieval (workflow): Sequential retrieval: each step depends on previous answer. For multi-hop queries.\n  - dense-embedding-retrieval (retrieval): Dense embedding via neural model (bge-m3, qwen3-embedding); cosine similarity in d-dim space. Bridges vocabulary gap.\n  - parallel-fan-out (gating): Run multiple retrievers in parallel; combine. Higher quality but higher cost.\n  - react-workflow (workflow): Reasoning + Acting loop: LLM reasons about what to retrieve next, retrieves, observes, repeats.\n**Real walls (combined):**\n  - [abstractive-synthesis] Hallucination: LLM may invent info not in context.\n  - [abstractive-synthesis] Context window: limited to model's input size.\n  - [abstractive-synthesis] Latency: 100-500ms per generation.\n  - [abstractive-synthesis] Cost: GPT-4-class models are $0.01-$0.10 per answer.\n  - [abstractive-synthesis] Quality depends on retrieved context quality.\n  - [chain-of-retrieval] Latency compounds (steps are sequential).\n  - [chain-of-retrieval] Error compounds: bad first answer \u2192 bad second.\n  - [chain-of-retrieval] Cost grows with hops.\n  - [chain-of-retrieval] Stop condition (when to stop?) is non-trivial.\n  - [dense-embedding-retrieval] Requires GPU or fast inference endpoint.\n  - [dense-embedding-retrieval] Latency: 10-50ms per query on CPU; 5-10ms on GPU.\n  - [dense-embedding-retrieval] Quality varies by model size; bge-m3 (566M) often beats qwen3-4b on small fixtures.\n  - [dense-embedding-retrieval] Cannot embed documents longer than model's context window.\n  - [dense-embedding-retrieval] Non-deterministic across model versions.\n  - [parallel-fan-out] Cost = sum of all parallel runs.\n  - [parallel-fan-out] Diminishing returns past 3-4 parallel retrievers.\n  - [parallel-fan-out] Result combination is non-trivial (RRF, voting, etc.).\n  - [react-workflow] LLM hallucination in reasoning step.\n  - [react-workflow] Action space must be well-defined.\n  - [react-workflow] Termination conditions matter.\n  - [react-workflow] Quality depends on LLM's instruction-following."
+    },
+    {
+      "primitives": [
+        "abstractive-synthesis",
+        "chain-of-retrieval",
+        "dense-embedding-retrieval",
+        "parallel-fan-out",
+        "self-ask-workflow"
+      ],
+      "domains": [
+        "synthesis",
+        "workflow",
+        "retrieval",
+        "gating",
+        "workflow"
+      ],
+      "categories": [
+        "synthesis",
+        "workflow",
+        "retrieval",
+        "gating",
+        "workflow"
+      ],
+      "score": 412.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "gating",
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "unique_domains": [
+        "gating",
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "order",
+        "compare",
+        "fold",
+        "project",
+        "scale",
+        "scan",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** gating \u2192 retrieval \u2192 synthesis \u2192 workflow\n**Components:**\n  - abstractive-synthesis (synthesis): LLM generates answer from retrieved context. Most flexible; can reason over multiple chunks.\n  - chain-of-retrieval (workflow): Sequential retrieval: each step depends on previous answer. For multi-hop queries.\n  - dense-embedding-retrieval (retrieval): Dense embedding via neural model (bge-m3, qwen3-embedding); cosine similarity in d-dim space. Bridges vocabulary gap.\n  - parallel-fan-out (gating): Run multiple retrievers in parallel; combine. Higher quality but higher cost.\n  - self-ask-workflow (workflow): LLM asks itself clarifying questions, retrieves, asks more, then answers. For complex multi-step queries.\n**Real walls (combined):**\n  - [abstractive-synthesis] Hallucination: LLM may invent info not in context.\n  - [abstractive-synthesis] Context window: limited to model's input size.\n  - [abstractive-synthesis] Latency: 100-500ms per generation.\n  - [abstractive-synthesis] Cost: GPT-4-class models are $0.01-$0.10 per answer.\n  - [abstractive-synthesis] Quality depends on retrieved context quality.\n  - [chain-of-retrieval] Latency compounds (steps are sequential).\n  - [chain-of-retrieval] Error compounds: bad first answer \u2192 bad second.\n  - [chain-of-retrieval] Cost grows with hops.\n  - [chain-of-retrieval] Stop condition (when to stop?) is non-trivial.\n  - [dense-embedding-retrieval] Requires GPU or fast inference endpoint.\n  - [dense-embedding-retrieval] Latency: 10-50ms per query on CPU; 5-10ms on GPU.\n  - [dense-embedding-retrieval] Quality varies by model size; bge-m3 (566M) often beats qwen3-4b on small fixtures.\n  - [dense-embedding-retrieval] Cannot embed documents longer than model's context window.\n  - [dense-embedding-retrieval] Non-deterministic across model versions.\n  - [parallel-fan-out] Cost = sum of all parallel runs.\n  - [parallel-fan-out] Diminishing returns past 3-4 parallel retrievers.\n  - [parallel-fan-out] Result combination is non-trivial (RRF, voting, etc.).\n  - [self-ask-workflow] LLM may get stuck in loops.\n  - [self-ask-workflow] Question quality depends on LLM.\n  - [self-ask-workflow] Cost is unpredictable.\n  - [self-ask-workflow] Stop conditions are critical."
+    },
+    {
+      "primitives": [
+        "abstractive-synthesis",
+        "chain-of-retrieval",
+        "dense-embedding-retrieval",
+        "parallel-fan-out",
+        "tree-of-retrieval"
+      ],
+      "domains": [
+        "synthesis",
+        "workflow",
+        "retrieval",
+        "gating",
+        "workflow"
+      ],
+      "categories": [
+        "synthesis",
+        "workflow",
+        "retrieval",
+        "gating",
+        "workflow"
+      ],
+      "score": 412.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "gating",
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "unique_domains": [
+        "gating",
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "order",
+        "compare",
+        "fold",
+        "project",
+        "scale",
+        "scan",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** gating \u2192 retrieval \u2192 synthesis \u2192 workflow\n**Components:**\n  - abstractive-synthesis (synthesis): LLM generates answer from retrieved context. Most flexible; can reason over multiple chunks.\n  - chain-of-retrieval (workflow): Sequential retrieval: each step depends on previous answer. For multi-hop queries.\n  - dense-embedding-retrieval (retrieval): Dense embedding via neural model (bge-m3, qwen3-embedding); cosine similarity in d-dim space. Bridges vocabulary gap.\n  - parallel-fan-out (gating): Run multiple retrievers in parallel; combine. Higher quality but higher cost.\n  - tree-of-retrieval (workflow): Branching retrieval: explore multiple paths, prune low-confidence branches.\n**Real walls (combined):**\n  - [abstractive-synthesis] Hallucination: LLM may invent info not in context.\n  - [abstractive-synthesis] Context window: limited to model's input size.\n  - [abstractive-synthesis] Latency: 100-500ms per generation.\n  - [abstractive-synthesis] Cost: GPT-4-class models are $0.01-$0.10 per answer.\n  - [abstractive-synthesis] Quality depends on retrieved context quality.\n  - [chain-of-retrieval] Latency compounds (steps are sequential).\n  - [chain-of-retrieval] Error compounds: bad first answer \u2192 bad second.\n  - [chain-of-retrieval] Cost grows with hops.\n  - [chain-of-retrieval] Stop condition (when to stop?) is non-trivial.\n  - [dense-embedding-retrieval] Requires GPU or fast inference endpoint.\n  - [dense-embedding-retrieval] Latency: 10-50ms per query on CPU; 5-10ms on GPU.\n  - [dense-embedding-retrieval] Quality varies by model size; bge-m3 (566M) often beats qwen3-4b on small fixtures.\n  - [dense-embedding-retrieval] Cannot embed documents longer than model's context window.\n  - [dense-embedding-retrieval] Non-deterministic across model versions.\n  - [parallel-fan-out] Cost = sum of all parallel runs.\n  - [parallel-fan-out] Diminishing returns past 3-4 parallel retrievers.\n  - [parallel-fan-out] Result combination is non-trivial (RRF, voting, etc.).\n  - [tree-of-retrieval] Tree width must be bounded (3-5 typical).\n  - [tree-of-retrieval] Pruning threshold tuning.\n  - [tree-of-retrieval] Combine step at root must reconcile branches.\n  - [tree-of-retrieval] Cost grows exponentially without pruning."
+    },
+    {
+      "primitives": [
+        "abstractive-synthesis",
+        "dedup-merge",
+        "dense-embedding-retrieval",
+        "hierarchical-decomposition",
+        "rag-fusion"
+      ],
+      "domains": [
+        "synthesis",
+        "synthesis",
+        "retrieval",
+        "decomposition",
+        "workflow"
+      ],
+      "categories": [
+        "synthesis",
+        "synthesis",
+        "retrieval",
+        "decomposition",
+        "workflow"
+      ],
+      "score": 412.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "decomposition",
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "unique_domains": [
+        "decomposition",
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "order",
+        "compare",
+        "hash",
+        "project",
+        "scale",
+        "fold",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** decomposition \u2192 retrieval \u2192 synthesis \u2192 workflow\n**Components:**\n  - abstractive-synthesis (synthesis): LLM generates answer from retrieved context. Most flexible; can reason over multiple chunks.\n  - dedup-merge (synthesis): Remove near-duplicate chunks (cosine or NCD > threshold) and merge their content.\n  - dense-embedding-retrieval (retrieval): Dense embedding via neural model (bge-m3, qwen3-embedding); cosine similarity in d-dim space. Bridges vocabulary gap.\n  - hierarchical-decomposition (decomposition): Recursive decomposition: sub-Qs split further if they're still complex. Tree of questions.\n  - rag-fusion (workflow): Generate N query variants via LLM, retrieve each, RRF-fuse results. Higher recall than single query.\n**Real walls (combined):**\n  - [abstractive-synthesis] Hallucination: LLM may invent info not in context.\n  - [abstractive-synthesis] Context window: limited to model's input size.\n  - [abstractive-synthesis] Latency: 100-500ms per generation.\n  - [abstractive-synthesis] Cost: GPT-4-class models are $0.01-$0.10 per answer.\n  - [abstractive-synthesis] Quality depends on retrieved context quality.\n  - [dedup-merge] Threshold tuning per corpus.\n  - [dedup-merge] May merge complementary info from near-duplicates that look the same.\n  - [dedup-merge] Computational cost: O(N^2) naive, O(N log N) with LSH.\n  - [dense-embedding-retrieval] Requires GPU or fast inference endpoint.\n  - [dense-embedding-retrieval] Latency: 10-50ms per query on CPU; 5-10ms on GPU.\n  - [dense-embedding-retrieval] Quality varies by model size; bge-m3 (566M) often beats qwen3-4b on small fixtures.\n  - [dense-embedding-retrieval] Cannot embed documents longer than model's context window.\n  - [dense-embedding-retrieval] Non-deterministic across model versions.\n  - [hierarchical-decomposition] Recursion depth must be bounded (3-4 typical).\n  - [hierarchical-decomposition] Leaves must be atomic; intermediate nodes need partial answers.\n  - [hierarchical-decomposition] Cost multiplies per level: 1 \u2192 N \u2192 N^2 in worst case.\n  - [hierarchical-decomposition] Aggregation at parent nodes can lose information.\n  - [rag-fusion] N variants: 3-5 typical.\n  - [rag-fusion] Cost = N * retrieve.\n  - [rag-fusion] Diminishing returns past N=5.\n  - [rag-fusion] Quality depends on LLM-generated variants."
+    },
+    {
+      "primitives": [
+        "abstractive-synthesis",
+        "dedup-merge",
+        "dense-embedding-retrieval",
+        "hierarchical-decomposition",
+        "react-workflow"
+      ],
+      "domains": [
+        "synthesis",
+        "synthesis",
+        "retrieval",
+        "decomposition",
+        "workflow"
+      ],
+      "categories": [
+        "synthesis",
+        "synthesis",
+        "retrieval",
+        "decomposition",
+        "workflow"
+      ],
+      "score": 412.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "decomposition",
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "unique_domains": [
+        "decomposition",
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "order",
+        "compare",
+        "hash",
+        "project",
+        "scale",
+        "fold",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** decomposition \u2192 retrieval \u2192 synthesis \u2192 workflow\n**Components:**\n  - abstractive-synthesis (synthesis): LLM generates answer from retrieved context. Most flexible; can reason over multiple chunks.\n  - dedup-merge (synthesis): Remove near-duplicate chunks (cosine or NCD > threshold) and merge their content.\n  - dense-embedding-retrieval (retrieval): Dense embedding via neural model (bge-m3, qwen3-embedding); cosine similarity in d-dim space. Bridges vocabulary gap.\n  - hierarchical-decomposition (decomposition): Recursive decomposition: sub-Qs split further if they're still complex. Tree of questions.\n  - react-workflow (workflow): Reasoning + Acting loop: LLM reasons about what to retrieve next, retrieves, observes, repeats.\n**Real walls (combined):**\n  - [abstractive-synthesis] Hallucination: LLM may invent info not in context.\n  - [abstractive-synthesis] Context window: limited to model's input size.\n  - [abstractive-synthesis] Latency: 100-500ms per generation.\n  - [abstractive-synthesis] Cost: GPT-4-class models are $0.01-$0.10 per answer.\n  - [abstractive-synthesis] Quality depends on retrieved context quality.\n  - [dedup-merge] Threshold tuning per corpus.\n  - [dedup-merge] May merge complementary info from near-duplicates that look the same.\n  - [dedup-merge] Computational cost: O(N^2) naive, O(N log N) with LSH.\n  - [dense-embedding-retrieval] Requires GPU or fast inference endpoint.\n  - [dense-embedding-retrieval] Latency: 10-50ms per query on CPU; 5-10ms on GPU.\n  - [dense-embedding-retrieval] Quality varies by model size; bge-m3 (566M) often beats qwen3-4b on small fixtures.\n  - [dense-embedding-retrieval] Cannot embed documents longer than model's context window.\n  - [dense-embedding-retrieval] Non-deterministic across model versions.\n  - [hierarchical-decomposition] Recursion depth must be bounded (3-4 typical).\n  - [hierarchical-decomposition] Leaves must be atomic; intermediate nodes need partial answers.\n  - [hierarchical-decomposition] Cost multiplies per level: 1 \u2192 N \u2192 N^2 in worst case.\n  - [hierarchical-decomposition] Aggregation at parent nodes can lose information.\n  - [react-workflow] LLM hallucination in reasoning step.\n  - [react-workflow] Action space must be well-defined.\n  - [react-workflow] Termination conditions matter.\n  - [react-workflow] Quality depends on LLM's instruction-following."
+    },
+    {
+      "primitives": [
+        "abstractive-synthesis",
+        "dedup-merge",
+        "dense-embedding-retrieval",
+        "hierarchical-decomposition",
+        "self-ask-workflow"
+      ],
+      "domains": [
+        "synthesis",
+        "synthesis",
+        "retrieval",
+        "decomposition",
+        "workflow"
+      ],
+      "categories": [
+        "synthesis",
+        "synthesis",
+        "retrieval",
+        "decomposition",
+        "workflow"
+      ],
+      "score": 412.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "decomposition",
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "unique_domains": [
+        "decomposition",
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "order",
+        "compare",
+        "hash",
+        "project",
+        "scale",
+        "fold",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** decomposition \u2192 retrieval \u2192 synthesis \u2192 workflow\n**Components:**\n  - abstractive-synthesis (synthesis): LLM generates answer from retrieved context. Most flexible; can reason over multiple chunks.\n  - dedup-merge (synthesis): Remove near-duplicate chunks (cosine or NCD > threshold) and merge their content.\n  - dense-embedding-retrieval (retrieval): Dense embedding via neural model (bge-m3, qwen3-embedding); cosine similarity in d-dim space. Bridges vocabulary gap.\n  - hierarchical-decomposition (decomposition): Recursive decomposition: sub-Qs split further if they're still complex. Tree of questions.\n  - self-ask-workflow (workflow): LLM asks itself clarifying questions, retrieves, asks more, then answers. For complex multi-step queries.\n**Real walls (combined):**\n  - [abstractive-synthesis] Hallucination: LLM may invent info not in context.\n  - [abstractive-synthesis] Context window: limited to model's input size.\n  - [abstractive-synthesis] Latency: 100-500ms per generation.\n  - [abstractive-synthesis] Cost: GPT-4-class models are $0.01-$0.10 per answer.\n  - [abstractive-synthesis] Quality depends on retrieved context quality.\n  - [dedup-merge] Threshold tuning per corpus.\n  - [dedup-merge] May merge complementary info from near-duplicates that look the same.\n  - [dedup-merge] Computational cost: O(N^2) naive, O(N log N) with LSH.\n  - [dense-embedding-retrieval] Requires GPU or fast inference endpoint.\n  - [dense-embedding-retrieval] Latency: 10-50ms per query on CPU; 5-10ms on GPU.\n  - [dense-embedding-retrieval] Quality varies by model size; bge-m3 (566M) often beats qwen3-4b on small fixtures.\n  - [dense-embedding-retrieval] Cannot embed documents longer than model's context window.\n  - [dense-embedding-retrieval] Non-deterministic across model versions.\n  - [hierarchical-decomposition] Recursion depth must be bounded (3-4 typical).\n  - [hierarchical-decomposition] Leaves must be atomic; intermediate nodes need partial answers.\n  - [hierarchical-decomposition] Cost multiplies per level: 1 \u2192 N \u2192 N^2 in worst case.\n  - [hierarchical-decomposition] Aggregation at parent nodes can lose information.\n  - [self-ask-workflow] LLM may get stuck in loops.\n  - [self-ask-workflow] Question quality depends on LLM.\n  - [self-ask-workflow] Cost is unpredictable.\n  - [self-ask-workflow] Stop conditions are critical."
+    },
+    {
+      "primitives": [
+        "abstractive-synthesis",
+        "dedup-merge",
+        "dense-embedding-retrieval",
+        "hierarchical-decomposition",
+        "tree-of-retrieval"
+      ],
+      "domains": [
+        "synthesis",
+        "synthesis",
+        "retrieval",
+        "decomposition",
+        "workflow"
+      ],
+      "categories": [
+        "synthesis",
+        "synthesis",
+        "retrieval",
+        "decomposition",
+        "workflow"
+      ],
+      "score": 412.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "decomposition",
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "unique_domains": [
+        "decomposition",
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "order",
+        "compare",
+        "hash",
+        "project",
+        "scale",
+        "fold",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** decomposition \u2192 retrieval \u2192 synthesis \u2192 workflow\n**Components:**\n  - abstractive-synthesis (synthesis): LLM generates answer from retrieved context. Most flexible; can reason over multiple chunks.\n  - dedup-merge (synthesis): Remove near-duplicate chunks (cosine or NCD > threshold) and merge their content.\n  - dense-embedding-retrieval (retrieval): Dense embedding via neural model (bge-m3, qwen3-embedding); cosine similarity in d-dim space. Bridges vocabulary gap.\n  - hierarchical-decomposition (decomposition): Recursive decomposition: sub-Qs split further if they're still complex. Tree of questions.\n  - tree-of-retrieval (workflow): Branching retrieval: explore multiple paths, prune low-confidence branches.\n**Real walls (combined):**\n  - [abstractive-synthesis] Hallucination: LLM may invent info not in context.\n  - [abstractive-synthesis] Context window: limited to model's input size.\n  - [abstractive-synthesis] Latency: 100-500ms per generation.\n  - [abstractive-synthesis] Cost: GPT-4-class models are $0.01-$0.10 per answer.\n  - [abstractive-synthesis] Quality depends on retrieved context quality.\n  - [dedup-merge] Threshold tuning per corpus.\n  - [dedup-merge] May merge complementary info from near-duplicates that look the same.\n  - [dedup-merge] Computational cost: O(N^2) naive, O(N log N) with LSH.\n  - [dense-embedding-retrieval] Requires GPU or fast inference endpoint.\n  - [dense-embedding-retrieval] Latency: 10-50ms per query on CPU; 5-10ms on GPU.\n  - [dense-embedding-retrieval] Quality varies by model size; bge-m3 (566M) often beats qwen3-4b on small fixtures.\n  - [dense-embedding-retrieval] Cannot embed documents longer than model's context window.\n  - [dense-embedding-retrieval] Non-deterministic across model versions.\n  - [hierarchical-decomposition] Recursion depth must be bounded (3-4 typical).\n  - [hierarchical-decomposition] Leaves must be atomic; intermediate nodes need partial answers.\n  - [hierarchical-decomposition] Cost multiplies per level: 1 \u2192 N \u2192 N^2 in worst case.\n  - [hierarchical-decomposition] Aggregation at parent nodes can lose information.\n  - [tree-of-retrieval] Tree width must be bounded (3-5 typical).\n  - [tree-of-retrieval] Pruning threshold tuning.\n  - [tree-of-retrieval] Combine step at root must reconcile branches.\n  - [tree-of-retrieval] Cost grows exponentially without pruning."
+    },
+    {
+      "primitives": [
+        "abstractive-synthesis",
+        "dedup-merge",
+        "dense-embedding-retrieval",
+        "ncd-retrieval",
+        "rag-fusion"
+      ],
+      "domains": [
+        "synthesis",
+        "synthesis",
+        "retrieval",
+        "retrieval",
+        "workflow"
+      ],
+      "categories": [
+        "synthesis",
+        "synthesis",
+        "retrieval",
+        "retrieval",
+        "workflow"
+      ],
+      "score": 412.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "unique_domains": [
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "order",
+        "compare",
+        "hash",
+        "project",
+        "scale",
+        "fold",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** retrieval \u2192 synthesis \u2192 workflow\n**Components:**\n  - abstractive-synthesis (synthesis): LLM generates answer from retrieved context. Most flexible; can reason over multiple chunks.\n  - dedup-merge (synthesis): Remove near-duplicate chunks (cosine or NCD > threshold) and merge their content.\n  - dense-embedding-retrieval (retrieval): Dense embedding via neural model (bge-m3, qwen3-embedding); cosine similarity in d-dim space. Bridges vocabulary gap.\n  - ncd-retrieval (retrieval): Normalized Compression Distance: similarity = (C(xy) - min(C(x),C(y))) / max(C(x),C(y)). Cross-vocabulary similarity.\n  - rag-fusion (workflow): Generate N query variants via LLM, retrieve each, RRF-fuse results. Higher recall than single query.\n**Real walls (combined):**\n  - [abstractive-synthesis] Hallucination: LLM may invent info not in context.\n  - [abstractive-synthesis] Context window: limited to model's input size.\n  - [abstractive-synthesis] Latency: 100-500ms per generation.\n  - [abstractive-synthesis] Cost: GPT-4-class models are $0.01-$0.10 per answer.\n  - [abstractive-synthesis] Quality depends on retrieved context quality.\n  - [dedup-merge] Threshold tuning per corpus.\n  - [dedup-merge] May merge complementary info from near-duplicates that look the same.\n  - [dedup-merge] Computational cost: O(N^2) naive, O(N log N) with LSH.\n  - [dense-embedding-retrieval] Requires GPU or fast inference endpoint.\n  - [dense-embedding-retrieval] Latency: 10-50ms per query on CPU; 5-10ms on GPU.\n  - [dense-embedding-retrieval] Quality varies by model size; bge-m3 (566M) often beats qwen3-4b on small fixtures.\n  - [dense-embedding-retrieval] Cannot embed documents longer than model's context window.\n  - [dense-embedding-retrieval] Non-deterministic across model versions.\n  - [ncd-retrieval] Compression quality varies by algorithm (bzip2, lzma, zstd).\n  - [ncd-retrieval] Computationally expensive vs cosine (10-100x).\n  - [ncd-retrieval] Biased toward compressible text.\n  - [ncd-retrieval] Effective cross-vocabulary but slow at scale.\n  - [rag-fusion] N variants: 3-5 typical.\n  - [rag-fusion] Cost = N * retrieve.\n  - [rag-fusion] Diminishing returns past N=5.\n  - [rag-fusion] Quality depends on LLM-generated variants."
+    },
+    {
+      "primitives": [
+        "abstractive-synthesis",
+        "dedup-merge",
+        "dense-embedding-retrieval",
+        "ncd-retrieval",
+        "react-workflow"
+      ],
+      "domains": [
+        "synthesis",
+        "synthesis",
+        "retrieval",
+        "retrieval",
+        "workflow"
+      ],
+      "categories": [
+        "synthesis",
+        "synthesis",
+        "retrieval",
+        "retrieval",
+        "workflow"
+      ],
+      "score": 412.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "unique_domains": [
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "order",
+        "compare",
+        "hash",
+        "project",
+        "scale",
+        "fold",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** retrieval \u2192 synthesis \u2192 workflow\n**Components:**\n  - abstractive-synthesis (synthesis): LLM generates answer from retrieved context. Most flexible; can reason over multiple chunks.\n  - dedup-merge (synthesis): Remove near-duplicate chunks (cosine or NCD > threshold) and merge their content.\n  - dense-embedding-retrieval (retrieval): Dense embedding via neural model (bge-m3, qwen3-embedding); cosine similarity in d-dim space. Bridges vocabulary gap.\n  - ncd-retrieval (retrieval): Normalized Compression Distance: similarity = (C(xy) - min(C(x),C(y))) / max(C(x),C(y)). Cross-vocabulary similarity.\n  - react-workflow (workflow): Reasoning + Acting loop: LLM reasons about what to retrieve next, retrieves, observes, repeats.\n**Real walls (combined):**\n  - [abstractive-synthesis] Hallucination: LLM may invent info not in context.\n  - [abstractive-synthesis] Context window: limited to model's input size.\n  - [abstractive-synthesis] Latency: 100-500ms per generation.\n  - [abstractive-synthesis] Cost: GPT-4-class models are $0.01-$0.10 per answer.\n  - [abstractive-synthesis] Quality depends on retrieved context quality.\n  - [dedup-merge] Threshold tuning per corpus.\n  - [dedup-merge] May merge complementary info from near-duplicates that look the same.\n  - [dedup-merge] Computational cost: O(N^2) naive, O(N log N) with LSH.\n  - [dense-embedding-retrieval] Requires GPU or fast inference endpoint.\n  - [dense-embedding-retrieval] Latency: 10-50ms per query on CPU; 5-10ms on GPU.\n  - [dense-embedding-retrieval] Quality varies by model size; bge-m3 (566M) often beats qwen3-4b on small fixtures.\n  - [dense-embedding-retrieval] Cannot embed documents longer than model's context window.\n  - [dense-embedding-retrieval] Non-deterministic across model versions.\n  - [ncd-retrieval] Compression quality varies by algorithm (bzip2, lzma, zstd).\n  - [ncd-retrieval] Computationally expensive vs cosine (10-100x).\n  - [ncd-retrieval] Biased toward compressible text.\n  - [ncd-retrieval] Effective cross-vocabulary but slow at scale.\n  - [react-workflow] LLM hallucination in reasoning step.\n  - [react-workflow] Action space must be well-defined.\n  - [react-workflow] Termination conditions matter.\n  - [react-workflow] Quality depends on LLM's instruction-following."
+    },
+    {
+      "primitives": [
+        "abstractive-synthesis",
+        "dedup-merge",
+        "dense-embedding-retrieval",
+        "ncd-retrieval",
+        "self-ask-workflow"
+      ],
+      "domains": [
+        "synthesis",
+        "synthesis",
+        "retrieval",
+        "retrieval",
+        "workflow"
+      ],
+      "categories": [
+        "synthesis",
+        "synthesis",
+        "retrieval",
+        "retrieval",
+        "workflow"
+      ],
+      "score": 412.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "unique_domains": [
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "order",
+        "compare",
+        "hash",
+        "project",
+        "scale",
+        "fold",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** retrieval \u2192 synthesis \u2192 workflow\n**Components:**\n  - abstractive-synthesis (synthesis): LLM generates answer from retrieved context. Most flexible; can reason over multiple chunks.\n  - dedup-merge (synthesis): Remove near-duplicate chunks (cosine or NCD > threshold) and merge their content.\n  - dense-embedding-retrieval (retrieval): Dense embedding via neural model (bge-m3, qwen3-embedding); cosine similarity in d-dim space. Bridges vocabulary gap.\n  - ncd-retrieval (retrieval): Normalized Compression Distance: similarity = (C(xy) - min(C(x),C(y))) / max(C(x),C(y)). Cross-vocabulary similarity.\n  - self-ask-workflow (workflow): LLM asks itself clarifying questions, retrieves, asks more, then answers. For complex multi-step queries.\n**Real walls (combined):**\n  - [abstractive-synthesis] Hallucination: LLM may invent info not in context.\n  - [abstractive-synthesis] Context window: limited to model's input size.\n  - [abstractive-synthesis] Latency: 100-500ms per generation.\n  - [abstractive-synthesis] Cost: GPT-4-class models are $0.01-$0.10 per answer.\n  - [abstractive-synthesis] Quality depends on retrieved context quality.\n  - [dedup-merge] Threshold tuning per corpus.\n  - [dedup-merge] May merge complementary info from near-duplicates that look the same.\n  - [dedup-merge] Computational cost: O(N^2) naive, O(N log N) with LSH.\n  - [dense-embedding-retrieval] Requires GPU or fast inference endpoint.\n  - [dense-embedding-retrieval] Latency: 10-50ms per query on CPU; 5-10ms on GPU.\n  - [dense-embedding-retrieval] Quality varies by model size; bge-m3 (566M) often beats qwen3-4b on small fixtures.\n  - [dense-embedding-retrieval] Cannot embed documents longer than model's context window.\n  - [dense-embedding-retrieval] Non-deterministic across model versions.\n  - [ncd-retrieval] Compression quality varies by algorithm (bzip2, lzma, zstd).\n  - [ncd-retrieval] Computationally expensive vs cosine (10-100x).\n  - [ncd-retrieval] Biased toward compressible text.\n  - [ncd-retrieval] Effective cross-vocabulary but slow at scale.\n  - [self-ask-workflow] LLM may get stuck in loops.\n  - [self-ask-workflow] Question quality depends on LLM.\n  - [self-ask-workflow] Cost is unpredictable.\n  - [self-ask-workflow] Stop conditions are critical."
+    },
+    {
+      "primitives": [
+        "abstractive-synthesis",
+        "dedup-merge",
+        "dense-embedding-retrieval",
+        "ncd-retrieval",
+        "tree-of-retrieval"
+      ],
+      "domains": [
+        "synthesis",
+        "synthesis",
+        "retrieval",
+        "retrieval",
+        "workflow"
+      ],
+      "categories": [
+        "synthesis",
+        "synthesis",
+        "retrieval",
+        "retrieval",
+        "workflow"
+      ],
+      "score": 412.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "unique_domains": [
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "order",
+        "compare",
+        "hash",
+        "project",
+        "scale",
+        "fold",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** retrieval \u2192 synthesis \u2192 workflow\n**Components:**\n  - abstractive-synthesis (synthesis): LLM generates answer from retrieved context. Most flexible; can reason over multiple chunks.\n  - dedup-merge (synthesis): Remove near-duplicate chunks (cosine or NCD > threshold) and merge their content.\n  - dense-embedding-retrieval (retrieval): Dense embedding via neural model (bge-m3, qwen3-embedding); cosine similarity in d-dim space. Bridges vocabulary gap.\n  - ncd-retrieval (retrieval): Normalized Compression Distance: similarity = (C(xy) - min(C(x),C(y))) / max(C(x),C(y)). Cross-vocabulary similarity.\n  - tree-of-retrieval (workflow): Branching retrieval: explore multiple paths, prune low-confidence branches.\n**Real walls (combined):**\n  - [abstractive-synthesis] Hallucination: LLM may invent info not in context.\n  - [abstractive-synthesis] Context window: limited to model's input size.\n  - [abstractive-synthesis] Latency: 100-500ms per generation.\n  - [abstractive-synthesis] Cost: GPT-4-class models are $0.01-$0.10 per answer.\n  - [abstractive-synthesis] Quality depends on retrieved context quality.\n  - [dedup-merge] Threshold tuning per corpus.\n  - [dedup-merge] May merge complementary info from near-duplicates that look the same.\n  - [dedup-merge] Computational cost: O(N^2) naive, O(N log N) with LSH.\n  - [dense-embedding-retrieval] Requires GPU or fast inference endpoint.\n  - [dense-embedding-retrieval] Latency: 10-50ms per query on CPU; 5-10ms on GPU.\n  - [dense-embedding-retrieval] Quality varies by model size; bge-m3 (566M) often beats qwen3-4b on small fixtures.\n  - [dense-embedding-retrieval] Cannot embed documents longer than model's context window.\n  - [dense-embedding-retrieval] Non-deterministic across model versions.\n  - [ncd-retrieval] Compression quality varies by algorithm (bzip2, lzma, zstd).\n  - [ncd-retrieval] Computationally expensive vs cosine (10-100x).\n  - [ncd-retrieval] Biased toward compressible text.\n  - [ncd-retrieval] Effective cross-vocabulary but slow at scale.\n  - [tree-of-retrieval] Tree width must be bounded (3-5 typical).\n  - [tree-of-retrieval] Pruning threshold tuning.\n  - [tree-of-retrieval] Combine step at root must reconcile branches.\n  - [tree-of-retrieval] Cost grows exponentially without pruning."
+    },
+    {
+      "primitives": [
+        "abstractive-synthesis",
+        "dense-embedding-retrieval",
+        "hierarchical-decomposition",
+        "parallel-fan-out",
+        "rag-fusion"
+      ],
+      "domains": [
+        "synthesis",
+        "retrieval",
+        "decomposition",
+        "gating",
+        "workflow"
+      ],
+      "categories": [
+        "synthesis",
+        "retrieval",
+        "decomposition",
+        "gating",
+        "workflow"
+      ],
+      "score": 412.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "decomposition",
+        "gating",
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "unique_domains": [
+        "decomposition",
+        "gating",
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "order",
+        "compare",
+        "project",
+        "scale",
+        "fold",
+        "scan",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** decomposition \u2192 gating \u2192 retrieval \u2192 synthesis \u2192 workflow\n**Components:**\n  - abstractive-synthesis (synthesis): LLM generates answer from retrieved context. Most flexible; can reason over multiple chunks.\n  - dense-embedding-retrieval (retrieval): Dense embedding via neural model (bge-m3, qwen3-embedding); cosine similarity in d-dim space. Bridges vocabulary gap.\n  - hierarchical-decomposition (decomposition): Recursive decomposition: sub-Qs split further if they're still complex. Tree of questions.\n  - parallel-fan-out (gating): Run multiple retrievers in parallel; combine. Higher quality but higher cost.\n  - rag-fusion (workflow): Generate N query variants via LLM, retrieve each, RRF-fuse results. Higher recall than single query.\n**Real walls (combined):**\n  - [abstractive-synthesis] Hallucination: LLM may invent info not in context.\n  - [abstractive-synthesis] Context window: limited to model's input size.\n  - [abstractive-synthesis] Latency: 100-500ms per generation.\n  - [abstractive-synthesis] Cost: GPT-4-class models are $0.01-$0.10 per answer.\n  - [abstractive-synthesis] Quality depends on retrieved context quality.\n  - [dense-embedding-retrieval] Requires GPU or fast inference endpoint.\n  - [dense-embedding-retrieval] Latency: 10-50ms per query on CPU; 5-10ms on GPU.\n  - [dense-embedding-retrieval] Quality varies by model size; bge-m3 (566M) often beats qwen3-4b on small fixtures.\n  - [dense-embedding-retrieval] Cannot embed documents longer than model's context window.\n  - [dense-embedding-retrieval] Non-deterministic across model versions.\n  - [hierarchical-decomposition] Recursion depth must be bounded (3-4 typical).\n  - [hierarchical-decomposition] Leaves must be atomic; intermediate nodes need partial answers.\n  - [hierarchical-decomposition] Cost multiplies per level: 1 \u2192 N \u2192 N^2 in worst case.\n  - [hierarchical-decomposition] Aggregation at parent nodes can lose information.\n  - [parallel-fan-out] Cost = sum of all parallel runs.\n  - [parallel-fan-out] Diminishing returns past 3-4 parallel retrievers.\n  - [parallel-fan-out] Result combination is non-trivial (RRF, voting, etc.).\n  - [rag-fusion] N variants: 3-5 typical.\n  - [rag-fusion] Cost = N * retrieve.\n  - [rag-fusion] Diminishing returns past N=5.\n  - [rag-fusion] Quality depends on LLM-generated variants."
+    },
+    {
+      "primitives": [
+        "abstractive-synthesis",
+        "dense-embedding-retrieval",
+        "hierarchical-decomposition",
+        "parallel-fan-out",
+        "react-workflow"
+      ],
+      "domains": [
+        "synthesis",
+        "retrieval",
+        "decomposition",
+        "gating",
+        "workflow"
+      ],
+      "categories": [
+        "synthesis",
+        "retrieval",
+        "decomposition",
+        "gating",
+        "workflow"
+      ],
+      "score": 412.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "decomposition",
+        "gating",
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "unique_domains": [
+        "decomposition",
+        "gating",
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "order",
+        "compare",
+        "project",
+        "scale",
+        "fold",
+        "scan",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** decomposition \u2192 gating \u2192 retrieval \u2192 synthesis \u2192 workflow\n**Components:**\n  - abstractive-synthesis (synthesis): LLM generates answer from retrieved context. Most flexible; can reason over multiple chunks.\n  - dense-embedding-retrieval (retrieval): Dense embedding via neural model (bge-m3, qwen3-embedding); cosine similarity in d-dim space. Bridges vocabulary gap.\n  - hierarchical-decomposition (decomposition): Recursive decomposition: sub-Qs split further if they're still complex. Tree of questions.\n  - parallel-fan-out (gating): Run multiple retrievers in parallel; combine. Higher quality but higher cost.\n  - react-workflow (workflow): Reasoning + Acting loop: LLM reasons about what to retrieve next, retrieves, observes, repeats.\n**Real walls (combined):**\n  - [abstractive-synthesis] Hallucination: LLM may invent info not in context.\n  - [abstractive-synthesis] Context window: limited to model's input size.\n  - [abstractive-synthesis] Latency: 100-500ms per generation.\n  - [abstractive-synthesis] Cost: GPT-4-class models are $0.01-$0.10 per answer.\n  - [abstractive-synthesis] Quality depends on retrieved context quality.\n  - [dense-embedding-retrieval] Requires GPU or fast inference endpoint.\n  - [dense-embedding-retrieval] Latency: 10-50ms per query on CPU; 5-10ms on GPU.\n  - [dense-embedding-retrieval] Quality varies by model size; bge-m3 (566M) often beats qwen3-4b on small fixtures.\n  - [dense-embedding-retrieval] Cannot embed documents longer than model's context window.\n  - [dense-embedding-retrieval] Non-deterministic across model versions.\n  - [hierarchical-decomposition] Recursion depth must be bounded (3-4 typical).\n  - [hierarchical-decomposition] Leaves must be atomic; intermediate nodes need partial answers.\n  - [hierarchical-decomposition] Cost multiplies per level: 1 \u2192 N \u2192 N^2 in worst case.\n  - [hierarchical-decomposition] Aggregation at parent nodes can lose information.\n  - [parallel-fan-out] Cost = sum of all parallel runs.\n  - [parallel-fan-out] Diminishing returns past 3-4 parallel retrievers.\n  - [parallel-fan-out] Result combination is non-trivial (RRF, voting, etc.).\n  - [react-workflow] LLM hallucination in reasoning step.\n  - [react-workflow] Action space must be well-defined.\n  - [react-workflow] Termination conditions matter.\n  - [react-workflow] Quality depends on LLM's instruction-following."
+    },
+    {
+      "primitives": [
+        "abstractive-synthesis",
+        "dense-embedding-retrieval",
+        "hierarchical-decomposition",
+        "parallel-fan-out",
+        "self-ask-workflow"
+      ],
+      "domains": [
+        "synthesis",
+        "retrieval",
+        "decomposition",
+        "gating",
+        "workflow"
+      ],
+      "categories": [
+        "synthesis",
+        "retrieval",
+        "decomposition",
+        "gating",
+        "workflow"
+      ],
+      "score": 412.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "decomposition",
+        "gating",
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "unique_domains": [
+        "decomposition",
+        "gating",
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "order",
+        "compare",
+        "project",
+        "scale",
+        "fold",
+        "scan",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** decomposition \u2192 gating \u2192 retrieval \u2192 synthesis \u2192 workflow\n**Components:**\n  - abstractive-synthesis (synthesis): LLM generates answer from retrieved context. Most flexible; can reason over multiple chunks.\n  - dense-embedding-retrieval (retrieval): Dense embedding via neural model (bge-m3, qwen3-embedding); cosine similarity in d-dim space. Bridges vocabulary gap.\n  - hierarchical-decomposition (decomposition): Recursive decomposition: sub-Qs split further if they're still complex. Tree of questions.\n  - parallel-fan-out (gating): Run multiple retrievers in parallel; combine. Higher quality but higher cost.\n  - self-ask-workflow (workflow): LLM asks itself clarifying questions, retrieves, asks more, then answers. For complex multi-step queries.\n**Real walls (combined):**\n  - [abstractive-synthesis] Hallucination: LLM may invent info not in context.\n  - [abstractive-synthesis] Context window: limited to model's input size.\n  - [abstractive-synthesis] Latency: 100-500ms per generation.\n  - [abstractive-synthesis] Cost: GPT-4-class models are $0.01-$0.10 per answer.\n  - [abstractive-synthesis] Quality depends on retrieved context quality.\n  - [dense-embedding-retrieval] Requires GPU or fast inference endpoint.\n  - [dense-embedding-retrieval] Latency: 10-50ms per query on CPU; 5-10ms on GPU.\n  - [dense-embedding-retrieval] Quality varies by model size; bge-m3 (566M) often beats qwen3-4b on small fixtures.\n  - [dense-embedding-retrieval] Cannot embed documents longer than model's context window.\n  - [dense-embedding-retrieval] Non-deterministic across model versions.\n  - [hierarchical-decomposition] Recursion depth must be bounded (3-4 typical).\n  - [hierarchical-decomposition] Leaves must be atomic; intermediate nodes need partial answers.\n  - [hierarchical-decomposition] Cost multiplies per level: 1 \u2192 N \u2192 N^2 in worst case.\n  - [hierarchical-decomposition] Aggregation at parent nodes can lose information.\n  - [parallel-fan-out] Cost = sum of all parallel runs.\n  - [parallel-fan-out] Diminishing returns past 3-4 parallel retrievers.\n  - [parallel-fan-out] Result combination is non-trivial (RRF, voting, etc.).\n  - [self-ask-workflow] LLM may get stuck in loops.\n  - [self-ask-workflow] Question quality depends on LLM.\n  - [self-ask-workflow] Cost is unpredictable.\n  - [self-ask-workflow] Stop conditions are critical."
+    },
+    {
+      "primitives": [
+        "abstractive-synthesis",
+        "dense-embedding-retrieval",
+        "hierarchical-decomposition",
+        "parallel-fan-out",
+        "tree-of-retrieval"
+      ],
+      "domains": [
+        "synthesis",
+        "retrieval",
+        "decomposition",
+        "gating",
+        "workflow"
+      ],
+      "categories": [
+        "synthesis",
+        "retrieval",
+        "decomposition",
+        "gating",
+        "workflow"
+      ],
+      "score": 412.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "decomposition",
+        "gating",
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "unique_domains": [
+        "decomposition",
+        "gating",
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "order",
+        "compare",
+        "project",
+        "scale",
+        "fold",
+        "scan",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** decomposition \u2192 gating \u2192 retrieval \u2192 synthesis \u2192 workflow\n**Components:**\n  - abstractive-synthesis (synthesis): LLM generates answer from retrieved context. Most flexible; can reason over multiple chunks.\n  - dense-embedding-retrieval (retrieval): Dense embedding via neural model (bge-m3, qwen3-embedding); cosine similarity in d-dim space. Bridges vocabulary gap.\n  - hierarchical-decomposition (decomposition): Recursive decomposition: sub-Qs split further if they're still complex. Tree of questions.\n  - parallel-fan-out (gating): Run multiple retrievers in parallel; combine. Higher quality but higher cost.\n  - tree-of-retrieval (workflow): Branching retrieval: explore multiple paths, prune low-confidence branches.\n**Real walls (combined):**\n  - [abstractive-synthesis] Hallucination: LLM may invent info not in context.\n  - [abstractive-synthesis] Context window: limited to model's input size.\n  - [abstractive-synthesis] Latency: 100-500ms per generation.\n  - [abstractive-synthesis] Cost: GPT-4-class models are $0.01-$0.10 per answer.\n  - [abstractive-synthesis] Quality depends on retrieved context quality.\n  - [dense-embedding-retrieval] Requires GPU or fast inference endpoint.\n  - [dense-embedding-retrieval] Latency: 10-50ms per query on CPU; 5-10ms on GPU.\n  - [dense-embedding-retrieval] Quality varies by model size; bge-m3 (566M) often beats qwen3-4b on small fixtures.\n  - [dense-embedding-retrieval] Cannot embed documents longer than model's context window.\n  - [dense-embedding-retrieval] Non-deterministic across model versions.\n  - [hierarchical-decomposition] Recursion depth must be bounded (3-4 typical).\n  - [hierarchical-decomposition] Leaves must be atomic; intermediate nodes need partial answers.\n  - [hierarchical-decomposition] Cost multiplies per level: 1 \u2192 N \u2192 N^2 in worst case.\n  - [hierarchical-decomposition] Aggregation at parent nodes can lose information.\n  - [parallel-fan-out] Cost = sum of all parallel runs.\n  - [parallel-fan-out] Diminishing returns past 3-4 parallel retrievers.\n  - [parallel-fan-out] Result combination is non-trivial (RRF, voting, etc.).\n  - [tree-of-retrieval] Tree width must be bounded (3-5 typical).\n  - [tree-of-retrieval] Pruning threshold tuning.\n  - [tree-of-retrieval] Combine step at root must reconcile branches.\n  - [tree-of-retrieval] Cost grows exponentially without pruning."
+    },
+    {
+      "primitives": [
+        "abstractive-synthesis",
+        "dense-embedding-retrieval",
+        "ncd-retrieval",
+        "parallel-fan-out",
+        "rag-fusion"
+      ],
+      "domains": [
+        "synthesis",
+        "retrieval",
+        "retrieval",
+        "gating",
+        "workflow"
+      ],
+      "categories": [
+        "synthesis",
+        "retrieval",
+        "retrieval",
+        "gating",
+        "workflow"
+      ],
+      "score": 412.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "gating",
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "unique_domains": [
+        "gating",
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "order",
+        "compare",
+        "project",
+        "scale",
+        "fold",
+        "scan",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** gating \u2192 retrieval \u2192 synthesis \u2192 workflow\n**Components:**\n  - abstractive-synthesis (synthesis): LLM generates answer from retrieved context. Most flexible; can reason over multiple chunks.\n  - dense-embedding-retrieval (retrieval): Dense embedding via neural model (bge-m3, qwen3-embedding); cosine similarity in d-dim space. Bridges vocabulary gap.\n  - ncd-retrieval (retrieval): Normalized Compression Distance: similarity = (C(xy) - min(C(x),C(y))) / max(C(x),C(y)). Cross-vocabulary similarity.\n  - parallel-fan-out (gating): Run multiple retrievers in parallel; combine. Higher quality but higher cost.\n  - rag-fusion (workflow): Generate N query variants via LLM, retrieve each, RRF-fuse results. Higher recall than single query.\n**Real walls (combined):**\n  - [abstractive-synthesis] Hallucination: LLM may invent info not in context.\n  - [abstractive-synthesis] Context window: limited to model's input size.\n  - [abstractive-synthesis] Latency: 100-500ms per generation.\n  - [abstractive-synthesis] Cost: GPT-4-class models are $0.01-$0.10 per answer.\n  - [abstractive-synthesis] Quality depends on retrieved context quality.\n  - [dense-embedding-retrieval] Requires GPU or fast inference endpoint.\n  - [dense-embedding-retrieval] Latency: 10-50ms per query on CPU; 5-10ms on GPU.\n  - [dense-embedding-retrieval] Quality varies by model size; bge-m3 (566M) often beats qwen3-4b on small fixtures.\n  - [dense-embedding-retrieval] Cannot embed documents longer than model's context window.\n  - [dense-embedding-retrieval] Non-deterministic across model versions.\n  - [ncd-retrieval] Compression quality varies by algorithm (bzip2, lzma, zstd).\n  - [ncd-retrieval] Computationally expensive vs cosine (10-100x).\n  - [ncd-retrieval] Biased toward compressible text.\n  - [ncd-retrieval] Effective cross-vocabulary but slow at scale.\n  - [parallel-fan-out] Cost = sum of all parallel runs.\n  - [parallel-fan-out] Diminishing returns past 3-4 parallel retrievers.\n  - [parallel-fan-out] Result combination is non-trivial (RRF, voting, etc.).\n  - [rag-fusion] N variants: 3-5 typical.\n  - [rag-fusion] Cost = N * retrieve.\n  - [rag-fusion] Diminishing returns past N=5.\n  - [rag-fusion] Quality depends on LLM-generated variants."
+    },
+    {
+      "primitives": [
+        "abstractive-synthesis",
+        "dense-embedding-retrieval",
+        "ncd-retrieval",
+        "parallel-fan-out",
+        "react-workflow"
+      ],
+      "domains": [
+        "synthesis",
+        "retrieval",
+        "retrieval",
+        "gating",
+        "workflow"
+      ],
+      "categories": [
+        "synthesis",
+        "retrieval",
+        "retrieval",
+        "gating",
+        "workflow"
+      ],
+      "score": 412.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "gating",
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "unique_domains": [
+        "gating",
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "order",
+        "compare",
+        "project",
+        "scale",
+        "fold",
+        "scan",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** gating \u2192 retrieval \u2192 synthesis \u2192 workflow\n**Components:**\n  - abstractive-synthesis (synthesis): LLM generates answer from retrieved context. Most flexible; can reason over multiple chunks.\n  - dense-embedding-retrieval (retrieval): Dense embedding via neural model (bge-m3, qwen3-embedding); cosine similarity in d-dim space. Bridges vocabulary gap.\n  - ncd-retrieval (retrieval): Normalized Compression Distance: similarity = (C(xy) - min(C(x),C(y))) / max(C(x),C(y)). Cross-vocabulary similarity.\n  - parallel-fan-out (gating): Run multiple retrievers in parallel; combine. Higher quality but higher cost.\n  - react-workflow (workflow): Reasoning + Acting loop: LLM reasons about what to retrieve next, retrieves, observes, repeats.\n**Real walls (combined):**\n  - [abstractive-synthesis] Hallucination: LLM may invent info not in context.\n  - [abstractive-synthesis] Context window: limited to model's input size.\n  - [abstractive-synthesis] Latency: 100-500ms per generation.\n  - [abstractive-synthesis] Cost: GPT-4-class models are $0.01-$0.10 per answer.\n  - [abstractive-synthesis] Quality depends on retrieved context quality.\n  - [dense-embedding-retrieval] Requires GPU or fast inference endpoint.\n  - [dense-embedding-retrieval] Latency: 10-50ms per query on CPU; 5-10ms on GPU.\n  - [dense-embedding-retrieval] Quality varies by model size; bge-m3 (566M) often beats qwen3-4b on small fixtures.\n  - [dense-embedding-retrieval] Cannot embed documents longer than model's context window.\n  - [dense-embedding-retrieval] Non-deterministic across model versions.\n  - [ncd-retrieval] Compression quality varies by algorithm (bzip2, lzma, zstd).\n  - [ncd-retrieval] Computationally expensive vs cosine (10-100x).\n  - [ncd-retrieval] Biased toward compressible text.\n  - [ncd-retrieval] Effective cross-vocabulary but slow at scale.\n  - [parallel-fan-out] Cost = sum of all parallel runs.\n  - [parallel-fan-out] Diminishing returns past 3-4 parallel retrievers.\n  - [parallel-fan-out] Result combination is non-trivial (RRF, voting, etc.).\n  - [react-workflow] LLM hallucination in reasoning step.\n  - [react-workflow] Action space must be well-defined.\n  - [react-workflow] Termination conditions matter.\n  - [react-workflow] Quality depends on LLM's instruction-following."
+    },
+    {
+      "primitives": [
+        "abstractive-synthesis",
+        "dense-embedding-retrieval",
+        "ncd-retrieval",
+        "parallel-fan-out",
+        "self-ask-workflow"
+      ],
+      "domains": [
+        "synthesis",
+        "retrieval",
+        "retrieval",
+        "gating",
+        "workflow"
+      ],
+      "categories": [
+        "synthesis",
+        "retrieval",
+        "retrieval",
+        "gating",
+        "workflow"
+      ],
+      "score": 412.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "gating",
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "unique_domains": [
+        "gating",
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "order",
+        "compare",
+        "project",
+        "scale",
+        "fold",
+        "scan",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** gating \u2192 retrieval \u2192 synthesis \u2192 workflow\n**Components:**\n  - abstractive-synthesis (synthesis): LLM generates answer from retrieved context. Most flexible; can reason over multiple chunks.\n  - dense-embedding-retrieval (retrieval): Dense embedding via neural model (bge-m3, qwen3-embedding); cosine similarity in d-dim space. Bridges vocabulary gap.\n  - ncd-retrieval (retrieval): Normalized Compression Distance: similarity = (C(xy) - min(C(x),C(y))) / max(C(x),C(y)). Cross-vocabulary similarity.\n  - parallel-fan-out (gating): Run multiple retrievers in parallel; combine. Higher quality but higher cost.\n  - self-ask-workflow (workflow): LLM asks itself clarifying questions, retrieves, asks more, then answers. For complex multi-step queries.\n**Real walls (combined):**\n  - [abstractive-synthesis] Hallucination: LLM may invent info not in context.\n  - [abstractive-synthesis] Context window: limited to model's input size.\n  - [abstractive-synthesis] Latency: 100-500ms per generation.\n  - [abstractive-synthesis] Cost: GPT-4-class models are $0.01-$0.10 per answer.\n  - [abstractive-synthesis] Quality depends on retrieved context quality.\n  - [dense-embedding-retrieval] Requires GPU or fast inference endpoint.\n  - [dense-embedding-retrieval] Latency: 10-50ms per query on CPU; 5-10ms on GPU.\n  - [dense-embedding-retrieval] Quality varies by model size; bge-m3 (566M) often beats qwen3-4b on small fixtures.\n  - [dense-embedding-retrieval] Cannot embed documents longer than model's context window.\n  - [dense-embedding-retrieval] Non-deterministic across model versions.\n  - [ncd-retrieval] Compression quality varies by algorithm (bzip2, lzma, zstd).\n  - [ncd-retrieval] Computationally expensive vs cosine (10-100x).\n  - [ncd-retrieval] Biased toward compressible text.\n  - [ncd-retrieval] Effective cross-vocabulary but slow at scale.\n  - [parallel-fan-out] Cost = sum of all parallel runs.\n  - [parallel-fan-out] Diminishing returns past 3-4 parallel retrievers.\n  - [parallel-fan-out] Result combination is non-trivial (RRF, voting, etc.).\n  - [self-ask-workflow] LLM may get stuck in loops.\n  - [self-ask-workflow] Question quality depends on LLM.\n  - [self-ask-workflow] Cost is unpredictable.\n  - [self-ask-workflow] Stop conditions are critical."
+    },
+    {
+      "primitives": [
+        "abstractive-synthesis",
+        "dense-embedding-retrieval",
+        "ncd-retrieval",
+        "parallel-fan-out",
+        "tree-of-retrieval"
+      ],
+      "domains": [
+        "synthesis",
+        "retrieval",
+        "retrieval",
+        "gating",
+        "workflow"
+      ],
+      "categories": [
+        "synthesis",
+        "retrieval",
+        "retrieval",
+        "gating",
+        "workflow"
+      ],
+      "score": 412.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "gating",
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "unique_domains": [
+        "gating",
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "order",
+        "compare",
+        "project",
+        "scale",
+        "fold",
+        "scan",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** gating \u2192 retrieval \u2192 synthesis \u2192 workflow\n**Components:**\n  - abstractive-synthesis (synthesis): LLM generates answer from retrieved context. Most flexible; can reason over multiple chunks.\n  - dense-embedding-retrieval (retrieval): Dense embedding via neural model (bge-m3, qwen3-embedding); cosine similarity in d-dim space. Bridges vocabulary gap.\n  - ncd-retrieval (retrieval): Normalized Compression Distance: similarity = (C(xy) - min(C(x),C(y))) / max(C(x),C(y)). Cross-vocabulary similarity.\n  - parallel-fan-out (gating): Run multiple retrievers in parallel; combine. Higher quality but higher cost.\n  - tree-of-retrieval (workflow): Branching retrieval: explore multiple paths, prune low-confidence branches.\n**Real walls (combined):**\n  - [abstractive-synthesis] Hallucination: LLM may invent info not in context.\n  - [abstractive-synthesis] Context window: limited to model's input size.\n  - [abstractive-synthesis] Latency: 100-500ms per generation.\n  - [abstractive-synthesis] Cost: GPT-4-class models are $0.01-$0.10 per answer.\n  - [abstractive-synthesis] Quality depends on retrieved context quality.\n  - [dense-embedding-retrieval] Requires GPU or fast inference endpoint.\n  - [dense-embedding-retrieval] Latency: 10-50ms per query on CPU; 5-10ms on GPU.\n  - [dense-embedding-retrieval] Quality varies by model size; bge-m3 (566M) often beats qwen3-4b on small fixtures.\n  - [dense-embedding-retrieval] Cannot embed documents longer than model's context window.\n  - [dense-embedding-retrieval] Non-deterministic across model versions.\n  - [ncd-retrieval] Compression quality varies by algorithm (bzip2, lzma, zstd).\n  - [ncd-retrieval] Computationally expensive vs cosine (10-100x).\n  - [ncd-retrieval] Biased toward compressible text.\n  - [ncd-retrieval] Effective cross-vocabulary but slow at scale.\n  - [parallel-fan-out] Cost = sum of all parallel runs.\n  - [parallel-fan-out] Diminishing returns past 3-4 parallel retrievers.\n  - [parallel-fan-out] Result combination is non-trivial (RRF, voting, etc.).\n  - [tree-of-retrieval] Tree width must be bounded (3-5 typical).\n  - [tree-of-retrieval] Pruning threshold tuning.\n  - [tree-of-retrieval] Combine step at root must reconcile branches.\n  - [tree-of-retrieval] Cost grows exponentially without pruning."
+    },
+    {
+      "primitives": [
+        "bm25-retrieval",
+        "cross-encoder-rerank",
+        "dedup-merge",
+        "dense-embedding-retrieval",
+        "rag-fusion"
+      ],
+      "domains": [
+        "retrieval",
+        "reranking",
+        "synthesis",
+        "retrieval",
+        "workflow"
+      ],
+      "categories": [
+        "retrieval",
+        "reranking",
+        "synthesis",
+        "retrieval",
+        "workflow"
+      ],
+      "score": 412.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "reranking",
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "unique_domains": [
+        "reranking",
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "scale",
+        "fold",
+        "compare",
+        "hash",
+        "project",
+        "sample",
+        "order"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** reranking \u2192 retrieval \u2192 synthesis \u2192 workflow\n**Components:**\n  - bm25-retrieval (retrieval): Probabilistic relevance ranking with TF saturation and document length normalization. Industry standard for sparse retrieval.\n  - cross-encoder-rerank (reranking): Cross-encoder model scores (query, doc) pair jointly. State-of-the-art rerank quality.\n  - dedup-merge (synthesis): Remove near-duplicate chunks (cosine or NCD > threshold) and merge their content.\n  - dense-embedding-retrieval (retrieval): Dense embedding via neural model (bge-m3, qwen3-embedding); cosine similarity in d-dim space. Bridges vocabulary gap.\n  - rag-fusion (workflow): Generate N query variants via LLM, retrieve each, RRF-fuse results. Higher recall than single query.\n**Real walls (combined):**\n  - [bm25-retrieval] BM25F (fielded) needed for structured docs.\n  - [bm25-retrieval] k1=1.5, b=0.75 are defaults but rarely optimal.\n  - [bm25-retrieval] Cannot bridge vocabulary gap (no synonym handling).\n  - [bm25-retrieval] Fails on long-tail terms without IDF smoothing.\n  - [cross-encoder-rerank] Slowest rerank option (O(K) model calls).\n  - [cross-encoder-rerank] Requires GPU/endpoint.\n  - [cross-encoder-rerank] Bounded by K (top-K from stage 1).\n  - [cross-encoder-rerank] Model size matters: 0.6B is much faster than 4B, slight quality loss.\n  - [cross-encoder-rerank] Tied to underlying LLM's pre-training distribution.\n  - [dedup-merge] Threshold tuning per corpus.\n  - [dedup-merge] May merge complementary info from near-duplicates that look the same.\n  - [dedup-merge] Computational cost: O(N^2) naive, O(N log N) with LSH.\n  - [dense-embedding-retrieval] Requires GPU or fast inference endpoint.\n  - [dense-embedding-retrieval] Latency: 10-50ms per query on CPU; 5-10ms on GPU.\n  - [dense-embedding-retrieval] Quality varies by model size; bge-m3 (566M) often beats qwen3-4b on small fixtures.\n  - [dense-embedding-retrieval] Cannot embed documents longer than model's context window.\n  - [dense-embedding-retrieval] Non-deterministic across model versions.\n  - [rag-fusion] N variants: 3-5 typical.\n  - [rag-fusion] Cost = N * retrieve.\n  - [rag-fusion] Diminishing returns past N=5.\n  - [rag-fusion] Quality depends on LLM-generated variants."
+    },
+    {
+      "primitives": [
+        "bm25-retrieval",
+        "cross-encoder-rerank",
+        "dedup-merge",
+        "dense-embedding-retrieval",
+        "react-workflow"
+      ],
+      "domains": [
+        "retrieval",
+        "reranking",
+        "synthesis",
+        "retrieval",
+        "workflow"
+      ],
+      "categories": [
+        "retrieval",
+        "reranking",
+        "synthesis",
+        "retrieval",
+        "workflow"
+      ],
+      "score": 412.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "reranking",
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "unique_domains": [
+        "reranking",
+        "retrieval",
+        "synthesis",
+        "workflow"
+      ],
+      "root_atoms_used": [
+        "combine",
+        "scale",
+        "fold",
+        "compare",
+        "hash",
+        "project",
+        "order",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 5,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** reranking \u2192 retrieval \u2192 synthesis \u2192 workflow\n**Components:**\n  - bm25-retrieval (retrieval): Probabilistic relevance ranking with TF saturation and document length normalization. Industry standard for sparse retrieval.\n  - cross-encoder-rerank (reranking): Cross-encoder model scores (query, doc) pair jointly. State-of-the-art rerank quality.\n  - dedup-merge (synthesis): Remove near-duplicate chunks (cosine or NCD > threshold) and merge their content.\n  - dense-embedding-retrieval (retrieval): Dense embedding via neural model (bge-m3, qwen3-embedding); cosine similarity in d-dim space. Bridges vocabulary gap.\n  - react-workflow (workflow): Reasoning + Acting loop: LLM reasons about what to retrieve next, retrieves, observes, repeats.\n**Real walls (combined):**\n  - [bm25-retrieval] BM25F (fielded) needed for structured docs.\n  - [bm25-retrieval] k1=1.5, b=0.75 are defaults but rarely optimal.\n  - [bm25-retrieval] Cannot bridge vocabulary gap (no synonym handling).\n  - [bm25-retrieval] Fails on long-tail terms without IDF smoothing.\n  - [cross-encoder-rerank] Slowest rerank option (O(K) model calls).\n  - [cross-encoder-rerank] Requires GPU/endpoint.\n  - [cross-encoder-rerank] Bounded by K (top-K from stage 1).\n  - [cross-encoder-rerank] Model size matters: 0.6B is much faster than 4B, slight quality loss.\n  - [cross-encoder-rerank] Tied to underlying LLM's pre-training distribution.\n  - [dedup-merge] Threshold tuning per corpus.\n  - [dedup-merge] May merge complementary info from near-duplicates that look the same.\n  - [dedup-merge] Computational cost: O(N^2) naive, O(N log N) with LSH.\n  - [dense-embedding-retrieval] Requires GPU or fast inference endpoint.\n  - [dense-embedding-retrieval] Latency: 10-50ms per query on CPU; 5-10ms on GPU.\n  - [dense-embedding-retrieval] Quality varies by model size; bge-m3 (566M) often beats qwen3-4b on small fixtures.\n  - [dense-embedding-retrieval] Cannot embed documents longer than model's context window.\n  - [dense-embedding-retrieval] Non-deterministic across model versions.\n  - [react-workflow] LLM hallucination in reasoning step.\n  - [react-workflow] Action space must be well-defined.\n  - [react-workflow] Termination conditions matter.\n  - [react-workflow] Quality depends on LLM's instruction-following."
+    }
+  ]
+}

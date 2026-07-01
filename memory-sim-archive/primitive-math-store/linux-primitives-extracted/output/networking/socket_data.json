@@ -1,0 +1,91 @@
+{
+  "filename": "socket.h",
+  "includes": [],
+  "defines": [
+    {
+      "name": "_K_SS_MAXSIZE",
+      "value": "128",
+      "comment": "Implementation specific max size",
+      "category": ""
+    },
+    {
+      "name": "SOCK_SNDBUF_LOCK",
+      "value": "1",
+      "comment": "",
+      "category": "SOCK_SNDBUF"
+    },
+    {
+      "name": "SOCK_RCVBUF_LOCK",
+      "value": "2",
+      "comment": "",
+      "category": "SOCK_RCVBUF"
+    },
+    {
+      "name": "SOCK_BUF_LOCK_MASK",
+      "value": "(SOCK_SNDBUF_LOCK | SOCK_RCVBUF_LOCK)",
+      "comment": "",
+      "category": "SOCK_BUF"
+    },
+    {
+      "name": "SOCK_TXREHASH_DEFAULT",
+      "value": "255",
+      "comment": "",
+      "category": "SOCK_TXREHASH"
+    },
+    {
+      "name": "SOCK_TXREHASH_DISABLED",
+      "value": "0",
+      "comment": "",
+      "category": "SOCK_TXREHASH"
+    },
+    {
+      "name": "SOCK_TXREHASH_ENABLED",
+      "value": "1",
+      "comment": "",
+      "category": "SOCK_TXREHASH"
+    }
+  ],
+  "structs": [
+    {
+      "name": "__kernel_sockaddr_storage",
+      "fields": [
+        {
+          "type_name": "__kernel_sa_family_t",
+          "name": "ss_family",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "__data",
+          "array_size": "_K_SS_MAXSIZE - sizeof(unsigned short)",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_1",
+      "fields": [
+        {
+          "type_name": "__kernel_sa_family_t",
+          "name": "ss_family",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "__data",
+          "array_size": "_K_SS_MAXSIZE - sizeof(unsigned short)",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

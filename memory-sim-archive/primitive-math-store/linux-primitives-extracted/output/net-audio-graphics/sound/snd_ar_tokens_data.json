@@ -1,0 +1,524 @@
+{
+  "filename": "snd_ar_tokens.h",
+  "includes": [
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "APM_SUB_GRAPH_PERF_MODE_LOW_POWER",
+      "value": "0x1",
+      "comment": "",
+      "category": "APM_SUB"
+    },
+    {
+      "name": "APM_SUB_GRAPH_PERF_MODE_LOW_LATENCY",
+      "value": "0x2",
+      "comment": "",
+      "category": "APM_SUB"
+    },
+    {
+      "name": "APM_SUB_GRAPH_DIRECTION_TX",
+      "value": "0x1",
+      "comment": "",
+      "category": "APM_SUB"
+    },
+    {
+      "name": "APM_SUB_GRAPH_DIRECTION_RX",
+      "value": "0x2",
+      "comment": "",
+      "category": "APM_SUB"
+    },
+    {
+      "name": "APM_SUB_GRAPH_SID_AUDIO_PLAYBACK",
+      "value": "0x1",
+      "comment": "",
+      "category": "APM_SUB"
+    },
+    {
+      "name": "APM_SUB_GRAPH_SID_AUDIO_RECORD",
+      "value": "0x2",
+      "comment": "",
+      "category": "APM_SUB"
+    },
+    {
+      "name": "APM_SUB_GRAPH_SID_VOICE_CALL",
+      "value": "0x3",
+      "comment": "",
+      "category": "APM_SUB"
+    },
+    {
+      "name": "APM_CONTAINER_CAP_ID_PP",
+      "value": "0x1",
+      "comment": "",
+      "category": "APM_CONTAINER"
+    },
+    {
+      "name": "APM_CONTAINER_CAP_ID_CD",
+      "value": "0x2",
+      "comment": "",
+      "category": "APM_CONTAINER"
+    },
+    {
+      "name": "APM_CONTAINER_CAP_ID_EP",
+      "value": "0x3",
+      "comment": "",
+      "category": "APM_CONTAINER"
+    },
+    {
+      "name": "APM_CONTAINER_CAP_ID_OLC",
+      "value": "0x4",
+      "comment": "",
+      "category": "APM_CONTAINER"
+    },
+    {
+      "name": "APM_CONT_GRAPH_POS_STREAM",
+      "value": "0x1",
+      "comment": "",
+      "category": "APM_CONT"
+    },
+    {
+      "name": "APM_CONT_GRAPH_POS_PER_STR_PER_DEV",
+      "value": "0x2",
+      "comment": "",
+      "category": "APM_CONT"
+    },
+    {
+      "name": "APM_CONT_GRAPH_POS_STR_DEV",
+      "value": "0x3",
+      "comment": "",
+      "category": "APM_CONT"
+    },
+    {
+      "name": "APM_CONT_GRAPH_POS_GLOBAL_DEV",
+      "value": "0x4",
+      "comment": "",
+      "category": "APM_CONT"
+    },
+    {
+      "name": "APM_PROC_DOMAIN_ID_MDSP",
+      "value": "0x1",
+      "comment": "",
+      "category": "APM_PROC"
+    },
+    {
+      "name": "APM_PROC_DOMAIN_ID_ADSP",
+      "value": "0x2",
+      "comment": "",
+      "category": "APM_PROC"
+    },
+    {
+      "name": "APM_PROC_DOMAIN_ID_SDSP",
+      "value": "0x4",
+      "comment": "",
+      "category": "APM_PROC"
+    },
+    {
+      "name": "APM_PROC_DOMAIN_ID_CDSP",
+      "value": "0x5",
+      "comment": "",
+      "category": "APM_PROC"
+    },
+    {
+      "name": "PCM_INTERLEAVED",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PCM_DEINTERLEAVED_PACKED",
+      "value": "2",
+      "comment": "",
+      "category": "PCM_DEINTERLEAVED"
+    },
+    {
+      "name": "PCM_DEINTERLEAVED_UNPACKED",
+      "value": "3",
+      "comment": "",
+      "category": "PCM_DEINTERLEAVED"
+    },
+    {
+      "name": "AR_I2S_WS_SRC_EXTERNAL",
+      "value": "0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "AR_I2S_WS_SRC_INTERNAL",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SND_SOC_AR_TPLG_FE_BE_GRAPH_CTL_MIX",
+      "value": "256",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "SND_SOC_AR_TPLG_VOL_CTL",
+      "value": "257",
+      "comment": "",
+      "category": "SND_SOC"
+    },
+    {
+      "name": "AR_TKN_DAI_INDEX",
+      "value": "1",
+      "comment": "",
+      "category": "AR_TKN"
+    },
+    {
+      "name": "AR_TKN_U32_SUB_GRAPH_INSTANCE_ID",
+      "value": "2",
+      "comment": "",
+      "category": "AR_TKN"
+    },
+    {
+      "name": "AR_TKN_U32_SUB_GRAPH_PERF_MODE",
+      "value": "3",
+      "comment": "",
+      "category": "AR_TKN"
+    },
+    {
+      "name": "AR_TKN_U32_SUB_GRAPH_DIRECTION",
+      "value": "4",
+      "comment": "",
+      "category": "AR_TKN"
+    },
+    {
+      "name": "AR_TKN_U32_SUB_GRAPH_SCENARIO_ID",
+      "value": "5",
+      "comment": "",
+      "category": "AR_TKN"
+    },
+    {
+      "name": "AR_TKN_U32_CONTAINER_INSTANCE_ID",
+      "value": "100",
+      "comment": "",
+      "category": "AR_TKN"
+    },
+    {
+      "name": "AR_TKN_U32_CONTAINER_CAPABILITY_ID",
+      "value": "101",
+      "comment": "",
+      "category": "AR_TKN"
+    },
+    {
+      "name": "AR_TKN_U32_CONTAINER_STACK_SIZE",
+      "value": "102",
+      "comment": "",
+      "category": "AR_TKN"
+    },
+    {
+      "name": "AR_TKN_U32_CONTAINER_GRAPH_POS",
+      "value": "103",
+      "comment": "",
+      "category": "AR_TKN"
+    },
+    {
+      "name": "AR_TKN_U32_CONTAINER_PROC_DOMAIN",
+      "value": "104",
+      "comment": "",
+      "category": "AR_TKN"
+    },
+    {
+      "name": "AR_TKN_U32_MODULE_ID",
+      "value": "200",
+      "comment": "",
+      "category": "AR_TKN"
+    },
+    {
+      "name": "AR_TKN_U32_MODULE_INSTANCE_ID",
+      "value": "201",
+      "comment": "",
+      "category": "AR_TKN"
+    },
+    {
+      "name": "AR_TKN_U32_MODULE_MAX_IP_PORTS",
+      "value": "202",
+      "comment": "",
+      "category": "AR_TKN"
+    },
+    {
+      "name": "AR_TKN_U32_MODULE_MAX_OP_PORTS",
+      "value": "203",
+      "comment": "",
+      "category": "AR_TKN"
+    },
+    {
+      "name": "AR_TKN_U32_MODULE_IN_PORTS",
+      "value": "204",
+      "comment": "deprecated",
+      "category": "AR_TKN"
+    },
+    {
+      "name": "AR_TKN_U32_MODULE_OUT_PORTS",
+      "value": "205",
+      "comment": "deprecated",
+      "category": "AR_TKN"
+    },
+    {
+      "name": "AR_TKN_U32_MODULE_SRC_OP_PORT_ID",
+      "value": "206",
+      "comment": "",
+      "category": "AR_TKN"
+    },
+    {
+      "name": "AR_TKN_U32_MODULE_DST_IN_PORT_ID",
+      "value": "207",
+      "comment": "",
+      "category": "AR_TKN"
+    },
+    {
+      "name": "AR_TKN_U32_MODULE_SRC_INSTANCE_ID",
+      "value": "208",
+      "comment": "",
+      "category": "AR_TKN"
+    },
+    {
+      "name": "AR_TKN_U32_MODULE_DST_INSTANCE_ID",
+      "value": "209",
+      "comment": "",
+      "category": "AR_TKN"
+    },
+    {
+      "name": "AR_TKN_U32_MODULE_SRC_OP_PORT_ID1",
+      "value": "210",
+      "comment": "",
+      "category": "AR_TKN"
+    },
+    {
+      "name": "AR_TKN_U32_MODULE_DST_IN_PORT_ID1",
+      "value": "211",
+      "comment": "",
+      "category": "AR_TKN"
+    },
+    {
+      "name": "AR_TKN_U32_MODULE_DST_INSTANCE_ID1",
+      "value": "212",
+      "comment": "",
+      "category": "AR_TKN"
+    },
+    {
+      "name": "AR_TKN_U32_MODULE_SRC_OP_PORT_ID2",
+      "value": "213",
+      "comment": "",
+      "category": "AR_TKN"
+    },
+    {
+      "name": "AR_TKN_U32_MODULE_DST_IN_PORT_ID2",
+      "value": "214",
+      "comment": "",
+      "category": "AR_TKN"
+    },
+    {
+      "name": "AR_TKN_U32_MODULE_DST_INSTANCE_ID2",
+      "value": "215",
+      "comment": "",
+      "category": "AR_TKN"
+    },
+    {
+      "name": "AR_TKN_U32_MODULE_SRC_OP_PORT_ID3",
+      "value": "216",
+      "comment": "",
+      "category": "AR_TKN"
+    },
+    {
+      "name": "AR_TKN_U32_MODULE_DST_IN_PORT_ID3",
+      "value": "217",
+      "comment": "",
+      "category": "AR_TKN"
+    },
+    {
+      "name": "AR_TKN_U32_MODULE_DST_INSTANCE_ID3",
+      "value": "218",
+      "comment": "",
+      "category": "AR_TKN"
+    },
+    {
+      "name": "AR_TKN_U32_MODULE_SRC_OP_PORT_ID4",
+      "value": "219",
+      "comment": "",
+      "category": "AR_TKN"
+    },
+    {
+      "name": "AR_TKN_U32_MODULE_DST_IN_PORT_ID4",
+      "value": "220",
+      "comment": "",
+      "category": "AR_TKN"
+    },
+    {
+      "name": "AR_TKN_U32_MODULE_DST_INSTANCE_ID4",
+      "value": "221",
+      "comment": "",
+      "category": "AR_TKN"
+    },
+    {
+      "name": "AR_TKN_U32_MODULE_SRC_OP_PORT_ID5",
+      "value": "222",
+      "comment": "",
+      "category": "AR_TKN"
+    },
+    {
+      "name": "AR_TKN_U32_MODULE_DST_IN_PORT_ID5",
+      "value": "223",
+      "comment": "",
+      "category": "AR_TKN"
+    },
+    {
+      "name": "AR_TKN_U32_MODULE_DST_INSTANCE_ID5",
+      "value": "224",
+      "comment": "",
+      "category": "AR_TKN"
+    },
+    {
+      "name": "AR_TKN_U32_MODULE_SRC_OP_PORT_ID6",
+      "value": "225",
+      "comment": "",
+      "category": "AR_TKN"
+    },
+    {
+      "name": "AR_TKN_U32_MODULE_DST_IN_PORT_ID6",
+      "value": "226",
+      "comment": "",
+      "category": "AR_TKN"
+    },
+    {
+      "name": "AR_TKN_U32_MODULE_DST_INSTANCE_ID6",
+      "value": "227",
+      "comment": "",
+      "category": "AR_TKN"
+    },
+    {
+      "name": "AR_TKN_U32_MODULE_SRC_OP_PORT_ID7",
+      "value": "228",
+      "comment": "",
+      "category": "AR_TKN"
+    },
+    {
+      "name": "AR_TKN_U32_MODULE_DST_IN_PORT_ID7",
+      "value": "229",
+      "comment": "",
+      "category": "AR_TKN"
+    },
+    {
+      "name": "AR_TKN_U32_MODULE_DST_INSTANCE_ID7",
+      "value": "230",
+      "comment": "",
+      "category": "AR_TKN"
+    },
+    {
+      "name": "AR_TKN_U32_MODULE_HW_IF_IDX",
+      "value": "250",
+      "comment": "",
+      "category": "AR_TKN"
+    },
+    {
+      "name": "AR_TKN_U32_MODULE_HW_IF_TYPE",
+      "value": "251",
+      "comment": "",
+      "category": "AR_TKN"
+    },
+    {
+      "name": "AR_TKN_U32_MODULE_FMT_INTERLEAVE",
+      "value": "252",
+      "comment": "",
+      "category": "AR_TKN"
+    },
+    {
+      "name": "AR_TKN_U32_MODULE_FMT_DATA",
+      "value": "253",
+      "comment": "",
+      "category": "AR_TKN"
+    },
+    {
+      "name": "AR_TKN_U32_MODULE_FMT_SAMPLE_RATE",
+      "value": "254",
+      "comment": "",
+      "category": "AR_TKN"
+    },
+    {
+      "name": "AR_TKN_U32_MODULE_FMT_BIT_DEPTH",
+      "value": "255",
+      "comment": "",
+      "category": "AR_TKN"
+    },
+    {
+      "name": "AR_TKN_U32_MODULE_SD_LINE_IDX",
+      "value": "256",
+      "comment": "",
+      "category": "AR_TKN"
+    },
+    {
+      "name": "AR_TKN_U32_MODULE_WS_SRC",
+      "value": "257",
+      "comment": "",
+      "category": "AR_TKN"
+    },
+    {
+      "name": "AR_TKN_U32_MODULE_FRAME_SZ_FACTOR",
+      "value": "258",
+      "comment": "",
+      "category": "AR_TKN"
+    },
+    {
+      "name": "AR_TKN_U32_MODULE_LOG_CODE",
+      "value": "259",
+      "comment": "",
+      "category": "AR_TKN"
+    },
+    {
+      "name": "AR_TKN_U32_MODULE_LOG_TAP_POINT_ID",
+      "value": "260",
+      "comment": "",
+      "category": "AR_TKN"
+    },
+    {
+      "name": "AR_TKN_U32_MODULE_LOG_MODE",
+      "value": "261",
+      "comment": "",
+      "category": "AR_TKN"
+    },
+    {
+      "name": "SND_SOC_AR_TPLG_MODULE_CFG_TYPE",
+      "value": "0x01001006",
+      "comment": "",
+      "category": "SND_SOC"
+    }
+  ],
+  "structs": [
+    {
+      "name": "audioreach_module_priv_data",
+      "fields": [
+        {
+          "type_name": "__le32",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "priv",
+          "array_size": "2",
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "data",
+          "array_size": "0",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

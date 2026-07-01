@@ -1,0 +1,31 @@
+# Local-only: experiment run metadata kept on disk, not pushed to remote
+# (scripts regenerate this; the per-trial prompt/response/CSV audit
+# trail is too large to push as part of the repo)
+/rag_runs/
+
+# Rust build output
+/target
+
+# Cargo build artifacts that leaked into experiment run dirs
+# (the Rust coder benchmark runs `cargo test` per trial inside rag_runs/;
+/target/  in .gitignore above doesn't catch them, so we list patterns)
+*.o
+*.pdb
+*.exe
+*.rmeta
+*.rlib
+*.d
+*.lib
+*.exp
+*.dll
+*.TAG
+*.cargo-lock
+*.timestamp
+
+# Python
+__pycache__/
+*.pyc
+
+# IDE
+.vs/
+.idea/

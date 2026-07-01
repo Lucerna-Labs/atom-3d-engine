@@ -1,0 +1,274 @@
+{
+  "meta": {
+    "lastTouchedVersion": "2026.3.25",
+    "lastTouchedAt": "2026-04-06T00:37:44.961Z"
+  },
+  "env": {},
+  "wizard": {
+    "lastRunAt": "2026-03-23T18:42:28.953Z",
+    "lastRunVersion": "2026.3.22",
+    "lastRunCommand": "onboard",
+    "lastRunMode": "local"
+  },
+  "auth": {
+    "profiles": {
+      "ollama:default": {
+        "provider": "ollama",
+        "mode": "api_key"
+      }
+    }
+  },
+  "models": {
+    "mode": "merge",
+    "providers": {
+      "ollama": {
+        "baseUrl": "http://127.0.0.1:11434",
+        "apiKey": "OLLAMA_API_KEY",
+        "api": "ollama",
+        "models": [
+          {
+            "id": "glm-5.1:cloud",
+            "name": "glm-5.1:cloud",
+            "api": "ollama",
+            "reasoning": false,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 202752,
+            "maxTokens": 8192
+          },
+          {
+            "id": "qwen3.5:397b-cloud",
+            "name": "qwen3.5:397b-cloud",
+            "api": "ollama",
+            "reasoning": false,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 262144,
+            "maxTokens": 8192
+          }
+        ]
+      }
+    }
+  },
+  "agents": {
+    "defaults": {
+      "model": {
+        "primary": "ollama/glm-5.1:cloud",
+        "fallbacks": [
+          "ollama/qwen3.5:397b-cloud"
+        ]
+      },
+      "models": {
+        "ollama/glm-5.1:cloud": {
+          "alias": "glm-5.1"
+        },
+        "ollama/qwen3.5:397b-cloud": {
+          "alias": "qwen3.5-flagship"
+        }
+      },
+      "workspace": "C:\\Users\\jgali\\.openclaw\\workspace",
+      "memorySearch": {
+        "enabled": true,
+        "provider": "ollama",
+        "remote": {
+          "baseUrl": "http://127.0.0.1:11434",
+          "apiKey": "ollama-local"
+        },
+        "model": "nomic-embed-text",
+        "sync": {
+          "onSessionStart": true,
+          "watch": true
+        },
+        "cache": {
+          "maxEntries": 500000
+        }
+      },
+      "maxConcurrent": 4,
+      "subagents": {
+        "maxConcurrent": 8
+      }
+    },
+    "list": [
+      {
+        "id": "main",
+        "tools": {
+          "profile": "full",
+          "alsoAllow": [
+            "canvas",
+            "message",
+            "gateway",
+            "nodes",
+            "agents_list",
+            "tts",
+            "read",
+            "write",
+            "edit",
+            "apply_patch",
+            "process",
+            "exec",
+            "web_search",
+            "web_fetch",
+            "memory_get",
+            "memory_search",
+            "sessions_yield",
+            "subagents",
+            "sessions_spawn",
+            "cron",
+            "image",
+            "image_generate"
+          ],
+          "deny": [
+            "browser"
+          ]
+        }
+      }
+    ]
+  },
+  "tools": {
+    "profile": "coding",
+    "web": {
+      "search": {
+        "enabled": true,
+        "provider": "duckduckgo"
+      }
+    }
+  },
+  "messages": {
+    "queue": {
+      "mode": "interrupt"
+    },
+    "ackReactionScope": "group-mentions"
+  },
+  "commands": {
+    "native": "auto",
+    "nativeSkills": "auto",
+    "restart": true,
+    "ownerDisplay": "raw"
+  },
+  "session": {
+    "dmScope": "per-channel-peer"
+  },
+  "hooks": {
+    "internal": {
+      "enabled": true,
+      "entries": {
+        "session-memory": {
+          "enabled": true
+        }
+      }
+    }
+  },
+  "channels": {
+    "telegram": {
+      "enabled": true,
+      "dmPolicy": "pairing",
+      "botToken": "8705351803:AAE0BsrI5kUeXuNgFm_EFqze52SwcppoViw",
+      "groupPolicy": "allowlist",
+      "streaming": "partial"
+    },
+    "signal": {
+      "enabled": false,
+      "account": "+13527600236",
+      "cliPath": "signal-cli",
+      "dmPolicy": "pairing",
+      "groupPolicy": "allowlist"
+    }
+  },
+  "gateway": {
+    "port": 18789,
+    "mode": "local",
+    "bind": "loopback",
+    "auth": {
+      "mode": "token",
+      "token": "f0e11abe2adca8ba3218b9efcb928904d8d7660a83f32068"
+    },
+    "tailscale": {
+      "mode": "off",
+      "resetOnExit": false
+    },
+    "nodes": {
+      "denyCommands": [
+        "camera.snap",
+        "camera.clip",
+        "screen.record",
+        "contacts.add",
+        "calendar.add",
+        "reminders.add",
+        "sms.send"
+      ]
+    }
+  },
+  "mcp": {
+    "servers": {}
+  },
+  "skills": {
+    "install": {
+      "nodeManager": "npm"
+    },
+    "entries": {
+      "apple-notes": {
+        "enabled": false
+      },
+      "bear-notes": {
+        "enabled": true
+      },
+      "1password": {
+        "enabled": false
+      },
+      "bluebubbles": {
+        "enabled": false
+      },
+      "discord": {
+        "enabled": false
+      },
+      "model-usage": {
+        "enabled": false
+      },
+      "things-mac": {
+        "enabled": false
+      },
+      "trello": {
+        "enabled": false
+      },
+      "wacli": {
+        "enabled": false
+      },
+      "camsnap": {
+        "enabled": false
+      },
+      "gemini": {
+        "enabled": false
+      },
+      "skill-creator": {
+        "enabled": true
+      },
+      "openclaw-secrets-operator": {
+        "enabled": true
+      },
+      "github": {
+        "enabled": true
+      }
+    }
+  },
+  "plugins": {
+    "entries": {
+      "duckduckgo": {
+        "enabled": true
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+The total score for the first three tests is (3 times 82 = 246). Adding the fourth and fifth test scores gives a new total of (166 + 166 = 332). Dividing by 5 to find the mean: ((text{total} / text{{test_count}}) = 166).
+
+Thus, the mean score on each test is calculated as follows:
+
+( frac{text{{first_test_score_1}} + text{{first_test_score_2}}}{text{{num_tests}}}) where
+[
+(text{{first_test_score_1}}, text{{second_test_score}})
+]
+
+Example:
+For the given data points ([score1], [score2], ..., [score_n]), the program calculates the mean using the formula above.
+```python
+def calculate_mean(scores):
+    """
+    This function takes in a list

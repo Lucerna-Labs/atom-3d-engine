@@ -1,0 +1,171 @@
+{
+  "filename": "fsmap.h",
+  "includes": [
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "FMH_IF_VALID",
+      "value": "0",
+      "comment": "",
+      "category": "FMH_IF"
+    },
+    {
+      "name": "FMH_OF_DEV_T",
+      "value": "0x1",
+      "comment": "fmr_device values will be dev_t",
+      "category": "FMH_OF"
+    },
+    {
+      "name": "FMR_OF_PREALLOC",
+      "value": "0x1",
+      "comment": "segment = unwritten pre-allocation",
+      "category": "FMR_OF"
+    },
+    {
+      "name": "FMR_OF_ATTR_FORK",
+      "value": "0x2",
+      "comment": "segment = attribute fork",
+      "category": "FMR_OF"
+    },
+    {
+      "name": "FMR_OF_EXTENT_MAP",
+      "value": "0x4",
+      "comment": "segment = extent map",
+      "category": "FMR_OF"
+    },
+    {
+      "name": "FMR_OF_SHARED",
+      "value": "0x8",
+      "comment": "segment = shared with another file",
+      "category": "FMR_OF"
+    },
+    {
+      "name": "FMR_OF_SPECIAL_OWNER",
+      "value": "0x10",
+      "comment": "owner is a special value",
+      "category": "FMR_OF"
+    },
+    {
+      "name": "FMR_OF_LAST",
+      "value": "0x20",
+      "comment": "segment is the last in the dataset",
+      "category": "FMR_OF"
+    },
+    {
+      "name": "FMR_OWN_FREE",
+      "value": "FMR_OWNER(0, 1)",
+      "comment": "free space",
+      "category": "FMR_OWN"
+    },
+    {
+      "name": "FMR_OWN_UNKNOWN",
+      "value": "FMR_OWNER(0, 2)",
+      "comment": "unknown owner",
+      "category": "FMR_OWN"
+    },
+    {
+      "name": "FMR_OWN_METADATA",
+      "value": "FMR_OWNER(0, 3)",
+      "comment": "metadata",
+      "category": "FMR_OWN"
+    },
+    {
+      "name": "FS_IOC_GETFSMAP",
+      "value": "_IOWR('X', 59, struct fsmap_head)",
+      "comment": "",
+      "category": "FS_IOC"
+    }
+  ],
+  "structs": [
+    {
+      "name": "fsmap",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "fmr_device",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "fmr_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "fmr_physical",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "fmr_owner",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "fmr_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "fmr_length",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "fmr_reserved",
+          "array_size": "3",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fsmap_head",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "fmh_iflags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "fmh_oflags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "fmh_count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "fmh_entries",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "fmh_reserved",
+          "array_size": "6",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

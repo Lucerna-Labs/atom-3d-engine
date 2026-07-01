@@ -1,0 +1,713 @@
+{
+  "filename": "jffs2.h",
+  "includes": [
+    "linux/types.h",
+    "linux/magic.h"
+  ],
+  "defines": [
+    {
+      "name": "JFFS2_OLD_MAGIC_BITMASK",
+      "value": "0x1984",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "JFFS2_MAGIC_BITMASK",
+      "value": "0x1985",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "KSAMTIB_CIGAM_2SFFJ",
+      "value": "0x8519",
+      "comment": "For detecting wrong-endian fs",
+      "category": "KSAMTIB_CIGAM"
+    },
+    {
+      "name": "JFFS2_EMPTY_BITMASK",
+      "value": "0xffff",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "JFFS2_DIRTY_BITMASK",
+      "value": "0x0000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "JFFS2_SUM_MAGIC",
+      "value": "0x02851885",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "JFFS2_MAX_NAME_LEN",
+      "value": "254",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "JFFS2_MIN_DATA_LEN",
+      "value": "128",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "JFFS2_COMPR_NONE",
+      "value": "0x00",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "JFFS2_COMPR_ZERO",
+      "value": "0x01",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "JFFS2_COMPR_RTIME",
+      "value": "0x02",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "JFFS2_COMPR_RUBINMIPS",
+      "value": "0x03",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "JFFS2_COMPR_COPY",
+      "value": "0x04",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "JFFS2_COMPR_DYNRUBIN",
+      "value": "0x05",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "JFFS2_COMPR_ZLIB",
+      "value": "0x06",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "JFFS2_COMPR_LZO",
+      "value": "0x07",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "JFFS2_COMPAT_MASK",
+      "value": "0xc000",
+      "comment": "What do to if an unknown nodetype is found",
+      "category": ""
+    },
+    {
+      "name": "JFFS2_NODE_ACCURATE",
+      "value": "0x2000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "JFFS2_FEATURE_INCOMPAT",
+      "value": "0xc000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "JFFS2_FEATURE_ROCOMPAT",
+      "value": "0x8000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "JFFS2_FEATURE_RWCOMPAT_COPY",
+      "value": "0x4000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "JFFS2_FEATURE_RWCOMPAT_DELETE",
+      "value": "0x0000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "JFFS2_NODETYPE_DIRENT",
+      "value": "(JFFS2_FEATURE_INCOMPAT | JFFS2_NODE_ACCURATE | 1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "JFFS2_NODETYPE_INODE",
+      "value": "(JFFS2_FEATURE_INCOMPAT | JFFS2_NODE_ACCURATE | 2)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "JFFS2_NODETYPE_CLEANMARKER",
+      "value": "(JFFS2_FEATURE_RWCOMPAT_DELETE | JFFS2_NODE_ACCURATE | 3)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "JFFS2_NODETYPE_PADDING",
+      "value": "(JFFS2_FEATURE_RWCOMPAT_DELETE | JFFS2_NODE_ACCURATE | 4)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "JFFS2_NODETYPE_SUMMARY",
+      "value": "(JFFS2_FEATURE_RWCOMPAT_DELETE | JFFS2_NODE_ACCURATE | 6)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "JFFS2_NODETYPE_XATTR",
+      "value": "(JFFS2_FEATURE_INCOMPAT | JFFS2_NODE_ACCURATE | 8)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "JFFS2_NODETYPE_XREF",
+      "value": "(JFFS2_FEATURE_INCOMPAT | JFFS2_NODE_ACCURATE | 9)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "JFFS2_XPREFIX_USER",
+      "value": "1",
+      "comment": "for \"user.\"",
+      "category": ""
+    },
+    {
+      "name": "JFFS2_XPREFIX_SECURITY",
+      "value": "2",
+      "comment": "for \"security.\"",
+      "category": ""
+    },
+    {
+      "name": "JFFS2_XPREFIX_ACL_ACCESS",
+      "value": "3",
+      "comment": "for \"system.posix_acl_access\"",
+      "category": ""
+    },
+    {
+      "name": "JFFS2_XPREFIX_ACL_DEFAULT",
+      "value": "4",
+      "comment": "for \"system.posix_acl_default\"",
+      "category": ""
+    },
+    {
+      "name": "JFFS2_XPREFIX_TRUSTED",
+      "value": "5",
+      "comment": "for \"trusted.*\"",
+      "category": ""
+    },
+    {
+      "name": "JFFS2_ACL_VERSION",
+      "value": "0x0001",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "JFFS2_INO_FLAG_PREREAD",
+      "value": "1\t/* Do read_inode() for this one at",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "JFFS2_INO_FLAG_USERCOMPR",
+      "value": "2\t/* User has requested a specific",
+      "comment": "",
+      "category": ""
+    }
+  ],
+  "structs": [
+    {
+      "name": "anonymous_0",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "v32",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_1",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "m",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_2",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "v16",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "jffs2_unknown_node",
+      "fields": [
+        {
+          "type_name": "jint16_t",
+          "name": "magic",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "jint16_t",
+          "name": "nodetype",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "jint32_t",
+          "name": "totlen",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "jint32_t",
+          "name": "hdr_crc",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "jffs2_raw_dirent",
+      "fields": [
+        {
+          "type_name": "jint16_t",
+          "name": "magic",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "jint16_t",
+          "name": "nodetype",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "jint32_t",
+          "name": "totlen",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "jint32_t",
+          "name": "hdr_crc",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "jint32_t",
+          "name": "pino",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "jint32_t",
+          "name": "version",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "jint32_t",
+          "name": "ino",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "jint32_t",
+          "name": "mctime",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "nsize",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "unused",
+          "array_size": "2",
+          "comment": ""
+        },
+        {
+          "type_name": "jint32_t",
+          "name": "node_crc",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "jint32_t",
+          "name": "name_crc",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "jffs2_raw_inode",
+      "fields": [
+        {
+          "type_name": "jint16_t",
+          "name": "magic",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "jint16_t",
+          "name": "nodetype",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "jint32_t",
+          "name": "totlen",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "jint32_t",
+          "name": "hdr_crc",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "jint32_t",
+          "name": "ino",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "jint32_t",
+          "name": "version",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "jmode_t",
+          "name": "mode",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "jint16_t",
+          "name": "uid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "jint16_t",
+          "name": "gid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "jint32_t",
+          "name": "isize",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "jint32_t",
+          "name": "atime",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "jint32_t",
+          "name": "mtime",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "jint32_t",
+          "name": "ctime",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "jint32_t",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "jint32_t",
+          "name": "csize",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "jint32_t",
+          "name": "dsize",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "compr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "usercompr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "jint16_t",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "jint32_t",
+          "name": "data_crc",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "jint32_t",
+          "name": "node_crc",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "jffs2_raw_xattr",
+      "fields": [
+        {
+          "type_name": "jint16_t",
+          "name": "magic",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "jint16_t",
+          "name": "nodetype",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "jint32_t",
+          "name": "totlen",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "jint32_t",
+          "name": "hdr_crc",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "jint32_t",
+          "name": "xid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "jint32_t",
+          "name": "version",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "xprefix",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "name_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "jint16_t",
+          "name": "value_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "jint32_t",
+          "name": "data_crc",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "jint32_t",
+          "name": "node_crc",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "jffs2_raw_xref",
+      "fields": [
+        {
+          "type_name": "jint16_t",
+          "name": "magic",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "jint16_t",
+          "name": "nodetype",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "jint32_t",
+          "name": "totlen",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "jint32_t",
+          "name": "hdr_crc",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "jint32_t",
+          "name": "ino",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "jint32_t",
+          "name": "xid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "jint32_t",
+          "name": "xseqno",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "jint32_t",
+          "name": "node_crc",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "jffs2_raw_summary",
+      "fields": [
+        {
+          "type_name": "jint16_t",
+          "name": "magic",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "jint16_t",
+          "name": "nodetype",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "jint32_t",
+          "name": "totlen",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "jint32_t",
+          "name": "hdr_crc",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "jint32_t",
+          "name": "sum_num",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "jint32_t",
+          "name": "cln_mkr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "jint32_t",
+          "name": "padded",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "jint32_t",
+          "name": "sum_crc",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "jint32_t",
+          "name": "node_crc",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

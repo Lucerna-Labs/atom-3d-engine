@@ -1,0 +1,48 @@
+{
+  "filename": "tcp_metrics.h",
+  "includes": [
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "TCP_METRICS_GENL_NAME",
+      "value": "\"tcp_metrics\"",
+      "comment": "",
+      "category": "TCP_METRICS"
+    },
+    {
+      "name": "TCP_METRICS_GENL_VERSION",
+      "value": "0x1",
+      "comment": "",
+      "category": "TCP_METRICS"
+    },
+    {
+      "name": "TCP_METRIC_MAX",
+      "value": "(__TCP_METRIC_MAX - 1)",
+      "comment": "",
+      "category": "TCP_METRIC"
+    },
+    {
+      "name": "TCP_METRICS_A_METRICS_MAX",
+      "value": "(__TCP_METRICS_A_METRICS_MAX - 1)",
+      "comment": "",
+      "category": "TCP_METRICS"
+    },
+    {
+      "name": "TCP_METRICS_ATTR_MAX",
+      "value": "(__TCP_METRICS_ATTR_MAX - 1)",
+      "comment": "",
+      "category": "TCP_METRICS"
+    },
+    {
+      "name": "TCP_METRICS_CMD_MAX",
+      "value": "(__TCP_METRICS_CMD_MAX - 1)",
+      "comment": "",
+      "category": "TCP_METRICS"
+    }
+  ],
+  "structs": [],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

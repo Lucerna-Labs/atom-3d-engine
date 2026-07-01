@@ -1,0 +1,189 @@
+{
+  "filename": "connector.h",
+  "includes": [
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "CN_IDX_PROC",
+      "value": "0x1",
+      "comment": "",
+      "category": "CN_IDX"
+    },
+    {
+      "name": "CN_VAL_PROC",
+      "value": "0x1",
+      "comment": "",
+      "category": "CN_VAL"
+    },
+    {
+      "name": "CN_IDX_CIFS",
+      "value": "0x2",
+      "comment": "",
+      "category": "CN_IDX"
+    },
+    {
+      "name": "CN_VAL_CIFS",
+      "value": "0x1",
+      "comment": "",
+      "category": "CN_VAL"
+    },
+    {
+      "name": "CN_W1_IDX",
+      "value": "0x3",
+      "comment": "w1 communication",
+      "category": ""
+    },
+    {
+      "name": "CN_W1_VAL",
+      "value": "0x1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "CN_IDX_V86D",
+      "value": "0x4",
+      "comment": "",
+      "category": "CN_IDX"
+    },
+    {
+      "name": "CN_VAL_V86D_UVESAFB",
+      "value": "0x1",
+      "comment": "",
+      "category": "CN_VAL"
+    },
+    {
+      "name": "CN_IDX_BB",
+      "value": "0x5",
+      "comment": "BlackBoard, from the TSP GPL sampling framework",
+      "category": "CN_IDX"
+    },
+    {
+      "name": "CN_DST_IDX",
+      "value": "0x6",
+      "comment": "",
+      "category": "CN_DST"
+    },
+    {
+      "name": "CN_DST_VAL",
+      "value": "0x1",
+      "comment": "",
+      "category": "CN_DST"
+    },
+    {
+      "name": "CN_IDX_DM",
+      "value": "0x7",
+      "comment": "Device Mapper",
+      "category": "CN_IDX"
+    },
+    {
+      "name": "CN_VAL_DM_USERSPACE_LOG",
+      "value": "0x1",
+      "comment": "",
+      "category": "CN_VAL"
+    },
+    {
+      "name": "CN_IDX_DRBD",
+      "value": "0x8",
+      "comment": "",
+      "category": "CN_IDX"
+    },
+    {
+      "name": "CN_VAL_DRBD",
+      "value": "0x1",
+      "comment": "",
+      "category": "CN_VAL"
+    },
+    {
+      "name": "CN_KVP_IDX",
+      "value": "0x9",
+      "comment": "HyperV KVP",
+      "category": "CN_KVP"
+    },
+    {
+      "name": "CN_KVP_VAL",
+      "value": "0x1",
+      "comment": "queries from the kernel",
+      "category": "CN_KVP"
+    },
+    {
+      "name": "CN_VSS_IDX",
+      "value": "0xA",
+      "comment": "HyperV VSS",
+      "category": "CN_VSS"
+    },
+    {
+      "name": "CN_VSS_VAL",
+      "value": "0x1",
+      "comment": "queries from the kernel",
+      "category": "CN_VSS"
+    },
+    {
+      "name": "CN_NETLINK_USERS",
+      "value": "11",
+      "comment": "Highest index + 1",
+      "category": "CN_NETLINK"
+    },
+    {
+      "name": "CONNECTOR_MAX_MSG_SIZE",
+      "value": "16384",
+      "comment": "",
+      "category": "CONNECTOR_MAX"
+    }
+  ],
+  "structs": [
+    {
+      "name": "cb_id",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "idx",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "val",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "cn_msg",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "seq",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ack",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

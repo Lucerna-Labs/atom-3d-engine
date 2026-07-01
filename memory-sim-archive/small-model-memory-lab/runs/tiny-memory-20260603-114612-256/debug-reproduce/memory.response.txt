@@ -1,0 +1,6 @@
+﻿
+1) Reproduce reliably: capture the exact request, headers, and payload; replay in a local or staging environment; add a minimal test case.
+2) Isolate the change: bisect recent commits; diff config and dependencies; check for race conditions and timing.
+3) Instrument: add structured logs and metrics around the suspected path; enable request tracing; watch error rates and latency.
+4) Fix and verify: apply the smallest change that removes the failure; run the reproduction test; monitor for regressions.
+

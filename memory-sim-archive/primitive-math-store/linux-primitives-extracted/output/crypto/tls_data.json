@@ -1,0 +1,476 @@
+{
+  "filename": "tls.h",
+  "includes": [
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "TLS_TX",
+      "value": "1",
+      "comment": "Set transmit parameters",
+      "category": ""
+    },
+    {
+      "name": "TLS_RX",
+      "value": "2",
+      "comment": "Set receive parameters",
+      "category": ""
+    },
+    {
+      "name": "TLS_TX_ZEROCOPY_RO",
+      "value": "3",
+      "comment": "TX zerocopy (only sendfile now)",
+      "category": "TLS_TX"
+    },
+    {
+      "name": "TLS_RX_EXPECT_NO_PAD",
+      "value": "4",
+      "comment": "Attempt opportunistic zero-copy",
+      "category": "TLS_RX"
+    },
+    {
+      "name": "TLS_TX_MAX_PAYLOAD_LEN",
+      "value": "5",
+      "comment": "Maximum plaintext size",
+      "category": "TLS_TX"
+    },
+    {
+      "name": "TLS_1_2_VERSION_MAJOR",
+      "value": "0x3",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "TLS_1_2_VERSION_MINOR",
+      "value": "0x3",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "TLS_1_2_VERSION",
+      "value": "TLS_VERSION_NUMBER(TLS_1_2)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "TLS_1_3_VERSION_MAJOR",
+      "value": "0x3",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "TLS_1_3_VERSION_MINOR",
+      "value": "0x4",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "TLS_1_3_VERSION",
+      "value": "TLS_VERSION_NUMBER(TLS_1_3)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "TLS_CIPHER_AES_GCM_128",
+      "value": "51",
+      "comment": "",
+      "category": "TLS_CIPHER"
+    },
+    {
+      "name": "TLS_CIPHER_AES_GCM_128_IV_SIZE",
+      "value": "8",
+      "comment": "",
+      "category": "TLS_CIPHER"
+    },
+    {
+      "name": "TLS_CIPHER_AES_GCM_128_KEY_SIZE",
+      "value": "16",
+      "comment": "",
+      "category": "TLS_CIPHER"
+    },
+    {
+      "name": "TLS_CIPHER_AES_GCM_128_SALT_SIZE",
+      "value": "4",
+      "comment": "",
+      "category": "TLS_CIPHER"
+    },
+    {
+      "name": "TLS_CIPHER_AES_GCM_128_TAG_SIZE",
+      "value": "16",
+      "comment": "",
+      "category": "TLS_CIPHER"
+    },
+    {
+      "name": "TLS_CIPHER_AES_GCM_128_REC_SEQ_SIZE",
+      "value": "8",
+      "comment": "",
+      "category": "TLS_CIPHER"
+    },
+    {
+      "name": "TLS_CIPHER_AES_GCM_256",
+      "value": "52",
+      "comment": "",
+      "category": "TLS_CIPHER"
+    },
+    {
+      "name": "TLS_CIPHER_AES_GCM_256_IV_SIZE",
+      "value": "8",
+      "comment": "",
+      "category": "TLS_CIPHER"
+    },
+    {
+      "name": "TLS_CIPHER_AES_GCM_256_KEY_SIZE",
+      "value": "32",
+      "comment": "",
+      "category": "TLS_CIPHER"
+    },
+    {
+      "name": "TLS_CIPHER_AES_GCM_256_SALT_SIZE",
+      "value": "4",
+      "comment": "",
+      "category": "TLS_CIPHER"
+    },
+    {
+      "name": "TLS_CIPHER_AES_GCM_256_TAG_SIZE",
+      "value": "16",
+      "comment": "",
+      "category": "TLS_CIPHER"
+    },
+    {
+      "name": "TLS_CIPHER_AES_GCM_256_REC_SEQ_SIZE",
+      "value": "8",
+      "comment": "",
+      "category": "TLS_CIPHER"
+    },
+    {
+      "name": "TLS_CIPHER_AES_CCM_128",
+      "value": "53",
+      "comment": "",
+      "category": "TLS_CIPHER"
+    },
+    {
+      "name": "TLS_CIPHER_AES_CCM_128_IV_SIZE",
+      "value": "8",
+      "comment": "",
+      "category": "TLS_CIPHER"
+    },
+    {
+      "name": "TLS_CIPHER_AES_CCM_128_KEY_SIZE",
+      "value": "16",
+      "comment": "",
+      "category": "TLS_CIPHER"
+    },
+    {
+      "name": "TLS_CIPHER_AES_CCM_128_SALT_SIZE",
+      "value": "4",
+      "comment": "",
+      "category": "TLS_CIPHER"
+    },
+    {
+      "name": "TLS_CIPHER_AES_CCM_128_TAG_SIZE",
+      "value": "16",
+      "comment": "",
+      "category": "TLS_CIPHER"
+    },
+    {
+      "name": "TLS_CIPHER_AES_CCM_128_REC_SEQ_SIZE",
+      "value": "8",
+      "comment": "",
+      "category": "TLS_CIPHER"
+    },
+    {
+      "name": "TLS_CIPHER_CHACHA20_POLY1305",
+      "value": "54",
+      "comment": "",
+      "category": "TLS_CIPHER"
+    },
+    {
+      "name": "TLS_CIPHER_CHACHA20_POLY1305_IV_SIZE",
+      "value": "12",
+      "comment": "",
+      "category": "TLS_CIPHER"
+    },
+    {
+      "name": "TLS_CIPHER_CHACHA20_POLY1305_KEY_SIZE",
+      "value": "32",
+      "comment": "",
+      "category": "TLS_CIPHER"
+    },
+    {
+      "name": "TLS_CIPHER_CHACHA20_POLY1305_SALT_SIZE",
+      "value": "0",
+      "comment": "",
+      "category": "TLS_CIPHER"
+    },
+    {
+      "name": "TLS_CIPHER_CHACHA20_POLY1305_TAG_SIZE",
+      "value": "16",
+      "comment": "",
+      "category": "TLS_CIPHER"
+    },
+    {
+      "name": "TLS_CIPHER_CHACHA20_POLY1305_REC_SEQ_SIZE",
+      "value": "8",
+      "comment": "",
+      "category": "TLS_CIPHER"
+    },
+    {
+      "name": "TLS_CIPHER_SM4_GCM",
+      "value": "55",
+      "comment": "",
+      "category": "TLS_CIPHER"
+    },
+    {
+      "name": "TLS_CIPHER_SM4_GCM_IV_SIZE",
+      "value": "8",
+      "comment": "",
+      "category": "TLS_CIPHER"
+    },
+    {
+      "name": "TLS_CIPHER_SM4_GCM_KEY_SIZE",
+      "value": "16",
+      "comment": "",
+      "category": "TLS_CIPHER"
+    },
+    {
+      "name": "TLS_CIPHER_SM4_GCM_SALT_SIZE",
+      "value": "4",
+      "comment": "",
+      "category": "TLS_CIPHER"
+    },
+    {
+      "name": "TLS_CIPHER_SM4_GCM_TAG_SIZE",
+      "value": "16",
+      "comment": "",
+      "category": "TLS_CIPHER"
+    },
+    {
+      "name": "TLS_CIPHER_SM4_GCM_REC_SEQ_SIZE",
+      "value": "8",
+      "comment": "",
+      "category": "TLS_CIPHER"
+    },
+    {
+      "name": "TLS_CIPHER_SM4_CCM",
+      "value": "56",
+      "comment": "",
+      "category": "TLS_CIPHER"
+    },
+    {
+      "name": "TLS_CIPHER_SM4_CCM_IV_SIZE",
+      "value": "8",
+      "comment": "",
+      "category": "TLS_CIPHER"
+    },
+    {
+      "name": "TLS_CIPHER_SM4_CCM_KEY_SIZE",
+      "value": "16",
+      "comment": "",
+      "category": "TLS_CIPHER"
+    },
+    {
+      "name": "TLS_CIPHER_SM4_CCM_SALT_SIZE",
+      "value": "4",
+      "comment": "",
+      "category": "TLS_CIPHER"
+    },
+    {
+      "name": "TLS_CIPHER_SM4_CCM_TAG_SIZE",
+      "value": "16",
+      "comment": "",
+      "category": "TLS_CIPHER"
+    },
+    {
+      "name": "TLS_CIPHER_SM4_CCM_REC_SEQ_SIZE",
+      "value": "8",
+      "comment": "",
+      "category": "TLS_CIPHER"
+    },
+    {
+      "name": "TLS_CIPHER_ARIA_GCM_128",
+      "value": "57",
+      "comment": "",
+      "category": "TLS_CIPHER"
+    },
+    {
+      "name": "TLS_CIPHER_ARIA_GCM_128_IV_SIZE",
+      "value": "8",
+      "comment": "",
+      "category": "TLS_CIPHER"
+    },
+    {
+      "name": "TLS_CIPHER_ARIA_GCM_128_KEY_SIZE",
+      "value": "16",
+      "comment": "",
+      "category": "TLS_CIPHER"
+    },
+    {
+      "name": "TLS_CIPHER_ARIA_GCM_128_SALT_SIZE",
+      "value": "4",
+      "comment": "",
+      "category": "TLS_CIPHER"
+    },
+    {
+      "name": "TLS_CIPHER_ARIA_GCM_128_TAG_SIZE",
+      "value": "16",
+      "comment": "",
+      "category": "TLS_CIPHER"
+    },
+    {
+      "name": "TLS_CIPHER_ARIA_GCM_128_REC_SEQ_SIZE",
+      "value": "8",
+      "comment": "",
+      "category": "TLS_CIPHER"
+    },
+    {
+      "name": "TLS_CIPHER_ARIA_GCM_256",
+      "value": "58",
+      "comment": "",
+      "category": "TLS_CIPHER"
+    },
+    {
+      "name": "TLS_CIPHER_ARIA_GCM_256_IV_SIZE",
+      "value": "8",
+      "comment": "",
+      "category": "TLS_CIPHER"
+    },
+    {
+      "name": "TLS_CIPHER_ARIA_GCM_256_KEY_SIZE",
+      "value": "32",
+      "comment": "",
+      "category": "TLS_CIPHER"
+    },
+    {
+      "name": "TLS_CIPHER_ARIA_GCM_256_SALT_SIZE",
+      "value": "4",
+      "comment": "",
+      "category": "TLS_CIPHER"
+    },
+    {
+      "name": "TLS_CIPHER_ARIA_GCM_256_TAG_SIZE",
+      "value": "16",
+      "comment": "",
+      "category": "TLS_CIPHER"
+    },
+    {
+      "name": "TLS_CIPHER_ARIA_GCM_256_REC_SEQ_SIZE",
+      "value": "8",
+      "comment": "",
+      "category": "TLS_CIPHER"
+    },
+    {
+      "name": "TLS_SET_RECORD_TYPE",
+      "value": "1",
+      "comment": "",
+      "category": "TLS_SET"
+    },
+    {
+      "name": "TLS_GET_RECORD_TYPE",
+      "value": "2",
+      "comment": "",
+      "category": "TLS_GET"
+    },
+    {
+      "name": "TLS_INFO_MAX",
+      "value": "(__TLS_INFO_MAX - 1)",
+      "comment": "",
+      "category": "TLS_INFO"
+    },
+    {
+      "name": "TLS_CONF_BASE",
+      "value": "1",
+      "comment": "",
+      "category": "TLS_CONF"
+    },
+    {
+      "name": "TLS_CONF_SW",
+      "value": "2",
+      "comment": "",
+      "category": "TLS_CONF"
+    },
+    {
+      "name": "TLS_CONF_HW",
+      "value": "3",
+      "comment": "",
+      "category": "TLS_CONF"
+    },
+    {
+      "name": "TLS_CONF_HW_RECORD",
+      "value": "4",
+      "comment": "",
+      "category": "TLS_CONF"
+    }
+  ],
+  "structs": [
+    {
+      "name": "tls_crypto_info",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "version",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "cipher_type",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "tls12_crypto_info_aes_gcm_128",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "tls12_crypto_info_aes_gcm_256",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "tls12_crypto_info_aes_ccm_128",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "tls12_crypto_info_chacha20_poly1305",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "tls12_crypto_info_sm4_gcm",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "tls12_crypto_info_sm4_ccm",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "tls12_crypto_info_aria_gcm_128",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "tls12_crypto_info_aria_gcm_256",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

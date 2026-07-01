@@ -1,0 +1,982 @@
+{
+  "filename": "etnaviv_drm.h",
+  "includes": [
+    "drm.h"
+  ],
+  "defines": [
+    {
+      "name": "ETNAVIV_PARAM_GPU_MODEL",
+      "value": "0x01",
+      "comment": "",
+      "category": "ETNAVIV_PARAM"
+    },
+    {
+      "name": "ETNAVIV_PARAM_GPU_REVISION",
+      "value": "0x02",
+      "comment": "",
+      "category": "ETNAVIV_PARAM"
+    },
+    {
+      "name": "ETNAVIV_PARAM_GPU_FEATURES_0",
+      "value": "0x03",
+      "comment": "",
+      "category": "ETNAVIV_PARAM"
+    },
+    {
+      "name": "ETNAVIV_PARAM_GPU_FEATURES_1",
+      "value": "0x04",
+      "comment": "",
+      "category": "ETNAVIV_PARAM"
+    },
+    {
+      "name": "ETNAVIV_PARAM_GPU_FEATURES_2",
+      "value": "0x05",
+      "comment": "",
+      "category": "ETNAVIV_PARAM"
+    },
+    {
+      "name": "ETNAVIV_PARAM_GPU_FEATURES_3",
+      "value": "0x06",
+      "comment": "",
+      "category": "ETNAVIV_PARAM"
+    },
+    {
+      "name": "ETNAVIV_PARAM_GPU_FEATURES_4",
+      "value": "0x07",
+      "comment": "",
+      "category": "ETNAVIV_PARAM"
+    },
+    {
+      "name": "ETNAVIV_PARAM_GPU_FEATURES_5",
+      "value": "0x08",
+      "comment": "",
+      "category": "ETNAVIV_PARAM"
+    },
+    {
+      "name": "ETNAVIV_PARAM_GPU_FEATURES_6",
+      "value": "0x09",
+      "comment": "",
+      "category": "ETNAVIV_PARAM"
+    },
+    {
+      "name": "ETNAVIV_PARAM_GPU_FEATURES_7",
+      "value": "0x0a",
+      "comment": "",
+      "category": "ETNAVIV_PARAM"
+    },
+    {
+      "name": "ETNAVIV_PARAM_GPU_FEATURES_8",
+      "value": "0x0b",
+      "comment": "",
+      "category": "ETNAVIV_PARAM"
+    },
+    {
+      "name": "ETNAVIV_PARAM_GPU_FEATURES_9",
+      "value": "0x0c",
+      "comment": "",
+      "category": "ETNAVIV_PARAM"
+    },
+    {
+      "name": "ETNAVIV_PARAM_GPU_FEATURES_10",
+      "value": "0x0d",
+      "comment": "",
+      "category": "ETNAVIV_PARAM"
+    },
+    {
+      "name": "ETNAVIV_PARAM_GPU_FEATURES_11",
+      "value": "0x0e",
+      "comment": "",
+      "category": "ETNAVIV_PARAM"
+    },
+    {
+      "name": "ETNAVIV_PARAM_GPU_FEATURES_12",
+      "value": "0x0f",
+      "comment": "",
+      "category": "ETNAVIV_PARAM"
+    },
+    {
+      "name": "ETNAVIV_PARAM_GPU_STREAM_COUNT",
+      "value": "0x10",
+      "comment": "",
+      "category": "ETNAVIV_PARAM"
+    },
+    {
+      "name": "ETNAVIV_PARAM_GPU_REGISTER_MAX",
+      "value": "0x11",
+      "comment": "",
+      "category": "ETNAVIV_PARAM"
+    },
+    {
+      "name": "ETNAVIV_PARAM_GPU_THREAD_COUNT",
+      "value": "0x12",
+      "comment": "",
+      "category": "ETNAVIV_PARAM"
+    },
+    {
+      "name": "ETNAVIV_PARAM_GPU_VERTEX_CACHE_SIZE",
+      "value": "0x13",
+      "comment": "",
+      "category": "ETNAVIV_PARAM"
+    },
+    {
+      "name": "ETNAVIV_PARAM_GPU_SHADER_CORE_COUNT",
+      "value": "0x14",
+      "comment": "",
+      "category": "ETNAVIV_PARAM"
+    },
+    {
+      "name": "ETNAVIV_PARAM_GPU_PIXEL_PIPES",
+      "value": "0x15",
+      "comment": "",
+      "category": "ETNAVIV_PARAM"
+    },
+    {
+      "name": "ETNAVIV_PARAM_GPU_VERTEX_OUTPUT_BUFFER_SIZE",
+      "value": "0x16",
+      "comment": "",
+      "category": "ETNAVIV_PARAM"
+    },
+    {
+      "name": "ETNAVIV_PARAM_GPU_BUFFER_SIZE",
+      "value": "0x17",
+      "comment": "",
+      "category": "ETNAVIV_PARAM"
+    },
+    {
+      "name": "ETNAVIV_PARAM_GPU_INSTRUCTION_COUNT",
+      "value": "0x18",
+      "comment": "",
+      "category": "ETNAVIV_PARAM"
+    },
+    {
+      "name": "ETNAVIV_PARAM_GPU_NUM_CONSTANTS",
+      "value": "0x19",
+      "comment": "",
+      "category": "ETNAVIV_PARAM"
+    },
+    {
+      "name": "ETNAVIV_PARAM_GPU_NUM_VARYINGS",
+      "value": "0x1a",
+      "comment": "",
+      "category": "ETNAVIV_PARAM"
+    },
+    {
+      "name": "ETNAVIV_PARAM_SOFTPIN_START_ADDR",
+      "value": "0x1b",
+      "comment": "",
+      "category": "ETNAVIV_PARAM"
+    },
+    {
+      "name": "ETNAVIV_PARAM_GPU_PRODUCT_ID",
+      "value": "0x1c",
+      "comment": "",
+      "category": "ETNAVIV_PARAM"
+    },
+    {
+      "name": "ETNAVIV_PARAM_GPU_CUSTOMER_ID",
+      "value": "0x1d",
+      "comment": "",
+      "category": "ETNAVIV_PARAM"
+    },
+    {
+      "name": "ETNAVIV_PARAM_GPU_ECO_ID",
+      "value": "0x1e",
+      "comment": "",
+      "category": "ETNAVIV_PARAM"
+    },
+    {
+      "name": "ETNA_MAX_PIPES",
+      "value": "4",
+      "comment": "",
+      "category": "ETNA_MAX"
+    },
+    {
+      "name": "ETNA_BO_CACHE_MASK",
+      "value": "0x000f0000",
+      "comment": "",
+      "category": "ETNA_BO"
+    },
+    {
+      "name": "ETNA_BO_CACHED",
+      "value": "0x00010000",
+      "comment": "",
+      "category": "ETNA_BO"
+    },
+    {
+      "name": "ETNA_BO_WC",
+      "value": "0x00020000",
+      "comment": "",
+      "category": "ETNA_BO"
+    },
+    {
+      "name": "ETNA_BO_UNCACHED",
+      "value": "0x00040000",
+      "comment": "",
+      "category": "ETNA_BO"
+    },
+    {
+      "name": "ETNA_BO_FORCE_MMU",
+      "value": "0x00100000",
+      "comment": "",
+      "category": "ETNA_BO"
+    },
+    {
+      "name": "ETNA_PREP_READ",
+      "value": "0x01",
+      "comment": "",
+      "category": "ETNA_PREP"
+    },
+    {
+      "name": "ETNA_PREP_WRITE",
+      "value": "0x02",
+      "comment": "",
+      "category": "ETNA_PREP"
+    },
+    {
+      "name": "ETNA_PREP_NOSYNC",
+      "value": "0x04",
+      "comment": "",
+      "category": "ETNA_PREP"
+    },
+    {
+      "name": "ETNA_SUBMIT_BO_READ",
+      "value": "0x0001",
+      "comment": "",
+      "category": "ETNA_SUBMIT"
+    },
+    {
+      "name": "ETNA_SUBMIT_BO_WRITE",
+      "value": "0x0002",
+      "comment": "",
+      "category": "ETNA_SUBMIT"
+    },
+    {
+      "name": "ETNA_PM_PROCESS_PRE",
+      "value": "0x0001",
+      "comment": "",
+      "category": "ETNA_PM"
+    },
+    {
+      "name": "ETNA_PM_PROCESS_POST",
+      "value": "0x0002",
+      "comment": "",
+      "category": "ETNA_PM"
+    },
+    {
+      "name": "ETNA_SUBMIT_NO_IMPLICIT",
+      "value": "0x0001",
+      "comment": "",
+      "category": "ETNA_SUBMIT"
+    },
+    {
+      "name": "ETNA_SUBMIT_FENCE_FD_IN",
+      "value": "0x0002",
+      "comment": "",
+      "category": "ETNA_SUBMIT"
+    },
+    {
+      "name": "ETNA_SUBMIT_FENCE_FD_OUT",
+      "value": "0x0004",
+      "comment": "",
+      "category": "ETNA_SUBMIT"
+    },
+    {
+      "name": "ETNA_SUBMIT_SOFTPIN",
+      "value": "0x0008",
+      "comment": "",
+      "category": "ETNA_SUBMIT"
+    },
+    {
+      "name": "ETNA_SUBMIT_FLAGS",
+      "value": "(ETNA_SUBMIT_NO_IMPLICIT | ",
+      "comment": "",
+      "category": "ETNA_SUBMIT"
+    },
+    {
+      "name": "ETNA_PIPE_3D",
+      "value": "0x00",
+      "comment": "",
+      "category": "ETNA_PIPE"
+    },
+    {
+      "name": "ETNA_PIPE_2D",
+      "value": "0x01",
+      "comment": "",
+      "category": "ETNA_PIPE"
+    },
+    {
+      "name": "ETNA_PIPE_VG",
+      "value": "0x02",
+      "comment": "",
+      "category": "ETNA_PIPE"
+    },
+    {
+      "name": "ETNA_WAIT_NONBLOCK",
+      "value": "0x01",
+      "comment": "",
+      "category": "ETNA_WAIT"
+    },
+    {
+      "name": "ETNA_USERPTR_READ",
+      "value": "0x01",
+      "comment": "",
+      "category": "ETNA_USERPTR"
+    },
+    {
+      "name": "ETNA_USERPTR_WRITE",
+      "value": "0x02",
+      "comment": "",
+      "category": "ETNA_USERPTR"
+    },
+    {
+      "name": "DRM_ETNAVIV_GET_PARAM",
+      "value": "0x00",
+      "comment": "",
+      "category": "DRM_ETNAVIV"
+    },
+    {
+      "name": "DRM_ETNAVIV_SET_PARAM",
+      "value": "0x01",
+      "comment": "",
+      "category": "DRM_ETNAVIV"
+    },
+    {
+      "name": "DRM_ETNAVIV_GEM_NEW",
+      "value": "0x02",
+      "comment": "",
+      "category": "DRM_ETNAVIV"
+    },
+    {
+      "name": "DRM_ETNAVIV_GEM_INFO",
+      "value": "0x03",
+      "comment": "",
+      "category": "DRM_ETNAVIV"
+    },
+    {
+      "name": "DRM_ETNAVIV_GEM_CPU_PREP",
+      "value": "0x04",
+      "comment": "",
+      "category": "DRM_ETNAVIV"
+    },
+    {
+      "name": "DRM_ETNAVIV_GEM_CPU_FINI",
+      "value": "0x05",
+      "comment": "",
+      "category": "DRM_ETNAVIV"
+    },
+    {
+      "name": "DRM_ETNAVIV_GEM_SUBMIT",
+      "value": "0x06",
+      "comment": "",
+      "category": "DRM_ETNAVIV"
+    },
+    {
+      "name": "DRM_ETNAVIV_WAIT_FENCE",
+      "value": "0x07",
+      "comment": "",
+      "category": "DRM_ETNAVIV"
+    },
+    {
+      "name": "DRM_ETNAVIV_GEM_USERPTR",
+      "value": "0x08",
+      "comment": "",
+      "category": "DRM_ETNAVIV"
+    },
+    {
+      "name": "DRM_ETNAVIV_GEM_WAIT",
+      "value": "0x09",
+      "comment": "",
+      "category": "DRM_ETNAVIV"
+    },
+    {
+      "name": "DRM_ETNAVIV_PM_QUERY_DOM",
+      "value": "0x0a",
+      "comment": "",
+      "category": "DRM_ETNAVIV"
+    },
+    {
+      "name": "DRM_ETNAVIV_PM_QUERY_SIG",
+      "value": "0x0b",
+      "comment": "",
+      "category": "DRM_ETNAVIV"
+    },
+    {
+      "name": "DRM_ETNAVIV_NUM_IOCTLS",
+      "value": "0x0c",
+      "comment": "",
+      "category": "DRM_ETNAVIV"
+    },
+    {
+      "name": "DRM_IOCTL_ETNAVIV_GET_PARAM",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_ETNAVIV_GET_PARAM, struct drm_etnaviv_param)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_ETNAVIV_GEM_NEW",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_ETNAVIV_GEM_NEW, struct drm_etnaviv_gem_new)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_ETNAVIV_GEM_INFO",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_ETNAVIV_GEM_INFO, struct drm_etnaviv_gem_info)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_ETNAVIV_GEM_CPU_PREP",
+      "value": "DRM_IOW(DRM_COMMAND_BASE + DRM_ETNAVIV_GEM_CPU_PREP, struct drm_etnaviv_gem_cpu_prep)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_ETNAVIV_GEM_CPU_FINI",
+      "value": "DRM_IOW(DRM_COMMAND_BASE + DRM_ETNAVIV_GEM_CPU_FINI, struct drm_etnaviv_gem_cpu_fini)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_ETNAVIV_GEM_SUBMIT",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_ETNAVIV_GEM_SUBMIT, struct drm_etnaviv_gem_submit)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_ETNAVIV_WAIT_FENCE",
+      "value": "DRM_IOW(DRM_COMMAND_BASE + DRM_ETNAVIV_WAIT_FENCE, struct drm_etnaviv_wait_fence)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_ETNAVIV_GEM_USERPTR",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_ETNAVIV_GEM_USERPTR, struct drm_etnaviv_gem_userptr)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_ETNAVIV_GEM_WAIT",
+      "value": "DRM_IOW(DRM_COMMAND_BASE + DRM_ETNAVIV_GEM_WAIT, struct drm_etnaviv_gem_wait)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_ETNAVIV_PM_QUERY_DOM",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_ETNAVIV_PM_QUERY_DOM, struct drm_etnaviv_pm_domain)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_ETNAVIV_PM_QUERY_SIG",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_ETNAVIV_PM_QUERY_SIG, struct drm_etnaviv_pm_signal)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    }
+  ],
+  "structs": [
+    {
+      "name": "drm_etnaviv_timespec",
+      "fields": [
+        {
+          "type_name": "__s64",
+          "name": "tv_sec",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s64",
+          "name": "tv_nsec",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_etnaviv_param",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "pipe",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "param",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "value",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_etnaviv_gem_new",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_etnaviv_gem_info",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_etnaviv_gem_cpu_prep",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "op",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_etnaviv_gem_cpu_fini",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_etnaviv_gem_submit_reloc",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "submit_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reloc_idx",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "reloc_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_etnaviv_gem_submit_bo",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "presumed",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_etnaviv_gem_submit_pmr",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "domain",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "signal",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "sequence",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "read_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "read_idx",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_etnaviv_gem_submit",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "fence",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pipe",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "exec_state",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "nr_bos",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "nr_relocs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "stream_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "bos",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "relocs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "stream",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "fence_fd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "pmrs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "nr_pmrs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_etnaviv_wait_fence",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "pipe",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "fence",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_etnaviv_gem_userptr",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "user_ptr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "user_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_etnaviv_gem_wait",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "pipe",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_etnaviv_pm_domain",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "pipe",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "iter",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "nr_signals",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "name",
+          "array_size": "64",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_etnaviv_pm_signal",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "pipe",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "domain",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "iter",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "name",
+          "array_size": "64",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

@@ -1,0 +1,1509 @@
+{
+  "filename": "vmwgfx_drm.h",
+  "includes": [
+    "drm.h"
+  ],
+  "defines": [
+    {
+      "name": "DRM_VMW_MAX_SURFACE_FACES",
+      "value": "6",
+      "comment": "",
+      "category": "DRM_VMW"
+    },
+    {
+      "name": "DRM_VMW_MAX_MIP_LEVELS",
+      "value": "24",
+      "comment": "",
+      "category": "DRM_VMW"
+    },
+    {
+      "name": "DRM_VMW_GET_PARAM",
+      "value": "0",
+      "comment": "",
+      "category": "DRM_VMW"
+    },
+    {
+      "name": "DRM_VMW_ALLOC_DMABUF",
+      "value": "1",
+      "comment": "",
+      "category": "DRM_VMW"
+    },
+    {
+      "name": "DRM_VMW_ALLOC_BO",
+      "value": "1",
+      "comment": "",
+      "category": "DRM_VMW"
+    },
+    {
+      "name": "DRM_VMW_UNREF_DMABUF",
+      "value": "2",
+      "comment": "",
+      "category": "DRM_VMW"
+    },
+    {
+      "name": "DRM_VMW_HANDLE_CLOSE",
+      "value": "2",
+      "comment": "",
+      "category": "DRM_VMW"
+    },
+    {
+      "name": "DRM_VMW_CURSOR_BYPASS",
+      "value": "3",
+      "comment": "",
+      "category": "DRM_VMW"
+    },
+    {
+      "name": "DRM_VMW_CONTROL_STREAM",
+      "value": "4",
+      "comment": "",
+      "category": "DRM_VMW"
+    },
+    {
+      "name": "DRM_VMW_CLAIM_STREAM",
+      "value": "5",
+      "comment": "",
+      "category": "DRM_VMW"
+    },
+    {
+      "name": "DRM_VMW_UNREF_STREAM",
+      "value": "6",
+      "comment": "",
+      "category": "DRM_VMW"
+    },
+    {
+      "name": "DRM_VMW_CREATE_CONTEXT",
+      "value": "7",
+      "comment": "",
+      "category": "DRM_VMW"
+    },
+    {
+      "name": "DRM_VMW_UNREF_CONTEXT",
+      "value": "8",
+      "comment": "",
+      "category": "DRM_VMW"
+    },
+    {
+      "name": "DRM_VMW_CREATE_SURFACE",
+      "value": "9",
+      "comment": "",
+      "category": "DRM_VMW"
+    },
+    {
+      "name": "DRM_VMW_UNREF_SURFACE",
+      "value": "10",
+      "comment": "",
+      "category": "DRM_VMW"
+    },
+    {
+      "name": "DRM_VMW_REF_SURFACE",
+      "value": "11",
+      "comment": "",
+      "category": "DRM_VMW"
+    },
+    {
+      "name": "DRM_VMW_EXECBUF",
+      "value": "12",
+      "comment": "",
+      "category": "DRM_VMW"
+    },
+    {
+      "name": "DRM_VMW_GET_3D_CAP",
+      "value": "13",
+      "comment": "",
+      "category": "DRM_VMW"
+    },
+    {
+      "name": "DRM_VMW_FENCE_WAIT",
+      "value": "14",
+      "comment": "",
+      "category": "DRM_VMW"
+    },
+    {
+      "name": "DRM_VMW_FENCE_SIGNALED",
+      "value": "15",
+      "comment": "",
+      "category": "DRM_VMW"
+    },
+    {
+      "name": "DRM_VMW_FENCE_UNREF",
+      "value": "16",
+      "comment": "",
+      "category": "DRM_VMW"
+    },
+    {
+      "name": "DRM_VMW_FENCE_EVENT",
+      "value": "17",
+      "comment": "",
+      "category": "DRM_VMW"
+    },
+    {
+      "name": "DRM_VMW_PRESENT",
+      "value": "18",
+      "comment": "",
+      "category": "DRM_VMW"
+    },
+    {
+      "name": "DRM_VMW_PRESENT_READBACK",
+      "value": "19",
+      "comment": "",
+      "category": "DRM_VMW"
+    },
+    {
+      "name": "DRM_VMW_UPDATE_LAYOUT",
+      "value": "20",
+      "comment": "",
+      "category": "DRM_VMW"
+    },
+    {
+      "name": "DRM_VMW_CREATE_SHADER",
+      "value": "21",
+      "comment": "",
+      "category": "DRM_VMW"
+    },
+    {
+      "name": "DRM_VMW_UNREF_SHADER",
+      "value": "22",
+      "comment": "",
+      "category": "DRM_VMW"
+    },
+    {
+      "name": "DRM_VMW_GB_SURFACE_CREATE",
+      "value": "23",
+      "comment": "",
+      "category": "DRM_VMW"
+    },
+    {
+      "name": "DRM_VMW_GB_SURFACE_REF",
+      "value": "24",
+      "comment": "",
+      "category": "DRM_VMW"
+    },
+    {
+      "name": "DRM_VMW_SYNCCPU",
+      "value": "25",
+      "comment": "",
+      "category": "DRM_VMW"
+    },
+    {
+      "name": "DRM_VMW_CREATE_EXTENDED_CONTEXT",
+      "value": "26",
+      "comment": "",
+      "category": "DRM_VMW"
+    },
+    {
+      "name": "DRM_VMW_GB_SURFACE_CREATE_EXT",
+      "value": "27",
+      "comment": "",
+      "category": "DRM_VMW"
+    },
+    {
+      "name": "DRM_VMW_GB_SURFACE_REF_EXT",
+      "value": "28",
+      "comment": "",
+      "category": "DRM_VMW"
+    },
+    {
+      "name": "DRM_VMW_MSG",
+      "value": "29",
+      "comment": "",
+      "category": "DRM_VMW"
+    },
+    {
+      "name": "DRM_VMW_MKSSTAT_RESET",
+      "value": "30",
+      "comment": "",
+      "category": "DRM_VMW"
+    },
+    {
+      "name": "DRM_VMW_MKSSTAT_ADD",
+      "value": "31",
+      "comment": "",
+      "category": "DRM_VMW"
+    },
+    {
+      "name": "DRM_VMW_MKSSTAT_REMOVE",
+      "value": "32",
+      "comment": "",
+      "category": "DRM_VMW"
+    },
+    {
+      "name": "DRM_VMW_PARAM_NUM_STREAMS",
+      "value": "0",
+      "comment": "",
+      "category": "DRM_VMW"
+    },
+    {
+      "name": "DRM_VMW_PARAM_NUM_FREE_STREAMS",
+      "value": "1",
+      "comment": "",
+      "category": "DRM_VMW"
+    },
+    {
+      "name": "DRM_VMW_PARAM_3D",
+      "value": "2",
+      "comment": "",
+      "category": "DRM_VMW"
+    },
+    {
+      "name": "DRM_VMW_PARAM_HW_CAPS",
+      "value": "3",
+      "comment": "",
+      "category": "DRM_VMW"
+    },
+    {
+      "name": "DRM_VMW_PARAM_FIFO_CAPS",
+      "value": "4",
+      "comment": "",
+      "category": "DRM_VMW"
+    },
+    {
+      "name": "DRM_VMW_PARAM_MAX_FB_SIZE",
+      "value": "5",
+      "comment": "",
+      "category": "DRM_VMW"
+    },
+    {
+      "name": "DRM_VMW_PARAM_FIFO_HW_VERSION",
+      "value": "6",
+      "comment": "",
+      "category": "DRM_VMW"
+    },
+    {
+      "name": "DRM_VMW_PARAM_MAX_SURF_MEMORY",
+      "value": "7",
+      "comment": "",
+      "category": "DRM_VMW"
+    },
+    {
+      "name": "DRM_VMW_PARAM_3D_CAPS_SIZE",
+      "value": "8",
+      "comment": "",
+      "category": "DRM_VMW"
+    },
+    {
+      "name": "DRM_VMW_PARAM_MAX_MOB_MEMORY",
+      "value": "9",
+      "comment": "",
+      "category": "DRM_VMW"
+    },
+    {
+      "name": "DRM_VMW_PARAM_MAX_MOB_SIZE",
+      "value": "10",
+      "comment": "",
+      "category": "DRM_VMW"
+    },
+    {
+      "name": "DRM_VMW_PARAM_SCREEN_TARGET",
+      "value": "11",
+      "comment": "",
+      "category": "DRM_VMW"
+    },
+    {
+      "name": "DRM_VMW_PARAM_DX",
+      "value": "12",
+      "comment": "",
+      "category": "DRM_VMW"
+    },
+    {
+      "name": "DRM_VMW_PARAM_HW_CAPS2",
+      "value": "13",
+      "comment": "",
+      "category": "DRM_VMW"
+    },
+    {
+      "name": "DRM_VMW_PARAM_SM4_1",
+      "value": "14",
+      "comment": "",
+      "category": "DRM_VMW"
+    },
+    {
+      "name": "DRM_VMW_PARAM_SM5",
+      "value": "15",
+      "comment": "",
+      "category": "DRM_VMW"
+    },
+    {
+      "name": "DRM_VMW_PARAM_GL43",
+      "value": "16",
+      "comment": "",
+      "category": "DRM_VMW"
+    },
+    {
+      "name": "DRM_VMW_PARAM_DEVICE_ID",
+      "value": "17",
+      "comment": "",
+      "category": "DRM_VMW"
+    },
+    {
+      "name": "DRM_VMW_EXECBUF_VERSION",
+      "value": "2",
+      "comment": "",
+      "category": "DRM_VMW"
+    },
+    {
+      "name": "DRM_VMW_EXECBUF_FLAG_IMPORT_FENCE_FD",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "DRM_VMW"
+    },
+    {
+      "name": "DRM_VMW_EXECBUF_FLAG_EXPORT_FENCE_FD",
+      "value": "(1 << 1)",
+      "comment": "",
+      "category": "DRM_VMW"
+    },
+    {
+      "name": "drm_vmw_alloc_dmabuf_req",
+      "value": "drm_vmw_alloc_bo_req",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "drm_vmw_dmabuf_rep",
+      "value": "drm_vmw_bo_rep",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "drm_vmw_alloc_dmabuf_arg",
+      "value": "drm_vmw_alloc_bo_arg",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_VMW_CURSOR_BYPASS_ALL",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "DRM_VMW"
+    },
+    {
+      "name": "DRM_VMW_CURSOR_BYPASS_FLAGS",
+      "value": "(1)",
+      "comment": "",
+      "category": "DRM_VMW"
+    },
+    {
+      "name": "DRM_VMW_FENCE_FLAG_EXEC",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "DRM_VMW"
+    },
+    {
+      "name": "DRM_VMW_FENCE_FLAG_QUERY",
+      "value": "(1 << 1)",
+      "comment": "",
+      "category": "DRM_VMW"
+    },
+    {
+      "name": "DRM_VMW_WAIT_OPTION_UNREF",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "DRM_VMW"
+    },
+    {
+      "name": "DRM_VMW_EVENT_FENCE_SIGNALED",
+      "value": "0x80000000",
+      "comment": "",
+      "category": "DRM_VMW"
+    },
+    {
+      "name": "DRM_VMW_FE_FLAG_REQ_TIME",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "DRM_VMW"
+    },
+    {
+      "name": "drm_vmw_unref_dmabuf_arg",
+      "value": "drm_vmw_handle_close_arg",
+      "comment": "",
+      "category": ""
+    }
+  ],
+  "structs": [
+    {
+      "name": "drm_vmw_getparam_arg",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "value",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "param",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad64",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_vmw_context_arg",
+      "fields": [
+        {
+          "type_name": "__s32",
+          "name": "cid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad64",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_vmw_surface_create_req",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "format",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "mip_levels",
+          "array_size": "DRM_VMW_MAX_SURFACE_FACES",
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "size_addr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "shareable",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "scanout",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_vmw_surface_arg",
+      "fields": [
+        {
+          "type_name": "__s32",
+          "name": "sid",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_vmw_size",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "width",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "height",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "depth",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad64",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_vmw_execbuf_arg",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "commands",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "command_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "throttle_us",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "fence_rep",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "version",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "context_handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "imported_fence_fd",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_vmw_fence_rep",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "mask",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "seqno",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "passed_seqno",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "fd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "error",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_vmw_alloc_bo_req",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad64",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_vmw_bo_rep",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "map_handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "cur_gmr_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "cur_gmr_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad64",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_vmw_rect",
+      "fields": [
+        {
+          "type_name": "__s32",
+          "name": "x",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "y",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "w",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "h",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_vmw_control_stream_arg",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "stream_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "enabled",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "color_key",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "format",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "width",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "height",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pitch",
+          "array_size": "3",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad64",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_vmw_cursor_bypass_arg",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "crtc_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "xpos",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "ypos",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "xhot",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "yhot",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_vmw_stream_arg",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "stream_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad64",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_vmw_get_3d_cap_arg",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "buffer",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "max_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad64",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_vmw_fence_wait_arg",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "cookie_valid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "kernel_cookie",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "timeout_us",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "lazy",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "wait_options",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "pad64",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_vmw_fence_signaled_arg",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "signaled",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "passed_seqno",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "signaled_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad64",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_vmw_fence_arg",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad64",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_vmw_event_fence",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "user_data",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tv_sec",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tv_usec",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_vmw_fence_event_arg",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "fence_rep",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "user_data",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_vmw_present_arg",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "fb_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "sid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "dest_x",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "dest_y",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "clips_ptr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "num_clips",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad64",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_vmw_present_readback_arg",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "fb_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "num_clips",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "clips_ptr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "fence_rep",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_vmw_update_layout_arg",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "num_outputs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad64",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "rects",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_vmw_shader_create_arg",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "buffer_handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "shader_handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_vmw_shader_arg",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad64",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_vmw_gb_surface_create_req",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "svga3d_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "format",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "mip_levels",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "multisample_count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "autogen_filter",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "buffer_handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "array_size",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_vmw_gb_surface_create_rep",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "backup_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "buffer_handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "buffer_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "buffer_map_handle",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_vmw_gb_surface_ref_rep",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_vmw_synccpu_arg",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad64",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_vmw_handle_close_arg",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad64",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_vmw_gb_surface_create_ext_req",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "svga3d_flags_upper_32_bits",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "multisample_pattern",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "quality_level",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "buffer_byte_stride",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "must_be_zero",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_vmw_gb_surface_ref_ext_rep",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_vmw_msg_arg",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "send",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "receive",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "send_only",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "receive_len",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_vmw_mksstat_add_arg",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "stat",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "info",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "strs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "stat_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "info_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "strs_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "description",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_vmw_mksstat_remove_arg",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

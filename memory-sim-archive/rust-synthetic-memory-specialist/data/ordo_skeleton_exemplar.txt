@@ -1,0 +1,81 @@
+task=common
+Here is a COMPLETE, COMPILING Ordo app I keep as a template for the shape of any new one. It is not the answer to any specific task -- it shows the structure to adapt. The library (src/lib.rs):
+```rust
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub struct Trace {
+    pub path: Vec<String>,
+    pub signals: Vec<String>,
+}
+
+struct Edge {
+    from: String,
+    to: String,
+}
+
+pub struct Relay {
+    edges: Vec<Edge>,
+}
+
+impl Relay {
+    pub fn new() -> Self {
+        Relay { edges: Vec::new() }
+    }
+
+    pub fn connect(&mut self, from: &str, to: &str) {
+        self.edges.push(Edge { from: from.to_string(), to: to.to_string() });
+    }
+
+    pub fn route(&self, start: &str) -> Trace {
+        let mut path = vec![start.to_string()];
+        let mut signals: Vec<String> = Vec::new();
+        let mut current = start.to_string();
+        loop {
+            match self.edges.iter().find(|e| e.from == current) {
+                Some(edge) => {
+                    if path.contains(&edge.to) {
+                        break;
+                    }
+                    path.push(edge.to.clone());
+                    current = edge.to.clone();
+                }
+                None => {
+                    signals.push(format!("end:{}", current));
+                    break;
+                }
+            }
+        }
+        Trace { path, signals }
+    }
+}
+```
+The binary (src/main.rs):
+```rust
+use rust_ordo_ext::Relay;
+use std::io::Read;
+
+fn main() {
+    let mut input = String::new();
+    std::io::stdin().read_to_string(&mut input).unwrap();
+    let mut relay = Relay::new();
+    for line in input.lines() {
+        let parts: Vec<&str> = line.split_whitespace().collect();
+        if parts.is_empty() {
+            continue;
+        }
+        match parts[0] {
+            "connect" => relay.connect(parts[1], parts[2]),
+            "route" => {
+                let trace = relay.route(parts[1]);
+                let signals = if trace.signals.is_empty() {
+                    "none".to_string()
+                } else {
+                    trace.signals.join(",")
+                };
+                println!("path={} signals={}", trace.path.join(">"), signals);
+            }
+            _ => {}
+        }
+    }
+}
+```
+To build a new Ordo app I copy this exact shape and ADAPT it: I rename Relay and Trace and the methods to match the task's required API names and signatures exactly, add the fields the task's structs need, change the traversal and signal logic to the task's rules, and change the printed line to the task's exact output contract. I keep the package name rust_ordo_ext, the plain-data String structs deriving Clone/Debug/PartialEq/Eq (no f64 in them), the mutating setters returning (), the private Edge helper, the stdin read_to_string + lines + split_whitespace + match-on-first-token loop, and printing only the exact contract line.

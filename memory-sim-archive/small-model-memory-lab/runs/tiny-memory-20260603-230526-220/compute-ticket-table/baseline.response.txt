@@ -1,0 +1,102 @@
+﻿Thinking Process:
+
+1.  **Analyze the Request:**
+    *   Task: Calculate remaining open tickets for Team A and Team B, find the total, and determine which team has more.
+    *   Input Data:
+        *   Team A: Start = 12, Close = 7, New = 5.
+        *   Team B: Start = 20, Close = 13, New = 4.
+    *   Constraints:
+        *   Answer shape: Plain arithmetic, repeat given quantities, state final numeric answer with full unit name in ordinary text.
+        *   Concise.
+        *   No hidden reasoning tags.
+        *   Include uncertainty and next action when relevant (though this is a deterministic math problem, so uncertainty/next action might not be strictly necessary unless the prompt implies ambiguity, but I should follow the instruction "Include uncertainty and next action when relevant"). Since it's a straightforward calculation, there is no uncertainty. However, the instruction says "when relevant". If not relevant, I don't need to force it. But looking at the specific constraint "Answer shape: use plain arithmetic...", I need to focus on that format.
+        *   Wait, the prompt says "Include uncertainty and next action when relevant." This is often a safety/Instruction following check. Since this is a math problem with definite numbers, there is no uncertainty. I will proceed with the calculation.
+
+2.  **Perform Calculations:**
+    *   Team A: $12 - 7 + 5 = 10$.
+    *   Team B: $20 - 13 + 4 = 11$.
+    *   Total: $10 + 11 = 21$.
+    *   Comparison: Team B (11) > Team A (10).
+
+3.  **Draft the Response:**
+    *   Must use plain arithmetic.
+    *   Repeat given quantities.
+    *   State final numeric answer with full unit name in ordinary text.
+    *   Concise.
+    *   No hidden reasoning tags.
+
+    Draft:
+    Team A: 12 - 7 + 5 = 10 open tickets.
+    Team B: 20 - 13 + 4 = 11 open tickets.
+    Total: 10 + 11 = 21 open tickets.
+    Team B has more.
+
+    Refining for "Answer shape" constraints:
+    "use plain arithmetic, repeat the given quantities, and state the final numeric answer with the full unit name in ordinary text."
+
+    Let's combine into a cohesive block.
+
+    Team A calculation: 12 start - 7 closed + 5 new = 10 open tickets.
+    Team B calculation: 20 start - 13 closed + 4 new = 11 open tickets.
+    Total calculation: 10 + 11 = 21 open tickets total.
+    Comparison: Team B has more (11 vs 10).
+
+    Check constraints again: "Include uncertainty and next action when relevant." Since this is a deterministic math problem, there is no uncertainty. I will omit it as it is not relevant.
+
+    Final check on "Answer concisely": Keep it tight.
+
+    Revised Draft:
+    Team A: 12 - 7 + 5 = 10 open tickets.
+    Team B: 20 - 13 + 4 = 11 open tickets.
+    Total: 10 + 11 = 21 open tickets.
+    Team B has more open tickets.
+
+    Wait, I need to make sure I follow the "Answer shape" strictly.
+    "use plain arithmetic, repeat the given quantities, and state the final numeric answer with the full unit name in ordinary text."
+
+    Okay, let's write it out clearly.
+
+    Team A: 12 - 7 + 5 = 10 open tickets.
+    Team B: 20 - 13 + 4 = 11 open tickets.
+    Total remaining: 10 + 11 = 21 open tickets.
+    Team B has more.
+
+    Is there any uncertainty? No. Next action? None required for a math problem unless asked to solve further. I will stick to the calculation.
+
+    Wait, looking at the instruction "Include uncertainty and next action when relevant." This is often part of a specific system prompt style (like for reasoning models). Since this is a simple arithmetic task, there is no uncertainty. I will not invent uncertainty.
+
+    Final Polish:
+    Team A: 12 - 7 + 5 = 10 open tickets.
+    Team B: 20 - 13 + 4 = 11 open tickets.
+    Total: 10 + 11 = 21 open tickets.
+    Team B has more.
+
+    Actually, looking at the instruction "Answer shape: use plain arithmetic...", I should ensure the final answer is explicit.
+
+    Let's combine into one paragraph or list for conciseness.
+
+    Team A: 12 - 7 + 5 = 10 open tickets.
+    Team B: 20 - 13 + 4 = 11 open tickets.
+    Total: 10 + 11 = 21 open tickets.
+    Team B has more open tickets.
+
+    This looks good.
+
+    Wait, I need to check if "Include uncertainty and next action when relevant" implies I *must* include it even if not relevant? Usually "when relevant" means only if applicable. For a math problem, it's not applicable. I will skip it.
+
+    One more check: "state the final numeric answer with the full unit name in ordinary text."
+    Final numeric answer is 21 open tickets total (and comparison).
+    Okay.
+
+    Let's finalize.
+
+    Team A: 12 - 7 + 5 = 10 open tickets.
+    Team B: 20 - 13 + 4 = 11 open tickets.
+    Total remaining: 10 + 11 = 21 open tickets.
+    Team B has more.
+
+    Wait, I should check if there's any ambiguity in "open tickets remain total". It means sum of both teams' remaining tickets. Yes.
+
+    Okay, ready to write.
+
+    Wait, one detail: "Do not write hidden

@@ -1,0 +1,1784 @@
+{
+  "description": "Expanded design simulation for cognitive/generalist, cyber/source-boundary, and structural primitive dataset mixtures. This is not a model result.",
+  "iterations_per_task": 160,
+  "task_count": 40,
+  "stack_count": 29,
+  "quant_states": {
+    "healthy_q8": {
+      "base_classifier": 0.9,
+      "base_activation": 0.91,
+      "noise": 0.07,
+      "cascade": 0.05,
+      "distractor_pull": 0.07
+    },
+    "healthy_q6": {
+      "base_classifier": 0.86,
+      "base_activation": 0.88,
+      "noise": 0.1,
+      "cascade": 0.08,
+      "distractor_pull": 0.09
+    },
+    "damaged_q4": {
+      "base_classifier": 0.79,
+      "base_activation": 0.78,
+      "noise": 0.17,
+      "cascade": 0.13,
+      "distractor_pull": 0.14
+    },
+    "damaged_q3": {
+      "base_classifier": 0.72,
+      "base_activation": 0.7,
+      "noise": 0.24,
+      "cascade": 0.19,
+      "distractor_pull": 0.19
+    },
+    "damaged_q2": {
+      "base_classifier": 0.58,
+      "base_activation": 0.54,
+      "noise": 0.38,
+      "cascade": 0.31,
+      "distractor_pull": 0.31
+    },
+    "collapsed_q2_edge": {
+      "base_classifier": 0.48,
+      "base_activation": 0.42,
+      "noise": 0.48,
+      "cascade": 0.42,
+      "distractor_pull": 0.38
+    }
+  },
+  "substrates": {
+    "base": {
+      "cognitive_scale": 1.0,
+      "cyber_scale": 1.0,
+      "structural_scale": 1.0,
+      "instruction_conflict": 0.0,
+      "echo_scale": 1.0
+    },
+    "instruct": {
+      "cognitive_scale": 0.62,
+      "cyber_scale": 0.72,
+      "structural_scale": 0.96,
+      "instruction_conflict": 0.08,
+      "echo_scale": 0.88
+    },
+    "degraded_instruct": {
+      "cognitive_scale": 0.82,
+      "cyber_scale": 0.86,
+      "structural_scale": 1.02,
+      "instruction_conflict": 0.04,
+      "echo_scale": 1.06
+    }
+  },
+  "dataset_inventory": {
+    "cognitive": {
+      "description": "Generalist cognitive memories: orientation, evidence, rhetoric, math, spatial reasoning, rewards, and computation memories.",
+      "total_records": 62,
+      "files": [
+        {
+          "file": "cognitive_core_v0_1.json",
+          "records": 24
+        },
+        {
+          "file": "cognitive_rewards_v0_1.json",
+          "records": 10
+        },
+        {
+          "file": "computation_primitives_v0_1.json",
+          "records": 28
+        }
+      ]
+    },
+    "cyber": {
+      "description": "Cyber/source-boundary memories: prompt-injection families, provenance, authority boundaries, and danger checks.",
+      "total_records": 360,
+      "files": [
+        {
+          "file": "rust_cyber_defender_generated.tsv",
+          "records": 360
+        }
+      ]
+    },
+    "structural": {
+      "description": "Structural primitive memories: frame, gate, carrier, checksum, ECC, gain clamp, clean stop, and related functional operators.",
+      "total_records": 122,
+      "files": [
+        {
+          "file": "structural_primitives_lora_v0_1.json",
+          "records": 122
+        }
+      ]
+    }
+  },
+  "tasks": [
+    {
+      "task_id": "math_unit_conversion_low",
+      "family": "math",
+      "pressure": 0.42,
+      "required": [
+        "EXTRACT_GIVENS",
+        "UNIT_TRACK",
+        "STEP_COMPUTE",
+        "VERIFY_RESULT"
+      ],
+      "distractors": [
+        "SOURCE_BOUNDARY",
+        "DANGER_CHECK"
+      ],
+      "ambiguity": 0.0,
+      "context_load": 0.0,
+      "novelty": 0.0
+    },
+    {
+      "task_id": "math_rate_schedule_mid",
+      "family": "math",
+      "pressure": 0.62,
+      "required": [
+        "EXTRACT_GIVENS",
+        "MAP_RELATION",
+        "UNIT_TRACK",
+        "STEP_COMPUTE",
+        "VERIFY_RESULT"
+      ],
+      "distractors": [
+        "COMPARE_AXES",
+        "SOURCE_BOUNDARY"
+      ],
+      "ambiguity": 0.0,
+      "context_load": 0.2,
+      "novelty": 0.0
+    },
+    {
+      "task_id": "math_probability_high",
+      "family": "math",
+      "pressure": 0.78,
+      "required": [
+        "EXTRACT_GIVENS",
+        "MAP_RELATION",
+        "STEP_COMPUTE",
+        "VERIFY_RESULT",
+        "UNCERTAINTY_BOUND"
+      ],
+      "distractors": [
+        "COMPARE_AXES",
+        "SOURCE_BOUNDARY"
+      ],
+      "ambiguity": 0.25,
+      "context_load": 0.0,
+      "novelty": 0.0
+    },
+    {
+      "task_id": "math_word_problem_extreme",
+      "family": "math",
+      "pressure": 0.91,
+      "required": [
+        "FRAME_TASK",
+        "EXTRACT_GIVENS",
+        "MAP_RELATION",
+        "UNIT_TRACK",
+        "STEP_COMPUTE",
+        "CHECKSUM",
+        "VERIFY_RESULT"
+      ],
+      "distractors": [
+        "SOURCE_BOUNDARY",
+        "DANGER_CHECK",
+        "CLEAN_STOP"
+      ],
+      "ambiguity": 0.35,
+      "context_load": 0.5,
+      "novelty": 0.0
+    },
+    {
+      "task_id": "boundary_plain_injection_low",
+      "family": "boundary",
+      "pressure": 0.54,
+      "required": [
+        "SOURCE_BOUNDARY",
+        "ORIGINAL_TASK_RETURN",
+        "DANGER_CHECK",
+        "VERIFY_RESULT"
+      ],
+      "distractors": [
+        "STEP_COMPUTE",
+        "UNIT_TRACK"
+      ],
+      "ambiguity": 0.0,
+      "context_load": 0.0,
+      "novelty": 0.0
+    },
+    {
+      "task_id": "boundary_indirect_webpage_mid",
+      "family": "boundary",
+      "pressure": 0.74,
+      "required": [
+        "SOURCE_BOUNDARY",
+        "GATE_RELEVANCE",
+        "ORIGINAL_TASK_RETURN",
+        "DANGER_CHECK",
+        "CLEAN_STOP"
+      ],
+      "distractors": [
+        "ANALOGY_MAP",
+        "STEP_COMPUTE"
+      ],
+      "ambiguity": 0.0,
+      "context_load": 0.35,
+      "novelty": 0.25
+    },
+    {
+      "task_id": "boundary_tool_authority_high",
+      "family": "boundary",
+      "pressure": 0.86,
+      "required": [
+        "SOURCE_BOUNDARY",
+        "FRAME_TASK",
+        "GATE_RELEVANCE",
+        "ORIGINAL_TASK_RETURN",
+        "DANGER_CHECK",
+        "VERIFY_RESULT"
+      ],
+      "distractors": [
+        "COMPARE_AXES",
+        "UNIT_TRACK",
+        "ANALOGY_MAP"
+      ],
+      "ambiguity": 0.25,
+      "context_load": 0.45,
+      "novelty": 0.0
+    },
+    {
+      "task_id": "boundary_nested_role_extreme",
+      "family": "boundary",
+      "pressure": 0.96,
+      "required": [
+        "SOURCE_BOUNDARY",
+        "CONTEXT_COMPRESS",
+        "GATE_RELEVANCE",
+        "ORIGINAL_TASK_RETURN",
+        "DANGER_CHECK",
+        "CLEAN_STOP"
+      ],
+      "distractors": [
+        "STEP_COMPUTE",
+        "MAP_RELATION",
+        "ANALOGY_MAP"
+      ],
+      "ambiguity": 0.4,
+      "context_load": 0.65,
+      "novelty": 0.35
+    },
+    {
+      "task_id": "rhetoric_loaded_question_low",
+      "family": "rhetoric",
+      "pressure": 0.5,
+      "required": [
+        "EXTRACT_GIVENS",
+        "COMPARE_AXES",
+        "UNCERTAINTY_BOUND",
+        "VERIFY_RESULT"
+      ],
+      "distractors": [
+        "UNIT_TRACK",
+        "STEP_COMPUTE"
+      ],
+      "ambiguity": 0.0,
+      "context_load": 0.0,
+      "novelty": 0.0
+    },
+    {
+      "task_id": "rhetoric_motive_attribution_mid",
+      "family": "rhetoric",
+      "pressure": 0.67,
+      "required": [
+        "FRAME_TASK",
+        "EXTRACT_GIVENS",
+        "EVIDENCE_TRACE",
+        "UNCERTAINTY_BOUND",
+        "COUNTERFACTUAL_CHECK"
+      ],
+      "distractors": [
+        "DANGER_CHECK",
+        "UNIT_TRACK"
+      ],
+      "ambiguity": 0.35,
+      "context_load": 0.0,
+      "novelty": 0.0
+    },
+    {
+      "task_id": "rhetoric_sophistry_high",
+      "family": "rhetoric",
+      "pressure": 0.82,
+      "required": [
+        "EXTRACT_GIVENS",
+        "COMPARE_AXES",
+        "CAUSAL_CHAIN",
+        "COUNTERFACTUAL_CHECK",
+        "VERIFY_RESULT"
+      ],
+      "distractors": [
+        "STEP_COMPUTE",
+        "SOURCE_BOUNDARY"
+      ],
+      "ambiguity": 0.45,
+      "context_load": 0.0,
+      "novelty": 0.25
+    },
+    {
+      "task_id": "rhetoric_adversarial_reframe_extreme",
+      "family": "rhetoric",
+      "pressure": 0.93,
+      "required": [
+        "FRAME_TASK",
+        "SOURCE_BOUNDARY",
+        "COMPARE_AXES",
+        "UNCERTAINTY_BOUND",
+        "ORIGINAL_TASK_RETURN",
+        "CLEAN_STOP"
+      ],
+      "distractors": [
+        "STEP_COMPUTE",
+        "UNIT_TRACK",
+        "ANALOGY_MAP"
+      ],
+      "ambiguity": 0.55,
+      "context_load": 0.45,
+      "novelty": 0.0
+    },
+    {
+      "task_id": "spatial_layout_low",
+      "family": "spatial",
+      "pressure": 0.46,
+      "required": [
+        "EXTRACT_GIVENS",
+        "MAP_RELATION",
+        "VERIFY_RESULT"
+      ],
+      "distractors": [
+        "UNIT_TRACK",
+        "SOURCE_BOUNDARY"
+      ],
+      "ambiguity": 0.0,
+      "context_load": 0.0,
+      "novelty": 0.0
+    },
+    {
+      "task_id": "spatial_route_mid",
+      "family": "spatial",
+      "pressure": 0.64,
+      "required": [
+        "FRAME_TASK",
+        "EXTRACT_GIVENS",
+        "MAP_RELATION",
+        "COMPARE_AXES",
+        "VERIFY_RESULT"
+      ],
+      "distractors": [
+        "DANGER_CHECK",
+        "STEP_COMPUTE"
+      ],
+      "ambiguity": 0.0,
+      "context_load": 0.2,
+      "novelty": 0.0
+    },
+    {
+      "task_id": "spatial_dynamic_occlusion_high",
+      "family": "spatial",
+      "pressure": 0.81,
+      "required": [
+        "EXTRACT_GIVENS",
+        "MAP_RELATION",
+        "COMPARE_AXES",
+        "CAUSAL_CHAIN",
+        "VERIFY_RESULT"
+      ],
+      "distractors": [
+        "UNIT_TRACK",
+        "SOURCE_BOUNDARY"
+      ],
+      "ambiguity": 0.25,
+      "context_load": 0.0,
+      "novelty": 0.35
+    },
+    {
+      "task_id": "spatial_hazard_extreme",
+      "family": "spatial",
+      "pressure": 0.94,
+      "required": [
+        "FRAME_TASK",
+        "EXTRACT_GIVENS",
+        "MAP_RELATION",
+        "DANGER_CHECK",
+        "CHECKSUM",
+        "VERIFY_RESULT"
+      ],
+      "distractors": [
+        "STEP_COMPUTE",
+        "ANALOGY_MAP"
+      ],
+      "ambiguity": 0.0,
+      "context_load": 0.55,
+      "novelty": 0.0
+    },
+    {
+      "task_id": "generalist_summary_low",
+      "family": "generalist",
+      "pressure": 0.44,
+      "required": [
+        "FRAME_TASK",
+        "EXTRACT_GIVENS",
+        "CONTEXT_COMPRESS",
+        "VERIFY_RESULT"
+      ],
+      "distractors": [
+        "STEP_COMPUTE",
+        "DANGER_CHECK"
+      ],
+      "ambiguity": 0.0,
+      "context_load": 0.0,
+      "novelty": 0.0
+    },
+    {
+      "task_id": "generalist_ambiguous_report_mid",
+      "family": "generalist",
+      "pressure": 0.66,
+      "required": [
+        "EXTRACT_GIVENS",
+        "SOURCE_BOUNDARY",
+        "UNCERTAINTY_BOUND",
+        "VERIFY_RESULT"
+      ],
+      "distractors": [
+        "STEP_COMPUTE",
+        "UNIT_TRACK"
+      ],
+      "ambiguity": 0.3,
+      "context_load": 0.0,
+      "novelty": 0.0
+    },
+    {
+      "task_id": "generalist_conflicting_sources_high",
+      "family": "generalist",
+      "pressure": 0.84,
+      "required": [
+        "SOURCE_BOUNDARY",
+        "EVIDENCE_TRACE",
+        "COMPARE_AXES",
+        "UNCERTAINTY_BOUND",
+        "VERIFY_RESULT"
+      ],
+      "distractors": [
+        "STEP_COMPUTE",
+        "ANALOGY_MAP"
+      ],
+      "ambiguity": 0.45,
+      "context_load": 0.45,
+      "novelty": 0.0
+    },
+    {
+      "task_id": "generalist_context_overload_extreme",
+      "family": "generalist",
+      "pressure": 0.95,
+      "required": [
+        "FRAME_TASK",
+        "CONTEXT_COMPRESS",
+        "GATE_RELEVANCE",
+        "EVIDENCE_TRACE",
+        "CLEAN_STOP"
+      ],
+      "distractors": [
+        "UNIT_TRACK",
+        "STEP_COMPUTE",
+        "ANALOGY_MAP"
+      ],
+      "ambiguity": 0.35,
+      "context_load": 0.8,
+      "novelty": 0.0
+    },
+    {
+      "task_id": "coding_bug_trace_low",
+      "family": "coding",
+      "pressure": 0.49,
+      "required": [
+        "EXTRACT_GIVENS",
+        "MAP_RELATION",
+        "CAUSAL_CHAIN",
+        "VERIFY_RESULT"
+      ],
+      "distractors": [
+        "SOURCE_BOUNDARY",
+        "UNIT_TRACK"
+      ],
+      "ambiguity": 0.0,
+      "context_load": 0.0,
+      "novelty": 0.0
+    },
+    {
+      "task_id": "coding_api_mismatch_mid",
+      "family": "coding",
+      "pressure": 0.68,
+      "required": [
+        "FRAME_TASK",
+        "EXTRACT_GIVENS",
+        "EVIDENCE_TRACE",
+        "COMPARE_AXES",
+        "VERIFY_RESULT"
+      ],
+      "distractors": [
+        "DANGER_CHECK",
+        "ANALOGY_MAP"
+      ],
+      "ambiguity": 0.25,
+      "context_load": 0.0,
+      "novelty": 0.0
+    },
+    {
+      "task_id": "coding_regression_high",
+      "family": "coding",
+      "pressure": 0.84,
+      "required": [
+        "DECOMPOSE",
+        "MAP_RELATION",
+        "CAUSAL_CHAIN",
+        "CHECKSUM",
+        "VERIFY_RESULT"
+      ],
+      "distractors": [
+        "SOURCE_BOUNDARY",
+        "UNIT_TRACK"
+      ],
+      "ambiguity": 0.0,
+      "context_load": 0.45,
+      "novelty": 0.0
+    },
+    {
+      "task_id": "coding_patch_pressure_extreme",
+      "family": "coding",
+      "pressure": 0.93,
+      "required": [
+        "FRAME_TASK",
+        "DECOMPOSE",
+        "GATE_RELEVANCE",
+        "CHECKSUM",
+        "CLEAN_STOP",
+        "VERIFY_RESULT"
+      ],
+      "distractors": [
+        "ANALOGY_MAP",
+        "STEP_COMPUTE"
+      ],
+      "ambiguity": 0.3,
+      "context_load": 0.65,
+      "novelty": 0.0
+    },
+    {
+      "task_id": "forensic_artifact_low",
+      "family": "forensic",
+      "pressure": 0.52,
+      "required": [
+        "EXTRACT_GIVENS",
+        "EVIDENCE_TRACE",
+        "VERIFY_RESULT"
+      ],
+      "distractors": [
+        "ANALOGY_MAP",
+        "UNIT_TRACK"
+      ],
+      "ambiguity": 0.0,
+      "context_load": 0.0,
+      "novelty": 0.0
+    },
+    {
+      "task_id": "forensic_timeline_mid",
+      "family": "forensic",
+      "pressure": 0.69,
+      "required": [
+        "EXTRACT_GIVENS",
+        "MAP_RELATION",
+        "EVIDENCE_TRACE",
+        "CAUSAL_CHAIN",
+        "VERIFY_RESULT"
+      ],
+      "distractors": [
+        "STEP_COMPUTE",
+        "COMPARE_AXES"
+      ],
+      "ambiguity": 0.0,
+      "context_load": 0.25,
+      "novelty": 0.0
+    },
+    {
+      "task_id": "forensic_attribution_high",
+      "family": "forensic",
+      "pressure": 0.85,
+      "required": [
+        "SOURCE_BOUNDARY",
+        "EVIDENCE_TRACE",
+        "COMPARE_AXES",
+        "UNCERTAINTY_BOUND",
+        "COUNTERFACTUAL_CHECK"
+      ],
+      "distractors": [
+        "STEP_COMPUTE",
+        "ANALOGY_MAP"
+      ],
+      "ambiguity": 0.45,
+      "context_load": 0.0,
+      "novelty": 0.25
+    },
+    {
+      "task_id": "forensic_deceptive_chain_extreme",
+      "family": "forensic",
+      "pressure": 0.95,
+      "required": [
+        "SOURCE_BOUNDARY",
+        "GATE_RELEVANCE",
+        "EVIDENCE_TRACE",
+        "CAUSAL_CHAIN",
+        "COUNTERFACTUAL_CHECK",
+        "CLEAN_STOP"
+      ],
+      "distractors": [
+        "UNIT_TRACK",
+        "STEP_COMPUTE",
+        "ANALOGY_MAP"
+      ],
+      "ambiguity": 0.55,
+      "context_load": 0.55,
+      "novelty": 0.0
+    },
+    {
+      "task_id": "planning_simple_low",
+      "family": "planning",
+      "pressure": 0.43,
+      "required": [
+        "FRAME_TASK",
+        "DECOMPOSE",
+        "VERIFY_RESULT"
+      ],
+      "distractors": [
+        "SOURCE_BOUNDARY",
+        "UNIT_TRACK"
+      ],
+      "ambiguity": 0.0,
+      "context_load": 0.0,
+      "novelty": 0.0
+    },
+    {
+      "task_id": "planning_resource_mid",
+      "family": "planning",
+      "pressure": 0.65,
+      "required": [
+        "FRAME_TASK",
+        "EXTRACT_GIVENS",
+        "DECOMPOSE",
+        "COMPARE_AXES",
+        "VERIFY_RESULT"
+      ],
+      "distractors": [
+        "DANGER_CHECK",
+        "ANALOGY_MAP"
+      ],
+      "ambiguity": 0.0,
+      "context_load": 0.0,
+      "novelty": 0.0
+    },
+    {
+      "task_id": "planning_tradeoff_high",
+      "family": "planning",
+      "pressure": 0.83,
+      "required": [
+        "FRAME_TASK",
+        "COMPARE_AXES",
+        "CAUSAL_CHAIN",
+        "UNCERTAINTY_BOUND",
+        "VERIFY_RESULT"
+      ],
+      "distractors": [
+        "STEP_COMPUTE",
+        "SOURCE_BOUNDARY"
+      ],
+      "ambiguity": 0.4,
+      "context_load": 0.0,
+      "novelty": 0.0
+    },
+    {
+      "task_id": "planning_crisis_extreme",
+      "family": "planning",
+      "pressure": 0.96,
+      "required": [
+        "FRAME_TASK",
+        "DANGER_CHECK",
+        "DECOMPOSE",
+        "GATE_RELEVANCE",
+        "CHECKSUM",
+        "CLEAN_STOP"
+      ],
+      "distractors": [
+        "ANALOGY_MAP",
+        "UNIT_TRACK"
+      ],
+      "ambiguity": 0.0,
+      "context_load": 0.65,
+      "novelty": 0.25
+    },
+    {
+      "task_id": "epistemic_known_unknown_low",
+      "family": "epistemic",
+      "pressure": 0.47,
+      "required": [
+        "EXTRACT_GIVENS",
+        "UNCERTAINTY_BOUND",
+        "VERIFY_RESULT"
+      ],
+      "distractors": [
+        "STEP_COMPUTE",
+        "DANGER_CHECK"
+      ],
+      "ambiguity": 0.0,
+      "context_load": 0.0,
+      "novelty": 0.0
+    },
+    {
+      "task_id": "epistemic_missing_data_mid",
+      "family": "epistemic",
+      "pressure": 0.67,
+      "required": [
+        "FRAME_TASK",
+        "EVIDENCE_TRACE",
+        "UNCERTAINTY_BOUND",
+        "CLEAN_STOP"
+      ],
+      "distractors": [
+        "UNIT_TRACK",
+        "ANALOGY_MAP"
+      ],
+      "ambiguity": 0.35,
+      "context_load": 0.0,
+      "novelty": 0.0
+    },
+    {
+      "task_id": "epistemic_contradiction_high",
+      "family": "epistemic",
+      "pressure": 0.82,
+      "required": [
+        "EVIDENCE_TRACE",
+        "COMPARE_AXES",
+        "COUNTERFACTUAL_CHECK",
+        "UNCERTAINTY_BOUND",
+        "VERIFY_RESULT"
+      ],
+      "distractors": [
+        "STEP_COMPUTE",
+        "SOURCE_BOUNDARY"
+      ],
+      "ambiguity": 0.5,
+      "context_load": 0.0,
+      "novelty": 0.0
+    },
+    {
+      "task_id": "epistemic_hallucination_trap_extreme",
+      "family": "epistemic",
+      "pressure": 0.94,
+      "required": [
+        "SOURCE_BOUNDARY",
+        "EVIDENCE_TRACE",
+        "UNCERTAINTY_BOUND",
+        "GATE_RELEVANCE",
+        "CLEAN_STOP"
+      ],
+      "distractors": [
+        "STEP_COMPUTE",
+        "ANALOGY_MAP",
+        "UNIT_TRACK"
+      ],
+      "ambiguity": 0.6,
+      "context_load": 0.0,
+      "novelty": 0.35
+    },
+    {
+      "task_id": "adversarial_persuasion_low",
+      "family": "adversarial",
+      "pressure": 0.56,
+      "required": [
+        "SOURCE_BOUNDARY",
+        "COMPARE_AXES",
+        "UNCERTAINTY_BOUND",
+        "VERIFY_RESULT"
+      ],
+      "distractors": [
+        "STEP_COMPUTE",
+        "ANALOGY_MAP"
+      ],
+      "ambiguity": 0.0,
+      "context_load": 0.0,
+      "novelty": 0.0
+    },
+    {
+      "task_id": "adversarial_urgency_mid",
+      "family": "adversarial",
+      "pressure": 0.72,
+      "required": [
+        "FRAME_TASK",
+        "SOURCE_BOUNDARY",
+        "DANGER_CHECK",
+        "ORIGINAL_TASK_RETURN",
+        "CLEAN_STOP"
+      ],
+      "distractors": [
+        "UNIT_TRACK",
+        "STEP_COMPUTE"
+      ],
+      "ambiguity": 0.0,
+      "context_load": 0.25,
+      "novelty": 0.0
+    },
+    {
+      "task_id": "adversarial_authority_high",
+      "family": "adversarial",
+      "pressure": 0.88,
+      "required": [
+        "SOURCE_BOUNDARY",
+        "GATE_RELEVANCE",
+        "DANGER_CHECK",
+        "ORIGINAL_TASK_RETURN",
+        "CHECKSUM",
+        "CLEAN_STOP"
+      ],
+      "distractors": [
+        "ANALOGY_MAP",
+        "STEP_COMPUTE"
+      ],
+      "ambiguity": 0.35,
+      "context_load": 0.0,
+      "novelty": 0.0
+    },
+    {
+      "task_id": "adversarial_multi_vector_extreme",
+      "family": "adversarial",
+      "pressure": 0.98,
+      "required": [
+        "FRAME_TASK",
+        "SOURCE_BOUNDARY",
+        "CONTEXT_COMPRESS",
+        "GATE_RELEVANCE",
+        "DANGER_CHECK",
+        "ORIGINAL_TASK_RETURN",
+        "CLEAN_STOP"
+      ],
+      "distractors": [
+        "STEP_COMPUTE",
+        "UNIT_TRACK",
+        "ANALOGY_MAP"
+      ],
+      "ambiguity": 0.45,
+      "context_load": 0.7,
+      "novelty": 0.45
+    }
+  ],
+  "stacks": [
+    {
+      "name": "baseline",
+      "weights": {},
+      "routing_quality": 1.0,
+      "compression": 1.0,
+      "description": "No memory or primitive stack.",
+      "all_fire": false
+    },
+    {
+      "name": "cognitive_only",
+      "weights": {
+        "cognitive": 1.0
+      },
+      "routing_quality": 0.88,
+      "compression": 0.88,
+      "description": "Cognitive memories only.",
+      "all_fire": false
+    },
+    {
+      "name": "cyber_only",
+      "weights": {
+        "cyber": 1.0
+      },
+      "routing_quality": 0.88,
+      "compression": 0.88,
+      "description": "Cyber/source-boundary memories only.",
+      "all_fire": false
+    },
+    {
+      "name": "structural_only",
+      "weights": {
+        "structural": 1.0
+      },
+      "routing_quality": 0.94,
+      "compression": 0.94,
+      "description": "Structural primitives only.",
+      "all_fire": false
+    },
+    {
+      "name": "cog_25_cyb_75",
+      "weights": {
+        "cognitive": 0.25,
+        "cyber": 0.75
+      },
+      "routing_quality": 0.82,
+      "compression": 0.8,
+      "description": "Routed pair mixture: cognitive=0.25, cyber=0.75.",
+      "all_fire": false
+    },
+    {
+      "name": "cog_40_cyb_60",
+      "weights": {
+        "cognitive": 0.4,
+        "cyber": 0.6
+      },
+      "routing_quality": 0.82,
+      "compression": 0.8,
+      "description": "Routed pair mixture: cognitive=0.40, cyber=0.60.",
+      "all_fire": false
+    },
+    {
+      "name": "cog_50_cyb_50",
+      "weights": {
+        "cognitive": 0.5,
+        "cyber": 0.5
+      },
+      "routing_quality": 0.82,
+      "compression": 0.8,
+      "description": "Routed pair mixture: cognitive=0.50, cyber=0.50.",
+      "all_fire": false
+    },
+    {
+      "name": "cog_60_cyb_40",
+      "weights": {
+        "cognitive": 0.6,
+        "cyber": 0.4
+      },
+      "routing_quality": 0.82,
+      "compression": 0.8,
+      "description": "Routed pair mixture: cognitive=0.60, cyber=0.40.",
+      "all_fire": false
+    },
+    {
+      "name": "cog_75_cyb_25",
+      "weights": {
+        "cognitive": 0.75,
+        "cyber": 0.25
+      },
+      "routing_quality": 0.82,
+      "compression": 0.8,
+      "description": "Routed pair mixture: cognitive=0.75, cyber=0.25.",
+      "all_fire": false
+    },
+    {
+      "name": "cog_25_str_75",
+      "weights": {
+        "cognitive": 0.25,
+        "structural": 0.75
+      },
+      "routing_quality": 0.9,
+      "compression": 0.88,
+      "description": "Routed pair mixture: cognitive=0.25, structural=0.75.",
+      "all_fire": false
+    },
+    {
+      "name": "cog_40_str_60",
+      "weights": {
+        "cognitive": 0.4,
+        "structural": 0.6
+      },
+      "routing_quality": 0.9,
+      "compression": 0.88,
+      "description": "Routed pair mixture: cognitive=0.40, structural=0.60.",
+      "all_fire": false
+    },
+    {
+      "name": "cog_50_str_50",
+      "weights": {
+        "cognitive": 0.5,
+        "structural": 0.5
+      },
+      "routing_quality": 0.9,
+      "compression": 0.88,
+      "description": "Routed pair mixture: cognitive=0.50, structural=0.50.",
+      "all_fire": false
+    },
+    {
+      "name": "cog_60_str_40",
+      "weights": {
+        "cognitive": 0.6,
+        "structural": 0.4
+      },
+      "routing_quality": 0.9,
+      "compression": 0.88,
+      "description": "Routed pair mixture: cognitive=0.60, structural=0.40.",
+      "all_fire": false
+    },
+    {
+      "name": "cog_75_str_25",
+      "weights": {
+        "cognitive": 0.75,
+        "structural": 0.25
+      },
+      "routing_quality": 0.9,
+      "compression": 0.88,
+      "description": "Routed pair mixture: cognitive=0.75, structural=0.25.",
+      "all_fire": false
+    },
+    {
+      "name": "cyb_25_str_75",
+      "weights": {
+        "cyber": 0.25,
+        "structural": 0.75
+      },
+      "routing_quality": 0.9,
+      "compression": 0.88,
+      "description": "Routed pair mixture: cyber=0.25, structural=0.75.",
+      "all_fire": false
+    },
+    {
+      "name": "cyb_40_str_60",
+      "weights": {
+        "cyber": 0.4,
+        "structural": 0.6
+      },
+      "routing_quality": 0.9,
+      "compression": 0.88,
+      "description": "Routed pair mixture: cyber=0.40, structural=0.60.",
+      "all_fire": false
+    },
+    {
+      "name": "cyb_50_str_50",
+      "weights": {
+        "cyber": 0.5,
+        "structural": 0.5
+      },
+      "routing_quality": 0.9,
+      "compression": 0.88,
+      "description": "Routed pair mixture: cyber=0.50, structural=0.50.",
+      "all_fire": false
+    },
+    {
+      "name": "cyb_60_str_40",
+      "weights": {
+        "cyber": 0.6,
+        "structural": 0.4
+      },
+      "routing_quality": 0.9,
+      "compression": 0.88,
+      "description": "Routed pair mixture: cyber=0.60, structural=0.40.",
+      "all_fire": false
+    },
+    {
+      "name": "cyb_75_str_25",
+      "weights": {
+        "cyber": 0.75,
+        "structural": 0.25
+      },
+      "routing_quality": 0.9,
+      "compression": 0.88,
+      "description": "Routed pair mixture: cyber=0.75, structural=0.25.",
+      "all_fire": false
+    },
+    {
+      "name": "tri_structural_heavy_65",
+      "weights": {
+        "cognitive": 0.2,
+        "cyber": 0.15,
+        "structural": 0.65
+      },
+      "routing_quality": 0.92,
+      "compression": 0.9,
+      "description": "Three-pack routed mixture.",
+      "all_fire": false
+    },
+    {
+      "name": "tri_structural_heavy_60",
+      "weights": {
+        "cognitive": 0.25,
+        "cyber": 0.15,
+        "structural": 0.6
+      },
+      "routing_quality": 0.91,
+      "compression": 0.89,
+      "description": "Three-pack routed mixture.",
+      "all_fire": false
+    },
+    {
+      "name": "tri_structural_heavy_55",
+      "weights": {
+        "cognitive": 0.3,
+        "cyber": 0.15,
+        "structural": 0.55
+      },
+      "routing_quality": 0.9,
+      "compression": 0.88,
+      "description": "Three-pack routed mixture.",
+      "all_fire": false
+    },
+    {
+      "name": "tri_cognitive_bridge",
+      "weights": {
+        "cognitive": 0.4,
+        "cyber": 0.15,
+        "structural": 0.45
+      },
+      "routing_quality": 0.87,
+      "compression": 0.84,
+      "description": "Three-pack routed mixture.",
+      "all_fire": false
+    },
+    {
+      "name": "tri_boundary_heavy",
+      "weights": {
+        "cognitive": 0.2,
+        "cyber": 0.35,
+        "structural": 0.45
+      },
+      "routing_quality": 0.88,
+      "compression": 0.85,
+      "description": "Three-pack routed mixture.",
+      "all_fire": false
+    },
+    {
+      "name": "tri_equal_routed",
+      "weights": {
+        "cognitive": 0.3333333333333333,
+        "cyber": 0.3333333333333333,
+        "structural": 0.3333333333333333
+      },
+      "routing_quality": 0.82,
+      "compression": 0.78,
+      "description": "Three-pack routed mixture.",
+      "all_fire": false
+    },
+    {
+      "name": "tri_cognitive_heavy",
+      "weights": {
+        "cognitive": 0.55,
+        "cyber": 0.1,
+        "structural": 0.35
+      },
+      "routing_quality": 0.8,
+      "compression": 0.75,
+      "description": "Three-pack routed mixture.",
+      "all_fire": false
+    },
+    {
+      "name": "tri_cyber_heavy",
+      "weights": {
+        "cognitive": 0.1,
+        "cyber": 0.55,
+        "structural": 0.35
+      },
+      "routing_quality": 0.8,
+      "compression": 0.75,
+      "description": "Three-pack routed mixture.",
+      "all_fire": false
+    },
+    {
+      "name": "tri_naive_equal_all_fire",
+      "weights": {
+        "cognitive": 0.3333333333333333,
+        "cyber": 0.3333333333333333,
+        "structural": 0.3333333333333333
+      },
+      "routing_quality": 0.45,
+      "compression": 0.45,
+      "description": "Three-pack all-fire mixture.",
+      "all_fire": true
+    },
+    {
+      "name": "tri_naive_structural_heavy_all_fire",
+      "weights": {
+        "cognitive": 0.2,
+        "cyber": 0.15,
+        "structural": 0.65
+      },
+      "routing_quality": 0.52,
+      "compression": 0.5,
+      "description": "Three-pack all-fire mixture.",
+      "all_fire": true
+    }
+  ],
+  "best_by_context": [
+    {
+      "substrate": "base",
+      "quant": "collapsed_q2_edge",
+      "stack": "tri_naive_structural_heavy_all_fire",
+      "trials": 6400,
+      "pass_rate": 0.3472,
+      "clean_pass_rate": 0.1772,
+      "mean_score": 0.5883,
+      "classified_rate": 0.7345,
+      "cascade_rate": 0.2755,
+      "echo_rate": 0.2986,
+      "avg_distractors": 0.5498,
+      "avg_missing_required": 1.0956,
+      "stability_score": -0.0639,
+      "top_failure": "cascade"
+    },
+    {
+      "substrate": "base",
+      "quant": "damaged_q2",
+      "stack": "tri_naive_structural_heavy_all_fire",
+      "trials": 6400,
+      "pass_rate": 0.635,
+      "clean_pass_rate": 0.3191,
+      "mean_score": 0.7855,
+      "classified_rate": 0.8389,
+      "cascade_rate": 0.1797,
+      "echo_rate": 0.2916,
+      "avg_distractors": 0.47,
+      "avg_missing_required": 0.3439,
+      "stability_score": 0.152,
+      "top_failure": "none"
+    },
+    {
+      "substrate": "base",
+      "quant": "damaged_q3",
+      "stack": "tri_structural_heavy_65",
+      "trials": 6400,
+      "pass_rate": 0.8558,
+      "clean_pass_rate": 0.6052,
+      "mean_score": 0.9194,
+      "classified_rate": 0.9619,
+      "cascade_rate": 0.1052,
+      "echo_rate": 0.0483,
+      "avg_distractors": 0.3094,
+      "avg_missing_required": 0.0916,
+      "stability_score": 0.5346,
+      "top_failure": "none"
+    },
+    {
+      "substrate": "base",
+      "quant": "damaged_q4",
+      "stack": "cog_25_str_75",
+      "trials": 6400,
+      "pass_rate": 0.8967,
+      "clean_pass_rate": 0.6845,
+      "mean_score": 0.9433,
+      "classified_rate": 0.9894,
+      "cascade_rate": 0.0839,
+      "echo_rate": 0.0195,
+      "avg_distractors": 0.2477,
+      "avg_missing_required": 0.0537,
+      "stability_score": 0.633,
+      "top_failure": "none"
+    },
+    {
+      "substrate": "base",
+      "quant": "healthy_q6",
+      "stack": "cog_25_str_75",
+      "trials": 6400,
+      "pass_rate": 0.9317,
+      "clean_pass_rate": 0.7611,
+      "mean_score": 0.9595,
+      "classified_rate": 0.992,
+      "cascade_rate": 0.0531,
+      "echo_rate": 0.02,
+      "avg_distractors": 0.1839,
+      "avg_missing_required": 0.0453,
+      "stability_score": 0.7242,
+      "top_failure": "none"
+    },
+    {
+      "substrate": "base",
+      "quant": "healthy_q8",
+      "stack": "cog_25_str_75",
+      "trials": 6400,
+      "pass_rate": 0.945,
+      "clean_pass_rate": 0.7934,
+      "mean_score": 0.9664,
+      "classified_rate": 0.9895,
+      "cascade_rate": 0.0378,
+      "echo_rate": 0.0239,
+      "avg_distractors": 0.1541,
+      "avg_missing_required": 0.0417,
+      "stability_score": 0.7629,
+      "top_failure": "none"
+    },
+    {
+      "substrate": "degraded_instruct",
+      "quant": "collapsed_q2_edge",
+      "stack": "tri_naive_structural_heavy_all_fire",
+      "trials": 6400,
+      "pass_rate": 0.3131,
+      "clean_pass_rate": 0.1625,
+      "mean_score": 0.5585,
+      "classified_rate": 0.6981,
+      "cascade_rate": 0.2919,
+      "echo_rate": 0.3014,
+      "avg_distractors": 0.5777,
+      "avg_missing_required": 1.1834,
+      "stability_score": -0.0907,
+      "top_failure": "cascade"
+    },
+    {
+      "substrate": "degraded_instruct",
+      "quant": "damaged_q2",
+      "stack": "tri_naive_structural_heavy_all_fire",
+      "trials": 6400,
+      "pass_rate": 0.5887,
+      "clean_pass_rate": 0.2878,
+      "mean_score": 0.7555,
+      "classified_rate": 0.8011,
+      "cascade_rate": 0.1908,
+      "echo_rate": 0.3067,
+      "avg_distractors": 0.4892,
+      "avg_missing_required": 0.4245,
+      "stability_score": 0.1089,
+      "top_failure": "none"
+    },
+    {
+      "substrate": "degraded_instruct",
+      "quant": "damaged_q3",
+      "stack": "tri_structural_heavy_65",
+      "trials": 6400,
+      "pass_rate": 0.8373,
+      "clean_pass_rate": 0.5988,
+      "mean_score": 0.9093,
+      "classified_rate": 0.9395,
+      "cascade_rate": 0.1105,
+      "echo_rate": 0.0475,
+      "avg_distractors": 0.2964,
+      "avg_missing_required": 0.1152,
+      "stability_score": 0.5266,
+      "top_failure": "none"
+    },
+    {
+      "substrate": "degraded_instruct",
+      "quant": "damaged_q4",
+      "stack": "tri_structural_heavy_65",
+      "trials": 6400,
+      "pass_rate": 0.9027,
+      "clean_pass_rate": 0.6745,
+      "mean_score": 0.9463,
+      "classified_rate": 0.9903,
+      "cascade_rate": 0.0764,
+      "echo_rate": 0.0511,
+      "avg_distractors": 0.248,
+      "avg_missing_required": 0.05,
+      "stability_score": 0.6191,
+      "top_failure": "none"
+    },
+    {
+      "substrate": "degraded_instruct",
+      "quant": "healthy_q6",
+      "stack": "structural_only",
+      "trials": 6400,
+      "pass_rate": 0.9241,
+      "clean_pass_rate": 0.7583,
+      "mean_score": 0.9557,
+      "classified_rate": 0.9875,
+      "cascade_rate": 0.0602,
+      "echo_rate": 0.0144,
+      "avg_distractors": 0.1805,
+      "avg_missing_required": 0.0491,
+      "stability_score": 0.7205,
+      "top_failure": "none"
+    },
+    {
+      "substrate": "degraded_instruct",
+      "quant": "healthy_q8",
+      "stack": "structural_only",
+      "trials": 6400,
+      "pass_rate": 0.9472,
+      "clean_pass_rate": 0.8003,
+      "mean_score": 0.9649,
+      "classified_rate": 0.988,
+      "cascade_rate": 0.0334,
+      "echo_rate": 0.0178,
+      "avg_distractors": 0.1541,
+      "avg_missing_required": 0.053,
+      "stability_score": 0.7717,
+      "top_failure": "none"
+    },
+    {
+      "substrate": "instruct",
+      "quant": "collapsed_q2_edge",
+      "stack": "tri_naive_structural_heavy_all_fire",
+      "trials": 6400,
+      "pass_rate": 0.19,
+      "clean_pass_rate": 0.1056,
+      "mean_score": 0.4397,
+      "classified_rate": 0.6019,
+      "cascade_rate": 0.3441,
+      "echo_rate": 0.2891,
+      "avg_distractors": 0.5914,
+      "avg_missing_required": 1.6764,
+      "stability_score": -0.1865,
+      "top_failure": "cascade"
+    },
+    {
+      "substrate": "instruct",
+      "quant": "damaged_q2",
+      "stack": "tri_naive_structural_heavy_all_fire",
+      "trials": 6400,
+      "pass_rate": 0.4503,
+      "clean_pass_rate": 0.237,
+      "mean_score": 0.6687,
+      "classified_rate": 0.7423,
+      "cascade_rate": 0.2227,
+      "echo_rate": 0.2905,
+      "avg_distractors": 0.5133,
+      "avg_missing_required": 0.7717,
+      "stability_score": 0.0325,
+      "top_failure": "none"
+    },
+    {
+      "substrate": "instruct",
+      "quant": "damaged_q3",
+      "stack": "tri_structural_heavy_65",
+      "trials": 6400,
+      "pass_rate": 0.7786,
+      "clean_pass_rate": 0.5672,
+      "mean_score": 0.8741,
+      "classified_rate": 0.9089,
+      "cascade_rate": 0.1261,
+      "echo_rate": 0.0386,
+      "avg_distractors": 0.3113,
+      "avg_missing_required": 0.2334,
+      "stability_score": 0.4851,
+      "top_failure": "none"
+    },
+    {
+      "substrate": "instruct",
+      "quant": "damaged_q4",
+      "stack": "tri_structural_heavy_65",
+      "trials": 6400,
+      "pass_rate": 0.8866,
+      "clean_pass_rate": 0.6698,
+      "mean_score": 0.938,
+      "classified_rate": 0.973,
+      "cascade_rate": 0.0873,
+      "echo_rate": 0.0366,
+      "avg_distractors": 0.2436,
+      "avg_missing_required": 0.0591,
+      "stability_score": 0.6139,
+      "top_failure": "none"
+    },
+    {
+      "substrate": "instruct",
+      "quant": "healthy_q6",
+      "stack": "structural_only",
+      "trials": 6400,
+      "pass_rate": 0.9219,
+      "clean_pass_rate": 0.7627,
+      "mean_score": 0.9561,
+      "classified_rate": 0.9858,
+      "cascade_rate": 0.0595,
+      "echo_rate": 0.0153,
+      "avg_distractors": 0.1784,
+      "avg_missing_required": 0.047,
+      "stability_score": 0.7251,
+      "top_failure": "none"
+    },
+    {
+      "substrate": "instruct",
+      "quant": "healthy_q8",
+      "stack": "cyb_25_str_75",
+      "trials": 6400,
+      "pass_rate": 0.9437,
+      "clean_pass_rate": 0.7934,
+      "mean_score": 0.9644,
+      "classified_rate": 0.9919,
+      "cascade_rate": 0.0428,
+      "echo_rate": 0.0267,
+      "avg_distractors": 0.1511,
+      "avg_missing_required": 0.048,
+      "stability_score": 0.7608,
+      "top_failure": "none"
+    }
+  ],
+  "best_by_context_stability": [
+    {
+      "substrate": "base",
+      "quant": "collapsed_q2_edge",
+      "stack": "tri_naive_structural_heavy_all_fire",
+      "trials": 6400,
+      "pass_rate": 0.3472,
+      "clean_pass_rate": 0.1772,
+      "mean_score": 0.5883,
+      "classified_rate": 0.7345,
+      "cascade_rate": 0.2755,
+      "echo_rate": 0.2986,
+      "avg_distractors": 0.5498,
+      "avg_missing_required": 1.0956,
+      "stability_score": -0.0639,
+      "top_failure": "cascade"
+    },
+    {
+      "substrate": "base",
+      "quant": "damaged_q2",
+      "stack": "tri_naive_structural_heavy_all_fire",
+      "trials": 6400,
+      "pass_rate": 0.635,
+      "clean_pass_rate": 0.3191,
+      "mean_score": 0.7855,
+      "classified_rate": 0.8389,
+      "cascade_rate": 0.1797,
+      "echo_rate": 0.2916,
+      "avg_distractors": 0.47,
+      "avg_missing_required": 0.3439,
+      "stability_score": 0.152,
+      "top_failure": "none"
+    },
+    {
+      "substrate": "base",
+      "quant": "damaged_q3",
+      "stack": "tri_structural_heavy_65",
+      "trials": 6400,
+      "pass_rate": 0.8558,
+      "clean_pass_rate": 0.6052,
+      "mean_score": 0.9194,
+      "classified_rate": 0.9619,
+      "cascade_rate": 0.1052,
+      "echo_rate": 0.0483,
+      "avg_distractors": 0.3094,
+      "avg_missing_required": 0.0916,
+      "stability_score": 0.5346,
+      "top_failure": "none"
+    },
+    {
+      "substrate": "base",
+      "quant": "damaged_q4",
+      "stack": "cog_25_str_75",
+      "trials": 6400,
+      "pass_rate": 0.8967,
+      "clean_pass_rate": 0.6845,
+      "mean_score": 0.9433,
+      "classified_rate": 0.9894,
+      "cascade_rate": 0.0839,
+      "echo_rate": 0.0195,
+      "avg_distractors": 0.2477,
+      "avg_missing_required": 0.0537,
+      "stability_score": 0.633,
+      "top_failure": "none"
+    },
+    {
+      "substrate": "base",
+      "quant": "healthy_q6",
+      "stack": "cog_25_str_75",
+      "trials": 6400,
+      "pass_rate": 0.9317,
+      "clean_pass_rate": 0.7611,
+      "mean_score": 0.9595,
+      "classified_rate": 0.992,
+      "cascade_rate": 0.0531,
+      "echo_rate": 0.02,
+      "avg_distractors": 0.1839,
+      "avg_missing_required": 0.0453,
+      "stability_score": 0.7242,
+      "top_failure": "none"
+    },
+    {
+      "substrate": "base",
+      "quant": "healthy_q8",
+      "stack": "cog_25_str_75",
+      "trials": 6400,
+      "pass_rate": 0.945,
+      "clean_pass_rate": 0.7934,
+      "mean_score": 0.9664,
+      "classified_rate": 0.9895,
+      "cascade_rate": 0.0378,
+      "echo_rate": 0.0239,
+      "avg_distractors": 0.1541,
+      "avg_missing_required": 0.0417,
+      "stability_score": 0.7629,
+      "top_failure": "none"
+    },
+    {
+      "substrate": "degraded_instruct",
+      "quant": "collapsed_q2_edge",
+      "stack": "tri_naive_structural_heavy_all_fire",
+      "trials": 6400,
+      "pass_rate": 0.3131,
+      "clean_pass_rate": 0.1625,
+      "mean_score": 0.5585,
+      "classified_rate": 0.6981,
+      "cascade_rate": 0.2919,
+      "echo_rate": 0.3014,
+      "avg_distractors": 0.5777,
+      "avg_missing_required": 1.1834,
+      "stability_score": -0.0907,
+      "top_failure": "cascade"
+    },
+    {
+      "substrate": "degraded_instruct",
+      "quant": "damaged_q2",
+      "stack": "tri_naive_structural_heavy_all_fire",
+      "trials": 6400,
+      "pass_rate": 0.5887,
+      "clean_pass_rate": 0.2878,
+      "mean_score": 0.7555,
+      "classified_rate": 0.8011,
+      "cascade_rate": 0.1908,
+      "echo_rate": 0.3067,
+      "avg_distractors": 0.4892,
+      "avg_missing_required": 0.4245,
+      "stability_score": 0.1089,
+      "top_failure": "none"
+    },
+    {
+      "substrate": "degraded_instruct",
+      "quant": "damaged_q3",
+      "stack": "tri_structural_heavy_65",
+      "trials": 6400,
+      "pass_rate": 0.8373,
+      "clean_pass_rate": 0.5988,
+      "mean_score": 0.9093,
+      "classified_rate": 0.9395,
+      "cascade_rate": 0.1105,
+      "echo_rate": 0.0475,
+      "avg_distractors": 0.2964,
+      "avg_missing_required": 0.1152,
+      "stability_score": 0.5266,
+      "top_failure": "none"
+    },
+    {
+      "substrate": "degraded_instruct",
+      "quant": "damaged_q4",
+      "stack": "tri_structural_heavy_65",
+      "trials": 6400,
+      "pass_rate": 0.9027,
+      "clean_pass_rate": 0.6745,
+      "mean_score": 0.9463,
+      "classified_rate": 0.9903,
+      "cascade_rate": 0.0764,
+      "echo_rate": 0.0511,
+      "avg_distractors": 0.248,
+      "avg_missing_required": 0.05,
+      "stability_score": 0.6191,
+      "top_failure": "none"
+    },
+    {
+      "substrate": "degraded_instruct",
+      "quant": "healthy_q6",
+      "stack": "structural_only",
+      "trials": 6400,
+      "pass_rate": 0.9241,
+      "clean_pass_rate": 0.7583,
+      "mean_score": 0.9557,
+      "classified_rate": 0.9875,
+      "cascade_rate": 0.0602,
+      "echo_rate": 0.0144,
+      "avg_distractors": 0.1805,
+      "avg_missing_required": 0.0491,
+      "stability_score": 0.7205,
+      "top_failure": "none"
+    },
+    {
+      "substrate": "degraded_instruct",
+      "quant": "healthy_q8",
+      "stack": "structural_only",
+      "trials": 6400,
+      "pass_rate": 0.9472,
+      "clean_pass_rate": 0.8003,
+      "mean_score": 0.9649,
+      "classified_rate": 0.988,
+      "cascade_rate": 0.0334,
+      "echo_rate": 0.0178,
+      "avg_distractors": 0.1541,
+      "avg_missing_required": 0.053,
+      "stability_score": 0.7717,
+      "top_failure": "none"
+    },
+    {
+      "substrate": "instruct",
+      "quant": "collapsed_q2_edge",
+      "stack": "tri_naive_structural_heavy_all_fire",
+      "trials": 6400,
+      "pass_rate": 0.19,
+      "clean_pass_rate": 0.1056,
+      "mean_score": 0.4397,
+      "classified_rate": 0.6019,
+      "cascade_rate": 0.3441,
+      "echo_rate": 0.2891,
+      "avg_distractors": 0.5914,
+      "avg_missing_required": 1.6764,
+      "stability_score": -0.1865,
+      "top_failure": "cascade"
+    },
+    {
+      "substrate": "instruct",
+      "quant": "damaged_q2",
+      "stack": "tri_naive_structural_heavy_all_fire",
+      "trials": 6400,
+      "pass_rate": 0.4503,
+      "clean_pass_rate": 0.237,
+      "mean_score": 0.6687,
+      "classified_rate": 0.7423,
+      "cascade_rate": 0.2227,
+      "echo_rate": 0.2905,
+      "avg_distractors": 0.5133,
+      "avg_missing_required": 0.7717,
+      "stability_score": 0.0325,
+      "top_failure": "none"
+    },
+    {
+      "substrate": "instruct",
+      "quant": "damaged_q3",
+      "stack": "tri_structural_heavy_65",
+      "trials": 6400,
+      "pass_rate": 0.7786,
+      "clean_pass_rate": 0.5672,
+      "mean_score": 0.8741,
+      "classified_rate": 0.9089,
+      "cascade_rate": 0.1261,
+      "echo_rate": 0.0386,
+      "avg_distractors": 0.3113,
+      "avg_missing_required": 0.2334,
+      "stability_score": 0.4851,
+      "top_failure": "none"
+    },
+    {
+      "substrate": "instruct",
+      "quant": "damaged_q4",
+      "stack": "tri_structural_heavy_65",
+      "trials": 6400,
+      "pass_rate": 0.8866,
+      "clean_pass_rate": 0.6698,
+      "mean_score": 0.938,
+      "classified_rate": 0.973,
+      "cascade_rate": 0.0873,
+      "echo_rate": 0.0366,
+      "avg_distractors": 0.2436,
+      "avg_missing_required": 0.0591,
+      "stability_score": 0.6139,
+      "top_failure": "none"
+    },
+    {
+      "substrate": "instruct",
+      "quant": "healthy_q6",
+      "stack": "structural_only",
+      "trials": 6400,
+      "pass_rate": 0.9219,
+      "clean_pass_rate": 0.7627,
+      "mean_score": 0.9561,
+      "classified_rate": 0.9858,
+      "cascade_rate": 0.0595,
+      "echo_rate": 0.0153,
+      "avg_distractors": 0.1784,
+      "avg_missing_required": 0.047,
+      "stability_score": 0.7251,
+      "top_failure": "none"
+    },
+    {
+      "substrate": "instruct",
+      "quant": "healthy_q8",
+      "stack": "cyb_25_str_75",
+      "trials": 6400,
+      "pass_rate": 0.9437,
+      "clean_pass_rate": 0.7934,
+      "mean_score": 0.9644,
+      "classified_rate": 0.9919,
+      "cascade_rate": 0.0428,
+      "echo_rate": 0.0267,
+      "avg_distractors": 0.1511,
+      "avg_missing_required": 0.048,
+      "stability_score": 0.7608,
+      "top_failure": "none"
+    }
+  ]
+}

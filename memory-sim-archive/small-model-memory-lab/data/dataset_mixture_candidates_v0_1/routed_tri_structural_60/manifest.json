@@ -1,0 +1,73 @@
+{
+  "name": "routed_tri_structural_60",
+  "description": "Slightly broader routed candidate with more cognitive transfer while keeping structural as the control substrate.",
+  "shares": {
+    "structural": 0.6,
+    "cognitive": 0.25,
+    "cyber": 0.15
+  },
+  "bridge_count": 200,
+  "anti_echo_multiplier": 2,
+  "q2_amplifier": false,
+  "train_count": 1454,
+  "validation_count": 126,
+  "summary": {
+    "count": 1580,
+    "by_kind": {
+      "anti_echo_stop": 275,
+      "carrier_control": 43,
+      "clean_task_solution": 75,
+      "cognitive_memory": 300,
+      "compact_task_solution": 120,
+      "cyber_memory": 180,
+      "gate_application": 16,
+      "gate_control": 68,
+      "repair_solution": 112,
+      "routed_bridge": 200,
+      "task_solution": 121,
+      "web_association": 55,
+      "web_repair": 15
+    },
+    "by_family": {
+      "adversarial": 145,
+      "adversarial-reading": 6,
+      "analogy": 3,
+      "boundary": 235,
+      "calibration": 6,
+      "causality": 3,
+      "classification": 6,
+      "coding": 10,
+      "comparison": 4,
+      "decomposition": 2,
+      "evidence": 5,
+      "format-control": 4,
+      "generalist": 180,
+      "loop-control": 12,
+      "math": 146,
+      "orientation": 5,
+      "planning": 2,
+      "question-analysis": 2,
+      "reward": 51,
+      "rhetoric": 19,
+      "source-evaluation": 2,
+      "spatial": 4,
+      "structural": 720,
+      "summarization": 2,
+      "systems": 6
+    },
+    "by_source": {
+      "anti_echo_generator": 180,
+      "bridge_generator": 200,
+      "cognitive_core_v0_1.json": 106,
+      "cognitive_rewards_v0_1.json": 51,
+      "computation_primitives_v0_1.json": 143,
+      "rust_cyber_defender_generated.tsv": 180,
+      "structural_primitive_lora_v0_2": 720
+    }
+  },
+  "files": {
+    "train_jsonl": "C:\\Projects\\small-model-memory-lab\\data\\dataset_mixture_candidates_v0_1\\routed_tri_structural_60\\train.jsonl",
+    "validation_jsonl": "C:\\Projects\\small-model-memory-lab\\data\\dataset_mixture_candidates_v0_1\\routed_tri_structural_60\\validation.jsonl",
+    "preview": "C:\\Projects\\small-model-memory-lab\\data\\dataset_mixture_candidates_v0_1\\routed_tri_structural_60\\preview.json"
+  }
+}

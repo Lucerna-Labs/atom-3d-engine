@@ -1,0 +1,468 @@
+{
+  "filename": "inet_diag.h",
+  "includes": [
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "TCPDIAG_GETSOCK",
+      "value": "18",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DCCPDIAG_GETSOCK",
+      "value": "19",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "INET_DIAG_GETSOCK_MAX",
+      "value": "24",
+      "comment": "",
+      "category": "INET_DIAG"
+    },
+    {
+      "name": "INET_DIAG_NOCOOKIE",
+      "value": "(~0U)",
+      "comment": "",
+      "category": "INET_DIAG"
+    },
+    {
+      "name": "INET_DIAG_REQ_MAX",
+      "value": "(__INET_DIAG_REQ_MAX - 1)",
+      "comment": "",
+      "category": "INET_DIAG"
+    },
+    {
+      "name": "INET_DIAG_MAX",
+      "value": "(__INET_DIAG_MAX - 1)",
+      "comment": "",
+      "category": "INET_DIAG"
+    },
+    {
+      "name": "INET_ULP_INFO_MAX",
+      "value": "(__INET_ULP_INFO_MAX - 1)",
+      "comment": "",
+      "category": "INET_ULP"
+    }
+  ],
+  "structs": [
+    {
+      "name": "inet_diag_sockid",
+      "fields": [
+        {
+          "type_name": "__be16",
+          "name": "idiag_sport",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be16",
+          "name": "idiag_dport",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "idiag_src",
+          "array_size": "4",
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "idiag_dst",
+          "array_size": "4",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "idiag_if",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "idiag_cookie",
+          "array_size": "2",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "inet_diag_req",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "idiag_family",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "idiag_src_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "idiag_dst_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "idiag_ext",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "idiag_states",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "idiag_dbs",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "inet_diag_req_v2",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "sdiag_family",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "sdiag_protocol",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "idiag_ext",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "idiag_states",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "inet_diag_req_raw",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "sdiag_family",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "sdiag_protocol",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "idiag_ext",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "sdiag_raw_protocol",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "idiag_states",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "inet_diag_bc_op",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "inet_diag_hostcond",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "family",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "prefix_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "port",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "inet_diag_markcond",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "mark",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "mask",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "inet_diag_msg",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "idiag_family",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "idiag_state",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "idiag_timer",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "idiag_retrans",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "idiag_expires",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "idiag_rqueue",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "idiag_wqueue",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "idiag_uid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "idiag_inode",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "inet_diag_meminfo",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "idiag_rmem",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "idiag_wmem",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "idiag_fmem",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "idiag_tmem",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "inet_diag_sockopt",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "tcpvegas_info",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "tcpv_enabled",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tcpv_rttcnt",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tcpv_rtt",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tcpv_minrtt",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "tcp_dctcp_info",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "dctcp_enabled",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "dctcp_ce_state",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "dctcp_alpha",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "dctcp_ab_ecn",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "dctcp_ab_tot",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "tcp_bbr_info",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "bbr_bw_lo",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "bbr_bw_hi",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "bbr_min_rtt",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "bbr_pacing_gain",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "bbr_cwnd_gain",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

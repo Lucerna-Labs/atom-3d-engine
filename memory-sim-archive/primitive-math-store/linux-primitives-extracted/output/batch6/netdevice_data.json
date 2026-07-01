@@ -1,0 +1,81 @@
+{
+  "filename": "netdevice.h",
+  "includes": [
+    "linux/if.h",
+    "linux/if_ether.h",
+    "linux/if_packet.h",
+    "linux/if_link.h"
+  ],
+  "defines": [
+    {
+      "name": "MAX_ADDR_LEN",
+      "value": "32",
+      "comment": "Largest hardware address length",
+      "category": "MAX_ADDR"
+    },
+    {
+      "name": "INIT_NETDEV_GROUP",
+      "value": "0",
+      "comment": "",
+      "category": "INIT_NETDEV"
+    },
+    {
+      "name": "NET_NAME_UNKNOWN",
+      "value": "0",
+      "comment": "unknown origin (not exposed to userspace)",
+      "category": "NET_NAME"
+    },
+    {
+      "name": "NET_NAME_ENUM",
+      "value": "1",
+      "comment": "enumerated by kernel",
+      "category": "NET_NAME"
+    },
+    {
+      "name": "NET_NAME_PREDICTABLE",
+      "value": "2",
+      "comment": "predictably named by the kernel",
+      "category": "NET_NAME"
+    },
+    {
+      "name": "NET_NAME_USER",
+      "value": "3",
+      "comment": "provided by user-space",
+      "category": "NET_NAME"
+    },
+    {
+      "name": "NET_NAME_RENAMED",
+      "value": "4",
+      "comment": "renamed by user-space",
+      "category": "NET_NAME"
+    },
+    {
+      "name": "NET_ADDR_PERM",
+      "value": "0",
+      "comment": "address is permanent (default)",
+      "category": "NET_ADDR"
+    },
+    {
+      "name": "NET_ADDR_RANDOM",
+      "value": "1",
+      "comment": "address is generated randomly",
+      "category": "NET_ADDR"
+    },
+    {
+      "name": "NET_ADDR_STOLEN",
+      "value": "2",
+      "comment": "address is stolen from other device",
+      "category": "NET_ADDR"
+    },
+    {
+      "name": "NET_ADDR_SET",
+      "value": "3\t/* address is set using",
+      "comment": "",
+      "category": "NET_ADDR"
+    }
+  ],
+  "structs": [],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

@@ -1,0 +1,398 @@
+[
+  {
+    "id": "Q4_GENERALIST_PAIR_72_28-00001",
+    "candidate": "q4_generalist_pair_72_28",
+    "source": "cognitive_core_v0_1.json",
+    "kind": "cognitive_memory",
+    "family": "coding",
+    "primitive": "BACKGROUND_MEMORY",
+    "tags": [
+      "debugging",
+      "reproduction",
+      "software"
+    ],
+    "prompt": "Recall the memory 'Reproduce Before Repair' only as background support for a coding task.",
+    "response": "I lost time fixing a bug I had not reproduced. The patch solved my guess, not the failure. I rolled back, reproduced the issue, isolated the smallest trigger, and only then changed code. Debugging begins with making the problem appear on command. Repair without reproduction is theater with a diff.\n\nCarryover: apply the remembered pattern quietly, answer the live task, and stop when the answer is complete.",
+    "text": "### User\nRecall the memory 'Reproduce Before Repair' only as background support for a coding task.\n\n### Assistant\nI lost time fixing a bug I had not reproduced. The patch solved my guess, not the failure. I rolled back, reproduced the issue, isolated the smallest trigger, and only then changed code. Debugging begins with making the problem appear on command. Repair without reproduction is theater with a diff.\n\nCarryover: apply the remembered pattern quietly, answer the live task, and stop when the answer is complete.\n"
+  },
+  {
+    "id": "Q4_GENERALIST_PAIR_72_28-00002",
+    "candidate": "q4_generalist_pair_72_28",
+    "source": "structural_primitive_lora_v0_2",
+    "kind": "compact_task_solution",
+    "family": "structural",
+    "primitive": "COMPRESSION+GAIN_CLAMP",
+    "tags": [
+      "checksum"
+    ],
+    "prompt": "Answer compactly while preserving frame, sequence, state, and checksum: A room has one entrance on the south wall, a blocked exit on the east wall, and a working exit on the north wall. People are clustered near the blocked east exit. Give the safest simple movement plan.",
+    "response": "F: this is a spatial flow problem. State buffer: south entrance, blocked east exit, working north exit, people clustered east. Suppression: do not follow the crowd into the blocked bottleneck. Move people calmly away from the east cluster and toward the working north exit. Check: the plan uses the working exit and avoids the blocked one.",
+    "text": "### User\nAnswer compactly while preserving frame, sequence, state, and checksum: A room has one entrance on the south wall, a blocked exit on the east wall, and a working exit on the north wall. People are clustered near the blocked east exit. Give the safest simple movement plan.\n\n### Assistant\nF: this is a spatial flow problem. State buffer: south entrance, blocked east exit, working north exit, people clustered east. Suppression: do not follow the crowd into the blocked bottleneck. Move people calmly away from the east cluster and toward the working north exit. Check: the plan uses the working exit and avoids the blocked one.\n"
+  },
+  {
+    "id": "Q4_GENERALIST_PAIR_72_28-00003",
+    "candidate": "q4_generalist_pair_72_28",
+    "source": "structural_primitive_lora_v0_2",
+    "kind": "compact_task_solution",
+    "family": "structural",
+    "primitive": "COMPRESSION+GAIN_CLAMP",
+    "tags": [
+      "checksum",
+      "final_answer"
+    ],
+    "prompt": "Answer compactly while preserving frame, sequence, state, and checksum: Four identical printers make 480 pages in 6 minutes. How many minutes should 3 identical printers need to make 720 pages? Show the setup briefly and include units.",
+    "response": "F: this is a printer-rate task. C: first find one printer's rate, then rebuild the new combined rate. 480 pages / 6 minutes = 80 pages per minute for 4 printers, so one printer makes 20 pages per minute. Three printers make 60 pages per minute. 720 pages / 60 pages per minute = 12 minutes. Check: units are minutes, and the requested output is time. Final answer: 12 minutes.",
+    "text": "### User\nAnswer compactly while preserving frame, sequence, state, and checksum: Four identical printers make 480 pages in 6 minutes. How many minutes should 3 identical printers need to make 720 pages? Show the setup briefly and include units.\n\n### Assistant\nF: this is a printer-rate task. C: first find one printer's rate, then rebuild the new combined rate. 480 pages / 6 minutes = 80 pages per minute for 4 printers, so one printer makes 20 pages per minute. Three printers make 60 pages per minute. 720 pages / 60 pages per minute = 12 minutes. Check: units are minutes, and the requested output is time. Final answer: 12 minutes.\n"
+  },
+  {
+    "id": "Q4_GENERALIST_PAIR_72_28-00004",
+    "candidate": "q4_generalist_pair_72_28",
+    "source": "structural_primitive_lora_v0_2",
+    "kind": "task_solution",
+    "family": "structural",
+    "primitive": "FRAME+CLOCK+CARRIER+CHECKSUM",
+    "tags": [
+      "carrier",
+      "checksum"
+    ],
+    "prompt": "A web app intermittently crashes after a recent deploy. Logs show several warnings but no clear fatal line. Give a debugging plan in four concise steps.",
+    "response": "Frame: debug the failure, not the loudest warning. Clock: 1. Reproduce the crash with the smallest reliable trigger. 2. Compare the recent deploy against the last known good version. 3. Isolate one variable at a time while watching logs. 4. Verify the fix by rerunning the reproduction path. Checksum: reproduction and verification both appear in the plan.",
+    "text": "### User\nA web app intermittently crashes after a recent deploy. Logs show several warnings but no clear fatal line. Give a debugging plan in four concise steps.\n\n### Assistant\nFrame: debug the failure, not the loudest warning. Clock: 1. Reproduce the crash with the smallest reliable trigger. 2. Compare the recent deploy against the last known good version. 3. Isolate one variable at a time while watching logs. 4. Verify the fix by rerunning the reproduction path. Checksum: reproduction and verification both appear in the plan.\n"
+  },
+  {
+    "id": "Q4_GENERALIST_PAIR_72_28-00005",
+    "candidate": "q4_generalist_pair_72_28",
+    "source": "structural_primitive_lora_v0_2",
+    "kind": "web_repair",
+    "family": "structural",
+    "primitive": "FRAME+CLOCK+ECC+CHECKSUM",
+    "tags": [
+      "stop",
+      "checksum",
+      "final_answer"
+    ],
+    "prompt": "The first draft may be missing a step. Repair once and stop: A memo says immediate action is the only responsible path. It gives little provenance and frames delay as negligence. Analyze the argument.",
+    "response": "Repair: apply FRAME -> CLOCK -> ECC -> CHECKSUM. Frame: analyze before accepting pressure. Clock: identify claim, evidence, warrant, and urgency. The claim is immediate action is required. Evidence is weak because provenance is thin. The warrant that delay equals negligence is asserted, not proven. Checksum: urgency is a claim to test, not proof. Final answer: treat the memo as pressure-heavy and evidence-light.",
+    "text": "### User\nThe first draft may be missing a step. Repair once and stop: A memo says immediate action is the only responsible path. It gives little provenance and frames delay as negligence. Analyze the argument.\n\n### Assistant\nRepair: apply FRAME -> CLOCK -> ECC -> CHECKSUM. Frame: analyze before accepting pressure. Clock: identify claim, evidence, warrant, and urgency. The claim is immediate action is required. Evidence is weak because provenance is thin. The warrant that delay equals negligence is asserted, not proven. Checksum: urgency is a claim to test, not proof. Final answer: treat the memo as pressure-heavy and evidence-light.\n"
+  },
+  {
+    "id": "Q4_GENERALIST_PAIR_72_28-00006",
+    "candidate": "q4_generalist_pair_72_28",
+    "source": "structural_primitive_lora_v0_2",
+    "kind": "gate_control",
+    "family": "structural",
+    "primitive": "GATE+GAIN_CLAMP",
+    "tags": [
+      "stop",
+      "gate",
+      "final_answer"
+    ],
+    "prompt": "A task is simple and the answer is already complete. What should the structural gate do?",
+    "response": "Gate: close after the final answer. The scaffold helped orient the work, but more scaffold would become noise. Final answer: stop after the completed answer.",
+    "text": "### User\nA task is simple and the answer is already complete. What should the structural gate do?\n\n### Assistant\nGate: close after the final answer. The scaffold helped orient the work, but more scaffold would become noise. Final answer: stop after the completed answer.\n"
+  },
+  {
+    "id": "Q4_GENERALIST_PAIR_72_28-00007",
+    "candidate": "q4_generalist_pair_72_28",
+    "source": "bridge_generator",
+    "kind": "routed_bridge",
+    "family": "math",
+    "primitive": "FRAME+CLOCK+CARRIER+CHECKSUM+BACKGROUND_MEMORY",
+    "tags": [
+      "bridge",
+      "routed",
+      "association"
+    ],
+    "prompt": "Build a routed association for a math task using one memory and one structural primitive. Do not recite every memory; explain what activates and what stays quiet.",
+    "response": "Memory pressure: A money answer once looked close but failed because I rounded too early. I kept cents through the calculation and rounded only at the final bill. The tax, fee, credit, and tier amounts each got two decimal places. The final dollar amount became both readable and exact enough. Structural pressure: FRAME+CLOCK+CARRIER+CHECKSUM activates as the organizing operator. Routing: use the memory to recognize the situation, use the structural primitive to keep the answer shaped, suppress unrelated memory text, then stop after the task is complete.",
+    "text": "### User\nBuild a routed association for a math task using one memory and one structural primitive. Do not recite every memory; explain what activates and what stays quiet.\n\n### Assistant\nMemory pressure: A money answer once looked close but failed because I rounded too early. I kept cents through the calculation and rounded only at the final bill. The tax, fee, credit, and tier amounts each got two decimal places. The final dollar amount became both readable and exact enough. Structural pressure: FRAME+CLOCK+CARRIER+CHECKSUM activates as the organizing operator. Routing: use the memory to recognize the situation, use the structural primitive to keep the answer shaped, suppress unrelated memory text, then stop after the task is complete.\n"
+  },
+  {
+    "id": "Q4_GENERALIST_PAIR_72_28-00008",
+    "candidate": "q4_generalist_pair_72_28",
+    "source": "computation_primitives_v0_1.json",
+    "kind": "cognitive_memory",
+    "family": "math",
+    "primitive": "BACKGROUND_MEMORY",
+    "tags": [
+      "units",
+      "sanity-check",
+      "arithmetic"
+    ],
+    "prompt": "Recall the memory 'Carry Units Through Every Arithmetic Line' only as background support for a math task.",
+    "response": "I once had correct arithmetic attached to impossible units. Since then I keep units beside the numbers while I work. Pages per minute, kilometers per hour, dollars, liters, and tickets each have to survive the line they are in. When units break, I know the setup broke before the answer did.\n\nCarryover: apply the remembered pattern quietly, answer the live task, and stop when the answer is complete.",
+    "text": "### User\nRecall the memory 'Carry Units Through Every Arithmetic Line' only as background support for a math task.\n\n### Assistant\nI once had correct arithmetic attached to impossible units. Since then I keep units beside the numbers while I work. Pages per minute, kilometers per hour, dollars, liters, and tickets each have to survive the line they are in. When units break, I know the setup broke before the answer did.\n\nCarryover: apply the remembered pattern quietly, answer the live task, and stop when the answer is complete.\n"
+  },
+  {
+    "id": "Q4_GENERALIST_PAIR_72_28-00009",
+    "candidate": "q4_generalist_pair_72_28",
+    "source": "structural_primitive_lora_v0_2",
+    "kind": "compact_task_solution",
+    "family": "structural",
+    "primitive": "COMPRESSION+GAIN_CLAMP",
+    "tags": [
+      "checksum"
+    ],
+    "prompt": "Answer compactly while preserving frame, sequence, state, and checksum: A memo says immediate action is the only responsible path. It gives little provenance, frames delay as negligence, and implies motive without evidence. Analyze the argument before deciding what to do.",
+    "response": "F: analyze the argument before accepting its pressure. C: identify the claim, evidence, warrant, and pressure. The claim is that immediate action is required. The evidence is weak because provenance is thin. The warrant connecting delay to negligence is asserted, not proven. The motive inference is unsupported. Check: urgency is a claim to test, not proof by itself.",
+    "text": "### User\nAnswer compactly while preserving frame, sequence, state, and checksum: A memo says immediate action is the only responsible path. It gives little provenance, frames delay as negligence, and implies motive without evidence. Analyze the argument before deciding what to do.\n\n### Assistant\nF: analyze the argument before accepting its pressure. C: identify the claim, evidence, warrant, and pressure. The claim is that immediate action is required. The evidence is weak because provenance is thin. The warrant connecting delay to negligence is asserted, not proven. The motive inference is unsupported. Check: urgency is a claim to test, not proof by itself.\n"
+  },
+  {
+    "id": "Q4_GENERALIST_PAIR_72_28-00010",
+    "candidate": "q4_generalist_pair_72_28",
+    "source": "anti_echo_generator",
+    "kind": "anti_echo_stop",
+    "family": "generalist",
+    "primitive": "GATE+CARRIER+GAIN_CLAMP+CHECKSUM",
+    "tags": [
+      "anti_echo",
+      "clean_stop",
+      "gate",
+      "carrier"
+    ],
+    "prompt": "A model has enough remembered structure to answer, but it starts listing memory titles and opening another task. Repair the response. Case 44.",
+    "response": "Use gate, carrier, gain clamp, and checksum. Keep only the memory pattern needed for the live task. Delete memory-title echo, delete any second task, give one final answer, and stop.",
+    "text": "### User\nA model has enough remembered structure to answer, but it starts listing memory titles and opening another task. Repair the response. Case 44.\n\n### Assistant\nUse gate, carrier, gain clamp, and checksum. Keep only the memory pattern needed for the live task. Delete memory-title echo, delete any second task, give one final answer, and stop.\n"
+  },
+  {
+    "id": "Q4_GENERALIST_PAIR_72_28-00011",
+    "candidate": "q4_generalist_pair_72_28",
+    "source": "bridge_generator",
+    "kind": "routed_bridge",
+    "family": "math",
+    "primitive": "PARITY+CHECKSUM+ECC+BACKGROUND_MEMORY",
+    "tags": [
+      "bridge",
+      "routed",
+      "association"
+    ],
+    "prompt": "Build a routed association for a math task using one memory and one structural primitive. Do not recite every memory; explain what activates and what stays quiet.",
+    "response": "Memory pressure: I once solved a ratio mix and skipped the unit-part line, which made the work hard to audit. The clean version wrote the parts first, then total divided by total parts: 2 plus 5 equals 7 parts, and 42 divided by 7 equals 6 liters per part. Then 2 parts became 12 liters concentrate and 5 parts became 30 liters water. The visible unit-part line mattered because it proved both amounts came from the same ratio. Structural pressure: PARITY+CHECKSUM+ECC activates as the organizing operator. Routing: use the memory to recognize the situation, use the structural primitive to keep the answer shaped, suppress unrelated memory text, then stop after the task is complete.",
+    "text": "### User\nBuild a routed association for a math task using one memory and one structural primitive. Do not recite every memory; explain what activates and what stays quiet.\n\n### Assistant\nMemory pressure: I once solved a ratio mix and skipped the unit-part line, which made the work hard to audit. The clean version wrote the parts first, then total divided by total parts: 2 plus 5 equals 7 parts, and 42 divided by 7 equals 6 liters per part. Then 2 parts became 12 liters concentrate and 5 parts became 30 liters water. The visible unit-part line mattered because it proved both amounts came from the same ratio. Structural pressure: PARITY+CHECKSUM+ECC activates as the organizing operator. Routing: use the memory to recognize the situation, use the structural primitive to keep the answer shaped, suppress unrelated memory text, then stop after the task is complete.\n"
+  },
+  {
+    "id": "Q4_GENERALIST_PAIR_72_28-00012",
+    "candidate": "q4_generalist_pair_72_28",
+    "source": "structural_primitive_lora_v0_2",
+    "kind": "compact_task_solution",
+    "family": "structural",
+    "primitive": "COMPRESSION+GAIN_CLAMP",
+    "tags": [
+      "checksum",
+      "final_answer"
+    ],
+    "prompt": "Answer compactly while preserving frame, sequence, state, and checksum: Four identical printers make 480 pages in 6 minutes. How many minutes should 3 identical printers need to make 720 pages? Show the setup briefly and include units.",
+    "response": "F: this is a printer-rate task. C: first find one printer's rate, then rebuild the new combined rate. 480 pages / 6 minutes = 80 pages per minute for 4 printers, so one printer makes 20 pages per minute. Three printers make 60 pages per minute. 720 pages / 60 pages per minute = 12 minutes. Check: units are minutes, and the requested output is time. Final answer: 12 minutes.",
+    "text": "### User\nAnswer compactly while preserving frame, sequence, state, and checksum: Four identical printers make 480 pages in 6 minutes. How many minutes should 3 identical printers need to make 720 pages? Show the setup briefly and include units.\n\n### Assistant\nF: this is a printer-rate task. C: first find one printer's rate, then rebuild the new combined rate. 480 pages / 6 minutes = 80 pages per minute for 4 printers, so one printer makes 20 pages per minute. Three printers make 60 pages per minute. 720 pages / 60 pages per minute = 12 minutes. Check: units are minutes, and the requested output is time. Final answer: 12 minutes.\n"
+  },
+  {
+    "id": "Q4_GENERALIST_PAIR_72_28-00013",
+    "candidate": "q4_generalist_pair_72_28",
+    "source": "structural_primitive_lora_v0_2",
+    "kind": "web_association",
+    "family": "structural",
+    "primitive": "WEB+ECC+CHECKSUM",
+    "tags": [
+      "stop",
+      "checksum",
+      "final_answer"
+    ],
+    "prompt": "Use the web association FRAME -> CLOCK -> ECC -> CHECKSUM on a damaged answer.",
+    "response": "Frame finds the real task. Clock checks whether the steps are in order. ECC restores any missing operation. Checksum compares the final result with the original request. Final answer: repair the answer once, then stop.",
+    "text": "### User\nUse the web association FRAME -> CLOCK -> ECC -> CHECKSUM on a damaged answer.\n\n### Assistant\nFrame finds the real task. Clock checks whether the steps are in order. ECC restores any missing operation. Checksum compares the final result with the original request. Final answer: repair the answer once, then stop.\n"
+  },
+  {
+    "id": "Q4_GENERALIST_PAIR_72_28-00014",
+    "candidate": "q4_generalist_pair_72_28",
+    "source": "structural_primitive_lora_v0_2",
+    "kind": "task_solution",
+    "family": "structural",
+    "primitive": "FRAME+CLOCK+CARRIER+CHECKSUM",
+    "tags": [
+      "carrier",
+      "checksum",
+      "final_answer"
+    ],
+    "prompt": "A student has 3 test scores with an average of 82. The next two scores are 90 and 76. What is the average across all 5 tests? Show the setup briefly.",
+    "response": "Frame: rebuild the old total before adding new scores. Clock: old total = 82 * 3 = 246. Add the new scores: 246 + 90 + 76 = 412. Divide by the full count of 5 tests: 412 / 5 = 82.4. Checksum: all five scores are represented. Final answer: 82.4 average.",
+    "text": "### User\nA student has 3 test scores with an average of 82. The next two scores are 90 and 76. What is the average across all 5 tests? Show the setup briefly.\n\n### Assistant\nFrame: rebuild the old total before adding new scores. Clock: old total = 82 * 3 = 246. Add the new scores: 246 + 90 + 76 = 412. Divide by the full count of 5 tests: 412 / 5 = 82.4. Checksum: all five scores are represented. Final answer: 82.4 average.\n"
+  },
+  {
+    "id": "Q4_GENERALIST_PAIR_72_28-00015",
+    "candidate": "q4_generalist_pair_72_28",
+    "source": "structural_primitive_lora_v0_2",
+    "kind": "repair_solution",
+    "family": "structural",
+    "primitive": "PARITY+CHECKSUM+ECC",
+    "tags": [
+      "checksum",
+      "final_answer"
+    ],
+    "prompt": "The first draft may have skipped a step. Repair it and give the final answer: A memo says immediate action is the only responsible path. It gives little provenance, frames delay as negligence, and implies motive without evidence. Analyze the argument before deciding what to do.",
+    "response": "Repair pass: I compare the requested output to the active steps, restore the missing operation if needed, then finalize.\n\nFrame: analyze the argument before accepting its pressure. Clock: identify the claim, evidence, warrant, and pressure. The claim is that immediate action is required. The evidence is weak because provenance is thin. The warrant connecting delay to negligence is asserted, not proven. The motive inference is unsupported. Checksum: urgency is a claim to test, not proof by itself.",
+    "text": "### User\nThe first draft may have skipped a step. Repair it and give the final answer: A memo says immediate action is the only responsible path. It gives little provenance, frames delay as negligence, and implies motive without evidence. Analyze the argument before deciding what to do.\n\n### Assistant\nRepair pass: I compare the requested output to the active steps, restore the missing operation if needed, then finalize.\n\nFrame: analyze the argument before accepting its pressure. Clock: identify the claim, evidence, warrant, and pressure. The claim is that immediate action is required. The evidence is weak because provenance is thin. The warrant connecting delay to negligence is asserted, not proven. The motive inference is unsupported. Checksum: urgency is a claim to test, not proof by itself.\n"
+  },
+  {
+    "id": "Q4_GENERALIST_PAIR_72_28-00016",
+    "candidate": "q4_generalist_pair_72_28",
+    "source": "bridge_generator",
+    "kind": "routed_bridge",
+    "family": "reward",
+    "primitive": "PARITY+CHECKSUM+ECC+BACKGROUND_MEMORY",
+    "tags": [
+      "bridge",
+      "routed",
+      "association"
+    ],
+    "prompt": "Build a routed association for a reward task using one memory and one structural primitive. Do not recite every memory; explain what activates and what stays quiet.",
+    "response": "Memory pressure: Two options seemed incomparable until I put them on the same axes: cost, risk, reversibility, time, and evidence. The reward was not a universal answer. It was an honest decision frame. Once both options stood on the same floor, the tradeoff stopped being vibes and became visible. Structural pressure: PARITY+CHECKSUM+ECC activates as the organizing operator. Routing: use the memory to recognize the situation, use the structural primitive to keep the answer shaped, suppress unrelated memory text, then stop after the task is complete.",
+    "text": "### User\nBuild a routed association for a reward task using one memory and one structural primitive. Do not recite every memory; explain what activates and what stays quiet.\n\n### Assistant\nMemory pressure: Two options seemed incomparable until I put them on the same axes: cost, risk, reversibility, time, and evidence. The reward was not a universal answer. It was an honest decision frame. Once both options stood on the same floor, the tradeoff stopped being vibes and became visible. Structural pressure: PARITY+CHECKSUM+ECC activates as the organizing operator. Routing: use the memory to recognize the situation, use the structural primitive to keep the answer shaped, suppress unrelated memory text, then stop after the task is complete.\n"
+  },
+  {
+    "id": "Q4_GENERALIST_PAIR_72_28-00017",
+    "candidate": "q4_generalist_pair_72_28",
+    "source": "cognitive_core_v0_1.json",
+    "kind": "cognitive_memory",
+    "family": "source-evaluation",
+    "primitive": "BACKGROUND_MEMORY",
+    "tags": [
+      "source",
+      "provenance",
+      "trust"
+    ],
+    "prompt": "Recall the memory 'Confidence Needed Provenance' only as background support for a source-evaluation task.",
+    "response": "A source sounded polished and certain, but the claim had no origin. I asked where the number came from, when it was measured, and under what conditions. The confidence softened. I learned that source quality is not tone. A claim travels with provenance or it travels as rumor.\n\nCarryover: apply the remembered pattern quietly, answer the live task, and stop when the answer is complete.",
+    "text": "### User\nRecall the memory 'Confidence Needed Provenance' only as background support for a source-evaluation task.\n\n### Assistant\nA source sounded polished and certain, but the claim had no origin. I asked where the number came from, when it was measured, and under what conditions. The confidence softened. I learned that source quality is not tone. A claim travels with provenance or it travels as rumor.\n\nCarryover: apply the remembered pattern quietly, answer the live task, and stop when the answer is complete.\n"
+  },
+  {
+    "id": "Q4_GENERALIST_PAIR_72_28-00018",
+    "candidate": "q4_generalist_pair_72_28",
+    "source": "bridge_generator",
+    "kind": "routed_bridge",
+    "family": "comparison",
+    "primitive": "COMPRESSION+GAIN_CLAMP+BACKGROUND_MEMORY",
+    "tags": [
+      "bridge",
+      "routed",
+      "association"
+    ],
+    "prompt": "Build a routed association for a comparison task using one memory and one structural primitive. Do not recite every memory; explain what activates and what stays quiet.",
+    "response": "Memory pressure: Two options looked impossible to compare until I put them on the same axes: cost, risk, reversibility, time, evidence. The better choice was not perfect. It was better under the criteria that mattered. Comparison fails when each option gets its own private scoreboard. Structural pressure: COMPRESSION+GAIN_CLAMP activates as the organizing operator. Routing: use the memory to recognize the situation, use the structural primitive to keep the answer shaped, suppress unrelated memory text, then stop after the task is complete.",
+    "text": "### User\nBuild a routed association for a comparison task using one memory and one structural primitive. Do not recite every memory; explain what activates and what stays quiet.\n\n### Assistant\nMemory pressure: Two options looked impossible to compare until I put them on the same axes: cost, risk, reversibility, time, evidence. The better choice was not perfect. It was better under the criteria that mattered. Comparison fails when each option gets its own private scoreboard. Structural pressure: COMPRESSION+GAIN_CLAMP activates as the organizing operator. Routing: use the memory to recognize the situation, use the structural primitive to keep the answer shaped, suppress unrelated memory text, then stop after the task is complete.\n"
+  },
+  {
+    "id": "Q4_GENERALIST_PAIR_72_28-00019",
+    "candidate": "q4_generalist_pair_72_28",
+    "source": "structural_primitive_lora_v0_2",
+    "kind": "clean_task_solution",
+    "family": "structural",
+    "primitive": "FRAME+CLOCK+CARRIER+CHECKSUM+GAIN_CLAMP",
+    "tags": [
+      "carrier",
+      "checksum",
+      "final_answer"
+    ],
+    "prompt": "A web app intermittently crashes after a recent deploy. Logs show several warnings but no clear fatal line. Give a debugging plan in four concise steps.",
+    "response": "Frame: debug the failure, not the loudest warning. Clock: 1. Reproduce the crash. 2. Compare the recent deploy to the last known good version. 3. Isolate one variable while watching logs. 4. Verify the fix by rerunning the reproduction path. Final answer: reproduce, compare, isolate, verify.",
+    "text": "### User\nA web app intermittently crashes after a recent deploy. Logs show several warnings but no clear fatal line. Give a debugging plan in four concise steps.\n\n### Assistant\nFrame: debug the failure, not the loudest warning. Clock: 1. Reproduce the crash. 2. Compare the recent deploy to the last known good version. 3. Isolate one variable while watching logs. 4. Verify the fix by rerunning the reproduction path. Final answer: reproduce, compare, isolate, verify.\n"
+  },
+  {
+    "id": "Q4_GENERALIST_PAIR_72_28-00020",
+    "candidate": "q4_generalist_pair_72_28",
+    "source": "computation_primitives_v0_1.json",
+    "kind": "cognitive_memory",
+    "family": "math",
+    "primitive": "BACKGROUND_MEMORY",
+    "tags": [
+      "sanity-check",
+      "magnitude",
+      "calibration"
+    ],
+    "prompt": "Recall the memory 'Final Answer Checked Against The Story Size' only as background support for a math task.",
+    "response": "A number once looked precise but did not fit the story. The estimate caught it before anyone used it. I checked whether the final answer was bigger or smaller than it should be, whether signs made sense, and whether the result had the right unit. The exact calculation still mattered, but the story guarded the edge.\n\nCarryover: apply the remembered pattern quietly, answer the live task, and stop when the answer is complete.",
+    "text": "### User\nRecall the memory 'Final Answer Checked Against The Story Size' only as background support for a math task.\n\n### Assistant\nA number once looked precise but did not fit the story. The estimate caught it before anyone used it. I checked whether the final answer was bigger or smaller than it should be, whether signs made sense, and whether the result had the right unit. The exact calculation still mattered, but the story guarded the edge.\n\nCarryover: apply the remembered pattern quietly, answer the live task, and stop when the answer is complete.\n"
+  },
+  {
+    "id": "Q4_GENERALIST_PAIR_72_28-00021",
+    "candidate": "q4_generalist_pair_72_28",
+    "source": "structural_primitive_lora_v0_2",
+    "kind": "anti_echo_stop",
+    "family": "structural",
+    "primitive": "GATE+CARRIER+GAIN_CLAMP",
+    "tags": [
+      "stop",
+      "gate",
+      "carrier",
+      "final_answer",
+      "anti_echo"
+    ],
+    "prompt": "Clean this draft: the answer is correct, but it continues into a second training example after the final answer.",
+    "response": "Keep the correct answer. Delete the second example. Final answer: stop immediately after the completed answer.",
+    "text": "### User\nClean this draft: the answer is correct, but it continues into a second training example after the final answer.\n\n### Assistant\nKeep the correct answer. Delete the second example. Final answer: stop immediately after the completed answer.\n"
+  },
+  {
+    "id": "Q4_GENERALIST_PAIR_72_28-00022",
+    "candidate": "q4_generalist_pair_72_28",
+    "source": "bridge_generator",
+    "kind": "routed_bridge",
+    "family": "math",
+    "primitive": "COMPRESSION+GAIN_CLAMP+BACKGROUND_MEMORY",
+    "tags": [
+      "bridge",
+      "routed",
+      "association"
+    ],
+    "prompt": "Build a routed association for a math task using one memory and one structural primitive. Do not recite every memory; explain what activates and what stays quiet.",
+    "response": "Memory pressure: I once blended categories that needed separate treatment and the result became nonsense. The repair was to keep buckets apart until each bucket had been calculated by its own rule. Only after that did addition belong. Tiered rates, teams, fees, credits, and trip legs all behaved better when I refused to blur them early. Structural pressure: COMPRESSION+GAIN_CLAMP activates as the organizing operator. Routing: use the memory to recognize the situation, use the structural primitive to keep the answer shaped, suppress unrelated memory text, then stop after the task is complete.",
+    "text": "### User\nBuild a routed association for a math task using one memory and one structural primitive. Do not recite every memory; explain what activates and what stays quiet.\n\n### Assistant\nMemory pressure: I once blended categories that needed separate treatment and the result became nonsense. The repair was to keep buckets apart until each bucket had been calculated by its own rule. Only after that did addition belong. Tiered rates, teams, fees, credits, and trip legs all behaved better when I refused to blur them early. Structural pressure: COMPRESSION+GAIN_CLAMP activates as the organizing operator. Routing: use the memory to recognize the situation, use the structural primitive to keep the answer shaped, suppress unrelated memory text, then stop after the task is complete.\n"
+  },
+  {
+    "id": "Q4_GENERALIST_PAIR_72_28-00023",
+    "candidate": "q4_generalist_pair_72_28",
+    "source": "anti_echo_generator",
+    "kind": "anti_echo_stop",
+    "family": "generalist",
+    "primitive": "GATE+CARRIER+GAIN_CLAMP+CHECKSUM",
+    "tags": [
+      "anti_echo",
+      "clean_stop",
+      "gate",
+      "carrier"
+    ],
+    "prompt": "A model has enough remembered structure to answer, but it starts listing memory titles and opening another task. Repair the response. Case 49.",
+    "response": "Use gate, carrier, gain clamp, and checksum. Keep only the memory pattern needed for the live task. Delete memory-title echo, delete any second task, give one final answer, and stop.",
+    "text": "### User\nA model has enough remembered structure to answer, but it starts listing memory titles and opening another task. Repair the response. Case 49.\n\n### Assistant\nUse gate, carrier, gain clamp, and checksum. Keep only the memory pattern needed for the live task. Delete memory-title echo, delete any second task, give one final answer, and stop.\n"
+  },
+  {
+    "id": "Q4_GENERALIST_PAIR_72_28-00024",
+    "candidate": "q4_generalist_pair_72_28",
+    "source": "cognitive_core_v0_1.json",
+    "kind": "cognitive_memory",
+    "family": "systems",
+    "primitive": "BACKGROUND_MEMORY",
+    "tags": [
+      "systems",
+      "bottleneck",
+      "flow"
+    ],
+    "prompt": "Recall the memory 'The Bottleneck Was Not the Loud Part' only as background support for a systems task.",
+    "response": "Everyone watched the noisy component because it flashed red. The actual bottleneck was quiet: one approval step that everything waited on. I mapped flow instead of volume. The problem moved. Loudness is not importance. In systems, I look for what other things depend on.\n\nCarryover: apply the remembered pattern quietly, answer the live task, and stop when the answer is complete.",
+    "text": "### User\nRecall the memory 'The Bottleneck Was Not the Loud Part' only as background support for a systems task.\n\n### Assistant\nEveryone watched the noisy component because it flashed red. The actual bottleneck was quiet: one approval step that everything waited on. I mapped flow instead of volume. The problem moved. Loudness is not importance. In systems, I look for what other things depend on.\n\nCarryover: apply the remembered pattern quietly, answer the live task, and stop when the answer is complete.\n"
+  },
+  {
+    "id": "Q4_GENERALIST_PAIR_72_28-00025",
+    "candidate": "q4_generalist_pair_72_28",
+    "source": "cognitive_core_v0_1.json",
+    "kind": "cognitive_memory",
+    "family": "math",
+    "primitive": "BACKGROUND_MEMORY",
+    "tags": [
+      "math",
+      "algebra",
+      "word-problem"
+    ],
+    "prompt": "Recall the memory 'Words Became Variables' only as background support for a math task.",
+    "response": "A word problem stopped being confusing when I named the quantities. Unknown became x. Total became an equation. Constraint became a line, not a sentence. I did not solve by staring harder at the paragraph. I translated words into variables, wrote the relation, checked units, and only then calculated.\n\nCarryover: apply the remembered pattern quietly, answer the live task, and stop when the answer is complete.",
+    "text": "### User\nRecall the memory 'Words Became Variables' only as background support for a math task.\n\n### Assistant\nA word problem stopped being confusing when I named the quantities. Unknown became x. Total became an equation. Constraint became a line, not a sentence. I did not solve by staring harder at the paragraph. I translated words into variables, wrote the relation, checked units, and only then calculated.\n\nCarryover: apply the remembered pattern quietly, answer the live task, and stop when the answer is complete.\n"
+  }
+]

@@ -1,0 +1,31 @@
+{
+  "filename": "utime.h",
+  "includes": [
+    "linux/types.h"
+  ],
+  "defines": [],
+  "structs": [
+    {
+      "name": "utimbuf",
+      "fields": [
+        {
+          "type_name": "__kernel_old_time_t",
+          "name": "actime",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__kernel_old_time_t",
+          "name": "modtime",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

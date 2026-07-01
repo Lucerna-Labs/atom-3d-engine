@@ -1,0 +1,49 @@
+﻿Thinking Process:
+
+1.  **Analyze the Request:**
+    *   Input: A set of "Relevant remembered experiences, compressed into cognitive cues" (carry units, turn word quantities into variables/relations/units, Kate pins task facts before comparing).
+    *   Task: Solve a specific math problem ("A pump fills 3 tanks in 12 minutes. Each tank has the same size. How many minutes should 5 identical pumps need to fill 10 identical tanks?").
+    *   Constraints: Show setup briefly, include units, answer concisely, do not write hidden reasoning tags, use only memory patterns that fit, include uncertainty and next action when relevant (though this is a deterministic math problem, so uncertainty might be low or framed as verification).
+    *   Output Format: "Answer:" followed by the solution.
+
+2.  **Apply Memory Patterns:**
+    *   *Pattern 1: Carry units through calculation.* I need to track minutes, tanks, and pumps explicitly.
+    *   *Pattern 2: Turn word quantities into variables, relations, and units.* Define rate (tanks/pump/minute).
+    *   *Pattern 3: Kate pins task facts before comparing.* State the knowns clearly before deriving the unknowns to avoid reversal errors.
+
+3.  **Solve the Problem:**
+    *   Given: 1 pump fills 3 tanks in 12 minutes.
+    *   Rate calculation:
+        *   Total work = 3 tanks.
+        *   Time = 12 min.
+        *   Pumps = 1.
+        *   Rate per pump = (3 tanks) / (12 min * 1 pump) = 0.25 tanks/(min·pump).
+    *   Target: Fill 10 tanks with 5 pumps.
+    *   Equation: Time = Total Work / (Rate × Number of Pumps).
+    *   Calculation: Time = 10 tanks / (0.25 tanks/(min·pump) × 5 pumps).
+    *   Units check: tanks / (tanks/min) = min.
+    *   Math: 0.25 * 5 = 1.25 tanks/min.
+    *   Time = 10 / 1.25 = 8 minutes.
+
+4.  **Draft the Response:**
+    *   Pin facts: Rate = 3 tanks / (1 pump × 12 min). Target = 10 tanks, 5 pumps.
+    *   Setup with units: $T = \frac{10 \text{ tanks}}{5 \text{ pumps} \times (\frac{3 \text{ tanks}}{12 \text{ min} \cdot 1 \text{ pump}})}$.
+    *   Simplify: $T = \frac{10}{5 \times 0.25} \text{ min} = 8 \text{ min}$.
+    *   Check units: tanks cancel, pumps cancel, leaving minutes.
+
+5.  **Refine for Constraints:**
+    *   Concise? Yes.
+    *   No hidden reasoning tags? Yes.
+    *   Include uncertainty/next action? Since it's a standard math problem, uncertainty is low, but I can frame the verification as the "next action" or simply state confidence based on unit check. The prompt says "Include uncertainty and next action when relevant." For a deterministic calculation, uncertainty isn't really relevant unless there's ambiguity in the problem statement (which there isn't). However, to adhere strictly to the instruction "when relevant," I should probably omit it if not applicable, or frame the unit check as the verification step. Let's stick to the core task but ensure the unit carry is explicit.
+    *   Wait, looking at the instruction: "Include uncertainty and next action when relevant." Since this is a solvable math problem with clear inputs, uncertainty isn't really relevant. I will focus on the patterns provided (units, variables, pinning facts).
+
+6.  **Final Polish:**
+    *   Pin facts: Rate = 3 tanks / 12 min per pump. Target = 10 tanks, 5 pumps.
+    *   Setup: Time = Work / (Rate × Pumps).
+    *   Units carried throughout.
+
+    Draft:
+    Facts pinned: Rate = $\frac{3 \text{ tanks}}{12 \text{ min} \cdot 1 \text{ pump}}$. Target work = $10 \text{ tanks}$, $n=5$ pumps.
+    Setup: $t = \frac{10 \text{ tanks}}{5 \text{ pumps} \times (\frac{3 \text{ tanks}}{12 \text{ min} \cdot 1 \text{ pump}})}$.
+    Calculation: $t = \frac{10}{5 \times 0.25} \text{ min} = 8 \text{ min}$.
+    Units check:

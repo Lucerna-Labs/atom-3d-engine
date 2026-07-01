@@ -1,0 +1,144 @@
+{
+  "filename": "virtio_console.h",
+  "includes": [
+    "linux/types.h",
+    "linux/virtio_types.h",
+    "linux/virtio_ids.h",
+    "linux/virtio_config.h"
+  ],
+  "defines": [
+    {
+      "name": "VIRTIO_CONSOLE_F_SIZE",
+      "value": "0",
+      "comment": "Does host provide console size?",
+      "category": "VIRTIO_CONSOLE"
+    },
+    {
+      "name": "VIRTIO_CONSOLE_F_MULTIPORT",
+      "value": "1",
+      "comment": "Does host provide multiple ports?",
+      "category": "VIRTIO_CONSOLE"
+    },
+    {
+      "name": "VIRTIO_CONSOLE_F_EMERG_WRITE",
+      "value": "2",
+      "comment": "Does host support emergency write?",
+      "category": "VIRTIO_CONSOLE"
+    },
+    {
+      "name": "VIRTIO_CONSOLE_BAD_ID",
+      "value": "(~(__u32)0)",
+      "comment": "",
+      "category": "VIRTIO_CONSOLE"
+    },
+    {
+      "name": "VIRTIO_CONSOLE_DEVICE_READY",
+      "value": "0",
+      "comment": "",
+      "category": "VIRTIO_CONSOLE"
+    },
+    {
+      "name": "VIRTIO_CONSOLE_PORT_ADD",
+      "value": "1",
+      "comment": "",
+      "category": "VIRTIO_CONSOLE"
+    },
+    {
+      "name": "VIRTIO_CONSOLE_PORT_REMOVE",
+      "value": "2",
+      "comment": "",
+      "category": "VIRTIO_CONSOLE"
+    },
+    {
+      "name": "VIRTIO_CONSOLE_PORT_READY",
+      "value": "3",
+      "comment": "",
+      "category": "VIRTIO_CONSOLE"
+    },
+    {
+      "name": "VIRTIO_CONSOLE_CONSOLE_PORT",
+      "value": "4",
+      "comment": "",
+      "category": "VIRTIO_CONSOLE"
+    },
+    {
+      "name": "VIRTIO_CONSOLE_RESIZE",
+      "value": "5",
+      "comment": "",
+      "category": "VIRTIO_CONSOLE"
+    },
+    {
+      "name": "VIRTIO_CONSOLE_PORT_OPEN",
+      "value": "6",
+      "comment": "",
+      "category": "VIRTIO_CONSOLE"
+    },
+    {
+      "name": "VIRTIO_CONSOLE_PORT_NAME",
+      "value": "7",
+      "comment": "",
+      "category": "VIRTIO_CONSOLE"
+    }
+  ],
+  "structs": [
+    {
+      "name": "virtio_console_config",
+      "fields": [
+        {
+          "type_name": "__virtio16",
+          "name": "cols",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__virtio16",
+          "name": "rows",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__virtio32",
+          "name": "max_nr_ports",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__virtio32",
+          "name": "emerg_wr",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "virtio_console_control",
+      "fields": [
+        {
+          "type_name": "__virtio32",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__virtio16",
+          "name": "event",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__virtio16",
+          "name": "value",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

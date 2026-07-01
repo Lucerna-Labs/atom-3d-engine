@@ -1,0 +1,118 @@
+{
+  "filename": "i2c-dev.h",
+  "includes": [
+    "linux/types.h",
+    "linux/compiler.h"
+  ],
+  "defines": [
+    {
+      "name": "I2C_RETRIES",
+      "value": "0x0701\t/* number of times a device address should",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I2C_TIMEOUT",
+      "value": "0x0702",
+      "comment": "set timeout in units of 10 ms",
+      "category": ""
+    },
+    {
+      "name": "I2C_SLAVE",
+      "value": "0x0703",
+      "comment": "Use this slave address",
+      "category": ""
+    },
+    {
+      "name": "I2C_SLAVE_FORCE",
+      "value": "0x0706\t/* Use this slave address, even if it",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I2C_TENBIT",
+      "value": "0x0704",
+      "comment": "0 for 7 bit addrs, != 0 for 10 bit",
+      "category": ""
+    },
+    {
+      "name": "I2C_FUNCS",
+      "value": "0x0705",
+      "comment": "Get the adapter functionality mask",
+      "category": ""
+    },
+    {
+      "name": "I2C_RDWR",
+      "value": "0x0707",
+      "comment": "Combined R/W transfer (one STOP only)",
+      "category": ""
+    },
+    {
+      "name": "I2C_PEC",
+      "value": "0x0708",
+      "comment": "!= 0 to use PEC with SMBus",
+      "category": ""
+    },
+    {
+      "name": "I2C_SMBUS",
+      "value": "0x0720",
+      "comment": "SMBus transfer",
+      "category": ""
+    },
+    {
+      "name": "I2C_RDWR_IOCTL_MAX_MSGS",
+      "value": "42",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I2C_RDRW_IOCTL_MAX_MSGS",
+      "value": "I2C_RDWR_IOCTL_MAX_MSGS",
+      "comment": "",
+      "category": ""
+    }
+  ],
+  "structs": [
+    {
+      "name": "i2c_smbus_ioctl_data",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "read_write",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "command",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "i2c_rdwr_ioctl_data",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "nmsgs",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

@@ -1,0 +1,293 @@
+{
+  "filename": "if_pppox.h",
+  "includes": [
+    "linux/types.h",
+    "asm/byteorder.h",
+    "linux/socket.h",
+    "linux/if.h",
+    "linux/if_ether.h",
+    "linux/if_pppol2tp.h",
+    "linux/in.h",
+    "linux/in6.h"
+  ],
+  "defines": [
+    {
+      "name": "AF_PPPOX",
+      "value": "24",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PF_PPPOX",
+      "value": "AF_PPPOX",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PX_PROTO_OE",
+      "value": "0",
+      "comment": "Currently just PPPoE",
+      "category": "PX_PROTO"
+    },
+    {
+      "name": "PX_PROTO_OL2TP",
+      "value": "1",
+      "comment": "Now L2TP also",
+      "category": "PX_PROTO"
+    },
+    {
+      "name": "PX_PROTO_PPTP",
+      "value": "2",
+      "comment": "",
+      "category": "PX_PROTO"
+    },
+    {
+      "name": "PX_MAX_PROTO",
+      "value": "3",
+      "comment": "",
+      "category": "PX_MAX"
+    },
+    {
+      "name": "PADI_CODE",
+      "value": "0x09",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PADO_CODE",
+      "value": "0x07",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PADR_CODE",
+      "value": "0x19",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PADS_CODE",
+      "value": "0x65",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PADT_CODE",
+      "value": "0xa7",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PTT_EOL",
+      "value": "__cpu_to_be16(0x0000)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PTT_SRV_NAME",
+      "value": "__cpu_to_be16(0x0101)",
+      "comment": "",
+      "category": "PTT_SRV"
+    },
+    {
+      "name": "PTT_AC_NAME",
+      "value": "__cpu_to_be16(0x0102)",
+      "comment": "",
+      "category": "PTT_AC"
+    },
+    {
+      "name": "PTT_HOST_UNIQ",
+      "value": "__cpu_to_be16(0x0103)",
+      "comment": "",
+      "category": "PTT_HOST"
+    },
+    {
+      "name": "PTT_AC_COOKIE",
+      "value": "__cpu_to_be16(0x0104)",
+      "comment": "",
+      "category": "PTT_AC"
+    },
+    {
+      "name": "PTT_VENDOR",
+      "value": "__cpu_to_be16(0x0105)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PTT_RELAY_SID",
+      "value": "__cpu_to_be16(0x0110)",
+      "comment": "",
+      "category": "PTT_RELAY"
+    },
+    {
+      "name": "PTT_SRV_ERR",
+      "value": "__cpu_to_be16(0x0201)",
+      "comment": "",
+      "category": "PTT_SRV"
+    },
+    {
+      "name": "PTT_SYS_ERR",
+      "value": "__cpu_to_be16(0x0202)",
+      "comment": "",
+      "category": "PTT_SYS"
+    },
+    {
+      "name": "PTT_GEN_ERR",
+      "value": "__cpu_to_be16(0x0203)",
+      "comment": "",
+      "category": "PTT_GEN"
+    },
+    {
+      "name": "PPPOE_SES_HLEN",
+      "value": "8",
+      "comment": "",
+      "category": "PPPOE_SES"
+    }
+  ],
+  "structs": [
+    {
+      "name": "pppoe_addr",
+      "fields": [
+        {
+          "type_name": "sid_t",
+          "name": "sid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "dev",
+          "array_size": "IFNAMSIZ",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "pptp_addr",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "call_id",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "sockaddr_pppox",
+      "fields": [
+        {
+          "type_name": "__kernel_sa_family_t",
+          "name": "sa_family",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "sockaddr_pppol2tp",
+      "fields": [
+        {
+          "type_name": "__kernel_sa_family_t",
+          "name": "sa_family",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "sockaddr_pppol2tpin6",
+      "fields": [
+        {
+          "type_name": "__kernel_sa_family_t",
+          "name": "sa_family",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "sockaddr_pppol2tpv3",
+      "fields": [
+        {
+          "type_name": "__kernel_sa_family_t",
+          "name": "sa_family",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "sockaddr_pppol2tpv3in6",
+      "fields": [
+        {
+          "type_name": "__kernel_sa_family_t",
+          "name": "sa_family",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "pppoe_tag",
+      "fields": [
+        {
+          "type_name": "__be16",
+          "name": "tag_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be16",
+          "name": "tag_len",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "pppoe_hdr",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "code",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be16",
+          "name": "sid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be16",
+          "name": "length",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

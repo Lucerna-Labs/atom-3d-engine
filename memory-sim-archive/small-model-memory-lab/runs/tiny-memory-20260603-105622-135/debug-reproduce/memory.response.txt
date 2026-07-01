@@ -1,0 +1,4 @@
+﻿1. **Reproduce Before Repair**: Isolate the crash by triggering the specific user flow in a staging environment; without a stable reproduction, the intermittent nature prevents targeted fixes.
+2. **One Variable Moved**: Hypothesize that the recent deploy altered a single configuration or dependency (e.g., a timeout threshold or API version) rather than introducing a complex logic error.
+3. **Uncertainty & Next Action**: Since logs lack a fatal line, the root cause may be a race condition or resource exhaustion not captured in standard output; next, enable verbose tracing or add synthetic monitoring to capture the exact state at failure.
+4. **Compressed Cue Application**: If reproduction fails, revert the specific changed variable immediately to restore stability while deeper analysis proceeds.

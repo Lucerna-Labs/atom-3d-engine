@@ -1,0 +1,136 @@
+{
+  "filename": "tlv.h",
+  "includes": [],
+  "defines": [
+    {
+      "name": "SNDRV_CTL_TLVT_CONTAINER",
+      "value": "0",
+      "comment": "one level down - group of TLVs",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_TLVT_DB_SCALE",
+      "value": "1",
+      "comment": "dB scale",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_TLVT_DB_LINEAR",
+      "value": "2",
+      "comment": "linear volume",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_TLVT_DB_RANGE",
+      "value": "3",
+      "comment": "dB range container",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_TLVT_DB_MINMAX",
+      "value": "4",
+      "comment": "dB scale with min/max",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_TLVT_DB_MINMAX_MUTE",
+      "value": "5",
+      "comment": "dB scale with min/max with mute",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_TLVT_CHMAP_FIXED",
+      "value": "0x101",
+      "comment": "fixed channel position",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_TLVT_CHMAP_VAR",
+      "value": "0x102",
+      "comment": "channels freely swappable",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_TLVT_CHMAP_PAIRED",
+      "value": "0x103",
+      "comment": "pair-wise swappable",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_TLVT_FCP_CHANNEL_LABELS",
+      "value": "0x110",
+      "comment": "channel labels",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_TLVO_TYPE",
+      "value": "0",
+      "comment": "",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_TLVO_LEN",
+      "value": "1",
+      "comment": "",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_TLVD_DB_SCALE_MASK",
+      "value": "0xffff",
+      "comment": "",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_TLVD_DB_SCALE_MUTE",
+      "value": "0x10000",
+      "comment": "",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_TLVO_DB_SCALE_MIN",
+      "value": "2",
+      "comment": "",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_TLVO_DB_SCALE_MUTE_AND_STEP",
+      "value": "3",
+      "comment": "",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_TLVO_DB_MINMAX_MIN",
+      "value": "2",
+      "comment": "",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_TLVO_DB_MINMAX_MAX",
+      "value": "3",
+      "comment": "",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_TLVO_DB_LINEAR_MIN",
+      "value": "2",
+      "comment": "",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_TLVO_DB_LINEAR_MAX",
+      "value": "3",
+      "comment": "",
+      "category": "SNDRV_CTL"
+    },
+    {
+      "name": "SNDRV_CTL_TLVD_DB_GAIN_MUTE",
+      "value": "-9999999",
+      "comment": "",
+      "category": "SNDRV_CTL"
+    }
+  ],
+  "structs": [],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

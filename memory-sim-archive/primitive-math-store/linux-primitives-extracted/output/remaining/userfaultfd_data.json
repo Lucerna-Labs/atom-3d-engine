@@ -1,0 +1,838 @@
+{
+  "filename": "userfaultfd.h",
+  "includes": [
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "USERFAULTFD_IOC",
+      "value": "0xAA",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "USERFAULTFD_IOC_NEW",
+      "value": "_IO(USERFAULTFD_IOC, 0x00)",
+      "comment": "",
+      "category": "USERFAULTFD_IOC"
+    },
+    {
+      "name": "UFFD_API",
+      "value": "((__u64)0xAA)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "UFFD_API_REGISTER_MODES",
+      "value": "(UFFDIO_REGISTER_MODE_MISSING |\t",
+      "comment": "",
+      "category": "UFFD_API"
+    },
+    {
+      "name": "UFFD_API_FEATURES",
+      "value": "(UFFD_FEATURE_PAGEFAULT_FLAG_WP |\t",
+      "comment": "",
+      "category": "UFFD_API"
+    },
+    {
+      "name": "UFFD_API_IOCTLS",
+      "value": "",
+      "comment": "",
+      "category": "UFFD_API"
+    },
+    {
+      "name": "UFFD_API_RANGE_IOCTLS",
+      "value": "",
+      "comment": "",
+      "category": "UFFD_API"
+    },
+    {
+      "name": "UFFD_API_RANGE_IOCTLS_BASIC",
+      "value": "",
+      "comment": "",
+      "category": "UFFD_API"
+    },
+    {
+      "name": "_UFFDIO_REGISTER",
+      "value": "(0x00)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "_UFFDIO_UNREGISTER",
+      "value": "(0x01)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "_UFFDIO_WAKE",
+      "value": "(0x02)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "_UFFDIO_COPY",
+      "value": "(0x03)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "_UFFDIO_ZEROPAGE",
+      "value": "(0x04)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "_UFFDIO_MOVE",
+      "value": "(0x05)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "_UFFDIO_WRITEPROTECT",
+      "value": "(0x06)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "_UFFDIO_CONTINUE",
+      "value": "(0x07)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "_UFFDIO_POISON",
+      "value": "(0x08)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "_UFFDIO_API",
+      "value": "(0x3F)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "UFFDIO",
+      "value": "0xAA",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "UFFDIO_API",
+      "value": "_IOWR(UFFDIO, _UFFDIO_API,\t",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "UFFDIO_REGISTER",
+      "value": "_IOWR(UFFDIO, _UFFDIO_REGISTER, ",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "UFFDIO_UNREGISTER",
+      "value": "_IOR(UFFDIO, _UFFDIO_UNREGISTER,\t",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "UFFDIO_WAKE",
+      "value": "_IOR(UFFDIO, _UFFDIO_WAKE,\t",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "UFFDIO_COPY",
+      "value": "_IOWR(UFFDIO, _UFFDIO_COPY,\t",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "UFFDIO_ZEROPAGE",
+      "value": "_IOWR(UFFDIO, _UFFDIO_ZEROPAGE,\t",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "UFFDIO_MOVE",
+      "value": "_IOWR(UFFDIO, _UFFDIO_MOVE,\t",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "UFFDIO_WRITEPROTECT",
+      "value": "_IOWR(UFFDIO, _UFFDIO_WRITEPROTECT, ",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "UFFDIO_CONTINUE",
+      "value": "_IOWR(UFFDIO, _UFFDIO_CONTINUE,\t",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "UFFDIO_POISON",
+      "value": "_IOWR(UFFDIO, _UFFDIO_POISON, ",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "UFFD_EVENT_PAGEFAULT",
+      "value": "0x12",
+      "comment": "",
+      "category": "UFFD_EVENT"
+    },
+    {
+      "name": "UFFD_EVENT_FORK",
+      "value": "0x13",
+      "comment": "",
+      "category": "UFFD_EVENT"
+    },
+    {
+      "name": "UFFD_EVENT_REMAP",
+      "value": "0x14",
+      "comment": "",
+      "category": "UFFD_EVENT"
+    },
+    {
+      "name": "UFFD_EVENT_REMOVE",
+      "value": "0x15",
+      "comment": "",
+      "category": "UFFD_EVENT"
+    },
+    {
+      "name": "UFFD_EVENT_UNMAP",
+      "value": "0x16",
+      "comment": "",
+      "category": "UFFD_EVENT"
+    },
+    {
+      "name": "UFFD_PAGEFAULT_FLAG_WRITE",
+      "value": "(1<<0)",
+      "comment": "If this was a write fault",
+      "category": "UFFD_PAGEFAULT"
+    },
+    {
+      "name": "UFFD_PAGEFAULT_FLAG_WP",
+      "value": "(1<<1)",
+      "comment": "If reason is VM_UFFD_WP",
+      "category": "UFFD_PAGEFAULT"
+    },
+    {
+      "name": "UFFD_PAGEFAULT_FLAG_MINOR",
+      "value": "(1<<2)",
+      "comment": "If reason is VM_UFFD_MINOR",
+      "category": "UFFD_PAGEFAULT"
+    },
+    {
+      "name": "UFFD_FEATURE_PAGEFAULT_FLAG_WP",
+      "value": "(1<<0)",
+      "comment": "",
+      "category": "UFFD_FEATURE"
+    },
+    {
+      "name": "UFFD_FEATURE_EVENT_FORK",
+      "value": "(1<<1)",
+      "comment": "",
+      "category": "UFFD_FEATURE"
+    },
+    {
+      "name": "UFFD_FEATURE_EVENT_REMAP",
+      "value": "(1<<2)",
+      "comment": "",
+      "category": "UFFD_FEATURE"
+    },
+    {
+      "name": "UFFD_FEATURE_EVENT_REMOVE",
+      "value": "(1<<3)",
+      "comment": "",
+      "category": "UFFD_FEATURE"
+    },
+    {
+      "name": "UFFD_FEATURE_MISSING_HUGETLBFS",
+      "value": "(1<<4)",
+      "comment": "",
+      "category": "UFFD_FEATURE"
+    },
+    {
+      "name": "UFFD_FEATURE_MISSING_SHMEM",
+      "value": "(1<<5)",
+      "comment": "",
+      "category": "UFFD_FEATURE"
+    },
+    {
+      "name": "UFFD_FEATURE_EVENT_UNMAP",
+      "value": "(1<<6)",
+      "comment": "",
+      "category": "UFFD_FEATURE"
+    },
+    {
+      "name": "UFFD_FEATURE_SIGBUS",
+      "value": "(1<<7)",
+      "comment": "",
+      "category": "UFFD_FEATURE"
+    },
+    {
+      "name": "UFFD_FEATURE_THREAD_ID",
+      "value": "(1<<8)",
+      "comment": "",
+      "category": "UFFD_FEATURE"
+    },
+    {
+      "name": "UFFD_FEATURE_MINOR_HUGETLBFS",
+      "value": "(1<<9)",
+      "comment": "",
+      "category": "UFFD_FEATURE"
+    },
+    {
+      "name": "UFFD_FEATURE_MINOR_SHMEM",
+      "value": "(1<<10)",
+      "comment": "",
+      "category": "UFFD_FEATURE"
+    },
+    {
+      "name": "UFFD_FEATURE_EXACT_ADDRESS",
+      "value": "(1<<11)",
+      "comment": "",
+      "category": "UFFD_FEATURE"
+    },
+    {
+      "name": "UFFD_FEATURE_WP_HUGETLBFS_SHMEM",
+      "value": "(1<<12)",
+      "comment": "",
+      "category": "UFFD_FEATURE"
+    },
+    {
+      "name": "UFFD_FEATURE_WP_UNPOPULATED",
+      "value": "(1<<13)",
+      "comment": "",
+      "category": "UFFD_FEATURE"
+    },
+    {
+      "name": "UFFD_FEATURE_POISON",
+      "value": "(1<<14)",
+      "comment": "",
+      "category": "UFFD_FEATURE"
+    },
+    {
+      "name": "UFFD_FEATURE_WP_ASYNC",
+      "value": "(1<<15)",
+      "comment": "",
+      "category": "UFFD_FEATURE"
+    },
+    {
+      "name": "UFFD_FEATURE_MOVE",
+      "value": "(1<<16)",
+      "comment": "",
+      "category": "UFFD_FEATURE"
+    },
+    {
+      "name": "UFFDIO_REGISTER_MODE_MISSING",
+      "value": "((__u64)1<<0)",
+      "comment": "",
+      "category": "UFFDIO_REGISTER"
+    },
+    {
+      "name": "UFFDIO_REGISTER_MODE_WP",
+      "value": "((__u64)1<<1)",
+      "comment": "",
+      "category": "UFFDIO_REGISTER"
+    },
+    {
+      "name": "UFFDIO_REGISTER_MODE_MINOR",
+      "value": "((__u64)1<<2)",
+      "comment": "",
+      "category": "UFFDIO_REGISTER"
+    },
+    {
+      "name": "UFFDIO_COPY_MODE_DONTWAKE",
+      "value": "((__u64)1<<0)",
+      "comment": "",
+      "category": "UFFDIO_COPY"
+    },
+    {
+      "name": "UFFDIO_COPY_MODE_WP",
+      "value": "((__u64)1<<1)",
+      "comment": "",
+      "category": "UFFDIO_COPY"
+    },
+    {
+      "name": "UFFDIO_ZEROPAGE_MODE_DONTWAKE",
+      "value": "((__u64)1<<0)",
+      "comment": "",
+      "category": "UFFDIO_ZEROPAGE"
+    },
+    {
+      "name": "UFFDIO_WRITEPROTECT_MODE_WP",
+      "value": "((__u64)1<<0)",
+      "comment": "",
+      "category": "UFFDIO_WRITEPROTECT"
+    },
+    {
+      "name": "UFFDIO_WRITEPROTECT_MODE_DONTWAKE",
+      "value": "((__u64)1<<1)",
+      "comment": "",
+      "category": "UFFDIO_WRITEPROTECT"
+    },
+    {
+      "name": "UFFDIO_CONTINUE_MODE_DONTWAKE",
+      "value": "((__u64)1<<0)",
+      "comment": "",
+      "category": "UFFDIO_CONTINUE"
+    },
+    {
+      "name": "UFFDIO_CONTINUE_MODE_WP",
+      "value": "((__u64)1<<1)",
+      "comment": "",
+      "category": "UFFDIO_CONTINUE"
+    },
+    {
+      "name": "UFFDIO_POISON_MODE_DONTWAKE",
+      "value": "((__u64)1<<0)",
+      "comment": "",
+      "category": "UFFDIO_POISON"
+    },
+    {
+      "name": "UFFDIO_MOVE_MODE_DONTWAKE",
+      "value": "((__u64)1<<0)",
+      "comment": "",
+      "category": "UFFDIO_MOVE"
+    },
+    {
+      "name": "UFFDIO_MOVE_MODE_ALLOW_SRC_HOLES",
+      "value": "((__u64)1<<1)",
+      "comment": "",
+      "category": "UFFDIO_MOVE"
+    },
+    {
+      "name": "UFFD_USER_MODE_ONLY",
+      "value": "1",
+      "comment": "",
+      "category": "UFFD_USER"
+    }
+  ],
+  "structs": [
+    {
+      "name": "uffd_msg",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "event",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reserved1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "reserved2",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved3",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "address",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ptid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ufd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "from",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "to",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "start",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "end",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "reserved1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "reserved2",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "reserved3",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_1",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "address",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ptid",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_2",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "ufd",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_3",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "from",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "to",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "len",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_4",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "start",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "end",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_5",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "reserved1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "reserved2",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "reserved3",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "uffdio_api",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "api",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "features",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "ioctls",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "uffdio_range",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "start",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "len",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "uffdio_register",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "mode",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "ioctls",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "uffdio_copy",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "dst",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "src",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "mode",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s64",
+          "name": "copy",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "uffdio_zeropage",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "mode",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s64",
+          "name": "zeropage",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "uffdio_writeprotect",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "mode",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "uffdio_continue",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "mode",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s64",
+          "name": "mapped",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "uffdio_poison",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "mode",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s64",
+          "name": "updated",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "uffdio_move",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "dst",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "src",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "mode",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s64",
+          "name": "move",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

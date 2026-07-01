@@ -1,0 +1,293 @@
+{
+  "filename": "hdspm.h",
+  "includes": [
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "HDSPM_MAX_CHANNELS",
+      "value": "64",
+      "comment": "",
+      "category": "HDSPM_MAX"
+    },
+    {
+      "name": "SNDRV_HDSPM_IOCTL_GET_PEAK_RMS",
+      "value": "",
+      "comment": "",
+      "category": "SNDRV_HDSPM"
+    },
+    {
+      "name": "SNDRV_HDSPM_IOCTL_GET_CONFIG",
+      "value": "",
+      "comment": "",
+      "category": "SNDRV_HDSPM"
+    },
+    {
+      "name": "SNDRV_HDSPM_IOCTL_GET_LTC",
+      "value": "_IOR('H', 0x46, struct hdspm_ltc)",
+      "comment": "",
+      "category": "SNDRV_HDSPM"
+    },
+    {
+      "name": "SNDRV_HDSPM_IOCTL_GET_STATUS",
+      "value": "",
+      "comment": "",
+      "category": "SNDRV_HDSPM"
+    },
+    {
+      "name": "HDSPM_ADDON_TCO",
+      "value": "1",
+      "comment": "",
+      "category": "HDSPM_ADDON"
+    },
+    {
+      "name": "SNDRV_HDSPM_IOCTL_GET_VERSION",
+      "value": "_IOR('H', 0x48, struct hdspm_version)",
+      "comment": "",
+      "category": "SNDRV_HDSPM"
+    },
+    {
+      "name": "HDSPM_MIXER_CHANNELS",
+      "value": "HDSPM_MAX_CHANNELS",
+      "comment": "",
+      "category": "HDSPM_MIXER"
+    },
+    {
+      "name": "SNDRV_HDSPM_IOCTL_GET_MIXER",
+      "value": "_IOR('H', 0x44, struct hdspm_mixer_ioctl)",
+      "comment": "",
+      "category": "SNDRV_HDSPM"
+    }
+  ],
+  "structs": [
+    {
+      "name": "hdspm_peak_rms",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "input_peaks",
+          "array_size": "64",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "playback_peaks",
+          "array_size": "64",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "output_peaks",
+          "array_size": "64",
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "input_rms",
+          "array_size": "64",
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "playback_rms",
+          "array_size": "64",
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "output_rms",
+          "array_size": "64",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "speed",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "status2",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "hdspm_config",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "hdspm_ltc",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "hdspm_status",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "card_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "card_clock",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "master_period",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "sync_wc",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "sync_madi",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "sync_tco",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "sync_in",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "madi_input",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "channel_format",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "frame_format",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_4",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "sync_wc",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "sync_madi",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "sync_tco",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "sync_in",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "madi_input",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "channel_format",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "frame_format",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "hdspm_version",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "card_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "cardname",
+          "array_size": "20",
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "addons",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "hdspm_channelfader",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "hdspm_mixer",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "hdspm_mixer_ioctl",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

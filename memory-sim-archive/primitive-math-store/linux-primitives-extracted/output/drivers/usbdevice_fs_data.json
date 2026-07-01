@@ -1,0 +1,603 @@
+{
+  "filename": "usbdevice_fs.h",
+  "includes": [
+    "linux/types.h",
+    "linux/magic.h"
+  ],
+  "defines": [
+    {
+      "name": "USBDEVFS_MAXDRIVERNAME",
+      "value": "255",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "USBDEVFS_URB_SHORT_NOT_OK",
+      "value": "0x01",
+      "comment": "",
+      "category": "USBDEVFS_URB"
+    },
+    {
+      "name": "USBDEVFS_URB_ISO_ASAP",
+      "value": "0x02",
+      "comment": "",
+      "category": "USBDEVFS_URB"
+    },
+    {
+      "name": "USBDEVFS_URB_BULK_CONTINUATION",
+      "value": "0x04",
+      "comment": "",
+      "category": "USBDEVFS_URB"
+    },
+    {
+      "name": "USBDEVFS_URB_NO_FSBR",
+      "value": "0x20",
+      "comment": "Not used",
+      "category": "USBDEVFS_URB"
+    },
+    {
+      "name": "USBDEVFS_URB_ZERO_PACKET",
+      "value": "0x40",
+      "comment": "",
+      "category": "USBDEVFS_URB"
+    },
+    {
+      "name": "USBDEVFS_URB_NO_INTERRUPT",
+      "value": "0x80",
+      "comment": "",
+      "category": "USBDEVFS_URB"
+    },
+    {
+      "name": "USBDEVFS_URB_TYPE_ISO",
+      "value": "0",
+      "comment": "",
+      "category": "USBDEVFS_URB"
+    },
+    {
+      "name": "USBDEVFS_URB_TYPE_INTERRUPT",
+      "value": "1",
+      "comment": "",
+      "category": "USBDEVFS_URB"
+    },
+    {
+      "name": "USBDEVFS_URB_TYPE_CONTROL",
+      "value": "2",
+      "comment": "",
+      "category": "USBDEVFS_URB"
+    },
+    {
+      "name": "USBDEVFS_URB_TYPE_BULK",
+      "value": "3",
+      "comment": "",
+      "category": "USBDEVFS_URB"
+    },
+    {
+      "name": "USBDEVFS_CAP_ZERO_PACKET",
+      "value": "0x01",
+      "comment": "",
+      "category": "USBDEVFS_CAP"
+    },
+    {
+      "name": "USBDEVFS_CAP_BULK_CONTINUATION",
+      "value": "0x02",
+      "comment": "",
+      "category": "USBDEVFS_CAP"
+    },
+    {
+      "name": "USBDEVFS_CAP_NO_PACKET_SIZE_LIM",
+      "value": "0x04",
+      "comment": "",
+      "category": "USBDEVFS_CAP"
+    },
+    {
+      "name": "USBDEVFS_CAP_BULK_SCATTER_GATHER",
+      "value": "0x08",
+      "comment": "",
+      "category": "USBDEVFS_CAP"
+    },
+    {
+      "name": "USBDEVFS_CAP_REAP_AFTER_DISCONNECT",
+      "value": "0x10",
+      "comment": "",
+      "category": "USBDEVFS_CAP"
+    },
+    {
+      "name": "USBDEVFS_CAP_MMAP",
+      "value": "0x20",
+      "comment": "",
+      "category": "USBDEVFS_CAP"
+    },
+    {
+      "name": "USBDEVFS_CAP_DROP_PRIVILEGES",
+      "value": "0x40",
+      "comment": "",
+      "category": "USBDEVFS_CAP"
+    },
+    {
+      "name": "USBDEVFS_CAP_CONNINFO_EX",
+      "value": "0x80",
+      "comment": "",
+      "category": "USBDEVFS_CAP"
+    },
+    {
+      "name": "USBDEVFS_CAP_SUSPEND",
+      "value": "0x100",
+      "comment": "",
+      "category": "USBDEVFS_CAP"
+    },
+    {
+      "name": "USBDEVFS_DISCONNECT_CLAIM_IF_DRIVER",
+      "value": "0x01",
+      "comment": "",
+      "category": "USBDEVFS_DISCONNECT"
+    },
+    {
+      "name": "USBDEVFS_DISCONNECT_CLAIM_EXCEPT_DRIVER",
+      "value": "0x02",
+      "comment": "",
+      "category": "USBDEVFS_DISCONNECT"
+    },
+    {
+      "name": "USBDEVFS_CONTROL",
+      "value": "_IOWR('U', 0, struct usbdevfs_ctrltransfer)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "USBDEVFS_CONTROL32",
+      "value": "_IOWR('U', 0, struct usbdevfs_ctrltransfer32)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "USBDEVFS_BULK",
+      "value": "_IOWR('U', 2, struct usbdevfs_bulktransfer)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "USBDEVFS_BULK32",
+      "value": "_IOWR('U', 2, struct usbdevfs_bulktransfer32)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "USBDEVFS_RESETEP",
+      "value": "_IOR('U', 3, unsigned int)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "USBDEVFS_SETINTERFACE",
+      "value": "_IOR('U', 4, struct usbdevfs_setinterface)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "USBDEVFS_SETCONFIGURATION",
+      "value": "_IOR('U', 5, unsigned int)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "USBDEVFS_GETDRIVER",
+      "value": "_IOW('U', 8, struct usbdevfs_getdriver)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "USBDEVFS_SUBMITURB",
+      "value": "_IOR('U', 10, struct usbdevfs_urb)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "USBDEVFS_SUBMITURB32",
+      "value": "_IOR('U', 10, struct usbdevfs_urb32)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "USBDEVFS_DISCARDURB",
+      "value": "_IO('U', 11)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "USBDEVFS_REAPURB",
+      "value": "_IOW('U', 12, void *)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "USBDEVFS_REAPURB32",
+      "value": "_IOW('U', 12, __u32)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "USBDEVFS_REAPURBNDELAY",
+      "value": "_IOW('U', 13, void *)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "USBDEVFS_REAPURBNDELAY32",
+      "value": "_IOW('U', 13, __u32)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "USBDEVFS_DISCSIGNAL",
+      "value": "_IOR('U', 14, struct usbdevfs_disconnectsignal)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "USBDEVFS_DISCSIGNAL32",
+      "value": "_IOR('U', 14, struct usbdevfs_disconnectsignal32)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "USBDEVFS_CLAIMINTERFACE",
+      "value": "_IOR('U', 15, unsigned int)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "USBDEVFS_RELEASEINTERFACE",
+      "value": "_IOR('U', 16, unsigned int)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "USBDEVFS_CONNECTINFO",
+      "value": "_IOW('U', 17, struct usbdevfs_connectinfo)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "USBDEVFS_IOCTL",
+      "value": "_IOWR('U', 18, struct usbdevfs_ioctl)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "USBDEVFS_IOCTL32",
+      "value": "_IOWR('U', 18, struct usbdevfs_ioctl32)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "USBDEVFS_HUB_PORTINFO",
+      "value": "_IOR('U', 19, struct usbdevfs_hub_portinfo)",
+      "comment": "",
+      "category": "USBDEVFS_HUB"
+    },
+    {
+      "name": "USBDEVFS_RESET",
+      "value": "_IO('U', 20)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "USBDEVFS_CLEAR_HALT",
+      "value": "_IOR('U', 21, unsigned int)",
+      "comment": "",
+      "category": "USBDEVFS_CLEAR"
+    },
+    {
+      "name": "USBDEVFS_DISCONNECT",
+      "value": "_IO('U', 22)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "USBDEVFS_CONNECT",
+      "value": "_IO('U', 23)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "USBDEVFS_CLAIM_PORT",
+      "value": "_IOR('U', 24, unsigned int)",
+      "comment": "",
+      "category": "USBDEVFS_CLAIM"
+    },
+    {
+      "name": "USBDEVFS_RELEASE_PORT",
+      "value": "_IOR('U', 25, unsigned int)",
+      "comment": "",
+      "category": "USBDEVFS_RELEASE"
+    },
+    {
+      "name": "USBDEVFS_GET_CAPABILITIES",
+      "value": "_IOR('U', 26, __u32)",
+      "comment": "",
+      "category": "USBDEVFS_GET"
+    },
+    {
+      "name": "USBDEVFS_DISCONNECT_CLAIM",
+      "value": "_IOR('U', 27, struct usbdevfs_disconnect_claim)",
+      "comment": "",
+      "category": "USBDEVFS_DISCONNECT"
+    },
+    {
+      "name": "USBDEVFS_ALLOC_STREAMS",
+      "value": "_IOR('U', 28, struct usbdevfs_streams)",
+      "comment": "",
+      "category": "USBDEVFS_ALLOC"
+    },
+    {
+      "name": "USBDEVFS_FREE_STREAMS",
+      "value": "_IOR('U', 29, struct usbdevfs_streams)",
+      "comment": "",
+      "category": "USBDEVFS_FREE"
+    },
+    {
+      "name": "USBDEVFS_DROP_PRIVILEGES",
+      "value": "_IOW('U', 30, __u32)",
+      "comment": "",
+      "category": "USBDEVFS_DROP"
+    },
+    {
+      "name": "USBDEVFS_GET_SPEED",
+      "value": "_IO('U', 31)",
+      "comment": "",
+      "category": "USBDEVFS_GET"
+    },
+    {
+      "name": "USBDEVFS_FORBID_SUSPEND",
+      "value": "_IO('U', 33)",
+      "comment": "",
+      "category": "USBDEVFS_FORBID"
+    },
+    {
+      "name": "USBDEVFS_ALLOW_SUSPEND",
+      "value": "_IO('U', 34)",
+      "comment": "",
+      "category": "USBDEVFS_ALLOW"
+    },
+    {
+      "name": "USBDEVFS_WAIT_FOR_RESUME",
+      "value": "_IO('U', 35)",
+      "comment": "",
+      "category": "USBDEVFS_WAIT"
+    }
+  ],
+  "structs": [
+    {
+      "name": "usbdevfs_ctrltransfer",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "bRequestType",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "bRequest",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "wValue",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "wIndex",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "wLength",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "timeout",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "usbdevfs_bulktransfer",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "usbdevfs_setinterface",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "usbdevfs_disconnectsignal",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "usbdevfs_getdriver",
+      "fields": [
+        {
+          "type_name": "char",
+          "name": "driver",
+          "array_size": "USBDEVFS_MAXDRIVERNAME + 1",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "usbdevfs_connectinfo",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "usbdevfs_conninfo_ex",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "busnum",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "devnum",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "speed",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "num_ports",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "ports",
+          "array_size": "7",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "usbdevfs_iso_packet_desc",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "usbdevfs_urb",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "status",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "buffer_length",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "actual_length",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "start_frame",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "number_of_packets",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "error_count",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "usbdevfs_ioctl",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "ifno",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "ioctl_code",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "usbdevfs_hub_portinfo",
+      "fields": [
+        {
+          "type_name": "char",
+          "name": "nports",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "port",
+          "array_size": "127",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "usbdevfs_disconnect_claim",
+      "fields": [
+        {
+          "type_name": "char",
+          "name": "driver",
+          "array_size": "USBDEVFS_MAXDRIVERNAME + 1",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "usbdevfs_streams",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

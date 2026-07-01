@@ -1,0 +1,516 @@
+{
+  "filename": "ppp-ioctl.h",
+  "includes": [
+    "linux/types.h",
+    "linux/compiler.h",
+    "linux/ppp_defs.h"
+  ],
+  "defines": [
+    {
+      "name": "SC_COMP_PROT",
+      "value": "0x00000001",
+      "comment": "protocol compression (output)",
+      "category": "SC_COMP"
+    },
+    {
+      "name": "SC_COMP_AC",
+      "value": "0x00000002",
+      "comment": "header compression (output)",
+      "category": "SC_COMP"
+    },
+    {
+      "name": "SC_COMP_TCP",
+      "value": "0x00000004",
+      "comment": "TCP (VJ) compression (output)",
+      "category": "SC_COMP"
+    },
+    {
+      "name": "SC_NO_TCP_CCID",
+      "value": "0x00000008",
+      "comment": "disable VJ connection-id comp.",
+      "category": "SC_NO"
+    },
+    {
+      "name": "SC_REJ_COMP_AC",
+      "value": "0x00000010",
+      "comment": "reject adrs/ctrl comp. on input",
+      "category": "SC_REJ"
+    },
+    {
+      "name": "SC_REJ_COMP_TCP",
+      "value": "0x00000020",
+      "comment": "reject TCP (VJ) comp. on input",
+      "category": "SC_REJ"
+    },
+    {
+      "name": "SC_CCP_OPEN",
+      "value": "0x00000040",
+      "comment": "Look at CCP packets",
+      "category": "SC_CCP"
+    },
+    {
+      "name": "SC_CCP_UP",
+      "value": "0x00000080",
+      "comment": "May send/recv compressed packets",
+      "category": "SC_CCP"
+    },
+    {
+      "name": "SC_ENABLE_IP",
+      "value": "0x00000100",
+      "comment": "IP packets may be exchanged",
+      "category": "SC_ENABLE"
+    },
+    {
+      "name": "SC_LOOP_TRAFFIC",
+      "value": "0x00000200",
+      "comment": "send traffic to pppd",
+      "category": "SC_LOOP"
+    },
+    {
+      "name": "SC_MULTILINK",
+      "value": "0x00000400",
+      "comment": "do multilink encapsulation",
+      "category": ""
+    },
+    {
+      "name": "SC_MP_SHORTSEQ",
+      "value": "0x00000800",
+      "comment": "use short MP sequence numbers",
+      "category": "SC_MP"
+    },
+    {
+      "name": "SC_COMP_RUN",
+      "value": "0x00001000",
+      "comment": "compressor has been inited",
+      "category": "SC_COMP"
+    },
+    {
+      "name": "SC_DECOMP_RUN",
+      "value": "0x00002000",
+      "comment": "decompressor has been inited",
+      "category": "SC_DECOMP"
+    },
+    {
+      "name": "SC_MP_XSHORTSEQ",
+      "value": "0x00004000",
+      "comment": "transmit short MP seq numbers",
+      "category": "SC_MP"
+    },
+    {
+      "name": "SC_DEBUG",
+      "value": "0x00010000",
+      "comment": "enable debug messages",
+      "category": ""
+    },
+    {
+      "name": "SC_LOG_INPKT",
+      "value": "0x00020000",
+      "comment": "log contents of good pkts recvd",
+      "category": "SC_LOG"
+    },
+    {
+      "name": "SC_LOG_OUTPKT",
+      "value": "0x00040000",
+      "comment": "log contents of pkts sent",
+      "category": "SC_LOG"
+    },
+    {
+      "name": "SC_LOG_RAWIN",
+      "value": "0x00080000",
+      "comment": "log all chars received",
+      "category": "SC_LOG"
+    },
+    {
+      "name": "SC_LOG_FLUSH",
+      "value": "0x00100000",
+      "comment": "log all chars flushed",
+      "category": "SC_LOG"
+    },
+    {
+      "name": "SC_SYNC",
+      "value": "0x00200000",
+      "comment": "synchronous serial mode",
+      "category": ""
+    },
+    {
+      "name": "SC_MUST_COMP",
+      "value": "0x00400000",
+      "comment": "no uncompressed packets may be sent or received",
+      "category": "SC_MUST"
+    },
+    {
+      "name": "SC_MASK",
+      "value": "0x0f600fff",
+      "comment": "bits that user can change",
+      "category": ""
+    },
+    {
+      "name": "SC_XMIT_BUSY",
+      "value": "0x10000000",
+      "comment": "(used by isdn_ppp?)",
+      "category": "SC_XMIT"
+    },
+    {
+      "name": "SC_RCV_ODDP",
+      "value": "0x08000000",
+      "comment": "have rcvd char with odd parity",
+      "category": "SC_RCV"
+    },
+    {
+      "name": "SC_RCV_EVNP",
+      "value": "0x04000000",
+      "comment": "have rcvd char with even parity",
+      "category": "SC_RCV"
+    },
+    {
+      "name": "SC_RCV_B7_1",
+      "value": "0x02000000",
+      "comment": "have rcvd char with bit 7 = 1",
+      "category": "SC_RCV"
+    },
+    {
+      "name": "SC_RCV_B7_0",
+      "value": "0x01000000",
+      "comment": "have rcvd char with bit 7 = 0",
+      "category": "SC_RCV"
+    },
+    {
+      "name": "SC_DC_FERROR",
+      "value": "0x00800000",
+      "comment": "fatal decomp error detected",
+      "category": "SC_DC"
+    },
+    {
+      "name": "SC_DC_ERROR",
+      "value": "0x00400000",
+      "comment": "non-fatal decomp error detected",
+      "category": "SC_DC"
+    },
+    {
+      "name": "PPPIOCGFLAGS",
+      "value": "_IOR('t', 90, int)",
+      "comment": "get configuration flags",
+      "category": ""
+    },
+    {
+      "name": "PPPIOCSFLAGS",
+      "value": "_IOW('t', 89, int)",
+      "comment": "set configuration flags",
+      "category": ""
+    },
+    {
+      "name": "PPPIOCGASYNCMAP",
+      "value": "_IOR('t', 88, int)",
+      "comment": "get async map",
+      "category": ""
+    },
+    {
+      "name": "PPPIOCSASYNCMAP",
+      "value": "_IOW('t', 87, int)",
+      "comment": "set async map",
+      "category": ""
+    },
+    {
+      "name": "PPPIOCGUNIT",
+      "value": "_IOR('t', 86, int)",
+      "comment": "get ppp unit number",
+      "category": ""
+    },
+    {
+      "name": "PPPIOCGRASYNCMAP",
+      "value": "_IOR('t', 85, int)",
+      "comment": "get receive async map",
+      "category": ""
+    },
+    {
+      "name": "PPPIOCSRASYNCMAP",
+      "value": "_IOW('t', 84, int)",
+      "comment": "set receive async map",
+      "category": ""
+    },
+    {
+      "name": "PPPIOCGMRU",
+      "value": "_IOR('t', 83, int)",
+      "comment": "get max receive unit",
+      "category": ""
+    },
+    {
+      "name": "PPPIOCSMRU",
+      "value": "_IOW('t', 82, int)",
+      "comment": "set max receive unit",
+      "category": ""
+    },
+    {
+      "name": "PPPIOCSMAXCID",
+      "value": "_IOW('t', 81, int)",
+      "comment": "set VJ max slot ID",
+      "category": ""
+    },
+    {
+      "name": "PPPIOCGXASYNCMAP",
+      "value": "_IOR('t', 80, ext_accm)",
+      "comment": "get extended ACCM",
+      "category": ""
+    },
+    {
+      "name": "PPPIOCSXASYNCMAP",
+      "value": "_IOW('t', 79, ext_accm)",
+      "comment": "set extended ACCM",
+      "category": ""
+    },
+    {
+      "name": "PPPIOCXFERUNIT",
+      "value": "_IO('t', 78)",
+      "comment": "transfer PPP unit",
+      "category": ""
+    },
+    {
+      "name": "PPPIOCSCOMPRESS",
+      "value": "_IOW('t', 77, struct ppp_option_data)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PPPIOCGNPMODE",
+      "value": "_IOWR('t', 76, struct npioctl)",
+      "comment": "get NP mode",
+      "category": ""
+    },
+    {
+      "name": "PPPIOCSNPMODE",
+      "value": "_IOW('t', 75, struct npioctl)",
+      "comment": "set NP mode",
+      "category": ""
+    },
+    {
+      "name": "PPPIOCSPASS",
+      "value": "_IOW('t', 71, struct sock_fprog)",
+      "comment": "set pass filter",
+      "category": ""
+    },
+    {
+      "name": "PPPIOCSACTIVE",
+      "value": "_IOW('t', 70, struct sock_fprog)",
+      "comment": "set active filt",
+      "category": ""
+    },
+    {
+      "name": "PPPIOCGDEBUG",
+      "value": "_IOR('t', 65, int)",
+      "comment": "Read debug level",
+      "category": ""
+    },
+    {
+      "name": "PPPIOCSDEBUG",
+      "value": "_IOW('t', 64, int)",
+      "comment": "Set debug level",
+      "category": ""
+    },
+    {
+      "name": "PPPIOCGIDLE",
+      "value": "_IOR('t', 63, struct ppp_idle)",
+      "comment": "get idle time",
+      "category": ""
+    },
+    {
+      "name": "PPPIOCGIDLE32",
+      "value": "_IOR('t', 63, struct ppp_idle32)",
+      "comment": "32-bit times",
+      "category": ""
+    },
+    {
+      "name": "PPPIOCGIDLE64",
+      "value": "_IOR('t', 63, struct ppp_idle64)",
+      "comment": "64-bit times",
+      "category": ""
+    },
+    {
+      "name": "PPPIOCNEWUNIT",
+      "value": "_IOWR('t', 62, int)",
+      "comment": "create new ppp unit",
+      "category": ""
+    },
+    {
+      "name": "PPPIOCATTACH",
+      "value": "_IOW('t', 61, int)",
+      "comment": "attach to ppp unit",
+      "category": ""
+    },
+    {
+      "name": "PPPIOCDETACH",
+      "value": "_IOW('t', 60, int)",
+      "comment": "obsolete, do not use",
+      "category": ""
+    },
+    {
+      "name": "PPPIOCSMRRU",
+      "value": "_IOW('t', 59, int)",
+      "comment": "set multilink MRU",
+      "category": ""
+    },
+    {
+      "name": "PPPIOCCONNECT",
+      "value": "_IOW('t', 58, int)",
+      "comment": "connect channel to unit",
+      "category": ""
+    },
+    {
+      "name": "PPPIOCDISCONN",
+      "value": "_IO('t', 57)",
+      "comment": "disconnect channel",
+      "category": ""
+    },
+    {
+      "name": "PPPIOCATTCHAN",
+      "value": "_IOW('t', 56, int)",
+      "comment": "attach to ppp channel",
+      "category": ""
+    },
+    {
+      "name": "PPPIOCGCHAN",
+      "value": "_IOR('t', 55, int)",
+      "comment": "get ppp channel number",
+      "category": ""
+    },
+    {
+      "name": "PPPIOCGL2TPSTATS",
+      "value": "_IOR('t', 54, struct pppol2tp_ioc_stats)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PPPIOCBRIDGECHAN",
+      "value": "_IOW('t', 53, int)",
+      "comment": "bridge one channel to another",
+      "category": ""
+    },
+    {
+      "name": "PPPIOCUNBRIDGECHAN",
+      "value": "_IO('t', 52)",
+      "comment": "unbridge channel",
+      "category": ""
+    },
+    {
+      "name": "SIOCGPPPSTATS",
+      "value": "(SIOCDEVPRIVATE + 0)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SIOCGPPPVER",
+      "value": "(SIOCDEVPRIVATE + 1)",
+      "comment": "NEVER change this!!",
+      "category": ""
+    },
+    {
+      "name": "SIOCGPPPCSTATS",
+      "value": "(SIOCDEVPRIVATE + 2)",
+      "comment": "",
+      "category": ""
+    }
+  ],
+  "structs": [
+    {
+      "name": "npioctl",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "protocol",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ppp_option_data",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "length",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "transmit",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "pppol2tp_ioc_stats",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "tunnel_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "session_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__aligned_u64",
+          "name": "tx_packets",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__aligned_u64",
+          "name": "tx_bytes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__aligned_u64",
+          "name": "tx_errors",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__aligned_u64",
+          "name": "rx_packets",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__aligned_u64",
+          "name": "rx_bytes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__aligned_u64",
+          "name": "rx_seq_discards",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__aligned_u64",
+          "name": "rx_oos_packets",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__aligned_u64",
+          "name": "rx_errors",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

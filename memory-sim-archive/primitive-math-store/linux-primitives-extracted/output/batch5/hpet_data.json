@@ -1,0 +1,67 @@
+{
+  "filename": "hpet.h",
+  "includes": [
+    "linux/compiler.h"
+  ],
+  "defines": [
+    {
+      "name": "HPET_INFO_PERIODIC",
+      "value": "0x0010",
+      "comment": "periodic-capable comparator",
+      "category": "HPET_INFO"
+    },
+    {
+      "name": "HPET_IE_ON",
+      "value": "_IO('h', 0x01)",
+      "comment": "interrupt on",
+      "category": "HPET_IE"
+    },
+    {
+      "name": "HPET_IE_OFF",
+      "value": "_IO('h', 0x02)",
+      "comment": "interrupt off",
+      "category": "HPET_IE"
+    },
+    {
+      "name": "HPET_INFO",
+      "value": "_IOR('h', 0x03, struct hpet_info)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "HPET_EPI",
+      "value": "_IO('h', 0x04)",
+      "comment": "enable periodic",
+      "category": ""
+    },
+    {
+      "name": "HPET_DPI",
+      "value": "_IO('h', 0x05)",
+      "comment": "disable periodic",
+      "category": ""
+    },
+    {
+      "name": "HPET_IRQFREQ",
+      "value": "_IOW('h', 0x6, unsigned long)",
+      "comment": "IRQFREQ usec",
+      "category": ""
+    },
+    {
+      "name": "MAX_HPET_TBS",
+      "value": "8",
+      "comment": "maximum hpet timer blocks",
+      "category": "MAX_HPET"
+    }
+  ],
+  "structs": [
+    {
+      "name": "hpet_info",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

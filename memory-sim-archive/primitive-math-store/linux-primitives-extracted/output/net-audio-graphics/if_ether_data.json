@@ -1,0 +1,704 @@
+{
+  "filename": "if_ether.h",
+  "includes": [
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "ETH_ALEN",
+      "value": "6",
+      "comment": "Octets in one ethernet addr",
+      "category": ""
+    },
+    {
+      "name": "ETH_TLEN",
+      "value": "2",
+      "comment": "Octets in ethernet type field",
+      "category": ""
+    },
+    {
+      "name": "ETH_HLEN",
+      "value": "14",
+      "comment": "Total octets in header.",
+      "category": ""
+    },
+    {
+      "name": "ETH_ZLEN",
+      "value": "60",
+      "comment": "Min. octets in frame sans FCS",
+      "category": ""
+    },
+    {
+      "name": "ETH_DATA_LEN",
+      "value": "1500",
+      "comment": "Max. octets in payload",
+      "category": "ETH_DATA"
+    },
+    {
+      "name": "ETH_FRAME_LEN",
+      "value": "1514",
+      "comment": "Max. octets in frame sans FCS",
+      "category": "ETH_FRAME"
+    },
+    {
+      "name": "ETH_FCS_LEN",
+      "value": "4",
+      "comment": "Octets in the FCS",
+      "category": "ETH_FCS"
+    },
+    {
+      "name": "ETH_MIN_MTU",
+      "value": "68",
+      "comment": "Min IPv4 MTU per RFC791",
+      "category": "ETH_MIN"
+    },
+    {
+      "name": "ETH_MAX_MTU",
+      "value": "0xFFFFU",
+      "comment": "65535, same as IP_MAX_MTU",
+      "category": "ETH_MAX"
+    },
+    {
+      "name": "ETH_P_LOOP",
+      "value": "0x0060",
+      "comment": "Ethernet Loopback packet",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_PUP",
+      "value": "0x0200",
+      "comment": "Xerox PUP packet",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_PUPAT",
+      "value": "0x0201",
+      "comment": "Xerox PUP Addr Trans packet",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_TSN",
+      "value": "0x22F0",
+      "comment": "TSN (IEEE 1722) packet",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_ERSPAN2",
+      "value": "0x22EB",
+      "comment": "ERSPAN version 2 (type III)",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_IP",
+      "value": "0x0800",
+      "comment": "Internet Protocol packet",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_X25",
+      "value": "0x0805",
+      "comment": "CCITT X.25",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_ARP",
+      "value": "0x0806",
+      "comment": "Address Resolution packet",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_BPQ",
+      "value": "0x08FF",
+      "comment": "G8BPQ AX.25 Ethernet Packet\t[ NOT AN OFFICIALLY REGISTERED ID ]",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_IEEEPUP",
+      "value": "0x0a00",
+      "comment": "Xerox IEEE802.3 PUP packet",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_IEEEPUPAT",
+      "value": "0x0a01",
+      "comment": "Xerox IEEE802.3 PUP Addr Trans packet",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_BATMAN",
+      "value": "0x4305",
+      "comment": "B.A.T.M.A.N.-Advanced packet [ NOT AN OFFICIALLY REGISTERED ID ]",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_DEC",
+      "value": "0x6000",
+      "comment": "DEC Assigned proto",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_DNA_DL",
+      "value": "0x6001",
+      "comment": "DEC DNA Dump/Load",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_DNA_RC",
+      "value": "0x6002",
+      "comment": "DEC DNA Remote Console",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_DNA_RT",
+      "value": "0x6003",
+      "comment": "DEC DNA Routing",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_LAT",
+      "value": "0x6004",
+      "comment": "DEC LAT",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_DIAG",
+      "value": "0x6005",
+      "comment": "DEC Diagnostics",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_CUST",
+      "value": "0x6006",
+      "comment": "DEC Customer use",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_SCA",
+      "value": "0x6007",
+      "comment": "DEC Systems Comms Arch",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_TEB",
+      "value": "0x6558",
+      "comment": "Trans Ether Bridging",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_RARP",
+      "value": "0x8035",
+      "comment": "Reverse Addr Res packet",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_ATALK",
+      "value": "0x809B",
+      "comment": "Appletalk DDP",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_AARP",
+      "value": "0x80F3",
+      "comment": "Appletalk AARP",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_8021Q",
+      "value": "0x8100",
+      "comment": "802.1Q VLAN Extended Header",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_ERSPAN",
+      "value": "0x88BE",
+      "comment": "ERSPAN type II",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_IPX",
+      "value": "0x8137",
+      "comment": "IPX over DIX",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_IPV6",
+      "value": "0x86DD",
+      "comment": "IPv6 over bluebook",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_PAUSE",
+      "value": "0x8808",
+      "comment": "IEEE Pause frames. See 802.3 31B",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_SLOW",
+      "value": "0x8809",
+      "comment": "Slow Protocol. See 802.3ad 43B",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_WCCP",
+      "value": "0x883E\t\t/* Web-cache coordination protocol",
+      "comment": "",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_MPLS_UC",
+      "value": "0x8847",
+      "comment": "MPLS Unicast traffic",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_MPLS_MC",
+      "value": "0x8848",
+      "comment": "MPLS Multicast traffic",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_ATMMPOA",
+      "value": "0x884c",
+      "comment": "MultiProtocol Over ATM",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_PPP_DISC",
+      "value": "0x8863",
+      "comment": "PPPoE discovery messages",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_PPP_SES",
+      "value": "0x8864",
+      "comment": "PPPoE session messages",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_LINK_CTL",
+      "value": "0x886c",
+      "comment": "HPNA, wlan link local tunnel",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_ATMFATE",
+      "value": "0x8884\t\t/* Frame-based ATM Transport",
+      "comment": "",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_PAE",
+      "value": "0x888E",
+      "comment": "Port Access Entity (IEEE 802.1X)",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_PROFINET",
+      "value": "0x8892",
+      "comment": "PROFINET",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_REALTEK",
+      "value": "0x8899",
+      "comment": "Multiple proprietary protocols",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_AOE",
+      "value": "0x88A2",
+      "comment": "ATA over Ethernet",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_ETHERCAT",
+      "value": "0x88A4",
+      "comment": "EtherCAT",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_8021AD",
+      "value": "0x88A8",
+      "comment": "802.1ad Service VLAN",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_802_EX1",
+      "value": "0x88B5",
+      "comment": "802.1 Local Experimental 1.",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_MXLGSW",
+      "value": "0x88C3\t\t/* Infineon Technologies Corporate Research ST",
+      "comment": "",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_PREAUTH",
+      "value": "0x88C7",
+      "comment": "802.11 Preauthentication",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_TIPC",
+      "value": "0x88CA",
+      "comment": "TIPC",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_LLDP",
+      "value": "0x88CC",
+      "comment": "Link Layer Discovery Protocol",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_MRP",
+      "value": "0x88E3",
+      "comment": "Media Redundancy Protocol",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_MACSEC",
+      "value": "0x88E5",
+      "comment": "802.1ae MACsec",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_8021AH",
+      "value": "0x88E7",
+      "comment": "802.1ah Backbone Service Tag",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_MVRP",
+      "value": "0x88F5",
+      "comment": "802.1Q MVRP",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_1588",
+      "value": "0x88F7",
+      "comment": "IEEE 1588 Timesync",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_NCSI",
+      "value": "0x88F8",
+      "comment": "NCSI protocol",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_PRP",
+      "value": "0x88FB",
+      "comment": "IEC 62439-3 PRP/HSRv0",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_CFM",
+      "value": "0x8902",
+      "comment": "Connectivity Fault Management",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_FCOE",
+      "value": "0x8906",
+      "comment": "Fibre Channel over Ethernet",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_IBOE",
+      "value": "0x8915",
+      "comment": "Infiniband over Ethernet",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_TDLS",
+      "value": "0x890D",
+      "comment": "TDLS",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_FIP",
+      "value": "0x8914",
+      "comment": "FCoE Initialization Protocol",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_80221",
+      "value": "0x8917",
+      "comment": "IEEE 802.21 Media Independent Handover Protocol",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_HSR",
+      "value": "0x892F",
+      "comment": "IEC 62439-3 HSRv1",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_NSH",
+      "value": "0x894F",
+      "comment": "Network Service Header",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_LOOPBACK",
+      "value": "0x9000",
+      "comment": "Ethernet loopback packet, per IEEE 802.3",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_QINQ1",
+      "value": "0x9100",
+      "comment": "deprecated QinQ VLAN [ NOT AN OFFICIALLY REGISTERED ID ]",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_QINQ2",
+      "value": "0x9200",
+      "comment": "deprecated QinQ VLAN [ NOT AN OFFICIALLY REGISTERED ID ]",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_QINQ3",
+      "value": "0x9300",
+      "comment": "deprecated QinQ VLAN [ NOT AN OFFICIALLY REGISTERED ID ]",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_YT921X",
+      "value": "0x9988",
+      "comment": "Motorcomm YT921x DSA [ NOT AN OFFICIALLY REGISTERED ID ]",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_EDSA",
+      "value": "0xDADA",
+      "comment": "Ethertype DSA [ NOT AN OFFICIALLY REGISTERED ID ]",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_DSA_8021Q",
+      "value": "0xDADB",
+      "comment": "Fake VLAN Header for DSA [ NOT AN OFFICIALLY REGISTERED ID ]",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_DSA_A5PSW",
+      "value": "0xE001",
+      "comment": "A5PSW Tag Value [ NOT AN OFFICIALLY REGISTERED ID ]",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_IFE",
+      "value": "0xED3E",
+      "comment": "ForCES inter-FE LFB type",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_AF_IUCV",
+      "value": "0xFBFB",
+      "comment": "IBM af_iucv [ NOT AN OFFICIALLY REGISTERED ID ]",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_802_3_MIN",
+      "value": "0x0600\t\t/* If the value in the ethernet type is more than this value",
+      "comment": "",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_802_3",
+      "value": "0x0001",
+      "comment": "Dummy type for 802.3 frames",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_AX25",
+      "value": "0x0002",
+      "comment": "Dummy protocol id for AX.25",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_ALL",
+      "value": "0x0003",
+      "comment": "Every packet (be careful!!!)",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_802_2",
+      "value": "0x0004",
+      "comment": "802.2 frames",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_SNAP",
+      "value": "0x0005",
+      "comment": "Internal only",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_DDCMP",
+      "value": "0x0006",
+      "comment": "DEC DDCMP: Internal only",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_WAN_PPP",
+      "value": "0x0007",
+      "comment": "Dummy type for WAN PPP frames",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_PPP_MP",
+      "value": "0x0008",
+      "comment": "Dummy type for PPP MP frames",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_LOCALTALK",
+      "value": "0x0009",
+      "comment": "Localtalk pseudo type",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_CAN",
+      "value": "0x000C",
+      "comment": "CAN: Controller Area Network",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_CANFD",
+      "value": "0x000D",
+      "comment": "CANFD: CAN flexible data rate",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_CANXL",
+      "value": "0x000E",
+      "comment": "CANXL: eXtended frame Length",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_PPPTALK",
+      "value": "0x0010",
+      "comment": "Dummy type for Atalk over PPP",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_TR_802_2",
+      "value": "0x0011",
+      "comment": "802.2 frames",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_MOBITEX",
+      "value": "0x0015",
+      "comment": "Mobitex (kaz@cafe.net)",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_CONTROL",
+      "value": "0x0016",
+      "comment": "Card specific control frames",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_IRDA",
+      "value": "0x0017",
+      "comment": "Linux-IrDA",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_ECONET",
+      "value": "0x0018",
+      "comment": "Acorn Econet",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_HDLC",
+      "value": "0x0019",
+      "comment": "HDLC frames",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_ARCNET",
+      "value": "0x001A",
+      "comment": "1A for ArcNet :-)",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_DSA",
+      "value": "0x001B",
+      "comment": "Distributed Switch Arch.",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_TRAILER",
+      "value": "0x001C",
+      "comment": "Trailer switch tagging",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_PHONET",
+      "value": "0x00F5",
+      "comment": "Nokia Phonet frames",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_IEEE802154",
+      "value": "0x00F6",
+      "comment": "IEEE802.15.4 frame",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_CAIF",
+      "value": "0x00F7",
+      "comment": "ST-Ericsson CAIF protocol",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_XDSA",
+      "value": "0x00F8",
+      "comment": "Multiplexed DSA protocol",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_MAP",
+      "value": "0x00F9\t\t/* Qualcomm multiplexing and",
+      "comment": "",
+      "category": "ETH_P"
+    },
+    {
+      "name": "ETH_P_MCTP",
+      "value": "0x00FA\t\t/* Management component transport",
+      "comment": "",
+      "category": "ETH_P"
+    },
+    {
+      "name": "__UAPI_DEF_ETHHDR",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    }
+  ],
+  "structs": [
+    {
+      "name": "ethhdr",
+      "fields": [
+        {
+          "type_name": "__be16",
+          "name": "h_proto",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

@@ -1,0 +1,220 @@
+{
+  "filename": "netlink_diag.h",
+  "includes": [
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "NETLINK_DIAG_MAX",
+      "value": "(__NETLINK_DIAG_MAX - 1)",
+      "comment": "",
+      "category": "NETLINK_DIAG"
+    },
+    {
+      "name": "NDIAG_PROTO_ALL",
+      "value": "((__u8) ~0)",
+      "comment": "",
+      "category": "NDIAG_PROTO"
+    },
+    {
+      "name": "NDIAG_SHOW_MEMINFO",
+      "value": "0x00000001",
+      "comment": "show memory info of a socket",
+      "category": "NDIAG_SHOW"
+    },
+    {
+      "name": "NDIAG_SHOW_GROUPS",
+      "value": "0x00000002",
+      "comment": "show groups of a netlink socket",
+      "category": "NDIAG_SHOW"
+    },
+    {
+      "name": "NDIAG_SHOW_RING_CFG",
+      "value": "0x00000004",
+      "comment": "show ring configuration",
+      "category": "NDIAG_SHOW"
+    },
+    {
+      "name": "NDIAG_SHOW_FLAGS",
+      "value": "0x00000008",
+      "comment": "show flags of a netlink socket",
+      "category": "NDIAG_SHOW"
+    },
+    {
+      "name": "NDIAG_FLAG_CB_RUNNING",
+      "value": "0x00000001",
+      "comment": "",
+      "category": "NDIAG_FLAG"
+    },
+    {
+      "name": "NDIAG_FLAG_PKTINFO",
+      "value": "0x00000002",
+      "comment": "",
+      "category": "NDIAG_FLAG"
+    },
+    {
+      "name": "NDIAG_FLAG_BROADCAST_ERROR",
+      "value": "0x00000004",
+      "comment": "",
+      "category": "NDIAG_FLAG"
+    },
+    {
+      "name": "NDIAG_FLAG_NO_ENOBUFS",
+      "value": "0x00000008",
+      "comment": "",
+      "category": "NDIAG_FLAG"
+    },
+    {
+      "name": "NDIAG_FLAG_LISTEN_ALL_NSID",
+      "value": "0x00000010",
+      "comment": "",
+      "category": "NDIAG_FLAG"
+    },
+    {
+      "name": "NDIAG_FLAG_CAP_ACK",
+      "value": "0x00000020",
+      "comment": "",
+      "category": "NDIAG_FLAG"
+    }
+  ],
+  "structs": [
+    {
+      "name": "netlink_diag_req",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "sdiag_family",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "sdiag_protocol",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ndiag_ino",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ndiag_show",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ndiag_cookie",
+          "array_size": "2",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "netlink_diag_msg",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "ndiag_family",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "ndiag_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "ndiag_protocol",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "ndiag_state",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ndiag_portid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ndiag_dst_portid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ndiag_dst_group",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ndiag_ino",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ndiag_cookie",
+          "array_size": "2",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "netlink_diag_ring",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "ndr_block_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ndr_block_nr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ndr_frame_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ndr_frame_nr",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

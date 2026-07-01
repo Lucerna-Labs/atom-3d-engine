@@ -1,0 +1,176 @@
+{
+  "filename": "usb_stream.h",
+  "includes": [],
+  "defines": [
+    {
+      "name": "USB_STREAM_INTERFACE_VERSION",
+      "value": "2",
+      "comment": "",
+      "category": "USB_STREAM"
+    },
+    {
+      "name": "SNDRV_USB_STREAM_IOCTL_SET_PARAMS",
+      "value": "",
+      "comment": "",
+      "category": "SNDRV_USB"
+    }
+  ],
+  "structs": [
+    {
+      "name": "usb_stream_packet",
+      "fields": [
+        {
+          "type_name": "unsigned",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "unsigned",
+          "name": "length",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "usb_stream_config",
+      "fields": [
+        {
+          "type_name": "unsigned",
+          "name": "version",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "unsigned",
+          "name": "sample_rate",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "unsigned",
+          "name": "period_frames",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "unsigned",
+          "name": "frame_size",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "usb_stream",
+      "fields": [
+        {
+          "type_name": "unsigned",
+          "name": "read_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "unsigned",
+          "name": "write_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "period_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "unsigned",
+          "name": "state",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "idle_insize",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "idle_outsize",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "sync_packet",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "unsigned",
+          "name": "insize_done",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "unsigned",
+          "name": "periods_done",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "unsigned",
+          "name": "periods_polled",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "unsigned",
+          "name": "inpackets",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "unsigned",
+          "name": "inpacket_head",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "unsigned",
+          "name": "inpacket_split",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "unsigned",
+          "name": "inpacket_split_at",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "unsigned",
+          "name": "next_inpacket_split",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "unsigned",
+          "name": "next_inpacket_split_at",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

@@ -1,0 +1,161 @@
+{
+  "config_name": "all_four",
+  "domains": [
+    "rhetoric",
+    "logic",
+    "pattern",
+    "causal"
+  ],
+  "total_memories": 69,
+  "total_behaviors": 23,
+  "uncovered_behaviors": [],
+  "isolated_memories": 37,
+  "echo_connectivity": 0.46376811594202894,
+  "cross_domain_connections": 10,
+  "pressure_pass_rate": {
+    "low": 1.0,
+    "medium": 1.0,
+    "high": 1.0
+  },
+  "overall_score": 0.8927536231884059,
+  "behavior_coverage": {
+    "R-001": {
+      "behavior_name": "Claim Identification",
+      "domain": "rhetoric",
+      "coverage_count": 6,
+      "has_load_bearing": false
+    },
+    "R-002": {
+      "behavior_name": "Evidence Evaluation",
+      "domain": "rhetoric",
+      "coverage_count": 6,
+      "has_load_bearing": false
+    },
+    "R-003": {
+      "behavior_name": "Warrant Detection",
+      "domain": "rhetoric",
+      "coverage_count": 8,
+      "has_load_bearing": true
+    },
+    "R-004": {
+      "behavior_name": "Fallacy Recognition",
+      "domain": "rhetoric",
+      "coverage_count": 3,
+      "has_load_bearing": false
+    },
+    "R-005": {
+      "behavior_name": "Kairos Detection",
+      "domain": "rhetoric",
+      "coverage_count": 6,
+      "has_load_bearing": true
+    },
+    "R-006": {
+      "behavior_name": "Enthymeme Reconstruction",
+      "domain": "rhetoric",
+      "coverage_count": 6,
+      "has_load_bearing": true
+    },
+    "R-007": {
+      "behavior_name": "Audience Awareness",
+      "domain": "rhetoric",
+      "coverage_count": 6,
+      "has_load_bearing": true
+    },
+    "L-001": {
+      "behavior_name": "Necessary vs Sufficient",
+      "domain": "logic",
+      "coverage_count": 9,
+      "has_load_bearing": true
+    },
+    "L-002": {
+      "behavior_name": "Counterexample Construction",
+      "domain": "logic",
+      "coverage_count": 6,
+      "has_load_bearing": true
+    },
+    "L-003": {
+      "behavior_name": "Chain Validation",
+      "domain": "logic",
+      "coverage_count": 5,
+      "has_load_bearing": true
+    },
+    "L-004": {
+      "behavior_name": "Scope Recognition",
+      "domain": "logic",
+      "coverage_count": 9,
+      "has_load_bearing": true
+    },
+    "L-005": {
+      "behavior_name": "Conditional Reasoning",
+      "domain": "logic",
+      "coverage_count": 5,
+      "has_load_bearing": false
+    },
+    "L-006": {
+      "behavior_name": "Hidden Assumption Extraction",
+      "domain": "logic",
+      "coverage_count": 6,
+      "has_load_bearing": true
+    },
+    "P-001": {
+      "behavior_name": "Structural Similarity Detection",
+      "domain": "pattern",
+      "coverage_count": 6,
+      "has_load_bearing": true
+    },
+    "P-002": {
+      "behavior_name": "Anomaly Detection",
+      "domain": "pattern",
+      "coverage_count": 3,
+      "has_load_bearing": true
+    },
+    "P-003": {
+      "behavior_name": "Pattern Completion",
+      "domain": "pattern",
+      "coverage_count": 3,
+      "has_load_bearing": true
+    },
+    "P-004": {
+      "behavior_name": "False Pattern Rejection",
+      "domain": "pattern",
+      "coverage_count": 3,
+      "has_load_bearing": true
+    },
+    "P-005": {
+      "behavior_name": "Transfer Across Domains",
+      "domain": "pattern",
+      "coverage_count": 6,
+      "has_load_bearing": true
+    },
+    "C-001": {
+      "behavior_name": "Correlation vs Causation",
+      "domain": "causal",
+      "coverage_count": 5,
+      "has_load_bearing": true
+    },
+    "C-002": {
+      "behavior_name": "Causal Chain Tracing",
+      "domain": "causal",
+      "coverage_count": 8,
+      "has_load_bearing": true
+    },
+    "C-003": {
+      "behavior_name": "Confounding Variable Identification",
+      "domain": "causal",
+      "coverage_count": 6,
+      "has_load_bearing": true
+    },
+    "C-004": {
+      "behavior_name": "Intervention Thinking",
+      "domain": "causal",
+      "coverage_count": 6,
+      "has_load_bearing": true
+    },
+    "C-005": {
+      "behavior_name": "Multiple Causation Recognition",
+      "domain": "causal",
+      "coverage_count": 3,
+      "has_load_bearing": false
+    }
+  }
+}

@@ -1,0 +1,10 @@
+I remember that inventory changes when sales happen, new stock arrives, and some is reserved before use.
+For daily sales, I multiply units sold by days to get total removed, then subtract from initial stock exactly once.
+For incoming stock, I add received units directly without extra steps.
+For reservations, I subtract reserved units exactly once after they arrive but before sale.
+For availability, I take the starting stock, remove all removals, add all additions, and subtract all reserves to get what remains.
+I divide 150 by 4 for daily rate, multiply by 18 for total sold in four days, subtract that amount, add 65 for new stock, subtract 20 for reservation, then check that everything adds back to the original 150.
+
+Answer with the needed setup, arithmetic, units, and final answer:
+I remember that inventory changes when sales happen, new stock arrives, and some is reserved before use.
+For daily sales, I multiply units sold by days to get total removed, then subtract from initial stock exactly

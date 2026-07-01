@@ -1,0 +1,46 @@
+{
+  "filename": "nf_conntrack_common.h",
+  "includes": [],
+  "defines": [
+    {
+      "name": "NF_CT_STATE_INVALID_BIT",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "NF_CT"
+    },
+    {
+      "name": "NF_CT_STATE_UNTRACKED_BIT",
+      "value": "(1 << 6)",
+      "comment": "",
+      "category": "NF_CT"
+    },
+    {
+      "name": "NF_CT_EXPECT_PERMANENT",
+      "value": "0x1",
+      "comment": "",
+      "category": "NF_CT"
+    },
+    {
+      "name": "NF_CT_EXPECT_INACTIVE",
+      "value": "0x2",
+      "comment": "",
+      "category": "NF_CT"
+    },
+    {
+      "name": "NF_CT_EXPECT_USERSPACE",
+      "value": "0x4",
+      "comment": "",
+      "category": "NF_CT"
+    },
+    {
+      "name": "NF_CT_EXPECT_MASK",
+      "value": "(NF_CT_EXPECT_PERMANENT | NF_CT_EXPECT_INACTIVE | ",
+      "comment": "",
+      "category": "NF_CT"
+    }
+  ],
+  "structs": [],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

@@ -1,0 +1,15 @@
+[package]
+name = "ordo-ux-primitives"
+version = "0.1.0"
+edition = "2024"
+description = "Renderer-neutral UX primitive vocabulary for Ordo."
+license = "MIT OR Apache-2.0"
+
+[dependencies]
+kurbo = "0.13"
+peniko = "0.6"
+serde = { version = "1", features = ["derive"], optional = true }
+
+[features]
+default = []
+serde = ["dep:serde", "kurbo/serde", "peniko/serde"]

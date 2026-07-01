@@ -1,0 +1,475 @@
+{
+  "filename": "nilfs2_api.h",
+  "includes": [
+    "linux/types.h",
+    "linux/ioctl.h"
+  ],
+  "defines": [
+    {
+      "name": "NILFS_IOCTL_IDENT",
+      "value": "'n'",
+      "comment": "",
+      "category": "NILFS_IOCTL"
+    },
+    {
+      "name": "NILFS_IOCTL_CHANGE_CPMODE",
+      "value": "",
+      "comment": "",
+      "category": "NILFS_IOCTL"
+    },
+    {
+      "name": "NILFS_IOCTL_DELETE_CHECKPOINT",
+      "value": "",
+      "comment": "",
+      "category": "NILFS_IOCTL"
+    },
+    {
+      "name": "NILFS_IOCTL_GET_CPINFO",
+      "value": "",
+      "comment": "",
+      "category": "NILFS_IOCTL"
+    },
+    {
+      "name": "NILFS_IOCTL_GET_CPSTAT",
+      "value": "",
+      "comment": "",
+      "category": "NILFS_IOCTL"
+    },
+    {
+      "name": "NILFS_IOCTL_GET_SUINFO",
+      "value": "",
+      "comment": "",
+      "category": "NILFS_IOCTL"
+    },
+    {
+      "name": "NILFS_IOCTL_GET_SUSTAT",
+      "value": "",
+      "comment": "",
+      "category": "NILFS_IOCTL"
+    },
+    {
+      "name": "NILFS_IOCTL_GET_VINFO",
+      "value": "",
+      "comment": "",
+      "category": "NILFS_IOCTL"
+    },
+    {
+      "name": "NILFS_IOCTL_GET_BDESCS",
+      "value": "",
+      "comment": "",
+      "category": "NILFS_IOCTL"
+    },
+    {
+      "name": "NILFS_IOCTL_CLEAN_SEGMENTS",
+      "value": "",
+      "comment": "",
+      "category": "NILFS_IOCTL"
+    },
+    {
+      "name": "NILFS_IOCTL_SYNC",
+      "value": "",
+      "comment": "",
+      "category": "NILFS_IOCTL"
+    },
+    {
+      "name": "NILFS_IOCTL_RESIZE",
+      "value": "",
+      "comment": "",
+      "category": "NILFS_IOCTL"
+    },
+    {
+      "name": "NILFS_IOCTL_SET_ALLOC_RANGE",
+      "value": "",
+      "comment": "",
+      "category": "NILFS_IOCTL"
+    },
+    {
+      "name": "NILFS_IOCTL_SET_SUINFO",
+      "value": "",
+      "comment": "",
+      "category": "NILFS_IOCTL"
+    }
+  ],
+  "structs": [
+    {
+      "name": "nilfs_cpinfo",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "ci_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ci_pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "ci_cno",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "ci_create",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "ci_nblk_inc",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "ci_inodes_count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "ci_blocks_count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "ci_next",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "nilfs_suinfo",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "sui_lastmod",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "sui_nblocks",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "sui_flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "nilfs_suinfo_update",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "sup_segnum",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "sup_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "sup_reserved",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "nilfs_cpmode",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "cm_cno",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "cm_mode",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "cm_pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "nilfs_argv",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "v_base",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "v_nmembs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "v_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "v_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "v_index",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "nilfs_period",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "p_start",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "p_end",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "nilfs_cpstat",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "cs_cno",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "cs_ncps",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "cs_nsss",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "nilfs_sustat",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "ss_nsegs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "ss_ncleansegs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "ss_ndirtysegs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "ss_ctime",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "ss_nongc_ctime",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "ss_prot_seq",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "nilfs_vinfo",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "vi_vblocknr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "vi_start",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "vi_end",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "vi_blocknr",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "nilfs_vdesc",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "vd_ino",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "vd_cno",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "vd_vblocknr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "vd_blocknr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "vd_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "vd_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "vd_pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "nilfs_bdesc",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "bd_ino",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "bd_oblocknr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "bd_blocknr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "bd_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "bd_level",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "bd_pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

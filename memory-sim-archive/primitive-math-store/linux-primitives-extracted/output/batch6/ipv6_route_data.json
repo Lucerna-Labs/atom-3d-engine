@@ -1,0 +1,177 @@
+{
+  "filename": "ipv6_route.h",
+  "includes": [
+    "linux/types.h",
+    "linux/in6.h"
+  ],
+  "defines": [
+    {
+      "name": "RTF_DEFAULT",
+      "value": "0x00010000",
+      "comment": "default - learned via ND",
+      "category": ""
+    },
+    {
+      "name": "RTF_ALLONLINK",
+      "value": "0x00020000\t/* (deprecated and will be removed)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTF_ADDRCONF",
+      "value": "0x00040000",
+      "comment": "addrconf route - RA",
+      "category": ""
+    },
+    {
+      "name": "RTF_PREFIX_RT",
+      "value": "0x00080000",
+      "comment": "A prefix only route - RA",
+      "category": "RTF_PREFIX"
+    },
+    {
+      "name": "RTF_ANYCAST",
+      "value": "0x00100000",
+      "comment": "Anycast",
+      "category": ""
+    },
+    {
+      "name": "RTF_NONEXTHOP",
+      "value": "0x00200000",
+      "comment": "route with no nexthop",
+      "category": ""
+    },
+    {
+      "name": "RTF_EXPIRES",
+      "value": "0x00400000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTF_ROUTEINFO",
+      "value": "0x00800000",
+      "comment": "route information - RA",
+      "category": ""
+    },
+    {
+      "name": "RTF_CACHE",
+      "value": "0x01000000",
+      "comment": "read-only: can not be set by user",
+      "category": ""
+    },
+    {
+      "name": "RTF_FLOW",
+      "value": "0x02000000",
+      "comment": "flow significant route",
+      "category": ""
+    },
+    {
+      "name": "RTF_POLICY",
+      "value": "0x04000000",
+      "comment": "policy route",
+      "category": ""
+    },
+    {
+      "name": "RTF_PREF_MASK",
+      "value": "0x18000000",
+      "comment": "",
+      "category": "RTF_PREF"
+    },
+    {
+      "name": "RTF_PCPU",
+      "value": "0x40000000",
+      "comment": "read-only: can not be set by user",
+      "category": ""
+    },
+    {
+      "name": "RTF_LOCAL",
+      "value": "0x80000000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTMSG_NEWDEVICE",
+      "value": "0x11",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTMSG_DELDEVICE",
+      "value": "0x12",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTMSG_NEWROUTE",
+      "value": "0x21",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RTMSG_DELROUTE",
+      "value": "0x22",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IP6_RT_PRIO_USER",
+      "value": "1024",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IP6_RT_PRIO_ADDRCONF",
+      "value": "256",
+      "comment": "",
+      "category": ""
+    }
+  ],
+  "structs": [
+    {
+      "name": "in6_rtmsg",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "rtmsg_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "rtmsg_dst_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "rtmsg_src_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "rtmsg_metric",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "rtmsg_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "rtmsg_ifindex",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

@@ -1,0 +1,591 @@
+{
+  "filename": "kd.h",
+  "includes": [
+    "linux/types.h",
+    "linux/compiler.h"
+  ],
+  "defines": [
+    {
+      "name": "GIO_FONT",
+      "value": "0x4B60",
+      "comment": "gets font in expanded form",
+      "category": ""
+    },
+    {
+      "name": "PIO_FONT",
+      "value": "0x4B61",
+      "comment": "use font in expanded form",
+      "category": ""
+    },
+    {
+      "name": "GIO_FONTX",
+      "value": "0x4B6B",
+      "comment": "get font using struct consolefontdesc",
+      "category": ""
+    },
+    {
+      "name": "PIO_FONTX",
+      "value": "0x4B6C",
+      "comment": "set font using struct consolefontdesc",
+      "category": ""
+    },
+    {
+      "name": "PIO_FONTRESET",
+      "value": "0x4B6D",
+      "comment": "reset to default font",
+      "category": ""
+    },
+    {
+      "name": "GIO_CMAP",
+      "value": "0x4B70",
+      "comment": "gets colour palette on VGA+",
+      "category": ""
+    },
+    {
+      "name": "PIO_CMAP",
+      "value": "0x4B71",
+      "comment": "sets colour palette on VGA+",
+      "category": ""
+    },
+    {
+      "name": "KIOCSOUND",
+      "value": "0x4B2F",
+      "comment": "start sound generation (0 for off)",
+      "category": ""
+    },
+    {
+      "name": "KDMKTONE",
+      "value": "0x4B30",
+      "comment": "generate tone",
+      "category": ""
+    },
+    {
+      "name": "KDGETLED",
+      "value": "0x4B31",
+      "comment": "return current led state",
+      "category": ""
+    },
+    {
+      "name": "KDSETLED",
+      "value": "0x4B32",
+      "comment": "set led state [lights, not flags]",
+      "category": ""
+    },
+    {
+      "name": "LED_SCR",
+      "value": "0x01",
+      "comment": "scroll lock led",
+      "category": ""
+    },
+    {
+      "name": "LED_NUM",
+      "value": "0x02",
+      "comment": "num lock led",
+      "category": ""
+    },
+    {
+      "name": "LED_CAP",
+      "value": "0x04",
+      "comment": "caps lock led",
+      "category": ""
+    },
+    {
+      "name": "KDGKBTYPE",
+      "value": "0x4B33",
+      "comment": "get keyboard type",
+      "category": ""
+    },
+    {
+      "name": "KB_84",
+      "value": "0x01",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "KB_101",
+      "value": "0x02",
+      "comment": "this is what we always answer",
+      "category": ""
+    },
+    {
+      "name": "KB_OTHER",
+      "value": "0x03",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "KDADDIO",
+      "value": "0x4B34",
+      "comment": "add i/o port as valid",
+      "category": ""
+    },
+    {
+      "name": "KDDELIO",
+      "value": "0x4B35",
+      "comment": "del i/o port as valid",
+      "category": ""
+    },
+    {
+      "name": "KDENABIO",
+      "value": "0x4B36",
+      "comment": "enable i/o to video board",
+      "category": ""
+    },
+    {
+      "name": "KDDISABIO",
+      "value": "0x4B37",
+      "comment": "disable i/o to video board",
+      "category": ""
+    },
+    {
+      "name": "KDSETMODE",
+      "value": "0x4B3A",
+      "comment": "set text/graphics mode",
+      "category": ""
+    },
+    {
+      "name": "KD_TEXT",
+      "value": "0x00",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "KD_GRAPHICS",
+      "value": "0x01",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "KD_TEXT0",
+      "value": "0x02",
+      "comment": "obsolete",
+      "category": ""
+    },
+    {
+      "name": "KD_TEXT1",
+      "value": "0x03",
+      "comment": "obsolete",
+      "category": ""
+    },
+    {
+      "name": "KDGETMODE",
+      "value": "0x4B3B",
+      "comment": "get current mode",
+      "category": ""
+    },
+    {
+      "name": "KDMAPDISP",
+      "value": "0x4B3C",
+      "comment": "map display into address space",
+      "category": ""
+    },
+    {
+      "name": "KDUNMAPDISP",
+      "value": "0x4B3D",
+      "comment": "unmap display from address space",
+      "category": ""
+    },
+    {
+      "name": "E_TABSZ",
+      "value": "256",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GIO_SCRNMAP",
+      "value": "0x4B40",
+      "comment": "get screen mapping from kernel",
+      "category": ""
+    },
+    {
+      "name": "PIO_SCRNMAP",
+      "value": "0x4B41",
+      "comment": "put screen mapping table in kernel",
+      "category": ""
+    },
+    {
+      "name": "GIO_UNISCRNMAP",
+      "value": "0x4B69",
+      "comment": "get full Unicode screen mapping",
+      "category": ""
+    },
+    {
+      "name": "PIO_UNISCRNMAP",
+      "value": "0x4B6A",
+      "comment": "set full Unicode screen mapping",
+      "category": ""
+    },
+    {
+      "name": "GIO_UNIMAP",
+      "value": "0x4B66",
+      "comment": "get unicode-to-font mapping from kernel",
+      "category": ""
+    },
+    {
+      "name": "PIO_UNIMAP",
+      "value": "0x4B67",
+      "comment": "put unicode-to-font mapping in kernel",
+      "category": ""
+    },
+    {
+      "name": "PIO_UNIMAPCLR",
+      "value": "0x4B68",
+      "comment": "clear table, possibly advise hash algorithm",
+      "category": ""
+    },
+    {
+      "name": "UNI_DIRECT_BASE",
+      "value": "0xF000",
+      "comment": "start of Direct Font Region",
+      "category": "UNI_DIRECT"
+    },
+    {
+      "name": "UNI_DIRECT_MASK",
+      "value": "0x01FF",
+      "comment": "Direct Font Region bitmask",
+      "category": "UNI_DIRECT"
+    },
+    {
+      "name": "K_RAW",
+      "value": "0x00",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "K_XLATE",
+      "value": "0x01",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "K_MEDIUMRAW",
+      "value": "0x02",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "K_UNICODE",
+      "value": "0x03",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "K_OFF",
+      "value": "0x04",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "KDGKBMODE",
+      "value": "0x4B44",
+      "comment": "gets current keyboard mode",
+      "category": ""
+    },
+    {
+      "name": "KDSKBMODE",
+      "value": "0x4B45",
+      "comment": "sets current keyboard mode",
+      "category": ""
+    },
+    {
+      "name": "K_METABIT",
+      "value": "0x03",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "K_ESCPREFIX",
+      "value": "0x04",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "KDGKBMETA",
+      "value": "0x4B62",
+      "comment": "gets meta key handling mode",
+      "category": ""
+    },
+    {
+      "name": "KDSKBMETA",
+      "value": "0x4B63",
+      "comment": "sets meta key handling mode",
+      "category": ""
+    },
+    {
+      "name": "K_SCROLLLOCK",
+      "value": "0x01",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "K_NUMLOCK",
+      "value": "0x02",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "K_CAPSLOCK",
+      "value": "0x04",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "KDGKBLED",
+      "value": "0x4B64",
+      "comment": "get led flags (not lights)",
+      "category": ""
+    },
+    {
+      "name": "KDSKBLED",
+      "value": "0x4B65",
+      "comment": "set led flags (not lights)",
+      "category": ""
+    },
+    {
+      "name": "K_NORMTAB",
+      "value": "0x00",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "K_SHIFTTAB",
+      "value": "0x01",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "K_ALTTAB",
+      "value": "0x02",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "K_ALTSHIFTTAB",
+      "value": "0x03",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "KDGKBENT",
+      "value": "0x4B46",
+      "comment": "gets one entry in translation table",
+      "category": ""
+    },
+    {
+      "name": "KDSKBENT",
+      "value": "0x4B47",
+      "comment": "sets one entry in translation table",
+      "category": ""
+    },
+    {
+      "name": "KDGKBSENT",
+      "value": "0x4B48",
+      "comment": "gets one function key string entry",
+      "category": ""
+    },
+    {
+      "name": "KDSKBSENT",
+      "value": "0x4B49",
+      "comment": "sets one function key string entry",
+      "category": ""
+    },
+    {
+      "name": "KDGKBDIACR",
+      "value": "0x4B4A",
+      "comment": "read kernel accent table",
+      "category": ""
+    },
+    {
+      "name": "KDSKBDIACR",
+      "value": "0x4B4B",
+      "comment": "write kernel accent table",
+      "category": ""
+    },
+    {
+      "name": "KDGKBDIACRUC",
+      "value": "0x4BFA",
+      "comment": "read kernel accent table - UCS",
+      "category": ""
+    },
+    {
+      "name": "KDSKBDIACRUC",
+      "value": "0x4BFB",
+      "comment": "write kernel accent table - UCS",
+      "category": ""
+    },
+    {
+      "name": "KDGETKEYCODE",
+      "value": "0x4B4C",
+      "comment": "read kernel keycode table entry",
+      "category": ""
+    },
+    {
+      "name": "KDSETKEYCODE",
+      "value": "0x4B4D",
+      "comment": "write kernel keycode table entry",
+      "category": ""
+    },
+    {
+      "name": "KDSIGACCEPT",
+      "value": "0x4B4E",
+      "comment": "accept kbd generated signals",
+      "category": ""
+    },
+    {
+      "name": "KDKBDREP",
+      "value": "0x4B52  /* set keyboard delay/repeat rate;",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "KDFONTOP",
+      "value": "0x4B72",
+      "comment": "font operations",
+      "category": ""
+    },
+    {
+      "name": "KD_FONT_OP_SET",
+      "value": "0",
+      "comment": "Set font",
+      "category": "KD_FONT"
+    },
+    {
+      "name": "KD_FONT_OP_GET",
+      "value": "1",
+      "comment": "Get font",
+      "category": "KD_FONT"
+    },
+    {
+      "name": "KD_FONT_OP_SET_DEFAULT",
+      "value": "2",
+      "comment": "Set font to default, data points to name / NULL",
+      "category": "KD_FONT"
+    },
+    {
+      "name": "KD_FONT_OP_COPY",
+      "value": "3",
+      "comment": "Obsolete, do not use",
+      "category": "KD_FONT"
+    },
+    {
+      "name": "KD_FONT_OP_SET_TALL",
+      "value": "4",
+      "comment": "Set font with vpitch = height",
+      "category": "KD_FONT"
+    },
+    {
+      "name": "KD_FONT_OP_GET_TALL",
+      "value": "5",
+      "comment": "Get font with vpitch = height",
+      "category": "KD_FONT"
+    },
+    {
+      "name": "KD_FONT_FLAG_DONT_RECALC",
+      "value": "1",
+      "comment": "Don't recalculate hw charcell size [compat]",
+      "category": "KD_FONT"
+    }
+  ],
+  "structs": [
+    {
+      "name": "consolefontdesc",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "unipair",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "unimapdesc",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "unimapinit",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "kbentry",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "kbsentry",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "kbdiacr",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "kbdiacrs",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "kbdiacruc",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "kbdiacrsuc",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "kbkeycode",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "kbd_repeat",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "delay",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "period",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "console_font_op",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "console_font",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

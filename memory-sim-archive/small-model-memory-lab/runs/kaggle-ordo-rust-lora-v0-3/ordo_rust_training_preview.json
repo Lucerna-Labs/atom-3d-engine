@@ -1,0 +1,31 @@
+{
+  "dataset_root": "/kaggle/input/datasets/jessealicea/small-model-memory-lab/data/ordo_rust_memory_lora_v0_2",
+  "model_id": "Qwen/Qwen3-1.7B-Base",
+  "training_enabled": true,
+  "train_count": 137,
+  "validation_count": 14,
+  "first_train_examples": [
+    {
+      "id": "contract-card:backpressure_scheduler:0",
+      "kind": "ordo_contract_card",
+      "task": "backpressure_scheduler",
+      "text": "### User\nYou are training as a narrow Rust builder for Jesse's Ordo architecture.\nReturn exact Rust contracts and compact implementation details. Preserve names, signatures, fields, booleans, and CLI output exactly.\n\nWrite the core Rust contract for the Ordo backpressure_scheduler. Include Plan fields and the schedule method signature.\n\n### Assistant\nI remember the exact backpressure_scheduler contract.\n\n```rust\n#[derive(Clone, Debug, PartialEq, Eq)]\npub struct Plan { pub task_id: String, pub node: String, pub promoted: bool, pub signals: Vec<String> }\n\nimpl Scheduler {\n    pub fn new() -> Self;\n    pub fn add_node(&mut self, id: &str, cost: u32, capacity: usize);\n    pub fn add_ramp(&mut self, from: &str, to: &str);\n    pub fn schedule(&self, task_id: &str, candidates: &[&str], max_cost: u32) -> Option<Plan>;\n}\n```\n\nschedule iterates candidates in preference order. Over-budget nodes are skipped. Full nodes produce `backpressure:<node>` and are skipped. The first affordable node with capacity becomes the Plan. If a skipped full node has a ramp to the selected node, `promoted=true`. The CLI line is `task=job node=cloud promoted=true signals=backpressure:local`."
+    },
+    {
+      "id": "contract-card:signal_mesh:0",
+      "kind": "ordo_contract_card",
+      "task": "signal_mesh",
+      "text": "### User\nYou are training as a narrow Rust builder for Jesse's Ordo architecture.\nReturn exact Rust contracts and compact implementation details. Preserve names, signatures, fields, booleans, and CLI output exactly.\n\nDescribe and sketch the Rust behavior for SignalMesh vertical and horizontal propagation in Ordo.\n\n### Assistant\nI remember the exact SignalMesh shape.\n\n```rust\n#[derive(Clone, Debug, PartialEq, Eq)]\npub struct SignalTrace { pub kind: String, pub origin: String, pub affected: Vec<String> }\n\nimpl SignalMesh {\n    pub fn new() -> Self;\n    pub fn add_node(&mut self, name: &str, layer: usize);\n    pub fn vertical(&self, origin: &str) -> SignalTrace;\n    pub fn horizontal(&self, origin: &str) -> SignalTrace;\n}\n```\n\nvertical(origin) includes the origin first, then every node with a greater layer in insertion order. With transport L0, message L1, flow L2, peer L2, orch L3, `vertical(\"message\")` returns affected `message,flow,peer,orch`. horizontal(origin) returns same-layer peers other than origin, so `horizontal(\"flow\")` affects `peer`. CLI prints `signal=vertical origin=message affected=message,flow,peer,orch`."
+    },
+    {
+      "id": "contract-card:retry_fallback:0",
+      "kind": "ordo_contract_card",
+      "task": "retry_fallback",
+      "text": "### User\nYou are training as a narrow Rust builder for Jesse's Ordo architecture.\nReturn exact Rust contracts and compact implementation details. Preserve names, signatures, fields, booleans, and CLI output exactly.\n\nImplement the key logic for RetryRuntime where false means failed and true means healthy.\n\n### Assistant\nI remember the exact retry_fallback polarity.\n\n```rust\n#[derive(Clone, Debug, PartialEq, Eq)]\npub struct RetryPlan { pub task_id: String, pub node: String, pub signals: Vec<String> }\n\nimpl RetryRuntime {\n    pub fn new() -> Self;\n    pub fn add_node(&mut self, name: &str, healthy: bool);\n    pub fn plan(&self, task_id: &str, candidates: &[&str]) -> Option<RetryPlan>;\n}\n```\n\n`false` means failed and `true` means healthy. plan tries candidates in order, records `retry:<node>` for each failed or missing candidate, returns the first healthy node, and returns None if no healthy node exists. With local=false and backup=true, plan returns node `backup` with signals `retry:local`."
+    }
+  ],
+  "output_dir": "/kaggle/working/ordo-rust-memory-lora-v0-3",
+  "report_path": "/kaggle/working/ordo_rust_lora_eval_results.json",
+  "max_steps": 90,
+  "max_seq_length": 1536
+}

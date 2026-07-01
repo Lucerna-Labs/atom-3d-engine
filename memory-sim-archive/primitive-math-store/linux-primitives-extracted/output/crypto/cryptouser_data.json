@@ -1,0 +1,549 @@
+{
+  "filename": "cryptouser.h",
+  "includes": [
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "CRYPTO_MSG_MAX",
+      "value": "(__CRYPTO_MSG_MAX - 1)",
+      "comment": "",
+      "category": "CRYPTO_MSG"
+    },
+    {
+      "name": "CRYPTO_NR_MSGTYPES",
+      "value": "(CRYPTO_MSG_MAX + 1 - CRYPTO_MSG_BASE)",
+      "comment": "",
+      "category": "CRYPTO_NR"
+    },
+    {
+      "name": "CRYPTO_MAX_NAME",
+      "value": "64",
+      "comment": "",
+      "category": "CRYPTO_MAX"
+    },
+    {
+      "name": "CRYPTOCFGA_MAX",
+      "value": "(__CRYPTOCFGA_MAX - 1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "CRYPTO_REPORT_MAXSIZE",
+      "value": "(sizeof(struct crypto_user_alg) + ",
+      "comment": "",
+      "category": "CRYPTO_REPORT"
+    }
+  ],
+  "structs": [
+    {
+      "name": "crypto_user_alg",
+      "fields": [
+        {
+          "type_name": "char",
+          "name": "cru_name",
+          "array_size": "CRYPTO_MAX_NAME",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "cru_driver_name",
+          "array_size": "CRYPTO_MAX_NAME",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "cru_module_name",
+          "array_size": "CRYPTO_MAX_NAME",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "cru_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "cru_mask",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "cru_refcnt",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "cru_flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "crypto_stat_aead",
+      "fields": [
+        {
+          "type_name": "char",
+          "name": "type",
+          "array_size": "CRYPTO_MAX_NAME",
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "stat_encrypt_cnt",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "stat_encrypt_tlen",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "stat_decrypt_cnt",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "stat_decrypt_tlen",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "stat_err_cnt",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "crypto_stat_akcipher",
+      "fields": [
+        {
+          "type_name": "char",
+          "name": "type",
+          "array_size": "CRYPTO_MAX_NAME",
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "stat_encrypt_cnt",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "stat_encrypt_tlen",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "stat_decrypt_cnt",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "stat_decrypt_tlen",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "stat_verify_cnt",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "stat_sign_cnt",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "stat_err_cnt",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "crypto_stat_cipher",
+      "fields": [
+        {
+          "type_name": "char",
+          "name": "type",
+          "array_size": "CRYPTO_MAX_NAME",
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "stat_encrypt_cnt",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "stat_encrypt_tlen",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "stat_decrypt_cnt",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "stat_decrypt_tlen",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "stat_err_cnt",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "crypto_stat_compress",
+      "fields": [
+        {
+          "type_name": "char",
+          "name": "type",
+          "array_size": "CRYPTO_MAX_NAME",
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "stat_compress_cnt",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "stat_compress_tlen",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "stat_decompress_cnt",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "stat_decompress_tlen",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "stat_err_cnt",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "crypto_stat_hash",
+      "fields": [
+        {
+          "type_name": "char",
+          "name": "type",
+          "array_size": "CRYPTO_MAX_NAME",
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "stat_hash_cnt",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "stat_hash_tlen",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "stat_err_cnt",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "crypto_stat_kpp",
+      "fields": [
+        {
+          "type_name": "char",
+          "name": "type",
+          "array_size": "CRYPTO_MAX_NAME",
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "stat_setsecret_cnt",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "stat_generate_public_key_cnt",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "stat_compute_shared_secret_cnt",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "stat_err_cnt",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "crypto_stat_rng",
+      "fields": [
+        {
+          "type_name": "char",
+          "name": "type",
+          "array_size": "CRYPTO_MAX_NAME",
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "stat_generate_cnt",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "stat_generate_tlen",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "stat_seed_cnt",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "stat_err_cnt",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "crypto_stat_larval",
+      "fields": [
+        {
+          "type_name": "char",
+          "name": "type",
+          "array_size": "CRYPTO_MAX_NAME",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "crypto_report_larval",
+      "fields": [
+        {
+          "type_name": "char",
+          "name": "type",
+          "array_size": "CRYPTO_MAX_NAME",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "crypto_report_hash",
+      "fields": [
+        {
+          "type_name": "char",
+          "name": "type",
+          "array_size": "CRYPTO_MAX_NAME",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "crypto_report_cipher",
+      "fields": [
+        {
+          "type_name": "char",
+          "name": "type",
+          "array_size": "CRYPTO_MAX_NAME",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "crypto_report_blkcipher",
+      "fields": [
+        {
+          "type_name": "char",
+          "name": "type",
+          "array_size": "CRYPTO_MAX_NAME",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "geniv",
+          "array_size": "CRYPTO_MAX_NAME",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "crypto_report_aead",
+      "fields": [
+        {
+          "type_name": "char",
+          "name": "type",
+          "array_size": "CRYPTO_MAX_NAME",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "geniv",
+          "array_size": "CRYPTO_MAX_NAME",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "crypto_report_comp",
+      "fields": [
+        {
+          "type_name": "char",
+          "name": "type",
+          "array_size": "CRYPTO_MAX_NAME",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "crypto_report_rng",
+      "fields": [
+        {
+          "type_name": "char",
+          "name": "type",
+          "array_size": "CRYPTO_MAX_NAME",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "crypto_report_akcipher",
+      "fields": [
+        {
+          "type_name": "char",
+          "name": "type",
+          "array_size": "CRYPTO_MAX_NAME",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "crypto_report_kpp",
+      "fields": [
+        {
+          "type_name": "char",
+          "name": "type",
+          "array_size": "CRYPTO_MAX_NAME",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "crypto_report_acomp",
+      "fields": [
+        {
+          "type_name": "char",
+          "name": "type",
+          "array_size": "CRYPTO_MAX_NAME",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "crypto_report_sig",
+      "fields": [
+        {
+          "type_name": "char",
+          "name": "type",
+          "array_size": "CRYPTO_MAX_NAME",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

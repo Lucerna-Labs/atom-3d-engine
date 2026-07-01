@@ -1,0 +1,1603 @@
+{
+  "filename": "fb.h",
+  "includes": [
+    "linux/types.h",
+    "linux/i2c.h",
+    "linux/vesa.h"
+  ],
+  "defines": [
+    {
+      "name": "FB_MAX",
+      "value": "32",
+      "comment": "sufficient for now",
+      "category": ""
+    },
+    {
+      "name": "FBIOGET_VSCREENINFO",
+      "value": "0x4600",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FBIOPUT_VSCREENINFO",
+      "value": "0x4601",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FBIOGET_FSCREENINFO",
+      "value": "0x4602",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FBIOGETCMAP",
+      "value": "0x4604",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FBIOPUTCMAP",
+      "value": "0x4605",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FBIOPAN_DISPLAY",
+      "value": "0x4606",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FBIO_CURSOR",
+      "value": "_IOWR('F', 0x08, struct fb_cursor)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FBIOGET_CON2FBMAP",
+      "value": "0x460F",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FBIOPUT_CON2FBMAP",
+      "value": "0x4610",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FBIOBLANK",
+      "value": "0x4611",
+      "comment": "arg: 0 or vesa level + 1",
+      "category": ""
+    },
+    {
+      "name": "FBIOGET_VBLANK",
+      "value": "_IOR('F', 0x12, struct fb_vblank)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FBIO_ALLOC",
+      "value": "0x4613",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FBIO_FREE",
+      "value": "0x4614",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FBIOGET_GLYPH",
+      "value": "0x4615",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FBIOGET_HWCINFO",
+      "value": "0x4616",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FBIOPUT_MODEINFO",
+      "value": "0x4617",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FBIOGET_DISPINFO",
+      "value": "0x4618",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FBIO_WAITFORVSYNC",
+      "value": "_IOW('F', 0x20, __u32)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FB_TYPE_PACKED_PIXELS",
+      "value": "0",
+      "comment": "Packed Pixels",
+      "category": "FB_TYPE"
+    },
+    {
+      "name": "FB_TYPE_PLANES",
+      "value": "1",
+      "comment": "Non interleaved planes",
+      "category": "FB_TYPE"
+    },
+    {
+      "name": "FB_TYPE_INTERLEAVED_PLANES",
+      "value": "2",
+      "comment": "Interleaved planes",
+      "category": "FB_TYPE"
+    },
+    {
+      "name": "FB_TYPE_TEXT",
+      "value": "3",
+      "comment": "Text/attributes",
+      "category": "FB_TYPE"
+    },
+    {
+      "name": "FB_TYPE_VGA_PLANES",
+      "value": "4",
+      "comment": "EGA/VGA planes",
+      "category": "FB_TYPE"
+    },
+    {
+      "name": "FB_TYPE_FOURCC",
+      "value": "5",
+      "comment": "Type identified by a V4L2 FOURCC",
+      "category": "FB_TYPE"
+    },
+    {
+      "name": "FB_AUX_TEXT_MDA",
+      "value": "0",
+      "comment": "Monochrome text",
+      "category": "FB_AUX"
+    },
+    {
+      "name": "FB_AUX_TEXT_CGA",
+      "value": "1",
+      "comment": "CGA/EGA/VGA Color text",
+      "category": "FB_AUX"
+    },
+    {
+      "name": "FB_AUX_TEXT_S3_MMIO",
+      "value": "2",
+      "comment": "S3 MMIO fasttext",
+      "category": "FB_AUX"
+    },
+    {
+      "name": "FB_AUX_TEXT_MGA_STEP16",
+      "value": "3",
+      "comment": "MGA Millenium I: text, attr, 14 reserved bytes",
+      "category": "FB_AUX"
+    },
+    {
+      "name": "FB_AUX_TEXT_MGA_STEP8",
+      "value": "4",
+      "comment": "other MGAs:      text, attr,  6 reserved bytes",
+      "category": "FB_AUX"
+    },
+    {
+      "name": "FB_AUX_TEXT_SVGA_GROUP",
+      "value": "8",
+      "comment": "8-15: SVGA tileblit compatible modes",
+      "category": "FB_AUX"
+    },
+    {
+      "name": "FB_AUX_TEXT_SVGA_MASK",
+      "value": "7",
+      "comment": "lower three bits says step",
+      "category": "FB_AUX"
+    },
+    {
+      "name": "FB_AUX_TEXT_SVGA_STEP2",
+      "value": "8",
+      "comment": "SVGA text mode:  text, attr",
+      "category": "FB_AUX"
+    },
+    {
+      "name": "FB_AUX_TEXT_SVGA_STEP4",
+      "value": "9",
+      "comment": "SVGA text mode:  text, attr,  2 reserved bytes",
+      "category": "FB_AUX"
+    },
+    {
+      "name": "FB_AUX_TEXT_SVGA_STEP8",
+      "value": "10",
+      "comment": "SVGA text mode:  text, attr,  6 reserved bytes",
+      "category": "FB_AUX"
+    },
+    {
+      "name": "FB_AUX_TEXT_SVGA_STEP16",
+      "value": "11",
+      "comment": "SVGA text mode:  text, attr, 14 reserved bytes",
+      "category": "FB_AUX"
+    },
+    {
+      "name": "FB_AUX_TEXT_SVGA_LAST",
+      "value": "15",
+      "comment": "reserved up to 15",
+      "category": "FB_AUX"
+    },
+    {
+      "name": "FB_AUX_VGA_PLANES_VGA4",
+      "value": "0",
+      "comment": "16 color planes (EGA/VGA)",
+      "category": "FB_AUX"
+    },
+    {
+      "name": "FB_AUX_VGA_PLANES_CFB4",
+      "value": "1",
+      "comment": "CFB4 in planes (VGA)",
+      "category": "FB_AUX"
+    },
+    {
+      "name": "FB_AUX_VGA_PLANES_CFB8",
+      "value": "2",
+      "comment": "CFB8 in planes (VGA)",
+      "category": "FB_AUX"
+    },
+    {
+      "name": "FB_VISUAL_MONO01",
+      "value": "0",
+      "comment": "Monochr. 1=Black 0=White",
+      "category": "FB_VISUAL"
+    },
+    {
+      "name": "FB_VISUAL_MONO10",
+      "value": "1",
+      "comment": "Monochr. 1=White 0=Black",
+      "category": "FB_VISUAL"
+    },
+    {
+      "name": "FB_VISUAL_TRUECOLOR",
+      "value": "2",
+      "comment": "True color",
+      "category": "FB_VISUAL"
+    },
+    {
+      "name": "FB_VISUAL_PSEUDOCOLOR",
+      "value": "3",
+      "comment": "Pseudo color (like atari)",
+      "category": "FB_VISUAL"
+    },
+    {
+      "name": "FB_VISUAL_DIRECTCOLOR",
+      "value": "4",
+      "comment": "Direct color",
+      "category": "FB_VISUAL"
+    },
+    {
+      "name": "FB_VISUAL_STATIC_PSEUDOCOLOR",
+      "value": "5",
+      "comment": "Pseudo color readonly",
+      "category": "FB_VISUAL"
+    },
+    {
+      "name": "FB_VISUAL_FOURCC",
+      "value": "6",
+      "comment": "Visual identified by a V4L2 FOURCC",
+      "category": "FB_VISUAL"
+    },
+    {
+      "name": "FB_ACCEL_NONE",
+      "value": "0",
+      "comment": "no hardware accelerator",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_ATARIBLITT",
+      "value": "1",
+      "comment": "Atari Blitter",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_AMIGABLITT",
+      "value": "2",
+      "comment": "Amiga Blitter",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_S3_TRIO64",
+      "value": "3",
+      "comment": "Cybervision64 (S3 Trio64)",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_NCR_77C32BLT",
+      "value": "4",
+      "comment": "RetinaZ3 (NCR 77C32BLT)",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_S3_VIRGE",
+      "value": "5",
+      "comment": "Cybervision64/3D (S3 ViRGE)",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_ATI_MACH64GX",
+      "value": "6",
+      "comment": "ATI Mach 64GX family",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_DEC_TGA",
+      "value": "7",
+      "comment": "DEC 21030 TGA",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_ATI_MACH64CT",
+      "value": "8",
+      "comment": "ATI Mach 64CT family",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_ATI_MACH64VT",
+      "value": "9",
+      "comment": "ATI Mach 64CT family VT class",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_ATI_MACH64GT",
+      "value": "10",
+      "comment": "ATI Mach 64CT family GT class",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_SUN_CREATOR",
+      "value": "11",
+      "comment": "Sun Creator/Creator3D",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_SUN_CGSIX",
+      "value": "12",
+      "comment": "Sun cg6",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_SUN_LEO",
+      "value": "13",
+      "comment": "Sun leo/zx",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_IMS_TWINTURBO",
+      "value": "14",
+      "comment": "IMS Twin Turbo",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_3DLABS_PERMEDIA2",
+      "value": "15",
+      "comment": "3Dlabs Permedia 2",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_MATROX_MGA2064W",
+      "value": "16",
+      "comment": "Matrox MGA2064W (Millenium)",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_MATROX_MGA1064SG",
+      "value": "17",
+      "comment": "Matrox MGA1064SG (Mystique)",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_MATROX_MGA2164W",
+      "value": "18",
+      "comment": "Matrox MGA2164W (Millenium II)",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_MATROX_MGA2164W_AGP",
+      "value": "19",
+      "comment": "Matrox MGA2164W (Millenium II)",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_MATROX_MGAG100",
+      "value": "20",
+      "comment": "Matrox G100 (Productiva G100)",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_MATROX_MGAG200",
+      "value": "21",
+      "comment": "Matrox G200 (Myst, Mill, ...)",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_SUN_CG14",
+      "value": "22",
+      "comment": "Sun cgfourteen",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_SUN_BWTWO",
+      "value": "23",
+      "comment": "Sun bwtwo",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_SUN_CGTHREE",
+      "value": "24",
+      "comment": "Sun cgthree",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_SUN_TCX",
+      "value": "25",
+      "comment": "Sun tcx",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_MATROX_MGAG400",
+      "value": "26",
+      "comment": "Matrox G400",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_NV3",
+      "value": "27",
+      "comment": "nVidia RIVA 128",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_NV4",
+      "value": "28",
+      "comment": "nVidia RIVA TNT",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_NV5",
+      "value": "29",
+      "comment": "nVidia RIVA TNT2",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_CT_6555x",
+      "value": "30",
+      "comment": "C&T 6555x",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_3DFX_BANSHEE",
+      "value": "31",
+      "comment": "3Dfx Banshee",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_ATI_RAGE128",
+      "value": "32",
+      "comment": "ATI Rage128 family",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_IGS_CYBER2000",
+      "value": "33",
+      "comment": "CyberPro 2000",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_IGS_CYBER2010",
+      "value": "34",
+      "comment": "CyberPro 2010",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_IGS_CYBER5000",
+      "value": "35",
+      "comment": "CyberPro 5000",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_SIS_GLAMOUR",
+      "value": "36",
+      "comment": "SiS 300/630/540",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_3DLABS_PERMEDIA3",
+      "value": "37",
+      "comment": "3Dlabs Permedia 3",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_ATI_RADEON",
+      "value": "38",
+      "comment": "ATI Radeon family",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_I810",
+      "value": "39",
+      "comment": "Intel 810/815",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_SIS_GLAMOUR_2",
+      "value": "40",
+      "comment": "SiS 315, 650, 740",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_SIS_XABRE",
+      "value": "41",
+      "comment": "SiS 330 (\"Xabre\")",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_I830",
+      "value": "42",
+      "comment": "Intel 830M/845G/85x/865G",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_NV_10",
+      "value": "43",
+      "comment": "nVidia Arch 10",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_NV_20",
+      "value": "44",
+      "comment": "nVidia Arch 20",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_NV_30",
+      "value": "45",
+      "comment": "nVidia Arch 30",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_NV_40",
+      "value": "46",
+      "comment": "nVidia Arch 40",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_XGI_VOLARI_V",
+      "value": "47",
+      "comment": "XGI Volari V3XT, V5, V8",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_XGI_VOLARI_Z",
+      "value": "48",
+      "comment": "XGI Volari Z7",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_OMAP1610",
+      "value": "49",
+      "comment": "TI OMAP16xx",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_TRIDENT_TGUI",
+      "value": "50",
+      "comment": "Trident TGUI",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_TRIDENT_3DIMAGE",
+      "value": "51",
+      "comment": "Trident 3DImage",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_TRIDENT_BLADE3D",
+      "value": "52",
+      "comment": "Trident Blade3D",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_TRIDENT_BLADEXP",
+      "value": "53",
+      "comment": "Trident BladeXP",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_CIRRUS_ALPINE",
+      "value": "53",
+      "comment": "Cirrus Logic 543x/544x/5480",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_NEOMAGIC_NM2070",
+      "value": "90",
+      "comment": "NeoMagic NM2070",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_NEOMAGIC_NM2090",
+      "value": "91",
+      "comment": "NeoMagic NM2090",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_NEOMAGIC_NM2093",
+      "value": "92",
+      "comment": "NeoMagic NM2093",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_NEOMAGIC_NM2097",
+      "value": "93",
+      "comment": "NeoMagic NM2097",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_NEOMAGIC_NM2160",
+      "value": "94",
+      "comment": "NeoMagic NM2160",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_NEOMAGIC_NM2200",
+      "value": "95",
+      "comment": "NeoMagic NM2200",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_NEOMAGIC_NM2230",
+      "value": "96",
+      "comment": "NeoMagic NM2230",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_NEOMAGIC_NM2360",
+      "value": "97",
+      "comment": "NeoMagic NM2360",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_NEOMAGIC_NM2380",
+      "value": "98",
+      "comment": "NeoMagic NM2380",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_PXA3XX",
+      "value": "99",
+      "comment": "PXA3xx",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_SAVAGE4",
+      "value": "0x80",
+      "comment": "S3 Savage4",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_SAVAGE3D",
+      "value": "0x81",
+      "comment": "S3 Savage3D",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_SAVAGE3D_MV",
+      "value": "0x82",
+      "comment": "S3 Savage3D-MV",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_SAVAGE2000",
+      "value": "0x83",
+      "comment": "S3 Savage2000",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_SAVAGE_MX_MV",
+      "value": "0x84",
+      "comment": "S3 Savage/MX-MV",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_SAVAGE_MX",
+      "value": "0x85",
+      "comment": "S3 Savage/MX",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_SAVAGE_IX_MV",
+      "value": "0x86",
+      "comment": "S3 Savage/IX-MV",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_SAVAGE_IX",
+      "value": "0x87",
+      "comment": "S3 Savage/IX",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_PROSAVAGE_PM",
+      "value": "0x88",
+      "comment": "S3 ProSavage PM133",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_PROSAVAGE_KM",
+      "value": "0x89",
+      "comment": "S3 ProSavage KM133",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_S3TWISTER_P",
+      "value": "0x8a",
+      "comment": "S3 Twister",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_S3TWISTER_K",
+      "value": "0x8b",
+      "comment": "S3 TwisterK",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_SUPERSAVAGE",
+      "value": "0x8c",
+      "comment": "S3 Supersavage",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_PROSAVAGE_DDR",
+      "value": "0x8d",
+      "comment": "S3 ProSavage DDR",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_PROSAVAGE_DDRK",
+      "value": "0x8e",
+      "comment": "S3 ProSavage DDR-K",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_ACCEL_PUV3_UNIGFX",
+      "value": "0xa0",
+      "comment": "PKUnity-v3 Unigfx",
+      "category": "FB_ACCEL"
+    },
+    {
+      "name": "FB_CAP_FOURCC",
+      "value": "1",
+      "comment": "Device supports FOURCC-based formats",
+      "category": "FB_CAP"
+    },
+    {
+      "name": "FB_NONSTD_HAM",
+      "value": "1",
+      "comment": "Hold-And-Modify (HAM)",
+      "category": "FB_NONSTD"
+    },
+    {
+      "name": "FB_NONSTD_REV_PIX_IN_B",
+      "value": "2",
+      "comment": "order of pixels in each byte is reversed",
+      "category": "FB_NONSTD"
+    },
+    {
+      "name": "FB_ACTIVATE_NOW",
+      "value": "0",
+      "comment": "set values immediately (or vbl)",
+      "category": "FB_ACTIVATE"
+    },
+    {
+      "name": "FB_ACTIVATE_NXTOPEN",
+      "value": "1",
+      "comment": "activate on next open",
+      "category": "FB_ACTIVATE"
+    },
+    {
+      "name": "FB_ACTIVATE_TEST",
+      "value": "2",
+      "comment": "don't set, round up impossible",
+      "category": "FB_ACTIVATE"
+    },
+    {
+      "name": "FB_ACTIVATE_MASK",
+      "value": "15",
+      "comment": "",
+      "category": "FB_ACTIVATE"
+    },
+    {
+      "name": "FB_ACTIVATE_VBL",
+      "value": "16",
+      "comment": "activate values on next vbl",
+      "category": "FB_ACTIVATE"
+    },
+    {
+      "name": "FB_CHANGE_CMAP_VBL",
+      "value": "32",
+      "comment": "change colormap on vbl",
+      "category": "FB_CHANGE"
+    },
+    {
+      "name": "FB_ACTIVATE_ALL",
+      "value": "64",
+      "comment": "change all VCs on this fb",
+      "category": "FB_ACTIVATE"
+    },
+    {
+      "name": "FB_ACTIVATE_FORCE",
+      "value": "128",
+      "comment": "force apply even when no change",
+      "category": "FB_ACTIVATE"
+    },
+    {
+      "name": "FB_ACTIVATE_INV_MODE",
+      "value": "256",
+      "comment": "invalidate videomode",
+      "category": "FB_ACTIVATE"
+    },
+    {
+      "name": "FB_ACTIVATE_KD_TEXT",
+      "value": "512",
+      "comment": "for KDSET vt ioctl",
+      "category": "FB_ACTIVATE"
+    },
+    {
+      "name": "FB_ACCELF_TEXT",
+      "value": "1",
+      "comment": "(OBSOLETE) see fb_info.flags and vc_mode",
+      "category": "FB_ACCELF"
+    },
+    {
+      "name": "FB_SYNC_HOR_HIGH_ACT",
+      "value": "1",
+      "comment": "horizontal sync high active",
+      "category": "FB_SYNC"
+    },
+    {
+      "name": "FB_SYNC_VERT_HIGH_ACT",
+      "value": "2",
+      "comment": "vertical sync high active",
+      "category": "FB_SYNC"
+    },
+    {
+      "name": "FB_SYNC_EXT",
+      "value": "4",
+      "comment": "external sync",
+      "category": "FB_SYNC"
+    },
+    {
+      "name": "FB_SYNC_COMP_HIGH_ACT",
+      "value": "8",
+      "comment": "composite sync high active",
+      "category": "FB_SYNC"
+    },
+    {
+      "name": "FB_SYNC_BROADCAST",
+      "value": "16",
+      "comment": "broadcast video timings",
+      "category": "FB_SYNC"
+    },
+    {
+      "name": "FB_SYNC_ON_GREEN",
+      "value": "32",
+      "comment": "sync on green",
+      "category": "FB_SYNC"
+    },
+    {
+      "name": "FB_VMODE_NONINTERLACED",
+      "value": "0",
+      "comment": "non interlaced",
+      "category": "FB_VMODE"
+    },
+    {
+      "name": "FB_VMODE_INTERLACED",
+      "value": "1",
+      "comment": "interlaced",
+      "category": "FB_VMODE"
+    },
+    {
+      "name": "FB_VMODE_DOUBLE",
+      "value": "2",
+      "comment": "double scan",
+      "category": "FB_VMODE"
+    },
+    {
+      "name": "FB_VMODE_ODD_FLD_FIRST",
+      "value": "4",
+      "comment": "interlaced: top line first",
+      "category": "FB_VMODE"
+    },
+    {
+      "name": "FB_VMODE_MASK",
+      "value": "255",
+      "comment": "",
+      "category": "FB_VMODE"
+    },
+    {
+      "name": "FB_VMODE_YWRAP",
+      "value": "256",
+      "comment": "ywrap instead of panning",
+      "category": "FB_VMODE"
+    },
+    {
+      "name": "FB_VMODE_SMOOTH_XPAN",
+      "value": "512",
+      "comment": "smooth xpan possible (internally used)",
+      "category": "FB_VMODE"
+    },
+    {
+      "name": "FB_VMODE_CONUPDATE",
+      "value": "512",
+      "comment": "don't update x/yoffset",
+      "category": "FB_VMODE"
+    },
+    {
+      "name": "FB_ROTATE_UR",
+      "value": "0",
+      "comment": "",
+      "category": "FB_ROTATE"
+    },
+    {
+      "name": "FB_ROTATE_CW",
+      "value": "1",
+      "comment": "",
+      "category": "FB_ROTATE"
+    },
+    {
+      "name": "FB_ROTATE_UD",
+      "value": "2",
+      "comment": "",
+      "category": "FB_ROTATE"
+    },
+    {
+      "name": "FB_ROTATE_CCW",
+      "value": "3",
+      "comment": "",
+      "category": "FB_ROTATE"
+    },
+    {
+      "name": "FB_VBLANK_VBLANKING",
+      "value": "0x001",
+      "comment": "currently in a vertical blank",
+      "category": "FB_VBLANK"
+    },
+    {
+      "name": "FB_VBLANK_HBLANKING",
+      "value": "0x002",
+      "comment": "currently in a horizontal blank",
+      "category": "FB_VBLANK"
+    },
+    {
+      "name": "FB_VBLANK_HAVE_VBLANK",
+      "value": "0x004",
+      "comment": "vertical blanks can be detected",
+      "category": "FB_VBLANK"
+    },
+    {
+      "name": "FB_VBLANK_HAVE_HBLANK",
+      "value": "0x008",
+      "comment": "horizontal blanks can be detected",
+      "category": "FB_VBLANK"
+    },
+    {
+      "name": "FB_VBLANK_HAVE_COUNT",
+      "value": "0x010",
+      "comment": "global retrace counter is available",
+      "category": "FB_VBLANK"
+    },
+    {
+      "name": "FB_VBLANK_HAVE_VCOUNT",
+      "value": "0x020",
+      "comment": "the vcount field is valid",
+      "category": "FB_VBLANK"
+    },
+    {
+      "name": "FB_VBLANK_HAVE_HCOUNT",
+      "value": "0x040",
+      "comment": "the hcount field is valid",
+      "category": "FB_VBLANK"
+    },
+    {
+      "name": "FB_VBLANK_VSYNCING",
+      "value": "0x080",
+      "comment": "currently in a vsync",
+      "category": "FB_VBLANK"
+    },
+    {
+      "name": "FB_VBLANK_HAVE_VSYNC",
+      "value": "0x100",
+      "comment": "vertical syncs can be detected",
+      "category": "FB_VBLANK"
+    },
+    {
+      "name": "ROP_COPY",
+      "value": "0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ROP_XOR",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FB_CUR_SETIMAGE",
+      "value": "0x01",
+      "comment": "",
+      "category": "FB_CUR"
+    },
+    {
+      "name": "FB_CUR_SETPOS",
+      "value": "0x02",
+      "comment": "",
+      "category": "FB_CUR"
+    },
+    {
+      "name": "FB_CUR_SETHOT",
+      "value": "0x04",
+      "comment": "",
+      "category": "FB_CUR"
+    },
+    {
+      "name": "FB_CUR_SETCMAP",
+      "value": "0x08",
+      "comment": "",
+      "category": "FB_CUR"
+    },
+    {
+      "name": "FB_CUR_SETSHAPE",
+      "value": "0x10",
+      "comment": "",
+      "category": "FB_CUR"
+    },
+    {
+      "name": "FB_CUR_SETSIZE",
+      "value": "0x20",
+      "comment": "",
+      "category": "FB_CUR"
+    },
+    {
+      "name": "FB_CUR_SETALL",
+      "value": "0xFF",
+      "comment": "",
+      "category": "FB_CUR"
+    },
+    {
+      "name": "FB_BACKLIGHT_LEVELS",
+      "value": "128",
+      "comment": "",
+      "category": "FB_BACKLIGHT"
+    },
+    {
+      "name": "FB_BACKLIGHT_MAX",
+      "value": "0xFF",
+      "comment": "",
+      "category": "FB_BACKLIGHT"
+    }
+  ],
+  "structs": [
+    {
+      "name": "fb_fix_screeninfo",
+      "fields": [
+        {
+          "type_name": "char",
+          "name": "id",
+          "array_size": "16",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "smem_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "type_aux",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "visual",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "xpanstep",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "ypanstep",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "ywrapstep",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "line_length",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "mmio_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "accel",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "capabilities",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "reserved",
+          "array_size": "2",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fb_bitfield",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "length",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "msb_right",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fb_var_screeninfo",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "xres",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "yres",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "xres_virtual",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "yres_virtual",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "xoffset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "yoffset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "bits_per_pixel",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "grayscale",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "nonstd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "activate",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "height",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "width",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "accel_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pixclock",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "left_margin",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "right_margin",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "upper_margin",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "lower_margin",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "hsync_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "vsync_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "sync",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "vmode",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "rotate",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "colorspace",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved",
+          "array_size": "4",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fb_cmap",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "start",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "len",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fb_con2fbmap",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "console",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "framebuffer",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fb_vblank",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "vcount",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "hcount",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved",
+          "array_size": "4",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fb_copyarea",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "dx",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "dy",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "width",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "height",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "sx",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "sy",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fb_fillrect",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "dx",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "dy",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "width",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "height",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "color",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "rop",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fb_image",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "dx",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "dy",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "width",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "height",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "fg_color",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "bg_color",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "depth",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fbcurpos",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fb_cursor",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "set",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "enable",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "rop",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

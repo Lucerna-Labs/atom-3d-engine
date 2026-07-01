@@ -1,0 +1,2603 @@
+{
+  "filename": "drm_mode.h",
+  "includes": [
+    "linux/bits.h",
+    "linux/const.h",
+    "drm.h"
+  ],
+  "defines": [
+    {
+      "name": "DRM_CONNECTOR_NAME_LEN",
+      "value": "32",
+      "comment": "",
+      "category": "DRM_CONNECTOR"
+    },
+    {
+      "name": "DRM_DISPLAY_MODE_LEN",
+      "value": "32",
+      "comment": "",
+      "category": "DRM_DISPLAY"
+    },
+    {
+      "name": "DRM_PROP_NAME_LEN",
+      "value": "32",
+      "comment": "",
+      "category": "DRM_PROP"
+    },
+    {
+      "name": "DRM_MODE_TYPE_BUILTIN",
+      "value": "(1<<0)",
+      "comment": "deprecated",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_TYPE_CLOCK_C",
+      "value": "((1<<1) | DRM_MODE_TYPE_BUILTIN)",
+      "comment": "deprecated",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_TYPE_CRTC_C",
+      "value": "((1<<2) | DRM_MODE_TYPE_BUILTIN)",
+      "comment": "deprecated",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_TYPE_PREFERRED",
+      "value": "(1<<3)",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_TYPE_DEFAULT",
+      "value": "(1<<4)",
+      "comment": "deprecated",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_TYPE_USERDEF",
+      "value": "(1<<5)",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_TYPE_DRIVER",
+      "value": "(1<<6)",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_TYPE_ALL",
+      "value": "(DRM_MODE_TYPE_PREFERRED |\t",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_FLAG_PHSYNC",
+      "value": "(1<<0)",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_FLAG_NHSYNC",
+      "value": "(1<<1)",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_FLAG_PVSYNC",
+      "value": "(1<<2)",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_FLAG_NVSYNC",
+      "value": "(1<<3)",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_FLAG_INTERLACE",
+      "value": "(1<<4)",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_FLAG_DBLSCAN",
+      "value": "(1<<5)",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_FLAG_CSYNC",
+      "value": "(1<<6)",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_FLAG_PCSYNC",
+      "value": "(1<<7)",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_FLAG_NCSYNC",
+      "value": "(1<<8)",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_FLAG_HSKEW",
+      "value": "(1<<9)",
+      "comment": "hskew provided",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_FLAG_BCAST",
+      "value": "(1<<10)",
+      "comment": "deprecated",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_FLAG_PIXMUX",
+      "value": "(1<<11)",
+      "comment": "deprecated",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_FLAG_DBLCLK",
+      "value": "(1<<12)",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_FLAG_CLKDIV2",
+      "value": "(1<<13)",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_FLAG_3D_MASK",
+      "value": "(0x1f<<14)",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_FLAG_3D_NONE",
+      "value": "(0<<14)",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_FLAG_3D_FRAME_PACKING",
+      "value": "(1<<14)",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_FLAG_3D_FIELD_ALTERNATIVE",
+      "value": "(2<<14)",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_FLAG_3D_LINE_ALTERNATIVE",
+      "value": "(3<<14)",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_FLAG_3D_SIDE_BY_SIDE_FULL",
+      "value": "(4<<14)",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_FLAG_3D_L_DEPTH",
+      "value": "(5<<14)",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_FLAG_3D_L_DEPTH_GFX_GFX_DEPTH",
+      "value": "(6<<14)",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_FLAG_3D_TOP_AND_BOTTOM",
+      "value": "(7<<14)",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_FLAG_3D_SIDE_BY_SIDE_HALF",
+      "value": "(8<<14)",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_PICTURE_ASPECT_NONE",
+      "value": "0",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_PICTURE_ASPECT_4_3",
+      "value": "1",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_PICTURE_ASPECT_16_9",
+      "value": "2",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_PICTURE_ASPECT_64_27",
+      "value": "3",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_PICTURE_ASPECT_256_135",
+      "value": "4",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_CONTENT_TYPE_NO_DATA",
+      "value": "0",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_CONTENT_TYPE_GRAPHICS",
+      "value": "1",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_CONTENT_TYPE_PHOTO",
+      "value": "2",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_CONTENT_TYPE_CINEMA",
+      "value": "3",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_CONTENT_TYPE_GAME",
+      "value": "4",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_FLAG_PIC_AR_MASK",
+      "value": "(0x0F<<19)",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_FLAG_PIC_AR_NONE",
+      "value": "",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_FLAG_PIC_AR_4_3",
+      "value": "",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_FLAG_PIC_AR_16_9",
+      "value": "",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_FLAG_PIC_AR_64_27",
+      "value": "",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_FLAG_PIC_AR_256_135",
+      "value": "",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_FLAG_ALL",
+      "value": "(DRM_MODE_FLAG_PHSYNC |\t\t",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_DPMS_ON",
+      "value": "0",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_DPMS_STANDBY",
+      "value": "1",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_DPMS_SUSPEND",
+      "value": "2",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_DPMS_OFF",
+      "value": "3",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_SCALE_NONE",
+      "value": "0 /* Unmodified timing (display or",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_SCALE_FULLSCREEN",
+      "value": "1",
+      "comment": "Full screen, ignore aspect",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_SCALE_CENTER",
+      "value": "2",
+      "comment": "Centered, no scaling",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_SCALE_ASPECT",
+      "value": "3",
+      "comment": "Full screen, preserve aspect",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_DITHERING_OFF",
+      "value": "0",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_DITHERING_ON",
+      "value": "1",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_DITHERING_AUTO",
+      "value": "2",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_DIRTY_OFF",
+      "value": "0",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_DIRTY_ON",
+      "value": "1",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_DIRTY_ANNOTATE",
+      "value": "2",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_LINK_STATUS_GOOD",
+      "value": "0",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_LINK_STATUS_BAD",
+      "value": "1",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_PANEL_TYPE_UNKNOWN",
+      "value": "0",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_PANEL_TYPE_OLED",
+      "value": "1",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_ROTATE_0",
+      "value": "(1<<0)",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_ROTATE_90",
+      "value": "(1<<1)",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_ROTATE_180",
+      "value": "(1<<2)",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_ROTATE_270",
+      "value": "(1<<3)",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_ROTATE_MASK",
+      "value": "(",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_REFLECT_X",
+      "value": "(1<<4)",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_REFLECT_Y",
+      "value": "(1<<5)",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_REFLECT_MASK",
+      "value": "(",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_CONTENT_PROTECTION_UNDESIRED",
+      "value": "0",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_CONTENT_PROTECTION_DESIRED",
+      "value": "1",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_CONTENT_PROTECTION_ENABLED",
+      "value": "2",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_PRESENT_TOP_FIELD",
+      "value": "(1<<0)",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_PRESENT_BOTTOM_FIELD",
+      "value": "(1<<1)",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_ENCODER_NONE",
+      "value": "0",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_ENCODER_DAC",
+      "value": "1",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_ENCODER_TMDS",
+      "value": "2",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_ENCODER_LVDS",
+      "value": "3",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_ENCODER_TVDAC",
+      "value": "4",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_ENCODER_VIRTUAL",
+      "value": "5",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_ENCODER_DSI",
+      "value": "6",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_ENCODER_DPMST",
+      "value": "7",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_ENCODER_DPI",
+      "value": "8",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_CONNECTOR_Unknown",
+      "value": "0",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_CONNECTOR_VGA",
+      "value": "1",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_CONNECTOR_DVII",
+      "value": "2",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_CONNECTOR_DVID",
+      "value": "3",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_CONNECTOR_DVIA",
+      "value": "4",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_CONNECTOR_Composite",
+      "value": "5",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_CONNECTOR_SVIDEO",
+      "value": "6",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_CONNECTOR_LVDS",
+      "value": "7",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_CONNECTOR_Component",
+      "value": "8",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_CONNECTOR_9PinDIN",
+      "value": "9",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_CONNECTOR_DisplayPort",
+      "value": "10",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_CONNECTOR_HDMIA",
+      "value": "11",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_CONNECTOR_HDMIB",
+      "value": "12",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_CONNECTOR_TV",
+      "value": "13",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_CONNECTOR_eDP",
+      "value": "14",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_CONNECTOR_VIRTUAL",
+      "value": "15",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_CONNECTOR_DSI",
+      "value": "16",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_CONNECTOR_DPI",
+      "value": "17",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_CONNECTOR_WRITEBACK",
+      "value": "18",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_CONNECTOR_SPI",
+      "value": "19",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_CONNECTOR_USB",
+      "value": "20",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_PROP_PENDING",
+      "value": "(1<<0)",
+      "comment": "deprecated, do not use",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_PROP_RANGE",
+      "value": "(1<<1)",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_PROP_IMMUTABLE",
+      "value": "(1<<2)",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_PROP_ENUM",
+      "value": "(1<<3)",
+      "comment": "enumerated type with text strings",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_PROP_BLOB",
+      "value": "(1<<4)",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_PROP_BITMASK",
+      "value": "(1<<5)",
+      "comment": "bitmask of enumerated types",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_PROP_LEGACY_TYPE",
+      "value": "( ",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_PROP_EXTENDED_TYPE",
+      "value": "0x0000ffc0",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_PROP_OBJECT",
+      "value": "DRM_MODE_PROP_TYPE(1)",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_PROP_SIGNED_RANGE",
+      "value": "DRM_MODE_PROP_TYPE(2)",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_PROP_ATOMIC",
+      "value": "0x80000000",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_OBJECT_CRTC",
+      "value": "0xcccccccc",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_OBJECT_CONNECTOR",
+      "value": "0xc0c0c0c0",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_OBJECT_ENCODER",
+      "value": "0xe0e0e0e0",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_OBJECT_MODE",
+      "value": "0xdededede",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_OBJECT_PROPERTY",
+      "value": "0xb0b0b0b0",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_OBJECT_FB",
+      "value": "0xfbfbfbfb",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_OBJECT_BLOB",
+      "value": "0xbbbbbbbb",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_OBJECT_PLANE",
+      "value": "0xeeeeeeee",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_OBJECT_COLOROP",
+      "value": "0xfafafafa",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_OBJECT_ANY",
+      "value": "0",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_FB_INTERLACED",
+      "value": "(1<<0)",
+      "comment": "for interlaced framebuffers",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_FB_MODIFIERS",
+      "value": "(1<<1)",
+      "comment": "enables ->modifier[]",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_FB_DIRTY_ANNOTATE_COPY",
+      "value": "0x01",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_FB_DIRTY_ANNOTATE_FILL",
+      "value": "0x02",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_FB_DIRTY_FLAGS",
+      "value": "0x03",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_FB_DIRTY_MAX_CLIPS",
+      "value": "256",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_CURSOR_BO",
+      "value": "0x01",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_CURSOR_MOVE",
+      "value": "0x02",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_CURSOR_FLAGS",
+      "value": "0x03",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_PAGE_FLIP_EVENT",
+      "value": "0x01",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_PAGE_FLIP_ASYNC",
+      "value": "0x02",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_PAGE_FLIP_TARGET_ABSOLUTE",
+      "value": "0x4",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_PAGE_FLIP_TARGET_RELATIVE",
+      "value": "0x8",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_PAGE_FLIP_TARGET",
+      "value": "(DRM_MODE_PAGE_FLIP_TARGET_ABSOLUTE | ",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_PAGE_FLIP_FLAGS",
+      "value": "(DRM_MODE_PAGE_FLIP_EVENT | ",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_ATOMIC_TEST_ONLY",
+      "value": "0x0100",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_ATOMIC_NONBLOCK",
+      "value": "0x0200",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_ATOMIC_ALLOW_MODESET",
+      "value": "0x0400",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "DRM_MODE_ATOMIC_FLAGS",
+      "value": "(",
+      "comment": "",
+      "category": "DRM_MODE"
+    },
+    {
+      "name": "FORMAT_BLOB_CURRENT",
+      "value": "1",
+      "comment": "",
+      "category": "FORMAT_BLOB"
+    }
+  ],
+  "structs": [
+    {
+      "name": "drm_mode_modeinfo",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "clock",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "hdisplay",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "hsync_start",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "hsync_end",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "htotal",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "hskew",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "vdisplay",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "vsync_start",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "vsync_end",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "vtotal",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "vscan",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "vrefresh",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "name",
+          "array_size": "DRM_DISPLAY_MODE_LEN",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_mode_card_res",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "fb_id_ptr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "crtc_id_ptr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "connector_id_ptr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "encoder_id_ptr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "count_fbs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "count_crtcs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "count_connectors",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "count_encoders",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "min_width",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "max_width",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "min_height",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "max_height",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_mode_crtc",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "set_connectors_ptr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "count_connectors",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "crtc_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "fb_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "x",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "y",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "gamma_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "mode_valid",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_mode_set_plane",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "plane_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "crtc_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "fb_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "crtc_x",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "crtc_y",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "crtc_w",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "crtc_h",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "src_x",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "src_y",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "src_h",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "src_w",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_mode_get_plane",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "plane_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "crtc_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "fb_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "possible_crtcs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "gamma_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "count_format_types",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "format_type_ptr",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_mode_get_plane_res",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "plane_id_ptr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "count_planes",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_mode_get_encoder",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "encoder_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "encoder_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "crtc_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "possible_crtcs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "possible_clones",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_mode_get_connector",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "encoders_ptr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "modes_ptr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "props_ptr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "prop_values_ptr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "count_modes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "count_props",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "count_encoders",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "encoder_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "connector_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "connector_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "connector_type_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "connection",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "mm_width",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "mm_height",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "subpixel",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_mode_property_enum",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "value",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "name",
+          "array_size": "DRM_PROP_NAME_LEN",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_mode_get_property",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "values_ptr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "enum_blob_ptr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "prop_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "name",
+          "array_size": "DRM_PROP_NAME_LEN",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "count_values",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "count_enum_blobs",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_mode_connector_set_property",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "value",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "prop_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "connector_id",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_mode_obj_get_properties",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "props_ptr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "prop_values_ptr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "count_props",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "obj_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "obj_type",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_mode_obj_set_property",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "value",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "prop_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "obj_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "obj_type",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_mode_get_blob",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "blob_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "length",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "data",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_mode_fb_cmd",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "fb_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "width",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "height",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pitch",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "bpp",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "depth",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_mode_fb_cmd2",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "fb_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "width",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "height",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pixel_format",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "handles",
+          "array_size": "4",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pitches",
+          "array_size": "4",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "offsets",
+          "array_size": "4",
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "modifier",
+          "array_size": "4",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_mode_fb_dirty_cmd",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "fb_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "color",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "num_clips",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "clips_ptr",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_mode_mode_cmd",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "connector_id",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_mode_cursor",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "crtc_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "x",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "y",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "width",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "height",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_mode_cursor2",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "crtc_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "x",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "y",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "width",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "height",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "hot_x",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "hot_y",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_mode_crtc_lut",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "crtc_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "gamma_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "red",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "green",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "blue",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_color_ctm",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "matrix",
+          "array_size": "9",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_color_ctm_3x4",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "matrix",
+          "array_size": "12",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_color_lut",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "red",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "green",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "blue",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_color_lut32",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "red",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "green",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "blue",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_plane_size_hint",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "width",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "height",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "hdr_metadata_infoframe",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "eotf",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "metadata_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "max_display_mastering_luminance",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "min_display_mastering_luminance",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "max_cll",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "max_fall",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_27",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_28",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "hdr_output_metadata",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "metadata_type",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_mode_crtc_page_flip",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "crtc_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "fb_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "user_data",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_mode_crtc_page_flip_target",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "crtc_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "fb_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "sequence",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "user_data",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_mode_create_dumb",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "height",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "width",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "bpp",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pitch",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_mode_map_dumb",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_mode_destroy_dumb",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_mode_atomic",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "count_objs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "objs_ptr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "count_props_ptr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "props_ptr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "prop_values_ptr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "user_data",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_format_modifier_blob",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "version",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "count_formats",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "formats_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "count_modifiers",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "modifiers_offset",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_format_modifier",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "formats",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "modifier",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_mode_create_blob",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "data",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "length",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "blob_id",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_mode_destroy_blob",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "blob_id",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_mode_create_lease",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "object_ids",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "object_count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "lessee_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "fd",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_mode_list_lessees",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "count_lessees",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "lessees_ptr",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_mode_get_lease",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "count_objects",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "objects_ptr",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_mode_revoke_lease",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "lessee_id",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_mode_rect",
+      "fields": [
+        {
+          "type_name": "__s32",
+          "name": "x1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "y1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "x2",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "y2",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_mode_closefb",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "fb_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

@@ -1,0 +1,349 @@
+{
+  "name": "dataset_mixture_candidates_v0_2",
+  "created": "2026-06-05",
+  "purpose": "Second candidate iteration after v0.1 simulation: tighter Q3/Q4 mixtures and lower-echo Q2 amplifier.",
+  "source_counts": {
+    "cognitive": 62,
+    "cyber": 360,
+    "structural": 360
+  },
+  "candidate_count": 5,
+  "candidates": [
+    {
+      "name": "q3_stability_tri_72",
+      "description": "Q3-focused stability candidate with heavier structural substrate and more clean-stop pressure.",
+      "shares": {
+        "structural": 0.72,
+        "cognitive": 0.18,
+        "cyber": 0.1
+      },
+      "bridge_count": 260,
+      "anti_echo_multiplier": 5,
+      "q2_amplifier": false,
+      "train_count": 1757,
+      "validation_count": 153,
+      "summary": {
+        "count": 1910,
+        "by_kind": {
+          "anti_echo_stop": 564,
+          "carrier_control": 55,
+          "clean_task_solution": 63,
+          "cognitive_memory": 216,
+          "compact_task_solution": 145,
+          "cyber_memory": 120,
+          "gate_application": 15,
+          "gate_control": 61,
+          "repair_solution": 167,
+          "routed_bridge": 260,
+          "task_solution": 166,
+          "web_association": 64,
+          "web_repair": 14
+        },
+        "by_family": {
+          "adversarial": 146,
+          "adversarial-reading": 2,
+          "analogy": 6,
+          "boundary": 234,
+          "calibration": 16,
+          "causality": 5,
+          "classification": 3,
+          "coding": 12,
+          "comparison": 2,
+          "decomposition": 2,
+          "evidence": 3,
+          "format-control": 1,
+          "generalist": 450,
+          "loop-control": 5,
+          "math": 84,
+          "orientation": 4,
+          "planning": 4,
+          "question-analysis": 5,
+          "reward": 37,
+          "rhetoric": 13,
+          "source-evaluation": 3,
+          "spatial": 2,
+          "structural": 864,
+          "summarization": 4,
+          "systems": 3
+        },
+        "by_source": {
+          "anti_echo_generator": 450,
+          "bridge_generator": 260,
+          "cognitive_core_v0_1.json": 90,
+          "cognitive_rewards_v0_1.json": 37,
+          "computation_primitives_v0_1.json": 89,
+          "rust_cyber_defender_generated.tsv": 120,
+          "structural_primitive_lora_v0_2": 864
+        }
+      },
+      "files": {
+        "train_jsonl": "C:\\Projects\\small-model-memory-lab\\data\\dataset_mixture_candidates_v0_2\\q3_stability_tri_72\\train.jsonl",
+        "validation_jsonl": "C:\\Projects\\small-model-memory-lab\\data\\dataset_mixture_candidates_v0_2\\q3_stability_tri_72\\validation.jsonl",
+        "preview": "C:\\Projects\\small-model-memory-lab\\data\\dataset_mixture_candidates_v0_2\\q3_stability_tri_72\\preview.json"
+      }
+    },
+    {
+      "name": "q3_routed_tri_68",
+      "description": "Q3 routed candidate: slightly more breadth than stability_tri_72 while keeping structural dominant.",
+      "shares": {
+        "structural": 0.68,
+        "cognitive": 0.2,
+        "cyber": 0.12
+      },
+      "bridge_count": 280,
+      "anti_echo_multiplier": 3,
+      "q2_amplifier": false,
+      "train_count": 1610,
+      "validation_count": 140,
+      "summary": {
+        "count": 1750,
+        "by_kind": {
+          "anti_echo_stop": 370,
+          "carrier_control": 56,
+          "clean_task_solution": 77,
+          "cognitive_memory": 240,
+          "compact_task_solution": 144,
+          "cyber_memory": 144,
+          "gate_application": 14,
+          "gate_control": 59,
+          "repair_solution": 148,
+          "routed_bridge": 280,
+          "task_solution": 144,
+          "web_association": 61,
+          "web_repair": 13
+        },
+        "by_family": {
+          "adversarial": 156,
+          "adversarial-reading": 2,
+          "analogy": 4,
+          "boundary": 268,
+          "calibration": 10,
+          "causality": 5,
+          "classification": 5,
+          "coding": 10,
+          "comparison": 7,
+          "decomposition": 7,
+          "evidence": 2,
+          "format-control": 6,
+          "generalist": 270,
+          "loop-control": 6,
+          "math": 102,
+          "orientation": 4,
+          "planning": 7,
+          "question-analysis": 4,
+          "reward": 38,
+          "rhetoric": 8,
+          "source-evaluation": 5,
+          "spatial": 1,
+          "structural": 816,
+          "summarization": 5,
+          "systems": 2
+        },
+        "by_source": {
+          "anti_echo_generator": 270,
+          "bridge_generator": 280,
+          "cognitive_core_v0_1.json": 102,
+          "cognitive_rewards_v0_1.json": 38,
+          "computation_primitives_v0_1.json": 100,
+          "rust_cyber_defender_generated.tsv": 144,
+          "structural_primitive_lora_v0_2": 816
+        }
+      },
+      "files": {
+        "train_jsonl": "C:\\Projects\\small-model-memory-lab\\data\\dataset_mixture_candidates_v0_2\\q3_routed_tri_68\\train.jsonl",
+        "validation_jsonl": "C:\\Projects\\small-model-memory-lab\\data\\dataset_mixture_candidates_v0_2\\q3_routed_tri_68\\validation.jsonl",
+        "preview": "C:\\Projects\\small-model-memory-lab\\data\\dataset_mixture_candidates_v0_2\\q3_routed_tri_68\\preview.json"
+      }
+    },
+    {
+      "name": "q4_generalist_pair_72_28",
+      "description": "Q4 generalist pair: structural plus cognitive memories, no cyber specialization.",
+      "shares": {
+        "structural": 0.72,
+        "cognitive": 0.28,
+        "cyber": 0.0
+      },
+      "bridge_count": 220,
+      "anti_echo_multiplier": 3,
+      "q2_amplifier": false,
+      "train_count": 1555,
+      "validation_count": 135,
+      "summary": {
+        "count": 1690,
+        "by_kind": {
+          "anti_echo_stop": 398,
+          "carrier_control": 63,
+          "clean_task_solution": 67,
+          "cognitive_memory": 336,
+          "compact_task_solution": 153,
+          "gate_application": 11,
+          "gate_control": 67,
+          "repair_solution": 171,
+          "routed_bridge": 220,
+          "task_solution": 131,
+          "web_association": 59,
+          "web_repair": 14
+        },
+        "by_family": {
+          "adversarial-reading": 9,
+          "analogy": 12,
+          "calibration": 22,
+          "causality": 13,
+          "classification": 7,
+          "coding": 28,
+          "comparison": 12,
+          "decomposition": 10,
+          "evidence": 9,
+          "format-control": 9,
+          "generalist": 270,
+          "loop-control": 18,
+          "math": 254,
+          "orientation": 4,
+          "planning": 4,
+          "question-analysis": 3,
+          "reward": 81,
+          "rhetoric": 23,
+          "source-evaluation": 11,
+          "spatial": 4,
+          "structural": 864,
+          "summarization": 14,
+          "systems": 9
+        },
+        "by_source": {
+          "anti_echo_generator": 270,
+          "bridge_generator": 220,
+          "cognitive_core_v0_1.json": 137,
+          "cognitive_rewards_v0_1.json": 51,
+          "computation_primitives_v0_1.json": 148,
+          "structural_primitive_lora_v0_2": 864
+        }
+      },
+      "files": {
+        "train_jsonl": "C:\\Projects\\small-model-memory-lab\\data\\dataset_mixture_candidates_v0_2\\q4_generalist_pair_72_28\\train.jsonl",
+        "validation_jsonl": "C:\\Projects\\small-model-memory-lab\\data\\dataset_mixture_candidates_v0_2\\q4_generalist_pair_72_28\\validation.jsonl",
+        "preview": "C:\\Projects\\small-model-memory-lab\\data\\dataset_mixture_candidates_v0_2\\q4_generalist_pair_72_28\\preview.json"
+      }
+    },
+    {
+      "name": "q4_boundary_pair_72_28",
+      "description": "Q4 boundary pair: structural plus cyber/source-boundary memories, no cognitive breadth.",
+      "shares": {
+        "structural": 0.72,
+        "cognitive": 0.0,
+        "cyber": 0.28
+      },
+      "bridge_count": 220,
+      "anti_echo_multiplier": 3,
+      "q2_amplifier": false,
+      "train_count": 1555,
+      "validation_count": 135,
+      "summary": {
+        "count": 1690,
+        "by_kind": {
+          "anti_echo_stop": 389,
+          "carrier_control": 51,
+          "clean_task_solution": 78,
+          "compact_task_solution": 163,
+          "cyber_memory": 336,
+          "gate_application": 16,
+          "gate_control": 76,
+          "repair_solution": 148,
+          "routed_bridge": 220,
+          "task_solution": 152,
+          "web_association": 49,
+          "web_repair": 12
+        },
+        "by_family": {
+          "adversarial": 203,
+          "boundary": 353,
+          "generalist": 270,
+          "structural": 864
+        },
+        "by_source": {
+          "anti_echo_generator": 270,
+          "bridge_generator": 220,
+          "rust_cyber_defender_generated.tsv": 336,
+          "structural_primitive_lora_v0_2": 864
+        }
+      },
+      "files": {
+        "train_jsonl": "C:\\Projects\\small-model-memory-lab\\data\\dataset_mixture_candidates_v0_2\\q4_boundary_pair_72_28\\train.jsonl",
+        "validation_jsonl": "C:\\Projects\\small-model-memory-lab\\data\\dataset_mixture_candidates_v0_2\\q4_boundary_pair_72_28\\validation.jsonl",
+        "preview": "C:\\Projects\\small-model-memory-lab\\data\\dataset_mixture_candidates_v0_2\\q4_boundary_pair_72_28\\preview.json"
+      }
+    },
+    {
+      "name": "q2_amplifier_low_echo",
+      "description": "Lower-echo Q2 amplifier: keeps strong structural signal but adds more explicit stop/closure pressure.",
+      "shares": {
+        "structural": 0.72,
+        "cognitive": 0.14,
+        "cyber": 0.14
+      },
+      "bridge_count": 300,
+      "anti_echo_multiplier": 6,
+      "q2_amplifier": true,
+      "train_count": 2245,
+      "validation_count": 195,
+      "summary": {
+        "count": 2440,
+        "by_kind": {
+          "anti_echo_stop": 642,
+          "carrier_control": 64,
+          "clean_task_solution": 70,
+          "cognitive_memory": 168,
+          "compact_task_solution": 159,
+          "cyber_memory": 168,
+          "gate_application": 17,
+          "gate_control": 69,
+          "low_echo_stop": 220,
+          "q2_amplifier": 180,
+          "repair_solution": 145,
+          "routed_bridge": 300,
+          "task_solution": 149,
+          "web_association": 66,
+          "web_repair": 23
+        },
+        "by_family": {
+          "adversarial": 183,
+          "analogy": 3,
+          "boundary": 285,
+          "calibration": 7,
+          "classification": 3,
+          "coding": 4,
+          "comparison": 5,
+          "decomposition": 2,
+          "evidence": 2,
+          "format-control": 5,
+          "generalist": 940,
+          "loop-control": 6,
+          "math": 78,
+          "planning": 3,
+          "question-analysis": 2,
+          "reward": 29,
+          "rhetoric": 11,
+          "spatial": 2,
+          "structural": 864,
+          "summarization": 3,
+          "systems": 3
+        },
+        "by_source": {
+          "anti_echo_generator": 540,
+          "bridge_generator": 300,
+          "cognitive_core_v0_1.json": 62,
+          "cognitive_rewards_v0_1.json": 29,
+          "computation_primitives_v0_1.json": 77,
+          "low_echo_generator": 220,
+          "q2_amplifier_generator": 180,
+          "rust_cyber_defender_generated.tsv": 168,
+          "structural_primitive_lora_v0_2": 864
+        }
+      },
+      "files": {
+        "train_jsonl": "C:\\Projects\\small-model-memory-lab\\data\\dataset_mixture_candidates_v0_2\\q2_amplifier_low_echo\\train.jsonl",
+        "validation_jsonl": "C:\\Projects\\small-model-memory-lab\\data\\dataset_mixture_candidates_v0_2\\q2_amplifier_low_echo\\validation.jsonl",
+        "preview": "C:\\Projects\\small-model-memory-lab\\data\\dataset_mixture_candidates_v0_2\\q2_amplifier_low_echo\\preview.json"
+      }
+    }
+  ]
+}

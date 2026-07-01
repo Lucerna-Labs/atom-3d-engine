@@ -1,0 +1,594 @@
+{
+  "filename": "dcbnl.h",
+  "includes": [
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "IEEE_8021QAZ_MAX_TCS",
+      "value": "8",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IEEE_8021QAZ_TSA_STRICT",
+      "value": "0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IEEE_8021QAZ_TSA_CB_SHAPER",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IEEE_8021QAZ_TSA_ETS",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IEEE_8021QAZ_TSA_VENDOR",
+      "value": "255",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IEEE_8021Q_MAX_PRIORITIES",
+      "value": "8",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DCBX_MAX_BUFFERS",
+      "value": "8",
+      "comment": "",
+      "category": "DCBX_MAX"
+    },
+    {
+      "name": "CEE_DCBX_MAX_PGS",
+      "value": "8",
+      "comment": "",
+      "category": "CEE_DCBX"
+    },
+    {
+      "name": "CEE_DCBX_MAX_PRIO",
+      "value": "8",
+      "comment": "",
+      "category": "CEE_DCBX"
+    },
+    {
+      "name": "IEEE_8021QAZ_APP_SEL_ETHERTYPE",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IEEE_8021QAZ_APP_SEL_STREAM",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IEEE_8021QAZ_APP_SEL_DGRAM",
+      "value": "3",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IEEE_8021QAZ_APP_SEL_ANY",
+      "value": "4",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IEEE_8021QAZ_APP_SEL_DSCP",
+      "value": "5",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DCB_APP_SEL_PCP",
+      "value": "255",
+      "comment": "",
+      "category": "DCB_APP"
+    },
+    {
+      "name": "IEEE_8021QAZ_APP_SEL_MAX",
+      "value": "255",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DCB_ATTR_IEEE_MAX",
+      "value": "(__DCB_ATTR_IEEE_MAX - 1)",
+      "comment": "",
+      "category": "DCB_ATTR"
+    },
+    {
+      "name": "DCB_ATTR_IEEE_APP_MAX",
+      "value": "(__DCB_ATTR_IEEE_APP_MAX - 1)",
+      "comment": "",
+      "category": "DCB_ATTR"
+    },
+    {
+      "name": "DCB_ATTR_CEE_MAX",
+      "value": "(__DCB_ATTR_CEE_MAX - 1)",
+      "comment": "",
+      "category": "DCB_ATTR"
+    },
+    {
+      "name": "DCB_ATTR_CEE_PEER_APP_MAX",
+      "value": "(__DCB_ATTR_CEE_PEER_APP_MAX - 1)",
+      "comment": "",
+      "category": "DCB_ATTR"
+    },
+    {
+      "name": "DCB_ATTR_CEE_APP_MAX",
+      "value": "(__DCB_ATTR_CEE_APP_MAX - 1)",
+      "comment": "",
+      "category": "DCB_ATTR"
+    },
+    {
+      "name": "DCB_CAP_DCBX_HOST",
+      "value": "0x01",
+      "comment": "",
+      "category": "DCB_CAP"
+    },
+    {
+      "name": "DCB_CAP_DCBX_LLD_MANAGED",
+      "value": "0x02",
+      "comment": "",
+      "category": "DCB_CAP"
+    },
+    {
+      "name": "DCB_CAP_DCBX_VER_CEE",
+      "value": "0x04",
+      "comment": "",
+      "category": "DCB_CAP"
+    },
+    {
+      "name": "DCB_CAP_DCBX_VER_IEEE",
+      "value": "0x08",
+      "comment": "",
+      "category": "DCB_CAP"
+    },
+    {
+      "name": "DCB_CAP_DCBX_STATIC",
+      "value": "0x10",
+      "comment": "",
+      "category": "DCB_CAP"
+    },
+    {
+      "name": "DCB_APP_IDTYPE_ETHTYPE",
+      "value": "0x00",
+      "comment": "",
+      "category": "DCB_APP"
+    },
+    {
+      "name": "DCB_APP_IDTYPE_PORTNUM",
+      "value": "0x01",
+      "comment": "",
+      "category": "DCB_APP"
+    },
+    {
+      "name": "DCB_FEATCFG_ERROR",
+      "value": "0x01",
+      "comment": "error in feature resolution",
+      "category": "DCB_FEATCFG"
+    },
+    {
+      "name": "DCB_FEATCFG_ENABLE",
+      "value": "0x02",
+      "comment": "enable feature",
+      "category": "DCB_FEATCFG"
+    },
+    {
+      "name": "DCB_FEATCFG_WILLING",
+      "value": "0x04",
+      "comment": "feature is willing",
+      "category": "DCB_FEATCFG"
+    },
+    {
+      "name": "DCB_FEATCFG_ADVERTISE",
+      "value": "0x08",
+      "comment": "advertise feature",
+      "category": "DCB_FEATCFG"
+    }
+  ],
+  "structs": [
+    {
+      "name": "ieee_ets",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "willing",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "ets_cap",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "cbs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "tc_tx_bw",
+          "array_size": "IEEE_8021QAZ_MAX_TCS",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "tc_rx_bw",
+          "array_size": "IEEE_8021QAZ_MAX_TCS",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "tc_tsa",
+          "array_size": "IEEE_8021QAZ_MAX_TCS",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "prio_tc",
+          "array_size": "IEEE_8021QAZ_MAX_TCS",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "tc_reco_bw",
+          "array_size": "IEEE_8021QAZ_MAX_TCS",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "tc_reco_tsa",
+          "array_size": "IEEE_8021QAZ_MAX_TCS",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reco_prio_tc",
+          "array_size": "IEEE_8021QAZ_MAX_TCS",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ieee_maxrate",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "tc_maxrate",
+          "array_size": "IEEE_8021QAZ_MAX_TCS",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ieee_qcn",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "rpg_enable",
+          "array_size": "IEEE_8021QAZ_MAX_TCS",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "rppp_max_rps",
+          "array_size": "IEEE_8021QAZ_MAX_TCS",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "rpg_time_reset",
+          "array_size": "IEEE_8021QAZ_MAX_TCS",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "rpg_byte_reset",
+          "array_size": "IEEE_8021QAZ_MAX_TCS",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "rpg_threshold",
+          "array_size": "IEEE_8021QAZ_MAX_TCS",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "rpg_max_rate",
+          "array_size": "IEEE_8021QAZ_MAX_TCS",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "rpg_ai_rate",
+          "array_size": "IEEE_8021QAZ_MAX_TCS",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "rpg_hai_rate",
+          "array_size": "IEEE_8021QAZ_MAX_TCS",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "rpg_gd",
+          "array_size": "IEEE_8021QAZ_MAX_TCS",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "rpg_min_dec_fac",
+          "array_size": "IEEE_8021QAZ_MAX_TCS",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "rpg_min_rate",
+          "array_size": "IEEE_8021QAZ_MAX_TCS",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "cndd_state_machine",
+          "array_size": "IEEE_8021QAZ_MAX_TCS",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ieee_qcn_stats",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "rppp_rp_centiseconds",
+          "array_size": "IEEE_8021QAZ_MAX_TCS",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "rppp_created_rps",
+          "array_size": "IEEE_8021QAZ_MAX_TCS",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ieee_pfc",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "pfc_cap",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "pfc_en",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "mbc",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "delay",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "requests",
+          "array_size": "IEEE_8021QAZ_MAX_TCS",
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "indications",
+          "array_size": "IEEE_8021QAZ_MAX_TCS",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "dcbnl_buffer",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "prio2buffer",
+          "array_size": "IEEE_8021Q_MAX_PRIORITIES",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "buffer_size",
+          "array_size": "DCBX_MAX_BUFFERS",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "total_size",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "cee_pg",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "willing",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "error",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "pg_en",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "tcs_supported",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "pg_bw",
+          "array_size": "CEE_DCBX_MAX_PGS",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "prio_pg",
+          "array_size": "CEE_DCBX_MAX_PGS",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "cee_pfc",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "willing",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "error",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "pfc_en",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "tcs_supported",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "dcb_app",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "selector",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "priority",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "protocol",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "dcb_peer_app_info",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "willing",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "error",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "dcbmsg",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "dcb_family",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "cmd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "dcb_pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

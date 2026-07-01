@@ -1,0 +1,21 @@
+services:
+  nginx:
+    image: elestio/nginx-auto-ssl:1.0.22
+    container_name: elestio-nginx
+    restart: always
+    network_mode: "host"
+    volumes:
+      - /opt/elestio/nginx/ssl_data:/etc/resty-auto-ssl
+      - /opt/elestio/nginx/conf.d:/etc/nginx/conf.d
+      - /opt/elestio/nginx/streams:/etc/nginx/streams
+      - /opt/elestio/nginx/logs:/var/log/nginx/
+      - /root/.acme.sh/vm.elestio.app/fullchain.cer:/etc/nginx/certs/cert.pem
+      - /root/.acme.sh/vm.elestio.app/vm.elestio.app.key:/etc/nginx/certs/key.pem
+      - /root/.acme.sh/lucernamedia.com_ecc/fullchain.cer:/etc/nginx/certs/lucernamedia.com.pem
+      - /root/.acme.sh/lucernamedia.com_ecc/lucernamedia.com.key:/etc/nginx/certs/lucernamedia.com.key
+      - /root/.acme.sh/lucernalabs.lucernamedia.com_ecc/fullchain.cer:/etc/nginx/certs/lucernalabs.lucernamedia.com.pem
+      - /root/.acme.sh/lucernalabs.lucernamedia.com_ecc/lucernalabs.lucernamedia.com.key:/etc/nginx/certs/lucernalabs.lucernamedia.com.key
+      - /root/.acme.sh/warpedreality.lucernamedia.com_ecc/fullchain.cer:/etc/nginx/certs/warpedreality.lucernamedia.com.pem
+      - /root/.acme.sh/warpedreality.lucernamedia.com_ecc/warpedreality.lucernamedia.com.key:/etc/nginx/certs/warpedreality.lucernamedia.com.key
+    env_file:
+      - .env

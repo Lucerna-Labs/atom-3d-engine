@@ -1,0 +1,13 @@
+﻿
+
+1. **Reproduce Before Repair**
+   - **Action:** Reproduce the crash in a controlled environment (e.g., staging) to isolate the issue.
+   - **Uncertainty:** If the crash is intermittent, use a test harness or automated regression testing to ensure it can be reproduced consistently.
+
+2. **One Variable Moved**
+   - **Action:** Identify and isolate the variable that changed in the recent deploy. Focus on the code, configuration, or dependencies that were modified.
+   - **Uncertainty:** If the issue is complex, use a feature flag or canary deployment to gradually roll out changes and monitor for the crash.
+
+3. **The Loop Ended at the Checkpoint**
+   - **Action:** Analyze the logs and error messages to pinpoint the exact point where the crash occurs. Look for specific error codes or stack traces.
+  

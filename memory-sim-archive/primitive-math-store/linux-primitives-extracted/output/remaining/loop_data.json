@@ -1,0 +1,365 @@
+{
+  "filename": "loop.h",
+  "includes": [
+    "asm/posix_types.h",
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "LO_NAME_SIZE",
+      "value": "64",
+      "comment": "",
+      "category": "LO_NAME"
+    },
+    {
+      "name": "LO_KEY_SIZE",
+      "value": "32",
+      "comment": "",
+      "category": "LO_KEY"
+    },
+    {
+      "name": "LOOP_SET_STATUS_SETTABLE_FLAGS",
+      "value": "(LO_FLAGS_AUTOCLEAR | LO_FLAGS_PARTSCAN)",
+      "comment": "",
+      "category": "LOOP_SET"
+    },
+    {
+      "name": "LOOP_SET_STATUS_CLEARABLE_FLAGS",
+      "value": "(LO_FLAGS_AUTOCLEAR)",
+      "comment": "",
+      "category": "LOOP_SET"
+    },
+    {
+      "name": "LOOP_CONFIGURE_SETTABLE_FLAGS",
+      "value": "(LO_FLAGS_READ_ONLY | LO_FLAGS_AUTOCLEAR ",
+      "comment": "",
+      "category": "LOOP_CONFIGURE"
+    },
+    {
+      "name": "LO_CRYPT_NONE",
+      "value": "0",
+      "comment": "",
+      "category": "LO_CRYPT"
+    },
+    {
+      "name": "LO_CRYPT_XOR",
+      "value": "1",
+      "comment": "",
+      "category": "LO_CRYPT"
+    },
+    {
+      "name": "LO_CRYPT_DES",
+      "value": "2",
+      "comment": "",
+      "category": "LO_CRYPT"
+    },
+    {
+      "name": "LO_CRYPT_FISH2",
+      "value": "3",
+      "comment": "Twofish encryption",
+      "category": "LO_CRYPT"
+    },
+    {
+      "name": "LO_CRYPT_BLOW",
+      "value": "4",
+      "comment": "",
+      "category": "LO_CRYPT"
+    },
+    {
+      "name": "LO_CRYPT_CAST128",
+      "value": "5",
+      "comment": "",
+      "category": "LO_CRYPT"
+    },
+    {
+      "name": "LO_CRYPT_IDEA",
+      "value": "6",
+      "comment": "",
+      "category": "LO_CRYPT"
+    },
+    {
+      "name": "LO_CRYPT_DUMMY",
+      "value": "9",
+      "comment": "",
+      "category": "LO_CRYPT"
+    },
+    {
+      "name": "LO_CRYPT_SKIPJACK",
+      "value": "10",
+      "comment": "",
+      "category": "LO_CRYPT"
+    },
+    {
+      "name": "LO_CRYPT_CRYPTOAPI",
+      "value": "18",
+      "comment": "",
+      "category": "LO_CRYPT"
+    },
+    {
+      "name": "MAX_LO_CRYPT",
+      "value": "20",
+      "comment": "",
+      "category": "MAX_LO"
+    },
+    {
+      "name": "LOOP_SET_FD",
+      "value": "0x4C00",
+      "comment": "",
+      "category": "LOOP_SET"
+    },
+    {
+      "name": "LOOP_CLR_FD",
+      "value": "0x4C01",
+      "comment": "",
+      "category": "LOOP_CLR"
+    },
+    {
+      "name": "LOOP_SET_STATUS",
+      "value": "0x4C02",
+      "comment": "",
+      "category": "LOOP_SET"
+    },
+    {
+      "name": "LOOP_GET_STATUS",
+      "value": "0x4C03",
+      "comment": "",
+      "category": "LOOP_GET"
+    },
+    {
+      "name": "LOOP_SET_STATUS64",
+      "value": "0x4C04",
+      "comment": "",
+      "category": "LOOP_SET"
+    },
+    {
+      "name": "LOOP_GET_STATUS64",
+      "value": "0x4C05",
+      "comment": "",
+      "category": "LOOP_GET"
+    },
+    {
+      "name": "LOOP_CHANGE_FD",
+      "value": "0x4C06",
+      "comment": "",
+      "category": "LOOP_CHANGE"
+    },
+    {
+      "name": "LOOP_SET_CAPACITY",
+      "value": "0x4C07",
+      "comment": "",
+      "category": "LOOP_SET"
+    },
+    {
+      "name": "LOOP_SET_DIRECT_IO",
+      "value": "0x4C08",
+      "comment": "",
+      "category": "LOOP_SET"
+    },
+    {
+      "name": "LOOP_SET_BLOCK_SIZE",
+      "value": "0x4C09",
+      "comment": "",
+      "category": "LOOP_SET"
+    },
+    {
+      "name": "LOOP_CONFIGURE",
+      "value": "0x4C0A",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "LOOP_CTL_ADD",
+      "value": "0x4C80",
+      "comment": "",
+      "category": "LOOP_CTL"
+    },
+    {
+      "name": "LOOP_CTL_REMOVE",
+      "value": "0x4C81",
+      "comment": "",
+      "category": "LOOP_CTL"
+    },
+    {
+      "name": "LOOP_CTL_GET_FREE",
+      "value": "0x4C82",
+      "comment": "",
+      "category": "LOOP_CTL"
+    }
+  ],
+  "structs": [
+    {
+      "name": "loop_info",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "lo_number",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__kernel_old_dev_t",
+          "name": "lo_device",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__kernel_old_dev_t",
+          "name": "lo_rdevice",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "lo_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "lo_encrypt_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "lo_encrypt_key_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "lo_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "lo_name",
+          "array_size": "LO_NAME_SIZE",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "reserved",
+          "array_size": "4",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "loop_info64",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "lo_device",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "lo_inode",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "lo_rdevice",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "lo_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "lo_sizelimit",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "lo_number",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "lo_encrypt_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "lo_encrypt_key_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "lo_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "lo_file_name",
+          "array_size": "LO_NAME_SIZE",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "lo_crypt_name",
+          "array_size": "LO_NAME_SIZE",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "lo_encrypt_key",
+          "array_size": "LO_KEY_SIZE",
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "lo_init",
+          "array_size": "2",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "loop_config",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "fd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "block_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "__reserved",
+          "array_size": "8",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

@@ -1,0 +1,619 @@
+{
+  "filename": "virtio_snd.h",
+  "includes": [
+    "linux/virtio_types.h"
+  ],
+  "defines": [
+    {
+      "name": "VIRTIO_SND_CHMAP_MAX_SIZE",
+      "value": "18",
+      "comment": "",
+      "category": "VIRTIO_SND"
+    }
+  ],
+  "structs": [
+    {
+      "name": "virtio_snd_config",
+      "fields": [
+        {
+          "type_name": "__le32",
+          "name": "jacks",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "streams",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "chmaps",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "controls",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "virtio_snd_hdr",
+      "fields": [
+        {
+          "type_name": "__le32",
+          "name": "code",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "virtio_snd_event",
+      "fields": [
+        {
+          "type_name": "__le32",
+          "name": "data",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "virtio_snd_query_info",
+      "fields": [
+        {
+          "type_name": "__le32",
+          "name": "start_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "virtio_snd_info",
+      "fields": [
+        {
+          "type_name": "__le32",
+          "name": "hda_fn_nid",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "virtio_snd_jack_hdr",
+      "fields": [
+        {
+          "type_name": "__le32",
+          "name": "jack_id",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "virtio_snd_jack_info",
+      "fields": [
+        {
+          "type_name": "__le32",
+          "name": "features",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "hda_reg_defconf",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "hda_reg_caps",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "connected",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "padding",
+          "array_size": "7",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "virtio_snd_jack_remap",
+      "fields": [
+        {
+          "type_name": "__le32",
+          "name": "association",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "sequence",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "virtio_snd_pcm_hdr",
+      "fields": [
+        {
+          "type_name": "__le32",
+          "name": "stream_id",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "virtio_snd_pcm_info",
+      "fields": [
+        {
+          "type_name": "__le32",
+          "name": "features",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "formats",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "rates",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "direction",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "channels_min",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "channels_max",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "padding",
+          "array_size": "5",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "virtio_snd_pcm_set_params",
+      "fields": [
+        {
+          "type_name": "__le32",
+          "name": "buffer_bytes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "period_bytes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "features",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "channels",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "format",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "rate",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "padding",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "virtio_snd_pcm_xfer",
+      "fields": [
+        {
+          "type_name": "__le32",
+          "name": "stream_id",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "virtio_snd_pcm_status",
+      "fields": [
+        {
+          "type_name": "__le32",
+          "name": "status",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "latency_bytes",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "virtio_snd_chmap_hdr",
+      "fields": [
+        {
+          "type_name": "__le32",
+          "name": "chmap_id",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "virtio_snd_chmap_info",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "direction",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "channels",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "positions",
+          "array_size": "VIRTIO_SND_CHMAP_MAX_SIZE",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "virtio_snd_ctl_hdr",
+      "fields": [
+        {
+          "type_name": "__le32",
+          "name": "control_id",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "virtio_snd_ctl_info",
+      "fields": [
+        {
+          "type_name": "__le32",
+          "name": "role",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "access",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "index",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "name",
+          "array_size": "44",
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "min",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "max",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "step",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "min",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "max",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "step",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "items",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_17",
+      "fields": [
+        {
+          "type_name": "__le32",
+          "name": "min",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "max",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "step",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_18",
+      "fields": [
+        {
+          "type_name": "__le64",
+          "name": "min",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "max",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "step",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_19",
+      "fields": [
+        {
+          "type_name": "__le32",
+          "name": "items",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "virtio_snd_ctl_enum_item",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "item",
+          "array_size": "64",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "virtio_snd_ctl_iec958",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "status",
+          "array_size": "24",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "subcode",
+          "array_size": "147",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "dig_subframe",
+          "array_size": "4",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "virtio_snd_ctl_value",
+      "fields": [
+        {
+          "type_name": "__le32",
+          "name": "integer",
+          "array_size": "128",
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "integer64",
+          "array_size": "64",
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "enumerated",
+          "array_size": "128",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "bytes",
+          "array_size": "512",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "virtio_snd_ctl_event",
+      "fields": [
+        {
+          "type_name": "__le16",
+          "name": "control_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le16",
+          "name": "mask",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

@@ -1,0 +1,735 @@
+{
+  "filename": "iso_fs.h",
+  "includes": [
+    "linux/types.h",
+    "linux/magic.h"
+  ],
+  "defines": [
+    {
+      "name": "ISO_VD_PRIMARY",
+      "value": "1",
+      "comment": "",
+      "category": "ISO_VD"
+    },
+    {
+      "name": "ISO_VD_SUPPLEMENTARY",
+      "value": "2",
+      "comment": "",
+      "category": "ISO_VD"
+    },
+    {
+      "name": "ISO_VD_END",
+      "value": "255",
+      "comment": "",
+      "category": "ISO_VD"
+    },
+    {
+      "name": "ISO_STANDARD_ID",
+      "value": "\"CD001\"",
+      "comment": "",
+      "category": "ISO_STANDARD"
+    },
+    {
+      "name": "HS_STANDARD_ID",
+      "value": "\"CDROM\"",
+      "comment": "",
+      "category": "HS_STANDARD"
+    },
+    {
+      "name": "ISOFS_BLOCK_BITS",
+      "value": "11",
+      "comment": "",
+      "category": "ISOFS_BLOCK"
+    },
+    {
+      "name": "ISOFS_BLOCK_SIZE",
+      "value": "2048",
+      "comment": "",
+      "category": "ISOFS_BLOCK"
+    }
+  ],
+  "structs": [
+    {
+      "name": "iso_volume_descriptor",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "type",
+          "array_size": "ISODCL(1,1)",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "id",
+          "array_size": "ISODCL(2,6)",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "version",
+          "array_size": "ISODCL(7,7)",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "data",
+          "array_size": "ISODCL(8,2048)",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "iso_primary_descriptor",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "type",
+          "array_size": "ISODCL (  1,   1)",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "id",
+          "array_size": "ISODCL (  2,   6)",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "version",
+          "array_size": "ISODCL (  7,   7)",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "unused1",
+          "array_size": "ISODCL (  8,   8)",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "system_id",
+          "array_size": "ISODCL (  9,  40)",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "volume_id",
+          "array_size": "ISODCL ( 41,  72)",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "unused2",
+          "array_size": "ISODCL ( 73,  80)",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "volume_space_size",
+          "array_size": "ISODCL ( 81,  88)",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "unused3",
+          "array_size": "ISODCL ( 89, 120)",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "volume_set_size",
+          "array_size": "ISODCL (121, 124)",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "volume_sequence_number",
+          "array_size": "ISODCL (125, 128)",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "logical_block_size",
+          "array_size": "ISODCL (129, 132)",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "path_table_size",
+          "array_size": "ISODCL (133, 140)",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "type_l_path_table",
+          "array_size": "ISODCL (141, 144)",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "opt_type_l_path_table",
+          "array_size": "ISODCL (145, 148)",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "type_m_path_table",
+          "array_size": "ISODCL (149, 152)",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "opt_type_m_path_table",
+          "array_size": "ISODCL (153, 156)",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "root_directory_record",
+          "array_size": "ISODCL (157, 190)",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "volume_set_id",
+          "array_size": "ISODCL (191, 318)",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "publisher_id",
+          "array_size": "ISODCL (319, 446)",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "preparer_id",
+          "array_size": "ISODCL (447, 574)",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "application_id",
+          "array_size": "ISODCL (575, 702)",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "copyright_file_id",
+          "array_size": "ISODCL (703, 739)",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "abstract_file_id",
+          "array_size": "ISODCL (740, 776)",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "bibliographic_file_id",
+          "array_size": "ISODCL (777, 813)",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "creation_date",
+          "array_size": "ISODCL (814, 830)",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "modification_date",
+          "array_size": "ISODCL (831, 847)",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "expiration_date",
+          "array_size": "ISODCL (848, 864)",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "effective_date",
+          "array_size": "ISODCL (865, 881)",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "file_structure_version",
+          "array_size": "ISODCL (882, 882)",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "unused4",
+          "array_size": "ISODCL (883, 883)",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "application_data",
+          "array_size": "ISODCL (884, 1395)",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "unused5",
+          "array_size": "ISODCL (1396, 2048)",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "iso_supplementary_descriptor",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "type",
+          "array_size": "ISODCL (  1,   1)",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "id",
+          "array_size": "ISODCL (  2,   6)",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "version",
+          "array_size": "ISODCL (  7,   7)",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "flags",
+          "array_size": "ISODCL (  8,   8)",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "system_id",
+          "array_size": "ISODCL (  9,  40)",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "volume_id",
+          "array_size": "ISODCL ( 41,  72)",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "unused2",
+          "array_size": "ISODCL ( 73,  80)",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "volume_space_size",
+          "array_size": "ISODCL ( 81,  88)",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "escape",
+          "array_size": "ISODCL ( 89, 120)",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "volume_set_size",
+          "array_size": "ISODCL (121, 124)",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "volume_sequence_number",
+          "array_size": "ISODCL (125, 128)",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "logical_block_size",
+          "array_size": "ISODCL (129, 132)",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "path_table_size",
+          "array_size": "ISODCL (133, 140)",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "type_l_path_table",
+          "array_size": "ISODCL (141, 144)",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "opt_type_l_path_table",
+          "array_size": "ISODCL (145, 148)",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "type_m_path_table",
+          "array_size": "ISODCL (149, 152)",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "opt_type_m_path_table",
+          "array_size": "ISODCL (153, 156)",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "root_directory_record",
+          "array_size": "ISODCL (157, 190)",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "volume_set_id",
+          "array_size": "ISODCL (191, 318)",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "publisher_id",
+          "array_size": "ISODCL (319, 446)",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "preparer_id",
+          "array_size": "ISODCL (447, 574)",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "application_id",
+          "array_size": "ISODCL (575, 702)",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "copyright_file_id",
+          "array_size": "ISODCL (703, 739)",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "abstract_file_id",
+          "array_size": "ISODCL (740, 776)",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "bibliographic_file_id",
+          "array_size": "ISODCL (777, 813)",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "creation_date",
+          "array_size": "ISODCL (814, 830)",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "modification_date",
+          "array_size": "ISODCL (831, 847)",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "expiration_date",
+          "array_size": "ISODCL (848, 864)",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "effective_date",
+          "array_size": "ISODCL (865, 881)",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "file_structure_version",
+          "array_size": "ISODCL (882, 882)",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "unused4",
+          "array_size": "ISODCL (883, 883)",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "application_data",
+          "array_size": "ISODCL (884, 1395)",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "unused5",
+          "array_size": "ISODCL (1396, 2048)",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "hs_volume_descriptor",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "foo",
+          "array_size": "ISODCL (  1,   8)",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "type",
+          "array_size": "ISODCL (  9,   9)",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "id",
+          "array_size": "ISODCL ( 10,  14)",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "version",
+          "array_size": "ISODCL ( 15,  15)",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "data",
+          "array_size": "ISODCL(16,2048)",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "hs_primary_descriptor",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "foo",
+          "array_size": "ISODCL (  1,   8)",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "type",
+          "array_size": "ISODCL (  9,   9)",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "id",
+          "array_size": "ISODCL ( 10,  14)",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "version",
+          "array_size": "ISODCL ( 15,  15)",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "unused1",
+          "array_size": "ISODCL ( 16,  16)",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "system_id",
+          "array_size": "ISODCL ( 17,  48)",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "volume_id",
+          "array_size": "ISODCL ( 49,  80)",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "unused2",
+          "array_size": "ISODCL ( 81,  88)",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "volume_space_size",
+          "array_size": "ISODCL ( 89,  96)",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "unused3",
+          "array_size": "ISODCL ( 97, 128)",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "volume_set_size",
+          "array_size": "ISODCL (129, 132)",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "volume_sequence_number",
+          "array_size": "ISODCL (133, 136)",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "logical_block_size",
+          "array_size": "ISODCL (137, 140)",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "path_table_size",
+          "array_size": "ISODCL (141, 148)",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "type_l_path_table",
+          "array_size": "ISODCL (149, 152)",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "unused4",
+          "array_size": "ISODCL (153, 180)",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "root_directory_record",
+          "array_size": "ISODCL (181, 214)",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "iso_path_table",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "name_len",
+          "array_size": "2",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "extent",
+          "array_size": "4",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "parent",
+          "array_size": "2",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "iso_directory_record",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "length",
+          "array_size": "ISODCL (1, 1)",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "ext_attr_length",
+          "array_size": "ISODCL (2, 2)",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "extent",
+          "array_size": "ISODCL (3, 10)",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "size",
+          "array_size": "ISODCL (11, 18)",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "date",
+          "array_size": "ISODCL (19, 25)",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "flags",
+          "array_size": "ISODCL (26, 26)",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "file_unit_size",
+          "array_size": "ISODCL (27, 27)",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "interleave",
+          "array_size": "ISODCL (28, 28)",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "volume_sequence_number",
+          "array_size": "ISODCL (29, 32)",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "name_len",
+          "array_size": "ISODCL (33, 33)",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

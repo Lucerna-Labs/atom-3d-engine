@@ -1,0 +1,126 @@
+{
+  "filename": "memfd.h",
+  "includes": [
+    "asm-generic/hugetlb_encode.h"
+  ],
+  "defines": [
+    {
+      "name": "MFD_CLOEXEC",
+      "value": "0x0001U",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "MFD_ALLOW_SEALING",
+      "value": "0x0002U",
+      "comment": "",
+      "category": "MFD_ALLOW"
+    },
+    {
+      "name": "MFD_HUGETLB",
+      "value": "0x0004U",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "MFD_NOEXEC_SEAL",
+      "value": "0x0008U",
+      "comment": "",
+      "category": "MFD_NOEXEC"
+    },
+    {
+      "name": "MFD_EXEC",
+      "value": "0x0010U",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "MFD_HUGE_SHIFT",
+      "value": "HUGETLB_FLAG_ENCODE_SHIFT",
+      "comment": "",
+      "category": "MFD_HUGE"
+    },
+    {
+      "name": "MFD_HUGE_MASK",
+      "value": "HUGETLB_FLAG_ENCODE_MASK",
+      "comment": "",
+      "category": "MFD_HUGE"
+    },
+    {
+      "name": "MFD_HUGE_64KB",
+      "value": "HUGETLB_FLAG_ENCODE_64KB",
+      "comment": "",
+      "category": "MFD_HUGE"
+    },
+    {
+      "name": "MFD_HUGE_512KB",
+      "value": "HUGETLB_FLAG_ENCODE_512KB",
+      "comment": "",
+      "category": "MFD_HUGE"
+    },
+    {
+      "name": "MFD_HUGE_1MB",
+      "value": "HUGETLB_FLAG_ENCODE_1MB",
+      "comment": "",
+      "category": "MFD_HUGE"
+    },
+    {
+      "name": "MFD_HUGE_2MB",
+      "value": "HUGETLB_FLAG_ENCODE_2MB",
+      "comment": "",
+      "category": "MFD_HUGE"
+    },
+    {
+      "name": "MFD_HUGE_8MB",
+      "value": "HUGETLB_FLAG_ENCODE_8MB",
+      "comment": "",
+      "category": "MFD_HUGE"
+    },
+    {
+      "name": "MFD_HUGE_16MB",
+      "value": "HUGETLB_FLAG_ENCODE_16MB",
+      "comment": "",
+      "category": "MFD_HUGE"
+    },
+    {
+      "name": "MFD_HUGE_32MB",
+      "value": "HUGETLB_FLAG_ENCODE_32MB",
+      "comment": "",
+      "category": "MFD_HUGE"
+    },
+    {
+      "name": "MFD_HUGE_256MB",
+      "value": "HUGETLB_FLAG_ENCODE_256MB",
+      "comment": "",
+      "category": "MFD_HUGE"
+    },
+    {
+      "name": "MFD_HUGE_512MB",
+      "value": "HUGETLB_FLAG_ENCODE_512MB",
+      "comment": "",
+      "category": "MFD_HUGE"
+    },
+    {
+      "name": "MFD_HUGE_1GB",
+      "value": "HUGETLB_FLAG_ENCODE_1GB",
+      "comment": "",
+      "category": "MFD_HUGE"
+    },
+    {
+      "name": "MFD_HUGE_2GB",
+      "value": "HUGETLB_FLAG_ENCODE_2GB",
+      "comment": "",
+      "category": "MFD_HUGE"
+    },
+    {
+      "name": "MFD_HUGE_16GB",
+      "value": "HUGETLB_FLAG_ENCODE_16GB",
+      "comment": "",
+      "category": "MFD_HUGE"
+    }
+  ],
+  "structs": [],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

@@ -1,0 +1,18 @@
+[package]
+name = "discovery-sim"
+version = "0.1.0"
+edition = "2021"
+description = "Local primitive-combination discovery simulator. Proposes wirings (incl. ones the kit does NOT document), executes each against an SDF marcher executor, and keeps only those that pay a conserved currency (field-evaluations at held correctness). Painted-Fence doctrine."
+
+[[bin]]
+name = "discovery-sim"
+path = "src/main.rs"
+
+# Zero external dependencies — std only. Faithful to the doctrine.
+[dependencies]
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+panic = "abort"

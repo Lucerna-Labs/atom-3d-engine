@@ -1,0 +1,14 @@
+﻿**Memory Pattern:**  
+"Probability of two independent events A and B is P(A) × P(B)."  
+
+**Task Fit:**  
+The problem involves drawing two balls without replacement from a finite set (5 red, 3 blue). The first draw affects the second. However, since the draws are sequential and dependent, we can compute conditional probabilities:  
+
+- **P(1st ball is red):** 5/8  
+- **P(2nd ball is red | 1st was red):** 4/7 (since one red remains after removing one)  
+
+**Calculation:**  
+P(both red) = P(1st red) × P(2nd red | 1st red) = (5/8) × (4/7) = **20/56**.  
+
+**Uncertainty & Next Action:**  
+The problem is straightforward, but the memory pattern "probability of two independent events" does not fully apply because the draws are dependent. Still, the multiplication method can be adapted for sequential dependent events. No further action needed unless more context arises.

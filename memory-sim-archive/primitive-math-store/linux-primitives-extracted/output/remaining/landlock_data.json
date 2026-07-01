@@ -1,0 +1,238 @@
+{
+  "filename": "landlock.h",
+  "includes": [
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "LANDLOCK_CREATE_RULESET_VERSION",
+      "value": "(1U << 0)",
+      "comment": "",
+      "category": "LANDLOCK_CREATE"
+    },
+    {
+      "name": "LANDLOCK_CREATE_RULESET_ERRATA",
+      "value": "(1U << 1)",
+      "comment": "",
+      "category": "LANDLOCK_CREATE"
+    },
+    {
+      "name": "LANDLOCK_RESTRICT_SELF_LOG_SAME_EXEC_OFF",
+      "value": "(1U << 0)",
+      "comment": "",
+      "category": "LANDLOCK_RESTRICT"
+    },
+    {
+      "name": "LANDLOCK_RESTRICT_SELF_LOG_NEW_EXEC_ON",
+      "value": "(1U << 1)",
+      "comment": "",
+      "category": "LANDLOCK_RESTRICT"
+    },
+    {
+      "name": "LANDLOCK_RESTRICT_SELF_LOG_SUBDOMAINS_OFF",
+      "value": "(1U << 2)",
+      "comment": "",
+      "category": "LANDLOCK_RESTRICT"
+    },
+    {
+      "name": "LANDLOCK_RESTRICT_SELF_TSYNC",
+      "value": "(1U << 3)",
+      "comment": "",
+      "category": "LANDLOCK_RESTRICT"
+    },
+    {
+      "name": "LANDLOCK_ACCESS_FS_EXECUTE",
+      "value": "(1ULL << 0)",
+      "comment": "",
+      "category": "LANDLOCK_ACCESS"
+    },
+    {
+      "name": "LANDLOCK_ACCESS_FS_WRITE_FILE",
+      "value": "(1ULL << 1)",
+      "comment": "",
+      "category": "LANDLOCK_ACCESS"
+    },
+    {
+      "name": "LANDLOCK_ACCESS_FS_READ_FILE",
+      "value": "(1ULL << 2)",
+      "comment": "",
+      "category": "LANDLOCK_ACCESS"
+    },
+    {
+      "name": "LANDLOCK_ACCESS_FS_READ_DIR",
+      "value": "(1ULL << 3)",
+      "comment": "",
+      "category": "LANDLOCK_ACCESS"
+    },
+    {
+      "name": "LANDLOCK_ACCESS_FS_REMOVE_DIR",
+      "value": "(1ULL << 4)",
+      "comment": "",
+      "category": "LANDLOCK_ACCESS"
+    },
+    {
+      "name": "LANDLOCK_ACCESS_FS_REMOVE_FILE",
+      "value": "(1ULL << 5)",
+      "comment": "",
+      "category": "LANDLOCK_ACCESS"
+    },
+    {
+      "name": "LANDLOCK_ACCESS_FS_MAKE_CHAR",
+      "value": "(1ULL << 6)",
+      "comment": "",
+      "category": "LANDLOCK_ACCESS"
+    },
+    {
+      "name": "LANDLOCK_ACCESS_FS_MAKE_DIR",
+      "value": "(1ULL << 7)",
+      "comment": "",
+      "category": "LANDLOCK_ACCESS"
+    },
+    {
+      "name": "LANDLOCK_ACCESS_FS_MAKE_REG",
+      "value": "(1ULL << 8)",
+      "comment": "",
+      "category": "LANDLOCK_ACCESS"
+    },
+    {
+      "name": "LANDLOCK_ACCESS_FS_MAKE_SOCK",
+      "value": "(1ULL << 9)",
+      "comment": "",
+      "category": "LANDLOCK_ACCESS"
+    },
+    {
+      "name": "LANDLOCK_ACCESS_FS_MAKE_FIFO",
+      "value": "(1ULL << 10)",
+      "comment": "",
+      "category": "LANDLOCK_ACCESS"
+    },
+    {
+      "name": "LANDLOCK_ACCESS_FS_MAKE_BLOCK",
+      "value": "(1ULL << 11)",
+      "comment": "",
+      "category": "LANDLOCK_ACCESS"
+    },
+    {
+      "name": "LANDLOCK_ACCESS_FS_MAKE_SYM",
+      "value": "(1ULL << 12)",
+      "comment": "",
+      "category": "LANDLOCK_ACCESS"
+    },
+    {
+      "name": "LANDLOCK_ACCESS_FS_REFER",
+      "value": "(1ULL << 13)",
+      "comment": "",
+      "category": "LANDLOCK_ACCESS"
+    },
+    {
+      "name": "LANDLOCK_ACCESS_FS_TRUNCATE",
+      "value": "(1ULL << 14)",
+      "comment": "",
+      "category": "LANDLOCK_ACCESS"
+    },
+    {
+      "name": "LANDLOCK_ACCESS_FS_IOCTL_DEV",
+      "value": "(1ULL << 15)",
+      "comment": "",
+      "category": "LANDLOCK_ACCESS"
+    },
+    {
+      "name": "LANDLOCK_ACCESS_FS_RESOLVE_UNIX",
+      "value": "(1ULL << 16)",
+      "comment": "",
+      "category": "LANDLOCK_ACCESS"
+    },
+    {
+      "name": "LANDLOCK_ACCESS_NET_BIND_TCP",
+      "value": "(1ULL << 0)",
+      "comment": "",
+      "category": "LANDLOCK_ACCESS"
+    },
+    {
+      "name": "LANDLOCK_ACCESS_NET_CONNECT_TCP",
+      "value": "(1ULL << 1)",
+      "comment": "",
+      "category": "LANDLOCK_ACCESS"
+    },
+    {
+      "name": "LANDLOCK_SCOPE_ABSTRACT_UNIX_SOCKET",
+      "value": "(1ULL << 0)",
+      "comment": "",
+      "category": "LANDLOCK_SCOPE"
+    },
+    {
+      "name": "LANDLOCK_SCOPE_SIGNAL",
+      "value": "(1ULL << 1)",
+      "comment": "",
+      "category": "LANDLOCK_SCOPE"
+    }
+  ],
+  "structs": [
+    {
+      "name": "landlock_ruleset_attr",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "handled_access_fs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "handled_access_net",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "scoped",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "landlock_path_beneath_attr",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "allowed_access",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "parent_fd",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": true
+    },
+    {
+      "name": "landlock_net_port_attr",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "allowed_access",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "port",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

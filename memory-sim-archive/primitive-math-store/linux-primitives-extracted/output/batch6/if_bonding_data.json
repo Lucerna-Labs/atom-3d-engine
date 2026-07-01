@@ -1,0 +1,357 @@
+{
+  "filename": "if_bonding.h",
+  "includes": [
+    "linux/if.h",
+    "linux/types.h",
+    "linux/if_ether.h"
+  ],
+  "defines": [
+    {
+      "name": "BOND_ABI_VERSION",
+      "value": "2",
+      "comment": "",
+      "category": "BOND_ABI"
+    },
+    {
+      "name": "BOND_ENSLAVE_OLD",
+      "value": "(SIOCDEVPRIVATE)",
+      "comment": "",
+      "category": "BOND_ENSLAVE"
+    },
+    {
+      "name": "BOND_RELEASE_OLD",
+      "value": "(SIOCDEVPRIVATE + 1)",
+      "comment": "",
+      "category": "BOND_RELEASE"
+    },
+    {
+      "name": "BOND_SETHWADDR_OLD",
+      "value": "(SIOCDEVPRIVATE + 2)",
+      "comment": "",
+      "category": "BOND_SETHWADDR"
+    },
+    {
+      "name": "BOND_SLAVE_INFO_QUERY_OLD",
+      "value": "(SIOCDEVPRIVATE + 11)",
+      "comment": "",
+      "category": "BOND_SLAVE"
+    },
+    {
+      "name": "BOND_INFO_QUERY_OLD",
+      "value": "(SIOCDEVPRIVATE + 12)",
+      "comment": "",
+      "category": "BOND_INFO"
+    },
+    {
+      "name": "BOND_CHANGE_ACTIVE_OLD",
+      "value": "(SIOCDEVPRIVATE + 13)",
+      "comment": "",
+      "category": "BOND_CHANGE"
+    },
+    {
+      "name": "BOND_CHECK_MII_STATUS",
+      "value": "(SIOCGMIIPHY)",
+      "comment": "",
+      "category": "BOND_CHECK"
+    },
+    {
+      "name": "BOND_MODE_ROUNDROBIN",
+      "value": "0",
+      "comment": "",
+      "category": "BOND_MODE"
+    },
+    {
+      "name": "BOND_MODE_ACTIVEBACKUP",
+      "value": "1",
+      "comment": "",
+      "category": "BOND_MODE"
+    },
+    {
+      "name": "BOND_MODE_XOR",
+      "value": "2",
+      "comment": "",
+      "category": "BOND_MODE"
+    },
+    {
+      "name": "BOND_MODE_BROADCAST",
+      "value": "3",
+      "comment": "",
+      "category": "BOND_MODE"
+    },
+    {
+      "name": "BOND_MODE_8023AD",
+      "value": "4",
+      "comment": "",
+      "category": "BOND_MODE"
+    },
+    {
+      "name": "BOND_MODE_TLB",
+      "value": "5",
+      "comment": "",
+      "category": "BOND_MODE"
+    },
+    {
+      "name": "BOND_MODE_ALB",
+      "value": "6",
+      "comment": "TLB + RLB (receive load balancing)",
+      "category": "BOND_MODE"
+    },
+    {
+      "name": "BOND_LINK_UP",
+      "value": "0",
+      "comment": "link is up and running",
+      "category": "BOND_LINK"
+    },
+    {
+      "name": "BOND_LINK_FAIL",
+      "value": "1",
+      "comment": "link has just gone down",
+      "category": "BOND_LINK"
+    },
+    {
+      "name": "BOND_LINK_DOWN",
+      "value": "2",
+      "comment": "link has been down for too long time",
+      "category": "BOND_LINK"
+    },
+    {
+      "name": "BOND_LINK_BACK",
+      "value": "3",
+      "comment": "link is going back",
+      "category": "BOND_LINK"
+    },
+    {
+      "name": "BOND_STATE_ACTIVE",
+      "value": "0",
+      "comment": "link is active",
+      "category": "BOND_STATE"
+    },
+    {
+      "name": "BOND_STATE_BACKUP",
+      "value": "1",
+      "comment": "link is backup",
+      "category": "BOND_STATE"
+    },
+    {
+      "name": "BOND_DEFAULT_MAX_BONDS",
+      "value": "1",
+      "comment": "Default maximum number of devices to support",
+      "category": "BOND_DEFAULT"
+    },
+    {
+      "name": "BOND_DEFAULT_TX_QUEUES",
+      "value": "16",
+      "comment": "Default number of tx queues per device",
+      "category": "BOND_DEFAULT"
+    },
+    {
+      "name": "BOND_DEFAULT_RESEND_IGMP",
+      "value": "1",
+      "comment": "Default number of IGMP membership reports",
+      "category": "BOND_DEFAULT"
+    },
+    {
+      "name": "BOND_XMIT_POLICY_LAYER2",
+      "value": "0",
+      "comment": "layer 2 (MAC only), default",
+      "category": "BOND_XMIT"
+    },
+    {
+      "name": "BOND_XMIT_POLICY_LAYER34",
+      "value": "1",
+      "comment": "layer 3+4 (IP ^ (TCP || UDP))",
+      "category": "BOND_XMIT"
+    },
+    {
+      "name": "BOND_XMIT_POLICY_LAYER23",
+      "value": "2",
+      "comment": "layer 2+3 (IP ^ MAC)",
+      "category": "BOND_XMIT"
+    },
+    {
+      "name": "BOND_XMIT_POLICY_ENCAP23",
+      "value": "3",
+      "comment": "encapsulated layer 2+3",
+      "category": "BOND_XMIT"
+    },
+    {
+      "name": "BOND_XMIT_POLICY_ENCAP34",
+      "value": "4",
+      "comment": "encapsulated layer 3+4",
+      "category": "BOND_XMIT"
+    },
+    {
+      "name": "BOND_XMIT_POLICY_VLAN_SRCMAC",
+      "value": "5",
+      "comment": "vlan + source MAC",
+      "category": "BOND_XMIT"
+    },
+    {
+      "name": "LACP_STATE_LACP_ACTIVITY",
+      "value": "0x1",
+      "comment": "",
+      "category": "LACP_STATE"
+    },
+    {
+      "name": "LACP_STATE_LACP_TIMEOUT",
+      "value": "0x2",
+      "comment": "",
+      "category": "LACP_STATE"
+    },
+    {
+      "name": "LACP_STATE_AGGREGATION",
+      "value": "0x4",
+      "comment": "",
+      "category": "LACP_STATE"
+    },
+    {
+      "name": "LACP_STATE_SYNCHRONIZATION",
+      "value": "0x8",
+      "comment": "",
+      "category": "LACP_STATE"
+    },
+    {
+      "name": "LACP_STATE_COLLECTING",
+      "value": "0x10",
+      "comment": "",
+      "category": "LACP_STATE"
+    },
+    {
+      "name": "LACP_STATE_DISTRIBUTING",
+      "value": "0x20",
+      "comment": "",
+      "category": "LACP_STATE"
+    },
+    {
+      "name": "LACP_STATE_DEFAULTED",
+      "value": "0x40",
+      "comment": "",
+      "category": "LACP_STATE"
+    },
+    {
+      "name": "LACP_STATE_EXPIRED",
+      "value": "0x80",
+      "comment": "",
+      "category": "LACP_STATE"
+    },
+    {
+      "name": "BOND_XSTATS_MAX",
+      "value": "(__BOND_XSTATS_MAX - 1)",
+      "comment": "",
+      "category": "BOND_XSTATS"
+    },
+    {
+      "name": "BOND_3AD_STAT_MAX",
+      "value": "(__BOND_3AD_STAT_MAX - 1)",
+      "comment": "",
+      "category": ""
+    }
+  ],
+  "structs": [
+    {
+      "name": "ifbond",
+      "fields": [
+        {
+          "type_name": "__s32",
+          "name": "bond_mode",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "num_slaves",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "miimon",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ifslave",
+      "fields": [
+        {
+          "type_name": "__s32",
+          "name": "slave_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "slave_name",
+          "array_size": "IFNAMSIZ",
+          "comment": ""
+        },
+        {
+          "type_name": "__s8",
+          "name": "link",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s8",
+          "name": "state",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "link_failure_count",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ad_info",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "aggregator_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "ports",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "actor_key",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "partner_key",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "partner_system",
+          "array_size": "ETH_ALEN",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [
+    "ifbond",
+    "ifslave"
+  ],
+  "enums": {}
+}

@@ -1,0 +1,921 @@
+{
+  "filename": "nl80211.h",
+  "includes": [
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "NL80211_GENL_NAME",
+      "value": "\"nl80211\"",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_MULTICAST_GROUP_CONFIG",
+      "value": "\"config\"",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_MULTICAST_GROUP_SCAN",
+      "value": "\"scan\"",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_MULTICAST_GROUP_REG",
+      "value": "\"regulatory\"",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_MULTICAST_GROUP_MLME",
+      "value": "\"mlme\"",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_MULTICAST_GROUP_VENDOR",
+      "value": "\"vendor\"",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_MULTICAST_GROUP_NAN",
+      "value": "\"nan\"",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_MULTICAST_GROUP_TESTMODE",
+      "value": "\"testmode\"",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_EDMG_BW_CONFIG_MIN",
+      "value": "4",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_EDMG_BW_CONFIG_MAX",
+      "value": "15",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_EDMG_CHANNELS_MIN",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_EDMG_CHANNELS_MAX",
+      "value": "0x3c",
+      "comment": "0b00111100",
+      "category": ""
+    },
+    {
+      "name": "NL80211_CMD_SET_BSS",
+      "value": "NL80211_CMD_SET_BSS",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_CMD_SET_MGMT_EXTRA_IE",
+      "value": "NL80211_CMD_SET_MGMT_EXTRA_IE",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_CMD_REG_CHANGE",
+      "value": "NL80211_CMD_REG_CHANGE",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_CMD_AUTHENTICATE",
+      "value": "NL80211_CMD_AUTHENTICATE",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_CMD_ASSOCIATE",
+      "value": "NL80211_CMD_ASSOCIATE",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_CMD_DEAUTHENTICATE",
+      "value": "NL80211_CMD_DEAUTHENTICATE",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_CMD_DISASSOCIATE",
+      "value": "NL80211_CMD_DISASSOCIATE",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_CMD_REG_BEACON_HINT",
+      "value": "NL80211_CMD_REG_BEACON_HINT",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_ATTR_FEATURE_FLAGS",
+      "value": "NL80211_ATTR_FEATURE_FLAGS",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_CMD_GET_MESH_PARAMS",
+      "value": "NL80211_CMD_GET_MESH_CONFIG",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_CMD_SET_MESH_PARAMS",
+      "value": "NL80211_CMD_SET_MESH_CONFIG",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_MESH_SETUP_VENDOR_PATH_SEL_IE",
+      "value": "NL80211_MESH_SETUP_IE",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_ATTR_SCAN_GENERATION",
+      "value": "NL80211_ATTR_GENERATION",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_ATTR_MESH_PARAMS",
+      "value": "NL80211_ATTR_MESH_CONFIG",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_ATTR_IFACE_SOCKET_OWNER",
+      "value": "NL80211_ATTR_SOCKET_OWNER",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_ATTR_SAE_DATA",
+      "value": "NL80211_ATTR_AUTH_DATA",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_ATTR_CSA_C_OFF_BEACON",
+      "value": "NL80211_ATTR_CNTDWN_OFFS_BEACON",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_ATTR_CSA_C_OFF_PRESP",
+      "value": "NL80211_ATTR_CNTDWN_OFFS_PRESP",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_CMD_CONNECT",
+      "value": "NL80211_CMD_CONNECT",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_ATTR_HT_CAPABILITY",
+      "value": "NL80211_ATTR_HT_CAPABILITY",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_ATTR_BSS_BASIC_RATES",
+      "value": "NL80211_ATTR_BSS_BASIC_RATES",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_ATTR_WIPHY_TXQ_PARAMS",
+      "value": "NL80211_ATTR_WIPHY_TXQ_PARAMS",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_ATTR_WIPHY_FREQ",
+      "value": "NL80211_ATTR_WIPHY_FREQ",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_ATTR_WIPHY_CHANNEL_TYPE",
+      "value": "NL80211_ATTR_WIPHY_CHANNEL_TYPE",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_ATTR_MGMT_SUBTYPE",
+      "value": "NL80211_ATTR_MGMT_SUBTYPE",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_ATTR_IE",
+      "value": "NL80211_ATTR_IE",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_ATTR_REG_INITIATOR",
+      "value": "NL80211_ATTR_REG_INITIATOR",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_ATTR_REG_TYPE",
+      "value": "NL80211_ATTR_REG_TYPE",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_ATTR_FRAME",
+      "value": "NL80211_ATTR_FRAME",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_ATTR_SSID",
+      "value": "NL80211_ATTR_SSID",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_ATTR_AUTH_TYPE",
+      "value": "NL80211_ATTR_AUTH_TYPE",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_ATTR_REASON_CODE",
+      "value": "NL80211_ATTR_REASON_CODE",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_ATTR_CIPHER_SUITES_PAIRWISE",
+      "value": "NL80211_ATTR_CIPHER_SUITES_PAIRWISE",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_ATTR_CIPHER_SUITE_GROUP",
+      "value": "NL80211_ATTR_CIPHER_SUITE_GROUP",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_ATTR_WPA_VERSIONS",
+      "value": "NL80211_ATTR_WPA_VERSIONS",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_ATTR_AKM_SUITES",
+      "value": "NL80211_ATTR_AKM_SUITES",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_ATTR_KEY",
+      "value": "NL80211_ATTR_KEY",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_ATTR_KEYS",
+      "value": "NL80211_ATTR_KEYS",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_ATTR_FEATURE_FLAGS",
+      "value": "NL80211_ATTR_FEATURE_FLAGS",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_WIPHY_NAME_MAXLEN",
+      "value": "64",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_MAX_SUPP_RATES",
+      "value": "32",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_MAX_SUPP_SELECTORS",
+      "value": "128",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_MAX_SUPP_HT_RATES",
+      "value": "77",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_MAX_SUPP_REG_RULES",
+      "value": "128",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_TKIP_DATA_OFFSET_ENCR_KEY",
+      "value": "0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_TKIP_DATA_OFFSET_TX_MIC_KEY",
+      "value": "16",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_TKIP_DATA_OFFSET_RX_MIC_KEY",
+      "value": "24",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_HT_CAPABILITY_LEN",
+      "value": "26",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_VHT_CAPABILITY_LEN",
+      "value": "12",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_HE_MIN_CAPABILITY_LEN",
+      "value": "16",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_HE_MAX_CAPABILITY_LEN",
+      "value": "54",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_MAX_NR_CIPHER_SUITES",
+      "value": "5",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_MAX_NR_AKM_SUITES",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_EHT_MIN_CAPABILITY_LEN",
+      "value": "13",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_EHT_MAX_CAPABILITY_LEN",
+      "value": "51",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_MIN_REMAIN_ON_CHANNEL_TIME",
+      "value": "10",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_SCAN_RSSI_THOLD_OFF",
+      "value": "-300",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_CQM_TXE_MAX_INTVL",
+      "value": "1800",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_STA_FLAG_MAX_OLD_API",
+      "value": "NL80211_STA_FLAG_TDLS_PEER",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_STA_INFO_DATA_ACK_SIGNAL_AVG",
+      "value": "NL80211_STA_INFO_ACK_SIGNAL_AVG",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_BAND_ATTR_HT_CAPA",
+      "value": "NL80211_BAND_ATTR_HT_CAPA",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_FREQUENCY_ATTR_MAX_TX_POWER",
+      "value": "NL80211_FREQUENCY_ATTR_MAX_TX_POWER",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_FREQUENCY_ATTR_PASSIVE_SCAN",
+      "value": "NL80211_FREQUENCY_ATTR_NO_IR",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_FREQUENCY_ATTR_NO_IBSS",
+      "value": "NL80211_FREQUENCY_ATTR_NO_IR",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_FREQUENCY_ATTR_NO_IR",
+      "value": "NL80211_FREQUENCY_ATTR_NO_IR",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_FREQUENCY_ATTR_GO_CONCURRENT",
+      "value": "",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_FREQUENCY_ATTR_NO_UHB_VLP_CLIENT",
+      "value": "",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_FREQUENCY_ATTR_NO_UHB_AFC_CLIENT",
+      "value": "",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_ATTR_SCHED_SCAN_MATCH_SSID",
+      "value": "NL80211_SCHED_SCAN_MATCH_ATTR_SSID",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_RRF_PASSIVE_SCAN",
+      "value": "NL80211_RRF_NO_IR",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_RRF_NO_IBSS",
+      "value": "NL80211_RRF_NO_IR",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_RRF_NO_IR",
+      "value": "NL80211_RRF_NO_IR",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_RRF_NO_HT40",
+      "value": "(NL80211_RRF_NO_HT40MINUS |",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_RRF_GO_CONCURRENT",
+      "value": "NL80211_RRF_IR_CONCURRENT",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_RRF_NO_UHB_VLP_CLIENT",
+      "value": "NL80211_RRF_NO_6GHZ_VLP_CLIENT",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_RRF_NO_UHB_AFC_CLIENT",
+      "value": "NL80211_RRF_NO_6GHZ_AFC_CLIENT",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_RRF_NO_IR_ALL",
+      "value": "(NL80211_RRF_NO_IR | __NL80211_RRF_NO_IBSS)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_SURVEY_INFO_CHANNEL_TIME",
+      "value": "NL80211_SURVEY_INFO_TIME",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_SURVEY_INFO_CHANNEL_TIME_BUSY",
+      "value": "NL80211_SURVEY_INFO_TIME_BUSY",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_SURVEY_INFO_CHANNEL_TIME_EXT_BUSY",
+      "value": "NL80211_SURVEY_INFO_TIME_EXT_BUSY",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_SURVEY_INFO_CHANNEL_TIME_RX",
+      "value": "NL80211_SURVEY_INFO_TIME_RX",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_SURVEY_INFO_CHANNEL_TIME_TX",
+      "value": "NL80211_SURVEY_INFO_TIME_TX",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_TXQ_ATTR_QUEUE",
+      "value": "NL80211_TXQ_ATTR_AC",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_TXQ_Q_VO",
+      "value": "NL80211_AC_VO",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_TXQ_Q_VI",
+      "value": "NL80211_AC_VI",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_TXQ_Q_BE",
+      "value": "NL80211_AC_BE",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_TXQ_Q_BK",
+      "value": "NL80211_AC_BK",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_BSS_CANNOT_USE_UHB_PWR_MISMATCH",
+      "value": "",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_TXRATE_MCS",
+      "value": "NL80211_TXRATE_HT",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_VHT_NSS_MAX",
+      "value": "8",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_HE_NSS_MAX",
+      "value": "8",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_EHT_NSS_MAX",
+      "value": "16",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "__NL80211_WOWLAN_PKTPAT_INVALID",
+      "value": "__NL80211_PKTPAT_INVALID",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_WOWLAN_PKTPAT_MASK",
+      "value": "NL80211_PKTPAT_MASK",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_WOWLAN_PKTPAT_PATTERN",
+      "value": "NL80211_PKTPAT_PATTERN",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_WOWLAN_PKTPAT_OFFSET",
+      "value": "NL80211_PKTPAT_OFFSET",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NUM_NL80211_WOWLAN_PKTPAT",
+      "value": "NUM_NL80211_PKTPAT",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "MAX_NL80211_WOWLAN_PKTPAT",
+      "value": "MAX_NL80211_PKTPAT",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "nl80211_wowlan_pattern_support",
+      "value": "nl80211_pattern_support",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_KCK_LEN",
+      "value": "16",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_KEK_LEN",
+      "value": "16",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_KCK_EXT_LEN",
+      "value": "24",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_KEK_EXT_LEN",
+      "value": "32",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_KCK_EXT_LEN_32",
+      "value": "32",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_REPLAY_CTR_LEN",
+      "value": "8",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_CRIT_PROTO_MAX_DURATION",
+      "value": "5000",
+      "comment": "msec",
+      "category": ""
+    },
+    {
+      "name": "NL80211_VENDOR_ID_IS_LINUX",
+      "value": "0x80000000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_NAN_FUNC_SERVICE_ID_LEN",
+      "value": "6",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_NAN_FUNC_SERVICE_SPEC_INFO_MAX_LEN",
+      "value": "0xff",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_NAN_FUNC_SRF_MAX_LEN",
+      "value": "0xff",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_FILS_DISCOVERY_TMPL_MIN_LEN",
+      "value": "42",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NL80211_NAN_SCHED_NOT_AVAIL_SLOT",
+      "value": "0xff",
+      "comment": "",
+      "category": ""
+    }
+  ],
+  "structs": [
+    {
+      "name": "nl80211_sta_flag_update",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "mask",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "set",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "nl80211_txrate_vht",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "mcs",
+          "array_size": "NL80211_VHT_NSS_MAX",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "nl80211_txrate_he",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "mcs",
+          "array_size": "NL80211_HE_NSS_MAX",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "nl80211_txrate_eht",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "mcs",
+          "array_size": "NL80211_EHT_NSS_MAX",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "nl80211_pattern_support",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "max_patterns",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "min_pattern_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "max_pattern_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "max_pkt_offset",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "nl80211_wowlan_tcp_data_seq",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "nl80211_wowlan_tcp_data_token",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "nl80211_wowlan_tcp_data_token_feature",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "nl80211_coalesce_rule_support",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "max_rules",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "max_delay",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "nl80211_vendor_cmd_info",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "vendor_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "subcmd",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "nl80211_bss_select_rssi_adjust",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "band",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s8",
+          "name": "delta",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

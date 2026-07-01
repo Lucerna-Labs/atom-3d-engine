@@ -1,0 +1,73 @@
+{
+  "name": "stability_first_tri_70",
+  "description": "Conservative candidate: maximizes gate, carrier, checksum, and clean-stop behavior over breadth.",
+  "shares": {
+    "structural": 0.7,
+    "cognitive": 0.2,
+    "cyber": 0.1
+  },
+  "bridge_count": 200,
+  "anti_echo_multiplier": 4,
+  "q2_amplifier": false,
+  "train_count": 1619,
+  "validation_count": 141,
+  "summary": {
+    "count": 1760,
+    "by_kind": {
+      "anti_echo_stop": 469,
+      "carrier_control": 54,
+      "clean_task_solution": 61,
+      "cognitive_memory": 240,
+      "compact_task_solution": 149,
+      "cyber_memory": 120,
+      "gate_application": 13,
+      "gate_control": 80,
+      "repair_solution": 151,
+      "routed_bridge": 200,
+      "task_solution": 163,
+      "web_association": 52,
+      "web_repair": 8
+    },
+    "by_family": {
+      "adversarial": 128,
+      "adversarial-reading": 7,
+      "analogy": 4,
+      "boundary": 192,
+      "calibration": 6,
+      "causality": 3,
+      "classification": 9,
+      "coding": 11,
+      "comparison": 5,
+      "decomposition": 4,
+      "evidence": 4,
+      "format-control": 3,
+      "generalist": 360,
+      "loop-control": 6,
+      "math": 112,
+      "orientation": 2,
+      "planning": 3,
+      "question-analysis": 3,
+      "reward": 36,
+      "rhetoric": 9,
+      "source-evaluation": 4,
+      "spatial": 1,
+      "structural": 840,
+      "summarization": 4,
+      "systems": 4
+    },
+    "by_source": {
+      "anti_echo_generator": 360,
+      "bridge_generator": 200,
+      "cognitive_core_v0_1.json": 91,
+      "cognitive_rewards_v0_1.json": 36,
+      "computation_primitives_v0_1.json": 113,
+      "rust_cyber_defender_generated.tsv": 120,
+      "structural_primitive_lora_v0_2": 840
+    }
+  },
+  "files": {
+    "train_jsonl": "C:\\Projects\\small-model-memory-lab\\data\\dataset_mixture_candidates_v0_1\\stability_first_tri_70\\train.jsonl",
+    "validation_jsonl": "C:\\Projects\\small-model-memory-lab\\data\\dataset_mixture_candidates_v0_1\\stability_first_tri_70\\validation.jsonl",
+    "preview": "C:\\Projects\\small-model-memory-lab\\data\\dataset_mixture_candidates_v0_1\\stability_first_tri_70\\preview.json"
+  }
+}

@@ -1,0 +1,149 @@
+{
+  "filename": "aio_abi.h",
+  "includes": [
+    "linux/types.h",
+    "linux/fs.h",
+    "asm/byteorder.h"
+  ],
+  "defines": [
+    {
+      "name": "IOCB_FLAG_RESFD",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "IOCB_FLAG"
+    },
+    {
+      "name": "IOCB_FLAG_IOPRIO",
+      "value": "(1 << 1)",
+      "comment": "",
+      "category": "IOCB_FLAG"
+    }
+  ],
+  "structs": [
+    {
+      "name": "io_event",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "data",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "obj",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s64",
+          "name": "res",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s64",
+          "name": "res2",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "iocb",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "aio_data",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "aio_key",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__kernel_rwf_t",
+          "name": "aio_rw_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__kernel_rwf_t",
+          "name": "aio_rw_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "aio_key",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "aio_lio_opcode",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s16",
+          "name": "aio_reqprio",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "aio_fildes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "aio_buf",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "aio_nbytes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s64",
+          "name": "aio_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "aio_reserved2",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "aio_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "aio_resfd",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

@@ -1,0 +1,361 @@
+{
+  "filename": "joystick.h",
+  "includes": [
+    "linux/types.h",
+    "linux/input.h"
+  ],
+  "defines": [
+    {
+      "name": "JS_VERSION",
+      "value": "0x020100",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "JS_EVENT_BUTTON",
+      "value": "0x01",
+      "comment": "button pressed/released",
+      "category": "JS_EVENT"
+    },
+    {
+      "name": "JS_EVENT_AXIS",
+      "value": "0x02",
+      "comment": "joystick moved",
+      "category": "JS_EVENT"
+    },
+    {
+      "name": "JS_EVENT_INIT",
+      "value": "0x80",
+      "comment": "initial state of device",
+      "category": "JS_EVENT"
+    },
+    {
+      "name": "JSIOCGVERSION",
+      "value": "_IOR('j', 0x01, __u32)",
+      "comment": "get driver version",
+      "category": ""
+    },
+    {
+      "name": "JSIOCGAXES",
+      "value": "_IOR('j', 0x11, __u8)",
+      "comment": "get number of axes",
+      "category": ""
+    },
+    {
+      "name": "JSIOCGBUTTONS",
+      "value": "_IOR('j', 0x12, __u8)",
+      "comment": "get number of buttons",
+      "category": ""
+    },
+    {
+      "name": "JSIOCSCORR",
+      "value": "_IOW('j', 0x21, struct js_corr)",
+      "comment": "set correction values",
+      "category": ""
+    },
+    {
+      "name": "JSIOCGCORR",
+      "value": "_IOR('j', 0x22, struct js_corr)",
+      "comment": "get correction values",
+      "category": ""
+    },
+    {
+      "name": "JSIOCSAXMAP",
+      "value": "_IOW('j', 0x31, __u8[ABS_CNT])",
+      "comment": "set axis mapping",
+      "category": ""
+    },
+    {
+      "name": "JSIOCGAXMAP",
+      "value": "_IOR('j', 0x32, __u8[ABS_CNT])",
+      "comment": "get axis mapping",
+      "category": ""
+    },
+    {
+      "name": "JSIOCSBTNMAP",
+      "value": "_IOW('j', 0x33, __u16[KEY_MAX - BTN_MISC + 1])",
+      "comment": "set button mapping",
+      "category": ""
+    },
+    {
+      "name": "JSIOCGBTNMAP",
+      "value": "_IOR('j', 0x34, __u16[KEY_MAX - BTN_MISC + 1])",
+      "comment": "get button mapping",
+      "category": ""
+    },
+    {
+      "name": "JS_CORR_NONE",
+      "value": "0x00",
+      "comment": "returns raw values",
+      "category": "JS_CORR"
+    },
+    {
+      "name": "JS_CORR_BROKEN",
+      "value": "0x01",
+      "comment": "broken line",
+      "category": "JS_CORR"
+    },
+    {
+      "name": "JS_RETURN",
+      "value": "sizeof(struct JS_DATA_TYPE)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "JS_TRUE",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "JS_FALSE",
+      "value": "0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "JS_X_0",
+      "value": "0x01",
+      "comment": "",
+      "category": "JS_X"
+    },
+    {
+      "name": "JS_Y_0",
+      "value": "0x02",
+      "comment": "",
+      "category": "JS_Y"
+    },
+    {
+      "name": "JS_X_1",
+      "value": "0x04",
+      "comment": "",
+      "category": "JS_X"
+    },
+    {
+      "name": "JS_Y_1",
+      "value": "0x08",
+      "comment": "",
+      "category": "JS_Y"
+    },
+    {
+      "name": "JS_MAX",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "JS_DEF_TIMEOUT",
+      "value": "0x1300",
+      "comment": "",
+      "category": "JS_DEF"
+    },
+    {
+      "name": "JS_DEF_CORR",
+      "value": "0",
+      "comment": "",
+      "category": "JS_DEF"
+    },
+    {
+      "name": "JS_DEF_TIMELIMIT",
+      "value": "10L",
+      "comment": "",
+      "category": "JS_DEF"
+    },
+    {
+      "name": "JS_SET_CAL",
+      "value": "1",
+      "comment": "",
+      "category": "JS_SET"
+    },
+    {
+      "name": "JS_GET_CAL",
+      "value": "2",
+      "comment": "",
+      "category": "JS_GET"
+    },
+    {
+      "name": "JS_SET_TIMEOUT",
+      "value": "3",
+      "comment": "",
+      "category": "JS_SET"
+    },
+    {
+      "name": "JS_GET_TIMEOUT",
+      "value": "4",
+      "comment": "",
+      "category": "JS_GET"
+    },
+    {
+      "name": "JS_SET_TIMELIMIT",
+      "value": "5",
+      "comment": "",
+      "category": "JS_SET"
+    },
+    {
+      "name": "JS_GET_TIMELIMIT",
+      "value": "6",
+      "comment": "",
+      "category": "JS_GET"
+    },
+    {
+      "name": "JS_GET_ALL",
+      "value": "7",
+      "comment": "",
+      "category": "JS_GET"
+    },
+    {
+      "name": "JS_SET_ALL",
+      "value": "8",
+      "comment": "",
+      "category": "JS_SET"
+    }
+  ],
+  "structs": [
+    {
+      "name": "js_event",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "time",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s16",
+          "name": "value",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "number",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "js_corr",
+      "fields": [
+        {
+          "type_name": "__s32",
+          "name": "coef",
+          "array_size": "8",
+          "comment": ""
+        },
+        {
+          "type_name": "__s16",
+          "name": "prec",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "JS_DATA_TYPE",
+      "fields": [
+        {
+          "type_name": "__s32",
+          "name": "buttons",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "x",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "y",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "JS_DATA_SAVE_TYPE_32",
+      "fields": [
+        {
+          "type_name": "__s32",
+          "name": "JS_TIMEOUT",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "BUSY",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "JS_EXPIRETIME",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "JS_TIMELIMIT",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "JS_DATA_SAVE_TYPE_64",
+      "fields": [
+        {
+          "type_name": "__s32",
+          "name": "JS_TIMEOUT",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "BUSY",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s64",
+          "name": "JS_EXPIRETIME",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s64",
+          "name": "JS_TIMELIMIT",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

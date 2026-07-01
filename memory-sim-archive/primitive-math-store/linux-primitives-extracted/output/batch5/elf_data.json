@@ -1,0 +1,2743 @@
+{
+  "filename": "elf.h",
+  "includes": [
+    "linux/types.h",
+    "linux/elf-em.h"
+  ],
+  "defines": [
+    {
+      "name": "PT_NULL",
+      "value": "0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PT_LOAD",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PT_DYNAMIC",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PT_INTERP",
+      "value": "3",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PT_NOTE",
+      "value": "4",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PT_SHLIB",
+      "value": "5",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PT_PHDR",
+      "value": "6",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PT_TLS",
+      "value": "7",
+      "comment": "Thread local storage segment",
+      "category": ""
+    },
+    {
+      "name": "PT_LOOS",
+      "value": "0x60000000",
+      "comment": "OS-specific",
+      "category": ""
+    },
+    {
+      "name": "PT_HIOS",
+      "value": "0x6fffffff",
+      "comment": "OS-specific",
+      "category": ""
+    },
+    {
+      "name": "PT_LOPROC",
+      "value": "0x70000000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PT_HIPROC",
+      "value": "0x7fffffff",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PT_GNU_EH_FRAME",
+      "value": "(PT_LOOS + 0x474e550)",
+      "comment": "",
+      "category": "PT_GNU"
+    },
+    {
+      "name": "PT_GNU_STACK",
+      "value": "(PT_LOOS + 0x474e551)",
+      "comment": "",
+      "category": "PT_GNU"
+    },
+    {
+      "name": "PT_GNU_RELRO",
+      "value": "(PT_LOOS + 0x474e552)",
+      "comment": "",
+      "category": "PT_GNU"
+    },
+    {
+      "name": "PT_GNU_PROPERTY",
+      "value": "(PT_LOOS + 0x474e553)",
+      "comment": "",
+      "category": "PT_GNU"
+    },
+    {
+      "name": "PT_AARCH64_MEMTAG_MTE",
+      "value": "(PT_LOPROC + 0x2)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PN_XNUM",
+      "value": "0xffff",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ET_NONE",
+      "value": "0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ET_REL",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ET_EXEC",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ET_DYN",
+      "value": "3",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ET_CORE",
+      "value": "4",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ET_LOPROC",
+      "value": "0xff00",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ET_HIPROC",
+      "value": "0xffff",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DT_NULL",
+      "value": "0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DT_NEEDED",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DT_PLTRELSZ",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DT_PLTGOT",
+      "value": "3",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DT_HASH",
+      "value": "4",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DT_STRTAB",
+      "value": "5",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DT_SYMTAB",
+      "value": "6",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DT_RELA",
+      "value": "7",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DT_RELASZ",
+      "value": "8",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DT_RELAENT",
+      "value": "9",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DT_STRSZ",
+      "value": "10",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DT_SYMENT",
+      "value": "11",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DT_INIT",
+      "value": "12",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DT_FINI",
+      "value": "13",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DT_SONAME",
+      "value": "14",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DT_RPATH",
+      "value": "15",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DT_SYMBOLIC",
+      "value": "16",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DT_REL",
+      "value": "17",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DT_RELSZ",
+      "value": "18",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DT_RELENT",
+      "value": "19",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DT_PLTREL",
+      "value": "20",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DT_DEBUG",
+      "value": "21",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DT_TEXTREL",
+      "value": "22",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DT_JMPREL",
+      "value": "23",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DT_ENCODING",
+      "value": "32",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "OLD_DT_LOOS",
+      "value": "0x60000000",
+      "comment": "",
+      "category": "OLD_DT"
+    },
+    {
+      "name": "DT_LOOS",
+      "value": "0x6000000d",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DT_HIOS",
+      "value": "0x6ffff000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DT_VALRNGLO",
+      "value": "0x6ffffd00",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DT_VALRNGHI",
+      "value": "0x6ffffdff",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DT_ADDRRNGLO",
+      "value": "0x6ffffe00",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DT_GNU_HASH",
+      "value": "0x6ffffef5",
+      "comment": "",
+      "category": "DT_GNU"
+    },
+    {
+      "name": "DT_ADDRRNGHI",
+      "value": "0x6ffffeff",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DT_VERSYM",
+      "value": "0x6ffffff0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DT_RELACOUNT",
+      "value": "0x6ffffff9",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DT_RELCOUNT",
+      "value": "0x6ffffffa",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DT_FLAGS_1",
+      "value": "0x6ffffffb",
+      "comment": "",
+      "category": "DT_FLAGS"
+    },
+    {
+      "name": "DT_VERDEF",
+      "value": "0x6ffffffc",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DT_VERDEFNUM",
+      "value": "0x6ffffffd",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DT_VERNEED",
+      "value": "0x6ffffffe",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DT_VERNEEDNUM",
+      "value": "0x6fffffff",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "OLD_DT_HIOS",
+      "value": "0x6fffffff",
+      "comment": "",
+      "category": "OLD_DT"
+    },
+    {
+      "name": "DT_LOPROC",
+      "value": "0x70000000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DT_HIPROC",
+      "value": "0x7fffffff",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "STB_LOCAL",
+      "value": "0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "STB_GLOBAL",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "STB_WEAK",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "STN_UNDEF",
+      "value": "0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "STT_NOTYPE",
+      "value": "0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "STT_OBJECT",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "STT_FUNC",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "STT_SECTION",
+      "value": "3",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "STT_FILE",
+      "value": "4",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "STT_COMMON",
+      "value": "5",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "STT_TLS",
+      "value": "6",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "VER_FLG_BASE",
+      "value": "0x1",
+      "comment": "",
+      "category": "VER_FLG"
+    },
+    {
+      "name": "VER_FLG_WEAK",
+      "value": "0x2",
+      "comment": "",
+      "category": "VER_FLG"
+    },
+    {
+      "name": "EI_NIDENT",
+      "value": "16",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PF_R",
+      "value": "0x4",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PF_W",
+      "value": "0x2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PF_X",
+      "value": "0x1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SHT_NULL",
+      "value": "0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SHT_PROGBITS",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SHT_SYMTAB",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SHT_STRTAB",
+      "value": "3",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SHT_RELA",
+      "value": "4",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SHT_HASH",
+      "value": "5",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SHT_DYNAMIC",
+      "value": "6",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SHT_NOTE",
+      "value": "7",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SHT_NOBITS",
+      "value": "8",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SHT_REL",
+      "value": "9",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SHT_SHLIB",
+      "value": "10",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SHT_DYNSYM",
+      "value": "11",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SHT_NUM",
+      "value": "12",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SHT_LOPROC",
+      "value": "0x70000000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SHT_HIPROC",
+      "value": "0x7fffffff",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SHT_LOUSER",
+      "value": "0x80000000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SHT_HIUSER",
+      "value": "0xffffffff",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SHF_WRITE",
+      "value": "0x1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SHF_ALLOC",
+      "value": "0x2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SHF_EXECINSTR",
+      "value": "0x4",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SHF_MERGE",
+      "value": "0x10",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SHF_STRINGS",
+      "value": "0x20",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SHF_INFO_LINK",
+      "value": "0x40",
+      "comment": "",
+      "category": "SHF_INFO"
+    },
+    {
+      "name": "SHF_LINK_ORDER",
+      "value": "0x80",
+      "comment": "",
+      "category": "SHF_LINK"
+    },
+    {
+      "name": "SHF_OS_NONCONFORMING",
+      "value": "0x100",
+      "comment": "",
+      "category": "SHF_OS"
+    },
+    {
+      "name": "SHF_GROUP",
+      "value": "0x200",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SHF_TLS",
+      "value": "0x400",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SHF_RELA_LIVEPATCH",
+      "value": "0x00100000",
+      "comment": "",
+      "category": "SHF_RELA"
+    },
+    {
+      "name": "SHF_RO_AFTER_INIT",
+      "value": "0x00200000",
+      "comment": "",
+      "category": "SHF_RO"
+    },
+    {
+      "name": "SHF_ORDERED",
+      "value": "0x04000000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SHF_EXCLUDE",
+      "value": "0x08000000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SHF_MASKOS",
+      "value": "0x0ff00000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SHF_MASKPROC",
+      "value": "0xf0000000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SHN_UNDEF",
+      "value": "0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SHN_LORESERVE",
+      "value": "0xff00",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SHN_LOPROC",
+      "value": "0xff00",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SHN_HIPROC",
+      "value": "0xff1f",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SHN_LIVEPATCH",
+      "value": "0xff20",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SHN_ABS",
+      "value": "0xfff1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SHN_COMMON",
+      "value": "0xfff2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SHN_HIRESERVE",
+      "value": "0xffff",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EI_MAG0",
+      "value": "0",
+      "comment": "e_ident[] indexes",
+      "category": ""
+    },
+    {
+      "name": "EI_MAG1",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EI_MAG2",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EI_MAG3",
+      "value": "3",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EI_CLASS",
+      "value": "4",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EI_DATA",
+      "value": "5",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EI_VERSION",
+      "value": "6",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EI_OSABI",
+      "value": "7",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EI_PAD",
+      "value": "8",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ELFMAG0",
+      "value": "0x7f",
+      "comment": "EI_MAG",
+      "category": ""
+    },
+    {
+      "name": "ELFMAG1",
+      "value": "'E'",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ELFMAG2",
+      "value": "'L'",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ELFMAG3",
+      "value": "'F'",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ELFMAG",
+      "value": "\"\\177ELF\"",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SELFMAG",
+      "value": "4",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ELFCLASSNONE",
+      "value": "0",
+      "comment": "EI_CLASS",
+      "category": ""
+    },
+    {
+      "name": "ELFCLASS32",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ELFCLASS64",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ELFCLASSNUM",
+      "value": "3",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ELFDATANONE",
+      "value": "0",
+      "comment": "e_ident[EI_DATA]",
+      "category": ""
+    },
+    {
+      "name": "ELFDATA2LSB",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ELFDATA2MSB",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EV_NONE",
+      "value": "0",
+      "comment": "e_version, EI_VERSION",
+      "category": ""
+    },
+    {
+      "name": "EV_CURRENT",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EV_NUM",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ELFOSABI_NONE",
+      "value": "0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ELFOSABI_LINUX",
+      "value": "3",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ELF_OSABI",
+      "value": "ELFOSABI_NONE",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NN_GNU_PROPERTY_TYPE_0",
+      "value": "\"GNU\"",
+      "comment": "",
+      "category": "NN_GNU"
+    },
+    {
+      "name": "NT_GNU_PROPERTY_TYPE_0",
+      "value": "5",
+      "comment": "",
+      "category": "NT_GNU"
+    },
+    {
+      "name": "NN_PRSTATUS",
+      "value": "\"CORE\"",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NT_PRSTATUS",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NN_PRFPREG",
+      "value": "\"CORE\"",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NT_PRFPREG",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NN_PRPSINFO",
+      "value": "\"CORE\"",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NT_PRPSINFO",
+      "value": "3",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NN_TASKSTRUCT",
+      "value": "\"CORE\"",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NT_TASKSTRUCT",
+      "value": "4",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NN_AUXV",
+      "value": "\"CORE\"",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NT_AUXV",
+      "value": "6",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NN_SIGINFO",
+      "value": "\"CORE\"",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NT_SIGINFO",
+      "value": "0x53494749",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NN_FILE",
+      "value": "\"CORE\"",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NT_FILE",
+      "value": "0x46494c45",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NN_PRXFPREG",
+      "value": "\"LINUX\"",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NT_PRXFPREG",
+      "value": "0x46e62b7f",
+      "comment": "copied from gdb5.1/include/elf/common.h",
+      "category": ""
+    },
+    {
+      "name": "NN_PPC_VMX",
+      "value": "\"LINUX\"",
+      "comment": "",
+      "category": "NN_PPC"
+    },
+    {
+      "name": "NT_PPC_VMX",
+      "value": "0x100",
+      "comment": "PowerPC Altivec/VMX registers",
+      "category": "NT_PPC"
+    },
+    {
+      "name": "NN_PPC_SPE",
+      "value": "\"LINUX\"",
+      "comment": "",
+      "category": "NN_PPC"
+    },
+    {
+      "name": "NT_PPC_SPE",
+      "value": "0x101",
+      "comment": "PowerPC SPE/EVR registers",
+      "category": "NT_PPC"
+    },
+    {
+      "name": "NN_PPC_VSX",
+      "value": "\"LINUX\"",
+      "comment": "",
+      "category": "NN_PPC"
+    },
+    {
+      "name": "NT_PPC_VSX",
+      "value": "0x102",
+      "comment": "PowerPC VSX registers",
+      "category": "NT_PPC"
+    },
+    {
+      "name": "NN_PPC_TAR",
+      "value": "\"LINUX\"",
+      "comment": "",
+      "category": "NN_PPC"
+    },
+    {
+      "name": "NT_PPC_TAR",
+      "value": "0x103",
+      "comment": "Target Address Register",
+      "category": "NT_PPC"
+    },
+    {
+      "name": "NN_PPC_PPR",
+      "value": "\"LINUX\"",
+      "comment": "",
+      "category": "NN_PPC"
+    },
+    {
+      "name": "NT_PPC_PPR",
+      "value": "0x104",
+      "comment": "Program Priority Register",
+      "category": "NT_PPC"
+    },
+    {
+      "name": "NN_PPC_DSCR",
+      "value": "\"LINUX\"",
+      "comment": "",
+      "category": "NN_PPC"
+    },
+    {
+      "name": "NT_PPC_DSCR",
+      "value": "0x105",
+      "comment": "Data Stream Control Register",
+      "category": "NT_PPC"
+    },
+    {
+      "name": "NN_PPC_EBB",
+      "value": "\"LINUX\"",
+      "comment": "",
+      "category": "NN_PPC"
+    },
+    {
+      "name": "NT_PPC_EBB",
+      "value": "0x106",
+      "comment": "Event Based Branch Registers",
+      "category": "NT_PPC"
+    },
+    {
+      "name": "NN_PPC_PMU",
+      "value": "\"LINUX\"",
+      "comment": "",
+      "category": "NN_PPC"
+    },
+    {
+      "name": "NT_PPC_PMU",
+      "value": "0x107",
+      "comment": "Performance Monitor Registers",
+      "category": "NT_PPC"
+    },
+    {
+      "name": "NN_PPC_TM_CGPR",
+      "value": "\"LINUX\"",
+      "comment": "",
+      "category": "NN_PPC"
+    },
+    {
+      "name": "NT_PPC_TM_CGPR",
+      "value": "0x108",
+      "comment": "TM checkpointed GPR Registers",
+      "category": "NT_PPC"
+    },
+    {
+      "name": "NN_PPC_TM_CFPR",
+      "value": "\"LINUX\"",
+      "comment": "",
+      "category": "NN_PPC"
+    },
+    {
+      "name": "NT_PPC_TM_CFPR",
+      "value": "0x109",
+      "comment": "TM checkpointed FPR Registers",
+      "category": "NT_PPC"
+    },
+    {
+      "name": "NN_PPC_TM_CVMX",
+      "value": "\"LINUX\"",
+      "comment": "",
+      "category": "NN_PPC"
+    },
+    {
+      "name": "NT_PPC_TM_CVMX",
+      "value": "0x10a",
+      "comment": "TM checkpointed VMX Registers",
+      "category": "NT_PPC"
+    },
+    {
+      "name": "NN_PPC_TM_CVSX",
+      "value": "\"LINUX\"",
+      "comment": "",
+      "category": "NN_PPC"
+    },
+    {
+      "name": "NT_PPC_TM_CVSX",
+      "value": "0x10b",
+      "comment": "TM checkpointed VSX Registers",
+      "category": "NT_PPC"
+    },
+    {
+      "name": "NN_PPC_TM_SPR",
+      "value": "\"LINUX\"",
+      "comment": "",
+      "category": "NN_PPC"
+    },
+    {
+      "name": "NT_PPC_TM_SPR",
+      "value": "0x10c",
+      "comment": "TM Special Purpose Registers",
+      "category": "NT_PPC"
+    },
+    {
+      "name": "NN_PPC_TM_CTAR",
+      "value": "\"LINUX\"",
+      "comment": "",
+      "category": "NN_PPC"
+    },
+    {
+      "name": "NT_PPC_TM_CTAR",
+      "value": "0x10d",
+      "comment": "TM checkpointed Target Address Register",
+      "category": "NT_PPC"
+    },
+    {
+      "name": "NN_PPC_TM_CPPR",
+      "value": "\"LINUX\"",
+      "comment": "",
+      "category": "NN_PPC"
+    },
+    {
+      "name": "NT_PPC_TM_CPPR",
+      "value": "0x10e",
+      "comment": "TM checkpointed Program Priority Register",
+      "category": "NT_PPC"
+    },
+    {
+      "name": "NN_PPC_TM_CDSCR",
+      "value": "\"LINUX\"",
+      "comment": "",
+      "category": "NN_PPC"
+    },
+    {
+      "name": "NT_PPC_TM_CDSCR",
+      "value": "0x10f",
+      "comment": "TM checkpointed Data Stream Control Register",
+      "category": "NT_PPC"
+    },
+    {
+      "name": "NN_PPC_PKEY",
+      "value": "\"LINUX\"",
+      "comment": "",
+      "category": "NN_PPC"
+    },
+    {
+      "name": "NT_PPC_PKEY",
+      "value": "0x110",
+      "comment": "Memory Protection Keys registers",
+      "category": "NT_PPC"
+    },
+    {
+      "name": "NN_PPC_DEXCR",
+      "value": "\"LINUX\"",
+      "comment": "",
+      "category": "NN_PPC"
+    },
+    {
+      "name": "NT_PPC_DEXCR",
+      "value": "0x111",
+      "comment": "PowerPC DEXCR registers",
+      "category": "NT_PPC"
+    },
+    {
+      "name": "NN_PPC_HASHKEYR",
+      "value": "\"LINUX\"",
+      "comment": "",
+      "category": "NN_PPC"
+    },
+    {
+      "name": "NT_PPC_HASHKEYR",
+      "value": "0x112",
+      "comment": "PowerPC HASHKEYR register",
+      "category": "NT_PPC"
+    },
+    {
+      "name": "NN_386_TLS",
+      "value": "\"LINUX\"",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NT_386_TLS",
+      "value": "0x200",
+      "comment": "i386 TLS slots (struct user_desc)",
+      "category": ""
+    },
+    {
+      "name": "NN_386_IOPERM",
+      "value": "\"LINUX\"",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NT_386_IOPERM",
+      "value": "0x201",
+      "comment": "x86 io permission bitmap (1=deny)",
+      "category": ""
+    },
+    {
+      "name": "NN_X86_XSTATE",
+      "value": "\"LINUX\"",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NT_X86_XSTATE",
+      "value": "0x202",
+      "comment": "x86 extended state using xsave",
+      "category": ""
+    },
+    {
+      "name": "NN_X86_SHSTK",
+      "value": "\"LINUX\"",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NT_X86_SHSTK",
+      "value": "0x204",
+      "comment": "x86 SHSTK state",
+      "category": ""
+    },
+    {
+      "name": "NN_X86_XSAVE_LAYOUT",
+      "value": "\"LINUX\"",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NT_X86_XSAVE_LAYOUT",
+      "value": "0x205",
+      "comment": "XSAVE layout description",
+      "category": ""
+    },
+    {
+      "name": "NN_S390_HIGH_GPRS",
+      "value": "\"LINUX\"",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NT_S390_HIGH_GPRS",
+      "value": "0x300",
+      "comment": "s390 upper register halves",
+      "category": ""
+    },
+    {
+      "name": "NN_S390_TIMER",
+      "value": "\"LINUX\"",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NT_S390_TIMER",
+      "value": "0x301",
+      "comment": "s390 timer register",
+      "category": ""
+    },
+    {
+      "name": "NN_S390_TODCMP",
+      "value": "\"LINUX\"",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NT_S390_TODCMP",
+      "value": "0x302",
+      "comment": "s390 TOD clock comparator register",
+      "category": ""
+    },
+    {
+      "name": "NN_S390_TODPREG",
+      "value": "\"LINUX\"",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NT_S390_TODPREG",
+      "value": "0x303",
+      "comment": "s390 TOD programmable register",
+      "category": ""
+    },
+    {
+      "name": "NN_S390_CTRS",
+      "value": "\"LINUX\"",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NT_S390_CTRS",
+      "value": "0x304",
+      "comment": "s390 control registers",
+      "category": ""
+    },
+    {
+      "name": "NN_S390_PREFIX",
+      "value": "\"LINUX\"",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NT_S390_PREFIX",
+      "value": "0x305",
+      "comment": "s390 prefix register",
+      "category": ""
+    },
+    {
+      "name": "NN_S390_LAST_BREAK",
+      "value": "\"LINUX\"",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NT_S390_LAST_BREAK",
+      "value": "0x306",
+      "comment": "s390 breaking event address",
+      "category": ""
+    },
+    {
+      "name": "NN_S390_SYSTEM_CALL",
+      "value": "\"LINUX\"",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NT_S390_SYSTEM_CALL",
+      "value": "0x307",
+      "comment": "s390 system call restart data",
+      "category": ""
+    },
+    {
+      "name": "NN_S390_TDB",
+      "value": "\"LINUX\"",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NT_S390_TDB",
+      "value": "0x308",
+      "comment": "s390 transaction diagnostic block",
+      "category": ""
+    },
+    {
+      "name": "NN_S390_VXRS_LOW",
+      "value": "\"LINUX\"",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NT_S390_VXRS_LOW",
+      "value": "0x309",
+      "comment": "s390 vector registers 0-15 upper half",
+      "category": ""
+    },
+    {
+      "name": "NN_S390_VXRS_HIGH",
+      "value": "\"LINUX\"",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NT_S390_VXRS_HIGH",
+      "value": "0x30a",
+      "comment": "s390 vector registers 16-31",
+      "category": ""
+    },
+    {
+      "name": "NN_S390_GS_CB",
+      "value": "\"LINUX\"",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NT_S390_GS_CB",
+      "value": "0x30b",
+      "comment": "s390 guarded storage registers",
+      "category": ""
+    },
+    {
+      "name": "NN_S390_GS_BC",
+      "value": "\"LINUX\"",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NT_S390_GS_BC",
+      "value": "0x30c",
+      "comment": "s390 guarded storage broadcast control block",
+      "category": ""
+    },
+    {
+      "name": "NN_S390_RI_CB",
+      "value": "\"LINUX\"",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NT_S390_RI_CB",
+      "value": "0x30d",
+      "comment": "s390 runtime instrumentation",
+      "category": ""
+    },
+    {
+      "name": "NN_S390_PV_CPU_DATA",
+      "value": "\"LINUX\"",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NT_S390_PV_CPU_DATA",
+      "value": "0x30e",
+      "comment": "s390 protvirt cpu dump data",
+      "category": ""
+    },
+    {
+      "name": "NN_ARM_VFP",
+      "value": "\"LINUX\"",
+      "comment": "",
+      "category": "NN_ARM"
+    },
+    {
+      "name": "NT_ARM_VFP",
+      "value": "0x400",
+      "comment": "ARM VFP/NEON registers",
+      "category": "NT_ARM"
+    },
+    {
+      "name": "NN_ARM_TLS",
+      "value": "\"LINUX\"",
+      "comment": "",
+      "category": "NN_ARM"
+    },
+    {
+      "name": "NT_ARM_TLS",
+      "value": "0x401",
+      "comment": "ARM TLS register",
+      "category": "NT_ARM"
+    },
+    {
+      "name": "NN_ARM_HW_BREAK",
+      "value": "\"LINUX\"",
+      "comment": "",
+      "category": "NN_ARM"
+    },
+    {
+      "name": "NT_ARM_HW_BREAK",
+      "value": "0x402",
+      "comment": "ARM hardware breakpoint registers",
+      "category": "NT_ARM"
+    },
+    {
+      "name": "NN_ARM_HW_WATCH",
+      "value": "\"LINUX\"",
+      "comment": "",
+      "category": "NN_ARM"
+    },
+    {
+      "name": "NT_ARM_HW_WATCH",
+      "value": "0x403",
+      "comment": "ARM hardware watchpoint registers",
+      "category": "NT_ARM"
+    },
+    {
+      "name": "NN_ARM_SYSTEM_CALL",
+      "value": "\"LINUX\"",
+      "comment": "",
+      "category": "NN_ARM"
+    },
+    {
+      "name": "NT_ARM_SYSTEM_CALL",
+      "value": "0x404",
+      "comment": "ARM system call number",
+      "category": "NT_ARM"
+    },
+    {
+      "name": "NN_ARM_SVE",
+      "value": "\"LINUX\"",
+      "comment": "",
+      "category": "NN_ARM"
+    },
+    {
+      "name": "NT_ARM_SVE",
+      "value": "0x405",
+      "comment": "ARM Scalable Vector Extension registers",
+      "category": "NT_ARM"
+    },
+    {
+      "name": "NN_ARM_PAC_MASK",
+      "value": "\"LINUX\"",
+      "comment": "",
+      "category": "NN_ARM"
+    },
+    {
+      "name": "NT_ARM_PAC_MASK",
+      "value": "0x406",
+      "comment": "ARM pointer authentication code masks",
+      "category": "NT_ARM"
+    },
+    {
+      "name": "NN_ARM_PACA_KEYS",
+      "value": "\"LINUX\"",
+      "comment": "",
+      "category": "NN_ARM"
+    },
+    {
+      "name": "NT_ARM_PACA_KEYS",
+      "value": "0x407",
+      "comment": "ARM pointer authentication address keys",
+      "category": "NT_ARM"
+    },
+    {
+      "name": "NN_ARM_PACG_KEYS",
+      "value": "\"LINUX\"",
+      "comment": "",
+      "category": "NN_ARM"
+    },
+    {
+      "name": "NT_ARM_PACG_KEYS",
+      "value": "0x408",
+      "comment": "ARM pointer authentication generic key",
+      "category": "NT_ARM"
+    },
+    {
+      "name": "NN_ARM_TAGGED_ADDR_CTRL",
+      "value": "\"LINUX\"",
+      "comment": "",
+      "category": "NN_ARM"
+    },
+    {
+      "name": "NT_ARM_TAGGED_ADDR_CTRL",
+      "value": "0x409",
+      "comment": "arm64 tagged address control (prctl())",
+      "category": "NT_ARM"
+    },
+    {
+      "name": "NN_ARM_PAC_ENABLED_KEYS",
+      "value": "\"LINUX\"",
+      "comment": "",
+      "category": "NN_ARM"
+    },
+    {
+      "name": "NT_ARM_PAC_ENABLED_KEYS",
+      "value": "0x40a",
+      "comment": "arm64 ptr auth enabled keys (prctl())",
+      "category": "NT_ARM"
+    },
+    {
+      "name": "NN_ARM_SSVE",
+      "value": "\"LINUX\"",
+      "comment": "",
+      "category": "NN_ARM"
+    },
+    {
+      "name": "NT_ARM_SSVE",
+      "value": "0x40b",
+      "comment": "ARM Streaming SVE registers",
+      "category": "NT_ARM"
+    },
+    {
+      "name": "NN_ARM_ZA",
+      "value": "\"LINUX\"",
+      "comment": "",
+      "category": "NN_ARM"
+    },
+    {
+      "name": "NT_ARM_ZA",
+      "value": "0x40c",
+      "comment": "ARM SME ZA registers",
+      "category": "NT_ARM"
+    },
+    {
+      "name": "NN_ARM_ZT",
+      "value": "\"LINUX\"",
+      "comment": "",
+      "category": "NN_ARM"
+    },
+    {
+      "name": "NT_ARM_ZT",
+      "value": "0x40d",
+      "comment": "ARM SME ZT registers",
+      "category": "NT_ARM"
+    },
+    {
+      "name": "NN_ARM_FPMR",
+      "value": "\"LINUX\"",
+      "comment": "",
+      "category": "NN_ARM"
+    },
+    {
+      "name": "NT_ARM_FPMR",
+      "value": "0x40e",
+      "comment": "ARM floating point mode register",
+      "category": "NT_ARM"
+    },
+    {
+      "name": "NN_ARM_POE",
+      "value": "\"LINUX\"",
+      "comment": "",
+      "category": "NN_ARM"
+    },
+    {
+      "name": "NT_ARM_POE",
+      "value": "0x40f",
+      "comment": "ARM POE registers",
+      "category": "NT_ARM"
+    },
+    {
+      "name": "NN_ARM_GCS",
+      "value": "\"LINUX\"",
+      "comment": "",
+      "category": "NN_ARM"
+    },
+    {
+      "name": "NT_ARM_GCS",
+      "value": "0x410",
+      "comment": "ARM GCS state",
+      "category": "NT_ARM"
+    },
+    {
+      "name": "NN_ARC_V2",
+      "value": "\"LINUX\"",
+      "comment": "",
+      "category": "NN_ARC"
+    },
+    {
+      "name": "NT_ARC_V2",
+      "value": "0x600",
+      "comment": "ARCv2 accumulator/extra registers",
+      "category": "NT_ARC"
+    },
+    {
+      "name": "NN_VMCOREDD",
+      "value": "\"LINUX\"",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NT_VMCOREDD",
+      "value": "0x700",
+      "comment": "Vmcore Device Dump Note",
+      "category": ""
+    },
+    {
+      "name": "NN_MIPS_DSP",
+      "value": "\"LINUX\"",
+      "comment": "",
+      "category": "NN_MIPS"
+    },
+    {
+      "name": "NT_MIPS_DSP",
+      "value": "0x800",
+      "comment": "MIPS DSP ASE registers",
+      "category": "NT_MIPS"
+    },
+    {
+      "name": "NN_MIPS_FP_MODE",
+      "value": "\"LINUX\"",
+      "comment": "",
+      "category": "NN_MIPS"
+    },
+    {
+      "name": "NT_MIPS_FP_MODE",
+      "value": "0x801",
+      "comment": "MIPS floating-point mode",
+      "category": "NT_MIPS"
+    },
+    {
+      "name": "NN_MIPS_MSA",
+      "value": "\"LINUX\"",
+      "comment": "",
+      "category": "NN_MIPS"
+    },
+    {
+      "name": "NT_MIPS_MSA",
+      "value": "0x802",
+      "comment": "MIPS SIMD registers",
+      "category": "NT_MIPS"
+    },
+    {
+      "name": "NN_RISCV_CSR",
+      "value": "\"LINUX\"",
+      "comment": "",
+      "category": "NN_RISCV"
+    },
+    {
+      "name": "NT_RISCV_CSR",
+      "value": "0x900",
+      "comment": "RISC-V Control and Status Registers",
+      "category": "NT_RISCV"
+    },
+    {
+      "name": "NN_RISCV_VECTOR",
+      "value": "\"LINUX\"",
+      "comment": "",
+      "category": "NN_RISCV"
+    },
+    {
+      "name": "NT_RISCV_VECTOR",
+      "value": "0x901",
+      "comment": "RISC-V vector registers",
+      "category": "NT_RISCV"
+    },
+    {
+      "name": "NN_RISCV_TAGGED_ADDR_CTRL",
+      "value": "\"LINUX\"",
+      "comment": "",
+      "category": "NN_RISCV"
+    },
+    {
+      "name": "NT_RISCV_TAGGED_ADDR_CTRL",
+      "value": "0x902",
+      "comment": "RISC-V tagged address control (prctl())",
+      "category": "NT_RISCV"
+    },
+    {
+      "name": "NN_RISCV_USER_CFI",
+      "value": "\"LINUX\"",
+      "comment": "",
+      "category": "NN_RISCV"
+    },
+    {
+      "name": "NT_RISCV_USER_CFI",
+      "value": "0x903",
+      "comment": "RISC-V shadow stack state",
+      "category": "NT_RISCV"
+    },
+    {
+      "name": "NN_LOONGARCH_CPUCFG",
+      "value": "\"LINUX\"",
+      "comment": "",
+      "category": "NN_LOONGARCH"
+    },
+    {
+      "name": "NT_LOONGARCH_CPUCFG",
+      "value": "0xa00",
+      "comment": "LoongArch CPU config registers",
+      "category": "NT_LOONGARCH"
+    },
+    {
+      "name": "NN_LOONGARCH_CSR",
+      "value": "\"LINUX\"",
+      "comment": "",
+      "category": "NN_LOONGARCH"
+    },
+    {
+      "name": "NT_LOONGARCH_CSR",
+      "value": "0xa01",
+      "comment": "LoongArch control and status registers",
+      "category": "NT_LOONGARCH"
+    },
+    {
+      "name": "NN_LOONGARCH_LSX",
+      "value": "\"LINUX\"",
+      "comment": "",
+      "category": "NN_LOONGARCH"
+    },
+    {
+      "name": "NT_LOONGARCH_LSX",
+      "value": "0xa02",
+      "comment": "LoongArch Loongson SIMD Extension registers",
+      "category": "NT_LOONGARCH"
+    },
+    {
+      "name": "NN_LOONGARCH_LASX",
+      "value": "\"LINUX\"",
+      "comment": "",
+      "category": "NN_LOONGARCH"
+    },
+    {
+      "name": "NT_LOONGARCH_LASX",
+      "value": "0xa03",
+      "comment": "LoongArch Loongson Advanced SIMD Extension registers",
+      "category": "NT_LOONGARCH"
+    },
+    {
+      "name": "NN_LOONGARCH_LBT",
+      "value": "\"LINUX\"",
+      "comment": "",
+      "category": "NN_LOONGARCH"
+    },
+    {
+      "name": "NT_LOONGARCH_LBT",
+      "value": "0xa04",
+      "comment": "LoongArch Loongson Binary Translation registers",
+      "category": "NT_LOONGARCH"
+    },
+    {
+      "name": "NN_LOONGARCH_HW_BREAK",
+      "value": "\"LINUX\"",
+      "comment": "",
+      "category": "NN_LOONGARCH"
+    },
+    {
+      "name": "NT_LOONGARCH_HW_BREAK",
+      "value": "0xa05",
+      "comment": "LoongArch hardware breakpoint registers",
+      "category": "NT_LOONGARCH"
+    },
+    {
+      "name": "NN_LOONGARCH_HW_WATCH",
+      "value": "\"LINUX\"",
+      "comment": "",
+      "category": "NN_LOONGARCH"
+    },
+    {
+      "name": "NT_LOONGARCH_HW_WATCH",
+      "value": "0xa06",
+      "comment": "LoongArch hardware watchpoint registers",
+      "category": "NT_LOONGARCH"
+    },
+    {
+      "name": "GNU_PROPERTY_AARCH64_FEATURE_1_AND",
+      "value": "0xc0000000",
+      "comment": "",
+      "category": "GNU_PROPERTY"
+    },
+    {
+      "name": "GNU_PROPERTY_AARCH64_FEATURE_1_BTI",
+      "value": "(1U << 0)",
+      "comment": "",
+      "category": "GNU_PROPERTY"
+    }
+  ],
+  "structs": [
+    {
+      "name": "anonymous_0",
+      "fields": [
+        {
+          "type_name": "Elf32_Sword",
+          "name": "d_tag",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf32_Sword",
+          "name": "d_val",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf32_Addr",
+          "name": "d_ptr",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_1",
+      "fields": [
+        {
+          "type_name": "Elf64_Sxword",
+          "name": "d_tag",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf64_Xword",
+          "name": "d_val",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf64_Addr",
+          "name": "d_ptr",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "elf32_rel",
+      "fields": [
+        {
+          "type_name": "Elf32_Addr",
+          "name": "r_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf32_Word",
+          "name": "r_info",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "elf64_rel",
+      "fields": [
+        {
+          "type_name": "Elf64_Addr",
+          "name": "r_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf64_Xword",
+          "name": "r_info",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "elf32_rela",
+      "fields": [
+        {
+          "type_name": "Elf32_Addr",
+          "name": "r_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf32_Word",
+          "name": "r_info",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf32_Sword",
+          "name": "r_addend",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "elf64_rela",
+      "fields": [
+        {
+          "type_name": "Elf64_Addr",
+          "name": "r_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf64_Xword",
+          "name": "r_info",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf64_Sxword",
+          "name": "r_addend",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "elf32_sym",
+      "fields": [
+        {
+          "type_name": "Elf32_Word",
+          "name": "st_name",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf32_Addr",
+          "name": "st_value",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf32_Word",
+          "name": "st_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf32_Half",
+          "name": "st_shndx",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "elf64_sym",
+      "fields": [
+        {
+          "type_name": "Elf64_Word",
+          "name": "st_name",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf64_Half",
+          "name": "st_shndx",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf64_Addr",
+          "name": "st_value",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf64_Xword",
+          "name": "st_size",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "elf32_hdr",
+      "fields": [
+        {
+          "type_name": "Elf32_Half",
+          "name": "e_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf32_Half",
+          "name": "e_machine",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf32_Word",
+          "name": "e_version",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf32_Addr",
+          "name": "e_entry",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf32_Off",
+          "name": "e_phoff",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf32_Off",
+          "name": "e_shoff",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf32_Word",
+          "name": "e_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf32_Half",
+          "name": "e_ehsize",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf32_Half",
+          "name": "e_phentsize",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf32_Half",
+          "name": "e_phnum",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf32_Half",
+          "name": "e_shentsize",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf32_Half",
+          "name": "e_shnum",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf32_Half",
+          "name": "e_shstrndx",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "elf64_hdr",
+      "fields": [
+        {
+          "type_name": "Elf64_Half",
+          "name": "e_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf64_Half",
+          "name": "e_machine",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf64_Word",
+          "name": "e_version",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf64_Addr",
+          "name": "e_entry",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf64_Off",
+          "name": "e_phoff",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf64_Off",
+          "name": "e_shoff",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf64_Word",
+          "name": "e_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf64_Half",
+          "name": "e_ehsize",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf64_Half",
+          "name": "e_phentsize",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf64_Half",
+          "name": "e_phnum",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf64_Half",
+          "name": "e_shentsize",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf64_Half",
+          "name": "e_shnum",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf64_Half",
+          "name": "e_shstrndx",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "elf32_phdr",
+      "fields": [
+        {
+          "type_name": "Elf32_Word",
+          "name": "p_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf32_Off",
+          "name": "p_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf32_Addr",
+          "name": "p_vaddr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf32_Addr",
+          "name": "p_paddr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf32_Word",
+          "name": "p_filesz",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf32_Word",
+          "name": "p_memsz",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf32_Word",
+          "name": "p_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf32_Word",
+          "name": "p_align",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "elf64_phdr",
+      "fields": [
+        {
+          "type_name": "Elf64_Word",
+          "name": "p_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf64_Word",
+          "name": "p_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf64_Off",
+          "name": "p_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf64_Addr",
+          "name": "p_vaddr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf64_Addr",
+          "name": "p_paddr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf64_Xword",
+          "name": "p_filesz",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf64_Xword",
+          "name": "p_memsz",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf64_Xword",
+          "name": "p_align",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "elf32_shdr",
+      "fields": [
+        {
+          "type_name": "Elf32_Word",
+          "name": "sh_name",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf32_Word",
+          "name": "sh_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf32_Word",
+          "name": "sh_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf32_Addr",
+          "name": "sh_addr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf32_Off",
+          "name": "sh_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf32_Word",
+          "name": "sh_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf32_Word",
+          "name": "sh_link",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf32_Word",
+          "name": "sh_info",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf32_Word",
+          "name": "sh_addralign",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf32_Word",
+          "name": "sh_entsize",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "elf64_shdr",
+      "fields": [
+        {
+          "type_name": "Elf64_Word",
+          "name": "sh_name",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf64_Word",
+          "name": "sh_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf64_Xword",
+          "name": "sh_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf64_Addr",
+          "name": "sh_addr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf64_Off",
+          "name": "sh_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf64_Xword",
+          "name": "sh_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf64_Word",
+          "name": "sh_link",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf64_Word",
+          "name": "sh_info",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf64_Xword",
+          "name": "sh_addralign",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf64_Xword",
+          "name": "sh_entsize",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "elf32_note",
+      "fields": [
+        {
+          "type_name": "Elf32_Word",
+          "name": "n_namesz",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf32_Word",
+          "name": "n_descsz",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf32_Word",
+          "name": "n_type",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "elf64_note",
+      "fields": [
+        {
+          "type_name": "Elf64_Word",
+          "name": "n_namesz",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf64_Word",
+          "name": "n_descsz",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf64_Word",
+          "name": "n_type",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_16",
+      "fields": [
+        {
+          "type_name": "Elf32_Half",
+          "name": "vd_version",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf32_Half",
+          "name": "vd_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf32_Half",
+          "name": "vd_ndx",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf32_Half",
+          "name": "vd_cnt",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf32_Word",
+          "name": "vd_hash",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf32_Word",
+          "name": "vd_aux",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf32_Word",
+          "name": "vd_next",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_17",
+      "fields": [
+        {
+          "type_name": "Elf64_Half",
+          "name": "vd_version",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf64_Half",
+          "name": "vd_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf64_Half",
+          "name": "vd_ndx",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf64_Half",
+          "name": "vd_cnt",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf64_Word",
+          "name": "vd_hash",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf64_Word",
+          "name": "vd_aux",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf64_Word",
+          "name": "vd_next",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_18",
+      "fields": [
+        {
+          "type_name": "Elf32_Word",
+          "name": "vda_name",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf32_Word",
+          "name": "vda_next",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_19",
+      "fields": [
+        {
+          "type_name": "Elf64_Word",
+          "name": "vda_name",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "Elf64_Word",
+          "name": "vda_next",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [
+    "elf32_rel",
+    "elf64_rel",
+    "elf32_rela",
+    "elf64_rela",
+    "elf32_sym",
+    "elf64_sym",
+    "elf32_hdr",
+    "elf64_hdr",
+    "elf32_phdr",
+    "elf64_phdr",
+    "elf32_shdr",
+    "elf64_shdr",
+    "elf32_note",
+    "elf64_note"
+  ],
+  "enums": {}
+}

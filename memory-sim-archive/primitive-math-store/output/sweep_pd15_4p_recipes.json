@@ -1,0 +1,2272 @@
+{
+  "metadata": {
+    "timestamp": "2026-06-24T01:36:31.542671+00:00",
+    "seed": 42,
+    "n_primitives": 4,
+    "top_recipes": 50,
+    "seed_pool_size": 50,
+    "n_domains": 4,
+    "catalog_path": "D:\\MINIMAX-PRIMITVE-SIMULATIONS\\src\\primitive_catalog_full.json",
+    "catalog_size": 939,
+    "weights": {
+      "cross_domain_bonus": 50.0,
+      "multi_category_bonus": 30.0,
+      "root_atom_diversity": 5.0,
+      "real_wall_diversity": 2.0,
+      "base_per_primitive": 50.0
+    },
+    "runtime_seconds": 2.89428448677063,
+    "enum_counts": {
+      "4-tuple": 230300
+    },
+    "scoring_summary": {
+      "total_recipes_scored": 230300,
+      "max_score": 330.0,
+      "min_score": 213.0,
+      "mean_score": 295.6647025618758,
+      "cross_domain_count": 226200,
+      "cross_domain_pct": 98.21971341728181,
+      "wiring_pattern_counts": {
+        "fusion ranking": 230300
+      },
+      "domain_pair_counts": {
+        "causal-inference": 177940,
+        "combinatorial-optimization": 177940,
+        "agentic-reasoning": 177940,
+        "cryptography-advanced": 81305
+      },
+      "root_atom_counts": {
+        "combine": 230230,
+        "sample": 81305,
+        "project": 51935,
+        "order": 51935,
+        "scale": 35720,
+        "compare": 35720,
+        "hash": 18424
+      }
+    }
+  },
+  "recipes": [
+    {
+      "primitives": [
+        "cutting-planes",
+        "doubly-robust-estimation",
+        "merkle-commitment",
+        "pedersen-commitment"
+      ],
+      "domains": [
+        "combinatorial-optimization",
+        "causal-inference",
+        "cryptography-advanced",
+        "cryptography-advanced"
+      ],
+      "categories": [
+        "combinatorial-optimization",
+        "causal-inference",
+        "cryptography-advanced",
+        "cryptography-advanced"
+      ],
+      "score": 330.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "unique_domains": [
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "root_atoms_used": [
+        "project",
+        "scale",
+        "hash",
+        "order",
+        "combine",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 4,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** causal-inference \u2192 combinatorial-optimization \u2192 cryptography-advanced\n**Components:**\n  - cutting-planes (combinatorial-optimization): Cutting planes: valid inequalities that cut off fractional LP solutions. Gomory mixed integer (GMI), MIR, lift-and-project.\n  - doubly-robust-estimation (causal-inference): Doubly robust (DR) estimator: combine outcome regression with IPW. Consistent if EITHER propensity model OR outcome model is correct.\n  - merkle-commitment (cryptography-advanced): Merkle commitment: hash data into a binary tree, commit to root hash; opening = path of sibling hashes to root. Post-quantum secure (only requires collision-resistant hash).\n  - pedersen-commitment (cryptography-advanced): Pedersen commitment: commit to m as C = g^m \u00b7 h^r, where g, h are generators of a group of unknown order, and r is randomness. Perfectly hiding (given m, g^r is uniform) and computationally binding under the discrete log assumption.\n**Real walls (combined):**\n  - [cutting-planes] Different problem classes have specialized cuts\n  - [cutting-planes] TSP has subtour elimination\n  - [cutting-planes] packing has cover inequalities\n  - [doubly-robust-estimation] DR estimators have lower variance than pure IPW\n  - [doubly-robust-estimation] both models wrong \u2192 bias (not DR)\n  - [merkle-commitment] Tree construction O(n) for n data items\n  - [merkle-commitment] bandwidth of proofs\n  - [merkle-commitment] not additive-homomorphic\n  - [pedersen-commitment] Requires trusted setup to generate g, h such that discrete log of h wrt g is unknown\n  - [pedersen-commitment] no known trapdoor"
+    },
+    {
+      "primitives": [
+        "cutting-planes",
+        "doubly-robust-estimation",
+        "merkle-commitment",
+        "propensity-score-matching"
+      ],
+      "domains": [
+        "combinatorial-optimization",
+        "causal-inference",
+        "cryptography-advanced",
+        "causal-inference"
+      ],
+      "categories": [
+        "combinatorial-optimization",
+        "causal-inference",
+        "cryptography-advanced",
+        "causal-inference"
+      ],
+      "score": 330.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "unique_domains": [
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "root_atoms_used": [
+        "project",
+        "scale",
+        "hash",
+        "combine",
+        "compare",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 4,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** causal-inference \u2192 combinatorial-optimization \u2192 cryptography-advanced\n**Components:**\n  - cutting-planes (combinatorial-optimization): Cutting planes: valid inequalities that cut off fractional LP solutions. Gomory mixed integer (GMI), MIR, lift-and-project.\n  - doubly-robust-estimation (causal-inference): Doubly robust (DR) estimator: combine outcome regression with IPW. Consistent if EITHER propensity model OR outcome model is correct.\n  - merkle-commitment (cryptography-advanced): Merkle commitment: hash data into a binary tree, commit to root hash; opening = path of sibling hashes to root. Post-quantum secure (only requires collision-resistant hash).\n  - propensity-score-matching (causal-inference): Propensity score matching: match treated units to control units with similar propensity scores. Nearest neighbor, radius, stratification matching.\n**Real walls (combined):**\n  - [cutting-planes] Different problem classes have specialized cuts\n  - [cutting-planes] TSP has subtour elimination\n  - [cutting-planes] packing has cover inequalities\n  - [doubly-robust-estimation] DR estimators have lower variance than pure IPW\n  - [doubly-robust-estimation] both models wrong \u2192 bias (not DR)\n  - [merkle-commitment] Tree construction O(n) for n data items\n  - [merkle-commitment] bandwidth of proofs\n  - [merkle-commitment] not additive-homomorphic\n  - [propensity-score-matching] Matching without replacement can improve balance but reduces effective sample size\n  - [propensity-score-matching] with replacement may reuse controls"
+    },
+    {
+      "primitives": [
+        "cutting-planes",
+        "doubly-robust-estimation",
+        "merkle-commitment",
+        "self-consistency"
+      ],
+      "domains": [
+        "combinatorial-optimization",
+        "causal-inference",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "combinatorial-optimization",
+        "causal-inference",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "score": 330.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "root_atoms_used": [
+        "project",
+        "scale",
+        "hash",
+        "combine",
+        "compare",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 4,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 causal-inference \u2192 combinatorial-optimization \u2192 cryptography-advanced\n**Components:**\n  - cutting-planes (combinatorial-optimization): Cutting planes: valid inequalities that cut off fractional LP solutions. Gomory mixed integer (GMI), MIR, lift-and-project.\n  - doubly-robust-estimation (causal-inference): Doubly robust (DR) estimator: combine outcome regression with IPW. Consistent if EITHER propensity model OR outcome model is correct.\n  - merkle-commitment (cryptography-advanced): Merkle commitment: hash data into a binary tree, commit to root hash; opening = path of sibling hashes to root. Post-quantum secure (only requires collision-resistant hash).\n  - self-consistency (agentic-reasoning): Self-consistency: sample multiple reasoning paths (CoT or ReAct), aggregate answers via majority vote. Improves CoT by trading inference cost for accuracy.\n**Real walls (combined):**\n  - [cutting-planes] Different problem classes have specialized cuts\n  - [cutting-planes] TSP has subtour elimination\n  - [cutting-planes] packing has cover inequalities\n  - [doubly-robust-estimation] DR estimators have lower variance than pure IPW\n  - [doubly-robust-estimation] both models wrong \u2192 bias (not DR)\n  - [merkle-commitment] Tree construction O(n) for n data items\n  - [merkle-commitment] bandwidth of proofs\n  - [merkle-commitment] not additive-homomorphic\n  - [self-consistency] Answer aggregation tricky for open-ended outputs (need string matching or LLM-as-judge)\n  - [self-consistency] marginal gains after n=10\u201320"
+    },
+    {
+      "primitives": [
+        "cutting-planes",
+        "gomory-cuts",
+        "merkle-commitment",
+        "propensity-score-matching"
+      ],
+      "domains": [
+        "combinatorial-optimization",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "causal-inference"
+      ],
+      "categories": [
+        "combinatorial-optimization",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "causal-inference"
+      ],
+      "score": 330.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "unique_domains": [
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "root_atoms_used": [
+        "project",
+        "order",
+        "hash",
+        "combine",
+        "compare",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 4,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** causal-inference \u2192 combinatorial-optimization \u2192 cryptography-advanced\n**Components:**\n  - cutting-planes (combinatorial-optimization): Cutting planes: valid inequalities that cut off fractional LP solutions. Gomory mixed integer (GMI), MIR, lift-and-project.\n  - gomory-cuts (combinatorial-optimization): Gomory mixed integer (GMI) cuts: from optimal LP tableau row with fractional basic variable. Very effective in practice.\n  - merkle-commitment (cryptography-advanced): Merkle commitment: hash data into a binary tree, commit to root hash; opening = path of sibling hashes to root. Post-quantum secure (only requires collision-resistant hash).\n  - propensity-score-matching (causal-inference): Propensity score matching: match treated units to control units with similar propensity scores. Nearest neighbor, radius, stratification matching.\n**Real walls (combined):**\n  - [cutting-planes] Different problem classes have specialized cuts\n  - [cutting-planes] TSP has subtour elimination\n  - [cutting-planes] packing has cover inequalities\n  - [gomory-cuts] GMI cuts are universal (valid for all IPs)\n  - [gomory-cuts] problem-specific cuts (clique, cover) can be stronger\n  - [merkle-commitment] Tree construction O(n) for n data items\n  - [merkle-commitment] bandwidth of proofs\n  - [merkle-commitment] not additive-homomorphic\n  - [propensity-score-matching] Matching without replacement can improve balance but reduces effective sample size\n  - [propensity-score-matching] with replacement may reuse controls"
+    },
+    {
+      "primitives": [
+        "cutting-planes",
+        "gomory-cuts",
+        "merkle-commitment",
+        "self-consistency"
+      ],
+      "domains": [
+        "combinatorial-optimization",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "combinatorial-optimization",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "score": 330.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "root_atoms_used": [
+        "project",
+        "order",
+        "hash",
+        "combine",
+        "compare",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 4,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 combinatorial-optimization \u2192 cryptography-advanced\n**Components:**\n  - cutting-planes (combinatorial-optimization): Cutting planes: valid inequalities that cut off fractional LP solutions. Gomory mixed integer (GMI), MIR, lift-and-project.\n  - gomory-cuts (combinatorial-optimization): Gomory mixed integer (GMI) cuts: from optimal LP tableau row with fractional basic variable. Very effective in practice.\n  - merkle-commitment (cryptography-advanced): Merkle commitment: hash data into a binary tree, commit to root hash; opening = path of sibling hashes to root. Post-quantum secure (only requires collision-resistant hash).\n  - self-consistency (agentic-reasoning): Self-consistency: sample multiple reasoning paths (CoT or ReAct), aggregate answers via majority vote. Improves CoT by trading inference cost for accuracy.\n**Real walls (combined):**\n  - [cutting-planes] Different problem classes have specialized cuts\n  - [cutting-planes] TSP has subtour elimination\n  - [cutting-planes] packing has cover inequalities\n  - [gomory-cuts] GMI cuts are universal (valid for all IPs)\n  - [gomory-cuts] problem-specific cuts (clique, cover) can be stronger\n  - [merkle-commitment] Tree construction O(n) for n data items\n  - [merkle-commitment] bandwidth of proofs\n  - [merkle-commitment] not additive-homomorphic\n  - [self-consistency] Answer aggregation tricky for open-ended outputs (need string matching or LLM-as-judge)\n  - [self-consistency] marginal gains after n=10\u201320"
+    },
+    {
+      "primitives": [
+        "cutting-planes",
+        "inverse-probability-weighting",
+        "merkle-commitment",
+        "pedersen-commitment"
+      ],
+      "domains": [
+        "combinatorial-optimization",
+        "causal-inference",
+        "cryptography-advanced",
+        "cryptography-advanced"
+      ],
+      "categories": [
+        "combinatorial-optimization",
+        "causal-inference",
+        "cryptography-advanced",
+        "cryptography-advanced"
+      ],
+      "score": 330.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "unique_domains": [
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "root_atoms_used": [
+        "project",
+        "scale",
+        "hash",
+        "order",
+        "combine",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 4,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** causal-inference \u2192 combinatorial-optimization \u2192 cryptography-advanced\n**Components:**\n  - cutting-planes (combinatorial-optimization): Cutting planes: valid inequalities that cut off fractional LP solutions. Gomory mixed integer (GMI), MIR, lift-and-project.\n  - inverse-probability-weighting (causal-inference): IPW (Inverse Probability Weighting): P(Y | do(X=x)) = \u03a3_z P(Y | X=x, Z=z) P(Z=z) when Z satisfies backdoor. Empirically: weight observations by 1/P(X | Z).\n  - merkle-commitment (cryptography-advanced): Merkle commitment: hash data into a binary tree, commit to root hash; opening = path of sibling hashes to root. Post-quantum secure (only requires collision-resistant hash).\n  - pedersen-commitment (cryptography-advanced): Pedersen commitment: commit to m as C = g^m \u00b7 h^r, where g, h are generators of a group of unknown order, and r is randomness. Perfectly hiding (given m, g^r is uniform) and computationally binding under the discrete log assumption.\n**Real walls (combined):**\n  - [cutting-planes] Different problem classes have specialized cuts\n  - [cutting-planes] TSP has subtour elimination\n  - [cutting-planes] packing has cover inequalities\n  - [inverse-probability-weighting] IPW unstable when propensity scores near 0 or 1 (extreme weights)\n  - [inverse-probability-weighting] truncate weights or use stabilized weights\n  - [merkle-commitment] Tree construction O(n) for n data items\n  - [merkle-commitment] bandwidth of proofs\n  - [merkle-commitment] not additive-homomorphic\n  - [pedersen-commitment] Requires trusted setup to generate g, h such that discrete log of h wrt g is unknown\n  - [pedersen-commitment] no known trapdoor"
+    },
+    {
+      "primitives": [
+        "cutting-planes",
+        "inverse-probability-weighting",
+        "merkle-commitment",
+        "propensity-score-matching"
+      ],
+      "domains": [
+        "combinatorial-optimization",
+        "causal-inference",
+        "cryptography-advanced",
+        "causal-inference"
+      ],
+      "categories": [
+        "combinatorial-optimization",
+        "causal-inference",
+        "cryptography-advanced",
+        "causal-inference"
+      ],
+      "score": 330.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "unique_domains": [
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "root_atoms_used": [
+        "project",
+        "scale",
+        "hash",
+        "combine",
+        "compare",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 4,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** causal-inference \u2192 combinatorial-optimization \u2192 cryptography-advanced\n**Components:**\n  - cutting-planes (combinatorial-optimization): Cutting planes: valid inequalities that cut off fractional LP solutions. Gomory mixed integer (GMI), MIR, lift-and-project.\n  - inverse-probability-weighting (causal-inference): IPW (Inverse Probability Weighting): P(Y | do(X=x)) = \u03a3_z P(Y | X=x, Z=z) P(Z=z) when Z satisfies backdoor. Empirically: weight observations by 1/P(X | Z).\n  - merkle-commitment (cryptography-advanced): Merkle commitment: hash data into a binary tree, commit to root hash; opening = path of sibling hashes to root. Post-quantum secure (only requires collision-resistant hash).\n  - propensity-score-matching (causal-inference): Propensity score matching: match treated units to control units with similar propensity scores. Nearest neighbor, radius, stratification matching.\n**Real walls (combined):**\n  - [cutting-planes] Different problem classes have specialized cuts\n  - [cutting-planes] TSP has subtour elimination\n  - [cutting-planes] packing has cover inequalities\n  - [inverse-probability-weighting] IPW unstable when propensity scores near 0 or 1 (extreme weights)\n  - [inverse-probability-weighting] truncate weights or use stabilized weights\n  - [merkle-commitment] Tree construction O(n) for n data items\n  - [merkle-commitment] bandwidth of proofs\n  - [merkle-commitment] not additive-homomorphic\n  - [propensity-score-matching] Matching without replacement can improve balance but reduces effective sample size\n  - [propensity-score-matching] with replacement may reuse controls"
+    },
+    {
+      "primitives": [
+        "cutting-planes",
+        "inverse-probability-weighting",
+        "merkle-commitment",
+        "self-consistency"
+      ],
+      "domains": [
+        "combinatorial-optimization",
+        "causal-inference",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "combinatorial-optimization",
+        "causal-inference",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "score": 330.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "root_atoms_used": [
+        "project",
+        "scale",
+        "hash",
+        "combine",
+        "compare",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 4,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 causal-inference \u2192 combinatorial-optimization \u2192 cryptography-advanced\n**Components:**\n  - cutting-planes (combinatorial-optimization): Cutting planes: valid inequalities that cut off fractional LP solutions. Gomory mixed integer (GMI), MIR, lift-and-project.\n  - inverse-probability-weighting (causal-inference): IPW (Inverse Probability Weighting): P(Y | do(X=x)) = \u03a3_z P(Y | X=x, Z=z) P(Z=z) when Z satisfies backdoor. Empirically: weight observations by 1/P(X | Z).\n  - merkle-commitment (cryptography-advanced): Merkle commitment: hash data into a binary tree, commit to root hash; opening = path of sibling hashes to root. Post-quantum secure (only requires collision-resistant hash).\n  - self-consistency (agentic-reasoning): Self-consistency: sample multiple reasoning paths (CoT or ReAct), aggregate answers via majority vote. Improves CoT by trading inference cost for accuracy.\n**Real walls (combined):**\n  - [cutting-planes] Different problem classes have specialized cuts\n  - [cutting-planes] TSP has subtour elimination\n  - [cutting-planes] packing has cover inequalities\n  - [inverse-probability-weighting] IPW unstable when propensity scores near 0 or 1 (extreme weights)\n  - [inverse-probability-weighting] truncate weights or use stabilized weights\n  - [merkle-commitment] Tree construction O(n) for n data items\n  - [merkle-commitment] bandwidth of proofs\n  - [merkle-commitment] not additive-homomorphic\n  - [self-consistency] Answer aggregation tricky for open-ended outputs (need string matching or LLM-as-judge)\n  - [self-consistency] marginal gains after n=10\u201320"
+    },
+    {
+      "primitives": [
+        "cutting-planes",
+        "merkle-commitment",
+        "pedersen-commitment",
+        "propensity-score-matching"
+      ],
+      "domains": [
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "cryptography-advanced",
+        "causal-inference"
+      ],
+      "categories": [
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "cryptography-advanced",
+        "causal-inference"
+      ],
+      "score": 330.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "unique_domains": [
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "root_atoms_used": [
+        "project",
+        "hash",
+        "order",
+        "combine",
+        "sample",
+        "compare"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 4,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** causal-inference \u2192 combinatorial-optimization \u2192 cryptography-advanced\n**Components:**\n  - cutting-planes (combinatorial-optimization): Cutting planes: valid inequalities that cut off fractional LP solutions. Gomory mixed integer (GMI), MIR, lift-and-project.\n  - merkle-commitment (cryptography-advanced): Merkle commitment: hash data into a binary tree, commit to root hash; opening = path of sibling hashes to root. Post-quantum secure (only requires collision-resistant hash).\n  - pedersen-commitment (cryptography-advanced): Pedersen commitment: commit to m as C = g^m \u00b7 h^r, where g, h are generators of a group of unknown order, and r is randomness. Perfectly hiding (given m, g^r is uniform) and computationally binding under the discrete log assumption.\n  - propensity-score-matching (causal-inference): Propensity score matching: match treated units to control units with similar propensity scores. Nearest neighbor, radius, stratification matching.\n**Real walls (combined):**\n  - [cutting-planes] Different problem classes have specialized cuts\n  - [cutting-planes] TSP has subtour elimination\n  - [cutting-planes] packing has cover inequalities\n  - [merkle-commitment] Tree construction O(n) for n data items\n  - [merkle-commitment] bandwidth of proofs\n  - [merkle-commitment] not additive-homomorphic\n  - [pedersen-commitment] Requires trusted setup to generate g, h such that discrete log of h wrt g is unknown\n  - [pedersen-commitment] no known trapdoor\n  - [propensity-score-matching] Matching without replacement can improve balance but reduces effective sample size\n  - [propensity-score-matching] with replacement may reuse controls"
+    },
+    {
+      "primitives": [
+        "cutting-planes",
+        "merkle-commitment",
+        "pedersen-commitment",
+        "self-consistency"
+      ],
+      "domains": [
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "score": 330.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "root_atoms_used": [
+        "project",
+        "hash",
+        "order",
+        "combine",
+        "sample",
+        "compare"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 4,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 combinatorial-optimization \u2192 cryptography-advanced\n**Components:**\n  - cutting-planes (combinatorial-optimization): Cutting planes: valid inequalities that cut off fractional LP solutions. Gomory mixed integer (GMI), MIR, lift-and-project.\n  - merkle-commitment (cryptography-advanced): Merkle commitment: hash data into a binary tree, commit to root hash; opening = path of sibling hashes to root. Post-quantum secure (only requires collision-resistant hash).\n  - pedersen-commitment (cryptography-advanced): Pedersen commitment: commit to m as C = g^m \u00b7 h^r, where g, h are generators of a group of unknown order, and r is randomness. Perfectly hiding (given m, g^r is uniform) and computationally binding under the discrete log assumption.\n  - self-consistency (agentic-reasoning): Self-consistency: sample multiple reasoning paths (CoT or ReAct), aggregate answers via majority vote. Improves CoT by trading inference cost for accuracy.\n**Real walls (combined):**\n  - [cutting-planes] Different problem classes have specialized cuts\n  - [cutting-planes] TSP has subtour elimination\n  - [cutting-planes] packing has cover inequalities\n  - [merkle-commitment] Tree construction O(n) for n data items\n  - [merkle-commitment] bandwidth of proofs\n  - [merkle-commitment] not additive-homomorphic\n  - [pedersen-commitment] Requires trusted setup to generate g, h such that discrete log of h wrt g is unknown\n  - [pedersen-commitment] no known trapdoor\n  - [self-consistency] Answer aggregation tricky for open-ended outputs (need string matching or LLM-as-judge)\n  - [self-consistency] marginal gains after n=10\u201320"
+    },
+    {
+      "primitives": [
+        "cutting-planes",
+        "merkle-commitment",
+        "preprocessing-ip",
+        "propensity-score-matching"
+      ],
+      "domains": [
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "combinatorial-optimization",
+        "causal-inference"
+      ],
+      "categories": [
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "combinatorial-optimization",
+        "causal-inference"
+      ],
+      "score": 330.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "unique_domains": [
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "root_atoms_used": [
+        "project",
+        "hash",
+        "order",
+        "combine",
+        "compare",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 4,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** causal-inference \u2192 combinatorial-optimization \u2192 cryptography-advanced\n**Components:**\n  - cutting-planes (combinatorial-optimization): Cutting planes: valid inequalities that cut off fractional LP solutions. Gomory mixed integer (GMI), MIR, lift-and-project.\n  - merkle-commitment (cryptography-advanced): Merkle commitment: hash data into a binary tree, commit to root hash; opening = path of sibling hashes to root. Post-quantum secure (only requires collision-resistant hash).\n  - preprocessing-ip (combinatorial-optimization): IP preprocessing: presolve (bounds tightening, variable elimination, probing). Reduce problem size before branching.\n  - propensity-score-matching (causal-inference): Propensity score matching: match treated units to control units with similar propensity scores. Nearest neighbor, radius, stratification matching.\n**Real walls (combined):**\n  - [cutting-planes] Different problem classes have specialized cuts\n  - [cutting-planes] TSP has subtour elimination\n  - [cutting-planes] packing has cover inequalities\n  - [merkle-commitment] Tree construction O(n) for n data items\n  - [merkle-commitment] bandwidth of proofs\n  - [merkle-commitment] not additive-homomorphic\n  - [preprocessing-ip] Aggressive presolve can identify infeasibility early\n  - [preprocessing-ip] may change problem structure (SOS, special ordered sets)\n  - [propensity-score-matching] Matching without replacement can improve balance but reduces effective sample size\n  - [propensity-score-matching] with replacement may reuse controls"
+    },
+    {
+      "primitives": [
+        "cutting-planes",
+        "merkle-commitment",
+        "preprocessing-ip",
+        "self-consistency"
+      ],
+      "domains": [
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "combinatorial-optimization",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "combinatorial-optimization",
+        "agentic-reasoning"
+      ],
+      "score": 330.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "root_atoms_used": [
+        "project",
+        "hash",
+        "order",
+        "combine",
+        "compare",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 4,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 combinatorial-optimization \u2192 cryptography-advanced\n**Components:**\n  - cutting-planes (combinatorial-optimization): Cutting planes: valid inequalities that cut off fractional LP solutions. Gomory mixed integer (GMI), MIR, lift-and-project.\n  - merkle-commitment (cryptography-advanced): Merkle commitment: hash data into a binary tree, commit to root hash; opening = path of sibling hashes to root. Post-quantum secure (only requires collision-resistant hash).\n  - preprocessing-ip (combinatorial-optimization): IP preprocessing: presolve (bounds tightening, variable elimination, probing). Reduce problem size before branching.\n  - self-consistency (agentic-reasoning): Self-consistency: sample multiple reasoning paths (CoT or ReAct), aggregate answers via majority vote. Improves CoT by trading inference cost for accuracy.\n**Real walls (combined):**\n  - [cutting-planes] Different problem classes have specialized cuts\n  - [cutting-planes] TSP has subtour elimination\n  - [cutting-planes] packing has cover inequalities\n  - [merkle-commitment] Tree construction O(n) for n data items\n  - [merkle-commitment] bandwidth of proofs\n  - [merkle-commitment] not additive-homomorphic\n  - [preprocessing-ip] Aggressive presolve can identify infeasibility early\n  - [preprocessing-ip] may change problem structure (SOS, special ordered sets)\n  - [self-consistency] Answer aggregation tricky for open-ended outputs (need string matching or LLM-as-judge)\n  - [self-consistency] marginal gains after n=10\u201320"
+    },
+    {
+      "primitives": [
+        "cutting-planes",
+        "merkle-commitment",
+        "pedersen-commitment",
+        "program-aided-language-model"
+      ],
+      "domains": [
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "score": 329.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "root_atoms_used": [
+        "project",
+        "hash",
+        "order",
+        "combine",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 4,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 combinatorial-optimization \u2192 cryptography-advanced\n**Components:**\n  - cutting-planes (combinatorial-optimization): Cutting planes: valid inequalities that cut off fractional LP solutions. Gomory mixed integer (GMI), MIR, lift-and-project.\n  - merkle-commitment (cryptography-advanced): Merkle commitment: hash data into a binary tree, commit to root hash; opening = path of sibling hashes to root. Post-quantum secure (only requires collision-resistant hash).\n  - pedersen-commitment (cryptography-advanced): Pedersen commitment: commit to m as C = g^m \u00b7 h^r, where g, h are generators of a group of unknown order, and r is randomness. Perfectly hiding (given m, g^r is uniform) and computationally binding under the discrete log assumption.\n  - program-aided-language-model (agentic-reasoning): PAL (Program-Aided Language Model): LLM generates executable code to solve reasoning tasks; code executor computes result; LLM interprets output.\n**Real walls (combined):**\n  - [cutting-planes] Different problem classes have specialized cuts\n  - [cutting-planes] TSP has subtour elimination\n  - [cutting-planes] packing has cover inequalities\n  - [merkle-commitment] Tree construction O(n) for n data items\n  - [merkle-commitment] bandwidth of proofs\n  - [merkle-commitment] not additive-homomorphic\n  - [pedersen-commitment] Requires trusted setup to generate g, h such that discrete log of h wrt g is unknown\n  - [pedersen-commitment] no known trapdoor\n  - [program-aided-language-model] Code generation errors (syntax, logic)\n  - [program-aided-language-model] execution sandboxing\n  - [program-aided-language-model] Python vs\n  - [program-aided-language-model] LLM arithmetic (PAL reduces LLM math errors)"
+    },
+    {
+      "primitives": [
+        "cutting-planes",
+        "merkle-commitment",
+        "program-aided-language-model",
+        "propensity-score-matching"
+      ],
+      "domains": [
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "agentic-reasoning",
+        "causal-inference"
+      ],
+      "categories": [
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "agentic-reasoning",
+        "causal-inference"
+      ],
+      "score": 329.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "root_atoms_used": [
+        "project",
+        "hash",
+        "combine",
+        "compare",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 4,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 causal-inference \u2192 combinatorial-optimization \u2192 cryptography-advanced\n**Components:**\n  - cutting-planes (combinatorial-optimization): Cutting planes: valid inequalities that cut off fractional LP solutions. Gomory mixed integer (GMI), MIR, lift-and-project.\n  - merkle-commitment (cryptography-advanced): Merkle commitment: hash data into a binary tree, commit to root hash; opening = path of sibling hashes to root. Post-quantum secure (only requires collision-resistant hash).\n  - program-aided-language-model (agentic-reasoning): PAL (Program-Aided Language Model): LLM generates executable code to solve reasoning tasks; code executor computes result; LLM interprets output.\n  - propensity-score-matching (causal-inference): Propensity score matching: match treated units to control units with similar propensity scores. Nearest neighbor, radius, stratification matching.\n**Real walls (combined):**\n  - [cutting-planes] Different problem classes have specialized cuts\n  - [cutting-planes] TSP has subtour elimination\n  - [cutting-planes] packing has cover inequalities\n  - [merkle-commitment] Tree construction O(n) for n data items\n  - [merkle-commitment] bandwidth of proofs\n  - [merkle-commitment] not additive-homomorphic\n  - [program-aided-language-model] Code generation errors (syntax, logic)\n  - [program-aided-language-model] execution sandboxing\n  - [program-aided-language-model] Python vs\n  - [program-aided-language-model] LLM arithmetic (PAL reduces LLM math errors)\n  - [propensity-score-matching] Matching without replacement can improve balance but reduces effective sample size\n  - [propensity-score-matching] with replacement may reuse controls"
+    },
+    {
+      "primitives": [
+        "cutting-planes",
+        "merkle-commitment",
+        "program-aided-language-model",
+        "self-consistency"
+      ],
+      "domains": [
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "agentic-reasoning",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "agentic-reasoning",
+        "agentic-reasoning"
+      ],
+      "score": 329.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "root_atoms_used": [
+        "project",
+        "hash",
+        "combine",
+        "compare",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 4,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 combinatorial-optimization \u2192 cryptography-advanced\n**Components:**\n  - cutting-planes (combinatorial-optimization): Cutting planes: valid inequalities that cut off fractional LP solutions. Gomory mixed integer (GMI), MIR, lift-and-project.\n  - merkle-commitment (cryptography-advanced): Merkle commitment: hash data into a binary tree, commit to root hash; opening = path of sibling hashes to root. Post-quantum secure (only requires collision-resistant hash).\n  - program-aided-language-model (agentic-reasoning): PAL (Program-Aided Language Model): LLM generates executable code to solve reasoning tasks; code executor computes result; LLM interprets output.\n  - self-consistency (agentic-reasoning): Self-consistency: sample multiple reasoning paths (CoT or ReAct), aggregate answers via majority vote. Improves CoT by trading inference cost for accuracy.\n**Real walls (combined):**\n  - [cutting-planes] Different problem classes have specialized cuts\n  - [cutting-planes] TSP has subtour elimination\n  - [cutting-planes] packing has cover inequalities\n  - [merkle-commitment] Tree construction O(n) for n data items\n  - [merkle-commitment] bandwidth of proofs\n  - [merkle-commitment] not additive-homomorphic\n  - [program-aided-language-model] Code generation errors (syntax, logic)\n  - [program-aided-language-model] execution sandboxing\n  - [program-aided-language-model] Python vs\n  - [program-aided-language-model] LLM arithmetic (PAL reduces LLM math errors)\n  - [self-consistency] Answer aggregation tricky for open-ended outputs (need string matching or LLM-as-judge)\n  - [self-consistency] marginal gains after n=10\u201320"
+    },
+    {
+      "primitives": [
+        "cutting-planes",
+        "doubly-robust-estimation",
+        "gomory-cuts",
+        "self-consistency"
+      ],
+      "domains": [
+        "combinatorial-optimization",
+        "causal-inference",
+        "combinatorial-optimization",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "combinatorial-optimization",
+        "causal-inference",
+        "combinatorial-optimization",
+        "agentic-reasoning"
+      ],
+      "score": 328.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "causal-inference",
+        "combinatorial-optimization"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "causal-inference",
+        "combinatorial-optimization"
+      ],
+      "root_atoms_used": [
+        "project",
+        "scale",
+        "order",
+        "combine",
+        "compare",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 4,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 causal-inference \u2192 combinatorial-optimization\n**Components:**\n  - cutting-planes (combinatorial-optimization): Cutting planes: valid inequalities that cut off fractional LP solutions. Gomory mixed integer (GMI), MIR, lift-and-project.\n  - doubly-robust-estimation (causal-inference): Doubly robust (DR) estimator: combine outcome regression with IPW. Consistent if EITHER propensity model OR outcome model is correct.\n  - gomory-cuts (combinatorial-optimization): Gomory mixed integer (GMI) cuts: from optimal LP tableau row with fractional basic variable. Very effective in practice.\n  - self-consistency (agentic-reasoning): Self-consistency: sample multiple reasoning paths (CoT or ReAct), aggregate answers via majority vote. Improves CoT by trading inference cost for accuracy.\n**Real walls (combined):**\n  - [cutting-planes] Different problem classes have specialized cuts\n  - [cutting-planes] TSP has subtour elimination\n  - [cutting-planes] packing has cover inequalities\n  - [doubly-robust-estimation] DR estimators have lower variance than pure IPW\n  - [doubly-robust-estimation] both models wrong \u2192 bias (not DR)\n  - [gomory-cuts] GMI cuts are universal (valid for all IPs)\n  - [gomory-cuts] problem-specific cuts (clique, cover) can be stronger\n  - [self-consistency] Answer aggregation tricky for open-ended outputs (need string matching or LLM-as-judge)\n  - [self-consistency] marginal gains after n=10\u201320"
+    },
+    {
+      "primitives": [
+        "cutting-planes",
+        "doubly-robust-estimation",
+        "pedersen-commitment",
+        "propensity-score-matching"
+      ],
+      "domains": [
+        "combinatorial-optimization",
+        "causal-inference",
+        "cryptography-advanced",
+        "causal-inference"
+      ],
+      "categories": [
+        "combinatorial-optimization",
+        "causal-inference",
+        "cryptography-advanced",
+        "causal-inference"
+      ],
+      "score": 328.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "unique_domains": [
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "root_atoms_used": [
+        "project",
+        "scale",
+        "order",
+        "combine",
+        "sample",
+        "compare"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 4,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** causal-inference \u2192 combinatorial-optimization \u2192 cryptography-advanced\n**Components:**\n  - cutting-planes (combinatorial-optimization): Cutting planes: valid inequalities that cut off fractional LP solutions. Gomory mixed integer (GMI), MIR, lift-and-project.\n  - doubly-robust-estimation (causal-inference): Doubly robust (DR) estimator: combine outcome regression with IPW. Consistent if EITHER propensity model OR outcome model is correct.\n  - pedersen-commitment (cryptography-advanced): Pedersen commitment: commit to m as C = g^m \u00b7 h^r, where g, h are generators of a group of unknown order, and r is randomness. Perfectly hiding (given m, g^r is uniform) and computationally binding under the discrete log assumption.\n  - propensity-score-matching (causal-inference): Propensity score matching: match treated units to control units with similar propensity scores. Nearest neighbor, radius, stratification matching.\n**Real walls (combined):**\n  - [cutting-planes] Different problem classes have specialized cuts\n  - [cutting-planes] TSP has subtour elimination\n  - [cutting-planes] packing has cover inequalities\n  - [doubly-robust-estimation] DR estimators have lower variance than pure IPW\n  - [doubly-robust-estimation] both models wrong \u2192 bias (not DR)\n  - [pedersen-commitment] Requires trusted setup to generate g, h such that discrete log of h wrt g is unknown\n  - [pedersen-commitment] no known trapdoor\n  - [propensity-score-matching] Matching without replacement can improve balance but reduces effective sample size\n  - [propensity-score-matching] with replacement may reuse controls"
+    },
+    {
+      "primitives": [
+        "cutting-planes",
+        "doubly-robust-estimation",
+        "pedersen-commitment",
+        "self-consistency"
+      ],
+      "domains": [
+        "combinatorial-optimization",
+        "causal-inference",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "combinatorial-optimization",
+        "causal-inference",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "score": 328.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "root_atoms_used": [
+        "project",
+        "scale",
+        "order",
+        "combine",
+        "sample",
+        "compare"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 4,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 causal-inference \u2192 combinatorial-optimization \u2192 cryptography-advanced\n**Components:**\n  - cutting-planes (combinatorial-optimization): Cutting planes: valid inequalities that cut off fractional LP solutions. Gomory mixed integer (GMI), MIR, lift-and-project.\n  - doubly-robust-estimation (causal-inference): Doubly robust (DR) estimator: combine outcome regression with IPW. Consistent if EITHER propensity model OR outcome model is correct.\n  - pedersen-commitment (cryptography-advanced): Pedersen commitment: commit to m as C = g^m \u00b7 h^r, where g, h are generators of a group of unknown order, and r is randomness. Perfectly hiding (given m, g^r is uniform) and computationally binding under the discrete log assumption.\n  - self-consistency (agentic-reasoning): Self-consistency: sample multiple reasoning paths (CoT or ReAct), aggregate answers via majority vote. Improves CoT by trading inference cost for accuracy.\n**Real walls (combined):**\n  - [cutting-planes] Different problem classes have specialized cuts\n  - [cutting-planes] TSP has subtour elimination\n  - [cutting-planes] packing has cover inequalities\n  - [doubly-robust-estimation] DR estimators have lower variance than pure IPW\n  - [doubly-robust-estimation] both models wrong \u2192 bias (not DR)\n  - [pedersen-commitment] Requires trusted setup to generate g, h such that discrete log of h wrt g is unknown\n  - [pedersen-commitment] no known trapdoor\n  - [self-consistency] Answer aggregation tricky for open-ended outputs (need string matching or LLM-as-judge)\n  - [self-consistency] marginal gains after n=10\u201320"
+    },
+    {
+      "primitives": [
+        "cutting-planes",
+        "doubly-robust-estimation",
+        "preprocessing-ip",
+        "self-consistency"
+      ],
+      "domains": [
+        "combinatorial-optimization",
+        "causal-inference",
+        "combinatorial-optimization",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "combinatorial-optimization",
+        "causal-inference",
+        "combinatorial-optimization",
+        "agentic-reasoning"
+      ],
+      "score": 328.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "causal-inference",
+        "combinatorial-optimization"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "causal-inference",
+        "combinatorial-optimization"
+      ],
+      "root_atoms_used": [
+        "project",
+        "scale",
+        "order",
+        "combine",
+        "compare",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 4,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 causal-inference \u2192 combinatorial-optimization\n**Components:**\n  - cutting-planes (combinatorial-optimization): Cutting planes: valid inequalities that cut off fractional LP solutions. Gomory mixed integer (GMI), MIR, lift-and-project.\n  - doubly-robust-estimation (causal-inference): Doubly robust (DR) estimator: combine outcome regression with IPW. Consistent if EITHER propensity model OR outcome model is correct.\n  - preprocessing-ip (combinatorial-optimization): IP preprocessing: presolve (bounds tightening, variable elimination, probing). Reduce problem size before branching.\n  - self-consistency (agentic-reasoning): Self-consistency: sample multiple reasoning paths (CoT or ReAct), aggregate answers via majority vote. Improves CoT by trading inference cost for accuracy.\n**Real walls (combined):**\n  - [cutting-planes] Different problem classes have specialized cuts\n  - [cutting-planes] TSP has subtour elimination\n  - [cutting-planes] packing has cover inequalities\n  - [doubly-robust-estimation] DR estimators have lower variance than pure IPW\n  - [doubly-robust-estimation] both models wrong \u2192 bias (not DR)\n  - [preprocessing-ip] Aggressive presolve can identify infeasibility early\n  - [preprocessing-ip] may change problem structure (SOS, special ordered sets)\n  - [self-consistency] Answer aggregation tricky for open-ended outputs (need string matching or LLM-as-judge)\n  - [self-consistency] marginal gains after n=10\u201320"
+    },
+    {
+      "primitives": [
+        "cutting-planes",
+        "gomory-cuts",
+        "inverse-probability-weighting",
+        "self-consistency"
+      ],
+      "domains": [
+        "combinatorial-optimization",
+        "combinatorial-optimization",
+        "causal-inference",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "combinatorial-optimization",
+        "combinatorial-optimization",
+        "causal-inference",
+        "agentic-reasoning"
+      ],
+      "score": 328.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "causal-inference",
+        "combinatorial-optimization"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "causal-inference",
+        "combinatorial-optimization"
+      ],
+      "root_atoms_used": [
+        "project",
+        "order",
+        "scale",
+        "combine",
+        "compare",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 4,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 causal-inference \u2192 combinatorial-optimization\n**Components:**\n  - cutting-planes (combinatorial-optimization): Cutting planes: valid inequalities that cut off fractional LP solutions. Gomory mixed integer (GMI), MIR, lift-and-project.\n  - gomory-cuts (combinatorial-optimization): Gomory mixed integer (GMI) cuts: from optimal LP tableau row with fractional basic variable. Very effective in practice.\n  - inverse-probability-weighting (causal-inference): IPW (Inverse Probability Weighting): P(Y | do(X=x)) = \u03a3_z P(Y | X=x, Z=z) P(Z=z) when Z satisfies backdoor. Empirically: weight observations by 1/P(X | Z).\n  - self-consistency (agentic-reasoning): Self-consistency: sample multiple reasoning paths (CoT or ReAct), aggregate answers via majority vote. Improves CoT by trading inference cost for accuracy.\n**Real walls (combined):**\n  - [cutting-planes] Different problem classes have specialized cuts\n  - [cutting-planes] TSP has subtour elimination\n  - [cutting-planes] packing has cover inequalities\n  - [gomory-cuts] GMI cuts are universal (valid for all IPs)\n  - [gomory-cuts] problem-specific cuts (clique, cover) can be stronger\n  - [inverse-probability-weighting] IPW unstable when propensity scores near 0 or 1 (extreme weights)\n  - [inverse-probability-weighting] truncate weights or use stabilized weights\n  - [self-consistency] Answer aggregation tricky for open-ended outputs (need string matching or LLM-as-judge)\n  - [self-consistency] marginal gains after n=10\u201320"
+    },
+    {
+      "primitives": [
+        "cutting-planes",
+        "inverse-probability-weighting",
+        "pedersen-commitment",
+        "propensity-score-matching"
+      ],
+      "domains": [
+        "combinatorial-optimization",
+        "causal-inference",
+        "cryptography-advanced",
+        "causal-inference"
+      ],
+      "categories": [
+        "combinatorial-optimization",
+        "causal-inference",
+        "cryptography-advanced",
+        "causal-inference"
+      ],
+      "score": 328.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "unique_domains": [
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "root_atoms_used": [
+        "project",
+        "scale",
+        "order",
+        "combine",
+        "sample",
+        "compare"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 4,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** causal-inference \u2192 combinatorial-optimization \u2192 cryptography-advanced\n**Components:**\n  - cutting-planes (combinatorial-optimization): Cutting planes: valid inequalities that cut off fractional LP solutions. Gomory mixed integer (GMI), MIR, lift-and-project.\n  - inverse-probability-weighting (causal-inference): IPW (Inverse Probability Weighting): P(Y | do(X=x)) = \u03a3_z P(Y | X=x, Z=z) P(Z=z) when Z satisfies backdoor. Empirically: weight observations by 1/P(X | Z).\n  - pedersen-commitment (cryptography-advanced): Pedersen commitment: commit to m as C = g^m \u00b7 h^r, where g, h are generators of a group of unknown order, and r is randomness. Perfectly hiding (given m, g^r is uniform) and computationally binding under the discrete log assumption.\n  - propensity-score-matching (causal-inference): Propensity score matching: match treated units to control units with similar propensity scores. Nearest neighbor, radius, stratification matching.\n**Real walls (combined):**\n  - [cutting-planes] Different problem classes have specialized cuts\n  - [cutting-planes] TSP has subtour elimination\n  - [cutting-planes] packing has cover inequalities\n  - [inverse-probability-weighting] IPW unstable when propensity scores near 0 or 1 (extreme weights)\n  - [inverse-probability-weighting] truncate weights or use stabilized weights\n  - [pedersen-commitment] Requires trusted setup to generate g, h such that discrete log of h wrt g is unknown\n  - [pedersen-commitment] no known trapdoor\n  - [propensity-score-matching] Matching without replacement can improve balance but reduces effective sample size\n  - [propensity-score-matching] with replacement may reuse controls"
+    },
+    {
+      "primitives": [
+        "cutting-planes",
+        "inverse-probability-weighting",
+        "pedersen-commitment",
+        "self-consistency"
+      ],
+      "domains": [
+        "combinatorial-optimization",
+        "causal-inference",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "combinatorial-optimization",
+        "causal-inference",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "score": 328.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "root_atoms_used": [
+        "project",
+        "scale",
+        "order",
+        "combine",
+        "sample",
+        "compare"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 4,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 causal-inference \u2192 combinatorial-optimization \u2192 cryptography-advanced\n**Components:**\n  - cutting-planes (combinatorial-optimization): Cutting planes: valid inequalities that cut off fractional LP solutions. Gomory mixed integer (GMI), MIR, lift-and-project.\n  - inverse-probability-weighting (causal-inference): IPW (Inverse Probability Weighting): P(Y | do(X=x)) = \u03a3_z P(Y | X=x, Z=z) P(Z=z) when Z satisfies backdoor. Empirically: weight observations by 1/P(X | Z).\n  - pedersen-commitment (cryptography-advanced): Pedersen commitment: commit to m as C = g^m \u00b7 h^r, where g, h are generators of a group of unknown order, and r is randomness. Perfectly hiding (given m, g^r is uniform) and computationally binding under the discrete log assumption.\n  - self-consistency (agentic-reasoning): Self-consistency: sample multiple reasoning paths (CoT or ReAct), aggregate answers via majority vote. Improves CoT by trading inference cost for accuracy.\n**Real walls (combined):**\n  - [cutting-planes] Different problem classes have specialized cuts\n  - [cutting-planes] TSP has subtour elimination\n  - [cutting-planes] packing has cover inequalities\n  - [inverse-probability-weighting] IPW unstable when propensity scores near 0 or 1 (extreme weights)\n  - [inverse-probability-weighting] truncate weights or use stabilized weights\n  - [pedersen-commitment] Requires trusted setup to generate g, h such that discrete log of h wrt g is unknown\n  - [pedersen-commitment] no known trapdoor\n  - [self-consistency] Answer aggregation tricky for open-ended outputs (need string matching or LLM-as-judge)\n  - [self-consistency] marginal gains after n=10\u201320"
+    },
+    {
+      "primitives": [
+        "cutting-planes",
+        "inverse-probability-weighting",
+        "preprocessing-ip",
+        "self-consistency"
+      ],
+      "domains": [
+        "combinatorial-optimization",
+        "causal-inference",
+        "combinatorial-optimization",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "combinatorial-optimization",
+        "causal-inference",
+        "combinatorial-optimization",
+        "agentic-reasoning"
+      ],
+      "score": 328.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "causal-inference",
+        "combinatorial-optimization"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "causal-inference",
+        "combinatorial-optimization"
+      ],
+      "root_atoms_used": [
+        "project",
+        "scale",
+        "order",
+        "combine",
+        "compare",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 4,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 causal-inference \u2192 combinatorial-optimization\n**Components:**\n  - cutting-planes (combinatorial-optimization): Cutting planes: valid inequalities that cut off fractional LP solutions. Gomory mixed integer (GMI), MIR, lift-and-project.\n  - inverse-probability-weighting (causal-inference): IPW (Inverse Probability Weighting): P(Y | do(X=x)) = \u03a3_z P(Y | X=x, Z=z) P(Z=z) when Z satisfies backdoor. Empirically: weight observations by 1/P(X | Z).\n  - preprocessing-ip (combinatorial-optimization): IP preprocessing: presolve (bounds tightening, variable elimination, probing). Reduce problem size before branching.\n  - self-consistency (agentic-reasoning): Self-consistency: sample multiple reasoning paths (CoT or ReAct), aggregate answers via majority vote. Improves CoT by trading inference cost for accuracy.\n**Real walls (combined):**\n  - [cutting-planes] Different problem classes have specialized cuts\n  - [cutting-planes] TSP has subtour elimination\n  - [cutting-planes] packing has cover inequalities\n  - [inverse-probability-weighting] IPW unstable when propensity scores near 0 or 1 (extreme weights)\n  - [inverse-probability-weighting] truncate weights or use stabilized weights\n  - [preprocessing-ip] Aggressive presolve can identify infeasibility early\n  - [preprocessing-ip] may change problem structure (SOS, special ordered sets)\n  - [self-consistency] Answer aggregation tricky for open-ended outputs (need string matching or LLM-as-judge)\n  - [self-consistency] marginal gains after n=10\u201320"
+    },
+    {
+      "primitives": [
+        "disjunctive-programming",
+        "doubly-robust-estimation",
+        "merkle-commitment",
+        "pedersen-commitment"
+      ],
+      "domains": [
+        "combinatorial-optimization",
+        "causal-inference",
+        "cryptography-advanced",
+        "cryptography-advanced"
+      ],
+      "categories": [
+        "combinatorial-optimization",
+        "causal-inference",
+        "cryptography-advanced",
+        "cryptography-advanced"
+      ],
+      "score": 328.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "unique_domains": [
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "root_atoms_used": [
+        "project",
+        "scale",
+        "hash",
+        "order",
+        "combine",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 4,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** causal-inference \u2192 combinatorial-optimization \u2192 cryptography-advanced\n**Components:**\n  - disjunctive-programming (combinatorial-optimization): Disjunctive programming: represent feasible region as union of polyhedra. Convex hull = convex hull of union of polyhedra.\n  - doubly-robust-estimation (causal-inference): Doubly robust (DR) estimator: combine outcome regression with IPW. Consistent if EITHER propensity model OR outcome model is correct.\n  - merkle-commitment (cryptography-advanced): Merkle commitment: hash data into a binary tree, commit to root hash; opening = path of sibling hashes to root. Post-quantum secure (only requires collision-resistant hash).\n  - pedersen-commitment (cryptography-advanced): Pedersen commitment: commit to m as C = g^m \u00b7 h^r, where g, h are generators of a group of unknown order, and r is randomness. Perfectly hiding (given m, g^r is uniform) and computationally binding under the discrete log assumption.\n**Real walls (combined):**\n  - [disjunctive-programming] Disjunctive cuts generalize lift-and-project\n  - [disjunctive-programming] extended formulation may be smaller than convex hull projection\n  - [doubly-robust-estimation] DR estimators have lower variance than pure IPW\n  - [doubly-robust-estimation] both models wrong \u2192 bias (not DR)\n  - [merkle-commitment] Tree construction O(n) for n data items\n  - [merkle-commitment] bandwidth of proofs\n  - [merkle-commitment] not additive-homomorphic\n  - [pedersen-commitment] Requires trusted setup to generate g, h such that discrete log of h wrt g is unknown\n  - [pedersen-commitment] no known trapdoor"
+    },
+    {
+      "primitives": [
+        "disjunctive-programming",
+        "doubly-robust-estimation",
+        "merkle-commitment",
+        "propensity-score-matching"
+      ],
+      "domains": [
+        "combinatorial-optimization",
+        "causal-inference",
+        "cryptography-advanced",
+        "causal-inference"
+      ],
+      "categories": [
+        "combinatorial-optimization",
+        "causal-inference",
+        "cryptography-advanced",
+        "causal-inference"
+      ],
+      "score": 328.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "unique_domains": [
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "root_atoms_used": [
+        "project",
+        "scale",
+        "hash",
+        "combine",
+        "compare",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 4,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** causal-inference \u2192 combinatorial-optimization \u2192 cryptography-advanced\n**Components:**\n  - disjunctive-programming (combinatorial-optimization): Disjunctive programming: represent feasible region as union of polyhedra. Convex hull = convex hull of union of polyhedra.\n  - doubly-robust-estimation (causal-inference): Doubly robust (DR) estimator: combine outcome regression with IPW. Consistent if EITHER propensity model OR outcome model is correct.\n  - merkle-commitment (cryptography-advanced): Merkle commitment: hash data into a binary tree, commit to root hash; opening = path of sibling hashes to root. Post-quantum secure (only requires collision-resistant hash).\n  - propensity-score-matching (causal-inference): Propensity score matching: match treated units to control units with similar propensity scores. Nearest neighbor, radius, stratification matching.\n**Real walls (combined):**\n  - [disjunctive-programming] Disjunctive cuts generalize lift-and-project\n  - [disjunctive-programming] extended formulation may be smaller than convex hull projection\n  - [doubly-robust-estimation] DR estimators have lower variance than pure IPW\n  - [doubly-robust-estimation] both models wrong \u2192 bias (not DR)\n  - [merkle-commitment] Tree construction O(n) for n data items\n  - [merkle-commitment] bandwidth of proofs\n  - [merkle-commitment] not additive-homomorphic\n  - [propensity-score-matching] Matching without replacement can improve balance but reduces effective sample size\n  - [propensity-score-matching] with replacement may reuse controls"
+    },
+    {
+      "primitives": [
+        "disjunctive-programming",
+        "doubly-robust-estimation",
+        "merkle-commitment",
+        "self-consistency"
+      ],
+      "domains": [
+        "combinatorial-optimization",
+        "causal-inference",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "combinatorial-optimization",
+        "causal-inference",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "score": 328.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "root_atoms_used": [
+        "project",
+        "scale",
+        "hash",
+        "combine",
+        "compare",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 4,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 causal-inference \u2192 combinatorial-optimization \u2192 cryptography-advanced\n**Components:**\n  - disjunctive-programming (combinatorial-optimization): Disjunctive programming: represent feasible region as union of polyhedra. Convex hull = convex hull of union of polyhedra.\n  - doubly-robust-estimation (causal-inference): Doubly robust (DR) estimator: combine outcome regression with IPW. Consistent if EITHER propensity model OR outcome model is correct.\n  - merkle-commitment (cryptography-advanced): Merkle commitment: hash data into a binary tree, commit to root hash; opening = path of sibling hashes to root. Post-quantum secure (only requires collision-resistant hash).\n  - self-consistency (agentic-reasoning): Self-consistency: sample multiple reasoning paths (CoT or ReAct), aggregate answers via majority vote. Improves CoT by trading inference cost for accuracy.\n**Real walls (combined):**\n  - [disjunctive-programming] Disjunctive cuts generalize lift-and-project\n  - [disjunctive-programming] extended formulation may be smaller than convex hull projection\n  - [doubly-robust-estimation] DR estimators have lower variance than pure IPW\n  - [doubly-robust-estimation] both models wrong \u2192 bias (not DR)\n  - [merkle-commitment] Tree construction O(n) for n data items\n  - [merkle-commitment] bandwidth of proofs\n  - [merkle-commitment] not additive-homomorphic\n  - [self-consistency] Answer aggregation tricky for open-ended outputs (need string matching or LLM-as-judge)\n  - [self-consistency] marginal gains after n=10\u201320"
+    },
+    {
+      "primitives": [
+        "disjunctive-programming",
+        "gomory-cuts",
+        "merkle-commitment",
+        "propensity-score-matching"
+      ],
+      "domains": [
+        "combinatorial-optimization",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "causal-inference"
+      ],
+      "categories": [
+        "combinatorial-optimization",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "causal-inference"
+      ],
+      "score": 328.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "unique_domains": [
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "root_atoms_used": [
+        "project",
+        "order",
+        "hash",
+        "combine",
+        "compare",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 4,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** causal-inference \u2192 combinatorial-optimization \u2192 cryptography-advanced\n**Components:**\n  - disjunctive-programming (combinatorial-optimization): Disjunctive programming: represent feasible region as union of polyhedra. Convex hull = convex hull of union of polyhedra.\n  - gomory-cuts (combinatorial-optimization): Gomory mixed integer (GMI) cuts: from optimal LP tableau row with fractional basic variable. Very effective in practice.\n  - merkle-commitment (cryptography-advanced): Merkle commitment: hash data into a binary tree, commit to root hash; opening = path of sibling hashes to root. Post-quantum secure (only requires collision-resistant hash).\n  - propensity-score-matching (causal-inference): Propensity score matching: match treated units to control units with similar propensity scores. Nearest neighbor, radius, stratification matching.\n**Real walls (combined):**\n  - [disjunctive-programming] Disjunctive cuts generalize lift-and-project\n  - [disjunctive-programming] extended formulation may be smaller than convex hull projection\n  - [gomory-cuts] GMI cuts are universal (valid for all IPs)\n  - [gomory-cuts] problem-specific cuts (clique, cover) can be stronger\n  - [merkle-commitment] Tree construction O(n) for n data items\n  - [merkle-commitment] bandwidth of proofs\n  - [merkle-commitment] not additive-homomorphic\n  - [propensity-score-matching] Matching without replacement can improve balance but reduces effective sample size\n  - [propensity-score-matching] with replacement may reuse controls"
+    },
+    {
+      "primitives": [
+        "disjunctive-programming",
+        "gomory-cuts",
+        "merkle-commitment",
+        "self-consistency"
+      ],
+      "domains": [
+        "combinatorial-optimization",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "combinatorial-optimization",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "score": 328.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "root_atoms_used": [
+        "project",
+        "order",
+        "hash",
+        "combine",
+        "compare",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 4,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 combinatorial-optimization \u2192 cryptography-advanced\n**Components:**\n  - disjunctive-programming (combinatorial-optimization): Disjunctive programming: represent feasible region as union of polyhedra. Convex hull = convex hull of union of polyhedra.\n  - gomory-cuts (combinatorial-optimization): Gomory mixed integer (GMI) cuts: from optimal LP tableau row with fractional basic variable. Very effective in practice.\n  - merkle-commitment (cryptography-advanced): Merkle commitment: hash data into a binary tree, commit to root hash; opening = path of sibling hashes to root. Post-quantum secure (only requires collision-resistant hash).\n  - self-consistency (agentic-reasoning): Self-consistency: sample multiple reasoning paths (CoT or ReAct), aggregate answers via majority vote. Improves CoT by trading inference cost for accuracy.\n**Real walls (combined):**\n  - [disjunctive-programming] Disjunctive cuts generalize lift-and-project\n  - [disjunctive-programming] extended formulation may be smaller than convex hull projection\n  - [gomory-cuts] GMI cuts are universal (valid for all IPs)\n  - [gomory-cuts] problem-specific cuts (clique, cover) can be stronger\n  - [merkle-commitment] Tree construction O(n) for n data items\n  - [merkle-commitment] bandwidth of proofs\n  - [merkle-commitment] not additive-homomorphic\n  - [self-consistency] Answer aggregation tricky for open-ended outputs (need string matching or LLM-as-judge)\n  - [self-consistency] marginal gains after n=10\u201320"
+    },
+    {
+      "primitives": [
+        "disjunctive-programming",
+        "inverse-probability-weighting",
+        "merkle-commitment",
+        "pedersen-commitment"
+      ],
+      "domains": [
+        "combinatorial-optimization",
+        "causal-inference",
+        "cryptography-advanced",
+        "cryptography-advanced"
+      ],
+      "categories": [
+        "combinatorial-optimization",
+        "causal-inference",
+        "cryptography-advanced",
+        "cryptography-advanced"
+      ],
+      "score": 328.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "unique_domains": [
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "root_atoms_used": [
+        "project",
+        "scale",
+        "hash",
+        "order",
+        "combine",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 4,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** causal-inference \u2192 combinatorial-optimization \u2192 cryptography-advanced\n**Components:**\n  - disjunctive-programming (combinatorial-optimization): Disjunctive programming: represent feasible region as union of polyhedra. Convex hull = convex hull of union of polyhedra.\n  - inverse-probability-weighting (causal-inference): IPW (Inverse Probability Weighting): P(Y | do(X=x)) = \u03a3_z P(Y | X=x, Z=z) P(Z=z) when Z satisfies backdoor. Empirically: weight observations by 1/P(X | Z).\n  - merkle-commitment (cryptography-advanced): Merkle commitment: hash data into a binary tree, commit to root hash; opening = path of sibling hashes to root. Post-quantum secure (only requires collision-resistant hash).\n  - pedersen-commitment (cryptography-advanced): Pedersen commitment: commit to m as C = g^m \u00b7 h^r, where g, h are generators of a group of unknown order, and r is randomness. Perfectly hiding (given m, g^r is uniform) and computationally binding under the discrete log assumption.\n**Real walls (combined):**\n  - [disjunctive-programming] Disjunctive cuts generalize lift-and-project\n  - [disjunctive-programming] extended formulation may be smaller than convex hull projection\n  - [inverse-probability-weighting] IPW unstable when propensity scores near 0 or 1 (extreme weights)\n  - [inverse-probability-weighting] truncate weights or use stabilized weights\n  - [merkle-commitment] Tree construction O(n) for n data items\n  - [merkle-commitment] bandwidth of proofs\n  - [merkle-commitment] not additive-homomorphic\n  - [pedersen-commitment] Requires trusted setup to generate g, h such that discrete log of h wrt g is unknown\n  - [pedersen-commitment] no known trapdoor"
+    },
+    {
+      "primitives": [
+        "disjunctive-programming",
+        "inverse-probability-weighting",
+        "merkle-commitment",
+        "propensity-score-matching"
+      ],
+      "domains": [
+        "combinatorial-optimization",
+        "causal-inference",
+        "cryptography-advanced",
+        "causal-inference"
+      ],
+      "categories": [
+        "combinatorial-optimization",
+        "causal-inference",
+        "cryptography-advanced",
+        "causal-inference"
+      ],
+      "score": 328.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "unique_domains": [
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "root_atoms_used": [
+        "project",
+        "scale",
+        "hash",
+        "combine",
+        "compare",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 4,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** causal-inference \u2192 combinatorial-optimization \u2192 cryptography-advanced\n**Components:**\n  - disjunctive-programming (combinatorial-optimization): Disjunctive programming: represent feasible region as union of polyhedra. Convex hull = convex hull of union of polyhedra.\n  - inverse-probability-weighting (causal-inference): IPW (Inverse Probability Weighting): P(Y | do(X=x)) = \u03a3_z P(Y | X=x, Z=z) P(Z=z) when Z satisfies backdoor. Empirically: weight observations by 1/P(X | Z).\n  - merkle-commitment (cryptography-advanced): Merkle commitment: hash data into a binary tree, commit to root hash; opening = path of sibling hashes to root. Post-quantum secure (only requires collision-resistant hash).\n  - propensity-score-matching (causal-inference): Propensity score matching: match treated units to control units with similar propensity scores. Nearest neighbor, radius, stratification matching.\n**Real walls (combined):**\n  - [disjunctive-programming] Disjunctive cuts generalize lift-and-project\n  - [disjunctive-programming] extended formulation may be smaller than convex hull projection\n  - [inverse-probability-weighting] IPW unstable when propensity scores near 0 or 1 (extreme weights)\n  - [inverse-probability-weighting] truncate weights or use stabilized weights\n  - [merkle-commitment] Tree construction O(n) for n data items\n  - [merkle-commitment] bandwidth of proofs\n  - [merkle-commitment] not additive-homomorphic\n  - [propensity-score-matching] Matching without replacement can improve balance but reduces effective sample size\n  - [propensity-score-matching] with replacement may reuse controls"
+    },
+    {
+      "primitives": [
+        "disjunctive-programming",
+        "inverse-probability-weighting",
+        "merkle-commitment",
+        "self-consistency"
+      ],
+      "domains": [
+        "combinatorial-optimization",
+        "causal-inference",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "combinatorial-optimization",
+        "causal-inference",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "score": 328.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "root_atoms_used": [
+        "project",
+        "scale",
+        "hash",
+        "combine",
+        "compare",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 4,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 causal-inference \u2192 combinatorial-optimization \u2192 cryptography-advanced\n**Components:**\n  - disjunctive-programming (combinatorial-optimization): Disjunctive programming: represent feasible region as union of polyhedra. Convex hull = convex hull of union of polyhedra.\n  - inverse-probability-weighting (causal-inference): IPW (Inverse Probability Weighting): P(Y | do(X=x)) = \u03a3_z P(Y | X=x, Z=z) P(Z=z) when Z satisfies backdoor. Empirically: weight observations by 1/P(X | Z).\n  - merkle-commitment (cryptography-advanced): Merkle commitment: hash data into a binary tree, commit to root hash; opening = path of sibling hashes to root. Post-quantum secure (only requires collision-resistant hash).\n  - self-consistency (agentic-reasoning): Self-consistency: sample multiple reasoning paths (CoT or ReAct), aggregate answers via majority vote. Improves CoT by trading inference cost for accuracy.\n**Real walls (combined):**\n  - [disjunctive-programming] Disjunctive cuts generalize lift-and-project\n  - [disjunctive-programming] extended formulation may be smaller than convex hull projection\n  - [inverse-probability-weighting] IPW unstable when propensity scores near 0 or 1 (extreme weights)\n  - [inverse-probability-weighting] truncate weights or use stabilized weights\n  - [merkle-commitment] Tree construction O(n) for n data items\n  - [merkle-commitment] bandwidth of proofs\n  - [merkle-commitment] not additive-homomorphic\n  - [self-consistency] Answer aggregation tricky for open-ended outputs (need string matching or LLM-as-judge)\n  - [self-consistency] marginal gains after n=10\u201320"
+    },
+    {
+      "primitives": [
+        "disjunctive-programming",
+        "merkle-commitment",
+        "pedersen-commitment",
+        "propensity-score-matching"
+      ],
+      "domains": [
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "cryptography-advanced",
+        "causal-inference"
+      ],
+      "categories": [
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "cryptography-advanced",
+        "causal-inference"
+      ],
+      "score": 328.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "unique_domains": [
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "root_atoms_used": [
+        "project",
+        "hash",
+        "order",
+        "combine",
+        "sample",
+        "compare"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 4,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** causal-inference \u2192 combinatorial-optimization \u2192 cryptography-advanced\n**Components:**\n  - disjunctive-programming (combinatorial-optimization): Disjunctive programming: represent feasible region as union of polyhedra. Convex hull = convex hull of union of polyhedra.\n  - merkle-commitment (cryptography-advanced): Merkle commitment: hash data into a binary tree, commit to root hash; opening = path of sibling hashes to root. Post-quantum secure (only requires collision-resistant hash).\n  - pedersen-commitment (cryptography-advanced): Pedersen commitment: commit to m as C = g^m \u00b7 h^r, where g, h are generators of a group of unknown order, and r is randomness. Perfectly hiding (given m, g^r is uniform) and computationally binding under the discrete log assumption.\n  - propensity-score-matching (causal-inference): Propensity score matching: match treated units to control units with similar propensity scores. Nearest neighbor, radius, stratification matching.\n**Real walls (combined):**\n  - [disjunctive-programming] Disjunctive cuts generalize lift-and-project\n  - [disjunctive-programming] extended formulation may be smaller than convex hull projection\n  - [merkle-commitment] Tree construction O(n) for n data items\n  - [merkle-commitment] bandwidth of proofs\n  - [merkle-commitment] not additive-homomorphic\n  - [pedersen-commitment] Requires trusted setup to generate g, h such that discrete log of h wrt g is unknown\n  - [pedersen-commitment] no known trapdoor\n  - [propensity-score-matching] Matching without replacement can improve balance but reduces effective sample size\n  - [propensity-score-matching] with replacement may reuse controls"
+    },
+    {
+      "primitives": [
+        "disjunctive-programming",
+        "merkle-commitment",
+        "pedersen-commitment",
+        "self-consistency"
+      ],
+      "domains": [
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "score": 328.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "root_atoms_used": [
+        "project",
+        "hash",
+        "order",
+        "combine",
+        "sample",
+        "compare"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 4,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 combinatorial-optimization \u2192 cryptography-advanced\n**Components:**\n  - disjunctive-programming (combinatorial-optimization): Disjunctive programming: represent feasible region as union of polyhedra. Convex hull = convex hull of union of polyhedra.\n  - merkle-commitment (cryptography-advanced): Merkle commitment: hash data into a binary tree, commit to root hash; opening = path of sibling hashes to root. Post-quantum secure (only requires collision-resistant hash).\n  - pedersen-commitment (cryptography-advanced): Pedersen commitment: commit to m as C = g^m \u00b7 h^r, where g, h are generators of a group of unknown order, and r is randomness. Perfectly hiding (given m, g^r is uniform) and computationally binding under the discrete log assumption.\n  - self-consistency (agentic-reasoning): Self-consistency: sample multiple reasoning paths (CoT or ReAct), aggregate answers via majority vote. Improves CoT by trading inference cost for accuracy.\n**Real walls (combined):**\n  - [disjunctive-programming] Disjunctive cuts generalize lift-and-project\n  - [disjunctive-programming] extended formulation may be smaller than convex hull projection\n  - [merkle-commitment] Tree construction O(n) for n data items\n  - [merkle-commitment] bandwidth of proofs\n  - [merkle-commitment] not additive-homomorphic\n  - [pedersen-commitment] Requires trusted setup to generate g, h such that discrete log of h wrt g is unknown\n  - [pedersen-commitment] no known trapdoor\n  - [self-consistency] Answer aggregation tricky for open-ended outputs (need string matching or LLM-as-judge)\n  - [self-consistency] marginal gains after n=10\u201320"
+    },
+    {
+      "primitives": [
+        "disjunctive-programming",
+        "merkle-commitment",
+        "preprocessing-ip",
+        "propensity-score-matching"
+      ],
+      "domains": [
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "combinatorial-optimization",
+        "causal-inference"
+      ],
+      "categories": [
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "combinatorial-optimization",
+        "causal-inference"
+      ],
+      "score": 328.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "unique_domains": [
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "root_atoms_used": [
+        "project",
+        "hash",
+        "order",
+        "combine",
+        "compare",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 4,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** causal-inference \u2192 combinatorial-optimization \u2192 cryptography-advanced\n**Components:**\n  - disjunctive-programming (combinatorial-optimization): Disjunctive programming: represent feasible region as union of polyhedra. Convex hull = convex hull of union of polyhedra.\n  - merkle-commitment (cryptography-advanced): Merkle commitment: hash data into a binary tree, commit to root hash; opening = path of sibling hashes to root. Post-quantum secure (only requires collision-resistant hash).\n  - preprocessing-ip (combinatorial-optimization): IP preprocessing: presolve (bounds tightening, variable elimination, probing). Reduce problem size before branching.\n  - propensity-score-matching (causal-inference): Propensity score matching: match treated units to control units with similar propensity scores. Nearest neighbor, radius, stratification matching.\n**Real walls (combined):**\n  - [disjunctive-programming] Disjunctive cuts generalize lift-and-project\n  - [disjunctive-programming] extended formulation may be smaller than convex hull projection\n  - [merkle-commitment] Tree construction O(n) for n data items\n  - [merkle-commitment] bandwidth of proofs\n  - [merkle-commitment] not additive-homomorphic\n  - [preprocessing-ip] Aggressive presolve can identify infeasibility early\n  - [preprocessing-ip] may change problem structure (SOS, special ordered sets)\n  - [propensity-score-matching] Matching without replacement can improve balance but reduces effective sample size\n  - [propensity-score-matching] with replacement may reuse controls"
+    },
+    {
+      "primitives": [
+        "disjunctive-programming",
+        "merkle-commitment",
+        "preprocessing-ip",
+        "self-consistency"
+      ],
+      "domains": [
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "combinatorial-optimization",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "combinatorial-optimization",
+        "agentic-reasoning"
+      ],
+      "score": 328.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "root_atoms_used": [
+        "project",
+        "hash",
+        "order",
+        "combine",
+        "compare",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 4,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 combinatorial-optimization \u2192 cryptography-advanced\n**Components:**\n  - disjunctive-programming (combinatorial-optimization): Disjunctive programming: represent feasible region as union of polyhedra. Convex hull = convex hull of union of polyhedra.\n  - merkle-commitment (cryptography-advanced): Merkle commitment: hash data into a binary tree, commit to root hash; opening = path of sibling hashes to root. Post-quantum secure (only requires collision-resistant hash).\n  - preprocessing-ip (combinatorial-optimization): IP preprocessing: presolve (bounds tightening, variable elimination, probing). Reduce problem size before branching.\n  - self-consistency (agentic-reasoning): Self-consistency: sample multiple reasoning paths (CoT or ReAct), aggregate answers via majority vote. Improves CoT by trading inference cost for accuracy.\n**Real walls (combined):**\n  - [disjunctive-programming] Disjunctive cuts generalize lift-and-project\n  - [disjunctive-programming] extended formulation may be smaller than convex hull projection\n  - [merkle-commitment] Tree construction O(n) for n data items\n  - [merkle-commitment] bandwidth of proofs\n  - [merkle-commitment] not additive-homomorphic\n  - [preprocessing-ip] Aggressive presolve can identify infeasibility early\n  - [preprocessing-ip] may change problem structure (SOS, special ordered sets)\n  - [self-consistency] Answer aggregation tricky for open-ended outputs (need string matching or LLM-as-judge)\n  - [self-consistency] marginal gains after n=10\u201320"
+    },
+    {
+      "primitives": [
+        "doubly-robust-estimation",
+        "gomory-cuts",
+        "merkle-commitment",
+        "propensity-score-matching"
+      ],
+      "domains": [
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "causal-inference"
+      ],
+      "categories": [
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "causal-inference"
+      ],
+      "score": 328.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "unique_domains": [
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "root_atoms_used": [
+        "scale",
+        "order",
+        "hash",
+        "combine",
+        "compare",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 4,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** causal-inference \u2192 combinatorial-optimization \u2192 cryptography-advanced\n**Components:**\n  - doubly-robust-estimation (causal-inference): Doubly robust (DR) estimator: combine outcome regression with IPW. Consistent if EITHER propensity model OR outcome model is correct.\n  - gomory-cuts (combinatorial-optimization): Gomory mixed integer (GMI) cuts: from optimal LP tableau row with fractional basic variable. Very effective in practice.\n  - merkle-commitment (cryptography-advanced): Merkle commitment: hash data into a binary tree, commit to root hash; opening = path of sibling hashes to root. Post-quantum secure (only requires collision-resistant hash).\n  - propensity-score-matching (causal-inference): Propensity score matching: match treated units to control units with similar propensity scores. Nearest neighbor, radius, stratification matching.\n**Real walls (combined):**\n  - [doubly-robust-estimation] DR estimators have lower variance than pure IPW\n  - [doubly-robust-estimation] both models wrong \u2192 bias (not DR)\n  - [gomory-cuts] GMI cuts are universal (valid for all IPs)\n  - [gomory-cuts] problem-specific cuts (clique, cover) can be stronger\n  - [merkle-commitment] Tree construction O(n) for n data items\n  - [merkle-commitment] bandwidth of proofs\n  - [merkle-commitment] not additive-homomorphic\n  - [propensity-score-matching] Matching without replacement can improve balance but reduces effective sample size\n  - [propensity-score-matching] with replacement may reuse controls"
+    },
+    {
+      "primitives": [
+        "doubly-robust-estimation",
+        "gomory-cuts",
+        "merkle-commitment",
+        "self-consistency"
+      ],
+      "domains": [
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "score": 328.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "root_atoms_used": [
+        "scale",
+        "order",
+        "hash",
+        "combine",
+        "compare",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 4,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 causal-inference \u2192 combinatorial-optimization \u2192 cryptography-advanced\n**Components:**\n  - doubly-robust-estimation (causal-inference): Doubly robust (DR) estimator: combine outcome regression with IPW. Consistent if EITHER propensity model OR outcome model is correct.\n  - gomory-cuts (combinatorial-optimization): Gomory mixed integer (GMI) cuts: from optimal LP tableau row with fractional basic variable. Very effective in practice.\n  - merkle-commitment (cryptography-advanced): Merkle commitment: hash data into a binary tree, commit to root hash; opening = path of sibling hashes to root. Post-quantum secure (only requires collision-resistant hash).\n  - self-consistency (agentic-reasoning): Self-consistency: sample multiple reasoning paths (CoT or ReAct), aggregate answers via majority vote. Improves CoT by trading inference cost for accuracy.\n**Real walls (combined):**\n  - [doubly-robust-estimation] DR estimators have lower variance than pure IPW\n  - [doubly-robust-estimation] both models wrong \u2192 bias (not DR)\n  - [gomory-cuts] GMI cuts are universal (valid for all IPs)\n  - [gomory-cuts] problem-specific cuts (clique, cover) can be stronger\n  - [merkle-commitment] Tree construction O(n) for n data items\n  - [merkle-commitment] bandwidth of proofs\n  - [merkle-commitment] not additive-homomorphic\n  - [self-consistency] Answer aggregation tricky for open-ended outputs (need string matching or LLM-as-judge)\n  - [self-consistency] marginal gains after n=10\u201320"
+    },
+    {
+      "primitives": [
+        "doubly-robust-estimation",
+        "lift-and-project",
+        "merkle-commitment",
+        "pedersen-commitment"
+      ],
+      "domains": [
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "cryptography-advanced"
+      ],
+      "categories": [
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "cryptography-advanced"
+      ],
+      "score": 328.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "unique_domains": [
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "root_atoms_used": [
+        "scale",
+        "project",
+        "hash",
+        "order",
+        "combine",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 4,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** causal-inference \u2192 combinatorial-optimization \u2192 cryptography-advanced\n**Components:**\n  - doubly-robust-estimation (causal-inference): Doubly robust (DR) estimator: combine outcome regression with IPW. Consistent if EITHER propensity model OR outcome model is correct.\n  - lift-and-project (combinatorial-optimization): Lift-and-project (Balas-Perduc): iteratively lift 0-1 variables to higher-dimensional spaces. Add binary constraint x_i + x_j \u2265 1 in projection.\n  - merkle-commitment (cryptography-advanced): Merkle commitment: hash data into a binary tree, commit to root hash; opening = path of sibling hashes to root. Post-quantum secure (only requires collision-resistant hash).\n  - pedersen-commitment (cryptography-advanced): Pedersen commitment: commit to m as C = g^m \u00b7 h^r, where g, h are generators of a group of unknown order, and r is randomness. Perfectly hiding (given m, g^r is uniform) and computationally binding under the discrete log assumption.\n**Real walls (combined):**\n  - [doubly-robust-estimation] DR estimators have lower variance than pure IPW\n  - [doubly-robust-estimation] both models wrong \u2192 bias (not DR)\n  - [lift-and-project] Lift-and-project is effective for small 0-1 IPs\n  - [lift-and-project] too expensive for large IPs without preprocessing\n  - [merkle-commitment] Tree construction O(n) for n data items\n  - [merkle-commitment] bandwidth of proofs\n  - [merkle-commitment] not additive-homomorphic\n  - [pedersen-commitment] Requires trusted setup to generate g, h such that discrete log of h wrt g is unknown\n  - [pedersen-commitment] no known trapdoor"
+    },
+    {
+      "primitives": [
+        "doubly-robust-estimation",
+        "lift-and-project",
+        "merkle-commitment",
+        "propensity-score-matching"
+      ],
+      "domains": [
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "causal-inference"
+      ],
+      "categories": [
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "causal-inference"
+      ],
+      "score": 328.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "unique_domains": [
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "root_atoms_used": [
+        "scale",
+        "project",
+        "hash",
+        "combine",
+        "compare",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 4,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** causal-inference \u2192 combinatorial-optimization \u2192 cryptography-advanced\n**Components:**\n  - doubly-robust-estimation (causal-inference): Doubly robust (DR) estimator: combine outcome regression with IPW. Consistent if EITHER propensity model OR outcome model is correct.\n  - lift-and-project (combinatorial-optimization): Lift-and-project (Balas-Perduc): iteratively lift 0-1 variables to higher-dimensional spaces. Add binary constraint x_i + x_j \u2265 1 in projection.\n  - merkle-commitment (cryptography-advanced): Merkle commitment: hash data into a binary tree, commit to root hash; opening = path of sibling hashes to root. Post-quantum secure (only requires collision-resistant hash).\n  - propensity-score-matching (causal-inference): Propensity score matching: match treated units to control units with similar propensity scores. Nearest neighbor, radius, stratification matching.\n**Real walls (combined):**\n  - [doubly-robust-estimation] DR estimators have lower variance than pure IPW\n  - [doubly-robust-estimation] both models wrong \u2192 bias (not DR)\n  - [lift-and-project] Lift-and-project is effective for small 0-1 IPs\n  - [lift-and-project] too expensive for large IPs without preprocessing\n  - [merkle-commitment] Tree construction O(n) for n data items\n  - [merkle-commitment] bandwidth of proofs\n  - [merkle-commitment] not additive-homomorphic\n  - [propensity-score-matching] Matching without replacement can improve balance but reduces effective sample size\n  - [propensity-score-matching] with replacement may reuse controls"
+    },
+    {
+      "primitives": [
+        "doubly-robust-estimation",
+        "lift-and-project",
+        "merkle-commitment",
+        "self-consistency"
+      ],
+      "domains": [
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "score": 328.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "root_atoms_used": [
+        "scale",
+        "project",
+        "hash",
+        "combine",
+        "compare",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 4,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 causal-inference \u2192 combinatorial-optimization \u2192 cryptography-advanced\n**Components:**\n  - doubly-robust-estimation (causal-inference): Doubly robust (DR) estimator: combine outcome regression with IPW. Consistent if EITHER propensity model OR outcome model is correct.\n  - lift-and-project (combinatorial-optimization): Lift-and-project (Balas-Perduc): iteratively lift 0-1 variables to higher-dimensional spaces. Add binary constraint x_i + x_j \u2265 1 in projection.\n  - merkle-commitment (cryptography-advanced): Merkle commitment: hash data into a binary tree, commit to root hash; opening = path of sibling hashes to root. Post-quantum secure (only requires collision-resistant hash).\n  - self-consistency (agentic-reasoning): Self-consistency: sample multiple reasoning paths (CoT or ReAct), aggregate answers via majority vote. Improves CoT by trading inference cost for accuracy.\n**Real walls (combined):**\n  - [doubly-robust-estimation] DR estimators have lower variance than pure IPW\n  - [doubly-robust-estimation] both models wrong \u2192 bias (not DR)\n  - [lift-and-project] Lift-and-project is effective for small 0-1 IPs\n  - [lift-and-project] too expensive for large IPs without preprocessing\n  - [merkle-commitment] Tree construction O(n) for n data items\n  - [merkle-commitment] bandwidth of proofs\n  - [merkle-commitment] not additive-homomorphic\n  - [self-consistency] Answer aggregation tricky for open-ended outputs (need string matching or LLM-as-judge)\n  - [self-consistency] marginal gains after n=10\u201320"
+    },
+    {
+      "primitives": [
+        "doubly-robust-estimation",
+        "merkle-commitment",
+        "pedersen-commitment",
+        "self-consistency"
+      ],
+      "domains": [
+        "causal-inference",
+        "cryptography-advanced",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "causal-inference",
+        "cryptography-advanced",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "score": 328.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "causal-inference",
+        "cryptography-advanced"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "causal-inference",
+        "cryptography-advanced"
+      ],
+      "root_atoms_used": [
+        "scale",
+        "hash",
+        "order",
+        "combine",
+        "sample",
+        "compare"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 4,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 causal-inference \u2192 cryptography-advanced\n**Components:**\n  - doubly-robust-estimation (causal-inference): Doubly robust (DR) estimator: combine outcome regression with IPW. Consistent if EITHER propensity model OR outcome model is correct.\n  - merkle-commitment (cryptography-advanced): Merkle commitment: hash data into a binary tree, commit to root hash; opening = path of sibling hashes to root. Post-quantum secure (only requires collision-resistant hash).\n  - pedersen-commitment (cryptography-advanced): Pedersen commitment: commit to m as C = g^m \u00b7 h^r, where g, h are generators of a group of unknown order, and r is randomness. Perfectly hiding (given m, g^r is uniform) and computationally binding under the discrete log assumption.\n  - self-consistency (agentic-reasoning): Self-consistency: sample multiple reasoning paths (CoT or ReAct), aggregate answers via majority vote. Improves CoT by trading inference cost for accuracy.\n**Real walls (combined):**\n  - [doubly-robust-estimation] DR estimators have lower variance than pure IPW\n  - [doubly-robust-estimation] both models wrong \u2192 bias (not DR)\n  - [merkle-commitment] Tree construction O(n) for n data items\n  - [merkle-commitment] bandwidth of proofs\n  - [merkle-commitment] not additive-homomorphic\n  - [pedersen-commitment] Requires trusted setup to generate g, h such that discrete log of h wrt g is unknown\n  - [pedersen-commitment] no known trapdoor\n  - [self-consistency] Answer aggregation tricky for open-ended outputs (need string matching or LLM-as-judge)\n  - [self-consistency] marginal gains after n=10\u201320"
+    },
+    {
+      "primitives": [
+        "doubly-robust-estimation",
+        "merkle-commitment",
+        "preprocessing-ip",
+        "propensity-score-matching"
+      ],
+      "domains": [
+        "causal-inference",
+        "cryptography-advanced",
+        "combinatorial-optimization",
+        "causal-inference"
+      ],
+      "categories": [
+        "causal-inference",
+        "cryptography-advanced",
+        "combinatorial-optimization",
+        "causal-inference"
+      ],
+      "score": 328.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "unique_domains": [
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "root_atoms_used": [
+        "scale",
+        "hash",
+        "order",
+        "combine",
+        "compare",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 4,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** causal-inference \u2192 combinatorial-optimization \u2192 cryptography-advanced\n**Components:**\n  - doubly-robust-estimation (causal-inference): Doubly robust (DR) estimator: combine outcome regression with IPW. Consistent if EITHER propensity model OR outcome model is correct.\n  - merkle-commitment (cryptography-advanced): Merkle commitment: hash data into a binary tree, commit to root hash; opening = path of sibling hashes to root. Post-quantum secure (only requires collision-resistant hash).\n  - preprocessing-ip (combinatorial-optimization): IP preprocessing: presolve (bounds tightening, variable elimination, probing). Reduce problem size before branching.\n  - propensity-score-matching (causal-inference): Propensity score matching: match treated units to control units with similar propensity scores. Nearest neighbor, radius, stratification matching.\n**Real walls (combined):**\n  - [doubly-robust-estimation] DR estimators have lower variance than pure IPW\n  - [doubly-robust-estimation] both models wrong \u2192 bias (not DR)\n  - [merkle-commitment] Tree construction O(n) for n data items\n  - [merkle-commitment] bandwidth of proofs\n  - [merkle-commitment] not additive-homomorphic\n  - [preprocessing-ip] Aggressive presolve can identify infeasibility early\n  - [preprocessing-ip] may change problem structure (SOS, special ordered sets)\n  - [propensity-score-matching] Matching without replacement can improve balance but reduces effective sample size\n  - [propensity-score-matching] with replacement may reuse controls"
+    },
+    {
+      "primitives": [
+        "doubly-robust-estimation",
+        "merkle-commitment",
+        "preprocessing-ip",
+        "self-consistency"
+      ],
+      "domains": [
+        "causal-inference",
+        "cryptography-advanced",
+        "combinatorial-optimization",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "causal-inference",
+        "cryptography-advanced",
+        "combinatorial-optimization",
+        "agentic-reasoning"
+      ],
+      "score": 328.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "root_atoms_used": [
+        "scale",
+        "hash",
+        "order",
+        "combine",
+        "compare",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 4,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 causal-inference \u2192 combinatorial-optimization \u2192 cryptography-advanced\n**Components:**\n  - doubly-robust-estimation (causal-inference): Doubly robust (DR) estimator: combine outcome regression with IPW. Consistent if EITHER propensity model OR outcome model is correct.\n  - merkle-commitment (cryptography-advanced): Merkle commitment: hash data into a binary tree, commit to root hash; opening = path of sibling hashes to root. Post-quantum secure (only requires collision-resistant hash).\n  - preprocessing-ip (combinatorial-optimization): IP preprocessing: presolve (bounds tightening, variable elimination, probing). Reduce problem size before branching.\n  - self-consistency (agentic-reasoning): Self-consistency: sample multiple reasoning paths (CoT or ReAct), aggregate answers via majority vote. Improves CoT by trading inference cost for accuracy.\n**Real walls (combined):**\n  - [doubly-robust-estimation] DR estimators have lower variance than pure IPW\n  - [doubly-robust-estimation] both models wrong \u2192 bias (not DR)\n  - [merkle-commitment] Tree construction O(n) for n data items\n  - [merkle-commitment] bandwidth of proofs\n  - [merkle-commitment] not additive-homomorphic\n  - [preprocessing-ip] Aggressive presolve can identify infeasibility early\n  - [preprocessing-ip] may change problem structure (SOS, special ordered sets)\n  - [self-consistency] Answer aggregation tricky for open-ended outputs (need string matching or LLM-as-judge)\n  - [self-consistency] marginal gains after n=10\u201320"
+    },
+    {
+      "primitives": [
+        "gomory-cuts",
+        "inverse-probability-weighting",
+        "merkle-commitment",
+        "propensity-score-matching"
+      ],
+      "domains": [
+        "combinatorial-optimization",
+        "causal-inference",
+        "cryptography-advanced",
+        "causal-inference"
+      ],
+      "categories": [
+        "combinatorial-optimization",
+        "causal-inference",
+        "cryptography-advanced",
+        "causal-inference"
+      ],
+      "score": 328.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "unique_domains": [
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "root_atoms_used": [
+        "order",
+        "scale",
+        "hash",
+        "combine",
+        "compare",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 4,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** causal-inference \u2192 combinatorial-optimization \u2192 cryptography-advanced\n**Components:**\n  - gomory-cuts (combinatorial-optimization): Gomory mixed integer (GMI) cuts: from optimal LP tableau row with fractional basic variable. Very effective in practice.\n  - inverse-probability-weighting (causal-inference): IPW (Inverse Probability Weighting): P(Y | do(X=x)) = \u03a3_z P(Y | X=x, Z=z) P(Z=z) when Z satisfies backdoor. Empirically: weight observations by 1/P(X | Z).\n  - merkle-commitment (cryptography-advanced): Merkle commitment: hash data into a binary tree, commit to root hash; opening = path of sibling hashes to root. Post-quantum secure (only requires collision-resistant hash).\n  - propensity-score-matching (causal-inference): Propensity score matching: match treated units to control units with similar propensity scores. Nearest neighbor, radius, stratification matching.\n**Real walls (combined):**\n  - [gomory-cuts] GMI cuts are universal (valid for all IPs)\n  - [gomory-cuts] problem-specific cuts (clique, cover) can be stronger\n  - [inverse-probability-weighting] IPW unstable when propensity scores near 0 or 1 (extreme weights)\n  - [inverse-probability-weighting] truncate weights or use stabilized weights\n  - [merkle-commitment] Tree construction O(n) for n data items\n  - [merkle-commitment] bandwidth of proofs\n  - [merkle-commitment] not additive-homomorphic\n  - [propensity-score-matching] Matching without replacement can improve balance but reduces effective sample size\n  - [propensity-score-matching] with replacement may reuse controls"
+    },
+    {
+      "primitives": [
+        "gomory-cuts",
+        "inverse-probability-weighting",
+        "merkle-commitment",
+        "self-consistency"
+      ],
+      "domains": [
+        "combinatorial-optimization",
+        "causal-inference",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "combinatorial-optimization",
+        "causal-inference",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "score": 328.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "root_atoms_used": [
+        "order",
+        "scale",
+        "hash",
+        "combine",
+        "compare",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 4,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 causal-inference \u2192 combinatorial-optimization \u2192 cryptography-advanced\n**Components:**\n  - gomory-cuts (combinatorial-optimization): Gomory mixed integer (GMI) cuts: from optimal LP tableau row with fractional basic variable. Very effective in practice.\n  - inverse-probability-weighting (causal-inference): IPW (Inverse Probability Weighting): P(Y | do(X=x)) = \u03a3_z P(Y | X=x, Z=z) P(Z=z) when Z satisfies backdoor. Empirically: weight observations by 1/P(X | Z).\n  - merkle-commitment (cryptography-advanced): Merkle commitment: hash data into a binary tree, commit to root hash; opening = path of sibling hashes to root. Post-quantum secure (only requires collision-resistant hash).\n  - self-consistency (agentic-reasoning): Self-consistency: sample multiple reasoning paths (CoT or ReAct), aggregate answers via majority vote. Improves CoT by trading inference cost for accuracy.\n**Real walls (combined):**\n  - [gomory-cuts] GMI cuts are universal (valid for all IPs)\n  - [gomory-cuts] problem-specific cuts (clique, cover) can be stronger\n  - [inverse-probability-weighting] IPW unstable when propensity scores near 0 or 1 (extreme weights)\n  - [inverse-probability-weighting] truncate weights or use stabilized weights\n  - [merkle-commitment] Tree construction O(n) for n data items\n  - [merkle-commitment] bandwidth of proofs\n  - [merkle-commitment] not additive-homomorphic\n  - [self-consistency] Answer aggregation tricky for open-ended outputs (need string matching or LLM-as-judge)\n  - [self-consistency] marginal gains after n=10\u201320"
+    },
+    {
+      "primitives": [
+        "gomory-cuts",
+        "lift-and-project",
+        "merkle-commitment",
+        "propensity-score-matching"
+      ],
+      "domains": [
+        "combinatorial-optimization",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "causal-inference"
+      ],
+      "categories": [
+        "combinatorial-optimization",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "causal-inference"
+      ],
+      "score": 328.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "unique_domains": [
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "root_atoms_used": [
+        "order",
+        "project",
+        "hash",
+        "combine",
+        "compare",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 4,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** causal-inference \u2192 combinatorial-optimization \u2192 cryptography-advanced\n**Components:**\n  - gomory-cuts (combinatorial-optimization): Gomory mixed integer (GMI) cuts: from optimal LP tableau row with fractional basic variable. Very effective in practice.\n  - lift-and-project (combinatorial-optimization): Lift-and-project (Balas-Perduc): iteratively lift 0-1 variables to higher-dimensional spaces. Add binary constraint x_i + x_j \u2265 1 in projection.\n  - merkle-commitment (cryptography-advanced): Merkle commitment: hash data into a binary tree, commit to root hash; opening = path of sibling hashes to root. Post-quantum secure (only requires collision-resistant hash).\n  - propensity-score-matching (causal-inference): Propensity score matching: match treated units to control units with similar propensity scores. Nearest neighbor, radius, stratification matching.\n**Real walls (combined):**\n  - [gomory-cuts] GMI cuts are universal (valid for all IPs)\n  - [gomory-cuts] problem-specific cuts (clique, cover) can be stronger\n  - [lift-and-project] Lift-and-project is effective for small 0-1 IPs\n  - [lift-and-project] too expensive for large IPs without preprocessing\n  - [merkle-commitment] Tree construction O(n) for n data items\n  - [merkle-commitment] bandwidth of proofs\n  - [merkle-commitment] not additive-homomorphic\n  - [propensity-score-matching] Matching without replacement can improve balance but reduces effective sample size\n  - [propensity-score-matching] with replacement may reuse controls"
+    },
+    {
+      "primitives": [
+        "gomory-cuts",
+        "lift-and-project",
+        "merkle-commitment",
+        "self-consistency"
+      ],
+      "domains": [
+        "combinatorial-optimization",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "combinatorial-optimization",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "score": 328.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "root_atoms_used": [
+        "order",
+        "project",
+        "hash",
+        "combine",
+        "compare",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 4,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 combinatorial-optimization \u2192 cryptography-advanced\n**Components:**\n  - gomory-cuts (combinatorial-optimization): Gomory mixed integer (GMI) cuts: from optimal LP tableau row with fractional basic variable. Very effective in practice.\n  - lift-and-project (combinatorial-optimization): Lift-and-project (Balas-Perduc): iteratively lift 0-1 variables to higher-dimensional spaces. Add binary constraint x_i + x_j \u2265 1 in projection.\n  - merkle-commitment (cryptography-advanced): Merkle commitment: hash data into a binary tree, commit to root hash; opening = path of sibling hashes to root. Post-quantum secure (only requires collision-resistant hash).\n  - self-consistency (agentic-reasoning): Self-consistency: sample multiple reasoning paths (CoT or ReAct), aggregate answers via majority vote. Improves CoT by trading inference cost for accuracy.\n**Real walls (combined):**\n  - [gomory-cuts] GMI cuts are universal (valid for all IPs)\n  - [gomory-cuts] problem-specific cuts (clique, cover) can be stronger\n  - [lift-and-project] Lift-and-project is effective for small 0-1 IPs\n  - [lift-and-project] too expensive for large IPs without preprocessing\n  - [merkle-commitment] Tree construction O(n) for n data items\n  - [merkle-commitment] bandwidth of proofs\n  - [merkle-commitment] not additive-homomorphic\n  - [self-consistency] Answer aggregation tricky for open-ended outputs (need string matching or LLM-as-judge)\n  - [self-consistency] marginal gains after n=10\u201320"
+    },
+    {
+      "primitives": [
+        "inverse-probability-weighting",
+        "lift-and-project",
+        "merkle-commitment",
+        "pedersen-commitment"
+      ],
+      "domains": [
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "cryptography-advanced"
+      ],
+      "categories": [
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "cryptography-advanced"
+      ],
+      "score": 328.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "unique_domains": [
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "root_atoms_used": [
+        "scale",
+        "project",
+        "hash",
+        "order",
+        "combine",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 4,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** causal-inference \u2192 combinatorial-optimization \u2192 cryptography-advanced\n**Components:**\n  - inverse-probability-weighting (causal-inference): IPW (Inverse Probability Weighting): P(Y | do(X=x)) = \u03a3_z P(Y | X=x, Z=z) P(Z=z) when Z satisfies backdoor. Empirically: weight observations by 1/P(X | Z).\n  - lift-and-project (combinatorial-optimization): Lift-and-project (Balas-Perduc): iteratively lift 0-1 variables to higher-dimensional spaces. Add binary constraint x_i + x_j \u2265 1 in projection.\n  - merkle-commitment (cryptography-advanced): Merkle commitment: hash data into a binary tree, commit to root hash; opening = path of sibling hashes to root. Post-quantum secure (only requires collision-resistant hash).\n  - pedersen-commitment (cryptography-advanced): Pedersen commitment: commit to m as C = g^m \u00b7 h^r, where g, h are generators of a group of unknown order, and r is randomness. Perfectly hiding (given m, g^r is uniform) and computationally binding under the discrete log assumption.\n**Real walls (combined):**\n  - [inverse-probability-weighting] IPW unstable when propensity scores near 0 or 1 (extreme weights)\n  - [inverse-probability-weighting] truncate weights or use stabilized weights\n  - [lift-and-project] Lift-and-project is effective for small 0-1 IPs\n  - [lift-and-project] too expensive for large IPs without preprocessing\n  - [merkle-commitment] Tree construction O(n) for n data items\n  - [merkle-commitment] bandwidth of proofs\n  - [merkle-commitment] not additive-homomorphic\n  - [pedersen-commitment] Requires trusted setup to generate g, h such that discrete log of h wrt g is unknown\n  - [pedersen-commitment] no known trapdoor"
+    },
+    {
+      "primitives": [
+        "inverse-probability-weighting",
+        "lift-and-project",
+        "merkle-commitment",
+        "propensity-score-matching"
+      ],
+      "domains": [
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "causal-inference"
+      ],
+      "categories": [
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "causal-inference"
+      ],
+      "score": 328.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "unique_domains": [
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "root_atoms_used": [
+        "scale",
+        "project",
+        "hash",
+        "combine",
+        "compare",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 4,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** causal-inference \u2192 combinatorial-optimization \u2192 cryptography-advanced\n**Components:**\n  - inverse-probability-weighting (causal-inference): IPW (Inverse Probability Weighting): P(Y | do(X=x)) = \u03a3_z P(Y | X=x, Z=z) P(Z=z) when Z satisfies backdoor. Empirically: weight observations by 1/P(X | Z).\n  - lift-and-project (combinatorial-optimization): Lift-and-project (Balas-Perduc): iteratively lift 0-1 variables to higher-dimensional spaces. Add binary constraint x_i + x_j \u2265 1 in projection.\n  - merkle-commitment (cryptography-advanced): Merkle commitment: hash data into a binary tree, commit to root hash; opening = path of sibling hashes to root. Post-quantum secure (only requires collision-resistant hash).\n  - propensity-score-matching (causal-inference): Propensity score matching: match treated units to control units with similar propensity scores. Nearest neighbor, radius, stratification matching.\n**Real walls (combined):**\n  - [inverse-probability-weighting] IPW unstable when propensity scores near 0 or 1 (extreme weights)\n  - [inverse-probability-weighting] truncate weights or use stabilized weights\n  - [lift-and-project] Lift-and-project is effective for small 0-1 IPs\n  - [lift-and-project] too expensive for large IPs without preprocessing\n  - [merkle-commitment] Tree construction O(n) for n data items\n  - [merkle-commitment] bandwidth of proofs\n  - [merkle-commitment] not additive-homomorphic\n  - [propensity-score-matching] Matching without replacement can improve balance but reduces effective sample size\n  - [propensity-score-matching] with replacement may reuse controls"
+    },
+    {
+      "primitives": [
+        "inverse-probability-weighting",
+        "lift-and-project",
+        "merkle-commitment",
+        "self-consistency"
+      ],
+      "domains": [
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "categories": [
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced",
+        "agentic-reasoning"
+      ],
+      "score": 328.0,
+      "cross_domain": true,
+      "unique_categories": [
+        "agentic-reasoning",
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "unique_domains": [
+        "agentic-reasoning",
+        "causal-inference",
+        "combinatorial-optimization",
+        "cryptography-advanced"
+      ],
+      "root_atoms_used": [
+        "scale",
+        "project",
+        "hash",
+        "combine",
+        "compare",
+        "sample"
+      ],
+      "wiring_pattern": "fusion ranking",
+      "composite_count": 0,
+      "atomic_count": 4,
+      "description": "**Wiring:** fusion ranking\n**Cross-domain:** agentic-reasoning \u2192 causal-inference \u2192 combinatorial-optimization \u2192 cryptography-advanced\n**Components:**\n  - inverse-probability-weighting (causal-inference): IPW (Inverse Probability Weighting): P(Y | do(X=x)) = \u03a3_z P(Y | X=x, Z=z) P(Z=z) when Z satisfies backdoor. Empirically: weight observations by 1/P(X | Z).\n  - lift-and-project (combinatorial-optimization): Lift-and-project (Balas-Perduc): iteratively lift 0-1 variables to higher-dimensional spaces. Add binary constraint x_i + x_j \u2265 1 in projection.\n  - merkle-commitment (cryptography-advanced): Merkle commitment: hash data into a binary tree, commit to root hash; opening = path of sibling hashes to root. Post-quantum secure (only requires collision-resistant hash).\n  - self-consistency (agentic-reasoning): Self-consistency: sample multiple reasoning paths (CoT or ReAct), aggregate answers via majority vote. Improves CoT by trading inference cost for accuracy.\n**Real walls (combined):**\n  - [inverse-probability-weighting] IPW unstable when propensity scores near 0 or 1 (extreme weights)\n  - [inverse-probability-weighting] truncate weights or use stabilized weights\n  - [lift-and-project] Lift-and-project is effective for small 0-1 IPs\n  - [lift-and-project] too expensive for large IPs without preprocessing\n  - [merkle-commitment] Tree construction O(n) for n data items\n  - [merkle-commitment] bandwidth of proofs\n  - [merkle-commitment] not additive-homomorphic\n  - [self-consistency] Answer aggregation tricky for open-ended outputs (need string matching or LLM-as-judge)\n  - [self-consistency] marginal gains after n=10\u201320"
+    }
+  ]
+}

@@ -1,0 +1,213 @@
+{
+  "filename": "watchdog.h",
+  "includes": [
+    "linux/ioctl.h",
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "WATCHDOG_IOCTL_BASE",
+      "value": "'W'",
+      "comment": "",
+      "category": "WATCHDOG_IOCTL"
+    },
+    {
+      "name": "WDIOC_GETSUPPORT",
+      "value": "_IOR(WATCHDOG_IOCTL_BASE, 0, struct watchdog_info)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "WDIOC_GETSTATUS",
+      "value": "_IOR(WATCHDOG_IOCTL_BASE, 1, int)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "WDIOC_GETBOOTSTATUS",
+      "value": "_IOR(WATCHDOG_IOCTL_BASE, 2, int)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "WDIOC_GETTEMP",
+      "value": "_IOR(WATCHDOG_IOCTL_BASE, 3, int)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "WDIOC_SETOPTIONS",
+      "value": "_IOR(WATCHDOG_IOCTL_BASE, 4, int)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "WDIOC_KEEPALIVE",
+      "value": "_IOR(WATCHDOG_IOCTL_BASE, 5, int)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "WDIOC_SETTIMEOUT",
+      "value": "_IOWR(WATCHDOG_IOCTL_BASE, 6, int)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "WDIOC_GETTIMEOUT",
+      "value": "_IOR(WATCHDOG_IOCTL_BASE, 7, int)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "WDIOC_SETPRETIMEOUT",
+      "value": "_IOWR(WATCHDOG_IOCTL_BASE, 8, int)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "WDIOC_GETPRETIMEOUT",
+      "value": "_IOR(WATCHDOG_IOCTL_BASE, 9, int)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "WDIOC_GETTIMELEFT",
+      "value": "_IOR(WATCHDOG_IOCTL_BASE, 10, int)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "WDIOF_UNKNOWN",
+      "value": "-1",
+      "comment": "Unknown flag error",
+      "category": ""
+    },
+    {
+      "name": "WDIOS_UNKNOWN",
+      "value": "-1",
+      "comment": "Unknown status error",
+      "category": ""
+    },
+    {
+      "name": "WDIOF_OVERHEAT",
+      "value": "0x0001",
+      "comment": "Reset due to CPU overheat",
+      "category": ""
+    },
+    {
+      "name": "WDIOF_FANFAULT",
+      "value": "0x0002",
+      "comment": "Fan failed",
+      "category": ""
+    },
+    {
+      "name": "WDIOF_EXTERN1",
+      "value": "0x0004",
+      "comment": "External relay 1",
+      "category": ""
+    },
+    {
+      "name": "WDIOF_EXTERN2",
+      "value": "0x0008",
+      "comment": "External relay 2",
+      "category": ""
+    },
+    {
+      "name": "WDIOF_POWERUNDER",
+      "value": "0x0010",
+      "comment": "Power bad/power fault",
+      "category": ""
+    },
+    {
+      "name": "WDIOF_CARDRESET",
+      "value": "0x0020",
+      "comment": "Card previously reset the CPU",
+      "category": ""
+    },
+    {
+      "name": "WDIOF_POWEROVER",
+      "value": "0x0040",
+      "comment": "Power over voltage",
+      "category": ""
+    },
+    {
+      "name": "WDIOF_SETTIMEOUT",
+      "value": "0x0080",
+      "comment": "Set timeout (in seconds)",
+      "category": ""
+    },
+    {
+      "name": "WDIOF_MAGICCLOSE",
+      "value": "0x0100",
+      "comment": "Supports magic close char",
+      "category": ""
+    },
+    {
+      "name": "WDIOF_PRETIMEOUT",
+      "value": "0x0200",
+      "comment": "Pretimeout (in seconds), get/set",
+      "category": ""
+    },
+    {
+      "name": "WDIOF_ALARMONLY",
+      "value": "0x0400\t/* Watchdog triggers a management or",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "WDIOF_KEEPALIVEPING",
+      "value": "0x8000",
+      "comment": "Keep alive ping reply",
+      "category": ""
+    },
+    {
+      "name": "WDIOS_DISABLECARD",
+      "value": "0x0001",
+      "comment": "Turn off the watchdog timer",
+      "category": ""
+    },
+    {
+      "name": "WDIOS_ENABLECARD",
+      "value": "0x0002",
+      "comment": "Turn on the watchdog timer",
+      "category": ""
+    },
+    {
+      "name": "WDIOS_TEMPPANIC",
+      "value": "0x0004",
+      "comment": "Kernel panic on temperature trip",
+      "category": ""
+    }
+  ],
+  "structs": [
+    {
+      "name": "watchdog_info",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "options",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "firmware_version",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "identity",
+          "array_size": "32",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

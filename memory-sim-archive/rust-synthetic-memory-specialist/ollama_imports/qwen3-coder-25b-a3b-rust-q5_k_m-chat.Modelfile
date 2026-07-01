@@ -1,0 +1,9 @@
+FROM I:/llm/Coder Models/Qwen3-coder-REAP-25B-A3B-Rust-GGUF/Qwen3-Coder-REAP-25B-A3B-Rust-Q5_K_M.gguf
+TEMPLATE """{{ if .System }}<|im_start|>system
+{{ .System }}<|im_end|>
+{{ end }}<|im_start|>user
+{{ .Prompt }}<|im_end|>
+<|im_start|>assistant
+"""
+PARAMETER stop "<|im_end|>"
+PARAMETER stop "<|endoftext|>"

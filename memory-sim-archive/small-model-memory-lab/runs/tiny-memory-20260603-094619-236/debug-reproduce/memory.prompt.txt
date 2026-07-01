@@ -1,0 +1,12 @@
+﻿Relevant remembered experiences:
+- CORE-013 [debugging] Reproduce Before Repair: id: CORE-013 domain: debugging title: Reproduce Before Repair tags: debugging, reproduction, software memory: I lost time fixing a bug I had not reproduced. The patch solved my guess, not the failure. I rolled back, reproduced the issue, isolated the smallest trigger, and only then changed code. Debugging begins with making the problem appear on command. Repair without reproduction is theater with a diff.
+- CORE-014 [debugging] One Variable Moved: id: CORE-014 domain: debugging title: One Variable Moved tags: debugging, isolation, experiment memory: A messy test changed three things at once and taught me nothing. I reset and moved one variable. The result finally had meaning. I learned to make experiments boring enough to interpret. If several things move together, success can be as useless as failure.
+- CORE-006 [rhetoric] The Loaded Question Changed Shape: id: CORE-006 domain: rhetoric title: The Loaded Question Changed Shape tags: loaded-question, premise, frame memory: Someone asked when I would admit the plan had failed. If I answered inside the question, I accepted the premise. I stepped outside it and asked what observation showed failure. The room changed. A loaded question is not answered first. Its hidden premise is inspected first.
+- CORE-018 [loop-control] The Loop Ended at the Checkpoint: id: CORE-018 domain: loop-control title: The Loop Ended at the Checkpoint tags: loop, stop, checkpoint memory: I kept searching because each result suggested another search. The work felt active and was starting to become avoidance. I stopped at a checkpoint: current answer, confidence, unknowns, next test. The checkpoint did not end learning. It ended the loop long enough to make progress.
+- CORE-020 [causality] Sequence Was Not Cause: id: CORE-020 domain: causality title: Sequence Was Not Cause tags: causality, sequence, correlation memory: The event happened after the change, so everyone wanted the change to be the cause. I wrote other possible causes beside the timeline and asked what evidence would distinguish them. Sequence is a clue, not a verdict. Cause has to survive alternatives.
+
+Task:
+A web app intermittently crashes after a recent deploy. Logs show several warnings but no clear fatal line. Give a debugging plan in four concise steps.
+
+Answer concisely. Use only the memory patterns that fit the task. Include uncertainty and next action when relevant.
+Answer:

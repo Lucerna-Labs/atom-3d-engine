@@ -1,0 +1,57 @@
+{
+  "project": "Small Model Memory and Structural Primitive Lab",
+  "experiment": "Structural Primitive LoRA",
+  "result_type": "real Kaggle model runs",
+  "model_id": "Qwen/Qwen3-1.7B-Base",
+  "evaluation": {
+    "probe_count": 6,
+    "families": [
+      "math",
+      "source-boundary",
+      "rhetoric",
+      "spatial",
+      "debugging"
+    ],
+    "scoring_note": "A probe passes when the output contains required task-structure evidence and avoids forbidden markers for that probe."
+  },
+  "runs": [
+    {
+      "setup": "base no structural LoRA",
+      "train_examples": 0,
+      "validation_examples": 0,
+      "max_steps": 0,
+      "passed": 2,
+      "total": 6,
+      "lift_vs_base": 0,
+      "local_report": "runs/kaggle-structural-lora-v0-2/structural_lora_eval_results.json"
+    },
+    {
+      "setup": "structural primitive LoRA v0.1",
+      "train_examples": 537,
+      "validation_examples": 47,
+      "max_steps": 180,
+      "passed": 6,
+      "total": 6,
+      "lift_vs_base": 4,
+      "notes": "Learned the structural behavior but several outputs echoed training-format continuations.",
+      "local_report": "runs/kaggle-structural-lora-v1/structural_lora_eval_results.json"
+    },
+    {
+      "setup": "cleaned structural primitive LoRA v0.2",
+      "train_examples": 320,
+      "validation_examples": 40,
+      "max_steps": 180,
+      "passed": 6,
+      "total": 6,
+      "lift_vs_base": 4,
+      "notes": "Same score as v0.1 with no obvious User/Assistant template echo markers in the quick eval, though some repetition remains.",
+      "local_report": "runs/kaggle-structural-lora-v0-2/structural_lora_eval_results.json"
+    }
+  ],
+  "latest_run": {
+    "name": "cleaned structural primitive LoRA v0.2",
+    "dataset": "data/structural_primitive_lora_v0_2",
+    "adapter_output_dir": "/kaggle/working/structural-primitive-lora-v0-2",
+    "report_path": "/kaggle/working/structural_lora_eval_results.json"
+  }
+}

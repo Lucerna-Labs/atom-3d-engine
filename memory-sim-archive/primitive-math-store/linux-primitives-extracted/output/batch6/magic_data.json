@@ -1,0 +1,538 @@
+{
+  "filename": "magic.h",
+  "includes": [],
+  "defines": [
+    {
+      "name": "ADFS_SUPER_MAGIC",
+      "value": "0xadf5",
+      "comment": "",
+      "category": "ADFS_SUPER"
+    },
+    {
+      "name": "AFFS_SUPER_MAGIC",
+      "value": "0xadff",
+      "comment": "",
+      "category": "AFFS_SUPER"
+    },
+    {
+      "name": "AFS_SUPER_MAGIC",
+      "value": "0x5346414F",
+      "comment": "",
+      "category": "AFS_SUPER"
+    },
+    {
+      "name": "AUTOFS_SUPER_MAGIC",
+      "value": "0x0187",
+      "comment": "",
+      "category": "AUTOFS_SUPER"
+    },
+    {
+      "name": "CEPH_SUPER_MAGIC",
+      "value": "0x00c36400",
+      "comment": "",
+      "category": "CEPH_SUPER"
+    },
+    {
+      "name": "CODA_SUPER_MAGIC",
+      "value": "0x73757245",
+      "comment": "",
+      "category": "CODA_SUPER"
+    },
+    {
+      "name": "CRAMFS_MAGIC",
+      "value": "0x28cd3d45",
+      "comment": "some random number",
+      "category": ""
+    },
+    {
+      "name": "CRAMFS_MAGIC_WEND",
+      "value": "0x453dcd28",
+      "comment": "magic number with the wrong endianess",
+      "category": "CRAMFS_MAGIC"
+    },
+    {
+      "name": "DEBUGFS_MAGIC",
+      "value": "0x64626720",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SECURITYFS_MAGIC",
+      "value": "0x73636673",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SELINUX_MAGIC",
+      "value": "0xf97cff8c",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SMACK_MAGIC",
+      "value": "0x43415d53",
+      "comment": "\"SMAC\"",
+      "category": ""
+    },
+    {
+      "name": "RAMFS_MAGIC",
+      "value": "0x858458f6",
+      "comment": "some random number",
+      "category": ""
+    },
+    {
+      "name": "TMPFS_MAGIC",
+      "value": "0x01021994",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "HUGETLBFS_MAGIC",
+      "value": "0x958458f6",
+      "comment": "some random number",
+      "category": ""
+    },
+    {
+      "name": "SQUASHFS_MAGIC",
+      "value": "0x73717368",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ECRYPTFS_SUPER_MAGIC",
+      "value": "0xf15f",
+      "comment": "",
+      "category": "ECRYPTFS_SUPER"
+    },
+    {
+      "name": "EFS_SUPER_MAGIC",
+      "value": "0x414A53",
+      "comment": "",
+      "category": "EFS_SUPER"
+    },
+    {
+      "name": "EROFS_SUPER_MAGIC_V1",
+      "value": "0xE0F5E1E2",
+      "comment": "",
+      "category": "EROFS_SUPER"
+    },
+    {
+      "name": "EXT2_SUPER_MAGIC",
+      "value": "0xEF53",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EXT3_SUPER_MAGIC",
+      "value": "0xEF53",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "XENFS_SUPER_MAGIC",
+      "value": "0xabba1974",
+      "comment": "",
+      "category": "XENFS_SUPER"
+    },
+    {
+      "name": "EXT4_SUPER_MAGIC",
+      "value": "0xEF53",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "BTRFS_SUPER_MAGIC",
+      "value": "0x9123683E",
+      "comment": "",
+      "category": "BTRFS_SUPER"
+    },
+    {
+      "name": "NILFS_SUPER_MAGIC",
+      "value": "0x3434",
+      "comment": "",
+      "category": "NILFS_SUPER"
+    },
+    {
+      "name": "F2FS_SUPER_MAGIC",
+      "value": "0xF2F52010",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "HPFS_SUPER_MAGIC",
+      "value": "0xf995e849",
+      "comment": "",
+      "category": "HPFS_SUPER"
+    },
+    {
+      "name": "ISOFS_SUPER_MAGIC",
+      "value": "0x9660",
+      "comment": "",
+      "category": "ISOFS_SUPER"
+    },
+    {
+      "name": "JFFS2_SUPER_MAGIC",
+      "value": "0x72b6",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "XFS_SUPER_MAGIC",
+      "value": "0x58465342",
+      "comment": "\"XFSB\"",
+      "category": "XFS_SUPER"
+    },
+    {
+      "name": "PSTOREFS_MAGIC",
+      "value": "0x6165676C",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EFIVARFS_MAGIC",
+      "value": "0xde5e81e4",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "HOSTFS_SUPER_MAGIC",
+      "value": "0x00c0ffee",
+      "comment": "",
+      "category": "HOSTFS_SUPER"
+    },
+    {
+      "name": "OVERLAYFS_SUPER_MAGIC",
+      "value": "0x794c7630",
+      "comment": "",
+      "category": "OVERLAYFS_SUPER"
+    },
+    {
+      "name": "FUSE_SUPER_MAGIC",
+      "value": "0x65735546",
+      "comment": "",
+      "category": "FUSE_SUPER"
+    },
+    {
+      "name": "BCACHEFS_SUPER_MAGIC",
+      "value": "0xca451a4e",
+      "comment": "",
+      "category": "BCACHEFS_SUPER"
+    },
+    {
+      "name": "MINIX_SUPER_MAGIC",
+      "value": "0x137F",
+      "comment": "minix v1 fs, 14 char names",
+      "category": "MINIX_SUPER"
+    },
+    {
+      "name": "MINIX_SUPER_MAGIC2",
+      "value": "0x138F",
+      "comment": "minix v1 fs, 30 char names",
+      "category": "MINIX_SUPER"
+    },
+    {
+      "name": "MINIX2_SUPER_MAGIC",
+      "value": "0x2468",
+      "comment": "minix v2 fs, 14 char names",
+      "category": ""
+    },
+    {
+      "name": "MINIX2_SUPER_MAGIC2",
+      "value": "0x2478",
+      "comment": "minix v2 fs, 30 char names",
+      "category": ""
+    },
+    {
+      "name": "MINIX3_SUPER_MAGIC",
+      "value": "0x4d5a",
+      "comment": "minix v3 fs, 60 char names",
+      "category": ""
+    },
+    {
+      "name": "MSDOS_SUPER_MAGIC",
+      "value": "0x4d44",
+      "comment": "MD",
+      "category": "MSDOS_SUPER"
+    },
+    {
+      "name": "EXFAT_SUPER_MAGIC",
+      "value": "0x2011BAB0",
+      "comment": "",
+      "category": "EXFAT_SUPER"
+    },
+    {
+      "name": "NCP_SUPER_MAGIC",
+      "value": "0x564c",
+      "comment": "Guess, what 0x564c is :-)",
+      "category": "NCP_SUPER"
+    },
+    {
+      "name": "NFS_SUPER_MAGIC",
+      "value": "0x6969",
+      "comment": "",
+      "category": "NFS_SUPER"
+    },
+    {
+      "name": "OCFS2_SUPER_MAGIC",
+      "value": "0x7461636f",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "OPENPROM_SUPER_MAGIC",
+      "value": "0x9fa1",
+      "comment": "",
+      "category": "OPENPROM_SUPER"
+    },
+    {
+      "name": "QNX4_SUPER_MAGIC",
+      "value": "0x002f",
+      "comment": "qnx4 fs detection",
+      "category": ""
+    },
+    {
+      "name": "QNX6_SUPER_MAGIC",
+      "value": "0x68191122",
+      "comment": "qnx6 fs detection",
+      "category": ""
+    },
+    {
+      "name": "AFS_FS_MAGIC",
+      "value": "0x6B414653",
+      "comment": "",
+      "category": "AFS_FS"
+    },
+    {
+      "name": "REISERFS_SUPER_MAGIC",
+      "value": "0x52654973",
+      "comment": "used by gcc",
+      "category": "REISERFS_SUPER"
+    },
+    {
+      "name": "REISERFS_SUPER_MAGIC_STRING",
+      "value": "\"ReIsErFs\"",
+      "comment": "",
+      "category": "REISERFS_SUPER"
+    },
+    {
+      "name": "REISER2FS_SUPER_MAGIC_STRING",
+      "value": "\"ReIsEr2Fs\"",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "REISER2FS_JR_SUPER_MAGIC_STRING",
+      "value": "\"ReIsEr3Fs\"",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SMB_SUPER_MAGIC",
+      "value": "0x517B",
+      "comment": "",
+      "category": "SMB_SUPER"
+    },
+    {
+      "name": "CIFS_SUPER_MAGIC",
+      "value": "0xFF534D42",
+      "comment": "the first four bytes of SMB PDUs",
+      "category": "CIFS_SUPER"
+    },
+    {
+      "name": "SMB2_SUPER_MAGIC",
+      "value": "0xFE534D42",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "CGROUP_SUPER_MAGIC",
+      "value": "0x27e0eb",
+      "comment": "",
+      "category": "CGROUP_SUPER"
+    },
+    {
+      "name": "CGROUP2_SUPER_MAGIC",
+      "value": "0x63677270",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RDTGROUP_SUPER_MAGIC",
+      "value": "0x7655821",
+      "comment": "",
+      "category": "RDTGROUP_SUPER"
+    },
+    {
+      "name": "STACK_END_MAGIC",
+      "value": "0x57AC6E9D",
+      "comment": "",
+      "category": "STACK_END"
+    },
+    {
+      "name": "TRACEFS_MAGIC",
+      "value": "0x74726163",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "V9FS_MAGIC",
+      "value": "0x01021997",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "BDEVFS_MAGIC",
+      "value": "0x62646576",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DAXFS_MAGIC",
+      "value": "0x64646178",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "BINFMTFS_MAGIC",
+      "value": "0x42494e4d",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DEVPTS_SUPER_MAGIC",
+      "value": "0x1cd1",
+      "comment": "",
+      "category": "DEVPTS_SUPER"
+    },
+    {
+      "name": "BINDERFS_SUPER_MAGIC",
+      "value": "0x6c6f6f70",
+      "comment": "",
+      "category": "BINDERFS_SUPER"
+    },
+    {
+      "name": "FUTEXFS_SUPER_MAGIC",
+      "value": "0xBAD1DEA",
+      "comment": "",
+      "category": "FUTEXFS_SUPER"
+    },
+    {
+      "name": "PIPEFS_MAGIC",
+      "value": "0x50495045",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PROC_SUPER_MAGIC",
+      "value": "0x9fa0",
+      "comment": "",
+      "category": "PROC_SUPER"
+    },
+    {
+      "name": "SOCKFS_MAGIC",
+      "value": "0x534F434B",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SYSFS_MAGIC",
+      "value": "0x62656572",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "USBDEVICE_SUPER_MAGIC",
+      "value": "0x9fa2",
+      "comment": "",
+      "category": "USBDEVICE_SUPER"
+    },
+    {
+      "name": "MTD_INODE_FS_MAGIC",
+      "value": "0x11307854",
+      "comment": "",
+      "category": "MTD_INODE"
+    },
+    {
+      "name": "ANON_INODE_FS_MAGIC",
+      "value": "0x09041934",
+      "comment": "",
+      "category": "ANON_INODE"
+    },
+    {
+      "name": "BTRFS_TEST_MAGIC",
+      "value": "0x73727279",
+      "comment": "",
+      "category": "BTRFS_TEST"
+    },
+    {
+      "name": "NSFS_MAGIC",
+      "value": "0x6e736673",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "BPF_FS_MAGIC",
+      "value": "0xcafe4a11",
+      "comment": "",
+      "category": "BPF_FS"
+    },
+    {
+      "name": "AAFS_MAGIC",
+      "value": "0x5a3c69f0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ZONEFS_MAGIC",
+      "value": "0x5a4f4653",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "UDF_SUPER_MAGIC",
+      "value": "0x15013346",
+      "comment": "",
+      "category": "UDF_SUPER"
+    },
+    {
+      "name": "DMA_BUF_MAGIC",
+      "value": "0x444d4142",
+      "comment": "\"DMAB\"",
+      "category": "DMA_BUF"
+    },
+    {
+      "name": "DEVMEM_MAGIC",
+      "value": "0x454d444d",
+      "comment": "\"DMEM\"",
+      "category": ""
+    },
+    {
+      "name": "SECRETMEM_MAGIC",
+      "value": "0x5345434d",
+      "comment": "\"SECM\"",
+      "category": ""
+    },
+    {
+      "name": "PID_FS_MAGIC",
+      "value": "0x50494446",
+      "comment": "\"PIDF\"",
+      "category": "PID_FS"
+    },
+    {
+      "name": "GUEST_MEMFD_MAGIC",
+      "value": "0x474d454d",
+      "comment": "\"GMEM\"",
+      "category": "GUEST_MEMFD"
+    },
+    {
+      "name": "NULL_FS_MAGIC",
+      "value": "0x4E554C4C",
+      "comment": "\"NULL\"",
+      "category": "NULL_FS"
+    }
+  ],
+  "structs": [],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

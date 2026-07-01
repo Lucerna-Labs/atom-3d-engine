@@ -1,0 +1,68 @@
+{
+  "filename": "sock_diag.h",
+  "includes": [
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "SOCK_DIAG_BY_FAMILY",
+      "value": "20",
+      "comment": "",
+      "category": "SOCK_DIAG"
+    },
+    {
+      "name": "SOCK_DESTROY",
+      "value": "21",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SKNLGRP_MAX",
+      "value": "(__SKNLGRP_MAX - 1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SK_DIAG_BPF_STORAGE_REQ_MAX",
+      "value": "(__SK_DIAG_BPF_STORAGE_REQ_MAX - 1)",
+      "comment": "",
+      "category": "SK_DIAG"
+    },
+    {
+      "name": "SK_DIAB_BPF_STORAGE_REP_MAX",
+      "value": "(__SK_DIAG_BPF_STORAGE_REP_MAX - 1)",
+      "comment": "",
+      "category": "SK_DIAB"
+    },
+    {
+      "name": "SK_DIAG_BPF_STORAGE_MAX",
+      "value": "(__SK_DIAG_BPF_STORAGE_MAX - 1)",
+      "comment": "",
+      "category": "SK_DIAG"
+    }
+  ],
+  "structs": [
+    {
+      "name": "sock_diag_req",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "sdiag_family",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "sdiag_protocol",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

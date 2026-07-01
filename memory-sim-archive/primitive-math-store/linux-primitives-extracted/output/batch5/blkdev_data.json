@@ -1,0 +1,19 @@
+{
+  "filename": "blkdev.h",
+  "includes": [
+    "linux/ioctl.h",
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "BLOCK_URING_CMD_DISCARD",
+      "value": "_IO(0x12, 0)",
+      "comment": "",
+      "category": "BLOCK_URING"
+    }
+  ],
+  "structs": [],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

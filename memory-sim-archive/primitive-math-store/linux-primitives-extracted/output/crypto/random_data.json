@@ -1,0 +1,125 @@
+{
+  "filename": "random.h",
+  "includes": [
+    "linux/types.h",
+    "linux/ioctl.h",
+    "linux/irqnr.h"
+  ],
+  "defines": [
+    {
+      "name": "RNDGETENTCNT",
+      "value": "_IOR( 'R', 0x00, int )",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RNDADDTOENTCNT",
+      "value": "_IOW( 'R', 0x01, int )",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RNDGETPOOL",
+      "value": "_IOR( 'R', 0x02, int [2] )",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RNDADDENTROPY",
+      "value": "_IOW( 'R', 0x03, int [2] )",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RNDZAPENTCNT",
+      "value": "_IO( 'R', 0x04 )",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RNDCLEARPOOL",
+      "value": "_IO( 'R', 0x06 )",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RNDRESEEDCRNG",
+      "value": "_IO( 'R', 0x07 )",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GRND_NONBLOCK",
+      "value": "0x0001",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GRND_RANDOM",
+      "value": "0x0002",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "GRND_INSECURE",
+      "value": "0x0004",
+      "comment": "",
+      "category": ""
+    }
+  ],
+  "structs": [
+    {
+      "name": "rand_pool_info",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "entropy_count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "buf_size",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "vgetrandom_opaque_params",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "size_of_opaque_state",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "mmap_prot",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "mmap_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved",
+          "array_size": "13",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

@@ -1,0 +1,523 @@
+{
+  "filename": "mptcp.h",
+  "includes": [
+    "netinet/in.h",
+    "sys/socket.h",
+    "linux/const.h",
+    "linux/types.h",
+    "linux/in.h",
+    "linux/in6.h",
+    "linux/socket.h",
+    "linux/mptcp_pm.h"
+  ],
+  "defines": [
+    {
+      "name": "MPTCP_SUBFLOW_FLAG_MCAP_REM",
+      "value": "_BITUL(0)",
+      "comment": "",
+      "category": "MPTCP_SUBFLOW"
+    },
+    {
+      "name": "MPTCP_SUBFLOW_FLAG_MCAP_LOC",
+      "value": "_BITUL(1)",
+      "comment": "",
+      "category": "MPTCP_SUBFLOW"
+    },
+    {
+      "name": "MPTCP_SUBFLOW_FLAG_JOIN_REM",
+      "value": "_BITUL(2)",
+      "comment": "",
+      "category": "MPTCP_SUBFLOW"
+    },
+    {
+      "name": "MPTCP_SUBFLOW_FLAG_JOIN_LOC",
+      "value": "_BITUL(3)",
+      "comment": "",
+      "category": "MPTCP_SUBFLOW"
+    },
+    {
+      "name": "MPTCP_SUBFLOW_FLAG_BKUP_REM",
+      "value": "_BITUL(4)",
+      "comment": "",
+      "category": "MPTCP_SUBFLOW"
+    },
+    {
+      "name": "MPTCP_SUBFLOW_FLAG_BKUP_LOC",
+      "value": "_BITUL(5)",
+      "comment": "",
+      "category": "MPTCP_SUBFLOW"
+    },
+    {
+      "name": "MPTCP_SUBFLOW_FLAG_FULLY_ESTABLISHED",
+      "value": "_BITUL(6)",
+      "comment": "",
+      "category": "MPTCP_SUBFLOW"
+    },
+    {
+      "name": "MPTCP_SUBFLOW_FLAG_CONNECTED",
+      "value": "_BITUL(7)",
+      "comment": "",
+      "category": "MPTCP_SUBFLOW"
+    },
+    {
+      "name": "MPTCP_SUBFLOW_FLAG_MAPVALID",
+      "value": "_BITUL(8)",
+      "comment": "",
+      "category": "MPTCP_SUBFLOW"
+    },
+    {
+      "name": "MPTCP_PM_CMD_GRP_NAME",
+      "value": "\"mptcp_pm_cmds\"",
+      "comment": "",
+      "category": "MPTCP_PM"
+    },
+    {
+      "name": "MPTCP_PM_EV_GRP_NAME",
+      "value": "\"mptcp_pm_events\"",
+      "comment": "",
+      "category": "MPTCP_PM"
+    },
+    {
+      "name": "MPTCP_INFO_FLAG_FALLBACK",
+      "value": "_BITUL(0)",
+      "comment": "",
+      "category": "MPTCP_INFO"
+    },
+    {
+      "name": "MPTCP_INFO_FLAG_REMOTE_KEY_RECEIVED",
+      "value": "_BITUL(1)",
+      "comment": "",
+      "category": "MPTCP_INFO"
+    },
+    {
+      "name": "MPTCP_PM_EV_FLAG_DENY_JOIN_ID0",
+      "value": "_BITUL(0)",
+      "comment": "",
+      "category": "MPTCP_PM"
+    },
+    {
+      "name": "MPTCP_PM_EV_FLAG_SERVER_SIDE",
+      "value": "_BITUL(1)",
+      "comment": "",
+      "category": "MPTCP_PM"
+    },
+    {
+      "name": "MPTCP_PM_ADDR_FLAG_SIGNAL",
+      "value": "_BITUL(0)",
+      "comment": "",
+      "category": "MPTCP_PM"
+    },
+    {
+      "name": "MPTCP_PM_ADDR_FLAG_SUBFLOW",
+      "value": "_BITUL(1)",
+      "comment": "",
+      "category": "MPTCP_PM"
+    },
+    {
+      "name": "MPTCP_PM_ADDR_FLAG_BACKUP",
+      "value": "_BITUL(2)",
+      "comment": "",
+      "category": "MPTCP_PM"
+    },
+    {
+      "name": "MPTCP_PM_ADDR_FLAG_FULLMESH",
+      "value": "_BITUL(3)",
+      "comment": "",
+      "category": "MPTCP_PM"
+    },
+    {
+      "name": "MPTCP_PM_ADDR_FLAG_IMPLICIT",
+      "value": "_BITUL(4)",
+      "comment": "",
+      "category": "MPTCP_PM"
+    },
+    {
+      "name": "MPTCP_PM_ADDR_FLAG_LAMINAR",
+      "value": "_BITUL(5)",
+      "comment": "",
+      "category": "MPTCP_PM"
+    },
+    {
+      "name": "MPTCP_PM_ADDR_FLAGS_MASK",
+      "value": "GENMASK(5, 0)",
+      "comment": "",
+      "category": "MPTCP_PM"
+    },
+    {
+      "name": "mptcpi_extra_subflows",
+      "value": "mptcpi_subflows",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "mptcpi_limit_extra_subflows",
+      "value": "mptcpi_subflows_max",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "mptcpi_endp_signal_max",
+      "value": "mptcpi_add_addr_signal_max",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "mptcpi_limit_add_addr_accepted",
+      "value": "mptcpi_add_addr_accepted_max",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "mptcpi_endp_subflow_max",
+      "value": "mptcpi_local_addr_max",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "MPTCP_RST_EUNSPEC",
+      "value": "0",
+      "comment": "",
+      "category": "MPTCP_RST"
+    },
+    {
+      "name": "MPTCP_RST_EMPTCP",
+      "value": "1",
+      "comment": "",
+      "category": "MPTCP_RST"
+    },
+    {
+      "name": "MPTCP_RST_ERESOURCE",
+      "value": "2",
+      "comment": "",
+      "category": "MPTCP_RST"
+    },
+    {
+      "name": "MPTCP_RST_EPROHIBIT",
+      "value": "3",
+      "comment": "",
+      "category": "MPTCP_RST"
+    },
+    {
+      "name": "MPTCP_RST_EWQ2BIG",
+      "value": "4",
+      "comment": "",
+      "category": "MPTCP_RST"
+    },
+    {
+      "name": "MPTCP_RST_EBADPERF",
+      "value": "5",
+      "comment": "",
+      "category": "MPTCP_RST"
+    },
+    {
+      "name": "MPTCP_RST_EMIDDLEBOX",
+      "value": "6",
+      "comment": "",
+      "category": "MPTCP_RST"
+    },
+    {
+      "name": "MPTCP_INFO",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "MPTCP_TCPINFO",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "MPTCP_SUBFLOW_ADDRS",
+      "value": "3",
+      "comment": "",
+      "category": "MPTCP_SUBFLOW"
+    },
+    {
+      "name": "MPTCP_FULL_INFO",
+      "value": "4",
+      "comment": "",
+      "category": "MPTCP_FULL"
+    }
+  ],
+  "structs": [
+    {
+      "name": "mptcp_info",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "mptcpi_subflows",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "mptcpi_add_addr_signal",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "mptcpi_add_addr_accepted",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "mptcpi_subflows_max",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "mptcpi_add_addr_signal_max",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "mptcpi_add_addr_accepted_max",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "mptcpi_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "mptcpi_token",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "mptcpi_write_seq",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "mptcpi_snd_una",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "mptcpi_rcv_nxt",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "mptcpi_local_addr_used",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "mptcpi_local_addr_max",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "mptcpi_csum_enabled",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "mptcpi_retransmits",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "mptcpi_bytes_retrans",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "mptcpi_bytes_sent",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "mptcpi_bytes_received",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "mptcpi_bytes_acked",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "mptcpi_subflows_total",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "mptcpi_endp_laminar_max",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "mptcpi_endp_fullmesh_max",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "mptcpi_last_data_sent",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "mptcpi_last_data_recv",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "mptcpi_last_ack_recv",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "mptcp_subflow_data",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "size_subflow_data",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "num_subflows",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "size_kernel",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "size_user",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "mptcp_subflow_addrs",
+      "fields": [
+        {
+          "type_name": "__kernel_sa_family_t",
+          "name": "sa_family",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "mptcp_subflow_info",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "mptcp_full_info",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "size_tcpinfo_kernel",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "size_tcpinfo_user",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "size_sfinfo_kernel",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "size_sfinfo_user",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "num_subflows",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "size_arrays_user",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__aligned_u64",
+          "name": "subflow_info",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__aligned_u64",
+          "name": "tcp_info",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

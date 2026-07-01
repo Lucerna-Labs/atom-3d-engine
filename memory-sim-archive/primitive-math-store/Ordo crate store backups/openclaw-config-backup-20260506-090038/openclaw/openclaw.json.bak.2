@@ -1,0 +1,561 @@
+{
+  "meta": {
+    "lastTouchedVersion": "2026.3.25",
+    "lastTouchedAt": "2026-04-03T16:58:43.503Z"
+  },
+  "wizard": {
+    "lastRunAt": "2026-03-23T18:42:28.953Z",
+    "lastRunVersion": "2026.3.22",
+    "lastRunCommand": "onboard",
+    "lastRunMode": "local"
+  },
+  "auth": {
+    "profiles": {
+      "ollama:default": {
+        "provider": "ollama",
+        "mode": "api_key"
+      }
+    }
+  },
+  "models": {
+    "mode": "merge",
+    "providers": {
+      "lmstudio": {
+        "baseUrl": "http://127.0.0.1:1234/v1",
+        "apiKey": "not-needed",
+        "api": "openai-completions",
+        "models": [
+          {
+            "id": "qwen3.5-35b-a3b",
+            "name": "Qwen3.5 35B A3B (Local)",
+            "api": "openai-completions",
+            "reasoning": false,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 262144,
+            "maxTokens": 8192
+          },
+          {
+            "id": "qwen3.5-9b",
+            "name": "Qwen3.5 9B (Local Fast)",
+            "api": "openai-completions",
+            "reasoning": false,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 131072,
+            "maxTokens": 8192
+          },
+          {
+            "id": "qwen3.5-4b",
+            "name": "Qwen3.5 4B (Local Light)",
+            "api": "openai-completions",
+            "reasoning": false,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 65536,
+            "maxTokens": 8192
+          },
+          {
+            "id": "qwen3.5-9b-python-coder",
+            "name": "Qwen3.5 9B Python Coder (Local)",
+            "api": "openai-completions",
+            "reasoning": false,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 131072,
+            "maxTokens": 8192
+          },
+          {
+            "id": "qwen3.5-40b-claude-4.6-opus-deckard-heretic-uncensored-thinking-i1",
+            "name": "Qwen3.5 40B Claude 4.6 Opus Deckard (Local)",
+            "api": "openai-completions",
+            "reasoning": false
+          },
+          {
+            "id": "qwen3.5-35b-a3b-uncensored-hauhaucs-aggressive",
+            "name": "Qwen3.5 35B Aggressive HauhauCS (Local)",
+            "api": "openai-completions",
+            "reasoning": false
+          },
+          {
+            "id": "qwen3.5-creative-26b-a3b-reap-i1",
+            "name": "Qwen3.5 Creative 26B REAP (Local)",
+            "api": "openai-completions",
+            "reasoning": false
+          },
+          {
+            "id": "darkidol-catgirl-9b",
+            "name": "Darkidol Catgirl 9B (Local)",
+            "api": "openai-completions",
+            "reasoning": false
+          },
+          {
+            "id": "qwen3.5-18b-a3b-reap-coding-heretic-v0-i1",
+            "name": "Qwen3.5 18B REAP Coding (Local)",
+            "api": "openai-completions",
+            "reasoning": false
+          },
+          {
+            "id": "qwen3.5-9b-claude-4.6-os-auto-variable-heretic-uncensored-thinking-max-neocode-imatrix",
+            "name": "Qwen3.5 9B Claude 4.6 OS AV Heretic (Local)",
+            "api": "openai-completions",
+            "reasoning": false
+          },
+          {
+            "id": "nvidia-nemotron-3-nano-30b-a3b-novelrp-i1",
+            "name": "NVIDIA Nemotron 30B NovelRP (Local)",
+            "api": "openai-completions",
+            "reasoning": false
+          },
+          {
+            "id": "huihui-qwen3.5-35b-a3b-abliterated_moe",
+            "name": "Huihui Qwen3.5 35B Abliterated MOE (Local)",
+            "api": "openai-completions",
+            "reasoning": false
+          },
+          {
+            "id": "WhiteRabbitNeo-V3-7B-i1",
+            "name": "WhiteRabbitNeo V3 7B i1 (Local Security)",
+            "api": "openai-completions",
+            "reasoning": false,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 32768,
+            "maxTokens": 4096
+          }
+        ]
+      },
+      "ollama": {
+        "baseUrl": "http://127.0.0.1:11434",
+        "apiKey": "OLLAMA_API_KEY",
+        "api": "ollama",
+        "models": [
+          {
+            "id": "kimi-k2.5:cloud",
+            "name": "kimi-k2.5:cloud",
+            "api": "ollama",
+            "reasoning": false,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 128000,
+            "maxTokens": 8192
+          },
+          {
+            "id": "minimax-m2.5:cloud",
+            "name": "minimax-m2.5:cloud",
+            "api": "ollama",
+            "reasoning": false,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 204800,
+            "maxTokens": 8192
+          },
+          {
+            "id": "glm-5:cloud",
+            "name": "glm-5:cloud",
+            "api": "ollama",
+            "reasoning": false,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 128000,
+            "maxTokens": 8192
+          },
+          {
+            "id": "qwen3-coder-next:cloud",
+            "name": "qwen3-coder-next:cloud",
+            "api": "ollama",
+            "reasoning": false,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 262144,
+            "maxTokens": 8192
+          },
+          {
+            "id": "qwen3:30b-a3b",
+            "name": "qwen3:30b-a3b",
+            "api": "ollama",
+            "reasoning": false,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 262144,
+            "maxTokens": 8192
+          },
+          {
+            "id": "qwen2.5:7b",
+            "name": "qwen2.5:7b",
+            "api": "ollama",
+            "reasoning": false,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 32768,
+            "maxTokens": 8192
+          }
+        ]
+      }
+    }
+  },
+  "agents": {
+    "defaults": {
+      "model": {
+        "primary": "ollama/glm-5:cloud",
+        "fallbacks": [
+          "ollama/qwen3-coder-next:cloud"
+        ]
+      },
+      "models": {
+        "lmstudio/qwen3.5-35b-a3b": {
+          "alias": "local-35b"
+        },
+        "lmstudio/qwen3.5-9b": {
+          "alias": "local-9b"
+        },
+        "lmstudio/qwen3.5-4b": {
+          "alias": "local-4b"
+        },
+        "lmstudio/qwen3.5-9b-python-coder": {
+          "alias": "local-code"
+        },
+        "lmstudio/qwen3.5-creative-26b-a3b-reap-i1": {
+          "alias": "creative-26b"
+        },
+        "ollama/glm-5:cloud": {
+          "alias": "glm-5"
+        },
+        "ollama/qwen3-coder-next:cloud": {
+          "alias": "qwen-next-80b"
+        },
+        "lmstudio/WhiteRabbitNeo-V3-7B-i1": {
+          "alias": "security-7b"
+        }
+      },
+      "workspace": "C:\\Users\\jgali\\.openclaw\\workspace",
+      "memorySearch": {
+        "enabled": true,
+        "provider": "ollama",
+        "remote": {
+          "baseUrl": "http://127.0.0.1:11434",
+          "apiKey": "ollama-local"
+        },
+        "model": "nomic-embed-text",
+        "sync": {
+          "onSessionStart": true,
+          "watch": true
+        }
+      },
+      "maxConcurrent": 4,
+      "subagents": {
+        "maxConcurrent": 8
+      }
+    },
+    "list": [
+      {
+        "id": "main",
+        "tools": {
+          "profile": "full",
+          "alsoAllow": [
+            "canvas",
+            "message",
+            "gateway",
+            "nodes",
+            "agents_list",
+            "tts",
+            "read",
+            "write",
+            "edit",
+            "apply_patch",
+            "process",
+            "exec",
+            "web_search",
+            "web_fetch",
+            "memory_get",
+            "memory_search",
+            "sessions_yield",
+            "subagents",
+            "sessions_spawn",
+            "cron",
+            "image",
+            "image_generate"
+          ],
+          "deny": [
+            "browser"
+          ]
+        }
+      },
+      {
+        "id": "local-lm",
+        "name": "local-lm",
+        "workspace": "C:\\Users\\jgali\\.openclaw\\workspace-local-lm",
+        "agentDir": "C:\\Users\\jgali\\.openclaw\\agents\\local-lm\\agent",
+        "model": "lmstudio/qwen3.5-35b-a3b",
+        "subagents": {
+          "model": {
+            "primary": "ollama/glm-5:cloud",
+            "fallbacks": [
+              "ollama/qwen3-coder-next:cloud"
+            ]
+          }
+        },
+        "tools": {
+          "profile": "messaging",
+          "alsoAllow": [
+            "canvas",
+            "message",
+            "gateway",
+            "nodes",
+            "agents_list",
+            "tts",
+            "read",
+            "write",
+            "edit",
+            "apply_patch",
+            "exec",
+            "process",
+            "web_search",
+            "web_fetch",
+            "memory_search",
+            "memory_get",
+            "sessions_spawn",
+            "subagents",
+            "sessions_yield",
+            "cron",
+            "image",
+            "image_generate"
+          ]
+        }
+      },
+      {
+        "id": "lite-lm",
+        "name": "lite-lm",
+        "workspace": "C:\\Users\\jgali\\.openclaw\\workspace-lite-lm",
+        "agentDir": "C:\\Users\\jgali\\.openclaw\\agents\\lite-lm\\agent",
+        "model": "lmstudio/qwen3.5-4b"
+      }
+    ]
+  },
+  "tools": {
+    "profile": "coding",
+    "web": {
+      "search": {
+        "enabled": true,
+        "provider": "duckduckgo"
+      }
+    }
+  },
+  "messages": {
+    "queue": {
+      "mode": "interrupt"
+    },
+    "ackReactionScope": "group-mentions"
+  },
+  "commands": {
+    "native": "auto",
+    "nativeSkills": "auto",
+    "restart": true,
+    "ownerDisplay": "raw"
+  },
+  "session": {
+    "dmScope": "per-channel-peer"
+  },
+  "hooks": {
+    "internal": {
+      "enabled": true,
+      "entries": {
+        "session-memory": {
+          "enabled": true
+        }
+      }
+    }
+  },
+  "channels": {
+    "telegram": {
+      "enabled": true,
+      "dmPolicy": "pairing",
+      "botToken": "8705351803:AAE0BsrI5kUeXuNgFm_EFqze52SwcppoViw",
+      "groupPolicy": "allowlist",
+      "streaming": "partial"
+    },
+    "signal": {
+      "enabled": false,
+      "account": "+13527600236",
+      "cliPath": "signal-cli",
+      "dmPolicy": "pairing",
+      "groupPolicy": "allowlist"
+    }
+  },
+  "gateway": {
+    "port": 18789,
+    "mode": "local",
+    "bind": "loopback",
+    "auth": {
+      "mode": "token",
+      "token": "f0e11abe2adca8ba3218b9efcb928904d8d7660a83f32068"
+    },
+    "tailscale": {
+      "mode": "off",
+      "resetOnExit": false
+    },
+    "nodes": {
+      "denyCommands": [
+        "camera.snap",
+        "camera.clip",
+        "screen.record",
+        "contacts.add",
+        "calendar.add",
+        "reminders.add",
+        "sms.send"
+      ]
+    }
+  },
+  "mcp": {
+    "servers": {
+      "wordpress": {
+        "command": "node",
+        "args": [
+          "C:\\openclaw-src\\mcp\\wordpress-ssh\\index.mjs"
+        ],
+        "env": {
+          "WORDPRESS_SSH_TARGET": "root@wordpress-multisites1-u70513.vm.elestio.app",
+          "WORDPRESS_SSH_PORT": 22,
+          "WORDPRESS_SSH_KEY_PATH": "C:/Users/jgali/.ssh/lucernamedia_cpanel",
+          "WORDPRESS_SSH_STRICT_HOST_KEY_CHECKING": "accept-new",
+          "WORDPRESS_SSH_DOCKER_COMPOSE_DIR": "/opt/app",
+          "WORDPRESS_SSH_DOCKER_SERVICE": "wordpress",
+          "WORDPRESS_WP_PATH": "/var/www/html",
+          "WORDPRESS_SITE_URL": "https://wordpress-multisites1-u70513.vm.elestio.app",
+          "WORDPRESS_WP_ALLOW_ROOT": true
+        },
+        "cwd": "C:\\openclaw-src\\mcp\\wordpress-ssh"
+      }
+    }
+  },
+  "skills": {
+    "install": {
+      "nodeManager": "npm"
+    },
+    "entries": {
+      "apple-notes": {
+        "enabled": false
+      },
+      "bear-notes": {
+        "enabled": true
+      },
+      "1password": {
+        "enabled": false
+      },
+      "bluebubbles": {
+        "enabled": false
+      },
+      "discord": {
+        "enabled": false
+      },
+      "model-usage": {
+        "enabled": false
+      },
+      "things-mac": {
+        "enabled": false
+      },
+      "trello": {
+        "enabled": false
+      },
+      "wacli": {
+        "enabled": false
+      },
+      "camsnap": {
+        "enabled": false
+      },
+      "gemini": {
+        "enabled": false
+      },
+      "skill-creator": {
+        "enabled": true
+      },
+      "github": {
+        "enabled": true
+      }
+    }
+  },
+  "plugins": {
+    "entries": {
+      "duckduckgo": {
+        "enabled": true
+      }
+    }
+  }
+}

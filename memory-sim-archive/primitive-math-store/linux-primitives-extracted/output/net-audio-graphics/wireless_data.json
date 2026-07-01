@@ -1,0 +1,2150 @@
+{
+  "filename": "wireless.h",
+  "includes": [
+    "linux/types.h",
+    "linux/socket.h",
+    "linux/if.h"
+  ],
+  "defines": [
+    {
+      "name": "WIRELESS_EXT",
+      "value": "22",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SIOCSIWCOMMIT",
+      "value": "0x8B00",
+      "comment": "Commit pending changes to driver",
+      "category": ""
+    },
+    {
+      "name": "SIOCGIWNAME",
+      "value": "0x8B01",
+      "comment": "get name == wireless protocol",
+      "category": ""
+    },
+    {
+      "name": "SIOCSIWNWID",
+      "value": "0x8B02",
+      "comment": "set network id (pre-802.11)",
+      "category": ""
+    },
+    {
+      "name": "SIOCGIWNWID",
+      "value": "0x8B03",
+      "comment": "get network id (the cell)",
+      "category": ""
+    },
+    {
+      "name": "SIOCSIWFREQ",
+      "value": "0x8B04",
+      "comment": "set channel/frequency (Hz)",
+      "category": ""
+    },
+    {
+      "name": "SIOCGIWFREQ",
+      "value": "0x8B05",
+      "comment": "get channel/frequency (Hz)",
+      "category": ""
+    },
+    {
+      "name": "SIOCSIWMODE",
+      "value": "0x8B06",
+      "comment": "set operation mode",
+      "category": ""
+    },
+    {
+      "name": "SIOCGIWMODE",
+      "value": "0x8B07",
+      "comment": "get operation mode",
+      "category": ""
+    },
+    {
+      "name": "SIOCSIWSENS",
+      "value": "0x8B08",
+      "comment": "set sensitivity (dBm)",
+      "category": ""
+    },
+    {
+      "name": "SIOCGIWSENS",
+      "value": "0x8B09",
+      "comment": "get sensitivity (dBm)",
+      "category": ""
+    },
+    {
+      "name": "SIOCSIWRANGE",
+      "value": "0x8B0A",
+      "comment": "Unused",
+      "category": ""
+    },
+    {
+      "name": "SIOCGIWRANGE",
+      "value": "0x8B0B",
+      "comment": "Get range of parameters",
+      "category": ""
+    },
+    {
+      "name": "SIOCSIWPRIV",
+      "value": "0x8B0C",
+      "comment": "Unused",
+      "category": ""
+    },
+    {
+      "name": "SIOCGIWPRIV",
+      "value": "0x8B0D",
+      "comment": "get private ioctl interface info",
+      "category": ""
+    },
+    {
+      "name": "SIOCSIWSTATS",
+      "value": "0x8B0E",
+      "comment": "Unused",
+      "category": ""
+    },
+    {
+      "name": "SIOCGIWSTATS",
+      "value": "0x8B0F",
+      "comment": "Get /proc/net/wireless stats",
+      "category": ""
+    },
+    {
+      "name": "SIOCSIWSPY",
+      "value": "0x8B10",
+      "comment": "set spy addresses",
+      "category": ""
+    },
+    {
+      "name": "SIOCGIWSPY",
+      "value": "0x8B11",
+      "comment": "get spy info (quality of link)",
+      "category": ""
+    },
+    {
+      "name": "SIOCSIWTHRSPY",
+      "value": "0x8B12",
+      "comment": "set spy threshold (spy event)",
+      "category": ""
+    },
+    {
+      "name": "SIOCGIWTHRSPY",
+      "value": "0x8B13",
+      "comment": "get spy threshold",
+      "category": ""
+    },
+    {
+      "name": "SIOCSIWAP",
+      "value": "0x8B14",
+      "comment": "set access point MAC addresses",
+      "category": ""
+    },
+    {
+      "name": "SIOCGIWAP",
+      "value": "0x8B15",
+      "comment": "get access point MAC addresses",
+      "category": ""
+    },
+    {
+      "name": "SIOCGIWAPLIST",
+      "value": "0x8B17",
+      "comment": "Deprecated in favor of scanning",
+      "category": ""
+    },
+    {
+      "name": "SIOCSIWSCAN",
+      "value": "0x8B18",
+      "comment": "trigger scanning (list cells)",
+      "category": ""
+    },
+    {
+      "name": "SIOCGIWSCAN",
+      "value": "0x8B19",
+      "comment": "get scanning results",
+      "category": ""
+    },
+    {
+      "name": "SIOCSIWESSID",
+      "value": "0x8B1A",
+      "comment": "set ESSID (network name)",
+      "category": ""
+    },
+    {
+      "name": "SIOCGIWESSID",
+      "value": "0x8B1B",
+      "comment": "get ESSID",
+      "category": ""
+    },
+    {
+      "name": "SIOCSIWNICKN",
+      "value": "0x8B1C",
+      "comment": "set node name/nickname",
+      "category": ""
+    },
+    {
+      "name": "SIOCGIWNICKN",
+      "value": "0x8B1D",
+      "comment": "get node name/nickname",
+      "category": ""
+    },
+    {
+      "name": "SIOCSIWRATE",
+      "value": "0x8B20",
+      "comment": "set default bit rate (bps)",
+      "category": ""
+    },
+    {
+      "name": "SIOCGIWRATE",
+      "value": "0x8B21",
+      "comment": "get default bit rate (bps)",
+      "category": ""
+    },
+    {
+      "name": "SIOCSIWRTS",
+      "value": "0x8B22",
+      "comment": "set RTS/CTS threshold (bytes)",
+      "category": ""
+    },
+    {
+      "name": "SIOCGIWRTS",
+      "value": "0x8B23",
+      "comment": "get RTS/CTS threshold (bytes)",
+      "category": ""
+    },
+    {
+      "name": "SIOCSIWFRAG",
+      "value": "0x8B24",
+      "comment": "set fragmentation thr (bytes)",
+      "category": ""
+    },
+    {
+      "name": "SIOCGIWFRAG",
+      "value": "0x8B25",
+      "comment": "get fragmentation thr (bytes)",
+      "category": ""
+    },
+    {
+      "name": "SIOCSIWTXPOW",
+      "value": "0x8B26",
+      "comment": "set transmit power (dBm)",
+      "category": ""
+    },
+    {
+      "name": "SIOCGIWTXPOW",
+      "value": "0x8B27",
+      "comment": "get transmit power (dBm)",
+      "category": ""
+    },
+    {
+      "name": "SIOCSIWRETRY",
+      "value": "0x8B28",
+      "comment": "set retry limits and lifetime",
+      "category": ""
+    },
+    {
+      "name": "SIOCGIWRETRY",
+      "value": "0x8B29",
+      "comment": "get retry limits and lifetime",
+      "category": ""
+    },
+    {
+      "name": "SIOCSIWENCODE",
+      "value": "0x8B2A",
+      "comment": "set encoding token & mode",
+      "category": ""
+    },
+    {
+      "name": "SIOCGIWENCODE",
+      "value": "0x8B2B",
+      "comment": "get encoding token & mode",
+      "category": ""
+    },
+    {
+      "name": "SIOCSIWPOWER",
+      "value": "0x8B2C",
+      "comment": "set Power Management settings",
+      "category": ""
+    },
+    {
+      "name": "SIOCGIWPOWER",
+      "value": "0x8B2D",
+      "comment": "get Power Management settings",
+      "category": ""
+    },
+    {
+      "name": "SIOCSIWGENIE",
+      "value": "0x8B30",
+      "comment": "set generic IE",
+      "category": ""
+    },
+    {
+      "name": "SIOCGIWGENIE",
+      "value": "0x8B31",
+      "comment": "get generic IE",
+      "category": ""
+    },
+    {
+      "name": "SIOCSIWMLME",
+      "value": "0x8B16\t\t/* request MLME operation; uses",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SIOCSIWAUTH",
+      "value": "0x8B32",
+      "comment": "set authentication mode params",
+      "category": ""
+    },
+    {
+      "name": "SIOCGIWAUTH",
+      "value": "0x8B33",
+      "comment": "get authentication mode params",
+      "category": ""
+    },
+    {
+      "name": "SIOCSIWENCODEEXT",
+      "value": "0x8B34",
+      "comment": "set encoding token & mode",
+      "category": ""
+    },
+    {
+      "name": "SIOCGIWENCODEEXT",
+      "value": "0x8B35",
+      "comment": "get encoding token & mode",
+      "category": ""
+    },
+    {
+      "name": "SIOCSIWPMKSA",
+      "value": "0x8B36",
+      "comment": "PMKSA cache operation",
+      "category": ""
+    },
+    {
+      "name": "SIOCIWFIRSTPRIV",
+      "value": "0x8BE0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SIOCIWLASTPRIV",
+      "value": "0x8BFF",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SIOCIWFIRST",
+      "value": "0x8B00",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SIOCIWLAST",
+      "value": "SIOCIWLASTPRIV",
+      "comment": "0x8BFF",
+      "category": ""
+    },
+    {
+      "name": "IWEVTXDROP",
+      "value": "0x8C00",
+      "comment": "Packet dropped to excessive retry",
+      "category": ""
+    },
+    {
+      "name": "IWEVQUAL",
+      "value": "0x8C01",
+      "comment": "Quality part of statistics (scan)",
+      "category": ""
+    },
+    {
+      "name": "IWEVCUSTOM",
+      "value": "0x8C02",
+      "comment": "Driver specific ascii string",
+      "category": ""
+    },
+    {
+      "name": "IWEVREGISTERED",
+      "value": "0x8C03",
+      "comment": "Discovered a new node (AP mode)",
+      "category": ""
+    },
+    {
+      "name": "IWEVEXPIRED",
+      "value": "0x8C04",
+      "comment": "Expired a node (AP mode)",
+      "category": ""
+    },
+    {
+      "name": "IWEVGENIE",
+      "value": "0x8C05\t\t/* Generic IE (WPA, RSN, WMM, ..)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IWEVMICHAELMICFAILURE",
+      "value": "0x8C06\t/* Michael MIC failure",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IWEVASSOCREQIE",
+      "value": "0x8C07\t\t/* IEs used in (Re)Association Request.",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IWEVASSOCRESPIE",
+      "value": "0x8C08\t\t/* IEs used in (Re)Association",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IWEVPMKIDCAND",
+      "value": "0x8C09\t\t/* PMKID candidate for RSN",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IWEVFIRST",
+      "value": "0x8C00",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IW_PRIV_TYPE_MASK",
+      "value": "0x7000",
+      "comment": "Type of arguments",
+      "category": "IW_PRIV"
+    },
+    {
+      "name": "IW_PRIV_TYPE_NONE",
+      "value": "0x0000",
+      "comment": "",
+      "category": "IW_PRIV"
+    },
+    {
+      "name": "IW_PRIV_TYPE_BYTE",
+      "value": "0x1000",
+      "comment": "Char as number",
+      "category": "IW_PRIV"
+    },
+    {
+      "name": "IW_PRIV_TYPE_CHAR",
+      "value": "0x2000",
+      "comment": "Char as character",
+      "category": "IW_PRIV"
+    },
+    {
+      "name": "IW_PRIV_TYPE_INT",
+      "value": "0x4000",
+      "comment": "32 bits int",
+      "category": "IW_PRIV"
+    },
+    {
+      "name": "IW_PRIV_TYPE_FLOAT",
+      "value": "0x5000",
+      "comment": "struct iw_freq",
+      "category": "IW_PRIV"
+    },
+    {
+      "name": "IW_PRIV_TYPE_ADDR",
+      "value": "0x6000",
+      "comment": "struct sockaddr",
+      "category": "IW_PRIV"
+    },
+    {
+      "name": "IW_PRIV_SIZE_FIXED",
+      "value": "0x0800",
+      "comment": "Variable or fixed number of args",
+      "category": "IW_PRIV"
+    },
+    {
+      "name": "IW_PRIV_SIZE_MASK",
+      "value": "0x07FF",
+      "comment": "Max number of those args",
+      "category": "IW_PRIV"
+    },
+    {
+      "name": "IW_MAX_FREQUENCIES",
+      "value": "32",
+      "comment": "",
+      "category": "IW_MAX"
+    },
+    {
+      "name": "IW_MAX_BITRATES",
+      "value": "32",
+      "comment": "",
+      "category": "IW_MAX"
+    },
+    {
+      "name": "IW_MAX_TXPOWER",
+      "value": "8",
+      "comment": "",
+      "category": "IW_MAX"
+    },
+    {
+      "name": "IW_MAX_SPY",
+      "value": "8",
+      "comment": "",
+      "category": "IW_MAX"
+    },
+    {
+      "name": "IW_MAX_AP",
+      "value": "64",
+      "comment": "",
+      "category": "IW_MAX"
+    },
+    {
+      "name": "IW_ESSID_MAX_SIZE",
+      "value": "32",
+      "comment": "",
+      "category": "IW_ESSID"
+    },
+    {
+      "name": "IW_MODE_AUTO",
+      "value": "0",
+      "comment": "Let the driver decides",
+      "category": "IW_MODE"
+    },
+    {
+      "name": "IW_MODE_ADHOC",
+      "value": "1",
+      "comment": "Single cell network",
+      "category": "IW_MODE"
+    },
+    {
+      "name": "IW_MODE_INFRA",
+      "value": "2",
+      "comment": "Multi cell network, roaming, ...",
+      "category": "IW_MODE"
+    },
+    {
+      "name": "IW_MODE_MASTER",
+      "value": "3",
+      "comment": "Synchronisation master or Access Point",
+      "category": "IW_MODE"
+    },
+    {
+      "name": "IW_MODE_REPEAT",
+      "value": "4",
+      "comment": "Wireless Repeater (forwarder)",
+      "category": "IW_MODE"
+    },
+    {
+      "name": "IW_MODE_SECOND",
+      "value": "5",
+      "comment": "Secondary master/repeater (backup)",
+      "category": "IW_MODE"
+    },
+    {
+      "name": "IW_MODE_MONITOR",
+      "value": "6",
+      "comment": "Passive monitor (listen only)",
+      "category": "IW_MODE"
+    },
+    {
+      "name": "IW_MODE_MESH",
+      "value": "7",
+      "comment": "Mesh (IEEE 802.11s) network",
+      "category": "IW_MODE"
+    },
+    {
+      "name": "IW_QUAL_QUAL_UPDATED",
+      "value": "0x01",
+      "comment": "Value was updated since last read",
+      "category": "IW_QUAL"
+    },
+    {
+      "name": "IW_QUAL_LEVEL_UPDATED",
+      "value": "0x02",
+      "comment": "",
+      "category": "IW_QUAL"
+    },
+    {
+      "name": "IW_QUAL_NOISE_UPDATED",
+      "value": "0x04",
+      "comment": "",
+      "category": "IW_QUAL"
+    },
+    {
+      "name": "IW_QUAL_ALL_UPDATED",
+      "value": "0x07",
+      "comment": "",
+      "category": "IW_QUAL"
+    },
+    {
+      "name": "IW_QUAL_DBM",
+      "value": "0x08",
+      "comment": "Level + Noise are dBm",
+      "category": "IW_QUAL"
+    },
+    {
+      "name": "IW_QUAL_QUAL_INVALID",
+      "value": "0x10",
+      "comment": "Driver doesn't provide value",
+      "category": "IW_QUAL"
+    },
+    {
+      "name": "IW_QUAL_LEVEL_INVALID",
+      "value": "0x20",
+      "comment": "",
+      "category": "IW_QUAL"
+    },
+    {
+      "name": "IW_QUAL_NOISE_INVALID",
+      "value": "0x40",
+      "comment": "",
+      "category": "IW_QUAL"
+    },
+    {
+      "name": "IW_QUAL_RCPI",
+      "value": "0x80",
+      "comment": "Level + Noise are 802.11k RCPI",
+      "category": "IW_QUAL"
+    },
+    {
+      "name": "IW_QUAL_ALL_INVALID",
+      "value": "0x70",
+      "comment": "",
+      "category": "IW_QUAL"
+    },
+    {
+      "name": "IW_FREQ_AUTO",
+      "value": "0x00",
+      "comment": "Let the driver decides",
+      "category": "IW_FREQ"
+    },
+    {
+      "name": "IW_FREQ_FIXED",
+      "value": "0x01",
+      "comment": "Force a specific value",
+      "category": "IW_FREQ"
+    },
+    {
+      "name": "IW_MAX_ENCODING_SIZES",
+      "value": "8",
+      "comment": "",
+      "category": "IW_MAX"
+    },
+    {
+      "name": "IW_ENCODING_TOKEN_MAX",
+      "value": "64",
+      "comment": "512 bits (for now)",
+      "category": "IW_ENCODING"
+    },
+    {
+      "name": "IW_ENCODE_INDEX",
+      "value": "0x00FF",
+      "comment": "Token index (if needed)",
+      "category": "IW_ENCODE"
+    },
+    {
+      "name": "IW_ENCODE_FLAGS",
+      "value": "0xFF00",
+      "comment": "Flags defined below",
+      "category": "IW_ENCODE"
+    },
+    {
+      "name": "IW_ENCODE_MODE",
+      "value": "0xF000",
+      "comment": "Modes defined below",
+      "category": "IW_ENCODE"
+    },
+    {
+      "name": "IW_ENCODE_DISABLED",
+      "value": "0x8000",
+      "comment": "Encoding disabled",
+      "category": "IW_ENCODE"
+    },
+    {
+      "name": "IW_ENCODE_ENABLED",
+      "value": "0x0000",
+      "comment": "Encoding enabled",
+      "category": "IW_ENCODE"
+    },
+    {
+      "name": "IW_ENCODE_RESTRICTED",
+      "value": "0x4000",
+      "comment": "Refuse non-encoded packets",
+      "category": "IW_ENCODE"
+    },
+    {
+      "name": "IW_ENCODE_OPEN",
+      "value": "0x2000",
+      "comment": "Accept non-encoded packets",
+      "category": "IW_ENCODE"
+    },
+    {
+      "name": "IW_ENCODE_NOKEY",
+      "value": "0x0800",
+      "comment": "Key is write only, so not present",
+      "category": "IW_ENCODE"
+    },
+    {
+      "name": "IW_ENCODE_TEMP",
+      "value": "0x0400",
+      "comment": "Temporary key",
+      "category": "IW_ENCODE"
+    },
+    {
+      "name": "IW_POWER_ON",
+      "value": "0x0000",
+      "comment": "No details...",
+      "category": "IW_POWER"
+    },
+    {
+      "name": "IW_POWER_TYPE",
+      "value": "0xF000",
+      "comment": "Type of parameter",
+      "category": "IW_POWER"
+    },
+    {
+      "name": "IW_POWER_PERIOD",
+      "value": "0x1000",
+      "comment": "Value is a period/duration of",
+      "category": "IW_POWER"
+    },
+    {
+      "name": "IW_POWER_TIMEOUT",
+      "value": "0x2000",
+      "comment": "Value is a timeout (to go asleep)",
+      "category": "IW_POWER"
+    },
+    {
+      "name": "IW_POWER_MODE",
+      "value": "0x0F00",
+      "comment": "Power Management mode",
+      "category": "IW_POWER"
+    },
+    {
+      "name": "IW_POWER_UNICAST_R",
+      "value": "0x0100",
+      "comment": "Receive only unicast messages",
+      "category": "IW_POWER"
+    },
+    {
+      "name": "IW_POWER_MULTICAST_R",
+      "value": "0x0200",
+      "comment": "Receive only multicast messages",
+      "category": "IW_POWER"
+    },
+    {
+      "name": "IW_POWER_ALL_R",
+      "value": "0x0300",
+      "comment": "Receive all messages though PM",
+      "category": "IW_POWER"
+    },
+    {
+      "name": "IW_POWER_FORCE_S",
+      "value": "0x0400",
+      "comment": "Force PM procedure for sending unicast",
+      "category": "IW_POWER"
+    },
+    {
+      "name": "IW_POWER_REPEATER",
+      "value": "0x0800",
+      "comment": "Repeat broadcast messages in PM period",
+      "category": "IW_POWER"
+    },
+    {
+      "name": "IW_POWER_MODIFIER",
+      "value": "0x000F",
+      "comment": "Modify a parameter",
+      "category": "IW_POWER"
+    },
+    {
+      "name": "IW_POWER_MIN",
+      "value": "0x0001",
+      "comment": "Value is a minimum",
+      "category": "IW_POWER"
+    },
+    {
+      "name": "IW_POWER_MAX",
+      "value": "0x0002",
+      "comment": "Value is a maximum",
+      "category": "IW_POWER"
+    },
+    {
+      "name": "IW_POWER_RELATIVE",
+      "value": "0x0004",
+      "comment": "Value is not in seconds/ms/us",
+      "category": "IW_POWER"
+    },
+    {
+      "name": "IW_TXPOW_TYPE",
+      "value": "0x00FF",
+      "comment": "Type of value",
+      "category": "IW_TXPOW"
+    },
+    {
+      "name": "IW_TXPOW_DBM",
+      "value": "0x0000",
+      "comment": "Value is in dBm",
+      "category": "IW_TXPOW"
+    },
+    {
+      "name": "IW_TXPOW_MWATT",
+      "value": "0x0001",
+      "comment": "Value is in mW",
+      "category": "IW_TXPOW"
+    },
+    {
+      "name": "IW_TXPOW_RELATIVE",
+      "value": "0x0002",
+      "comment": "Value is in arbitrary units",
+      "category": "IW_TXPOW"
+    },
+    {
+      "name": "IW_TXPOW_RANGE",
+      "value": "0x1000",
+      "comment": "Range of value between min/max",
+      "category": "IW_TXPOW"
+    },
+    {
+      "name": "IW_RETRY_ON",
+      "value": "0x0000",
+      "comment": "No details...",
+      "category": "IW_RETRY"
+    },
+    {
+      "name": "IW_RETRY_TYPE",
+      "value": "0xF000",
+      "comment": "Type of parameter",
+      "category": "IW_RETRY"
+    },
+    {
+      "name": "IW_RETRY_LIMIT",
+      "value": "0x1000",
+      "comment": "Maximum number of retries",
+      "category": "IW_RETRY"
+    },
+    {
+      "name": "IW_RETRY_LIFETIME",
+      "value": "0x2000",
+      "comment": "Maximum duration of retries in us",
+      "category": "IW_RETRY"
+    },
+    {
+      "name": "IW_RETRY_MODIFIER",
+      "value": "0x00FF",
+      "comment": "Modify a parameter",
+      "category": "IW_RETRY"
+    },
+    {
+      "name": "IW_RETRY_MIN",
+      "value": "0x0001",
+      "comment": "Value is a minimum",
+      "category": "IW_RETRY"
+    },
+    {
+      "name": "IW_RETRY_MAX",
+      "value": "0x0002",
+      "comment": "Value is a maximum",
+      "category": "IW_RETRY"
+    },
+    {
+      "name": "IW_RETRY_RELATIVE",
+      "value": "0x0004",
+      "comment": "Value is not in seconds/ms/us",
+      "category": "IW_RETRY"
+    },
+    {
+      "name": "IW_RETRY_SHORT",
+      "value": "0x0010",
+      "comment": "Value is for short packets",
+      "category": "IW_RETRY"
+    },
+    {
+      "name": "IW_RETRY_LONG",
+      "value": "0x0020",
+      "comment": "Value is for long packets",
+      "category": "IW_RETRY"
+    },
+    {
+      "name": "IW_SCAN_DEFAULT",
+      "value": "0x0000",
+      "comment": "Default scan of the driver",
+      "category": "IW_SCAN"
+    },
+    {
+      "name": "IW_SCAN_ALL_ESSID",
+      "value": "0x0001",
+      "comment": "Scan all ESSIDs",
+      "category": "IW_SCAN"
+    },
+    {
+      "name": "IW_SCAN_THIS_ESSID",
+      "value": "0x0002",
+      "comment": "Scan only this ESSID",
+      "category": "IW_SCAN"
+    },
+    {
+      "name": "IW_SCAN_ALL_FREQ",
+      "value": "0x0004",
+      "comment": "Scan all Frequencies",
+      "category": "IW_SCAN"
+    },
+    {
+      "name": "IW_SCAN_THIS_FREQ",
+      "value": "0x0008",
+      "comment": "Scan only this Frequency",
+      "category": "IW_SCAN"
+    },
+    {
+      "name": "IW_SCAN_ALL_MODE",
+      "value": "0x0010",
+      "comment": "Scan all Modes",
+      "category": "IW_SCAN"
+    },
+    {
+      "name": "IW_SCAN_THIS_MODE",
+      "value": "0x0020",
+      "comment": "Scan only this Mode",
+      "category": "IW_SCAN"
+    },
+    {
+      "name": "IW_SCAN_ALL_RATE",
+      "value": "0x0040",
+      "comment": "Scan all Bit-Rates",
+      "category": "IW_SCAN"
+    },
+    {
+      "name": "IW_SCAN_THIS_RATE",
+      "value": "0x0080",
+      "comment": "Scan only this Bit-Rate",
+      "category": "IW_SCAN"
+    },
+    {
+      "name": "IW_SCAN_TYPE_ACTIVE",
+      "value": "0",
+      "comment": "",
+      "category": "IW_SCAN"
+    },
+    {
+      "name": "IW_SCAN_TYPE_PASSIVE",
+      "value": "1",
+      "comment": "",
+      "category": "IW_SCAN"
+    },
+    {
+      "name": "IW_SCAN_MAX_DATA",
+      "value": "4096",
+      "comment": "In bytes",
+      "category": "IW_SCAN"
+    },
+    {
+      "name": "IW_SCAN_CAPA_NONE",
+      "value": "0x00",
+      "comment": "",
+      "category": "IW_SCAN"
+    },
+    {
+      "name": "IW_SCAN_CAPA_ESSID",
+      "value": "0x01",
+      "comment": "",
+      "category": "IW_SCAN"
+    },
+    {
+      "name": "IW_SCAN_CAPA_BSSID",
+      "value": "0x02",
+      "comment": "",
+      "category": "IW_SCAN"
+    },
+    {
+      "name": "IW_SCAN_CAPA_CHANNEL",
+      "value": "0x04",
+      "comment": "",
+      "category": "IW_SCAN"
+    },
+    {
+      "name": "IW_SCAN_CAPA_MODE",
+      "value": "0x08",
+      "comment": "",
+      "category": "IW_SCAN"
+    },
+    {
+      "name": "IW_SCAN_CAPA_RATE",
+      "value": "0x10",
+      "comment": "",
+      "category": "IW_SCAN"
+    },
+    {
+      "name": "IW_SCAN_CAPA_TYPE",
+      "value": "0x20",
+      "comment": "",
+      "category": "IW_SCAN"
+    },
+    {
+      "name": "IW_SCAN_CAPA_TIME",
+      "value": "0x40",
+      "comment": "",
+      "category": "IW_SCAN"
+    },
+    {
+      "name": "IW_CUSTOM_MAX",
+      "value": "256",
+      "comment": "In bytes",
+      "category": "IW_CUSTOM"
+    },
+    {
+      "name": "IW_GENERIC_IE_MAX",
+      "value": "1024",
+      "comment": "",
+      "category": "IW_GENERIC"
+    },
+    {
+      "name": "IW_MLME_DEAUTH",
+      "value": "0",
+      "comment": "",
+      "category": "IW_MLME"
+    },
+    {
+      "name": "IW_MLME_DISASSOC",
+      "value": "1",
+      "comment": "",
+      "category": "IW_MLME"
+    },
+    {
+      "name": "IW_MLME_AUTH",
+      "value": "2",
+      "comment": "",
+      "category": "IW_MLME"
+    },
+    {
+      "name": "IW_MLME_ASSOC",
+      "value": "3",
+      "comment": "",
+      "category": "IW_MLME"
+    },
+    {
+      "name": "IW_AUTH_INDEX",
+      "value": "0x0FFF",
+      "comment": "",
+      "category": "IW_AUTH"
+    },
+    {
+      "name": "IW_AUTH_FLAGS",
+      "value": "0xF000",
+      "comment": "",
+      "category": "IW_AUTH"
+    },
+    {
+      "name": "IW_AUTH_WPA_VERSION",
+      "value": "0",
+      "comment": "",
+      "category": "IW_AUTH"
+    },
+    {
+      "name": "IW_AUTH_CIPHER_PAIRWISE",
+      "value": "1",
+      "comment": "",
+      "category": "IW_AUTH"
+    },
+    {
+      "name": "IW_AUTH_CIPHER_GROUP",
+      "value": "2",
+      "comment": "",
+      "category": "IW_AUTH"
+    },
+    {
+      "name": "IW_AUTH_KEY_MGMT",
+      "value": "3",
+      "comment": "",
+      "category": "IW_AUTH"
+    },
+    {
+      "name": "IW_AUTH_TKIP_COUNTERMEASURES",
+      "value": "4",
+      "comment": "",
+      "category": "IW_AUTH"
+    },
+    {
+      "name": "IW_AUTH_DROP_UNENCRYPTED",
+      "value": "5",
+      "comment": "",
+      "category": "IW_AUTH"
+    },
+    {
+      "name": "IW_AUTH_80211_AUTH_ALG",
+      "value": "6",
+      "comment": "",
+      "category": "IW_AUTH"
+    },
+    {
+      "name": "IW_AUTH_WPA_ENABLED",
+      "value": "7",
+      "comment": "",
+      "category": "IW_AUTH"
+    },
+    {
+      "name": "IW_AUTH_RX_UNENCRYPTED_EAPOL",
+      "value": "8",
+      "comment": "",
+      "category": "IW_AUTH"
+    },
+    {
+      "name": "IW_AUTH_ROAMING_CONTROL",
+      "value": "9",
+      "comment": "",
+      "category": "IW_AUTH"
+    },
+    {
+      "name": "IW_AUTH_PRIVACY_INVOKED",
+      "value": "10",
+      "comment": "",
+      "category": "IW_AUTH"
+    },
+    {
+      "name": "IW_AUTH_CIPHER_GROUP_MGMT",
+      "value": "11",
+      "comment": "",
+      "category": "IW_AUTH"
+    },
+    {
+      "name": "IW_AUTH_MFP",
+      "value": "12",
+      "comment": "",
+      "category": "IW_AUTH"
+    },
+    {
+      "name": "IW_AUTH_WPA_VERSION_DISABLED",
+      "value": "0x00000001",
+      "comment": "",
+      "category": "IW_AUTH"
+    },
+    {
+      "name": "IW_AUTH_WPA_VERSION_WPA",
+      "value": "0x00000002",
+      "comment": "",
+      "category": "IW_AUTH"
+    },
+    {
+      "name": "IW_AUTH_WPA_VERSION_WPA2",
+      "value": "0x00000004",
+      "comment": "",
+      "category": "IW_AUTH"
+    },
+    {
+      "name": "IW_AUTH_CIPHER_NONE",
+      "value": "0x00000001",
+      "comment": "",
+      "category": "IW_AUTH"
+    },
+    {
+      "name": "IW_AUTH_CIPHER_WEP40",
+      "value": "0x00000002",
+      "comment": "",
+      "category": "IW_AUTH"
+    },
+    {
+      "name": "IW_AUTH_CIPHER_TKIP",
+      "value": "0x00000004",
+      "comment": "",
+      "category": "IW_AUTH"
+    },
+    {
+      "name": "IW_AUTH_CIPHER_CCMP",
+      "value": "0x00000008",
+      "comment": "",
+      "category": "IW_AUTH"
+    },
+    {
+      "name": "IW_AUTH_CIPHER_WEP104",
+      "value": "0x00000010",
+      "comment": "",
+      "category": "IW_AUTH"
+    },
+    {
+      "name": "IW_AUTH_CIPHER_AES_CMAC",
+      "value": "0x00000020",
+      "comment": "",
+      "category": "IW_AUTH"
+    },
+    {
+      "name": "IW_AUTH_KEY_MGMT_802_1X",
+      "value": "1",
+      "comment": "",
+      "category": "IW_AUTH"
+    },
+    {
+      "name": "IW_AUTH_KEY_MGMT_PSK",
+      "value": "2",
+      "comment": "",
+      "category": "IW_AUTH"
+    },
+    {
+      "name": "IW_AUTH_ALG_OPEN_SYSTEM",
+      "value": "0x00000001",
+      "comment": "",
+      "category": "IW_AUTH"
+    },
+    {
+      "name": "IW_AUTH_ALG_SHARED_KEY",
+      "value": "0x00000002",
+      "comment": "",
+      "category": "IW_AUTH"
+    },
+    {
+      "name": "IW_AUTH_ALG_LEAP",
+      "value": "0x00000004",
+      "comment": "",
+      "category": "IW_AUTH"
+    },
+    {
+      "name": "IW_AUTH_ROAMING_ENABLE",
+      "value": "0",
+      "comment": "driver/firmware based roaming",
+      "category": "IW_AUTH"
+    },
+    {
+      "name": "IW_AUTH_ROAMING_DISABLE",
+      "value": "1\t/* user space program used for roaming",
+      "comment": "",
+      "category": "IW_AUTH"
+    },
+    {
+      "name": "IW_AUTH_MFP_DISABLED",
+      "value": "0",
+      "comment": "MFP disabled",
+      "category": "IW_AUTH"
+    },
+    {
+      "name": "IW_AUTH_MFP_OPTIONAL",
+      "value": "1",
+      "comment": "MFP optional",
+      "category": "IW_AUTH"
+    },
+    {
+      "name": "IW_AUTH_MFP_REQUIRED",
+      "value": "2",
+      "comment": "MFP required",
+      "category": "IW_AUTH"
+    },
+    {
+      "name": "IW_ENCODE_SEQ_MAX_SIZE",
+      "value": "8",
+      "comment": "",
+      "category": "IW_ENCODE"
+    },
+    {
+      "name": "IW_ENCODE_ALG_NONE",
+      "value": "0",
+      "comment": "",
+      "category": "IW_ENCODE"
+    },
+    {
+      "name": "IW_ENCODE_ALG_WEP",
+      "value": "1",
+      "comment": "",
+      "category": "IW_ENCODE"
+    },
+    {
+      "name": "IW_ENCODE_ALG_TKIP",
+      "value": "2",
+      "comment": "",
+      "category": "IW_ENCODE"
+    },
+    {
+      "name": "IW_ENCODE_ALG_CCMP",
+      "value": "3",
+      "comment": "",
+      "category": "IW_ENCODE"
+    },
+    {
+      "name": "IW_ENCODE_ALG_PMK",
+      "value": "4",
+      "comment": "",
+      "category": "IW_ENCODE"
+    },
+    {
+      "name": "IW_ENCODE_ALG_AES_CMAC",
+      "value": "5",
+      "comment": "",
+      "category": "IW_ENCODE"
+    },
+    {
+      "name": "IW_ENCODE_EXT_TX_SEQ_VALID",
+      "value": "0x00000001",
+      "comment": "",
+      "category": "IW_ENCODE"
+    },
+    {
+      "name": "IW_ENCODE_EXT_RX_SEQ_VALID",
+      "value": "0x00000002",
+      "comment": "",
+      "category": "IW_ENCODE"
+    },
+    {
+      "name": "IW_ENCODE_EXT_GROUP_KEY",
+      "value": "0x00000004",
+      "comment": "",
+      "category": "IW_ENCODE"
+    },
+    {
+      "name": "IW_ENCODE_EXT_SET_TX_KEY",
+      "value": "0x00000008",
+      "comment": "",
+      "category": "IW_ENCODE"
+    },
+    {
+      "name": "IW_MICFAILURE_KEY_ID",
+      "value": "0x00000003",
+      "comment": "Key ID 0..3",
+      "category": "IW_MICFAILURE"
+    },
+    {
+      "name": "IW_MICFAILURE_GROUP",
+      "value": "0x00000004",
+      "comment": "",
+      "category": "IW_MICFAILURE"
+    },
+    {
+      "name": "IW_MICFAILURE_PAIRWISE",
+      "value": "0x00000008",
+      "comment": "",
+      "category": "IW_MICFAILURE"
+    },
+    {
+      "name": "IW_MICFAILURE_STAKEY",
+      "value": "0x00000010",
+      "comment": "",
+      "category": "IW_MICFAILURE"
+    },
+    {
+      "name": "IW_MICFAILURE_COUNT",
+      "value": "0x00000060 /* 1 or 2 (0 = count not supported)",
+      "comment": "",
+      "category": "IW_MICFAILURE"
+    },
+    {
+      "name": "IW_ENC_CAPA_WPA",
+      "value": "0x00000001",
+      "comment": "",
+      "category": "IW_ENC"
+    },
+    {
+      "name": "IW_ENC_CAPA_WPA2",
+      "value": "0x00000002",
+      "comment": "",
+      "category": "IW_ENC"
+    },
+    {
+      "name": "IW_ENC_CAPA_CIPHER_TKIP",
+      "value": "0x00000004",
+      "comment": "",
+      "category": "IW_ENC"
+    },
+    {
+      "name": "IW_ENC_CAPA_CIPHER_CCMP",
+      "value": "0x00000008",
+      "comment": "",
+      "category": "IW_ENC"
+    },
+    {
+      "name": "IW_ENC_CAPA_4WAY_HANDSHAKE",
+      "value": "0x00000010",
+      "comment": "",
+      "category": "IW_ENC"
+    },
+    {
+      "name": "IW_EVENT_CAPA_K_0",
+      "value": "(IW_EVENT_CAPA_MASK(0x8B04) | ",
+      "comment": "",
+      "category": "IW_EVENT"
+    },
+    {
+      "name": "IW_EVENT_CAPA_K_1",
+      "value": "(IW_EVENT_CAPA_MASK(0x8B2A))",
+      "comment": "",
+      "category": "IW_EVENT"
+    },
+    {
+      "name": "IW_PMKSA_ADD",
+      "value": "1",
+      "comment": "",
+      "category": "IW_PMKSA"
+    },
+    {
+      "name": "IW_PMKSA_REMOVE",
+      "value": "2",
+      "comment": "",
+      "category": "IW_PMKSA"
+    },
+    {
+      "name": "IW_PMKSA_FLUSH",
+      "value": "3",
+      "comment": "",
+      "category": "IW_PMKSA"
+    },
+    {
+      "name": "IW_PMKID_LEN",
+      "value": "16",
+      "comment": "",
+      "category": "IW_PMKID"
+    },
+    {
+      "name": "IW_PMKID_CAND_PREAUTH",
+      "value": "0x00000001",
+      "comment": "RNS pre-authentication enabled",
+      "category": "IW_PMKID"
+    },
+    {
+      "name": "IW_EV_LCP_LEN",
+      "value": "(sizeof(struct iw_event) - sizeof(union iwreq_data))",
+      "comment": "",
+      "category": "IW_EV"
+    },
+    {
+      "name": "IW_EV_CHAR_LEN",
+      "value": "(IW_EV_LCP_LEN + IFNAMSIZ)",
+      "comment": "",
+      "category": "IW_EV"
+    },
+    {
+      "name": "IW_EV_UINT_LEN",
+      "value": "(IW_EV_LCP_LEN + sizeof(__u32))",
+      "comment": "",
+      "category": "IW_EV"
+    },
+    {
+      "name": "IW_EV_FREQ_LEN",
+      "value": "(IW_EV_LCP_LEN + sizeof(struct iw_freq))",
+      "comment": "",
+      "category": "IW_EV"
+    },
+    {
+      "name": "IW_EV_PARAM_LEN",
+      "value": "(IW_EV_LCP_LEN + sizeof(struct iw_param))",
+      "comment": "",
+      "category": "IW_EV"
+    },
+    {
+      "name": "IW_EV_ADDR_LEN",
+      "value": "(IW_EV_LCP_LEN + sizeof(struct sockaddr))",
+      "comment": "",
+      "category": "IW_EV"
+    },
+    {
+      "name": "IW_EV_QUAL_LEN",
+      "value": "(IW_EV_LCP_LEN + sizeof(struct iw_quality))",
+      "comment": "",
+      "category": "IW_EV"
+    },
+    {
+      "name": "IW_EV_POINT_OFF",
+      "value": "offsetof(struct iw_point, length)",
+      "comment": "",
+      "category": "IW_EV"
+    },
+    {
+      "name": "IW_EV_POINT_LEN",
+      "value": "(IW_EV_LCP_LEN + sizeof(struct iw_point) - ",
+      "comment": "",
+      "category": "IW_EV"
+    },
+    {
+      "name": "IW_EV_LCP_PK_LEN",
+      "value": "(4)",
+      "comment": "",
+      "category": "IW_EV"
+    },
+    {
+      "name": "IW_EV_CHAR_PK_LEN",
+      "value": "(IW_EV_LCP_PK_LEN + IFNAMSIZ)",
+      "comment": "",
+      "category": "IW_EV"
+    },
+    {
+      "name": "IW_EV_UINT_PK_LEN",
+      "value": "(IW_EV_LCP_PK_LEN + sizeof(__u32))",
+      "comment": "",
+      "category": "IW_EV"
+    },
+    {
+      "name": "IW_EV_FREQ_PK_LEN",
+      "value": "(IW_EV_LCP_PK_LEN + sizeof(struct iw_freq))",
+      "comment": "",
+      "category": "IW_EV"
+    },
+    {
+      "name": "IW_EV_PARAM_PK_LEN",
+      "value": "(IW_EV_LCP_PK_LEN + sizeof(struct iw_param))",
+      "comment": "",
+      "category": "IW_EV"
+    },
+    {
+      "name": "IW_EV_ADDR_PK_LEN",
+      "value": "(IW_EV_LCP_PK_LEN + sizeof(struct sockaddr))",
+      "comment": "",
+      "category": "IW_EV"
+    },
+    {
+      "name": "IW_EV_QUAL_PK_LEN",
+      "value": "(IW_EV_LCP_PK_LEN + sizeof(struct iw_quality))",
+      "comment": "",
+      "category": "IW_EV"
+    },
+    {
+      "name": "IW_EV_POINT_PK_LEN",
+      "value": "(IW_EV_LCP_PK_LEN + 4)",
+      "comment": "",
+      "category": "IW_EV"
+    }
+  ],
+  "structs": [
+    {
+      "name": "iw_param",
+      "fields": [
+        {
+          "type_name": "__s32",
+          "name": "value",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "fixed",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "disabled",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "iw_point",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "length",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "iw_freq",
+      "fields": [
+        {
+          "type_name": "__s32",
+          "name": "m",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s16",
+          "name": "e",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "i",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "iw_quality",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "qual",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "level",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "noise",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "updated",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "iw_discarded",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "nwid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "code",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "fragment",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "retries",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "misc",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "iw_missed",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "beacon",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "iw_thrspy",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "iw_scan_req",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "scan_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "essid_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "num_channels",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "essid",
+          "array_size": "IW_ESSID_MAX_SIZE",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "min_channel_time",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "max_channel_time",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "iw_encode_ext",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "ext_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "tx_seq",
+          "array_size": "IW_ENCODE_SEQ_MAX_SIZE",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "rx_seq",
+          "array_size": "IW_ENCODE_SEQ_MAX_SIZE",
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "alg",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "key_len",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "iw_mlme",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "cmd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "reason_code",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "iw_pmksa",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "cmd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "pmkid",
+          "array_size": "IW_PMKID_LEN",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "iw_michaelmicfailure",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "tsc",
+          "array_size": "IW_ENCODE_SEQ_MAX_SIZE",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "iw_pmkid_cand",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "index",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "iw_statistics",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "status",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "iwreq",
+      "fields": [
+        {
+          "type_name": "char",
+          "name": "ifrn_name",
+          "array_size": "IFNAMSIZ",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "iw_range",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "throughput",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "min_nwid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "max_nwid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "old_num_channels",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "old_num_frequency",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "scan_capa",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "event_capa",
+          "array_size": "6",
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "sensitivity",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "num_bitrates",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "bitrate",
+          "array_size": "IW_MAX_BITRATES",
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "min_rts",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "max_rts",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "min_frag",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "max_frag",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "min_pmp",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "max_pmp",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "min_pmt",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "max_pmt",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "pmp_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "pmt_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "pm_capa",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "encoding_size",
+          "array_size": "IW_MAX_ENCODING_SIZES",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "num_encoding_sizes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "max_encoding_tokens",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "encoding_login_index",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "txpower_capa",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "num_txpower",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "txpower",
+          "array_size": "IW_MAX_TXPOWER",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "we_version_compiled",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "we_version_source",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "retry_capa",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "retry_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "r_time_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "min_retry",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "max_retry",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "min_r_time",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "max_r_time",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "num_channels",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "num_frequency",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "enc_capa",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "iw_priv_args",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "cmd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "set_args",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "get_args",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "name",
+          "array_size": "IFNAMSIZ",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "iw_event",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "cmd",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

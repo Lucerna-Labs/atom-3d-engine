@@ -1,0 +1,81 @@
+{
+  "filename": "dlm.h",
+  "includes": [
+    "linux/dlmconstants.h",
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "DLM_SBF_DEMOTED",
+      "value": "0x01",
+      "comment": "",
+      "category": "DLM_SBF"
+    },
+    {
+      "name": "DLM_SBF_VALNOTVALID",
+      "value": "0x02",
+      "comment": "",
+      "category": "DLM_SBF"
+    },
+    {
+      "name": "DLM_SBF_ALTMODE",
+      "value": "0x04",
+      "comment": "",
+      "category": "DLM_SBF"
+    },
+    {
+      "name": "DLM_LSFL_TIMEWARN",
+      "value": "0x00000002",
+      "comment": "",
+      "category": "DLM_LSFL"
+    },
+    {
+      "name": "DLM_LSFL_NEWEXCL",
+      "value": "0x00000008",
+      "comment": "",
+      "category": "DLM_LSFL"
+    },
+    {
+      "name": "__DLM_LSFL_RESERVED0",
+      "value": "0x00000010",
+      "comment": "",
+      "category": ""
+    }
+  ],
+  "structs": [
+    {
+      "name": "dlm_lksb",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "sb_status",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "sb_lkid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "sb_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "char *",
+          "name": "sb_lvbptr",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

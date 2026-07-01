@@ -1,0 +1,27 @@
+use rust_ordo_ext::Graph;
+use std::io::Read;
+
+fn main() {
+    let mut input = String::new();
+    std::io::stdin().read_to_string(&mut input).unwrap();
+    let mut graph = Graph::new();
+    for line in input.lines() {
+        let parts: Vec<&str> = line.split_whitespace().collect();
+        if parts.is_empty() {
+            continue;
+        }
+        match parts[0] {
+            "link" => graph.link(parts[1], parts[2]),
+            "reach" => {
+                let result = graph.reach(parts[1], parts[2]);
+                let route = if result.route.is_empty() {
+                    "none".to_string()
+                } else {
+                    result.route.join(">")
+                };
+                println!("reachable={} route={} hops={}", result.reachable, route, result.hops);
+            }
+            _ => {}
+        }
+    }
+}

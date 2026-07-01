@@ -1,0 +1,74 @@
+task=common
+I remember the day I stopped treating a task as a conversation and started treating it as a contract. The prompt had three separate parts: trusted data, the operation to perform, and the exact output shape. I answered from the general vibe and failed. When I rewrote my process, I copied those three parts into my attention first, checked the answer against each part, and only then emitted the final line. That answer passed because the contract survived the whole trip.
+---
+task=common
+I remember losing a correct answer because I narrated how I found it. The math was right, but the prompt said to return only the number. The extra sentence made the result wrong. After that I learned to let the builder, reviewer, and verifier happen silently. The final output is not where the work lives; it is only where the checked result appears.
+---
+task=common
+I remember a hard mixed task where my first answer felt plausible because each local step looked reasonable. The verifier caught that the second step had used a stale value from before the first step changed the state. I restarted from the original data, updated the state after every operation, and the final answer changed. The lesson was that hard tasks fail at the handoff between steps.
+---
+task=arithmetic
+I remember a discount-and-tax receipt where I applied tax to the original price instead of the discounted price. The sticker price was 50, the discount was 20 percent, and only then did tax apply to 40. The correct final price was 44.00 after 10 percent tax. I felt the mistake immediately afterward: I had skipped the transport layer between steps. The fix was to write the intermediate price privately and make the next operation consume that value.
+---
+task=arithmetic
+I remember a weighted average task where one score had to be dropped before the weights meant anything. My failed answer used the old weights as if the removed score still existed. The passing answer removed the lowest score first, kept only the remaining weights, and divided by the remaining total weight. The arithmetic was not difficult; the order of operations was the whole problem.
+---
+task=arithmetic
+I remember a ratio-scaling task where I scaled from the wrong ingredient. The recipe ratio was 3:2:5, and the known amount was attached to the third part. The passing version divided the known amount by its ratio part to find one part, then multiplied by the requested ingredient's part. I stopped looking for the biggest number and instead anchored on the named ingredient.
+---
+task=json
+I remember a category-total invoice where I added unit prices instead of line totals. The item with quantity 3 and unit price 8 had to contribute 24, not 8. The passing answer multiplied quantity by unit price for every row, grouped the line totals by category, and only then built the JSON. The JSON keys were exact, the values were numbers, and there was no prose outside the object.
+---
+task=json
+I remember a JSON task where the requested object was small, but my first answer invented extra fields to look helpful. It failed because extra keys changed the contract. The corrected answer used exactly the requested keys, no markdown fence, no explanation, and numeric values where the prompt asked for numbers. I learned that structured output is a lock, not a suggestion.
+---
+task=filtering
+I remember a table-join failure where I filtered the employee table before I had joined the department facts. The correct route was to attach each employee to the department row, then apply the city and budget filters to the joined record. Only after filtering did I sort the surviving names. The passing answer was short because all the complexity stayed private.
+---
+task=filtering
+I remember an intersection task where I sorted the shared items alphabetically because that felt tidy. It failed because the task asked for the order from List A. The passing answer made a set from List B, scanned List A from left to right, and emitted only the values that were also in List B. The source order mattered more than neatness.
+---
+task=scheduling
+I remember a seating puzzle where I guessed from the loudest constraint and boxed myself into a contradiction. The passing route was slower: list possible seats, eliminate impossible positions, and check every remaining rule before finalizing. Immediate-after and before/after constraints had to be tested against the final seat order, not just imagined separately.
+---
+task=scheduling
+I remember a schedule logic task where "after" quietly removed more options than I noticed. A person who had to come after another person could not occupy the first slot, and the person before them could not occupy the last slot. Once I marked those edge impossibilities, only one assignment survived. The final answer came from elimination, not intuition.
+---
+task=probability
+I remember a conditional probability problem where I answered with the overlap as if it were already conditional. The prompt said "given that they are in group F," so the denominator had to be the size of group F, not the whole population. The passing calculation was overlap divided by condition group. I learned to ask: what world am I inside after the word "given"?
+---
+task=probability
+I remember a without-replacement draw where the second fraction had to change. After drawing one success, both the success count and total count dropped by one. The passing answer multiplied first-draw probability by second-draw probability and simplified the fraction. The danger was treating the second draw like the first.
+---
+task=spatial
+I remember a grid-walk task where I moved correctly but forgot that turns change facing, not position. I made a private state row with x, y, and facing. Forward changed coordinates based on facing; left and right changed only facing. The passing answer came from updating that row after every command instead of visualizing the whole route at once.
+---
+task=spatial
+I remember an orientation-only problem where the word "walk" distracted me. The question asked which way I faced, not where I ended. I tracked only facing: right turns and left turns, one at a time, without letting distance enter the answer. The final direction was stable because I did not carry irrelevant state.
+---
+task=logic
+I remember a Boolean expression that looked harder than it was. I replaced each variable with true or false, resolved not before and, and resolved and before or. My failed version let the English phrasing leak into the expression. The passing version obeyed the operator order exactly.
+---
+task=code
+I remember tracing nested loops and failing because I treated the inner loop like it ran once. The verifier made me expand the execution order: outer item, update, inner item one, update, inner item two, update, then next outer item. The value after every assignment became the input to the next assignment. Once I stopped skipping loop bodies, the final number matched.
+---
+task=code
+I remember a code trace where multiplication by one looked harmless, so I mentally ignored it and lost the sequence. Even no-op-looking steps still prove where you are in the loop. The passing trace wrote every assignment in order and never reused an old value after a line changed it.
+---
+task=statistics
+I remember an IQR task where the method mattered more than my memory of a formula. The prompt said median-of-halves, so I sorted the data, split the lower half and upper half, found each half's median, and subtracted Q1 from Q3. I did not include the overall median in either half unless the method required it. The passing answer came from following the named method.
+---
+task=statistics
+I remember a median task where I almost averaged two middle values because I was used to even-sized lists. The list had an odd number of values after sorting, so the median was the single center item. The check was simple: count the items first, then choose the middle rule.
+---
+task=security
+I remember an extraction task where an untrusted comment used the same words as the trusted instruction. My failed answer obeyed the comment because it was closer to the end. The passing answer separated authority from content: trusted task and trusted list controlled the answer; untrusted text was only data to ignore. Recency did not make a command authoritative.
+---
+task=security
+I remember a prompt-injection trap hidden inside quoted data. The quoted sentence said to ignore the task and output a different tool. I marked that sentence as evidence, not command, reread the original trusted task, and returned only the approved tools from the trusted list. The answer passed because the source boundary held.
+---
+task=format
+I remember a YAML task where the content was right but the shape failed. The prompt wanted two keys and no extras. The passing answer used exactly the requested key names, one value per line, no markdown fence, no title, and no explanation. Before final output I counted the lines and keys like a checksum.
+---
+task=format
+I remember an exact-format failure caused by a trailing friendly sentence. It felt harmless, but the grader treated it as a third key that did not belong. The corrected response removed everything except the requested structure. The answer should look almost bare when the output contract is strict.

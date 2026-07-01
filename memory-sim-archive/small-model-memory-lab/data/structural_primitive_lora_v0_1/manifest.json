@@ -1,0 +1,39 @@
+{
+  "name": "structural_primitive_lora_v0_1",
+  "created": "2026-06-04",
+  "purpose": "LoRA training data for structural primitive reinforcement in compressed small models.",
+  "target_packet": [
+    "FRAME",
+    "CLOCK",
+    "CARRIER",
+    "PARITY",
+    "CHECKSUM",
+    "ECC",
+    "REDUNDANCY",
+    "SUPPRESSION",
+    "COMPRESSION",
+    "STATE_BUFFER",
+    "GAIN_CLAMP",
+    "FRAME",
+    "CLOCK",
+    "ECC",
+    "GAIN_CLAMP"
+  ],
+  "memory_count": 122,
+  "sft_example_count": 584,
+  "train_count": 537,
+  "validation_count": 47,
+  "files": {
+    "memory_tsv": "C:\\Projects\\small-model-memory-lab\\corpus\\structural_primitives_lora_v0_1.tsv",
+    "memory_json": "C:\\Projects\\small-model-memory-lab\\corpus\\structural_primitives_lora_v0_1.json",
+    "train_jsonl": "C:\\Projects\\small-model-memory-lab\\data\\structural_primitive_lora_v0_1\\train.jsonl",
+    "validation_jsonl": "C:\\Projects\\small-model-memory-lab\\data\\structural_primitive_lora_v0_1\\validation.jsonl",
+    "preview": "C:\\Projects\\small-model-memory-lab\\data\\structural_primitive_lora_v0_1\\preview.json"
+  },
+  "notes": [
+    "Memories are first-person episodic records, not direct rules.",
+    "Training examples include recall, application, task solution, compact solution, and repair examples.",
+    "FRAME, CLOCK, ECC, and GAIN_CLAMP are intentionally overweighted to match the repeat-reinforced simulation result.",
+    "ROUTER is intentionally absent from the target packet because simulation showed negative average lift."
+  ]
+}

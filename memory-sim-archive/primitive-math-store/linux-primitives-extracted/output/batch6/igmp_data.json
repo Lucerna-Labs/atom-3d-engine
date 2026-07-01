@@ -1,0 +1,342 @@
+{
+  "filename": "igmp.h",
+  "includes": [
+    "linux/types.h",
+    "asm/byteorder.h"
+  ],
+  "defines": [
+    {
+      "name": "IGMPV3_MODE_IS_INCLUDE",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IGMPV3_MODE_IS_EXCLUDE",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IGMPV3_CHANGE_TO_INCLUDE",
+      "value": "3",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IGMPV3_CHANGE_TO_EXCLUDE",
+      "value": "4",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IGMPV3_ALLOW_NEW_SOURCES",
+      "value": "5",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IGMPV3_BLOCK_OLD_SOURCES",
+      "value": "6",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IGMP_HOST_MEMBERSHIP_QUERY",
+      "value": "0x11",
+      "comment": "From RFC1112",
+      "category": "IGMP_HOST"
+    },
+    {
+      "name": "IGMP_HOST_MEMBERSHIP_REPORT",
+      "value": "0x12",
+      "comment": "Ditto",
+      "category": "IGMP_HOST"
+    },
+    {
+      "name": "IGMP_DVMRP",
+      "value": "0x13",
+      "comment": "DVMRP routing",
+      "category": ""
+    },
+    {
+      "name": "IGMP_PIM",
+      "value": "0x14",
+      "comment": "PIM routing",
+      "category": ""
+    },
+    {
+      "name": "IGMP_TRACE",
+      "value": "0x15",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IGMPV2_HOST_MEMBERSHIP_REPORT",
+      "value": "0x16",
+      "comment": "V2 version of 0x12",
+      "category": ""
+    },
+    {
+      "name": "IGMP_HOST_LEAVE_MESSAGE",
+      "value": "0x17",
+      "comment": "",
+      "category": "IGMP_HOST"
+    },
+    {
+      "name": "IGMPV3_HOST_MEMBERSHIP_REPORT",
+      "value": "0x22",
+      "comment": "V3 version of 0x12",
+      "category": ""
+    },
+    {
+      "name": "IGMP_MTRACE_RESP",
+      "value": "0x1e",
+      "comment": "",
+      "category": "IGMP_MTRACE"
+    },
+    {
+      "name": "IGMP_MTRACE",
+      "value": "0x1f",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IGMP_MRDISC_ADV",
+      "value": "0x30",
+      "comment": "From RFC4286",
+      "category": "IGMP_MRDISC"
+    },
+    {
+      "name": "IGMP_DELAYING_MEMBER",
+      "value": "0x01",
+      "comment": "",
+      "category": "IGMP_DELAYING"
+    },
+    {
+      "name": "IGMP_IDLE_MEMBER",
+      "value": "0x02",
+      "comment": "",
+      "category": "IGMP_IDLE"
+    },
+    {
+      "name": "IGMP_LAZY_MEMBER",
+      "value": "0x03",
+      "comment": "",
+      "category": "IGMP_LAZY"
+    },
+    {
+      "name": "IGMP_SLEEPING_MEMBER",
+      "value": "0x04",
+      "comment": "",
+      "category": "IGMP_SLEEPING"
+    },
+    {
+      "name": "IGMP_AWAKENING_MEMBER",
+      "value": "0x05",
+      "comment": "",
+      "category": "IGMP_AWAKENING"
+    },
+    {
+      "name": "IGMP_MINLEN",
+      "value": "8",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IGMP_MAX_HOST_REPORT_DELAY",
+      "value": "10",
+      "comment": "max delay for response to",
+      "category": "IGMP_MAX"
+    },
+    {
+      "name": "IGMP_TIMER_SCALE",
+      "value": "10",
+      "comment": "denotes that the igmphdr->timer field",
+      "category": "IGMP_TIMER"
+    },
+    {
+      "name": "IGMP_AGE_THRESHOLD",
+      "value": "400",
+      "comment": "If this host don't hear any IGMP V1",
+      "category": "IGMP_AGE"
+    },
+    {
+      "name": "IGMP_ALL_HOSTS",
+      "value": "htonl(0xE0000001L)",
+      "comment": "",
+      "category": "IGMP_ALL"
+    },
+    {
+      "name": "IGMP_ALL_ROUTER",
+      "value": "htonl(0xE0000002L)",
+      "comment": "",
+      "category": "IGMP_ALL"
+    },
+    {
+      "name": "IGMPV3_ALL_MCR",
+      "value": "htonl(0xE0000016L)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "IGMP_LOCAL_GROUP",
+      "value": "htonl(0xE0000000L)",
+      "comment": "",
+      "category": "IGMP_LOCAL"
+    },
+    {
+      "name": "IGMP_LOCAL_GROUP_MASK",
+      "value": "htonl(0xFFFFFF00L)",
+      "comment": "",
+      "category": "IGMP_LOCAL"
+    }
+  ],
+  "structs": [
+    {
+      "name": "igmphdr",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "code",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__sum16",
+          "name": "csum",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "group",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "igmpv3_grec",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "grec_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "grec_auxwords",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be16",
+          "name": "grec_nsrcs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "grec_mca",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "igmpv3_report",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "resv1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__sum16",
+          "name": "csum",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be16",
+          "name": "resv2",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be16",
+          "name": "ngrec",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "igmpv3_query",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "code",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__sum16",
+          "name": "csum",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "group",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "qqic",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be16",
+          "name": "nsrcs",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

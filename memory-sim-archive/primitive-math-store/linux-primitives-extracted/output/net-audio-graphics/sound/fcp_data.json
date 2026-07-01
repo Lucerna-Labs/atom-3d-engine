@@ -1,0 +1,156 @@
+{
+  "filename": "fcp.h",
+  "includes": [
+    "linux/types.h",
+    "linux/ioctl.h"
+  ],
+  "defines": [
+    {
+      "name": "FCP_HWDEP_MAJOR",
+      "value": "2",
+      "comment": "",
+      "category": "FCP_HWDEP"
+    },
+    {
+      "name": "FCP_HWDEP_MINOR",
+      "value": "0",
+      "comment": "",
+      "category": "FCP_HWDEP"
+    },
+    {
+      "name": "FCP_HWDEP_SUBMINOR",
+      "value": "0",
+      "comment": "",
+      "category": "FCP_HWDEP"
+    },
+    {
+      "name": "FCP_HWDEP_VERSION",
+      "value": "",
+      "comment": "",
+      "category": "FCP_HWDEP"
+    },
+    {
+      "name": "FCP_IOCTL_PVERSION",
+      "value": "_IOR('S', 0x60, int)",
+      "comment": "",
+      "category": "FCP_IOCTL"
+    },
+    {
+      "name": "FCP_IOCTL_INIT",
+      "value": "_IOWR('S', 0x64, struct fcp_init)",
+      "comment": "",
+      "category": "FCP_IOCTL"
+    },
+    {
+      "name": "FCP_IOCTL_CMD",
+      "value": "_IOWR('S', 0x65, struct fcp_cmd)",
+      "comment": "",
+      "category": "FCP_IOCTL"
+    },
+    {
+      "name": "FCP_IOCTL_SET_METER_MAP",
+      "value": "_IOW('S', 0x66, struct fcp_meter_map)",
+      "comment": "",
+      "category": "FCP_IOCTL"
+    },
+    {
+      "name": "FCP_IOCTL_SET_METER_LABELS",
+      "value": "_IOW('S', 0x67, struct fcp_meter_labels)",
+      "comment": "",
+      "category": "FCP_IOCTL"
+    }
+  ],
+  "structs": [
+    {
+      "name": "fcp_init",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "step0_resp_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "step2_resp_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "init1_opcode",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "init2_opcode",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fcp_cmd",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "opcode",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "req_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "resp_size",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fcp_meter_map",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "map_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "meter_slots",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fcp_meter_labels",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "labels_size",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

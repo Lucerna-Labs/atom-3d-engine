@@ -1,0 +1,300 @@
+{
+  "filename": "mroute.h",
+  "includes": [
+    "linux/sockios.h",
+    "linux/types.h",
+    "linux/in.h"
+  ],
+  "defines": [
+    {
+      "name": "MRT_BASE",
+      "value": "200",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "MRT_INIT",
+      "value": "(MRT_BASE)",
+      "comment": "Activate the kernel mroute code",
+      "category": ""
+    },
+    {
+      "name": "MRT_DONE",
+      "value": "(MRT_BASE+1)",
+      "comment": "Shutdown the kernel mroute",
+      "category": ""
+    },
+    {
+      "name": "MRT_ADD_VIF",
+      "value": "(MRT_BASE+2)",
+      "comment": "Add a virtual interface",
+      "category": "MRT_ADD"
+    },
+    {
+      "name": "MRT_DEL_VIF",
+      "value": "(MRT_BASE+3)",
+      "comment": "Delete a virtual interface",
+      "category": "MRT_DEL"
+    },
+    {
+      "name": "MRT_ADD_MFC",
+      "value": "(MRT_BASE+4)",
+      "comment": "Add a multicast forwarding entry",
+      "category": "MRT_ADD"
+    },
+    {
+      "name": "MRT_DEL_MFC",
+      "value": "(MRT_BASE+5)",
+      "comment": "Delete a multicast forwarding entry",
+      "category": "MRT_DEL"
+    },
+    {
+      "name": "MRT_VERSION",
+      "value": "(MRT_BASE+6)",
+      "comment": "Get the kernel multicast version",
+      "category": ""
+    },
+    {
+      "name": "MRT_ASSERT",
+      "value": "(MRT_BASE+7)",
+      "comment": "Activate PIM assert mode",
+      "category": ""
+    },
+    {
+      "name": "MRT_PIM",
+      "value": "(MRT_BASE+8)",
+      "comment": "enable PIM code",
+      "category": ""
+    },
+    {
+      "name": "MRT_TABLE",
+      "value": "(MRT_BASE+9)",
+      "comment": "Specify mroute table ID",
+      "category": ""
+    },
+    {
+      "name": "MRT_ADD_MFC_PROXY",
+      "value": "(MRT_BASE+10)",
+      "comment": "Add a (*,*|G) mfc entry",
+      "category": "MRT_ADD"
+    },
+    {
+      "name": "MRT_DEL_MFC_PROXY",
+      "value": "(MRT_BASE+11)",
+      "comment": "Del a (*,*|G) mfc entry",
+      "category": "MRT_DEL"
+    },
+    {
+      "name": "MRT_FLUSH",
+      "value": "(MRT_BASE+12)",
+      "comment": "Flush all mfc entries and/or vifs",
+      "category": ""
+    },
+    {
+      "name": "MRT_MAX",
+      "value": "(MRT_BASE+12)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SIOCGETVIFCNT",
+      "value": "SIOCPROTOPRIVATE",
+      "comment": "IP protocol privates",
+      "category": ""
+    },
+    {
+      "name": "SIOCGETSGCNT",
+      "value": "(SIOCPROTOPRIVATE+1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SIOCGETRPF",
+      "value": "(SIOCPROTOPRIVATE+2)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "MRT_FLUSH_MFC",
+      "value": "1",
+      "comment": "Flush multicast entries",
+      "category": "MRT_FLUSH"
+    },
+    {
+      "name": "MRT_FLUSH_MFC_STATIC",
+      "value": "2",
+      "comment": "Flush static multicast entries",
+      "category": "MRT_FLUSH"
+    },
+    {
+      "name": "MRT_FLUSH_VIFS",
+      "value": "4",
+      "comment": "Flush multicast vifs",
+      "category": "MRT_FLUSH"
+    },
+    {
+      "name": "MRT_FLUSH_VIFS_STATIC",
+      "value": "8",
+      "comment": "Flush static multicast vifs",
+      "category": "MRT_FLUSH"
+    },
+    {
+      "name": "MAXVIFS",
+      "value": "32",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ALL_VIFS",
+      "value": "((vifi_t)(-1))",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "VIFF_TUNNEL",
+      "value": "0x1",
+      "comment": "IPIP tunnel",
+      "category": ""
+    },
+    {
+      "name": "VIFF_SRCRT",
+      "value": "0x2",
+      "comment": "NI",
+      "category": ""
+    },
+    {
+      "name": "VIFF_REGISTER",
+      "value": "0x4",
+      "comment": "register vif",
+      "category": ""
+    },
+    {
+      "name": "VIFF_USE_IFINDEX",
+      "value": "0x8\t/* use vifc_lcl_ifindex instead of",
+      "comment": "",
+      "category": "VIFF_USE"
+    },
+    {
+      "name": "IPMRA_TABLE_MAX",
+      "value": "(__IPMRA_TABLE_MAX - 1)",
+      "comment": "",
+      "category": "IPMRA_TABLE"
+    },
+    {
+      "name": "IPMRA_VIF_MAX",
+      "value": "(__IPMRA_VIF_MAX - 1)",
+      "comment": "",
+      "category": "IPMRA_VIF"
+    },
+    {
+      "name": "IPMRA_VIFA_MAX",
+      "value": "(__IPMRA_VIFA_MAX - 1)",
+      "comment": "",
+      "category": "IPMRA_VIFA"
+    },
+    {
+      "name": "IPMRA_CREPORT_MAX",
+      "value": "(__IPMRA_CREPORT_MAX - 1)",
+      "comment": "",
+      "category": "IPMRA_CREPORT"
+    },
+    {
+      "name": "MFC_ASSERT_THRESH",
+      "value": "(3*HZ)",
+      "comment": "Maximal freq. of asserts",
+      "category": "MFC_ASSERT"
+    },
+    {
+      "name": "IGMPMSG_NOCACHE",
+      "value": "1",
+      "comment": "Kern cache fill request to mrouted",
+      "category": ""
+    },
+    {
+      "name": "IGMPMSG_WRONGVIF",
+      "value": "2",
+      "comment": "For PIM assert processing (unused)",
+      "category": ""
+    },
+    {
+      "name": "IGMPMSG_WHOLEPKT",
+      "value": "3",
+      "comment": "For PIM Register processing",
+      "category": ""
+    },
+    {
+      "name": "IGMPMSG_WRVIFWHOLE",
+      "value": "4",
+      "comment": "For PIM Register and assert processing",
+      "category": ""
+    }
+  ],
+  "structs": [
+    {
+      "name": "vifctl",
+      "fields": [
+        {
+          "type_name": "vifi_t",
+          "name": "vifc_vifi",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "vifc_lcl_ifindex",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "mfcctl",
+      "fields": [
+        {
+          "type_name": "vifi_t",
+          "name": "mfcc_parent",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "mfcc_expire",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "sioc_sg_req",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "sioc_vif_req",
+      "fields": [
+        {
+          "type_name": "vifi_t",
+          "name": "vifi",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "igmpmsg",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

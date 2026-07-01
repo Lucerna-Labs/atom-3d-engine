@@ -1,0 +1,2538 @@
+{
+  "filename": "vfio.h",
+  "includes": [
+    "linux/types.h",
+    "linux/ioctl.h",
+    "linux/stddef.h"
+  ],
+  "defines": [
+    {
+      "name": "VFIO_API_VERSION",
+      "value": "0",
+      "comment": "",
+      "category": "VFIO_API"
+    },
+    {
+      "name": "VFIO_TYPE1_IOMMU",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "VFIO_SPAPR_TCE_IOMMU",
+      "value": "2",
+      "comment": "",
+      "category": "VFIO_SPAPR"
+    },
+    {
+      "name": "VFIO_TYPE1v2_IOMMU",
+      "value": "3",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "VFIO_DMA_CC_IOMMU",
+      "value": "4",
+      "comment": "",
+      "category": "VFIO_DMA"
+    },
+    {
+      "name": "VFIO_EEH",
+      "value": "5",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "__VFIO_RESERVED_TYPE1_NESTING_IOMMU",
+      "value": "6",
+      "comment": "Implies v2",
+      "category": ""
+    },
+    {
+      "name": "VFIO_SPAPR_TCE_v2_IOMMU",
+      "value": "7",
+      "comment": "",
+      "category": "VFIO_SPAPR"
+    },
+    {
+      "name": "VFIO_NOIOMMU_IOMMU",
+      "value": "8",
+      "comment": "",
+      "category": "VFIO_NOIOMMU"
+    },
+    {
+      "name": "VFIO_UNMAP_ALL",
+      "value": "9",
+      "comment": "",
+      "category": "VFIO_UNMAP"
+    },
+    {
+      "name": "VFIO_UPDATE_VADDR",
+      "value": "10",
+      "comment": "",
+      "category": "VFIO_UPDATE"
+    },
+    {
+      "name": "VFIO_TYPE",
+      "value": "(';')",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "VFIO_BASE",
+      "value": "100",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "VFIO_GET_API_VERSION",
+      "value": "_IO(VFIO_TYPE, VFIO_BASE + 0)",
+      "comment": "",
+      "category": "VFIO_GET"
+    },
+    {
+      "name": "VFIO_CHECK_EXTENSION",
+      "value": "_IO(VFIO_TYPE, VFIO_BASE + 1)",
+      "comment": "",
+      "category": "VFIO_CHECK"
+    },
+    {
+      "name": "VFIO_SET_IOMMU",
+      "value": "_IO(VFIO_TYPE, VFIO_BASE + 2)",
+      "comment": "",
+      "category": "VFIO_SET"
+    },
+    {
+      "name": "VFIO_GROUP_FLAGS_VIABLE",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "VFIO_GROUP"
+    },
+    {
+      "name": "VFIO_GROUP_FLAGS_CONTAINER_SET",
+      "value": "(1 << 1)",
+      "comment": "",
+      "category": "VFIO_GROUP"
+    },
+    {
+      "name": "VFIO_GROUP_GET_STATUS",
+      "value": "_IO(VFIO_TYPE, VFIO_BASE + 3)",
+      "comment": "",
+      "category": "VFIO_GROUP"
+    },
+    {
+      "name": "VFIO_GROUP_SET_CONTAINER",
+      "value": "_IO(VFIO_TYPE, VFIO_BASE + 4)",
+      "comment": "",
+      "category": "VFIO_GROUP"
+    },
+    {
+      "name": "VFIO_GROUP_UNSET_CONTAINER",
+      "value": "_IO(VFIO_TYPE, VFIO_BASE + 5)",
+      "comment": "",
+      "category": "VFIO_GROUP"
+    },
+    {
+      "name": "VFIO_GROUP_GET_DEVICE_FD",
+      "value": "_IO(VFIO_TYPE, VFIO_BASE + 6)",
+      "comment": "",
+      "category": "VFIO_GROUP"
+    },
+    {
+      "name": "VFIO_DEVICE_FLAGS_RESET",
+      "value": "(1 << 0)",
+      "comment": "Device supports reset",
+      "category": "VFIO_DEVICE"
+    },
+    {
+      "name": "VFIO_DEVICE_FLAGS_PCI",
+      "value": "(1 << 1)",
+      "comment": "vfio-pci device",
+      "category": "VFIO_DEVICE"
+    },
+    {
+      "name": "VFIO_DEVICE_FLAGS_PLATFORM",
+      "value": "(1 << 2)",
+      "comment": "vfio-platform device",
+      "category": "VFIO_DEVICE"
+    },
+    {
+      "name": "VFIO_DEVICE_FLAGS_AMBA",
+      "value": "(1 << 3)",
+      "comment": "vfio-amba device",
+      "category": "VFIO_DEVICE"
+    },
+    {
+      "name": "VFIO_DEVICE_FLAGS_CCW",
+      "value": "(1 << 4)",
+      "comment": "vfio-ccw device",
+      "category": "VFIO_DEVICE"
+    },
+    {
+      "name": "VFIO_DEVICE_FLAGS_AP",
+      "value": "(1 << 5)",
+      "comment": "vfio-ap device",
+      "category": "VFIO_DEVICE"
+    },
+    {
+      "name": "VFIO_DEVICE_FLAGS_FSL_MC",
+      "value": "(1 << 6)",
+      "comment": "vfio-fsl-mc device",
+      "category": "VFIO_DEVICE"
+    },
+    {
+      "name": "VFIO_DEVICE_FLAGS_CAPS",
+      "value": "(1 << 7)",
+      "comment": "Info supports caps",
+      "category": "VFIO_DEVICE"
+    },
+    {
+      "name": "VFIO_DEVICE_FLAGS_CDX",
+      "value": "(1 << 8)",
+      "comment": "vfio-cdx device",
+      "category": "VFIO_DEVICE"
+    },
+    {
+      "name": "VFIO_DEVICE_GET_INFO",
+      "value": "_IO(VFIO_TYPE, VFIO_BASE + 7)",
+      "comment": "",
+      "category": "VFIO_DEVICE"
+    },
+    {
+      "name": "VFIO_DEVICE_API_PCI_STRING",
+      "value": "\"vfio-pci\"",
+      "comment": "",
+      "category": "VFIO_DEVICE"
+    },
+    {
+      "name": "VFIO_DEVICE_API_PLATFORM_STRING",
+      "value": "\"vfio-platform\"",
+      "comment": "",
+      "category": "VFIO_DEVICE"
+    },
+    {
+      "name": "VFIO_DEVICE_API_AMBA_STRING",
+      "value": "\"vfio-amba\"",
+      "comment": "",
+      "category": "VFIO_DEVICE"
+    },
+    {
+      "name": "VFIO_DEVICE_API_CCW_STRING",
+      "value": "\"vfio-ccw\"",
+      "comment": "",
+      "category": "VFIO_DEVICE"
+    },
+    {
+      "name": "VFIO_DEVICE_API_AP_STRING",
+      "value": "\"vfio-ap\"",
+      "comment": "",
+      "category": "VFIO_DEVICE"
+    },
+    {
+      "name": "VFIO_DEVICE_INFO_CAP_ZPCI_BASE",
+      "value": "1",
+      "comment": "",
+      "category": "VFIO_DEVICE"
+    },
+    {
+      "name": "VFIO_DEVICE_INFO_CAP_ZPCI_GROUP",
+      "value": "2",
+      "comment": "",
+      "category": "VFIO_DEVICE"
+    },
+    {
+      "name": "VFIO_DEVICE_INFO_CAP_ZPCI_UTIL",
+      "value": "3",
+      "comment": "",
+      "category": "VFIO_DEVICE"
+    },
+    {
+      "name": "VFIO_DEVICE_INFO_CAP_ZPCI_PFIP",
+      "value": "4",
+      "comment": "",
+      "category": "VFIO_DEVICE"
+    },
+    {
+      "name": "VFIO_DEVICE_INFO_CAP_PCI_ATOMIC_COMP",
+      "value": "5",
+      "comment": "",
+      "category": "VFIO_DEVICE"
+    },
+    {
+      "name": "VFIO_PCI_ATOMIC_COMP32",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "VFIO_PCI"
+    },
+    {
+      "name": "VFIO_PCI_ATOMIC_COMP64",
+      "value": "(1 << 1)",
+      "comment": "",
+      "category": "VFIO_PCI"
+    },
+    {
+      "name": "VFIO_PCI_ATOMIC_COMP128",
+      "value": "(1 << 2)",
+      "comment": "",
+      "category": "VFIO_PCI"
+    },
+    {
+      "name": "VFIO_REGION_INFO_FLAG_READ",
+      "value": "(1 << 0)",
+      "comment": "Region supports read",
+      "category": "VFIO_REGION"
+    },
+    {
+      "name": "VFIO_REGION_INFO_FLAG_WRITE",
+      "value": "(1 << 1)",
+      "comment": "Region supports write",
+      "category": "VFIO_REGION"
+    },
+    {
+      "name": "VFIO_REGION_INFO_FLAG_MMAP",
+      "value": "(1 << 2)",
+      "comment": "Region supports mmap",
+      "category": "VFIO_REGION"
+    },
+    {
+      "name": "VFIO_REGION_INFO_FLAG_CAPS",
+      "value": "(1 << 3)",
+      "comment": "Info supports caps",
+      "category": "VFIO_REGION"
+    },
+    {
+      "name": "VFIO_DEVICE_GET_REGION_INFO",
+      "value": "_IO(VFIO_TYPE, VFIO_BASE + 8)",
+      "comment": "",
+      "category": "VFIO_DEVICE"
+    },
+    {
+      "name": "VFIO_REGION_INFO_CAP_SPARSE_MMAP",
+      "value": "1",
+      "comment": "",
+      "category": "VFIO_REGION"
+    },
+    {
+      "name": "VFIO_REGION_INFO_CAP_TYPE",
+      "value": "2",
+      "comment": "",
+      "category": "VFIO_REGION"
+    },
+    {
+      "name": "VFIO_REGION_TYPE_PCI_VENDOR_TYPE",
+      "value": "(1 << 31)",
+      "comment": "",
+      "category": "VFIO_REGION"
+    },
+    {
+      "name": "VFIO_REGION_TYPE_PCI_VENDOR_MASK",
+      "value": "(0xffff)",
+      "comment": "",
+      "category": "VFIO_REGION"
+    },
+    {
+      "name": "VFIO_REGION_TYPE_GFX",
+      "value": "(1)",
+      "comment": "",
+      "category": "VFIO_REGION"
+    },
+    {
+      "name": "VFIO_REGION_TYPE_CCW",
+      "value": "(2)",
+      "comment": "",
+      "category": "VFIO_REGION"
+    },
+    {
+      "name": "VFIO_REGION_TYPE_MIGRATION_DEPRECATED",
+      "value": "(3)",
+      "comment": "",
+      "category": "VFIO_REGION"
+    },
+    {
+      "name": "VFIO_REGION_SUBTYPE_INTEL_IGD_OPREGION",
+      "value": "(1)",
+      "comment": "",
+      "category": "VFIO_REGION"
+    },
+    {
+      "name": "VFIO_REGION_SUBTYPE_INTEL_IGD_HOST_CFG",
+      "value": "(2)",
+      "comment": "",
+      "category": "VFIO_REGION"
+    },
+    {
+      "name": "VFIO_REGION_SUBTYPE_INTEL_IGD_LPC_CFG",
+      "value": "(3)",
+      "comment": "",
+      "category": "VFIO_REGION"
+    },
+    {
+      "name": "VFIO_REGION_SUBTYPE_NVIDIA_NVLINK2_RAM",
+      "value": "(1)",
+      "comment": "",
+      "category": "VFIO_REGION"
+    },
+    {
+      "name": "VFIO_REGION_SUBTYPE_IBM_NVLINK2_ATSD",
+      "value": "(1)",
+      "comment": "",
+      "category": "VFIO_REGION"
+    },
+    {
+      "name": "VFIO_REGION_SUBTYPE_GFX_EDID",
+      "value": "(1)",
+      "comment": "",
+      "category": "VFIO_REGION"
+    },
+    {
+      "name": "VFIO_DEVICE_GFX_LINK_STATE_UP",
+      "value": "1",
+      "comment": "",
+      "category": "VFIO_DEVICE"
+    },
+    {
+      "name": "VFIO_DEVICE_GFX_LINK_STATE_DOWN",
+      "value": "2",
+      "comment": "",
+      "category": "VFIO_DEVICE"
+    },
+    {
+      "name": "VFIO_REGION_SUBTYPE_CCW_ASYNC_CMD",
+      "value": "(1)",
+      "comment": "",
+      "category": "VFIO_REGION"
+    },
+    {
+      "name": "VFIO_REGION_SUBTYPE_CCW_SCHIB",
+      "value": "(2)",
+      "comment": "",
+      "category": "VFIO_REGION"
+    },
+    {
+      "name": "VFIO_REGION_SUBTYPE_CCW_CRW",
+      "value": "(3)",
+      "comment": "",
+      "category": "VFIO_REGION"
+    },
+    {
+      "name": "VFIO_REGION_SUBTYPE_MIGRATION_DEPRECATED",
+      "value": "(1)",
+      "comment": "",
+      "category": "VFIO_REGION"
+    },
+    {
+      "name": "VFIO_DEVICE_STATE_V1_STOP",
+      "value": "(0)",
+      "comment": "",
+      "category": "VFIO_DEVICE"
+    },
+    {
+      "name": "VFIO_DEVICE_STATE_V1_RUNNING",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "VFIO_DEVICE"
+    },
+    {
+      "name": "VFIO_DEVICE_STATE_V1_SAVING",
+      "value": "(1 << 1)",
+      "comment": "",
+      "category": "VFIO_DEVICE"
+    },
+    {
+      "name": "VFIO_DEVICE_STATE_V1_RESUMING",
+      "value": "(1 << 2)",
+      "comment": "",
+      "category": "VFIO_DEVICE"
+    },
+    {
+      "name": "VFIO_DEVICE_STATE_MASK",
+      "value": "(VFIO_DEVICE_STATE_V1_RUNNING | ",
+      "comment": "",
+      "category": "VFIO_DEVICE"
+    },
+    {
+      "name": "VFIO_REGION_INFO_CAP_MSIX_MAPPABLE",
+      "value": "3",
+      "comment": "",
+      "category": "VFIO_REGION"
+    },
+    {
+      "name": "VFIO_REGION_INFO_CAP_NVLINK2_SSATGT",
+      "value": "4",
+      "comment": "",
+      "category": "VFIO_REGION"
+    },
+    {
+      "name": "VFIO_REGION_INFO_CAP_NVLINK2_LNKSPD",
+      "value": "5",
+      "comment": "",
+      "category": "VFIO_REGION"
+    },
+    {
+      "name": "VFIO_IRQ_INFO_EVENTFD",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "VFIO_IRQ"
+    },
+    {
+      "name": "VFIO_IRQ_INFO_MASKABLE",
+      "value": "(1 << 1)",
+      "comment": "",
+      "category": "VFIO_IRQ"
+    },
+    {
+      "name": "VFIO_IRQ_INFO_AUTOMASKED",
+      "value": "(1 << 2)",
+      "comment": "",
+      "category": "VFIO_IRQ"
+    },
+    {
+      "name": "VFIO_IRQ_INFO_NORESIZE",
+      "value": "(1 << 3)",
+      "comment": "",
+      "category": "VFIO_IRQ"
+    },
+    {
+      "name": "VFIO_DEVICE_GET_IRQ_INFO",
+      "value": "_IO(VFIO_TYPE, VFIO_BASE + 9)",
+      "comment": "",
+      "category": "VFIO_DEVICE"
+    },
+    {
+      "name": "VFIO_IRQ_SET_DATA_NONE",
+      "value": "(1 << 0)",
+      "comment": "Data not present",
+      "category": "VFIO_IRQ"
+    },
+    {
+      "name": "VFIO_IRQ_SET_DATA_BOOL",
+      "value": "(1 << 1)",
+      "comment": "Data is bool (u8)",
+      "category": "VFIO_IRQ"
+    },
+    {
+      "name": "VFIO_IRQ_SET_DATA_EVENTFD",
+      "value": "(1 << 2)",
+      "comment": "Data is eventfd (s32)",
+      "category": "VFIO_IRQ"
+    },
+    {
+      "name": "VFIO_IRQ_SET_ACTION_MASK",
+      "value": "(1 << 3)",
+      "comment": "Mask interrupt",
+      "category": "VFIO_IRQ"
+    },
+    {
+      "name": "VFIO_IRQ_SET_ACTION_UNMASK",
+      "value": "(1 << 4)",
+      "comment": "Unmask interrupt",
+      "category": "VFIO_IRQ"
+    },
+    {
+      "name": "VFIO_IRQ_SET_ACTION_TRIGGER",
+      "value": "(1 << 5)",
+      "comment": "Trigger interrupt",
+      "category": "VFIO_IRQ"
+    },
+    {
+      "name": "VFIO_DEVICE_SET_IRQS",
+      "value": "_IO(VFIO_TYPE, VFIO_BASE + 10)",
+      "comment": "",
+      "category": "VFIO_DEVICE"
+    },
+    {
+      "name": "VFIO_IRQ_SET_DATA_TYPE_MASK",
+      "value": "(VFIO_IRQ_SET_DATA_NONE | ",
+      "comment": "",
+      "category": "VFIO_IRQ"
+    },
+    {
+      "name": "VFIO_IRQ_SET_ACTION_TYPE_MASK",
+      "value": "(VFIO_IRQ_SET_ACTION_MASK | ",
+      "comment": "",
+      "category": "VFIO_IRQ"
+    },
+    {
+      "name": "VFIO_DEVICE_RESET",
+      "value": "_IO(VFIO_TYPE, VFIO_BASE + 11)",
+      "comment": "",
+      "category": "VFIO_DEVICE"
+    },
+    {
+      "name": "VFIO_PCI_DEVID_OWNED",
+      "value": "0",
+      "comment": "",
+      "category": "VFIO_PCI"
+    },
+    {
+      "name": "VFIO_PCI_DEVID_NOT_OWNED",
+      "value": "-1",
+      "comment": "",
+      "category": "VFIO_PCI"
+    },
+    {
+      "name": "VFIO_PCI_HOT_RESET_FLAG_DEV_ID",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "VFIO_PCI"
+    },
+    {
+      "name": "VFIO_PCI_HOT_RESET_FLAG_DEV_ID_OWNED",
+      "value": "(1 << 1)",
+      "comment": "",
+      "category": "VFIO_PCI"
+    },
+    {
+      "name": "VFIO_DEVICE_GET_PCI_HOT_RESET_INFO",
+      "value": "_IO(VFIO_TYPE, VFIO_BASE + 12)",
+      "comment": "",
+      "category": "VFIO_DEVICE"
+    },
+    {
+      "name": "VFIO_DEVICE_PCI_HOT_RESET",
+      "value": "_IO(VFIO_TYPE, VFIO_BASE + 13)",
+      "comment": "",
+      "category": "VFIO_DEVICE"
+    },
+    {
+      "name": "VFIO_GFX_PLANE_TYPE_PROBE",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "VFIO_GFX"
+    },
+    {
+      "name": "VFIO_GFX_PLANE_TYPE_DMABUF",
+      "value": "(1 << 1)",
+      "comment": "",
+      "category": "VFIO_GFX"
+    },
+    {
+      "name": "VFIO_GFX_PLANE_TYPE_REGION",
+      "value": "(1 << 2)",
+      "comment": "",
+      "category": "VFIO_GFX"
+    },
+    {
+      "name": "VFIO_DEVICE_QUERY_GFX_PLANE",
+      "value": "_IO(VFIO_TYPE, VFIO_BASE + 14)",
+      "comment": "",
+      "category": "VFIO_DEVICE"
+    },
+    {
+      "name": "VFIO_DEVICE_GET_GFX_DMABUF",
+      "value": "_IO(VFIO_TYPE, VFIO_BASE + 15)",
+      "comment": "",
+      "category": "VFIO_DEVICE"
+    },
+    {
+      "name": "VFIO_DEVICE_IOEVENTFD_8",
+      "value": "(1 << 0)",
+      "comment": "1-byte write",
+      "category": "VFIO_DEVICE"
+    },
+    {
+      "name": "VFIO_DEVICE_IOEVENTFD_16",
+      "value": "(1 << 1)",
+      "comment": "2-byte write",
+      "category": "VFIO_DEVICE"
+    },
+    {
+      "name": "VFIO_DEVICE_IOEVENTFD_32",
+      "value": "(1 << 2)",
+      "comment": "4-byte write",
+      "category": "VFIO_DEVICE"
+    },
+    {
+      "name": "VFIO_DEVICE_IOEVENTFD_64",
+      "value": "(1 << 3)",
+      "comment": "8-byte write",
+      "category": "VFIO_DEVICE"
+    },
+    {
+      "name": "VFIO_DEVICE_IOEVENTFD_SIZE_MASK",
+      "value": "(0xf)",
+      "comment": "",
+      "category": "VFIO_DEVICE"
+    },
+    {
+      "name": "VFIO_DEVICE_IOEVENTFD",
+      "value": "_IO(VFIO_TYPE, VFIO_BASE + 16)",
+      "comment": "",
+      "category": "VFIO_DEVICE"
+    },
+    {
+      "name": "VFIO_DEVICE_FEATURE_MASK",
+      "value": "(0xffff)",
+      "comment": "16-bit feature index",
+      "category": "VFIO_DEVICE"
+    },
+    {
+      "name": "VFIO_DEVICE_FEATURE_GET",
+      "value": "(1 << 16)",
+      "comment": "Get feature into data[]",
+      "category": "VFIO_DEVICE"
+    },
+    {
+      "name": "VFIO_DEVICE_FEATURE_SET",
+      "value": "(1 << 17)",
+      "comment": "Set feature from data[]",
+      "category": "VFIO_DEVICE"
+    },
+    {
+      "name": "VFIO_DEVICE_FEATURE_PROBE",
+      "value": "(1 << 18)",
+      "comment": "Probe feature support",
+      "category": "VFIO_DEVICE"
+    },
+    {
+      "name": "VFIO_DEVICE_FEATURE",
+      "value": "_IO(VFIO_TYPE, VFIO_BASE + 17)",
+      "comment": "",
+      "category": "VFIO_DEVICE"
+    },
+    {
+      "name": "VFIO_DEVICE_BIND_FLAG_TOKEN",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "VFIO_DEVICE"
+    },
+    {
+      "name": "VFIO_DEVICE_BIND_IOMMUFD",
+      "value": "_IO(VFIO_TYPE, VFIO_BASE + 18)",
+      "comment": "",
+      "category": "VFIO_DEVICE"
+    },
+    {
+      "name": "VFIO_DEVICE_ATTACH_PASID",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "VFIO_DEVICE"
+    },
+    {
+      "name": "VFIO_DEVICE_ATTACH_IOMMUFD_PT",
+      "value": "_IO(VFIO_TYPE, VFIO_BASE + 19)",
+      "comment": "",
+      "category": "VFIO_DEVICE"
+    },
+    {
+      "name": "VFIO_DEVICE_DETACH_PASID",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "VFIO_DEVICE"
+    },
+    {
+      "name": "VFIO_DEVICE_DETACH_IOMMUFD_PT",
+      "value": "_IO(VFIO_TYPE, VFIO_BASE + 20)",
+      "comment": "",
+      "category": "VFIO_DEVICE"
+    },
+    {
+      "name": "VFIO_DEVICE_FEATURE_PCI_VF_TOKEN",
+      "value": "(0)",
+      "comment": "",
+      "category": "VFIO_DEVICE"
+    },
+    {
+      "name": "VFIO_MIGRATION_STOP_COPY",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "VFIO_MIGRATION"
+    },
+    {
+      "name": "VFIO_MIGRATION_P2P",
+      "value": "(1 << 1)",
+      "comment": "",
+      "category": "VFIO_MIGRATION"
+    },
+    {
+      "name": "VFIO_MIGRATION_PRE_COPY",
+      "value": "(1 << 2)",
+      "comment": "",
+      "category": "VFIO_MIGRATION"
+    },
+    {
+      "name": "VFIO_DEVICE_FEATURE_MIGRATION",
+      "value": "1",
+      "comment": "",
+      "category": "VFIO_DEVICE"
+    },
+    {
+      "name": "VFIO_DEVICE_FEATURE_MIG_DEVICE_STATE",
+      "value": "2",
+      "comment": "",
+      "category": "VFIO_DEVICE"
+    },
+    {
+      "name": "VFIO_PRECOPY_INFO_REINIT",
+      "value": "(1 << 0)",
+      "comment": "output - new initial data is present",
+      "category": "VFIO_PRECOPY"
+    },
+    {
+      "name": "VFIO_MIG_GET_PRECOPY_INFO",
+      "value": "_IO(VFIO_TYPE, VFIO_BASE + 21)",
+      "comment": "",
+      "category": "VFIO_MIG"
+    },
+    {
+      "name": "VFIO_DEVICE_FEATURE_LOW_POWER_ENTRY",
+      "value": "3",
+      "comment": "",
+      "category": "VFIO_DEVICE"
+    },
+    {
+      "name": "VFIO_DEVICE_FEATURE_LOW_POWER_ENTRY_WITH_WAKEUP",
+      "value": "4",
+      "comment": "",
+      "category": "VFIO_DEVICE"
+    },
+    {
+      "name": "VFIO_DEVICE_FEATURE_LOW_POWER_EXIT",
+      "value": "5",
+      "comment": "",
+      "category": "VFIO_DEVICE"
+    },
+    {
+      "name": "VFIO_DEVICE_FEATURE_DMA_LOGGING_START",
+      "value": "6",
+      "comment": "",
+      "category": "VFIO_DEVICE"
+    },
+    {
+      "name": "VFIO_DEVICE_FEATURE_DMA_LOGGING_STOP",
+      "value": "7",
+      "comment": "",
+      "category": "VFIO_DEVICE"
+    },
+    {
+      "name": "VFIO_DEVICE_FEATURE_DMA_LOGGING_REPORT",
+      "value": "8",
+      "comment": "",
+      "category": "VFIO_DEVICE"
+    },
+    {
+      "name": "VFIO_DEVICE_FEATURE_MIG_DATA_SIZE",
+      "value": "9",
+      "comment": "",
+      "category": "VFIO_DEVICE"
+    },
+    {
+      "name": "VFIO_DEVICE_FEATURE_CLEAR_MASTER",
+      "value": "0",
+      "comment": "Clear Bus Master",
+      "category": "VFIO_DEVICE"
+    },
+    {
+      "name": "VFIO_DEVICE_FEATURE_SET_MASTER",
+      "value": "1",
+      "comment": "Set Bus Master",
+      "category": "VFIO_DEVICE"
+    },
+    {
+      "name": "VFIO_DEVICE_FEATURE_BUS_MASTER",
+      "value": "10",
+      "comment": "",
+      "category": "VFIO_DEVICE"
+    },
+    {
+      "name": "VFIO_DEVICE_FEATURE_DMA_BUF",
+      "value": "11",
+      "comment": "",
+      "category": "VFIO_DEVICE"
+    },
+    {
+      "name": "VFIO_DEVICE_FEATURE_MIG_PRECOPY_INFOv2",
+      "value": "12",
+      "comment": "",
+      "category": "VFIO_DEVICE"
+    },
+    {
+      "name": "VFIO_IOMMU_INFO_PGSIZES",
+      "value": "(1 << 0)",
+      "comment": "supported page sizes info",
+      "category": "VFIO_IOMMU"
+    },
+    {
+      "name": "VFIO_IOMMU_INFO_CAPS",
+      "value": "(1 << 1)",
+      "comment": "Info supports caps",
+      "category": "VFIO_IOMMU"
+    },
+    {
+      "name": "VFIO_IOMMU_TYPE1_INFO_CAP_IOVA_RANGE",
+      "value": "1",
+      "comment": "",
+      "category": "VFIO_IOMMU"
+    },
+    {
+      "name": "VFIO_IOMMU_TYPE1_INFO_CAP_MIGRATION",
+      "value": "2",
+      "comment": "",
+      "category": "VFIO_IOMMU"
+    },
+    {
+      "name": "VFIO_IOMMU_TYPE1_INFO_DMA_AVAIL",
+      "value": "3",
+      "comment": "",
+      "category": "VFIO_IOMMU"
+    },
+    {
+      "name": "VFIO_IOMMU_GET_INFO",
+      "value": "_IO(VFIO_TYPE, VFIO_BASE + 12)",
+      "comment": "",
+      "category": "VFIO_IOMMU"
+    },
+    {
+      "name": "VFIO_DMA_MAP_FLAG_READ",
+      "value": "(1 << 0)",
+      "comment": "readable from device",
+      "category": "VFIO_DMA"
+    },
+    {
+      "name": "VFIO_DMA_MAP_FLAG_WRITE",
+      "value": "(1 << 1)",
+      "comment": "writable from device",
+      "category": "VFIO_DMA"
+    },
+    {
+      "name": "VFIO_DMA_MAP_FLAG_VADDR",
+      "value": "(1 << 2)",
+      "comment": "",
+      "category": "VFIO_DMA"
+    },
+    {
+      "name": "VFIO_IOMMU_MAP_DMA",
+      "value": "_IO(VFIO_TYPE, VFIO_BASE + 13)",
+      "comment": "",
+      "category": "VFIO_IOMMU"
+    },
+    {
+      "name": "VFIO_DMA_UNMAP_FLAG_GET_DIRTY_BITMAP",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "VFIO_DMA"
+    },
+    {
+      "name": "VFIO_DMA_UNMAP_FLAG_ALL",
+      "value": "(1 << 1)",
+      "comment": "",
+      "category": "VFIO_DMA"
+    },
+    {
+      "name": "VFIO_DMA_UNMAP_FLAG_VADDR",
+      "value": "(1 << 2)",
+      "comment": "",
+      "category": "VFIO_DMA"
+    },
+    {
+      "name": "VFIO_IOMMU_UNMAP_DMA",
+      "value": "_IO(VFIO_TYPE, VFIO_BASE + 14)",
+      "comment": "",
+      "category": "VFIO_IOMMU"
+    },
+    {
+      "name": "VFIO_IOMMU_ENABLE",
+      "value": "_IO(VFIO_TYPE, VFIO_BASE + 15)",
+      "comment": "",
+      "category": "VFIO_IOMMU"
+    },
+    {
+      "name": "VFIO_IOMMU_DISABLE",
+      "value": "_IO(VFIO_TYPE, VFIO_BASE + 16)",
+      "comment": "",
+      "category": "VFIO_IOMMU"
+    },
+    {
+      "name": "VFIO_IOMMU_DIRTY_PAGES_FLAG_START",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "VFIO_IOMMU"
+    },
+    {
+      "name": "VFIO_IOMMU_DIRTY_PAGES_FLAG_STOP",
+      "value": "(1 << 1)",
+      "comment": "",
+      "category": "VFIO_IOMMU"
+    },
+    {
+      "name": "VFIO_IOMMU_DIRTY_PAGES_FLAG_GET_BITMAP",
+      "value": "(1 << 2)",
+      "comment": "",
+      "category": "VFIO_IOMMU"
+    },
+    {
+      "name": "VFIO_IOMMU_DIRTY_PAGES",
+      "value": "_IO(VFIO_TYPE, VFIO_BASE + 17)",
+      "comment": "",
+      "category": "VFIO_IOMMU"
+    },
+    {
+      "name": "VFIO_IOMMU_SPAPR_INFO_DDW",
+      "value": "(1 << 0)",
+      "comment": "DDW supported",
+      "category": "VFIO_IOMMU"
+    },
+    {
+      "name": "VFIO_IOMMU_SPAPR_TCE_GET_INFO",
+      "value": "_IO(VFIO_TYPE, VFIO_BASE + 12)",
+      "comment": "",
+      "category": "VFIO_IOMMU"
+    },
+    {
+      "name": "VFIO_EEH_PE_DISABLE",
+      "value": "0",
+      "comment": "Disable EEH functionality",
+      "category": "VFIO_EEH"
+    },
+    {
+      "name": "VFIO_EEH_PE_ENABLE",
+      "value": "1",
+      "comment": "Enable EEH functionality",
+      "category": "VFIO_EEH"
+    },
+    {
+      "name": "VFIO_EEH_PE_UNFREEZE_IO",
+      "value": "2",
+      "comment": "Enable IO for frozen PE",
+      "category": "VFIO_EEH"
+    },
+    {
+      "name": "VFIO_EEH_PE_UNFREEZE_DMA",
+      "value": "3",
+      "comment": "Enable DMA for frozen PE",
+      "category": "VFIO_EEH"
+    },
+    {
+      "name": "VFIO_EEH_PE_GET_STATE",
+      "value": "4",
+      "comment": "PE state retrieval",
+      "category": "VFIO_EEH"
+    },
+    {
+      "name": "VFIO_EEH_PE_STATE_NORMAL",
+      "value": "0",
+      "comment": "PE in functional state",
+      "category": "VFIO_EEH"
+    },
+    {
+      "name": "VFIO_EEH_PE_STATE_RESET",
+      "value": "1",
+      "comment": "PE reset in progress",
+      "category": "VFIO_EEH"
+    },
+    {
+      "name": "VFIO_EEH_PE_STATE_STOPPED",
+      "value": "2",
+      "comment": "Stopped DMA and IO",
+      "category": "VFIO_EEH"
+    },
+    {
+      "name": "VFIO_EEH_PE_STATE_STOPPED_DMA",
+      "value": "4",
+      "comment": "Stopped DMA only",
+      "category": "VFIO_EEH"
+    },
+    {
+      "name": "VFIO_EEH_PE_STATE_UNAVAIL",
+      "value": "5",
+      "comment": "State unavailable",
+      "category": "VFIO_EEH"
+    },
+    {
+      "name": "VFIO_EEH_PE_RESET_DEACTIVATE",
+      "value": "5",
+      "comment": "Deassert PE reset",
+      "category": "VFIO_EEH"
+    },
+    {
+      "name": "VFIO_EEH_PE_RESET_HOT",
+      "value": "6",
+      "comment": "Assert hot reset",
+      "category": "VFIO_EEH"
+    },
+    {
+      "name": "VFIO_EEH_PE_RESET_FUNDAMENTAL",
+      "value": "7",
+      "comment": "Assert fundamental reset",
+      "category": "VFIO_EEH"
+    },
+    {
+      "name": "VFIO_EEH_PE_CONFIGURE",
+      "value": "8",
+      "comment": "PE configuration",
+      "category": "VFIO_EEH"
+    },
+    {
+      "name": "VFIO_EEH_PE_INJECT_ERR",
+      "value": "9",
+      "comment": "Inject EEH error",
+      "category": "VFIO_EEH"
+    },
+    {
+      "name": "VFIO_EEH_PE_OP",
+      "value": "_IO(VFIO_TYPE, VFIO_BASE + 21)",
+      "comment": "",
+      "category": "VFIO_EEH"
+    },
+    {
+      "name": "VFIO_IOMMU_SPAPR_REGISTER_MEMORY",
+      "value": "_IO(VFIO_TYPE, VFIO_BASE + 17)",
+      "comment": "",
+      "category": "VFIO_IOMMU"
+    },
+    {
+      "name": "VFIO_IOMMU_SPAPR_UNREGISTER_MEMORY",
+      "value": "_IO(VFIO_TYPE, VFIO_BASE + 18)",
+      "comment": "",
+      "category": "VFIO_IOMMU"
+    },
+    {
+      "name": "VFIO_IOMMU_SPAPR_TCE_CREATE",
+      "value": "_IO(VFIO_TYPE, VFIO_BASE + 19)",
+      "comment": "",
+      "category": "VFIO_IOMMU"
+    },
+    {
+      "name": "VFIO_IOMMU_SPAPR_TCE_REMOVE",
+      "value": "_IO(VFIO_TYPE, VFIO_BASE + 20)",
+      "comment": "",
+      "category": "VFIO_IOMMU"
+    }
+  ],
+  "structs": [
+    {
+      "name": "vfio_info_cap_header",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "version",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "next",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "vfio_group_status",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "argsz",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "vfio_device_info",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "argsz",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "num_regions",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "num_irqs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "cap_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "vfio_device_info_cap_pci_atomic_comp",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "vfio_region_info",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "argsz",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "index",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "cap_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__aligned_u64",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__aligned_u64",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "vfio_region_sparse_mmap_area",
+      "fields": [
+        {
+          "type_name": "__aligned_u64",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__aligned_u64",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "vfio_region_info_cap_sparse_mmap",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "nr_areas",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "vfio_region_info_cap_type",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "subtype",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "vfio_region_gfx_edid",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "edid_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "edid_max_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "edid_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "max_xres",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "max_yres",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "link_state",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "vfio_device_migration_info",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "device_state",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__aligned_u64",
+          "name": "pending_bytes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__aligned_u64",
+          "name": "data_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__aligned_u64",
+          "name": "data_size",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "vfio_region_info_cap_nvlink2_ssatgt",
+      "fields": [
+        {
+          "type_name": "__aligned_u64",
+          "name": "tgt",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "vfio_region_info_cap_nvlink2_lnkspd",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "link_speed",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "__pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "vfio_irq_info",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "argsz",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "index",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "count",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "vfio_irq_set",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "argsz",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "index",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "start",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "count",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "vfio_pci_dependent_device",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "group_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "devid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "segment",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "bus",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "devfn",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "vfio_pci_hot_reset_info",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "argsz",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "count",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "vfio_pci_hot_reset",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "argsz",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "count",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "vfio_device_gfx_plane_info",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "argsz",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "drm_plane_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "drm_format",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__aligned_u64",
+          "name": "drm_format_mod",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "width",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "height",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "stride",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "x_pos",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "y_pos",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "x_hot",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "y_hot",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "region_index",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "dmabuf_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "vfio_device_ioeventfd",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "argsz",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__aligned_u64",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__aligned_u64",
+          "name": "data",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "fd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "vfio_device_feature",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "argsz",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "vfio_device_bind_iommufd",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "argsz",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "iommufd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "out_devid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__aligned_u64",
+          "name": "token_uuid_ptr",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "vfio_device_attach_iommufd_pt",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "argsz",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pt_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pasid",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "vfio_device_detach_iommufd_pt",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "argsz",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pasid",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "vfio_device_feature_migration",
+      "fields": [
+        {
+          "type_name": "__aligned_u64",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "vfio_device_feature_mig_state",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "device_state",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "data_fd",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "vfio_precopy_info",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "argsz",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__aligned_u64",
+          "name": "initial_bytes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__aligned_u64",
+          "name": "dirty_bytes",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "vfio_device_low_power_entry_with_wakeup",
+      "fields": [
+        {
+          "type_name": "__s32",
+          "name": "wakeup_eventfd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "vfio_device_feature_dma_logging_control",
+      "fields": [
+        {
+          "type_name": "__aligned_u64",
+          "name": "page_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "num_ranges",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "__reserved",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__aligned_u64",
+          "name": "ranges",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "vfio_device_feature_dma_logging_range",
+      "fields": [
+        {
+          "type_name": "__aligned_u64",
+          "name": "iova",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__aligned_u64",
+          "name": "length",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "vfio_device_feature_dma_logging_report",
+      "fields": [
+        {
+          "type_name": "__aligned_u64",
+          "name": "iova",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__aligned_u64",
+          "name": "length",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__aligned_u64",
+          "name": "page_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__aligned_u64",
+          "name": "bitmap",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "vfio_device_feature_mig_data_size",
+      "fields": [
+        {
+          "type_name": "__aligned_u64",
+          "name": "stop_copy_length",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "vfio_device_feature_bus_master",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "op",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "vfio_region_dma_range",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "length",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "vfio_device_feature_dma_buf",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "region_index",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "open_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "nr_ranges",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "vfio_iommu_type1_info",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "argsz",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__aligned_u64",
+          "name": "iova_pgsizes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "cap_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "vfio_iova_range",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "start",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "end",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "vfio_iommu_type1_info_cap_iova_range",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "nr_iovas",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "vfio_iommu_type1_info_cap_migration",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "pgsize_bitmap",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "max_dirty_bitmap_size",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "vfio_iommu_type1_info_dma_avail",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "avail",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "vfio_iommu_type1_dma_map",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "argsz",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "vaddr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "iova",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "vfio_bitmap",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "pgsize",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "vfio_iommu_type1_dma_unmap",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "argsz",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "iova",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "vfio_iommu_type1_dirty_bitmap",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "argsz",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "vfio_iommu_type1_dirty_bitmap_get",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "iova",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "vfio_iommu_spapr_tce_ddw_info",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "pgsizes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "max_dynamic_windows_supported",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "levels",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "vfio_iommu_spapr_tce_info",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "argsz",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "dma32_window_start",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "dma32_window_size",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "vfio_eeh_pe_err",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "func",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "addr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "mask",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "vfio_eeh_pe_op",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "argsz",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "op",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "vfio_iommu_spapr_register_memory",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "argsz",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "vaddr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "vfio_iommu_spapr_tce_create",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "argsz",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "page_shift",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "__resv1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "window_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "levels",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "__resv2",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "start_addr",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "vfio_iommu_spapr_tce_remove",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "argsz",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "start_addr",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

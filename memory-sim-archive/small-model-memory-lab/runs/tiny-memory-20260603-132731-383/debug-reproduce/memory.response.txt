@@ -1,0 +1,4 @@
+﻿1. **Reproduce the failure** by isolating the specific user actions or load conditions that trigger the crash in a staging environment, ensuring the intermittent behavior is observable before attempting fixes.
+2. **Correlate warnings with timing** to identify if the non-fatal logs precede the crash, acknowledging that the root cause may be a resource leak or race condition not explicitly flagged as fatal.
+3. **Verify the hypothesis** by temporarily reverting the recent deploy or disabling specific new features to confirm if stability returns, recognizing that speed of deployment may have outpaced verification of edge cases.
+4. **Implement a targeted fix** based on the confirmed trigger, then re-run the reproduction steps to ensure the crash is resolved before redeploying to production.

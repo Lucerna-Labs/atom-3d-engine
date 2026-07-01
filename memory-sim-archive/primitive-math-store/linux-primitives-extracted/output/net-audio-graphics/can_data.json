@@ -1,0 +1,495 @@
+{
+  "filename": "can.h",
+  "includes": [
+    "linux/types.h",
+    "linux/socket.h",
+    "linux/stddef.h"
+  ],
+  "defines": [
+    {
+      "name": "CAN_EFF_FLAG",
+      "value": "0x80000000U",
+      "comment": "EFF/SFF is set in the MSB",
+      "category": "CAN_EFF"
+    },
+    {
+      "name": "CAN_RTR_FLAG",
+      "value": "0x40000000U",
+      "comment": "remote transmission request",
+      "category": "CAN_RTR"
+    },
+    {
+      "name": "CAN_ERR_FLAG",
+      "value": "0x20000000U",
+      "comment": "error message frame",
+      "category": "CAN_ERR"
+    },
+    {
+      "name": "CAN_SFF_MASK",
+      "value": "0x000007FFU",
+      "comment": "standard frame format (SFF)",
+      "category": "CAN_SFF"
+    },
+    {
+      "name": "CAN_EFF_MASK",
+      "value": "0x1FFFFFFFU",
+      "comment": "extended frame format (EFF)",
+      "category": "CAN_EFF"
+    },
+    {
+      "name": "CAN_ERR_MASK",
+      "value": "0x1FFFFFFFU",
+      "comment": "omit EFF, RTR, ERR flags",
+      "category": "CAN_ERR"
+    },
+    {
+      "name": "CANXL_PRIO_MASK",
+      "value": "CAN_SFF_MASK",
+      "comment": "11 bit priority mask",
+      "category": "CANXL_PRIO"
+    },
+    {
+      "name": "CAN_SFF_ID_BITS",
+      "value": "11",
+      "comment": "",
+      "category": "CAN_SFF"
+    },
+    {
+      "name": "CAN_EFF_ID_BITS",
+      "value": "29",
+      "comment": "",
+      "category": "CAN_EFF"
+    },
+    {
+      "name": "CANXL_PRIO_BITS",
+      "value": "CAN_SFF_ID_BITS",
+      "comment": "",
+      "category": "CANXL_PRIO"
+    },
+    {
+      "name": "CAN_MAX_DLC",
+      "value": "8",
+      "comment": "",
+      "category": "CAN_MAX"
+    },
+    {
+      "name": "CAN_MAX_RAW_DLC",
+      "value": "15",
+      "comment": "",
+      "category": "CAN_MAX"
+    },
+    {
+      "name": "CAN_MAX_DLEN",
+      "value": "8",
+      "comment": "",
+      "category": "CAN_MAX"
+    },
+    {
+      "name": "CANFD_MAX_DLC",
+      "value": "15",
+      "comment": "",
+      "category": "CANFD_MAX"
+    },
+    {
+      "name": "CANFD_MAX_DLEN",
+      "value": "64",
+      "comment": "",
+      "category": "CANFD_MAX"
+    },
+    {
+      "name": "CANXL_MIN_DLC",
+      "value": "0",
+      "comment": "",
+      "category": "CANXL_MIN"
+    },
+    {
+      "name": "CANXL_MAX_DLC",
+      "value": "2047",
+      "comment": "",
+      "category": "CANXL_MAX"
+    },
+    {
+      "name": "CANXL_MAX_DLC_MASK",
+      "value": "0x07FF",
+      "comment": "",
+      "category": "CANXL_MAX"
+    },
+    {
+      "name": "CANXL_MIN_DLEN",
+      "value": "1",
+      "comment": "",
+      "category": "CANXL_MIN"
+    },
+    {
+      "name": "CANXL_MAX_DLEN",
+      "value": "2048",
+      "comment": "",
+      "category": "CANXL_MAX"
+    },
+    {
+      "name": "CANFD_BRS",
+      "value": "0x01",
+      "comment": "bit rate switch (second bitrate for payload data)",
+      "category": ""
+    },
+    {
+      "name": "CANFD_ESI",
+      "value": "0x02",
+      "comment": "error state indicator of the transmitting node",
+      "category": ""
+    },
+    {
+      "name": "CANFD_FDF",
+      "value": "0x04",
+      "comment": "mark CAN FD for dual use of struct canfd_frame",
+      "category": ""
+    },
+    {
+      "name": "CANXL_XLF",
+      "value": "0x80",
+      "comment": "mandatory CAN XL frame flag (must always be set!)",
+      "category": ""
+    },
+    {
+      "name": "CANXL_SEC",
+      "value": "0x01",
+      "comment": "Simple Extended Content (security/segmentation)",
+      "category": ""
+    },
+    {
+      "name": "CANXL_RRS",
+      "value": "0x02",
+      "comment": "Remote Request Substitution",
+      "category": ""
+    },
+    {
+      "name": "CANXL_VCID_OFFSET",
+      "value": "16",
+      "comment": "bit offset of VCID in prio element",
+      "category": "CANXL_VCID"
+    },
+    {
+      "name": "CANXL_VCID_VAL_MASK",
+      "value": "0xFFUL",
+      "comment": "VCID is an 8-bit value",
+      "category": "CANXL_VCID"
+    },
+    {
+      "name": "CANXL_VCID_MASK",
+      "value": "(CANXL_VCID_VAL_MASK << CANXL_VCID_OFFSET)",
+      "comment": "",
+      "category": "CANXL_VCID"
+    },
+    {
+      "name": "CAN_MTU",
+      "value": "(sizeof(struct can_frame))",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "CANFD_MTU",
+      "value": "(sizeof(struct canfd_frame))",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "CANXL_MTU",
+      "value": "(sizeof(struct canxl_frame))",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "CANXL_HDR_SIZE",
+      "value": "(offsetof(struct canxl_frame, data))",
+      "comment": "",
+      "category": "CANXL_HDR"
+    },
+    {
+      "name": "CANXL_MIN_MTU",
+      "value": "(CANXL_HDR_SIZE + 64)",
+      "comment": "",
+      "category": "CANXL_MIN"
+    },
+    {
+      "name": "CANXL_MAX_MTU",
+      "value": "CANXL_MTU",
+      "comment": "",
+      "category": "CANXL_MAX"
+    },
+    {
+      "name": "CAN_RAW",
+      "value": "1",
+      "comment": "RAW sockets",
+      "category": ""
+    },
+    {
+      "name": "CAN_BCM",
+      "value": "2",
+      "comment": "Broadcast Manager",
+      "category": ""
+    },
+    {
+      "name": "CAN_TP16",
+      "value": "3",
+      "comment": "VAG Transport Protocol v1.6",
+      "category": ""
+    },
+    {
+      "name": "CAN_TP20",
+      "value": "4",
+      "comment": "VAG Transport Protocol v2.0",
+      "category": ""
+    },
+    {
+      "name": "CAN_MCNET",
+      "value": "5",
+      "comment": "Bosch MCNet",
+      "category": ""
+    },
+    {
+      "name": "CAN_ISOTP",
+      "value": "6",
+      "comment": "ISO 15765-2 Transport Protocol",
+      "category": ""
+    },
+    {
+      "name": "CAN_J1939",
+      "value": "7",
+      "comment": "SAE J1939",
+      "category": ""
+    },
+    {
+      "name": "CAN_NPROTO",
+      "value": "8",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "SOL_CAN_BASE",
+      "value": "100",
+      "comment": "",
+      "category": "SOL_CAN"
+    },
+    {
+      "name": "CAN_INV_FILTER",
+      "value": "0x20000000U",
+      "comment": "to be set in can_filter.can_id",
+      "category": "CAN_INV"
+    }
+  ],
+  "structs": [
+    {
+      "name": "can_frame",
+      "fields": [
+        {
+          "type_name": "canid_t",
+          "name": "can_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "can_dlc",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "__pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "__res0",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "len8_dlc",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": true
+    },
+    {
+      "name": "canfd_frame",
+      "fields": [
+        {
+          "type_name": "canid_t",
+          "name": "can_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "__res0",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "__res1",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "canxl_frame",
+      "fields": [
+        {
+          "type_name": "canid_t",
+          "name": "prio",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "sdt",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "af",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "data",
+          "array_size": "CANXL_MAX_DLEN",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "sockaddr_can",
+      "fields": [
+        {
+          "type_name": "__kernel_sa_family_t",
+          "name": "can_family",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "can_ifindex",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "name",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pgn",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "addr",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_4",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_5",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "name",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pgn",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "addr",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "can_filter",
+      "fields": [
+        {
+          "type_name": "canid_t",
+          "name": "can_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "canid_t",
+          "name": "can_mask",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

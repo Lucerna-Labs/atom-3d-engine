@@ -1,0 +1,474 @@
+{
+  "filename": "blktrace_api.h",
+  "includes": [
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "BLK_TC_SHIFT",
+      "value": "(16)",
+      "comment": "",
+      "category": "BLK_TC"
+    },
+    {
+      "name": "BLK_TA_QUEUE",
+      "value": "(__BLK_TA_QUEUE | BLK_TC_ACT(BLK_TC_QUEUE))",
+      "comment": "",
+      "category": "BLK_TA"
+    },
+    {
+      "name": "BLK_TA_BACKMERGE",
+      "value": "(__BLK_TA_BACKMERGE | BLK_TC_ACT(BLK_TC_QUEUE))",
+      "comment": "",
+      "category": "BLK_TA"
+    },
+    {
+      "name": "BLK_TA_FRONTMERGE",
+      "value": "(__BLK_TA_FRONTMERGE | BLK_TC_ACT(BLK_TC_QUEUE))",
+      "comment": "",
+      "category": "BLK_TA"
+    },
+    {
+      "name": "BLK_TA_GETRQ",
+      "value": "(__BLK_TA_GETRQ | BLK_TC_ACT(BLK_TC_QUEUE))",
+      "comment": "",
+      "category": "BLK_TA"
+    },
+    {
+      "name": "BLK_TA_SLEEPRQ",
+      "value": "(__BLK_TA_SLEEPRQ | BLK_TC_ACT(BLK_TC_QUEUE))",
+      "comment": "",
+      "category": "BLK_TA"
+    },
+    {
+      "name": "BLK_TA_REQUEUE",
+      "value": "(__BLK_TA_REQUEUE | BLK_TC_ACT(BLK_TC_REQUEUE))",
+      "comment": "",
+      "category": "BLK_TA"
+    },
+    {
+      "name": "BLK_TA_ISSUE",
+      "value": "(__BLK_TA_ISSUE | BLK_TC_ACT(BLK_TC_ISSUE))",
+      "comment": "",
+      "category": "BLK_TA"
+    },
+    {
+      "name": "BLK_TA_COMPLETE",
+      "value": "(__BLK_TA_COMPLETE| BLK_TC_ACT(BLK_TC_COMPLETE))",
+      "comment": "",
+      "category": "BLK_TA"
+    },
+    {
+      "name": "BLK_TA_PLUG",
+      "value": "(__BLK_TA_PLUG | BLK_TC_ACT(BLK_TC_QUEUE))",
+      "comment": "",
+      "category": "BLK_TA"
+    },
+    {
+      "name": "BLK_TA_UNPLUG_IO",
+      "value": "(__BLK_TA_UNPLUG_IO | BLK_TC_ACT(BLK_TC_QUEUE))",
+      "comment": "",
+      "category": "BLK_TA"
+    },
+    {
+      "name": "BLK_TA_UNPLUG_TIMER",
+      "value": "(__BLK_TA_UNPLUG_TIMER | BLK_TC_ACT(BLK_TC_QUEUE))",
+      "comment": "",
+      "category": "BLK_TA"
+    },
+    {
+      "name": "BLK_TA_INSERT",
+      "value": "(__BLK_TA_INSERT | BLK_TC_ACT(BLK_TC_QUEUE))",
+      "comment": "",
+      "category": "BLK_TA"
+    },
+    {
+      "name": "BLK_TA_SPLIT",
+      "value": "(__BLK_TA_SPLIT)",
+      "comment": "",
+      "category": "BLK_TA"
+    },
+    {
+      "name": "BLK_TA_BOUNCE",
+      "value": "(__BLK_TA_BOUNCE)",
+      "comment": "",
+      "category": "BLK_TA"
+    },
+    {
+      "name": "BLK_TA_REMAP",
+      "value": "(__BLK_TA_REMAP | BLK_TC_ACT(BLK_TC_QUEUE))",
+      "comment": "",
+      "category": "BLK_TA"
+    },
+    {
+      "name": "BLK_TA_ABORT",
+      "value": "(__BLK_TA_ABORT | BLK_TC_ACT(BLK_TC_QUEUE))",
+      "comment": "",
+      "category": "BLK_TA"
+    },
+    {
+      "name": "BLK_TA_DRV_DATA",
+      "value": "(__BLK_TA_DRV_DATA | BLK_TC_ACT(BLK_TC_DRV_DATA))",
+      "comment": "",
+      "category": "BLK_TA"
+    },
+    {
+      "name": "BLK_TA_ZONE_APPEND",
+      "value": "(__BLK_TA_COMPLETE |",
+      "comment": "",
+      "category": "BLK_TA"
+    },
+    {
+      "name": "BLK_TA_ZONE_PLUG",
+      "value": "(__BLK_TA_ZONE_PLUG | BLK_TC_ACT(BLK_TC_QUEUE))",
+      "comment": "",
+      "category": "BLK_TA"
+    },
+    {
+      "name": "BLK_TA_ZONE_UNPLUG",
+      "value": "(__BLK_TA_ZONE_UNPLUG |",
+      "comment": "",
+      "category": "BLK_TA"
+    },
+    {
+      "name": "BLK_TN_PROCESS",
+      "value": "(__BLK_TN_PROCESS | BLK_TC_ACT(BLK_TC_NOTIFY))",
+      "comment": "",
+      "category": "BLK_TN"
+    },
+    {
+      "name": "BLK_TN_TIMESTAMP",
+      "value": "(__BLK_TN_TIMESTAMP | BLK_TC_ACT(BLK_TC_NOTIFY))",
+      "comment": "",
+      "category": "BLK_TN"
+    },
+    {
+      "name": "BLK_TN_MESSAGE",
+      "value": "(__BLK_TN_MESSAGE | BLK_TC_ACT(BLK_TC_NOTIFY))",
+      "comment": "",
+      "category": "BLK_TN"
+    },
+    {
+      "name": "BLK_IO_TRACE_MAGIC",
+      "value": "0x65617400",
+      "comment": "",
+      "category": "BLK_IO"
+    },
+    {
+      "name": "BLK_IO_TRACE_VERSION",
+      "value": "0x07",
+      "comment": "",
+      "category": "BLK_IO"
+    },
+    {
+      "name": "BLK_IO_TRACE2_VERSION",
+      "value": "0x08",
+      "comment": "",
+      "category": "BLK_IO"
+    },
+    {
+      "name": "BLKTRACE_BDEV_SIZE",
+      "value": "32",
+      "comment": "",
+      "category": "BLKTRACE_BDEV"
+    },
+    {
+      "name": "BLKTRACE_BDEV_SIZE2",
+      "value": "64",
+      "comment": "",
+      "category": "BLKTRACE_BDEV"
+    }
+  ],
+  "structs": [
+    {
+      "name": "blk_io_trace",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "magic",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "sequence",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "time",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "sector",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "bytes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "action",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "device",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "cpu",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "error",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "pdu_len",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "blk_io_trace2",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "magic",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "sequence",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "time",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "sector",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "bytes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "action",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "device",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "cpu",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "error",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "pdu_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "pad",
+          "array_size": "12",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "blk_io_trace_remap",
+      "fields": [
+        {
+          "type_name": "__be32",
+          "name": "device_from",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "device_to",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be64",
+          "name": "sector_from",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "blk_user_trace_setup",
+      "fields": [
+        {
+          "type_name": "char",
+          "name": "name",
+          "array_size": "BLKTRACE_BDEV_SIZE",
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "act_mask",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "buf_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "buf_nr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "start_lba",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "end_lba",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pid",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "blk_user_trace_setup2",
+      "fields": [
+        {
+          "type_name": "char",
+          "name": "name",
+          "array_size": "BLKTRACE_BDEV_SIZE2",
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "act_mask",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "buf_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "buf_nr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "start_lba",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "end_lba",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "reserved",
+          "array_size": "11",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

@@ -1,0 +1,7 @@
+﻿
+1) Reproduce: narrow the scope with a minimal repro (e.g., a single failing test or a small script).
+2) One Variable Moved: isolate the change by temporarily reverting the last commit and re-running the repro.
+3) Identify the culprit: if the failure persists, the change is likely the cause; if it disappears, the change is not the cause.
+4) Fix and verify: apply the fix, re-run the repro, and confirm the app works.
+
+This plan follows the "Reproduce Before Repair" principle: first isolate the problem with a

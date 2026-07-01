@@ -1,0 +1,127 @@
+{
+  "model_id": "mixedbread-ai/mxbai-embed-large-v1",
+  "model_type": "bert",
+  "architecture": "BertModel",
+  "base_model": "BERT Large",
+  
+  "dimensions": {
+    "hidden_size": 1024,
+    "intermediate_size": 4096,
+    "vocab_size": 30522,
+    "type_vocab_size": 2,
+    "max_position_embeddings": 512,
+    "output_dimension": 1024
+  },
+  
+  "layers": {
+    "num_hidden_layers": 24,
+    "num_attention_heads": 16,
+    "attention_head_dim": 64,
+    "layer_norm_eps": 1e-12
+  },
+  
+  "attention": {
+    "type": "self-attention",
+    "position_embedding": "absolute",
+    "attention_probs_dropout_prob": 0.1,
+    "hidden_dropout_prob": 0.1,
+    "num_kv_heads": 16,
+    "head_dim": 64,
+    "qkv_projection": "separate",
+    "output_projection": true
+  },
+  
+  "activation": {
+    "hidden_act": "gelu",
+    "type": "GeLU (Gaussian Error Linear Unit)",
+    "approximate": false
+  },
+  
+  "normalization": {
+    "type": "LayerNorm",
+    "eps": 1e-12,
+    "elementwise_affine": true,
+    "bias": true
+  },
+  
+  "feedforward": {
+    "type": "MLP",
+    "activation": "gelu",
+    "hidden_dim": 4096,
+    "output_dim": 1024,
+    "bias": true
+  },
+  
+  "embedding": {
+    "word_embeddings": {
+      "num_embeddings": 30522,
+      "embedding_dim": 1024,
+      "padding_idx": 0
+    },
+    "position_embeddings": {
+      "num_embeddings": 512,
+      "embedding_dim": 1024,
+      "type": "absolute"
+    },
+    "token_type_embeddings": {
+      "num_embeddings": 2,
+      "embedding_dim": 1024
+    }
+  },
+  
+  "pooling": {
+    "default": "cls",
+    "supported": ["cls", "mean"],
+    "cls_index": 0
+  },
+  
+  "special_tokens": {
+    "bos_token_id": null,
+    "eos_token_id": null,
+    "pad_token_id": 0,
+    "cls_token_id": null,
+    "sep_token_id": null
+  },
+  
+  "inference": {
+    "torch_dtype": "float16",
+    "use_cache": false,
+    "gradient_checkpointing": false,
+    "classifier_dropout": null
+  },
+  
+  "matryoshka": {
+    "supported": true,
+    "native_dim": 1024,
+    "truncate_dims": [768, 512, 256, 128, 64],
+    "method": "truncate_dim parameter"
+  },
+  
+  "quantization": {
+    "supported": true,
+    "methods": ["int8", "ubinary"],
+    "post_encoding": true
+  },
+  
+  "tensor_shapes": {
+    "query_weight": [1024, 1024],
+    "key_weight": [1024, 1024],
+    "value_weight": [1024, 1024],
+    "attention_output_weight": [1024, 1024],
+    "intermediate_weight": [1024, 4096],
+    "output_weight": [4096, 1024],
+    "word_embeddings_weight": [30522, 1024],
+    "position_embeddings_weight": [512, 1024],
+    "token_type_embeddings_weight": [2, 1024],
+    "layer_norm_weight": [1024],
+    "layer_norm_bias": [1024]
+  },
+  
+  "parameter_count": {
+    "total_parameters": 335000000,
+    "total_parameters_readable": "~335M",
+    "trainable_parameters": 335000000,
+    "embedding_parameters": 31457280,
+    "encoder_parameters": 303542720
+  }
+}

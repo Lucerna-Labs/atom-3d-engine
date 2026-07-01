@@ -1,0 +1,177 @@
+{
+  "filename": "adfs_fs.h",
+  "includes": [
+    "linux/types.h",
+    "linux/magic.h"
+  ],
+  "defines": [
+    {
+      "name": "ADFS_DISCRECORD",
+      "value": "(0xc00)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "ADFS_DR_OFFSET",
+      "value": "(0x1c0)",
+      "comment": "",
+      "category": "ADFS_DR"
+    },
+    {
+      "name": "ADFS_DR_SIZE",
+      "value": "60",
+      "comment": "",
+      "category": "ADFS_DR"
+    },
+    {
+      "name": "ADFS_DR_SIZE_BITS",
+      "value": "(ADFS_DR_SIZE << 3)",
+      "comment": "",
+      "category": "ADFS_DR"
+    }
+  ],
+  "structs": [
+    {
+      "name": "adfs_discrecord",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "log2secsize",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "secspertrack",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "heads",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "density",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "idlen",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "log2bpmb",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "skew",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "bootoption",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "lowsector",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "nzones",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le16",
+          "name": "zone_spare",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "root",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "disc_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le16",
+          "name": "disc_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "disc_name",
+          "array_size": "10",
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "disc_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "disc_size_high",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "nzones_high",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reserved43",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "format_version",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "root_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "unused52",
+          "array_size": "60 - 52",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

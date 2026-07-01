@@ -1,0 +1,6 @@
+﻿
+
+1. Reproduce the intermittent crash in a staging environment using targeted load tests before applying any fixes.
+2. Correlate warning logs with timing beats to identify patterns preceding the failure, rather than seeking a single fatal line.
+3. Audit recent deploy changes for optimizations that may have outrun verification logic or introduced race conditions.
+4. If reproduction remains uncertain, enable detailed monitoring and prepare a rollback as the immediate next action.

@@ -1,0 +1,893 @@
+{
+  "filename": "qaic_accel.h",
+  "includes": [
+    "drm.h"
+  ],
+  "defines": [
+    {
+      "name": "QAIC_MANAGE_MAX_MSG_LENGTH",
+      "value": "SZ_4K",
+      "comment": "",
+      "category": "QAIC_MANAGE"
+    },
+    {
+      "name": "QAIC_SEM_INSYNCFENCE",
+      "value": "2",
+      "comment": "",
+      "category": "QAIC_SEM"
+    },
+    {
+      "name": "QAIC_SEM_OUTSYNCFENCE",
+      "value": "1",
+      "comment": "",
+      "category": "QAIC_SEM"
+    },
+    {
+      "name": "QAIC_SEM_NOP",
+      "value": "0",
+      "comment": "",
+      "category": "QAIC_SEM"
+    },
+    {
+      "name": "QAIC_SEM_INIT",
+      "value": "1",
+      "comment": "",
+      "category": "QAIC_SEM"
+    },
+    {
+      "name": "QAIC_SEM_INC",
+      "value": "2",
+      "comment": "",
+      "category": "QAIC_SEM"
+    },
+    {
+      "name": "QAIC_SEM_DEC",
+      "value": "3",
+      "comment": "",
+      "category": "QAIC_SEM"
+    },
+    {
+      "name": "QAIC_SEM_WAIT_EQUAL",
+      "value": "4",
+      "comment": "",
+      "category": "QAIC_SEM"
+    },
+    {
+      "name": "QAIC_SEM_WAIT_GT_EQ",
+      "value": "5",
+      "comment": "Greater than or equal",
+      "category": "QAIC_SEM"
+    },
+    {
+      "name": "QAIC_SEM_WAIT_GT_0",
+      "value": "6",
+      "comment": "Greater than 0",
+      "category": "QAIC_SEM"
+    },
+    {
+      "name": "QAIC_TRANS_UNDEFINED",
+      "value": "0",
+      "comment": "",
+      "category": "QAIC_TRANS"
+    },
+    {
+      "name": "QAIC_TRANS_PASSTHROUGH_FROM_USR",
+      "value": "1",
+      "comment": "",
+      "category": "QAIC_TRANS"
+    },
+    {
+      "name": "QAIC_TRANS_PASSTHROUGH_TO_USR",
+      "value": "2",
+      "comment": "",
+      "category": "QAIC_TRANS"
+    },
+    {
+      "name": "QAIC_TRANS_PASSTHROUGH_FROM_DEV",
+      "value": "3",
+      "comment": "",
+      "category": "QAIC_TRANS"
+    },
+    {
+      "name": "QAIC_TRANS_PASSTHROUGH_TO_DEV",
+      "value": "4",
+      "comment": "",
+      "category": "QAIC_TRANS"
+    },
+    {
+      "name": "QAIC_TRANS_DMA_XFER_FROM_USR",
+      "value": "5",
+      "comment": "",
+      "category": "QAIC_TRANS"
+    },
+    {
+      "name": "QAIC_TRANS_DMA_XFER_TO_DEV",
+      "value": "6",
+      "comment": "",
+      "category": "QAIC_TRANS"
+    },
+    {
+      "name": "QAIC_TRANS_ACTIVATE_FROM_USR",
+      "value": "7",
+      "comment": "",
+      "category": "QAIC_TRANS"
+    },
+    {
+      "name": "QAIC_TRANS_ACTIVATE_FROM_DEV",
+      "value": "8",
+      "comment": "",
+      "category": "QAIC_TRANS"
+    },
+    {
+      "name": "QAIC_TRANS_ACTIVATE_TO_DEV",
+      "value": "9",
+      "comment": "",
+      "category": "QAIC_TRANS"
+    },
+    {
+      "name": "QAIC_TRANS_DEACTIVATE_FROM_USR",
+      "value": "10",
+      "comment": "",
+      "category": "QAIC_TRANS"
+    },
+    {
+      "name": "QAIC_TRANS_DEACTIVATE_FROM_DEV",
+      "value": "11",
+      "comment": "",
+      "category": "QAIC_TRANS"
+    },
+    {
+      "name": "QAIC_TRANS_STATUS_FROM_USR",
+      "value": "12",
+      "comment": "",
+      "category": "QAIC_TRANS"
+    },
+    {
+      "name": "QAIC_TRANS_STATUS_TO_USR",
+      "value": "13",
+      "comment": "",
+      "category": "QAIC_TRANS"
+    },
+    {
+      "name": "QAIC_TRANS_STATUS_FROM_DEV",
+      "value": "14",
+      "comment": "",
+      "category": "QAIC_TRANS"
+    },
+    {
+      "name": "QAIC_TRANS_STATUS_TO_DEV",
+      "value": "15",
+      "comment": "",
+      "category": "QAIC_TRANS"
+    },
+    {
+      "name": "QAIC_TRANS_TERMINATE_FROM_DEV",
+      "value": "16",
+      "comment": "",
+      "category": "QAIC_TRANS"
+    },
+    {
+      "name": "QAIC_TRANS_TERMINATE_TO_DEV",
+      "value": "17",
+      "comment": "",
+      "category": "QAIC_TRANS"
+    },
+    {
+      "name": "QAIC_TRANS_DMA_XFER_CONT",
+      "value": "18",
+      "comment": "",
+      "category": "QAIC_TRANS"
+    },
+    {
+      "name": "QAIC_TRANS_VALIDATE_PARTITION_FROM_DEV",
+      "value": "19",
+      "comment": "",
+      "category": "QAIC_TRANS"
+    },
+    {
+      "name": "QAIC_TRANS_VALIDATE_PARTITION_TO_DEV",
+      "value": "20",
+      "comment": "",
+      "category": "QAIC_TRANS"
+    },
+    {
+      "name": "DRM_QAIC_MANAGE",
+      "value": "0x00",
+      "comment": "",
+      "category": "DRM_QAIC"
+    },
+    {
+      "name": "DRM_QAIC_CREATE_BO",
+      "value": "0x01",
+      "comment": "",
+      "category": "DRM_QAIC"
+    },
+    {
+      "name": "DRM_QAIC_MMAP_BO",
+      "value": "0x02",
+      "comment": "",
+      "category": "DRM_QAIC"
+    },
+    {
+      "name": "DRM_QAIC_ATTACH_SLICE_BO",
+      "value": "0x03",
+      "comment": "",
+      "category": "DRM_QAIC"
+    },
+    {
+      "name": "DRM_QAIC_EXECUTE_BO",
+      "value": "0x04",
+      "comment": "",
+      "category": "DRM_QAIC"
+    },
+    {
+      "name": "DRM_QAIC_PARTIAL_EXECUTE_BO",
+      "value": "0x05",
+      "comment": "",
+      "category": "DRM_QAIC"
+    },
+    {
+      "name": "DRM_QAIC_WAIT_BO",
+      "value": "0x06",
+      "comment": "",
+      "category": "DRM_QAIC"
+    },
+    {
+      "name": "DRM_QAIC_PERF_STATS_BO",
+      "value": "0x07",
+      "comment": "",
+      "category": "DRM_QAIC"
+    },
+    {
+      "name": "DRM_QAIC_DETACH_SLICE_BO",
+      "value": "0x08",
+      "comment": "",
+      "category": "DRM_QAIC"
+    },
+    {
+      "name": "DRM_IOCTL_QAIC_MANAGE",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_QAIC_MANAGE, struct qaic_manage_msg)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_QAIC_CREATE_BO",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_QAIC_CREATE_BO,\tstruct qaic_create_bo)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_QAIC_MMAP_BO",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_QAIC_MMAP_BO, struct qaic_mmap_bo)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_QAIC_ATTACH_SLICE_BO",
+      "value": "DRM_IOW(DRM_COMMAND_BASE + DRM_QAIC_ATTACH_SLICE_BO, struct qaic_attach_slice)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_QAIC_EXECUTE_BO",
+      "value": "DRM_IOW(DRM_COMMAND_BASE + DRM_QAIC_EXECUTE_BO,\tstruct qaic_execute)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_QAIC_PARTIAL_EXECUTE_BO",
+      "value": "DRM_IOW(DRM_COMMAND_BASE + DRM_QAIC_PARTIAL_EXECUTE_BO,\tstruct qaic_execute)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_QAIC_WAIT_BO",
+      "value": "DRM_IOW(DRM_COMMAND_BASE + DRM_QAIC_WAIT_BO, struct qaic_wait)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_QAIC_PERF_STATS_BO",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_QAIC_PERF_STATS_BO, struct qaic_perf_stats)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_QAIC_DETACH_SLICE_BO",
+      "value": "DRM_IOW(DRM_COMMAND_BASE + DRM_QAIC_DETACH_SLICE_BO, struct qaic_detach_slice)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    }
+  ],
+  "structs": [
+    {
+      "name": "qaic_manage_trans_hdr",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "len",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "qaic_manage_trans_passthrough",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "qaic_manage_trans_dma_xfer",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "tag",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "addr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "qaic_manage_trans_activate_to_dev",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "queue_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "eventfd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "options",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "qaic_manage_trans_activate_from_dev",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "status",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "dbc_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "options",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "qaic_manage_trans_deactivate",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "dbc_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "qaic_manage_trans_status_to_dev",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "qaic_manage_trans_status_from_dev",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "major",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "minor",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "status",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "status_flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "qaic_manage_msg",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "data",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "qaic_create_bo",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "qaic_mmap_bo",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "qaic_sem",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "val",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "index",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "presync",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "cmd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "qaic_attach_slice_entry",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "dev_addr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "db_addr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "db_data",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "db_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "qaic_attach_slice_hdr",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "dbc_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "dir",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "qaic_attach_slice",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "data",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "qaic_execute_entry",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "dir",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "qaic_partial_execute_entry",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "dir",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "resize",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "qaic_execute_hdr",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "dbc_id",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "qaic_execute",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "data",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "qaic_wait",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "timeout",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "dbc_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "qaic_perf_stats_hdr",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "dbc_id",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "qaic_perf_stats",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "data",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "qaic_perf_stats_entry",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "queue_level_before",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "num_queue_element",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "submit_latency_us",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "device_latency_us",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "qaic_detach_slice",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

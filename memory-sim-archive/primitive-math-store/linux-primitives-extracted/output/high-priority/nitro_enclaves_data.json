@@ -1,0 +1,268 @@
+{
+  "filename": "nitro_enclaves.h",
+  "includes": [
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "NE_CREATE_VM",
+      "value": "_IOR(0xAE, 0x20, __u64)",
+      "comment": "",
+      "category": "NE_CREATE"
+    },
+    {
+      "name": "NE_ADD_VCPU",
+      "value": "_IOWR(0xAE, 0x21, __u32)",
+      "comment": "",
+      "category": "NE_ADD"
+    },
+    {
+      "name": "NE_GET_IMAGE_LOAD_INFO",
+      "value": "_IOWR(0xAE, 0x22, struct ne_image_load_info)",
+      "comment": "",
+      "category": "NE_GET"
+    },
+    {
+      "name": "NE_SET_USER_MEMORY_REGION",
+      "value": "_IOW(0xAE, 0x23, struct ne_user_memory_region)",
+      "comment": "",
+      "category": "NE_SET"
+    },
+    {
+      "name": "NE_START_ENCLAVE",
+      "value": "_IOWR(0xAE, 0x24, struct ne_enclave_start_info)",
+      "comment": "",
+      "category": "NE_START"
+    },
+    {
+      "name": "NE_ERR_VCPU_ALREADY_USED",
+      "value": "(256)",
+      "comment": "",
+      "category": "NE_ERR"
+    },
+    {
+      "name": "NE_ERR_VCPU_NOT_IN_CPU_POOL",
+      "value": "(257)",
+      "comment": "",
+      "category": "NE_ERR"
+    },
+    {
+      "name": "NE_ERR_VCPU_INVALID_CPU_CORE",
+      "value": "(258)",
+      "comment": "",
+      "category": "NE_ERR"
+    },
+    {
+      "name": "NE_ERR_INVALID_MEM_REGION_SIZE",
+      "value": "(259)",
+      "comment": "",
+      "category": "NE_ERR"
+    },
+    {
+      "name": "NE_ERR_INVALID_MEM_REGION_ADDR",
+      "value": "(260)",
+      "comment": "",
+      "category": "NE_ERR"
+    },
+    {
+      "name": "NE_ERR_UNALIGNED_MEM_REGION_ADDR",
+      "value": "(261)",
+      "comment": "",
+      "category": "NE_ERR"
+    },
+    {
+      "name": "NE_ERR_MEM_REGION_ALREADY_USED",
+      "value": "(262)",
+      "comment": "",
+      "category": "NE_ERR"
+    },
+    {
+      "name": "NE_ERR_MEM_NOT_HUGE_PAGE",
+      "value": "(263)",
+      "comment": "",
+      "category": "NE_ERR"
+    },
+    {
+      "name": "NE_ERR_MEM_DIFFERENT_NUMA_NODE",
+      "value": "(264)",
+      "comment": "",
+      "category": "NE_ERR"
+    },
+    {
+      "name": "NE_ERR_MEM_MAX_REGIONS",
+      "value": "(265)",
+      "comment": "",
+      "category": "NE_ERR"
+    },
+    {
+      "name": "NE_ERR_NO_MEM_REGIONS_ADDED",
+      "value": "(266)",
+      "comment": "",
+      "category": "NE_ERR"
+    },
+    {
+      "name": "NE_ERR_NO_VCPUS_ADDED",
+      "value": "(267)",
+      "comment": "",
+      "category": "NE_ERR"
+    },
+    {
+      "name": "NE_ERR_ENCLAVE_MEM_MIN_SIZE",
+      "value": "(268)",
+      "comment": "",
+      "category": "NE_ERR"
+    },
+    {
+      "name": "NE_ERR_FULL_CORES_NOT_USED",
+      "value": "(269)",
+      "comment": "",
+      "category": "NE_ERR"
+    },
+    {
+      "name": "NE_ERR_NOT_IN_INIT_STATE",
+      "value": "(270)",
+      "comment": "",
+      "category": "NE_ERR"
+    },
+    {
+      "name": "NE_ERR_INVALID_VCPU",
+      "value": "(271)",
+      "comment": "",
+      "category": "NE_ERR"
+    },
+    {
+      "name": "NE_ERR_NO_CPUS_AVAIL_IN_POOL",
+      "value": "(272)",
+      "comment": "",
+      "category": "NE_ERR"
+    },
+    {
+      "name": "NE_ERR_INVALID_PAGE_SIZE",
+      "value": "(273)",
+      "comment": "",
+      "category": "NE_ERR"
+    },
+    {
+      "name": "NE_ERR_INVALID_FLAG_VALUE",
+      "value": "(274)",
+      "comment": "",
+      "category": "NE_ERR"
+    },
+    {
+      "name": "NE_ERR_INVALID_ENCLAVE_CID",
+      "value": "(275)",
+      "comment": "",
+      "category": "NE_ERR"
+    },
+    {
+      "name": "NE_EIF_IMAGE",
+      "value": "(0x01)",
+      "comment": "",
+      "category": "NE_EIF"
+    },
+    {
+      "name": "NE_IMAGE_LOAD_MAX_FLAG_VAL",
+      "value": "(0x02)",
+      "comment": "",
+      "category": "NE_IMAGE"
+    },
+    {
+      "name": "NE_DEFAULT_MEMORY_REGION",
+      "value": "(0x00)",
+      "comment": "",
+      "category": "NE_DEFAULT"
+    },
+    {
+      "name": "NE_MEMORY_REGION_MAX_FLAG_VAL",
+      "value": "(0x01)",
+      "comment": "",
+      "category": "NE_MEMORY"
+    },
+    {
+      "name": "NE_ENCLAVE_PRODUCTION_MODE",
+      "value": "(0x00)",
+      "comment": "",
+      "category": "NE_ENCLAVE"
+    },
+    {
+      "name": "NE_ENCLAVE_DEBUG_MODE",
+      "value": "(0x01)",
+      "comment": "",
+      "category": "NE_ENCLAVE"
+    },
+    {
+      "name": "NE_ENCLAVE_START_MAX_FLAG_VAL",
+      "value": "(0x02)",
+      "comment": "",
+      "category": "NE_ENCLAVE"
+    }
+  ],
+  "structs": [
+    {
+      "name": "ne_image_load_info",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "memory_offset",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ne_user_memory_region",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "memory_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "userspace_addr",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ne_enclave_start_info",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "enclave_cid",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

@@ -1,0 +1,823 @@
+{
+  "filename": "ivpu_accel.h",
+  "includes": [
+    "drm.h"
+  ],
+  "defines": [
+    {
+      "name": "DRM_IVPU_GET_PARAM",
+      "value": "0x00",
+      "comment": "",
+      "category": "DRM_IVPU"
+    },
+    {
+      "name": "DRM_IVPU_SET_PARAM",
+      "value": "0x01",
+      "comment": "",
+      "category": "DRM_IVPU"
+    },
+    {
+      "name": "DRM_IVPU_BO_CREATE",
+      "value": "0x02",
+      "comment": "",
+      "category": "DRM_IVPU"
+    },
+    {
+      "name": "DRM_IVPU_BO_INFO",
+      "value": "0x03",
+      "comment": "",
+      "category": "DRM_IVPU"
+    },
+    {
+      "name": "DRM_IVPU_SUBMIT",
+      "value": "0x05",
+      "comment": "",
+      "category": "DRM_IVPU"
+    },
+    {
+      "name": "DRM_IVPU_BO_WAIT",
+      "value": "0x06",
+      "comment": "",
+      "category": "DRM_IVPU"
+    },
+    {
+      "name": "DRM_IVPU_METRIC_STREAMER_START",
+      "value": "0x07",
+      "comment": "",
+      "category": "DRM_IVPU"
+    },
+    {
+      "name": "DRM_IVPU_METRIC_STREAMER_STOP",
+      "value": "0x08",
+      "comment": "",
+      "category": "DRM_IVPU"
+    },
+    {
+      "name": "DRM_IVPU_METRIC_STREAMER_GET_DATA",
+      "value": "0x09",
+      "comment": "",
+      "category": "DRM_IVPU"
+    },
+    {
+      "name": "DRM_IVPU_METRIC_STREAMER_GET_INFO",
+      "value": "0x0a",
+      "comment": "",
+      "category": "DRM_IVPU"
+    },
+    {
+      "name": "DRM_IVPU_CMDQ_CREATE",
+      "value": "0x0b",
+      "comment": "",
+      "category": "DRM_IVPU"
+    },
+    {
+      "name": "DRM_IVPU_CMDQ_DESTROY",
+      "value": "0x0c",
+      "comment": "",
+      "category": "DRM_IVPU"
+    },
+    {
+      "name": "DRM_IVPU_CMDQ_SUBMIT",
+      "value": "0x0d",
+      "comment": "",
+      "category": "DRM_IVPU"
+    },
+    {
+      "name": "DRM_IVPU_BO_CREATE_FROM_USERPTR",
+      "value": "0x0e",
+      "comment": "",
+      "category": "DRM_IVPU"
+    },
+    {
+      "name": "DRM_IOCTL_IVPU_GET_PARAM",
+      "value": "",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_IVPU_SET_PARAM",
+      "value": "",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_IVPU_BO_CREATE",
+      "value": "",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_IVPU_BO_INFO",
+      "value": "",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_IVPU_SUBMIT",
+      "value": "",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_IVPU_BO_WAIT",
+      "value": "",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_IVPU_METRIC_STREAMER_START",
+      "value": "",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_IVPU_METRIC_STREAMER_STOP",
+      "value": "",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_IVPU_METRIC_STREAMER_GET_DATA",
+      "value": "",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_IVPU_METRIC_STREAMER_GET_INFO",
+      "value": "",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_IVPU_CMDQ_CREATE",
+      "value": "",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_IVPU_CMDQ_DESTROY",
+      "value": "",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_IVPU_CMDQ_SUBMIT",
+      "value": "",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_IVPU_BO_CREATE_FROM_USERPTR",
+      "value": "",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IVPU_PARAM_DEVICE_ID",
+      "value": "0",
+      "comment": "",
+      "category": "DRM_IVPU"
+    },
+    {
+      "name": "DRM_IVPU_PARAM_DEVICE_REVISION",
+      "value": "1",
+      "comment": "",
+      "category": "DRM_IVPU"
+    },
+    {
+      "name": "DRM_IVPU_PARAM_PLATFORM_TYPE",
+      "value": "2",
+      "comment": "",
+      "category": "DRM_IVPU"
+    },
+    {
+      "name": "DRM_IVPU_PARAM_CORE_CLOCK_RATE",
+      "value": "3",
+      "comment": "",
+      "category": "DRM_IVPU"
+    },
+    {
+      "name": "DRM_IVPU_PARAM_NUM_CONTEXTS",
+      "value": "4",
+      "comment": "",
+      "category": "DRM_IVPU"
+    },
+    {
+      "name": "DRM_IVPU_PARAM_CONTEXT_BASE_ADDRESS",
+      "value": "5",
+      "comment": "",
+      "category": "DRM_IVPU"
+    },
+    {
+      "name": "DRM_IVPU_PARAM_CONTEXT_PRIORITY",
+      "value": "6",
+      "comment": "Deprecated",
+      "category": "DRM_IVPU"
+    },
+    {
+      "name": "DRM_IVPU_PARAM_CONTEXT_ID",
+      "value": "7",
+      "comment": "",
+      "category": "DRM_IVPU"
+    },
+    {
+      "name": "DRM_IVPU_PARAM_FW_API_VERSION",
+      "value": "8",
+      "comment": "",
+      "category": "DRM_IVPU"
+    },
+    {
+      "name": "DRM_IVPU_PARAM_ENGINE_HEARTBEAT",
+      "value": "9",
+      "comment": "",
+      "category": "DRM_IVPU"
+    },
+    {
+      "name": "DRM_IVPU_PARAM_UNIQUE_INFERENCE_ID",
+      "value": "10",
+      "comment": "",
+      "category": "DRM_IVPU"
+    },
+    {
+      "name": "DRM_IVPU_PARAM_TILE_CONFIG",
+      "value": "11",
+      "comment": "",
+      "category": "DRM_IVPU"
+    },
+    {
+      "name": "DRM_IVPU_PARAM_SKU",
+      "value": "12",
+      "comment": "",
+      "category": "DRM_IVPU"
+    },
+    {
+      "name": "DRM_IVPU_PARAM_CAPABILITIES",
+      "value": "13",
+      "comment": "",
+      "category": "DRM_IVPU"
+    },
+    {
+      "name": "DRM_IVPU_PARAM_PREEMPT_BUFFER_SIZE",
+      "value": "14",
+      "comment": "",
+      "category": "DRM_IVPU"
+    },
+    {
+      "name": "DRM_IVPU_PLATFORM_TYPE_SILICON",
+      "value": "0",
+      "comment": "",
+      "category": "DRM_IVPU"
+    },
+    {
+      "name": "DRM_IVPU_CONTEXT_PRIORITY_IDLE",
+      "value": "0",
+      "comment": "",
+      "category": "DRM_IVPU"
+    },
+    {
+      "name": "DRM_IVPU_CONTEXT_PRIORITY_NORMAL",
+      "value": "1",
+      "comment": "",
+      "category": "DRM_IVPU"
+    },
+    {
+      "name": "DRM_IVPU_CONTEXT_PRIORITY_FOCUS",
+      "value": "2",
+      "comment": "",
+      "category": "DRM_IVPU"
+    },
+    {
+      "name": "DRM_IVPU_CONTEXT_PRIORITY_REALTIME",
+      "value": "3",
+      "comment": "",
+      "category": "DRM_IVPU"
+    },
+    {
+      "name": "DRM_IVPU_JOB_PRIORITY_DEFAULT",
+      "value": "0",
+      "comment": "",
+      "category": "DRM_IVPU"
+    },
+    {
+      "name": "DRM_IVPU_JOB_PRIORITY_IDLE",
+      "value": "1",
+      "comment": "",
+      "category": "DRM_IVPU"
+    },
+    {
+      "name": "DRM_IVPU_JOB_PRIORITY_NORMAL",
+      "value": "2",
+      "comment": "",
+      "category": "DRM_IVPU"
+    },
+    {
+      "name": "DRM_IVPU_JOB_PRIORITY_FOCUS",
+      "value": "3",
+      "comment": "",
+      "category": "DRM_IVPU"
+    },
+    {
+      "name": "DRM_IVPU_JOB_PRIORITY_REALTIME",
+      "value": "4",
+      "comment": "",
+      "category": "DRM_IVPU"
+    },
+    {
+      "name": "DRM_IVPU_CAP_METRIC_STREAMER",
+      "value": "1",
+      "comment": "",
+      "category": "DRM_IVPU"
+    },
+    {
+      "name": "DRM_IVPU_CAP_DMA_MEMORY_RANGE",
+      "value": "2",
+      "comment": "",
+      "category": "DRM_IVPU"
+    },
+    {
+      "name": "DRM_IVPU_CAP_MANAGE_CMDQ",
+      "value": "3",
+      "comment": "",
+      "category": "DRM_IVPU"
+    },
+    {
+      "name": "DRM_IVPU_CAP_BO_CREATE_FROM_USERPTR",
+      "value": "4",
+      "comment": "",
+      "category": "DRM_IVPU"
+    },
+    {
+      "name": "DRM_IVPU_BO_SHAVE_MEM",
+      "value": "0x00000001",
+      "comment": "",
+      "category": "DRM_IVPU"
+    },
+    {
+      "name": "DRM_IVPU_BO_HIGH_MEM",
+      "value": "DRM_IVPU_BO_SHAVE_MEM",
+      "comment": "",
+      "category": "DRM_IVPU"
+    },
+    {
+      "name": "DRM_IVPU_BO_MAPPABLE",
+      "value": "0x00000002",
+      "comment": "",
+      "category": "DRM_IVPU"
+    },
+    {
+      "name": "DRM_IVPU_BO_DMA_MEM",
+      "value": "0x00000004",
+      "comment": "",
+      "category": "DRM_IVPU"
+    },
+    {
+      "name": "DRM_IVPU_BO_READ_ONLY",
+      "value": "0x00000008",
+      "comment": "",
+      "category": "DRM_IVPU"
+    },
+    {
+      "name": "DRM_IVPU_BO_CACHED",
+      "value": "0x00000000",
+      "comment": "",
+      "category": "DRM_IVPU"
+    },
+    {
+      "name": "DRM_IVPU_BO_UNCACHED",
+      "value": "0x00010000",
+      "comment": "",
+      "category": "DRM_IVPU"
+    },
+    {
+      "name": "DRM_IVPU_BO_WC",
+      "value": "0x00020000",
+      "comment": "",
+      "category": "DRM_IVPU"
+    },
+    {
+      "name": "DRM_IVPU_BO_CACHE_MASK",
+      "value": "0x00030000",
+      "comment": "",
+      "category": "DRM_IVPU"
+    },
+    {
+      "name": "DRM_IVPU_BO_FLAGS",
+      "value": "",
+      "comment": "",
+      "category": "DRM_IVPU"
+    },
+    {
+      "name": "DRM_IVPU_ENGINE_COMPUTE",
+      "value": "0",
+      "comment": "",
+      "category": "DRM_IVPU"
+    },
+    {
+      "name": "DRM_IVPU_ENGINE_COPY",
+      "value": "1",
+      "comment": "Deprecated",
+      "category": "DRM_IVPU"
+    },
+    {
+      "name": "DRM_IVPU_JOB_STATUS_SUCCESS",
+      "value": "0",
+      "comment": "",
+      "category": "DRM_IVPU"
+    },
+    {
+      "name": "DRM_IVPU_JOB_STATUS_ABORTED",
+      "value": "256",
+      "comment": "",
+      "category": "DRM_IVPU"
+    },
+    {
+      "name": "DRM_IVPU_CMDQ_FLAG_TURBO",
+      "value": "0x00000001",
+      "comment": "",
+      "category": "DRM_IVPU"
+    }
+  ],
+  "structs": [
+    {
+      "name": "drm_ivpu_param",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "param",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "index",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "value",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_ivpu_bo_create",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "vpu_addr",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_ivpu_bo_create_from_userptr",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "user_ptr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "vpu_addr",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_ivpu_bo_info",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "vpu_addr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "mmap_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_ivpu_submit",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "buffers_ptr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "buffer_count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "engine",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "commands_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "priority",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_ivpu_cmdq_submit",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "buffers_ptr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "buffer_count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "cmdq_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "commands_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "preempt_buffer_index",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_ivpu_bo_wait",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s64",
+          "name": "timeout_ns",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "job_status",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_ivpu_metric_streamer_start",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "metric_group_mask",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "sampling_period_ns",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "read_period_samples",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "sample_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "max_data_size",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_ivpu_metric_streamer_get_data",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "metric_group_mask",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "buffer_ptr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "buffer_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "data_size",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_ivpu_cmdq_create",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "cmdq_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "priority",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_ivpu_cmdq_destroy",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "cmdq_id",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_ivpu_metric_streamer_stop",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "metric_group_mask",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

@@ -1,0 +1,4 @@
+﻿1. Reproduce the intermittent crash in a controlled environment to isolate the failure before attempting repairs.
+2. Review Beat Reading Logs to identify patterns in the warnings that precede the crash.
+3. Verify if recent changes introduced speed-related issues where execution outruns verification, as this can cause hidden instability.
+4. If the root cause remains unclear, capture a live trace during the next failure and proceed to isolate the specific code path.

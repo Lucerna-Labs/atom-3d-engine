@@ -1,0 +1,854 @@
+{
+  "filename": "panfrost_drm.h",
+  "includes": [
+    "drm.h"
+  ],
+  "defines": [
+    {
+      "name": "DRM_PANFROST_SUBMIT",
+      "value": "0x00",
+      "comment": "",
+      "category": "DRM_PANFROST"
+    },
+    {
+      "name": "DRM_PANFROST_WAIT_BO",
+      "value": "0x01",
+      "comment": "",
+      "category": "DRM_PANFROST"
+    },
+    {
+      "name": "DRM_PANFROST_CREATE_BO",
+      "value": "0x02",
+      "comment": "",
+      "category": "DRM_PANFROST"
+    },
+    {
+      "name": "DRM_PANFROST_MMAP_BO",
+      "value": "0x03",
+      "comment": "",
+      "category": "DRM_PANFROST"
+    },
+    {
+      "name": "DRM_PANFROST_GET_PARAM",
+      "value": "0x04",
+      "comment": "",
+      "category": "DRM_PANFROST"
+    },
+    {
+      "name": "DRM_PANFROST_GET_BO_OFFSET",
+      "value": "0x05",
+      "comment": "",
+      "category": "DRM_PANFROST"
+    },
+    {
+      "name": "DRM_PANFROST_PERFCNT_ENABLE",
+      "value": "0x06",
+      "comment": "",
+      "category": "DRM_PANFROST"
+    },
+    {
+      "name": "DRM_PANFROST_PERFCNT_DUMP",
+      "value": "0x07",
+      "comment": "",
+      "category": "DRM_PANFROST"
+    },
+    {
+      "name": "DRM_PANFROST_MADVISE",
+      "value": "0x08",
+      "comment": "",
+      "category": "DRM_PANFROST"
+    },
+    {
+      "name": "DRM_PANFROST_SET_LABEL_BO",
+      "value": "0x09",
+      "comment": "",
+      "category": "DRM_PANFROST"
+    },
+    {
+      "name": "DRM_PANFROST_JM_CTX_CREATE",
+      "value": "0x0a",
+      "comment": "",
+      "category": "DRM_PANFROST"
+    },
+    {
+      "name": "DRM_PANFROST_JM_CTX_DESTROY",
+      "value": "0x0b",
+      "comment": "",
+      "category": "DRM_PANFROST"
+    },
+    {
+      "name": "DRM_PANFROST_SYNC_BO",
+      "value": "0x0c",
+      "comment": "",
+      "category": "DRM_PANFROST"
+    },
+    {
+      "name": "DRM_PANFROST_QUERY_BO_INFO",
+      "value": "0x0d",
+      "comment": "",
+      "category": "DRM_PANFROST"
+    },
+    {
+      "name": "DRM_IOCTL_PANFROST_SUBMIT",
+      "value": "DRM_IOW(DRM_COMMAND_BASE + DRM_PANFROST_SUBMIT, struct drm_panfrost_submit)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_PANFROST_WAIT_BO",
+      "value": "DRM_IOW(DRM_COMMAND_BASE + DRM_PANFROST_WAIT_BO, struct drm_panfrost_wait_bo)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_PANFROST_CREATE_BO",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_PANFROST_CREATE_BO, struct drm_panfrost_create_bo)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_PANFROST_MMAP_BO",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_PANFROST_MMAP_BO, struct drm_panfrost_mmap_bo)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_PANFROST_GET_PARAM",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_PANFROST_GET_PARAM, struct drm_panfrost_get_param)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_PANFROST_GET_BO_OFFSET",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_PANFROST_GET_BO_OFFSET, struct drm_panfrost_get_bo_offset)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_PANFROST_MADVISE",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_PANFROST_MADVISE, struct drm_panfrost_madvise)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_PANFROST_SET_LABEL_BO",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_PANFROST_SET_LABEL_BO, struct drm_panfrost_set_label_bo)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_PANFROST_JM_CTX_CREATE",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_PANFROST_JM_CTX_CREATE, struct drm_panfrost_jm_ctx_create)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_PANFROST_JM_CTX_DESTROY",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_PANFROST_JM_CTX_DESTROY, struct drm_panfrost_jm_ctx_destroy)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_PANFROST_SYNC_BO",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_PANFROST_SYNC_BO, struct drm_panfrost_sync_bo)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_PANFROST_QUERY_BO_INFO",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_PANFROST_QUERY_BO_INFO, struct drm_panfrost_query_bo_info)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_PANFROST_PERFCNT_ENABLE",
+      "value": "DRM_IOW(DRM_COMMAND_BASE + DRM_PANFROST_PERFCNT_ENABLE, struct drm_panfrost_perfcnt_enable)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_PANFROST_PERFCNT_DUMP",
+      "value": "DRM_IOW(DRM_COMMAND_BASE + DRM_PANFROST_PERFCNT_DUMP, struct drm_panfrost_perfcnt_dump)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "PANFROST_JD_REQ_FS",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "PANFROST_JD"
+    },
+    {
+      "name": "PANFROST_JD_REQ_CYCLE_COUNT",
+      "value": "(1 << 1)",
+      "comment": "",
+      "category": "PANFROST_JD"
+    },
+    {
+      "name": "PANFROST_BO_NOEXEC",
+      "value": "1",
+      "comment": "",
+      "category": "PANFROST_BO"
+    },
+    {
+      "name": "PANFROST_BO_HEAP",
+      "value": "2",
+      "comment": "",
+      "category": "PANFROST_BO"
+    },
+    {
+      "name": "PANFROST_BO_WB_MMAP",
+      "value": "4",
+      "comment": "",
+      "category": "PANFROST_BO"
+    },
+    {
+      "name": "PANFROST_MADV_WILLNEED",
+      "value": "0",
+      "comment": "backing pages are needed, status returned in 'retained'",
+      "category": "PANFROST_MADV"
+    },
+    {
+      "name": "PANFROST_MADV_DONTNEED",
+      "value": "1",
+      "comment": "backing pages not needed",
+      "category": "PANFROST_MADV"
+    },
+    {
+      "name": "PANFROST_BO_SYNC_CPU_CACHE_FLUSH",
+      "value": "0",
+      "comment": "",
+      "category": "PANFROST_BO"
+    },
+    {
+      "name": "PANFROST_BO_SYNC_CPU_CACHE_FLUSH_AND_INVALIDATE",
+      "value": "1",
+      "comment": "",
+      "category": "PANFROST_BO"
+    },
+    {
+      "name": "DRM_PANFROST_BO_IS_IMPORTED",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "DRM_PANFROST"
+    },
+    {
+      "name": "PANFROSTDUMP_MAJOR",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PANFROSTDUMP_MINOR",
+      "value": "0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PANFROSTDUMP_MAGIC",
+      "value": "0x464E4150",
+      "comment": "PANF",
+      "category": ""
+    },
+    {
+      "name": "PANFROSTDUMP_BUF_REG",
+      "value": "0",
+      "comment": "",
+      "category": "PANFROSTDUMP_BUF"
+    },
+    {
+      "name": "PANFROSTDUMP_BUF_BOMAP",
+      "value": "(PANFROSTDUMP_BUF_REG + 1)",
+      "comment": "",
+      "category": "PANFROSTDUMP_BUF"
+    },
+    {
+      "name": "PANFROSTDUMP_BUF_BO",
+      "value": "(PANFROSTDUMP_BUF_BOMAP + 1)",
+      "comment": "",
+      "category": "PANFROSTDUMP_BUF"
+    },
+    {
+      "name": "PANFROSTDUMP_BUF_TRAILER",
+      "value": "(PANFROSTDUMP_BUF_BO + 1)",
+      "comment": "",
+      "category": "PANFROSTDUMP_BUF"
+    }
+  ],
+  "structs": [
+    {
+      "name": "drm_panfrost_submit",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "jc",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "in_syncs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "in_sync_count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "out_sync",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "bo_handles",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "bo_handle_count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "requirements",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "jm_ctx_handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_panfrost_wait_bo",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s64",
+          "name": "timeout_ns",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_panfrost_create_bo",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_panfrost_mmap_bo",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_panfrost_get_param",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "param",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "value",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_panfrost_get_bo_offset",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_panfrost_perfcnt_enable",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "enable",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "counterset",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_panfrost_perfcnt_dump",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "buf_ptr",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_panfrost_madvise",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "madv",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "retained",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_panfrost_set_label_bo",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "label",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_panfrost_bo_sync_op",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_panfrost_sync_bo",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "ops",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "op_count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_panfrost_query_bo_info",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "extra_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "create_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "panfrost_dump_object_header",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "magic",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "file_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "file_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "jc",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "gpu_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "major",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "minor",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "nbos",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "valid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "iova",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "data",
+          "array_size": "2",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "sizer",
+          "array_size": "496",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_14",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "jc",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "gpu_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "major",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "minor",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "nbos",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_15",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "valid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "iova",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "data",
+          "array_size": "2",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "panfrost_dump_registers",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "reg",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "value",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_panfrost_jm_ctx_create",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "priority",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_panfrost_jm_ctx_destroy",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

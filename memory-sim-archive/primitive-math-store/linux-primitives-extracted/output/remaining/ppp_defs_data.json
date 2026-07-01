@@ -1,0 +1,469 @@
+{
+  "filename": "ppp_defs.h",
+  "includes": [
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "PPP_HDRLEN",
+      "value": "4",
+      "comment": "octets for standard ppp header",
+      "category": ""
+    },
+    {
+      "name": "PPP_FCSLEN",
+      "value": "2",
+      "comment": "octets for FCS",
+      "category": ""
+    },
+    {
+      "name": "PPP_MRU",
+      "value": "1500",
+      "comment": "default MRU = max length of info field",
+      "category": ""
+    },
+    {
+      "name": "PPP_ALLSTATIONS",
+      "value": "0xff",
+      "comment": "All-Stations broadcast address",
+      "category": ""
+    },
+    {
+      "name": "PPP_UI",
+      "value": "0x03",
+      "comment": "Unnumbered Information",
+      "category": ""
+    },
+    {
+      "name": "PPP_FLAG",
+      "value": "0x7e",
+      "comment": "Flag Sequence",
+      "category": ""
+    },
+    {
+      "name": "PPP_ESCAPE",
+      "value": "0x7d",
+      "comment": "Asynchronous Control Escape",
+      "category": ""
+    },
+    {
+      "name": "PPP_TRANS",
+      "value": "0x20",
+      "comment": "Asynchronous transparency modifier",
+      "category": ""
+    },
+    {
+      "name": "PPP_IP",
+      "value": "0x21",
+      "comment": "Internet Protocol",
+      "category": ""
+    },
+    {
+      "name": "PPP_AT",
+      "value": "0x29",
+      "comment": "AppleTalk Protocol",
+      "category": ""
+    },
+    {
+      "name": "PPP_IPX",
+      "value": "0x2b",
+      "comment": "IPX protocol",
+      "category": ""
+    },
+    {
+      "name": "PPP_VJC_COMP",
+      "value": "0x2d",
+      "comment": "VJ compressed TCP",
+      "category": "PPP_VJC"
+    },
+    {
+      "name": "PPP_VJC_UNCOMP",
+      "value": "0x2f",
+      "comment": "VJ uncompressed TCP",
+      "category": "PPP_VJC"
+    },
+    {
+      "name": "PPP_MP",
+      "value": "0x3d",
+      "comment": "Multilink protocol",
+      "category": ""
+    },
+    {
+      "name": "PPP_IPV6",
+      "value": "0x57",
+      "comment": "Internet Protocol Version 6",
+      "category": ""
+    },
+    {
+      "name": "PPP_COMPFRAG",
+      "value": "0xfb",
+      "comment": "fragment compressed below bundle",
+      "category": ""
+    },
+    {
+      "name": "PPP_COMP",
+      "value": "0xfd",
+      "comment": "compressed packet",
+      "category": ""
+    },
+    {
+      "name": "PPP_MPLS_UC",
+      "value": "0x0281",
+      "comment": "Multi Protocol Label Switching - Unicast",
+      "category": "PPP_MPLS"
+    },
+    {
+      "name": "PPP_MPLS_MC",
+      "value": "0x0283",
+      "comment": "Multi Protocol Label Switching - Multicast",
+      "category": "PPP_MPLS"
+    },
+    {
+      "name": "PPP_IPCP",
+      "value": "0x8021",
+      "comment": "IP Control Protocol",
+      "category": ""
+    },
+    {
+      "name": "PPP_ATCP",
+      "value": "0x8029",
+      "comment": "AppleTalk Control Protocol",
+      "category": ""
+    },
+    {
+      "name": "PPP_IPXCP",
+      "value": "0x802b",
+      "comment": "IPX Control Protocol",
+      "category": ""
+    },
+    {
+      "name": "PPP_IPV6CP",
+      "value": "0x8057",
+      "comment": "IPv6 Control Protocol",
+      "category": ""
+    },
+    {
+      "name": "PPP_CCPFRAG",
+      "value": "0x80fb",
+      "comment": "CCP at link level (below MP bundle)",
+      "category": ""
+    },
+    {
+      "name": "PPP_CCP",
+      "value": "0x80fd",
+      "comment": "Compression Control Protocol",
+      "category": ""
+    },
+    {
+      "name": "PPP_MPLSCP",
+      "value": "0x80fd",
+      "comment": "MPLS Control Protocol",
+      "category": ""
+    },
+    {
+      "name": "PPP_LCP",
+      "value": "0xc021",
+      "comment": "Link Control Protocol",
+      "category": ""
+    },
+    {
+      "name": "PPP_PAP",
+      "value": "0xc023",
+      "comment": "Password Authentication Protocol",
+      "category": ""
+    },
+    {
+      "name": "PPP_LQR",
+      "value": "0xc025",
+      "comment": "Link Quality Report protocol",
+      "category": ""
+    },
+    {
+      "name": "PPP_CHAP",
+      "value": "0xc223",
+      "comment": "Cryptographic Handshake Auth. Protocol",
+      "category": ""
+    },
+    {
+      "name": "PPP_CBCP",
+      "value": "0xc029",
+      "comment": "Callback Control Protocol",
+      "category": ""
+    },
+    {
+      "name": "PPP_INITFCS",
+      "value": "0xffff",
+      "comment": "Initial FCS value",
+      "category": ""
+    },
+    {
+      "name": "PPP_GOODFCS",
+      "value": "0xf0b8",
+      "comment": "Good final FCS value",
+      "category": ""
+    }
+  ],
+  "structs": [
+    {
+      "name": "pppstat",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "ppp_discards",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ppp_ibytes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ppp_ioctects",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ppp_ipackets",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ppp_ierrors",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ppp_ilqrs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ppp_obytes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ppp_ooctects",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ppp_opackets",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ppp_oerrors",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ppp_olqrs",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "vjstat",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "vjs_packets",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "vjs_compressed",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "vjs_searches",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "vjs_misses",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "vjs_uncompressedin",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "vjs_compressedin",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "vjs_errorin",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "vjs_tossed",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "compstat",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "unc_bytes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "unc_packets",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "comp_bytes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "comp_packets",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "inc_bytes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "inc_packets",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "in_count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "bytes_out",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "double",
+          "name": "ratio",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ppp_stats",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ppp_comp_stats",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ppp_idle",
+      "fields": [
+        {
+          "type_name": "__kernel_old_time_t",
+          "name": "xmit_idle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__kernel_old_time_t",
+          "name": "recv_idle",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ppp_idle32",
+      "fields": [
+        {
+          "type_name": "__s32",
+          "name": "xmit_idle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "recv_idle",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ppp_idle64",
+      "fields": [
+        {
+          "type_name": "__s64",
+          "name": "xmit_idle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s64",
+          "name": "recv_idle",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

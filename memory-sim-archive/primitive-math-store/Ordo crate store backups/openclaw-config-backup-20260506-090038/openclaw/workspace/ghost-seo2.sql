@@ -1,0 +1,2 @@
+-- Check all settings related to SEO/social
+SELECT `key`, value FROM settings WHERE `key` IN ('title', 'description', 'twitter', 'facebook', 'meta_description', 'og_title', 'og_description', 'og_image', 'twitter_image', 'twitter_title', 'twitter_description', 'codeinjection_head', 'codeinjection_foot', 'accent_color', 'locale', 'url', 'cover_image', 'logo', 'icon');

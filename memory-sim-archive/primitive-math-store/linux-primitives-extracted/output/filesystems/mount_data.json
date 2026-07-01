@@ -1,0 +1,802 @@
+{
+  "filename": "mount.h",
+  "includes": [
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "MS_RDONLY",
+      "value": "1",
+      "comment": "Mount read-only",
+      "category": ""
+    },
+    {
+      "name": "MS_NOSUID",
+      "value": "2",
+      "comment": "Ignore suid and sgid bits",
+      "category": ""
+    },
+    {
+      "name": "MS_NODEV",
+      "value": "4",
+      "comment": "Disallow access to device special files",
+      "category": ""
+    },
+    {
+      "name": "MS_NOEXEC",
+      "value": "8",
+      "comment": "Disallow program execution",
+      "category": ""
+    },
+    {
+      "name": "MS_SYNCHRONOUS",
+      "value": "16",
+      "comment": "Writes are synced at once",
+      "category": ""
+    },
+    {
+      "name": "MS_REMOUNT",
+      "value": "32",
+      "comment": "Alter flags of a mounted FS",
+      "category": ""
+    },
+    {
+      "name": "MS_MANDLOCK",
+      "value": "64",
+      "comment": "Allow mandatory locks on an FS",
+      "category": ""
+    },
+    {
+      "name": "MS_DIRSYNC",
+      "value": "128",
+      "comment": "Directory modifications are synchronous",
+      "category": ""
+    },
+    {
+      "name": "MS_NOSYMFOLLOW",
+      "value": "256",
+      "comment": "Do not follow symlinks",
+      "category": ""
+    },
+    {
+      "name": "MS_NOATIME",
+      "value": "1024",
+      "comment": "Do not update access times.",
+      "category": ""
+    },
+    {
+      "name": "MS_NODIRATIME",
+      "value": "2048",
+      "comment": "Do not update directory access times",
+      "category": ""
+    },
+    {
+      "name": "MS_BIND",
+      "value": "4096",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "MS_MOVE",
+      "value": "8192",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "MS_REC",
+      "value": "16384",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "MS_VERBOSE",
+      "value": "32768\t/* War is peace. Verbosity is silence.",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "MS_SILENT",
+      "value": "32768",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "MS_POSIXACL",
+      "value": "(1<<16)",
+      "comment": "VFS does not apply the umask",
+      "category": ""
+    },
+    {
+      "name": "MS_UNBINDABLE",
+      "value": "(1<<17)",
+      "comment": "change to unbindable",
+      "category": ""
+    },
+    {
+      "name": "MS_PRIVATE",
+      "value": "(1<<18)",
+      "comment": "change to private",
+      "category": ""
+    },
+    {
+      "name": "MS_SLAVE",
+      "value": "(1<<19)",
+      "comment": "change to slave",
+      "category": ""
+    },
+    {
+      "name": "MS_SHARED",
+      "value": "(1<<20)",
+      "comment": "change to shared",
+      "category": ""
+    },
+    {
+      "name": "MS_RELATIME",
+      "value": "(1<<21)",
+      "comment": "Update atime relative to mtime/ctime.",
+      "category": ""
+    },
+    {
+      "name": "MS_KERNMOUNT",
+      "value": "(1<<22)",
+      "comment": "this is a kern_mount call",
+      "category": ""
+    },
+    {
+      "name": "MS_I_VERSION",
+      "value": "(1<<23)",
+      "comment": "Update inode I_version field",
+      "category": "MS_I"
+    },
+    {
+      "name": "MS_STRICTATIME",
+      "value": "(1<<24)",
+      "comment": "Always perform atime updates",
+      "category": ""
+    },
+    {
+      "name": "MS_LAZYTIME",
+      "value": "(1<<25)",
+      "comment": "Update the on-disk [acm]times lazily",
+      "category": ""
+    },
+    {
+      "name": "MS_SUBMOUNT",
+      "value": "(1<<26)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "MS_NOREMOTELOCK",
+      "value": "(1<<27)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "MS_NOSEC",
+      "value": "(1<<28)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "MS_BORN",
+      "value": "(1<<29)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "MS_ACTIVE",
+      "value": "(1<<30)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "MS_NOUSER",
+      "value": "(1<<31)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "MS_RMT_MASK",
+      "value": "(MS_RDONLY|MS_SYNCHRONOUS|MS_MANDLOCK|MS_I_VERSION|",
+      "comment": "",
+      "category": "MS_RMT"
+    },
+    {
+      "name": "MS_MGC_VAL",
+      "value": "0xC0ED0000",
+      "comment": "",
+      "category": "MS_MGC"
+    },
+    {
+      "name": "MS_MGC_MSK",
+      "value": "0xffff0000",
+      "comment": "",
+      "category": "MS_MGC"
+    },
+    {
+      "name": "OPEN_TREE_CLONE",
+      "value": "(1 << 0)",
+      "comment": "Clone the target tree and attach the clone",
+      "category": "OPEN_TREE"
+    },
+    {
+      "name": "OPEN_TREE_NAMESPACE",
+      "value": "(1 << 1)",
+      "comment": "Clone the target tree into a new mount namespace",
+      "category": "OPEN_TREE"
+    },
+    {
+      "name": "OPEN_TREE_CLOEXEC",
+      "value": "O_CLOEXEC",
+      "comment": "Close the file on execve()",
+      "category": "OPEN_TREE"
+    },
+    {
+      "name": "MOVE_MOUNT_F_SYMLINKS",
+      "value": "0x00000001",
+      "comment": "Follow symlinks on from path",
+      "category": "MOVE_MOUNT"
+    },
+    {
+      "name": "MOVE_MOUNT_F_AUTOMOUNTS",
+      "value": "0x00000002",
+      "comment": "Follow automounts on from path",
+      "category": "MOVE_MOUNT"
+    },
+    {
+      "name": "MOVE_MOUNT_F_EMPTY_PATH",
+      "value": "0x00000004",
+      "comment": "Empty from path permitted",
+      "category": "MOVE_MOUNT"
+    },
+    {
+      "name": "MOVE_MOUNT_T_SYMLINKS",
+      "value": "0x00000010",
+      "comment": "Follow symlinks on to path",
+      "category": "MOVE_MOUNT"
+    },
+    {
+      "name": "MOVE_MOUNT_T_AUTOMOUNTS",
+      "value": "0x00000020",
+      "comment": "Follow automounts on to path",
+      "category": "MOVE_MOUNT"
+    },
+    {
+      "name": "MOVE_MOUNT_T_EMPTY_PATH",
+      "value": "0x00000040",
+      "comment": "Empty to path permitted",
+      "category": "MOVE_MOUNT"
+    },
+    {
+      "name": "MOVE_MOUNT_SET_GROUP",
+      "value": "0x00000100",
+      "comment": "Set sharing group instead",
+      "category": "MOVE_MOUNT"
+    },
+    {
+      "name": "MOVE_MOUNT_BENEATH",
+      "value": "0x00000200",
+      "comment": "Mount beneath top mount",
+      "category": "MOVE_MOUNT"
+    },
+    {
+      "name": "MOVE_MOUNT__MASK",
+      "value": "0x00000377",
+      "comment": "",
+      "category": "MOVE_MOUNT"
+    },
+    {
+      "name": "FSOPEN_CLOEXEC",
+      "value": "0x00000001",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FSPICK_CLOEXEC",
+      "value": "0x00000001",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FSPICK_SYMLINK_NOFOLLOW",
+      "value": "0x00000002",
+      "comment": "",
+      "category": "FSPICK_SYMLINK"
+    },
+    {
+      "name": "FSPICK_NO_AUTOMOUNT",
+      "value": "0x00000004",
+      "comment": "",
+      "category": "FSPICK_NO"
+    },
+    {
+      "name": "FSPICK_EMPTY_PATH",
+      "value": "0x00000008",
+      "comment": "",
+      "category": "FSPICK_EMPTY"
+    },
+    {
+      "name": "FSMOUNT_CLOEXEC",
+      "value": "0x00000001",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FSMOUNT_NAMESPACE",
+      "value": "0x00000002",
+      "comment": "Create the mount in a new mount namespace",
+      "category": ""
+    },
+    {
+      "name": "MOUNT_ATTR_RDONLY",
+      "value": "0x00000001",
+      "comment": "Mount read-only",
+      "category": "MOUNT_ATTR"
+    },
+    {
+      "name": "MOUNT_ATTR_NOSUID",
+      "value": "0x00000002",
+      "comment": "Ignore suid and sgid bits",
+      "category": "MOUNT_ATTR"
+    },
+    {
+      "name": "MOUNT_ATTR_NODEV",
+      "value": "0x00000004",
+      "comment": "Disallow access to device special files",
+      "category": "MOUNT_ATTR"
+    },
+    {
+      "name": "MOUNT_ATTR_NOEXEC",
+      "value": "0x00000008",
+      "comment": "Disallow program execution",
+      "category": "MOUNT_ATTR"
+    },
+    {
+      "name": "MOUNT_ATTR__ATIME",
+      "value": "0x00000070",
+      "comment": "Setting on how atime should be updated",
+      "category": "MOUNT_ATTR"
+    },
+    {
+      "name": "MOUNT_ATTR_RELATIME",
+      "value": "0x00000000",
+      "comment": "- Update atime relative to mtime/ctime.",
+      "category": "MOUNT_ATTR"
+    },
+    {
+      "name": "MOUNT_ATTR_NOATIME",
+      "value": "0x00000010",
+      "comment": "- Do not update access times.",
+      "category": "MOUNT_ATTR"
+    },
+    {
+      "name": "MOUNT_ATTR_STRICTATIME",
+      "value": "0x00000020",
+      "comment": "- Always perform atime updates",
+      "category": "MOUNT_ATTR"
+    },
+    {
+      "name": "MOUNT_ATTR_NODIRATIME",
+      "value": "0x00000080",
+      "comment": "Do not update directory access times",
+      "category": "MOUNT_ATTR"
+    },
+    {
+      "name": "MOUNT_ATTR_IDMAP",
+      "value": "0x00100000",
+      "comment": "Idmap mount to @userns_fd in struct mount_attr.",
+      "category": "MOUNT_ATTR"
+    },
+    {
+      "name": "MOUNT_ATTR_NOSYMFOLLOW",
+      "value": "0x00200000",
+      "comment": "Do not follow symlinks",
+      "category": "MOUNT_ATTR"
+    },
+    {
+      "name": "MOUNT_ATTR_SIZE_VER0",
+      "value": "32",
+      "comment": "sizeof first published struct",
+      "category": "MOUNT_ATTR"
+    },
+    {
+      "name": "MNT_ID_REQ_SIZE_VER0",
+      "value": "24",
+      "comment": "sizeof first published struct",
+      "category": "MNT_ID"
+    },
+    {
+      "name": "MNT_ID_REQ_SIZE_VER1",
+      "value": "32",
+      "comment": "sizeof second published struct",
+      "category": "MNT_ID"
+    },
+    {
+      "name": "STATMOUNT_SB_BASIC",
+      "value": "0x00000001U",
+      "comment": "Want/got sb_...",
+      "category": "STATMOUNT_SB"
+    },
+    {
+      "name": "STATMOUNT_MNT_BASIC",
+      "value": "0x00000002U",
+      "comment": "Want/got mnt_...",
+      "category": "STATMOUNT_MNT"
+    },
+    {
+      "name": "STATMOUNT_PROPAGATE_FROM",
+      "value": "0x00000004U",
+      "comment": "Want/got propagate_from",
+      "category": "STATMOUNT_PROPAGATE"
+    },
+    {
+      "name": "STATMOUNT_MNT_ROOT",
+      "value": "0x00000008U",
+      "comment": "Want/got mnt_root",
+      "category": "STATMOUNT_MNT"
+    },
+    {
+      "name": "STATMOUNT_MNT_POINT",
+      "value": "0x00000010U",
+      "comment": "Want/got mnt_point",
+      "category": "STATMOUNT_MNT"
+    },
+    {
+      "name": "STATMOUNT_FS_TYPE",
+      "value": "0x00000020U",
+      "comment": "Want/got fs_type",
+      "category": "STATMOUNT_FS"
+    },
+    {
+      "name": "STATMOUNT_MNT_NS_ID",
+      "value": "0x00000040U",
+      "comment": "Want/got mnt_ns_id",
+      "category": "STATMOUNT_MNT"
+    },
+    {
+      "name": "STATMOUNT_MNT_OPTS",
+      "value": "0x00000080U",
+      "comment": "Want/got mnt_opts",
+      "category": "STATMOUNT_MNT"
+    },
+    {
+      "name": "STATMOUNT_FS_SUBTYPE",
+      "value": "0x00000100U",
+      "comment": "Want/got fs_subtype",
+      "category": "STATMOUNT_FS"
+    },
+    {
+      "name": "STATMOUNT_SB_SOURCE",
+      "value": "0x00000200U",
+      "comment": "Want/got sb_source",
+      "category": "STATMOUNT_SB"
+    },
+    {
+      "name": "STATMOUNT_OPT_ARRAY",
+      "value": "0x00000400U",
+      "comment": "Want/got opt_...",
+      "category": "STATMOUNT_OPT"
+    },
+    {
+      "name": "STATMOUNT_OPT_SEC_ARRAY",
+      "value": "0x00000800U",
+      "comment": "Want/got opt_sec...",
+      "category": "STATMOUNT_OPT"
+    },
+    {
+      "name": "STATMOUNT_SUPPORTED_MASK",
+      "value": "0x00001000U",
+      "comment": "Want/got supported mask flags",
+      "category": "STATMOUNT_SUPPORTED"
+    },
+    {
+      "name": "STATMOUNT_MNT_UIDMAP",
+      "value": "0x00002000U",
+      "comment": "Want/got uidmap...",
+      "category": "STATMOUNT_MNT"
+    },
+    {
+      "name": "STATMOUNT_MNT_GIDMAP",
+      "value": "0x00004000U",
+      "comment": "Want/got gidmap...",
+      "category": "STATMOUNT_MNT"
+    },
+    {
+      "name": "LSMT_ROOT",
+      "value": "0xffffffffffffffff",
+      "comment": "root mount",
+      "category": ""
+    },
+    {
+      "name": "LISTMOUNT_REVERSE",
+      "value": "(1 << 0)",
+      "comment": "List later mounts first",
+      "category": ""
+    },
+    {
+      "name": "STATMOUNT_BY_FD",
+      "value": "0x00000001U",
+      "comment": "want mountinfo for given fd",
+      "category": "STATMOUNT_BY"
+    }
+  ],
+  "structs": [
+    {
+      "name": "mount_attr",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "attr_set",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "attr_clr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "propagation",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "userns_fd",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "statmount",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "mnt_opts",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "mask",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "sb_dev_major",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "sb_dev_minor",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "sb_magic",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "sb_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "fs_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "mnt_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "mnt_parent_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "mnt_id_old",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "mnt_parent_id_old",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "mnt_attr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "mnt_propagation",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "mnt_peer_group",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "mnt_master",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "propagate_from",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "mnt_root",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "mnt_point",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "mnt_ns_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "fs_subtype",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "sb_source",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "opt_num",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "opt_array",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "opt_sec_num",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "opt_sec_array",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "supported_mask",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "mnt_uidmap_num",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "mnt_uidmap",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "mnt_gidmap_num",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "mnt_gidmap",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "__spare2",
+          "array_size": "43",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "mnt_id_req",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "mnt_ns_fd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "mnt_fd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "mnt_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "param",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "mnt_ns_id",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

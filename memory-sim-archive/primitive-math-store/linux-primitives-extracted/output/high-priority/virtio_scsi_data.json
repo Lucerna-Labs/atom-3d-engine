@@ -1,0 +1,598 @@
+{
+  "filename": "virtio_scsi.h",
+  "includes": [
+    "linux/virtio_types.h"
+  ],
+  "defines": [
+    {
+      "name": "VIRTIO_SCSI_CDB_DEFAULT_SIZE",
+      "value": "32",
+      "comment": "",
+      "category": "VIRTIO_SCSI"
+    },
+    {
+      "name": "VIRTIO_SCSI_SENSE_DEFAULT_SIZE",
+      "value": "96",
+      "comment": "",
+      "category": "VIRTIO_SCSI"
+    },
+    {
+      "name": "VIRTIO_SCSI_CDB_SIZE",
+      "value": "VIRTIO_SCSI_CDB_DEFAULT_SIZE",
+      "comment": "",
+      "category": "VIRTIO_SCSI"
+    },
+    {
+      "name": "VIRTIO_SCSI_SENSE_SIZE",
+      "value": "VIRTIO_SCSI_SENSE_DEFAULT_SIZE",
+      "comment": "",
+      "category": "VIRTIO_SCSI"
+    },
+    {
+      "name": "VIRTIO_SCSI_F_INOUT",
+      "value": "0",
+      "comment": "",
+      "category": "VIRTIO_SCSI"
+    },
+    {
+      "name": "VIRTIO_SCSI_F_HOTPLUG",
+      "value": "1",
+      "comment": "",
+      "category": "VIRTIO_SCSI"
+    },
+    {
+      "name": "VIRTIO_SCSI_F_CHANGE",
+      "value": "2",
+      "comment": "",
+      "category": "VIRTIO_SCSI"
+    },
+    {
+      "name": "VIRTIO_SCSI_F_T10_PI",
+      "value": "3",
+      "comment": "",
+      "category": "VIRTIO_SCSI"
+    },
+    {
+      "name": "VIRTIO_SCSI_S_OK",
+      "value": "0",
+      "comment": "",
+      "category": "VIRTIO_SCSI"
+    },
+    {
+      "name": "VIRTIO_SCSI_S_OVERRUN",
+      "value": "1",
+      "comment": "",
+      "category": "VIRTIO_SCSI"
+    },
+    {
+      "name": "VIRTIO_SCSI_S_ABORTED",
+      "value": "2",
+      "comment": "",
+      "category": "VIRTIO_SCSI"
+    },
+    {
+      "name": "VIRTIO_SCSI_S_BAD_TARGET",
+      "value": "3",
+      "comment": "",
+      "category": "VIRTIO_SCSI"
+    },
+    {
+      "name": "VIRTIO_SCSI_S_RESET",
+      "value": "4",
+      "comment": "",
+      "category": "VIRTIO_SCSI"
+    },
+    {
+      "name": "VIRTIO_SCSI_S_BUSY",
+      "value": "5",
+      "comment": "",
+      "category": "VIRTIO_SCSI"
+    },
+    {
+      "name": "VIRTIO_SCSI_S_TRANSPORT_FAILURE",
+      "value": "6",
+      "comment": "",
+      "category": "VIRTIO_SCSI"
+    },
+    {
+      "name": "VIRTIO_SCSI_S_TARGET_FAILURE",
+      "value": "7",
+      "comment": "",
+      "category": "VIRTIO_SCSI"
+    },
+    {
+      "name": "VIRTIO_SCSI_S_NEXUS_FAILURE",
+      "value": "8",
+      "comment": "",
+      "category": "VIRTIO_SCSI"
+    },
+    {
+      "name": "VIRTIO_SCSI_S_FAILURE",
+      "value": "9",
+      "comment": "",
+      "category": "VIRTIO_SCSI"
+    },
+    {
+      "name": "VIRTIO_SCSI_S_FUNCTION_SUCCEEDED",
+      "value": "10",
+      "comment": "",
+      "category": "VIRTIO_SCSI"
+    },
+    {
+      "name": "VIRTIO_SCSI_S_FUNCTION_REJECTED",
+      "value": "11",
+      "comment": "",
+      "category": "VIRTIO_SCSI"
+    },
+    {
+      "name": "VIRTIO_SCSI_S_INCORRECT_LUN",
+      "value": "12",
+      "comment": "",
+      "category": "VIRTIO_SCSI"
+    },
+    {
+      "name": "VIRTIO_SCSI_T_TMF",
+      "value": "0",
+      "comment": "",
+      "category": "VIRTIO_SCSI"
+    },
+    {
+      "name": "VIRTIO_SCSI_T_AN_QUERY",
+      "value": "1",
+      "comment": "",
+      "category": "VIRTIO_SCSI"
+    },
+    {
+      "name": "VIRTIO_SCSI_T_AN_SUBSCRIBE",
+      "value": "2",
+      "comment": "",
+      "category": "VIRTIO_SCSI"
+    },
+    {
+      "name": "VIRTIO_SCSI_T_TMF_ABORT_TASK",
+      "value": "0",
+      "comment": "",
+      "category": "VIRTIO_SCSI"
+    },
+    {
+      "name": "VIRTIO_SCSI_T_TMF_ABORT_TASK_SET",
+      "value": "1",
+      "comment": "",
+      "category": "VIRTIO_SCSI"
+    },
+    {
+      "name": "VIRTIO_SCSI_T_TMF_CLEAR_ACA",
+      "value": "2",
+      "comment": "",
+      "category": "VIRTIO_SCSI"
+    },
+    {
+      "name": "VIRTIO_SCSI_T_TMF_CLEAR_TASK_SET",
+      "value": "3",
+      "comment": "",
+      "category": "VIRTIO_SCSI"
+    },
+    {
+      "name": "VIRTIO_SCSI_T_TMF_I_T_NEXUS_RESET",
+      "value": "4",
+      "comment": "",
+      "category": "VIRTIO_SCSI"
+    },
+    {
+      "name": "VIRTIO_SCSI_T_TMF_LOGICAL_UNIT_RESET",
+      "value": "5",
+      "comment": "",
+      "category": "VIRTIO_SCSI"
+    },
+    {
+      "name": "VIRTIO_SCSI_T_TMF_QUERY_TASK",
+      "value": "6",
+      "comment": "",
+      "category": "VIRTIO_SCSI"
+    },
+    {
+      "name": "VIRTIO_SCSI_T_TMF_QUERY_TASK_SET",
+      "value": "7",
+      "comment": "",
+      "category": "VIRTIO_SCSI"
+    },
+    {
+      "name": "VIRTIO_SCSI_T_EVENTS_MISSED",
+      "value": "0x80000000",
+      "comment": "",
+      "category": "VIRTIO_SCSI"
+    },
+    {
+      "name": "VIRTIO_SCSI_T_NO_EVENT",
+      "value": "0",
+      "comment": "",
+      "category": "VIRTIO_SCSI"
+    },
+    {
+      "name": "VIRTIO_SCSI_T_TRANSPORT_RESET",
+      "value": "1",
+      "comment": "",
+      "category": "VIRTIO_SCSI"
+    },
+    {
+      "name": "VIRTIO_SCSI_T_ASYNC_NOTIFY",
+      "value": "2",
+      "comment": "",
+      "category": "VIRTIO_SCSI"
+    },
+    {
+      "name": "VIRTIO_SCSI_T_PARAM_CHANGE",
+      "value": "3",
+      "comment": "",
+      "category": "VIRTIO_SCSI"
+    },
+    {
+      "name": "VIRTIO_SCSI_EVT_RESET_HARD",
+      "value": "0",
+      "comment": "",
+      "category": "VIRTIO_SCSI"
+    },
+    {
+      "name": "VIRTIO_SCSI_EVT_RESET_RESCAN",
+      "value": "1",
+      "comment": "",
+      "category": "VIRTIO_SCSI"
+    },
+    {
+      "name": "VIRTIO_SCSI_EVT_RESET_REMOVED",
+      "value": "2",
+      "comment": "",
+      "category": "VIRTIO_SCSI"
+    },
+    {
+      "name": "VIRTIO_SCSI_S_SIMPLE",
+      "value": "0",
+      "comment": "",
+      "category": "VIRTIO_SCSI"
+    },
+    {
+      "name": "VIRTIO_SCSI_S_ORDERED",
+      "value": "1",
+      "comment": "",
+      "category": "VIRTIO_SCSI"
+    },
+    {
+      "name": "VIRTIO_SCSI_S_HEAD",
+      "value": "2",
+      "comment": "",
+      "category": "VIRTIO_SCSI"
+    },
+    {
+      "name": "VIRTIO_SCSI_S_ACA",
+      "value": "3",
+      "comment": "",
+      "category": "VIRTIO_SCSI"
+    }
+  ],
+  "structs": [
+    {
+      "name": "virtio_scsi_cmd_req",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "lun",
+          "array_size": "8",
+          "comment": ""
+        },
+        {
+          "type_name": "__virtio64",
+          "name": "tag",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "task_attr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "prio",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "crn",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "cdb",
+          "array_size": "VIRTIO_SCSI_CDB_SIZE",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "virtio_scsi_cmd_req_pi",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "lun",
+          "array_size": "8",
+          "comment": ""
+        },
+        {
+          "type_name": "__virtio64",
+          "name": "tag",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "task_attr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "prio",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "crn",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__virtio32",
+          "name": "pi_bytesout",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__virtio32",
+          "name": "pi_bytesin",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "cdb",
+          "array_size": "VIRTIO_SCSI_CDB_SIZE",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "virtio_scsi_cmd_resp",
+      "fields": [
+        {
+          "type_name": "__virtio32",
+          "name": "sense_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__virtio32",
+          "name": "resid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__virtio16",
+          "name": "status_qualifier",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "status",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "response",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "sense",
+          "array_size": "VIRTIO_SCSI_SENSE_SIZE",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "virtio_scsi_ctrl_tmf_req",
+      "fields": [
+        {
+          "type_name": "__virtio32",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__virtio32",
+          "name": "subtype",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "lun",
+          "array_size": "8",
+          "comment": ""
+        },
+        {
+          "type_name": "__virtio64",
+          "name": "tag",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "virtio_scsi_ctrl_tmf_resp",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "response",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "virtio_scsi_ctrl_an_req",
+      "fields": [
+        {
+          "type_name": "__virtio32",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "lun",
+          "array_size": "8",
+          "comment": ""
+        },
+        {
+          "type_name": "__virtio32",
+          "name": "event_requested",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "virtio_scsi_ctrl_an_resp",
+      "fields": [
+        {
+          "type_name": "__virtio32",
+          "name": "event_actual",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "response",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "virtio_scsi_event",
+      "fields": [
+        {
+          "type_name": "__virtio32",
+          "name": "event",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "lun",
+          "array_size": "8",
+          "comment": ""
+        },
+        {
+          "type_name": "__virtio32",
+          "name": "reason",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "virtio_scsi_config",
+      "fields": [
+        {
+          "type_name": "__virtio32",
+          "name": "num_queues",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__virtio32",
+          "name": "seg_max",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__virtio32",
+          "name": "max_sectors",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__virtio32",
+          "name": "cmd_per_lun",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__virtio32",
+          "name": "event_info_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__virtio32",
+          "name": "sense_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__virtio32",
+          "name": "cdb_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__virtio16",
+          "name": "max_channel",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__virtio16",
+          "name": "max_target",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__virtio32",
+          "name": "max_lun",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

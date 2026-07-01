@@ -1,0 +1,42 @@
+{
+  "filename": "binfmts.h",
+  "includes": [
+    "linux/capability.h"
+  ],
+  "defines": [
+    {
+      "name": "MAX_ARG_STRLEN",
+      "value": "(PAGE_SIZE * 32)",
+      "comment": "",
+      "category": "MAX_ARG"
+    },
+    {
+      "name": "MAX_ARG_STRINGS",
+      "value": "0x7FFFFFFF",
+      "comment": "",
+      "category": "MAX_ARG"
+    },
+    {
+      "name": "BINPRM_BUF_SIZE",
+      "value": "256",
+      "comment": "",
+      "category": "BINPRM_BUF"
+    },
+    {
+      "name": "AT_FLAGS_PRESERVE_ARGV0_BIT",
+      "value": "0",
+      "comment": "",
+      "category": "AT_FLAGS"
+    },
+    {
+      "name": "AT_FLAGS_PRESERVE_ARGV0",
+      "value": "(1 << AT_FLAGS_PRESERVE_ARGV0_BIT)",
+      "comment": "",
+      "category": "AT_FLAGS"
+    }
+  ],
+  "structs": [],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

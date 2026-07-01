@@ -1,0 +1,172 @@
+{
+  "filename": "errqueue.h",
+  "includes": [
+    "linux/types.h",
+    "linux/time_types.h"
+  ],
+  "defines": [
+    {
+      "name": "SO_EE_ORIGIN_NONE",
+      "value": "0",
+      "comment": "",
+      "category": "SO_EE"
+    },
+    {
+      "name": "SO_EE_ORIGIN_LOCAL",
+      "value": "1",
+      "comment": "",
+      "category": "SO_EE"
+    },
+    {
+      "name": "SO_EE_ORIGIN_ICMP",
+      "value": "2",
+      "comment": "",
+      "category": "SO_EE"
+    },
+    {
+      "name": "SO_EE_ORIGIN_ICMP6",
+      "value": "3",
+      "comment": "",
+      "category": "SO_EE"
+    },
+    {
+      "name": "SO_EE_ORIGIN_TXSTATUS",
+      "value": "4",
+      "comment": "",
+      "category": "SO_EE"
+    },
+    {
+      "name": "SO_EE_ORIGIN_ZEROCOPY",
+      "value": "5",
+      "comment": "",
+      "category": "SO_EE"
+    },
+    {
+      "name": "SO_EE_ORIGIN_TXTIME",
+      "value": "6",
+      "comment": "",
+      "category": "SO_EE"
+    },
+    {
+      "name": "SO_EE_ORIGIN_TIMESTAMPING",
+      "value": "SO_EE_ORIGIN_TXSTATUS",
+      "comment": "",
+      "category": "SO_EE"
+    },
+    {
+      "name": "SO_EE_CODE_ZEROCOPY_COPIED",
+      "value": "1",
+      "comment": "",
+      "category": "SO_EE"
+    },
+    {
+      "name": "SO_EE_CODE_TXTIME_INVALID_PARAM",
+      "value": "1",
+      "comment": "",
+      "category": "SO_EE"
+    },
+    {
+      "name": "SO_EE_CODE_TXTIME_MISSED",
+      "value": "2",
+      "comment": "",
+      "category": "SO_EE"
+    },
+    {
+      "name": "SO_EE_RFC4884_FLAG_INVALID",
+      "value": "1",
+      "comment": "",
+      "category": "SO_EE"
+    }
+  ],
+  "structs": [
+    {
+      "name": "sock_ee_data_rfc4884",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "sock_extended_err",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "ee_errno",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "ee_origin",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "ee_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "ee_code",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "ee_pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ee_info",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ee_data",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "scm_timestamping",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "scm_timestamping64",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

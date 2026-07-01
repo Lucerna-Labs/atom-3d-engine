@@ -1,0 +1,1449 @@
+{
+  "filename": "tcp.h",
+  "includes": [
+    "linux/types.h",
+    "asm/byteorder.h",
+    "linux/socket.h"
+  ],
+  "defines": [
+    {
+      "name": "TCP_MSS_DEFAULT",
+      "value": "536U",
+      "comment": "IPv4 (RFC1122, RFC2581)",
+      "category": "TCP_MSS"
+    },
+    {
+      "name": "TCP_MSS_DESIRED",
+      "value": "1220U",
+      "comment": "IPv6 (tunneled), EDNS0 (RFC3226)",
+      "category": "TCP_MSS"
+    },
+    {
+      "name": "TCP_NODELAY",
+      "value": "1",
+      "comment": "Turn off Nagle's algorithm.",
+      "category": ""
+    },
+    {
+      "name": "TCP_MAXSEG",
+      "value": "2",
+      "comment": "Limit MSS",
+      "category": ""
+    },
+    {
+      "name": "TCP_CORK",
+      "value": "3",
+      "comment": "Never send partially complete segments",
+      "category": ""
+    },
+    {
+      "name": "TCP_KEEPIDLE",
+      "value": "4",
+      "comment": "Start keeplives after this period",
+      "category": ""
+    },
+    {
+      "name": "TCP_KEEPINTVL",
+      "value": "5",
+      "comment": "Interval between keepalives",
+      "category": ""
+    },
+    {
+      "name": "TCP_KEEPCNT",
+      "value": "6",
+      "comment": "Number of keepalives before death",
+      "category": ""
+    },
+    {
+      "name": "TCP_SYNCNT",
+      "value": "7",
+      "comment": "Number of SYN retransmits",
+      "category": ""
+    },
+    {
+      "name": "TCP_LINGER2",
+      "value": "8",
+      "comment": "Life time of orphaned FIN-WAIT-2 state",
+      "category": ""
+    },
+    {
+      "name": "TCP_DEFER_ACCEPT",
+      "value": "9",
+      "comment": "Wake up listener only when data arrive",
+      "category": "TCP_DEFER"
+    },
+    {
+      "name": "TCP_WINDOW_CLAMP",
+      "value": "10",
+      "comment": "Bound advertised window",
+      "category": "TCP_WINDOW"
+    },
+    {
+      "name": "TCP_INFO",
+      "value": "11",
+      "comment": "Information about this connection.",
+      "category": ""
+    },
+    {
+      "name": "TCP_QUICKACK",
+      "value": "12",
+      "comment": "Block/reenable quick acks",
+      "category": ""
+    },
+    {
+      "name": "TCP_CONGESTION",
+      "value": "13",
+      "comment": "Congestion control algorithm",
+      "category": ""
+    },
+    {
+      "name": "TCP_MD5SIG",
+      "value": "14",
+      "comment": "TCP MD5 Signature (RFC2385)",
+      "category": ""
+    },
+    {
+      "name": "TCP_THIN_LINEAR_TIMEOUTS",
+      "value": "16",
+      "comment": "Use linear timeouts for thin streams",
+      "category": "TCP_THIN"
+    },
+    {
+      "name": "TCP_THIN_DUPACK",
+      "value": "17",
+      "comment": "Fast retrans. after 1 dupack",
+      "category": "TCP_THIN"
+    },
+    {
+      "name": "TCP_USER_TIMEOUT",
+      "value": "18",
+      "comment": "How long for loss retry before timeout",
+      "category": "TCP_USER"
+    },
+    {
+      "name": "TCP_REPAIR",
+      "value": "19",
+      "comment": "TCP sock is under repair right now",
+      "category": ""
+    },
+    {
+      "name": "TCP_REPAIR_QUEUE",
+      "value": "20",
+      "comment": "",
+      "category": "TCP_REPAIR"
+    },
+    {
+      "name": "TCP_QUEUE_SEQ",
+      "value": "21",
+      "comment": "",
+      "category": "TCP_QUEUE"
+    },
+    {
+      "name": "TCP_REPAIR_OPTIONS",
+      "value": "22",
+      "comment": "",
+      "category": "TCP_REPAIR"
+    },
+    {
+      "name": "TCP_FASTOPEN",
+      "value": "23",
+      "comment": "Enable FastOpen on listeners",
+      "category": ""
+    },
+    {
+      "name": "TCP_TIMESTAMP",
+      "value": "24",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "TCP_NOTSENT_LOWAT",
+      "value": "25",
+      "comment": "limit number of unsent bytes in write queue",
+      "category": "TCP_NOTSENT"
+    },
+    {
+      "name": "TCP_CC_INFO",
+      "value": "26",
+      "comment": "Get Congestion Control (optional) info",
+      "category": "TCP_CC"
+    },
+    {
+      "name": "TCP_SAVE_SYN",
+      "value": "27",
+      "comment": "Record SYN headers for new connections",
+      "category": "TCP_SAVE"
+    },
+    {
+      "name": "TCP_SAVED_SYN",
+      "value": "28",
+      "comment": "Get SYN headers recorded for connection",
+      "category": "TCP_SAVED"
+    },
+    {
+      "name": "TCP_REPAIR_WINDOW",
+      "value": "29",
+      "comment": "Get/set window parameters",
+      "category": "TCP_REPAIR"
+    },
+    {
+      "name": "TCP_FASTOPEN_CONNECT",
+      "value": "30",
+      "comment": "Attempt FastOpen with connect",
+      "category": "TCP_FASTOPEN"
+    },
+    {
+      "name": "TCP_ULP",
+      "value": "31",
+      "comment": "Attach a ULP to a TCP connection",
+      "category": ""
+    },
+    {
+      "name": "TCP_MD5SIG_EXT",
+      "value": "32",
+      "comment": "TCP MD5 Signature with extensions",
+      "category": ""
+    },
+    {
+      "name": "TCP_FASTOPEN_KEY",
+      "value": "33",
+      "comment": "Set the key for Fast Open (cookie)",
+      "category": "TCP_FASTOPEN"
+    },
+    {
+      "name": "TCP_FASTOPEN_NO_COOKIE",
+      "value": "34",
+      "comment": "Enable TFO without a TFO cookie",
+      "category": "TCP_FASTOPEN"
+    },
+    {
+      "name": "TCP_ZEROCOPY_RECEIVE",
+      "value": "35",
+      "comment": "",
+      "category": "TCP_ZEROCOPY"
+    },
+    {
+      "name": "TCP_INQ",
+      "value": "36",
+      "comment": "Notify bytes available to read as a cmsg on read",
+      "category": ""
+    },
+    {
+      "name": "TCP_CM_INQ",
+      "value": "TCP_INQ",
+      "comment": "",
+      "category": "TCP_CM"
+    },
+    {
+      "name": "TCP_TX_DELAY",
+      "value": "37",
+      "comment": "delay outgoing packets by XX usec",
+      "category": "TCP_TX"
+    },
+    {
+      "name": "TCP_AO_ADD_KEY",
+      "value": "38",
+      "comment": "Add/Set MKT",
+      "category": "TCP_AO"
+    },
+    {
+      "name": "TCP_AO_DEL_KEY",
+      "value": "39",
+      "comment": "Delete MKT",
+      "category": "TCP_AO"
+    },
+    {
+      "name": "TCP_AO_INFO",
+      "value": "40",
+      "comment": "Set/list TCP-AO per-socket options",
+      "category": "TCP_AO"
+    },
+    {
+      "name": "TCP_AO_GET_KEYS",
+      "value": "41",
+      "comment": "List MKT(s)",
+      "category": "TCP_AO"
+    },
+    {
+      "name": "TCP_AO_REPAIR",
+      "value": "42",
+      "comment": "Get/Set SNEs and ISNs",
+      "category": "TCP_AO"
+    },
+    {
+      "name": "TCP_IS_MPTCP",
+      "value": "43",
+      "comment": "Is MPTCP being used?",
+      "category": "TCP_IS"
+    },
+    {
+      "name": "TCP_RTO_MAX_MS",
+      "value": "44",
+      "comment": "max rto time in ms",
+      "category": "TCP_RTO"
+    },
+    {
+      "name": "TCP_RTO_MIN_US",
+      "value": "45",
+      "comment": "min rto time in us",
+      "category": "TCP_RTO"
+    },
+    {
+      "name": "TCP_DELACK_MAX_US",
+      "value": "46",
+      "comment": "max delayed ack time in us",
+      "category": "TCP_DELACK"
+    },
+    {
+      "name": "TCP_REPAIR_ON",
+      "value": "1",
+      "comment": "",
+      "category": "TCP_REPAIR"
+    },
+    {
+      "name": "TCP_REPAIR_OFF",
+      "value": "0",
+      "comment": "",
+      "category": "TCP_REPAIR"
+    },
+    {
+      "name": "TCP_REPAIR_OFF_NO_WP",
+      "value": "-1",
+      "comment": "Turn off without window probes",
+      "category": "TCP_REPAIR"
+    },
+    {
+      "name": "TCPI_OPT_TIMESTAMPS",
+      "value": "1",
+      "comment": "",
+      "category": "TCPI_OPT"
+    },
+    {
+      "name": "TCPI_OPT_SACK",
+      "value": "2",
+      "comment": "",
+      "category": "TCPI_OPT"
+    },
+    {
+      "name": "TCPI_OPT_WSCALE",
+      "value": "4",
+      "comment": "",
+      "category": "TCPI_OPT"
+    },
+    {
+      "name": "TCPI_OPT_ECN",
+      "value": "8",
+      "comment": "ECN was negociated at TCP session init",
+      "category": "TCPI_OPT"
+    },
+    {
+      "name": "TCPI_OPT_ECN_SEEN",
+      "value": "16",
+      "comment": "we received at least one packet with ECT",
+      "category": "TCPI_OPT"
+    },
+    {
+      "name": "TCPI_OPT_SYN_DATA",
+      "value": "32",
+      "comment": "SYN-ACK acked data in SYN sent or rcvd",
+      "category": "TCPI_OPT"
+    },
+    {
+      "name": "TCPI_OPT_USEC_TS",
+      "value": "64",
+      "comment": "usec timestamps",
+      "category": "TCPI_OPT"
+    },
+    {
+      "name": "TCPI_OPT_TFO_CHILD",
+      "value": "128",
+      "comment": "child from a Fast Open option on SYN",
+      "category": "TCPI_OPT"
+    },
+    {
+      "name": "TCPF_CA_Open",
+      "value": "(1<<TCP_CA_Open)",
+      "comment": "",
+      "category": "TCPF_CA"
+    },
+    {
+      "name": "TCPF_CA_Disorder",
+      "value": "(1<<TCP_CA_Disorder)",
+      "comment": "",
+      "category": "TCPF_CA"
+    },
+    {
+      "name": "TCPF_CA_CWR",
+      "value": "(1<<TCP_CA_CWR)",
+      "comment": "",
+      "category": "TCPF_CA"
+    },
+    {
+      "name": "TCPF_CA_Recovery",
+      "value": "(1<<TCP_CA_Recovery)",
+      "comment": "",
+      "category": "TCPF_CA"
+    },
+    {
+      "name": "TCPF_CA_Loss",
+      "value": "(1<<TCP_CA_Loss)",
+      "comment": "",
+      "category": "TCPF_CA"
+    },
+    {
+      "name": "TCPI_ECN_MODE_DISABLED",
+      "value": "0x0",
+      "comment": "",
+      "category": "TCPI_ECN"
+    },
+    {
+      "name": "TCPI_ECN_MODE_RFC3168",
+      "value": "0x1",
+      "comment": "",
+      "category": "TCPI_ECN"
+    },
+    {
+      "name": "TCPI_ECN_MODE_ACCECN",
+      "value": "0x2",
+      "comment": "",
+      "category": "TCPI_ECN"
+    },
+    {
+      "name": "TCPI_ECN_MODE_PENDING",
+      "value": "0x3",
+      "comment": "",
+      "category": "TCPI_ECN"
+    },
+    {
+      "name": "TCP_ACCECN_OPT_NOT_SEEN",
+      "value": "0x0",
+      "comment": "",
+      "category": "TCP_ACCECN"
+    },
+    {
+      "name": "TCP_ACCECN_OPT_EMPTY_SEEN",
+      "value": "0x1",
+      "comment": "",
+      "category": "TCP_ACCECN"
+    },
+    {
+      "name": "TCP_ACCECN_OPT_COUNTER_SEEN",
+      "value": "0x2",
+      "comment": "",
+      "category": "TCP_ACCECN"
+    },
+    {
+      "name": "TCP_ACCECN_OPT_FAIL_SEEN",
+      "value": "0x3",
+      "comment": "",
+      "category": "TCP_ACCECN"
+    },
+    {
+      "name": "TCP_ACCECN_ACE_FAIL_SEND",
+      "value": "BIT(0)",
+      "comment": "",
+      "category": "TCP_ACCECN"
+    },
+    {
+      "name": "TCP_ACCECN_ACE_FAIL_RECV",
+      "value": "BIT(1)",
+      "comment": "",
+      "category": "TCP_ACCECN"
+    },
+    {
+      "name": "TCP_ACCECN_OPT_FAIL_SEND",
+      "value": "BIT(2)",
+      "comment": "",
+      "category": "TCP_ACCECN"
+    },
+    {
+      "name": "TCP_ACCECN_OPT_FAIL_RECV",
+      "value": "BIT(3)",
+      "comment": "",
+      "category": "TCP_ACCECN"
+    },
+    {
+      "name": "TCP_MD5SIG_MAXKEYLEN",
+      "value": "80",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "TCP_MD5SIG_FLAG_PREFIX",
+      "value": "0x1",
+      "comment": "address prefix length",
+      "category": ""
+    },
+    {
+      "name": "TCP_MD5SIG_FLAG_IFINDEX",
+      "value": "0x2",
+      "comment": "ifindex set",
+      "category": ""
+    },
+    {
+      "name": "TCP_AO_MAXKEYLEN",
+      "value": "80",
+      "comment": "",
+      "category": "TCP_AO"
+    },
+    {
+      "name": "TCP_AO_KEYF_IFINDEX",
+      "value": "(1 << 0)",
+      "comment": "L3 ifindex for VRF",
+      "category": "TCP_AO"
+    },
+    {
+      "name": "TCP_AO_KEYF_EXCLUDE_OPT",
+      "value": "(1 << 1)\t/* \"Indicates whether TCP",
+      "comment": "",
+      "category": "TCP_AO"
+    },
+    {
+      "name": "TCP_RECEIVE_ZEROCOPY_FLAG_TLB_CLEAN_HINT",
+      "value": "0x1",
+      "comment": "",
+      "category": "TCP_RECEIVE"
+    }
+  ],
+  "structs": [
+    {
+      "name": "tcphdr",
+      "fields": [
+        {
+          "type_name": "__be16",
+          "name": "source",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be16",
+          "name": "dest",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "seq",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "ack_seq",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be16",
+          "name": "window",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__sum16",
+          "name": "check",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be16",
+          "name": "urg_ptr",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "tcp_repair_opt",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "opt_code",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "opt_val",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "tcp_repair_window",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "snd_wl1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "snd_wnd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "max_window",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "rcv_wnd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "rcv_wup",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "tcp_info",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "tcpi_state",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "tcpi_ca_state",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "tcpi_retransmits",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "tcpi_probes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "tcpi_backoff",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "tcpi_options",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tcpi_rto",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tcpi_ato",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tcpi_snd_mss",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tcpi_rcv_mss",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tcpi_unacked",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tcpi_sacked",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tcpi_lost",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tcpi_retrans",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tcpi_fackets",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tcpi_last_data_sent",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tcpi_last_ack_sent",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tcpi_last_data_recv",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tcpi_last_ack_recv",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tcpi_pmtu",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tcpi_rcv_ssthresh",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tcpi_rtt",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tcpi_rttvar",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tcpi_snd_ssthresh",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tcpi_snd_cwnd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tcpi_advmss",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tcpi_reordering",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tcpi_rcv_rtt",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tcpi_rcv_space",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tcpi_total_retrans",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "tcpi_pacing_rate",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "tcpi_max_pacing_rate",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "tcpi_bytes_acked",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "tcpi_bytes_received",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tcpi_segs_out",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tcpi_segs_in",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tcpi_notsent_bytes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tcpi_min_rtt",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tcpi_data_segs_in",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tcpi_data_segs_out",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "tcpi_delivery_rate",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "tcpi_busy_time",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "tcpi_rwnd_limited",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "tcpi_sndbuf_limited",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tcpi_delivered",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tcpi_delivered_ce",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "tcpi_bytes_sent",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "tcpi_bytes_retrans",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tcpi_dsack_dups",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tcpi_reord_seen",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tcpi_rcv_ooopack",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tcpi_snd_wnd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tcpi_rcv_wnd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tcpi_rehash",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "tcpi_total_rto",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "tcpi_total_rto_recoveries",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tcpi_total_rto_time",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tcpi_received_ce",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tcpi_delivered_e1_bytes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tcpi_delivered_e0_bytes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tcpi_delivered_ce_bytes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tcpi_received_e1_bytes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tcpi_received_e0_bytes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tcpi_received_ce_bytes",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "tcp_md5sig",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "tcpm_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "tcpm_prefixlen",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "tcpm_keylen",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "tcpm_ifindex",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "tcpm_key",
+          "array_size": "TCP_MD5SIG_MAXKEYLEN",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "tcp_diag_md5sig",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "tcpm_family",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "tcpm_prefixlen",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "tcpm_keylen",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "tcpm_addr",
+          "array_size": "4",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "tcpm_key",
+          "array_size": "TCP_MD5SIG_MAXKEYLEN",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "tcp_ao_add",
+      "fields": [
+        {
+          "type_name": "char",
+          "name": "alg_name",
+          "array_size": "64",
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "ifindex",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "reserved2",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "prefix",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "sndid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "rcvid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "maclen",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "keyflags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "keylen",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "key",
+          "array_size": "TCP_AO_MAXKEYLEN",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "tcp_ao_del",
+      "fields": [
+        {
+          "type_name": "__s32",
+          "name": "ifindex",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "reserved2",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "prefix",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "sndid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "rcvid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "current_key",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "rnext",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "keyflags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "tcp_ao_info_opt",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "reserved2",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "current_key",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "rnext",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "pkt_good",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "pkt_bad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "pkt_key_not_found",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "pkt_ao_required",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "pkt_dropped_icmp",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "tcp_ao_getsockopt",
+      "fields": [
+        {
+          "type_name": "char",
+          "name": "alg_name",
+          "array_size": "64",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "key",
+          "array_size": "TCP_AO_MAXKEYLEN",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "nkeys",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "sndid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "rcvid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "prefix",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "maclen",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "keyflags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "keylen",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "ifindex",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "pkt_good",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "pkt_bad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "tcp_ao_repair",
+      "fields": [
+        {
+          "type_name": "__be32",
+          "name": "snt_isn",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "rcv_isn",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "snd_sne",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "rcv_sne",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "tcp_zerocopy_receive",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "address",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "length",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "recv_skip_hint",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "inq",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "err",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "copybuf_address",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "copybuf_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "msg_control",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "msg_controllen",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "msg_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

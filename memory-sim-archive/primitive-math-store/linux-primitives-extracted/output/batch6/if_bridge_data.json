@@ -1,0 +1,1384 @@
+{
+  "filename": "if_bridge.h",
+  "includes": [
+    "linux/types.h",
+    "linux/if_ether.h",
+    "linux/in6.h"
+  ],
+  "defines": [
+    {
+      "name": "SYSFS_BRIDGE_ATTR",
+      "value": "\"bridge\"",
+      "comment": "",
+      "category": "SYSFS_BRIDGE"
+    },
+    {
+      "name": "SYSFS_BRIDGE_FDB",
+      "value": "\"brforward\"",
+      "comment": "",
+      "category": "SYSFS_BRIDGE"
+    },
+    {
+      "name": "SYSFS_BRIDGE_PORT_SUBDIR",
+      "value": "\"brif\"",
+      "comment": "",
+      "category": "SYSFS_BRIDGE"
+    },
+    {
+      "name": "SYSFS_BRIDGE_PORT_ATTR",
+      "value": "\"brport\"",
+      "comment": "",
+      "category": "SYSFS_BRIDGE"
+    },
+    {
+      "name": "SYSFS_BRIDGE_PORT_LINK",
+      "value": "\"bridge\"",
+      "comment": "",
+      "category": "SYSFS_BRIDGE"
+    },
+    {
+      "name": "BRCTL_VERSION",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "BRCTL_GET_VERSION",
+      "value": "0",
+      "comment": "",
+      "category": "BRCTL_GET"
+    },
+    {
+      "name": "BRCTL_GET_BRIDGES",
+      "value": "1",
+      "comment": "",
+      "category": "BRCTL_GET"
+    },
+    {
+      "name": "BRCTL_ADD_BRIDGE",
+      "value": "2",
+      "comment": "",
+      "category": "BRCTL_ADD"
+    },
+    {
+      "name": "BRCTL_DEL_BRIDGE",
+      "value": "3",
+      "comment": "",
+      "category": "BRCTL_DEL"
+    },
+    {
+      "name": "BRCTL_ADD_IF",
+      "value": "4",
+      "comment": "",
+      "category": "BRCTL_ADD"
+    },
+    {
+      "name": "BRCTL_DEL_IF",
+      "value": "5",
+      "comment": "",
+      "category": "BRCTL_DEL"
+    },
+    {
+      "name": "BRCTL_GET_BRIDGE_INFO",
+      "value": "6",
+      "comment": "",
+      "category": "BRCTL_GET"
+    },
+    {
+      "name": "BRCTL_GET_PORT_LIST",
+      "value": "7",
+      "comment": "",
+      "category": "BRCTL_GET"
+    },
+    {
+      "name": "BRCTL_SET_BRIDGE_FORWARD_DELAY",
+      "value": "8",
+      "comment": "",
+      "category": "BRCTL_SET"
+    },
+    {
+      "name": "BRCTL_SET_BRIDGE_HELLO_TIME",
+      "value": "9",
+      "comment": "",
+      "category": "BRCTL_SET"
+    },
+    {
+      "name": "BRCTL_SET_BRIDGE_MAX_AGE",
+      "value": "10",
+      "comment": "",
+      "category": "BRCTL_SET"
+    },
+    {
+      "name": "BRCTL_SET_AGEING_TIME",
+      "value": "11",
+      "comment": "",
+      "category": "BRCTL_SET"
+    },
+    {
+      "name": "BRCTL_SET_GC_INTERVAL",
+      "value": "12",
+      "comment": "",
+      "category": "BRCTL_SET"
+    },
+    {
+      "name": "BRCTL_GET_PORT_INFO",
+      "value": "13",
+      "comment": "",
+      "category": "BRCTL_GET"
+    },
+    {
+      "name": "BRCTL_SET_BRIDGE_STP_STATE",
+      "value": "14",
+      "comment": "",
+      "category": "BRCTL_SET"
+    },
+    {
+      "name": "BRCTL_SET_BRIDGE_PRIORITY",
+      "value": "15",
+      "comment": "",
+      "category": "BRCTL_SET"
+    },
+    {
+      "name": "BRCTL_SET_PORT_PRIORITY",
+      "value": "16",
+      "comment": "",
+      "category": "BRCTL_SET"
+    },
+    {
+      "name": "BRCTL_SET_PATH_COST",
+      "value": "17",
+      "comment": "",
+      "category": "BRCTL_SET"
+    },
+    {
+      "name": "BRCTL_GET_FDB_ENTRIES",
+      "value": "18",
+      "comment": "",
+      "category": "BRCTL_GET"
+    },
+    {
+      "name": "BR_STATE_DISABLED",
+      "value": "0",
+      "comment": "",
+      "category": "BR_STATE"
+    },
+    {
+      "name": "BR_STATE_LISTENING",
+      "value": "1",
+      "comment": "",
+      "category": "BR_STATE"
+    },
+    {
+      "name": "BR_STATE_LEARNING",
+      "value": "2",
+      "comment": "",
+      "category": "BR_STATE"
+    },
+    {
+      "name": "BR_STATE_FORWARDING",
+      "value": "3",
+      "comment": "",
+      "category": "BR_STATE"
+    },
+    {
+      "name": "BR_STATE_BLOCKING",
+      "value": "4",
+      "comment": "",
+      "category": "BR_STATE"
+    },
+    {
+      "name": "BRIDGE_FLAGS_MASTER",
+      "value": "1",
+      "comment": "Bridge command to/from master",
+      "category": "BRIDGE_FLAGS"
+    },
+    {
+      "name": "BRIDGE_FLAGS_SELF",
+      "value": "2",
+      "comment": "Bridge command to/from lowerdev",
+      "category": "BRIDGE_FLAGS"
+    },
+    {
+      "name": "BRIDGE_MODE_VEB",
+      "value": "0",
+      "comment": "Default loopback mode",
+      "category": "BRIDGE_MODE"
+    },
+    {
+      "name": "BRIDGE_MODE_VEPA",
+      "value": "1",
+      "comment": "802.1Qbg defined VEPA mode",
+      "category": "BRIDGE_MODE"
+    },
+    {
+      "name": "BRIDGE_MODE_UNDEF",
+      "value": "0xFFFF",
+      "comment": "mode undefined",
+      "category": "BRIDGE_MODE"
+    },
+    {
+      "name": "IFLA_BRIDGE_MAX",
+      "value": "(__IFLA_BRIDGE_MAX - 1)",
+      "comment": "",
+      "category": "IFLA_BRIDGE"
+    },
+    {
+      "name": "BRIDGE_VLAN_INFO_MASTER",
+      "value": "(1<<0)",
+      "comment": "Operate on Bridge device as well",
+      "category": "BRIDGE_VLAN"
+    },
+    {
+      "name": "BRIDGE_VLAN_INFO_PVID",
+      "value": "(1<<1)",
+      "comment": "VLAN is PVID, ingress untagged",
+      "category": "BRIDGE_VLAN"
+    },
+    {
+      "name": "BRIDGE_VLAN_INFO_UNTAGGED",
+      "value": "(1<<2)",
+      "comment": "VLAN egresses untagged",
+      "category": "BRIDGE_VLAN"
+    },
+    {
+      "name": "BRIDGE_VLAN_INFO_RANGE_BEGIN",
+      "value": "(1<<3)",
+      "comment": "VLAN is start of vlan range",
+      "category": "BRIDGE_VLAN"
+    },
+    {
+      "name": "BRIDGE_VLAN_INFO_RANGE_END",
+      "value": "(1<<4)",
+      "comment": "VLAN is end of vlan range",
+      "category": "BRIDGE_VLAN"
+    },
+    {
+      "name": "BRIDGE_VLAN_INFO_BRENTRY",
+      "value": "(1<<5)",
+      "comment": "Global bridge VLAN entry",
+      "category": "BRIDGE_VLAN"
+    },
+    {
+      "name": "BRIDGE_VLAN_INFO_ONLY_OPTS",
+      "value": "(1<<6)",
+      "comment": "Skip create/delete/flags",
+      "category": "BRIDGE_VLAN"
+    },
+    {
+      "name": "IFLA_BRIDGE_VLAN_TUNNEL_MAX",
+      "value": "(__IFLA_BRIDGE_VLAN_TUNNEL_MAX - 1)",
+      "comment": "",
+      "category": "IFLA_BRIDGE"
+    },
+    {
+      "name": "IFLA_BRIDGE_MRP_MAX",
+      "value": "(__IFLA_BRIDGE_MRP_MAX - 1)",
+      "comment": "",
+      "category": "IFLA_BRIDGE"
+    },
+    {
+      "name": "IFLA_BRIDGE_MRP_INSTANCE_MAX",
+      "value": "(__IFLA_BRIDGE_MRP_INSTANCE_MAX - 1)",
+      "comment": "",
+      "category": "IFLA_BRIDGE"
+    },
+    {
+      "name": "IFLA_BRIDGE_MRP_PORT_STATE_MAX",
+      "value": "(__IFLA_BRIDGE_MRP_PORT_STATE_MAX - 1)",
+      "comment": "",
+      "category": "IFLA_BRIDGE"
+    },
+    {
+      "name": "IFLA_BRIDGE_MRP_PORT_ROLE_MAX",
+      "value": "(__IFLA_BRIDGE_MRP_PORT_ROLE_MAX - 1)",
+      "comment": "",
+      "category": "IFLA_BRIDGE"
+    },
+    {
+      "name": "IFLA_BRIDGE_MRP_RING_STATE_MAX",
+      "value": "(__IFLA_BRIDGE_MRP_RING_STATE_MAX - 1)",
+      "comment": "",
+      "category": "IFLA_BRIDGE"
+    },
+    {
+      "name": "IFLA_BRIDGE_MRP_RING_ROLE_MAX",
+      "value": "(__IFLA_BRIDGE_MRP_RING_ROLE_MAX - 1)",
+      "comment": "",
+      "category": "IFLA_BRIDGE"
+    },
+    {
+      "name": "IFLA_BRIDGE_MRP_START_TEST_MAX",
+      "value": "(__IFLA_BRIDGE_MRP_START_TEST_MAX - 1)",
+      "comment": "",
+      "category": "IFLA_BRIDGE"
+    },
+    {
+      "name": "IFLA_BRIDGE_MRP_INFO_MAX",
+      "value": "(__IFLA_BRIDGE_MRP_INFO_MAX - 1)",
+      "comment": "",
+      "category": "IFLA_BRIDGE"
+    },
+    {
+      "name": "IFLA_BRIDGE_MRP_IN_STATE_MAX",
+      "value": "(__IFLA_BRIDGE_MRP_IN_STATE_MAX - 1)",
+      "comment": "",
+      "category": "IFLA_BRIDGE"
+    },
+    {
+      "name": "IFLA_BRIDGE_MRP_IN_ROLE_MAX",
+      "value": "(__IFLA_BRIDGE_MRP_IN_ROLE_MAX - 1)",
+      "comment": "",
+      "category": "IFLA_BRIDGE"
+    },
+    {
+      "name": "IFLA_BRIDGE_MRP_START_IN_TEST_MAX",
+      "value": "(__IFLA_BRIDGE_MRP_START_IN_TEST_MAX - 1)",
+      "comment": "",
+      "category": "IFLA_BRIDGE"
+    },
+    {
+      "name": "IFLA_BRIDGE_CFM_MAX",
+      "value": "(__IFLA_BRIDGE_CFM_MAX - 1)",
+      "comment": "",
+      "category": "IFLA_BRIDGE"
+    },
+    {
+      "name": "IFLA_BRIDGE_CFM_MEP_CREATE_MAX",
+      "value": "(__IFLA_BRIDGE_CFM_MEP_CREATE_MAX - 1)",
+      "comment": "",
+      "category": "IFLA_BRIDGE"
+    },
+    {
+      "name": "IFLA_BRIDGE_CFM_MEP_DELETE_MAX",
+      "value": "(__IFLA_BRIDGE_CFM_MEP_DELETE_MAX - 1)",
+      "comment": "",
+      "category": "IFLA_BRIDGE"
+    },
+    {
+      "name": "IFLA_BRIDGE_CFM_MEP_CONFIG_MAX",
+      "value": "(__IFLA_BRIDGE_CFM_MEP_CONFIG_MAX - 1)",
+      "comment": "",
+      "category": "IFLA_BRIDGE"
+    },
+    {
+      "name": "IFLA_BRIDGE_CFM_CC_CONFIG_MAX",
+      "value": "(__IFLA_BRIDGE_CFM_CC_CONFIG_MAX - 1)",
+      "comment": "",
+      "category": "IFLA_BRIDGE"
+    },
+    {
+      "name": "IFLA_BRIDGE_CFM_CC_PEER_MEP_MAX",
+      "value": "(__IFLA_BRIDGE_CFM_CC_PEER_MEP_MAX - 1)",
+      "comment": "",
+      "category": "IFLA_BRIDGE"
+    },
+    {
+      "name": "IFLA_BRIDGE_CFM_CC_RDI_MAX",
+      "value": "(__IFLA_BRIDGE_CFM_CC_RDI_MAX - 1)",
+      "comment": "",
+      "category": "IFLA_BRIDGE"
+    },
+    {
+      "name": "IFLA_BRIDGE_CFM_CC_CCM_TX_MAX",
+      "value": "(__IFLA_BRIDGE_CFM_CC_CCM_TX_MAX - 1)",
+      "comment": "",
+      "category": "IFLA_BRIDGE"
+    },
+    {
+      "name": "IFLA_BRIDGE_CFM_MEP_STATUS_MAX",
+      "value": "(__IFLA_BRIDGE_CFM_MEP_STATUS_MAX - 1)",
+      "comment": "",
+      "category": "IFLA_BRIDGE"
+    },
+    {
+      "name": "IFLA_BRIDGE_CFM_CC_PEER_STATUS_MAX",
+      "value": "(__IFLA_BRIDGE_CFM_CC_PEER_STATUS_MAX - 1)",
+      "comment": "",
+      "category": "IFLA_BRIDGE"
+    },
+    {
+      "name": "IFLA_BRIDGE_MST_MAX",
+      "value": "(__IFLA_BRIDGE_MST_MAX - 1)",
+      "comment": "",
+      "category": "IFLA_BRIDGE"
+    },
+    {
+      "name": "IFLA_BRIDGE_MST_ENTRY_MAX",
+      "value": "(__IFLA_BRIDGE_MST_ENTRY_MAX - 1)",
+      "comment": "",
+      "category": "IFLA_BRIDGE"
+    },
+    {
+      "name": "BRIDGE_VLANDB_DUMP_MAX",
+      "value": "(__BRIDGE_VLANDB_DUMP_MAX - 1)",
+      "comment": "",
+      "category": "BRIDGE_VLANDB"
+    },
+    {
+      "name": "BRIDGE_VLANDB_DUMPF_STATS",
+      "value": "(1 << 0)",
+      "comment": "Include stats in the dump",
+      "category": "BRIDGE_VLANDB"
+    },
+    {
+      "name": "BRIDGE_VLANDB_DUMPF_GLOBAL",
+      "value": "(1 << 1)",
+      "comment": "Dump global vlan options only",
+      "category": "BRIDGE_VLANDB"
+    },
+    {
+      "name": "BRIDGE_VLANDB_MAX",
+      "value": "(__BRIDGE_VLANDB_MAX - 1)",
+      "comment": "",
+      "category": "BRIDGE_VLANDB"
+    },
+    {
+      "name": "BRIDGE_VLANDB_ENTRY_MAX",
+      "value": "(__BRIDGE_VLANDB_ENTRY_MAX - 1)",
+      "comment": "",
+      "category": "BRIDGE_VLANDB"
+    },
+    {
+      "name": "BRIDGE_VLANDB_TINFO_MAX",
+      "value": "(__BRIDGE_VLANDB_TINFO_MAX - 1)",
+      "comment": "",
+      "category": "BRIDGE_VLANDB"
+    },
+    {
+      "name": "BRIDGE_VLANDB_STATS_MAX",
+      "value": "(__BRIDGE_VLANDB_STATS_MAX - 1)",
+      "comment": "",
+      "category": "BRIDGE_VLANDB"
+    },
+    {
+      "name": "BRIDGE_VLANDB_GOPTS_MAX",
+      "value": "(__BRIDGE_VLANDB_GOPTS_MAX - 1)",
+      "comment": "",
+      "category": "BRIDGE_VLANDB"
+    },
+    {
+      "name": "MDBA_MAX",
+      "value": "(__MDBA_MAX - 1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "MDBA_MDB_MAX",
+      "value": "(__MDBA_MDB_MAX - 1)",
+      "comment": "",
+      "category": "MDBA_MDB"
+    },
+    {
+      "name": "MDBA_MDB_ENTRY_MAX",
+      "value": "(__MDBA_MDB_ENTRY_MAX - 1)",
+      "comment": "",
+      "category": "MDBA_MDB"
+    },
+    {
+      "name": "MDBA_MDB_EATTR_MAX",
+      "value": "(__MDBA_MDB_EATTR_MAX - 1)",
+      "comment": "",
+      "category": "MDBA_MDB"
+    },
+    {
+      "name": "MDBA_MDB_SRCLIST_MAX",
+      "value": "(__MDBA_MDB_SRCLIST_MAX - 1)",
+      "comment": "",
+      "category": "MDBA_MDB"
+    },
+    {
+      "name": "MDBA_MDB_SRCATTR_MAX",
+      "value": "(__MDBA_MDB_SRCATTR_MAX - 1)",
+      "comment": "",
+      "category": "MDBA_MDB"
+    },
+    {
+      "name": "MDBA_ROUTER_MAX",
+      "value": "(__MDBA_ROUTER_MAX - 1)",
+      "comment": "",
+      "category": "MDBA_ROUTER"
+    },
+    {
+      "name": "MDBA_ROUTER_PATTR_MAX",
+      "value": "(__MDBA_ROUTER_PATTR_MAX - 1)",
+      "comment": "",
+      "category": "MDBA_ROUTER"
+    },
+    {
+      "name": "MDB_TEMPORARY",
+      "value": "0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "MDB_PERMANENT",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "MDB_FLAGS_OFFLOAD",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "MDB_FLAGS"
+    },
+    {
+      "name": "MDB_FLAGS_FAST_LEAVE",
+      "value": "(1 << 1)",
+      "comment": "",
+      "category": "MDB_FLAGS"
+    },
+    {
+      "name": "MDB_FLAGS_STAR_EXCL",
+      "value": "(1 << 2)",
+      "comment": "",
+      "category": "MDB_FLAGS"
+    },
+    {
+      "name": "MDB_FLAGS_BLOCKED",
+      "value": "(1 << 3)",
+      "comment": "",
+      "category": "MDB_FLAGS"
+    },
+    {
+      "name": "MDB_FLAGS_OFFLOAD_FAILED",
+      "value": "(1 << 4)",
+      "comment": "",
+      "category": "MDB_FLAGS"
+    },
+    {
+      "name": "MDBA_SET_ENTRY_MAX",
+      "value": "(__MDBA_SET_ENTRY_MAX - 1)",
+      "comment": "",
+      "category": "MDBA_SET"
+    },
+    {
+      "name": "MDBA_GET_ENTRY_MAX",
+      "value": "(__MDBA_GET_ENTRY_MAX - 1)",
+      "comment": "",
+      "category": "MDBA_GET"
+    },
+    {
+      "name": "MDBE_ATTR_MAX",
+      "value": "(__MDBE_ATTR_MAX - 1)",
+      "comment": "",
+      "category": "MDBE_ATTR"
+    },
+    {
+      "name": "MDBE_SRC_LIST_MAX",
+      "value": "(__MDBE_SRC_LIST_MAX - 1)",
+      "comment": "",
+      "category": "MDBE_SRC"
+    },
+    {
+      "name": "MDBE_SRCATTR_MAX",
+      "value": "(__MDBE_SRCATTR_MAX - 1)",
+      "comment": "",
+      "category": "MDBE_SRCATTR"
+    },
+    {
+      "name": "BRIDGE_XSTATS_MAX",
+      "value": "(__BRIDGE_XSTATS_MAX - 1)",
+      "comment": "",
+      "category": "BRIDGE_XSTATS"
+    },
+    {
+      "name": "BRIDGE_QUERIER_MAX",
+      "value": "(__BRIDGE_QUERIER_MAX - 1)",
+      "comment": "",
+      "category": "BRIDGE_QUERIER"
+    }
+  ],
+  "structs": [
+    {
+      "name": "__bridge_info",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "designated_root",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "bridge_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "root_path_cost",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "max_age",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "hello_time",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "forward_delay",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "bridge_max_age",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "bridge_hello_time",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "bridge_forward_delay",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "topology_change",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "topology_change_detected",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "root_port",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "stp_enabled",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ageing_time",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "gc_interval",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "hello_timer_value",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tcn_timer_value",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "topology_change_timer_value",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "gc_timer_value",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "__port_info",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "designated_root",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "designated_bridge",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "port_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "designated_port",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "path_cost",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "designated_cost",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "state",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "top_change_ack",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "config_pending",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "unused0",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "message_age_timer_value",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "forward_delay_timer_value",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "hold_timer_value",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "__fdb_entry",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "mac_addr",
+          "array_size": "ETH_ALEN",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "port_no",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "is_local",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ageing_timer_value",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "port_hi",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "pad0",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "unused",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "bridge_vlan_info",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "vid",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "bridge_vlan_xstats",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "rx_bytes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "rx_packets",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "tx_bytes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "tx_packets",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "vid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad2",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "br_mrp_instance",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "ring_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "p_ifindex",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "s_ifindex",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "prio",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "br_mrp_ring_state",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "ring_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ring_state",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "br_mrp_ring_role",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "ring_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ring_role",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "br_mrp_start_test",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "ring_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "interval",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "max_miss",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "period",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "monitor",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "br_mrp_in_state",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "in_state",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "in_id",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "br_mrp_in_role",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "ring_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "in_role",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "i_ifindex",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "in_id",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "br_mrp_start_in_test",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "interval",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "max_miss",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "period",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "in_id",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "bridge_stp_xstats",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "transition_blk",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "transition_fwd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "rx_bpdu",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "tx_bpdu",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "rx_tcn",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "tx_tcn",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "br_vlan_msg",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "family",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reserved1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "reserved2",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ifindex",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "br_port_msg",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "family",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ifindex",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "br_mdb_entry",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "ifindex",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "state",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "vid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be32",
+          "name": "ip4",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be16",
+          "name": "proto",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_16",
+      "fields": [
+        {
+          "type_name": "__be32",
+          "name": "ip4",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__be16",
+          "name": "proto",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "br_mcast_stats",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "igmp_v1queries",
+          "array_size": "BR_MCAST_DIR_SIZE",
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "igmp_v2queries",
+          "array_size": "BR_MCAST_DIR_SIZE",
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "igmp_v3queries",
+          "array_size": "BR_MCAST_DIR_SIZE",
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "igmp_leaves",
+          "array_size": "BR_MCAST_DIR_SIZE",
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "igmp_v1reports",
+          "array_size": "BR_MCAST_DIR_SIZE",
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "igmp_v2reports",
+          "array_size": "BR_MCAST_DIR_SIZE",
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "igmp_v3reports",
+          "array_size": "BR_MCAST_DIR_SIZE",
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "igmp_parse_errors",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "mld_v1queries",
+          "array_size": "BR_MCAST_DIR_SIZE",
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "mld_v2queries",
+          "array_size": "BR_MCAST_DIR_SIZE",
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "mld_leaves",
+          "array_size": "BR_MCAST_DIR_SIZE",
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "mld_v1reports",
+          "array_size": "BR_MCAST_DIR_SIZE",
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "mld_v2reports",
+          "array_size": "BR_MCAST_DIR_SIZE",
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "mld_parse_errors",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "mcast_bytes",
+          "array_size": "BR_MCAST_DIR_SIZE",
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "mcast_packets",
+          "array_size": "BR_MCAST_DIR_SIZE",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "br_boolopt_multi",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "optval",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "optmask",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

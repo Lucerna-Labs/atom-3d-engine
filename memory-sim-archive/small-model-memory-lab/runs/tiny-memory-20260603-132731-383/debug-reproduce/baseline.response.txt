@@ -1,0 +1,4 @@
+﻿1. **Correlate Timestamps**: Cross-reference crash timestamps with specific user actions or API calls in the logs to identify the triggering context, noting that intermittent issues may lack a consistent pattern.
+2. **Reproduce in Staging**: Attempt to replicate the crash in a staging environment using the exact recent deploy version and traffic patterns; if reproduction fails, proceed to step 3 with increased monitoring.
+3. **Enable Deep Tracing**: Activate distributed tracing or detailed memory profiling to capture hidden resource leaks or race conditions that standard logs miss, acknowledging that this may introduce slight performance overhead.
+4. **Rollback or Hotfix**: If the root cause remains elusive after 24 hours of enhanced monitoring, roll back to the previous stable version to restore service while continuing offline analysis of the captured traces.

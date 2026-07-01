@@ -1,0 +1,271 @@
+{
+  "filename": "xdp_diag.h",
+  "includes": [
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "XDP_SHOW_INFO",
+      "value": "(1 << 0)",
+      "comment": "Basic information",
+      "category": "XDP_SHOW"
+    },
+    {
+      "name": "XDP_SHOW_RING_CFG",
+      "value": "(1 << 1)",
+      "comment": "",
+      "category": "XDP_SHOW"
+    },
+    {
+      "name": "XDP_SHOW_UMEM",
+      "value": "(1 << 2)",
+      "comment": "",
+      "category": "XDP_SHOW"
+    },
+    {
+      "name": "XDP_SHOW_MEMINFO",
+      "value": "(1 << 3)",
+      "comment": "",
+      "category": "XDP_SHOW"
+    },
+    {
+      "name": "XDP_SHOW_STATS",
+      "value": "(1 << 4)",
+      "comment": "",
+      "category": "XDP_SHOW"
+    },
+    {
+      "name": "XDP_DIAG_MAX",
+      "value": "(__XDP_DIAG_MAX - 1)",
+      "comment": "",
+      "category": "XDP_DIAG"
+    },
+    {
+      "name": "XDP_DU_F_ZEROCOPY",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "XDP_DU"
+    }
+  ],
+  "structs": [
+    {
+      "name": "xdp_diag_req",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "sdiag_family",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "sdiag_protocol",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "xdiag_ino",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "xdiag_show",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "xdiag_cookie",
+          "array_size": "2",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "xdp_diag_msg",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "xdiag_family",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "xdiag_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "xdiag_ino",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "xdiag_cookie",
+          "array_size": "2",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "xdp_diag_info",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "ifindex",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "queue_id",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "xdp_diag_ring",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "entries",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "xdp_diag_umem",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "num_pages",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "chunk_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "headroom",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ifindex",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "queue_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "refs",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "xdp_diag_stats",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "n_rx_dropped",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "n_rx_invalid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "n_rx_full",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "n_fill_ring_empty",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "n_tx_invalid",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "n_tx_ring_empty",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

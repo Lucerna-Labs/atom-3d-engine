@@ -1,0 +1,16 @@
+[package]
+name = "cap-primitives"
+version = "0.1.0"
+edition = "2024"
+description = "Renderer-neutral UX primitive vocabulary — shapes, fills, strokes, text, images, clips, layers. The shared language between app logic and renderer backends."
+license = "Apache-2.0 OR MIT"
+publish = false
+
+[dependencies]
+cap-geometry = { path = "../cap-geometry" }
+
+[features]
+default = []
+
+[lints.clippy]
+dbg_macro = "deny"

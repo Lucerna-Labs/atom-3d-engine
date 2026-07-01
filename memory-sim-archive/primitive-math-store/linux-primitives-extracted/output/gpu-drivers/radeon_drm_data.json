@@ -1,0 +1,3489 @@
+{
+  "filename": "radeon_drm.h",
+  "includes": [
+    "drm.h"
+  ],
+  "defines": [
+    {
+      "name": "RADEON_UPLOAD_CONTEXT",
+      "value": "0x00000001",
+      "comment": "",
+      "category": "RADEON_UPLOAD"
+    },
+    {
+      "name": "RADEON_UPLOAD_VERTFMT",
+      "value": "0x00000002",
+      "comment": "",
+      "category": "RADEON_UPLOAD"
+    },
+    {
+      "name": "RADEON_UPLOAD_LINE",
+      "value": "0x00000004",
+      "comment": "",
+      "category": "RADEON_UPLOAD"
+    },
+    {
+      "name": "RADEON_UPLOAD_BUMPMAP",
+      "value": "0x00000008",
+      "comment": "",
+      "category": "RADEON_UPLOAD"
+    },
+    {
+      "name": "RADEON_UPLOAD_MASKS",
+      "value": "0x00000010",
+      "comment": "",
+      "category": "RADEON_UPLOAD"
+    },
+    {
+      "name": "RADEON_UPLOAD_VIEWPORT",
+      "value": "0x00000020",
+      "comment": "",
+      "category": "RADEON_UPLOAD"
+    },
+    {
+      "name": "RADEON_UPLOAD_SETUP",
+      "value": "0x00000040",
+      "comment": "",
+      "category": "RADEON_UPLOAD"
+    },
+    {
+      "name": "RADEON_UPLOAD_TCL",
+      "value": "0x00000080",
+      "comment": "",
+      "category": "RADEON_UPLOAD"
+    },
+    {
+      "name": "RADEON_UPLOAD_MISC",
+      "value": "0x00000100",
+      "comment": "",
+      "category": "RADEON_UPLOAD"
+    },
+    {
+      "name": "RADEON_UPLOAD_TEX0",
+      "value": "0x00000200",
+      "comment": "",
+      "category": "RADEON_UPLOAD"
+    },
+    {
+      "name": "RADEON_UPLOAD_TEX1",
+      "value": "0x00000400",
+      "comment": "",
+      "category": "RADEON_UPLOAD"
+    },
+    {
+      "name": "RADEON_UPLOAD_TEX2",
+      "value": "0x00000800",
+      "comment": "",
+      "category": "RADEON_UPLOAD"
+    },
+    {
+      "name": "RADEON_UPLOAD_TEX0IMAGES",
+      "value": "0x00001000",
+      "comment": "",
+      "category": "RADEON_UPLOAD"
+    },
+    {
+      "name": "RADEON_UPLOAD_TEX1IMAGES",
+      "value": "0x00002000",
+      "comment": "",
+      "category": "RADEON_UPLOAD"
+    },
+    {
+      "name": "RADEON_UPLOAD_TEX2IMAGES",
+      "value": "0x00004000",
+      "comment": "",
+      "category": "RADEON_UPLOAD"
+    },
+    {
+      "name": "RADEON_UPLOAD_CLIPRECTS",
+      "value": "0x00008000",
+      "comment": "handled client-side",
+      "category": "RADEON_UPLOAD"
+    },
+    {
+      "name": "RADEON_REQUIRE_QUIESCENCE",
+      "value": "0x00010000",
+      "comment": "",
+      "category": "RADEON_REQUIRE"
+    },
+    {
+      "name": "RADEON_UPLOAD_ZBIAS",
+      "value": "0x00020000",
+      "comment": "version 1.2 and newer",
+      "category": "RADEON_UPLOAD"
+    },
+    {
+      "name": "RADEON_UPLOAD_ALL",
+      "value": "0x003effff",
+      "comment": "",
+      "category": "RADEON_UPLOAD"
+    },
+    {
+      "name": "RADEON_UPLOAD_CONTEXT_ALL",
+      "value": "0x003e01ff",
+      "comment": "",
+      "category": "RADEON_UPLOAD"
+    },
+    {
+      "name": "RADEON_EMIT_PP_MISC",
+      "value": "0",
+      "comment": "context/7",
+      "category": "RADEON_EMIT"
+    },
+    {
+      "name": "RADEON_EMIT_PP_CNTL",
+      "value": "1",
+      "comment": "context/3",
+      "category": "RADEON_EMIT"
+    },
+    {
+      "name": "RADEON_EMIT_RB3D_COLORPITCH",
+      "value": "2",
+      "comment": "context/1",
+      "category": "RADEON_EMIT"
+    },
+    {
+      "name": "RADEON_EMIT_RE_LINE_PATTERN",
+      "value": "3",
+      "comment": "line/2",
+      "category": "RADEON_EMIT"
+    },
+    {
+      "name": "RADEON_EMIT_SE_LINE_WIDTH",
+      "value": "4",
+      "comment": "line/1",
+      "category": "RADEON_EMIT"
+    },
+    {
+      "name": "RADEON_EMIT_PP_LUM_MATRIX",
+      "value": "5",
+      "comment": "bumpmap/1",
+      "category": "RADEON_EMIT"
+    },
+    {
+      "name": "RADEON_EMIT_PP_ROT_MATRIX_0",
+      "value": "6",
+      "comment": "bumpmap/2",
+      "category": "RADEON_EMIT"
+    },
+    {
+      "name": "RADEON_EMIT_RB3D_STENCILREFMASK",
+      "value": "7",
+      "comment": "masks/3",
+      "category": "RADEON_EMIT"
+    },
+    {
+      "name": "RADEON_EMIT_SE_VPORT_XSCALE",
+      "value": "8",
+      "comment": "viewport/6",
+      "category": "RADEON_EMIT"
+    },
+    {
+      "name": "RADEON_EMIT_SE_CNTL",
+      "value": "9",
+      "comment": "setup/2",
+      "category": "RADEON_EMIT"
+    },
+    {
+      "name": "RADEON_EMIT_SE_CNTL_STATUS",
+      "value": "10",
+      "comment": "setup/1",
+      "category": "RADEON_EMIT"
+    },
+    {
+      "name": "RADEON_EMIT_RE_MISC",
+      "value": "11",
+      "comment": "misc/1",
+      "category": "RADEON_EMIT"
+    },
+    {
+      "name": "RADEON_EMIT_PP_TXFILTER_0",
+      "value": "12",
+      "comment": "tex0/6",
+      "category": "RADEON_EMIT"
+    },
+    {
+      "name": "RADEON_EMIT_PP_BORDER_COLOR_0",
+      "value": "13",
+      "comment": "tex0/1",
+      "category": "RADEON_EMIT"
+    },
+    {
+      "name": "RADEON_EMIT_PP_TXFILTER_1",
+      "value": "14",
+      "comment": "tex1/6",
+      "category": "RADEON_EMIT"
+    },
+    {
+      "name": "RADEON_EMIT_PP_BORDER_COLOR_1",
+      "value": "15",
+      "comment": "tex1/1",
+      "category": "RADEON_EMIT"
+    },
+    {
+      "name": "RADEON_EMIT_PP_TXFILTER_2",
+      "value": "16",
+      "comment": "tex2/6",
+      "category": "RADEON_EMIT"
+    },
+    {
+      "name": "RADEON_EMIT_PP_BORDER_COLOR_2",
+      "value": "17",
+      "comment": "tex2/1",
+      "category": "RADEON_EMIT"
+    },
+    {
+      "name": "RADEON_EMIT_SE_ZBIAS_FACTOR",
+      "value": "18",
+      "comment": "zbias/2",
+      "category": "RADEON_EMIT"
+    },
+    {
+      "name": "RADEON_EMIT_SE_TCL_OUTPUT_VTX_FMT",
+      "value": "19",
+      "comment": "tcl/11",
+      "category": "RADEON_EMIT"
+    },
+    {
+      "name": "RADEON_EMIT_SE_TCL_MATERIAL_EMMISSIVE_RED",
+      "value": "20",
+      "comment": "material/17",
+      "category": "RADEON_EMIT"
+    },
+    {
+      "name": "R200_EMIT_PP_TXCBLEND_0",
+      "value": "21",
+      "comment": "tex0/4",
+      "category": ""
+    },
+    {
+      "name": "R200_EMIT_PP_TXCBLEND_1",
+      "value": "22",
+      "comment": "tex1/4",
+      "category": ""
+    },
+    {
+      "name": "R200_EMIT_PP_TXCBLEND_2",
+      "value": "23",
+      "comment": "tex2/4",
+      "category": ""
+    },
+    {
+      "name": "R200_EMIT_PP_TXCBLEND_3",
+      "value": "24",
+      "comment": "tex3/4",
+      "category": ""
+    },
+    {
+      "name": "R200_EMIT_PP_TXCBLEND_4",
+      "value": "25",
+      "comment": "tex4/4",
+      "category": ""
+    },
+    {
+      "name": "R200_EMIT_PP_TXCBLEND_5",
+      "value": "26",
+      "comment": "tex5/4",
+      "category": ""
+    },
+    {
+      "name": "R200_EMIT_PP_TXCBLEND_6",
+      "value": "27",
+      "comment": "/4",
+      "category": ""
+    },
+    {
+      "name": "R200_EMIT_PP_TXCBLEND_7",
+      "value": "28",
+      "comment": "/4",
+      "category": ""
+    },
+    {
+      "name": "R200_EMIT_TCL_LIGHT_MODEL_CTL_0",
+      "value": "29",
+      "comment": "tcl/7",
+      "category": ""
+    },
+    {
+      "name": "R200_EMIT_TFACTOR_0",
+      "value": "30",
+      "comment": "tf/7",
+      "category": ""
+    },
+    {
+      "name": "R200_EMIT_VTX_FMT_0",
+      "value": "31",
+      "comment": "vtx/5",
+      "category": ""
+    },
+    {
+      "name": "R200_EMIT_VAP_CTL",
+      "value": "32",
+      "comment": "vap/1",
+      "category": ""
+    },
+    {
+      "name": "R200_EMIT_MATRIX_SELECT_0",
+      "value": "33",
+      "comment": "msl/5",
+      "category": ""
+    },
+    {
+      "name": "R200_EMIT_TEX_PROC_CTL_2",
+      "value": "34",
+      "comment": "tcg/5",
+      "category": ""
+    },
+    {
+      "name": "R200_EMIT_TCL_UCP_VERT_BLEND_CTL",
+      "value": "35",
+      "comment": "tcl/1",
+      "category": ""
+    },
+    {
+      "name": "R200_EMIT_PP_TXFILTER_0",
+      "value": "36",
+      "comment": "tex0/6",
+      "category": ""
+    },
+    {
+      "name": "R200_EMIT_PP_TXFILTER_1",
+      "value": "37",
+      "comment": "tex1/6",
+      "category": ""
+    },
+    {
+      "name": "R200_EMIT_PP_TXFILTER_2",
+      "value": "38",
+      "comment": "tex2/6",
+      "category": ""
+    },
+    {
+      "name": "R200_EMIT_PP_TXFILTER_3",
+      "value": "39",
+      "comment": "tex3/6",
+      "category": ""
+    },
+    {
+      "name": "R200_EMIT_PP_TXFILTER_4",
+      "value": "40",
+      "comment": "tex4/6",
+      "category": ""
+    },
+    {
+      "name": "R200_EMIT_PP_TXFILTER_5",
+      "value": "41",
+      "comment": "tex5/6",
+      "category": ""
+    },
+    {
+      "name": "R200_EMIT_PP_TXOFFSET_0",
+      "value": "42",
+      "comment": "tex0/1",
+      "category": ""
+    },
+    {
+      "name": "R200_EMIT_PP_TXOFFSET_1",
+      "value": "43",
+      "comment": "tex1/1",
+      "category": ""
+    },
+    {
+      "name": "R200_EMIT_PP_TXOFFSET_2",
+      "value": "44",
+      "comment": "tex2/1",
+      "category": ""
+    },
+    {
+      "name": "R200_EMIT_PP_TXOFFSET_3",
+      "value": "45",
+      "comment": "tex3/1",
+      "category": ""
+    },
+    {
+      "name": "R200_EMIT_PP_TXOFFSET_4",
+      "value": "46",
+      "comment": "tex4/1",
+      "category": ""
+    },
+    {
+      "name": "R200_EMIT_PP_TXOFFSET_5",
+      "value": "47",
+      "comment": "tex5/1",
+      "category": ""
+    },
+    {
+      "name": "R200_EMIT_VTE_CNTL",
+      "value": "48",
+      "comment": "vte/1",
+      "category": ""
+    },
+    {
+      "name": "R200_EMIT_OUTPUT_VTX_COMP_SEL",
+      "value": "49",
+      "comment": "vtx/1",
+      "category": ""
+    },
+    {
+      "name": "R200_EMIT_PP_TAM_DEBUG3",
+      "value": "50",
+      "comment": "tam/1",
+      "category": ""
+    },
+    {
+      "name": "R200_EMIT_PP_CNTL_X",
+      "value": "51",
+      "comment": "cst/1",
+      "category": ""
+    },
+    {
+      "name": "R200_EMIT_RB3D_DEPTHXY_OFFSET",
+      "value": "52",
+      "comment": "cst/1",
+      "category": ""
+    },
+    {
+      "name": "R200_EMIT_RE_AUX_SCISSOR_CNTL",
+      "value": "53",
+      "comment": "cst/1",
+      "category": ""
+    },
+    {
+      "name": "R200_EMIT_RE_SCISSOR_TL_0",
+      "value": "54",
+      "comment": "cst/2",
+      "category": ""
+    },
+    {
+      "name": "R200_EMIT_RE_SCISSOR_TL_1",
+      "value": "55",
+      "comment": "cst/2",
+      "category": ""
+    },
+    {
+      "name": "R200_EMIT_RE_SCISSOR_TL_2",
+      "value": "56",
+      "comment": "cst/2",
+      "category": ""
+    },
+    {
+      "name": "R200_EMIT_SE_VAP_CNTL_STATUS",
+      "value": "57",
+      "comment": "cst/1",
+      "category": ""
+    },
+    {
+      "name": "R200_EMIT_SE_VTX_STATE_CNTL",
+      "value": "58",
+      "comment": "cst/1",
+      "category": ""
+    },
+    {
+      "name": "R200_EMIT_RE_POINTSIZE",
+      "value": "59",
+      "comment": "cst/1",
+      "category": ""
+    },
+    {
+      "name": "R200_EMIT_TCL_INPUT_VTX_VECTOR_ADDR_0",
+      "value": "60",
+      "comment": "cst/4",
+      "category": ""
+    },
+    {
+      "name": "R200_EMIT_PP_CUBIC_FACES_0",
+      "value": "61",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "R200_EMIT_PP_CUBIC_OFFSETS_0",
+      "value": "62",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "R200_EMIT_PP_CUBIC_FACES_1",
+      "value": "63",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "R200_EMIT_PP_CUBIC_OFFSETS_1",
+      "value": "64",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "R200_EMIT_PP_CUBIC_FACES_2",
+      "value": "65",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "R200_EMIT_PP_CUBIC_OFFSETS_2",
+      "value": "66",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "R200_EMIT_PP_CUBIC_FACES_3",
+      "value": "67",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "R200_EMIT_PP_CUBIC_OFFSETS_3",
+      "value": "68",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "R200_EMIT_PP_CUBIC_FACES_4",
+      "value": "69",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "R200_EMIT_PP_CUBIC_OFFSETS_4",
+      "value": "70",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "R200_EMIT_PP_CUBIC_FACES_5",
+      "value": "71",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "R200_EMIT_PP_CUBIC_OFFSETS_5",
+      "value": "72",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RADEON_EMIT_PP_TEX_SIZE_0",
+      "value": "73",
+      "comment": "",
+      "category": "RADEON_EMIT"
+    },
+    {
+      "name": "RADEON_EMIT_PP_TEX_SIZE_1",
+      "value": "74",
+      "comment": "",
+      "category": "RADEON_EMIT"
+    },
+    {
+      "name": "RADEON_EMIT_PP_TEX_SIZE_2",
+      "value": "75",
+      "comment": "",
+      "category": "RADEON_EMIT"
+    },
+    {
+      "name": "R200_EMIT_RB3D_BLENDCOLOR",
+      "value": "76",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "R200_EMIT_TCL_POINT_SPRITE_CNTL",
+      "value": "77",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RADEON_EMIT_PP_CUBIC_FACES_0",
+      "value": "78",
+      "comment": "",
+      "category": "RADEON_EMIT"
+    },
+    {
+      "name": "RADEON_EMIT_PP_CUBIC_OFFSETS_T0",
+      "value": "79",
+      "comment": "",
+      "category": "RADEON_EMIT"
+    },
+    {
+      "name": "RADEON_EMIT_PP_CUBIC_FACES_1",
+      "value": "80",
+      "comment": "",
+      "category": "RADEON_EMIT"
+    },
+    {
+      "name": "RADEON_EMIT_PP_CUBIC_OFFSETS_T1",
+      "value": "81",
+      "comment": "",
+      "category": "RADEON_EMIT"
+    },
+    {
+      "name": "RADEON_EMIT_PP_CUBIC_FACES_2",
+      "value": "82",
+      "comment": "",
+      "category": "RADEON_EMIT"
+    },
+    {
+      "name": "RADEON_EMIT_PP_CUBIC_OFFSETS_T2",
+      "value": "83",
+      "comment": "",
+      "category": "RADEON_EMIT"
+    },
+    {
+      "name": "R200_EMIT_PP_TRI_PERF_CNTL",
+      "value": "84",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "R200_EMIT_PP_AFS_0",
+      "value": "85",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "R200_EMIT_PP_AFS_1",
+      "value": "86",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "R200_EMIT_ATF_TFACTOR",
+      "value": "87",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "R200_EMIT_PP_TXCTLALL_0",
+      "value": "88",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "R200_EMIT_PP_TXCTLALL_1",
+      "value": "89",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "R200_EMIT_PP_TXCTLALL_2",
+      "value": "90",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "R200_EMIT_PP_TXCTLALL_3",
+      "value": "91",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "R200_EMIT_PP_TXCTLALL_4",
+      "value": "92",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "R200_EMIT_PP_TXCTLALL_5",
+      "value": "93",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "R200_EMIT_VAP_PVS_CNTL",
+      "value": "94",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RADEON_MAX_STATE_PACKETS",
+      "value": "95",
+      "comment": "",
+      "category": "RADEON_MAX"
+    },
+    {
+      "name": "RADEON_CMD_PACKET",
+      "value": "1",
+      "comment": "emit one of the register packets above",
+      "category": "RADEON_CMD"
+    },
+    {
+      "name": "RADEON_CMD_SCALARS",
+      "value": "2",
+      "comment": "emit scalar data",
+      "category": "RADEON_CMD"
+    },
+    {
+      "name": "RADEON_CMD_VECTORS",
+      "value": "3",
+      "comment": "emit vector data",
+      "category": "RADEON_CMD"
+    },
+    {
+      "name": "RADEON_CMD_DMA_DISCARD",
+      "value": "4",
+      "comment": "discard current dma buf",
+      "category": "RADEON_CMD"
+    },
+    {
+      "name": "RADEON_CMD_PACKET3",
+      "value": "5",
+      "comment": "emit hw packet",
+      "category": "RADEON_CMD"
+    },
+    {
+      "name": "RADEON_CMD_PACKET3_CLIP",
+      "value": "6",
+      "comment": "emit hw packet wrapped in cliprects",
+      "category": "RADEON_CMD"
+    },
+    {
+      "name": "RADEON_CMD_SCALARS2",
+      "value": "7",
+      "comment": "r200 stopgap",
+      "category": "RADEON_CMD"
+    },
+    {
+      "name": "RADEON_CMD_WAIT",
+      "value": "8\t/* emit hw wait commands -- note:",
+      "comment": "",
+      "category": "RADEON_CMD"
+    },
+    {
+      "name": "RADEON_CMD_VECLINEAR",
+      "value": "9",
+      "comment": "another r200 stopgap",
+      "category": "RADEON_CMD"
+    },
+    {
+      "name": "RADEON_WAIT_2D",
+      "value": "0x1",
+      "comment": "",
+      "category": "RADEON_WAIT"
+    },
+    {
+      "name": "RADEON_WAIT_3D",
+      "value": "0x2",
+      "comment": "",
+      "category": "RADEON_WAIT"
+    },
+    {
+      "name": "R300_CMD_PACKET3_CLEAR",
+      "value": "0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "R300_CMD_PACKET3_RAW",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "R300_CMD_PACKET0",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "R300_CMD_VPU",
+      "value": "2",
+      "comment": "emit vertex program upload",
+      "category": ""
+    },
+    {
+      "name": "R300_CMD_PACKET3",
+      "value": "3",
+      "comment": "emit a packet3",
+      "category": ""
+    },
+    {
+      "name": "R300_CMD_END3D",
+      "value": "4",
+      "comment": "emit sequence ending 3d rendering",
+      "category": ""
+    },
+    {
+      "name": "R300_CMD_CP_DELAY",
+      "value": "5",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "R300_CMD_DMA_DISCARD",
+      "value": "6",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "R300_CMD_WAIT",
+      "value": "7",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "R300_CMD_SCRATCH",
+      "value": "8",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "R300_CMD_R500FP",
+      "value": "9",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RADEON_FRONT",
+      "value": "0x1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RADEON_BACK",
+      "value": "0x2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RADEON_DEPTH",
+      "value": "0x4",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RADEON_STENCIL",
+      "value": "0x8",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RADEON_CLEAR_FASTZ",
+      "value": "0x80000000",
+      "comment": "",
+      "category": "RADEON_CLEAR"
+    },
+    {
+      "name": "RADEON_USE_HIERZ",
+      "value": "0x40000000",
+      "comment": "",
+      "category": "RADEON_USE"
+    },
+    {
+      "name": "RADEON_USE_COMP_ZBUF",
+      "value": "0x20000000",
+      "comment": "",
+      "category": "RADEON_USE"
+    },
+    {
+      "name": "R500FP_CONSTANT_TYPE",
+      "value": "(1 << 1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "R500FP_CONSTANT_CLAMP",
+      "value": "(1 << 2)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RADEON_POINTS",
+      "value": "0x1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RADEON_LINES",
+      "value": "0x2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RADEON_LINE_STRIP",
+      "value": "0x3",
+      "comment": "",
+      "category": "RADEON_LINE"
+    },
+    {
+      "name": "RADEON_TRIANGLES",
+      "value": "0x4",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RADEON_TRIANGLE_FAN",
+      "value": "0x5",
+      "comment": "",
+      "category": "RADEON_TRIANGLE"
+    },
+    {
+      "name": "RADEON_TRIANGLE_STRIP",
+      "value": "0x6",
+      "comment": "",
+      "category": "RADEON_TRIANGLE"
+    },
+    {
+      "name": "RADEON_BUFFER_SIZE",
+      "value": "65536",
+      "comment": "",
+      "category": "RADEON_BUFFER"
+    },
+    {
+      "name": "RADEON_INDEX_PRIM_OFFSET",
+      "value": "20",
+      "comment": "",
+      "category": "RADEON_INDEX"
+    },
+    {
+      "name": "RADEON_SCRATCH_REG_OFFSET",
+      "value": "32",
+      "comment": "",
+      "category": "RADEON_SCRATCH"
+    },
+    {
+      "name": "R600_SCRATCH_REG_OFFSET",
+      "value": "256",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RADEON_NR_SAREA_CLIPRECTS",
+      "value": "12",
+      "comment": "",
+      "category": "RADEON_NR"
+    },
+    {
+      "name": "RADEON_LOCAL_TEX_HEAP",
+      "value": "0",
+      "comment": "",
+      "category": "RADEON_LOCAL"
+    },
+    {
+      "name": "RADEON_GART_TEX_HEAP",
+      "value": "1",
+      "comment": "",
+      "category": "RADEON_GART"
+    },
+    {
+      "name": "RADEON_NR_TEX_HEAPS",
+      "value": "2",
+      "comment": "",
+      "category": "RADEON_NR"
+    },
+    {
+      "name": "RADEON_NR_TEX_REGIONS",
+      "value": "64",
+      "comment": "",
+      "category": "RADEON_NR"
+    },
+    {
+      "name": "RADEON_LOG_TEX_GRANULARITY",
+      "value": "16",
+      "comment": "",
+      "category": "RADEON_LOG"
+    },
+    {
+      "name": "RADEON_MAX_TEXTURE_LEVELS",
+      "value": "12",
+      "comment": "",
+      "category": "RADEON_MAX"
+    },
+    {
+      "name": "RADEON_MAX_TEXTURE_UNITS",
+      "value": "3",
+      "comment": "",
+      "category": "RADEON_MAX"
+    },
+    {
+      "name": "RADEON_MAX_SURFACES",
+      "value": "8",
+      "comment": "",
+      "category": "RADEON_MAX"
+    },
+    {
+      "name": "RADEON_OFFSET_SHIFT",
+      "value": "10",
+      "comment": "",
+      "category": "RADEON_OFFSET"
+    },
+    {
+      "name": "RADEON_OFFSET_ALIGN",
+      "value": "(1 << RADEON_OFFSET_SHIFT)",
+      "comment": "",
+      "category": "RADEON_OFFSET"
+    },
+    {
+      "name": "RADEON_OFFSET_MASK",
+      "value": "(RADEON_OFFSET_ALIGN - 1)",
+      "comment": "",
+      "category": "RADEON_OFFSET"
+    },
+    {
+      "name": "DRM_RADEON_CP_INIT",
+      "value": "0x00",
+      "comment": "",
+      "category": "DRM_RADEON"
+    },
+    {
+      "name": "DRM_RADEON_CP_START",
+      "value": "0x01",
+      "comment": "",
+      "category": "DRM_RADEON"
+    },
+    {
+      "name": "DRM_RADEON_CP_STOP",
+      "value": "0x02",
+      "comment": "",
+      "category": "DRM_RADEON"
+    },
+    {
+      "name": "DRM_RADEON_CP_RESET",
+      "value": "0x03",
+      "comment": "",
+      "category": "DRM_RADEON"
+    },
+    {
+      "name": "DRM_RADEON_CP_IDLE",
+      "value": "0x04",
+      "comment": "",
+      "category": "DRM_RADEON"
+    },
+    {
+      "name": "DRM_RADEON_RESET",
+      "value": "0x05",
+      "comment": "",
+      "category": "DRM_RADEON"
+    },
+    {
+      "name": "DRM_RADEON_FULLSCREEN",
+      "value": "0x06",
+      "comment": "",
+      "category": "DRM_RADEON"
+    },
+    {
+      "name": "DRM_RADEON_SWAP",
+      "value": "0x07",
+      "comment": "",
+      "category": "DRM_RADEON"
+    },
+    {
+      "name": "DRM_RADEON_CLEAR",
+      "value": "0x08",
+      "comment": "",
+      "category": "DRM_RADEON"
+    },
+    {
+      "name": "DRM_RADEON_VERTEX",
+      "value": "0x09",
+      "comment": "",
+      "category": "DRM_RADEON"
+    },
+    {
+      "name": "DRM_RADEON_INDICES",
+      "value": "0x0A",
+      "comment": "",
+      "category": "DRM_RADEON"
+    },
+    {
+      "name": "DRM_RADEON_STIPPLE",
+      "value": "0x0C",
+      "comment": "",
+      "category": "DRM_RADEON"
+    },
+    {
+      "name": "DRM_RADEON_INDIRECT",
+      "value": "0x0D",
+      "comment": "",
+      "category": "DRM_RADEON"
+    },
+    {
+      "name": "DRM_RADEON_TEXTURE",
+      "value": "0x0E",
+      "comment": "",
+      "category": "DRM_RADEON"
+    },
+    {
+      "name": "DRM_RADEON_VERTEX2",
+      "value": "0x0F",
+      "comment": "",
+      "category": "DRM_RADEON"
+    },
+    {
+      "name": "DRM_RADEON_CMDBUF",
+      "value": "0x10",
+      "comment": "",
+      "category": "DRM_RADEON"
+    },
+    {
+      "name": "DRM_RADEON_GETPARAM",
+      "value": "0x11",
+      "comment": "",
+      "category": "DRM_RADEON"
+    },
+    {
+      "name": "DRM_RADEON_FLIP",
+      "value": "0x12",
+      "comment": "",
+      "category": "DRM_RADEON"
+    },
+    {
+      "name": "DRM_RADEON_ALLOC",
+      "value": "0x13",
+      "comment": "",
+      "category": "DRM_RADEON"
+    },
+    {
+      "name": "DRM_RADEON_FREE",
+      "value": "0x14",
+      "comment": "",
+      "category": "DRM_RADEON"
+    },
+    {
+      "name": "DRM_RADEON_INIT_HEAP",
+      "value": "0x15",
+      "comment": "",
+      "category": "DRM_RADEON"
+    },
+    {
+      "name": "DRM_RADEON_IRQ_EMIT",
+      "value": "0x16",
+      "comment": "",
+      "category": "DRM_RADEON"
+    },
+    {
+      "name": "DRM_RADEON_IRQ_WAIT",
+      "value": "0x17",
+      "comment": "",
+      "category": "DRM_RADEON"
+    },
+    {
+      "name": "DRM_RADEON_CP_RESUME",
+      "value": "0x18",
+      "comment": "",
+      "category": "DRM_RADEON"
+    },
+    {
+      "name": "DRM_RADEON_SETPARAM",
+      "value": "0x19",
+      "comment": "",
+      "category": "DRM_RADEON"
+    },
+    {
+      "name": "DRM_RADEON_SURF_ALLOC",
+      "value": "0x1a",
+      "comment": "",
+      "category": "DRM_RADEON"
+    },
+    {
+      "name": "DRM_RADEON_SURF_FREE",
+      "value": "0x1b",
+      "comment": "",
+      "category": "DRM_RADEON"
+    },
+    {
+      "name": "DRM_RADEON_GEM_INFO",
+      "value": "0x1c",
+      "comment": "",
+      "category": "DRM_RADEON"
+    },
+    {
+      "name": "DRM_RADEON_GEM_CREATE",
+      "value": "0x1d",
+      "comment": "",
+      "category": "DRM_RADEON"
+    },
+    {
+      "name": "DRM_RADEON_GEM_MMAP",
+      "value": "0x1e",
+      "comment": "",
+      "category": "DRM_RADEON"
+    },
+    {
+      "name": "DRM_RADEON_GEM_PREAD",
+      "value": "0x21",
+      "comment": "",
+      "category": "DRM_RADEON"
+    },
+    {
+      "name": "DRM_RADEON_GEM_PWRITE",
+      "value": "0x22",
+      "comment": "",
+      "category": "DRM_RADEON"
+    },
+    {
+      "name": "DRM_RADEON_GEM_SET_DOMAIN",
+      "value": "0x23",
+      "comment": "",
+      "category": "DRM_RADEON"
+    },
+    {
+      "name": "DRM_RADEON_GEM_WAIT_IDLE",
+      "value": "0x24",
+      "comment": "",
+      "category": "DRM_RADEON"
+    },
+    {
+      "name": "DRM_RADEON_CS",
+      "value": "0x26",
+      "comment": "",
+      "category": "DRM_RADEON"
+    },
+    {
+      "name": "DRM_RADEON_INFO",
+      "value": "0x27",
+      "comment": "",
+      "category": "DRM_RADEON"
+    },
+    {
+      "name": "DRM_RADEON_GEM_SET_TILING",
+      "value": "0x28",
+      "comment": "",
+      "category": "DRM_RADEON"
+    },
+    {
+      "name": "DRM_RADEON_GEM_GET_TILING",
+      "value": "0x29",
+      "comment": "",
+      "category": "DRM_RADEON"
+    },
+    {
+      "name": "DRM_RADEON_GEM_BUSY",
+      "value": "0x2a",
+      "comment": "",
+      "category": "DRM_RADEON"
+    },
+    {
+      "name": "DRM_RADEON_GEM_VA",
+      "value": "0x2b",
+      "comment": "",
+      "category": "DRM_RADEON"
+    },
+    {
+      "name": "DRM_RADEON_GEM_OP",
+      "value": "0x2c",
+      "comment": "",
+      "category": "DRM_RADEON"
+    },
+    {
+      "name": "DRM_RADEON_GEM_USERPTR",
+      "value": "0x2d",
+      "comment": "",
+      "category": "DRM_RADEON"
+    },
+    {
+      "name": "DRM_IOCTL_RADEON_CP_INIT",
+      "value": "DRM_IOW( DRM_COMMAND_BASE + DRM_RADEON_CP_INIT, drm_radeon_init_t)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_RADEON_CP_START",
+      "value": "DRM_IO(  DRM_COMMAND_BASE + DRM_RADEON_CP_START)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_RADEON_CP_STOP",
+      "value": "DRM_IOW( DRM_COMMAND_BASE + DRM_RADEON_CP_STOP, drm_radeon_cp_stop_t)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_RADEON_CP_RESET",
+      "value": "DRM_IO(  DRM_COMMAND_BASE + DRM_RADEON_CP_RESET)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_RADEON_CP_IDLE",
+      "value": "DRM_IO(  DRM_COMMAND_BASE + DRM_RADEON_CP_IDLE)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_RADEON_RESET",
+      "value": "DRM_IO(  DRM_COMMAND_BASE + DRM_RADEON_RESET)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_RADEON_FULLSCREEN",
+      "value": "DRM_IOW( DRM_COMMAND_BASE + DRM_RADEON_FULLSCREEN, drm_radeon_fullscreen_t)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_RADEON_SWAP",
+      "value": "DRM_IO(  DRM_COMMAND_BASE + DRM_RADEON_SWAP)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_RADEON_CLEAR",
+      "value": "DRM_IOW( DRM_COMMAND_BASE + DRM_RADEON_CLEAR, drm_radeon_clear_t)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_RADEON_VERTEX",
+      "value": "DRM_IOW( DRM_COMMAND_BASE + DRM_RADEON_VERTEX, drm_radeon_vertex_t)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_RADEON_INDICES",
+      "value": "DRM_IOW( DRM_COMMAND_BASE + DRM_RADEON_INDICES, drm_radeon_indices_t)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_RADEON_STIPPLE",
+      "value": "DRM_IOW( DRM_COMMAND_BASE + DRM_RADEON_STIPPLE, drm_radeon_stipple_t)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_RADEON_INDIRECT",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_RADEON_INDIRECT, drm_radeon_indirect_t)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_RADEON_TEXTURE",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_RADEON_TEXTURE, drm_radeon_texture_t)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_RADEON_VERTEX2",
+      "value": "DRM_IOW( DRM_COMMAND_BASE + DRM_RADEON_VERTEX2, drm_radeon_vertex2_t)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_RADEON_CMDBUF",
+      "value": "DRM_IOW( DRM_COMMAND_BASE + DRM_RADEON_CMDBUF, drm_radeon_cmd_buffer_t)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_RADEON_GETPARAM",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_RADEON_GETPARAM, drm_radeon_getparam_t)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_RADEON_FLIP",
+      "value": "DRM_IO(  DRM_COMMAND_BASE + DRM_RADEON_FLIP)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_RADEON_ALLOC",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_RADEON_ALLOC, drm_radeon_mem_alloc_t)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_RADEON_FREE",
+      "value": "DRM_IOW( DRM_COMMAND_BASE + DRM_RADEON_FREE, drm_radeon_mem_free_t)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_RADEON_INIT_HEAP",
+      "value": "DRM_IOW( DRM_COMMAND_BASE + DRM_RADEON_INIT_HEAP, drm_radeon_mem_init_heap_t)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_RADEON_IRQ_EMIT",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_RADEON_IRQ_EMIT, drm_radeon_irq_emit_t)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_RADEON_IRQ_WAIT",
+      "value": "DRM_IOW( DRM_COMMAND_BASE + DRM_RADEON_IRQ_WAIT, drm_radeon_irq_wait_t)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_RADEON_CP_RESUME",
+      "value": "DRM_IO(  DRM_COMMAND_BASE + DRM_RADEON_CP_RESUME)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_RADEON_SETPARAM",
+      "value": "DRM_IOW( DRM_COMMAND_BASE + DRM_RADEON_SETPARAM, drm_radeon_setparam_t)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_RADEON_SURF_ALLOC",
+      "value": "DRM_IOW( DRM_COMMAND_BASE + DRM_RADEON_SURF_ALLOC, drm_radeon_surface_alloc_t)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_RADEON_SURF_FREE",
+      "value": "DRM_IOW( DRM_COMMAND_BASE + DRM_RADEON_SURF_FREE, drm_radeon_surface_free_t)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_RADEON_GEM_INFO",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_RADEON_GEM_INFO, struct drm_radeon_gem_info)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_RADEON_GEM_CREATE",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_RADEON_GEM_CREATE, struct drm_radeon_gem_create)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_RADEON_GEM_MMAP",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_RADEON_GEM_MMAP, struct drm_radeon_gem_mmap)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_RADEON_GEM_PREAD",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_RADEON_GEM_PREAD, struct drm_radeon_gem_pread)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_RADEON_GEM_PWRITE",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_RADEON_GEM_PWRITE, struct drm_radeon_gem_pwrite)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_RADEON_GEM_SET_DOMAIN",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_RADEON_GEM_SET_DOMAIN, struct drm_radeon_gem_set_domain)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_RADEON_GEM_WAIT_IDLE",
+      "value": "DRM_IOW(DRM_COMMAND_BASE + DRM_RADEON_GEM_WAIT_IDLE, struct drm_radeon_gem_wait_idle)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_RADEON_CS",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_RADEON_CS, struct drm_radeon_cs)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_RADEON_INFO",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_RADEON_INFO, struct drm_radeon_info)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_RADEON_GEM_SET_TILING",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_RADEON_GEM_SET_TILING, struct drm_radeon_gem_set_tiling)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_RADEON_GEM_GET_TILING",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_RADEON_GEM_GET_TILING, struct drm_radeon_gem_get_tiling)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_RADEON_GEM_BUSY",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_RADEON_GEM_BUSY, struct drm_radeon_gem_busy)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_RADEON_GEM_VA",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_RADEON_GEM_VA, struct drm_radeon_gem_va)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_RADEON_GEM_OP",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_RADEON_GEM_OP, struct drm_radeon_gem_op)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_RADEON_GEM_USERPTR",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_RADEON_GEM_USERPTR, struct drm_radeon_gem_userptr)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "CLEAR_X1",
+      "value": "0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "CLEAR_Y1",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "CLEAR_X2",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "CLEAR_Y2",
+      "value": "3",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "CLEAR_DEPTH",
+      "value": "4",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "RADEON_CARD_PCI",
+      "value": "0",
+      "comment": "",
+      "category": "RADEON_CARD"
+    },
+    {
+      "name": "RADEON_CARD_AGP",
+      "value": "1",
+      "comment": "",
+      "category": "RADEON_CARD"
+    },
+    {
+      "name": "RADEON_CARD_PCIE",
+      "value": "2",
+      "comment": "",
+      "category": "RADEON_CARD"
+    },
+    {
+      "name": "RADEON_PARAM_GART_BUFFER_OFFSET",
+      "value": "1",
+      "comment": "card offset of 1st GART buffer",
+      "category": "RADEON_PARAM"
+    },
+    {
+      "name": "RADEON_PARAM_LAST_FRAME",
+      "value": "2",
+      "comment": "",
+      "category": "RADEON_PARAM"
+    },
+    {
+      "name": "RADEON_PARAM_LAST_DISPATCH",
+      "value": "3",
+      "comment": "",
+      "category": "RADEON_PARAM"
+    },
+    {
+      "name": "RADEON_PARAM_LAST_CLEAR",
+      "value": "4",
+      "comment": "",
+      "category": "RADEON_PARAM"
+    },
+    {
+      "name": "RADEON_PARAM_IRQ_NR",
+      "value": "5",
+      "comment": "",
+      "category": "RADEON_PARAM"
+    },
+    {
+      "name": "RADEON_PARAM_GART_BASE",
+      "value": "6",
+      "comment": "card offset of GART base",
+      "category": "RADEON_PARAM"
+    },
+    {
+      "name": "RADEON_PARAM_REGISTER_HANDLE",
+      "value": "7",
+      "comment": "for drmMap()",
+      "category": "RADEON_PARAM"
+    },
+    {
+      "name": "RADEON_PARAM_STATUS_HANDLE",
+      "value": "8",
+      "comment": "",
+      "category": "RADEON_PARAM"
+    },
+    {
+      "name": "RADEON_PARAM_SAREA_HANDLE",
+      "value": "9",
+      "comment": "",
+      "category": "RADEON_PARAM"
+    },
+    {
+      "name": "RADEON_PARAM_GART_TEX_HANDLE",
+      "value": "10",
+      "comment": "",
+      "category": "RADEON_PARAM"
+    },
+    {
+      "name": "RADEON_PARAM_SCRATCH_OFFSET",
+      "value": "11",
+      "comment": "",
+      "category": "RADEON_PARAM"
+    },
+    {
+      "name": "RADEON_PARAM_CARD_TYPE",
+      "value": "12",
+      "comment": "",
+      "category": "RADEON_PARAM"
+    },
+    {
+      "name": "RADEON_PARAM_VBLANK_CRTC",
+      "value": "13",
+      "comment": "VBLANK CRTC",
+      "category": "RADEON_PARAM"
+    },
+    {
+      "name": "RADEON_PARAM_FB_LOCATION",
+      "value": "14",
+      "comment": "FB location",
+      "category": "RADEON_PARAM"
+    },
+    {
+      "name": "RADEON_PARAM_NUM_GB_PIPES",
+      "value": "15",
+      "comment": "num GB pipes",
+      "category": "RADEON_PARAM"
+    },
+    {
+      "name": "RADEON_PARAM_DEVICE_ID",
+      "value": "16",
+      "comment": "",
+      "category": "RADEON_PARAM"
+    },
+    {
+      "name": "RADEON_PARAM_NUM_Z_PIPES",
+      "value": "17",
+      "comment": "num Z pipes",
+      "category": "RADEON_PARAM"
+    },
+    {
+      "name": "RADEON_MEM_REGION_GART",
+      "value": "1",
+      "comment": "",
+      "category": "RADEON_MEM"
+    },
+    {
+      "name": "RADEON_MEM_REGION_FB",
+      "value": "2",
+      "comment": "",
+      "category": "RADEON_MEM"
+    },
+    {
+      "name": "RADEON_SETPARAM_FB_LOCATION",
+      "value": "1",
+      "comment": "determined framebuffer location",
+      "category": "RADEON_SETPARAM"
+    },
+    {
+      "name": "RADEON_SETPARAM_SWITCH_TILING",
+      "value": "2",
+      "comment": "enable/disable color tiling",
+      "category": "RADEON_SETPARAM"
+    },
+    {
+      "name": "RADEON_SETPARAM_PCIGART_LOCATION",
+      "value": "3",
+      "comment": "PCI Gart Location",
+      "category": "RADEON_SETPARAM"
+    },
+    {
+      "name": "RADEON_SETPARAM_NEW_MEMMAP",
+      "value": "4",
+      "comment": "Use new memory map",
+      "category": "RADEON_SETPARAM"
+    },
+    {
+      "name": "RADEON_SETPARAM_PCIGART_TABLE_SIZE",
+      "value": "5",
+      "comment": "PCI GART Table Size",
+      "category": "RADEON_SETPARAM"
+    },
+    {
+      "name": "RADEON_SETPARAM_VBLANK_CRTC",
+      "value": "6",
+      "comment": "VBLANK CRTC",
+      "category": "RADEON_SETPARAM"
+    },
+    {
+      "name": "DRM_RADEON_VBLANK_CRTC1",
+      "value": "1",
+      "comment": "",
+      "category": "DRM_RADEON"
+    },
+    {
+      "name": "DRM_RADEON_VBLANK_CRTC2",
+      "value": "2",
+      "comment": "",
+      "category": "DRM_RADEON"
+    },
+    {
+      "name": "RADEON_GEM_DOMAIN_CPU",
+      "value": "0x1",
+      "comment": "",
+      "category": "RADEON_GEM"
+    },
+    {
+      "name": "RADEON_GEM_DOMAIN_GTT",
+      "value": "0x2",
+      "comment": "",
+      "category": "RADEON_GEM"
+    },
+    {
+      "name": "RADEON_GEM_DOMAIN_VRAM",
+      "value": "0x4",
+      "comment": "",
+      "category": "RADEON_GEM"
+    },
+    {
+      "name": "RADEON_GEM_NO_BACKING_STORE",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "RADEON_GEM"
+    },
+    {
+      "name": "RADEON_GEM_GTT_UC",
+      "value": "(1 << 1)",
+      "comment": "",
+      "category": "RADEON_GEM"
+    },
+    {
+      "name": "RADEON_GEM_GTT_WC",
+      "value": "(1 << 2)",
+      "comment": "",
+      "category": "RADEON_GEM"
+    },
+    {
+      "name": "RADEON_GEM_CPU_ACCESS",
+      "value": "(1 << 3)",
+      "comment": "",
+      "category": "RADEON_GEM"
+    },
+    {
+      "name": "RADEON_GEM_NO_CPU_ACCESS",
+      "value": "(1 << 4)",
+      "comment": "",
+      "category": "RADEON_GEM"
+    },
+    {
+      "name": "RADEON_GEM_USERPTR_READONLY",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "RADEON_GEM"
+    },
+    {
+      "name": "RADEON_GEM_USERPTR_ANONONLY",
+      "value": "(1 << 1)",
+      "comment": "",
+      "category": "RADEON_GEM"
+    },
+    {
+      "name": "RADEON_GEM_USERPTR_VALIDATE",
+      "value": "(1 << 2)",
+      "comment": "",
+      "category": "RADEON_GEM"
+    },
+    {
+      "name": "RADEON_GEM_USERPTR_REGISTER",
+      "value": "(1 << 3)",
+      "comment": "",
+      "category": "RADEON_GEM"
+    },
+    {
+      "name": "RADEON_TILING_MACRO",
+      "value": "0x1",
+      "comment": "",
+      "category": "RADEON_TILING"
+    },
+    {
+      "name": "RADEON_TILING_MICRO",
+      "value": "0x2",
+      "comment": "",
+      "category": "RADEON_TILING"
+    },
+    {
+      "name": "RADEON_TILING_SWAP_16BIT",
+      "value": "0x4",
+      "comment": "",
+      "category": "RADEON_TILING"
+    },
+    {
+      "name": "RADEON_TILING_SWAP_32BIT",
+      "value": "0x8",
+      "comment": "",
+      "category": "RADEON_TILING"
+    },
+    {
+      "name": "RADEON_TILING_SURFACE",
+      "value": "0x10",
+      "comment": "",
+      "category": "RADEON_TILING"
+    },
+    {
+      "name": "RADEON_TILING_MICRO_SQUARE",
+      "value": "0x20",
+      "comment": "",
+      "category": "RADEON_TILING"
+    },
+    {
+      "name": "RADEON_TILING_EG_BANKW_SHIFT",
+      "value": "8",
+      "comment": "",
+      "category": "RADEON_TILING"
+    },
+    {
+      "name": "RADEON_TILING_EG_BANKW_MASK",
+      "value": "0xf",
+      "comment": "",
+      "category": "RADEON_TILING"
+    },
+    {
+      "name": "RADEON_TILING_EG_BANKH_SHIFT",
+      "value": "12",
+      "comment": "",
+      "category": "RADEON_TILING"
+    },
+    {
+      "name": "RADEON_TILING_EG_BANKH_MASK",
+      "value": "0xf",
+      "comment": "",
+      "category": "RADEON_TILING"
+    },
+    {
+      "name": "RADEON_TILING_EG_MACRO_TILE_ASPECT_SHIFT",
+      "value": "16",
+      "comment": "",
+      "category": "RADEON_TILING"
+    },
+    {
+      "name": "RADEON_TILING_EG_MACRO_TILE_ASPECT_MASK",
+      "value": "0xf",
+      "comment": "",
+      "category": "RADEON_TILING"
+    },
+    {
+      "name": "RADEON_TILING_EG_TILE_SPLIT_SHIFT",
+      "value": "24",
+      "comment": "",
+      "category": "RADEON_TILING"
+    },
+    {
+      "name": "RADEON_TILING_EG_TILE_SPLIT_MASK",
+      "value": "0xf",
+      "comment": "",
+      "category": "RADEON_TILING"
+    },
+    {
+      "name": "RADEON_TILING_EG_STENCIL_TILE_SPLIT_SHIFT",
+      "value": "28",
+      "comment": "",
+      "category": "RADEON_TILING"
+    },
+    {
+      "name": "RADEON_TILING_EG_STENCIL_TILE_SPLIT_MASK",
+      "value": "0xf",
+      "comment": "",
+      "category": "RADEON_TILING"
+    },
+    {
+      "name": "RADEON_GEM_OP_GET_INITIAL_DOMAIN",
+      "value": "0",
+      "comment": "",
+      "category": "RADEON_GEM"
+    },
+    {
+      "name": "RADEON_GEM_OP_SET_INITIAL_DOMAIN",
+      "value": "1",
+      "comment": "",
+      "category": "RADEON_GEM"
+    },
+    {
+      "name": "RADEON_VA_MAP",
+      "value": "1",
+      "comment": "",
+      "category": "RADEON_VA"
+    },
+    {
+      "name": "RADEON_VA_UNMAP",
+      "value": "2",
+      "comment": "",
+      "category": "RADEON_VA"
+    },
+    {
+      "name": "RADEON_VA_RESULT_OK",
+      "value": "0",
+      "comment": "",
+      "category": "RADEON_VA"
+    },
+    {
+      "name": "RADEON_VA_RESULT_ERROR",
+      "value": "1",
+      "comment": "",
+      "category": "RADEON_VA"
+    },
+    {
+      "name": "RADEON_VA_RESULT_VA_EXIST",
+      "value": "2",
+      "comment": "",
+      "category": "RADEON_VA"
+    },
+    {
+      "name": "RADEON_VM_PAGE_VALID",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": "RADEON_VM"
+    },
+    {
+      "name": "RADEON_VM_PAGE_READABLE",
+      "value": "(1 << 1)",
+      "comment": "",
+      "category": "RADEON_VM"
+    },
+    {
+      "name": "RADEON_VM_PAGE_WRITEABLE",
+      "value": "(1 << 2)",
+      "comment": "",
+      "category": "RADEON_VM"
+    },
+    {
+      "name": "RADEON_VM_PAGE_SYSTEM",
+      "value": "(1 << 3)",
+      "comment": "",
+      "category": "RADEON_VM"
+    },
+    {
+      "name": "RADEON_VM_PAGE_SNOOPED",
+      "value": "(1 << 4)",
+      "comment": "",
+      "category": "RADEON_VM"
+    },
+    {
+      "name": "RADEON_CHUNK_ID_RELOCS",
+      "value": "0x01",
+      "comment": "",
+      "category": "RADEON_CHUNK"
+    },
+    {
+      "name": "RADEON_CHUNK_ID_IB",
+      "value": "0x02",
+      "comment": "",
+      "category": "RADEON_CHUNK"
+    },
+    {
+      "name": "RADEON_CHUNK_ID_FLAGS",
+      "value": "0x03",
+      "comment": "",
+      "category": "RADEON_CHUNK"
+    },
+    {
+      "name": "RADEON_CHUNK_ID_CONST_IB",
+      "value": "0x04",
+      "comment": "",
+      "category": "RADEON_CHUNK"
+    },
+    {
+      "name": "RADEON_CS_KEEP_TILING_FLAGS",
+      "value": "0x01",
+      "comment": "",
+      "category": "RADEON_CS"
+    },
+    {
+      "name": "RADEON_CS_USE_VM",
+      "value": "0x02",
+      "comment": "",
+      "category": "RADEON_CS"
+    },
+    {
+      "name": "RADEON_CS_END_OF_FRAME",
+      "value": "0x04",
+      "comment": "a hint from userspace which CS is the last one",
+      "category": "RADEON_CS"
+    },
+    {
+      "name": "RADEON_CS_RING_GFX",
+      "value": "0",
+      "comment": "",
+      "category": "RADEON_CS"
+    },
+    {
+      "name": "RADEON_CS_RING_COMPUTE",
+      "value": "1",
+      "comment": "",
+      "category": "RADEON_CS"
+    },
+    {
+      "name": "RADEON_CS_RING_DMA",
+      "value": "2",
+      "comment": "",
+      "category": "RADEON_CS"
+    },
+    {
+      "name": "RADEON_CS_RING_UVD",
+      "value": "3",
+      "comment": "",
+      "category": "RADEON_CS"
+    },
+    {
+      "name": "RADEON_CS_RING_VCE",
+      "value": "4",
+      "comment": "",
+      "category": "RADEON_CS"
+    },
+    {
+      "name": "RADEON_RELOC_PRIO_MASK",
+      "value": "(0xf << 0)",
+      "comment": "",
+      "category": "RADEON_RELOC"
+    },
+    {
+      "name": "RADEON_INFO_DEVICE_ID",
+      "value": "0x00",
+      "comment": "",
+      "category": "RADEON_INFO"
+    },
+    {
+      "name": "RADEON_INFO_NUM_GB_PIPES",
+      "value": "0x01",
+      "comment": "",
+      "category": "RADEON_INFO"
+    },
+    {
+      "name": "RADEON_INFO_NUM_Z_PIPES",
+      "value": "0x02",
+      "comment": "",
+      "category": "RADEON_INFO"
+    },
+    {
+      "name": "RADEON_INFO_ACCEL_WORKING",
+      "value": "0x03",
+      "comment": "",
+      "category": "RADEON_INFO"
+    },
+    {
+      "name": "RADEON_INFO_CRTC_FROM_ID",
+      "value": "0x04",
+      "comment": "",
+      "category": "RADEON_INFO"
+    },
+    {
+      "name": "RADEON_INFO_ACCEL_WORKING2",
+      "value": "0x05",
+      "comment": "",
+      "category": "RADEON_INFO"
+    },
+    {
+      "name": "RADEON_INFO_TILING_CONFIG",
+      "value": "0x06",
+      "comment": "",
+      "category": "RADEON_INFO"
+    },
+    {
+      "name": "RADEON_INFO_WANT_HYPERZ",
+      "value": "0x07",
+      "comment": "",
+      "category": "RADEON_INFO"
+    },
+    {
+      "name": "RADEON_INFO_WANT_CMASK",
+      "value": "0x08",
+      "comment": "get access to CMASK on r300",
+      "category": "RADEON_INFO"
+    },
+    {
+      "name": "RADEON_INFO_CLOCK_CRYSTAL_FREQ",
+      "value": "0x09",
+      "comment": "clock crystal frequency",
+      "category": "RADEON_INFO"
+    },
+    {
+      "name": "RADEON_INFO_NUM_BACKENDS",
+      "value": "0x0a",
+      "comment": "DB/backends for r600+ - need for OQ",
+      "category": "RADEON_INFO"
+    },
+    {
+      "name": "RADEON_INFO_NUM_TILE_PIPES",
+      "value": "0x0b",
+      "comment": "tile pipes for r600+",
+      "category": "RADEON_INFO"
+    },
+    {
+      "name": "RADEON_INFO_FUSION_GART_WORKING",
+      "value": "0x0c",
+      "comment": "fusion writes to GTT were broken before this",
+      "category": "RADEON_INFO"
+    },
+    {
+      "name": "RADEON_INFO_BACKEND_MAP",
+      "value": "0x0d",
+      "comment": "pipe to backend map, needed by mesa",
+      "category": "RADEON_INFO"
+    },
+    {
+      "name": "RADEON_INFO_VA_START",
+      "value": "0x0e",
+      "comment": "",
+      "category": "RADEON_INFO"
+    },
+    {
+      "name": "RADEON_INFO_IB_VM_MAX_SIZE",
+      "value": "0x0f",
+      "comment": "",
+      "category": "RADEON_INFO"
+    },
+    {
+      "name": "RADEON_INFO_MAX_PIPES",
+      "value": "0x10",
+      "comment": "",
+      "category": "RADEON_INFO"
+    },
+    {
+      "name": "RADEON_INFO_TIMESTAMP",
+      "value": "0x11",
+      "comment": "",
+      "category": "RADEON_INFO"
+    },
+    {
+      "name": "RADEON_INFO_MAX_SE",
+      "value": "0x12",
+      "comment": "",
+      "category": "RADEON_INFO"
+    },
+    {
+      "name": "RADEON_INFO_MAX_SH_PER_SE",
+      "value": "0x13",
+      "comment": "",
+      "category": "RADEON_INFO"
+    },
+    {
+      "name": "RADEON_INFO_FASTFB_WORKING",
+      "value": "0x14",
+      "comment": "",
+      "category": "RADEON_INFO"
+    },
+    {
+      "name": "RADEON_INFO_RING_WORKING",
+      "value": "0x15",
+      "comment": "",
+      "category": "RADEON_INFO"
+    },
+    {
+      "name": "RADEON_INFO_SI_TILE_MODE_ARRAY",
+      "value": "0x16",
+      "comment": "",
+      "category": "RADEON_INFO"
+    },
+    {
+      "name": "RADEON_INFO_SI_CP_DMA_COMPUTE",
+      "value": "0x17",
+      "comment": "",
+      "category": "RADEON_INFO"
+    },
+    {
+      "name": "RADEON_INFO_CIK_MACROTILE_MODE_ARRAY",
+      "value": "0x18",
+      "comment": "",
+      "category": "RADEON_INFO"
+    },
+    {
+      "name": "RADEON_INFO_SI_BACKEND_ENABLED_MASK",
+      "value": "0x19",
+      "comment": "",
+      "category": "RADEON_INFO"
+    },
+    {
+      "name": "RADEON_INFO_MAX_SCLK",
+      "value": "0x1a",
+      "comment": "",
+      "category": "RADEON_INFO"
+    },
+    {
+      "name": "RADEON_INFO_VCE_FW_VERSION",
+      "value": "0x1b",
+      "comment": "",
+      "category": "RADEON_INFO"
+    },
+    {
+      "name": "RADEON_INFO_VCE_FB_VERSION",
+      "value": "0x1c",
+      "comment": "",
+      "category": "RADEON_INFO"
+    },
+    {
+      "name": "RADEON_INFO_NUM_BYTES_MOVED",
+      "value": "0x1d",
+      "comment": "",
+      "category": "RADEON_INFO"
+    },
+    {
+      "name": "RADEON_INFO_VRAM_USAGE",
+      "value": "0x1e",
+      "comment": "",
+      "category": "RADEON_INFO"
+    },
+    {
+      "name": "RADEON_INFO_GTT_USAGE",
+      "value": "0x1f",
+      "comment": "",
+      "category": "RADEON_INFO"
+    },
+    {
+      "name": "RADEON_INFO_ACTIVE_CU_COUNT",
+      "value": "0x20",
+      "comment": "",
+      "category": "RADEON_INFO"
+    },
+    {
+      "name": "RADEON_INFO_CURRENT_GPU_TEMP",
+      "value": "0x21",
+      "comment": "",
+      "category": "RADEON_INFO"
+    },
+    {
+      "name": "RADEON_INFO_CURRENT_GPU_SCLK",
+      "value": "0x22",
+      "comment": "",
+      "category": "RADEON_INFO"
+    },
+    {
+      "name": "RADEON_INFO_CURRENT_GPU_MCLK",
+      "value": "0x23",
+      "comment": "",
+      "category": "RADEON_INFO"
+    },
+    {
+      "name": "RADEON_INFO_READ_REG",
+      "value": "0x24",
+      "comment": "",
+      "category": "RADEON_INFO"
+    },
+    {
+      "name": "RADEON_INFO_VA_UNMAP_WORKING",
+      "value": "0x25",
+      "comment": "",
+      "category": "RADEON_INFO"
+    },
+    {
+      "name": "RADEON_INFO_GPU_RESET_COUNTER",
+      "value": "0x26",
+      "comment": "",
+      "category": "RADEON_INFO"
+    },
+    {
+      "name": "SI_TILE_MODE_COLOR_LINEAR_ALIGNED",
+      "value": "8",
+      "comment": "",
+      "category": "SI_TILE"
+    },
+    {
+      "name": "SI_TILE_MODE_COLOR_1D",
+      "value": "13",
+      "comment": "",
+      "category": "SI_TILE"
+    },
+    {
+      "name": "SI_TILE_MODE_COLOR_1D_SCANOUT",
+      "value": "9",
+      "comment": "",
+      "category": "SI_TILE"
+    },
+    {
+      "name": "SI_TILE_MODE_COLOR_2D_8BPP",
+      "value": "14",
+      "comment": "",
+      "category": "SI_TILE"
+    },
+    {
+      "name": "SI_TILE_MODE_COLOR_2D_16BPP",
+      "value": "15",
+      "comment": "",
+      "category": "SI_TILE"
+    },
+    {
+      "name": "SI_TILE_MODE_COLOR_2D_32BPP",
+      "value": "16",
+      "comment": "",
+      "category": "SI_TILE"
+    },
+    {
+      "name": "SI_TILE_MODE_COLOR_2D_64BPP",
+      "value": "17",
+      "comment": "",
+      "category": "SI_TILE"
+    },
+    {
+      "name": "SI_TILE_MODE_COLOR_2D_SCANOUT_16BPP",
+      "value": "11",
+      "comment": "",
+      "category": "SI_TILE"
+    },
+    {
+      "name": "SI_TILE_MODE_COLOR_2D_SCANOUT_32BPP",
+      "value": "12",
+      "comment": "",
+      "category": "SI_TILE"
+    },
+    {
+      "name": "SI_TILE_MODE_DEPTH_STENCIL_1D",
+      "value": "4",
+      "comment": "",
+      "category": "SI_TILE"
+    },
+    {
+      "name": "SI_TILE_MODE_DEPTH_STENCIL_2D",
+      "value": "0",
+      "comment": "",
+      "category": "SI_TILE"
+    },
+    {
+      "name": "SI_TILE_MODE_DEPTH_STENCIL_2D_2AA",
+      "value": "3",
+      "comment": "",
+      "category": "SI_TILE"
+    },
+    {
+      "name": "SI_TILE_MODE_DEPTH_STENCIL_2D_4AA",
+      "value": "3",
+      "comment": "",
+      "category": "SI_TILE"
+    },
+    {
+      "name": "SI_TILE_MODE_DEPTH_STENCIL_2D_8AA",
+      "value": "2",
+      "comment": "",
+      "category": "SI_TILE"
+    },
+    {
+      "name": "CIK_TILE_MODE_DEPTH_STENCIL_1D",
+      "value": "5",
+      "comment": "",
+      "category": "CIK_TILE"
+    }
+  ],
+  "structs": [
+    {
+      "name": "anonymous_0",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_1",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_2",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_3",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_4",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_5",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_6",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_7",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_8",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_9",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_10",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_11",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_12",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_13",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_14",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_15",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_16",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_17",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_18",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_19",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_20",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_21",
+      "fields": [
+        {
+          "type_name": "drm_radeon_context_regs_t",
+          "name": "context",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "drm_radeon_texture_regs_t",
+          "name": "tex",
+          "array_size": "RADEON_MAX_TEXTURE_UNITS",
+          "comment": ""
+        },
+        {
+          "type_name": "drm_radeon_context2_regs_t",
+          "name": "context2",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_22",
+      "fields": [
+        {
+          "type_name": "drm_radeon_context_regs_t",
+          "name": "context_state",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "drm_radeon_texture_regs_t",
+          "name": "tex_state",
+          "array_size": "RADEON_MAX_TEXTURE_UNITS",
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "ctx_owner",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "pfState",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "pfCurrentPage",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "crtc2_base",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "tiling_enabled",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_radeon_init",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "is_pci",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "cp_mode",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "gart_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "ring_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "usec_timeout",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_radeon_cp_stop",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "flush",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "idle",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_radeon_fullscreen",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_radeon_clear",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_radeon_vertex",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "prim",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "idx",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "discard",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_radeon_indices",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "prim",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "idx",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "start",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "end",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "discard",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_radeon_vertex2",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "idx",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "discard",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "nr_states",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "nr_prims",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_radeon_cmd_buffer",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "bufsz",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "nbox",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_radeon_tex_image",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_radeon_texture",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "pitch",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "format",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "width",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "height",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_radeon_stipple",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_radeon_indirect",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "idx",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "start",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "end",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "discard",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_radeon_getparam",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "param",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_radeon_mem_alloc",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "region",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "alignment",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_radeon_mem_free",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "region",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "region_offset",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_radeon_mem_init_heap",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "region",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "start",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_radeon_irq_emit",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_radeon_irq_wait",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "irq_seq",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_radeon_setparam",
+      "fields": [
+        {
+          "type_name": "__s64",
+          "name": "value",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_radeon_surface_alloc",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_radeon_surface_free",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_radeon_gem_info",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "gart_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "vram_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "vram_visible",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_radeon_gem_create",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "alignment",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "initial_domain",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_radeon_gem_userptr",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "addr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_radeon_gem_set_tiling",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tiling_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pitch",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_radeon_gem_get_tiling",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tiling_flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pitch",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_radeon_gem_mmap",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "addr_ptr",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_radeon_gem_set_domain",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "read_domains",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "write_domain",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_radeon_gem_wait_idle",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_radeon_gem_busy",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "domain",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_radeon_gem_pread",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "data_ptr",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_radeon_gem_pwrite",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "data_ptr",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_radeon_gem_op",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "op",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "value",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_radeon_gem_va",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "operation",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "vm_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_radeon_cs_chunk",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "chunk_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "length_dw",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "chunk_data",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_radeon_cs_reloc",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "read_domains",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "write_domain",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_radeon_cs",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "num_chunks",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "cs_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "chunks",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "gart_limit",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "vram_limit",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_radeon_info",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "request",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "value",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [
+    "drm_radeon_init",
+    "drm_radeon_cp_stop",
+    "drm_radeon_fullscreen",
+    "drm_radeon_clear_rect",
+    "drm_radeon_clear",
+    "drm_radeon_vertex",
+    "drm_radeon_indices",
+    "drm_radeon_vertex2",
+    "drm_radeon_cmd_buffer",
+    "drm_radeon_tex_image",
+    "drm_radeon_texture",
+    "drm_radeon_stipple",
+    "drm_radeon_indirect",
+    "drm_radeon_getparam",
+    "drm_radeon_mem_alloc",
+    "drm_radeon_mem_free",
+    "drm_radeon_mem_init_heap",
+    "drm_radeon_irq_emit",
+    "drm_radeon_irq_wait",
+    "drm_radeon_setparam",
+    "drm_radeon_surface_alloc",
+    "drm_radeon_surface_free"
+  ],
+  "enums": {}
+}

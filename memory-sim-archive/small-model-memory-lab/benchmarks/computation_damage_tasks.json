@@ -1,0 +1,153 @@
+[
+  {
+    "id": "compute_printer_rate",
+    "family": "math",
+    "task": "Four identical printers make 480 pages in 6 minutes. How many minutes should 3 identical printers need to make 720 pages? Show the setup briefly and include units.",
+    "criteria": [
+      {"id": "given_pages", "patterns": ["480 pages", "720 pages"]},
+      {"id": "given_printers", "patterns": ["4 printers", "3 printers"]},
+      {"id": "per_printer_rate", "patterns": ["20\\s*pages\\s*/\\s*minute", "20\\s*pages per minute"]},
+      {"id": "combined_rate", "patterns": ["60\\s*pages\\s*/\\s*minute", "60\\s*pages per minute"]},
+      {"id": "answer", "patterns": ["\\b12(?:\\.0+)?\\s*minutes\\b"]},
+      {"id": "units", "patterns": ["minutes"]}
+    ]
+  },
+  {
+    "id": "compute_discount_tax",
+    "family": "math",
+    "task": "An item costs $80. It is discounted by 25%, then 8% sales tax is applied to the discounted price. What is the final price? Show the steps briefly.",
+    "criteria": [
+      {"id": "original_price", "patterns": ["\\$?80"]},
+      {"id": "discount", "patterns": ["25\\s*%", "discount"]},
+      {"id": "discounted_price", "patterns": ["\\$?60(?:\\.00)?\\b"]},
+      {"id": "tax", "patterns": ["8\\s*%", "tax"]},
+      {"id": "tax_amount", "patterns": ["\\$?4\\.80\\b"]},
+      {"id": "answer", "patterns": ["\\$?64\\.80\\b"]}
+    ]
+  },
+  {
+    "id": "compute_weighted_average",
+    "family": "math",
+    "task": "A student has 3 test scores with an average of 82. The next two scores are 90 and 76. What is the average across all 5 tests? Show the setup briefly.",
+    "criteria": [
+      {"id": "old_total", "patterns": ["82\\s*\\*\\s*3", "\\b246\\b"]},
+      {"id": "new_scores", "patterns": ["90", "76"]},
+      {"id": "combined_total", "patterns": ["\\b412\\b"]},
+      {"id": "count", "patterns": ["5 tests", "divide by 5", "/\\s*5"]},
+      {"id": "answer", "patterns": ["\\b82\\.4\\b"]},
+      {"id": "average", "patterns": ["average"]}
+    ]
+  },
+  {
+    "id": "compute_inventory_available",
+    "family": "math",
+    "task": "A warehouse starts with 150 units. It sells 18 units per day for 4 days, receives 65 units, then reserves 20 units for a client. How many units are available? Show the arithmetic.",
+    "criteria": [
+      {"id": "start", "patterns": ["150"]},
+      {"id": "sold", "patterns": ["18\\s*\\*\\s*4", "\\b72\\b"]},
+      {"id": "received", "patterns": ["65"]},
+      {"id": "reserved", "patterns": ["20"]},
+      {"id": "setup", "patterns": ["150\\s*-\\s*72\\s*\\+\\s*65\\s*-\\s*20", "150.*72.*65.*20"]},
+      {"id": "answer", "patterns": ["\\b123\\b"]}
+    ]
+  },
+  {
+    "id": "compute_schedule_finish",
+    "family": "math",
+    "task": "A job starts at 9:15 AM. Phase 1 takes 45 minutes, phase 2 takes 70 minutes, then there is a 10-minute break, and phase 3 takes 35 minutes. What time does it finish?",
+    "criteria": [
+      {"id": "start_time", "patterns": ["9:15"]},
+      {"id": "durations", "patterns": ["45", "70", "10", "35"]},
+      {"id": "total_minutes", "patterns": ["160\\s*minutes", "2\\s*hours\\s*40"]},
+      {"id": "hour_rollover", "patterns": ["2\\s*hours", "40\\s*minutes"]},
+      {"id": "answer", "patterns": ["11:55\\s*AM", "11:55"]}
+    ]
+  },
+  {
+    "id": "compute_ratio_mixture",
+    "family": "math",
+    "task": "A cleaning mix uses concentrate and water in a 2:5 ratio. If you need 42 liters total, how many liters of concentrate and water are needed?",
+    "criteria": [
+      {"id": "ratio", "patterns": ["2:5", "2\\s*parts.*5\\s*parts"]},
+      {"id": "parts", "patterns": ["7\\s*parts"]},
+      {"id": "unit_part", "patterns": ["6\\s*liters per part", "42\\s*/\\s*7"]},
+      {"id": "concentrate", "patterns": ["12\\s*liters.*concentrate", "concentrate.*12\\s*liters"]},
+      {"id": "water", "patterns": ["30\\s*liters.*water", "water.*30\\s*liters"]},
+      {"id": "total_check", "patterns": ["12\\s*\\+\\s*30\\s*=\\s*42", "42\\s*liters"]}
+    ]
+  },
+  {
+    "id": "compute_average_speed",
+    "family": "math",
+    "task": "A car travels 150 km at 60 km/h, then 90 km at 45 km/h. What is the average speed for the whole trip? Show distance, time, and final units.",
+    "criteria": [
+      {"id": "first_time", "patterns": ["150\\s*/\\s*60", "2\\.5\\s*hours"]},
+      {"id": "second_time", "patterns": ["90\\s*/\\s*45", "\\b2\\s*hours\\b"]},
+      {"id": "total_distance", "patterns": ["240\\s*km", "150\\s*\\+\\s*90"]},
+      {"id": "total_time", "patterns": ["4\\.5\\s*hours"]},
+      {"id": "answer", "patterns": ["53\\.3", "53\\.33", "53\\.333"]},
+      {"id": "units", "patterns": ["km/h", "kilometers per hour"]}
+    ]
+  },
+  {
+    "id": "compute_linear_equation",
+    "family": "math",
+    "task": "Solve for x: 3(x - 4) + 2x = 46. Show the algebra briefly.",
+    "criteria": [
+      {"id": "expand", "patterns": ["3x\\s*-\\s*12"]},
+      {"id": "combine", "patterns": ["5x\\s*-\\s*12", "3x.*2x.*5x"]},
+      {"id": "add_12", "patterns": ["58", "46\\s*\\+\\s*12"]},
+      {"id": "divide", "patterns": ["5x\\s*=\\s*58", "58\\s*/\\s*5"]},
+      {"id": "answer", "patterns": ["x\\s*=\\s*11\\.6"]}
+    ]
+  },
+  {
+    "id": "compute_probability_without_replacement",
+    "family": "math",
+    "task": "A bag has 5 red balls and 3 blue balls. Two balls are drawn without replacement. What is the probability both are red? Show the multiplication.",
+    "criteria": [
+      {"id": "first_prob", "patterns": ["5\\s*/\\s*8"]},
+      {"id": "second_prob", "patterns": ["4\\s*/\\s*7"]},
+      {"id": "multiply", "patterns": ["5\\s*/\\s*8\\s*\\*\\s*4\\s*/\\s*7", "20\\s*/\\s*56"]},
+      {"id": "simplified", "patterns": ["5\\s*/\\s*14"]},
+      {"id": "decimal", "patterns": ["0\\.357", "35\\.7\\s*%"]},
+      {"id": "without_replacement", "patterns": ["without replacement"]}
+    ]
+  },
+  {
+    "id": "compute_ticket_table",
+    "family": "math",
+    "task": "Team A starts with 12 open tickets, closes 7, and receives 5 new tickets. Team B starts with 20 open tickets, closes 13, and receives 4 new tickets. How many open tickets remain total, and which team has more?",
+    "criteria": [
+      {"id": "team_a", "patterns": ["A.*12.*7.*5", "A\\s*=\\s*10", "Team A.*10"]},
+      {"id": "team_b", "patterns": ["B.*20.*13.*4", "B\\s*=\\s*11", "Team B.*11"]},
+      {"id": "total", "patterns": ["21\\s*open", "total.*21"]},
+      {"id": "compare", "patterns": ["Team B.*more", "B.*more"]},
+      {"id": "difference", "patterns": ["1\\s*ticket"]}
+    ]
+  },
+  {
+    "id": "compute_subscription_total",
+    "family": "math",
+    "task": "A subscription costs $19.99 per month for 6 months. There is a $14.95 setup fee and a $10 credit. What is the total cost?",
+    "criteria": [
+      {"id": "monthly", "patterns": ["19\\.99"]},
+      {"id": "six_months", "patterns": ["6\\s*months", "19\\.99\\s*\\*\\s*6", "119\\.94"]},
+      {"id": "setup", "patterns": ["14\\.95"]},
+      {"id": "credit", "patterns": ["10\\s*credit", "-\\s*10"]},
+      {"id": "answer", "patterns": ["\\$?124\\.89\\b"]}
+    ]
+  },
+  {
+    "id": "compute_tiered_pricing",
+    "family": "math",
+    "task": "A utility bill charges $0.12 per unit for the first 100 units, $0.18 per unit for units above 100, plus a fixed $6 fee. What is the bill for 135 units?",
+    "criteria": [
+      {"id": "first_tier", "patterns": ["100\\s*\\*\\s*0\\.12", "12\\.00", "\\$?12\\b"]},
+      {"id": "extra_units", "patterns": ["35\\s*units", "135\\s*-\\s*100"]},
+      {"id": "second_tier", "patterns": ["35\\s*\\*\\s*0\\.18", "6\\.30"]},
+      {"id": "fixed_fee", "patterns": ["\\$?6\\s*fee", "fixed.*6"]},
+      {"id": "answer", "patterns": ["\\$?24\\.30\\b"]}
+    ]
+  }
+]

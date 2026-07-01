@@ -1,0 +1,9 @@
+﻿
+
+1. **Check logs for stack traces** – Search the application logs for stack traces or error messages; if none appear, the crash may be intermittent or caused by a race condition.
+
+2. **Verify deployment artifacts** – Confirm that the new code is deployed to the correct environment and that the build is valid; if the build fails, the issue is likely in the deployment pipeline.
+
+3. **Test in a controlled environment** – Run the app in a staging or test environment to reproduce the crash and isolate whether the issue is environment-specific.
+
+4. **Monitor for intermittent behavior

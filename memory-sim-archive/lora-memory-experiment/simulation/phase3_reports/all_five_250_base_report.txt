@@ -1,0 +1,210 @@
+======================================================================
+SIMULATION REPORT: all_five_250
+======================================================================
+
+Domains: rhetoric, logic, pattern, causal, forensic
+Total memories: 174
+Total behaviors: 29
+Uncovered behaviors: 0
+Echo chains: 39
+Isolated memories: 84
+Echo connectivity: 51.7%
+Cross-domain connections: 33
+
+--- OVERALL SCORE: 0.903 ---
+
+--- PRESSURE PASS RATES ---
+       low: 100.0%
+    medium: 100.0%
+      high: 100.0%
+
+--- BEHAVIOR COVERAGE ---
+  ✓ C-001: Correlation vs Causation (9 memories) [LB] echo:4→5
+  ✓ C-002: Causal Chain Tracing (15 memories) [LB] echo:1→5
+  ✓ C-003: Confounding Variable Identification (12 memories) [LB] echo:4→5
+  ✓ C-004: Intervention Thinking (12 memories) [LB] echo:3→4
+  ✓ C-005: Multiple Causation Recognition (6 memories) echo:2→3
+  ✓ F-001: Deception Detection (12 memories) [LB] echo:7→5
+  ✓ F-002: Statement Analysis (9 memories) [LB] echo:4→4
+  ✓ F-003: Threat Assessment (12 memories) [LB] echo:7→6
+  ✓ F-004: Behavioral Baseline Reading (9 memories) [LB] echo:4→3
+  ✓ F-005: Criminal Thinking Pattern Recognition (6 memories) [LB]
+  ✓ F-006: Victim Psychology Awareness (6 memories) [LB] echo:3→1
+  ✓ L-001: Necessary vs Sufficient (18 memories) [LB] echo:6→6
+  ✓ L-002: Counterexample Construction (12 memories) [LB] echo:5→4
+  ✓ L-003: Chain Validation (9 memories) [LB] echo:2→3
+  ✓ L-004: Scope Recognition (18 memories) [LB] echo:6→7
+  ✓ L-005: Conditional Reasoning (12 memories) [LB] echo:6→2
+  ✓ L-006: Hidden Assumption Extraction (12 memories) [LB] echo:3→5
+  ✓ P-001: Structural Similarity Detection (12 memories) [LB] echo:6→5
+  ✓ P-002: Anomaly Detection (9 memories) [LB] echo:3→1
+  ✓ P-003: Pattern Completion (6 memories) [LB] echo:0→1
+  ✓ P-004: False Pattern Rejection (6 memories) [LB] echo:1→3
+  ✓ P-005: Transfer Across Domains (12 memories) [LB] echo:6→5
+  ✓ R-001: Claim Identification (12 memories) [LB] echo:6→5
+  ✓ R-002: Evidence Evaluation (12 memories) [LB] echo:6→5
+  ✓ R-003: Warrant Detection (18 memories) [LB] echo:4→6
+  ✓ R-004: Fallacy Recognition (12 memories) [LB] echo:2→0
+  ✓ R-005: Kairos Detection (12 memories) [LB] echo:2→1
+  ✓ R-006: Enthymeme Reconstruction (15 memories) [LB] echo:4→6
+  ✓ R-007: Audience Awareness (18 memories) [LB] echo:5→2
+
+--- ECHO CHAINS ---
+  chain_0: LOG-069 → RHE-000 → RHE-003
+    Domains: logic, rhetoric
+    Behaviors: R-001, L-005, L-001, R-002
+    Strength: 1.00
+  chain_1: LOG-074 → RHE-005
+    Domains: logic, rhetoric
+    Behaviors: R-001, L-006, L-003, R-002
+    Strength: 1.00
+  chain_2: PAT-100 → RHE-006 → RHE-008 → RHE-009 → RHE-011
+    Domains: rhetoric, pattern
+    Behaviors: R-001, L-004, P-004, R-002
+    Strength: 1.00
+  chain_3: CAU-126 → RHE-012
+    Domains: causal, rhetoric
+    Behaviors: R-006, R-003, C-002, C-004
+    Strength: 1.00
+  chain_4: CAU-133 → RHE-013 → RHE-030
+    Domains: causal, rhetoric
+    Behaviors: R-006, L-001, C-005, R-003
+    Strength: 1.00
+  chain_5: FOR-170 → LOG-061 → LOG-063 → RHE-015
+    Domains: logic, rhetoric, forensic
+    Behaviors: R-007, F-006, L-004, R-003, R-006
+    Strength: 1.00
+  chain_6: PAT-082 → RHE-017
+    Domains: rhetoric, pattern
+    Behaviors: R-006, P-005, R-003, P-001
+    Strength: 1.00
+  chain_7: CAU-109 → FOR-159 → RHE-018
+    Domains: causal, rhetoric, forensic
+    Behaviors: R-004, C-001, C-003, F-004, F-003
+    Strength: 1.00
+  chain_8: FOR-142 → FOR-152 → RHE-022
+    Domains: rhetoric, forensic
+    Behaviors: F-001, R-004, F-003, F-002
+    Strength: 1.00
+  chain_9: PAT-086 → RHE-029
+    Domains: rhetoric, pattern
+    Behaviors: P-002, R-007, R-005
+    Strength: 1.00
+  chain_10: PAT-096 → PAT-099 → RHE-031
+    Domains: rhetoric, pattern
+    Behaviors: R-006, L-004, P-004, R-003
+    Strength: 1.00
+  chain_11: LOG-077 → RHE-033
+    Domains: logic, rhetoric
+    Behaviors: R-006, L-006, R-003
+    Strength: 1.00
+  chain_12: RHE-036 → RHE-038
+    Domains: rhetoric
+    Behaviors: R-007, R-005
+    Strength: 1.00
+  chain_13: CAU-108 → CAU-110 → LOG-042
+    Domains: causal, logic
+    Behaviors: C-003, L-001, C-001
+    Strength: 1.00
+  chain_14: CAU-134 → LOG-047 → LOG-057
+    Domains: causal, logic
+    Behaviors: C-005, L-005, L-006, L-003, L-001
+    Strength: 1.00
+  chain_15: FOR-138 → FOR-154 → LOG-052
+    Domains: logic, forensic
+    Behaviors: F-002, F-001, L-004, L-002, F-003
+    Strength: 1.00
+  chain_16: LOG-053 → LOG-062 → PAT-082
+    Domains: logic, pattern
+    Behaviors: L-002, P-005, P-001, L-004
+    Strength: 1.00
+  chain_17: FOR-149 → LOG-054
+    Domains: logic, forensic
+    Behaviors: F-002, L-006, R-006, L-003
+    Strength: 1.00
+  chain_18: LOG-055 → LOG-076
+    Domains: logic
+    Behaviors: L-006, L-003
+    Strength: 1.00
+  chain_19: FOR-139 → FOR-161 → LOG-060
+    Domains: logic, forensic
+    Behaviors: F-001, F-004, L-004, L-002, F-003
+    Strength: 1.00
+  chain_20: LOG-066 → LOG-067 → LOG-070
+    Domains: logic
+    Behaviors: L-005, L-001
+    Strength: 1.00
+  chain_21: FOR-153 → LOG-075 → PAT-107
+    Domains: logic, pattern, forensic
+    Behaviors: P-005, F-004, L-006, R-003, F-003
+    Strength: 1.00
+  chain_22: PAT-078 → PAT-107
+    Domains: pattern
+    Behaviors: P-005, P-001
+    Strength: 1.00
+  chain_23: PAT-079 → PAT-083 → RHE-000 → RHE-003
+    Domains: rhetoric, pattern
+    Behaviors: R-001, P-005, P-001, R-002
+    Strength: 1.00
+  chain_24: FOR-168 → PAT-080
+    Domains: pattern, forensic
+    Behaviors: R-007, F-006, P-005, P-001
+    Strength: 1.00
+  chain_25: FOR-140 → FOR-145 → LOG-062 → PAT-081
+    Domains: logic, pattern, forensic
+    Behaviors: F-002, F-001, P-005, L-004, R-006
+    Strength: 1.00
+  chain_26: CAU-128 → PAT-085
+    Domains: causal, pattern
+    Behaviors: P-002, C-002, C-004
+    Strength: 1.00
+  chain_27: LOG-062 → PAT-087
+    Domains: logic, pattern
+    Behaviors: P-002, L-002, L-004
+    Strength: 1.00
+  chain_28: FOR-157 → PAT-094
+    Domains: pattern, forensic
+    Behaviors: F-004, P-003, C-002, F-003
+    Strength: 1.00
+  chain_29: FOR-151 → PAT-104
+    Domains: pattern, forensic
+    Behaviors: F-004, P-005, F-003, P-001
+    Strength: 1.00
+  chain_30: LOG-077 → PAT-105
+    Domains: logic, pattern
+    Behaviors: L-006, P-005, R-003, P-001
+    Strength: 1.00
+  chain_31: CAU-111 → CAU-112 → CAU-120 → FOR-173
+    Domains: causal, forensic
+    Behaviors: C-003, F-006, R-007, C-001
+    Strength: 1.00
+  chain_32: CAU-114 → CAU-131
+    Domains: causal
+    Behaviors: L-005, C-002, C-004
+    Strength: 1.00
+  chain_33: CAU-116 → CAU-129
+    Domains: causal
+    Behaviors: L-005, C-002, C-004
+    Strength: 1.00
+  chain_34: CAU-119 → RHE-038
+    Domains: causal, rhetoric
+    Behaviors: R-007, C-002, C-004, R-005
+    Strength: 1.00
+  chain_35: CAU-136 → FOR-143
+    Domains: causal, forensic
+    Behaviors: F-001, L-001, C-005, F-003
+    Strength: 1.00
+  chain_36: CAU-131 → FOR-138 → FOR-141 → FOR-154
+    Domains: causal, forensic
+    Behaviors: F-002, F-001, C-004, L-005, F-003
+    Strength: 1.00
+  chain_37: FOR-146 → PAT-100 → RHE-008
+    Domains: rhetoric, pattern, forensic
+    Behaviors: R-001, F-002, P-004, F-001, R-002
+    Strength: 1.00
+  chain_38: CAU-136 → FOR-156
+    Domains: causal, forensic
+    Behaviors: P-002, F-004, L-001, C-005
+    Strength: 1.00
+
+======================================================================

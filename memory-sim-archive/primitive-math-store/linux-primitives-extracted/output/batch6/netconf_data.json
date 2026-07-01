@@ -1,0 +1,51 @@
+{
+  "filename": "netconf.h",
+  "includes": [
+    "linux/types.h",
+    "linux/netlink.h"
+  ],
+  "defines": [
+    {
+      "name": "NETCONFA_MAX",
+      "value": "(__NETCONFA_MAX - 1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NETCONFA_ALL",
+      "value": "-1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "NETCONFA_IFINDEX_ALL",
+      "value": "-1",
+      "comment": "",
+      "category": "NETCONFA_IFINDEX"
+    },
+    {
+      "name": "NETCONFA_IFINDEX_DEFAULT",
+      "value": "-2",
+      "comment": "",
+      "category": "NETCONFA_IFINDEX"
+    }
+  ],
+  "structs": [
+    {
+      "name": "netconfmsg",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "ncm_family",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

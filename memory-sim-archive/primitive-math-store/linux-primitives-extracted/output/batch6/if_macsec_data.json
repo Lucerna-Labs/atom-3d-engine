@@ -1,0 +1,96 @@
+{
+  "filename": "if_macsec.h",
+  "includes": [
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "MACSEC_GENL_NAME",
+      "value": "\"macsec\"",
+      "comment": "",
+      "category": "MACSEC_GENL"
+    },
+    {
+      "name": "MACSEC_GENL_VERSION",
+      "value": "1",
+      "comment": "",
+      "category": "MACSEC_GENL"
+    },
+    {
+      "name": "MACSEC_MAX_KEY_LEN",
+      "value": "128",
+      "comment": "",
+      "category": "MACSEC_MAX"
+    },
+    {
+      "name": "MACSEC_KEYID_LEN",
+      "value": "16",
+      "comment": "",
+      "category": "MACSEC_KEYID"
+    },
+    {
+      "name": "MACSEC_SALT_LEN",
+      "value": "12",
+      "comment": "",
+      "category": "MACSEC_SALT"
+    },
+    {
+      "name": "MACSEC_CIPHER_ID_GCM_AES_128",
+      "value": "0x0080C20001000001ULL",
+      "comment": "",
+      "category": "MACSEC_CIPHER"
+    },
+    {
+      "name": "MACSEC_CIPHER_ID_GCM_AES_256",
+      "value": "0x0080C20001000002ULL",
+      "comment": "",
+      "category": "MACSEC_CIPHER"
+    },
+    {
+      "name": "MACSEC_CIPHER_ID_GCM_AES_XPN_128",
+      "value": "0x0080C20001000003ULL",
+      "comment": "",
+      "category": "MACSEC_CIPHER"
+    },
+    {
+      "name": "MACSEC_CIPHER_ID_GCM_AES_XPN_256",
+      "value": "0x0080C20001000004ULL",
+      "comment": "",
+      "category": "MACSEC_CIPHER"
+    },
+    {
+      "name": "MACSEC_DEFAULT_CIPHER_ID",
+      "value": "0x0080020001000001ULL",
+      "comment": "",
+      "category": "MACSEC_DEFAULT"
+    },
+    {
+      "name": "MACSEC_DEFAULT_CIPHER_ALT",
+      "value": "MACSEC_CIPHER_ID_GCM_AES_128",
+      "comment": "",
+      "category": "MACSEC_DEFAULT"
+    },
+    {
+      "name": "MACSEC_MIN_ICV_LEN",
+      "value": "8",
+      "comment": "",
+      "category": "MACSEC_MIN"
+    },
+    {
+      "name": "MACSEC_MAX_ICV_LEN",
+      "value": "32",
+      "comment": "",
+      "category": "MACSEC_MAX"
+    },
+    {
+      "name": "MACSEC_STD_ICV_LEN",
+      "value": "16",
+      "comment": "",
+      "category": "MACSEC_STD"
+    }
+  ],
+  "structs": [],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

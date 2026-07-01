@@ -1,0 +1,1155 @@
+{
+  "filename": "md_p.h",
+  "includes": [
+    "linux/types.h",
+    "asm/byteorder.h"
+  ],
+  "defines": [
+    {
+      "name": "MD_RESERVED_BYTES",
+      "value": "(64 * 1024)",
+      "comment": "",
+      "category": "MD_RESERVED"
+    },
+    {
+      "name": "MD_RESERVED_SECTORS",
+      "value": "(MD_RESERVED_BYTES / 512)",
+      "comment": "",
+      "category": "MD_RESERVED"
+    },
+    {
+      "name": "MD_SB_BYTES",
+      "value": "4096",
+      "comment": "",
+      "category": "MD_SB"
+    },
+    {
+      "name": "MD_SB_WORDS",
+      "value": "(MD_SB_BYTES / 4)",
+      "comment": "",
+      "category": "MD_SB"
+    },
+    {
+      "name": "MD_SB_SECTORS",
+      "value": "(MD_SB_BYTES / 512)",
+      "comment": "",
+      "category": "MD_SB"
+    },
+    {
+      "name": "MD_SB_GENERIC_OFFSET",
+      "value": "0",
+      "comment": "",
+      "category": "MD_SB"
+    },
+    {
+      "name": "MD_SB_PERSONALITY_OFFSET",
+      "value": "64",
+      "comment": "",
+      "category": "MD_SB"
+    },
+    {
+      "name": "MD_SB_DISKS_OFFSET",
+      "value": "128",
+      "comment": "",
+      "category": "MD_SB"
+    },
+    {
+      "name": "MD_SB_DESCRIPTOR_OFFSET",
+      "value": "992",
+      "comment": "",
+      "category": "MD_SB"
+    },
+    {
+      "name": "MD_SB_GENERIC_CONSTANT_WORDS",
+      "value": "32",
+      "comment": "",
+      "category": "MD_SB"
+    },
+    {
+      "name": "MD_SB_GENERIC_STATE_WORDS",
+      "value": "32",
+      "comment": "",
+      "category": "MD_SB"
+    },
+    {
+      "name": "MD_SB_GENERIC_WORDS",
+      "value": "(MD_SB_GENERIC_CONSTANT_WORDS + MD_SB_GENERIC_STATE_WORDS)",
+      "comment": "",
+      "category": "MD_SB"
+    },
+    {
+      "name": "MD_SB_PERSONALITY_WORDS",
+      "value": "64",
+      "comment": "",
+      "category": "MD_SB"
+    },
+    {
+      "name": "MD_SB_DESCRIPTOR_WORDS",
+      "value": "32",
+      "comment": "",
+      "category": "MD_SB"
+    },
+    {
+      "name": "MD_SB_DISKS",
+      "value": "27",
+      "comment": "",
+      "category": "MD_SB"
+    },
+    {
+      "name": "MD_SB_DISKS_WORDS",
+      "value": "(MD_SB_DISKS*MD_SB_DESCRIPTOR_WORDS)",
+      "comment": "",
+      "category": "MD_SB"
+    },
+    {
+      "name": "MD_SB_RESERVED_WORDS",
+      "value": "(1024 - MD_SB_GENERIC_WORDS - MD_SB_PERSONALITY_WORDS - MD_SB_DISKS_WORDS - MD_SB_DESCRIPTOR_WORDS)",
+      "comment": "",
+      "category": "MD_SB"
+    },
+    {
+      "name": "MD_SB_EQUAL_WORDS",
+      "value": "(MD_SB_GENERIC_WORDS + MD_SB_PERSONALITY_WORDS + MD_SB_DISKS_WORDS)",
+      "comment": "",
+      "category": "MD_SB"
+    },
+    {
+      "name": "MD_DISK_FAULTY",
+      "value": "0",
+      "comment": "disk is faulty / operational",
+      "category": "MD_DISK"
+    },
+    {
+      "name": "MD_DISK_ACTIVE",
+      "value": "1",
+      "comment": "disk is running or spare disk",
+      "category": "MD_DISK"
+    },
+    {
+      "name": "MD_DISK_SYNC",
+      "value": "2",
+      "comment": "disk is in sync with the raid set",
+      "category": "MD_DISK"
+    },
+    {
+      "name": "MD_DISK_REMOVED",
+      "value": "3",
+      "comment": "disk is in sync with the raid set",
+      "category": "MD_DISK"
+    },
+    {
+      "name": "MD_DISK_CLUSTER_ADD",
+      "value": "4 /* Initiate a disk add across the cluster",
+      "comment": "",
+      "category": "MD_DISK"
+    },
+    {
+      "name": "MD_DISK_CANDIDATE",
+      "value": "5 /* disk is added as spare (local) until confirmed",
+      "comment": "",
+      "category": "MD_DISK"
+    },
+    {
+      "name": "MD_DISK_FAILFAST",
+      "value": "10 /* Send REQ_FAILFAST if there are multiple",
+      "comment": "",
+      "category": "MD_DISK"
+    },
+    {
+      "name": "MD_DISK_WRITEMOSTLY",
+      "value": "9 /* disk is \"write-mostly\" is RAID1 config.",
+      "comment": "",
+      "category": "MD_DISK"
+    },
+    {
+      "name": "MD_DISK_JOURNAL",
+      "value": "18",
+      "comment": "disk is used as the write journal in RAID-5/6",
+      "category": "MD_DISK"
+    },
+    {
+      "name": "MD_DISK_ROLE_SPARE",
+      "value": "0xffff",
+      "comment": "",
+      "category": "MD_DISK"
+    },
+    {
+      "name": "MD_DISK_ROLE_FAULTY",
+      "value": "0xfffe",
+      "comment": "",
+      "category": "MD_DISK"
+    },
+    {
+      "name": "MD_DISK_ROLE_JOURNAL",
+      "value": "0xfffd",
+      "comment": "",
+      "category": "MD_DISK"
+    },
+    {
+      "name": "MD_DISK_ROLE_MAX",
+      "value": "0xff00",
+      "comment": "max value of regular disk role",
+      "category": "MD_DISK"
+    },
+    {
+      "name": "MD_SB_MAGIC",
+      "value": "0xa92b4efc",
+      "comment": "",
+      "category": "MD_SB"
+    },
+    {
+      "name": "MD_SB_CLEAN",
+      "value": "0",
+      "comment": "",
+      "category": "MD_SB"
+    },
+    {
+      "name": "MD_SB_ERRORS",
+      "value": "1",
+      "comment": "",
+      "category": "MD_SB"
+    },
+    {
+      "name": "MD_SB_CLUSTERED",
+      "value": "5",
+      "comment": "MD is clustered",
+      "category": "MD_SB"
+    },
+    {
+      "name": "MD_SB_BITMAP_PRESENT",
+      "value": "8",
+      "comment": "bitmap may be present nearby",
+      "category": "MD_SB"
+    },
+    {
+      "name": "MD_SUPERBLOCK_1_TIME_SEC_MASK",
+      "value": "((1ULL<<40) - 1)",
+      "comment": "",
+      "category": "MD_SUPERBLOCK"
+    },
+    {
+      "name": "WriteMostly1",
+      "value": "1",
+      "comment": "mask for writemostly flag in above",
+      "category": ""
+    },
+    {
+      "name": "FailFast1",
+      "value": "2",
+      "comment": "Should avoid retries and fixups and just fail",
+      "category": ""
+    },
+    {
+      "name": "MD_FEATURE_BITMAP_OFFSET",
+      "value": "1",
+      "comment": "",
+      "category": "MD_FEATURE"
+    },
+    {
+      "name": "MD_FEATURE_RECOVERY_OFFSET",
+      "value": "2 /* recovery_offset is present and",
+      "comment": "",
+      "category": "MD_FEATURE"
+    },
+    {
+      "name": "MD_FEATURE_RESHAPE_ACTIVE",
+      "value": "4",
+      "comment": "",
+      "category": "MD_FEATURE"
+    },
+    {
+      "name": "MD_FEATURE_BAD_BLOCKS",
+      "value": "8",
+      "comment": "badblock list is not empty",
+      "category": "MD_FEATURE"
+    },
+    {
+      "name": "MD_FEATURE_REPLACEMENT",
+      "value": "16 /* This device is replacing an",
+      "comment": "",
+      "category": "MD_FEATURE"
+    },
+    {
+      "name": "MD_FEATURE_RESHAPE_BACKWARDS",
+      "value": "32 /* Reshape doesn't change number",
+      "comment": "",
+      "category": "MD_FEATURE"
+    },
+    {
+      "name": "MD_FEATURE_NEW_OFFSET",
+      "value": "64",
+      "comment": "new_offset must be honoured",
+      "category": "MD_FEATURE"
+    },
+    {
+      "name": "MD_FEATURE_RECOVERY_BITMAP",
+      "value": "128 /* recovery that is happening",
+      "comment": "",
+      "category": "MD_FEATURE"
+    },
+    {
+      "name": "MD_FEATURE_CLUSTERED",
+      "value": "256",
+      "comment": "clustered MD",
+      "category": "MD_FEATURE"
+    },
+    {
+      "name": "MD_FEATURE_JOURNAL",
+      "value": "512",
+      "comment": "support write cache",
+      "category": "MD_FEATURE"
+    },
+    {
+      "name": "MD_FEATURE_PPL",
+      "value": "1024",
+      "comment": "support PPL",
+      "category": "MD_FEATURE"
+    },
+    {
+      "name": "MD_FEATURE_MULTIPLE_PPLS",
+      "value": "2048",
+      "comment": "support for multiple PPLs",
+      "category": "MD_FEATURE"
+    },
+    {
+      "name": "MD_FEATURE_RAID0_LAYOUT",
+      "value": "4096",
+      "comment": "layout is meaningful for RAID0",
+      "category": "MD_FEATURE"
+    },
+    {
+      "name": "MD_FEATURE_ALL",
+      "value": "(MD_FEATURE_BITMAP_OFFSET\t",
+      "comment": "",
+      "category": "MD_FEATURE"
+    },
+    {
+      "name": "R5LOG_VERSION",
+      "value": "0x1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "R5LOG_MAGIC",
+      "value": "0x6433c509",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "PPL_HEADER_SIZE",
+      "value": "4096",
+      "comment": "",
+      "category": "PPL_HEADER"
+    },
+    {
+      "name": "PPL_HDR_RESERVED",
+      "value": "512",
+      "comment": "",
+      "category": "PPL_HDR"
+    },
+    {
+      "name": "PPL_HDR_ENTRY_SPACE",
+      "value": "",
+      "comment": "",
+      "category": "PPL_HDR"
+    },
+    {
+      "name": "PPL_HDR_MAX_ENTRIES",
+      "value": "",
+      "comment": "",
+      "category": "PPL_HDR"
+    }
+  ],
+  "structs": [
+    {
+      "name": "mdp_device_descriptor_s",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "number",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "major",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "minor",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "raid_disk",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "state",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved",
+          "array_size": "MD_SB_DESCRIPTOR_WORDS - 5",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "mdp_superblock_s",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "md_magic",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "major_version",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "minor_version",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "patch_version",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "gvalid_words",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "set_uuid0",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "ctime",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "level",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "nr_disks",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "raid_disks",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "md_minor",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "not_persistent",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "set_uuid1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "set_uuid2",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "set_uuid3",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "gstate_creserved",
+          "array_size": "MD_SB_GENERIC_CONSTANT_WORDS - 16",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "utime",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "state",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "active_disks",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "working_disks",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "failed_disks",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "spare_disks",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "sb_csum",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "events_hi",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "events_lo",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "cp_events_hi",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "cp_events_lo",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "events_lo",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "events_hi",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "cp_events_lo",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "cp_events_hi",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "recovery_cp",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "reshape_position",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "new_level",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "delta_disks",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "new_layout",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "new_chunk",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "gstate_sreserved",
+          "array_size": "MD_SB_GENERIC_STATE_WORDS - 18",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "layout",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "chunk_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "root_pv",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "root_block",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pstate_reserved",
+          "array_size": "MD_SB_PERSONALITY_WORDS - 4",
+          "comment": ""
+        },
+        {
+          "type_name": "mdp_disk_t",
+          "name": "disks",
+          "array_size": "MD_SB_DISKS",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reserved",
+          "array_size": "MD_SB_RESERVED_WORDS",
+          "comment": ""
+        },
+        {
+          "type_name": "mdp_disk_t",
+          "name": "this_disk",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "mdp_superblock_1",
+      "fields": [
+        {
+          "type_name": "__le32",
+          "name": "magic",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "major_version",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "feature_map",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "pad0",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "set_uuid",
+          "array_size": "16",
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "set_name",
+          "array_size": "32",
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "ctime",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "level",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "layout",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "chunksize",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "raid_disks",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "bitmap_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le16",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le16",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "new_level",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "reshape_position",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "delta_disks",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "new_layout",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "new_chunk",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "new_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "data_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "data_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "super_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "recovery_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "journal_tail",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "dev_number",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "cnt_corrected_read",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "device_uuid",
+          "array_size": "16",
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "devflags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "bblog_shift",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le16",
+          "name": "bblog_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "bblog_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "utime",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "events",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "resync_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "sb_csum",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "max_dev",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "logical_block_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "pad3",
+          "array_size": "64-36",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_3",
+      "fields": [
+        {
+          "type_name": "__le16",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le16",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "r5l_payload_header",
+      "fields": [
+        {
+          "type_name": "__le16",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le16",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "r5l_payload_data_parity",
+      "fields": [
+        {
+          "type_name": "__le32",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "location",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "r5l_payload_flush",
+      "fields": [
+        {
+          "type_name": "__le32",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "r5l_meta_block",
+      "fields": [
+        {
+          "type_name": "__le32",
+          "name": "magic",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "checksum",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "version",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "__zero_pading_1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le16",
+          "name": "__zero_pading_2",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "meta_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "seq",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "position",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ppl_header_entry",
+      "fields": [
+        {
+          "type_name": "__le64",
+          "name": "data_sector",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "pp_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "data_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "parity_disk",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "checksum",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ppl_header",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "reserved",
+          "array_size": "PPL_HDR_RESERVED",
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "signature",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "padding",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le64",
+          "name": "generation",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "entries_count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__le32",
+          "name": "checksum",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [
+    "mdp_device_descriptor_s",
+    "mdp_superblock_s"
+  ],
+  "enums": {}
+}

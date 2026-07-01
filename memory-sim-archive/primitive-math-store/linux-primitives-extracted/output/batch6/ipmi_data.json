@@ -1,0 +1,455 @@
+{
+  "filename": "ipmi.h",
+  "includes": [
+    "linux/ipmi_msgdefs.h",
+    "linux/compiler.h"
+  ],
+  "defines": [
+    {
+      "name": "IPMI_MAX_ADDR_SIZE",
+      "value": "32",
+      "comment": "",
+      "category": "IPMI_MAX"
+    },
+    {
+      "name": "IPMI_SYSTEM_INTERFACE_ADDR_TYPE",
+      "value": "0x0c",
+      "comment": "",
+      "category": "IPMI_SYSTEM"
+    },
+    {
+      "name": "IPMI_IPMB_ADDR_TYPE",
+      "value": "0x01",
+      "comment": "",
+      "category": "IPMI_IPMB"
+    },
+    {
+      "name": "IPMI_IPMB_BROADCAST_ADDR_TYPE",
+      "value": "0x41",
+      "comment": "",
+      "category": "IPMI_IPMB"
+    },
+    {
+      "name": "IPMI_IPMB_DIRECT_ADDR_TYPE",
+      "value": "0x81",
+      "comment": "",
+      "category": "IPMI_IPMB"
+    },
+    {
+      "name": "IPMI_LAN_ADDR_TYPE",
+      "value": "0x04",
+      "comment": "",
+      "category": "IPMI_LAN"
+    },
+    {
+      "name": "IPMI_BMC_CHANNEL",
+      "value": "0xf",
+      "comment": "",
+      "category": "IPMI_BMC"
+    },
+    {
+      "name": "IPMI_NUM_CHANNELS",
+      "value": "0x10",
+      "comment": "",
+      "category": "IPMI_NUM"
+    },
+    {
+      "name": "IPMI_CHAN_ALL",
+      "value": "(~0)",
+      "comment": "",
+      "category": "IPMI_CHAN"
+    },
+    {
+      "name": "IPMI_INVALID_CMD_COMPLETION_CODE",
+      "value": "0xC1",
+      "comment": "",
+      "category": "IPMI_INVALID"
+    },
+    {
+      "name": "IPMI_TIMEOUT_COMPLETION_CODE",
+      "value": "0xC3",
+      "comment": "",
+      "category": "IPMI_TIMEOUT"
+    },
+    {
+      "name": "IPMI_UNKNOWN_ERR_COMPLETION_CODE",
+      "value": "0xff",
+      "comment": "",
+      "category": "IPMI_UNKNOWN"
+    },
+    {
+      "name": "IPMI_RESPONSE_RECV_TYPE",
+      "value": "1",
+      "comment": "A response to a command",
+      "category": "IPMI_RESPONSE"
+    },
+    {
+      "name": "IPMI_ASYNC_EVENT_RECV_TYPE",
+      "value": "2",
+      "comment": "Something from the event queue",
+      "category": "IPMI_ASYNC"
+    },
+    {
+      "name": "IPMI_CMD_RECV_TYPE",
+      "value": "3",
+      "comment": "A command from somewhere else",
+      "category": "IPMI_CMD"
+    },
+    {
+      "name": "IPMI_RESPONSE_RESPONSE_TYPE",
+      "value": "4 /* The response for",
+      "comment": "",
+      "category": "IPMI_RESPONSE"
+    },
+    {
+      "name": "IPMI_OEM_RECV_TYPE",
+      "value": "5",
+      "comment": "The response for OEM Channels",
+      "category": "IPMI_OEM"
+    },
+    {
+      "name": "IPMI_MAINTENANCE_MODE_AUTO",
+      "value": "0",
+      "comment": "",
+      "category": "IPMI_MAINTENANCE"
+    },
+    {
+      "name": "IPMI_MAINTENANCE_MODE_OFF",
+      "value": "1",
+      "comment": "",
+      "category": "IPMI_MAINTENANCE"
+    },
+    {
+      "name": "IPMI_MAINTENANCE_MODE_ON",
+      "value": "2",
+      "comment": "",
+      "category": "IPMI_MAINTENANCE"
+    },
+    {
+      "name": "IPMI_IOC_MAGIC",
+      "value": "'i'",
+      "comment": "",
+      "category": "IPMI_IOC"
+    },
+    {
+      "name": "IPMICTL_SEND_COMMAND",
+      "value": "_IOR(IPMI_IOC_MAGIC, 13,\t",
+      "comment": "",
+      "category": "IPMICTL_SEND"
+    },
+    {
+      "name": "IPMICTL_SEND_COMMAND_SETTIME",
+      "value": "_IOR(IPMI_IOC_MAGIC, 21,\t",
+      "comment": "",
+      "category": "IPMICTL_SEND"
+    },
+    {
+      "name": "IPMICTL_RECEIVE_MSG",
+      "value": "_IOWR(IPMI_IOC_MAGIC, 12,\t",
+      "comment": "",
+      "category": "IPMICTL_RECEIVE"
+    },
+    {
+      "name": "IPMICTL_RECEIVE_MSG_TRUNC",
+      "value": "_IOWR(IPMI_IOC_MAGIC, 11,\t",
+      "comment": "",
+      "category": "IPMICTL_RECEIVE"
+    },
+    {
+      "name": "IPMICTL_REGISTER_FOR_CMD",
+      "value": "_IOR(IPMI_IOC_MAGIC, 14,\t",
+      "comment": "",
+      "category": "IPMICTL_REGISTER"
+    },
+    {
+      "name": "IPMICTL_UNREGISTER_FOR_CMD",
+      "value": "_IOR(IPMI_IOC_MAGIC, 15,\t",
+      "comment": "",
+      "category": "IPMICTL_UNREGISTER"
+    },
+    {
+      "name": "IPMICTL_REGISTER_FOR_CMD_CHANS",
+      "value": "_IOR(IPMI_IOC_MAGIC, 28,\t",
+      "comment": "",
+      "category": "IPMICTL_REGISTER"
+    },
+    {
+      "name": "IPMICTL_UNREGISTER_FOR_CMD_CHANS",
+      "value": "_IOR(IPMI_IOC_MAGIC, 29,\t",
+      "comment": "",
+      "category": "IPMICTL_UNREGISTER"
+    },
+    {
+      "name": "IPMICTL_SET_GETS_EVENTS_CMD",
+      "value": "_IOR(IPMI_IOC_MAGIC, 16, int)",
+      "comment": "",
+      "category": "IPMICTL_SET"
+    },
+    {
+      "name": "IPMICTL_SET_MY_CHANNEL_ADDRESS_CMD",
+      "value": "",
+      "comment": "",
+      "category": "IPMICTL_SET"
+    },
+    {
+      "name": "IPMICTL_GET_MY_CHANNEL_ADDRESS_CMD",
+      "value": "",
+      "comment": "",
+      "category": "IPMICTL_GET"
+    },
+    {
+      "name": "IPMICTL_SET_MY_CHANNEL_LUN_CMD",
+      "value": "",
+      "comment": "",
+      "category": "IPMICTL_SET"
+    },
+    {
+      "name": "IPMICTL_GET_MY_CHANNEL_LUN_CMD",
+      "value": "",
+      "comment": "",
+      "category": "IPMICTL_GET"
+    },
+    {
+      "name": "IPMICTL_SET_MY_ADDRESS_CMD",
+      "value": "_IOR(IPMI_IOC_MAGIC, 17, unsigned int)",
+      "comment": "",
+      "category": "IPMICTL_SET"
+    },
+    {
+      "name": "IPMICTL_GET_MY_ADDRESS_CMD",
+      "value": "_IOR(IPMI_IOC_MAGIC, 18, unsigned int)",
+      "comment": "",
+      "category": "IPMICTL_GET"
+    },
+    {
+      "name": "IPMICTL_SET_MY_LUN_CMD",
+      "value": "_IOR(IPMI_IOC_MAGIC, 19, unsigned int)",
+      "comment": "",
+      "category": "IPMICTL_SET"
+    },
+    {
+      "name": "IPMICTL_GET_MY_LUN_CMD",
+      "value": "_IOR(IPMI_IOC_MAGIC, 20, unsigned int)",
+      "comment": "",
+      "category": "IPMICTL_GET"
+    },
+    {
+      "name": "IPMICTL_SET_TIMING_PARMS_CMD",
+      "value": "_IOR(IPMI_IOC_MAGIC, 22, ",
+      "comment": "",
+      "category": "IPMICTL_SET"
+    },
+    {
+      "name": "IPMICTL_GET_TIMING_PARMS_CMD",
+      "value": "_IOR(IPMI_IOC_MAGIC, 23, ",
+      "comment": "",
+      "category": "IPMICTL_GET"
+    },
+    {
+      "name": "IPMICTL_GET_MAINTENANCE_MODE_CMD",
+      "value": "_IOR(IPMI_IOC_MAGIC, 30, int)",
+      "comment": "",
+      "category": "IPMICTL_GET"
+    },
+    {
+      "name": "IPMICTL_SET_MAINTENANCE_MODE_CMD",
+      "value": "_IOW(IPMI_IOC_MAGIC, 31, int)",
+      "comment": "",
+      "category": "IPMICTL_SET"
+    }
+  ],
+  "structs": [
+    {
+      "name": "ipmi_addr",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "addr_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "short",
+          "name": "channel",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "data",
+          "array_size": "IPMI_MAX_ADDR_SIZE",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ipmi_system_interface_addr",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "addr_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "short",
+          "name": "channel",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ipmi_ipmb_addr",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "addr_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "short",
+          "name": "channel",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ipmi_ipmb_direct_addr",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "addr_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "short",
+          "name": "channel",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ipmi_lan_addr",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "addr_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "short",
+          "name": "channel",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ipmi_msg",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "kernel_ipmi_msg",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ipmi_req",
+      "fields": [
+        {
+          "type_name": "long",
+          "name": "msgid",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ipmi_req_settime",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "retries",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ipmi_recv",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "recv_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "long",
+          "name": "msgid",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ipmi_cmdspec",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ipmi_cmdspec_chans",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ipmi_channel_lun_address_set",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "ipmi_timing_parms",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "retries",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

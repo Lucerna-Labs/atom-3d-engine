@@ -1,0 +1,364 @@
+{
+  "filename": "audio.h",
+  "includes": [
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "AUDIO_CAP_DTS",
+      "value": "1",
+      "comment": "",
+      "category": "AUDIO_CAP"
+    },
+    {
+      "name": "AUDIO_CAP_LPCM",
+      "value": "2",
+      "comment": "",
+      "category": "AUDIO_CAP"
+    },
+    {
+      "name": "AUDIO_CAP_MP1",
+      "value": "4",
+      "comment": "",
+      "category": "AUDIO_CAP"
+    },
+    {
+      "name": "AUDIO_CAP_MP2",
+      "value": "8",
+      "comment": "",
+      "category": "AUDIO_CAP"
+    },
+    {
+      "name": "AUDIO_CAP_MP3",
+      "value": "16",
+      "comment": "",
+      "category": "AUDIO_CAP"
+    },
+    {
+      "name": "AUDIO_CAP_AAC",
+      "value": "32",
+      "comment": "",
+      "category": "AUDIO_CAP"
+    },
+    {
+      "name": "AUDIO_CAP_OGG",
+      "value": "64",
+      "comment": "",
+      "category": "AUDIO_CAP"
+    },
+    {
+      "name": "AUDIO_CAP_SDDS",
+      "value": "128",
+      "comment": "",
+      "category": "AUDIO_CAP"
+    },
+    {
+      "name": "AUDIO_CAP_AC3",
+      "value": "256",
+      "comment": "",
+      "category": "AUDIO_CAP"
+    },
+    {
+      "name": "AUDIO_STOP",
+      "value": "_IO('o', 1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "AUDIO_PLAY",
+      "value": "_IO('o', 2)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "AUDIO_PAUSE",
+      "value": "_IO('o', 3)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "AUDIO_CONTINUE",
+      "value": "_IO('o', 4)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "AUDIO_SELECT_SOURCE",
+      "value": "_IO('o', 5)",
+      "comment": "",
+      "category": "AUDIO_SELECT"
+    },
+    {
+      "name": "AUDIO_SET_MUTE",
+      "value": "_IO('o', 6)",
+      "comment": "",
+      "category": "AUDIO_SET"
+    },
+    {
+      "name": "AUDIO_SET_AV_SYNC",
+      "value": "_IO('o', 7)",
+      "comment": "",
+      "category": "AUDIO_SET"
+    },
+    {
+      "name": "AUDIO_SET_BYPASS_MODE",
+      "value": "_IO('o', 8)",
+      "comment": "",
+      "category": "AUDIO_SET"
+    },
+    {
+      "name": "AUDIO_CHANNEL_SELECT",
+      "value": "_IO('o', 9)",
+      "comment": "",
+      "category": "AUDIO_CHANNEL"
+    },
+    {
+      "name": "AUDIO_GET_STATUS",
+      "value": "_IOR('o', 10, audio_status_t)",
+      "comment": "",
+      "category": "AUDIO_GET"
+    },
+    {
+      "name": "AUDIO_GET_CAPABILITIES",
+      "value": "_IOR('o', 11, unsigned int)",
+      "comment": "",
+      "category": "AUDIO_GET"
+    },
+    {
+      "name": "AUDIO_CLEAR_BUFFER",
+      "value": "_IO('o',  12)",
+      "comment": "",
+      "category": "AUDIO_CLEAR"
+    },
+    {
+      "name": "AUDIO_SET_ID",
+      "value": "_IO('o', 13)",
+      "comment": "",
+      "category": "AUDIO_SET"
+    },
+    {
+      "name": "AUDIO_SET_MIXER",
+      "value": "_IOW('o', 14, audio_mixer_t)",
+      "comment": "",
+      "category": "AUDIO_SET"
+    },
+    {
+      "name": "AUDIO_SET_STREAMTYPE",
+      "value": "_IO('o', 15)",
+      "comment": "",
+      "category": "AUDIO_SET"
+    },
+    {
+      "name": "AUDIO_BILINGUAL_CHANNEL_SELECT",
+      "value": "_IO('o', 20)",
+      "comment": "",
+      "category": "AUDIO_BILINGUAL"
+    }
+  ],
+  "structs": [
+    {
+      "name": "audio_mixer",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "audio_status",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "AV_sync_state",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "mute_state",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "audio_play_state_t",
+          "name": "play_state",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "audio_stream_source_t",
+          "name": "stream_source",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "audio_channel_select_t",
+          "name": "channel_select",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "bypass_mode",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "audio_mixer_t",
+          "name": "mixer_state",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [
+    "audio_mixer",
+    "audio_status"
+  ],
+  "enums": {
+    "anonymous_enum_0": [
+      [
+        "AUDIO_SOURCE_DEMUX",
+        ""
+      ],
+      [
+        "Select",
+        ""
+      ],
+      [
+        "the",
+        ""
+      ],
+      [
+        "demux",
+        ""
+      ],
+      [
+        "as",
+        ""
+      ],
+      [
+        "the",
+        ""
+      ],
+      [
+        "main",
+        ""
+      ],
+      [
+        "source",
+        ""
+      ],
+      [
+        "AUDIO_SOURCE_MEMORY",
+        ""
+      ],
+      [
+        "Select",
+        ""
+      ],
+      [
+        "internal",
+        ""
+      ],
+      [
+        "memory",
+        ""
+      ],
+      [
+        "as",
+        ""
+      ],
+      [
+        "the",
+        ""
+      ],
+      [
+        "main",
+        ""
+      ],
+      [
+        "source",
+        ""
+      ]
+    ],
+    "anonymous_enum_1": [
+      [
+        "AUDIO_STOPPED",
+        ""
+      ],
+      [
+        "Device",
+        ""
+      ],
+      [
+        "is",
+        ""
+      ],
+      [
+        "stopped",
+        ""
+      ],
+      [
+        "AUDIO_PLAYING",
+        ""
+      ],
+      [
+        "Device",
+        ""
+      ],
+      [
+        "is",
+        ""
+      ],
+      [
+        "currently",
+        ""
+      ],
+      [
+        "playing",
+        ""
+      ],
+      [
+        "AUDIO_PAUSED",
+        ""
+      ],
+      [
+        "Device",
+        ""
+      ],
+      [
+        "is",
+        ""
+      ],
+      [
+        "paused",
+        ""
+      ]
+    ],
+    "anonymous_enum_2": [
+      [
+        "AUDIO_STEREO",
+        ""
+      ],
+      [
+        "AUDIO_MONO_LEFT",
+        ""
+      ],
+      [
+        "AUDIO_MONO_RIGHT",
+        ""
+      ],
+      [
+        "AUDIO_MONO",
+        ""
+      ],
+      [
+        "AUDIO_STEREO_SWAPPED",
+        ""
+      ]
+    ]
+  }
+}

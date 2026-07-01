@@ -1,0 +1,4958 @@
+{
+  "filename": "i915_drm.h",
+  "includes": [
+    "drm.h"
+  ],
+  "defines": [
+    {
+      "name": "I915_L3_PARITY_UEVENT",
+      "value": "\"L3_PARITY_ERROR\"",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_ERROR_UEVENT",
+      "value": "\"ERROR\"",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_RESET_UEVENT",
+      "value": "\"RESET\"",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_ENGINE_CLASS_INVALID_NONE",
+      "value": "-1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_ENGINE_CLASS_INVALID_VIRTUAL",
+      "value": "-2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_PMU_SAMPLE_BITS",
+      "value": "(4)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_PMU_SAMPLE_MASK",
+      "value": "(0xf)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_PMU_SAMPLE_INSTANCE_BITS",
+      "value": "(8)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_PMU_CLASS_SHIFT",
+      "value": "",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "__I915_PMU_GT_SHIFT",
+      "value": "(60)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_PMU_ACTUAL_FREQUENCY",
+      "value": "__I915_PMU_OTHER(0)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_PMU_REQUESTED_FREQUENCY",
+      "value": "__I915_PMU_OTHER(1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_PMU_INTERRUPTS",
+      "value": "__I915_PMU_OTHER(2)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_PMU_RC6_RESIDENCY",
+      "value": "__I915_PMU_OTHER(3)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_PMU_SOFTWARE_GT_AWAKE_TIME",
+      "value": "__I915_PMU_OTHER(4)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_PMU_LAST",
+      "value": "/* Deprecated - do not use */ I915_PMU_RC6_RESIDENCY",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_NR_TEX_REGIONS",
+      "value": "255\t/* table size 2k - maximum due to use",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_LOG_MIN_TEX_REGION_SIZE",
+      "value": "14",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "planeA_x",
+      "value": "pipeA_x",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "planeA_y",
+      "value": "pipeA_y",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "planeA_w",
+      "value": "pipeA_w",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "planeA_h",
+      "value": "pipeA_h",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "planeB_x",
+      "value": "pipeB_x",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "planeB_y",
+      "value": "pipeB_y",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "planeB_w",
+      "value": "pipeB_w",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "planeB_h",
+      "value": "pipeB_h",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_BOX_RING_EMPTY",
+      "value": "0x1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_BOX_FLIP",
+      "value": "0x2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_BOX_WAIT",
+      "value": "0x4",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_BOX_TEXTURE_LOAD",
+      "value": "0x8",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_BOX_LOST_CONTEXT",
+      "value": "0x10",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_I915_INIT",
+      "value": "0x00",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_I915_FLUSH",
+      "value": "0x01",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_I915_FLIP",
+      "value": "0x02",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_I915_BATCHBUFFER",
+      "value": "0x03",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_I915_IRQ_EMIT",
+      "value": "0x04",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_I915_IRQ_WAIT",
+      "value": "0x05",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_I915_GETPARAM",
+      "value": "0x06",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_I915_SETPARAM",
+      "value": "0x07",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_I915_ALLOC",
+      "value": "0x08",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_I915_FREE",
+      "value": "0x09",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_I915_INIT_HEAP",
+      "value": "0x0a",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_I915_CMDBUFFER",
+      "value": "0x0b",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_I915_DESTROY_HEAP",
+      "value": "0x0c",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_I915_SET_VBLANK_PIPE",
+      "value": "0x0d",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_I915_GET_VBLANK_PIPE",
+      "value": "0x0e",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_I915_VBLANK_SWAP",
+      "value": "0x0f",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_I915_HWS_ADDR",
+      "value": "0x11",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_I915_GEM_INIT",
+      "value": "0x13",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_I915_GEM_EXECBUFFER",
+      "value": "0x14",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_I915_GEM_PIN",
+      "value": "0x15",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_I915_GEM_UNPIN",
+      "value": "0x16",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_I915_GEM_BUSY",
+      "value": "0x17",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_I915_GEM_THROTTLE",
+      "value": "0x18",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_I915_GEM_ENTERVT",
+      "value": "0x19",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_I915_GEM_LEAVEVT",
+      "value": "0x1a",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_I915_GEM_CREATE",
+      "value": "0x1b",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_I915_GEM_PREAD",
+      "value": "0x1c",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_I915_GEM_PWRITE",
+      "value": "0x1d",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_I915_GEM_MMAP",
+      "value": "0x1e",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_I915_GEM_SET_DOMAIN",
+      "value": "0x1f",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_I915_GEM_SW_FINISH",
+      "value": "0x20",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_I915_GEM_SET_TILING",
+      "value": "0x21",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_I915_GEM_GET_TILING",
+      "value": "0x22",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_I915_GEM_GET_APERTURE",
+      "value": "0x23",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_I915_GEM_MMAP_GTT",
+      "value": "0x24",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_I915_GET_PIPE_FROM_CRTC_ID",
+      "value": "0x25",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_I915_GEM_MADVISE",
+      "value": "0x26",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_I915_OVERLAY_PUT_IMAGE",
+      "value": "0x27",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_I915_OVERLAY_ATTRS",
+      "value": "0x28",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_I915_GEM_EXECBUFFER2",
+      "value": "0x29",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_I915_GEM_EXECBUFFER2_WR",
+      "value": "DRM_I915_GEM_EXECBUFFER2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_I915_GET_SPRITE_COLORKEY",
+      "value": "0x2a",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_I915_SET_SPRITE_COLORKEY",
+      "value": "0x2b",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_I915_GEM_WAIT",
+      "value": "0x2c",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_I915_GEM_CONTEXT_CREATE",
+      "value": "0x2d",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_I915_GEM_CONTEXT_DESTROY",
+      "value": "0x2e",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_I915_GEM_SET_CACHING",
+      "value": "0x2f",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_I915_GEM_GET_CACHING",
+      "value": "0x30",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_I915_REG_READ",
+      "value": "0x31",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_I915_GET_RESET_STATS",
+      "value": "0x32",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_I915_GEM_USERPTR",
+      "value": "0x33",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_I915_GEM_CONTEXT_GETPARAM",
+      "value": "0x34",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_I915_GEM_CONTEXT_SETPARAM",
+      "value": "0x35",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_I915_PERF_OPEN",
+      "value": "0x36",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_I915_PERF_ADD_CONFIG",
+      "value": "0x37",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_I915_PERF_REMOVE_CONFIG",
+      "value": "0x38",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_I915_QUERY",
+      "value": "0x39",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_I915_GEM_VM_CREATE",
+      "value": "0x3a",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_I915_GEM_VM_DESTROY",
+      "value": "0x3b",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_I915_GEM_CREATE_EXT",
+      "value": "0x3c",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_IOCTL_I915_INIT",
+      "value": "DRM_IOW( DRM_COMMAND_BASE + DRM_I915_INIT, drm_i915_init_t)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_I915_FLUSH",
+      "value": "DRM_IO ( DRM_COMMAND_BASE + DRM_I915_FLUSH)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_I915_FLIP",
+      "value": "DRM_IO ( DRM_COMMAND_BASE + DRM_I915_FLIP)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_I915_BATCHBUFFER",
+      "value": "DRM_IOW( DRM_COMMAND_BASE + DRM_I915_BATCHBUFFER, drm_i915_batchbuffer_t)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_I915_IRQ_EMIT",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_I915_IRQ_EMIT, drm_i915_irq_emit_t)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_I915_IRQ_WAIT",
+      "value": "DRM_IOW( DRM_COMMAND_BASE + DRM_I915_IRQ_WAIT, drm_i915_irq_wait_t)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_I915_GETPARAM",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_I915_GETPARAM, drm_i915_getparam_t)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_I915_SETPARAM",
+      "value": "DRM_IOW( DRM_COMMAND_BASE + DRM_I915_SETPARAM, drm_i915_setparam_t)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_I915_ALLOC",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_I915_ALLOC, drm_i915_mem_alloc_t)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_I915_FREE",
+      "value": "DRM_IOW( DRM_COMMAND_BASE + DRM_I915_FREE, drm_i915_mem_free_t)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_I915_INIT_HEAP",
+      "value": "DRM_IOW( DRM_COMMAND_BASE + DRM_I915_INIT_HEAP, drm_i915_mem_init_heap_t)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_I915_CMDBUFFER",
+      "value": "DRM_IOW( DRM_COMMAND_BASE + DRM_I915_CMDBUFFER, drm_i915_cmdbuffer_t)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_I915_DESTROY_HEAP",
+      "value": "DRM_IOW( DRM_COMMAND_BASE + DRM_I915_DESTROY_HEAP, drm_i915_mem_destroy_heap_t)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_I915_SET_VBLANK_PIPE",
+      "value": "DRM_IOW( DRM_COMMAND_BASE + DRM_I915_SET_VBLANK_PIPE, drm_i915_vblank_pipe_t)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_I915_GET_VBLANK_PIPE",
+      "value": "DRM_IOR( DRM_COMMAND_BASE + DRM_I915_GET_VBLANK_PIPE, drm_i915_vblank_pipe_t)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_I915_VBLANK_SWAP",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_I915_VBLANK_SWAP, drm_i915_vblank_swap_t)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_I915_HWS_ADDR",
+      "value": "DRM_IOW(DRM_COMMAND_BASE + DRM_I915_HWS_ADDR, struct drm_i915_gem_init)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_I915_GEM_INIT",
+      "value": "DRM_IOW(DRM_COMMAND_BASE + DRM_I915_GEM_INIT, struct drm_i915_gem_init)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_I915_GEM_EXECBUFFER",
+      "value": "DRM_IOW(DRM_COMMAND_BASE + DRM_I915_GEM_EXECBUFFER, struct drm_i915_gem_execbuffer)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_I915_GEM_EXECBUFFER2",
+      "value": "DRM_IOW(DRM_COMMAND_BASE + DRM_I915_GEM_EXECBUFFER2, struct drm_i915_gem_execbuffer2)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_I915_GEM_EXECBUFFER2_WR",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_I915_GEM_EXECBUFFER2_WR, struct drm_i915_gem_execbuffer2)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_I915_GEM_PIN",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_I915_GEM_PIN, struct drm_i915_gem_pin)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_I915_GEM_UNPIN",
+      "value": "DRM_IOW(DRM_COMMAND_BASE + DRM_I915_GEM_UNPIN, struct drm_i915_gem_unpin)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_I915_GEM_BUSY",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_I915_GEM_BUSY, struct drm_i915_gem_busy)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_I915_GEM_SET_CACHING",
+      "value": "DRM_IOW(DRM_COMMAND_BASE + DRM_I915_GEM_SET_CACHING, struct drm_i915_gem_caching)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_I915_GEM_GET_CACHING",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_I915_GEM_GET_CACHING, struct drm_i915_gem_caching)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_I915_GEM_THROTTLE",
+      "value": "DRM_IO ( DRM_COMMAND_BASE + DRM_I915_GEM_THROTTLE)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_I915_GEM_ENTERVT",
+      "value": "DRM_IO(DRM_COMMAND_BASE + DRM_I915_GEM_ENTERVT)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_I915_GEM_LEAVEVT",
+      "value": "DRM_IO(DRM_COMMAND_BASE + DRM_I915_GEM_LEAVEVT)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_I915_GEM_CREATE",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_I915_GEM_CREATE, struct drm_i915_gem_create)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_I915_GEM_CREATE_EXT",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_I915_GEM_CREATE_EXT, struct drm_i915_gem_create_ext)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_I915_GEM_PREAD",
+      "value": "DRM_IOW (DRM_COMMAND_BASE + DRM_I915_GEM_PREAD, struct drm_i915_gem_pread)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_I915_GEM_PWRITE",
+      "value": "DRM_IOW (DRM_COMMAND_BASE + DRM_I915_GEM_PWRITE, struct drm_i915_gem_pwrite)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_I915_GEM_MMAP",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_I915_GEM_MMAP, struct drm_i915_gem_mmap)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_I915_GEM_MMAP_GTT",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_I915_GEM_MMAP_GTT, struct drm_i915_gem_mmap_gtt)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_I915_GEM_MMAP_OFFSET",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_I915_GEM_MMAP_GTT, struct drm_i915_gem_mmap_offset)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_I915_GEM_SET_DOMAIN",
+      "value": "DRM_IOW (DRM_COMMAND_BASE + DRM_I915_GEM_SET_DOMAIN, struct drm_i915_gem_set_domain)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_I915_GEM_SW_FINISH",
+      "value": "DRM_IOW (DRM_COMMAND_BASE + DRM_I915_GEM_SW_FINISH, struct drm_i915_gem_sw_finish)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_I915_GEM_SET_TILING",
+      "value": "DRM_IOWR (DRM_COMMAND_BASE + DRM_I915_GEM_SET_TILING, struct drm_i915_gem_set_tiling)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_I915_GEM_GET_TILING",
+      "value": "DRM_IOWR (DRM_COMMAND_BASE + DRM_I915_GEM_GET_TILING, struct drm_i915_gem_get_tiling)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_I915_GEM_GET_APERTURE",
+      "value": "DRM_IOR  (DRM_COMMAND_BASE + DRM_I915_GEM_GET_APERTURE, struct drm_i915_gem_get_aperture)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_I915_GET_PIPE_FROM_CRTC_ID",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_I915_GET_PIPE_FROM_CRTC_ID, struct drm_i915_get_pipe_from_crtc_id)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_I915_GEM_MADVISE",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_I915_GEM_MADVISE, struct drm_i915_gem_madvise)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_I915_OVERLAY_PUT_IMAGE",
+      "value": "DRM_IOW(DRM_COMMAND_BASE + DRM_I915_OVERLAY_PUT_IMAGE, struct drm_intel_overlay_put_image)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_I915_OVERLAY_ATTRS",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_I915_OVERLAY_ATTRS, struct drm_intel_overlay_attrs)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_I915_SET_SPRITE_COLORKEY",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_I915_SET_SPRITE_COLORKEY, struct drm_intel_sprite_colorkey)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_I915_GET_SPRITE_COLORKEY",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_I915_GET_SPRITE_COLORKEY, struct drm_intel_sprite_colorkey)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_I915_GEM_WAIT",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_I915_GEM_WAIT, struct drm_i915_gem_wait)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_I915_GEM_CONTEXT_CREATE",
+      "value": "DRM_IOWR (DRM_COMMAND_BASE + DRM_I915_GEM_CONTEXT_CREATE, struct drm_i915_gem_context_create)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_I915_GEM_CONTEXT_CREATE_EXT",
+      "value": "DRM_IOWR (DRM_COMMAND_BASE + DRM_I915_GEM_CONTEXT_CREATE, struct drm_i915_gem_context_create_ext)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_I915_GEM_CONTEXT_DESTROY",
+      "value": "DRM_IOW (DRM_COMMAND_BASE + DRM_I915_GEM_CONTEXT_DESTROY, struct drm_i915_gem_context_destroy)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_I915_REG_READ",
+      "value": "DRM_IOWR (DRM_COMMAND_BASE + DRM_I915_REG_READ, struct drm_i915_reg_read)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_I915_GET_RESET_STATS",
+      "value": "DRM_IOWR (DRM_COMMAND_BASE + DRM_I915_GET_RESET_STATS, struct drm_i915_reset_stats)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_I915_GEM_USERPTR",
+      "value": "DRM_IOWR (DRM_COMMAND_BASE + DRM_I915_GEM_USERPTR, struct drm_i915_gem_userptr)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_I915_GEM_CONTEXT_GETPARAM",
+      "value": "DRM_IOWR (DRM_COMMAND_BASE + DRM_I915_GEM_CONTEXT_GETPARAM, struct drm_i915_gem_context_param)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_I915_GEM_CONTEXT_SETPARAM",
+      "value": "DRM_IOWR (DRM_COMMAND_BASE + DRM_I915_GEM_CONTEXT_SETPARAM, struct drm_i915_gem_context_param)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_I915_PERF_OPEN",
+      "value": "DRM_IOW(DRM_COMMAND_BASE + DRM_I915_PERF_OPEN, struct drm_i915_perf_open_param)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_I915_PERF_ADD_CONFIG",
+      "value": "DRM_IOW(DRM_COMMAND_BASE + DRM_I915_PERF_ADD_CONFIG, struct drm_i915_perf_oa_config)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_I915_PERF_REMOVE_CONFIG",
+      "value": "DRM_IOW(DRM_COMMAND_BASE + DRM_I915_PERF_REMOVE_CONFIG, __u64)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_I915_QUERY",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_I915_QUERY, struct drm_i915_query)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_I915_GEM_VM_CREATE",
+      "value": "DRM_IOWR(DRM_COMMAND_BASE + DRM_I915_GEM_VM_CREATE, struct drm_i915_gem_vm_control)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "DRM_IOCTL_I915_GEM_VM_DESTROY",
+      "value": "DRM_IOW (DRM_COMMAND_BASE + DRM_I915_GEM_VM_DESTROY, struct drm_i915_gem_vm_control)",
+      "comment": "",
+      "category": "DRM_IOCTL"
+    },
+    {
+      "name": "I915_GEM_PPGTT_NONE",
+      "value": "0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_GEM_PPGTT_ALIASING",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_GEM_PPGTT_FULL",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_PARAM_IRQ_ACTIVE",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_PARAM_ALLOW_BATCHBUFFER",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_PARAM_LAST_DISPATCH",
+      "value": "3",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_PARAM_CHIPSET_ID",
+      "value": "4",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_PARAM_HAS_GEM",
+      "value": "5",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_PARAM_NUM_FENCES_AVAIL",
+      "value": "6",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_PARAM_HAS_OVERLAY",
+      "value": "7",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_PARAM_HAS_PAGEFLIPPING",
+      "value": "8",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_PARAM_HAS_EXECBUF2",
+      "value": "9",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_PARAM_HAS_BSD",
+      "value": "10",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_PARAM_HAS_BLT",
+      "value": "11",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_PARAM_HAS_RELAXED_FENCING",
+      "value": "12",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_PARAM_HAS_COHERENT_RINGS",
+      "value": "13",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_PARAM_HAS_EXEC_CONSTANTS",
+      "value": "14",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_PARAM_HAS_RELAXED_DELTA",
+      "value": "15",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_PARAM_HAS_GEN7_SOL_RESET",
+      "value": "16",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_PARAM_HAS_LLC",
+      "value": "17",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_PARAM_HAS_ALIASING_PPGTT",
+      "value": "18",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_PARAM_HAS_WAIT_TIMEOUT",
+      "value": "19",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_PARAM_HAS_SEMAPHORES",
+      "value": "20",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_PARAM_HAS_PRIME_VMAP_FLUSH",
+      "value": "21",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_PARAM_HAS_VEBOX",
+      "value": "22",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_PARAM_HAS_SECURE_BATCHES",
+      "value": "23",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_PARAM_HAS_PINNED_BATCHES",
+      "value": "24",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_PARAM_HAS_EXEC_NO_RELOC",
+      "value": "25",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_PARAM_HAS_EXEC_HANDLE_LUT",
+      "value": "26",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_PARAM_HAS_WT",
+      "value": "27",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_PARAM_CMD_PARSER_VERSION",
+      "value": "28",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_PARAM_HAS_COHERENT_PHYS_GTT",
+      "value": "29",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_PARAM_MMAP_VERSION",
+      "value": "30",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_PARAM_HAS_BSD2",
+      "value": "31",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_PARAM_REVISION",
+      "value": "32",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_PARAM_SUBSLICE_TOTAL",
+      "value": "33",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_PARAM_EU_TOTAL",
+      "value": "34",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_PARAM_HAS_GPU_RESET",
+      "value": "35",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_PARAM_HAS_RESOURCE_STREAMER",
+      "value": "36",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_PARAM_HAS_EXEC_SOFTPIN",
+      "value": "37",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_PARAM_HAS_POOLED_EU",
+      "value": "38",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_PARAM_MIN_EU_IN_POOL",
+      "value": "39",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_PARAM_MMAP_GTT_VERSION",
+      "value": "40",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_PARAM_HAS_SCHEDULER",
+      "value": "41",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_SCHEDULER_CAP_ENABLED",
+      "value": "(1ul << 0)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_SCHEDULER_CAP_PRIORITY",
+      "value": "(1ul << 1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_SCHEDULER_CAP_PREEMPTION",
+      "value": "(1ul << 2)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_SCHEDULER_CAP_SEMAPHORES",
+      "value": "(1ul << 3)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_SCHEDULER_CAP_ENGINE_BUSY_STATS",
+      "value": "(1ul << 4)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_SCHEDULER_CAP_STATIC_PRIORITY_MAP",
+      "value": "(1ul << 5)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_PARAM_HUC_STATUS",
+      "value": "42",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_PARAM_HAS_EXEC_ASYNC",
+      "value": "43",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_PARAM_HAS_EXEC_FENCE",
+      "value": "44",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_PARAM_HAS_EXEC_CAPTURE",
+      "value": "45",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_PARAM_SLICE_MASK",
+      "value": "46",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_PARAM_SUBSLICE_MASK",
+      "value": "47",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_PARAM_HAS_EXEC_BATCH_FIRST",
+      "value": "48",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_PARAM_HAS_EXEC_FENCE_ARRAY",
+      "value": "49",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_PARAM_HAS_CONTEXT_ISOLATION",
+      "value": "50",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_PARAM_CS_TIMESTAMP_FREQUENCY",
+      "value": "51",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_PARAM_MMAP_GTT_COHERENT",
+      "value": "52",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_PARAM_HAS_EXEC_SUBMIT_FENCE",
+      "value": "53",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_PARAM_PERF_REVISION",
+      "value": "54",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_PARAM_HAS_EXEC_TIMELINE_FENCES",
+      "value": "55",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_PARAM_HAS_USERPTR_PROBE",
+      "value": "56",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_PARAM_OA_TIMESTAMP_FREQUENCY",
+      "value": "57",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_PARAM_PXP_STATUS",
+      "value": "58",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_PARAM_HAS_CONTEXT_FREQ_HINT",
+      "value": "59",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_SETPARAM_USE_MI_BATCHBUFFER_START",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_SETPARAM_TEX_LRU_LOG_GRANULARITY",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_SETPARAM_ALLOW_BATCHBUFFER",
+      "value": "3",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_SETPARAM_NUM_USED_FENCES",
+      "value": "4",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_MEM_REGION_AGP",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_I915_VBLANK_PIPE_A",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_I915_VBLANK_PIPE_B",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_MMAP_WC",
+      "value": "0x1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_MMAP_OFFSET_GTT",
+      "value": "0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_MMAP_OFFSET_WC",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_MMAP_OFFSET_WB",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_MMAP_OFFSET_UC",
+      "value": "3",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_MMAP_OFFSET_FIXED",
+      "value": "4",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_GEM_DOMAIN_CPU",
+      "value": "0x00000001",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_GEM_DOMAIN_RENDER",
+      "value": "0x00000002",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_GEM_DOMAIN_SAMPLER",
+      "value": "0x00000004",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_GEM_DOMAIN_COMMAND",
+      "value": "0x00000008",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_GEM_DOMAIN_INSTRUCTION",
+      "value": "0x00000010",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_GEM_DOMAIN_VERTEX",
+      "value": "0x00000020",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_GEM_DOMAIN_GTT",
+      "value": "0x00000040",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_GEM_DOMAIN_WC",
+      "value": "0x00000080",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "EXEC_OBJECT_NEEDS_FENCE",
+      "value": "(1<<0)",
+      "comment": "",
+      "category": "EXEC_OBJECT"
+    },
+    {
+      "name": "EXEC_OBJECT_NEEDS_GTT",
+      "value": "(1<<1)",
+      "comment": "",
+      "category": "EXEC_OBJECT"
+    },
+    {
+      "name": "EXEC_OBJECT_WRITE",
+      "value": "(1<<2)",
+      "comment": "",
+      "category": "EXEC_OBJECT"
+    },
+    {
+      "name": "EXEC_OBJECT_SUPPORTS_48B_ADDRESS",
+      "value": "(1<<3)",
+      "comment": "",
+      "category": "EXEC_OBJECT"
+    },
+    {
+      "name": "EXEC_OBJECT_PINNED",
+      "value": "(1<<4)",
+      "comment": "",
+      "category": "EXEC_OBJECT"
+    },
+    {
+      "name": "EXEC_OBJECT_PAD_TO_SIZE",
+      "value": "(1<<5)",
+      "comment": "",
+      "category": "EXEC_OBJECT"
+    },
+    {
+      "name": "EXEC_OBJECT_ASYNC",
+      "value": "(1<<6)",
+      "comment": "",
+      "category": "EXEC_OBJECT"
+    },
+    {
+      "name": "EXEC_OBJECT_CAPTURE",
+      "value": "(1<<7)",
+      "comment": "",
+      "category": "EXEC_OBJECT"
+    },
+    {
+      "name": "__EXEC_OBJECT_UNKNOWN_FLAGS",
+      "value": "-(EXEC_OBJECT_CAPTURE<<1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_EXEC_FENCE_WAIT",
+      "value": "(1<<0)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_EXEC_FENCE_SIGNAL",
+      "value": "(1<<1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "__I915_EXEC_FENCE_UNKNOWN_FLAGS",
+      "value": "(-(I915_EXEC_FENCE_SIGNAL << 1))",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_I915_GEM_EXECBUFFER_EXT_TIMELINE_FENCES",
+      "value": "0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_EXEC_RING_MASK",
+      "value": "(0x3f)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_EXEC_DEFAULT",
+      "value": "(0<<0)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_EXEC_RENDER",
+      "value": "(1<<0)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_EXEC_BSD",
+      "value": "(2<<0)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_EXEC_BLT",
+      "value": "(3<<0)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_EXEC_VEBOX",
+      "value": "(4<<0)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_EXEC_CONSTANTS_MASK",
+      "value": "(3<<6)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_EXEC_CONSTANTS_REL_GENERAL",
+      "value": "(0<<6)",
+      "comment": "default",
+      "category": ""
+    },
+    {
+      "name": "I915_EXEC_CONSTANTS_ABSOLUTE",
+      "value": "(1<<6)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_EXEC_CONSTANTS_REL_SURFACE",
+      "value": "(2<<6)",
+      "comment": "gen4/5 only",
+      "category": ""
+    },
+    {
+      "name": "I915_EXEC_GEN7_SOL_RESET",
+      "value": "(1<<8)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_EXEC_SECURE",
+      "value": "(1<<9)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_EXEC_IS_PINNED",
+      "value": "(1<<10)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_EXEC_NO_RELOC",
+      "value": "(1<<11)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_EXEC_HANDLE_LUT",
+      "value": "(1<<12)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_EXEC_BSD_SHIFT",
+      "value": "(13)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_EXEC_BSD_MASK",
+      "value": "(3 << I915_EXEC_BSD_SHIFT)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_EXEC_BSD_DEFAULT",
+      "value": "(0 << I915_EXEC_BSD_SHIFT)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_EXEC_BSD_RING1",
+      "value": "(1 << I915_EXEC_BSD_SHIFT)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_EXEC_BSD_RING2",
+      "value": "(2 << I915_EXEC_BSD_SHIFT)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_EXEC_RESOURCE_STREAMER",
+      "value": "(1<<15)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_EXEC_FENCE_IN",
+      "value": "(1<<16)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_EXEC_FENCE_OUT",
+      "value": "(1<<17)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_EXEC_BATCH_FIRST",
+      "value": "(1<<18)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_EXEC_FENCE_ARRAY",
+      "value": "(1<<19)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_EXEC_FENCE_SUBMIT",
+      "value": "(1 << 20)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_EXEC_USE_EXTENSIONS",
+      "value": "(1 << 21)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "__I915_EXEC_UNKNOWN_FLAGS",
+      "value": "(-(I915_EXEC_USE_EXTENSIONS << 1))",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_EXEC_CONTEXT_ID_MASK",
+      "value": "(0xffffffff)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_CACHING_NONE",
+      "value": "0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_CACHING_CACHED",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_CACHING_DISPLAY",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_TILING_NONE",
+      "value": "0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_TILING_X",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_TILING_Y",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_TILING_LAST",
+      "value": "I915_TILING_Y",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_BIT_6_SWIZZLE_NONE",
+      "value": "0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_BIT_6_SWIZZLE_9",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_BIT_6_SWIZZLE_9_10",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_BIT_6_SWIZZLE_9_11",
+      "value": "3",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_BIT_6_SWIZZLE_9_10_11",
+      "value": "4",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_BIT_6_SWIZZLE_UNKNOWN",
+      "value": "5",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_BIT_6_SWIZZLE_9_17",
+      "value": "6",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_BIT_6_SWIZZLE_9_10_17",
+      "value": "7",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_MADV_WILLNEED",
+      "value": "0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_MADV_DONTNEED",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "__I915_MADV_PURGED",
+      "value": "2",
+      "comment": "internal state",
+      "category": ""
+    },
+    {
+      "name": "I915_OVERLAY_TYPE_MASK",
+      "value": "0xff",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_OVERLAY_YUV_PLANAR",
+      "value": "0x01",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_OVERLAY_YUV_PACKED",
+      "value": "0x02",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_OVERLAY_RGB",
+      "value": "0x03",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_OVERLAY_DEPTH_MASK",
+      "value": "0xff00",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_OVERLAY_RGB24",
+      "value": "0x1000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_OVERLAY_RGB16",
+      "value": "0x2000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_OVERLAY_RGB15",
+      "value": "0x3000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_OVERLAY_YUV422",
+      "value": "0x0100",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_OVERLAY_YUV411",
+      "value": "0x0200",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_OVERLAY_YUV420",
+      "value": "0x0300",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_OVERLAY_YUV410",
+      "value": "0x0400",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_OVERLAY_SWAP_MASK",
+      "value": "0xff0000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_OVERLAY_NO_SWAP",
+      "value": "0x000000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_OVERLAY_UV_SWAP",
+      "value": "0x010000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_OVERLAY_Y_SWAP",
+      "value": "0x020000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_OVERLAY_Y_AND_UV_SWAP",
+      "value": "0x030000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_OVERLAY_FLAGS_MASK",
+      "value": "0xff000000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_OVERLAY_ENABLE",
+      "value": "0x01000000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_OVERLAY_UPDATE_ATTRS",
+      "value": "(1<<0)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_OVERLAY_UPDATE_GAMMA",
+      "value": "(1<<1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_OVERLAY_DISABLE_DEST_COLORKEY",
+      "value": "(1<<2)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_SET_COLORKEY_NONE",
+      "value": "(1<<0) /* Deprecated. Instead set",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_SET_COLORKEY_DESTINATION",
+      "value": "(1<<1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_SET_COLORKEY_SOURCE",
+      "value": "(1<<2)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_CONTEXT_CREATE_FLAGS_USE_EXTENSIONS",
+      "value": "(1u << 0)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_CONTEXT_CREATE_FLAGS_SINGLE_TIMELINE",
+      "value": "(1u << 1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_CONTEXT_CREATE_FLAGS_UNKNOWN",
+      "value": "",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_CONTEXT_CREATE_EXT_SETPARAM",
+      "value": "0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_CONTEXT_CREATE_EXT_CLONE",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_CONTEXT_PARAM_BAN_PERIOD",
+      "value": "0x1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_CONTEXT_PARAM_NO_ZEROMAP",
+      "value": "0x2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_CONTEXT_PARAM_GTT_SIZE",
+      "value": "0x3",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_CONTEXT_PARAM_NO_ERROR_CAPTURE",
+      "value": "0x4",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_CONTEXT_PARAM_BANNABLE",
+      "value": "0x5",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_CONTEXT_PARAM_PRIORITY",
+      "value": "0x6",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_CONTEXT_MAX_USER_PRIORITY",
+      "value": "1023",
+      "comment": "inclusive",
+      "category": ""
+    },
+    {
+      "name": "I915_CONTEXT_DEFAULT_PRIORITY",
+      "value": "0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_CONTEXT_MIN_USER_PRIORITY",
+      "value": "-1023",
+      "comment": "inclusive",
+      "category": ""
+    },
+    {
+      "name": "I915_CONTEXT_PARAM_SSEU",
+      "value": "0x7",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_CONTEXT_PARAM_RECOVERABLE",
+      "value": "0x8",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_CONTEXT_PARAM_VM",
+      "value": "0x9",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_CONTEXT_PARAM_ENGINES",
+      "value": "0xa",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_CONTEXT_PARAM_PERSISTENCE",
+      "value": "0xb",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_CONTEXT_PARAM_RINGSIZE",
+      "value": "0xc",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_CONTEXT_PARAM_PROTECTED_CONTENT",
+      "value": "0xd",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_CONTEXT_PARAM_LOW_LATENCY",
+      "value": "0xe",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_CONTEXT_PARAM_CONTEXT_IMAGE",
+      "value": "0xf",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_CONTEXT_SSEU_FLAG_ENGINE_INDEX",
+      "value": "(1u << 0)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_CONTEXT_ENGINES_EXT_LOAD_BALANCE",
+      "value": "0",
+      "comment": "see i915_context_engines_load_balance",
+      "category": ""
+    },
+    {
+      "name": "I915_CONTEXT_ENGINES_EXT_BOND",
+      "value": "1",
+      "comment": "see i915_context_engines_bond",
+      "category": ""
+    },
+    {
+      "name": "I915_CONTEXT_ENGINES_EXT_PARALLEL_SUBMIT",
+      "value": "2",
+      "comment": "see i915_context_engines_parallel_submit",
+      "category": ""
+    },
+    {
+      "name": "I915_CONTEXT_IMAGE_FLAG_ENGINE_INDEX",
+      "value": "(1u << 0)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_REG_READ_8B_WA",
+      "value": "(1ul << 0)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_USERPTR_READ_ONLY",
+      "value": "0x1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_USERPTR_PROBE",
+      "value": "0x2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_USERPTR_UNSYNCHRONIZED",
+      "value": "0x80000000",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_PERF_FLAG_FD_CLOEXEC",
+      "value": "(1<<0)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_PERF_FLAG_FD_NONBLOCK",
+      "value": "(1<<1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_PERF_FLAG_DISABLED",
+      "value": "(1<<2)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_PERF_IOCTL_ENABLE",
+      "value": "_IO('i', 0x0)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_PERF_IOCTL_DISABLE",
+      "value": "_IO('i', 0x1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_PERF_IOCTL_CONFIG",
+      "value": "_IO('i', 0x2)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_I915_QUERY_TOPOLOGY_INFO",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_I915_QUERY_ENGINE_INFO",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_I915_QUERY_PERF_CONFIG",
+      "value": "3",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_I915_QUERY_MEMORY_REGIONS",
+      "value": "4",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_I915_QUERY_HWCONFIG_BLOB",
+      "value": "5",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_I915_QUERY_GEOMETRY_SUBSLICES",
+      "value": "6",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_I915_QUERY_GUC_SUBMISSION_VERSION",
+      "value": "7",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_I915_QUERY_PERF_CONFIG_LIST",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_I915_QUERY_PERF_CONFIG_DATA_FOR_UUID",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "DRM_I915_QUERY_PERF_CONFIG_DATA_FOR_ID",
+      "value": "3",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_ENGINE_INFO_HAS_LOGICAL_INSTANCE",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_VIDEO_CLASS_CAPABILITY_HEVC",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_VIDEO_AND_ENHANCE_CLASS_CAPABILITY_SFC",
+      "value": "(1 << 1)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_GEM_CREATE_EXT_FLAG_NEEDS_CPU_ACCESS",
+      "value": "(1 << 0)",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_GEM_CREATE_EXT_MEMORY_REGIONS",
+      "value": "0",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_GEM_CREATE_EXT_PROTECTED_CONTENT",
+      "value": "1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_GEM_CREATE_EXT_SET_PAT",
+      "value": "2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "I915_PROTECTED_CONTENT_DEFAULT_SESSION",
+      "value": "0xf",
+      "comment": "",
+      "category": ""
+    }
+  ],
+  "structs": [
+    {
+      "name": "i915_user_extension",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "next_extension",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "name",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "rsvd",
+          "array_size": "4",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "i915_engine_class_instance",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "engine_class",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "engine_instance",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "_drm_i915_init",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "sarea_priv_offset",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "_drm_i915_sarea",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "last_upload",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "last_enqueue",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "last_dispatch",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "ctxOwner",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "texAge",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "pf_enabled",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "pf_active",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "pf_current_page",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "perf_boxes",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "drm_handle_t",
+          "name": "front_handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "front_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "front_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "drm_handle_t",
+          "name": "back_handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "back_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "back_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "drm_handle_t",
+          "name": "depth_handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "depth_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "depth_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "drm_handle_t",
+          "name": "tex_handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "tex_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "tex_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "log_tex_granularity",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "pitch",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "rotation",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "rotated_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "rotated_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "rotated_pitch",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "pipeA_x",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "pipeA_y",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "pipeA_w",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "pipeA_h",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "pipeB_x",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "pipeB_y",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "pipeB_w",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "pipeB_h",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "drm_handle_t",
+          "name": "unused_handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "front_bo_handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "back_bo_handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "unused_bo_handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "depth_bo_handle",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_i915_batchbuffer",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "start",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "used",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "DR1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "DR4",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "num_cliprects",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "_drm_i915_cmdbuffer",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "sz",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "DR1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "DR4",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "num_cliprects",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_i915_irq_emit",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_i915_irq_wait",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "irq_seq",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_i915_getparam",
+      "fields": [
+        {
+          "type_name": "__s32",
+          "name": "param",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_i915_setparam",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "param",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "value",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_i915_mem_alloc",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "region",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "alignment",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_i915_mem_free",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "region",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "region_offset",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_i915_mem_init_heap",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "region",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "int",
+          "name": "start",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_i915_mem_destroy_heap",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "region",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_i915_vblank_pipe",
+      "fields": [
+        {
+          "type_name": "int",
+          "name": "pipe",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_i915_vblank_swap",
+      "fields": [
+        {
+          "type_name": "drm_drawable_t",
+          "name": "drawable",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_i915_hws_addr",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "addr",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_i915_gem_init",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "gtt_start",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "gtt_end",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_i915_gem_create",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_i915_gem_pread",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "data_ptr",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_i915_gem_pwrite",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "data_ptr",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_i915_gem_mmap",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "addr_ptr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_i915_gem_mmap_gtt",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_i915_gem_mmap_offset",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "extensions",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_i915_gem_set_domain",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "read_domains",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "write_domain",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_i915_gem_sw_finish",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_i915_gem_relocation_entry",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "target_handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "delta",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "presumed_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "read_domains",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "write_domain",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_i915_gem_exec_object",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "relocation_count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "relocs_ptr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "alignment",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_i915_gem_execbuffer",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "buffers_ptr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "buffer_count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "batch_start_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "batch_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "DR1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "DR4",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "num_cliprects",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "cliprects_ptr",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_i915_gem_exec_object2",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "relocation_count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "relocs_ptr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "alignment",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "rsvd1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "pad_to_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "rsvd2",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_i915_gem_exec_fence",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_i915_gem_execbuffer_ext_timeline_fences",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "fence_count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "handles_ptr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "values_ptr",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_i915_gem_execbuffer2",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "buffers_ptr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "buffer_count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "batch_start_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "batch_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "DR1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "DR4",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "num_cliprects",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "cliprects_ptr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "rsvd1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "rsvd2",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_i915_gem_pin",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "alignment",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_i915_gem_unpin",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_i915_gem_busy",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "busy",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_i915_gem_caching",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "caching",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_i915_gem_set_tiling",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tiling_mode",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "stride",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "swizzle_mode",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_i915_gem_get_tiling",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "tiling_mode",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "swizzle_mode",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "phys_swizzle_mode",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_i915_gem_get_aperture",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "aper_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "aper_available_size",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_i915_get_pipe_from_crtc_id",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "crtc_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pipe",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_i915_gem_madvise",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "madv",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "retained",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_intel_overlay_put_image",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "bo_handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "stride_Y",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "stride_UV",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "offset_Y",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "offset_U",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "offset_V",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "src_width",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "src_height",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "src_scan_width",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "src_scan_height",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "crtc_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "dst_x",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "dst_y",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "dst_width",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "dst_height",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": true
+    },
+    {
+      "name": "drm_intel_overlay_attrs",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "color_key",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "brightness",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "contrast",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "saturation",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "gamma0",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "gamma1",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "gamma2",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "gamma3",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "gamma4",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "gamma5",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_intel_sprite_colorkey",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "plane_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "min_value",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "channel_mask",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "max_value",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_i915_gem_wait",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "bo_handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s64",
+          "name": "timeout_ns",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_i915_gem_context_create",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "ctx_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_i915_gem_context_create_ext",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "ctx_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "extensions",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_i915_gem_context_param",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "ctx_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "param",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "value",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_i915_gem_context_param_sseu",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "slice_mask",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "subslice_mask",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "min_eus_per_subslice",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "max_eus_per_subslice",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "rsvd",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "i915_context_engines_load_balance",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "engine_index",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "num_siblings",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "mbz64",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_51",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "engine_index",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "num_siblings",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "mbz64",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "i915_context_engines_bond",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "virtual_index",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "num_bonds",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "mbz64",
+          "array_size": "4",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_53",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "virtual_index",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "num_bonds",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "mbz64",
+          "array_size": "4",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "i915_context_engines_parallel_submit",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "engine_index",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "width",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "num_siblings",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "mbz16",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "mbz64",
+          "array_size": "3",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_55",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "engine_index",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "width",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "num_siblings",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "mbz16",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "mbz64",
+          "array_size": "3",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "i915_context_param_engines",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "extensions",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_57",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "extensions",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "i915_gem_context_param_context_image",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "mbz",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "image",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_i915_gem_context_create_ext_setparam",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_i915_gem_context_destroy",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "ctx_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_i915_gem_vm_control",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "extensions",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "vm_id",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_i915_reg_read",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "val",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_i915_reset_stats",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "ctx_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "reset_count",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "batch_active",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "batch_pending",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_i915_gem_userptr",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "user_ptr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "user_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_i915_perf_open_param",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "num_properties",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "properties_ptr",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_i915_perf_record_header",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_67",
+      "fields": [],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_i915_perf_oa_config",
+      "fields": [
+        {
+          "type_name": "char",
+          "name": "uuid",
+          "array_size": "36",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "n_mux_regs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "n_boolean_regs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "n_flex_regs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "mux_regs_ptr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "boolean_regs_ptr",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "flex_regs_ptr",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_i915_query_item",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "query_id",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "length",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "data_ptr",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_i915_query",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "num_items",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "items_ptr",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_i915_query_topology_info",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "max_slices",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "max_subslices",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "max_eus_per_subslice",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "subslice_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "subslice_stride",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "eu_offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "eu_stride",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_i915_engine_info",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "rsvd0",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "capabilities",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "logical_instance",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "rsvd1",
+          "array_size": "3",
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "rsvd2",
+          "array_size": "3",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_i915_query_engine_info",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "num_engines",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "rsvd",
+          "array_size": "3",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_i915_query_perf_config",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "n_configs",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "config",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "char",
+          "name": "uuid",
+          "array_size": "36",
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_i915_gem_memory_class_instance",
+      "fields": [
+        {
+          "type_name": "__u16",
+          "name": "memory_class",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "memory_instance",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_i915_memory_region_info",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "rsvd0",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "probed_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "unallocated_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "rsvd1",
+          "array_size": "8",
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "probed_cpu_visible_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "unallocated_cpu_visible_size",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "anonymous_77",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "probed_cpu_visible_size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "unallocated_cpu_visible_size",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_i915_query_memory_regions",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "num_regions",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "rsvd",
+          "array_size": "3",
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_i915_query_guc_submission_version",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "branch",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "major",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "minor",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "patch",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_i915_gem_create_ext",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "size",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "handle",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "extensions",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_i915_gem_create_ext_memory_regions",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "num_regions",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "regions",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_i915_gem_create_ext_protected_content",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "flags",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "drm_i915_gem_create_ext_set_pat",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "pat_index",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "rsvd",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [
+    "_drm_i915_init",
+    "_drm_i915_sarea",
+    "drm_i915_batchbuffer",
+    "_drm_i915_cmdbuffer",
+    "drm_i915_irq_emit",
+    "drm_i915_irq_wait",
+    "drm_i915_getparam_t",
+    "drm_i915_setparam",
+    "drm_i915_mem_alloc",
+    "drm_i915_mem_free",
+    "drm_i915_mem_init_heap",
+    "drm_i915_mem_destroy_heap",
+    "drm_i915_vblank_pipe",
+    "drm_i915_vblank_swap",
+    "drm_i915_hws_addr"
+  ],
+  "enums": {}
+}

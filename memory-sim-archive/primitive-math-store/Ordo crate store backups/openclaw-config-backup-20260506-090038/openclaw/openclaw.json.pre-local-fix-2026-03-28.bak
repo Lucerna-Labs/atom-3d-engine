@@ -1,0 +1,331 @@
+{
+  "meta": {
+    "lastTouchedVersion": "2026.3.22",
+    "lastTouchedAt": "2026-03-28T23:58:24.547Z"
+  },
+  "wizard": {
+    "lastRunAt": "2026-03-23T18:42:28.953Z",
+    "lastRunVersion": "2026.3.22",
+    "lastRunCommand": "onboard",
+    "lastRunMode": "local"
+  },
+  "auth": {
+    "profiles": {
+      "ollama:default": {
+        "provider": "ollama",
+        "mode": "api_key"
+      }
+    }
+  },
+  "models": {
+    "mode": "merge",
+    "providers": {
+      "lmstudio": {
+        "baseUrl": "http://127.0.0.1:1234",
+        "apiKey": "not-needed",
+        "api": "openai-completions",
+        "models": [
+          {
+            "id": "qwen3.5-35b-a3b",
+            "name": "Qwen3.5 35B A3B (Local)",
+            "api": "openai-completions",
+            "reasoning": false,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 262144,
+            "maxTokens": 8192
+          }
+        ]
+      },
+      "ollama": {
+        "baseUrl": "http://127.0.0.1:11434",
+        "apiKey": "OLLAMA_API_KEY",
+        "api": "ollama",
+        "models": [
+          {
+            "id": "kimi-k2.5:cloud",
+            "name": "kimi-k2.5:cloud",
+            "api": "ollama",
+            "reasoning": false,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 128000,
+            "maxTokens": 8192
+          },
+          {
+            "id": "minimax-m2.5:cloud",
+            "name": "minimax-m2.5:cloud",
+            "api": "ollama",
+            "reasoning": false,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 204800,
+            "maxTokens": 8192
+          },
+          {
+            "id": "glm-5:cloud",
+            "name": "glm-5:cloud",
+            "api": "ollama",
+            "reasoning": false,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 128000,
+            "maxTokens": 8192
+          },
+          {
+            "id": "qwen3.5:397b-cloud",
+            "name": "qwen3.5:397b-cloud",
+            "api": "ollama",
+            "reasoning": false,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 262144,
+            "maxTokens": 8192
+          },
+          {
+            "id": "qwen3-coder-next:cloud",
+            "name": "qwen3-coder-next:cloud",
+            "api": "ollama",
+            "reasoning": false,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 262144,
+            "maxTokens": 8192
+          },
+          {
+            "id": "qwen3:30b-a3b",
+            "name": "qwen3:30b-a3b",
+            "api": "ollama",
+            "reasoning": false,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 262144,
+            "maxTokens": 8192
+          },
+          {
+            "id": "qwen2.5:7b",
+            "name": "qwen2.5:7b",
+            "api": "ollama",
+            "reasoning": false,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 32768,
+            "maxTokens": 8192
+          }
+        ]
+      }
+    }
+  },
+  "agents": {
+    "defaults": {
+      "model": {
+        "primary": "ollama/qwen3.5-35b-a3b-local"
+      },
+      "models": {
+        "lmstudio/qwen3.5-35b-a3b": {},
+        "ollama/qwen3.5:397b-cloud": {}
+      },
+      "workspace": "C:\\Users\\jgali\\.openclaw\\workspace",
+      "maxConcurrent": 4,
+      "subagents": {
+        "maxConcurrent": 8
+      }
+    }
+  },
+  "tools": {
+    "profile": "coding",
+    "web": {
+      "search": {
+        "enabled": true,
+        "provider": "duckduckgo"
+      }
+    }
+  },
+  "messages": {
+    "ackReactionScope": "group-mentions"
+  },
+  "commands": {
+    "native": "auto",
+    "nativeSkills": "auto",
+    "restart": true,
+    "ownerDisplay": "raw"
+  },
+  "session": {
+    "dmScope": "per-channel-peer"
+  },
+  "hooks": {
+    "internal": {
+      "enabled": true,
+      "entries": {
+        "session-memory": {
+          "enabled": true
+        }
+      }
+    }
+  },
+  "channels": {
+    "telegram": {
+      "enabled": true,
+      "dmPolicy": "pairing",
+      "botToken": "8705351803:AAE0BsrI5kUeXuNgFm_EFqze52SwcppoViw",
+      "groupPolicy": "allowlist",
+      "streaming": "partial"
+    },
+    "signal": {
+      "enabled": false,
+      "account": "+13527600236",
+      "cliPath": "signal-cli",
+      "dmPolicy": "pairing",
+      "groupPolicy": "allowlist"
+    }
+  },
+  "gateway": {
+    "port": 18789,
+    "mode": "local",
+    "bind": "loopback",
+    "auth": {
+      "mode": "token",
+      "token": "f0e11abe2adca8ba3218b9efcb928904d8d7660a83f32068"
+    },
+    "tailscale": {
+      "mode": "off",
+      "resetOnExit": false
+    },
+    "nodes": {
+      "denyCommands": [
+        "camera.snap",
+        "camera.clip",
+        "screen.record",
+        "contacts.add",
+        "calendar.add",
+        "reminders.add",
+        "sms.send"
+      ]
+    }
+  },
+  "mcp": {
+    "servers": {
+      "wordpress": {
+        "command": "node",
+        "args": [
+          "C:\\OpenClaw\\mcp\\wordpress-ssh\\index.mjs"
+        ],
+        "env": {
+          "WORDPRESS_SSH_TARGET": "root@lucerna-media-u70513.vm.elestio.app",
+          "WORDPRESS_SSH_PORT": "22",
+          "WORDPRESS_SSH_KEY_PATH": "C:\\Users\\jgali\\.ssh\\lucernamedia_cpanel",
+          "WORDPRESS_SSH_STRICT_HOST_KEY_CHECKING": "accept-new",
+          "WORDPRESS_SSH_DOCKER_COMPOSE_DIR": "/opt/app",
+          "WORDPRESS_SSH_DOCKER_SERVICE": "wordpress",
+          "WORDPRESS_WP_PATH": "/var/www/html",
+          "WORDPRESS_SITE_URL": "https://lucerna-media-u70513.vm.elestio.app",
+          "WORDPRESS_WP_ALLOW_ROOT": "true"
+        },
+        "cwd": "C:\\OpenClaw\\mcp\\wordpress-ssh"
+      }
+    }
+  },
+  "skills": {
+    "install": {
+      "nodeManager": "npm"
+    },
+    "entries": {
+      "apple-notes": {
+        "enabled": false
+      },
+      "bear-notes": {
+        "enabled": false
+      },
+      "1password": {
+        "enabled": false
+      },
+      "bluebubbles": {
+        "enabled": false
+      },
+      "discord": {
+        "enabled": false
+      },
+      "model-usage": {
+        "enabled": false
+      },
+      "things-mac": {
+        "enabled": false
+      },
+      "trello": {
+        "enabled": false
+      },
+      "wacli": {
+        "enabled": false
+      },
+      "camsnap": {
+        "enabled": false
+      },
+      "gemini": {
+        "enabled": false
+      }
+    }
+  },
+  "plugins": {
+    "entries": {
+      "duckduckgo": {
+        "enabled": true
+      }
+    }
+  }
+}

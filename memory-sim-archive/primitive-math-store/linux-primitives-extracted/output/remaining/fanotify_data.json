@@ -1,0 +1,761 @@
+{
+  "filename": "fanotify.h",
+  "includes": [
+    "linux/types.h"
+  ],
+  "defines": [
+    {
+      "name": "FAN_ACCESS",
+      "value": "0x00000001",
+      "comment": "File was accessed",
+      "category": ""
+    },
+    {
+      "name": "FAN_MODIFY",
+      "value": "0x00000002",
+      "comment": "File was modified",
+      "category": ""
+    },
+    {
+      "name": "FAN_ATTRIB",
+      "value": "0x00000004",
+      "comment": "Metadata changed",
+      "category": ""
+    },
+    {
+      "name": "FAN_CLOSE_WRITE",
+      "value": "0x00000008",
+      "comment": "Writable file closed",
+      "category": "FAN_CLOSE"
+    },
+    {
+      "name": "FAN_CLOSE_NOWRITE",
+      "value": "0x00000010",
+      "comment": "Unwritable file closed",
+      "category": "FAN_CLOSE"
+    },
+    {
+      "name": "FAN_OPEN",
+      "value": "0x00000020",
+      "comment": "File was opened",
+      "category": ""
+    },
+    {
+      "name": "FAN_MOVED_FROM",
+      "value": "0x00000040",
+      "comment": "File was moved from X",
+      "category": "FAN_MOVED"
+    },
+    {
+      "name": "FAN_MOVED_TO",
+      "value": "0x00000080",
+      "comment": "File was moved to Y",
+      "category": "FAN_MOVED"
+    },
+    {
+      "name": "FAN_CREATE",
+      "value": "0x00000100",
+      "comment": "Subfile was created",
+      "category": ""
+    },
+    {
+      "name": "FAN_DELETE",
+      "value": "0x00000200",
+      "comment": "Subfile was deleted",
+      "category": ""
+    },
+    {
+      "name": "FAN_DELETE_SELF",
+      "value": "0x00000400",
+      "comment": "Self was deleted",
+      "category": "FAN_DELETE"
+    },
+    {
+      "name": "FAN_MOVE_SELF",
+      "value": "0x00000800",
+      "comment": "Self was moved",
+      "category": "FAN_MOVE"
+    },
+    {
+      "name": "FAN_OPEN_EXEC",
+      "value": "0x00001000",
+      "comment": "File was opened for exec",
+      "category": "FAN_OPEN"
+    },
+    {
+      "name": "FAN_Q_OVERFLOW",
+      "value": "0x00004000",
+      "comment": "Event queued overflowed",
+      "category": "FAN_Q"
+    },
+    {
+      "name": "FAN_FS_ERROR",
+      "value": "0x00008000",
+      "comment": "Filesystem error",
+      "category": "FAN_FS"
+    },
+    {
+      "name": "FAN_OPEN_PERM",
+      "value": "0x00010000",
+      "comment": "File open in perm check",
+      "category": "FAN_OPEN"
+    },
+    {
+      "name": "FAN_ACCESS_PERM",
+      "value": "0x00020000",
+      "comment": "File accessed in perm check",
+      "category": "FAN_ACCESS"
+    },
+    {
+      "name": "FAN_OPEN_EXEC_PERM",
+      "value": "0x00040000",
+      "comment": "File open/exec in perm check",
+      "category": "FAN_OPEN"
+    },
+    {
+      "name": "FAN_PRE_ACCESS",
+      "value": "0x00100000",
+      "comment": "Pre-content access hook",
+      "category": "FAN_PRE"
+    },
+    {
+      "name": "FAN_MNT_ATTACH",
+      "value": "0x01000000",
+      "comment": "Mount was attached",
+      "category": "FAN_MNT"
+    },
+    {
+      "name": "FAN_MNT_DETACH",
+      "value": "0x02000000",
+      "comment": "Mount was detached",
+      "category": "FAN_MNT"
+    },
+    {
+      "name": "FAN_EVENT_ON_CHILD",
+      "value": "0x08000000",
+      "comment": "Interested in child events",
+      "category": "FAN_EVENT"
+    },
+    {
+      "name": "FAN_RENAME",
+      "value": "0x10000000",
+      "comment": "File was renamed",
+      "category": ""
+    },
+    {
+      "name": "FAN_ONDIR",
+      "value": "0x40000000",
+      "comment": "Event occurred against dir",
+      "category": ""
+    },
+    {
+      "name": "FAN_CLOSE",
+      "value": "(FAN_CLOSE_WRITE | FAN_CLOSE_NOWRITE)",
+      "comment": "close",
+      "category": ""
+    },
+    {
+      "name": "FAN_MOVE",
+      "value": "(FAN_MOVED_FROM | FAN_MOVED_TO)",
+      "comment": "moves",
+      "category": ""
+    },
+    {
+      "name": "FAN_CLOEXEC",
+      "value": "0x00000001",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FAN_NONBLOCK",
+      "value": "0x00000002",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FAN_CLASS_NOTIF",
+      "value": "0x00000000",
+      "comment": "",
+      "category": "FAN_CLASS"
+    },
+    {
+      "name": "FAN_CLASS_CONTENT",
+      "value": "0x00000004",
+      "comment": "",
+      "category": "FAN_CLASS"
+    },
+    {
+      "name": "FAN_CLASS_PRE_CONTENT",
+      "value": "0x00000008",
+      "comment": "",
+      "category": "FAN_CLASS"
+    },
+    {
+      "name": "FAN_ALL_CLASS_BITS",
+      "value": "(FAN_CLASS_NOTIF | FAN_CLASS_CONTENT | ",
+      "comment": "",
+      "category": "FAN_ALL"
+    },
+    {
+      "name": "FAN_UNLIMITED_QUEUE",
+      "value": "0x00000010",
+      "comment": "",
+      "category": "FAN_UNLIMITED"
+    },
+    {
+      "name": "FAN_UNLIMITED_MARKS",
+      "value": "0x00000020",
+      "comment": "",
+      "category": "FAN_UNLIMITED"
+    },
+    {
+      "name": "FAN_ENABLE_AUDIT",
+      "value": "0x00000040",
+      "comment": "",
+      "category": "FAN_ENABLE"
+    },
+    {
+      "name": "FAN_REPORT_PIDFD",
+      "value": "0x00000080",
+      "comment": "Report pidfd for event->pid",
+      "category": "FAN_REPORT"
+    },
+    {
+      "name": "FAN_REPORT_TID",
+      "value": "0x00000100",
+      "comment": "event->pid is thread id",
+      "category": "FAN_REPORT"
+    },
+    {
+      "name": "FAN_REPORT_FID",
+      "value": "0x00000200",
+      "comment": "Report unique file id",
+      "category": "FAN_REPORT"
+    },
+    {
+      "name": "FAN_REPORT_DIR_FID",
+      "value": "0x00000400",
+      "comment": "Report unique directory id",
+      "category": "FAN_REPORT"
+    },
+    {
+      "name": "FAN_REPORT_NAME",
+      "value": "0x00000800",
+      "comment": "Report events with name",
+      "category": "FAN_REPORT"
+    },
+    {
+      "name": "FAN_REPORT_TARGET_FID",
+      "value": "0x00001000",
+      "comment": "Report dirent target id",
+      "category": "FAN_REPORT"
+    },
+    {
+      "name": "FAN_REPORT_FD_ERROR",
+      "value": "0x00002000",
+      "comment": "event->fd can report error",
+      "category": "FAN_REPORT"
+    },
+    {
+      "name": "FAN_REPORT_MNT",
+      "value": "0x00004000",
+      "comment": "Report mount events",
+      "category": "FAN_REPORT"
+    },
+    {
+      "name": "FAN_REPORT_DFID_NAME",
+      "value": "(FAN_REPORT_DIR_FID | FAN_REPORT_NAME)",
+      "comment": "",
+      "category": "FAN_REPORT"
+    },
+    {
+      "name": "FAN_REPORT_DFID_NAME_TARGET",
+      "value": "(FAN_REPORT_DFID_NAME | ",
+      "comment": "",
+      "category": "FAN_REPORT"
+    },
+    {
+      "name": "FAN_ALL_INIT_FLAGS",
+      "value": "(FAN_CLOEXEC | FAN_NONBLOCK | ",
+      "comment": "",
+      "category": "FAN_ALL"
+    },
+    {
+      "name": "FAN_MARK_ADD",
+      "value": "0x00000001",
+      "comment": "",
+      "category": "FAN_MARK"
+    },
+    {
+      "name": "FAN_MARK_REMOVE",
+      "value": "0x00000002",
+      "comment": "",
+      "category": "FAN_MARK"
+    },
+    {
+      "name": "FAN_MARK_DONT_FOLLOW",
+      "value": "0x00000004",
+      "comment": "",
+      "category": "FAN_MARK"
+    },
+    {
+      "name": "FAN_MARK_ONLYDIR",
+      "value": "0x00000008",
+      "comment": "",
+      "category": "FAN_MARK"
+    },
+    {
+      "name": "FAN_MARK_IGNORED_MASK",
+      "value": "0x00000020",
+      "comment": "",
+      "category": "FAN_MARK"
+    },
+    {
+      "name": "FAN_MARK_IGNORED_SURV_MODIFY",
+      "value": "0x00000040",
+      "comment": "",
+      "category": "FAN_MARK"
+    },
+    {
+      "name": "FAN_MARK_FLUSH",
+      "value": "0x00000080",
+      "comment": "",
+      "category": "FAN_MARK"
+    },
+    {
+      "name": "FAN_MARK_EVICTABLE",
+      "value": "0x00000200",
+      "comment": "",
+      "category": "FAN_MARK"
+    },
+    {
+      "name": "FAN_MARK_IGNORE",
+      "value": "0x00000400",
+      "comment": "",
+      "category": "FAN_MARK"
+    },
+    {
+      "name": "FAN_MARK_INODE",
+      "value": "0x00000000",
+      "comment": "",
+      "category": "FAN_MARK"
+    },
+    {
+      "name": "FAN_MARK_MOUNT",
+      "value": "0x00000010",
+      "comment": "",
+      "category": "FAN_MARK"
+    },
+    {
+      "name": "FAN_MARK_FILESYSTEM",
+      "value": "0x00000100",
+      "comment": "",
+      "category": "FAN_MARK"
+    },
+    {
+      "name": "FAN_MARK_MNTNS",
+      "value": "0x00000110",
+      "comment": "",
+      "category": "FAN_MARK"
+    },
+    {
+      "name": "FAN_MARK_IGNORE_SURV",
+      "value": "(FAN_MARK_IGNORE | FAN_MARK_IGNORED_SURV_MODIFY)",
+      "comment": "",
+      "category": "FAN_MARK"
+    },
+    {
+      "name": "FAN_ALL_MARK_FLAGS",
+      "value": "(FAN_MARK_ADD |",
+      "comment": "",
+      "category": "FAN_ALL"
+    },
+    {
+      "name": "FAN_ALL_EVENTS",
+      "value": "(FAN_ACCESS |",
+      "comment": "",
+      "category": "FAN_ALL"
+    },
+    {
+      "name": "FAN_ALL_PERM_EVENTS",
+      "value": "(FAN_OPEN_PERM |",
+      "comment": "",
+      "category": "FAN_ALL"
+    },
+    {
+      "name": "FAN_ALL_OUTGOING_EVENTS",
+      "value": "(FAN_ALL_EVENTS |",
+      "comment": "",
+      "category": "FAN_ALL"
+    },
+    {
+      "name": "FANOTIFY_METADATA_VERSION",
+      "value": "3",
+      "comment": "",
+      "category": "FANOTIFY_METADATA"
+    },
+    {
+      "name": "FAN_EVENT_INFO_TYPE_FID",
+      "value": "1",
+      "comment": "",
+      "category": "FAN_EVENT"
+    },
+    {
+      "name": "FAN_EVENT_INFO_TYPE_DFID_NAME",
+      "value": "2",
+      "comment": "",
+      "category": "FAN_EVENT"
+    },
+    {
+      "name": "FAN_EVENT_INFO_TYPE_DFID",
+      "value": "3",
+      "comment": "",
+      "category": "FAN_EVENT"
+    },
+    {
+      "name": "FAN_EVENT_INFO_TYPE_PIDFD",
+      "value": "4",
+      "comment": "",
+      "category": "FAN_EVENT"
+    },
+    {
+      "name": "FAN_EVENT_INFO_TYPE_ERROR",
+      "value": "5",
+      "comment": "",
+      "category": "FAN_EVENT"
+    },
+    {
+      "name": "FAN_EVENT_INFO_TYPE_RANGE",
+      "value": "6",
+      "comment": "",
+      "category": "FAN_EVENT"
+    },
+    {
+      "name": "FAN_EVENT_INFO_TYPE_MNT",
+      "value": "7",
+      "comment": "",
+      "category": "FAN_EVENT"
+    },
+    {
+      "name": "FAN_EVENT_INFO_TYPE_OLD_DFID_NAME",
+      "value": "10",
+      "comment": "",
+      "category": "FAN_EVENT"
+    },
+    {
+      "name": "FAN_EVENT_INFO_TYPE_NEW_DFID_NAME",
+      "value": "12",
+      "comment": "",
+      "category": "FAN_EVENT"
+    },
+    {
+      "name": "FAN_RESPONSE_INFO_NONE",
+      "value": "0",
+      "comment": "",
+      "category": "FAN_RESPONSE"
+    },
+    {
+      "name": "FAN_RESPONSE_INFO_AUDIT_RULE",
+      "value": "1",
+      "comment": "",
+      "category": "FAN_RESPONSE"
+    },
+    {
+      "name": "FAN_ALLOW",
+      "value": "0x01",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FAN_DENY",
+      "value": "0x02",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FAN_ERRNO_BITS",
+      "value": "8",
+      "comment": "",
+      "category": "FAN_ERRNO"
+    },
+    {
+      "name": "FAN_ERRNO_SHIFT",
+      "value": "(32 - FAN_ERRNO_BITS)",
+      "comment": "",
+      "category": "FAN_ERRNO"
+    },
+    {
+      "name": "FAN_ERRNO_MASK",
+      "value": "((1 << FAN_ERRNO_BITS) - 1)",
+      "comment": "",
+      "category": "FAN_ERRNO"
+    },
+    {
+      "name": "FAN_AUDIT",
+      "value": "0x10",
+      "comment": "Bitmask to create audit record for result",
+      "category": ""
+    },
+    {
+      "name": "FAN_INFO",
+      "value": "0x20",
+      "comment": "Bitmask to indicate additional information",
+      "category": ""
+    },
+    {
+      "name": "FAN_NOFD",
+      "value": "-1",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FAN_NOPIDFD",
+      "value": "FAN_NOFD",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FAN_EPIDFD",
+      "value": "-2",
+      "comment": "",
+      "category": ""
+    },
+    {
+      "name": "FAN_EVENT_METADATA_LEN",
+      "value": "(sizeof(struct fanotify_event_metadata))",
+      "comment": "",
+      "category": "FAN_EVENT"
+    }
+  ],
+  "structs": [
+    {
+      "name": "fanotify_event_metadata",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "event_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "vers",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "reserved",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "metadata_len",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__aligned_u64",
+          "name": "mask",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "fd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__s32",
+          "name": "pid",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fanotify_event_info_header",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "info_type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "len",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fanotify_event_info_fid",
+      "fields": [
+        {
+          "type_name": "__kernel_fsid_t",
+          "name": "fsid",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fanotify_event_info_pidfd",
+      "fields": [
+        {
+          "type_name": "__s32",
+          "name": "pidfd",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fanotify_event_info_error",
+      "fields": [
+        {
+          "type_name": "__s32",
+          "name": "error",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "error_count",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fanotify_event_info_range",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "offset",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u64",
+          "name": "count",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fanotify_event_info_mnt",
+      "fields": [
+        {
+          "type_name": "__u64",
+          "name": "mnt_id",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fanotify_response",
+      "fields": [
+        {
+          "type_name": "__s32",
+          "name": "fd",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "response",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fanotify_response_info_header",
+      "fields": [
+        {
+          "type_name": "__u8",
+          "name": "type",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u8",
+          "name": "pad",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u16",
+          "name": "len",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    },
+    {
+      "name": "fanotify_response_info_audit_rule",
+      "fields": [
+        {
+          "type_name": "__u32",
+          "name": "rule_number",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "subj_trust",
+          "array_size": null,
+          "comment": ""
+        },
+        {
+          "type_name": "__u32",
+          "name": "obj_trust",
+          "array_size": null,
+          "comment": ""
+        }
+      ],
+      "comments": [],
+      "packed": false
+    }
+  ],
+  "ioctls": [],
+  "typedefs": [],
+  "enums": {}
+}

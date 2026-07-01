@@ -1,0 +1,116 @@
+task=common
+I remember the 4B Ordo run where the library was almost right but the binary imported the wrong crate name. Cargo.toml named the package rust_ordo_ext, so the binary had to import from rust_ordo_ext::{...}. The version that wrote rust_ordo_runtime failed before any behavior mattered. I corrected only the import name and the binary started linking to its own library.
+---
+task=common
+I remember the run where every CLI used read_to_string but I forgot the trait import. The method was present on Stdin only after I wrote the Read trait import beside std::io. The fixed binaries all read stdin into a String, looped over input.lines(), split_whitespace, and printed only exact contract lines.
+---
+task=common
+I remember exposing helper structs by accident. The tests ignored the return value from add_node, connect, add_ramp, register, and charge, but Rust still rejected public methods that returned private types. The clean fix was boring: mutating setup methods returned (), and only test-facing structs were public.
+---
+task=common
+I remember the derive scar from the Ordo run. Public structs compared by tests derived Clone, Debug, PartialEq, Eq, but I never put f64 fields inside those Eq structs. If a concept wanted a multiplier or cost, I stored integers or kept the float private and out of the compared struct.
+---
+task=common
+I remember the string-shape failure. The tests created structs with fields like kind: "vertical".to_string(), so the model-generated enum SignalKind broke the contract. The stable shape used plain String fields for kind, origin, node, task_id, and signals whenever the test built the struct directly.
+---
+task=common
+I remember the HashMap candidate scar. When a function accepts candidates: &[&str], the loop must be for &candidate in candidates, so candidate is &str. Then HashMap<String, _>.get(candidate) works. The failed version looped for candidate in candidates and passed &&str into get.
+---
+task=common
+I remember the stdout scar. The passing Ordo apps printed one line per command and no debug text, no labels beyond the contract, no extra spaces around >, no trailing summaries, and no explanations from main. Tests compared stdout exactly.
+---
+task=mini_runtime
+I remember mini_runtime failing after it started thread ids at 2. The correct publish took the current next_thread_id as the Trace thread_id, then incremented next_thread_id afterward. With a fresh runtime, the first publish returned thread_id 1 and printed thread=1.
+---
+task=mini_runtime
+I remember mini_runtime passing when add_node, connect, and add_ramp returned nothing. NodeState and Edge stayed private. OrdoRuntime exposed new, add_node, connect, add_ramp, set_capacity, set_cost, preload_targets, route_for_budget, and publish. Message and Trace were public plain structs.
+---
+task=mini_runtime
+I remember mini_runtime passing because publish walked the first outgoing edge in insertion order until no edge remained. It pushed each current node into path, marked promoted when the edge was a ramp, and recorded backpressure:name when the current node's capacity was zero. It did not stop just because capacity was zero.
+---
+task=backpressure_scheduler
+I remember scheduler passing when Plan was exactly task_id, node, promoted, signals. Scheduler::add_node and add_ramp returned (). schedule walked preferred candidates in order with for &candidate in candidates. A zero-capacity candidate produced backpressure:candidate, and the next healthy ramp target within budget produced promoted=true.
+---
+task=backpressure_scheduler
+I remember the scheduler failure where I mixed String and &String inside ramp lookup. The stable version stored ramps as Vec<(String, String)> and used simple comparisons: from == skipped and to == candidate. It avoided tuple HashMap lookups unless both tuple parts were owned Strings.
+---
+task=signal_mesh
+I remember signal_mesh passing only after I stopped inventing SignalKind. SignalTrace was a public struct with kind: String, origin: String, affected: Vec<String>. SignalMesh::new existed. vertical("message") returned the origin plus nodes in higher layers in insertion order. horizontal("flow") returned same-layer peers after removing the origin.
+---
+task=signal_mesh
+I remember the signal CLI that passed because it imported Read, built one SignalMesh across all node commands, and printed signal=vertical origin=message affected=message,flow,peer,orch. The print used trace.kind as a String, not an enum that needed Display.
+---
+task=retry_fallback
+I remember retry_fallback passing after the same &[&str] scar was fixed. RetryRuntime stored HashMap<String, bool>. plan used for &candidate in candidates, looked up self.nodes.get(candidate), pushed retry:candidate for failed nodes, and returned the first healthy candidate as RetryPlan { task_id, node, signals }.
+---
+task=retry_fallback
+I remember the retry CLI that passed because node local failed stored false, node backup healthy stored true, and plan job local backup printed exactly task=job node=backup signals=retry:local. When every candidate failed, plan returned None and the CLI printed nothing for that plan.
+---
+task=ramp_roundtrip
+I remember ramp_roundtrip passing after I stopped treating it like a graph search problem. RampRuntime only needed edges: Vec<(String, String)> and a states map from node name to "local" or "parallel". on_ramp(from, to) pushed the edge and stored to as parallel. off_ramp(from, to) pushed the edge and stored to as local. trace(start) began with path [start] and elevations ["local"], then repeatedly followed the first edge whose from matched current. Each transition to "parallel" incremented promotions; each transition to "local" from "parallel" incremented demotions.
+---
+task=ramp_roundtrip
+I remember the ramp_roundtrip CLI that passed with no cleverness. The commands were on ground highway, off highway exit, and trace ground. The output was exactly path=ground>highway>exit elevations=local,parallel,local promoted=1 demoted=1. RampTrace was a public struct with path, elevations, promotions, and demotions, all compared directly by tests.
+---
+task=ramp_roundtrip
+I remember the ramp binary failure that looked tiny but killed the test. I had written commands named on_ramp and off_ramp, but the test input used on and off. The passing match arms were "on" => runtime.on_ramp(parts[1], parts[2]), "off" => runtime.off_ramp(parts[1], parts[2]), and "trace" => println!("path={} elevations={} promoted={} demoted={}", trace.path.join(">"), trace.elevations.join(","), trace.promotions, trace.demotions). The binary imported the Read trait before calling read_to_string.
+---
+task=ramp_roundtrip
+I remember the ramp type-shape that stayed clean. RampTrace contained only path: Vec<String>, elevations: Vec<String>, promotions: usize, and demotions: usize. Elevations were stored as the literal strings "local" and "parallel". The runtime stored edge pairs and a map from node name to elevation string. Edges stayed a simple Vec<(String, String)>.
+---
+task=ramp_roundtrip
+I remember the exact small ramp library that would have passed. It used only this shape: pub struct RampTrace { pub path: Vec<String>, pub elevations: Vec<String>, pub promotions: usize, pub demotions: usize } and pub struct RampRuntime { edges: Vec<(String, String)>, states: std::collections::HashMap<String, String> }. new made empty edges and states. on_ramp pushed (from.to_string(), to.to_string()) and inserted to -> "parallel". off_ramp pushed the edge and inserted to -> "local". trace made current = start.to_string(), current_state = "local".to_string(), path vec![current.clone()], elevations vec![current_state.clone()], then while let Some((_, to)) = edges.iter().find(|(from, _)| from == &current) it cloned to into next, read next_state from states or "local", counted local-to-parallel promotions and parallel-to-local demotions, pushed next and next_state, then assigned current = next and current_state = next_state.
+---
+task=ramp_roundtrip
+I remember the exact small ramp binary that would have passed. It used use std::io::{self, Read}; made one RampRuntime before the input loop, read stdin into a String, and matched only "on", "off", and "trace". The trace arm printed println!("path={} elevations={} promoted={} demoted={}", trace.path.join(">"), trace.elevations.join(","), trace.promotions, trace.demotions).
+---
+task=ramp_roundtrip
+I remember the ramp stdin scar. I accidentally wrote read_to_string with a closure, like read_to_string(|mut s| ...), and rustc could not infer a type because read_to_string requires a mutable String buffer. The passing binary did exactly this before looping: let mut input = String::new(); io::stdin().read_to_string(&mut input).unwrap(); for line in input.lines() { ... }.
+---
+task=ramp_roundtrip
+I remember the ramp ownership scar. trace took &self, so it never called states.entry or mutated the map. It read strings with self.states.get(&current).cloned().unwrap_or_else(|| "local".to_string()). Inside the loop it used let next = to.clone(); let next_state = self.states.get(&next).cloned().unwrap_or_else(|| "local".to_string()); then pushed next.clone() into path, pushed next_state.clone() into elevations, and only after that assigned current = next and current_state = next_state.
+---
+task=ramp_roundtrip
+I remember the final ramp transition bug. current_state had to be mutable and updated at the end of each edge step. The working loop compared the old current_state against next_state, then after pushing the path it assigned current = next and current_state = next_state. It did not keep comparing every later edge against the original start state.
+---
+task=ramp_roundtrip
+I remember the ramp shadowing bug that caused cargo test to hang. Inside the trace loop I accidentally wrote let mut current = next_node, which created a new inner variable and left the outer current unchanged forever. The passing loop declared let mut current before the loop, then inside the loop assigned current = next without let. The same was true for current_state: update it with current_state = next_state, never redeclare it inside the loop.
+---
+task=ramp_roundtrip
+I remember the exact ramp trace ownership shape: let mut current_node = start.to_string(); let mut current_state = self.states.get(&current_node).cloned().unwrap_or_else(|| "local".to_string()); path.push(current_node.clone()); elevations.push(current_state.clone()); while let Some((_, to)) = self.edges.iter().find(|(from, _)| from == &current_node) { let next_node = to.clone(); let next_state = self.states.get(&next_node).cloned().unwrap_or_else(|| "local".to_string()); if current_state == "local" && next_state == "parallel" { promotions += 1; } else if current_state == "parallel" && next_state == "local" { demotions += 1; } path.push(next_node.clone()); elevations.push(next_state.clone()); current_node = next_node; current_state = next_state; }.
+---
+task=ramp_roundtrip
+I remember the Q4 ramp counter scar. promotions and demotions were local variables inside trace, not fields on RampRuntime. The passing trace started with let mut promotions = 0; let mut demotions = 0; incremented those local variables in the loop, and returned RampTrace { path, elevations, promotions, demotions }. It never wrote self.promotions, self.demotions, or promotions: self.promotions.
+---
+task=ramp_roundtrip
+I remember the Q4 ramp state-map shape that stayed stable. The runtime field was states: HashMap<String, String>. on_ramp inserted to.to_string() mapped to "parallel".to_string(). off_ramp inserted to.to_string() mapped to "local".to_string(). trace read current_state and next_state as String values with .cloned().unwrap_or_else(|| "local".to_string()), then pushed those String values into elevations. There was no custom state type, no enum, no Display conversion, and no to_string call on state objects.
+---
+task=preload_planner
+I remember the preload ownership scar from the 9B Q4 run. The graph stored HashMap<String, Vec<String>>, so self.nodes.get(&current) returned &Vec<String>. The passing BFS loop was for neighbor in neighbors, where neighbor is &String, then it used neighbor.clone() when inserting into visited, pushing into the queue, and pushing into result. The failing loop wrote for &neighbor in neighbors, which tried to move a String out of a shared reference.
+
+I remember the 9B Q3 ramp CLI scar. line.split_whitespace().collect::<Vec<_>>() returns a Vec<&str> directly, not an Option. The failed binary wrote if let Some(parts) = line.split_whitespace().collect::<Vec<_>>() and Rust rejected it with expected Vec<&str>, found Option. The passing shape is let parts: Vec<_> = line.split_whitespace().collect(); then inspect parts[0], parts[1], and parts[2].
+
+I remember the 9B Q3 audit index scar. AuditTimeline::default made next_index start at 0, so record produced audit=0:route@input,2:signal@model. The contract expected public monotonic indexes starting at 1, so AuditTimeline::new must initialize next_index: 1 instead of relying on Default for usize.
+
+I remember the audit_timeline Default trap because it fooled me twice. I wrote #[derive(Default)] on AuditTimeline and then made new() return Self::default(), which silently set next_index to 0. The rest of the code looked clean, cloned events correctly, and printed the CLI format correctly, but both tests still failed because the first public audit id was 0. The passing version did not rely on derived Default for AuditTimeline::new; it built AuditTimeline { events: Vec::new(), next_index: 1 }.
+---
+task=backpressure_scheduler
+I remember the Gemma scheduler iterator scar. I had candidates as &[&str] and tried to collect or compare borrowed iterator items directly, which left me with &&str and produced "Vec<&str> cannot be built from Iterator<Item=&&str>". The passing shape never collected candidates again. It iterated with for &candidate in candidates, used candidate as &str, pushed candidate.to_string() only when storing owned data, and compared candidate directly against node names by borrowing existing Strings.
+---
+task=ramp_roundtrip
+I remember the Gemma ramp alias trap. I accidentally defined RampTrace twice and tried to repair it with type RampTrace = RampTrace, which created a recursive type alias and hid the real fields. The passing version had exactly one concrete public struct RampTrace with path, elevations, promotions, and demotions. There was no type alias, no duplicate struct, and no fields named promotions or demotions on RampRuntime.
+---
+task=node_registry
+I remember the Gemma node registry borrowed-key scar. nodes_with returned Vec<String>, but I compared an owned String to a map key that expected a borrowed key and got expected &String, found String. The passing version made the filter simple: iterate over self.nodes.values(), test node.kind == kind, clone node.name into the result, sort the Vec<String>, and return it. It did not call contains_key with an owned String when a borrowed key was required.
+---
+task=backpressure_scheduler
+I remember the Gemma scheduler CLI slice scar. The parsed command already had parts: Vec<&str>, so the candidates for schedule were simply parts[3..].to_vec(). The failed binary wrote parts.iter().skip(3).collect::<Vec<&str>>(), which collected &&str items and failed. The passing binary did not import Plan, did not recollect from iter(), and called scheduler.schedule(task_id, &candidates, max_cost) with candidates built from the slice.
+---
+task=ramp_roundtrip
+I remember the Gemma ramp self-mutation scar. In trace(&self), promotions and demotions must be local mutable usize variables, never self.promotions or self.demotions, because RampRuntime has no such fields and &self cannot mutate counters. The passing trace used let mut promotions = 0; let mut demotions = 0; let mut current_node = start.to_string(); let mut current_state = ...; then returned RampTrace { path, elevations, promotions, demotions }.
+---
+task=ramp_roundtrip
+I remember the Gemma ramp binary command scar. The test sends commands named "on", "off", and "trace". The binary must import use rust_ordo_ext::RampRuntime; create one mutable runtime before the loop, and match "on" => runtime.on_ramp(parts[1], parts[2]), "off" => runtime.off_ramp(parts[1], parts[2]). A match arm named "connect" is dead code for this task and leaves the graph empty.
+---
+task=ramp_roundtrip
+I remember the Gemma ramp derive scar. The hidden tests use assert_eq! on RampTrace, so RampTrace must derive Debug, Clone, PartialEq, and Eq. The code can be behaviorally perfect and still fail if RampTrace is only pub struct RampTrace without derives, because assert_eq needs PartialEq and Debug. The passing declaration was #[derive(Debug, Clone, PartialEq, Eq)] pub struct RampTrace { pub path: Vec<String>, pub elevations: Vec<String>, pub promotions: usize, pub demotions: usize }.

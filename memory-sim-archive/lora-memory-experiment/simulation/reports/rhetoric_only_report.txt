@@ -1,0 +1,48 @@
+======================================================================
+SIMULATION REPORT: rhetoric_only
+======================================================================
+
+Domains: rhetoric
+Total memories: 21
+Total behaviors: 7
+Uncovered behaviors: 0
+Echo chains: 4
+Isolated memories: 11
+Echo connectivity: 47.6%
+Cross-domain connections: 0
+
+--- OVERALL SCORE: 0.895 ---
+
+--- PRESSURE PASS RATES ---
+       low: 100.0%
+    medium: 100.0%
+      high: 100.0%
+
+--- BEHAVIOR COVERAGE ---
+  ✓ R-001: Claim Identification (6 memories) [LB] echo:2→3
+  ✓ R-002: Evidence Evaluation (6 memories) [LB] echo:2→3
+  ✓ R-003: Warrant Detection (6 memories) echo:3→2
+  ✓ R-004: Fallacy Recognition (3 memories)
+  ✓ R-005: Kairos Detection (6 memories) [LB] echo:1→1
+  ✓ R-006: Enthymeme Reconstruction (6 memories) echo:3→2
+  ✓ R-007: Audience Awareness (6 memories) [LB] echo:1→1
+
+--- ECHO CHAINS ---
+  chain_0: RHE-000 → RHE-004 → RHE-015
+    Domains: rhetoric
+    Behaviors: R-003, R-001, R-002, R-006
+    Strength: 1.00
+  chain_1: RHE-003 → RHE-005
+    Domains: rhetoric
+    Behaviors: R-001, R-002
+    Strength: 1.00
+  chain_2: RHE-006 → RHE-008 → RHE-017
+    Domains: rhetoric
+    Behaviors: R-003, R-006
+    Strength: 1.00
+  chain_3: RHE-018 → RHE-019
+    Domains: rhetoric
+    Behaviors: R-007, R-005
+    Strength: 1.00
+
+======================================================================

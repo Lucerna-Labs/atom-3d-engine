@@ -1,0 +1,17 @@
+[package]
+name = "cap-keymap"
+version = "0.1.0"
+edition = "2024"
+description = "Renderer-neutral keymap system — context-aware binding resolution, multi-key sequences, and precedence-based dispatch. Extracted from Zed's GPUI architecture."
+license = "Apache-2.0 OR MIT"
+publish = false
+
+[dependencies]
+smallvec = { workspace = true }
+thiserror = { workspace = true }
+
+[features]
+default = []
+
+[lints.clippy]
+dbg_macro = "deny"
