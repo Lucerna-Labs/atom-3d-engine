@@ -270,6 +270,40 @@ fn physics_resolves_penetration() {
 }
 
 #[test]
+fn subitize_knob_cuts_field_evals_via_shipped_marcher() {
+    // Validates the SHIPPED `Marcher::subitize` knob (numerical-cognition / ANS transfer) through the
+    // real `Marcher::march`, not the standalone harness: turning it on must cut field-evals while
+    // keeping essentially the same silhouette (no tunneling) on the real demo scene.
+    use mm3e_kit::atoms;
+    use std::sync::atomic::{AtomicU64, Ordering::Relaxed};
+    fn count(scene: &Scene, c: &Camera, w: u32, h: u32) -> (u64, Vec<bool>) {
+        let counter = AtomicU64::new(0);
+        let base = scene.field();
+        let cf = |p: Vec3| {
+            counter.fetch_add(1, Relaxed);
+            base(p)
+        };
+        let m = scene.marcher;
+        let mut hits = Vec::with_capacity((w * h) as usize);
+        for (x, y) in atoms::scan(w, h) {
+            let ray = c.ray(x as f32 + 0.5, y as f32 + 0.5, w, h);
+            hits.push(m.march(&cf, &ray).hit);
+        }
+        (counter.load(Relaxed), hits)
+    }
+    let mut scene = demo_scene();
+    let c = cam();
+    let (w, h) = (scene.width, scene.height);
+    scene.marcher.subitize = 0.0;
+    let (e0, h0) = count(&scene, &c, w, h);
+    scene.marcher.subitize = 0.4;
+    let (e1, h1) = count(&scene, &c, w, h);
+    assert!(e1 < e0, "subitize=0.4 should cut field-evals: {e0} -> {e1}");
+    let agree = h0.iter().zip(&h1).filter(|(a, b)| a == b).count() as f32 / h0.len() as f32;
+    assert!(agree > 0.98, "subitize must not flip many hits (no tunneling): agree={agree:.4}");
+}
+
+#[test]
 fn animation_tracks_sample() {
     let pos = Track::new(Easing::Linear).key(0.0, Vec3::new(0.0, 0.0, 0.0)).key(2.0, Vec3::new(2.0, 4.0, 0.0));
     assert_eq!(pos.sample(-1.0), Vec3::new(0.0, 0.0, 0.0)); // clamps to start

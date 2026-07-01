@@ -56,6 +56,16 @@ pub struct Marcher {
     /// fidelity cost is imperceptible) and back to 0 for converged stills. Measured −7%…−16%
     /// field-evals for an image mean Δ of 1.3%…3.5% as it rises.
     pub lod_footprint: f32,
+    /// Subitize empty-space leap (a **numerical-cognition** transfer — the Approximate Number
+    /// System's "instantly recognize it's clearly far, so leap"): when the safe distance is well
+    /// clear of the surface (`d > 6·eps`), multiply the step by `1 + subitize`. 0.0 = off. This is
+    /// the top lead surfaced by mixing the new-domain primitives into the engine search and then
+    /// **validated on the real engine** (`examples/stoch_subitize_real.rs`): a speed/quality dial
+    /// like LOD — measured −11% field-evals at ~0.4% depth error (subitize≈0.2) up to −23% at ~1%
+    /// (subitize≈0.6); past that (≈0.8) it over-leaps silhouette edges and the error spikes. The
+    /// over-relaxation overlap-guard is the safety net for the leap, so it never tunnels through a
+    /// surface (hit-agreement stayed 99.9% across the whole sweep). Orchestrator dials it, like LOD.
+    pub subitize: f32,
 }
 
 impl Default for Marcher {
@@ -68,6 +78,7 @@ impl Default for Marcher {
             shadow_steps: 64,
             ao_samples: 5,
             lod_footprint: 0.0,
+            subitize: 0.0,
         }
     }
 }
@@ -82,6 +93,21 @@ impl Marcher {
     /// dominate the cost — without moving the hit point. A `step_scale < 1` (set for non-Lipschitz
     /// domain warps) disables over-relaxation and just under-relaxes, as before.
     pub fn march<F: Fn(Vec3) -> Field + ?Sized>(&self, field: &F, ray: &Ray) -> Hit {
+        self.march_with(field, |p| self.normal(field, p), ray)
+    }
+
+    /// Sphere-trace exactly as [`Marcher::march`], except the hit normal comes from `normal_fn`
+    /// instead of the tetrahedron stencil. `march()` is `march_with(field, |p| self.normal(field,
+    /// p), ray)` — same loop, same behavior, so every existing caller is unaffected. This hook
+    /// exists for callers that have an exact analytic gradient available (e.g. a dual-number scene
+    /// field, see `mm3e_kit::dual` and `Scene::field_dual`), which is both correct and cheaper than
+    /// four extra tetrahedron samples per hit. A generic closure (not `&dyn Fn`) keeps this
+    /// monomorphized and inlining, matching the rest of this file's hot-path style.
+    pub fn march_with<F, N>(&self, field: &F, normal_fn: N, ray: &Ray) -> Hit
+    where
+        F: Fn(Vec3) -> Field + ?Sized,
+        N: Fn(Vec3) -> Vec3,
+    {
         let mut omega = if self.step_scale >= 1.0 { 1.4 } else { self.step_scale };
         let mut t = 0.0f32;
         let mut prev_radius = 0.0f32;
@@ -100,9 +126,16 @@ impl Marcher {
                 omega = 1.0; // conservative for the rest of this ray
             } else {
                 if f.dist < eps {
-                    return Hit { hit: true, t, pos: p, normal: self.normal(field, p), mat: f.mat, steps: i };
+                    return Hit { hit: true, t, pos: p, normal: normal_fn(p), mat: f.mat, steps: i };
                 }
                 step_len = f.dist * omega;
+                // Subitize (a numerical-cognition transfer — the Approximate Number System's "leap
+                // when it's clearly far"): well clear of any surface, multiply the step. The
+                // over-relaxation overlap guard above is the safety net, so an over-leap is undone
+                // rather than tunneling. 0.0 = off. See `Marcher::subitize`.
+                if self.subitize > 0.0 && self.step_scale >= 1.0 && f.dist > eps * 6.0 {
+                    step_len *= 1.0 + self.subitize;
+                }
                 // Secant / regula-falsi root refinement near the surface (control-numerical-opt):
                 // estimate dd/dt from the last two samples and step toward the predicted root. On
                 // grazing rays the slope is shallow, so the secant step exceeds the safe sphere step
