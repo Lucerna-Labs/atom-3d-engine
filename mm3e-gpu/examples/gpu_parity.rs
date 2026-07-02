@@ -159,6 +159,57 @@ fn toggles_off_scene() -> Scene {
     scene
 }
 
+/// A baked mesh volume (an icosphere-ish UV sphere baked to an SDF grid): the GPU samples the
+/// same uploaded distance grid the CPU trilinearly interpolates (`vol_sample` vs
+/// `SdfVolume::sample`), including the conservative outside-box estimate.
+fn mesh_volume_scene() -> Scene {
+    use mm3e_orchestrator::mesh::{bake_sdf, Mesh};
+    let mut m = Mesh::default();
+    let (rings, segments, radius) = (24u32, 32u32, 0.9f32);
+    m.positions.push(Vec3::new(0.0, radius, 0.0));
+    for r in 1..rings {
+        let phi = std::f32::consts::PI * r as f32 / rings as f32;
+        for s in 0..segments {
+            let theta = std::f32::consts::TAU * s as f32 / segments as f32;
+            m.positions.push(Vec3::new(
+                radius * phi.sin() * theta.cos(),
+                radius * phi.cos(),
+                radius * phi.sin() * theta.sin(),
+            ));
+        }
+    }
+    m.positions.push(Vec3::new(0.0, -radius, 0.0));
+    let ring = |r: u32, s: u32| 1 + (r - 1) * segments + (s % segments);
+    for s in 0..segments {
+        m.triangles.push([0, ring(1, s + 1), ring(1, s)]);
+    }
+    for r in 1..rings - 1 {
+        for s in 0..segments {
+            let (a, b, c, d) = (ring(r, s), ring(r, s + 1), ring(r + 1, s + 1), ring(r + 1, s));
+            m.triangles.push([a, b, c]);
+            m.triangles.push([a, c, d]);
+        }
+    }
+    let south = (m.positions.len() - 1) as u32;
+    for s in 0..segments {
+        m.triangles.push([south, ring(rings - 1, s), ring(rings - 1, s + 1)]);
+    }
+    let vol = bake_sdf(&m, 64, 0.4).expect("bake");
+
+    let mut scene = base_scene();
+    let floor = scene.material(Material::solid(Vec3::splat(0.9)).checkered().roughness(0.55));
+    let red = scene.material(Material::solid(Vec3::new(0.85, 0.2, 0.2)).roughness(0.35));
+    let cell = vol.cell.x.max(vol.cell.y).max(vol.cell.z);
+    scene.marcher.normal_h = cell * 0.6;
+    let vid = scene.volume(vol);
+    scene.add(Object::new(Prim::Plane { n: Vec3::new(0.0, 1.0, 0.0), h: 0.0 }, Transform::IDENTITY, floor));
+    scene.add(Object::new(Prim::Volume { id: vid }, Transform::at(Vec3::new(0.0, 0.95, 0.0)), red));
+    scene.add(Object::new(Prim::Sphere { r: 0.45 }, Transform::at(Vec3::new(1.3, 0.5, 0.8)), red).smooth(0.3));
+    scene.sun_dir = Vec3::new(0.5, 0.75, 0.4).normalize();
+    scene.light(Light::directional(scene.sun_dir, Vec3::splat(1.4)).soft(0.04));
+    scene
+}
+
 fn main() {
     let r = match GpuRenderer::new() {
         Ok(r) => r,
@@ -174,4 +225,5 @@ fn main() {
     compare("foggy", &foggy_scene(), &r);
     compare("gi-bake", &gi_scene(), &r);
     compare("no-shdw-ao", &toggles_off_scene(), &r);
+    compare("mesh-vol", &mesh_volume_scene(), &r);
 }

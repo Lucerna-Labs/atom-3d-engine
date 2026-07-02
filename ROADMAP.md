@@ -44,8 +44,15 @@ constraint broken:
   schedule, emissive/fog blend), **baked GI on the GPU** (probe cubes as a storage buffer), and
   **deliberate adapter selection** (`MM3E_GPU_ADAPTER`; Intel Arc A380 validated at 55 fps).
 
-Highest-leverage next: **mesh ingestion** (glTF + a mesh→SDF bake) for those who want to bring
-external geometry into the field. See the tiers below.
+- ✅ **Mesh ingestion (OBJ → SDF bake)** — `mesh::parse_obj` + `mesh::bake_sdf` (triangle AABB
+  tree, row-parity sign, multithreaded; Lipschitz-verified output) and `Prim::Volume` /
+  `SdfVolume`: baked meshes are fields, so CSG/GI/physics/BVH consume them unchanged — on the
+  CPU and the GPU (storage-buffer sampling, parity mean 0.153/255). `mesh_demo` runs the whole
+  path end to end on a generated torus knot.
+
+Highest-leverage next: **glTF import** (the OBJ on-ramp exists; glb needs a small std-only JSON
+parser) and **SDF→mesh** (Marching Cubes / Dual Contouring) for the round trip. See the tiers
+below.
 
 ## The strategic fork (pick one)
 

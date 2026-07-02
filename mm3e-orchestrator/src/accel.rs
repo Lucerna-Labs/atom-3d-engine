@@ -33,6 +33,7 @@
 
 use mm3e_kit::sdf::Field;
 use mm3e_kit::vec::Vec3;
+use mm3e_kit::volume::SdfVolume;
 
 use crate::{Combine, Object};
 
@@ -114,7 +115,7 @@ impl Bvh {
     /// Fold every leaf that could beat `best` into it. `best` is `(dist, index, mat)`; the
     /// replace rule is strictly-smaller distance, or equal distance with smaller index — the
     /// linear fold's earliest-wins tie-break, made traversal-order independent.
-    fn query(&self, p: Vec3, objects: &[Object], slack: f32, best: &mut (f32, i64, u32)) {
+    fn query(&self, p: Vec3, objects: &[Object], volumes: &[SdfVolume], slack: f32, best: &mut (f32, i64, u32)) {
         // Median splits halve the item count per level, so depth ≤ ceil(log2 n) + 1; 48 covers
         // any realizable scene.
         let mut stack = [0u32; 48];
@@ -132,7 +133,8 @@ impl Bvh {
                 let i = node.leaf as usize;
                 // The leaf sphere IS the object's bounding sphere, so `lower` here is exactly
                 // the linear fold's per-object lower bound: same substitution, same contribution.
-                let contrib = if lower > slack { Field::new(lower, objects[i].mat) } else { objects[i].field(p) };
+                let contrib =
+                    if lower > slack { Field::new(lower, objects[i].mat) } else { objects[i].field(p, volumes) };
                 if contrib.dist < best.0 || (contrib.dist == best.0 && (i as i64) < best.1) {
                     *best = (contrib.dist, i as i64, contrib.mat);
                 }
@@ -170,8 +172,8 @@ pub(crate) struct WorldPlan {
 }
 
 impl WorldPlan {
-    pub(crate) fn build(objects: &[Object]) -> WorldPlan {
-        let bounds: Vec<Option<(Vec3, f32)>> = objects.iter().map(Object::world_bound).collect();
+    pub(crate) fn build(objects: &[Object], volumes: &[SdfVolume]) -> WorldPlan {
+        let bounds: Vec<Option<(Vec3, f32)>> = objects.iter().map(|o| o.world_bound(volumes)).collect();
         let slack = objects
             .iter()
             .map(|o| match o.combine {
@@ -222,29 +224,29 @@ impl WorldPlan {
     }
 
     /// An object's contribution at `p` — the linear fold's substitution rule, verbatim.
-    fn contrib(&self, i: usize, p: Vec3, objects: &[Object]) -> Field {
+    fn contrib(&self, i: usize, p: Vec3, objects: &[Object], volumes: &[SdfVolume]) -> Field {
         match self.bounds[i] {
             Some((c, r)) => {
                 let lower = (p - c).length() - r;
                 if lower > self.slack {
                     Field::new(lower, objects[i].mat)
                 } else {
-                    objects[i].field(p)
+                    objects[i].field(p, volumes)
                 }
             }
-            None => objects[i].field(p),
+            None => objects[i].field(p, volumes),
         }
     }
 
     /// Evaluate the world field at `p` — bit-identical to the linear left fold over `objects`.
-    pub(crate) fn eval(&self, p: Vec3, objects: &[Object]) -> Field {
+    pub(crate) fn eval(&self, p: Vec3, objects: &[Object], volumes: &[SdfVolume]) -> Field {
         use mm3e_kit::sdf;
         let mut acc = Field::FAR;
         let mut seeded = false;
         for seg in &self.segments {
             match seg {
                 Segment::One(i) => {
-                    let f = self.contrib(*i, p, objects);
+                    let f = self.contrib(*i, p, objects, volumes);
                     if !seeded {
                         acc = f;
                         seeded = true;
@@ -260,13 +262,13 @@ impl WorldPlan {
                     // The accumulator beats run members on ties (union keeps `a`), hence index −1.
                     let mut best = if seeded { (acc.dist, -1i64, acc.mat) } else { (f32::INFINITY, i64::MAX, 0u32) };
                     for &i in unbounded {
-                        let f = objects[i].field(p);
+                        let f = objects[i].field(p, volumes);
                         if f.dist < best.0 || (f.dist == best.0 && (i as i64) < best.1) {
                             best = (f.dist, i as i64, f.mat);
                         }
                     }
                     if let Some(t) = tree {
-                        t.query(p, objects, self.slack, &mut best);
+                        t.query(p, objects, volumes, self.slack, &mut best);
                     }
                     acc = Field::new(best.0, best.2);
                     seeded = true;

@@ -2,6 +2,34 @@
 
 All notable changes to MM3E are documented here.
 
+## [0.8.0] — mesh ingestion: OBJ → SDF bake, on the CPU and the GPU
+
+- **Triangle meshes now flow through the engine as fields** — the roadmap's "deliberate bridge
+  to art content", done the doctrine-preserving way. `mesh::parse_obj`/`load_obj` (std-only,
+  line-oriented, line-numbered errors, fan triangulation, negative/relative indices) reads a
+  mesh; `mesh::bake_sdf` converts it once into exact signed distances on a grid: nearest-triangle
+  distances via a triangle AABB tree (Ericson closest-point, degenerate-tri filtered), sign by
+  ray-crossing parity per grid row (watertight input; the crossing plane is epsilon-nudged so
+  shared-edge hits cannot double-count), multithreaded over z-slabs. A 9,600-triangle torus knot
+  bakes to a 185×95×192 grid in ~1 s and its field is Lipschitz-clean (0 adjacent-pair
+  violations — the sharp test for parity/sign bugs).
+- **`SdfVolume`** (`mm3e-kit/src/volume.rs`, mechanism): trilinear sampling inside the grid box;
+  outside, the provably conservative `max(box_dist, d(clamped) − box_dist)` (true distance
+  bounds both ways, so the tracer never overshoots). **`Prim::Volume { id }`** references
+  `Scene::volumes` the way materials work, so `Prim` stays `Copy`; baked meshes participate in
+  CSG (`mesh_demo` smooth-unions an analytic sphere into the knot), GI, physics, and the BVH
+  plan unchanged. Bit-exact world/linear-fold equivalence holds with volumes in the scene
+  (tested). Volume scenes fall back to tetrahedron normals (`is_dual_safe` excludes them).
+- **On the GPU too**: volumes upload as a concatenated storage buffer (binding 3) and the shader
+  ports `SdfVolume::sample` exactly. Measured parity on a baked-sphere scene: **mean 0.153/255**
+  — the same fidelity as the analytic scenes.
+- **`Marcher.normal_h`** (new mechanism knob, default 0.0009 = old behavior exactly): a sampled
+  field's trilinear surface wobbles at cell scale, so volume scenes widen the normal stencil to
+  ~½ cell and the shadow/reflection lift-offs and AO base offset scale with it (all bit-identical
+  for analytic scenes via `max(historical, …)`). Also baked into the WGSL twin.
+- `scene_io::serialize` writes an explicit comment for volume objects (grid data is not
+  text-serializable) instead of a broken directive.
+
 ## [0.7.0] — BVH tree-fold, GPU parity + GI, deliberate adapter selection
 
 - **BVH over union runs** (`mm3e-orchestrator/src/accel.rs`) — the roadmap's top item, built to a

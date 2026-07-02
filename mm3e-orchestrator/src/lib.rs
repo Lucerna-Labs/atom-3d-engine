@@ -12,6 +12,7 @@
 mod accel;
 pub mod anim;
 pub mod gi;
+pub mod mesh;
 pub mod particles;
 pub mod physics;
 pub mod post;
@@ -29,6 +30,7 @@ use mm3e_kit::{
     sdf::{self, Field},
     shade,
     vec::{Transform, Vec3},
+    volume::SdfVolume,
 };
 
 use gi::GiVolume;
@@ -146,21 +148,58 @@ impl Quality {
 /// A primitive's local-space shape. The orchestrator picks these; the kit only evaluates them.
 #[derive(Clone, Copy, Debug)]
 pub enum Prim {
-    Sphere { r: f32 },
-    Box { half: Vec3 },
-    RoundBox { half: Vec3, radius: f32 },
-    Torus { major: f32, minor: f32 },
-    Cylinder { h: f32, r: f32 },
-    Capsule { a: Vec3, b: Vec3, r: f32 },
-    Cone { r1: f32, r2: f32, h: f32 },
-    Ellipsoid { r: Vec3 },
-    Octahedron { s: f32 },
-    HexPrism { r: f32, h: f32 },
-    Plane { n: Vec3, h: f32 },
+    Sphere {
+        r: f32,
+    },
+    Box {
+        half: Vec3,
+    },
+    RoundBox {
+        half: Vec3,
+        radius: f32,
+    },
+    Torus {
+        major: f32,
+        minor: f32,
+    },
+    Cylinder {
+        h: f32,
+        r: f32,
+    },
+    Capsule {
+        a: Vec3,
+        b: Vec3,
+        r: f32,
+    },
+    Cone {
+        r1: f32,
+        r2: f32,
+        h: f32,
+    },
+    Ellipsoid {
+        r: Vec3,
+    },
+    Octahedron {
+        s: f32,
+    },
+    HexPrism {
+        r: f32,
+        h: f32,
+    },
+    Plane {
+        n: Vec3,
+        h: f32,
+    },
+    /// A baked signed-distance volume (a mesh re-expressed as a sampled field — see
+    /// [`mesh::bake_sdf`]). `id` indexes [`Scene::volumes`], mirroring how materials work, so
+    /// `Prim` stays `Copy` while the grid data lives once in the scene.
+    Volume {
+        id: u32,
+    },
 }
 
 impl Prim {
-    fn distance(&self, local: Vec3) -> f32 {
+    fn distance(&self, local: Vec3, volumes: &[SdfVolume]) -> f32 {
         match *self {
             Prim::Sphere { r } => sdf::sphere(local, r),
             Prim::Box { half } => sdf::boxed(local, half),
@@ -173,10 +212,18 @@ impl Prim {
             Prim::Octahedron { s } => sdf::octahedron(local, s),
             Prim::HexPrism { r, h } => sdf::hex_prism(local, r, h),
             Prim::Plane { n, h } => sdf::plane(local, n, h),
+            // A missing id (modulo-guarded like materials) can only come from a mis-authored
+            // scene; an empty volume list degenerates to "infinitely far", never a panic.
+            Prim::Volume { id } => match volumes.is_empty() {
+                true => f32::INFINITY,
+                false => volumes[id as usize % volumes.len()].sample(local),
+            },
         }
     }
 
     /// Dual-number twin of [`Prim::distance`] — same formulas, carrying the exact gradient.
+    /// `Volume` is unreachable: [`Object::is_dual_safe`] excludes it, so the dual path is never
+    /// entered for a scene that contains one.
     fn distance_dual(&self, lx: Dual, ly: Dual, lz: Dual) -> Dual {
         match *self {
             Prim::Sphere { r } => dual::sphere(lx, ly, lz, r),
@@ -190,11 +237,12 @@ impl Prim {
             Prim::Octahedron { s } => dual::octahedron(lx, ly, lz, s),
             Prim::HexPrism { r, h } => dual::hex_prism(lx, ly, lz, r, h),
             Prim::Plane { n, h } => dual::plane(lx, ly, lz, n, h),
+            Prim::Volume { .. } => unreachable!("volume prims are excluded by is_dual_safe"),
         }
     }
 
     /// A conservative local-space bounding sphere `(center, radius)`, or `None` if unbounded.
-    fn local_bound(&self) -> Option<(Vec3, f32)> {
+    fn local_bound(&self, volumes: &[SdfVolume]) -> Option<(Vec3, f32)> {
         match *self {
             Prim::Sphere { r } => Some((Vec3::ZERO, r)),
             Prim::Box { half } => Some((Vec3::ZERO, half.length())),
@@ -207,6 +255,13 @@ impl Prim {
             Prim::Octahedron { s } => Some((Vec3::ZERO, s)),
             Prim::HexPrism { r, h } => Some((Vec3::ZERO, (r * r + h * h).sqrt())),
             Prim::Plane { .. } => None,
+            Prim::Volume { id } => match volumes.is_empty() {
+                true => None,
+                false => {
+                    let (lo, hi) = volumes[id as usize % volumes.len()].bounds();
+                    Some(((lo + hi).scale(0.5), (hi - lo).scale(0.5).length()))
+                }
+            },
         }
     }
 }
@@ -296,7 +351,8 @@ impl Object {
     }
 
     /// This object's contribution to the world field at world point `p`, with modifiers applied.
-    fn field(&self, p: Vec3) -> Field {
+    /// `volumes` is [`Scene::volumes`] — only `Prim::Volume` reads it.
+    pub(crate) fn field(&self, p: Vec3, volumes: &[SdfVolume]) -> Field {
         let mut local = self.xform.to_local(p);
         let m = &self.mods;
         if m.any_mirror() {
@@ -315,7 +371,7 @@ impl Object {
             local = sdf::op_bend(local, m.bend);
         }
         // Rotation+translation is an isometry, so the world distance is `scale · sdf(local)`.
-        let mut d = self.prim.distance(local) * self.xform.scale;
+        let mut d = self.prim.distance(local, volumes) * self.xform.scale;
         if m.round != 0.0 {
             d = sdf::op_round(d, m.round);
         }
@@ -327,11 +383,11 @@ impl Object {
 
     /// True iff `field_dual` can represent this object exactly. `twist`/`bend` rotate the query
     /// point by a position-dependent angle (needing dual `sin`/`cos`, which `mm3e_kit::dual` does
-    /// not implement — used by exactly one example scene in the whole codebase). Any object using
-    /// either falls the WHOLE scene back to the tetrahedron normal (see `Scene::is_dual_safe`),
-    /// never a silently-wrong gradient.
+    /// not implement — used by exactly one example scene in the whole codebase), and a baked
+    /// `Volume` has no dual sampler. Any such object falls the WHOLE scene back to the
+    /// tetrahedron normal (see `Scene::is_dual_safe`), never a silently-wrong gradient.
     fn is_dual_safe(&self) -> bool {
-        self.mods.twist == 0.0 && self.mods.bend == 0.0
+        self.mods.twist == 0.0 && self.mods.bend == 0.0 && !matches!(self.prim, Prim::Volume { .. })
     }
 
     /// Dual-number twin of [`Object::field`] — same pipeline (transform → modifiers → primitive →
@@ -372,8 +428,8 @@ impl Object {
     /// field fold: outside the sphere the cheap lower bound `|p − center| − radius` is a valid
     /// distance underestimate, so the expensive exact SDF can be skipped without ever letting
     /// the sphere tracer overshoot a surface.
-    fn world_bound(&self) -> Option<(Vec3, f32)> {
-        let (mut center, mut radius) = self.prim.local_bound()?;
+    pub(crate) fn world_bound(&self, volumes: &[SdfVolume]) -> Option<(Vec3, f32)> {
+        let (mut center, mut radius) = self.prim.local_bound(volumes)?;
         let m = &self.mods;
         if m.repeat != Vec3::ZERO || m.bend != 0.0 {
             return None; // unbounded / non-convex in a way the sphere can't conservatively cover
@@ -481,6 +537,9 @@ pub struct Scene {
     pub mode: RenderMode,
     /// Optional baked global-illumination volume (see [`Scene::bake_gi`]).
     pub gi: Option<GiVolume>,
+    /// Baked signed-distance volumes (meshes re-expressed as fields — see [`mesh::bake_sdf`]),
+    /// referenced by [`Prim::Volume`] ids the way materials are.
+    pub volumes: Vec<SdfVolume>,
 }
 
 impl Scene {
@@ -504,6 +563,7 @@ impl Scene {
             post: Post::default(),
             mode: RenderMode::Beauty,
             gi: None,
+            volumes: Vec::new(),
         }
     }
 
@@ -511,6 +571,11 @@ impl Scene {
     pub fn material(&mut self, m: Material) -> u32 {
         self.materials.push(m);
         (self.materials.len() - 1) as u32
+    }
+    /// Register a baked SDF volume and return its id, for [`Prim::Volume`] objects to reference.
+    pub fn volume(&mut self, v: SdfVolume) -> u32 {
+        self.volumes.push(v);
+        (self.volumes.len() - 1) as u32
     }
     pub fn add(&mut self, obj: Object) {
         self.objects.push(obj);
@@ -524,7 +589,7 @@ impl Scene {
     /// the scene is assembled. `dims` is the probe grid resolution, `samples` the rays per cube
     /// face (1 = axis only, ≥5 = a cone). No-op for an empty / unbounded scene.
     pub fn bake_gi(&mut self, dims: (usize, usize, usize), samples: u32) {
-        let spheres: Vec<(Vec3, f32)> = self.objects.iter().filter_map(Object::world_bound).collect();
+        let spheres: Vec<(Vec3, f32)> = self.objects.iter().filter_map(|o| o.world_bound(&self.volumes)).collect();
         let Some((lo, hi)) = gi::bounds_of(&spheres, 1.5) else { return };
         // Build the volume in a block so the immutable borrows of `self` (the field + gather
         // closures) end before the mutable assignment to `self.gi`.
@@ -580,8 +645,8 @@ impl Scene {
     /// same per-object lower-bound substitution outside `slack`, same earliest-index tie-breaks.
     /// `tests/engine.rs` asserts the equivalence point-by-point on randomized scenes.
     fn world(&self) -> impl Fn(Vec3) -> Field + '_ {
-        let plan = accel::WorldPlan::build(&self.objects);
-        move |p: Vec3| plan.eval(p, &self.objects)
+        let plan = accel::WorldPlan::build(&self.objects, &self.volumes);
+        move |p: Vec3| plan.eval(p, &self.objects, &self.volumes)
     }
 
     /// The pre-BVH linear fold, verbatim — the semantic reference `world()` must match
@@ -589,7 +654,7 @@ impl Scene {
     /// path.
     #[doc(hidden)]
     pub fn world_linear(&self) -> impl Fn(Vec3) -> Field + '_ {
-        let bounds: Vec<Option<(Vec3, f32)>> = self.objects.iter().map(Object::world_bound).collect();
+        let bounds: Vec<Option<(Vec3, f32)>> = self.objects.iter().map(|o| o.world_bound(&self.volumes)).collect();
         let slack = self
             .objects
             .iter()
@@ -609,10 +674,10 @@ impl Scene {
                         if lower > slack {
                             Field::new(lower, obj.mat)
                         } else {
-                            obj.field(p)
+                            obj.field(p, &self.volumes)
                         }
                     }
-                    None => obj.field(p),
+                    None => obj.field(p, &self.volumes),
                 };
                 // The first placed object seeds the field; after that, its combine mode rules.
                 if first {
@@ -1002,10 +1067,14 @@ fn shade_hit<F: Fn(Vec3) -> Field + ?Sized>(
         if shade::lambert(normal, l_dir) <= 0.0 {
             continue;
         }
-        // Lift the shadow ray off the surface to avoid self-intersection acne.
+        // Lift the shadow ray off the surface to avoid self-intersection acne. The lift scales
+        // with the normal stencil: a sampled (baked-volume) field's trilinear surface wobbles at
+        // cell scale, so the analytic 0.01 would restart inside it. Analytic scenes
+        // (normal_h = 0.0009) keep the historical 0.01 exactly.
+        let lift = (scene.marcher.normal_h * 2.0).max(0.01);
         let shadow = if scene.shadows {
             let max_t = l_dist.min(scene.marcher.max_dist);
-            scene.marcher.soft_shadow(field, hit.pos + normal.scale(0.01), l_dir, max_t, light.shadow_k(l_dist))
+            scene.marcher.soft_shadow(field, hit.pos + normal.scale(lift), l_dir, max_t, light.shadow_k(l_dist))
         } else {
             1.0
         };
@@ -1023,7 +1092,7 @@ fn shade_hit<F: Fn(Vec3) -> Field + ?Sized>(
         let cos = normal.dot(view).max(0.0);
         let fr = shade::fresnel_schlick(cos, m.reflectivity);
         let rdir = ray.dir.reflect(normal).normalize();
-        let rorigin = hit.pos + normal.scale(0.02);
+        let rorigin = hit.pos + normal.scale((scene.marcher.normal_h * 2.0).max(0.02));
         let refl = trace(scene, field, &Ray { origin: rorigin, dir: rdir }, depth + 1, dual_safe);
         radiance = radiance.scale(1.0 - fr) + refl.scale(fr);
     }

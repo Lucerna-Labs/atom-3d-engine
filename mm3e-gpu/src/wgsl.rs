@@ -58,12 +58,15 @@ pub fn build_shader(scene: &Scene) -> String {
     s.push_str(&format!("const EPS_BASE: f32 = {};\n", f(mr.eps)));
     s.push_str(&format!("const LOD_FOOTPRINT: f32 = {};\n", f(mr.lod_footprint)));
     s.push_str(&format!("const STEP_SCALE: f32 = {};\n", f(mr.step_scale.min(1.0))));
+    s.push_str(&format!("const NORMAL_H: f32 = {};\n", f(mr.normal_h)));
+    s.push_str(&format!("const REFL_LIFT: f32 = {};\n", f((mr.normal_h * 2.0).max(0.02))));
     s.push_str(&format!("const SHADOW_STEPS: i32 = {};\n", mr.shadow_steps.min(i32::MAX as u32)));
     // `scene.ao == false` compiles to a zero sample budget — ao() then returns fully open (1.0),
     // matching the CPU's `if scene.ao { … } else { 1.0 }` gate.
     let ao_samples = if scene.ao { mr.ao_samples } else { 0 };
     s.push_str(&format!("const AO_SAMPLES: i32 = {};\n", ao_samples.min(i32::MAX as u32)));
     s.push_str(&format!("const AO_SPAN: f32 = {};\n", f((ao_samples.max(2) - 1) as f32)));
+    s.push_str(&format!("const AO_BASE: f32 = {};\n", f(mr.normal_h.max(0.01))));
     // Baked GI volume: the grid geometry compiles to constants; the ambient cubes ride in a
     // read-only storage buffer (binding 2, uploaded by `GpuRenderer::compile`). Per-axis
     // GI_SCALE = (n.max(2)-1)/extent maps world → fractional probe coords, with a degenerate
@@ -160,7 +163,9 @@ fn emit_local(o: &Object) -> String {
 }
 
 /// The primitive distance expression in WGSL, evaluated on `q` and scaled to world units.
-fn emit_prim(o: &Object) -> String {
+/// `vols` is `(per-volume f32 offsets into vol_data, &scene.volumes)` — a `Prim::Volume` call
+/// site bakes its grid geometry as literal arguments, id resolved modulo like the CPU.
+fn emit_prim(o: &Object, vols: &(Vec<u32>, &[mm3e_kit::volume::SdfVolume])) -> String {
     let sc = f(o.xform.scale);
     let body = match o.prim {
         Prim::Sphere { r } => format!("sd_sphere(q, {})", f(r)),
@@ -174,6 +179,18 @@ fn emit_prim(o: &Object) -> String {
         Prim::Octahedron { s } => format!("sd_octahedron(q, {})", f(s)),
         Prim::HexPrism { r, h } => format!("sd_hex_prism(q, {}, {})", f(r), f(h)),
         Prim::Plane { n, h } => format!("sd_plane(q, {}, {})", v3(n), f(h)),
+        Prim::Volume { id } => {
+            let (offsets, volumes) = vols;
+            if volumes.is_empty() {
+                // CPU: an empty volume list degenerates to "infinitely far".
+                "1e30".to_string()
+            } else {
+                let vid = id as usize % volumes.len();
+                let v = &volumes[vid];
+                let (nx, ny, nz) = v.dims;
+                format!("vol_sample({}u, {nx}u, {ny}u, {nz}u, {}, {}, q)", offsets[vid], v3(v.min), v3(v.cell))
+            }
+        }
     };
     let mut expr = format!("    var od = {body} * {sc};\n");
     if o.mods.round != 0.0 {
@@ -185,13 +202,26 @@ fn emit_prim(o: &Object) -> String {
     expr
 }
 
+/// Per-volume start offsets (in f32 elements) within the concatenated `vol_data` buffer —
+/// must match the packing in `GpuRenderer::compile`.
+pub(crate) fn volume_offsets(volumes: &[mm3e_kit::volume::SdfVolume]) -> Vec<u32> {
+    let mut offsets = Vec::with_capacity(volumes.len());
+    let mut off = 0u32;
+    for v in volumes {
+        offsets.push(off);
+        off += v.data.len() as u32;
+    }
+    offsets
+}
+
 fn map_fn(scene: &Scene) -> String {
+    let vols = (volume_offsets(&scene.volumes), scene.volumes.as_slice());
     let mut s = String::from("fn map(p: vec3<f32>) -> vec2<f32> {\n  var d = vec2<f32>(1e30, 0.0);\n");
     for (i, o) in scene.objects.iter().enumerate() {
         let matf = f(o.mat as f32);
         s.push_str("  {\n");
         s.push_str(&emit_local(o));
-        s.push_str(&emit_prim(o));
+        s.push_str(&emit_prim(o, &vols));
         if i == 0 {
             s.push_str(&format!("    d = vec2<f32>(od, {matf});\n"));
         } else {
@@ -258,9 +288,11 @@ fn direct_lighting_fn(scene: &Scene) -> String {
         s.push_str("    let ndl = max(dot(n, ldir), 0.0);\n");
         s.push_str("    if (ndl > 0.0) {\n");
         // `scene.shadows == false` compiles the shadow trace out entirely, matching the CPU's
-        // `if scene.shadows { … } else { 1.0 }` gate in shade_hit.
+        // `if scene.shadows { … } else { 1.0 }` gate in shade_hit. The lift scales with the
+        // normal stencil exactly like the CPU (sampled-field surfaces wobble at cell scale).
         if scene.shadows {
-            s.push_str(&format!("      let sh = soft_shadow(p + n*0.01, ldir, min(ldist, MAX_DIST), {k});\n"));
+            let lift = f((scene.marcher.normal_h * 2.0).max(0.01));
+            s.push_str(&format!("      let sh = soft_shadow(p + n*{lift}, ldir, min(ldist, MAX_DIST), {k});\n"));
         } else {
             s.push_str("      let sh = 1.0;\n");
         }
@@ -294,6 +326,35 @@ struct U {
 // (i, j, k) at flat index ((k*GI_NY + j)*GI_NX + i)*6. A 1-probe zero volume when HAS_GI is
 // false (the sampler is compiled out, but the binding must exist).
 @group(0) @binding(2) var<storage, read> gi_cubes: array<vec4<f32>>;
+// Baked SDF volumes (meshes re-expressed as sampled fields), concatenated; per-volume offsets
+// and grid geometry are baked as constants at each Prim::Volume call site. A single zero when
+// the scene has no volumes (binding must exist).
+@group(0) @binding(3) var<storage, read> vol_data: array<f32>;
+
+fn vol_at(off: u32, nx: u32, ny: u32, i: u32, j: u32, k: u32) -> f32 {
+  return vol_data[off + (k * ny + j) * nx + i];
+}
+// SdfVolume::sample, ported: trilinear inside the grid box; outside, the provably conservative
+// max(box_dist, d(clamped) - box_dist) (true distance >= both, so the tracer never overshoots).
+fn vol_sample(off: u32, nx: u32, ny: u32, nz: u32, vmin: vec3<f32>, cell: vec3<f32>, p: vec3<f32>) -> f32 {
+  let size = vec3<f32>(f32(nx - 1u), f32(ny - 1u), f32(nz - 1u)) * cell;
+  let c = clamp(p, vmin, vmin + size);
+  let outside = length(p - c);
+  let g = (c - vmin) / cell;
+  let i0 = min(u32(max(floor(g.x), 0.0)), nx - 2u);
+  let j0 = min(u32(max(floor(g.y), 0.0)), ny - 2u);
+  let k0 = min(u32(max(floor(g.z), 0.0)), nz - 2u);
+  let fx = clamp(g.x - f32(i0), 0.0, 1.0);
+  let fy = clamp(g.y - f32(j0), 0.0, 1.0);
+  let fz = clamp(g.z - f32(k0), 0.0, 1.0);
+  let x00 = mix(vol_at(off, nx, ny, i0, j0, k0),      vol_at(off, nx, ny, i0 + 1u, j0, k0),      fx);
+  let x10 = mix(vol_at(off, nx, ny, i0, j0 + 1u, k0), vol_at(off, nx, ny, i0 + 1u, j0 + 1u, k0), fx);
+  let x01 = mix(vol_at(off, nx, ny, i0, j0, k0 + 1u),      vol_at(off, nx, ny, i0 + 1u, j0, k0 + 1u),      fx);
+  let x11 = mix(vol_at(off, nx, ny, i0, j0 + 1u, k0 + 1u), vol_at(off, nx, ny, i0 + 1u, j0 + 1u, k0 + 1u), fx);
+  let d = mix(mix(x00, x10, fy), mix(x01, x11, fy), fz);
+  if (outside > 0.0) { return max(outside, d - outside); }
+  return d;
+}
 
 const PI: f32 = 3.14159265359;
 
@@ -331,7 +392,7 @@ fn op_twist(p: vec3<f32>, k: f32) -> vec3<f32> { let a = k * p.y; let s = sin(a)
 fn op_bend(p: vec3<f32>, k: f32) -> vec3<f32> { let a = k * p.x; let s = sin(a); let c = cos(a); return vec3<f32>(c*p.x - s*p.y, s*p.x + c*p.y, p.z); }
 
 fn calc_normal(p: vec3<f32>) -> vec3<f32> {
-  let h = 0.0009;
+  let h = NORMAL_H;
   let k0 = vec3<f32>(1.0, -1.0, -1.0); let k1 = vec3<f32>(-1.0, -1.0, 1.0);
   let k2 = vec3<f32>(-1.0, 1.0, -1.0); let k3 = vec3<f32>(1.0, 1.0, 1.0);
   return normalize(k0*map(p + k0*h).x + k1*map(p + k1*h).x + k2*map(p + k2*h).x + k3*map(p + k3*h).x);
@@ -368,7 +429,7 @@ fn soft_shadow(ro: vec3<f32>, rd: vec3<f32>, maxt: f32, k: f32) -> f32 {
 fn ao(p: vec3<f32>, n: vec3<f32>) -> f32 {
   if (AO_SAMPLES == 0) { return 1.0; }
   var occ = 0.0; var sca = 1.0;
-  for (var i = 0; i < AO_SAMPLES; i = i + 1) { let hr = 0.01 + 0.12 * f32(i) / AO_SPAN; let d = map(p + n*hr).x; occ = occ + (hr - d)*sca; sca = sca * 0.92; }
+  for (var i = 0; i < AO_SAMPLES; i = i + 1) { let hr = AO_BASE + 0.12 * f32(i) / AO_SPAN; let d = map(p + n*hr).x; occ = occ + (hr - d)*sca; sca = sca * 0.92; }
   return clamp(1.0 - 2.6*occ, 0.0, 1.0);
 }
 fn sky(d: vec3<f32>) -> vec3<f32> { let t = clamp(0.5*(d.y + 1.0), 0.0, 1.0); let base = mix(vec3<f32>(0.78,0.86,0.96), vec3<f32>(0.20,0.38,0.72), t); let s = max(dot(d, SUN), 0.0); return base + vec3<f32>(pow(s, 8.0)*0.3 + pow(s, 220.0)*6.0); }
@@ -486,7 +547,7 @@ fn shade(ro0: vec3<f32>, rd0: vec3<f32>) -> vec3<f32> {
     }
     col = col + atten * ((base * (1.0 - fr) + m.emissive) * (1.0 - fa) + FOG * fa);
     atten = atten * (fr * (1.0 - fa));
-    ro = p + n*0.02; rd = reflect(rd, n);
+    ro = p + n*REFL_LIFT; rd = reflect(rd, n);
   }
   return col;
 }

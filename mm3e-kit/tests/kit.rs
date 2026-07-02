@@ -192,6 +192,39 @@ fn boosted_steps_never_accept_hits_buried_inside_a_surface() {
 }
 
 #[test]
+fn sdf_volume_samples_and_conservative_outside() {
+    use mm3e_kit::volume::SdfVolume;
+    // Fill a grid with the analytic SDF of a unit sphere at the origin; the trilinear sample
+    // must reproduce it closely inside the box and never overestimate outside the box.
+    let n = 33usize;
+    let min = Vec3::splat(-2.0);
+    let cell = Vec3::splat(4.0 / (n - 1) as f32);
+    let mut data = Vec::with_capacity(n * n * n);
+    for k in 0..n {
+        for j in 0..n {
+            for i in 0..n {
+                let p = min + Vec3::new(i as f32 * cell.x, j as f32 * cell.y, k as f32 * cell.z);
+                data.push(p.length() - 1.0);
+            }
+        }
+    }
+    let vol = SdfVolume { dims: (n, n, n), min, cell, data };
+
+    // At grid points: exact. Between: within the trilinear error for a curved field (~cell²).
+    assert!(close(vol.sample(Vec3::ZERO), -1.0, 1e-6));
+    assert!(close(vol.sample(Vec3::new(1.0, 0.0, 0.0)), 0.0, 0.01));
+    assert!(close(vol.sample(Vec3::new(0.6, 0.4, -0.2)), Vec3::new(0.6, 0.4, -0.2).length() - 1.0, 0.02));
+
+    // Outside the grid box: must be a valid UNDERESTIMATE of the true distance, and positive.
+    for p in [Vec3::new(5.0, 0.0, 0.0), Vec3::new(-4.0, 3.0, 2.0), Vec3::new(0.0, 0.0, 9.0)] {
+        let s = vol.sample(p);
+        let truth = p.length() - 1.0;
+        assert!(s > 0.0, "outside sample must be positive, got {s} at {p:?}");
+        assert!(s <= truth + 1e-4, "outside sample {s} overestimates true distance {truth} at {p:?}");
+    }
+}
+
+#[test]
 fn font_draws_glyphs() {
     use mm3e_kit::font;
     assert_eq!(font::glyph(' '), [0; 7]);

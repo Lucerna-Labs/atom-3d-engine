@@ -134,6 +134,122 @@ fn bvh_world_matches_linear_fold_bit_exactly() {
     }
 }
 
+/// A watertight UV sphere mesh: `rings × segments` quads (triangulated) plus pole fans.
+fn uv_sphere_mesh(radius: f32, rings: u32, segments: u32) -> mm3e_orchestrator::mesh::Mesh {
+    use mm3e_orchestrator::mesh::Mesh;
+    let mut m = Mesh::default();
+    m.positions.push(Vec3::new(0.0, radius, 0.0)); // north pole
+    for r in 1..rings {
+        let phi = std::f32::consts::PI * r as f32 / rings as f32;
+        for s in 0..segments {
+            let theta = std::f32::consts::TAU * s as f32 / segments as f32;
+            m.positions.push(Vec3::new(
+                radius * phi.sin() * theta.cos(),
+                radius * phi.cos(),
+                radius * phi.sin() * theta.sin(),
+            ));
+        }
+    }
+    m.positions.push(Vec3::new(0.0, -radius, 0.0)); // south pole
+    let ring = |r: u32, s: u32| 1 + (r - 1) * segments + (s % segments);
+    for s in 0..segments {
+        m.triangles.push([0, ring(1, s + 1), ring(1, s)]);
+    }
+    for r in 1..rings - 1 {
+        for s in 0..segments {
+            let (a, b, c, d) = (ring(r, s), ring(r, s + 1), ring(r + 1, s + 1), ring(r + 1, s));
+            m.triangles.push([a, b, c]);
+            m.triangles.push([a, c, d]);
+        }
+    }
+    let south = (m.positions.len() - 1) as u32;
+    for s in 0..segments {
+        m.triangles.push([south, ring(rings - 1, s), ring(rings - 1, s + 1)]);
+    }
+    m
+}
+
+#[test]
+fn obj_parses_and_rejects_garbage() {
+    use mm3e_orchestrator::mesh::parse_obj;
+    let good = "# comment\nv 0 0 0\nv 1 0 0\nv 0 1 0\nv 0 0 1\nf 1 2 3\nf 1/1 2/2 4/4\nf -1 -2 -3\nf 1 2 3 4\n";
+    let m = parse_obj(good).expect("valid OBJ");
+    assert_eq!(m.positions.len(), 4);
+    // 3 triangle faces + one quad fan-triangulated into 2.
+    assert_eq!(m.triangles.len(), 5);
+
+    assert!(parse_obj("v 0 0\nf 1 1 1\n").is_err()); // missing coordinate
+    assert!(parse_obj("v 0 0 inf\nf 1 1 1\n").is_err()); // non-finite vertex
+    assert!(parse_obj("v 0 0 0\nf 1 2 3\n").is_err()); // face index out of range
+    assert!(parse_obj("v 0 0 0\nv 1 0 0\nf 1 2\n").is_err()); // degenerate face
+    assert!(parse_obj("v 0 0 0\n").is_err()); // no faces
+}
+
+#[test]
+fn mesh_bake_matches_analytic_sphere() {
+    use mm3e_orchestrator::mesh::bake_sdf;
+    let mesh = uv_sphere_mesh(1.0, 24, 32);
+    let vol = bake_sdf(&mesh, 48, 0.5).expect("bake");
+    // The bake samples exact distances to the FACETED sphere; against the analytic sphere the
+    // combined facet + trilinear error stays around one cell (cell ≈ 0.064 here). A sign or
+    // parity bug would show as ≥ 2·|distance| — far above this threshold.
+    let cell = vol.cell.x.max(vol.cell.y).max(vol.cell.z);
+    let mut worst = 0.0f32;
+    for &p in &[
+        Vec3::ZERO,
+        Vec3::new(0.5, 0.2, -0.1),
+        Vec3::new(0.0, 0.99, 0.0),
+        Vec3::new(1.2, 0.0, 0.0),
+        Vec3::new(-0.8, 0.8, 0.8),
+        Vec3::new(0.0, -1.35, 0.1),
+    ] {
+        let baked = vol.sample(p);
+        let truth = p.length() - 1.0;
+        worst = worst.max((baked - truth).abs());
+    }
+    assert!(worst < cell * 1.5, "baked sphere deviates {worst} from analytic (cell {cell})");
+    // Sign sanity: inside is negative, outside positive.
+    assert!(vol.sample(Vec3::ZERO) < -0.9);
+    assert!(vol.sample(Vec3::new(1.4, 0.0, 0.0)) > 0.3);
+}
+
+#[test]
+fn volume_prim_renders_and_matches_linear_fold() {
+    use mm3e_orchestrator::mesh::bake_sdf;
+    // A baked mesh volume dropped into a scene must render (non-flat image) and evaluate
+    // bit-identically through the BVH plan and the linear reference fold.
+    let mesh = uv_sphere_mesh(0.8, 16, 24);
+    let vol = bake_sdf(&mesh, 32, 0.4).expect("bake");
+    let mut scene = Scene::new(96, 64);
+    scene.aa = 1;
+    let floor = scene.material(Material::solid(Vec3::splat(1.0)).checkered().roughness(0.6));
+    let red = scene.material(Material::solid(Vec3::new(0.85, 0.2, 0.2)).roughness(0.3));
+    let vid = scene.volume(vol);
+    scene.add(Object::new(Prim::Plane { n: Vec3::new(0.0, 1.0, 0.0), h: 0.0 }, Transform::IDENTITY, floor));
+    scene.add(Object::new(Prim::Volume { id: vid }, Transform::at(Vec3::new(0.0, 0.8, 0.0)), red));
+    scene.add(Object::new(Prim::Sphere { r: 0.4 }, Transform::at(Vec3::new(1.4, 0.4, 0.6)), red).smooth(0.3));
+    assert!(!scene.is_dual_safe(), "volume scenes must fall back to tetrahedron normals");
+
+    let fast = scene.field();
+    let reference = scene.world_linear();
+    let mut state = 0x9E37_79B9_7F4A_7C15u64;
+    let mut rng = move || {
+        state = state.wrapping_mul(6364136223846793005).wrapping_add(1442695040888963407);
+        ((state >> 33) as f32 / (1u32 << 31) as f32) * 2.0 - 1.0
+    };
+    for _ in 0..3000 {
+        let p = Vec3::new(rng() * 5.0, rng() * 5.0, rng() * 5.0);
+        let (a, b) = (fast(p), reference(p));
+        assert_eq!(a.dist.to_bits(), b.dist.to_bits(), "volume scene field diverged at {p:?}");
+        assert_eq!(a.mat, b.mat);
+    }
+
+    let fb = render(&scene, &cam());
+    let px = fb.to_u32(mm3e_kit::color::Rgba::rgb8(0, 0, 0));
+    assert!(px.iter().any(|&p| p != px[0]), "volume render is a flat color");
+    assert!(px.iter().all(|&p| p <= 0x00FF_FFFF));
+}
+
 #[test]
 fn render_is_deterministic() {
     let scene = demo_scene();

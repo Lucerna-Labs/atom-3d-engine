@@ -79,6 +79,11 @@ fn v3(v: Vec3) -> String {
 }
 
 fn serialize_object(o: &Object) -> String {
+    // A baked volume's grid data is binary and belongs to the bake, not to a text scene file.
+    // Serialize the omission explicitly (the parser skips comments), never a broken directive.
+    if let Prim::Volume { id } = o.prim {
+        return format!("# volume object omitted (baked SDF volume id {id} is not text-serializable)");
+    }
     let mut s = String::from("obj ");
     s.push_str(&match o.prim {
         Prim::Sphere { r } => format!("sphere {r}"),
@@ -92,6 +97,7 @@ fn serialize_object(o: &Object) -> String {
         Prim::Octahedron { s } => format!("octahedron {s}"),
         Prim::HexPrism { r, h } => format!("hexprism {r} {h}"),
         Prim::Plane { n, h } => format!("plane {} {}", v3(n), h),
+        Prim::Volume { .. } => unreachable!("handled by the early return above"),
     });
     // Recover Euler-free placement: store rotation columns so any Mat3 round-trips exactly.
     let r = o.xform.rot;

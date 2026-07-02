@@ -177,6 +177,22 @@ impl GpuRenderer {
         });
         self.queue.write_buffer(&gi_buf, 0, bytemuck::cast_slice(&gi_data));
 
+        // Baked SDF volumes (Prim::Volume grids), concatenated in scene order — the same
+        // per-volume offsets `wgsl::volume_offsets` bakes into the sampler call sites. A single
+        // zero when the scene has none (the binding must exist).
+        let vol_data: Vec<f32> = if scene.volumes.is_empty() {
+            vec![0.0]
+        } else {
+            scene.volumes.iter().flat_map(|v| v.data.iter().copied()).collect()
+        };
+        let vol_buf = device.create_buffer(&wgpu::BufferDescriptor {
+            label: Some("sdf-volumes"),
+            size: (vol_data.len() * 4) as u64,
+            usage: wgpu::BufferUsages::STORAGE | wgpu::BufferUsages::COPY_DST,
+            mapped_at_creation: false,
+        });
+        self.queue.write_buffer(&vol_buf, 0, bytemuck::cast_slice(&vol_data));
+
         let tex = device.create_texture(&wgpu::TextureDescriptor {
             label: Some("out"),
             size: wgpu::Extent3d { width, height, depth_or_array_layers: 1 },
@@ -222,6 +238,16 @@ impl GpuRenderer {
                     },
                     count: None,
                 },
+                wgpu::BindGroupLayoutEntry {
+                    binding: 3,
+                    visibility: wgpu::ShaderStages::COMPUTE,
+                    ty: wgpu::BindingType::Buffer {
+                        ty: wgpu::BufferBindingType::Storage { read_only: true },
+                        has_dynamic_offset: false,
+                        min_binding_size: None,
+                    },
+                    count: None,
+                },
             ],
         });
         let bind_group = device.create_bind_group(&wgpu::BindGroupDescriptor {
@@ -231,6 +257,7 @@ impl GpuRenderer {
                 wgpu::BindGroupEntry { binding: 0, resource: uniform_buf.as_entire_binding() },
                 wgpu::BindGroupEntry { binding: 1, resource: wgpu::BindingResource::TextureView(&view) },
                 wgpu::BindGroupEntry { binding: 2, resource: gi_buf.as_entire_binding() },
+                wgpu::BindGroupEntry { binding: 3, resource: vol_buf.as_entire_binding() },
             ],
         });
         let layout = device.create_pipeline_layout(&wgpu::PipelineLayoutDescriptor {

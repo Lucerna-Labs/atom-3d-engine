@@ -89,10 +89,12 @@ BRDF, fog, smooth-min CSG, and bloom are all `combine`; the camera basis and eve
 ## Features
 
 **Geometry** — 11 analytic SDF primitives (sphere, box, rounded box, torus, cylinder, capsule,
-cone, ellipsoid, octahedron, hex prism, plane); CSG union/intersect/subtract + smooth variants;
-domain operators (round, onion, elongate, infinite repeat, twist, bend, mirror); a **BVH
-tree-fold** over union runs (bit-identical to the linear fold — proven in tests — and 1.2–2.3×
-faster, always on) with conservative bounding-sphere pruning as its substrate.
+cone, ellipsoid, octahedron, hex prism, plane); **mesh ingestion**: OBJ import + a mesh→SDF bake
+(`Prim::Volume` — baked meshes are fields, so CSG/GI/physics consume them unchanged, CPU and
+GPU); CSG union/intersect/subtract + smooth variants; domain operators (round, onion, elongate,
+infinite repeat, twist, bend, mirror); a **BVH tree-fold** over union runs (bit-identical to the
+linear fold — proven in tests — and 1.2–2.3× faster, always on) with conservative
+bounding-sphere pruning as its substrate.
 
 **Shading & lighting** — Cook-Torrance GGX PBR (metallic-roughness); diffuse image-based lighting
 from the sky; **SDF global illumination** (baked irradiance probe volume); directional + point +
@@ -106,7 +108,7 @@ multithreaded rendering via scoped std threads (deterministic, ≈11× on 24 cor
 **Systems** — keyframe animation with easing and quaternion slerp; a `.mm3e` text scene format
 (serializer + parser, round-trip tested); a real-time interactive viewer (raw Win32/GDI, no crate).
 
-**Engineering** — 58-test suite (incl. bit-exact BVH equivalence, buried-hit and dual-normal
+**Engineering** — 62-test suite (incl. bit-exact BVH equivalence, buried-hit and dual-normal
 regression tests), measured validation harnesses (`render_validate`, `gpu_parity`,
 `overshoot_probe`, `subitize_econ`, `bvh_bench`), GitHub Actions CI (fmt + clippy `-D warnings` +
 build + test on Linux & Windows), zero external dependencies in the core.
@@ -119,6 +121,7 @@ cargo run -p mm3e-orchestrator --example showcase   --release   # every primitiv
 cargo run -p mm3e-orchestrator --example gallery    --release   # primitive zoo + domain ops
 cargo run -p mm3e-orchestrator --example gi_demo    --release   # global illumination color bleed
 cargo run -p mm3e-orchestrator --example aov        --release   # debug passes (normals/steps/…)
+cargo run -p mm3e-orchestrator --example mesh_demo  --release   # OBJ → SDF bake → render a knot
 cargo run -p mm3e-orchestrator --example scene_file --release   # write + load a .mm3e scene
 cargo run -p mm3e-orchestrator --example animate    --release 24 # 24 animation frames
 cargo run -p mm3e-orchestrator --example viewer     --release   # live interactive window (Windows)

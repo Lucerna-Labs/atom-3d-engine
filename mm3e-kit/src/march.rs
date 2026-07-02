@@ -78,6 +78,12 @@ pub struct Marcher {
     /// where a field evaluation is far more expensive than the verification sample, and its
     /// overshoot-then-verify shape transfers to non-visual traversal domains.
     pub secant: bool,
+    /// Half-width of the tetrahedron normal stencil. The default (0.0009) suits analytic
+    /// fields; a scene built on a *sampled* field (a baked mesh volume) must widen it to about
+    /// half the grid cell, or the stencil reads the trilinear interpolant's per-cell faceting
+    /// as surface noise (speckled normals → shadow/AO acne). Mechanism only — the orchestrator
+    /// dials it from the volume resolution.
+    pub normal_h: f32,
 }
 
 impl Default for Marcher {
@@ -92,6 +98,7 @@ impl Default for Marcher {
             lod_footprint: 0.0,
             subitize: 0.0,
             secant: false,
+            normal_h: 0.0009,
         }
     }
 }
@@ -221,7 +228,7 @@ impl Marcher {
 
     /// Surface normal as the normalized field gradient (tetrahedron sampling: four `compare`s).
     pub fn normal<F: Fn(Vec3) -> Field + ?Sized>(&self, field: &F, p: Vec3) -> Vec3 {
-        let h = 0.0009;
+        let h = self.normal_h;
         let k0 = Vec3::new(1.0, -1.0, -1.0);
         let k1 = Vec3::new(-1.0, -1.0, 1.0);
         let k2 = Vec3::new(-1.0, 1.0, -1.0);
@@ -270,17 +277,21 @@ impl Marcher {
     }
 
     /// Ambient occlusion in [0, 1] by probing the field along the normal (1 = fully open).
-    /// `ao_samples == 0` skips the work and returns a fully-open 1.0.
+    /// `ao_samples == 0` skips the work and returns a fully-open 1.0. The probe base offset
+    /// scales with `normal_h` (like the shadow lift): on a sampled field the surface wobbles at
+    /// cell scale, and probes starting inside the wobble read it as per-pixel occlusion noise.
+    /// Analytic scenes (`normal_h` default) keep the historical 0.01 exactly.
     pub fn ambient_occlusion<F: Fn(Vec3) -> Field + ?Sized>(&self, field: &F, p: Vec3, n: Vec3) -> f32 {
         let n_samples = self.ao_samples;
         if n_samples == 0 {
             return 1.0;
         }
+        let base = self.normal_h.max(0.01);
         let span = (n_samples.max(2) - 1) as f32;
         let mut occ = 0.0f32;
         let mut sca = 1.0f32;
         for i in 0..n_samples {
-            let hr = 0.01 + 0.12 * i as f32 / span;
+            let hr = base + 0.12 * i as f32 / span;
             let d = field(p + n.scale(hr)).dist;
             occ += (hr - d) * sca;
             sca *= 0.92;
