@@ -64,6 +64,19 @@ fn scene_io_rejects_garbage() {
     assert!(scene_io::parse("size 10\n").is_err()); // missing height
     assert!(scene_io::parse("obj banana 1 2 3\n").is_err()); // unknown primitive
     assert!(scene_io::parse("wat 1 2 3\n").is_err()); // unknown directive
+                                                      // Degenerate values an untrusted file could carry: caught at parse time, never a NaN frame,
+                                                      // a wrapped buffer size, or a per-ray hang.
+    assert!(scene_io::parse("size 0 100\n").is_err()); // zero dimension
+    assert!(scene_io::parse("size 100000 100\n").is_err()); // absurd dimension (u32 overflow risk)
+    assert!(scene_io::parse("sun 0 0 0\n").is_err()); // zero sun direction
+    assert!(scene_io::parse("cam 1 2 3 1 2 3 0 1 0 50\n").is_err()); // eye == target
+    assert!(scene_io::parse("cam 0 0 0 0 1 0 0 1 0 50\n").is_err()); // up parallel to view
+    assert!(scene_io::parse("cam 0 0 5 0 0 0 0 1 0 180\n").is_err()); // fov out of range
+    assert!(scene_io::parse("marcher 0 120 0.0006 1\n").is_err()); // zero step budget
+    assert!(scene_io::parse("marcher 160 120 -1 1\n").is_err()); // negative eps
+                                                                 // An object referencing a material that is never declared must be rejected with a message,
+                                                                 // not silently remapped by the renderer's modulo lookup.
+    assert!(scene_io::parse("obj sphere 1 pos 0 0 0 basis 1 0 0 0 1 0 0 0 1 scale 1 mat 5 combine union\n").is_err());
 }
 
 #[test]

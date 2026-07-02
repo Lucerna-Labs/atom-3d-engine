@@ -659,9 +659,12 @@ impl Scene {
 /// debug AOV mode the band is shaded straight to display pixels. Deterministic in thread count.
 pub fn render(scene: &Scene, camera: &Camera) -> Framebuffer {
     let (w, h) = (scene.width, scene.height);
+    // Checked once per render, then threaded through every per-ray call — `is_dual_safe` walks
+    // all objects, which must not happen per ray (or per reflection bounce).
+    let dual_safe = scene.is_dual_safe();
 
     if scene.mode != RenderMode::Beauty {
-        return render_bands(scene, camera, |sc, f, cam, x, y| aov_pixel(sc, f, cam, x, y));
+        return render_bands(scene, camera, |sc, f, cam, x, y| aov_pixel(sc, f, cam, x, y, dual_safe));
     }
 
     // Beauty path: each thread builds the *concrete* world-field closure and shades its band with
@@ -679,7 +682,7 @@ pub fn render(scene: &Scene, camera: &Camera) -> Framebuffer {
                     let mut rows = Vec::with_capacity(((y1.saturating_sub(y0)) * w) as usize);
                     for y in y0..y1 {
                         for x in 0..w {
-                            rows.push(shade_pixel(scene, &field, camera, x, y));
+                            rows.push(shade_pixel(scene, &field, camera, x, y, dual_safe));
                         }
                     }
                     (y0, rows)
@@ -703,6 +706,7 @@ pub fn render(scene: &Scene, camera: &Camera) -> Framebuffer {
 pub fn render_gbuffer(scene: &Scene, camera: &Camera, movers: &[(Vec3, f32)]) -> reproject::GFrame {
     type GBand = (u32, Vec<([u8; 4], f32, i32)>); // (first row, [color, depth, obj] per pixel)
     let (w, h) = (scene.width, scene.height);
+    let dual_safe = scene.is_dual_safe();
     let threads = std::thread::available_parallelism().map(|n| n.get()).unwrap_or(1).max(1);
     let band = (h as usize).div_ceil(threads);
     let bands: Vec<GBand> = std::thread::scope(|s| {
@@ -712,7 +716,6 @@ pub fn render_gbuffer(scene: &Scene, camera: &Camera, movers: &[(Vec3, f32)]) ->
                 let y1 = (((ti + 1) * band) as u32).min(h);
                 s.spawn(move || {
                     let field = scene.world();
-                    let dual_safe = scene.is_dual_safe();
                     let mut rows = Vec::with_capacity(((y1.saturating_sub(y0)) * w) as usize);
                     for y in y0..y1 {
                         for x in 0..w {
@@ -728,7 +731,7 @@ pub fn render_gbuffer(scene: &Scene, camera: &Camera, movers: &[(Vec3, f32)]) ->
                                     .position(|(c, r)| (hit.pos - *c).length() <= r + 0.05)
                                     .map(|k| k as i32)
                                     .unwrap_or(-1);
-                                (shade_hit(scene, &field, &hit, &ray, 0), hit.t, o)
+                                (shade_hit(scene, &field, &hit, &ray, 0, dual_safe), hit.t, o)
                             } else {
                                 (shade::sky(ray.dir, scene.sun_dir), f32::INFINITY, -1)
                             };
@@ -784,8 +787,11 @@ pub fn reproject_hybrid(
             } else {
                 scene.marcher.march(&field, &ray)
             };
-            let hdr =
-                if hit.hit { shade_hit(scene, &field, &hit, &ray, 0) } else { shade::sky(ray.dir, scene.sun_dir) };
+            let hdr = if hit.hit {
+                shade_hit(scene, &field, &hit, &ray, 0, dual_safe)
+            } else {
+                shade::sky(ray.dir, scene.sun_dir)
+            };
             let d = shade::gamma(shade::aces(hdr.scale(scene.post.exposure))).clamp01();
             out[i] = [(d.x * 255.0 + 0.5) as u8, (d.y * 255.0 + 0.5) as u8, (d.z * 255.0 + 0.5) as u8, 255];
         }
@@ -799,10 +805,11 @@ pub fn reproject_hybrid(
 /// straight to display pixels (no HDR post pass), since it is a preview path.
 pub fn render_checkerboard(scene: &Scene, camera: &Camera) -> Framebuffer {
     let (w, h) = (scene.width, scene.height);
+    let dual_safe = scene.is_dual_safe();
     // Pass 1: shade the even pixels; mark the odd ones unfilled (alpha 0).
     let mut fb = render_bands(scene, camera, |sc, f, cam, x, y| {
         if (x + y) % 2 == 0 {
-            let c = shade_pixel(sc, f, cam, x, y).scale(sc.post.exposure);
+            let c = shade_pixel(sc, f, cam, x, y, dual_safe).scale(sc.post.exposure);
             Rgba::from_vec3(shade::gamma(shade::aces(c)))
         } else {
             Rgba::new(0.0, 0.0, 0.0, 0.0)
@@ -873,9 +880,10 @@ where
 }
 
 /// Shade one pixel for a debug AOV (single sample, written straight to display — no post pass).
-fn aov_pixel(scene: &Scene, field: &dyn Fn(Vec3) -> Field, camera: &Camera, x: u32, y: u32) -> Rgba {
+/// `dual_safe` is [`Scene::is_dual_safe`], hoisted by the caller (an O(objects) walk per call).
+fn aov_pixel(scene: &Scene, field: &dyn Fn(Vec3) -> Field, camera: &Camera, x: u32, y: u32, dual_safe: bool) -> Rgba {
     let ray = camera.ray(x as f32 + 0.5, y as f32 + 0.5, scene.width, scene.height);
-    let hit = if scene.is_dual_safe() {
+    let hit = if dual_safe {
         scene.marcher.march_with(field, |p| scene.normal_dual(p), &ray)
     } else {
         scene.marcher.march(field, &ray)
@@ -915,7 +923,14 @@ fn aov_pixel(scene: &Scene, field: &dyn Fn(Vec3) -> Field, camera: &Camera, x: u
 /// Shade one pixel into **linear HDR**: supersample on an n×n sub-pixel grid (the 3-D analog of
 /// MMPE's analytic AA band) and return the averaged radiance. Tone-mapping happens later, in the
 /// post pass, so the float frame stays available for bloom/exposure.
-fn shade_pixel<F: Fn(Vec3) -> Field + ?Sized>(scene: &Scene, field: &F, camera: &Camera, x: u32, y: u32) -> Vec3 {
+fn shade_pixel<F: Fn(Vec3) -> Field + ?Sized>(
+    scene: &Scene,
+    field: &F,
+    camera: &Camera,
+    x: u32,
+    y: u32,
+    dual_safe: bool,
+) -> Vec3 {
     let n = scene.aa.max(1);
     let inv_samples = 1.0 / (n * n) as f32;
     let mut acc = Vec3::ZERO;
@@ -924,7 +939,7 @@ fn shade_pixel<F: Fn(Vec3) -> Field + ?Sized>(scene: &Scene, field: &F, camera: 
             let ox = (sx as f32 + 0.5) / n as f32;
             let oy = (sy as f32 + 0.5) / n as f32;
             let ray = camera.ray(x as f32 + ox, y as f32 + oy, scene.width, scene.height);
-            acc = acc + trace(scene, field, &ray, 0);
+            acc = acc + trace(scene, field, &ray, 0, dual_safe);
         }
     }
     acc.scale(inv_samples)
@@ -932,8 +947,10 @@ fn shade_pixel<F: Fn(Vec3) -> Field + ?Sized>(scene: &Scene, field: &F, camera: 
 
 /// Trace one ray and return its linear HDR radiance. Recurses for mirror reflections. Generic over
 /// the field type so the beauty path monomorphizes (the primitive loop inlines into the marcher).
-fn trace<F: Fn(Vec3) -> Field + ?Sized>(scene: &Scene, field: &F, ray: &Ray, depth: u32) -> Vec3 {
-    let hit = if scene.is_dual_safe() {
+/// `dual_safe` is [`Scene::is_dual_safe`], hoisted once per render — it walks every object, which
+/// must not happen per ray (or per reflection bounce).
+fn trace<F: Fn(Vec3) -> Field + ?Sized>(scene: &Scene, field: &F, ray: &Ray, depth: u32, dual_safe: bool) -> Vec3 {
+    let hit = if dual_safe {
         scene.marcher.march_with(field, |p| scene.normal_dual(p), ray)
     } else {
         scene.marcher.march(field, ray)
@@ -941,12 +958,19 @@ fn trace<F: Fn(Vec3) -> Field + ?Sized>(scene: &Scene, field: &F, ray: &Ray, dep
     if !hit.hit {
         return shade::sky(ray.dir, scene.sun_dir);
     }
-    shade_hit(scene, field, &hit, ray, depth)
+    shade_hit(scene, field, &hit, ray, depth, dual_safe)
 }
 
 /// Shade a confirmed surface hit — the post-hit half of [`trace`], factored out so the G-buffer
 /// renderer (reprojection) can capture the primary depth without marching the ray a second time.
-fn shade_hit<F: Fn(Vec3) -> Field + ?Sized>(scene: &Scene, field: &F, hit: &Hit, ray: &Ray, depth: u32) -> Vec3 {
+fn shade_hit<F: Fn(Vec3) -> Field + ?Sized>(
+    scene: &Scene,
+    field: &F,
+    hit: &Hit,
+    ray: &Ray,
+    depth: u32,
+    dual_safe: bool,
+) -> Vec3 {
     let m = scene.materials[hit.mat as usize % scene.materials.len()];
     let albedo = surface_albedo(&m, hit.pos);
     let normal = hit.normal;
@@ -990,7 +1014,7 @@ fn shade_hit<F: Fn(Vec3) -> Field + ?Sized>(scene: &Scene, field: &F, hit: &Hit,
         let fr = shade::fresnel_schlick(cos, m.reflectivity);
         let rdir = ray.dir.reflect(normal).normalize();
         let rorigin = hit.pos + normal.scale(0.02);
-        let refl = trace(scene, field, &Ray { origin: rorigin, dir: rdir }, depth + 1);
+        let refl = trace(scene, field, &Ray { origin: rorigin, dir: rdir }, depth + 1, dual_safe);
         radiance = radiance.scale(1.0 - fr) + refl.scale(fr);
     }
 
@@ -1093,25 +1117,28 @@ mod dual_wiring_tests {
 
     /// The pre-wiring behavior, reproduced exactly: march with the tetrahedron normal (bypassing
     /// the new `is_dual_safe` branch entirely), then shade — the "before" side of every comparison.
+    /// The shade half (reflection bounces) still follows the scene's dual-safety, matching how the
+    /// pre-hoist code called `is_dual_safe()` inside every recursive `trace`.
     fn old_path_radiance(scene: &Scene, field: &dyn Fn(Vec3) -> Field, ray: &Ray) -> Vec3 {
         let hit = scene.marcher.march(field, ray);
         if !hit.hit {
             return shade::sky(ray.dir, scene.sun_dir);
         }
-        shade_hit(scene, field, &hit, ray, 0)
+        shade_hit(scene, field, &hit, ray, 0, scene.is_dual_safe())
     }
 
     /// Render both paths over a small grid and return (max, mean) absolute radiance delta.
     fn compare_paths(scene: &Scene) -> (f32, f32) {
         let field = scene.world();
         let camera = cam();
+        let dual_safe = scene.is_dual_safe();
         let (w, h) = (scene.width, scene.height);
         let (mut max_d, mut sum_d, mut n) = (0.0f32, 0.0f64, 0u32);
         for y in (0..h).step_by(3) {
             for x in (0..w).step_by(3) {
                 let ray = camera.ray(x as f32 + 0.5, y as f32 + 0.5, w, h);
                 let old = old_path_radiance(scene, &field, &ray);
-                let new = shade_pixel(scene, &field, &camera, x, y);
+                let new = shade_pixel(scene, &field, &camera, x, y, dual_safe);
                 let d = (old - new).abs();
                 let m = d.x.max(d.y).max(d.z);
                 max_d = max_d.max(m);
@@ -1220,7 +1247,7 @@ mod dual_wiring_tests {
         let new_t0 = std::time::Instant::now();
         for y in 0..h {
             for x in 0..w {
-                std::hint::black_box(shade_pixel(&scene, &field, &camera, x, y));
+                std::hint::black_box(shade_pixel(&scene, &field, &camera, x, y, true));
             }
         }
         let new_ms = new_t0.elapsed().as_secs_f64() * 1000.0;

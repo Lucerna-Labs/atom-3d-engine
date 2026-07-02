@@ -2,6 +2,40 @@
 
 All notable changes to MM3E are documented here.
 
+## [0.6.5] — marcher tunneling fix (correctness over borrowed speed)
+
+- **Fixed a real tunneling bug in `Marcher::march_with`.** The overlap safety guard was gated on
+  `omega > 1.0`, so after one over-relaxation failure decayed omega, secant (up to `4·d`) and
+  subitize steps kept firing with **no safety net**. Tunneled steps accepted hits **buried inside
+  surfaces** — 2% of all hits on the profiler scene (worst 0.17 world units deep; 5× the whole
+  shell thickness on the thin-shell scene). This was the root cause of the chaotic thin-shell
+  self-shadowing documented in the dual-wiring tests, and it is visible as shadow acne on
+  `gi_demo`'s sphere and walls in pre-fix renders.
+- **The guard is now unconditional, with midpoint gap verification.** The two-sphere overlap test
+  is pessimistic at grazing incidence (a good near-surface landing has a tiny sphere), so a tripped
+  step first spends one midpoint sample: if the midpoint's safe sphere covers the whole skipped
+  gap, the gap is provably surface-free and the landing stands. Only genuinely unverifiable gaps
+  retreat to the last safe frontier, and each boost mechanism (omega / subitize / secant) decays
+  only for its **own** misfires. The rescue also keeps omega alive through spurious grazing
+  failures: **−5% march evals vs. plain Keinert decay**. New regression tests: the buried-hit
+  invariant (`kit.rs`), plus `examples/overshoot_probe.rs` (0 buried hits post-fix, was 2,155).
+- **Honest re-measurement demoted two earlier "wins."** With landings forced to verify instead of
+  tunnel: **secant costs +5% march evals** (was "−14%") — now a default-off `Marcher.secant` knob,
+  preserved as a primitive per the renderer report's classification doctrine; **subitize** pays
+  only in its real niche (−8% evals on miss-heavy/sky framings, +8% cost on hit-dominated ones —
+  the old −11%…−23% claims were largely tunneling artifacts; see `examples/subitize_econ.rs`).
+  The engine test now asserts the true claims.
+- **Cost of correctness:** +4.5% total field evals on the profiler scene; `balanced`/`fast`
+  quality tiers unchanged. 93% of the `spheres` frame is bit-identical; the diffs are the
+  corrected pixels.
+- **`is_dual_safe` hoisted out of the per-ray path** — it walks every object and was being called
+  per ray *and per reflection bounce* despite its "once per render" contract. Now computed once in
+  `render`/`render_gbuffer`/`reproject_hybrid`/`render_checkerboard` and threaded through.
+- **`scene_io::parse` validates untrusted input**: rejects degenerate/absurd sizes (u32-wrap
+  risk), zero sun, coincident camera eye/target, up parallel to view, out-of-range FOV, hostile
+  marcher budgets (a 4-billion-step file was an effective per-ray hang), and out-of-range material
+  indices — each with a line-numbered message instead of a NaN frame or a silent wrong render.
+
 ## [0.6.4] — stochastic soft shadows (the `hash` atom enters the renderer)
 
 - **`Marcher::soft_shadow` is now blue-noise stochastic** — the cross-domain primitive finder kept

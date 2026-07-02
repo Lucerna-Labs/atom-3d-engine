@@ -166,6 +166,9 @@ impl<'a> Cur<'a> {
 
 /// Parse a `.mm3e` document into a scene and camera.
 pub fn parse(src: &str) -> Result<(Scene, Camera), String> {
+    // Strictly positive and finite — written as a positive predicate so NaN (which fails every
+    // comparison) is rejected too.
+    let pos = |x: f32| x > 0.0;
     let mut scene = Scene::new(640, 360);
     scene.materials.clear(); // replaced by file contents
     let mut camera = Camera::look_at(Vec3::new(0.0, 1.0, 6.0), Vec3::ZERO, Vec3::new(0.0, 1.0, 0.0), 1.0);
@@ -181,12 +184,27 @@ pub fn parse(src: &str) -> Result<(Scene, Camera), String> {
             "size" => {
                 scene.width = c.u("width")?;
                 scene.height = c.u("height")?;
+                // Reject degenerate/absurd sizes: 0 renders nothing meaningful, and huge values
+                // would overflow `w * h` buffer math downstream (u32 wrap → misallocated frame).
+                if scene.width == 0 || scene.height == 0 || scene.width > 16384 || scene.height > 16384 {
+                    return Err(format!(
+                        "line {}: size {}x{} out of range 1..=16384",
+                        i + 1,
+                        scene.width,
+                        scene.height
+                    ));
+                }
             }
             "aa" => scene.aa = c.u("aa")?,
             "bounces" => scene.bounces = c.u("bounces")?,
             "shadows" => scene.shadows = c.b("shadows")?,
             "ao" => scene.ao = c.b("ao")?,
-            "sun" => scene.sun_dir = c.v3("sun")?.normalize(),
+            "sun" => {
+                scene.sun_dir = c.v3("sun")?.normalize();
+                if scene.sun_dir == Vec3::ZERO {
+                    return Err(format!("line {}: sun direction must be non-zero", i + 1));
+                }
+            }
             "ambient" => scene.ambient = c.v3("ambient")?,
             "sky_ambient" => scene.sky_ambient = c.v3("sky_ambient")?,
             "fog" => {
@@ -198,6 +216,15 @@ pub fn parse(src: &str) -> Result<(Scene, Camera), String> {
                 scene.marcher.max_dist = c.f("max_dist")?;
                 scene.marcher.eps = c.f("eps")?;
                 scene.marcher.step_scale = c.f("step_scale")?;
+                // Sanity bounds for an untrusted file: a huge step budget is a per-ray hang, and
+                // non-positive distances/tolerances degenerate the march (never crash, but never
+                // finish usefully either).
+                if scene.marcher.max_steps == 0 || scene.marcher.max_steps > 100_000 {
+                    return Err(format!("line {}: marcher max_steps out of range 1..=100000", i + 1));
+                }
+                if !pos(scene.marcher.max_dist) || !pos(scene.marcher.eps) || !pos(scene.marcher.step_scale) {
+                    return Err(format!("line {}: marcher max_dist/eps/step_scale must be positive", i + 1));
+                }
             }
             "post" => {
                 scene.post.exposure = c.f("exposure")?;
@@ -221,8 +248,21 @@ pub fn parse(src: &str) -> Result<(Scene, Camera), String> {
                 let eye = c.v3("eye")?;
                 let target = c.v3("target")?;
                 let up = c.v3("up")?;
-                let fov = c.f("fov")?.to_radians();
-                camera = Camera::look_at(eye, target, up, fov);
+                let fov_deg = c.f("fov")?;
+                // A degenerate look-at basis (eye on target, or up parallel to the view direction)
+                // normalizes to zero vectors and fills the frame with NaN rays; reject it here so
+                // the kit's camera can stay dumb mechanism.
+                let forward = (target - eye).normalize();
+                if forward == Vec3::ZERO {
+                    return Err(format!("line {}: cam eye and target must not coincide", i + 1));
+                }
+                if forward.cross(up).normalize() == Vec3::ZERO {
+                    return Err(format!("line {}: cam up must not be parallel to the view direction", i + 1));
+                }
+                if !pos(fov_deg) || fov_deg >= 180.0 {
+                    return Err(format!("line {}: cam fov must be in (0, 180) degrees", i + 1));
+                }
+                camera = Camera::look_at(eye, target, up, fov_deg.to_radians());
             }
             "mat" => {
                 let albedo = c.v3("albedo")?;
@@ -260,6 +300,15 @@ pub fn parse(src: &str) -> Result<(Scene, Camera), String> {
     }
     if scene.materials.is_empty() {
         scene.materials.push(Material::default());
+    }
+    // Validate material references once the whole file is read (materials may be declared
+    // anywhere). The renderer's modulo lookup would not crash on a bad index, but it would
+    // silently pick the wrong material — better to reject the file with a real message.
+    let n_mats = scene.materials.len() as u32;
+    for (idx, obj) in scene.objects.iter().enumerate() {
+        if obj.mat >= n_mats {
+            return Err(format!("object {}: material index {} out of range (have {})", idx + 1, obj.mat, n_mats));
+        }
     }
     Ok((scene, camera))
 }
