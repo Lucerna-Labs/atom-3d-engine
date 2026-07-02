@@ -1,0 +1,6 @@
+# Mechanical Math 3-D Engine (MM3E) — a self-renderer for 3-D scenes from pure math primitives.
+# The 3-D elevation of MMPE: 2-D SDF + scan-convert becomes 3-D SDF + sphere-tracing.
+# Two members only, per the Composition doctrine: one kit + one orchestrator.
+[workspace]
+resolver = "2"
+members = ["mm3e-kit", "mm3e-orchestrator", "mm3e-gpu"]
