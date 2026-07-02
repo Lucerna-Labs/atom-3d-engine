@@ -10,10 +10,16 @@
 //! Controls: arrow keys or left-drag to orbit, `W`/`S` to zoom, `Esc` to quit.
 //! Run (Windows desktop): cargo run -p mm3e-orchestrator --example viewer --release
 
+// Everything below the stub is Windows-only; gate the imports and the scene builder too, or the
+// non-Windows build is left with unused items that fail clippy's -D warnings on Linux CI.
+#[cfg(windows)]
 use mm3e_kit::color::{Material, Rgba};
+#[cfg(windows)]
 use mm3e_kit::vec::{Mat3, Transform, Vec3};
+#[cfg(windows)]
 use mm3e_orchestrator::{Light, Object, Prim, Scene};
 
+#[cfg(windows)]
 fn build_scene() -> Scene {
     let mut scene = Scene::new(960, 540);
     scene.bounces = 2;
