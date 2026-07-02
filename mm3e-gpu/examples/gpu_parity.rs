@@ -115,12 +115,47 @@ fn compare(name: &str, scene: &Scene, r: &GpuRenderer) {
     );
 }
 
-/// The pbr scene with a plain (non-checkered) floor: the CPU checker adds a per-tile hash tint
-/// the GPU deliberately omits (no 64-bit FNV in WGSL), so this variant shows the parity floor
-/// with that one accepted divergence removed.
+/// The pbr scene with a plain (non-checkered) floor — the parity floor with the checker's
+/// hash-tint (now also ported to WGSL) out of the picture entirely.
 fn pbr_plain_scene() -> Scene {
     let mut scene = pbr_scene();
     scene.materials[1] = Material::solid(Vec3::splat(0.75)).specular(0.15).roughness(0.6);
+    scene
+}
+
+/// A Cornell-style room with a baked GI volume: real one-bounce color bleed. The GPU samples
+/// the same uploaded probe cubes the CPU interpolates — exposes the (previously missing) GI
+/// term in the shader ambient.
+fn gi_scene() -> Scene {
+    let mut scene = base_scene();
+    scene.fog_density = 0.0;
+    let white = scene.material(Material::solid(Vec3::splat(0.85)).roughness(0.6));
+    let red = scene.material(Material::solid(Vec3::new(0.75, 0.08, 0.08)).roughness(0.6));
+    let blue = scene.material(Material::solid(Vec3::new(0.08, 0.10, 0.75)).roughness(0.6));
+    scene.add(Object::new(Prim::Plane { n: Vec3::new(0.0, 1.0, 0.0), h: 0.0 }, Transform::IDENTITY, white));
+    scene.add(Object::new(
+        Prim::Box { half: Vec3::new(0.15, 2.0, 3.0) },
+        Transform::at(Vec3::new(-3.0, 2.0, 0.0)),
+        red,
+    ));
+    scene.add(Object::new(
+        Prim::Box { half: Vec3::new(0.15, 2.0, 3.0) },
+        Transform::at(Vec3::new(3.0, 2.0, 0.0)),
+        blue,
+    ));
+    scene.add(Object::new(Prim::Sphere { r: 0.9 }, Transform::at(Vec3::new(0.0, 0.9, 0.0)), white));
+    scene.sun_dir = Vec3::new(0.2, 0.9, 0.3).normalize();
+    scene.light(Light::directional(scene.sun_dir, Vec3::splat(1.6)).soft(0.05));
+    scene.bake_gi((10, 6, 10), 5);
+    scene
+}
+
+/// Shadows and AO switched OFF: the GPU previously ignored both toggles and rendered fully
+/// shadowed + occluded regardless.
+fn toggles_off_scene() -> Scene {
+    let mut scene = pbr_scene();
+    scene.shadows = false;
+    scene.ao = false;
     scene
 }
 
@@ -137,4 +172,6 @@ fn main() {
     compare("pbr-plain", &pbr_plain_scene(), &r);
     compare("emissive", &emissive_scene(), &r);
     compare("foggy", &foggy_scene(), &r);
+    compare("gi-bake", &gi_scene(), &r);
+    compare("no-shdw-ao", &toggles_off_scene(), &r);
 }

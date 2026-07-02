@@ -171,6 +171,7 @@ mod win32 {
         fn LoadCursorW(instance: Hinstance, name: *const u16) -> *mut c_void;
         fn ShowWindow(hwnd: Hwnd, cmd: i32) -> i32;
         fn SetWindowTextW(hwnd: Hwnd, text: *const u16) -> i32;
+        fn GetForegroundWindow() -> Hwnd;
     }
     #[link(name = "gdi32")]
     extern "system" {
@@ -306,30 +307,34 @@ mod win32 {
                     TranslateMessage(&msg);
                     DispatchMessageW(&msg);
                 }
-                if down(VK_ESCAPE) {
+                // GetAsyncKeyState is system-global; only read input while this window is
+                // foreground, or the viewer orbits (and quits) while the user types elsewhere.
+                let focused = GetForegroundWindow() == hwnd;
+                let key = |k: i32| focused && down(k);
+                if key(VK_ESCAPE) {
                     break 'frame;
                 }
-                if down(VK_LEFT) {
+                if key(VK_LEFT) {
                     yaw -= 0.04;
                 }
-                if down(VK_RIGHT) {
+                if key(VK_RIGHT) {
                     yaw += 0.04;
                 }
-                if down(VK_UP) {
+                if key(VK_UP) {
                     pitch = (pitch + 0.03).min(1.45);
                 }
-                if down(VK_DOWN) {
+                if key(VK_DOWN) {
                     pitch = (pitch - 0.03).max(-0.2);
                 }
-                if down(0x57) {
+                if key(0x57) {
                     radius = (radius - 0.15).max(2.5);
                 }
-                if down(0x53) {
+                if key(0x53) {
                     radius = (radius + 0.15).min(30.0);
                 }
                 let mut cur = Point { x: 0, y: 0 };
                 GetCursorPos(&mut cur);
-                if down(VK_LBUTTON) {
+                if key(VK_LBUTTON) {
                     if dragging {
                         yaw += (cur.x - last.x) as f32 * 0.01;
                         pitch = (pitch - (cur.y - last.y) as f32 * 0.01).clamp(-0.2, 1.45);

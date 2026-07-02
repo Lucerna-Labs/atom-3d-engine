@@ -167,6 +167,7 @@ mod win32 {
         fn GetCursorPos(p: *mut Point) -> i32;
         fn LoadCursorW(instance: Hinstance, name: *const u16) -> *mut c_void;
         fn ShowWindow(hwnd: Hwnd, cmd: i32) -> i32;
+        fn GetForegroundWindow() -> Hwnd;
     }
     #[link(name = "gdi32")]
     extern "system" {
@@ -306,7 +307,12 @@ mod win32 {
             GetCursorPos(&mut last);
 
             let mut bgra: Vec<u32> = Vec::with_capacity((rw * rh) as usize);
-            let dt = 1.0 / 60.0;
+            // Fixed-timestep physics behind a real frame clock: the simulation always steps at
+            // the tuned 1/60 (accumulated per rendered frame), so game speed is frame-rate
+            // independent — a 600 fps GPU no longer plays 10x faster than a 60 fps one.
+            const PHYS_DT: f32 = 1.0 / 60.0;
+            let mut accum = 0.0f32;
+            let mut last_frame = std::time::Instant::now();
             let mut msg = std::mem::zeroed::<Msg>();
             'frame: loop {
                 while PeekMessageW(&mut msg, std::ptr::null_mut(), 0, 0, PM_REMOVE) != 0 {
@@ -316,14 +322,18 @@ mod win32 {
                     TranslateMessage(&msg);
                     DispatchMessageW(&msg);
                 }
-                if down(VK_ESCAPE) {
+                // GetAsyncKeyState is system-global; only read input while this window is
+                // foreground, or the game steers (and quits!) while the user types elsewhere.
+                let focused = GetForegroundWindow() == hwnd;
+                let key = |k: i32| focused && down(k);
+                if key(VK_ESCAPE) {
                     break 'frame;
                 }
 
                 // Mouse-drag camera look.
                 let mut cur = Point { x: 0, y: 0 };
                 GetCursorPos(&mut cur);
-                if down(VK_LBUTTON) {
+                if key(VK_LBUTTON) {
                     if dragging {
                         cam_yaw += (cur.x - last.x) as f32 * 0.01;
                         cam_pitch = (cam_pitch - (cur.y - last.y) as f32 * 0.01).clamp(0.08, 1.4);
@@ -338,30 +348,38 @@ mod win32 {
                 let fwd = Vec3::new(-cam_yaw.cos(), 0.0, -cam_yaw.sin());
                 let right = Vec3::new(-cam_yaw.sin(), 0.0, cam_yaw.cos());
                 let mut mv = Vec3::ZERO;
-                if down(0x57) {
+                if key(0x57) {
                     mv = mv + fwd;
                 } // W
-                if down(0x53) {
+                if key(0x53) {
                     mv = mv - fwd;
                 } // S
-                if down(0x44) {
+                if key(0x44) {
                     mv = mv + right;
                 } // D
-                if down(0x41) {
+                if key(0x41) {
                     mv = mv - right;
                 } // A
-                {
-                    let p = &mut world.bodies[player];
-                    if mv.length() > 0.01 {
-                        p.drive(mv.normalize(), 6.0);
-                    }
-                    if down(VK_SPACE) {
-                        p.jump(7.0);
-                    }
-                }
 
-                // Step physics against the static level field.
-                world.step(dt, field);
+                // Step physics at the fixed rate, as many times as the elapsed frame time earns
+                // (capped so a stall never spirals into a step avalanche).
+                let now = std::time::Instant::now();
+                accum = (accum + (now - last_frame).as_secs_f32()).min(0.25);
+                last_frame = now;
+                while accum >= PHYS_DT {
+                    accum -= PHYS_DT;
+                    {
+                        let p = &mut world.bodies[player];
+                        if mv.length() > 0.01 {
+                            p.drive(mv.normalize(), 6.0);
+                        }
+                        if key(VK_SPACE) {
+                            p.jump(7.0);
+                        }
+                    }
+                    world.step(PHYS_DT, field);
+                    particles.update(PHYS_DT);
+                }
                 // Respawn anything that falls off the world.
                 for b in world.bodies.iter_mut() {
                     if b.pos.y < -20.0 {
@@ -386,8 +404,6 @@ mod win32 {
                         }
                     }
                 }
-                particles.update(dt);
-
                 let pp = world.bodies[player].pos;
                 let eye = pp
                     + Vec3::new(
@@ -423,7 +439,7 @@ mod win32 {
                 }
                 // Live particles fill any remaining dynamic-sphere slots.
                 for p in particles.alive() {
-                    if dyn_spheres.len() >= 24 {
+                    if dyn_spheres.len() >= mm3e_gpu::MAX_DYN {
                         break;
                     }
                     dyn_spheres.push(DynSphere { pos: p.pos, radius: p.size, albedo: p.color, metallic: 0.0 });

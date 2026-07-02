@@ -14,7 +14,9 @@ use mm3e_kit::color::Rgba;
 use mm3e_kit::framebuffer::Framebuffer;
 use mm3e_orchestrator::Scene;
 
-const MAX_DYN: usize = 24;
+/// Capacity of the dynamic-sphere uniform (player / physics bodies / particles per frame).
+/// The single source of truth — the WGSL array sizes and the examples' caps derive from it.
+pub const MAX_DYN: usize = 24;
 
 /// A dynamic sphere (player / physics body) rendered without recompiling the shader — its data
 /// rides in the uniform and is unioned into the field on the GPU each frame.
@@ -132,7 +134,16 @@ impl GpuRenderer {
     }
 
     /// Compile `scene` into a GPU pipeline + render targets at `width × height`.
+    ///
+    /// The shader is the beauty path only: `scene.mode` debug AOVs, and post-pass bloom, are
+    /// CPU-side features (see `gpu_parity` for the measured consequences of the shared pipeline).
+    /// A baked GI volume (`scene.bake_gi`) IS carried across: the ambient cubes upload as a
+    /// storage buffer and the shader samples them exactly like `GiVolume::sample`.
     pub fn compile(&self, scene: &Scene, width: u32, height: u32) -> GpuScene {
+        assert!(
+            width >= 1 && height >= 1 && width <= 16384 && height <= 16384,
+            "GpuRenderer::compile: {width}x{height} out of range 1..=16384"
+        );
         let device = &self.device;
         let source = wgsl::build_shader(scene);
         let module = device.create_shader_module(wgpu::ShaderModuleDescriptor {
@@ -146,6 +157,25 @@ impl GpuRenderer {
             usage: wgpu::BufferUsages::UNIFORM | wgpu::BufferUsages::COPY_DST,
             mapped_at_creation: false,
         });
+
+        // Baked GI ambient cubes → a read-only storage buffer (6 vec4 rows per probe, probe
+        // (i,j,k) at ((k·ny + j)·nx + i)·6 — the layout `GiVolume::raw` documents and the WGSL
+        // `gi_face` indexes). A scene without GI still binds a 1-probe zero volume: the shader
+        // compiles the sampler out (`HAS_GI = false`) but the binding must exist.
+        let gi_data: Vec<[f32; 4]> = match &scene.gi {
+            Some(vol) => {
+                let (_, _, _, cubes) = vol.raw();
+                cubes.iter().flat_map(|cube| cube.iter().map(|c| [c.x, c.y, c.z, 0.0])).collect()
+            }
+            None => vec![[0.0; 4]; 6],
+        };
+        let gi_buf = device.create_buffer(&wgpu::BufferDescriptor {
+            label: Some("gi-cubes"),
+            size: (gi_data.len() * 16) as u64,
+            usage: wgpu::BufferUsages::STORAGE | wgpu::BufferUsages::COPY_DST,
+            mapped_at_creation: false,
+        });
+        self.queue.write_buffer(&gi_buf, 0, bytemuck::cast_slice(&gi_data));
 
         let tex = device.create_texture(&wgpu::TextureDescriptor {
             label: Some("out"),
@@ -182,6 +212,16 @@ impl GpuRenderer {
                     },
                     count: None,
                 },
+                wgpu::BindGroupLayoutEntry {
+                    binding: 2,
+                    visibility: wgpu::ShaderStages::COMPUTE,
+                    ty: wgpu::BindingType::Buffer {
+                        ty: wgpu::BufferBindingType::Storage { read_only: true },
+                        has_dynamic_offset: false,
+                        min_binding_size: None,
+                    },
+                    count: None,
+                },
             ],
         });
         let bind_group = device.create_bind_group(&wgpu::BindGroupDescriptor {
@@ -190,6 +230,7 @@ impl GpuRenderer {
             entries: &[
                 wgpu::BindGroupEntry { binding: 0, resource: uniform_buf.as_entire_binding() },
                 wgpu::BindGroupEntry { binding: 1, resource: wgpu::BindingResource::TextureView(&view) },
+                wgpu::BindGroupEntry { binding: 2, resource: gi_buf.as_entire_binding() },
             ],
         });
         let layout = device.create_pipeline_layout(&wgpu::PipelineLayoutDescriptor {
@@ -326,8 +367,16 @@ impl GpuScene {
     pub fn render_rgba_dyn(&self, r: &GpuRenderer, camera: &Camera, dyn_spheres: &[DynSphere]) -> Vec<u8> {
         self.dispatch(r, camera, dyn_spheres);
         let slice = self.readback.slice(..);
-        slice.map_async(wgpu::MapMode::Read, |_| {});
+        // Surface a map failure (device loss, OOM) as a clear panic instead of a deeper opaque
+        // one from get_mapped_range — the callback's error was previously discarded.
+        let (tx, rx) = std::sync::mpsc::channel();
+        slice.map_async(wgpu::MapMode::Read, move |res| {
+            let _ = tx.send(res);
+        });
         r.device.poll(wgpu::PollType::Wait).expect("device poll");
+        rx.recv()
+            .expect("map_async callback never ran (device lost?)")
+            .expect("readback buffer map failed (device lost / out of memory?)");
         let data = slice.get_mapped_range();
         let mut out = Vec::with_capacity((self.width * self.height * 4) as usize);
         for y in 0..self.height {

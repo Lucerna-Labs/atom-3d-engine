@@ -9,7 +9,9 @@ use mm3e_kit::vec::Vec3;
 use mm3e_orchestrator::{Combine, Object, Prim, Scene};
 
 fn f(x: f32) -> String {
-    // Always emit a decimal point so WGSL treats it as f32, and avoid `inf`.
+    // Always emit a decimal point so WGSL treats it as f32, and avoid `inf`/`NaN` (which WGSL
+    // rejects as literals). -inf must stay a huge NEGATIVE value — collapsing it to +1e30 would
+    // silently flip the sign of a far bound. NaN has no meaningful direction; emit 0.0.
     if x.is_finite() {
         let s = format!("{x:?}");
         if s.contains('.') || s.contains('e') {
@@ -17,8 +19,12 @@ fn f(x: f32) -> String {
         } else {
             format!("{s}.0")
         }
-    } else {
+    } else if x == f32::INFINITY {
         "1e30".to_string()
+    } else if x == f32::NEG_INFINITY {
+        "-1e30".to_string()
+    } else {
+        "0.0".to_string()
     }
 }
 
@@ -29,6 +35,9 @@ fn v3(v: Vec3) -> String {
 /// Build the full compute shader for `scene`.
 pub fn build_shader(scene: &Scene) -> String {
     let mut s = String::new();
+    // The dyn-sphere capacity comes from the one Rust constant; the WGSL uniform arrays size
+    // themselves from this const (module-scope declarations are order-independent in WGSL).
+    s.push_str(&format!("const MAX_DYN: u32 = {}u;\n", crate::MAX_DYN));
     s.push_str(KERNEL_HEADER);
 
     // Scene constants.
@@ -50,8 +59,38 @@ pub fn build_shader(scene: &Scene) -> String {
     s.push_str(&format!("const LOD_FOOTPRINT: f32 = {};\n", f(mr.lod_footprint)));
     s.push_str(&format!("const STEP_SCALE: f32 = {};\n", f(mr.step_scale.min(1.0))));
     s.push_str(&format!("const SHADOW_STEPS: i32 = {};\n", mr.shadow_steps.min(i32::MAX as u32)));
-    s.push_str(&format!("const AO_SAMPLES: i32 = {};\n", mr.ao_samples.min(i32::MAX as u32)));
-    s.push_str(&format!("const AO_SPAN: f32 = {};\n\n", f((mr.ao_samples.max(2) - 1) as f32)));
+    // `scene.ao == false` compiles to a zero sample budget — ao() then returns fully open (1.0),
+    // matching the CPU's `if scene.ao { … } else { 1.0 }` gate.
+    let ao_samples = if scene.ao { mr.ao_samples } else { 0 };
+    s.push_str(&format!("const AO_SAMPLES: i32 = {};\n", ao_samples.min(i32::MAX as u32)));
+    s.push_str(&format!("const AO_SPAN: f32 = {};\n", f((ao_samples.max(2) - 1) as f32)));
+    // Baked GI volume: the grid geometry compiles to constants; the ambient cubes ride in a
+    // read-only storage buffer (binding 2, uploaded by `GpuRenderer::compile`). Per-axis
+    // GI_SCALE = (n.max(2)-1)/extent maps world → fractional probe coords, with a degenerate
+    // (zero-extent) axis collapsing to probe 0 — the same guard `GiVolume::sample` applies.
+    match &scene.gi {
+        Some(vol) => {
+            let (min, size, dims, _) = vol.raw();
+            let axis_scale = |ext: f32, n: usize| if ext.abs() > 1e-6 { (n.max(2) - 1) as f32 / ext } else { 0.0 };
+            s.push_str("const HAS_GI: bool = true;\n");
+            s.push_str(&format!("const GI_MIN: vec3<f32> = {};\n", v3(min)));
+            s.push_str(&format!(
+                "const GI_SCALE: vec3<f32> = vec3<f32>({}, {}, {});\n",
+                f(axis_scale(size.x, dims.0)),
+                f(axis_scale(size.y, dims.1)),
+                f(axis_scale(size.z, dims.2))
+            ));
+            s.push_str(&format!("const GI_NX: u32 = {}u;\n", dims.0));
+            s.push_str(&format!("const GI_NY: u32 = {}u;\n", dims.1));
+            s.push_str(&format!("const GI_NZ: u32 = {}u;\n\n", dims.2));
+        }
+        None => {
+            s.push_str("const HAS_GI: bool = false;\n");
+            s.push_str("const GI_MIN: vec3<f32> = vec3<f32>(0.0, 0.0, 0.0);\n");
+            s.push_str("const GI_SCALE: vec3<f32> = vec3<f32>(0.0, 0.0, 0.0);\n");
+            s.push_str("const GI_NX: u32 = 1u;\nconst GI_NY: u32 = 1u;\nconst GI_NZ: u32 = 1u;\n\n");
+        }
+    }
 
     s.push_str(&material_fn(scene));
     s.push_str(&map_fn(scene));
@@ -61,7 +100,15 @@ pub fn build_shader(scene: &Scene) -> String {
 }
 
 fn material_fn(scene: &Scene) -> String {
-    let mut s = String::from("fn material(id: u32) -> Mat {\n  switch (id) {\n");
+    // Material ids ≥ 1000 are reserved for the dynamic-sphere scheme in the shader (see map_fn),
+    // so a scene must not carry that many materials. Real scenes have a handful.
+    assert!(scene.materials.len() < 1000, "mm3e-gpu supports at most 999 materials (ids >= 1000 are dynamic spheres)");
+    // CPU material lookup wraps out-of-range ids (`mat as usize % materials.len()`); wrap here
+    // too so both backends resolve a bad id to the SAME material instead of a built-in grey.
+    let mut s = format!(
+        "fn material(raw_id: u32) -> Mat {{\n  let id = raw_id % {}u;\n  switch (id) {{\n",
+        scene.materials.len().max(1)
+    );
     for (i, m) in scene.materials.iter().enumerate() {
         s.push_str(&format!(
             "    case {i}u: {{ return Mat({}, {}, {}, {}, {}, {}, {}); }}\n",
@@ -96,7 +143,9 @@ fn emit_local(o: &Object) -> String {
         ));
     }
     if m.elongate != Vec3::ZERO {
-        s.push_str(&format!("    q = q - clamp(q, -{h}, {h});\n", h = v3(m.elongate)));
+        // max-then-min rather than clamp(): WGSL's clamp is indeterminate when low > high (a
+        // negative elongate component), while the CPU's clamp_to = max(lo).min(hi) is defined.
+        s.push_str(&format!("    q = q - min(max(q, -{h}), {h});\n", h = v3(m.elongate)));
     }
     if m.repeat != Vec3::ZERO {
         s.push_str(&format!("    q = op_repeat(q, {});\n", v3(m.repeat)));
@@ -208,7 +257,13 @@ fn direct_lighting_fn(scene: &Scene) -> String {
         };
         s.push_str("    let ndl = max(dot(n, ldir), 0.0);\n");
         s.push_str("    if (ndl > 0.0) {\n");
-        s.push_str(&format!("      let sh = soft_shadow(p + n*0.01, ldir, min(ldist, MAX_DIST), {k});\n"));
+        // `scene.shadows == false` compiles the shadow trace out entirely, matching the CPU's
+        // `if scene.shadows { … } else { 1.0 }` gate in shade_hit.
+        if scene.shadows {
+            s.push_str(&format!("      let sh = soft_shadow(p + n*0.01, ldir, min(ldist, MAX_DIST), {k});\n"));
+        } else {
+            s.push_str("      let sh = 1.0;\n");
+        }
         s.push_str(&format!(
             "      c = c + brdf(n, ldir, v, albedo, m.metallic, m.rough, m.spec) * {} * (sh * atten);\n",
             v3(color)
@@ -224,18 +279,21 @@ fn direct_lighting_fn(scene: &Scene) -> String {
 // ----------------------------------------------------------------------------
 
 const KERNEL_HEADER: &str = r#"
-const MAX_DYN: u32 = 24u;
 struct U {
   eye: vec3<f32>, fov: f32,
   right: vec3<f32>, aa: f32,
   up: vec3<f32>, bounces: f32,
   fwd: vec3<f32>, n_dyn: f32,
   res: vec2<f32>, _pad2: vec2<f32>,
-  dyn_pr: array<vec4<f32>, 24>,   // dynamic spheres: xyz = centre, w = radius
-  dyn_col: array<vec4<f32>, 24>,  // xyz = albedo, w = metallic
+  dyn_pr: array<vec4<f32>, MAX_DYN>,   // dynamic spheres: xyz = centre, w = radius
+  dyn_col: array<vec4<f32>, MAX_DYN>,  // xyz = albedo, w = metallic
 };
 @group(0) @binding(0) var<uniform> u: U;
 @group(0) @binding(1) var outtex: texture_storage_2d<rgba8unorm, write>;
+// Baked GI ambient cubes: 6 vec4 rows per probe (+x -x +y -y +z -z, rgb in xyz), probe
+// (i, j, k) at flat index ((k*GI_NY + j)*GI_NX + i)*6. A 1-probe zero volume when HAS_GI is
+// false (the sampler is compiled out, but the binding must exist).
+@group(0) @binding(2) var<storage, read> gi_cubes: array<vec4<f32>>;
 
 const PI: f32 = 3.14159265359;
 
@@ -336,6 +394,35 @@ fn ibl(n: vec3<f32>) -> vec3<f32> {
   for (var i = 0; i < 5; i = i + 1) { let cw = max(dot(dirs[i], n), 0.0); acc = acc + sky_diffuse(dirs[i]) * cw; w = w + cw; }
   return acc / max(w, 1e-4) * SKY_AMBIENT;
 }
+// GiVolume::sample, ported: trilinearly interpolate each of the six cube faces across the eight
+// surrounding probes, then blend the three normal-facing faces with n^2 weights (the
+// Half-Life-2 ambient-cube combine).
+fn gi_face(i: u32, j: u32, k: u32, face: u32) -> vec3<f32> {
+  return gi_cubes[((k * GI_NY + j) * GI_NX + i) * 6u + face].xyz;
+}
+fn gi_axis_lo(g: f32, n: u32) -> u32 { return min(u32(max(floor(g), 0.0)), n - 1u); }
+fn gi_sample(pos: vec3<f32>, n: vec3<f32>) -> vec3<f32> {
+  if (!HAS_GI) { return vec3<f32>(0.0); }
+  let g = (pos - GI_MIN) * GI_SCALE;
+  let i0 = gi_axis_lo(g.x, GI_NX); let j0 = gi_axis_lo(g.y, GI_NY); let k0 = gi_axis_lo(g.z, GI_NZ);
+  let i1 = min(i0 + 1u, GI_NX - 1u); let j1 = min(j0 + 1u, GI_NY - 1u); let k1 = min(k0 + 1u, GI_NZ - 1u);
+  let fx = clamp(g.x - f32(i0), 0.0, 1.0);
+  let fy = clamp(g.y - f32(j0), 0.0, 1.0);
+  let fz = clamp(g.z - f32(k0), 0.0, 1.0);
+  var face: array<vec3<f32>, 6>;
+  for (var fc = 0u; fc < 6u; fc = fc + 1u) {
+    let x00 = mix(gi_face(i0, j0, k0, fc), gi_face(i1, j0, k0, fc), fx);
+    let x10 = mix(gi_face(i0, j1, k0, fc), gi_face(i1, j1, k0, fc), fx);
+    let x01 = mix(gi_face(i0, j0, k1, fc), gi_face(i1, j0, k1, fc), fx);
+    let x11 = mix(gi_face(i0, j1, k1, fc), gi_face(i1, j1, k1, fc), fx);
+    face[fc] = mix(mix(x00, x10, fy), mix(x01, x11, fy), fz);
+  }
+  let nn = n * n;
+  var fx_face = face[1]; if (n.x >= 0.0) { fx_face = face[0]; }
+  var fy_face = face[3]; if (n.y >= 0.0) { fy_face = face[2]; }
+  var fz_face = face[5]; if (n.z >= 0.0) { fz_face = face[4]; }
+  return fx_face * nn.x + fy_face * nn.y + fz_face * nn.z;
+}
 // 64-bit FNV-1a over the 8 little-endian bytes of (ix, iz), on u32 pairs — the kit's
 // `atoms::hash_cell`, ported bit-exactly so the checker's per-tile tint matches the CPU
 // reference. The FNV prime 0x00000100000001B3 is 2^40 + 0x1B3, so the 64-bit multiply
@@ -384,7 +471,7 @@ fn shade(ro0: vec3<f32>, rd0: vec3<f32>) -> vec3<f32> {
     }
     let albedo = surface_albedo(m, p);
     let occ = ao(p, n);
-    var base = albedo * (ibl(n) + AMBIENT) * occ;
+    var base = albedo * (ibl(n) + gi_sample(p, n) + AMBIENT) * occ;
     base = base + direct_lighting(p, n, v, albedo, m);
     // The CPU recursion computes fog(base*(1-fr) + refl*fr + emissive) at every level: emissive
     // is added AFTER the Fresnel blend (a glowing reflective surface never dims at grazing

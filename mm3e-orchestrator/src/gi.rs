@@ -12,6 +12,9 @@
 
 use mm3e_kit::{atoms, vec::Vec3};
 
+/// [`GiVolume::raw`]'s view of the volume: `(min, size, (nx, ny, nz), cubes)`.
+pub type GiRaw<'a> = (Vec3, Vec3, (usize, usize, usize), &'a [[Vec3; 6]]);
+
 /// A baked irradiance volume covering an axis-aligned region of the scene.
 pub struct GiVolume {
     min: Vec3,
@@ -124,6 +127,14 @@ impl GiVolume {
     fn cube_at(&self, i: usize, j: usize, k: usize) -> &[Vec3; 6] {
         let (nx, ny, _) = self.dims;
         &self.cubes[(k * ny + j) * nx + i]
+    }
+
+    /// The volume's raw layout, for backends that re-express the lookup elsewhere (the GPU
+    /// uploads the cubes as a storage buffer and samples them in WGSL): `(min, size, dims,
+    /// cubes)`, where `cubes[(k·ny + j)·nx + i]` holds the six axis irradiances of probe
+    /// `(i, j, k)` in `+x −x +y −y +z −z` order — the exact layout [`GiVolume::sample`] reads.
+    pub fn raw(&self) -> GiRaw<'_> {
+        (self.min, self.size, self.dims, &self.cubes)
     }
 
     /// Sample the interpolated irradiance arriving at `pos` on a surface with normal `n`.
