@@ -80,6 +80,61 @@ fn scene_io_rejects_garbage() {
 }
 
 #[test]
+fn bvh_world_matches_linear_fold_bit_exactly() {
+    // The BVH-accelerated world() must be indistinguishable from the linear left fold — not
+    // approximately, but bit-for-bit (distance bits AND material id), across every combine mode,
+    // unbounded objects (planes), first-object seeding quirks (a Subtract/Smooth first object
+    // seeds like a union), and empty-space lower-bound substitution. A deterministic LCG builds
+    // varied scenes; points sample a box enclosing and exceeding the geometry.
+    let mut state = 0x243F_6A88_85A3_08D3u64; // deterministic (pi digits), NOT time-seeded
+    let mut rng = move || {
+        state = state.wrapping_mul(6364136223846793005).wrapping_add(1442695040888963407);
+        ((state >> 33) as f32 / (1u32 << 31) as f32) * 2.0 - 1.0 // [-1, 1)
+    };
+    for scene_idx in 0..12 {
+        let mut scene = Scene::new(8, 8);
+        let n_objects = 2 + (scene_idx * 5) % 40; // 2..=41 objects
+        for i in 0..n_objects {
+            let prim = match i % 5 {
+                0 => Prim::Sphere { r: 0.3 + rng().abs() },
+                1 => Prim::Box { half: Vec3::new(0.2 + rng().abs(), 0.2 + rng().abs(), 0.2 + rng().abs()) },
+                2 => Prim::Torus { major: 0.4 + rng().abs() * 0.5, minor: 0.1 + rng().abs() * 0.2 },
+                3 => Prim::Plane { n: Vec3::new(rng(), 1.0 + rng().abs(), rng()).normalize(), h: rng() },
+                _ => Prim::Capsule {
+                    a: Vec3::new(rng(), rng(), rng()),
+                    b: Vec3::new(rng(), rng(), rng()),
+                    r: 0.1 + rng().abs() * 0.3,
+                },
+            };
+            let xf = Transform::at(Vec3::new(rng() * 6.0, rng() * 6.0, rng() * 6.0)).scaled(0.5 + rng().abs());
+            let mut obj = Object::new(prim, xf, i as u32 % 4);
+            match i % 7 {
+                3 => obj = obj.smooth(0.2 + rng().abs() * 0.5),
+                5 => obj = obj.subtract(),
+                6 => obj = obj.repeat(Vec3::new(0.0, 0.0, 4.0 + rng().abs())), // unbounded in-run
+                _ => {}
+            }
+            scene.add(obj);
+        }
+        let fast = scene.field();
+        let reference = scene.world_linear();
+        for _ in 0..4000 {
+            let p = Vec3::new(rng() * 12.0, rng() * 12.0, rng() * 12.0);
+            let a = fast(p);
+            let b = reference(p);
+            assert_eq!(
+                a.dist.to_bits(),
+                b.dist.to_bits(),
+                "scene {scene_idx}: field distance diverged at {p:?}: bvh {} vs linear {}",
+                a.dist,
+                b.dist
+            );
+            assert_eq!(a.mat, b.mat, "scene {scene_idx}: material diverged at {p:?}");
+        }
+    }
+}
+
+#[test]
 fn render_is_deterministic() {
     let scene = demo_scene();
     let c = cam();

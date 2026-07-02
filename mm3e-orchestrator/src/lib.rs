@@ -9,6 +9,7 @@
 //!   scan pixels → project each into a camera ray → fold the ray down to a hit (sphere-trace)
 //!   → combine lights into radiance → order/compose reflection + fog → tone-map → put pixel.
 
+mod accel;
 pub mod anim;
 pub mod gi;
 pub mod particles;
@@ -572,13 +573,22 @@ impl Scene {
     /// The world field: a bounded `fold` of every object's contribution into one distance +
     /// material — the closure the kit's sphere tracer marches through. Built once per frame.
     ///
-    /// Each object carries a conservative bounding sphere; when the sample point is well outside
-    /// it (`lower_bound > slack`), the cheap lower bound replaces the exact SDF. Because the
-    /// lower bound never exceeds the true distance, every CSG op stays a safe underestimate and
-    /// the tracer never overshoots — this is the O(1) early-out that makes scenes scale and the
-    /// substrate a full BVH would later sit on. The `slack` covers the widest smooth-blend so
-    /// near-surface blends always use the exact field.
+    /// Evaluation goes through an [`accel::WorldPlan`]: runs of consecutive plain-`Union`
+    /// objects gather through a BVH (a *tree* fold — O(log N) once the traversal prunes), while
+    /// `Smooth`/`Subtract` objects keep their exact fold order. The plan is built to be
+    /// **bit-identical** to the linear left fold (`world_linear`, kept as the reference):
+    /// same per-object lower-bound substitution outside `slack`, same earliest-index tie-breaks.
+    /// `tests/engine.rs` asserts the equivalence point-by-point on randomized scenes.
     fn world(&self) -> impl Fn(Vec3) -> Field + '_ {
+        let plan = accel::WorldPlan::build(&self.objects);
+        move |p: Vec3| plan.eval(p, &self.objects)
+    }
+
+    /// The pre-BVH linear fold, verbatim — the semantic reference `world()` must match
+    /// bit-for-bit. Kept for the equivalence tests and the `bvh_bench` example; not a rendering
+    /// path.
+    #[doc(hidden)]
+    pub fn world_linear(&self) -> impl Fn(Vec3) -> Field + '_ {
         let bounds: Vec<Option<(Vec3, f32)>> = self.objects.iter().map(Object::world_bound).collect();
         let slack = self
             .objects
