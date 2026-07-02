@@ -15,12 +15,8 @@ fn grid_scene(side: u32, w: u32, h: u32) -> Scene {
     scene.aa = 1;
     scene.bounces = 0;
     let floor = scene.material(Material::solid(Vec3::splat(1.0)).checkered().roughness(0.6));
-    let colors = [
-        Vec3::new(0.85, 0.2, 0.2),
-        Vec3::new(0.2, 0.65, 0.3),
-        Vec3::new(0.25, 0.4, 0.85),
-        Vec3::new(0.9, 0.75, 0.25),
-    ];
+    let colors =
+        [Vec3::new(0.85, 0.2, 0.2), Vec3::new(0.2, 0.65, 0.3), Vec3::new(0.25, 0.4, 0.85), Vec3::new(0.9, 0.75, 0.25)];
     let mats: Vec<u32> = colors.iter().map(|&c| scene.material(Material::solid(c).roughness(0.35))).collect();
     scene.add(Object::new(Prim::Plane { n: Vec3::new(0.0, 1.0, 0.0), h: 0.0 }, Transform::IDENTITY, floor));
     let spacing = 1.6f32;
@@ -45,7 +41,10 @@ fn grid_scene(side: u32, w: u32, h: u32) -> Scene {
 
 fn main() {
     let (w, h) = (480u32, 270u32);
-    println!("{:>8}  {:>9}  {:>12}  {:>12}  {:>8}   (render ms/frame at {w}x{h})", "objects", "grid", "linear", "bvh", "speedup");
+    println!(
+        "{:>8}  {:>9}  {:>12}  {:>12}  {:>8}   (render ms/frame at {w}x{h})",
+        "objects", "grid", "linear", "bvh", "speedup"
+    );
     for side in [2u32, 4, 6, 8, 12, 16] {
         let scene = grid_scene(side, w, h);
         let n = scene.objects.len();

@@ -183,7 +183,7 @@ impl WorldPlan {
 
         let mut segments = Vec::new();
         let mut run: Vec<usize> = Vec::new();
-        let mut close_run = |run: &mut Vec<usize>, segments: &mut Vec<Segment>| {
+        let close_run = |run: &mut Vec<usize>, segments: &mut Vec<Segment>| {
             if run.is_empty() {
                 return;
             }
