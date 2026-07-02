@@ -86,6 +86,13 @@ where
         Rule::GuardedOmega { omega, secant } => (omega, secant),
         _ => (1.0, false),
     };
+    let mut use_secant = use_secant;
+    #[derive(Clone, Copy)]
+    enum Boost {
+        Omega,
+        Secant,
+    }
+    let mut boost = Boost::Omega;
     let mut t = 0.0f32;
     let mut prev_radius = 0.0f32;
     let mut last_step = 0.0f32;
@@ -105,27 +112,42 @@ where
         let overlap = radius + prev_radius - last_step;
         let mut step;
 
-        if matches!(rule, Rule::GuardedOmega { .. }) && omega > 1.0 && radius + prev_radius < last_step {
-            step = last_step - omega * last_step;
-            omega = 1.0;
-        } else {
-            if f.dist < eps {
-                return Hit { hit: true, t, pos: p, normal: normal_fn(p), mat: f.mat, steps: i };
-            }
-
-            step = match rule {
-                Rule::Exact | Rule::ExactRef => f.dist,
-                Rule::GuardedOmega { .. } => f.dist * omega,
-                Rule::RawRadiusIndex => clipped_step((radius + i as f32 * 0.02) / 0.588, f.dist),
-                Rule::RawOverlapT => clipped_step(overlap + t * 0.1, f.dist),
-            };
-
-            if use_secant && f.dist < 0.08 && d_prev.is_finite() {
-                let dt = t - t_prev;
-                let dd = f.dist - d_prev;
-                if dt > 1e-6 && dd < -1e-6 {
-                    step = (-f.dist * dt / dd).clamp(f.dist, f.dist * 4.0);
+        if matches!(rule, Rule::GuardedOmega { .. }) && last_step > radius + prev_radius {
+            let gap_lo = t_prev + prev_radius;
+            let gap_hi = t - radius;
+            let mid = 0.5 * (gap_lo + gap_hi);
+            let covered = f.dist > 0.0 && field(ray.at(mid)).dist >= 0.5 * (gap_hi - gap_lo);
+            if !covered {
+                t = gap_lo;
+                match boost {
+                    Boost::Omega => omega = omega.min(1.0),
+                    Boost::Secant => use_secant = false,
                 }
+                boost = Boost::Omega;
+                prev_radius = 0.0;
+                last_step = 0.0;
+                d_prev = f32::INFINITY;
+                continue;
+            }
+        }
+        if f.dist < eps {
+            return Hit { hit: true, t, pos: p, normal: normal_fn(p), mat: f.mat, steps: i };
+        }
+
+        step = match rule {
+            Rule::Exact | Rule::ExactRef => f.dist,
+            Rule::GuardedOmega { .. } => f.dist * omega,
+            Rule::RawRadiusIndex => clipped_step((radius + i as f32 * 0.02) / 0.588, f.dist),
+            Rule::RawOverlapT => clipped_step(overlap + t * 0.1, f.dist),
+        };
+        boost = Boost::Omega;
+
+        if use_secant && f.dist < 0.08 && d_prev.is_finite() {
+            let dt = t - t_prev;
+            let dd = f.dist - d_prev;
+            if dt > 1e-6 && dd < -1e-6 {
+                step = (-f.dist * dt / dd).clamp(f.dist, f.dist * 4.0);
+                boost = Boost::Secant;
             }
         }
 
@@ -217,11 +239,11 @@ fn main() {
     );
 
     let truth = pass(&scene, w, h, &cameras, Rule::ExactRef);
-    let shipped = pass(&scene, w, h, &cameras, Rule::GuardedOmega { omega: 1.4, secant: true });
+    let shipped = pass(&scene, w, h, &cameras, Rule::GuardedOmega { omega: 1.4, secant: false });
     let cases = [
         Case { name: "exact d (same budget)", rule: Rule::Exact },
-        Case { name: "shipped omega=1.40", rule: Rule::GuardedOmega { omega: 1.4, secant: true } },
-        Case { name: "TPU omega=1.70", rule: Rule::GuardedOmega { omega: 1.70, secant: true } },
+        Case { name: "shipped omega=1.40", rule: Rule::GuardedOmega { omega: 1.4, secant: false } },
+        Case { name: "TPU omega=1.70", rule: Rule::GuardedOmega { omega: 1.70, secant: false } },
         Case { name: "TPU raw (radius+i*.02)/.588", rule: Rule::RawRadiusIndex },
         Case { name: "TPU raw overlap+t*.1", rule: Rule::RawOverlapT },
     ];
