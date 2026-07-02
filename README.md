@@ -5,8 +5,9 @@ A real-time 3-D engine built from pure math primitives, in std-only Rust. The co
 windowing crate; it rolls its own vectors, matrices, quaternions, signed-distance fields, sphere
 tracer, global illumination, post-processing, animation, scene format, an interactive window, and
 24-bit BMP encoder. An optional **GPU backend** (`mm3e-gpu`) compiles the same scenes into a WGSL
-compute shader and runs them on wgpu (Vulkan/Metal/DX12) — **~430 fps at 960×540** on an RTX 5070 Ti,
-roughly 400× the CPU path, with a pixel-faithful image.
+compute shader and runs them on wgpu (Vulkan/Metal/DX12) — **~600 fps at 960×540** on an RTX 5070 Ti
+(55 fps on an Intel Arc A380 — pick your card with `MM3E_GPU_ADAPTER`), with **measured** parity:
+mean ≤0.2/255 vs the CPU reference across parity-hostile scenes (`gpu_parity`), baked GI included.
 
 MM3E is the **3-D elevation of [MMPE](https://github.com/Rekonquest/mm3e)** — where the 2-D engine
 rasterized 2-D signed-distance fields with a `scan`-convert, this one sphere-traces 3-D
@@ -45,11 +46,17 @@ soft shadows, AO, IBL ambient, reflections, and fog are all ported; the core cra
 wgpu lives only in this crate.
 
 ```sh
-cargo run -p mm3e-gpu --example gpu_probe  --release   # print the selected GPU adapter
+cargo run -p mm3e-gpu --example gpu_probe  --release   # list every adapter + show the selection
 cargo run -p mm3e-gpu --example gpu_render --release   # GPU render to BMP + an fps benchmark
+cargo run -p mm3e-gpu --example gpu_parity --release   # measured CPU-vs-GPU per-channel parity
 cargo run -p mm3e-gpu --example gpu_viewer --release   # real-time GPU window (Windows; orbit live)
 cargo run -p mm3e-gpu --example game       --release   # playable: roll a ball (GPU + SDF physics)
 ```
+
+Pick the card deliberately with `MM3E_GPU_ADAPTER` (case-insensitive substring: `arc`, `nvidia`,
+`dx12`, …) — how a heterogeneous fleet validates the renderer on the GPU it *means* to. Baked GI
+(`Scene::bake_gi`) rides along: the probe cubes upload as a storage buffer and the shader samples
+them exactly like the CPU.
 
 ## Physics + a playable game
 
@@ -83,8 +90,9 @@ BRDF, fog, smooth-min CSG, and bloom are all `combine`; the camera basis and eve
 
 **Geometry** — 11 analytic SDF primitives (sphere, box, rounded box, torus, cylinder, capsule,
 cone, ellipsoid, octahedron, hex prism, plane); CSG union/intersect/subtract + smooth variants;
-domain operators (round, onion, elongate, infinite repeat, twist, bend, mirror); conservative
-bounding-sphere pruning of the world field.
+domain operators (round, onion, elongate, infinite repeat, twist, bend, mirror); a **BVH
+tree-fold** over union runs (bit-identical to the linear fold — proven in tests — and 1.2–2.3×
+faster, always on) with conservative bounding-sphere pruning as its substrate.
 
 **Shading & lighting** — Cook-Torrance GGX PBR (metallic-roughness); diffuse image-based lighting
 from the sky; **SDF global illumination** (baked irradiance probe volume); directional + point +
@@ -98,8 +106,10 @@ multithreaded rendering via scoped std threads (deterministic, ≈11× on 24 cor
 **Systems** — keyframe animation with easing and quaternion slerp; a `.mm3e` text scene format
 (serializer + parser, round-trip tested); a real-time interactive viewer (raw Win32/GDI, no crate).
 
-**Engineering** — 19-test suite, GitHub Actions CI (fmt + clippy `-D warnings` + build + test on
-Linux & Windows), zero external dependencies.
+**Engineering** — 58-test suite (incl. bit-exact BVH equivalence, buried-hit and dual-normal
+regression tests), measured validation harnesses (`render_validate`, `gpu_parity`,
+`overshoot_probe`, `subitize_econ`, `bvh_bench`), GitHub Actions CI (fmt + clippy `-D warnings` +
+build + test on Linux & Windows), zero external dependencies in the core.
 
 ## Run
 

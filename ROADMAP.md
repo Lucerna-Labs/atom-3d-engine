@@ -35,9 +35,17 @@ constraint broken:
 - ✅ **Engineering** — a 25-test suite + GitHub Actions CI (fmt, clippy `-D warnings`, build, test;
   core on Linux + Windows, the GPU crate on Windows).
 
-Highest-leverage next: a true **BVH** over additive objects (the bounding-sphere prune is the
-substrate; the open problem is ordered CSG with subtraction), and **mesh ingestion** (glTF + a
-mesh→SDF bake) for those who want to bring external geometry into the field. See the tiers below.
+- ✅ **BVH tree-fold over union runs** (`mm3e-orchestrator/src/accel.rs`) — the ordered-CSG
+  problem solved by segmentation: Smooth/Subtract objects keep their fold order, consecutive
+  plain-Union runs gather through a median-split sphere BVH, unbounded objects seed the prune
+  bound. **Bit-identical** to the linear fold (tested point-by-point; renders byte-identical),
+  1.2–2.3× measured, always on.
+- ✅ **GPU parity, measured** (`gpu_parity`: mean ≤0.2/255 incl. the FNV hash tint, shadow
+  schedule, emissive/fog blend), **baked GI on the GPU** (probe cubes as a storage buffer), and
+  **deliberate adapter selection** (`MM3E_GPU_ADAPTER`; Intel Arc A380 validated at 55 fps).
+
+Highest-leverage next: **mesh ingestion** (glTF + a mesh→SDF bake) for those who want to bring
+external geometry into the field. See the tiers below.
 
 ## The strategic fork (pick one)
 

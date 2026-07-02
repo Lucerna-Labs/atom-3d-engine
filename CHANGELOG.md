@@ -2,6 +2,42 @@
 
 All notable changes to MM3E are documented here.
 
+## [0.7.0] — BVH tree-fold, GPU parity + GI, deliberate adapter selection
+
+- **BVH over union runs** (`mm3e-orchestrator/src/accel.rs`) — the roadmap's top item, built to a
+  hard constraint: the accelerated world field is **bit-identical** to the linear fold (proven
+  point-by-point over randomized scenes in `tests/engine.rs`; freshly rendered `spheres.bmp` /
+  `gi_demo.bmp` are byte-identical to their pre-BVH commits). Segments preserve CSG order
+  (Smooth/Subtract stay ordered; consecutive plain-Union objects gather through a median-split
+  sphere BVH with earliest-index tie-breaks); unbounded objects evaluate first and seed the prune
+  bound, so a nearby floor plane discards the whole tree in one sphere test. Measured
+  (`bvh_bench`): 1.5–2.3× fewer field-eval ns on small scenes, 1.2–1.8× on dense grids to 257
+  objects; never loses, so it is always on.
+- **GPU adapter enumeration + deliberate selection** — `list_adapters()`,
+  `GpuRenderer::with_adapter(substring)`, and the `MM3E_GPU_ADAPTER` env var (report next-step
+  #1). Validated across the fleet: RTX 5070 Ti 604.5 fps @ 960×540; **Intel Arc A380** runs the
+  same scene at 55.4 fps with slightly *tighter* CPU parity than NVIDIA.
+- **CPU↔GPU parity, measured and fixed** (`examples/gpu_parity.rs`): the WGSL twin now matches
+  the CPU reference to mean ≤0.2/255 on parity-hostile scenes (was 1.6–2.4/255). Fixes: the
+  emissive/Fresnel/fog blend order in `shade()` (reflected legs now inherit fog transmittance;
+  emissive never dims at grazing angles), marcher budgets baked from `scene.marcher` (was
+  hardcoded), the CPU's stochastic shadow schedule ported (also **+54% GPU fps** — 391.8 → 604.5),
+  the checker's 64-bit FNV-1a hash tint ported bit-exactly to WGSL on u32 pairs,
+  `scene.shadows`/`scene.ao` toggles compiled in (were silently ignored), material ids wrapping
+  modulo `materials.len()` like the CPU, `Smooth(k≤0)` and negative elongate/scale codegen guards,
+  and `f()` no longer sign-flips −inf.
+- **Baked GI renders on the GPU** — `Scene::bake_gi`'s ambient cubes upload as a storage buffer
+  and the shader ports `GiVolume::sample` exactly (trilinear per face + n² ambient-cube combine).
+  Cornell-style parity: mean 0.191/255 vs the CPU. The SDF superpower is now on the fast path.
+- **Renderer validation harness** (`examples/render_validate.rs`, report next-steps #3/#4): every
+  marcher config vs a conservative ground truth — field evals, hit/silhouette agreement, depth
+  error, normal error, material mismatch. Safe configs hold ≥99.4% agreement at ~2.3 mm depth
+  error; the LOD dial's fidelity price is now measured, not anecdotal.
+- **Example hygiene**: `game.rs` runs fixed-timestep physics behind a real frame clock (was
+  dt=1/60 per unpaced frame — a 600 fps GPU played 10× fast); game + viewer input is focus-gated
+  (`GetAsyncKeyState` is system-global); `MAX_DYN` deduplicated to one constant; GPU readback map
+  failures panic with a clear message; `compile()` validates resolution.
+
 ## [0.6.5] — marcher tunneling fix (correctness over borrowed speed)
 
 - **Fixed a real tunneling bug in `Marcher::march_with`.** The overlap safety guard was gated on
