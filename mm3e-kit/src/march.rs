@@ -58,14 +58,26 @@ pub struct Marcher {
     pub lod_footprint: f32,
     /// Subitize empty-space leap (a **numerical-cognition** transfer — the Approximate Number
     /// System's "instantly recognize it's clearly far, so leap"): when the safe distance is well
-    /// clear of the surface (`d > 6·eps`), multiply the step by `1 + subitize`. 0.0 = off. This is
-    /// the top lead surfaced by mixing the new-domain primitives into the engine search and then
-    /// **validated on the real engine** (`examples/stoch_subitize_real.rs`): a speed/quality dial
-    /// like LOD — measured −11% field-evals at ~0.4% depth error (subitize≈0.2) up to −23% at ~1%
-    /// (subitize≈0.6); past that (≈0.8) it over-leaps silhouette edges and the error spikes. The
-    /// over-relaxation overlap-guard is the safety net for the leap, so it never tunnels through a
-    /// surface (hit-agreement stayed 99.9% across the whole sweep). Orchestrator dials it, like LOD.
+    /// clear of the surface (`d > 6·eps`), multiply the step by `1 + subitize`. 0.0 = off. The
+    /// unconditional overlap guard is the safety net: a leap that would tunnel is undone (retreat
+    /// to the last safe frontier) and the knob decays off for that ray, so hits are never buried
+    /// inside surfaces. Honest economics under the corrected guard (`examples/subitize_econ.rs`):
+    /// it pays on miss-heavy / open framings (≈−7% field-evals at 0.4 on a mostly-sky camera,
+    /// ≈−3% at the horizon) and *costs* on hit-dominated framings (≈+6%: leaps near geometry trip
+    /// the guard and pay a retreat). Earlier measurements claiming −11%…−23% on hit-heavy scenes
+    /// predate the guard fix — much of that "saving" was tunneled marches terminating early with
+    /// buried hits. The orchestrator should dial it up for open/sky-heavy shots, off for close-ups.
     pub subitize: f32,
+    /// Secant / regula-falsi near-surface refinement: predict the surface root from the last two
+    /// samples and step toward it (capped at 4·d). **Off by default** — honest re-measurement
+    /// under the corrected overlap guard shows it *costs* ~5% march-phase field-evals on the
+    /// profiler scene (3.41M with vs 3.24M without), because grazing landings now pay gap
+    /// verification instead of tunneling. The previously documented "−14% march evals" was largely
+    /// unguarded secant steps skipping through geometry and accepting buried hits. Preserved as a
+    /// primitive (not deleted) per the renderer report's classification doctrine: it may still pay
+    /// where a field evaluation is far more expensive than the verification sample, and its
+    /// overshoot-then-verify shape transfers to non-visual traversal domains.
+    pub secant: bool,
 }
 
 impl Default for Marcher {
@@ -79,6 +91,7 @@ impl Default for Marcher {
             ao_samples: 5,
             lod_footprint: 0.0,
             subitize: 0.0,
+            secant: false,
         }
     }
 }
@@ -88,10 +101,12 @@ impl Marcher {
     ///
     /// Uses **enhanced sphere tracing** (Keinert et al. 2014): step by `ω · distance` with
     /// `ω = 1.4`, and whenever two successive unbounding spheres fail to overlap (the signal that
-    /// the over-relaxed step jumped past a surface), undo the over-relaxed part and continue
-    /// conservatively. This skips long empty stretches — exactly the horizon/grazing rays that
-    /// dominate the cost — without moving the hit point. A `step_scale < 1` (set for non-Lipschitz
-    /// domain warps) disables over-relaxation and just under-relaxes, as before.
+    /// a boosted step — over-relaxation, subitize, or secant — jumped past a surface), retreat to
+    /// the last provably safe frontier and continue conservatively. The guard is unconditional,
+    /// so no boosted step can ever tunnel and record a hit buried inside a surface. This skips
+    /// long empty stretches — exactly the horizon/grazing rays that dominate the cost — without
+    /// moving the hit point. A `step_scale < 1` (set for non-Lipschitz domain warps) disables
+    /// over-relaxation and just under-relaxes, as before.
     pub fn march<F: Fn(Vec3) -> Field + ?Sized>(&self, field: &F, ray: &Ray) -> Hit {
         self.march_with(field, |p| self.normal(field, p), ray)
     }
@@ -108,7 +123,20 @@ impl Marcher {
         F: Fn(Vec3) -> Field + ?Sized,
         N: Fn(Vec3) -> Vec3,
     {
+        /// Which mechanism produced the in-flight step — so a failed step decays only the
+        /// mechanism that misfired, instead of one bad leap taxing the whole remaining approach.
+        #[derive(Clone, Copy, PartialEq)]
+        enum Boost {
+            Omega,
+            Leap,
+            Secant,
+        }
         let mut omega = if self.step_scale >= 1.0 { 1.4 } else { self.step_scale };
+        // Per-ray decays: each boost mechanism switches off the first time one of ITS steps
+        // skips a gap that fails verification (its heuristic just proved wrong on this ray).
+        let mut subitize = if self.step_scale >= 1.0 { self.subitize } else { 0.0 };
+        let mut secant_on = self.secant && self.step_scale >= 1.0;
+        let mut boost = Boost::Omega;
         let mut t = 0.0f32;
         let mut prev_radius = 0.0f32;
         let mut step_len = 0.0f32;
@@ -120,34 +148,64 @@ impl Marcher {
             let f = field(p);
             let radius = f.dist.abs();
             let eps = self.eps * (1.0 + t * 0.5) + self.lod_footprint * t;
-            // Over-relaxation failure: the two safe spheres don't overlap → we overshot.
-            if omega > 1.0 && radius + prev_radius < step_len {
-                step_len -= omega * step_len; // back up to the last safe point
-                omega = 1.0; // conservative for the rest of this ray
-            } else {
-                if f.dist < eps {
-                    return Hit { hit: true, t, pos: p, normal: normal_fn(p), mat: f.mat, steps: i };
-                }
-                step_len = f.dist * omega;
-                // Subitize (a numerical-cognition transfer — the Approximate Number System's "leap
-                // when it's clearly far"): well clear of any surface, multiply the step. The
-                // over-relaxation overlap guard above is the safety net, so an over-leap is undone
-                // rather than tunneling. 0.0 = off. See `Marcher::subitize`.
-                if self.subitize > 0.0 && self.step_scale >= 1.0 && f.dist > eps * 6.0 {
-                    step_len *= 1.0 + self.subitize;
-                }
-                // Secant / regula-falsi root refinement near the surface (control-numerical-opt):
-                // estimate dd/dt from the last two samples and step toward the predicted root. On
-                // grazing rays the slope is shallow, so the secant step exceeds the safe sphere step
-                // — exactly where sphere tracing crawls — capped at 4·d (the over-relaxation overlap
-                // test is the safety net). Gated to Lipschitz fields, like over-relaxation. Measured
-                // on the profiler scene: march-phase field-evals -14%, total -5.3%, image mean Δ 0.19%.
-                if self.step_scale >= 1.0 && f.dist < 0.08 && d_prev.is_finite() {
-                    let dt = t - t_prev;
-                    let dd = f.dist - d_prev;
-                    if dt > 1e-6 && dd < -1e-6 {
-                        step_len = (-f.dist * dt / dd).clamp(f.dist, f.dist * 4.0);
+            // Overlap guard — active for EVERY boosted step (over-relaxation, subitize, secant),
+            // NOT gated on `omega > 1.0`: once omega decays, secant/subitize steps keep firing and
+            // still need the net (the old gate let them tunnel and accept hits buried inside
+            // surfaces — the self-shadow chaos in the thin-shell scenes). When the unbounding
+            // spheres at the last two samples fail to overlap, the interval between them is
+            // unverified: a surface could hide in the gap. The two-sphere test alone is
+            // pessimistic at grazing incidence (a *good* secant landing hugs the surface, so its
+            // sphere is tiny), so before undoing the step, spend ONE midpoint sample: if the
+            // midpoint's safe sphere covers the whole gap, the gap is provably surface-free and
+            // the landing stands. Only a genuinely unverifiable gap retreats to the last safe
+            // frontier (`t_prev + prev_radius`) and decays the mechanism that misfired. A
+            // conservative step (`step_len == prev_radius`) can never trip the guard (it would
+            // need `radius < 0`), so pure-Lipschitz marching pays nothing.
+            if step_len > radius + prev_radius {
+                let gap_lo = t_prev + prev_radius; // verified up to here by the previous sphere
+                let gap_hi = t - radius; // ...and from here by the landing sphere
+                let mid = 0.5 * (gap_lo + gap_hi);
+                // Signed distance on purpose: a midpoint *inside* geometry must never verify.
+                let covered = f.dist > 0.0 && field(ray.at(mid)).dist >= 0.5 * (gap_hi - gap_lo);
+                if !covered {
+                    t = gap_lo;
+                    match boost {
+                        Boost::Omega => omega = omega.min(1.0),
+                        Boost::Leap => subitize = 0.0,
+                        Boost::Secant => secant_on = false,
                     }
+                    boost = Boost::Omega;
+                    step_len = 0.0; // re-arms the guard; next iteration samples the frontier
+                    prev_radius = 0.0;
+                    d_prev = f32::INFINITY; // the overshot sample is not a valid secant point
+                    continue;
+                }
+                // Verified: the boosted step skipped nothing — keep the landing and carry on.
+            }
+            if f.dist < eps {
+                return Hit { hit: true, t, pos: p, normal: normal_fn(p), mat: f.mat, steps: i };
+            }
+            step_len = f.dist * omega;
+            boost = Boost::Omega;
+            // Subitize (a numerical-cognition transfer — the Approximate Number System's "leap
+            // when it's clearly far"): well clear of any surface, multiply the step. The
+            // overlap guard above is the safety net, so an over-leap is undone
+            // rather than tunneling. 0.0 = off. See `Marcher::subitize`.
+            if subitize > 0.0 && f.dist > eps * 6.0 {
+                step_len *= 1.0 + subitize;
+                boost = Boost::Leap;
+            }
+            // Secant / regula-falsi root refinement near the surface (control-numerical-opt):
+            // estimate dd/dt from the last two samples and step toward the predicted root. On
+            // grazing rays the slope is shallow, so the secant step exceeds the safe sphere step
+            // — exactly where sphere tracing crawls — capped at 4·d (the overlap guard above is
+            // the safety net). Gated to Lipschitz fields, like over-relaxation.
+            if secant_on && f.dist < 0.08 && d_prev.is_finite() {
+                let dt = t - t_prev;
+                let dd = f.dist - d_prev;
+                if dt > 1e-6 && dd < -1e-6 {
+                    step_len = (-f.dist * dt / dd).clamp(f.dist, f.dist * 4.0);
+                    boost = Boost::Secant;
                 }
             }
             prev_radius = radius;

@@ -271,9 +271,15 @@ fn physics_resolves_penetration() {
 
 #[test]
 fn subitize_knob_cuts_field_evals_via_shipped_marcher() {
-    // Validates the SHIPPED `Marcher::subitize` knob (numerical-cognition / ANS transfer) through the
-    // real `Marcher::march`, not the standalone harness: turning it on must cut field-evals while
-    // keeping essentially the same silhouette (no tunneling) on the real demo scene.
+    // Validates the SHIPPED `Marcher::subitize` knob (numerical-cognition / ANS transfer) through
+    // the real `Marcher::march`, under the corrected (unconditional) overlap guard. The leap's
+    // honest niche is empty space, so the eval cut is asserted on a miss-heavy sky framing. On
+    // hit-dominated framings the leaps that reach geometry trip the guard, retreat, and decay —
+    // a small bounded cost instead of a saving. That price is the fix for real tunneling: the
+    // old version of this test demanded an eval cut on the hit-dominated framing, and that "win"
+    // came from unguarded leaps tunneling into surfaces and terminating marches early with hits
+    // buried inside the geometry (see mm3e-kit's buried-hit regression test). Both framings must
+    // keep the silhouette (no tunneling), and the hit-heavy cost must stay bounded.
     use mm3e_kit::atoms;
     use std::sync::atomic::{AtomicU64, Ordering::Relaxed};
     fn count(scene: &Scene, c: &Camera, w: u32, h: u32) -> (u64, Vec<bool>) {
@@ -292,14 +298,35 @@ fn subitize_knob_cuts_field_evals_via_shipped_marcher() {
         (counter.load(Relaxed), hits)
     }
     let mut scene = demo_scene();
-    let c = cam();
     let (w, h) = (scene.width, scene.height);
+    let agreement = |a: &[bool], b: &[bool]| a.iter().zip(b).filter(|(x, y)| x == y).count() as f32 / a.len() as f32;
+
+    // Miss-heavy framing (mostly sky): the leap's home turf — it must cut field-evals.
+    let sky = Camera::look_at(
+        Vec3::new(0.0, 1.5, 8.0),
+        Vec3::new(0.0, 4.5, 0.0),
+        Vec3::new(0.0, 1.0, 0.0),
+        52f32.to_radians(),
+    );
+    scene.marcher.subitize = 0.0;
+    let (sky_e0, sky_h0) = count(&scene, &sky, w, h);
+    scene.marcher.subitize = 0.4;
+    let (sky_e1, sky_h1) = count(&scene, &sky, w, h);
+    assert!(sky_e1 < sky_e0, "subitize=0.4 should cut field-evals on a miss-heavy framing: {sky_e0} -> {sky_e1}");
+    let sky_agree = agreement(&sky_h0, &sky_h1);
+    assert!(sky_agree > 0.98, "subitize must not flip many hits (no tunneling): agree={sky_agree:.4}");
+
+    // Hit-dominated framing (the demo down-look): cost must stay small and bounded, silhouette kept.
+    let c = cam();
     scene.marcher.subitize = 0.0;
     let (e0, h0) = count(&scene, &c, w, h);
     scene.marcher.subitize = 0.4;
     let (e1, h1) = count(&scene, &c, w, h);
-    assert!(e1 < e0, "subitize=0.4 should cut field-evals: {e0} -> {e1}");
-    let agree = h0.iter().zip(&h1).filter(|(a, b)| a == b).count() as f32 / h0.len() as f32;
+    assert!(
+        (e1 as f64) < (e0 as f64) * 1.15,
+        "subitize's guarded cost on a hit-heavy framing must stay bounded: {e0} -> {e1}"
+    );
+    let agree = agreement(&h0, &h1);
     assert!(agree > 0.98, "subitize must not flip many hits (no tunneling): agree={agree:.4}");
 }
 

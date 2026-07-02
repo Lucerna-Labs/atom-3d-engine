@@ -159,6 +159,39 @@ fn marcher_hits_a_sphere_and_normal_points_back() {
 }
 
 #[test]
+fn boosted_steps_never_accept_hits_buried_inside_a_surface() {
+    // Regression for the tunneling fix: the overlap guard must stay active for secant/subitize
+    // boosted steps even after omega decays to 1.0. Pre-fix, those steps were unguarded and could
+    // jump through a surface, after which the hit test (`dist < eps`) accepted a position buried
+    // far deeper than eps — the root cause of the chaotic self-shadowing on thin shells noted in
+    // mm3e-orchestrator's dual-wiring tests. A 0.04-thick shell is the worst case: any tunneled
+    // step lands well inside (or beyond) it.
+    let field = |p: Vec3| Field::new(sdf::sphere(p, 1.0).abs() - 0.02, 0);
+    for &subitize in &[0.0f32, 0.6] {
+        let m = Marcher { subitize, ..Marcher::default() };
+        let mut hits = 0u32;
+        for iy in -12..=12 {
+            for ix in -12..=12 {
+                let dir = Vec3::new(ix as f32 * 0.02, iy as f32 * 0.02, -1.0).normalize();
+                let ray = Ray { origin: Vec3::new(0.0, 0.0, 5.0), dir };
+                let hit = m.march(&field, &ray);
+                if !hit.hit {
+                    continue;
+                }
+                hits += 1;
+                let d = field(hit.pos).dist;
+                let eps = m.eps * (1.0 + hit.t * 0.5);
+                assert!(
+                    d > -2.0 * eps,
+                    "hit buried {d} inside the shell (eps {eps}, subitize {subitize}) — a boosted step tunneled"
+                );
+            }
+        }
+        assert!(hits > 100, "the shell should be hit many times (got {hits})");
+    }
+}
+
+#[test]
 fn font_draws_glyphs() {
     use mm3e_kit::font;
     assert_eq!(font::glyph(' '), [0; 7]);
