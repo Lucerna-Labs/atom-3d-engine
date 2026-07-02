@@ -60,28 +60,64 @@ pub fn adapter_info() -> Result<String, String> {
     GpuRenderer::new().map(|r| r.adapter_name)
 }
 
+fn describe(info: &wgpu::AdapterInfo) -> String {
+    format!("{} ({:?}, {:?})", info.name, info.device_type, info.backend)
+}
+
+/// Every adapter wgpu can see on this machine, as human-readable descriptors — one line per
+/// physical device per backend (the same card often appears under both Vulkan and DX12).
+/// Deliberate adapter choice is how a heterogeneous fleet (e.g. an NVIDIA card next to an Intel
+/// Arc) validates the renderer on the card it *means* to, instead of whatever
+/// `PowerPreference::HighPerformance` happens to rank first.
+pub fn list_adapters() -> Vec<String> {
+    let instance = wgpu::Instance::default();
+    instance.enumerate_adapters(wgpu::Backends::all()).iter().map(|a| describe(&a.get_info())).collect()
+}
+
 impl GpuRenderer {
+    /// Open the default adapter — or, when the `MM3E_GPU_ADAPTER` environment variable is set,
+    /// the first adapter whose descriptor contains it (case-insensitive substring, e.g. `arc`,
+    /// `nvidia`, `dx12`). See [`GpuRenderer::with_adapter`] for the programmatic form.
     pub fn new() -> Result<GpuRenderer, String> {
+        match std::env::var("MM3E_GPU_ADAPTER") {
+            Ok(filter) if !filter.trim().is_empty() => Self::with_adapter(Some(filter.trim())),
+            _ => Self::with_adapter(None),
+        }
+    }
+
+    /// Open a specific adapter chosen by case-insensitive substring match against the adapter
+    /// descriptor (`"Intel(R) Arc(TM) A770 (DiscreteGpu, Vulkan)"`-style — so `"arc"`, `"5070"`,
+    /// or a backend name like `"dx12"` all work). `None` falls back to wgpu's
+    /// `HighPerformance` default. Errors list every available adapter so a typo is
+    /// self-diagnosing.
+    pub fn with_adapter(filter: Option<&str>) -> Result<GpuRenderer, String> {
         pollster::block_on(async {
             let instance = wgpu::Instance::default();
-            let adapter = instance
-                .request_adapter(&wgpu::RequestAdapterOptions {
-                    power_preference: wgpu::PowerPreference::HighPerformance,
-                    force_fallback_adapter: false,
-                    compatible_surface: None,
-                })
-                .await
-                .map_err(|e| format!("no GPU adapter: {e}"))?;
+            let adapter = match filter {
+                Some(want) => {
+                    let want_lc = want.to_lowercase();
+                    let adapters = instance.enumerate_adapters(wgpu::Backends::all());
+                    let names: Vec<String> = adapters.iter().map(|a| describe(&a.get_info())).collect();
+                    adapters
+                        .into_iter()
+                        .find(|a| describe(&a.get_info()).to_lowercase().contains(&want_lc))
+                        .ok_or_else(|| format!("no GPU adapter matching '{want}'; available: {}", names.join(" | ")))?
+                }
+                None => instance
+                    .request_adapter(&wgpu::RequestAdapterOptions {
+                        power_preference: wgpu::PowerPreference::HighPerformance,
+                        force_fallback_adapter: false,
+                        compatible_surface: None,
+                    })
+                    .await
+                    .map_err(|e| format!("no GPU adapter: {e}"))?,
+            };
             let info = adapter.get_info();
             let (device, queue) = adapter
                 .request_device(&wgpu::DeviceDescriptor { label: Some("mm3e-gpu"), ..Default::default() })
                 .await
                 .map_err(|e| format!("request_device failed: {e}"))?;
-            Ok(GpuRenderer {
-                device,
-                queue,
-                adapter_name: format!("{} ({:?}, {:?})", info.name, info.device_type, info.backend),
-            })
+            Ok(GpuRenderer { device, queue, adapter_name: describe(&info) })
         })
     }
 
