@@ -37,7 +37,21 @@ pub fn build_shader(scene: &Scene) -> String {
     s.push_str(&format!("const AMBIENT: vec3<f32> = {};\n", v3(scene.ambient)));
     s.push_str(&format!("const FOG: vec3<f32> = {};\n", v3(scene.fog)));
     s.push_str(&format!("const FOG_DENSITY: f32 = {};\n", f(scene.fog_density)));
-    s.push_str(&format!("const EXPOSURE: f32 = {};\n\n", f(scene.post.exposure)));
+    s.push_str(&format!("const EXPOSURE: f32 = {};\n", f(scene.post.exposure)));
+    // Marcher budgets, baked from `scene.marcher` so the shader honors the same policy the CPU
+    // path does (the GPU previously hardcoded its own numbers and ignored the Scene entirely).
+    // `step_scale` is clamped to 1 from above: the GPU marches conservatively (no CPU-style
+    // over-relaxation/leaps — per-lane divergence makes them a poor GPU fit), but a scene that
+    // under-relaxes for non-Lipschitz warps (twist/bend) must under-relax here too.
+    let mr = &scene.marcher;
+    s.push_str(&format!("const MARCH_STEPS: i32 = {};\n", mr.max_steps.min(i32::MAX as u32)));
+    s.push_str(&format!("const MAX_DIST: f32 = {};\n", f(mr.max_dist)));
+    s.push_str(&format!("const EPS_BASE: f32 = {};\n", f(mr.eps)));
+    s.push_str(&format!("const LOD_FOOTPRINT: f32 = {};\n", f(mr.lod_footprint)));
+    s.push_str(&format!("const STEP_SCALE: f32 = {};\n", f(mr.step_scale.min(1.0))));
+    s.push_str(&format!("const SHADOW_STEPS: i32 = {};\n", mr.shadow_steps.min(i32::MAX as u32)));
+    s.push_str(&format!("const AO_SAMPLES: i32 = {};\n", mr.ao_samples.min(i32::MAX as u32)));
+    s.push_str(&format!("const AO_SPAN: f32 = {};\n\n", f((mr.ao_samples.max(2) - 1) as f32)));
 
     s.push_str(&material_fn(scene));
     s.push_str(&map_fn(scene));
@@ -70,11 +84,10 @@ fn emit_local(o: &Object) -> String {
     let r = o.xform.rot.cols;
     let mut s = String::new();
     s.push_str(&format!("    let R = mat3x3<f32>({}, {}, {});\n", v3(r[0]), v3(r[1]), v3(r[2])));
-    s.push_str(&format!(
-        "    var q = transpose(R) * (p - {}) * {};\n",
-        v3(o.xform.pos),
-        f(1.0 / o.xform.scale.max(1e-12))
-    ));
+    // Signed inverse, matching Transform::to_local: a negative scale must invert with its sign,
+    // and only a degenerate |scale| collapses to 0 (finite point rather than Inf poisoning).
+    let inv = if o.xform.scale.abs() > 1e-12 { 1.0 / o.xform.scale } else { 0.0 };
+    s.push_str(&format!("    var q = transpose(R) * (p - {}) * {};\n", v3(o.xform.pos), f(inv)));
     let m = &o.mods;
     if m.mirror.iter().any(|&b| b) {
         s.push_str(&format!(
@@ -137,6 +150,11 @@ fn map_fn(scene: &Scene) -> String {
                 Combine::Union => {
                     s.push_str(&format!("    if (od < d.x) {{ d = vec2<f32>(od, {matf}); }}\n"));
                 }
+                // k → 0 recovers a hard union on the CPU (sdf::smooth_union guards it); emitting
+                // the blend with k = 0 would divide by zero in the shader.
+                Combine::Smooth(k) if k <= 0.0 => {
+                    s.push_str(&format!("    if (od < d.x) {{ d = vec2<f32>(od, {matf}); }}\n"));
+                }
                 Combine::Smooth(k) => {
                     s.push_str(&format!("    let h = clamp(0.5 + 0.5*(od - d.x)/{k}, 0.0, 1.0);\n", k = f(k)));
                     s.push_str(&format!(
@@ -190,7 +208,7 @@ fn direct_lighting_fn(scene: &Scene) -> String {
         };
         s.push_str("    let ndl = max(dot(n, ldir), 0.0);\n");
         s.push_str("    if (ndl > 0.0) {\n");
-        s.push_str(&format!("      let sh = soft_shadow(p + n*0.01, ldir, min(ldist, 120.0), {k});\n"));
+        s.push_str(&format!("      let sh = soft_shadow(p + n*0.01, ldir, min(ldist, MAX_DIST), {k});\n"));
         s.push_str(&format!(
             "      c = c + brdf(n, ldir, v, albedo, m.metallic, m.rough, m.spec) * {} * (sh * atten);\n",
             v3(color)
@@ -262,27 +280,37 @@ fn calc_normal(p: vec3<f32>) -> vec3<f32> {
 }
 fn raymarch(ro: vec3<f32>, rd: vec3<f32>) -> vec3<f32> {
   var t = 0.0;
-  for (var i = 0; i < 192; i = i + 1) {
+  for (var i = 0; i < MARCH_STEPS; i = i + 1) {
     let p = ro + rd*t; let dm = map(p);
-    if (dm.x < 0.0006 * (1.0 + t*0.5)) { return vec3<f32>(t, dm.y, 1.0); }
-    t = t + dm.x;
-    if (t > 120.0) { break; }
+    if (dm.x < EPS_BASE * (1.0 + t*0.5) + LOD_FOOTPRINT * t) { return vec3<f32>(t, dm.y, 1.0); }
+    t = t + dm.x * STEP_SCALE;
+    if (t > MAX_DIST) { break; }
   }
   return vec3<f32>(t, 0.0, 0.0);
 }
+// The CPU soft shadow, ported verbatim (mm3e-kit/src/march.rs soft_shadow): blue-noise start
+// jitter (deterministic hash of the ray origin) dithers the coarser steps across pixels instead
+// of banding, and the step cap grows with t — fine near the caster, long leaps far away. The
+// hash won't match the CPU bit-for-bit (sin precision differs across vendors, amplified by the
+// fract), but the dither family and the step schedule now do.
 fn soft_shadow(ro: vec3<f32>, rd: vec3<f32>, maxt: f32, k: f32) -> f32 {
-  var res = 1.0; var t = 0.02;
-  for (var i = 0; i < 64; i = i + 1) {
+  var res = 1.0;
+  let hb = ro.x * 127.1 + ro.y * 311.7 + ro.z * 74.7;
+  let jitter = abs(fract(sin(hb) * 43758.547));
+  var t = 0.02 + jitter * 0.16;
+  for (var i = 0; i < SHADOW_STEPS; i = i + 1) {
     let h = map(ro + rd*t).x;
     if (h < 0.0008) { return 0.0; }
-    res = min(res, k*h/t); t = t + clamp(h, 0.01, 0.4);
+    res = min(res, k*h/t);
+    t = t + clamp(h, 0.06, 0.5 + 0.7*t);
     if (t > maxt) { break; }
   }
   return clamp(res, 0.0, 1.0);
 }
 fn ao(p: vec3<f32>, n: vec3<f32>) -> f32 {
+  if (AO_SAMPLES == 0) { return 1.0; }
   var occ = 0.0; var sca = 1.0;
-  for (var i = 0; i < 5; i = i + 1) { let hr = 0.01 + 0.12 * f32(i) / 4.0; let d = map(p + n*hr).x; occ = occ + (hr - d)*sca; sca = sca * 0.92; }
+  for (var i = 0; i < AO_SAMPLES; i = i + 1) { let hr = 0.01 + 0.12 * f32(i) / AO_SPAN; let d = map(p + n*hr).x; occ = occ + (hr - d)*sca; sca = sca * 0.92; }
   return clamp(1.0 - 2.6*occ, 0.0, 1.0);
 }
 fn sky(d: vec3<f32>) -> vec3<f32> { let t = clamp(0.5*(d.y + 1.0), 0.0, 1.0); let base = mix(vec3<f32>(0.78,0.86,0.96), vec3<f32>(0.20,0.38,0.72), t); let s = max(dot(d, SUN), 0.0); return base + vec3<f32>(pow(s, 8.0)*0.3 + pow(s, 220.0)*6.0); }
@@ -308,14 +336,35 @@ fn ibl(n: vec3<f32>) -> vec3<f32> {
   for (var i = 0; i < 5; i = i + 1) { let cw = max(dot(dirs[i], n), 0.0); acc = acc + sky_diffuse(dirs[i]) * cw; w = w + cw; }
   return acc / max(w, 1e-4) * SKY_AMBIENT;
 }
+// 64-bit FNV-1a over the 8 little-endian bytes of (ix, iz), on u32 pairs — the kit's
+// `atoms::hash_cell`, ported bit-exactly so the checker's per-tile tint matches the CPU
+// reference. The FNV prime 0x00000100000001B3 is 2^40 + 0x1B3, so the 64-bit multiply
+// decomposes into a 40-bit shift plus a small-constant product built from 16-bit limbs.
+fn fnv_mul_prime(h: vec2<u32>) -> vec2<u32> {
+  let x = (h.y & 0xFFFFu) * 0x1B3u;          // low limb * 0x1B3   (< 2^25)
+  let y = (h.y >> 16u) * 0x1B3u;             // high limb * 0x1B3  (< 2^25)
+  let sum = x + ((y & 0xFFFFu) << 16u);      // low 32 bits of lo*0x1B3 (may wrap once)
+  let carry = (y >> 16u) + select(0u, 1u, sum < x);
+  let lo = sum;
+  let hi = carry + h.x * 0x1B3u + ((h.y & 0x00FFFFFFu) << 8u); // + (h << 40) mod 2^64
+  return vec2<u32>(hi, lo);
+}
+fn fnv_byte(h: vec2<u32>, b: u32) -> vec2<u32> { return fnv_mul_prime(vec2<u32>(h.x, h.y ^ (b & 0xFFu))); }
+fn hash_cell(ix: i32, iz: i32) -> f32 {
+  var h = vec2<u32>(0xcbf29ce4u, 0x84222325u);
+  let ux = bitcast<u32>(ix); let uz = bitcast<u32>(iz);
+  h = fnv_byte(h, ux); h = fnv_byte(h, ux >> 8u); h = fnv_byte(h, ux >> 16u); h = fnv_byte(h, ux >> 24u);
+  h = fnv_byte(h, uz); h = fnv_byte(h, uz >> 8u); h = fnv_byte(h, uz >> 16u); h = fnv_byte(h, uz >> 24u);
+  return f32(h.x >> 8u) / 16777216.0;        // bits 40..63 of the 64-bit hash, in [0, 1)
+}
 fn surface_albedo(m: Mat, p: vec3<f32>) -> vec3<f32> {
   if (m.checker < 0.5) { return m.albedo; }
   let ix = i32(floor(p.x)); let iz = i32(floor(p.z));
   var base = vec3<f32>(0.20); if (((ix + iz) & 1) == 0) { base = vec3<f32>(0.92); }
-  return base * m.albedo;
+  let tint = hash_cell(ix, iz) * 0.06 - 0.03;
+  return max((base + vec3<f32>(tint)) * m.albedo, vec3<f32>(0.0));
 }
 fn aces(x: vec3<f32>) -> vec3<f32> { let a = max(x, vec3<f32>(0.0)); return clamp((a*(2.51*a + 0.03)) / (a*(2.43*a + 0.59) + 0.14), vec3<f32>(0.0), vec3<f32>(1.0)); }
-fn apply_fog(c: vec3<f32>, t: f32) -> vec3<f32> { let fa = 1.0 - exp(-t * FOG_DENSITY); return mix(c, FOG, clamp(fa, 0.0, 1.0)); }
 "#;
 
 const KERNEL_BODY: &str = r#"
@@ -335,14 +384,21 @@ fn shade(ro0: vec3<f32>, rd0: vec3<f32>) -> vec3<f32> {
     }
     let albedo = surface_albedo(m, p);
     let occ = ao(p, n);
-    var rad = albedo * (ibl(n) + AMBIENT) * occ;
-    rad = rad + direct_lighting(p, n, v, albedo, m);
-    rad = rad + m.emissive;
-    rad = apply_fog(rad, t);
+    var base = albedo * (ibl(n) + AMBIENT) * occ;
+    base = base + direct_lighting(p, n, v, albedo, m);
+    // The CPU recursion computes fog(base*(1-fr) + refl*fr + emissive) at every level: emissive
+    // is added AFTER the Fresnel blend (a glowing reflective surface never dims at grazing
+    // angles), and the reflected radiance is fogged along every segment it traveled. Unrolled
+    // iteratively: emit this leg's non-reflected share now, and fold BOTH the Fresnel weight and
+    // this leg's fog transmittance (1-fa) into the attenuation the next leg inherits.
+    let fa = clamp(1.0 - exp(-t * FOG_DENSITY), 0.0, 1.0);
     let fr = select(0.0, fresnel(max(dot(n, v), 0.0), m.refl), m.refl > 0.0);
-    if (b == maxb || m.refl <= 0.0) { col = col + atten * rad; break; }
-    col = col + atten * rad * (1.0 - fr);
-    atten = atten * fr;
+    if (b == maxb || m.refl <= 0.0) {
+      col = col + atten * ((base + m.emissive) * (1.0 - fa) + FOG * fa);
+      break;
+    }
+    col = col + atten * ((base * (1.0 - fr) + m.emissive) * (1.0 - fa) + FOG * fa);
+    atten = atten * (fr * (1.0 - fa));
     ro = p + n*0.02; rd = reflect(rd, n);
   }
   return col;
