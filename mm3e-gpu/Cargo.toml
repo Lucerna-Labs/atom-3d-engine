@@ -9,6 +9,7 @@ description = "GPU backend: codegen the SDF world field into a WGSL compute shad
 [dependencies]
 mm3e-kit = { path = "../mm3e-kit" }
 mm3e-orchestrator = { path = "../mm3e-orchestrator" }
+lucerna-release-client = { path = "../lucerna-update" }
 wgpu = "26"
 pollster = "0.4"
 bytemuck = { version = "1", features = ["derive"] }

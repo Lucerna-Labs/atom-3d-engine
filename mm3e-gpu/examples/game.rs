@@ -325,7 +325,7 @@ mod win32 {
                 GetCursorPos(&mut cur);
                 if down(VK_LBUTTON) {
                     if dragging {
-                        cam_yaw += (cur.x - last.x) as f32 * 0.01;
+                        cam_yaw = mm3e_orchestrator::wrap_orbit_yaw(cam_yaw + (cur.x - last.x) as f32 * 0.01);
                         cam_pitch = (cam_pitch - (cur.y - last.y) as f32 * 0.01).clamp(0.08, 1.4);
                     }
                     dragging = true;

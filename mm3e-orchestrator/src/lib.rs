@@ -1149,8 +1149,25 @@ fn heatmap(t: f32) -> Vec3 {
 // Convenience: an orbiting camera for turntables and quick scene framing.
 // ----------------------------------------------------------------------------
 
+/// Canonicalize an orbit yaw to `[-pi, pi)`, preventing precision loss after long input sessions.
+pub fn wrap_orbit_yaw(yaw: f32) -> f32 {
+    if yaw.is_finite() {
+        (yaw + std::f32::consts::PI).rem_euclid(std::f32::consts::TAU) - std::f32::consts::PI
+    } else {
+        0.0
+    }
+}
+
 /// A camera orbiting `target` at `radius`, `yaw`/`pitch` in radians, FOV `fov_y` in radians.
+///
+/// Interactive callers may accumulate rotation indefinitely, so this constructor also
+/// canonicalizes yaw and keeps pitch away from the singularity at either pole.
 pub fn orbit_camera(target: Vec3, radius: f32, yaw: f32, pitch: f32, fov_y: f32) -> Camera {
+    let yaw = wrap_orbit_yaw(yaw);
+    let pitch_limit = std::f32::consts::FRAC_PI_2 - 1.0e-4;
+    let pitch = if pitch.is_finite() { pitch.clamp(-pitch_limit, pitch_limit) } else { 0.0 };
+    let radius = if radius.is_finite() { radius.abs().max(1.0e-4) } else { 1.0 };
+    let fov_y = if fov_y.is_finite() { fov_y.clamp(1.0e-4, std::f32::consts::PI - 1.0e-4) } else { 45f32.to_radians() };
     let eye =
         target + Vec3::new(radius * yaw.cos() * pitch.cos(), radius * pitch.sin(), radius * yaw.sin() * pitch.cos());
     Camera::look_at(eye, target, Vec3::new(0.0, 1.0, 0.0), fov_y)

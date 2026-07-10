@@ -10,10 +10,14 @@
 //! Controls: arrow keys or left-drag to orbit, `W`/`S` to zoom, `Esc` to quit.
 //! Run (Windows desktop): cargo run -p mm3e-orchestrator --example viewer --release
 
+#[cfg(windows)]
 use mm3e_kit::color::{Material, Rgba};
+#[cfg(windows)]
 use mm3e_kit::vec::{Mat3, Transform, Vec3};
+#[cfg(windows)]
 use mm3e_orchestrator::{Light, Object, Prim, Scene};
 
+#[cfg(windows)]
 fn build_scene() -> Scene {
     let mut scene = Scene::new(960, 540);
     scene.bounces = 2;
@@ -54,7 +58,7 @@ mod win32 {
     use super::*;
     use mm3e_kit::font;
     use mm3e_orchestrator::reproject::{reproject, GFrame};
-    use mm3e_orchestrator::{orbit_camera, render, render_gbuffer, Quality};
+    use mm3e_orchestrator::{orbit_camera, render, render_gbuffer, wrap_orbit_yaw, Quality};
     use std::ffi::c_void;
     use std::time::Instant;
 
@@ -321,6 +325,7 @@ mod win32 {
                     dragging = false;
                 }
                 last = cur;
+                yaw = wrap_orbit_yaw(yaw);
 
                 if moved {
                     still = 0;

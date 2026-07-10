@@ -1,0 +1,51 @@
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+      - name: Build packaged viewer
+        run: cargo build --release -p mm3e-gpu --example gpu_viewer
+      - name: Create verified release feed
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $tag = $env:GITHUB_REF_NAME
+          $version = $tag.TrimStart('v')
+          $assetName = 'Atom3DEngine-windows-x86_64.zip'
+          $releaseDir = Join-Path $PWD 'release-package'
+          $distDir = Join-Path $PWD 'dist'
+          New-Item -ItemType Directory -Force -Path $releaseDir, $distDir | Out-Null
+          Copy-Item 'target/release/examples/gpu_viewer.exe' (Join-Path $releaseDir 'Atom3DEngine.exe')
+          Copy-Item 'README.md', 'LICENSE' $releaseDir
+          $appManifest = Get-Content 'lucerna-update.json' -Raw | ConvertFrom-Json
+          $appManifest.current_version = $version
+          $appManifest | ConvertTo-Json -Depth 6 | Set-Content -Encoding utf8NoBOM (Join-Path $releaseDir 'lucerna-update.json')
+          Compress-Archive -Path (Join-Path $releaseDir '*') -DestinationPath (Join-Path $distDir $assetName)
+          $sha = (Get-FileHash (Join-Path $distDir $assetName) -Algorithm SHA256).Hash.ToLowerInvariant()
+          $assetUrl = "https://github.com/Lucerna-Labs/atom-3d-engine/releases/download/$tag/$assetName"
+          $feed = [ordered]@{
+            schema = 1
+            version = $version
+            notes_url = "https://github.com/Lucerna-Labs/atom-3d-engine/releases/tag/$tag"
+            assets = [ordered]@{
+              'windows-x86_64' = [ordered]@{
+                url = $assetUrl
+                sha256 = $sha
+                executable = 'Atom3DEngine.exe'
+              }
+            }
+          }
+          $feed | ConvertTo-Json -Depth 6 | Set-Content -Encoding utf8NoBOM (Join-Path $distDir 'lucerna-release.json')
+          gh release create $tag (Join-Path $distDir $assetName) (Join-Path $distDir 'lucerna-release.json') --verify-tag --generate-notes

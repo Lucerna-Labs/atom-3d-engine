@@ -54,6 +54,12 @@ cargo run -p mm3e-gpu --example gpu_viewer --release   # real-time GPU window (W
 cargo run -p mm3e-gpu --example game       --release   # playable: roll a ball (GPU + SDF physics)
 ```
 
+The GPU viewer checks the release feed in the background and never installs silently. Press
+`U` to check manually; when a newer version exists, the viewer asks before downloading, verifies
+the release archive's SHA-256 digest, and asks again before restarting to apply it. The reusable
+`lucerna-release-client` crate and `lucerna-update.json` manifest are framework-neutral so the same
+opt-in flow can be embedded in other Lucerna applications.
+
 ## Physics + a playable game
 
 `mm3e_orchestrator::physics` is **SDF-native**: the field *is* the collision oracle — `field(p).dist`

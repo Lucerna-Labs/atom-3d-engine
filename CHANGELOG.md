@@ -2,6 +2,16 @@
 
 All notable changes to MM3E are documented here.
 
+## Unreleased
+
+- Orbit cameras now canonicalize yaw and guard pole singularities. The CPU viewer, GPU viewer, and
+  game keep interactive yaw bounded; a real GPU regression sweeps all 360 degrees and rejects black
+  frames or a visually different full turn.
+- Added the framework-neutral `lucerna-release-client`: applications check a release manifest in
+  the background, ask before downloading, verify SHA-256, stage outside the install directory, and
+  ask again before restarting to apply files. The GPU viewer exposes this with `U` and packaged tag
+  releases now publish the matching Windows archive and release feed automatically.
+
 ## [0.6.4] — stochastic soft shadows (the `hash` atom enters the renderer)
 
 - **`Marcher::soft_shadow` is now blue-noise stochastic** — the cross-domain primitive finder kept

@@ -24,12 +24,12 @@ jobs:
       - uses: Swatinem/rust-cache@v2
       - name: Format (whole workspace)
         run: cargo fmt --all -- --check
-      - name: Clippy core (deny warnings)
-        run: cargo clippy -p mm3e-kit -p mm3e-orchestrator --all-targets -- -D warnings
-      - name: Build core
-        run: cargo build --release -p mm3e-kit -p mm3e-orchestrator --all-targets
-      - name: Test core
-        run: cargo test --release -p mm3e-kit -p mm3e-orchestrator
+      - name: Clippy core and release client (deny warnings)
+        run: cargo clippy -p mm3e-kit -p mm3e-orchestrator -p lucerna-release-client --all-targets -- -D warnings
+      - name: Build core and release client
+        run: cargo build --release -p mm3e-kit -p mm3e-orchestrator -p lucerna-release-client --all-targets
+      - name: Test core and release client
+        run: cargo test --release -p mm3e-kit -p mm3e-orchestrator -p lucerna-release-client
 
   gpu:
     name: gpu backend (build · clippy, Windows)

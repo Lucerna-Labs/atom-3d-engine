@@ -3,7 +3,7 @@
 //! window (no winit). This is the interactive payoff of the GPU backend: fly around an SDF scene
 //! in real time.
 //!
-//! Controls: arrow keys or left-drag to orbit, `W`/`S` to zoom, `Esc` to quit.
+//! Controls: arrow keys or left-drag to orbit, `W`/`S` to zoom, `U` to check for updates, `Esc` to quit.
 //! Run (Windows desktop): cargo run -p mm3e-gpu --example gpu_viewer --release
 //! Resolution: pass `480p` / `720p` / `1080p` / `1440p` / `4k` (or `WxH`) to render at that size,
 //! e.g. `cargo run -p mm3e-gpu --example gpu_viewer --release -- 4k`. The live fps is in the title
@@ -12,12 +12,17 @@
 //! render + readback; a swapchain-present engine would hit the higher render-only numbers from the
 //! `gpu_resolution` benchmark.)
 
+#[cfg(windows)]
 use mm3e_gpu::GpuRenderer;
+#[cfg(windows)]
 use mm3e_kit::color::Material;
+#[cfg(windows)]
 use mm3e_kit::vec::{Mat3, Transform, Vec3};
+#[cfg(windows)]
 use mm3e_orchestrator::{Light, Object, Prim, Scene};
 
 /// Resolution from the first non-flag CLI argument (a preset keyword or `WxH`); default 854×480.
+#[cfg(windows)]
 fn parse_res(args: &[String]) -> (u32, u32) {
     let pick = args.iter().skip(1).find(|a| !a.starts_with('-'));
     match pick.map(|s| s.to_lowercase()).as_deref() {
@@ -33,6 +38,7 @@ fn parse_res(args: &[String]) -> (u32, u32) {
     }
 }
 
+#[cfg(windows)]
 fn build_scene(width: u32, height: u32) -> Scene {
     let mut scene = Scene::new(width, height);
     scene.aa = 1;
@@ -82,9 +88,10 @@ fn main() {
 
 #[cfg(windows)]
 mod win32 {
+    use lucerna_release_client::{StagedUpdate, UpdateStatus};
     use mm3e_gpu::{GpuRenderer, GpuScene};
     use mm3e_kit::vec::Vec3;
-    use mm3e_orchestrator::orbit_camera;
+    use mm3e_orchestrator::{orbit_camera, wrap_orbit_yaw};
     use std::ffi::c_void;
 
     type Hwnd = *mut c_void;
@@ -172,6 +179,7 @@ mod win32 {
         fn LoadCursorW(instance: Hinstance, name: *const u16) -> *mut c_void;
         fn ShowWindow(hwnd: Hwnd, cmd: i32) -> i32;
         fn SetWindowTextW(hwnd: Hwnd, text: *const u16) -> i32;
+        fn MessageBoxW(hwnd: Hwnd, text: *const u16, caption: *const u16, kind: u32) -> i32;
     }
     #[link(name = "gdi32")]
     extern "system" {
@@ -213,12 +221,36 @@ mod win32 {
     const VK_RIGHT: i32 = 0x27;
     const VK_DOWN: i32 = 0x28;
     const VK_LBUTTON: i32 = 0x01;
+    const VK_U: i32 = 0x55;
+    const MB_OK: u32 = 0x0000;
+    const MB_YESNO: u32 = 0x0004;
+    const MB_ICONINFORMATION: u32 = 0x0040;
+    const MB_ICONWARNING: u32 = 0x0030;
+    const IDYES: i32 = 6;
+
+    const UPDATE_MANIFEST: &str = include_str!("../../lucerna-update.json");
+
+    enum UpdateEvent {
+        Checked { manual: bool, result: Result<UpdateStatus, String> },
+        Staged(Result<StagedUpdate, String>),
+    }
 
     fn wide(s: &str) -> Vec<u16> {
         s.encode_utf16().chain(std::iter::once(0)).collect()
     }
     fn down(key: i32) -> bool {
         unsafe { (GetAsyncKeyState(key) as u16 & 0x8000) != 0 }
+    }
+
+    fn start_update_check(sender: std::sync::mpsc::Sender<UpdateEvent>, manual: bool) {
+        std::thread::spawn(move || {
+            let result = lucerna_release_client::check_from_json(UPDATE_MANIFEST);
+            let _ = sender.send(UpdateEvent::Checked { manual, result });
+        });
+    }
+
+    unsafe fn message_box(hwnd: Hwnd, message: &str, kind: u32) -> i32 {
+        MessageBoxW(hwnd, wide(message).as_ptr(), wide("Atom 3D Engine Updates").as_ptr(), kind)
     }
 
     unsafe extern "system" fn wndproc(hwnd: Hwnd, msg: u32, w: usize, l: isize) -> isize {
@@ -268,7 +300,7 @@ mod win32 {
                 eprintln!("RegisterClassW failed");
                 return;
             }
-            let title = wide("MM3E — real-time GPU SDF viewer (arrows/drag orbit, W/S zoom, Esc quit)");
+            let title = wide("MM3E - real-time GPU SDF viewer (arrows/drag orbit, W/S zoom, U updates, Esc quit)");
             let hwnd = CreateWindowExW(
                 0,
                 class_name.as_ptr(),
@@ -301,6 +333,15 @@ mod win32 {
             let mut frames = 0u32;
             let mut fps_clock = std::time::Instant::now();
             let mut next_frame = std::time::Instant::now();
+            let (update_sender, update_receiver) = std::sync::mpsc::channel::<UpdateEvent>();
+            let check_on_startup = lucerna_release_client::parse_app_manifest(UPDATE_MANIFEST)
+                .map(|manifest| manifest.check_on_startup)
+                .unwrap_or(false);
+            let mut update_busy = check_on_startup;
+            let mut update_key_was_down = false;
+            if check_on_startup {
+                start_update_check(update_sender.clone(), false);
+            }
 
             let mut msg = std::mem::zeroed::<Msg>();
             'frame: loop {
@@ -313,6 +354,77 @@ mod win32 {
                 }
                 if down(VK_ESCAPE) {
                     break 'frame;
+                }
+                let update_key_down = down(VK_U);
+                if update_key_down && !update_key_was_down && !update_busy {
+                    update_busy = true;
+                    start_update_check(update_sender.clone(), true);
+                }
+                update_key_was_down = update_key_down;
+
+                while let Ok(event) = update_receiver.try_recv() {
+                    update_busy = false;
+                    match event {
+                        UpdateEvent::Checked { manual, result: Ok(UpdateStatus::UpToDate) } => {
+                            if manual {
+                                message_box(hwnd, "You already have the latest version.", MB_OK | MB_ICONINFORMATION);
+                            }
+                        }
+                        UpdateEvent::Checked { result: Ok(UpdateStatus::Available(update)), .. } => {
+                            let prompt = format!(
+                                "Atom 3D Engine {} is available.\n\nInstalled: {}\n\nDownload and install it now?",
+                                update.release.version, update.app.current_version
+                            );
+                            if message_box(hwnd, &prompt, MB_YESNO | MB_ICONINFORMATION) == IDYES {
+                                update_busy = true;
+                                let sender = update_sender.clone();
+                                std::thread::spawn(move || {
+                                    let result = lucerna_release_client::stage(&update);
+                                    let _ = sender.send(UpdateEvent::Staged(result));
+                                });
+                            }
+                        }
+                        UpdateEvent::Checked { manual, result: Err(error) } => {
+                            eprintln!("Update check failed: {error}");
+                            if manual {
+                                message_box(
+                                    hwnd,
+                                    &format!("Could not check for updates.\n\n{error}"),
+                                    MB_OK | MB_ICONWARNING,
+                                );
+                            }
+                        }
+                        UpdateEvent::Staged(Ok(staged)) => {
+                            let prompt = format!(
+                                "Version {} was downloaded and verified.\n\nRestart now to finish installing it?",
+                                staged.version
+                            );
+                            if message_box(hwnd, &prompt, MB_YESNO | MB_ICONINFORMATION) == IDYES {
+                                match std::env::current_exe().map_err(|error| error.to_string()).and_then(|path| {
+                                    let install_dir = path
+                                        .parent()
+                                        .ok_or_else(|| "the executable has no parent directory".to_string())?;
+                                    lucerna_release_client::schedule_install(&staged, install_dir, std::process::id())
+                                }) {
+                                    Ok(()) => break 'frame,
+                                    Err(error) => {
+                                        message_box(
+                                            hwnd,
+                                            &format!("Could not schedule the update.\n\n{error}"),
+                                            MB_OK | MB_ICONWARNING,
+                                        );
+                                    }
+                                }
+                            }
+                        }
+                        UpdateEvent::Staged(Err(error)) => {
+                            message_box(
+                                hwnd,
+                                &format!("The update was not installed.\n\n{error}"),
+                                MB_OK | MB_ICONWARNING,
+                            );
+                        }
+                    }
                 }
                 if down(VK_LEFT) {
                     yaw -= 0.04;
@@ -344,6 +456,7 @@ mod win32 {
                     dragging = false;
                 }
                 last = cur;
+                yaw = wrap_orbit_yaw(yaw);
 
                 // Render this frame on the GPU, then present via GDI.
                 let cam = orbit_camera(Vec3::new(0.0, 0.85, 0.4), radius, yaw, pitch, 52f32.to_radians());
@@ -388,7 +501,7 @@ mod win32 {
                 if secs >= 0.5 {
                     let fps = frames as f32 / secs;
                     let title = wide(&format!(
-                        "MM3E — GPU SDF viewer — {rw}x{rh} — {fps:.0} fps — 120 fps cap (arrows/drag orbit, W/S zoom, Esc quit)"
+                        "MM3E - GPU SDF viewer - {rw}x{rh} - {fps:.0} fps - 120 fps cap (arrows/drag orbit, W/S zoom, U updates, Esc quit)"
                     ));
                     SetWindowTextW(hwnd, title.as_ptr());
                     frames = 0;

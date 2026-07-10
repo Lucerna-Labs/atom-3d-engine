@@ -222,6 +222,22 @@ fn reprojection_hybrid_beats_cheap_fill() {
 }
 
 #[test]
+fn orbit_camera_is_periodic_and_finite_at_a_full_turn() {
+    let target = Vec3::new(0.2, 0.85, 0.4);
+    let start = orbit_camera(target, 8.5, 0.55, 0.32, 50f32.to_radians());
+    let full_turn = orbit_camera(target, 8.5, 0.55 + std::f32::consts::TAU, 0.32, 50f32.to_radians());
+
+    let close = |a: Vec3, b: Vec3| (a - b).length() < 2.0e-6;
+    assert!(close(start.eye, full_turn.eye));
+    assert!(close(start.forward, full_turn.forward));
+    assert!(close(start.right, full_turn.right));
+    assert!(close(start.up, full_turn.up));
+    for v in [full_turn.eye, full_turn.forward, full_turn.right, full_turn.up] {
+        assert!(v.x.is_finite() && v.y.is_finite() && v.z.is_finite());
+    }
+}
+
+#[test]
 fn reprojection_object_motion_has_effect() {
     use mm3e_orchestrator::render_gbuffer;
     use mm3e_orchestrator::reproject::reproject;
