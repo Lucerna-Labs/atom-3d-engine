@@ -1,3 +1,5 @@
+#![cfg_attr(windows, windows_subsystem = "windows")]
+
 //! Adaptive real-time CPU viewer — a live orbit window driven by the CPU raymarcher, using raw
 //! Win32 + GDI through `extern "system"` FFI (no winit, no softbuffer).
 //!
@@ -80,6 +82,7 @@ mod win32 {
         class_name: *const u16,
     }
     #[repr(C)]
+    #[derive(Clone, Copy)]
     struct Point {
         x: i32,
         y: i32,
@@ -144,6 +147,8 @@ mod win32 {
         fn GetClientRect(hwnd: Hwnd, r: *mut Rect) -> i32;
         fn GetAsyncKeyState(key: i32) -> i16;
         fn GetCursorPos(p: *mut Point) -> i32;
+        fn ScreenToClient(hwnd: Hwnd, point: *mut Point) -> i32;
+        fn GetForegroundWindow() -> Hwnd;
         fn LoadCursorW(instance: Hinstance, name: *const u16) -> *mut c_void;
         fn ShowWindow(hwnd: Hwnd, cmd: i32) -> i32;
     }
@@ -194,6 +199,16 @@ mod win32 {
     }
     fn down(key: i32) -> bool {
         unsafe { (GetAsyncKeyState(key) as u16 & 0x8000) != 0 }
+    }
+
+    unsafe fn point_in_client(hwnd: Hwnd, screen: Point) -> bool {
+        let mut client = screen;
+        if ScreenToClient(hwnd, &mut client) == 0 {
+            return false;
+        }
+        let mut rect = Rect { left: 0, top: 0, right: 0, bottom: 0 };
+        GetClientRect(hwnd, &mut rect);
+        client.x >= rect.left && client.x < rect.right && client.y >= rect.top && client.y < rect.bottom
     }
 
     unsafe extern "system" fn wndproc(hwnd: Hwnd, msg: u32, w: usize, l: isize) -> isize {
@@ -282,39 +297,40 @@ mod win32 {
                     TranslateMessage(&msg);
                     DispatchMessageW(&msg);
                 }
-                if down(VK_ESCAPE) {
+                let focused = GetForegroundWindow() == hwnd;
+                if focused && down(VK_ESCAPE) {
                     break 'frame;
                 }
 
                 // --- input → camera, and motion detection ---
                 let mut moved = false;
-                if down(VK_LEFT) {
+                if focused && down(VK_LEFT) {
                     yaw -= 0.04;
                     moved = true;
                 }
-                if down(VK_RIGHT) {
+                if focused && down(VK_RIGHT) {
                     yaw += 0.04;
                     moved = true;
                 }
-                if down(VK_UP) {
+                if focused && down(VK_UP) {
                     pitch = (pitch + 0.03).min(1.45);
                     moved = true;
                 }
-                if down(VK_DOWN) {
+                if focused && down(VK_DOWN) {
                     pitch = (pitch - 0.03).max(-0.2);
                     moved = true;
                 }
-                if down(0x57) {
+                if focused && down(0x57) {
                     radius = (radius - 0.15).max(2.5);
                     moved = true;
                 }
-                if down(0x53) {
+                if focused && down(0x53) {
                     radius = (radius + 0.15).min(30.0);
                     moved = true;
                 }
                 let mut cur = Point { x: 0, y: 0 };
                 GetCursorPos(&mut cur);
-                if down(VK_LBUTTON) {
+                if focused && down(VK_LBUTTON) && point_in_client(hwnd, cur) {
                     if dragging && (cur.x != last.x || cur.y != last.y) {
                         yaw += (cur.x - last.x) as f32 * 0.01;
                         pitch = (pitch - (cur.y - last.y) as f32 * 0.01).clamp(-0.2, 1.45);

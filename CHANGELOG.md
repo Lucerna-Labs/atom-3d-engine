@@ -6,7 +6,9 @@ All notable changes to MM3E are documented here.
 
 - Orbit cameras now canonicalize yaw and guard pole singularities. The CPU viewer, GPU viewer, and
   game keep interactive yaw bounded; a real GPU regression sweeps all 360 degrees and rejects black
-  frames or a visually different full turn.
+  frames or a visually different full turn. Interactive Windows builds no longer open a second
+  console window, and camera/game input is accepted only while the image window is focused and the
+  pointer is inside its client area.
 - Added the framework-neutral `lucerna-release-client`: applications check a release manifest in
   the background, ask before downloading, verify SHA-256, stage outside the install directory, and
   ask again before restarting to apply files. The GPU viewer exposes this with `U` and packaged tag

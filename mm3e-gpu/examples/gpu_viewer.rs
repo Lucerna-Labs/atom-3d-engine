@@ -1,3 +1,5 @@
+#![cfg_attr(windows, windows_subsystem = "windows")]
+
 //! Real-time **GPU** viewer: each frame is sphere-traced on the GPU (wgpu/Vulkan) and presented
 //! through Win32/GDI — combining the verified GPU compute path with the dependency-light Win32
 //! window (no winit). This is the interactive payoff of the GPU backend: fly around an SDF scene
@@ -112,6 +114,7 @@ mod win32 {
         class_name: *const u16,
     }
     #[repr(C)]
+    #[derive(Clone, Copy)]
     struct Point {
         x: i32,
         y: i32,
@@ -176,6 +179,8 @@ mod win32 {
         fn GetClientRect(hwnd: Hwnd, r: *mut Rect) -> i32;
         fn GetAsyncKeyState(key: i32) -> i16;
         fn GetCursorPos(p: *mut Point) -> i32;
+        fn ScreenToClient(hwnd: Hwnd, point: *mut Point) -> i32;
+        fn GetForegroundWindow() -> Hwnd;
         fn LoadCursorW(instance: Hinstance, name: *const u16) -> *mut c_void;
         fn ShowWindow(hwnd: Hwnd, cmd: i32) -> i32;
         fn SetWindowTextW(hwnd: Hwnd, text: *const u16) -> i32;
@@ -251,6 +256,16 @@ mod win32 {
 
     unsafe fn message_box(hwnd: Hwnd, message: &str, kind: u32) -> i32 {
         MessageBoxW(hwnd, wide(message).as_ptr(), wide("Atom 3D Engine Updates").as_ptr(), kind)
+    }
+
+    unsafe fn point_in_client(hwnd: Hwnd, screen: Point) -> bool {
+        let mut client = screen;
+        if ScreenToClient(hwnd, &mut client) == 0 {
+            return false;
+        }
+        let mut rect = Rect { left: 0, top: 0, right: 0, bottom: 0 };
+        GetClientRect(hwnd, &mut rect);
+        client.x >= rect.left && client.x < rect.right && client.y >= rect.top && client.y < rect.bottom
     }
 
     unsafe extern "system" fn wndproc(hwnd: Hwnd, msg: u32, w: usize, l: isize) -> isize {
@@ -352,10 +367,11 @@ mod win32 {
                     TranslateMessage(&msg);
                     DispatchMessageW(&msg);
                 }
-                if down(VK_ESCAPE) {
+                let focused = GetForegroundWindow() == hwnd;
+                if focused && down(VK_ESCAPE) {
                     break 'frame;
                 }
-                let update_key_down = down(VK_U);
+                let update_key_down = focused && down(VK_U);
                 if update_key_down && !update_key_was_down && !update_busy {
                     update_busy = true;
                     start_update_check(update_sender.clone(), true);
@@ -426,27 +442,27 @@ mod win32 {
                         }
                     }
                 }
-                if down(VK_LEFT) {
+                if focused && down(VK_LEFT) {
                     yaw -= 0.04;
                 }
-                if down(VK_RIGHT) {
+                if focused && down(VK_RIGHT) {
                     yaw += 0.04;
                 }
-                if down(VK_UP) {
+                if focused && down(VK_UP) {
                     pitch = (pitch + 0.03).min(1.45);
                 }
-                if down(VK_DOWN) {
+                if focused && down(VK_DOWN) {
                     pitch = (pitch - 0.03).max(-0.2);
                 }
-                if down(0x57) {
+                if focused && down(0x57) {
                     radius = (radius - 0.15).max(2.5);
                 }
-                if down(0x53) {
+                if focused && down(0x53) {
                     radius = (radius + 0.15).min(30.0);
                 }
                 let mut cur = Point { x: 0, y: 0 };
                 GetCursorPos(&mut cur);
-                if down(VK_LBUTTON) {
+                if focused && down(VK_LBUTTON) && point_in_client(hwnd, cur) {
                     if dragging {
                         yaw += (cur.x - last.x) as f32 * 0.01;
                         pitch = (pitch - (cur.y - last.y) as f32 * 0.01).clamp(-0.2, 1.45);

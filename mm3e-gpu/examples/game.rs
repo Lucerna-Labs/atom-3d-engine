@@ -1,3 +1,5 @@
+#![cfg_attr(windows, windows_subsystem = "windows")]
+
 //! A playable game: roll a ball around an SDF obstacle course. Real GPU rendering + SDF-native
 //! physics + input + a follow camera + a fixed-timestep game loop. The static level is compiled
 //! once into a WGSL compute shader; the player and the loose balls are dynamic spheres unioned on
@@ -101,6 +103,7 @@ mod win32 {
         class_name: *const u16,
     }
     #[repr(C)]
+    #[derive(Clone, Copy)]
     struct Point {
         x: i32,
         y: i32,
@@ -165,6 +168,8 @@ mod win32 {
         fn GetClientRect(hwnd: Hwnd, r: *mut Rect) -> i32;
         fn GetAsyncKeyState(key: i32) -> i16;
         fn GetCursorPos(p: *mut Point) -> i32;
+        fn ScreenToClient(hwnd: Hwnd, point: *mut Point) -> i32;
+        fn GetForegroundWindow() -> Hwnd;
         fn LoadCursorW(instance: Hinstance, name: *const u16) -> *mut c_void;
         fn ShowWindow(hwnd: Hwnd, cmd: i32) -> i32;
     }
@@ -212,6 +217,16 @@ mod win32 {
     }
     fn down(key: i32) -> bool {
         unsafe { (GetAsyncKeyState(key) as u16 & 0x8000) != 0 }
+    }
+
+    unsafe fn point_in_client(hwnd: Hwnd, screen: Point) -> bool {
+        let mut client = screen;
+        if ScreenToClient(hwnd, &mut client) == 0 {
+            return false;
+        }
+        let mut rect = Rect { left: 0, top: 0, right: 0, bottom: 0 };
+        GetClientRect(hwnd, &mut rect);
+        client.x >= rect.left && client.x < rect.right && client.y >= rect.top && client.y < rect.bottom
     }
 
     unsafe extern "system" fn wndproc(hwnd: Hwnd, msg: u32, w: usize, l: isize) -> isize {
@@ -316,14 +331,15 @@ mod win32 {
                     TranslateMessage(&msg);
                     DispatchMessageW(&msg);
                 }
-                if down(VK_ESCAPE) {
+                let focused = GetForegroundWindow() == hwnd;
+                if focused && down(VK_ESCAPE) {
                     break 'frame;
                 }
 
                 // Mouse-drag camera look.
                 let mut cur = Point { x: 0, y: 0 };
                 GetCursorPos(&mut cur);
-                if down(VK_LBUTTON) {
+                if focused && down(VK_LBUTTON) && point_in_client(hwnd, cur) {
                     if dragging {
                         cam_yaw = mm3e_orchestrator::wrap_orbit_yaw(cam_yaw + (cur.x - last.x) as f32 * 0.01);
                         cam_pitch = (cam_pitch - (cur.y - last.y) as f32 * 0.01).clamp(0.08, 1.4);
@@ -338,16 +354,16 @@ mod win32 {
                 let fwd = Vec3::new(-cam_yaw.cos(), 0.0, -cam_yaw.sin());
                 let right = Vec3::new(-cam_yaw.sin(), 0.0, cam_yaw.cos());
                 let mut mv = Vec3::ZERO;
-                if down(0x57) {
+                if focused && down(0x57) {
                     mv = mv + fwd;
                 } // W
-                if down(0x53) {
+                if focused && down(0x53) {
                     mv = mv - fwd;
                 } // S
-                if down(0x44) {
+                if focused && down(0x44) {
                     mv = mv + right;
                 } // D
-                if down(0x41) {
+                if focused && down(0x41) {
                     mv = mv - right;
                 } // A
                 {
@@ -355,7 +371,7 @@ mod win32 {
                     if mv.length() > 0.01 {
                         p.drive(mv.normalize(), 6.0);
                     }
-                    if down(VK_SPACE) {
+                    if focused && down(VK_SPACE) {
                         p.jump(7.0);
                     }
                 }
