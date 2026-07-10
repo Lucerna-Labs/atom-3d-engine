@@ -7,7 +7,8 @@
 //! Run (Windows desktop): cargo run -p mm3e-gpu --example gpu_viewer --release
 //! Resolution: pass `480p` / `720p` / `1080p` / `1440p` / `4k` (or `WxH`) to render at that size,
 //! e.g. `cargo run -p mm3e-gpu --example gpu_viewer --release -- 4k`. The live fps is in the title
-//! bar. (This Win32/GDI viewer reads each frame back to the CPU to present it, so its fps reflects
+//! bar. The interactive loop is capped at 120 FPS; benchmarks remain uncapped. (This Win32/GDI
+//! viewer reads each frame back to the CPU to present it, so its fps reflects
 //! render + readback; a swapchain-present engine would hit the higher render-only numbers from the
 //! `gpu_resolution` benchmark.)
 
@@ -194,7 +195,6 @@ mod win32 {
     #[link(name = "kernel32")]
     extern "system" {
         fn GetModuleHandleW(name: *const u16) -> Hinstance;
-        fn Sleep(ms: u32);
     }
 
     const WS_OVERLAPPEDWINDOW: u32 = 0x00CF_0000;
@@ -244,6 +244,10 @@ mod win32 {
     }
 
     pub fn run(renderer: &GpuRenderer, scene: &GpuScene, rw: u32, rh: u32) {
+        const TARGET_FPS: u32 = 120;
+        const FRAME_TIME: std::time::Duration = std::time::Duration::from_nanos(1_000_000_000 / TARGET_FPS as u64);
+        const SPIN_THRESHOLD: std::time::Duration = std::time::Duration::from_micros(500);
+
         unsafe {
             let instance = GetModuleHandleW(std::ptr::null());
             let class_name = wide("mm3e_gpu_viewer");
@@ -296,6 +300,7 @@ mod win32 {
             // Live fps in the title bar (refreshed twice a second).
             let mut frames = 0u32;
             let mut fps_clock = std::time::Instant::now();
+            let mut next_frame = std::time::Instant::now();
 
             let mut msg = std::mem::zeroed::<Msg>();
             'frame: loop {
@@ -383,13 +388,25 @@ mod win32 {
                 if secs >= 0.5 {
                     let fps = frames as f32 / secs;
                     let title = wide(&format!(
-                        "MM3E — GPU SDF viewer — {rw}x{rh} — {fps:.0} fps (arrows/drag orbit, W/S zoom, Esc quit)"
+                        "MM3E — GPU SDF viewer — {rw}x{rh} — {fps:.0} fps — 120 fps cap (arrows/drag orbit, W/S zoom, Esc quit)"
                     ));
                     SetWindowTextW(hwnd, title.as_ptr());
                     frames = 0;
                     fps_clock = std::time::Instant::now();
                 }
-                Sleep(1);
+                next_frame += FRAME_TIME;
+                let now = std::time::Instant::now();
+                if next_frame > now {
+                    let remaining = next_frame - now;
+                    if remaining > SPIN_THRESHOLD {
+                        std::thread::sleep(remaining - SPIN_THRESHOLD);
+                    }
+                    while std::time::Instant::now() < next_frame {
+                        std::hint::spin_loop();
+                    }
+                } else {
+                    next_frame = now;
+                }
             }
         }
     }
