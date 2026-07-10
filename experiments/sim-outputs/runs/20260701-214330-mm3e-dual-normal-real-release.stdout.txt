@@ -1,0 +1,21 @@
+=== dual-number autodiff normal validation on the REAL engine @ 480x270 AA1 ===
+(three independent searches picked this lead; this is its first real-engine test)
+
+correctness (dual normal vs shipped tetrahedron, 2865 sampled hit points):
+  mean angular deviation: 0.0151 deg | max: 0.1607 deg
+
+field-evals (march + shadow + AO + normal-method), 105996 hits:
+  tetrahedron (4 evals/hit): 7003864
+  dual-number (1 eval/hit):  6685677  (-4.5% vs tetrahedron)
+
+REAL WALL-CLOCK (avg of 3 runs, release build):
+  whole per-pixel pass (march+normal+shadow+AO):
+    tetrahedron: 249.78 ms
+    dual-number: 217.44 ms  (-12.9%)
+  normal-computation only (isolated, summed over all 105996 hits):
+    tetrahedron: 16482.3 us total (0.155 us/hit)
+    dual-number: 7946.4 us total (0.075 us/hit)  (-51.8%)
+
+Reading: eval-count savings and wall-clock savings can DIVERGE (the LOD-sweep lesson) —
+dual arithmetic does more FLOPs per call than one scalar tetrahedron sample, so a real
+win requires the wall-clock line to also show a negative percentage, not just the count.

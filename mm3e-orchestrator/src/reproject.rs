@@ -16,6 +16,10 @@ use mm3e_kit::framebuffer::Framebuffer;
 use mm3e_kit::vec::Vec3;
 use mm3e_kit::Rgba;
 
+fn frame_len(width: u32, height: u32) -> usize {
+    (width as usize).checked_mul(height as usize).expect("GFrame dimensions overflow addressable memory")
+}
+
 /// A rendered frame plus the depth, object tags, and camera needed to reproject it.
 pub struct GFrame {
     pub width: u32,
@@ -33,10 +37,12 @@ pub struct GFrame {
 impl GFrame {
     /// Wrap a colour buffer as a [`Framebuffer`] (e.g. to save a reprojected frame to BMP).
     pub fn color_to_framebuffer(width: u32, height: u32, color: &[[u8; 4]]) -> Framebuffer {
+        let n = frame_len(width, height);
+        assert!(color.len() >= n, "color buffer has {} pixels, expected at least {}", color.len(), n);
         let mut fb = Framebuffer::new(width, height, Rgba::new(0.0, 0.0, 0.0, 1.0));
         for y in 0..height {
             for x in 0..width {
-                let c = color[(y * width + x) as usize];
+                let c = color[y as usize * width as usize + x as usize];
                 fb.put(x, y, Rgba::new(c[0] as f32 / 255.0, c[1] as f32 / 255.0, c[2] as f32 / 255.0, 1.0));
             }
         }
@@ -68,14 +74,17 @@ fn project(camera: &Camera, world: Vec3, w: u32, h: u32) -> Option<(f32, f32, f3
 /// cheap `reproject` (row hole-fill) and the orchestrator's Level-3 hybrid (rerender the holes).
 pub fn warp(prev: &GFrame, new_camera: &Camera, mover_deltas: &[Vec3]) -> (Vec<[u8; 4]>, Vec<bool>) {
     let (w, h) = (prev.width, prev.height);
-    let n = (w * h) as usize;
+    let n = frame_len(w, h);
+    assert!(prev.color.len() >= n, "GFrame color buffer has {} pixels, expected at least {}", prev.color.len(), n);
+    assert!(prev.depth.len() >= n, "GFrame depth buffer has {} pixels, expected at least {}", prev.depth.len(), n);
+    assert!(prev.obj.len() >= n, "GFrame object buffer has {} pixels, expected at least {}", prev.obj.len(), n);
     let mut out = vec![[0u8; 4]; n];
     let mut filled = vec![false; n];
     let mut zbuf = vec![f32::INFINITY; n];
 
     for y in 0..h {
         for x in 0..w {
-            let i = (y * w + x) as usize;
+            let i = y as usize * w as usize + x as usize;
             let dir = prev.camera.ray(x as f32 + 0.5, y as f32 + 0.5, w, h).dir;
             // Sky (infinite depth) is reprojected as a far point so it rotates with the camera.
             let d = if prev.depth[i].is_finite() { prev.depth[i] } else { 1.0e6 };
@@ -91,7 +100,7 @@ pub fn warp(prev: &GFrame, new_camera: &Camera, mover_deltas: &[Vec3]) -> (Vec<[
                 // `sx = x + 0.5` is the centre of pixel x, so the target pixel index is floor(sx).
                 let (nx, ny) = (sx.floor() as i32, sy.floor() as i32);
                 if nx >= 0 && ny >= 0 && (nx as u32) < w && (ny as u32) < h {
-                    let j = (ny as u32 * w + nx as u32) as usize;
+                    let j = ny as usize * w as usize + nx as usize;
                     if fz < zbuf[j] {
                         zbuf[j] = fz;
                         out[j] = prev.color[i];
@@ -115,7 +124,7 @@ pub fn reproject(prev: &GFrame, new_camera: &Camera, mover_deltas: &[Vec3]) -> V
     for y in 0..h {
         let mut last: Option<[u8; 4]> = None;
         for x in 0..w {
-            let i = (y * w + x) as usize;
+            let i = y as usize * w as usize + x as usize;
             if filled[i] {
                 last = Some(out[i]);
             } else if let Some(c) = last {
@@ -126,7 +135,7 @@ pub fn reproject(prev: &GFrame, new_camera: &Camera, mover_deltas: &[Vec3]) -> V
         // second sweep right→left to fill the leading edge of each row
         let mut last: Option<[u8; 4]> = None;
         for x in (0..w).rev() {
-            let i = (y * w + x) as usize;
+            let i = y as usize * w as usize + x as usize;
             if filled[i] {
                 last = Some(out[i]);
             } else if let Some(c) = last {

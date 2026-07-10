@@ -12,6 +12,19 @@ survives gets reimplemented and wall-clock-validated in the real Rust marcher (s
 
 ## Contents
 
+### `sim-outputs/` - raw output archive for publication
+Timestamped logs, imported prior outputs, manifests, and checksums for runs that may need to be cited
+or packaged later. Use `capture-sim-output.ps1` for future runs so command, environment, stdout/stderr,
+exit code, git state, and SHA256 are preserved instead of relying on terminal scrollback.
+
+### `PMRE_FABLE5_SESSION_APPLICABILITY_NOTES.md`
+Notes extracted from the Fable5 PMRE session PDF, with local verification of the PMRE project and a
+transfer map for Ordo, MM3E overlays, the provider tab, and dependency-boundary risks.
+
+### `PRIMITIVE_SIM_EXPERIMENT_REPORT.md`
+Detailed narrative report covering how the discovery/confirmation/Rust-validation sims work, current
+progress, which primitives applied, which did not, and the most interesting transfer findings.
+
 ### `discovery-tpu/` — the TRUE discovery engine (current, publishable)
 Genetic-programming synthesis of the marcher **step function** from scratch. Given only primitive
 arithmetic atoms and the cost metric, it rediscovers hand-derived optimizations (over-relaxation) and
@@ -30,6 +43,14 @@ Evolve the parameters of a fixed operator genome (subitize, over-relax, secant, 
 - `arc_engine_mix.py`, `arc_engine_mix2.py` (v2 = the 4-domain run).
 - `arc_mix2.log` — **the v2 result**: −39.9%, and the per-domain ablation showing subitize is the only
   real driver (glue/symbols ~0%) — the evidence that a confirmation genome only re-finds what's seeded.
+
+### `rf-crypto-arc/` - RF self-repair + crypto integrity sims (Intel Arc, torch-XPU)
+Monte Carlo transport simulations for bursty RF loss plus tamper/corruption.
+- `rf_crypto_self_repair.py` compares raw delivery, per-frame MAC, repetition, FEC/RLNC repair,
+  block-hash-only detection, interleaving, and adaptive redundancy.
+- `RUN_NOTES.md` records the Arc A380 result: per-shard MAC/AEAD before FEC is the key primitive,
+  because it turns corruption into erasure; adaptive MAC+FEC reached full recovery at about `1.43x`
+  average overhead in the simulated channel.
 
 ### `engine-mix-8h-kaggle/` — the confirmation sim scaled up (Kaggle P100, torch-CUDA)
 `engine-mix-8h.py` + metadata. Higher-res confirmation run (webhook-streamed).

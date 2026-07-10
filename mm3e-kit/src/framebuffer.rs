@@ -12,22 +12,27 @@ pub struct Framebuffer {
 
 impl Framebuffer {
     pub fn new(width: u32, height: u32, clear: Rgba) -> Self {
-        Self { width, height, pixels: vec![clear; (width * height) as usize] }
+        let len =
+            (width as usize).checked_mul(height as usize).expect("framebuffer dimensions overflow addressable memory");
+        Self { width, height, pixels: vec![clear; len] }
     }
 
     /// Directly set a pixel to an opaque, already-shaded color (the raymarcher's output path).
     pub fn put(&mut self, x: u32, y: u32, c: Rgba) {
         if x < self.width && y < self.height {
-            self.pixels[(y * self.width + x) as usize] = c;
+            self.pixels[y as usize * self.width as usize + x as usize] = c;
         }
     }
 
     /// Read a pixel back (clamped to the edges). Lets the renderer use a framebuffer as a scratch
     /// carrier for linear-HDR values before the post pass resolves them.
     pub fn pixel(&self, x: u32, y: u32) -> Rgba {
+        if self.width == 0 || self.height == 0 {
+            return Rgba::new(0.0, 0.0, 0.0, 0.0);
+        }
         let x = x.min(self.width.saturating_sub(1));
         let y = y.min(self.height.saturating_sub(1));
-        self.pixels[(y * self.width + x) as usize]
+        self.pixels[y as usize * self.width as usize + x as usize]
     }
 
     /// Porter-Duff "over": straight-alpha `src` composited onto the stored pixel.
@@ -35,7 +40,7 @@ impl Framebuffer {
         if x >= self.width || y >= self.height {
             return;
         }
-        let i = (y * self.width + x) as usize;
+        let i = y as usize * self.width as usize + x as usize;
         let dst = self.pixels[i];
         let out_a = src.a + dst.a * (1.0 - src.a);
         if out_a <= 0.0 {
@@ -51,8 +56,10 @@ impl Framebuffer {
         let w = self.width as usize;
         let h = self.height as usize;
         let pad = (4 - (w * 3) % 4) % 4;
-        let pixel_bytes = (w * 3 + pad) * h;
-        let file_size = 54 + pixel_bytes;
+        let row_bytes = w.checked_mul(3).and_then(|v| v.checked_add(pad)).expect("BMP row size overflow");
+        let pixel_bytes = row_bytes.checked_mul(h).expect("BMP pixel data size overflow");
+        let file_size = 54usize.checked_add(pixel_bytes).expect("BMP file size overflow");
+        assert!(file_size <= u32::MAX as usize, "BMP file too large for 32-bit BMP header");
 
         let mut out = Vec::with_capacity(file_size);
         // BITMAPFILEHEADER (14 bytes)
@@ -94,7 +101,7 @@ impl Framebuffer {
     /// overlay (see `font::draw_text`) and software presentation.
     pub fn to_rgba8(&self, background: Rgba) -> Vec<u8> {
         let to_u8 = |c: f32| (c.clamp(0.0, 1.0) * 255.0 + 0.5) as u8;
-        let mut out = Vec::with_capacity((self.width * self.height * 4) as usize);
+        let mut out = Vec::with_capacity(self.pixels.len() * 4);
         for px in &self.pixels {
             let a = px.a.clamp(0.0, 1.0);
             out.push(to_u8(px.r * a + background.r * (1.0 - a)));
@@ -108,7 +115,7 @@ impl Framebuffer {
     /// Flatten to opaque `0x00RRGGBB` pixels for software presentation (e.g. softbuffer).
     pub fn to_u32(&self, background: Rgba) -> Vec<u32> {
         let to_u8 = |c: f32| (c.clamp(0.0, 1.0) * 255.0 + 0.5) as u32;
-        let mut out = Vec::with_capacity((self.width * self.height) as usize);
+        let mut out = Vec::with_capacity(self.pixels.len());
         for px in &self.pixels {
             let a = px.a.clamp(0.0, 1.0);
             let r = to_u8(px.r * a + background.r * (1.0 - a));

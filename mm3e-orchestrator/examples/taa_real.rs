@@ -17,17 +17,14 @@ use mm3e_kit::camera::Camera;
 use mm3e_kit::color::Material;
 use mm3e_kit::framebuffer::Framebuffer;
 use mm3e_kit::vec::{Mat3, Transform, Vec3};
-use mm3e_orchestrator::{
-    orbit_camera, render, render_gbuffer, reproject_hybrid, Light, Object, Prim, Scene,
-};
+use mm3e_orchestrator::{orbit_camera, render, render_gbuffer, reproject_hybrid, Light, Object, Prim, Scene};
 use std::time::Instant;
 
 fn build_scene(w: u32, h: u32) -> Scene {
     let mut scene = Scene::new(w, h);
     scene.aa = 1; // 1 sample/pixel — we anti-alias ourselves via camera jitter.
     scene.bounces = 3;
-    let floor =
-        scene.material(Material::solid(Vec3::splat(1.0)).checkered().specular(0.15).roughness(0.6));
+    let floor = scene.material(Material::solid(Vec3::splat(1.0)).checkered().specular(0.15).roughness(0.6));
     let red = scene.material(Material::solid(Vec3::new(0.85, 0.18, 0.20)).specular(0.7).roughness(0.25));
     let gold =
         scene.material(Material::solid(Vec3::new(0.95, 0.72, 0.25)).metallic(1.0).roughness(0.18).reflective(0.5));
@@ -60,13 +57,7 @@ fn jittered(cam: &Camera, jx: f32, jy: f32, w: u32, h: u32) -> Camera {
     let dx = 2.0 * jx / w as f32 * aspect * cam.fov_scale;
     let dy = -2.0 * jy / h as f32 * cam.fov_scale;
     let forward = (cam.forward + cam.right.scale(dx) + cam.up.scale(dy)).normalize();
-    Camera {
-        eye: cam.eye,
-        forward,
-        right: cam.right,
-        up: cam.up,
-        fov_scale: cam.fov_scale,
-    }
+    Camera { eye: cam.eye, forward, right: cam.right, up: cam.up, fov_scale: cam.fov_scale }
 }
 
 fn halton(mut i: u32, base: u32) -> f32 {
@@ -99,22 +90,12 @@ fn img_err(a: &[f32], b: &[f32]) -> f32 {
 
 fn img_err_u8(a: &[[u8; 4]], b: &[[u8; 4]]) -> f32 {
     let n = (a.len() * 3).max(1) as f32;
-    let s: f32 = a
-        .iter()
-        .zip(b)
-        .map(|(p, q)| (0..3).map(|c| (p[c] as f32 - q[c] as f32).abs()).sum::<f32>())
-        .sum();
+    let s: f32 = a.iter().zip(b).map(|(p, q)| (0..3).map(|c| (p[c] as f32 - q[c] as f32).abs()).sum::<f32>()).sum();
     s / n / 255.0
 }
 
 fn cam_at(i: u32, dyaw: f32) -> Camera {
-    orbit_camera(
-        Vec3::new(0.2, 0.85, 0.4),
-        8.5,
-        0.55 + i as f32 * dyaw,
-        0.32,
-        50f32.to_radians(),
-    )
+    orbit_camera(Vec3::new(0.2, 0.85, 0.4), 8.5, 0.55 + i as f32 * dyaw, 0.32, 50f32.to_radians())
 }
 
 fn static_taa(scene: &Scene, w: u32, h: u32) {
@@ -205,29 +186,20 @@ fn moving_reproj(scene: &Scene, w: u32, h: u32, dyaw: f32, label: &str) {
     }
     let amort_ms = t0.elapsed().as_secs_f64() * 1000.0 / frames as f64;
 
-    let errs: Vec<f32> = amort
-        .iter()
-        .zip(&full)
-        .map(|(a, f)| img_err_u8(a, f))
-        .collect();
+    let errs: Vec<f32> = amort.iter().zip(&full).map(|(a, f)| img_err_u8(a, f)).collect();
     let mean_err = errs.iter().sum::<f32>() / errs.len().max(1) as f32;
     let max_err = errs.iter().copied().fold(0.0f32, f32::max);
 
     println!("\nTEST 2 [{label}] — MOVING camera @ {w}x{h}, {frames} frames, keyframe/{keyint}, dyaw={dyaw}:");
     println!("  full render every frame : {full_ms:>7.1} ms/frame");
-    println!(
-        "  keyframe + reproject    : {amort_ms:>7.1} ms/frame   ({:.2}x faster)",
-        full_ms / amort_ms.max(0.001)
-    );
+    println!("  keyframe + reproject    : {amort_ms:>7.1} ms/frame   ({:.2}x faster)", full_ms / amort_ms.max(0.001));
     println!("  reprojected error vs full: mean {mean_err:.5}, worst {max_err:.5} (grows with motion from keyframe)");
 }
 
 fn main() {
     let (w, h) = (320u32, 180u32);
     let scene = build_scene(w, h);
-    let threads = std::thread::available_parallelism()
-        .map(|n| n.get())
-        .unwrap_or(1);
+    let threads = std::thread::available_parallelism().map(|n| n.get()).unwrap_or(1);
     println!("Real mm3e engine, {threads} CPU threads — the top discovery on the actual renderer.\n");
     static_taa(&scene, w, h);
     moving_reproj(&scene, w, h, 0.004, "slow pan");

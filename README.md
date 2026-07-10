@@ -84,7 +84,8 @@ BRDF, fog, smooth-min CSG, and bloom are all `combine`; the camera basis and eve
 **Geometry** — 11 analytic SDF primitives (sphere, box, rounded box, torus, cylinder, capsule,
 cone, ellipsoid, octahedron, hex prism, plane); CSG union/intersect/subtract + smooth variants;
 domain operators (round, onion, elongate, infinite repeat, twist, bend, mirror); conservative
-bounding-sphere pruning of the world field.
+bounding-sphere pruning of the world field; OBJ mesh ingestion through mesh-to-SDF baking with a
+std-only `.sdfv` cache so imported geometry can be baked once and reused as a normal field.
 
 **Shading & lighting** — Cook-Torrance GGX PBR (metallic-roughness); diffuse image-based lighting
 from the sky; **SDF global illumination** (baked irradiance probe volume); directional + point +
@@ -111,6 +112,7 @@ cargo run -p mm3e-orchestrator --example gi_demo    --release   # global illumin
 cargo run -p mm3e-orchestrator --example aov        --release   # debug passes (normals/steps/…)
 cargo run -p mm3e-orchestrator --example scene_file --release   # write + load a .mm3e scene
 cargo run -p mm3e-orchestrator --example animate    --release 24 # 24 animation frames
+cargo run -p mm3e-orchestrator --example mesh_demo  --release   # OBJ -> baked .sdfv -> render
 cargo run -p mm3e-orchestrator --example viewer     --release   # live interactive window (Windows)
 ```
 

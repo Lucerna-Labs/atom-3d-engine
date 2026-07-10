@@ -14,7 +14,9 @@ use mm3e_kit::color::Rgba;
 use mm3e_kit::framebuffer::Framebuffer;
 use mm3e_orchestrator::Scene;
 
-const MAX_DYN: usize = 24;
+/// Capacity of the dynamic-sphere uniform (player / physics bodies / particles per frame).
+/// The WGSL array sizes derive from this single Rust constant.
+pub const MAX_DYN: usize = 24;
 
 /// A dynamic sphere (player / physics body) rendered without recompiling the shader — its data
 /// rides in the uniform and is unioned into the field on the GPU each frame.
@@ -60,28 +62,55 @@ pub fn adapter_info() -> Result<String, String> {
     GpuRenderer::new().map(|r| r.adapter_name)
 }
 
+fn describe(info: &wgpu::AdapterInfo) -> String {
+    format!("{} ({:?}, {:?})", info.name, info.device_type, info.backend)
+}
+
+/// Every adapter wgpu can see on this machine, as human-readable descriptors.
+pub fn list_adapters() -> Vec<String> {
+    let instance = wgpu::Instance::default();
+    instance.enumerate_adapters(wgpu::Backends::all()).iter().map(|a| describe(&a.get_info())).collect()
+}
+
 impl GpuRenderer {
+    /// Open the default adapter, or the first adapter matching `MM3E_GPU_ADAPTER` when set.
     pub fn new() -> Result<GpuRenderer, String> {
+        match std::env::var("MM3E_GPU_ADAPTER") {
+            Ok(filter) if !filter.trim().is_empty() => Self::with_adapter(Some(filter.trim())),
+            _ => Self::with_adapter(None),
+        }
+    }
+
+    /// Open a specific adapter chosen by case-insensitive substring match against the adapter
+    /// descriptor. `None` falls back to wgpu's high-performance default.
+    pub fn with_adapter(filter: Option<&str>) -> Result<GpuRenderer, String> {
         pollster::block_on(async {
             let instance = wgpu::Instance::default();
-            let adapter = instance
-                .request_adapter(&wgpu::RequestAdapterOptions {
-                    power_preference: wgpu::PowerPreference::HighPerformance,
-                    force_fallback_adapter: false,
-                    compatible_surface: None,
-                })
-                .await
-                .map_err(|e| format!("no GPU adapter: {e}"))?;
+            let adapter = match filter {
+                Some(want) => {
+                    let want_lc = want.to_lowercase();
+                    let adapters = instance.enumerate_adapters(wgpu::Backends::all());
+                    let names: Vec<String> = adapters.iter().map(|a| describe(&a.get_info())).collect();
+                    adapters
+                        .into_iter()
+                        .find(|a| describe(&a.get_info()).to_lowercase().contains(&want_lc))
+                        .ok_or_else(|| format!("no GPU adapter matching '{want}'; available: {}", names.join(" | ")))?
+                }
+                None => instance
+                    .request_adapter(&wgpu::RequestAdapterOptions {
+                        power_preference: wgpu::PowerPreference::HighPerformance,
+                        force_fallback_adapter: false,
+                        compatible_surface: None,
+                    })
+                    .await
+                    .map_err(|e| format!("no GPU adapter: {e}"))?,
+            };
             let info = adapter.get_info();
             let (device, queue) = adapter
                 .request_device(&wgpu::DeviceDescriptor { label: Some("mm3e-gpu"), ..Default::default() })
                 .await
                 .map_err(|e| format!("request_device failed: {e}"))?;
-            Ok(GpuRenderer {
-                device,
-                queue,
-                adapter_name: format!("{} ({:?}, {:?})", info.name, info.device_type, info.backend),
-            })
+            Ok(GpuRenderer { device, queue, adapter_name: describe(&info) })
         })
     }
 
@@ -97,6 +126,10 @@ impl GpuRenderer {
 
     /// Compile `scene` into a GPU pipeline + render targets at `width × height`.
     pub fn compile(&self, scene: &Scene, width: u32, height: u32) -> GpuScene {
+        assert!(
+            width >= 1 && height >= 1 && width <= 16384 && height <= 16384,
+            "GpuRenderer::compile: {width}x{height} out of range 1..=16384"
+        );
         let device = &self.device;
         let source = wgsl::build_shader(scene);
         let module = device.create_shader_module(wgpu::ShaderModuleDescriptor {
@@ -110,6 +143,34 @@ impl GpuRenderer {
             usage: wgpu::BufferUsages::UNIFORM | wgpu::BufferUsages::COPY_DST,
             mapped_at_creation: false,
         });
+
+        let gi_data: Vec<[f32; 4]> = match &scene.gi {
+            Some(vol) => {
+                let (_, _, _, cubes) = vol.raw();
+                cubes.iter().flat_map(|cube| cube.iter().map(|c| [c.x, c.y, c.z, 0.0])).collect()
+            }
+            None => vec![[0.0; 4]; 6],
+        };
+        let gi_buf = device.create_buffer(&wgpu::BufferDescriptor {
+            label: Some("gi-cubes"),
+            size: (gi_data.len() * 16) as u64,
+            usage: wgpu::BufferUsages::STORAGE | wgpu::BufferUsages::COPY_DST,
+            mapped_at_creation: false,
+        });
+        self.queue.write_buffer(&gi_buf, 0, bytemuck::cast_slice(&gi_data));
+
+        let vol_data: Vec<f32> = if scene.volumes.is_empty() {
+            vec![0.0]
+        } else {
+            scene.volumes.iter().flat_map(|v| v.data.iter().copied()).collect()
+        };
+        let vol_buf = device.create_buffer(&wgpu::BufferDescriptor {
+            label: Some("sdf-volumes"),
+            size: (vol_data.len() * 4) as u64,
+            usage: wgpu::BufferUsages::STORAGE | wgpu::BufferUsages::COPY_DST,
+            mapped_at_creation: false,
+        });
+        self.queue.write_buffer(&vol_buf, 0, bytemuck::cast_slice(&vol_data));
 
         let tex = device.create_texture(&wgpu::TextureDescriptor {
             label: Some("out"),
@@ -146,6 +207,26 @@ impl GpuRenderer {
                     },
                     count: None,
                 },
+                wgpu::BindGroupLayoutEntry {
+                    binding: 2,
+                    visibility: wgpu::ShaderStages::COMPUTE,
+                    ty: wgpu::BindingType::Buffer {
+                        ty: wgpu::BufferBindingType::Storage { read_only: true },
+                        has_dynamic_offset: false,
+                        min_binding_size: None,
+                    },
+                    count: None,
+                },
+                wgpu::BindGroupLayoutEntry {
+                    binding: 3,
+                    visibility: wgpu::ShaderStages::COMPUTE,
+                    ty: wgpu::BindingType::Buffer {
+                        ty: wgpu::BufferBindingType::Storage { read_only: true },
+                        has_dynamic_offset: false,
+                        min_binding_size: None,
+                    },
+                    count: None,
+                },
             ],
         });
         let bind_group = device.create_bind_group(&wgpu::BindGroupDescriptor {
@@ -154,6 +235,8 @@ impl GpuRenderer {
             entries: &[
                 wgpu::BindGroupEntry { binding: 0, resource: uniform_buf.as_entire_binding() },
                 wgpu::BindGroupEntry { binding: 1, resource: wgpu::BindingResource::TextureView(&view) },
+                wgpu::BindGroupEntry { binding: 2, resource: gi_buf.as_entire_binding() },
+                wgpu::BindGroupEntry { binding: 3, resource: vol_buf.as_entire_binding() },
             ],
         });
         let layout = device.create_pipeline_layout(&wgpu::PipelineLayoutDescriptor {
@@ -290,8 +373,14 @@ impl GpuScene {
     pub fn render_rgba_dyn(&self, r: &GpuRenderer, camera: &Camera, dyn_spheres: &[DynSphere]) -> Vec<u8> {
         self.dispatch(r, camera, dyn_spheres);
         let slice = self.readback.slice(..);
-        slice.map_async(wgpu::MapMode::Read, |_| {});
+        let (tx, rx) = std::sync::mpsc::channel();
+        slice.map_async(wgpu::MapMode::Read, move |res| {
+            let _ = tx.send(res);
+        });
         r.device.poll(wgpu::PollType::Wait).expect("device poll");
+        rx.recv()
+            .expect("map_async callback never ran (device lost?)")
+            .expect("readback buffer map failed (device lost / out of memory?)");
         let data = slice.get_mapped_range();
         let mut out = Vec::with_capacity((self.width * self.height * 4) as usize);
         for y in 0..self.height {

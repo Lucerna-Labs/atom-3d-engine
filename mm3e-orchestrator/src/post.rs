@@ -28,13 +28,18 @@ impl Default for Post {
     }
 }
 
+fn frame_len(w: u32, h: u32) -> usize {
+    (w as usize).checked_mul(h as usize).expect("post-processing dimensions overflow addressable memory")
+}
+
 /// Resolve a linear-HDR `hdr` buffer (`w·h`, row-major) into a tone-mapped framebuffer.
 pub fn resolve(hdr: &[Vec3], w: u32, h: u32, post: &Post) -> Framebuffer {
-    let n = (w * h) as usize;
-    let mut color = hdr.to_vec();
+    let n = frame_len(w, h);
+    assert!(hdr.len() >= n, "HDR buffer has {} pixels, expected at least {}", hdr.len(), n);
+    let mut color = hdr[..n].to_vec();
 
     if post.bloom && post.bloom_intensity > 0.0 {
-        let bloom = bloom_pass(hdr, w, h, post.bloom_threshold, post.bloom_radius);
+        let bloom = bloom_pass(&color, w, h, post.bloom_threshold, post.bloom_radius);
         for i in 0..n {
             color[i] = color[i] + bloom[i].scale(post.bloom_intensity);
         }
@@ -45,7 +50,7 @@ pub fn resolve(hdr: &[Vec3], w: u32, h: u32, post: &Post) -> Framebuffer {
     let mut fb = Framebuffer::new(w, h, clear);
     for y in 0..h {
         for x in 0..w {
-            let c = color[(y * w + x) as usize].scale(post.exposure);
+            let c = color[y as usize * w as usize + x as usize].scale(post.exposure);
             fb.put(x, y, Rgba::from_vec3(shade::gamma(shade::aces(c))));
         }
     }
@@ -54,7 +59,8 @@ pub fn resolve(hdr: &[Vec3], w: u32, h: u32, post: &Post) -> Framebuffer {
 
 /// Bright-pass (luminance over `threshold`) blurred by a separable Gaussian of radius `radius`.
 fn bloom_pass(hdr: &[Vec3], w: u32, h: u32, threshold: f32, radius: u32) -> Vec<Vec3> {
-    let n = (w * h) as usize;
+    let n = frame_len(w, h);
+    assert!(hdr.len() >= n, "HDR buffer has {} pixels, expected at least {}", hdr.len(), n);
     let mut bright = vec![Vec3::ZERO; n];
     for i in 0..n {
         let l = shade::luminance(hdr[i]);
@@ -87,6 +93,9 @@ fn gaussian_kernel(radius: u32) -> Vec<f32> {
 
 /// One separable Gaussian pass along x (`horizontal`) or y, clamping at the borders.
 fn blur_axis(src: &[Vec3], w: u32, h: u32, kernel: &[f32], horizontal: bool) -> Vec<Vec3> {
+    if w == 0 || h == 0 {
+        return vec![Vec3::ZERO; src.len()];
+    }
     let r = (kernel.len() / 2) as i32;
     let (wi, hi) = (w as i32, h as i32);
     let mut out = vec![Vec3::ZERO; src.len()];
@@ -97,9 +106,9 @@ fn blur_axis(src: &[Vec3], w: u32, h: u32, kernel: &[f32], horizontal: bool) -> 
                 let off = ki as i32 - r;
                 let (sx, sy) =
                     if horizontal { ((x + off).clamp(0, wi - 1), y) } else { (x, (y + off).clamp(0, hi - 1)) };
-                acc = acc + src[(sy * wi + sx) as usize].scale(kw);
+                acc = acc + src[sy as usize * w as usize + sx as usize].scale(kw);
             }
-            out[(y * wi + x) as usize] = acc;
+            out[y as usize * w as usize + x as usize] = acc;
         }
     }
     out

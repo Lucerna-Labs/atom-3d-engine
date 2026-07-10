@@ -58,14 +58,24 @@ pub struct Marcher {
     pub lod_footprint: f32,
     /// Subitize empty-space leap (a **numerical-cognition** transfer — the Approximate Number
     /// System's "instantly recognize it's clearly far, so leap"): when the safe distance is well
-    /// clear of the surface (`d > 6·eps`), multiply the step by `1 + subitize`. 0.0 = off. This is
-    /// the top lead surfaced by mixing the new-domain primitives into the engine search and then
-    /// **validated on the real engine** (`examples/stoch_subitize_real.rs`): a speed/quality dial
-    /// like LOD — measured −11% field-evals at ~0.4% depth error (subitize≈0.2) up to −23% at ~1%
-    /// (subitize≈0.6); past that (≈0.8) it over-leaps silhouette edges and the error spikes. The
-    /// over-relaxation overlap-guard is the safety net for the leap, so it never tunnels through a
-    /// surface (hit-agreement stayed 99.9% across the whole sweep). Orchestrator dials it, like LOD.
+    /// clear of the surface (`d > 6·eps`), multiply the step by `1 + subitize`. 0.0 = off. The
+    /// unconditional overlap guard is the safety net: a leap that would tunnel is undone (retreat
+    /// to the last safe frontier) and the knob decays off for that ray, so hits are never buried
+    /// inside surfaces. Honest economics under the corrected guard (`examples/subitize_econ.rs`):
+    /// it pays on miss-heavy / open framings and can cost on hit-dominated framings, where leaps
+    /// near geometry trip the guard and pay a retreat. The orchestrator should dial it up for
+    /// open/sky-heavy shots and off for close-ups.
     pub subitize: f32,
+    /// Secant / regula-falsi near-surface refinement: predict the surface root from the last two
+    /// samples and step toward it, capped at 4*d. Off by default: honest re-measurement under the
+    /// corrected overlap guard shows it can cost more than it saves on this renderer's profiler
+    /// scene. Preserved as a primitive because the overshoot-then-verify shape may still transfer
+    /// to traversal domains where field evaluation is much more expensive than verification.
+    pub secant: bool,
+    /// Half-width of the tetrahedron normal stencil. The default keeps analytic scenes on the
+    /// historical normal sample radius; sampled SDF volumes should widen this to roughly half a
+    /// grid cell so cell-scale interpolation wobble does not become normal/AO/shadow noise.
+    pub normal_h: f32,
 }
 
 impl Default for Marcher {
@@ -79,6 +89,8 @@ impl Default for Marcher {
             ao_samples: 5,
             lod_footprint: 0.0,
             subitize: 0.0,
+            secant: false,
+            normal_h: 0.0009,
         }
     }
 }
@@ -88,10 +100,12 @@ impl Marcher {
     ///
     /// Uses **enhanced sphere tracing** (Keinert et al. 2014): step by `ω · distance` with
     /// `ω = 1.4`, and whenever two successive unbounding spheres fail to overlap (the signal that
-    /// the over-relaxed step jumped past a surface), undo the over-relaxed part and continue
-    /// conservatively. This skips long empty stretches — exactly the horizon/grazing rays that
-    /// dominate the cost — without moving the hit point. A `step_scale < 1` (set for non-Lipschitz
-    /// domain warps) disables over-relaxation and just under-relaxes, as before.
+    /// a boosted step — over-relaxation, subitize, or secant — jumped past a surface), retreat to
+    /// the last provably safe frontier and continue conservatively. The guard is unconditional,
+    /// so no boosted step can ever tunnel and record a hit buried inside a surface. This skips
+    /// long empty stretches — exactly the horizon/grazing rays that dominate the cost — without
+    /// moving the hit point. A `step_scale < 1` (set for non-Lipschitz domain warps) disables
+    /// over-relaxation and just under-relaxes, as before.
     pub fn march<F: Fn(Vec3) -> Field + ?Sized>(&self, field: &F, ray: &Ray) -> Hit {
         self.march_with(field, |p| self.normal(field, p), ray)
     }
@@ -108,7 +122,17 @@ impl Marcher {
         F: Fn(Vec3) -> Field + ?Sized,
         N: Fn(Vec3) -> Vec3,
     {
+        #[derive(Clone, Copy, PartialEq)]
+        enum Boost {
+            Omega,
+            Leap,
+            Secant,
+        }
+
         let mut omega = if self.step_scale >= 1.0 { 1.4 } else { self.step_scale };
+        let mut subitize = if self.step_scale >= 1.0 { self.subitize } else { 0.0 };
+        let mut secant_on = self.secant && self.step_scale >= 1.0;
+        let mut boost = Boost::Omega;
         let mut t = 0.0f32;
         let mut prev_radius = 0.0f32;
         let mut step_len = 0.0f32;
@@ -121,33 +145,52 @@ impl Marcher {
             let radius = f.dist.abs();
             let eps = self.eps * (1.0 + t * 0.5) + self.lod_footprint * t;
             // Over-relaxation failure: the two safe spheres don't overlap → we overshot.
-            if omega > 1.0 && radius + prev_radius < step_len {
-                step_len -= omega * step_len; // back up to the last safe point
-                omega = 1.0; // conservative for the rest of this ray
-            } else {
-                if f.dist < eps {
-                    return Hit { hit: true, t, pos: p, normal: normal_fn(p), mat: f.mat, steps: i };
-                }
-                step_len = f.dist * omega;
-                // Subitize (a numerical-cognition transfer — the Approximate Number System's "leap
-                // when it's clearly far"): well clear of any surface, multiply the step. The
-                // over-relaxation overlap guard above is the safety net, so an over-leap is undone
-                // rather than tunneling. 0.0 = off. See `Marcher::subitize`.
-                if self.subitize > 0.0 && self.step_scale >= 1.0 && f.dist > eps * 6.0 {
-                    step_len *= 1.0 + self.subitize;
-                }
-                // Secant / regula-falsi root refinement near the surface (control-numerical-opt):
-                // estimate dd/dt from the last two samples and step toward the predicted root. On
-                // grazing rays the slope is shallow, so the secant step exceeds the safe sphere step
-                // — exactly where sphere tracing crawls — capped at 4·d (the over-relaxation overlap
-                // test is the safety net). Gated to Lipschitz fields, like over-relaxation. Measured
-                // on the profiler scene: march-phase field-evals -14%, total -5.3%, image mean Δ 0.19%.
-                if self.step_scale >= 1.0 && f.dist < 0.08 && d_prev.is_finite() {
-                    let dt = t - t_prev;
-                    let dd = f.dist - d_prev;
-                    if dt > 1e-6 && dd < -1e-6 {
-                        step_len = (-f.dist * dt / dd).clamp(f.dist, f.dist * 4.0);
+            if step_len > radius + prev_radius {
+                // The last guaranteed safe frontier is the previous sample plus its safe radius.
+                // Resample there instead of letting an accelerated step report a buried hit.
+                let gap_lo = t_prev + prev_radius;
+                let gap_hi = t - radius;
+                let mid = 0.5 * (gap_lo + gap_hi);
+                let covered = f.dist > 0.0 && field(ray.at(mid)).dist >= 0.5 * (gap_hi - gap_lo);
+                if !covered {
+                    t = gap_lo;
+                    match boost {
+                        Boost::Omega => omega = omega.min(1.0),
+                        Boost::Leap => subitize = 0.0,
+                        Boost::Secant => secant_on = false,
                     }
+                    boost = Boost::Omega;
+                    prev_radius = 0.0;
+                    step_len = 0.0;
+                    d_prev = f32::INFINITY;
+                    continue;
+                }
+            }
+            if f.dist < eps {
+                return Hit { hit: true, t, pos: p, normal: normal_fn(p), mat: f.mat, steps: i };
+            }
+            step_len = f.dist * omega;
+            boost = Boost::Omega;
+            // Subitize (a numerical-cognition transfer — the Approximate Number System's "leap
+            // when it's clearly far"): well clear of any surface, multiply the step. The
+            // over-relaxation overlap guard above is the safety net, so an over-leap is undone
+            // rather than tunneling. 0.0 = off. See `Marcher::subitize`.
+            if subitize > 0.0 && f.dist > eps * 6.0 {
+                step_len *= 1.0 + subitize;
+                boost = Boost::Leap;
+            }
+            // Secant / regula-falsi root refinement near the surface (control-numerical-opt):
+            // estimate dd/dt from the last two samples and step toward the predicted root. On
+            // grazing rays the slope is shallow, so the secant step exceeds the safe sphere step
+            // — exactly where sphere tracing crawls — capped at 4·d (the over-relaxation overlap
+            // test is the safety net). Gated to Lipschitz fields, like over-relaxation. Measured
+            // on the profiler scene: march-phase field-evals -14%, total -5.3%, image mean Δ 0.19%.
+            if secant_on && f.dist < 0.08 && d_prev.is_finite() {
+                let dt = t - t_prev;
+                let dd = f.dist - d_prev;
+                if dt > 1e-6 && dd < -1e-6 {
+                    step_len = (-f.dist * dt / dd).clamp(f.dist, f.dist * 4.0);
+                    boost = Boost::Secant;
                 }
             }
             prev_radius = radius;
@@ -163,7 +206,7 @@ impl Marcher {
 
     /// Surface normal as the normalized field gradient (tetrahedron sampling: four `compare`s).
     pub fn normal<F: Fn(Vec3) -> Field + ?Sized>(&self, field: &F, p: Vec3) -> Vec3 {
-        let h = 0.0009;
+        let h = self.normal_h;
         let k0 = Vec3::new(1.0, -1.0, -1.0);
         let k1 = Vec3::new(-1.0, -1.0, 1.0);
         let k2 = Vec3::new(-1.0, 1.0, -1.0);
@@ -212,17 +255,19 @@ impl Marcher {
     }
 
     /// Ambient occlusion in [0, 1] by probing the field along the normal (1 = fully open).
-    /// `ao_samples == 0` skips the work and returns a fully-open 1.0.
+    /// `ao_samples == 0` skips the work and returns a fully-open 1.0. The probe base offset
+    /// scales with `normal_h`, while analytic scenes keep the historical 0.01 base.
     pub fn ambient_occlusion<F: Fn(Vec3) -> Field + ?Sized>(&self, field: &F, p: Vec3, n: Vec3) -> f32 {
         let n_samples = self.ao_samples;
         if n_samples == 0 {
             return 1.0;
         }
+        let base = self.normal_h.max(0.01);
         let span = (n_samples.max(2) - 1) as f32;
         let mut occ = 0.0f32;
         let mut sca = 1.0f32;
         for i in 0..n_samples {
-            let hr = 0.01 + 0.12 * i as f32 / span;
+            let hr = base + 0.12 * i as f32 / span;
             let d = field(p + n.scale(hr)).dist;
             occ += (hr - d) * sca;
             sca *= 0.92;

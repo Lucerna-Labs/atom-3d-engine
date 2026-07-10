@@ -20,6 +20,10 @@ fn mode_name(m: RenderMode) -> &'static str {
     }
 }
 
+fn positive_v3(v: Vec3) -> bool {
+    v.x > 0.0 && v.y > 0.0 && v.z > 0.0
+}
+
 // ----------------------------------------------------------------------------
 // Writer
 // ----------------------------------------------------------------------------
@@ -79,6 +83,9 @@ fn v3(v: Vec3) -> String {
 }
 
 fn serialize_object(o: &Object) -> String {
+    if let Prim::Volume { id } = o.prim {
+        return format!("# volume object omitted (baked SDF volume id {id} is not text-serializable)");
+    }
     let mut s = String::from("obj ");
     s.push_str(&match o.prim {
         Prim::Sphere { r } => format!("sphere {r}"),
@@ -92,6 +99,7 @@ fn serialize_object(o: &Object) -> String {
         Prim::Octahedron { s } => format!("octahedron {s}"),
         Prim::HexPrism { r, h } => format!("hexprism {r} {h}"),
         Prim::Plane { n, h } => format!("plane {} {}", v3(n), h),
+        Prim::Volume { .. } => unreachable!("handled before serializing an object directive"),
     });
     // Recover Euler-free placement: store rotation columns so any Mat3 round-trips exactly.
     let r = o.xform.rot;
@@ -150,7 +158,12 @@ impl<'a> Cur<'a> {
     }
     fn f(&mut self, what: &str) -> Result<f32, String> {
         let t = self.next(what)?;
-        t.parse::<f32>().map_err(|_| format!("line {}: bad number '{t}' for {what}", self.line))
+        let v = t.parse::<f32>().map_err(|_| format!("line {}: bad number '{t}' for {what}", self.line))?;
+        if v.is_finite() {
+            Ok(v)
+        } else {
+            Err(format!("line {}: non-finite number '{t}' for {what}", self.line))
+        }
     }
     fn u(&mut self, what: &str) -> Result<u32, String> {
         let t = self.next(what)?;
@@ -166,6 +179,7 @@ impl<'a> Cur<'a> {
 
 /// Parse a `.mm3e` document into a scene and camera.
 pub fn parse(src: &str) -> Result<(Scene, Camera), String> {
+    let pos = |x: f32| x > 0.0;
     let mut scene = Scene::new(640, 360);
     scene.materials.clear(); // replaced by file contents
     let mut camera = Camera::look_at(Vec3::new(0.0, 1.0, 6.0), Vec3::ZERO, Vec3::new(0.0, 1.0, 0.0), 1.0);
@@ -181,12 +195,25 @@ pub fn parse(src: &str) -> Result<(Scene, Camera), String> {
             "size" => {
                 scene.width = c.u("width")?;
                 scene.height = c.u("height")?;
+                if scene.width == 0 || scene.height == 0 || scene.width > 16384 || scene.height > 16384 {
+                    return Err(format!(
+                        "line {}: size {}x{} out of range 1..=16384",
+                        i + 1,
+                        scene.width,
+                        scene.height
+                    ));
+                }
             }
             "aa" => scene.aa = c.u("aa")?,
             "bounces" => scene.bounces = c.u("bounces")?,
             "shadows" => scene.shadows = c.b("shadows")?,
             "ao" => scene.ao = c.b("ao")?,
-            "sun" => scene.sun_dir = c.v3("sun")?.normalize(),
+            "sun" => {
+                scene.sun_dir = c.v3("sun")?.normalize();
+                if scene.sun_dir == Vec3::ZERO {
+                    return Err(format!("line {}: sun direction must be non-zero", i + 1));
+                }
+            }
             "ambient" => scene.ambient = c.v3("ambient")?,
             "sky_ambient" => scene.sky_ambient = c.v3("sky_ambient")?,
             "fog" => {
@@ -198,6 +225,12 @@ pub fn parse(src: &str) -> Result<(Scene, Camera), String> {
                 scene.marcher.max_dist = c.f("max_dist")?;
                 scene.marcher.eps = c.f("eps")?;
                 scene.marcher.step_scale = c.f("step_scale")?;
+                if scene.marcher.max_steps == 0 || scene.marcher.max_steps > 100_000 {
+                    return Err(format!("line {}: marcher max_steps out of range 1..=100000", i + 1));
+                }
+                if !pos(scene.marcher.max_dist) || !pos(scene.marcher.eps) || !pos(scene.marcher.step_scale) {
+                    return Err(format!("line {}: marcher max_dist/eps/step_scale must be positive", i + 1));
+                }
             }
             "post" => {
                 scene.post.exposure = c.f("exposure")?;
@@ -221,8 +254,18 @@ pub fn parse(src: &str) -> Result<(Scene, Camera), String> {
                 let eye = c.v3("eye")?;
                 let target = c.v3("target")?;
                 let up = c.v3("up")?;
-                let fov = c.f("fov")?.to_radians();
-                camera = Camera::look_at(eye, target, up, fov);
+                let fov_deg = c.f("fov")?;
+                let forward = (target - eye).normalize();
+                if forward == Vec3::ZERO {
+                    return Err(format!("line {}: cam eye and target must not coincide", i + 1));
+                }
+                if forward.cross(up).normalize() == Vec3::ZERO {
+                    return Err(format!("line {}: cam up must not be parallel to the view direction", i + 1));
+                }
+                if !pos(fov_deg) || fov_deg >= 180.0 {
+                    return Err(format!("line {}: cam fov must be in (0, 180) degrees", i + 1));
+                }
+                camera = Camera::look_at(eye, target, up, fov_deg.to_radians());
             }
             "mat" => {
                 let albedo = c.v3("albedo")?;
@@ -261,7 +304,38 @@ pub fn parse(src: &str) -> Result<(Scene, Camera), String> {
     if scene.materials.is_empty() {
         scene.materials.push(Material::default());
     }
+    let n_mats = scene.materials.len() as u32;
+    for (idx, obj) in scene.objects.iter().enumerate() {
+        if obj.mat >= n_mats {
+            return Err(format!("object {}: material index {} out of range (have {})", idx + 1, obj.mat, n_mats));
+        }
+    }
     Ok((scene, camera))
+}
+
+fn validate_prim(line: usize, prim: &Prim) -> Result<(), String> {
+    let bad = |msg: &str| Err(format!("line {line}: {msg}"));
+    match *prim {
+        Prim::Sphere { r } if r <= 0.0 => bad("sphere radius must be positive"),
+        Prim::Box { half } if !positive_v3(half) => bad("box half extents must be positive"),
+        Prim::RoundBox { half, radius } if !positive_v3(half) || radius < 0.0 => {
+            bad("roundbox half extents must be positive and radius non-negative")
+        }
+        Prim::Torus { major, minor } if major <= 0.0 || minor <= 0.0 => bad("torus radii must be positive"),
+        Prim::Cylinder { h, r } if h <= 0.0 || r <= 0.0 => bad("cylinder height and radius must be positive"),
+        Prim::Capsule { a, b, r } if r <= 0.0 || (b - a).length() <= 1e-6 => {
+            bad("capsule radius must be positive and endpoints must differ")
+        }
+        Prim::Cone { r1, r2, h } if r1 < 0.0 || r2 < 0.0 || h <= 0.0 || (r1 == 0.0 && r2 == 0.0) => {
+            bad("cone height must be positive and at least one radius must be positive")
+        }
+        Prim::Ellipsoid { r } if !positive_v3(r) => bad("ellipsoid radii must be positive"),
+        Prim::Octahedron { s } if s <= 0.0 => bad("octahedron size must be positive"),
+        Prim::HexPrism { r, h } if r <= 0.0 || h <= 0.0 => bad("hex prism radius and height must be positive"),
+        Prim::Plane { n, .. } if n.normalize() == Vec3::ZERO => bad("plane normal must be non-zero"),
+        Prim::Volume { .. } => Ok(()),
+        _ => Ok(()),
+    }
 }
 
 fn parse_object(c: &mut Cur) -> Result<Object, String> {
@@ -280,6 +354,7 @@ fn parse_object(c: &mut Cur) -> Result<Object, String> {
         "plane" => Prim::Plane { n: c.v3("n")?, h: c.f("h")? },
         other => return Err(format!("line {}: unknown primitive '{other}'", c.line)),
     };
+    validate_prim(c.line, &prim)?;
 
     let mut obj = Object::new(prim, Transform::IDENTITY, 0);
     let mut pos = Vec3::ZERO;
@@ -289,7 +364,12 @@ fn parse_object(c: &mut Cur) -> Result<Object, String> {
         match kw {
             "pos" => pos = c.v3("pos")?,
             "basis" => basis = Mat3::from_cols(c.v3("col0")?, c.v3("col1")?, c.v3("col2")?),
-            "scale" => scale = c.f("scale")?,
+            "scale" => {
+                scale = c.f("scale")?;
+                if scale <= 0.0 {
+                    return Err(format!("line {}: object scale must be positive", c.line));
+                }
+            }
             "mat" => obj.mat = c.u("mat")?,
             "combine" => {
                 obj.combine = match c.next("combine kind")? {

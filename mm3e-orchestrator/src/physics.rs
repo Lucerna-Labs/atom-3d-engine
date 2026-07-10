@@ -108,8 +108,8 @@ impl PhysicsWorld {
                 let delta = self.bodies[j].pos - self.bodies[i].pos;
                 let dist = delta.length();
                 let min = self.bodies[i].radius + self.bodies[j].radius;
-                if dist < min && dist > 1e-6 {
-                    let nrm = delta.scale(1.0 / dist);
+                if dist < min {
+                    let nrm = if dist > 1e-6 { delta.scale(1.0 / dist) } else { Vec3::new(1.0, 0.0, 0.0) };
                     let push = (min - dist) * 0.5;
                     self.bodies[i].pos = self.bodies[i].pos - nrm.scale(push);
                     self.bodies[j].pos = self.bodies[j].pos + nrm.scale(push);

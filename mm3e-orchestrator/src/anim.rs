@@ -70,26 +70,30 @@ impl<T: Lerp> Track<T> {
         self.keys.push((time, value));
         self
     }
-    /// Sample the track at `time`, clamping to the endpoints and easing within each segment.
-    pub fn sample(&self, time: f32) -> T {
+    /// Try to sample the track, returning `None` when it has no keyframes.
+    pub fn try_sample(&self, time: f32) -> Option<T> {
         let keys = &self.keys;
-        let first = keys.first().expect("Track::sample on a track with no keyframes");
+        let first = keys.first()?;
         if time <= first.0 {
-            return first.1;
+            return Some(first.1);
         }
         let last = keys.last().unwrap();
         if time >= last.0 {
-            return last.1;
+            return Some(last.1);
         }
         for w in keys.windows(2) {
             let (t0, v0) = w[0];
             let (t1, v1) = w[1];
             if time >= t0 && time <= t1 {
                 let local = if t1 > t0 { (time - t0) / (t1 - t0) } else { 0.0 };
-                return v0.lerp(v1, self.easing.apply(local));
+                return Some(v0.lerp(v1, self.easing.apply(local)));
             }
         }
-        last.1
+        Some(last.1)
+    }
+    /// Sample the track at `time`, clamping to the endpoints and easing within each segment.
+    pub fn sample(&self, time: f32) -> T {
+        self.try_sample(time).expect("Track::sample on a track with no keyframes")
     }
 }
 

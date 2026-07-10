@@ -20,6 +20,7 @@ pub mod march;
 pub mod sdf;
 pub mod shade;
 pub mod vec;
+pub mod volume;
 
 pub use camera::Camera;
 pub use color::{Material, Rgba};

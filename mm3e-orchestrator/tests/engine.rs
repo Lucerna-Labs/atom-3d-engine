@@ -64,6 +64,21 @@ fn scene_io_rejects_garbage() {
     assert!(scene_io::parse("size 10\n").is_err()); // missing height
     assert!(scene_io::parse("obj banana 1 2 3\n").is_err()); // unknown primitive
     assert!(scene_io::parse("wat 1 2 3\n").is_err()); // unknown directive
+    assert!(scene_io::parse("size 0 100\n").is_err()); // zero dimension
+    assert!(scene_io::parse("size 100000 100\n").is_err()); // absurd dimension
+    assert!(scene_io::parse("sun 0 0 0\n").is_err()); // zero sun direction
+    assert!(scene_io::parse("ambient NaN 0 0\n").is_err()); // non-finite float
+    assert!(scene_io::parse("cam 1 2 3 1 2 3 0 1 0 50\n").is_err()); // eye == target
+    assert!(scene_io::parse("cam 0 0 0 0 1 0 0 1 0 50\n").is_err()); // up parallel to view
+    assert!(scene_io::parse("cam 0 0 5 0 0 0 0 1 0 180\n").is_err()); // fov out of range
+    assert!(scene_io::parse("marcher 0 120 0.0006 1\n").is_err()); // zero step budget
+    assert!(scene_io::parse("marcher 160 120 -1 1\n").is_err()); // negative eps
+    assert!(scene_io::parse("obj sphere -1 pos 0 0 0 basis 1 0 0 0 1 0 0 0 1 scale 1 mat 0 combine union\n").is_err());
+    assert!(
+        scene_io::parse("obj plane 0 0 0 0 pos 0 0 0 basis 1 0 0 0 1 0 0 0 1 scale 1 mat 0 combine union\n").is_err()
+    );
+    assert!(scene_io::parse("obj sphere 1 pos 0 0 0 basis 1 0 0 0 1 0 0 0 1 scale 0 mat 0 combine union\n").is_err());
+    assert!(scene_io::parse("obj sphere 1 pos 0 0 0 basis 1 0 0 0 1 0 0 0 1 scale 1 mat 5 combine union\n").is_err());
 }
 
 #[test]
@@ -270,10 +285,24 @@ fn physics_resolves_penetration() {
 }
 
 #[test]
+fn physics_resolves_exactly_overlapping_bodies() {
+    use mm3e_kit::sdf::Field;
+    use mm3e_orchestrator::physics::{Body, PhysicsWorld};
+    let field = |_p: Vec3| Field::new(100.0, 0);
+    let mut w = PhysicsWorld::new();
+    w.gravity = Vec3::ZERO;
+    w.add(Body::new(Vec3::ZERO, 0.5));
+    w.add(Body::new(Vec3::ZERO, 0.5));
+    w.step(1.0 / 60.0, &field);
+    let sep = (w.bodies[1].pos - w.bodies[0].pos).length();
+    assert!(sep >= 0.99, "exactly overlapping bodies should separate, got {sep}");
+}
+
+#[test]
 fn subitize_knob_cuts_field_evals_via_shipped_marcher() {
-    // Validates the SHIPPED `Marcher::subitize` knob (numerical-cognition / ANS transfer) through the
-    // real `Marcher::march`, not the standalone harness: turning it on must cut field-evals while
-    // keeping essentially the same silhouette (no tunneling) on the real demo scene.
+    // Validates the shipped `Marcher::subitize` knob through the real marcher under the corrected
+    // overlap guard. Its honest niche is empty space: it should cut evals in a miss-heavy framing,
+    // while close/hit-heavy shots may pay a small bounded verification cost instead of tunneling.
     use mm3e_kit::atoms;
     use std::sync::atomic::{AtomicU64, Ordering::Relaxed};
     fn count(scene: &Scene, c: &Camera, w: u32, h: u32) -> (u64, Vec<bool>) {
@@ -292,19 +321,121 @@ fn subitize_knob_cuts_field_evals_via_shipped_marcher() {
         (counter.load(Relaxed), hits)
     }
     let mut scene = demo_scene();
-    let c = cam();
     let (w, h) = (scene.width, scene.height);
+    let agreement = |a: &[bool], b: &[bool]| a.iter().zip(b).filter(|(x, y)| x == y).count() as f32 / a.len() as f32;
+
+    let sky = Camera::look_at(
+        Vec3::new(0.0, 1.5, 8.0),
+        Vec3::new(0.0, 4.5, 0.0),
+        Vec3::new(0.0, 1.0, 0.0),
+        52f32.to_radians(),
+    );
+    scene.marcher.subitize = 0.0;
+    let (sky_e0, sky_h0) = count(&scene, &sky, w, h);
+    scene.marcher.subitize = 0.4;
+    let (sky_e1, sky_h1) = count(&scene, &sky, w, h);
+    assert!(sky_e1 < sky_e0, "subitize=0.4 should cut field-evals on a miss-heavy framing: {sky_e0} -> {sky_e1}");
+    let sky_agree = agreement(&sky_h0, &sky_h1);
+    assert!(sky_agree > 0.98, "subitize must not flip many hits: agree={sky_agree:.4}");
+
+    let c = cam();
     scene.marcher.subitize = 0.0;
     let (e0, h0) = count(&scene, &c, w, h);
     scene.marcher.subitize = 0.4;
     let (e1, h1) = count(&scene, &c, w, h);
-    assert!(e1 < e0, "subitize=0.4 should cut field-evals: {e0} -> {e1}");
-    let agree = h0.iter().zip(&h1).filter(|(a, b)| a == b).count() as f32 / h0.len() as f32;
-    assert!(agree > 0.98, "subitize must not flip many hits (no tunneling): agree={agree:.4}");
+    assert!(
+        (e1 as f64) < (e0 as f64) * 1.15,
+        "subitize's guarded cost on a hit-heavy framing must stay bounded: {e0} -> {e1}"
+    );
+    let agree = agreement(&h0, &h1);
+    assert!(agree > 0.98, "subitize must not flip many hits: agree={agree:.4}");
+}
+
+fn uv_sphere_mesh(rings: u32, segments: u32, radius: f32) -> mm3e_orchestrator::mesh::Mesh {
+    let mut m = mm3e_orchestrator::mesh::Mesh::default();
+    m.positions.push(Vec3::new(0.0, radius, 0.0));
+    for r in 1..rings {
+        let phi = std::f32::consts::PI * r as f32 / rings as f32;
+        for s in 0..segments {
+            let theta = std::f32::consts::TAU * s as f32 / segments as f32;
+            m.positions.push(Vec3::new(
+                radius * phi.sin() * theta.cos(),
+                radius * phi.cos(),
+                radius * phi.sin() * theta.sin(),
+            ));
+        }
+    }
+    m.positions.push(Vec3::new(0.0, -radius, 0.0));
+    let ring = |r: u32, s: u32| 1 + (r - 1) * segments + (s % segments);
+    for s in 0..segments {
+        m.triangles.push([0, ring(1, s + 1), ring(1, s)]);
+    }
+    for r in 1..rings - 1 {
+        for s in 0..segments {
+            let (a, b, c, d) = (ring(r, s), ring(r, s + 1), ring(r + 1, s + 1), ring(r + 1, s));
+            m.triangles.push([a, b, c]);
+            m.triangles.push([a, c, d]);
+        }
+    }
+    let south = (m.positions.len() - 1) as u32;
+    for s in 0..segments {
+        m.triangles.push([south, ring(rings - 1, s), ring(rings - 1, s + 1)]);
+    }
+    m
+}
+
+#[test]
+fn obj_parser_and_sdf_bake_work() {
+    use mm3e_orchestrator::mesh::{bake_sdf, parse_obj};
+
+    let obj = "v 0 0 0\nv 1 0 0\nv 0 1 0\nf 1 2 3\n";
+    let parsed = parse_obj(obj).expect("parse obj");
+    assert_eq!(parsed.positions.len(), 3);
+    assert_eq!(parsed.triangles, vec![[0, 1, 2]]);
+    assert!(parse_obj("v 0 0\nf 1 2 3\n").is_err());
+
+    let sphere = uv_sphere_mesh(12, 18, 1.0);
+    let vol = bake_sdf(&sphere, 28, 0.25).expect("bake");
+    for p in [Vec3::ZERO, Vec3::new(1.2, 0.0, 0.0), Vec3::new(0.0, 1.2, 0.0)] {
+        let got = vol.sample(p);
+        let want = p.length() - 1.0;
+        assert!((got - want).abs() < 0.16, "baked sphere mismatch at {p:?}: got {got}, want {want}");
+    }
+}
+
+#[test]
+fn volume_prim_renders_and_matches_linear_world() {
+    use mm3e_orchestrator::mesh::bake_sdf;
+
+    let vol = bake_sdf(&uv_sphere_mesh(12, 18, 0.8), 28, 0.25).expect("bake");
+    let mut scene = Scene::new(72, 48);
+    scene.aa = 1;
+    let red = scene.material(Material::solid(Vec3::new(0.8, 0.2, 0.2)).roughness(0.4));
+    let vid = scene.volume(vol);
+    scene.add(Object::new(Prim::Volume { id: vid }, Transform::at(Vec3::new(0.0, 0.8, 0.0)), red));
+    scene.add(Object::new(Prim::Sphere { r: 0.35 }, Transform::at(Vec3::new(0.7, 0.35, 0.0)), red).smooth(0.18));
+    scene.sun_dir = Vec3::new(0.5, 0.75, 0.3).normalize();
+    scene.light(Light::directional(scene.sun_dir, Vec3::splat(1.2)).soft(0.04));
+
+    let fast = scene.field();
+    let linear = scene.world_linear();
+    for p in [Vec3::new(0.0, 0.8, 0.0), Vec3::new(0.8, 0.8, 0.0), Vec3::new(1.0, 0.35, 0.0), Vec3::new(-1.2, 0.5, 0.4)]
+    {
+        let a = fast(p);
+        let b = linear(p);
+        assert!((a.dist - b.dist).abs() < 1e-5, "accelerated/linear distance mismatch at {p:?}");
+        assert_eq!(a.mat, b.mat, "accelerated/linear material mismatch at {p:?}");
+    }
+
+    let fb = render(&scene, &orbit_camera(Vec3::new(0.0, 0.65, 0.0), 4.0, 0.5, 0.25, 50f32.to_radians()));
+    let px = fb.to_u32(mm3e_kit::color::Rgba::rgb8(0, 0, 0));
+    assert!(px.iter().any(|&p| p != px[0]), "volume render is flat");
 }
 
 #[test]
 fn animation_tracks_sample() {
+    assert!(Track::<f32>::new(Easing::Linear).try_sample(0.0).is_none());
+
     let pos = Track::new(Easing::Linear).key(0.0, Vec3::new(0.0, 0.0, 0.0)).key(2.0, Vec3::new(2.0, 4.0, 0.0));
     assert_eq!(pos.sample(-1.0), Vec3::new(0.0, 0.0, 0.0)); // clamps to start
     assert_eq!(pos.sample(3.0), Vec3::new(2.0, 4.0, 0.0)); // clamps to end

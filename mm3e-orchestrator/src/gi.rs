@@ -21,6 +21,8 @@ pub struct GiVolume {
     cubes: Vec<[Vec3; 6]>,
 }
 
+pub type GiRaw<'a> = (Vec3, Vec3, (usize, usize, usize), &'a [[Vec3; 6]]);
+
 const AXES: [Vec3; 6] = [
     Vec3 { x: 1.0, y: 0.0, z: 0.0 },
     Vec3 { x: -1.0, y: 0.0, z: 0.0 },
@@ -124,6 +126,11 @@ impl GiVolume {
     fn cube_at(&self, i: usize, j: usize, k: usize) -> &[Vec3; 6] {
         let (nx, ny, _) = self.dims;
         &self.cubes[(k * ny + j) * nx + i]
+    }
+
+    /// Borrow the raw probe layout for GPU upload.
+    pub fn raw(&self) -> GiRaw<'_> {
+        (self.min, self.size, self.dims, &self.cubes)
     }
 
     /// Sample the interpolated irradiance arriving at `pos` on a surface with normal `n`.

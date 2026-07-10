@@ -1,0 +1,47 @@
+Synthetic RF chaos lane: 500 frames  source -> rf-relay -> sink
+
+      link     delivered    loss  duplicated  deterministic
+----------  ------------  ------  ----------  -------------
+[    0ms] [kernel] 🕸️  source registered (0 inputs, 1 outputs)
+[    1ms] [kernel] 🕸️  rf-relay registered (1 inputs, 3 outputs)
+[    1ms] [kernel] 🕸️  sink registered (1 inputs, 0 outputs)
+[    7ms] [kernel] 👋 source detached
+[  454ms] [kernel] ⏹  max duration reached, shutting down
+[  455ms] [kernel] 🧹 joined 2 worker(s); strands dropped
+[    0ms] [kernel] 🕸️  source registered (0 inputs, 1 outputs)
+[    0ms] [kernel] 🕸️  rf-relay registered (1 inputs, 3 outputs)
+[    0ms] [kernel] 🕸️  sink registered (1 inputs, 0 outputs)
+[    6ms] [kernel] 👋 source detached
+[  452ms] [kernel] ⏹  max duration reached, shutting down
+[  460ms] [kernel] 🧹 joined 2 worker(s); strands dropped
+     clear       500/500      0%           0            yes
+[    0ms] [kernel] 🕸️  source registered (0 inputs, 1 outputs)
+[    0ms] [kernel] 🕸️  rf-relay registered (1 inputs, 3 outputs)
+[    0ms] [kernel] 🕸️  sink registered (1 inputs, 0 outputs)
+[    5ms] [kernel] 👋 source detached
+[  452ms] [kernel] ⏹  max duration reached, shutting down
+[  454ms] [kernel] 🧹 joined 2 worker(s); strands dropped
+[    0ms] [kernel] 🕸️  source registered (0 inputs, 1 outputs)
+[    0ms] [kernel] 🕸️  rf-relay registered (1 inputs, 3 outputs)
+[    0ms] [kernel] 🕸️  sink registered (1 inputs, 0 outputs)
+[    5ms] [kernel] 👋 source detached
+[  452ms] [kernel] ⏹  max duration reached, shutting down
+[  459ms] [kernel] 🧹 joined 2 worker(s); strands dropped
+ lossy 15%       430/500     14%           8            yes
+[    0ms] [kernel] 🕸️  source registered (0 inputs, 1 outputs)
+[    0ms] [kernel] 🕸️  rf-relay registered (1 inputs, 3 outputs)
+[    0ms] [kernel] 🕸️  sink registered (1 inputs, 0 outputs)
+[    6ms] [kernel] 👋 source detached
+[  452ms] [kernel] ⏹  max duration reached, shutting down
+[  458ms] [kernel] 🧹 joined 2 worker(s); strands dropped
+[    0ms] [kernel] 🕸️  source registered (0 inputs, 1 outputs)
+[    0ms] [kernel] 🕸️  rf-relay registered (1 inputs, 3 outputs)
+[    0ms] [kernel] 🕸️  sink registered (1 inputs, 0 outputs)
+[    6ms] [kernel] 👋 source detached
+[  453ms] [kernel] ⏹  max duration reached, shutting down
+[  456ms] [kernel] 🧹 joined 2 worker(s); strands dropped
+    fading       393/500     21%          15            yes
+
+clear = lossless + in-order (exactly-once). lossy/fading = at-most-once WITH duplicates
+— the kernel's exactly-once contract is gone, which is the point: it forces receiver-side
+dedup/ARQ. Same seed reproduces the exact delivered set, so the chaos is a knob, not a hazard.

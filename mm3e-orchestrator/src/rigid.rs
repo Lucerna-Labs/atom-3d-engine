@@ -28,11 +28,18 @@ fn qmul(a: Quat, b: Quat) -> Quat {
 /// tensor drives rotation.
 #[derive(Clone, Copy, Debug)]
 pub enum Shape {
-    Sphere { r: f32 },
+    Sphere {
+        r: f32,
+    },
     /// Axis-aligned-in-local box with the given half-extents.
-    Cube { half: Vec3 },
+    Cube {
+        half: Vec3,
+    },
     /// Capsule swept along the local Y axis: radius `r`, half-height `half_h`.
-    Capsule { r: f32, half_h: f32 },
+    Capsule {
+        r: f32,
+        half_h: f32,
+    },
 }
 
 impl Shape {
@@ -120,11 +127,7 @@ impl RigidBody {
             let iu = shape.inertia_unit();
             (
                 1.0 / mass,
-                Vec3::new(
-                    1.0 / (mass * iu.x.max(1e-6)),
-                    1.0 / (mass * iu.y.max(1e-6)),
-                    1.0 / (mass * iu.z.max(1e-6)),
-                ),
+                Vec3::new(1.0 / (mass * iu.x.max(1e-6)), 1.0 / (mass * iu.y.max(1e-6)), 1.0 / (mass * iu.z.max(1e-6))),
             )
         } else {
             (0.0, Vec3::ZERO)
@@ -173,11 +176,8 @@ impl RigidBody {
     fn apply_inv_inertia(&self, l: Vec3) -> Vec3 {
         let r = self.rot();
         let local = r.transpose().mul_vec(l);
-        let scaled = Vec3::new(
-            local.x * self.inv_inertia.x,
-            local.y * self.inv_inertia.y,
-            local.z * self.inv_inertia.z,
-        );
+        let scaled =
+            Vec3::new(local.x * self.inv_inertia.x, local.y * self.inv_inertia.y, local.z * self.inv_inertia.z);
         r.mul_vec(scaled)
     }
 }

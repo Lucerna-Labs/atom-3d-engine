@@ -8,6 +8,7 @@ hand-derived optimizations (over-relaxation) and hunts for new ones. A *discover
 ## Files
 | File | Role |
 |---|---|
+| **`CROSS_DOMAIN_TRANSFER_NOTES.md`** | Tracks TPU/MM3E signals, including failed and partial results, as reusable mechanisms for the spiderweb bus, Redos kernel, inference engine, RF/signal processing, networking, security, false-memory systems, Kaggle/OpenAI competition algorithms, and LLM exoskeletons. |
 | **`discover-tpu.ipynb`** | **The publishable Kaggle notebook** — full narrative + runnable engine + a live short demo. This is what you push/publish. |
 | **`WRITEUP.md`** | The methodology "paper" — background, method, validation, limitations, related work. Read this for the full detail. |
 | `discover-tpu.py` | The same engine as a headless **script** (for a long unattended run). |

@@ -18,26 +18,26 @@ use mm3e_kit::march::{Hit, Marcher, Ray};
 use mm3e_kit::sdf::Field;
 use mm3e_kit::vec::{Mat3, Transform, Vec3};
 use mm3e_kit::Material;
-use mm3e_orchestrator::{orbit_camera, Light, Object, Prim, Scene};
 use mm3e_kit::{atoms, shade};
+use mm3e_orchestrator::{orbit_camera, Light, Object, Prim, Scene};
 use std::sync::atomic::{AtomicU64, Ordering::Relaxed};
 use std::time::Instant;
 
 /// The marcher config knobs the engine-mix search tunes (superset of the shipped marcher's).
 #[derive(Clone, Copy)]
 struct Cfg {
-    omega: f32,       // base over-relaxation (1.0 = fixed over-relax OFF)
-    stoch: f32,       // stochastic-omega jitter amplitude (quantum-walk)
-    subk: f32,        // subitize far-leap factor (ANS)
-    mom: f32,         // momentum / predictive-coding step
-    lod: f32,         // screen-footprint LOD tolerance slope
-    secant_thr: f32,  // near-surface secant threshold (0 = off)
+    omega: f32,      // base over-relaxation (1.0 = fixed over-relax OFF)
+    stoch: f32,      // stochastic-omega jitter amplitude (quantum-walk)
+    subk: f32,       // subitize far-leap factor (ANS)
+    mom: f32,        // momentum / predictive-coding step
+    lod: f32,        // screen-footprint LOD tolerance slope
+    secant_thr: f32, // near-surface secant threshold (0 = off)
 }
 
 impl Cfg {
     /// Exactly the shipped over-relaxation march (omega=1.4, secant at 0.08, no new ops, no LOD).
     fn shipped() -> Cfg {
-        Cfg { omega: 1.4, stoch: 0.0, subk: 0.0, mom: 0.0, lod: 0.0, secant_thr: 0.08 }
+        Cfg { omega: 1.4, stoch: 0.0, subk: 0.0, mom: 0.0, lod: 0.0, secant_thr: 0.0 }
     }
     /// The Arc engine-mix run's winning config (-40% in the sim).
     fn sim_winner() -> Cfg {
@@ -57,7 +57,21 @@ where
     F: Fn(Vec3) -> Field + ?Sized,
     N: Fn(Vec3) -> Vec3,
 {
+    #[derive(Clone, Copy, PartialEq)]
+    enum Boost {
+        Omega,
+        Stoch,
+        Momentum,
+        Leap,
+        Secant,
+    }
+
     let mut omega = cfg.omega;
+    let mut stoch = cfg.stoch;
+    let mut subk = cfg.subk;
+    let mut mom = cfg.mom;
+    let mut secant_thr = cfg.secant_thr;
+    let mut boost = Boost::Omega;
     let mut t = 0.0f32;
     let mut prev_radius = 0.0f32;
     let mut step_len = 0.0f32;
@@ -70,32 +84,55 @@ where
         let eps = m.eps * (1.0 + t * 0.5) + cfg.lod * t;
         // Overlap-guard fallback uses the omega STATE (not the jittered value) — matching the sim and
         // the shipped marcher. With omega=1.0 (fixed over-relax off) this guard is inactive.
-        if omega > 1.0 && radius + prev_radius < step_len {
-            step_len -= omega * step_len;
-            omega = 1.0;
-        } else {
-            if f.dist < eps {
-                return Hit { hit: true, t, pos: p, normal: normal_fn(p), mat: f.mat, steps: i };
-            }
-            // stochastic over-relaxation (quantum-walk): deterministic per-(t, step) jitter of omega.
-            let jitter = ((t * 12.9898 + i as f32 * 78.233).sin() * 43758.547).fract().abs();
-            let omega_eff = (omega + cfg.stoch * (jitter - 0.5) * 2.0).clamp(1.0, 2.0);
-            step_len = f.dist * omega_eff;
-            // momentum / predictive-coding: add a fraction of the approach rate.
-            if cfg.mom > 0.0 && d_prev.is_finite() {
-                step_len += cfg.mom * (d_prev - f.dist).max(0.0);
-            }
-            // subitize (ANS): extra leap when the distance is clearly far.
-            if cfg.subk > 0.0 && f.dist > eps * 6.0 {
-                step_len *= 1.0 + cfg.subk;
-            }
-            // secant near-surface refinement (overrides the above when near, matching the sim order).
-            if cfg.secant_thr > 0.0 && f.dist < cfg.secant_thr && d_prev.is_finite() {
-                let dt = t - t_prev;
-                let dd = f.dist - d_prev;
-                if dt > 1e-6 && dd < -1e-6 {
-                    step_len = (-f.dist * dt / dd).clamp(f.dist, f.dist * 4.0);
+        if step_len > radius + prev_radius {
+            let gap_lo = t_prev + prev_radius;
+            let gap_hi = t - radius;
+            let mid = 0.5 * (gap_lo + gap_hi);
+            let covered = f.dist > 0.0 && field(ray.at(mid)).dist >= 0.5 * (gap_hi - gap_lo);
+            if !covered {
+                t = gap_lo;
+                match boost {
+                    Boost::Omega => omega = omega.min(1.0),
+                    Boost::Stoch => stoch = 0.0,
+                    Boost::Momentum => mom = 0.0,
+                    Boost::Leap => subk = 0.0,
+                    Boost::Secant => secant_thr = 0.0,
                 }
+                boost = Boost::Omega;
+                prev_radius = 0.0;
+                step_len = 0.0;
+                d_prev = f32::INFINITY;
+                continue;
+            }
+        }
+        if f.dist < eps {
+            return Hit { hit: true, t, pos: p, normal: normal_fn(p), mat: f.mat, steps: i };
+        }
+        // stochastic over-relaxation (quantum-walk): deterministic per-(t, step) jitter of omega.
+        let jitter = ((t * 12.9898 + i as f32 * 78.233).sin() * 43758.547).fract().abs();
+        let omega_eff = (omega + stoch * (jitter - 0.5) * 2.0).clamp(1.0, 2.0);
+        step_len = f.dist * omega_eff;
+        boost = if omega_eff > omega { Boost::Stoch } else { Boost::Omega };
+        // momentum / predictive-coding: add a fraction of the approach rate.
+        if mom > 0.0 && d_prev.is_finite() {
+            let extra = mom * (d_prev - f.dist).max(0.0);
+            if extra > 0.0 {
+                step_len += extra;
+                boost = Boost::Momentum;
+            }
+        }
+        // subitize (ANS): extra leap when the distance is clearly far.
+        if subk > 0.0 && f.dist > eps * 6.0 {
+            step_len *= 1.0 + subk;
+            boost = Boost::Leap;
+        }
+        // secant near-surface refinement (overrides the above when near, matching the sim order).
+        if secant_thr > 0.0 && f.dist < secant_thr && d_prev.is_finite() {
+            let dt = t - t_prev;
+            let dd = f.dist - d_prev;
+            if dt > 1e-6 && dd < -1e-6 {
+                step_len = (-f.dist * dt / dd).clamp(f.dist, f.dist * 4.0);
+                boost = Boost::Secant;
             }
         }
         prev_radius = radius;
@@ -240,7 +277,13 @@ fn main() {
         let dtime = if name.starts_with("shipped") { 0.0 } else { (ms - bms) / bms * 100.0 };
         println!(
             "  {:<24} | {:>11} | {:>6.1}% | {:>7.2}ms | {:>5.1}% | {:>8.1}% | {:>8.4}   ({hits} hits)",
-            name, evals, devals, ms, dtime, agree * 100.0, derr
+            name,
+            evals,
+            devals,
+            ms,
+            dtime,
+            agree * 100.0,
+            derr
         );
     }
 

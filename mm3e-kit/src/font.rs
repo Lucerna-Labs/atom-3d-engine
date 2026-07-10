@@ -55,11 +55,17 @@ pub fn glyph(c: char) -> [u8; 7] {
 /// clipped. A small dark drop-shadow keeps it readable over any background.
 #[allow(clippy::too_many_arguments)]
 pub fn draw_text(buf: &mut [u8], w: u32, h: u32, x: i32, y: i32, scale: u32, text: &str, color: [u8; 3]) {
+    let Some(required) = (w as usize).checked_mul(h as usize).and_then(|px| px.checked_mul(4)) else {
+        return;
+    };
+    if buf.len() < required {
+        return;
+    }
     let put = |buf: &mut [u8], px: i32, py: i32, c: [u8; 3]| {
         if px < 0 || py < 0 || px >= w as i32 || py >= h as i32 {
             return;
         }
-        let i = ((py as u32 * w + px as u32) * 4) as usize;
+        let i = (py as usize * w as usize + px as usize) * 4;
         buf[i] = c[0];
         buf[i + 1] = c[1];
         buf[i + 2] = c[2];

@@ -355,18 +355,26 @@ fn main() {
 
     println!("field-evals (march + shadow + AO + normal-method), {} hits:", tetra.3);
     println!("  tetrahedron (4 evals/hit): {}", tetra.0);
-    println!("  dual-number (1 eval/hit):  {}  ({:+.1}% vs tetrahedron)", dual.0,
-        (dual.0 as f64 - tetra.0 as f64) / tetra.0 as f64 * 100.0);
+    println!(
+        "  dual-number (1 eval/hit):  {}  ({:+.1}% vs tetrahedron)",
+        dual.0,
+        (dual.0 as f64 - tetra.0 as f64) / tetra.0 as f64 * 100.0
+    );
     println!();
     println!("REAL WALL-CLOCK (avg of {REPEATS} runs, release build):");
     println!("  whole per-pixel pass (march+normal+shadow+AO):");
     println!("    tetrahedron: {tetra_whole_ms:.2} ms");
-    println!("    dual-number: {dual_whole_ms:.2} ms  ({:+.1}%)",
-        (dual_whole_ms - tetra_whole_ms) / tetra_whole_ms * 100.0);
+    println!(
+        "    dual-number: {dual_whole_ms:.2} ms  ({:+.1}%)",
+        (dual_whole_ms - tetra_whole_ms) / tetra_whole_ms * 100.0
+    );
     println!("  normal-computation only (isolated, summed over all {} hits):", tetra.3);
     println!("    tetrahedron: {tetra_norm_us:.1} us total ({:.3} us/hit)", tetra_norm_us / tetra.3.max(1) as f64);
-    println!("    dual-number: {dual_norm_us:.1} us total ({:.3} us/hit)  ({:+.1}%)",
-        dual_norm_us / dual.3.max(1) as f64, (dual_norm_us - tetra_norm_us) / tetra_norm_us * 100.0);
+    println!(
+        "    dual-number: {dual_norm_us:.1} us total ({:.3} us/hit)  ({:+.1}%)",
+        dual_norm_us / dual.3.max(1) as f64,
+        (dual_norm_us - tetra_norm_us) / tetra_norm_us * 100.0
+    );
     println!();
     println!("Reading: eval-count savings and wall-clock savings can DIVERGE (the LOD-sweep lesson) —");
     println!("dual arithmetic does more FLOPs per call than one scalar tetrahedron sample, so a real");
@@ -385,22 +393,28 @@ mod tests {
         let scene = scene_at(64, 64);
         let objs = extract_dual_objects(&scene);
         let probe_points = [
-            Vec3::new(0.0, 0.001, 0.0),   // near the plane
-            Vec3::new(-2.4, 2.0, 0.2),    // top of the mirror sphere
-            Vec3::new(-1.4, 1.0, 0.2),    // side of the mirror sphere
-            Vec3::new(1.05, 0.95, -0.6),  // near a round-box face
-            Vec3::new(0.2, 1.8, -0.6),    // round-box, another face
-            Vec3::new(3.45, 1.05, 0.4),   // outer torus rim
-            Vec3::new(2.6, 1.35, 0.4),    // torus top
-            Vec3::new(0.9, 1.4, 1.9),     // small sphere top
+            Vec3::new(0.0, 0.001, 0.0),  // near the plane
+            Vec3::new(-2.4, 2.0, 0.2),   // top of the mirror sphere
+            Vec3::new(-1.4, 1.0, 0.2),   // side of the mirror sphere
+            Vec3::new(1.05, 0.95, -0.6), // near a round-box face
+            Vec3::new(0.2, 1.8, -0.6),   // round-box, another face
+            Vec3::new(3.45, 1.05, 0.4),  // outer torus rim
+            Vec3::new(2.6, 1.35, 0.4),   // torus top
+            Vec3::new(0.9, 1.4, 1.9),    // small sphere top
         ];
         let h = 1e-4;
         let mut max_rel = 0.0f32;
         for p in probe_points {
             let (_, analytic_n) = dual_world(&objs, p);
-            let dx = (dual_world(&objs, p + Vec3::new(h, 0.0, 0.0)).0 - dual_world(&objs, p - Vec3::new(h, 0.0, 0.0)).0) / (2.0 * h);
-            let dy = (dual_world(&objs, p + Vec3::new(0.0, h, 0.0)).0 - dual_world(&objs, p - Vec3::new(0.0, h, 0.0)).0) / (2.0 * h);
-            let dz = (dual_world(&objs, p + Vec3::new(0.0, 0.0, h)).0 - dual_world(&objs, p - Vec3::new(0.0, 0.0, h)).0) / (2.0 * h);
+            let dx = (dual_world(&objs, p + Vec3::new(h, 0.0, 0.0)).0
+                - dual_world(&objs, p - Vec3::new(h, 0.0, 0.0)).0)
+                / (2.0 * h);
+            let dy = (dual_world(&objs, p + Vec3::new(0.0, h, 0.0)).0
+                - dual_world(&objs, p - Vec3::new(0.0, h, 0.0)).0)
+                / (2.0 * h);
+            let dz = (dual_world(&objs, p + Vec3::new(0.0, 0.0, h)).0
+                - dual_world(&objs, p - Vec3::new(0.0, 0.0, h)).0)
+                / (2.0 * h);
             let fd_n = Vec3::new(dx, dy, dz).normalize();
             let cos = analytic_n.dot(fd_n).clamp(-1.0, 1.0);
             let deg = cos.acos().to_degrees();

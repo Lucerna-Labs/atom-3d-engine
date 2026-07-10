@@ -145,6 +145,58 @@ fn domain_ops() {
     assert_eq!(m, Vec3::new(2.0, 1.0, 3.0));
 }
 
+#[test]
+fn sdf_volume_samples_and_guards_bad_layouts() {
+    let vol = mm3e_kit::volume::SdfVolume::new(
+        (2, 2, 2),
+        Vec3::ZERO,
+        Vec3::splat(1.0),
+        vec![
+            0.0, 1.0, 0.0, 1.0, // z=0 rows
+            0.0, 1.0, 0.0, 1.0, // z=1 rows
+        ],
+    )
+    .expect("valid volume");
+    assert!(close(vol.sample(Vec3::new(0.5, 0.25, 0.75)), 0.5, 1e-6));
+    assert!(vol.sample(Vec3::new(-1.0, 0.5, 0.5)) >= 1.0);
+    assert!(vol.recommended_normal_h() > 0.5);
+
+    let bad = mm3e_kit::volume::SdfVolume { dims: (2, 2, 2), min: Vec3::ZERO, cell: Vec3::splat(1.0), data: vec![0.0] };
+    assert_eq!(bad.sample(Vec3::splat(0.5)), f32::INFINITY);
+}
+
+#[test]
+fn sdf_volume_sdfv_roundtrips_and_rejects_bad_input() {
+    use mm3e_kit::volume::SdfVolume;
+
+    let vol = SdfVolume::new(
+        (2, 2, 2),
+        Vec3::new(-1.0, -2.0, -3.0),
+        Vec3::new(0.5, 0.75, 1.25),
+        vec![0.0, 0.5, 1.0, 1.5, -0.25, 0.25, 0.75, 1.25],
+    )
+    .expect("valid volume");
+    let bytes = vol.to_sdfv_bytes().expect("encode sdfv");
+    assert_eq!(&bytes[..8], b"MM3ESDF1");
+
+    let round = SdfVolume::from_sdfv_bytes(&bytes).expect("decode sdfv");
+    assert_eq!(round.dims, vol.dims);
+    assert_eq!(round.min, vol.min);
+    assert_eq!(round.cell, vol.cell);
+    assert_eq!(round.data, vol.data);
+    assert!(close(round.sample(Vec3::new(-0.75, -1.5, -2.5)), vol.sample(Vec3::new(-0.75, -1.5, -2.5)), 1e-6));
+
+    assert!(SdfVolume::from_sdfv_bytes(&bytes[..12]).is_err());
+    let mut bad = bytes.clone();
+    bad[0] = b'X';
+    assert!(SdfVolume::from_sdfv_bytes(&bad).is_err());
+
+    let path = std::env::temp_dir().join(format!("mm3e-volume-{}-sdfv-roundtrip.sdfv", std::process::id()));
+    vol.save_sdfv(&path).expect("save sdfv");
+    let loaded = SdfVolume::load_sdfv(&path).expect("load sdfv");
+    let _ = std::fs::remove_file(&path);
+    assert_eq!(loaded.data, vol.data);
+}
 // ---- raymarcher & shading ----
 
 #[test]
@@ -156,6 +208,36 @@ fn marcher_hits_a_sphere_and_normal_points_back() {
     assert!(hit.hit);
     assert!(close(hit.t, 4.0, 1e-2)); // sphere front face at z = -4
     assert!(hit.normal.dot(Vec3::new(0.0, 0.0, 1.0)) > 0.9); // normal faces the camera
+}
+
+#[test]
+fn boosted_steps_never_accept_hits_buried_inside_a_surface() {
+    let field = |p: Vec3| Field::new(sdf::sphere(p, 1.0).abs() - 0.02, 0);
+    for &subitize in &[0.0f32, 0.6] {
+        let m = Marcher { subitize, ..Marcher::default() };
+        let mut hits = 0u32;
+        for iy in -12..=12 {
+            for ix in -12..=12 {
+                let dir = Vec3::new(ix as f32 * 0.02, iy as f32 * 0.02, -1.0).normalize();
+                let ray = Ray { origin: Vec3::new(0.0, 0.0, 5.0), dir };
+                let hit = m.march(&field, &ray);
+                if !hit.hit {
+                    continue;
+                }
+                hits += 1;
+                let d = field(hit.pos).dist;
+                let eps = m.eps * (1.0 + hit.t * 0.5);
+                assert!(
+                    d > -2.0 * eps,
+                    "hit buried inside thin shell: subitize={subitize} ix={ix} iy={iy} t={} d={} eps={}",
+                    hit.t,
+                    d,
+                    eps
+                );
+            }
+        }
+        assert!(hits > 100, "thin shell regression should exercise many hits, got {hits}");
+    }
 }
 
 #[test]

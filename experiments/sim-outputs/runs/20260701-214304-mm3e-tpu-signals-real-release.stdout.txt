@@ -1,0 +1,15 @@
+=== TPU step-signal validation on the REAL engine @ 480x270 AA1 ===
+truth = 2x-step exact sphere tracing; candidates use the real scene field, shadows, AO, and 6 camera views
+
+baseline shipped total field-evals: 37393944
+baseline shipped primary field-evals: 15485465
+
+  case                          |       total |  dtotal |     primary |   dprim |       ms | hit-agree | depth-err |   hits
+  --------------------------------------------------------------------------------------------------------------------
+  exact d (same budget)         |    43661909 |   16.8% |    21871613 |   41.2% | 1450.23 |    99.69% |   0.00000 | 635340
+  shipped omega=1.40            |    37393944 |    0.0% |    15485465 |    0.0% | 1316.20 |    99.96% |   0.00064 | 637447
+  TPU omega=1.70                |    39179297 |    4.8% |    17277250 |   11.6% | 1500.41 |    99.93% |   0.00064 | 637248
+  TPU raw (radius+i*.02)/.588   |    25993986 |  -30.5% |     7653783 |  -50.6% | 1045.18 |    99.98% |   0.02691 | 637589
+  TPU raw overlap+t*.1          |    19525334 |  -47.8% |     8140348 |  -47.4% |  854.10 |    99.89% |   0.03353 | 636944
+
+Reading: a signal only survives if it cuts primary evals while keeping hit-agreement near 100% and depth error tiny.
