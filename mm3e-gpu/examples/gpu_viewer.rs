@@ -294,6 +294,8 @@ mod win32 {
         const TARGET_FPS: u32 = 120;
         const FRAME_TIME: std::time::Duration = std::time::Duration::from_nanos(1_000_000_000 / TARGET_FPS as u64);
         const SPIN_THRESHOLD: std::time::Duration = std::time::Duration::from_micros(500);
+        const MIN_ORBIT_PITCH: f32 = 0.02;
+        const MAX_ORBIT_PITCH: f32 = 1.45;
 
         unsafe {
             let instance = GetModuleHandleW(std::ptr::null());
@@ -449,10 +451,10 @@ mod win32 {
                     yaw += 0.04;
                 }
                 if focused && down(VK_UP) {
-                    pitch = (pitch + 0.03).min(1.45);
+                    pitch = (pitch + 0.03).min(MAX_ORBIT_PITCH);
                 }
                 if focused && down(VK_DOWN) {
-                    pitch = (pitch - 0.03).max(-0.2);
+                    pitch = (pitch - 0.03).max(MIN_ORBIT_PITCH);
                 }
                 if focused && down(0x57) {
                     radius = (radius - 0.15).max(2.5);
@@ -465,7 +467,7 @@ mod win32 {
                 if focused && down(VK_LBUTTON) && point_in_client(hwnd, cur) {
                     if dragging {
                         yaw += (cur.x - last.x) as f32 * 0.01;
-                        pitch = (pitch - (cur.y - last.y) as f32 * 0.01).clamp(-0.2, 1.45);
+                        pitch = (pitch - (cur.y - last.y) as f32 * 0.01).clamp(MIN_ORBIT_PITCH, MAX_ORBIT_PITCH);
                     }
                     dragging = true;
                 } else {

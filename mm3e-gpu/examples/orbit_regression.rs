@@ -7,6 +7,13 @@ use mm3e_kit::color::Material;
 use mm3e_kit::vec::{Transform, Vec3};
 use mm3e_orchestrator::{orbit_camera, Light, Object, Prim, Scene};
 
+fn mean_rgb(rgba: &[u8]) -> f64 {
+    rgba.chunks_exact(4)
+        .map(|pixel| (u32::from(pixel[0]) + u32::from(pixel[1]) + u32::from(pixel[2])) as f64 / 3.0)
+        .sum::<f64>()
+        / (rgba.len() / 4) as f64
+}
+
 fn main() {
     let mut scene = Scene::new(320, 180);
     scene.aa = 1;
@@ -32,11 +39,7 @@ fn main() {
         let yaw = base_yaw + (degree as f32).to_radians();
         let camera = orbit_camera(target, 7.0, yaw, 0.3, 52f32.to_radians());
         let rgba = gpu_scene.render_rgba(&renderer, &camera);
-        let mean = rgba
-            .chunks_exact(4)
-            .map(|pixel| (u32::from(pixel[0]) + u32::from(pixel[1]) + u32::from(pixel[2])) as f64 / 3.0)
-            .sum::<f64>()
-            / (scene.width * scene.height) as f64;
+        let mean = mean_rgb(&rgba);
         minimum_mean = minimum_mean.min(mean);
         assert!(mean > 5.0, "black frame at {degree} degrees (mean RGB {mean:.3})");
         if degree == 0 {
@@ -52,5 +55,16 @@ fn main() {
         }
     }
 
-    println!("PASS: 73 orbit frames rendered; minimum mean RGB {minimum_mean:.2}; full turn is visually equivalent");
+    for step in 0..=36 {
+        let pitch = 0.02 + (1.45 - 0.02) * step as f32 / 36.0;
+        let camera = orbit_camera(target, 7.0, base_yaw, pitch, 52f32.to_radians());
+        assert!(camera.eye.y > 0.0, "camera crossed below the floor at pitch {pitch:.3}");
+        let mean = mean_rgb(&gpu_scene.render_rgba(&renderer, &camera));
+        minimum_mean = minimum_mean.min(mean);
+        assert!(mean > 5.0, "black frame at vertical orbit pitch {pitch:.3} (mean RGB {mean:.3})");
+    }
+
+    println!(
+        "PASS: 73 yaw frames + 37 above-floor pitch frames; minimum mean RGB {minimum_mean:.2}; full turn is visually equivalent"
+    );
 }

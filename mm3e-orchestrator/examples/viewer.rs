@@ -233,6 +233,9 @@ mod win32 {
     }
 
     pub fn run(mut scene: Scene) {
+        const MIN_ORBIT_PITCH: f32 = 0.02;
+        const MAX_ORBIT_PITCH: f32 = 1.45;
+
         let (base_w, base_h) = (960u32, 540u32);
         let bg = Rgba::rgb8(0, 0, 0);
         let target_ms = 30.0f32; // frame budget while moving
@@ -313,11 +316,11 @@ mod win32 {
                     moved = true;
                 }
                 if focused && down(VK_UP) {
-                    pitch = (pitch + 0.03).min(1.45);
+                    pitch = (pitch + 0.03).min(MAX_ORBIT_PITCH);
                     moved = true;
                 }
                 if focused && down(VK_DOWN) {
-                    pitch = (pitch - 0.03).max(-0.2);
+                    pitch = (pitch - 0.03).max(MIN_ORBIT_PITCH);
                     moved = true;
                 }
                 if focused && down(0x57) {
@@ -333,7 +336,7 @@ mod win32 {
                 if focused && down(VK_LBUTTON) && point_in_client(hwnd, cur) {
                     if dragging && (cur.x != last.x || cur.y != last.y) {
                         yaw += (cur.x - last.x) as f32 * 0.01;
-                        pitch = (pitch - (cur.y - last.y) as f32 * 0.01).clamp(-0.2, 1.45);
+                        pitch = (pitch - (cur.y - last.y) as f32 * 0.01).clamp(MIN_ORBIT_PITCH, MAX_ORBIT_PITCH);
                         moved = true;
                     }
                     dragging = true;
