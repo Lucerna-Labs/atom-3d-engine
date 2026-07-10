@@ -1,0 +1,128 @@
+//! Framebuffer + alpha-over compositing (`blend_over` = the `combine` atom, weight = alpha)
+//! plus a dependency-free 24-bit BMP encoder, so output is viewable without any external crate.
+//! Carried over verbatim from MMPE — the surface is renderer-neutral and dimension-agnostic.
+
+use crate::color::Rgba;
+
+pub struct Framebuffer {
+    pub width: u32,
+    pub height: u32,
+    pixels: Vec<Rgba>,
+}
+
+impl Framebuffer {
+    pub fn new(width: u32, height: u32, clear: Rgba) -> Self {
+        let len =
+            (width as usize).checked_mul(height as usize).expect("framebuffer dimensions overflow addressable memory");
+        Self { width, height, pixels: vec![clear; len] }
+    }
+
+    /// Directly set a pixel to an opaque, already-shaded color (the raymarcher's output path).
+    pub fn put(&mut self, x: u32, y: u32, c: Rgba) {
+        if x < self.width && y < self.height {
+            self.pixels[y as usize * self.width as usize + x as usize] = c;
+        }
+    }
+
+    /// Read a pixel back (clamped to the edges). Lets the renderer use a framebuffer as a scratch
+    /// carrier for linear-HDR values before the post pass resolves them.
+    pub fn pixel(&self, x: u32, y: u32) -> Rgba {
+        if self.width == 0 || self.height == 0 {
+            return Rgba::new(0.0, 0.0, 0.0, 0.0);
+        }
+        let x = x.min(self.width.saturating_sub(1));
+        let y = y.min(self.height.saturating_sub(1));
+        self.pixels[y as usize * self.width as usize + x as usize]
+    }
+
+    /// Porter-Duff "over": straight-alpha `src` composited onto the stored pixel.
+    pub fn blend_over(&mut self, x: u32, y: u32, src: Rgba) {
+        if x >= self.width || y >= self.height {
+            return;
+        }
+        let i = y as usize * self.width as usize + x as usize;
+        let dst = self.pixels[i];
+        let out_a = src.a + dst.a * (1.0 - src.a);
+        if out_a <= 0.0 {
+            self.pixels[i] = Rgba::new(0.0, 0.0, 0.0, 0.0);
+            return;
+        }
+        let mix = |s: f32, d: f32| (s * src.a + d * dst.a * (1.0 - src.a)) / out_a;
+        self.pixels[i] = Rgba::new(mix(src.r, dst.r), mix(src.g, dst.g), mix(src.b, dst.b), out_a);
+    }
+
+    /// Encode as a 24-bit BMP, flattening straight alpha over `background`.
+    pub fn to_bmp(&self, background: Rgba) -> Vec<u8> {
+        let w = self.width as usize;
+        let h = self.height as usize;
+        let pad = (4 - (w * 3) % 4) % 4;
+        let row_bytes = w.checked_mul(3).and_then(|v| v.checked_add(pad)).expect("BMP row size overflow");
+        let pixel_bytes = row_bytes.checked_mul(h).expect("BMP pixel data size overflow");
+        let file_size = 54usize.checked_add(pixel_bytes).expect("BMP file size overflow");
+        assert!(file_size <= u32::MAX as usize, "BMP file too large for 32-bit BMP header");
+
+        let mut out = Vec::with_capacity(file_size);
+        // BITMAPFILEHEADER (14 bytes)
+        out.extend_from_slice(b"BM");
+        out.extend_from_slice(&(file_size as u32).to_le_bytes());
+        out.extend_from_slice(&0u32.to_le_bytes());
+        out.extend_from_slice(&54u32.to_le_bytes());
+        // BITMAPINFOHEADER (40 bytes)
+        out.extend_from_slice(&40u32.to_le_bytes());
+        out.extend_from_slice(&(self.width as i32).to_le_bytes());
+        out.extend_from_slice(&(self.height as i32).to_le_bytes()); // positive => bottom-up
+        out.extend_from_slice(&1u16.to_le_bytes());
+        out.extend_from_slice(&24u16.to_le_bytes());
+        out.extend_from_slice(&0u32.to_le_bytes());
+        out.extend_from_slice(&(pixel_bytes as u32).to_le_bytes());
+        out.extend_from_slice(&2835i32.to_le_bytes()); // ~72 DPI
+        out.extend_from_slice(&2835i32.to_le_bytes());
+        out.extend_from_slice(&0u32.to_le_bytes());
+        out.extend_from_slice(&0u32.to_le_bytes());
+
+        let to_u8 = |c: f32| (c.clamp(0.0, 1.0) * 255.0 + 0.5) as u8;
+        for y in (0..h).rev() {
+            for x in 0..w {
+                let px = self.pixels[y * w + x];
+                let a = px.a.clamp(0.0, 1.0);
+                let r = px.r * a + background.r * (1.0 - a);
+                let g = px.g * a + background.g * (1.0 - a);
+                let b = px.b * a + background.b * (1.0 - a);
+                out.push(to_u8(b));
+                out.push(to_u8(g));
+                out.push(to_u8(r));
+            }
+            out.resize(out.len() + pad, 0);
+        }
+        out
+    }
+
+    /// Flatten to opaque RGBA8 bytes (`[R, G, B, 255]` per pixel) over `background` — for HUD
+    /// overlay (see `font::draw_text`) and software presentation.
+    pub fn to_rgba8(&self, background: Rgba) -> Vec<u8> {
+        let to_u8 = |c: f32| (c.clamp(0.0, 1.0) * 255.0 + 0.5) as u8;
+        let mut out = Vec::with_capacity(self.pixels.len() * 4);
+        for px in &self.pixels {
+            let a = px.a.clamp(0.0, 1.0);
+            out.push(to_u8(px.r * a + background.r * (1.0 - a)));
+            out.push(to_u8(px.g * a + background.g * (1.0 - a)));
+            out.push(to_u8(px.b * a + background.b * (1.0 - a)));
+            out.push(255);
+        }
+        out
+    }
+
+    /// Flatten to opaque `0x00RRGGBB` pixels for software presentation (e.g. softbuffer).
+    pub fn to_u32(&self, background: Rgba) -> Vec<u32> {
+        let to_u8 = |c: f32| (c.clamp(0.0, 1.0) * 255.0 + 0.5) as u32;
+        let mut out = Vec::with_capacity(self.pixels.len());
+        for px in &self.pixels {
+            let a = px.a.clamp(0.0, 1.0);
+            let r = to_u8(px.r * a + background.r * (1.0 - a));
+            let g = to_u8(px.g * a + background.g * (1.0 - a));
+            let b = to_u8(px.b * a + background.b * (1.0 - a));
+            out.push((r << 16) | (g << 8) | b);
+        }
+        out
+    }
+}

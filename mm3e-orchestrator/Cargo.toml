@@ -1,0 +1,56 @@
+[package]
+name = "mm3e-orchestrator"
+version = "0.1.0"
+edition = "2021"
+description = "The single orchestrator: all policy, no mechanism. Drives the 3-D kit."
+
+[dependencies]
+mm3e-kit = { path = "../mm3e-kit" }
+
+[[example]]
+name = "spheres"
+path = "examples/spheres.rs"
+
+[[example]]
+name = "showcase"
+path = "examples/showcase.rs"
+
+[[example]]
+name = "turntable"
+path = "examples/turntable.rs"
+
+[[example]]
+name = "gallery"
+path = "examples/gallery.rs"
+
+[[example]]
+name = "gi_demo"
+path = "examples/gi_demo.rs"
+
+[[example]]
+name = "aov"
+path = "examples/aov.rs"
+
+[[example]]
+name = "scene_file"
+path = "examples/scene_file.rs"
+
+[[example]]
+name = "animate"
+path = "examples/animate.rs"
+
+[[example]]
+name = "viewer"
+path = "examples/viewer.rs"
+
+[[example]]
+name = "cpu_bench"
+path = "examples/cpu_bench.rs"
+
+[[example]]
+name = "cpu_profile"
+path = "examples/cpu_profile.rs"
+
+[[example]]
+name = "reproject"
+path = "examples/reproject.rs"

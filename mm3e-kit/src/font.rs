@@ -1,0 +1,94 @@
+//! A tiny 5×7 bitmap font for on-screen HUD text, drawn directly onto an RGBA8 buffer. Text is a
+//! rendering primitive, so it lives in the kit. Each glyph is 7 rows; bit 4 (0b10000) is the
+//! leftmost of 5 columns. Lowercase maps to uppercase; unknown glyphs render blank.
+
+/// The 7-row bitmap for a character (5 significant low bits per row).
+pub fn glyph(c: char) -> [u8; 7] {
+    match c.to_ascii_uppercase() {
+        ' ' => [0; 7],
+        'A' => [0b01110, 0b10001, 0b10001, 0b11111, 0b10001, 0b10001, 0b10001],
+        'B' => [0b11110, 0b10001, 0b10001, 0b11110, 0b10001, 0b10001, 0b11110],
+        'C' => [0b01110, 0b10001, 0b10000, 0b10000, 0b10000, 0b10001, 0b01110],
+        'D' => [0b11110, 0b10001, 0b10001, 0b10001, 0b10001, 0b10001, 0b11110],
+        'E' => [0b11111, 0b10000, 0b10000, 0b11110, 0b10000, 0b10000, 0b11111],
+        'F' => [0b11111, 0b10000, 0b10000, 0b11110, 0b10000, 0b10000, 0b10000],
+        'G' => [0b01110, 0b10001, 0b10000, 0b10111, 0b10001, 0b10001, 0b01111],
+        'H' => [0b10001, 0b10001, 0b10001, 0b11111, 0b10001, 0b10001, 0b10001],
+        'I' => [0b01110, 0b00100, 0b00100, 0b00100, 0b00100, 0b00100, 0b01110],
+        'J' => [0b00111, 0b00010, 0b00010, 0b00010, 0b00010, 0b10010, 0b01100],
+        'K' => [0b10001, 0b10010, 0b10100, 0b11000, 0b10100, 0b10010, 0b10001],
+        'L' => [0b10000, 0b10000, 0b10000, 0b10000, 0b10000, 0b10000, 0b11111],
+        'M' => [0b10001, 0b11011, 0b10101, 0b10101, 0b10001, 0b10001, 0b10001],
+        'N' => [0b10001, 0b10001, 0b11001, 0b10101, 0b10011, 0b10001, 0b10001],
+        'O' => [0b01110, 0b10001, 0b10001, 0b10001, 0b10001, 0b10001, 0b01110],
+        'P' => [0b11110, 0b10001, 0b10001, 0b11110, 0b10000, 0b10000, 0b10000],
+        'Q' => [0b01110, 0b10001, 0b10001, 0b10001, 0b10101, 0b10010, 0b01101],
+        'R' => [0b11110, 0b10001, 0b10001, 0b11110, 0b10100, 0b10010, 0b10001],
+        'S' => [0b01111, 0b10000, 0b10000, 0b01110, 0b00001, 0b00001, 0b11110],
+        'T' => [0b11111, 0b00100, 0b00100, 0b00100, 0b00100, 0b00100, 0b00100],
+        'U' => [0b10001, 0b10001, 0b10001, 0b10001, 0b10001, 0b10001, 0b01110],
+        'V' => [0b10001, 0b10001, 0b10001, 0b10001, 0b10001, 0b01010, 0b00100],
+        'W' => [0b10001, 0b10001, 0b10001, 0b10101, 0b10101, 0b11011, 0b10001],
+        'X' => [0b10001, 0b10001, 0b01010, 0b00100, 0b01010, 0b10001, 0b10001],
+        'Y' => [0b10001, 0b10001, 0b01010, 0b00100, 0b00100, 0b00100, 0b00100],
+        'Z' => [0b11111, 0b00001, 0b00010, 0b00100, 0b01000, 0b10000, 0b11111],
+        '0' => [0b01110, 0b10001, 0b10011, 0b10101, 0b11001, 0b10001, 0b01110],
+        '1' => [0b00100, 0b01100, 0b00100, 0b00100, 0b00100, 0b00100, 0b01110],
+        '2' => [0b01110, 0b10001, 0b00001, 0b00010, 0b00100, 0b01000, 0b11111],
+        '3' => [0b11111, 0b00010, 0b00100, 0b00010, 0b00001, 0b10001, 0b01110],
+        '4' => [0b00010, 0b00110, 0b01010, 0b10010, 0b11111, 0b00010, 0b00010],
+        '5' => [0b11111, 0b10000, 0b11110, 0b00001, 0b00001, 0b10001, 0b01110],
+        '6' => [0b00110, 0b01000, 0b10000, 0b11110, 0b10001, 0b10001, 0b01110],
+        '7' => [0b11111, 0b00001, 0b00010, 0b00100, 0b01000, 0b01000, 0b01000],
+        '8' => [0b01110, 0b10001, 0b10001, 0b01110, 0b10001, 0b10001, 0b01110],
+        '9' => [0b01110, 0b10001, 0b10001, 0b01111, 0b00001, 0b00010, 0b01100],
+        ':' => [0b00000, 0b00100, 0b00100, 0b00000, 0b00100, 0b00100, 0b00000],
+        '/' => [0b00001, 0b00010, 0b00100, 0b01000, 0b10000, 0b00000, 0b00000],
+        '!' => [0b00100, 0b00100, 0b00100, 0b00100, 0b00100, 0b00000, 0b00100],
+        '-' => [0b00000, 0b00000, 0b00000, 0b11111, 0b00000, 0b00000, 0b00000],
+        _ => [0; 7],
+    }
+}
+
+/// Draw `text` onto an RGBA8 buffer (`w × h`, row-major) with its top-left at `(x, y)`, each glyph
+/// pixel a `scale × scale` block, in opaque `color` (RGB 0–255). Pixels outside the buffer are
+/// clipped. A small dark drop-shadow keeps it readable over any background.
+#[allow(clippy::too_many_arguments)]
+pub fn draw_text(buf: &mut [u8], w: u32, h: u32, x: i32, y: i32, scale: u32, text: &str, color: [u8; 3]) {
+    let Some(required) = (w as usize).checked_mul(h as usize).and_then(|px| px.checked_mul(4)) else {
+        return;
+    };
+    if buf.len() < required {
+        return;
+    }
+    let put = |buf: &mut [u8], px: i32, py: i32, c: [u8; 3]| {
+        if px < 0 || py < 0 || px >= w as i32 || py >= h as i32 {
+            return;
+        }
+        let i = (py as usize * w as usize + px as usize) * 4;
+        buf[i] = c[0];
+        buf[i + 1] = c[1];
+        buf[i + 2] = c[2];
+        buf[i + 3] = 255;
+    };
+    let s = scale.max(1) as i32;
+    let mut pen = x;
+    for ch in text.chars() {
+        let g = glyph(ch);
+        for (r, &row) in g.iter().enumerate() {
+            for col in 0..5i32 {
+                if row & (1 << (4 - col)) != 0 {
+                    for dy in 0..s {
+                        for dx in 0..s {
+                            let px = pen + col * s + dx;
+                            let py = y + r as i32 * s + dy;
+                            put(buf, px + s, py + s, [0, 0, 0]); // drop shadow
+                            put(buf, px, py, color);
+                        }
+                    }
+                }
+            }
+        }
+        pen += 6 * s;
+    }
+}

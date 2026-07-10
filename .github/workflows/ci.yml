@@ -1,0 +1,47 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  core:
+    name: core (fmt · clippy · build · test)
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
+      - uses: Swatinem/rust-cache@v2
+      - name: Format (whole workspace)
+        run: cargo fmt --all -- --check
+      - name: Clippy core (deny warnings)
+        run: cargo clippy -p mm3e-kit -p mm3e-orchestrator --all-targets -- -D warnings
+      - name: Build core
+        run: cargo build --release -p mm3e-kit -p mm3e-orchestrator --all-targets
+      - name: Test core
+        run: cargo test --release -p mm3e-kit -p mm3e-orchestrator
+
+  gpu:
+    name: gpu backend (build · clippy, Windows)
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: clippy
+      - uses: Swatinem/rust-cache@v2
+      - name: Clippy gpu (deny warnings)
+        run: cargo clippy -p mm3e-gpu --all-targets -- -D warnings
+      # Builds (compiles WGSL codegen + wgpu); does not run, since CI runners have no GPU.
+      - name: Build gpu
+        run: cargo build --release -p mm3e-gpu --all-targets

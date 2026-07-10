@@ -1,0 +1,24 @@
+[    0ms] [kernel] 🕸️  cell-source registered (0 inputs, 1 outputs)
+[    0ms] [kernel] 🕸️  rf-relay registered (1 inputs, 3 outputs)
+[    0ms] [kernel] 🕸️  cell-sink registered (1 inputs, 0 outputs)
+[    6ms] [kernel] 👋 cell-source detached
+[  503ms] [kernel] ⏹  max duration reached, shutting down
+[  510ms] [kernel] 🧹 joined 2 worker(s); strands dropped
+[    0ms] [kernel] 🕸️  cell-source registered (0 inputs, 1 outputs)
+[    0ms] [kernel] 🕸️  rf-relay registered (1 inputs, 3 outputs)
+[    0ms] [kernel] 🕸️  cell-sink registered (1 inputs, 0 outputs)
+[    6ms] [kernel] 👋 cell-source detached
+[  503ms] [kernel] ⏹  max duration reached, shutting down
+[  510ms] [kernel] 🧹 joined 2 worker(s); strands dropped
+Fortifying the RF lane with a fountain-code repair primitive
+
+48 data chunks of 16B over the fading lane (same seed for both arms):
+
+                       arm   raw delivered    after repair
+--------------------------  --------------  --------------
+     no repair (bare lane)         38/48 (21%)         37/48 (23%)
+    + fountain (28 shards)         38/48 (21%)         48/48 ( 0%)
+
+The bare lane drops ~21% and stays dropped. The fountain primitive reconstructs the
+missing chunks from 28 repair shards (58% overhead) and delivers 48/48 — lossless.
+So the RF lane can be USED without degrading delivery: it costs bandwidth, not data.

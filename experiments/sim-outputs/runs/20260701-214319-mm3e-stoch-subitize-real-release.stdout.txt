@@ -1,0 +1,22 @@
+=== stochastic-omega + subitize validation on the REAL engine @ 480x270 AA1 ===
+(the Arc engine-mix search's -40% lead; this is its first real-engine test)
+
+  config                   | field-evals |  Δevals | wall-clock |  Δtime | hit-agree | depth-err
+  ------------------------------------------------------------------------------------------------
+  shipped (over-relax)     |     6155697 |    0.0% |  211.36ms |   0.0% |    100.0% |   0.0007   (105996 hits)
+  sim-winner (full)        |     4291551 |  -30.3% |  149.01ms | -29.5% |     99.9% |   0.0295   (106122 hits)
+    ablate stochastic-w    |     4414534 |  -28.3% |  153.44ms | -27.4% |     99.9% |   0.0289   (106122 hits)
+    ablate subitize        |     5794076 |   -5.9% |  229.29ms |   8.5% |     99.9% |   0.0111   (106122 hits)
+
+Subitize tradeoff sweep (winner's other params fixed, vs exact-depth reference):
+  subitize |  Δevals | depth-err | hit-agree
+     0.000 |   -5.9% |    0.0111 |     99.9%
+     0.200 |  -10.7% |    0.0044 |     99.9%
+     0.400 |  -16.5% |    0.0069 |     99.9%
+     0.600 |  -23.0% |    0.0107 |     99.9%
+     0.792 |  -30.3% |    0.0295 |     99.9%
+
+Reading: a REAL win needs (1) fewer field-evals AND lower wall-clock (Δtime negative),
+(2) hit-agreement ~100% and small depth-err (no tunneling), on THIS higher-res scene it was
+NOT tuned on. The ablation rows show whether stochastic-w or subitize is doing the work —
+or whether the sim's -40% was a low-res / tuning-scene artifact that doesn't survive.
