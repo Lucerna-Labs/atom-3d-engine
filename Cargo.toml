@@ -1,7 +1,7 @@
-# Mechanical Math 3-D Engine (MM3E) — a self-renderer for 3-D scenes from pure math primitives.
+# Mechanical Math 3-D Engine (MM3E) - a self-renderer for 3-D scenes from pure math primitives.
 # The 3-D elevation of MMPE: 2-D SDF + scan-convert becomes 3-D SDF + sphere-tracing.
 # The renderer remains split into kit, orchestrator, and opt-in GPU backend; the updater is an
 # independent application service shared by packaged Lucerna software.
 [workspace]
 resolver = "2"
-members = ["mm3e-kit", "mm3e-orchestrator", "mm3e-gpu", "lucerna-update"]
+members = ["mm3e-kit", "mm3e-orchestrator", "mm3e-gpu", "mm3e-cpu-parallel", "lucerna-update"]
