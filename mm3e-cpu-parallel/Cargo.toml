@@ -1,0 +1,17 @@
+[package]
+name = "mm3e-cpu-parallel"
+version = "0.1.0"
+edition = "2021"
+description = "CPU parallel backend: uses std::thread for multi-core rendering of SDF scenes. No dependencies, pure mathematical atoms."
+
+[dependencies]
+mm3e-kit = { path = "../mm3e-kit" }
+mm3e-orchestrator = { path = "../mm3e-orchestrator" }
+
+[[example]]
+name = "cpu_parallel_render"
+path = "examples/cpu_parallel_render.rs"
+
+[[example]]
+name = "cpu_parallel_viewer"
+path = "examples/cpu_parallel_viewer.rs"
