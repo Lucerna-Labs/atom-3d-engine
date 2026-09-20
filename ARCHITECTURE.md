@@ -84,19 +84,6 @@ chosen variable straight to display and skips the post stack.
 
 ## Concurrency
 
-The optional `mm3e-editor` crate adds the authoring document and transactional JSON command
-service. It compiles stable, named entities into the existing scene and calls the existing
-renderer. Schema and PNG dependencies stay in this outer layer. `Scene::sample_authored` and
-`Scene::sample_object` expose unpruned scalar observations for tools, separately from the
-rendering acceleration bounds. See [the editor guide](mm3e-editor/README.md) for the command
-contract and [the design report](docs/AGENT_EDITOR_FIRST_PRINCIPLES.md) for the extension path.
-
-Editor animation stores rest-world joint pivots, object bindings and named clips in that same
-document. `Document::compile_at` first compiles rest geometry, then evaluates keyframes using
-the orchestrator's interpolation and the kit's quaternion/transform mechanisms. Pose inspection,
-geometry observations and renders consume independent evaluated scenes without editing the
-rest document. [Timed sequence export](docs/AGENT_EDITOR_ANIMATION.md) uses the same render path.
-
 Rendering and GI baking both fan out over scoped `std::thread` bands — no external crate. Results
 are stitched in deterministic order, so a frame is identical regardless of thread count (a test
 enforces this).
