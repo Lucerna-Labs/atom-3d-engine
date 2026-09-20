@@ -30,6 +30,23 @@ fn positive_v3(v: Vec3) -> bool {
 
 /// Serialize a scene and its camera to the `.mm3e` text format.
 pub fn serialize(scene: &Scene, camera: &Camera) -> String {
+    try_serialize(scene, camera).expect("legacy scene cannot represent this geometry; use the durable editor format")
+}
+
+/// Fallible legacy writer. CSG and triangle surfaces are rejected explicitly instead of disappearing from the output.
+pub fn try_serialize(scene: &Scene, camera: &Camera) -> Result<String, String> {
+    if !scene.appearance.is_empty() {
+        return Err("UV textures are not representable in legacy .mm3e; use the native editor format".into());
+    }
+    if !scene.surfaces.is_empty() || scene.objects.iter().any(|o| matches!(o.prim, Prim::Surface { .. })) {
+        return Err(
+            "triangle surfaces are not representable in the legacy .mm3e text format; use the durable editor format"
+                .into(),
+        );
+    }
+    if scene.objects.iter().any(|o| matches!(o.prim, Prim::Csg { .. })) {
+        return Err("object-local CSG is not representable in the legacy .mm3e text format".into());
+    }
     let mut s = String::new();
     s.push_str("# MM3E scene\n");
     s.push_str(&format!("size {} {}\n", scene.width, scene.height));
@@ -75,7 +92,7 @@ pub fn serialize(scene: &Scene, camera: &Camera) -> String {
         s.push_str(&serialize_object(o));
         s.push('\n');
     }
-    s
+    Ok(s)
 }
 
 fn v3(v: Vec3) -> String {
@@ -99,7 +116,9 @@ fn serialize_object(o: &Object) -> String {
         Prim::Octahedron { s } => format!("octahedron {s}"),
         Prim::HexPrism { r, h } => format!("hexprism {r} {h}"),
         Prim::Plane { n, h } => format!("plane {} {}", v3(n), h),
-        Prim::Volume { .. } => unreachable!("handled before serializing an object directive"),
+        Prim::Volume { .. } | Prim::Csg { .. } | Prim::Surface { .. } => {
+            unreachable!("handled before serializing an object directive")
+        }
     });
     // Recover Euler-free placement: store rotation columns so any Mat3 round-trips exactly.
     let r = o.xform.rot;

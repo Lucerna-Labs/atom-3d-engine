@@ -1,0 +1,2040 @@
+{
+  "format": "mm3e-agent-project-v1",
+  "saved_revision": 3,
+  "document": {
+    "version": 1,
+    "units": "meters",
+    "objects": [
+      {
+        "id": "actor/head",
+        "label": "",
+        "role": "",
+        "group": "",
+        "shape": {
+          "type": "ellipsoid",
+          "radii": [
+            0.8,
+            1.0,
+            0.8
+          ]
+        },
+        "position": [
+          2.0,
+          0.0,
+          0.0
+        ],
+        "rotation_degrees": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": 1.0,
+        "material": {
+          "albedo": [
+            0.32,
+            0.65,
+            0.62
+          ],
+          "metallic": 0.0,
+          "roughness": 0.65,
+          "reflectivity": 0.0,
+          "specular": 0.5,
+          "emissive": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "checker": false
+        },
+        "combine": {
+          "type": "union"
+        },
+        "modifiers": {
+          "mirror": [
+            false,
+            false,
+            false
+          ],
+          "elongate": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "round": 0.0,
+          "onion": 0.0
+        }
+      },
+      {
+        "id": "actor/left_eye",
+        "label": "",
+        "role": "",
+        "group": "",
+        "shape": {
+          "type": "sphere",
+          "radius": 0.15
+        },
+        "position": [
+          2.28,
+          0.2,
+          0.78
+        ],
+        "rotation_degrees": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": 1.0,
+        "material": {
+          "albedo": [
+            0.32,
+            0.65,
+            0.62
+          ],
+          "metallic": 0.0,
+          "roughness": 0.65,
+          "reflectivity": 0.0,
+          "specular": 0.5,
+          "emissive": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "checker": false
+        },
+        "combine": {
+          "type": "union"
+        },
+        "modifiers": {
+          "mirror": [
+            false,
+            false,
+            false
+          ],
+          "elongate": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "round": 0.0,
+          "onion": 0.0
+        }
+      },
+      {
+        "id": "actor/right_eye",
+        "label": "",
+        "role": "",
+        "group": "",
+        "shape": {
+          "type": "sphere",
+          "radius": 0.15
+        },
+        "position": [
+          1.72,
+          0.2,
+          0.78
+        ],
+        "rotation_degrees": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": 1.0,
+        "material": {
+          "albedo": [
+            0.32,
+            0.65,
+            0.62
+          ],
+          "metallic": 0.0,
+          "roughness": 0.65,
+          "reflectivity": 0.0,
+          "specular": 0.5,
+          "emissive": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "checker": false
+        },
+        "combine": {
+          "type": "union"
+        },
+        "modifiers": {
+          "mirror": [
+            false,
+            false,
+            false
+          ],
+          "elongate": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "round": 0.0,
+          "onion": 0.0
+        }
+      },
+      {
+        "id": "face/left_upper_lid",
+        "label": "left upper lid",
+        "role": "left_upper_lid",
+        "group": "actor",
+        "shape": {
+          "type": "csg",
+          "expression": {
+            "type": "intersect",
+            "a": {
+              "type": "shell",
+              "shape": {
+                "type": "primitive",
+                "shape": {
+                  "type": "sphere",
+                  "radius": 0.159
+                }
+              },
+              "thickness": 0.00825
+            },
+            "b": {
+              "type": "primitive",
+              "shape": {
+                "type": "plane",
+                "normal": [
+                  0.0,
+                  -1.0,
+                  0.0
+                ],
+                "offset": 0.0045000017
+              }
+            }
+          }
+        },
+        "position": [
+          2.28,
+          0.2,
+          0.78
+        ],
+        "rotation_degrees": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": 1.0,
+        "material": {
+          "albedo": [
+            0.32,
+            0.65,
+            0.62
+          ],
+          "metallic": 0.0,
+          "roughness": 0.65,
+          "reflectivity": 0.0,
+          "specular": 0.5,
+          "emissive": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "checker": false
+        },
+        "combine": {
+          "type": "union"
+        },
+        "modifiers": {
+          "mirror": [
+            false,
+            false,
+            false
+          ],
+          "elongate": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "round": 0.0,
+          "onion": 0.0
+        }
+      },
+      {
+        "id": "face/left_lower_lid",
+        "label": "left lower lid",
+        "role": "left_lower_lid",
+        "group": "actor",
+        "shape": {
+          "type": "csg",
+          "expression": {
+            "type": "intersect",
+            "a": {
+              "type": "shell",
+              "shape": {
+                "type": "primitive",
+                "shape": {
+                  "type": "sphere",
+                  "radius": 0.159
+                }
+              },
+              "thickness": 0.00825
+            },
+            "b": {
+              "type": "primitive",
+              "shape": {
+                "type": "plane",
+                "normal": [
+                  0.0,
+                  1.0,
+                  0.0
+                ],
+                "offset": 0.0165
+              }
+            }
+          }
+        },
+        "position": [
+          2.28,
+          0.2,
+          0.78
+        ],
+        "rotation_degrees": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": 1.0,
+        "material": {
+          "albedo": [
+            0.32,
+            0.65,
+            0.62
+          ],
+          "metallic": 0.0,
+          "roughness": 0.65,
+          "reflectivity": 0.0,
+          "specular": 0.5,
+          "emissive": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "checker": false
+        },
+        "combine": {
+          "type": "union"
+        },
+        "modifiers": {
+          "mirror": [
+            false,
+            false,
+            false
+          ],
+          "elongate": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "round": 0.0,
+          "onion": 0.0
+        }
+      },
+      {
+        "id": "face/right_upper_lid",
+        "label": "right upper lid",
+        "role": "right_upper_lid",
+        "group": "actor",
+        "shape": {
+          "type": "csg",
+          "expression": {
+            "type": "intersect",
+            "a": {
+              "type": "shell",
+              "shape": {
+                "type": "primitive",
+                "shape": {
+                  "type": "sphere",
+                  "radius": 0.159
+                }
+              },
+              "thickness": 0.00825
+            },
+            "b": {
+              "type": "primitive",
+              "shape": {
+                "type": "plane",
+                "normal": [
+                  0.0,
+                  -1.0,
+                  0.0
+                ],
+                "offset": 0.006749999
+              }
+            }
+          }
+        },
+        "position": [
+          1.72,
+          0.2,
+          0.78
+        ],
+        "rotation_degrees": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": 1.0,
+        "material": {
+          "albedo": [
+            0.32,
+            0.65,
+            0.62
+          ],
+          "metallic": 0.0,
+          "roughness": 0.65,
+          "reflectivity": 0.0,
+          "specular": 0.5,
+          "emissive": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "checker": false
+        },
+        "combine": {
+          "type": "union"
+        },
+        "modifiers": {
+          "mirror": [
+            false,
+            false,
+            false
+          ],
+          "elongate": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "round": 0.0,
+          "onion": 0.0
+        }
+      },
+      {
+        "id": "face/right_lower_lid",
+        "label": "right lower lid",
+        "role": "right_lower_lid",
+        "group": "actor",
+        "shape": {
+          "type": "csg",
+          "expression": {
+            "type": "intersect",
+            "a": {
+              "type": "shell",
+              "shape": {
+                "type": "primitive",
+                "shape": {
+                  "type": "sphere",
+                  "radius": 0.159
+                }
+              },
+              "thickness": 0.00825
+            },
+            "b": {
+              "type": "primitive",
+              "shape": {
+                "type": "plane",
+                "normal": [
+                  0.0,
+                  1.0,
+                  0.0
+                ],
+                "offset": 0.04125
+              }
+            }
+          }
+        },
+        "position": [
+          1.72,
+          0.2,
+          0.78
+        ],
+        "rotation_degrees": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": 1.0,
+        "material": {
+          "albedo": [
+            0.32,
+            0.65,
+            0.62
+          ],
+          "metallic": 0.0,
+          "roughness": 0.65,
+          "reflectivity": 0.0,
+          "specular": 0.5,
+          "emissive": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "checker": false
+        },
+        "combine": {
+          "type": "union"
+        },
+        "modifiers": {
+          "mirror": [
+            false,
+            false,
+            false
+          ],
+          "elongate": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "round": 0.0,
+          "onion": 0.0
+        }
+      },
+      {
+        "id": "face/upper_lip",
+        "label": "upper lip",
+        "role": "upper_lip",
+        "group": "actor",
+        "shape": {
+          "type": "csg",
+          "expression": {
+            "type": "smooth_union",
+            "a": {
+              "type": "smooth_union",
+              "a": {
+                "type": "smooth_union",
+                "a": {
+                  "type": "smooth_union",
+                  "a": {
+                    "type": "smooth_union",
+                    "a": {
+                      "type": "smooth_union",
+                      "a": {
+                        "type": "smooth_union",
+                        "a": {
+                          "type": "smooth_union",
+                          "a": {
+                            "type": "smooth_union",
+                            "a": {
+                              "type": "smooth_union",
+                              "a": {
+                                "type": "smooth_union",
+                                "a": {
+                                  "type": "smooth_union",
+                                  "a": {
+                                    "type": "smooth_union",
+                                    "a": {
+                                      "type": "smooth_union",
+                                      "a": {
+                                        "type": "smooth_union",
+                                        "a": {
+                                          "type": "smooth_union",
+                                          "a": {
+                                            "type": "smooth_union",
+                                            "a": {
+                                              "type": "smooth_union",
+                                              "a": {
+                                                "type": "smooth_union",
+                                                "a": {
+                                                  "type": "smooth_union",
+                                                  "a": {
+                                                    "type": "smooth_union",
+                                                    "a": {
+                                                      "type": "smooth_union",
+                                                      "a": {
+                                                        "type": "smooth_union",
+                                                        "a": {
+                                                          "type": "primitive",
+                                                          "shape": {
+                                                            "type": "capsule",
+                                                            "a": [
+                                                              0.288686,
+                                                              -0.34655,
+                                                              0.72237486
+                                                            ],
+                                                            "b": [
+                                                              0.28621626,
+                                                              -0.34252208,
+                                                              0.72467816
+                                                            ],
+                                                            "radius": 0.022
+                                                          }
+                                                        },
+                                                        "b": {
+                                                          "type": "primitive",
+                                                          "shape": {
+                                                            "type": "capsule",
+                                                            "a": [
+                                                              0.28621626,
+                                                              -0.34252208,
+                                                              0.72467816
+                                                            ],
+                                                            "b": [
+                                                              0.27884927,
+                                                              -0.3392604,
+                                                              0.72868544
+                                                            ],
+                                                            "radius": 0.022
+                                                          }
+                                                        },
+                                                        "radius": 0.0055
+                                                      },
+                                                      "b": {
+                                                        "type": "primitive",
+                                                        "shape": {
+                                                          "type": "capsule",
+                                                          "a": [
+                                                            0.27884927,
+                                                            -0.3392604,
+                                                            0.72868544
+                                                          ],
+                                                          "b": [
+                                                            0.2667111,
+                                                            -0.3367672,
+                                                            0.7341725
+                                                          ],
+                                                          "radius": 0.022
+                                                        }
+                                                      },
+                                                      "radius": 0.0055
+                                                    },
+                                                    "b": {
+                                                      "type": "primitive",
+                                                      "shape": {
+                                                        "type": "capsule",
+                                                        "a": [
+                                                          0.2667111,
+                                                          -0.3367672,
+                                                          0.7341725
+                                                        ],
+                                                        "b": [
+                                                          0.25000942,
+                                                          -0.335,
+                                                          0.74080575
+                                                        ],
+                                                        "radius": 0.022
+                                                      }
+                                                    },
+                                                    "radius": 0.0055
+                                                  },
+                                                  "b": {
+                                                    "type": "primitive",
+                                                    "shape": {
+                                                      "type": "capsule",
+                                                      "a": [
+                                                        0.25000942,
+                                                        -0.335,
+                                                        0.74080575
+                                                      ],
+                                                      "b": [
+                                                        0.22903,
+                                                        -0.333878,
+                                                        0.74817175
+                                                      ],
+                                                      "radius": 0.022
+                                                    }
+                                                  },
+                                                  "radius": 0.0055
+                                                },
+                                                "b": {
+                                                  "type": "primitive",
+                                                  "shape": {
+                                                    "type": "capsule",
+                                                    "a": [
+                                                      0.22903,
+                                                      -0.333878,
+                                                      0.74817175
+                                                    ],
+                                                    "b": [
+                                                      0.20413183,
+                                                      -0.33329117,
+                                                      0.7558109
+                                                    ],
+                                                    "radius": 0.022
+                                                  }
+                                                },
+                                                "radius": 0.0055
+                                              },
+                                              "b": {
+                                                "type": "primitive",
+                                                "shape": {
+                                                  "type": "capsule",
+                                                  "a": [
+                                                    0.20413183,
+                                                    -0.33329117,
+                                                    0.7558109
+                                                  ],
+                                                  "b": [
+                                                    0.17574091,
+                                                    -0.33311093,
+                                                    0.7632523
+                                                  ],
+                                                  "radius": 0.022
+                                                }
+                                              },
+                                              "radius": 0.0055
+                                            },
+                                            "b": {
+                                              "type": "primitive",
+                                              "shape": {
+                                                "type": "capsule",
+                                                "a": [
+                                                  0.17574091,
+                                                  -0.33311093,
+                                                  0.7632523
+                                                ],
+                                                "b": [
+                                                  0.14434299,
+                                                  -0.33320153,
+                                                  0.77004474
+                                                ],
+                                                "radius": 0.022
+                                              }
+                                            },
+                                            "radius": 0.0055
+                                          },
+                                          "b": {
+                                            "type": "primitive",
+                                            "shape": {
+                                              "type": "capsule",
+                                              "a": [
+                                                0.14434299,
+                                                -0.33320153,
+                                                0.77004474
+                                              ],
+                                              "b": [
+                                                0.110475354,
+                                                -0.33343226,
+                                                0.77578443
+                                              ],
+                                              "radius": 0.022
+                                            }
+                                          },
+                                          "radius": 0.0055
+                                        },
+                                        "b": {
+                                          "type": "primitive",
+                                          "shape": {
+                                            "type": "capsule",
+                                            "a": [
+                                              0.110475354,
+                                              -0.33343226,
+                                              0.77578443
+                                            ],
+                                            "b": [
+                                              0.07471745,
+                                              -0.33368814,
+                                              0.7801364
+                                            ],
+                                            "radius": 0.022
+                                          }
+                                        },
+                                        "radius": 0.0055
+                                      },
+                                      "b": {
+                                        "type": "primitive",
+                                        "shape": {
+                                          "type": "capsule",
+                                          "a": [
+                                            0.07471745,
+                                            -0.33368814,
+                                            0.7801364
+                                          ],
+                                          "b": [
+                                            0.037681065,
+                                            -0.33387965,
+                                            0.78285056
+                                          ],
+                                          "radius": 0.022
+                                        }
+                                      },
+                                      "radius": 0.0055
+                                    },
+                                    "b": {
+                                      "type": "primitive",
+                                      "shape": {
+                                        "type": "capsule",
+                                        "a": [
+                                          0.037681065,
+                                          -0.33387965,
+                                          0.78285056
+                                        ],
+                                        "b": [
+                                          -1.2618866e-8,
+                                          -0.33394998,
+                                          0.78377265
+                                        ],
+                                        "radius": 0.022
+                                      }
+                                    },
+                                    "radius": 0.0055
+                                  },
+                                  "b": {
+                                    "type": "primitive",
+                                    "shape": {
+                                      "type": "capsule",
+                                      "a": [
+                                        -1.2618866e-8,
+                                        -0.33394998,
+                                        0.78377265
+                                      ],
+                                      "b": [
+                                        -0.037681125,
+                                        -0.33387968,
+                                        0.78285056
+                                      ],
+                                      "radius": 0.022
+                                    }
+                                  },
+                                  "radius": 0.0055
+                                },
+                                "b": {
+                                  "type": "primitive",
+                                  "shape": {
+                                    "type": "capsule",
+                                    "a": [
+                                      -0.037681125,
+                                      -0.33387968,
+                                      0.78285056
+                                    ],
+                                    "b": [
+                                      -0.07471744,
+                                      -0.33368814,
+                                      0.7801364
+                                    ],
+                                    "radius": 0.022
+                                  }
+                                },
+                                "radius": 0.0055
+                              },
+                              "b": {
+                                "type": "primitive",
+                                "shape": {
+                                  "type": "capsule",
+                                  "a": [
+                                    -0.07471744,
+                                    -0.33368814,
+                                    0.7801364
+                                  ],
+                                  "b": [
+                                    -0.110475376,
+                                    -0.33343226,
+                                    0.77578443
+                                  ],
+                                  "radius": 0.022
+                                }
+                              },
+                              "radius": 0.0055
+                            },
+                            "b": {
+                              "type": "primitive",
+                              "shape": {
+                                "type": "capsule",
+                                "a": [
+                                  -0.110475376,
+                                  -0.33343226,
+                                  0.77578443
+                                ],
+                                "b": [
+                                  -0.14434302,
+                                  -0.33320153,
+                                  0.77004474
+                                ],
+                                "radius": 0.022
+                              }
+                            },
+                            "radius": 0.0055
+                          },
+                          "b": {
+                            "type": "primitive",
+                            "shape": {
+                              "type": "capsule",
+                              "a": [
+                                -0.14434302,
+                                -0.33320153,
+                                0.77004474
+                              ],
+                              "b": [
+                                -0.17574091,
+                                -0.33311093,
+                                0.7632523
+                              ],
+                              "radius": 0.022
+                            }
+                          },
+                          "radius": 0.0055
+                        },
+                        "b": {
+                          "type": "primitive",
+                          "shape": {
+                            "type": "capsule",
+                            "a": [
+                              -0.17574091,
+                              -0.33311093,
+                              0.7632523
+                            ],
+                            "b": [
+                              -0.20413183,
+                              -0.33329117,
+                              0.7558109
+                            ],
+                            "radius": 0.022
+                          }
+                        },
+                        "radius": 0.0055
+                      },
+                      "b": {
+                        "type": "primitive",
+                        "shape": {
+                          "type": "capsule",
+                          "a": [
+                            -0.20413183,
+                            -0.33329117,
+                            0.7558109
+                          ],
+                          "b": [
+                            -0.22903006,
+                            -0.333878,
+                            0.74817175
+                          ],
+                          "radius": 0.022
+                        }
+                      },
+                      "radius": 0.0055
+                    },
+                    "b": {
+                      "type": "primitive",
+                      "shape": {
+                        "type": "capsule",
+                        "a": [
+                          -0.22903006,
+                          -0.333878,
+                          0.74817175
+                        ],
+                        "b": [
+                          -0.25000942,
+                          -0.33499998,
+                          0.74080575
+                        ],
+                        "radius": 0.022
+                      }
+                    },
+                    "radius": 0.0055
+                  },
+                  "b": {
+                    "type": "primitive",
+                    "shape": {
+                      "type": "capsule",
+                      "a": [
+                        -0.25000942,
+                        -0.33499998,
+                        0.74080575
+                      ],
+                      "b": [
+                        -0.26671112,
+                        -0.3367672,
+                        0.7341725
+                      ],
+                      "radius": 0.022
+                    }
+                  },
+                  "radius": 0.0055
+                },
+                "b": {
+                  "type": "primitive",
+                  "shape": {
+                    "type": "capsule",
+                    "a": [
+                      -0.26671112,
+                      -0.3367672,
+                      0.7341725
+                    ],
+                    "b": [
+                      -0.27884927,
+                      -0.3392604,
+                      0.72868544
+                    ],
+                    "radius": 0.022
+                  }
+                },
+                "radius": 0.0055
+              },
+              "b": {
+                "type": "primitive",
+                "shape": {
+                  "type": "capsule",
+                  "a": [
+                    -0.27884927,
+                    -0.3392604,
+                    0.72868544
+                  ],
+                  "b": [
+                    -0.28621626,
+                    -0.34252208,
+                    0.72467816
+                  ],
+                  "radius": 0.022
+                }
+              },
+              "radius": 0.0055
+            },
+            "b": {
+              "type": "primitive",
+              "shape": {
+                "type": "capsule",
+                "a": [
+                  -0.28621626,
+                  -0.34252208,
+                  0.72467816
+                ],
+                "b": [
+                  -0.288686,
+                  -0.34655,
+                  0.72237486
+                ],
+                "radius": 0.022
+              }
+            },
+            "radius": 0.0055
+          }
+        },
+        "position": [
+          2.0,
+          0.0,
+          0.0
+        ],
+        "rotation_degrees": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": 1.0,
+        "material": {
+          "albedo": [
+            0.3,
+            0.1,
+            0.2
+          ],
+          "metallic": 0.0,
+          "roughness": 0.42,
+          "reflectivity": 0.0,
+          "specular": 0.5,
+          "emissive": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "checker": false
+        },
+        "combine": {
+          "type": "union"
+        },
+        "modifiers": {
+          "mirror": [
+            false,
+            false,
+            false
+          ],
+          "elongate": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "round": 0.0,
+          "onion": 0.0
+        }
+      },
+      {
+        "id": "face/lower_lip",
+        "label": "lower lip",
+        "role": "lower_lip",
+        "group": "actor",
+        "shape": {
+          "type": "csg",
+          "expression": {
+            "type": "smooth_union",
+            "a": {
+              "type": "smooth_union",
+              "a": {
+                "type": "smooth_union",
+                "a": {
+                  "type": "smooth_union",
+                  "a": {
+                    "type": "smooth_union",
+                    "a": {
+                      "type": "smooth_union",
+                      "a": {
+                        "type": "smooth_union",
+                        "a": {
+                          "type": "smooth_union",
+                          "a": {
+                            "type": "smooth_union",
+                            "a": {
+                              "type": "smooth_union",
+                              "a": {
+                                "type": "smooth_union",
+                                "a": {
+                                  "type": "smooth_union",
+                                  "a": {
+                                    "type": "smooth_union",
+                                    "a": {
+                                      "type": "smooth_union",
+                                      "a": {
+                                        "type": "smooth_union",
+                                        "a": {
+                                          "type": "smooth_union",
+                                          "a": {
+                                            "type": "smooth_union",
+                                            "a": {
+                                              "type": "smooth_union",
+                                              "a": {
+                                                "type": "smooth_union",
+                                                "a": {
+                                                  "type": "smooth_union",
+                                                  "a": {
+                                                    "type": "smooth_union",
+                                                    "a": {
+                                                      "type": "smooth_union",
+                                                      "a": {
+                                                        "type": "smooth_union",
+                                                        "a": {
+                                                          "type": "primitive",
+                                                          "shape": {
+                                                            "type": "capsule",
+                                                            "a": [
+                                                              -0.288686,
+                                                              -0.34655,
+                                                              0.72237486
+                                                            ],
+                                                            "b": [
+                                                              -0.28621626,
+                                                              -0.35129344,
+                                                              0.72187036
+                                                            ],
+                                                            "radius": 0.022
+                                                          }
+                                                        },
+                                                        "b": {
+                                                          "type": "primitive",
+                                                          "shape": {
+                                                            "type": "capsule",
+                                                            "a": [
+                                                              -0.28621626,
+                                                              -0.35129344,
+                                                              0.72187036
+                                                            ],
+                                                            "b": [
+                                                              -0.27884924,
+                                                              -0.35665303,
+                                                              0.7231222
+                                                            ],
+                                                            "radius": 0.022
+                                                          }
+                                                        },
+                                                        "radius": 0.0055
+                                                      },
+                                                      "b": {
+                                                        "type": "primitive",
+                                                        "shape": {
+                                                          "type": "capsule",
+                                                          "a": [
+                                                            -0.27884924,
+                                                            -0.35665303,
+                                                            0.7231222
+                                                          ],
+                                                          "b": [
+                                                            -0.2667111,
+                                                            -0.3624835,
+                                                            0.7259564
+                                                          ],
+                                                          "radius": 0.022
+                                                        }
+                                                      },
+                                                      "radius": 0.0055
+                                                    },
+                                                    "b": {
+                                                      "type": "primitive",
+                                                      "shape": {
+                                                        "type": "capsule",
+                                                        "a": [
+                                                          -0.2667111,
+                                                          -0.3624835,
+                                                          0.7259564
+                                                        ],
+                                                        "b": [
+                                                          -0.25000942,
+                                                          -0.36859998,
+                                                          0.73008645
+                                                        ],
+                                                        "radius": 0.022
+                                                      }
+                                                    },
+                                                    "radius": 0.0055
+                                                  },
+                                                  "b": {
+                                                    "type": "primitive",
+                                                    "shape": {
+                                                      "type": "capsule",
+                                                      "a": [
+                                                        -0.25000942,
+                                                        -0.36859998,
+                                                        0.73008645
+                                                      ],
+                                                      "b": [
+                                                        -0.22902997,
+                                                        -0.37478676,
+                                                        0.73514146
+                                                      ],
+                                                      "radius": 0.022
+                                                    }
+                                                  },
+                                                  "radius": 0.0055
+                                                },
+                                                "b": {
+                                                  "type": "primitive",
+                                                  "shape": {
+                                                    "type": "capsule",
+                                                    "a": [
+                                                      -0.22902997,
+                                                      -0.37478676,
+                                                      0.73514146
+                                                    ],
+                                                    "b": [
+                                                      -0.2041318,
+                                                      -0.3808088,
+                                                      0.74069965
+                                                    ],
+                                                    "radius": 0.022
+                                                  }
+                                                },
+                                                "radius": 0.0055
+                                              },
+                                              "b": {
+                                                "type": "primitive",
+                                                "shape": {
+                                                  "type": "capsule",
+                                                  "a": [
+                                                    -0.2041318,
+                                                    -0.3808088,
+                                                    0.74069965
+                                                  ],
+                                                  "b": [
+                                                    -0.17574093,
+                                                    -0.38642424,
+                                                    0.7463227
+                                                  ],
+                                                  "radius": 0.022
+                                                }
+                                              },
+                                              "radius": 0.0055
+                                            },
+                                            "b": {
+                                              "type": "primitive",
+                                              "shape": {
+                                                "type": "capsule",
+                                                "a": [
+                                                  -0.17574093,
+                                                  -0.38642424,
+                                                  0.7463227
+                                                ],
+                                                "b": [
+                                                  -0.14434297,
+                                                  -0.39139843,
+                                                  0.7515877
+                                                ],
+                                                "radius": 0.022
+                                              }
+                                            },
+                                            "radius": 0.0055
+                                          },
+                                          "b": {
+                                            "type": "primitive",
+                                            "shape": {
+                                              "type": "capsule",
+                                              "a": [
+                                                -0.14434297,
+                                                -0.39139843,
+                                                0.7515877
+                                              ],
+                                              "b": [
+                                                -0.110475264,
+                                                -0.395517,
+                                                0.7561143
+                                              ],
+                                              "radius": 0.022
+                                            }
+                                          },
+                                          "radius": 0.0055
+                                        },
+                                        "b": {
+                                          "type": "primitive",
+                                          "shape": {
+                                            "type": "capsule",
+                                            "a": [
+                                              -0.110475264,
+                                              -0.395517,
+                                              0.7561143
+                                            ],
+                                            "b": [
+                                              -0.07471742,
+                                              -0.39859837,
+                                              0.75958616
+                                            ],
+                                            "radius": 0.022
+                                          }
+                                        },
+                                        "radius": 0.0055
+                                      },
+                                      "b": {
+                                        "type": "primitive",
+                                        "shape": {
+                                          "type": "capsule",
+                                          "a": [
+                                            -0.07471742,
+                                            -0.39859837,
+                                            0.75958616
+                                          ],
+                                          "b": [
+                                            -0.037681006,
+                                            -0.40050477,
+                                            0.7617666
+                                          ],
+                                          "radius": 0.022
+                                        }
+                                      },
+                                      "radius": 0.0055
+                                    },
+                                    "b": {
+                                      "type": "primitive",
+                                      "shape": {
+                                        "type": "capsule",
+                                        "a": [
+                                          -0.037681006,
+                                          -0.40050477,
+                                          0.7617666
+                                        ],
+                                        "b": [
+                                          3.4425462e-9,
+                                          -0.40115,
+                                          0.76250994
+                                        ],
+                                        "radius": 0.022
+                                      }
+                                    },
+                                    "radius": 0.0055
+                                  },
+                                  "b": {
+                                    "type": "primitive",
+                                    "shape": {
+                                      "type": "capsule",
+                                      "a": [
+                                        3.4425462e-9,
+                                        -0.40115,
+                                        0.76250994
+                                      ],
+                                      "b": [
+                                        0.037681147,
+                                        -0.40050474,
+                                        0.7617667
+                                      ],
+                                      "radius": 0.022
+                                    }
+                                  },
+                                  "radius": 0.0055
+                                },
+                                "b": {
+                                  "type": "primitive",
+                                  "shape": {
+                                    "type": "capsule",
+                                    "a": [
+                                      0.037681147,
+                                      -0.40050474,
+                                      0.7617667
+                                    ],
+                                    "b": [
+                                      0.074717425,
+                                      -0.39859837,
+                                      0.75958616
+                                    ],
+                                    "radius": 0.022
+                                  }
+                                },
+                                "radius": 0.0055
+                              },
+                              "b": {
+                                "type": "primitive",
+                                "shape": {
+                                  "type": "capsule",
+                                  "a": [
+                                    0.074717425,
+                                    -0.39859837,
+                                    0.75958616
+                                  ],
+                                  "b": [
+                                    0.1104754,
+                                    -0.39551693,
+                                    0.7561143
+                                  ],
+                                  "radius": 0.022
+                                }
+                              },
+                              "radius": 0.0055
+                            },
+                            "b": {
+                              "type": "primitive",
+                              "shape": {
+                                "type": "capsule",
+                                "a": [
+                                  0.1104754,
+                                  -0.39551693,
+                                  0.7561143
+                                ],
+                                "b": [
+                                  0.14434311,
+                                  -0.39139843,
+                                  0.7515877
+                                ],
+                                "radius": 0.022
+                              }
+                            },
+                            "radius": 0.0055
+                          },
+                          "b": {
+                            "type": "primitive",
+                            "shape": {
+                              "type": "capsule",
+                              "a": [
+                                0.14434311,
+                                -0.39139843,
+                                0.7515877
+                              ],
+                              "b": [
+                                0.17574094,
+                                -0.38642424,
+                                0.74632263
+                              ],
+                              "radius": 0.022
+                            }
+                          },
+                          "radius": 0.0055
+                        },
+                        "b": {
+                          "type": "primitive",
+                          "shape": {
+                            "type": "capsule",
+                            "a": [
+                              0.17574094,
+                              -0.38642424,
+                              0.74632263
+                            ],
+                            "b": [
+                              0.2041319,
+                              -0.38080874,
+                              0.7406996
+                            ],
+                            "radius": 0.022
+                          }
+                        },
+                        "radius": 0.0055
+                      },
+                      "b": {
+                        "type": "primitive",
+                        "shape": {
+                          "type": "capsule",
+                          "a": [
+                            0.2041319,
+                            -0.38080874,
+                            0.7406996
+                          ],
+                          "b": [
+                            0.2290301,
+                            -0.37478676,
+                            0.73514146
+                          ],
+                          "radius": 0.022
+                        }
+                      },
+                      "radius": 0.0055
+                    },
+                    "b": {
+                      "type": "primitive",
+                      "shape": {
+                        "type": "capsule",
+                        "a": [
+                          0.2290301,
+                          -0.37478676,
+                          0.73514146
+                        ],
+                        "b": [
+                          0.2500094,
+                          -0.3686,
+                          0.73008645
+                        ],
+                        "radius": 0.022
+                      }
+                    },
+                    "radius": 0.0055
+                  },
+                  "b": {
+                    "type": "primitive",
+                    "shape": {
+                      "type": "capsule",
+                      "a": [
+                        0.2500094,
+                        -0.3686,
+                        0.73008645
+                      ],
+                      "b": [
+                        0.26671112,
+                        -0.3624835,
+                        0.7259564
+                      ],
+                      "radius": 0.022
+                    }
+                  },
+                  "radius": 0.0055
+                },
+                "b": {
+                  "type": "primitive",
+                  "shape": {
+                    "type": "capsule",
+                    "a": [
+                      0.26671112,
+                      -0.3624835,
+                      0.7259564
+                    ],
+                    "b": [
+                      0.27884927,
+                      -0.35665303,
+                      0.7231221
+                    ],
+                    "radius": 0.022
+                  }
+                },
+                "radius": 0.0055
+              },
+              "b": {
+                "type": "primitive",
+                "shape": {
+                  "type": "capsule",
+                  "a": [
+                    0.27884927,
+                    -0.35665303,
+                    0.7231221
+                  ],
+                  "b": [
+                    0.28621626,
+                    -0.35129344,
+                    0.72187036
+                  ],
+                  "radius": 0.022
+                }
+              },
+              "radius": 0.0055
+            },
+            "b": {
+              "type": "primitive",
+              "shape": {
+                "type": "capsule",
+                "a": [
+                  0.28621626,
+                  -0.35129344,
+                  0.72187036
+                ],
+                "b": [
+                  0.288686,
+                  -0.34655,
+                  0.72237486
+                ],
+                "radius": 0.022
+              }
+            },
+            "radius": 0.0055
+          }
+        },
+        "position": [
+          2.0,
+          0.0,
+          0.0
+        ],
+        "rotation_degrees": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": 1.0,
+        "material": {
+          "albedo": [
+            0.42,
+            0.16,
+            0.18
+          ],
+          "metallic": 0.0,
+          "roughness": 0.55,
+          "reflectivity": 0.0,
+          "specular": 0.5,
+          "emissive": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "checker": false
+        },
+        "combine": {
+          "type": "union"
+        },
+        "modifiers": {
+          "mirror": [
+            false,
+            false,
+            false
+          ],
+          "elongate": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "round": 0.0,
+          "onion": 0.0
+        }
+      },
+      {
+        "id": "face/mouth_interior",
+        "label": "mouth interior",
+        "role": "mouth_interior",
+        "group": "actor",
+        "shape": {
+          "type": "csg",
+          "expression": {
+            "type": "transform",
+            "shape": {
+              "type": "primitive",
+              "shape": {
+                "type": "round_box",
+                "half_extents": [
+                  0.26559114,
+                  0.012064998,
+                  0.0336
+                ],
+                "radius": 0.006032499
+              }
+            },
+            "position": [
+              0.0,
+              -0.36755,
+              0.39120302
+            ],
+            "rotation_degrees": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "scale": 1.0
+          }
+        },
+        "position": [
+          2.0,
+          0.0,
+          0.0
+        ],
+        "rotation_degrees": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": 1.0,
+        "material": {
+          "albedo": [
+            0.055,
+            0.009,
+            0.014
+          ],
+          "metallic": 0.0,
+          "roughness": 0.9,
+          "reflectivity": 0.0,
+          "specular": 0.5,
+          "emissive": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "checker": false
+        },
+        "combine": {
+          "type": "union"
+        },
+        "modifiers": {
+          "mirror": [
+            false,
+            false,
+            false
+          ],
+          "elongate": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "round": 0.0,
+          "onion": 0.0
+        }
+      },
+      {
+        "id": "patch",
+        "label": "",
+        "role": "simulated_cloth",
+        "group": "",
+        "shape": {
+          "type": "surface",
+          "vertices": [
+            [
+              4.9,
+              3.0,
+              2.9
+            ],
+            [
+              5.1,
+              3.0,
+              2.9
+            ],
+            [
+              4.9,
+              3.0,
+              3.1
+            ],
+            [
+              5.1,
+              3.0,
+              3.1
+            ]
+          ],
+          "triangles": [
+            [
+              0,
+              1,
+              2
+            ],
+            [
+              1,
+              3,
+              2
+            ]
+          ],
+          "thickness_m": 0.004
+        },
+        "position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotation_degrees": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": 1.0,
+        "material": {
+          "albedo": [
+            0.32,
+            0.65,
+            0.62
+          ],
+          "metallic": 0.0,
+          "roughness": 0.65,
+          "reflectivity": 0.0,
+          "specular": 0.5,
+          "emissive": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "checker": false
+        },
+        "combine": {
+          "type": "union"
+        },
+        "modifiers": {
+          "mirror": [
+            false,
+            false,
+            false
+          ],
+          "elongate": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "round": 0.0,
+          "onion": 0.0
+        }
+      }
+    ],
+    "camera": {
+      "eye": [
+        3.0,
+        2.0,
+        5.0
+      ],
+      "target": [
+        0.0,
+        0.9,
+        0.0
+      ],
+      "up": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "fov_degrees": 38.0
+    },
+    "settings": {
+      "width": 320,
+      "height": 320,
+      "quality": "balanced",
+      "exposure": 1.0,
+      "shadows": true,
+      "ao": true,
+      "fog_density": 0.0,
+      "sky_ambient": [
+        0.35,
+        0.35,
+        0.35
+      ],
+      "spatial_aa": null,
+      "film": {
+        "transparent_background": false,
+        "exr_data_channels": false,
+        "aperture_radius_m": 0.0,
+        "focus_distance_m": 5.0,
+        "shutter_open_seconds": 0.0,
+        "shutter_close_seconds": 0.0,
+        "shutter_samples": 1
+      }
+    },
+    "lights": [
+      {
+        "vector": [
+          0.6,
+          0.8,
+          0.7
+        ],
+        "color": [
+          2.4,
+          2.2,
+          1.9
+        ],
+        "directional": true,
+        "radius": 0.06
+      },
+      {
+        "vector": [
+          -0.6,
+          0.3,
+          0.2
+        ],
+        "color": [
+          0.4,
+          0.6,
+          0.8
+        ],
+        "directional": true,
+        "radius": 0.1
+      }
+    ],
+    "garments": [],
+    "faces": [
+      {
+        "id": "face",
+        "character": "actor",
+        "controls": {
+          "blink_left": 1.0,
+          "blink_right": 0.7,
+          "jaw_open": 1.0,
+          "lip_round": 0.25,
+          "lip_wide": 0.2,
+          "smile": 0.3,
+          "gaze_x": 0.25,
+          "gaze_y": -0.5,
+          "brow_left": 1.0,
+          "brow_right": -0.5,
+          "lip_seal": 1.0
+        },
+        "generated_object_ids": [
+          "face/left_upper_lid",
+          "face/left_lower_lid",
+          "face/right_upper_lid",
+          "face/right_lower_lid",
+          "face/upper_lip",
+          "face/lower_lip",
+          "face/mouth_interior"
+        ]
+      }
+    ],
+    "cloths": [
+      {
+        "id": "patch",
+        "rest_vertices": [
+          [
+            4.9,
+            3.0,
+            2.9
+          ],
+          [
+            5.1,
+            3.0,
+            2.9
+          ],
+          [
+            4.9,
+            3.0,
+            3.1
+          ],
+          [
+            5.1,
+            3.0,
+            3.1
+          ]
+        ],
+        "triangles": [
+          [
+            0,
+            1,
+            2
+          ],
+          [
+            1,
+            3,
+            2
+          ]
+        ],
+        "thickness_m": 0.004,
+        "inverse_masses": [
+          50.0,
+          50.0,
+          50.0,
+          50.0
+        ],
+        "pins": [],
+        "collision_object_ids": [
+          "actor/head"
+        ],
+        "settings": {
+          "fixed_dt": 0.041666668,
+          "substeps": 1,
+          "iterations": 1,
+          "gravity": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "damping_per_second": 0.8,
+          "stretch_compliance": 1e-7,
+          "bend_compliance": 0.001,
+          "collision_thickness": 0.003,
+          "contact_iterations": 2,
+          "self_collision": false,
+          "self_collision_thickness": 0.006,
+          "friction_coefficient": 0.0,
+          "self_collision_max_candidates": 200000,
+          "self_collision_max_work": 5000000,
+          "max_penetration_m": 0.002,
+          "max_relative_edge_error": 0.25
+        },
+        "cache": {
+          "algorithm": "xpbd-dihedral-self-contact-v3",
+          "clip": "hold",
+          "duration": 0.041666668,
+          "source_fnv1a64": "a74762e6844dda15",
+          "frames_fnv1a64": "25460ea0454aa9a2",
+          "frames": [
+            {
+              "time": 0.0,
+              "vertices": [
+                [
+                  4.9,
+                  3.0,
+                  2.9
+                ],
+                [
+                  5.1,
+                  3.0,
+                  2.9
+                ],
+                [
+                  4.9,
+                  3.0,
+                  3.1
+                ],
+                [
+                  5.1,
+                  3.0,
+                  3.1
+                ]
+              ],
+              "diagnostics": {
+                "max_relative_edge_error": 0.0,
+                "max_contact_penetration": 0.0,
+                "max_speed": 0.0,
+                "contact_projections": 0,
+                "degenerate_bend_projections": 0
+              }
+            },
+            {
+              "time": 0.041666668,
+              "vertices": [
+                [
+                  4.9,
+                  3.0,
+                  2.9
+                ],
+                [
+                  5.1,
+                  3.0,
+                  2.9
+                ],
+                [
+                  4.9,
+                  3.0,
+                  3.1
+                ],
+                [
+                  5.1,
+                  3.0,
+                  3.1
+                ]
+              ],
+              "diagnostics": {
+                "max_relative_edge_error": 0.0,
+                "max_contact_penetration": 0.0,
+                "max_speed": 0.0,
+                "contact_projections": 0,
+                "degenerate_bend_projections": 0
+              }
+            }
+          ],
+          "diagnostics": {
+            "max_relative_edge_error": 0.0,
+            "max_contact_penetration": 0.0,
+            "max_speed": 0.0,
+            "contact_projections": 0,
+            "degenerate_bend_projections": 0
+          }
+        }
+      }
+    ],
+    "joints": [],
+    "clips": [
+      {
+        "id": "hold",
+        "duration": 0.041666668,
+        "tracks": [],
+        "face_tracks": [],
+        "camera_keys": [],
+        "camera_easing": "linear"
+      }
+    ]
+  }
+}

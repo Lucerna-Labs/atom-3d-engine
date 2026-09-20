@@ -1,0 +1,17 @@
+[package]
+name = "mm3e-editor"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.89"
+description = "Transactional, headless agent editor for the MM3E SDF engine"
+
+[dependencies]
+mm3e-kit = { path = "../mm3e-kit" }
+mm3e-orchestrator = { path = "../mm3e-orchestrator" }
+serde = { version = "1", features = ["derive"] }
+serde_json = { version = "1", features = ["float_roundtrip"] }
+schemars = "1"
+sha2 = "0.10"
+base64 = "0.22"
+png = "0.18"
+exr = { version = "1.74", default-features = false }

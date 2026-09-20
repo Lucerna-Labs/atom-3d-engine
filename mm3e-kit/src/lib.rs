@@ -12,15 +12,35 @@
 //! this crate grows an `if` that makes a value judgement, that `if` belongs in the orchestrator.
 
 pub mod camera;
+pub mod cloth;
 pub mod color;
+pub mod csg;
+pub mod deform;
 pub mod dual;
+pub mod exact_geometry;
 pub mod font;
 pub mod framebuffer;
+pub mod ik;
 pub mod march;
+pub mod mesh_correspondence;
+pub mod mesh_topology;
+pub mod meshing;
+pub mod meshing_boolean;
+pub mod meshing_local;
+mod normal_filter;
+pub mod pattern;
+pub mod radial_embedding;
 pub mod sdf;
 pub mod shade;
+pub mod surface;
+pub mod surface_features;
+pub mod surface_intersections;
+pub mod tangent;
+pub mod texture;
+pub mod triangle;
 pub mod vec;
 pub mod volume;
+pub mod wave;
 
 pub use camera::Camera;
 pub use color::{Material, Rgba};
@@ -93,3 +113,7 @@ pub mod atoms {
         idx
     }
 }
+
+pub mod rotation_limit;
+
+pub mod limited_ik;

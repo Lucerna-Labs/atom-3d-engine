@@ -1,0 +1,21 @@
+{
+  "format": "exact-geometry-3d-fraction-v1",
+  "points": 6890,
+  "orientation_queries": 7971,
+  "sign_counts": {
+    "-1": 3385,
+    "0": 1200,
+    "1": 3386
+  },
+  "groups": {
+    "all_binary64_exponents": 2098,
+    "cancellation_and_mixed_extremes": 7,
+    "arbitrary_rational_rotations_with_negative_homogeneous_scales": 16,
+    "long_rational_quad_and_collinear_families": 16,
+    "signed_expansion_quadruples": 32
+  },
+  "sign_convention": "determinant4 rows [x,y,z,1]; det(a-d,b-d,c-d)",
+  "generator_sha256": "00a556a852699946ab18f2583d54f3f1d8be63e6e883477485fdfa075985993a",
+  "oracle_sha256": "87e267f7442ac2f452cb8f0b6c70881506919d0a3fa3794674e8bac5f94c691e",
+  "method": "Python Fraction expansion sums and exact homogeneous division; independent 24-term determinant4 and all 24 point permutations"
+}

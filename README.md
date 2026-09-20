@@ -2,6 +2,30 @@
 
 A [Lucerna Labs](https://github.com/Lucerna-Labs) project.
 
+For the current agent editor, retained fixtures, and reproducible checks, see
+[recreate the checkpoint](artifacts/REPRODUCTION.md). Film-production readiness
+remains [incomplete](docs/PRODUCTION_READINESS.md).
+
+The first **agent-operated editor layer** is now available in
+[`mm3e-editor`](mm3e-editor/README.md): a headless JSON command service with stable object IDs,
+atomic edits, undo/redo, geometry observations, native save/load, PNG previews and an editable
+humanoid blockout. It runs the existing CPU renderer on Linux. See the
+[first-principles design](docs/AGENT_EDITOR_FIRST_PRINCIPLES.md) for the research, architecture,
+current limits, and path toward a character editor.
+
+[Animation](docs/AGENT_EDITOR_ANIMATION.md) adds persistent clips, object and camera keyframes,
+a 16-joint rig for the humanoid, stateless pose inspection, and timed PNG sequence export.
+
+Film-workflow development now includes [facial controls](docs/FACIAL_CONTROLS.md),
+[fitted clothing](docs/GARMENTS.md), scene-linear RGB EXR output, and
+[durable project sessions](docs/DURABLE_PROJECTS.md). The
+[limb controls](docs/IK_CONTROLS.md) and [clothing pattern tools](docs/PATTERNS.md)
+extend agent authoring to target poses and explicit garment outlines, holes and seams. The
+[UV texture tools](docs/UV_TEXTURES.md) add embedded PNGs, independent corner charts and
+surface detail that follows native skin/morph and cloth deformation. The
+[readiness record](docs/PRODUCTION_READINESS.md) distinguishes verified capabilities from
+open film-release gates. The project is not yet declared production ready.
+
 A real-time 3-D engine built from pure math primitives, in std-only Rust. The core
 (`mm3e-kit` + `mm3e-orchestrator`) is **dependency-free** — no Vello, no `image`, no math crate, no
 windowing crate; it rolls its own vectors, matrices, quaternions, signed-distance fields, sphere

@@ -11,13 +11,17 @@
 
 mod accel;
 pub mod anim;
+pub mod appearance;
+pub mod film;
 pub mod gi;
 pub mod mesh;
+pub mod meshing;
 pub mod particles;
 pub mod physics;
 pub mod post;
 pub mod reproject;
 pub mod rigid;
+pub mod sampling;
 pub mod scene_io;
 
 use mm3e_kit::{
@@ -29,12 +33,15 @@ use mm3e_kit::{
     march::{Hit, Marcher, Ray},
     sdf::{self, Field},
     shade,
+    surface::TriangleSurface,
     vec::{Transform, Vec3},
     volume::SdfVolume,
 };
 
 use gi::GiVolume;
 use post::Post;
+
+pub use film::{render_film, render_film_checked, render_film_with_threads, FilmFrame, Lens};
 
 /// What the renderer outputs. `Beauty` is the lit image; the rest are arbitrary-output-variable
 /// (AOV) debug passes — the tooling a real engine ships for inspecting a frame.
@@ -190,14 +197,28 @@ pub enum Prim {
         n: Vec3,
         h: f32,
     },
+    /// An isolated analytic CSG expression registered in `Scene::csgs`.
+    Csg {
+        id: u32,
+    },
     /// A baked signed-distance volume, usually produced by `mesh::bake_sdf`.
     Volume {
+        id: u32,
+    },
+    /// A native finite triangle shell registered in `Scene::surfaces`.
+    Surface {
         id: u32,
     },
 }
 
 impl Prim {
-    fn distance(&self, local: Vec3, volumes: &[SdfVolume]) -> f32 {
+    fn distance(
+        &self,
+        local: Vec3,
+        volumes: &[SdfVolume],
+        csgs: &[mm3e_kit::csg::Expr],
+        surfaces: &[TriangleSurface],
+    ) -> f32 {
         match *self {
             Prim::Sphere { r } => sdf::sphere(local, r),
             Prim::Box { half } => sdf::boxed(local, half),
@@ -210,6 +231,8 @@ impl Prim {
             Prim::Octahedron { s } => sdf::octahedron(local, s),
             Prim::HexPrism { r, h } => sdf::hex_prism(local, r, h),
             Prim::Plane { n, h } => sdf::plane(local, n, h),
+            Prim::Csg { id } => csgs.get(id as usize).expect("unregistered CSG expression").distance(local),
+            Prim::Surface { id } => surfaces.get(id as usize).expect("unregistered triangle surface").distance(local),
             Prim::Volume { id } => match volumes.is_empty() {
                 true => f32::INFINITY,
                 false => volumes[id as usize % volumes.len()].sample(local),
@@ -231,12 +254,19 @@ impl Prim {
             Prim::Octahedron { s } => dual::octahedron(lx, ly, lz, s),
             Prim::HexPrism { r, h } => dual::hex_prism(lx, ly, lz, r, h),
             Prim::Plane { n, h } => dual::plane(lx, ly, lz, n, h),
-            Prim::Volume { .. } => unreachable!("volume prims are excluded by Object::is_dual_safe"),
+            Prim::Volume { .. } | Prim::Csg { .. } | Prim::Surface { .. } => {
+                unreachable!("volume/CSG/surface prims are excluded by Object::is_dual_safe")
+            }
         }
     }
 
     /// A conservative local-space bounding sphere `(center, radius)`, or `None` if unbounded.
-    fn local_bound(&self, volumes: &[SdfVolume]) -> Option<(Vec3, f32)> {
+    fn local_bound(
+        &self,
+        volumes: &[SdfVolume],
+        csgs: &[mm3e_kit::csg::Expr],
+        surfaces: &[TriangleSurface],
+    ) -> Option<(Vec3, f32)> {
         match *self {
             Prim::Sphere { r } => Some((Vec3::ZERO, r)),
             Prim::Box { half } => Some((Vec3::ZERO, half.length())),
@@ -249,6 +279,8 @@ impl Prim {
             Prim::Octahedron { s } => Some((Vec3::ZERO, s)),
             Prim::HexPrism { r, h } => Some((Vec3::ZERO, (r * r + h * h).sqrt())),
             Prim::Plane { .. } => None,
+            Prim::Csg { id } => csgs.get(id as usize).expect("unregistered CSG expression").bound(),
+            Prim::Surface { id } => Some(surfaces.get(id as usize).expect("unregistered triangle surface").bound()),
             Prim::Volume { id } => match volumes.is_empty() {
                 true => None,
                 false => {
@@ -345,7 +377,27 @@ impl Object {
     }
 
     /// This object's contribution to the world field at world point `p`, with modifiers applied.
-    pub(crate) fn field(&self, p: Vec3, volumes: &[SdfVolume]) -> Field {
+    pub(crate) fn field(
+        &self,
+        p: Vec3,
+        volumes: &[SdfVolume],
+        csgs: &[mm3e_kit::csg::Expr],
+        surfaces: &[TriangleSurface],
+    ) -> Field {
+        let local = self.local_point(p);
+        let m = &self.mods;
+        let mut d = self.prim.distance(local, volumes, csgs, surfaces) * self.xform.scale;
+        if m.round != 0.0 {
+            d = sdf::op_round(d, m.round);
+        }
+        if m.onion != 0.0 {
+            d = sdf::op_onion(d, m.onion);
+        }
+        Field::new(d, self.mat)
+    }
+
+    /// The shared object-domain mapping used by rendering and boundary-preserving meshing.
+    pub(crate) fn local_point(&self, p: Vec3) -> Vec3 {
         let mut local = self.xform.to_local(p);
         let m = &self.mods;
         if m.any_mirror() {
@@ -363,15 +415,7 @@ impl Object {
         if m.bend != 0.0 {
             local = sdf::op_bend(local, m.bend);
         }
-        // Rotation+translation is an isometry, so the world distance is `scale · sdf(local)`.
-        let mut d = self.prim.distance(local, volumes) * self.xform.scale;
-        if m.round != 0.0 {
-            d = sdf::op_round(d, m.round);
-        }
-        if m.onion != 0.0 {
-            d = sdf::op_onion(d, m.onion);
-        }
-        Field::new(d, self.mat)
+        local
     }
 
     /// True iff `field_dual` can represent this object exactly. `twist`/`bend` rotate the query
@@ -380,11 +424,13 @@ impl Object {
     /// either falls the WHOLE scene back to the tetrahedron normal (see `Scene::is_dual_safe`),
     /// never a silently-wrong gradient.
     fn is_dual_safe(&self) -> bool {
-        self.mods.twist == 0.0 && self.mods.bend == 0.0 && !matches!(self.prim, Prim::Volume { .. })
+        self.mods.twist == 0.0
+            && self.mods.bend == 0.0
+            && !matches!(self.prim, Prim::Volume { .. } | Prim::Csg { .. } | Prim::Surface { .. })
     }
 
     /// Dual-number twin of [`Object::field`] — same pipeline (transform → modifiers → primitive →
-    /// distance-space modifiers → world scale), carrying the exact gradient throughout. Callers
+    /// world scale → distance-space modifiers), carrying the exact gradient throughout. Callers
     /// must check `is_dual_safe` first; this does not itself guard against twist/bend.
     fn field_dual(&self, wx: Dual, wy: Dual, wz: Dual) -> Dual {
         let xf = &self.xform;
@@ -421,8 +467,13 @@ impl Object {
     /// field fold: outside the sphere the cheap lower bound `|p − center| − radius` is a valid
     /// distance underestimate, so the expensive exact SDF can be skipped without ever letting
     /// the sphere tracer overshoot a surface.
-    pub(crate) fn world_bound(&self, volumes: &[SdfVolume]) -> Option<(Vec3, f32)> {
-        let (mut center, mut radius) = self.prim.local_bound(volumes)?;
+    pub(crate) fn world_bound(
+        &self,
+        volumes: &[SdfVolume],
+        csgs: &[mm3e_kit::csg::Expr],
+        surfaces: &[TriangleSurface],
+    ) -> Option<(Vec3, f32)> {
+        let (mut center, mut radius) = self.prim.local_bound(volumes, csgs, surfaces)?;
         let m = &self.mods;
         if m.repeat != Vec3::ZERO || m.bend != 0.0 {
             return None; // unbounded / non-convex in a way the sphere can't conservatively cover
@@ -506,7 +557,9 @@ impl Light {
 }
 
 /// Everything the renderer needs: geometry, materials, lights, atmosphere, and quality knobs.
+#[derive(Clone)]
 pub struct Scene {
+    pub appearance: appearance::Appearance,
     pub width: u32,
     pub height: u32,
     pub objects: Vec<Object>,
@@ -532,11 +585,16 @@ pub struct Scene {
     pub gi: Option<GiVolume>,
     /// Baked signed-distance volumes, referenced by `Prim::Volume` ids like materials.
     pub volumes: Vec<SdfVolume>,
+    /// Isolated analytic expressions; one expression supplies one top-level object.
+    pub csgs: Vec<mm3e_kit::csg::Expr>,
+    /// Immutable native triangle shells with source topology and exact nearest-surface BVHs.
+    pub surfaces: Vec<TriangleSurface>,
 }
 
 impl Scene {
     pub fn new(width: u32, height: u32) -> Scene {
         Scene {
+            appearance: appearance::Appearance::default(),
             width,
             height,
             objects: Vec::new(),
@@ -556,6 +614,8 @@ impl Scene {
             mode: RenderMode::Beauty,
             gi: None,
             volumes: Vec::new(),
+            csgs: Vec::new(),
+            surfaces: Vec::new(),
         }
     }
 
@@ -576,6 +636,21 @@ impl Scene {
         self.volumes.push(v);
         (self.volumes.len() - 1) as u32
     }
+    /// Validate and register an object-local expression. Invalid expressions leave the scene unchanged.
+    pub fn csg(&mut self, expr: mm3e_kit::csg::Expr) -> Result<u32, String> {
+        expr.validate()?;
+        let id = u32::try_from(self.csgs.len()).map_err(|_| "too many CSG expressions")?;
+        self.csgs.push(expr);
+        Ok(id)
+    }
+    /// Register an already validated triangle shell, returning its `Prim::Surface` id.
+    /// Materials and placement belong to `Object`, as for all other primitives. The immutable
+    /// `TriangleSurface` constructor guarantees valid geometry before the scene changes.
+    pub fn surface(&mut self, surface: TriangleSurface) -> Result<u32, String> {
+        let id = u32::try_from(self.surfaces.len()).map_err(|_| "too many triangle surfaces")?;
+        self.surfaces.push(surface);
+        Ok(id)
+    }
     pub fn add(&mut self, obj: Object) {
         self.objects.push(obj);
     }
@@ -588,14 +663,19 @@ impl Scene {
     /// the scene is assembled. `dims` is the probe grid resolution, `samples` the rays per cube
     /// face (1 = axis only, ≥5 = a cone). No-op for an empty / unbounded scene.
     pub fn bake_gi(&mut self, dims: (usize, usize, usize), samples: u32) {
-        let spheres: Vec<(Vec3, f32)> = self.objects.iter().filter_map(|o| o.world_bound(&self.volumes)).collect();
+        self.bake_gi_checked(dims, samples).expect("GI appearance failed; use bake_gi_checked for a recoverable error");
+    }
+    pub(crate) fn bake_gi_unchecked(&mut self, dims: (usize, usize, usize), samples: u32) {
+        let spheres: Vec<(Vec3, f32)> =
+            self.objects.iter().filter_map(|o| o.world_bound(&self.volumes, &self.csgs, &self.surfaces)).collect();
         let Some((lo, hi)) = gi::bounds_of(&spheres, 1.5) else { return };
         // Build the volume in a block so the immutable borrows of `self` (the field + gather
         // closures) end before the mutable assignment to `self.gi`.
         let vol = {
             let field = self.world();
             let dual_safe = self.is_dual_safe();
-            let gather = |o: Vec3, d: Vec3| self.gather(&field, dual_safe, o, d);
+            let gather =
+                |o: Vec3, d: Vec3| self.gather(&field, dual_safe, o, d, 2.0 / f64::from(samples.max(1)).sqrt());
             GiVolume::bake(lo, hi, dims, samples, &gather)
         };
         self.gi = Some(vol);
@@ -603,7 +683,7 @@ impl Scene {
 
     /// One-bounce incoming radiance along a ray, used while baking GI: march, then shade the hit
     /// with direct lighting only (no shadows, for speed) or return the sky on a miss.
-    fn gather(&self, field: &dyn Fn(Vec3) -> Field, dual_safe: bool, origin: Vec3, dir: Vec3) -> Vec3 {
+    fn gather(&self, field: &dyn Fn(Vec3) -> Field, dual_safe: bool, origin: Vec3, dir: Vec3, spread: f64) -> Vec3 {
         let ray = Ray { origin, dir };
         let hit = if dual_safe {
             self.marcher.march_with(field, |p| self.normal_dual(p), &ray)
@@ -613,16 +693,18 @@ impl Scene {
         if !hit.hit {
             return shade::sky_diffuse(dir, self.sun_dir);
         }
-        let m = self.materials[hit.mat as usize % self.materials.len()];
-        let albedo = surface_albedo(&m, hit.pos);
-        let n = hit.normal;
+        let resolved =
+            self.material_for_hit(&hit, f64::from(hit.t) * spread / f64::from(hit.normal.dot(dir).abs().max(0.001)));
+        let m = resolved.material;
+        let albedo = m.albedo;
+        let n = resolved.normal;
         let mut c = m.emissive;
         for light in &self.lights {
             let (l_dir, l_dist) = light.toward(hit.pos);
             let ndl = shade::lambert(n, l_dir);
-            if ndl > 0.0 {
-                let w = ndl * light.attenuation(l_dist) / std::f32::consts::PI;
-                c = c + albedo.cmul(light.color).scale(w);
+            if ndl > 0.0 && (!resolved.normal_mapped || hit.normal.dot(l_dir) > 0.0) {
+                let outgoing = shade::brdf(n, l_dir, dir * -1.0, albedo, m.metallic, m.roughness, m.specular);
+                c = c + outgoing.cmul(light.color).scale(light.attenuation(l_dist));
             }
         }
         c
@@ -632,6 +714,36 @@ impl Scene {
     /// the same `Fn(Vec3) -> Field` the renderer marches (e.g. distance/normal for collision).
     pub fn field(&self) -> impl Fn(Vec3) -> Field + '_ {
         self.world()
+    }
+
+    /// Evaluate the authored field without substituting acceleration bounds. Editing tools
+    /// should use this for scalar observations: `field()` may return a bounding-sphere
+    /// underestimate far from geometry. This preserves authored CSG order and material rules.
+    ///
+    /// This is the authored scalar value, not a promise of exact Euclidean distance: smooth
+    /// CSG, ellipsoids, sampled volumes and domain warps retain their existing approximations.
+    /// An empty scene returns `Field::FAR`.
+    pub fn sample_authored(&self, p: Vec3) -> Field {
+        let mut acc = None;
+        for object in &self.objects {
+            let field = object.field(p, &self.volumes, &self.csgs, &self.surfaces);
+            acc = Some(match acc {
+                None => field,
+                Some(previous) => match object.combine {
+                    Combine::Union => sdf::union(previous, field),
+                    Combine::Smooth(k) => sdf::smooth_union(previous, field, k),
+                    Combine::Subtract => sdf::subtract(previous, field),
+                },
+            });
+        }
+        acc.unwrap_or(Field::FAR)
+    }
+
+    /// Sample one object's authored field in world coordinates, before scene-wide CSG.
+    /// Useful when another part overlaps the geometry being measured by an editing tool.
+    /// The index refers to this scene snapshot; editors should resolve their stable IDs first.
+    pub fn sample_object(&self, index: usize, p: Vec3) -> Option<Field> {
+        self.objects.get(index).map(|object| object.field(p, &self.volumes, &self.csgs, &self.surfaces))
     }
 
     /// The world field: a bounded `fold` of every object's contribution into one distance +
@@ -644,15 +756,16 @@ impl Scene {
     /// substrate a full BVH would later sit on. The `slack` covers the widest smooth-blend so
     /// near-surface blends always use the exact field.
     fn world(&self) -> impl Fn(Vec3) -> Field + '_ {
-        let plan = accel::WorldPlan::build(&self.objects, &self.volumes);
-        move |p: Vec3| plan.eval(p, &self.objects, &self.volumes)
+        let plan = accel::WorldPlan::build(&self.objects, &self.volumes, &self.csgs, &self.surfaces);
+        move |p: Vec3| plan.eval(p, &self.objects, &self.volumes, &self.csgs, &self.surfaces)
     }
 
     /// Reference linear fold. Kept hidden for validation and for comparing the accelerated world
     /// against the exact authored order when changing the BVH planner.
     #[doc(hidden)]
     pub fn world_linear(&self) -> impl Fn(Vec3) -> Field + '_ {
-        let bounds: Vec<Option<(Vec3, f32)>> = self.objects.iter().map(|o| o.world_bound(&self.volumes)).collect();
+        let bounds: Vec<Option<(Vec3, f32)>> =
+            self.objects.iter().map(|o| o.world_bound(&self.volumes, &self.csgs, &self.surfaces)).collect();
         let slack = self
             .objects
             .iter()
@@ -672,10 +785,10 @@ impl Scene {
                         if lower > slack {
                             Field::new(lower, obj.mat)
                         } else {
-                            obj.field(p, &self.volumes)
+                            obj.field(p, &self.volumes, &self.csgs, &self.surfaces)
                         }
                     }
-                    None => obj.field(p, &self.volumes),
+                    None => obj.field(p, &self.volumes, &self.csgs, &self.surfaces),
                 };
                 // The first placed object seeds the field; after that, its combine mode rules.
                 if first {
@@ -735,23 +848,80 @@ fn frame_len(w: u32, h: u32) -> usize {
 /// **linear-HDR** buffer that a post pass (bloom, exposure, ACES, gamma) then resolves; in a
 /// debug AOV mode the band is shaded straight to display pixels. Deterministic in thread count.
 pub fn render(scene: &Scene, camera: &Camera) -> Framebuffer {
+    render_checked(scene, camera).expect("scene appearance failed; use render_checked for a recoverable error")
+}
+
+/// Checked appearance boundary for texture-aware clients. Evaluation failures are
+/// returned instead of allowing an incomplete textured image to be delivered.
+pub fn render_checked(scene: &Scene, camera: &Camera) -> Result<Framebuffer, String> {
+    render_with_threads_checked(scene, camera, available_render_threads())
+}
+
+/// The canonical renderer with an explicit worker budget. Zero selects one worker; the
+/// number of workers is capped by image rows. Shading and post-processing match [`render`].
+pub fn render_with_threads(scene: &Scene, camera: &Camera, threads: usize) -> Framebuffer {
+    render_with_threads_checked(scene, camera, threads)
+        .expect("scene appearance failed; use render_with_threads_checked for a recoverable error")
+}
+pub fn render_with_threads_checked(scene: &Scene, camera: &Camera, threads: usize) -> Result<Framebuffer, String> {
+    scene.validate_appearance()?;
+    let frame = render_unchecked(scene, camera, threads);
+    scene.appearance.status()?;
+    Ok(frame)
+}
+fn render_unchecked(scene: &Scene, camera: &Camera, threads: usize) -> Framebuffer {
     let (w, h) = (scene.width, scene.height);
     let dual_safe = scene.is_dual_safe();
 
     if scene.mode != RenderMode::Beauty {
-        return render_bands(scene, camera, |sc, f, cam, x, y| aov_pixel(sc, f, cam, x, y, dual_safe));
+        return render_bands_with_threads(scene, camera, threads, |sc, f, cam, x, y| {
+            aov_pixel(sc, f, cam, x, y, dual_safe)
+        });
     }
 
+    post::resolve(&render_linear_unchecked(scene, camera, threads), w, h, &scene.post)
+}
+
+/// Render row-major scene-linear beauty radiance before exposure, bloom, tone mapping or
+/// display transfer. Values above one remain intact. This always computes beauty regardless
+/// of `scene.mode`, so callers cannot accidentally encode a debug AOV as linear radiance.
+pub fn render_linear(scene: &Scene, camera: &Camera) -> Vec<Vec3> {
+    render_linear_checked(scene, camera)
+        .expect("scene appearance failed; use render_linear_checked for a recoverable error")
+}
+pub fn render_linear_checked(scene: &Scene, camera: &Camera) -> Result<Vec<Vec3>, String> {
+    render_linear_with_threads_checked(scene, camera, available_render_threads())
+}
+
+/// Scene-linear beauty radiance with an explicit worker budget; deterministic in worker
+/// count. Zero selects one worker, and no empty row workers are spawned.
+pub fn render_linear_with_threads(scene: &Scene, camera: &Camera, threads: usize) -> Vec<Vec3> {
+    render_linear_with_threads_checked(scene, camera, threads)
+        .expect("scene appearance failed; use render_linear_with_threads_checked for a recoverable error")
+}
+pub fn render_linear_with_threads_checked(scene: &Scene, camera: &Camera, threads: usize) -> Result<Vec<Vec3>, String> {
+    scene.validate_appearance()?;
+    let frame = render_linear_unchecked(scene, camera, threads);
+    scene.appearance.status()?;
+    Ok(frame)
+}
+fn render_linear_unchecked(scene: &Scene, camera: &Camera, threads: usize) -> Vec<Vec3> {
+    let (w, h) = (scene.width, scene.height);
+    if w == 0 || h == 0 {
+        return Vec::new();
+    }
+    let dual_safe = scene.is_dual_safe();
     // Beauty path: each thread builds the *concrete* world-field closure and shades its band with
     // it, so the marcher and the per-primitive loop monomorphize and inline (no `&dyn Fn` call in
     // the ~8M-evals-per-frame hot path). Results are linear HDR, resolved through the post pass.
-    let threads = std::thread::available_parallelism().map(|n| n.get()).unwrap_or(1).max(1);
-    let band = (h as usize).div_ceil(threads);
+    let threads = threads.max(1).min((h as usize).max(1));
+    let band = h as usize / threads;
+    let extra_rows = h as usize % threads;
     let bands: Vec<(u32, Vec<Vec3>)> = std::thread::scope(|s| {
         let handles: Vec<_> = (0..threads)
             .map(|ti| {
-                let y0 = (ti * band) as u32;
-                let y1 = (((ti + 1) * band) as u32).min(h);
+                let y0 = (ti * band + ti.min(extra_rows)) as u32;
+                let y1 = y0 + band as u32 + u32::from(ti < extra_rows);
                 s.spawn(move || {
                     let field = scene.world();
                     let mut rows = Vec::with_capacity(((y1.saturating_sub(y0)) * w) as usize);
@@ -773,12 +943,26 @@ pub fn render(scene: &Scene, camera: &Camera) -> Framebuffer {
             hdr[y0 as usize * w as usize + i] = px;
         }
     }
-    post::resolve(&hdr, w, h, &scene.post)
+    hdr
 }
 
 /// Render a **G-buffer frame** — display colour + primary-ray depth + the camera — for reprojection
 /// ([`reproject`]). One sample/pixel, no post pass: it is the base the cheap fake frames warp.
 pub fn render_gbuffer(scene: &Scene, camera: &Camera, movers: &[(Vec3, f32)]) -> reproject::GFrame {
+    render_gbuffer_checked(scene, camera, movers)
+        .expect("G-buffer appearance failed; use render_gbuffer_checked for a recoverable error")
+}
+pub fn render_gbuffer_checked(
+    scene: &Scene,
+    camera: &Camera,
+    movers: &[(Vec3, f32)],
+) -> Result<reproject::GFrame, String> {
+    scene.validate_appearance()?;
+    let frame = render_gbuffer_unchecked(scene, camera, movers);
+    scene.appearance.status()?;
+    Ok(frame)
+}
+fn render_gbuffer_unchecked(scene: &Scene, camera: &Camera, movers: &[(Vec3, f32)]) -> reproject::GFrame {
     type GBand = (u32, Vec<([u8; 4], f32, i32)>); // (first row, [color, depth, obj] per pixel)
     let (w, h) = (scene.width, scene.height);
     let dual_safe = scene.is_dual_safe();
@@ -806,7 +990,19 @@ pub fn render_gbuffer(scene: &Scene, camera: &Camera, movers: &[(Vec3, f32)]) ->
                                     .position(|(c, r)| (hit.pos - *c).length() <= r + 0.05)
                                     .map(|k| k as i32)
                                     .unwrap_or(-1);
-                                (shade_hit(scene, &field, &hit, &ray, 0, dual_safe), hit.t, o)
+                                (
+                                    shade_hit(
+                                        scene,
+                                        &field,
+                                        &hit,
+                                        &ray,
+                                        0,
+                                        dual_safe,
+                                        TextureFootprint::pixel(camera, scene, 1),
+                                    ),
+                                    hit.t,
+                                    o,
+                                )
                             } else {
                                 (shade::sky(ray.dir, scene.sun_dir), f32::INFINITY, -1)
                             };
@@ -847,6 +1043,14 @@ pub fn reproject_hybrid(
     scene: &Scene,
     mover_deltas: &[Vec3],
 ) -> Vec<[u8; 4]> {
+    if !scene.appearance.is_empty() {
+        // GFrame has no UV/content/footprint provenance. Re-evaluate textured
+        // scenes at the requested view instead of reusing stale color samples.
+        let mut current = scene.clone();
+        current.width = prev.width;
+        current.height = prev.height;
+        return render(&current, new_camera).to_rgba8(Rgba::rgb8(0, 0, 0)).as_chunks::<4>().0.to_vec();
+    }
     let (w, h) = (prev.width, prev.height);
     let (mut out, filled) = reproject::warp(prev, new_camera, mover_deltas);
     let field = scene.world();
@@ -864,7 +1068,7 @@ pub fn reproject_hybrid(
                 scene.marcher.march(&field, &ray)
             };
             let hdr = if hit.hit {
-                shade_hit(scene, &field, &hit, &ray, 0, dual_safe)
+                shade_hit(scene, &field, &hit, &ray, 0, dual_safe, TextureFootprint::pixel(new_camera, scene, 1))
             } else {
                 shade::sky(ray.dir, scene.sun_dir)
             };
@@ -917,20 +1121,35 @@ pub fn render_checkerboard(scene: &Scene, camera: &Camera) -> Framebuffer {
 
 /// Shade every row-band in parallel (scoped std threads), one pixel per `shade` callback, and
 /// stitch the bands into a framebuffer. Shared by the beauty and AOV render paths.
+fn available_render_threads() -> usize {
+    std::thread::available_parallelism().map(|n| n.get()).unwrap_or(1)
+}
+
 fn render_bands<F>(scene: &Scene, camera: &Camera, shade: F) -> Framebuffer
 where
     F: Fn(&Scene, &dyn Fn(Vec3) -> Field, &Camera, u32, u32) -> Rgba + Sync,
 {
+    render_bands_with_threads(scene, camera, available_render_threads(), shade)
+}
+
+fn render_bands_with_threads<F>(scene: &Scene, camera: &Camera, threads: usize, shade: F) -> Framebuffer
+where
+    F: Fn(&Scene, &dyn Fn(Vec3) -> Field, &Camera, u32, u32) -> Rgba + Sync,
+{
     let (w, h) = (scene.width, scene.height);
-    let threads = std::thread::available_parallelism().map(|n| n.get()).unwrap_or(1).max(1);
-    let band = (h as usize).div_ceil(threads);
+    if w == 0 || h == 0 {
+        return Framebuffer::new(w, h, Rgba::rgb8(0, 0, 0));
+    }
+    let threads = threads.max(1).min((h as usize).max(1));
+    let band = h as usize / threads;
+    let extra_rows = h as usize % threads;
     let shade = &shade;
 
     let bands: Vec<(u32, Vec<Rgba>)> = std::thread::scope(|s| {
         let handles: Vec<_> = (0..threads)
             .map(|ti| {
-                let y0 = (ti * band) as u32;
-                let y1 = (((ti + 1) * band) as u32).min(h);
+                let y0 = (ti * band + ti.min(extra_rows)) as u32;
+                let y1 = y0 + band as u32 + u32::from(ti < extra_rows);
                 s.spawn(move || {
                     let field = scene.world();
                     let mut rows = Vec::with_capacity(((y1.saturating_sub(y0)) * w) as usize);
@@ -985,7 +1204,10 @@ fn aov_pixel(scene: &Scene, field: &dyn Fn(Vec3) -> Field, camera: &Camera, x: u
         RenderMode::Steps => heatmap(hit.steps as f32 / scene.marcher.max_steps as f32),
         RenderMode::Albedo => {
             if hit.hit {
-                surface_albedo(&scene.materials[hit.mat as usize % scene.materials.len()], hit.pos)
+                scene
+                    .material_for_hit(&hit, TextureFootprint::pixel(camera, scene, 1).projected(&hit, &ray))
+                    .material
+                    .albedo
             } else {
                 Vec3::ZERO
             }
@@ -1014,7 +1236,7 @@ fn shade_pixel<F: Fn(Vec3) -> Field + ?Sized>(
             let ox = (sx as f32 + 0.5) / n as f32;
             let oy = (sy as f32 + 0.5) / n as f32;
             let ray = camera.ray(x as f32 + ox, y as f32 + oy, scene.width, scene.height);
-            acc = acc + trace(scene, field, &ray, 0, dual_safe);
+            acc = acc + trace(scene, field, &ray, 0, dual_safe, TextureFootprint::pixel(camera, scene, n));
         }
     }
     acc.scale(inv_samples)
@@ -1022,7 +1244,32 @@ fn shade_pixel<F: Fn(Vec3) -> Field + ?Sized>(
 
 /// Trace one ray and return its linear HDR radiance. Recurses for mirror reflections. Generic over
 /// the field type so the beauty path monomorphizes (the primitive loop inlines into the marcher).
-fn trace<F: Fn(Vec3) -> Field + ?Sized>(scene: &Scene, field: &F, ray: &Ray, depth: u32, dual_safe: bool) -> Vec3 {
+#[derive(Clone, Copy, Default)]
+struct TextureFootprint {
+    width: f64,
+    spread: f64,
+}
+impl TextureFootprint {
+    fn pixel(camera: &Camera, scene: &Scene, samples_per_axis: u32) -> Self {
+        Self {
+            width: 0.0,
+            spread: 2.0 * f64::from(camera.fov_scale)
+                / f64::from(scene.height.max(1))
+                / f64::from(samples_per_axis.max(1)),
+        }
+    }
+    fn projected(self, hit: &Hit, ray: &Ray) -> f64 {
+        (self.width + f64::from(hit.t.max(0.0)) * self.spread) / f64::from(hit.normal.dot(ray.dir).abs().max(0.001))
+    }
+}
+fn trace<F: Fn(Vec3) -> Field + ?Sized>(
+    scene: &Scene,
+    field: &F,
+    ray: &Ray,
+    depth: u32,
+    dual_safe: bool,
+    footprint: TextureFootprint,
+) -> Vec3 {
     let hit = if dual_safe {
         scene.marcher.march_with(field, |p| scene.normal_dual(p), ray)
     } else {
@@ -1031,7 +1278,7 @@ fn trace<F: Fn(Vec3) -> Field + ?Sized>(scene: &Scene, field: &F, ray: &Ray, dep
     if !hit.hit {
         return shade::sky(ray.dir, scene.sun_dir);
     }
-    shade_hit(scene, field, &hit, ray, depth, dual_safe)
+    shade_hit(scene, field, &hit, ray, depth, dual_safe, footprint)
 }
 
 /// Shade a confirmed surface hit — the post-hit half of [`trace`], factored out so the G-buffer
@@ -1043,16 +1290,19 @@ fn shade_hit<F: Fn(Vec3) -> Field + ?Sized>(
     ray: &Ray,
     depth: u32,
     dual_safe: bool,
+    footprint: TextureFootprint,
 ) -> Vec3 {
-    let m = scene.materials[hit.mat as usize % scene.materials.len()];
-    let albedo = surface_albedo(&m, hit.pos);
-    let normal = hit.normal;
+    let projected = footprint.projected(hit, ray);
+    let resolved = scene.material_for_hit(hit, projected);
+    let m = resolved.material;
+    let albedo = m.albedo;
+    let normal = resolved.normal;
     let view = ray.dir.scale(-1.0);
 
     // Ambient term: diffuse image-based lighting from the sky + baked GI + a constant floor,
     // all gated by ambient occlusion. This replaces the old flat ambient with real environment
     // and bounce light.
-    let occ = if scene.ao { scene.marcher.ambient_occlusion(field, hit.pos, normal) } else { 1.0 };
+    let occ = if scene.ao { scene.marcher.ambient_occlusion(field, hit.pos, hit.normal) } else { 1.0 };
     let gi = scene.gi.as_ref().map(|g| g.sample(hit.pos, normal)).unwrap_or(Vec3::ZERO);
     let ambient_irr = ibl_irradiance(scene, normal) + gi + scene.ambient;
     let mut radiance = albedo.cmul(ambient_irr).scale(occ);
@@ -1062,14 +1312,14 @@ fn shade_hit<F: Fn(Vec3) -> Field + ?Sized>(
     // needed (the old `order` call allocated a Vec for every shaded pixel — pure waste).
     for light in &scene.lights {
         let (l_dir, l_dist) = light.toward(hit.pos);
-        if shade::lambert(normal, l_dir) <= 0.0 {
+        if shade::lambert(normal, l_dir) <= 0.0 || (resolved.normal_mapped && hit.normal.dot(l_dir) <= 0.0) {
             continue;
         }
         // Lift the shadow ray off the surface to avoid self-intersection acne.
         let shadow = if scene.shadows {
             let max_t = l_dist.min(scene.marcher.max_dist);
             let lift = (scene.marcher.normal_h * 2.0).max(0.01);
-            scene.marcher.soft_shadow(field, hit.pos + normal.scale(lift), l_dir, max_t, light.shadow_k(l_dist))
+            scene.marcher.soft_shadow(field, hit.pos + hit.normal.scale(lift), l_dir, max_t, light.shadow_k(l_dist))
         } else {
             1.0
         };
@@ -1087,8 +1337,19 @@ fn shade_hit<F: Fn(Vec3) -> Field + ?Sized>(
         let cos = normal.dot(view).max(0.0);
         let fr = shade::fresnel_schlick(cos, m.reflectivity);
         let rdir = ray.dir.reflect(normal).normalize();
-        let rorigin = hit.pos + normal.scale((scene.marcher.normal_h * 2.0).max(0.02));
-        let refl = trace(scene, field, &Ray { origin: rorigin, dir: rdir }, depth + 1, dual_safe);
+        let rorigin = hit.pos + hit.normal.scale((scene.marcher.normal_h * 2.0).max(0.02));
+        let refl = if resolved.normal_mapped && rdir.dot(hit.normal) <= 0.0 {
+            Vec3::ZERO
+        } else {
+            trace(
+                scene,
+                field,
+                &Ray { origin: rorigin, dir: rdir },
+                depth + 1,
+                dual_safe,
+                TextureFootprint { width: projected, spread: footprint.spread },
+            )
+        };
         radiance = radiance.scale(1.0 - fr) + refl.scale(fr);
     }
 
@@ -1213,7 +1474,7 @@ mod dual_wiring_tests {
         if !hit.hit {
             return shade::sky(ray.dir, scene.sun_dir);
         }
-        shade_hit(scene, field, &hit, ray, 0, false)
+        shade_hit(scene, field, &hit, ray, 0, false, TextureFootprint::default())
     }
 
     /// Render both paths over a small grid and return (max, mean) absolute radiance delta.
@@ -1358,5 +1619,25 @@ mod dual_wiring_tests {
             }
         }
         assert!(any_nonzero, "rendered frame is entirely black");
+    }
+}
+
+#[cfg(test)]
+mod explicit_worker_tests {
+    use super::*;
+    use std::{collections::HashSet, sync::Mutex};
+
+    #[test]
+    fn explicit_aov_worker_budget_drives_the_actual_render_threads() {
+        let scene = Scene::new(3, 17);
+        let camera = Camera::look_at(Vec3::new(0.0, 0.0, 5.0), Vec3::ZERO, Vec3::new(0.0, 1.0, 0.0), 1.0);
+        for (budget, expected) in [(0, 1), (1, 1), (4, 4), (12, 12), (30, 17)] {
+            let workers = Mutex::new(HashSet::new());
+            render_bands_with_threads(&scene, &camera, budget, |_, _, _, _, _| {
+                workers.lock().unwrap().insert(std::thread::current().id());
+                Rgba::rgb8(0, 0, 0)
+            });
+            assert_eq!(workers.into_inner().unwrap().len(), expected);
+        }
     }
 }

@@ -9,6 +9,9 @@
 
 pub mod wgsl;
 
+#[cfg(test)]
+mod film_depth_tests;
+
 use mm3e_kit::camera::Camera;
 use mm3e_kit::color::Rgba;
 use mm3e_kit::framebuffer::Framebuffer;
@@ -126,12 +129,18 @@ impl GpuRenderer {
 
     /// Compile `scene` into a GPU pipeline + render targets at `width × height`.
     pub fn compile(&self, scene: &Scene, width: u32, height: u32) -> GpuScene {
-        assert!(
-            width >= 1 && height >= 1 && width <= 16384 && height <= 16384,
-            "GpuRenderer::compile: {width}x{height} out of range 1..=16384"
-        );
+        self.compile_checked(scene, width, height).expect("GPU scene compilation rejected")
+    }
+
+    /// Reject unsupported native geometry and invalid dimensions before allocating GPU
+    /// resources. Device/shader validation still follows wgpu's existing error handling.
+    /// Native triangle surfaces require the CPU renderer; there is no silent substitution.
+    pub fn compile_checked(&self, scene: &Scene, width: u32, height: u32) -> Result<GpuScene, String> {
+        if width == 0 || height == 0 || width > 16384 || height > 16384 {
+            return Err(format!("GpuRenderer::compile: {width}x{height} out of range 1..=16384"));
+        }
+        let source = wgsl::build_shader_checked(scene)?;
         let device = &self.device;
-        let source = wgsl::build_shader(scene);
         let module = device.create_shader_module(wgpu::ShaderModuleDescriptor {
             label: Some("mm3e-sdf"),
             source: wgpu::ShaderSource::Wgsl(source.into()),
@@ -261,7 +270,7 @@ impl GpuRenderer {
             mapped_at_creation: false,
         });
 
-        GpuScene {
+        Ok(GpuScene {
             pipeline,
             bind_group,
             uniform_buf,
@@ -272,7 +281,7 @@ impl GpuRenderer {
             bpr,
             aa: scene.aa.max(1),
             bounces: scene.bounces,
-        }
+        })
     }
 }
 

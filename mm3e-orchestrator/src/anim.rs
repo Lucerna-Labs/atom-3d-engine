@@ -31,6 +31,8 @@ impl Lerp for Quat {
 /// Per-segment easing applied to the normalized time before interpolation.
 #[derive(Clone, Copy, Debug)]
 pub enum Easing {
+    /// Hold the left key until the exact time of the next key.
+    Step,
     Linear,
     SmoothStep,
     EaseIn,
@@ -41,6 +43,13 @@ impl Easing {
     fn apply(self, t: f32) -> f32 {
         let t = t.clamp(0.0, 1.0);
         match self {
+            Easing::Step => {
+                if t < 1.0 {
+                    0.0
+                } else {
+                    1.0
+                }
+            }
             Easing::Linear => t,
             Easing::SmoothStep => t * t * (3.0 - 2.0 * t),
             Easing::EaseIn => t * t,
@@ -85,6 +94,15 @@ impl<T: Lerp> Track<T> {
             let (t0, v0) = w[0];
             let (t1, v1) = w[1];
             if time >= t0 && time <= t1 {
+                // Authored key values must survive exactly. Interpolating with t=1 can
+                // lose small scalars to cancellation, and quaternion interpolation
+                // can normalize an otherwise unchanged value.
+                if time == t1 {
+                    return Some(v1);
+                }
+                if time == t0 || matches!(self.easing, Easing::Step) {
+                    return Some(v0);
+                }
                 let local = if t1 > t0 { (time - t0) / (t1 - t0) } else { 0.0 };
                 return Some(v0.lerp(v1, self.easing.apply(local)));
             }

@@ -4,9 +4,9 @@
 //! order-sensitive, so this module only reorders maximal runs of plain hard unions, where `min` is
 //! associative/commutative. It still preserves material tie-breaking by earliest object index.
 
-use mm3e_kit::sdf::Field;
-use mm3e_kit::vec::Vec3;
 use mm3e_kit::volume::SdfVolume;
+use mm3e_kit::{csg::Expr, sdf::Field};
+use mm3e_kit::{surface::TriangleSurface, vec::Vec3};
 
 use crate::{Combine, Object};
 
@@ -76,7 +76,15 @@ impl Bvh {
         (nodes.len() - 1) as u32
     }
 
-    fn query(&self, p: Vec3, objects: &[Object], volumes: &[SdfVolume], slack: f32, best: &mut (f32, i64, u32)) {
+    fn query(
+        &self,
+        p: Vec3,
+        objects: &[Object],
+        geometry: (&[SdfVolume], &[Expr], &[TriangleSurface]),
+        slack: f32,
+        best: &mut (f32, i64, u32),
+    ) {
+        let (volumes, csgs, surfaces) = geometry;
         let mut stack = [0u32; 64];
         let mut sp = 0usize;
         stack[sp] = self.root;
@@ -90,8 +98,11 @@ impl Bvh {
             }
             if node.leaf >= 0 {
                 let i = node.leaf as usize;
-                let contrib =
-                    if lower > slack { Field::new(lower, objects[i].mat) } else { objects[i].field(p, volumes) };
+                let contrib = if lower > slack {
+                    Field::new(lower, objects[i].mat)
+                } else {
+                    objects[i].field(p, volumes, csgs, surfaces)
+                };
                 if contrib.dist < best.0 || (contrib.dist == best.0 && (i as i64) < best.1) {
                     *best = (contrib.dist, i as i64, contrib.mat);
                 }
@@ -120,8 +131,13 @@ pub(crate) struct WorldPlan {
 }
 
 impl WorldPlan {
-    pub(crate) fn build(objects: &[Object], volumes: &[SdfVolume]) -> WorldPlan {
-        let bounds: Vec<Option<(Vec3, f32)>> = objects.iter().map(|o| o.world_bound(volumes)).collect();
+    pub(crate) fn build(
+        objects: &[Object],
+        volumes: &[SdfVolume],
+        csgs: &[Expr],
+        surfaces: &[TriangleSurface],
+    ) -> WorldPlan {
+        let bounds: Vec<Option<(Vec3, f32)>> = objects.iter().map(|o| o.world_bound(volumes, csgs, surfaces)).collect();
         let slack = objects
             .iter()
             .map(|o| match o.combine {
@@ -168,28 +184,43 @@ impl WorldPlan {
         WorldPlan { segments, bounds, slack }
     }
 
-    fn contrib(&self, i: usize, p: Vec3, objects: &[Object], volumes: &[SdfVolume]) -> Field {
+    fn contrib(
+        &self,
+        i: usize,
+        p: Vec3,
+        objects: &[Object],
+        volumes: &[SdfVolume],
+        csgs: &[Expr],
+        surfaces: &[TriangleSurface],
+    ) -> Field {
         match self.bounds[i] {
             Some((c, r)) => {
                 let lower = (p - c).length() - r;
                 if lower > self.slack {
                     Field::new(lower, objects[i].mat)
                 } else {
-                    objects[i].field(p, volumes)
+                    objects[i].field(p, volumes, csgs, surfaces)
                 }
             }
-            None => objects[i].field(p, volumes),
+            None => objects[i].field(p, volumes, csgs, surfaces),
         }
     }
 
-    pub(crate) fn eval(&self, p: Vec3, objects: &[Object], volumes: &[SdfVolume]) -> Field {
+    pub(crate) fn eval(
+        &self,
+        p: Vec3,
+        objects: &[Object],
+        volumes: &[SdfVolume],
+        csgs: &[Expr],
+        surfaces: &[TriangleSurface],
+    ) -> Field {
         use mm3e_kit::sdf;
         let mut acc = Field::FAR;
         let mut seeded = false;
         for seg in &self.segments {
             match seg {
                 Segment::One(i) => {
-                    let f = self.contrib(*i, p, objects, volumes);
+                    let f = self.contrib(*i, p, objects, volumes, csgs, surfaces);
                     if !seeded {
                         acc = f;
                         seeded = true;
@@ -204,13 +235,13 @@ impl WorldPlan {
                 Segment::Run { tree, unbounded } => {
                     let mut best = if seeded { (acc.dist, -1i64, acc.mat) } else { (f32::INFINITY, i64::MAX, 0u32) };
                     for &i in unbounded {
-                        let f = objects[i].field(p, volumes);
+                        let f = objects[i].field(p, volumes, csgs, surfaces);
                         if f.dist < best.0 || (f.dist == best.0 && (i as i64) < best.1) {
                             best = (f.dist, i as i64, f.mat);
                         }
                     }
                     if let Some(t) = tree {
-                        t.query(p, objects, volumes, self.slack, &mut best);
+                        t.query(p, objects, (volumes, csgs, surfaces), self.slack, &mut best);
                     }
                     acc = Field::new(best.0, best.2);
                     seeded = true;

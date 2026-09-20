@@ -8,12 +8,17 @@
 //! Controls: W/A/S/D move (camera-relative), mouse-drag to look, Space to jump, Esc to quit.
 //! Run (Windows desktop): cargo run -p mm3e-gpu --example game --release
 
+#[cfg(windows)]
 use mm3e_gpu::{DynSphere, GpuRenderer};
+#[cfg(windows)]
 use mm3e_kit::color::Material;
+#[cfg(windows)]
 use mm3e_kit::vec::{Mat3, Transform, Vec3};
+#[cfg(windows)]
 use mm3e_orchestrator::{Light, Object, Prim, Scene};
 
 /// The static level (floor + obstacles). Physics collides against this; it is baked into the shader.
+#[cfg(windows)]
 fn build_level() -> Scene {
     let mut scene = Scene::new(854, 480);
     scene.aa = 1;

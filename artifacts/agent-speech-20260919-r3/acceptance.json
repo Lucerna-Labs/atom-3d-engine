@@ -1,0 +1,640 @@
+{
+  "status": "passed",
+  "editor_sha256": "422b38b0b4f54ecee5957ad8926783128ee6d980d36b629fc2ca9a5e00f1f011",
+  "backend_binary_sha256": "d9aefa0627f843cd306333cc761368c4750ceddfa43236f0e607fa074249390c",
+  "harness_sha256": "8c702a8dfba4810b08ebc78c4b5c7b83a7a73d08a57c7cddabe247bcd4e1b0a6",
+  "profile": {
+    "poses": [
+      {
+        "shape": "A",
+        "values": [
+          {
+            "type": "face",
+            "face": "face",
+            "channel": "jaw_open",
+            "value": 0
+          },
+          {
+            "type": "face",
+            "face": "face",
+            "channel": "lip_round",
+            "value": 0
+          },
+          {
+            "type": "face",
+            "face": "face",
+            "channel": "lip_wide",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "shape": "B",
+        "values": [
+          {
+            "type": "face",
+            "face": "face",
+            "channel": "jaw_open",
+            "value": 0.18
+          },
+          {
+            "type": "face",
+            "face": "face",
+            "channel": "lip_round",
+            "value": 0
+          },
+          {
+            "type": "face",
+            "face": "face",
+            "channel": "lip_wide",
+            "value": 0.35
+          }
+        ]
+      },
+      {
+        "shape": "C",
+        "values": [
+          {
+            "type": "face",
+            "face": "face",
+            "channel": "jaw_open",
+            "value": 0.65
+          },
+          {
+            "type": "face",
+            "face": "face",
+            "channel": "lip_round",
+            "value": 0
+          },
+          {
+            "type": "face",
+            "face": "face",
+            "channel": "lip_wide",
+            "value": 0.2
+          }
+        ]
+      },
+      {
+        "shape": "D",
+        "values": [
+          {
+            "type": "face",
+            "face": "face",
+            "channel": "jaw_open",
+            "value": 1
+          },
+          {
+            "type": "face",
+            "face": "face",
+            "channel": "lip_round",
+            "value": 0
+          },
+          {
+            "type": "face",
+            "face": "face",
+            "channel": "lip_wide",
+            "value": 0.1
+          }
+        ]
+      },
+      {
+        "shape": "E",
+        "values": [
+          {
+            "type": "face",
+            "face": "face",
+            "channel": "jaw_open",
+            "value": 0.45
+          },
+          {
+            "type": "face",
+            "face": "face",
+            "channel": "lip_round",
+            "value": 1
+          },
+          {
+            "type": "face",
+            "face": "face",
+            "channel": "lip_wide",
+            "value": -0.3
+          }
+        ]
+      },
+      {
+        "shape": "F",
+        "values": [
+          {
+            "type": "face",
+            "face": "face",
+            "channel": "jaw_open",
+            "value": 0.18
+          },
+          {
+            "type": "face",
+            "face": "face",
+            "channel": "lip_round",
+            "value": 0.5
+          },
+          {
+            "type": "face",
+            "face": "face",
+            "channel": "lip_wide",
+            "value": -0.2
+          }
+        ]
+      },
+      {
+        "shape": "X",
+        "values": [
+          {
+            "type": "face",
+            "face": "face",
+            "channel": "jaw_open",
+            "value": 0
+          },
+          {
+            "type": "face",
+            "face": "face",
+            "channel": "lip_round",
+            "value": 0
+          },
+          {
+            "type": "face",
+            "face": "face",
+            "channel": "lip_wide",
+            "value": 0
+          }
+        ]
+      }
+    ]
+  },
+  "scope": "Real local recognition and editable procedural rig mapping with source PCM preservation; not forced alignment, measured recognition accuracy, acting approval or anatomical calibration.",
+  "checks": {
+    "backend": {
+      "binary_sha256": "d9aefa0627f843cd306333cc761368c4750ceddfa43236f0e607fa074249390c",
+      "name": "rhubarb",
+      "resources_sha256": "232559704e3a86abe32156ec1d8445bc5cda36a6fb20c04d0ad5c7b68bc3377f",
+      "version": "1.14.0"
+    },
+    "original_source_sha256": "c17de07edc5c105d80b880be27ffdef8f60011e7778d8bf09101b7e37c550f57",
+    "spoken_cues": [
+      {
+        "end_cs": 28,
+        "shape": "X",
+        "start_cs": 0
+      },
+      {
+        "end_cs": 35,
+        "shape": "C",
+        "start_cs": 28
+      },
+      {
+        "end_cs": 55,
+        "shape": "E",
+        "start_cs": 35
+      },
+      {
+        "end_cs": 62,
+        "shape": "F",
+        "start_cs": 55
+      },
+      {
+        "end_cs": 89,
+        "shape": "B",
+        "start_cs": 62
+      },
+      {
+        "end_cs": 98,
+        "shape": "F",
+        "start_cs": 89
+      },
+      {
+        "end_cs": 105,
+        "shape": "B",
+        "start_cs": 98
+      },
+      {
+        "end_cs": 119,
+        "shape": "A",
+        "start_cs": 105
+      },
+      {
+        "end_cs": 154,
+        "shape": "C",
+        "start_cs": 119
+      },
+      {
+        "end_cs": 161,
+        "shape": "B",
+        "start_cs": 154
+      },
+      {
+        "end_cs": 170,
+        "shape": "A",
+        "start_cs": 161
+      },
+      {
+        "end_cs": 196,
+        "shape": "B",
+        "start_cs": 170
+      },
+      {
+        "end_cs": 224,
+        "shape": "C",
+        "start_cs": 196
+      },
+      {
+        "end_cs": 231,
+        "shape": "B",
+        "start_cs": 224
+      },
+      {
+        "end_cs": 238,
+        "shape": "C",
+        "start_cs": 231
+      },
+      {
+        "end_cs": 245,
+        "shape": "B",
+        "start_cs": 238
+      },
+      {
+        "end_cs": 273,
+        "shape": "E",
+        "start_cs": 245
+      },
+      {
+        "end_cs": 280,
+        "shape": "B",
+        "start_cs": 273
+      },
+      {
+        "end_cs": 293,
+        "shape": "X",
+        "start_cs": 280
+      }
+    ],
+    "silence_cues": [
+      {
+        "end_cs": 293,
+        "shape": "X",
+        "start_cs": 0
+      }
+    ],
+    "selected_stereo_range": {
+      "start_sample": 317,
+      "frame_count": 32000
+    },
+    "selected_channel": 1,
+    "cue_boundary_checks": [
+      {
+        "time": 0.0,
+        "shape": "X",
+        "controls": {
+          "blink_left": 0.0,
+          "blink_right": 0.0,
+          "jaw_open": 0.0,
+          "lip_round": 0.0,
+          "lip_wide": 0.0,
+          "smile": 0.0
+        },
+        "cavity_open": false,
+        "field_sha256": "35bf6ce71f9b0fee0a610c3514be7d569435e520838f5e8e88707764576a9189"
+      },
+      {
+        "time": 0.28,
+        "shape": "C",
+        "controls": {
+          "blink_left": 0.0,
+          "blink_right": 0.0,
+          "jaw_open": 0.6499999761581421,
+          "lip_round": 0.0,
+          "lip_wide": 0.20000000298023224,
+          "smile": 0.0
+        },
+        "cavity_open": true,
+        "field_sha256": "ac73ed15d41eb41d14a3568204518daa72c78b835f2bed26a6fed910594e6d5e"
+      },
+      {
+        "time": 0.35,
+        "shape": "E",
+        "controls": {
+          "blink_left": 0.0,
+          "blink_right": 0.0,
+          "jaw_open": 0.44999998807907104,
+          "lip_round": 1.0,
+          "lip_wide": -0.30000001192092896,
+          "smile": 0.0
+        },
+        "cavity_open": true,
+        "field_sha256": "444b71e59d2f3de497a9c709b2360e02bf646d9858b0ba1706ebb4923bcc8892"
+      },
+      {
+        "time": 0.55,
+        "shape": "F",
+        "controls": {
+          "blink_left": 0.0,
+          "blink_right": 0.0,
+          "jaw_open": 0.18000000715255737,
+          "lip_round": 0.5,
+          "lip_wide": -0.20000000298023224,
+          "smile": 0.0
+        },
+        "cavity_open": true,
+        "field_sha256": "328e1a41fc3cbc7fb491c2cf5b831b12e4f31ee23f7a9742cb0698c490c42aec"
+      },
+      {
+        "time": 0.62,
+        "shape": "B",
+        "controls": {
+          "blink_left": 0.0,
+          "blink_right": 0.0,
+          "jaw_open": 0.18000000715255737,
+          "lip_round": 0.0,
+          "lip_wide": 0.3499999940395355,
+          "smile": 0.0
+        },
+        "cavity_open": true,
+        "field_sha256": "1bfe093602714c0b4f8d6799eb82dbe12840d0ea4f64c0f48ae353b465f02777"
+      },
+      {
+        "time": 0.89,
+        "shape": "F",
+        "controls": {
+          "blink_left": 0.0,
+          "blink_right": 0.0,
+          "jaw_open": 0.18000000715255737,
+          "lip_round": 0.5,
+          "lip_wide": -0.20000000298023224,
+          "smile": 0.0
+        },
+        "cavity_open": true,
+        "field_sha256": "328e1a41fc3cbc7fb491c2cf5b831b12e4f31ee23f7a9742cb0698c490c42aec"
+      },
+      {
+        "time": 0.98,
+        "shape": "B",
+        "controls": {
+          "blink_left": 0.0,
+          "blink_right": 0.0,
+          "jaw_open": 0.18000000715255737,
+          "lip_round": 0.0,
+          "lip_wide": 0.3499999940395355,
+          "smile": 0.0
+        },
+        "cavity_open": true,
+        "field_sha256": "1bfe093602714c0b4f8d6799eb82dbe12840d0ea4f64c0f48ae353b465f02777"
+      },
+      {
+        "time": 1.05,
+        "shape": "A",
+        "controls": {
+          "blink_left": 0.0,
+          "blink_right": 0.0,
+          "jaw_open": 0.0,
+          "lip_round": 0.0,
+          "lip_wide": 0.0,
+          "smile": 0.0
+        },
+        "cavity_open": false,
+        "field_sha256": "35bf6ce71f9b0fee0a610c3514be7d569435e520838f5e8e88707764576a9189"
+      },
+      {
+        "time": 1.19,
+        "shape": "C",
+        "controls": {
+          "blink_left": 0.0,
+          "blink_right": 0.0,
+          "jaw_open": 0.6499999761581421,
+          "lip_round": 0.0,
+          "lip_wide": 0.20000000298023224,
+          "smile": 0.0
+        },
+        "cavity_open": true,
+        "field_sha256": "ac73ed15d41eb41d14a3568204518daa72c78b835f2bed26a6fed910594e6d5e"
+      },
+      {
+        "time": 1.54,
+        "shape": "B",
+        "controls": {
+          "blink_left": 0.0,
+          "blink_right": 0.0,
+          "jaw_open": 0.18000000715255737,
+          "lip_round": 0.0,
+          "lip_wide": 0.3499999940395355,
+          "smile": 0.0
+        },
+        "cavity_open": true,
+        "field_sha256": "1bfe093602714c0b4f8d6799eb82dbe12840d0ea4f64c0f48ae353b465f02777"
+      },
+      {
+        "time": 1.61,
+        "shape": "A",
+        "controls": {
+          "blink_left": 0.0,
+          "blink_right": 0.0,
+          "jaw_open": 0.0,
+          "lip_round": 0.0,
+          "lip_wide": 0.0,
+          "smile": 0.0
+        },
+        "cavity_open": false,
+        "field_sha256": "35bf6ce71f9b0fee0a610c3514be7d569435e520838f5e8e88707764576a9189"
+      },
+      {
+        "time": 1.7,
+        "shape": "B",
+        "controls": {
+          "blink_left": 0.0,
+          "blink_right": 0.0,
+          "jaw_open": 0.18000000715255737,
+          "lip_round": 0.0,
+          "lip_wide": 0.3499999940395355,
+          "smile": 0.0
+        },
+        "cavity_open": true,
+        "field_sha256": "1bfe093602714c0b4f8d6799eb82dbe12840d0ea4f64c0f48ae353b465f02777"
+      },
+      {
+        "time": 1.96,
+        "shape": "C",
+        "controls": {
+          "blink_left": 0.0,
+          "blink_right": 0.0,
+          "jaw_open": 0.6499999761581421,
+          "lip_round": 0.0,
+          "lip_wide": 0.20000000298023224,
+          "smile": 0.0
+        },
+        "cavity_open": true,
+        "field_sha256": "ac73ed15d41eb41d14a3568204518daa72c78b835f2bed26a6fed910594e6d5e"
+      },
+      {
+        "time": 2.24,
+        "shape": "B",
+        "controls": {
+          "blink_left": 0.0,
+          "blink_right": 0.0,
+          "jaw_open": 0.18000000715255737,
+          "lip_round": 0.0,
+          "lip_wide": 0.3499999940395355,
+          "smile": 0.0
+        },
+        "cavity_open": true,
+        "field_sha256": "1bfe093602714c0b4f8d6799eb82dbe12840d0ea4f64c0f48ae353b465f02777"
+      },
+      {
+        "time": 2.31,
+        "shape": "C",
+        "controls": {
+          "blink_left": 0.0,
+          "blink_right": 0.0,
+          "jaw_open": 0.6499999761581421,
+          "lip_round": 0.0,
+          "lip_wide": 0.20000000298023224,
+          "smile": 0.0
+        },
+        "cavity_open": true,
+        "field_sha256": "ac73ed15d41eb41d14a3568204518daa72c78b835f2bed26a6fed910594e6d5e"
+      },
+      {
+        "time": 2.38,
+        "shape": "B",
+        "controls": {
+          "blink_left": 0.0,
+          "blink_right": 0.0,
+          "jaw_open": 0.18000000715255737,
+          "lip_round": 0.0,
+          "lip_wide": 0.3499999940395355,
+          "smile": 0.0
+        },
+        "cavity_open": true,
+        "field_sha256": "1bfe093602714c0b4f8d6799eb82dbe12840d0ea4f64c0f48ae353b465f02777"
+      },
+      {
+        "time": 2.45,
+        "shape": "E",
+        "controls": {
+          "blink_left": 0.0,
+          "blink_right": 0.0,
+          "jaw_open": 0.44999998807907104,
+          "lip_round": 1.0,
+          "lip_wide": -0.30000001192092896,
+          "smile": 0.0
+        },
+        "cavity_open": true,
+        "field_sha256": "444b71e59d2f3de497a9c709b2360e02bf646d9858b0ba1706ebb4923bcc8892"
+      },
+      {
+        "time": 2.73,
+        "shape": "B",
+        "controls": {
+          "blink_left": 0.0,
+          "blink_right": 0.0,
+          "jaw_open": 0.18000000715255737,
+          "lip_round": 0.0,
+          "lip_wide": 0.3499999940395355,
+          "smile": 0.0
+        },
+        "cavity_open": true,
+        "field_sha256": "1bfe093602714c0b4f8d6799eb82dbe12840d0ea4f64c0f48ae353b465f02777"
+      },
+      {
+        "time": 2.8,
+        "shape": "X",
+        "controls": {
+          "blink_left": 0.0,
+          "blink_right": 0.0,
+          "jaw_open": 0.0,
+          "lip_round": 0.0,
+          "lip_wide": 0.0,
+          "smile": 0.0
+        },
+        "cavity_open": false,
+        "field_sha256": "35bf6ce71f9b0fee0a610c3514be7d569435e520838f5e8e88707764576a9189"
+      }
+    ],
+    "source_audio_unchanged": true,
+    "dry_run_undo_redo_explicit_replace": true,
+    "edited_provenance_observed": true,
+    "independent_body_blink_preserved": true,
+    "shot_frames": 29,
+    "shot_audio": {
+      "path": "/home/jesse/Desktop/Projects/atom-3d-engine-main/atom-3d-engine-main/artifacts/agent-speech-20260919-r3/shot/audio.wav",
+      "sha256": "c9f3f79ddfcbdeec5489d7306d7cfbd7399f8da66ce4cf45a9affb59029ee531",
+      "start_sample": 0,
+      "sample_frames": 46400,
+      "pcm_sha256": "2892c9ad6a2f373ee8114d46d43b13e5ce899e39c0ad1f48a7db8c8b4417e64b"
+    },
+    "mouth_only_changed_pixels": 1741,
+    "rendered_changed_pixels": 2732,
+    "cold_without_backend_or_external_reports": true
+  },
+  "elapsed_seconds": 5.726600357999814,
+  "artifact_sha256": {
+    ".mm3e-project-lock-78b5656d0b360f61": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "cold-audio.wav": "c17de07edc5c105d80b880be27ffdef8f60011e7778d8bf09101b7e37c550f57",
+    "cold.png": "b3f7a3e94ead50db409845422fbed8704d03f19c208e513443409b9ef783858c",
+    "direct-0.png": "9d0e8c5208b636332ba88418583b750c50d053164d683e3c4b609e7f7ed3338b",
+    "direct-10.png": "b3f7a3e94ead50db409845422fbed8704d03f19c208e513443409b9ef783858c",
+    "direct-20.png": "ba5f61df635a75fbb28ce7731223d756f01ae7c30c421c90c1370aeb5b831488",
+    "direct-28.png": "8ace9d1065c7dfce5cfa099ffb6652de5f3c601a77f78afa3ab962a057337775",
+    "evidence/original-voice-provenance.json": "a4c79c0bd69653de89ff1bfd6432273e4d99cad7d18808a02012ca798d275307",
+    "evidence/original-voice.wav": "c17de07edc5c105d80b880be27ffdef8f60011e7778d8bf09101b7e37c550f57",
+    "evidence/selected-removed-analysis/analysis.json": "32e2b09fe9d03c3bb0dd84a350df62f89a13df517eb8a363b16fb253e2f071b0",
+    "evidence/selected-removed-analysis/input.wav": "b32fa497680932b6539cb56840e4673975c242ccc2022627e003bc7357b2e497",
+    "evidence/selected-removed-analysis/raw.json": "1b7afc1d4d2db3e49ff4b27cd36fe1e5e3f628fe00d7d990d17c191afb639d4d",
+    "evidence/selected-removed-analysis/status.jsonl": "05653fd4f6466a4469bd833fa2984c97ee5191730f7402f3462c43edcef5b5a8",
+    "evidence/silence-removed-input.wav": "2ca1fe1b168d870a619f5a00f705bd50bb9d894ad0734e8963ac2079e8749807",
+    "evidence/silent-removed-analysis/analysis.json": "ef4fd7b63a2809e464d4d6a7107d08491220b70345f5fa27761b7badcb0d279f",
+    "evidence/silent-removed-analysis/dialogue.txt": "ae92830bacdfd5268ca76bdf5fd1a090ad835c549e7119ed5e4d76a7e921ba9d",
+    "evidence/silent-removed-analysis/input.wav": "2ca1fe1b168d870a619f5a00f705bd50bb9d894ad0734e8963ac2079e8749807",
+    "evidence/silent-removed-analysis/raw.json": "6dd26d7c832bb5962afc75fc7c215024dcd6938d850438f4bfa5875bcc6137b1",
+    "evidence/silent-removed-analysis/status.jsonl": "678855f274ef71dd051cb6a7cb54b0244f339a238ab16c7f3c70e55aab67b879",
+    "evidence/spoken-removed-analysis/analysis.json": "630e85bd13ad35e619a7cbb400c5d2bc4b93eaaaa29153450885e2b26010960b",
+    "evidence/spoken-removed-analysis/dialogue.txt": "ae92830bacdfd5268ca76bdf5fd1a090ad835c549e7119ed5e4d76a7e921ba9d",
+    "evidence/spoken-removed-analysis/input.wav": "c17de07edc5c105d80b880be27ffdef8f60011e7778d8bf09101b7e37c550f57",
+    "evidence/spoken-removed-analysis/raw.json": "bfe912754d63cc40dfd390ca4f61b645dc01855a9822e7cc3eefc1a6f7b2adc9",
+    "evidence/spoken-removed-analysis/status.jsonl": "9a69cd86ed1c6af31324761f559e858d090fa967791e96ce7cbbef17bf4f55e8",
+    "evidence/stereo-removed-input.wav": "79710cd696a9522ad3aa39ecd26d9f107f2aa07419ba06500feb5132f38263e2",
+    "evidence/voice-removed-input.wav": "c17de07edc5c105d80b880be27ffdef8f60011e7778d8bf09101b7e37c550f57",
+    "mm3e-editor": "422b38b0b4f54ecee5957ad8926783128ee6d980d36b629fc2ca9a5e00f1f011",
+    "mouth-changed.png": "ca535662b5a21ac4345f4d1eda31efaa458d18d8f6a35b1138be99f700a746fa",
+    "mouth-reference.png": "9d0e8c5208b636332ba88418583b750c50d053164d683e3c4b609e7f7ed3338b",
+    "shot/audio.wav": "c9f3f79ddfcbdeec5489d7306d7cfbd7399f8da66ce4cf45a9affb59029ee531",
+    "shot/frame_0000.png": "9d0e8c5208b636332ba88418583b750c50d053164d683e3c4b609e7f7ed3338b",
+    "shot/frame_0001.png": "b8b6a5e976f4eafcbad6fc19e0573e81e3a4b73f67c7eb40fdf9a4fa898fb666",
+    "shot/frame_0002.png": "0934244de35ab10dce515e8aa426f6272016e50bb7631a9f646f333953dadefa",
+    "shot/frame_0003.png": "b5128e8e58e986a76a389f4758c41c8dbf93cfeaa3ff1a8c5945855958d421b7",
+    "shot/frame_0004.png": "998b30c97ce0f608b3433c879db6396a01edef8a8abafeefc176fcf937d33bf6",
+    "shot/frame_0005.png": "df064e129fae79e94315cf5669503e196a61b4b783646c37d0b1c3ee02955ed7",
+    "shot/frame_0006.png": "7af2f0a36e86b4c2282b505304bbe07d1754b96d8d9900b7de2e09f2a0ca6c09",
+    "shot/frame_0007.png": "357281c4e6c0ef6fb756742d5204a5f26c9cb8e6fce8fcf6d32cc5051b6e2e35",
+    "shot/frame_0008.png": "7343d145689f3c5d2bde25ab4cf06535a48780d080bbad73de5cec83924182c9",
+    "shot/frame_0009.png": "bf891881aa703d4d2c58c7a2f215577a7413b6affad8dc9cf443b3ead9e51146",
+    "shot/frame_0010.png": "b3f7a3e94ead50db409845422fbed8704d03f19c208e513443409b9ef783858c",
+    "shot/frame_0011.png": "68c3864a3345dffbb9ef4d6924b8952a03f80e0048b7e1468ddce399256f88d8",
+    "shot/frame_0012.png": "2b971a8e028bbacc6473bba533c99dc22e4ce550aec28f6f3be5a962465a1f23",
+    "shot/frame_0013.png": "ff0efeae790a3ca3ef0ac107183d071eb65de501417a5e62a759a99c498ba381",
+    "shot/frame_0014.png": "5a12e5500506bd9649b8f49a2e64c8dfc94338940a1bfdecbb677c88d7812a80",
+    "shot/frame_0015.png": "6fe692cbd16aa0b2d60301af2075bcacbe5aa2ebecf7e15eba432b96b3af438b",
+    "shot/frame_0016.png": "3102600bb28a5d481013b3a97df2547cc6e105706e1d63ff430c91a8ba7279b8",
+    "shot/frame_0017.png": "ef8dfc30c237f6597048f28fcc5a76980ef462e8a0815f4e412da9df74801304",
+    "shot/frame_0018.png": "b1a3d20f20251bc465e145262b1f1ff9d9f303c3397460f2c2365410f60253b8",
+    "shot/frame_0019.png": "a54917fc3b2211e0936d792f80577637305083664413d97cc13f98a09c1dfc60",
+    "shot/frame_0020.png": "ba5f61df635a75fbb28ce7731223d756f01ae7c30c421c90c1370aeb5b831488",
+    "shot/frame_0021.png": "fd38940604b96a238f66bd22ce5af9b12b15995826de01860e476d5a62ff81c7",
+    "shot/frame_0022.png": "b56358e91877dde7526d465e0dbf2f3c169fa862ecda50e6af26282110c1410d",
+    "shot/frame_0023.png": "a70a4643720448d26d5fe89ad883824f33f21a9d972fa4e399fe0172845433b6",
+    "shot/frame_0024.png": "321c46762b096dbc74511e81aa9510befb2be32aa96f99c872fad80770b33e54",
+    "shot/frame_0025.png": "e4354002a2de45c286947c6e7905bb46d63ca9e3ab381aa8b1c43de72db4f0bf",
+    "shot/frame_0026.png": "e16e9ffdf38049fac908d155baccc823d9a9554cd7ccff27a7865b1e561a5f1c",
+    "shot/frame_0027.png": "79dacc248012d0534abcaca8c66b92c7774df95b72d08235de2e4342d0330918",
+    "shot/frame_0028.png": "8ace9d1065c7dfce5cfa099ffb6652de5f3c601a77f78afa3ab962a057337775",
+    "shot/manifest.json": "553012c152546e9b7ded304f5bccc5f6734f1272588b8297adc7fb16585b6a9a",
+    "speech-author-stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "speech-cold-without-backend-stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "speech-project.json": "17e8eb49014917deec3da1a23871d96d46a6d7e1db9ea7ee13c6ad249f91eed7",
+    "transcript.jsonl": "05c5e816174e14ec097e08d2501f09a61f96ec01e2563f704280e40ff482c01a"
+  }
+}

@@ -24,12 +24,182 @@ jobs:
       - uses: Swatinem/rust-cache@v2
       - name: Format (whole workspace)
         run: cargo fmt --all -- --check
-      - name: Clippy core and release client (deny warnings)
-        run: cargo clippy -p mm3e-kit -p mm3e-orchestrator -p lucerna-release-client --all-targets -- -D warnings
-      - name: Build core and release client
-        run: cargo build --release -p mm3e-kit -p mm3e-orchestrator -p lucerna-release-client --all-targets
-      - name: Test core and release client
-        run: cargo test --release -p mm3e-kit -p mm3e-orchestrator -p lucerna-release-client
+      - name: Clippy core, editor and release client (deny warnings)
+        run: cargo clippy --locked -p mm3e-kit -p mm3e-orchestrator -p mm3e-editor -p lucerna-release-client --all-targets -- -D warnings
+      - name: Build core, editor and release client
+        run: cargo build --locked --release -p mm3e-kit -p mm3e-orchestrator -p mm3e-editor -p lucerna-release-client --all-targets
+      - name: Test core, editor and release client
+        run: cargo test --locked --release -p mm3e-kit -p mm3e-orchestrator -p mm3e-editor -p lucerna-release-client
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install independent film and geometry readers
+        run: python -m pip install OpenEXR==3.4.5 usd-core==26.8 "numpy>=1.24,<3"
+      - name: Verify persistent project crash recovery (Linux)
+        if: runner.os == 'Linux'
+        run: python scripts/agent_durable_acceptance.py --binary target/release/mm3e-editor --output durable-acceptance
+      - name: Verify persistent project crash recovery (Windows)
+        if: runner.os == 'Windows'
+        run: python scripts/agent_durable_acceptance.py --binary target/release/mm3e-editor.exe --output durable-acceptance
+      - name: Verify native-project size admission (Linux)
+        if: runner.os == 'Linux'
+        run: python scripts/agent_project_budget_acceptance.py --editor target/release/mm3e-editor --output project-budget-acceptance
+      - name: Verify native-project size admission (Windows)
+        if: runner.os == 'Windows'
+        run: python scripts/agent_project_budget_acceptance.py --editor target/release/mm3e-editor.exe --output project-budget-acceptance
+      - name: Verify storage I/O failure recovery (Linux)
+        if: runner.os == 'Linux'
+        run: python scripts/agent_storage_fault_acceptance.py --editor target/release/mm3e-editor --output storage-fault-acceptance
+      - name: Verify film output through the executable (Linux)
+        if: runner.os == 'Linux'
+        run: python scripts/agent_film_acceptance.py --binary target/release/mm3e-editor --output film-acceptance
+      - name: Verify film output through the executable (Windows)
+        if: runner.os == 'Windows'
+        run: python scripts/agent_film_acceptance.py --binary target/release/mm3e-editor.exe --output film-acceptance
+      - name: Verify clothed geometry through the executable (Linux)
+        if: runner.os == 'Linux'
+        run: python scripts/agent_cloth_acceptance.py --exe target/release/mm3e-editor --output cloth-acceptance
+      - name: Verify clothed geometry through the executable (Windows)
+        if: runner.os == 'Windows'
+        run: python scripts/agent_cloth_acceptance.py --exe target/release/mm3e-editor.exe --output cloth-acceptance
+      - name: Verify sewn-panel authoring through the executable (Linux)
+        if: runner.os == 'Linux'
+        run: python scripts/agent_sewing_acceptance.py --executable target/release/mm3e-editor --output sewing-acceptance
+      - name: Verify sewn-panel authoring through the executable (Windows)
+        if: runner.os == 'Windows'
+        run: python scripts/agent_sewing_acceptance.py --executable target/release/mm3e-editor.exe --output sewing-acceptance
+      - name: Verify outline and hole patterns through the executable (Linux)
+        if: runner.os == 'Linux'
+        run: python scripts/agent_pattern_acceptance.py --editor target/release/mm3e-editor --output pattern-acceptance
+      - name: Verify outline and hole patterns through the executable (Windows)
+        if: runner.os == 'Windows'
+        run: python scripts/agent_pattern_acceptance.py --editor target/release/mm3e-editor.exe --output pattern-acceptance
+      - name: Verify limb target authoring through the executable (Linux)
+        if: runner.os == 'Linux'
+        run: python scripts/agent_ik_acceptance.py --editor target/release/mm3e-editor --output ik-acceptance
+      - name: Verify limb target authoring through the executable (Windows)
+        if: runner.os == 'Windows'
+        run: python scripts/agent_ik_acceptance.py --editor target/release/mm3e-editor.exe --output ik-acceptance
+      - name: Verify reference audio and dialogue shots (Linux)
+        if: runner.os == 'Linux'
+        run: python scripts/agent_dialogue_acceptance.py --editor target/release/mm3e-editor --output dialogue-acceptance
+      - name: Verify reference audio and dialogue shots (Windows)
+        if: runner.os == 'Windows'
+        run: python scripts/agent_dialogue_acceptance.py --editor target/release/mm3e-editor.exe --output dialogue-acceptance
+      - name: Verify attached face and cloth textures (Linux)
+        if: runner.os == 'Linux'
+        run: python scripts/agent_texture_acceptance.py --editor target/release/mm3e-editor --output texture-acceptance
+      - name: Verify attached face and cloth textures (Windows)
+        if: runner.os == 'Windows'
+        run: python scripts/agent_texture_acceptance.py --editor target/release/mm3e-editor.exe --output texture-acceptance
+      - name: Verify material maps and relighting (Linux)
+        if: runner.os == 'Linux'
+        run: python scripts/agent_material_map_acceptance.py --editor target/release/mm3e-editor --output material-map-acceptance
+      - name: Verify material maps and relighting (Windows)
+        if: runner.os == 'Windows'
+        run: python scripts/agent_material_map_acceptance.py --editor target/release/mm3e-editor.exe --output material-map-acceptance
+      - name: Install pinned local speech backend (Linux)
+        if: runner.os == 'Linux'
+        run: python scripts/install_speech_backend.py --destination speech-backend
+      - name: Verify real local speech and native mouth animation (Linux)
+        if: runner.os == 'Linux'
+        run: python scripts/agent_speech_acceptance.py --editor target/release/mm3e-editor --backend speech-backend/rhubarb --output speech-acceptance
+      - name: Verify constrained face, cloth, speech and IK (Linux)
+        if: runner.os == 'Linux'
+        run: python scripts/agent_joint_limit_acceptance.py --editor target/release/mm3e-editor --face-project material-map-acceptance/face/material-project.json --cloth-project material-map-acceptance/cloth/material-project.json --speech-project speech-acceptance/speech-project.json --speech-analysis speech-acceptance/evidence/spoken-removed-analysis/analysis.json --output joint-limit-acceptance
+      - name: Verify composed face and cloth animation (Linux)
+        if: runner.os == 'Linux'
+        run: python scripts/agent_animation_layer_acceptance.py --editor target/release/mm3e-editor --face-project material-map-acceptance/face/material-project.json --cloth-project material-map-acceptance/cloth/material-project.json --output animation-layer-acceptance
+      - name: Verify composed face and cloth animation (Windows)
+        if: runner.os == 'Windows'
+        run: python scripts/agent_animation_layer_acceptance.py --editor target/release/mm3e-editor.exe --face-project material-map-acceptance/face/material-project.json --cloth-project material-map-acceptance/cloth/material-project.json --output animation-layer-acceptance
+      - name: Verify resumable render jobs (Linux)
+        if: runner.os == 'Linux'
+        run: python scripts/agent_render_job_acceptance.py --editor target/release/mm3e-editor --output render-job-acceptance
+      - name: Verify resumable render jobs (Windows)
+        if: runner.os == 'Windows'
+        run: python scripts/agent_render_job_acceptance.py --editor target/release/mm3e-editor.exe --output render-job-acceptance
+      - name: Verify render-job process-death boundaries (Linux)
+        if: runner.os == 'Linux'
+        run: python scripts/agent_render_job_fault_acceptance.py --editor target/release/mm3e-editor --output render-job-fault-acceptance
+      - name: Verify resumed face and cloth shots (Linux)
+        if: runner.os == 'Linux'
+        run: python scripts/agent_character_render_job_acceptance.py --editor target/release/mm3e-editor --face-project material-map-acceptance/face/material-project.json --cloth-project material-map-acceptance/cloth/material-project.json --output character-render-job-acceptance
+      - name: Verify resumed face and cloth shots (Windows)
+        if: runner.os == 'Windows'
+        run: python scripts/agent_character_render_job_acceptance.py --editor target/release/mm3e-editor.exe --face-project material-map-acceptance/face/material-project.json --cloth-project material-map-acceptance/cloth/material-project.json --output character-render-job-acceptance
+      - name: Verify normal-map minification (Linux)
+        if: runner.os == 'Linux'
+        run: python scripts/agent_normal_filter_acceptance.py --editor target/release/mm3e-editor --output normal-filter-acceptance
+      - name: Verify normal-map minification (Windows)
+        if: runner.os == 'Windows'
+        run: python scripts/agent_normal_filter_acceptance.py --editor target/release/mm3e-editor.exe --output normal-filter-acceptance
+      - name: Verify independent USD delivery (Linux)
+        if: runner.os == 'Linux'
+        run: python scripts/agent_usd_acceptance.py --binary target/release/mm3e-editor --output usd-acceptance
+      - name: Verify independent USD delivery (Windows)
+        if: runner.os == 'Windows'
+        run: python scripts/agent_usd_acceptance.py --binary target/release/mm3e-editor.exe --output usd-acceptance
+      - name: Verify continuous face deformation (Linux)
+        if: runner.os == 'Linux'
+        run: python scripts/agent_deformed_face_acceptance.py --editor target/release/mm3e-editor --output deformed-face-acceptance
+      - name: Verify continuous face deformation (Windows)
+        if: runner.os == 'Windows'
+        run: python scripts/agent_deformed_face_acceptance.py --editor target/release/mm3e-editor.exe --output deformed-face-acceptance
+      - name: Verify skinning and independent mesh delivery (Linux)
+        if: runner.os == 'Linux'
+        run: python scripts/agent_skinning_acceptance.py --editor target/release/mm3e-editor --output skinning-acceptance
+      - name: Verify skinning and independent mesh delivery (Windows)
+        if: runner.os == 'Windows'
+        run: python scripts/agent_skinning_acceptance.py --editor target/release/mm3e-editor.exe --output skinning-acceptance
+      - name: Package and launch-check editor (Linux)
+        if: runner.os == 'Linux'
+        run: python scripts/package_editor.py --binary target/release/mm3e-editor --output mm3e-editor-linux-x86_64.zip --platform linux-x86_64 --speech-backend-dir speech-backend
+      - name: Package and launch-check editor (Windows)
+        if: runner.os == 'Windows'
+        run: python scripts/package_editor.py --binary target/release/mm3e-editor.exe --output mm3e-editor-windows-x86_64.zip --platform windows-x86_64
+      - uses: actions/upload-artifact@v4
+        with:
+          name: mm3e-editor-${{ runner.os }}-${{ runner.arch }}
+          path: mm3e-editor-*.zip
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: mm3e-film-acceptance-${{ runner.os }}-${{ runner.arch }}
+          path: film-acceptance/
+          if-no-files-found: ignore
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: mm3e-durable-acceptance-${{ runner.os }}-${{ runner.arch }}
+          path: durable-acceptance/
+          if-no-files-found: ignore
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: mm3e-cloth-usd-acceptance-${{ runner.os }}-${{ runner.arch }}
+          path: |
+            cloth-acceptance/
+            sewing-acceptance/
+            pattern-acceptance/
+            ik-acceptance/
+            dialogue-acceptance/
+            texture-acceptance/
+            material-map-acceptance/
+            normal-filter-acceptance/
+            render-job-acceptance/
+            render-job-fault-acceptance/
+            character-render-job-acceptance/
+            animation-layer-acceptance/
+            speech-acceptance/
+            joint-limit-acceptance/
+            project-budget-acceptance/
+            storage-fault-acceptance/
+            usd-acceptance/
+            deformed-face-acceptance/
+            skinning-acceptance/
+          if-no-files-found: ignore
 
   gpu:
     name: gpu backend (build · clippy, Windows)

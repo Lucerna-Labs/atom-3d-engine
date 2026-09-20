@@ -3,6 +3,7 @@
 //! Triangles are accepted as an interchange format, then converted once into the engine's basis:
 //! a sampled signed-distance field. Rendering, CSG, GI, physics, and shadows keep querying fields.
 
+use mm3e_kit::triangle::x_crossing;
 use mm3e_kit::vec::Vec3;
 use mm3e_kit::volume::SdfVolume;
 
@@ -256,26 +257,6 @@ impl TriBvh {
     }
 }
 
-fn x_crossing(a: Vec3, b: Vec3, c: Vec3, oy: f32, oz: f32) -> Option<f32> {
-    let e1 = b - a;
-    let e2 = c - a;
-    let det = e1.y * (-e2.z) + e1.z * e2.y;
-    if det.abs() < 1e-12 {
-        return None;
-    }
-    let inv = 1.0 / det;
-    let (sy, sz) = (oy - a.y, oz - a.z);
-    let u = (sy * (-e2.z) + sz * e2.y) * inv;
-    if !(0.0..=1.0).contains(&u) {
-        return None;
-    }
-    let v = (sy * e1.z - sz * e1.y) * inv;
-    if v < 0.0 || u + v > 1.0 {
-        return None;
-    }
-    Some(a.x + u * e1.x + v * e2.x)
-}
-
 /// Bake `mesh` into a signed-distance grid.
 ///
 /// `resolution` is the sample count along the longest padded axis. Sign comes from row-parity
@@ -296,7 +277,6 @@ pub fn bake_sdf(mesh: &Mesh, resolution: usize, padding: f32) -> Result<SdfVolum
     let (nx, ny, nz) = (dim(size.x), dim(size.y), dim(size.z));
     let cell = Vec3::new(size.x / (nx - 1) as f32, size.y / (ny - 1) as f32, size.z / (nz - 1) as f32);
     let bvh = TriBvh::build(mesh).ok_or("mesh has no non-degenerate triangles")?;
-    let nudge = 1.37e-4 * cell.y.min(cell.z);
 
     let threads = std::thread::available_parallelism().map(|n| n.get()).unwrap_or(1).max(1);
     let span = nz.div_ceil(threads);
@@ -310,9 +290,9 @@ pub fn bake_sdf(mesh: &Mesh, resolution: usize, padding: f32) -> Result<SdfVolum
                     let mut out = Vec::with_capacity(k1.saturating_sub(k0) * nx * ny);
                     let mut crossings = Vec::new();
                     for k in k0..k1 {
-                        let z = lo.z + k as f32 * cell.z + nudge;
+                        let z = lo.z + k as f32 * cell.z;
                         for j in 0..ny {
-                            let y = lo.y + j as f32 * cell.y + nudge;
+                            let y = lo.y + j as f32 * cell.y;
                             crossings.clear();
                             for t in &mesh.triangles {
                                 let (a, b, c) = (

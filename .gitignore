@@ -17,3 +17,14 @@ viewer_shot.png
 spheres_opt.png
 reproject_real.png
 reproject_fake.png
+
+# Pinned optional speech runtime, installed by scripts/install_speech_backend.py.
+/.dependencies/
+
+# Disposable build caches, including standalone artifact experiments.
+**/target/
+__pycache__/
+*.py[cod]
+
+# Generated evidence remains local; the curated reproduction set is explicitly tracked.
+/artifacts/

@@ -144,8 +144,12 @@ impl Marcher {
             let f = field(p);
             let radius = f.dist.abs();
             let eps = self.eps * (1.0 + t * 0.5) + self.lod_footprint * t;
-            // Over-relaxation failure: the two safe spheres don't overlap → we overshot.
-            if step_len > radius + prev_radius {
+            // Over-relaxation failure: the two safe spheres don't overlap, or a step crosses
+            // into the solid. Across a signed-distance zero the spheres can touch EXACTLY
+            // (e.g. a head-on plane), so the strict overlap inequality alone misses that case.
+            // An origin already inside remains an immediate t=0 hit; only stepped samples are
+            // rolled back. This assumes the field supplies a conservative distance bound.
+            if (step_len > 0.0 && f.dist < 0.0) || step_len > radius + prev_radius {
                 // The last guaranteed safe frontier is the previous sample plus its safe radius.
                 // Resample there instead of letting an accelerated step report a buried hit.
                 let gap_lo = t_prev + prev_radius;

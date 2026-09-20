@@ -1,0 +1,1427 @@
+   Compiling mm3e-orchestrator v0.1.0 (/home/jesse/Desktop/Projects/atom-3d-engine-main/atom-3d-engine-main/mm3e-orchestrator)
+   Compiling mm3e-kit v0.1.0 (/home/jesse/Desktop/Projects/atom-3d-engine-main/atom-3d-engine-main/mm3e-kit)
+   Compiling mm3e-editor v0.1.0 (/home/jesse/Desktop/Projects/atom-3d-engine-main/atom-3d-engine-main/mm3e-editor)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 12.11s
+     Running unittests src/lib.rs (target/debug/deps/mm3e_editor-f78772f19961a998)
+
+running 48 tests
+test delivery_uv::tests::large_constant_coordinate_does_not_erase_small_axis_chart_side ... ok
+test delivery_uv::tests::periodic_error_reduces_coordinates_before_subtraction ... ok
+test delivery_uv::tests::exact_coincident_split_edge_repairs_all_incident_faces_and_preserves_links ... ok
+test delivery_uv::tests::exact_collinear_face_repairs_neighbor_without_moving_distinct_vertices ... ok
+test delivery_uv::tests::vertex_link_audit_rejects_two_closed_shells_touching_at_one_index ... ok
+test delivery_uv::tests::unrelated_coincident_vertices_are_not_globally_welded ... ok
+test delivery_uv::tests::multiple_collinear_middle_points_reconcile_the_whole_boundary_cycle ... ok
+test native::tests::writer_stops_before_overflowing_chunk_and_counting_mode_never_collects_bytes ... ok
+test delivery_uv::tests::native_distance_tie_fallback_accepts_repeat_and_rejects_mixed_wraps ... ok
+test ik::tests::euler_round_trip_including_gimbal_neighborhoods ... ok
+test project::tests::lock_holder_process ... ok
+test delivery_textures::tests::scalar_channels_keep_source_alpha_independent_and_refuse_mixed_roughness_floor ... ok
+test delivery_textures::tests::constant_roughness_floor_is_explicit_and_active_normal_is_never_dropped ... ok
+test project::tests::malformed_paths_and_reserved_sidecars_fail_without_a_project ... ok
+test native::tests::accepted_snapshot_budget_is_independent_of_future_revision_digit_growth ... ok
+test sequence::tests::inclusive_sampling_keeps_exact_endpoints_without_accumulation ... ok
+test sequence::tests::existing_directories_are_never_replaced ... ok
+test project::tests::symlink_escape_and_project_or_lock_symlinks_are_rejected ... ok
+test project::tests::symlinked_parent_aliases_share_the_same_lock ... ok
+test sequence::tests::sampling_rejects_bad_ranges_and_unrepresentable_steps ... ok
+test sequence::tests::sampling_supports_single_frame_and_non_grid_end ... ok
+test sequence::tests::sequence_schema_defaults_are_accepted_but_unknown_fields_are_rejected ... ok
+test shot::tests::ray_budget_counts_data_reference_and_diagnostic_rays ... ok
+test shot::tests::quantized_transparency_does_not_retain_hidden_rgb ... ok
+test sequence::tests::inclusive_frame_cap_accounts_for_the_first_frame ... ok
+test storage::tests::visibility_classification_is_independent_of_message_wording ... ok
+test sequence::tests::symlink_parent_cannot_export_outside_root ... ok
+test speech::tests::pcm16_analysis_copy_preserves_every_signed_endpoint_and_original_bytes ... ok
+test speech::tests::channel_range_and_float_clipping_are_explicit_without_resampling ... ok
+test sequence::tests::oversized_render_requests_create_no_directory ... ok
+test speech::tests::report_cues_are_an_exact_contiguous_projection_of_raw_centiseconds ... ok
+test native::tests::exact_budget_is_accepted_and_one_byte_less_is_rejected_in_both_modes ... ok
+test native::tests::counter_and_collector_match_original_canonical_encoding_including_escapes_and_revision_digits ... ok
+test surface_refine::split_tests::midpoint_candidates_retain_subnormal_tail_below_f64_midpoint_precision ... ok
+test delivery_textures::tests::opaque_color_conversion_preserves_original_and_native_filtered_modulation ... ok
+test surface_refine::split_tests::sheet_strip_retains_both_long_edge_splits_despite_nearest_midpoint_collision ... ok
+test surface_refine::split_tests::captured_radial_targets_require_coupled_rounding_before_projection ... ok
+test surface_refine::split_tests::captured_curved_split_has_a_strict_native_interior_orientation_witness ... ok
+test project::tests::killed_process_releases_the_os_lock_without_deleting_sidecar ... ok
+test surface_refine::split_tests::embedding_fallback_keeps_disjoint_components_and_charges_every_attempt ... ok
+test textures::cache_tests::history_releases_disposable_mips_without_losing_source_data_or_active_cache ... ok
+test surface_refine::split_tests::captured_one_ulp_midpoint_combination_keeps_a_conforming_nondegenerate_subset ... ok
+test garment::tests::fit_body_uses_the_evaluated_facial_cavity_instead_of_the_rest_head ... ok
+test sequence::tests::sidecar_collision_preserves_images_and_foreign_file_without_a_completion_manifest ... ok
+test delivery::publication_tests::competing_layer_install_preserves_the_winner_and_owned_partial_bundle ... ok
+test project::tests::rejected_write_preserves_previous_file_and_lock ... ok
+test project::tests::exclusive_lock_rejects_other_handles_and_drop_allows_existing_sidecar ... ok
+test delivery::publication_tests::changing_an_in_root_parent_alias_does_not_separate_layer_from_its_assets ... ok
+
+test result: ok. 48 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.11s
+
+     Running unittests src/main.rs (target/debug/deps/mm3e_editor-23cd5e2ba450c5f3)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/animation.rs (target/debug/deps/animation-fc4f934f43ee88a4)
+
+running 9 tests
+test deleting_a_bound_target_requires_explicit_dependency_repair ... ok
+test invalid_intermediate_camera_fails_sampling_and_sequence_before_output ... ok
+test parent_motion_carries_child_joint_and_bound_offset_geometry ... ok
+test object_pivot_rotation_scale_and_translation_reach_real_geometry ... ok
+test pre_animation_projects_load_with_empty_animation_and_keep_their_geometry ... ok
+test clamp_loop_negative_time_and_shortest_arc_are_explicit ... ok
+test invalid_hierarchy_and_tracks_reject_the_whole_transaction ... ok
+test unanimated_rig_preserves_rotated_rest_basis_and_pixels_exactly ... ok
+test camera_keyframes_reach_render_and_explicit_view_override_wins ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s
+
+     Running tests/animation_layers.rs (target/debug/deps/animation_layers-818a30e2e6e9ac96)
+
+running 11 tests
+test graph_depth_and_expanded_reference_cost_are_bounded_even_for_inactive_branches ... ok
+test disabled_zero_and_masked_layers_still_validate_graph_and_edits_are_atomic ... ok
+test override_blends_at_rest_anchor_and_exact_endpoints_preserve_source_geometry ... ok
+test parent_time_weight_curves_multiply_constant_weight_and_local_tracks_override ... ok
+test additive_reference_preserves_noncommuting_joint_order_translation_and_scale ... ok
+test full_weight_additive_scale_ratio_remains_positive_across_authored_dynamic_range ... ok
+test source_clocks_masks_windows_and_sparse_channels_reach_the_field ... ok
+test sparse_layer_edits_preserve_local_channels_and_history_while_order_changes_real_pose ... ok
+test additive_scalar_rest_reference_is_respected_and_out_of_range_results_fail ... ok
+test layered_face_and_morph_curves_change_real_geometry_and_survive_native_save_load ... ok
+test camera_layers_reach_render_with_typed_masks_local_overrides_and_invalid_pose_rejection ... ok
+
+test result: ok. 11 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.13s
+
+     Running tests/audio.rs (target/debug/deps/audio-a085b48684308a6b)
+
+running 4 tests
+test waveform_rms_retains_extreme_finite_audio_and_native_deserialization_rejects_bad_bytes ... ok
+test invalid_import_replacement_and_referenced_audio_removal_are_atomic ... ok
+test source_is_embedded_and_reloaded_without_external_file_and_exact_slice_bytes_survive ... ok
+test embedded_audio_stays_compact_in_pretty_native_projects ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.15s
+
+     Running tests/cloth_deformation.rs (target/debug/deps/cloth_deformation-0b883361c367e0bd)
+
+running 6 tests
+test pins_to_deformed_surfaces_are_explicitly_rejected_without_partial_authoring ... ok
+test scoped_body_sample_works_with_unbaked_cloth_and_full_render_still_requires_bake ... ok
+test authentic_pre_deformation_v3_and_v4_projects_keep_cache_integrity_and_freshness ... ok
+test rest_object_transform_and_scaled_shell_thickness_reach_physical_contact ... ok
+test relevant_deformation_changes_stale_cache_but_unrelated_sources_do_not ... ok
+test actual_lbs_and_dqs_body_fields_drive_cloth_and_both_morph_and_skin_matter ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.25s
+
+     Running tests/cloth_dependencies.rs (target/debug/deps/cloth_dependencies-d1513288ab814abc)
+
+running 9 tests
+test nonidentity_object_zero_key_is_not_applied_twice_in_stored_bake_frames ... ok
+test barycentric_pin_follows_a_deformed_surface_through_bake_and_reload ... ok
+test pattern_barycentric_pins_retain_normalized_attachment_and_reject_out_of_tolerance_sum ... ok
+test nonidentity_ancestor_and_child_zero_keys_are_pruned_and_evaluated_once ... ok
+test physical_inputs_and_chosen_attachment_motion_stale_the_bake ... ok
+test unrelated_geometry_camera_lighting_materials_and_animation_do_not_stale_cache ... ok
+test barycentric_skin_and_morph_pins_follow_transformed_surface_at_subframes ... ok
+test barycentric_attachment_preserves_translation_and_charges_each_evaluation ... ok
+test garment_collider_retains_body_opening_face_and_joint_dependencies ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s
+
+     Running tests/cloth_editor.rs (target/debug/deps/cloth_editor-82d4944d790ed876)
+
+running 15 tests
+test final_physical_substep_matches_declared_frame_time_for_endpoint_step_track ... ok
+test selected_colliders_preserve_smooth_csg_and_reject_lone_subtractor ... ok
+test rejected_bake_rest_pin_collision_and_budget_leave_document_exactly_unchanged ... ok
+test between_frame_vertex_collision_is_reported_for_debugging_and_rejected_for_rendering ... ok
+test contact_normals_remain_representable_under_large_permitted_world_translation ... ok
+test rotating_parent_pins_follow_exact_midpoint_arc_in_inspection_and_rendered_geometry ... ok
+test partial_bake_rejects_unbaked_time_and_missing_or_different_clip_cache ... ok
+test malformed_cache_and_derived_geometry_changes_are_rejected ... ok
+test updating_panel_preserves_identity_order_and_explicit_material_but_invalidates_cache ... ok
+test previous_solver_cache_loads_as_authorable_but_requires_rebake_for_playback ... ok
+test cloth_bake_deforms_rendered_surface_and_preserves_rest_sources ... ok
+test actual_contacts_hold_vertices_above_floor_and_no_collider_negative_control_falls_through ... ok
+test agent_operations_create_bake_and_inspect_cloth_through_revision_guarded_protocol ... ok
+test native_roundtrip_and_repeat_bake_reproduce_vertices_and_actual_render_pixels ... ok
+test edits_keep_document_authorable_but_reject_stale_render_until_actual_rebake ... ok
+
+test result: ok. 15 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.32s
+
+     Running tests/cloth_layers.rs (target/debug/deps/cloth_layers-f0862550d8f45927)
+
+running 9 tests
+test masked_unrelated_and_disabled_branches_do_not_stale_cache ... ok
+test projected_bake_and_full_pose_honor_direct_override_of_overflowing_layers ... ok
+test direct_overrides_shadow_child_channels_but_ordered_shared_references_still_matter ... ok
+test nested_masked_parent_motion_reaches_child_pins_and_native_reload ... ok
+test facial_layers_are_physical_only_when_selected_geometry_depends_on_face ... ok
+test contributing_child_values_and_layer_timing_weights_references_stale_cache ... ok
+test authentic_flat_v3_v4_cache_fingerprints_survive_unrelated_layer_additions ... ok
+test layered_collider_motion_drives_actual_contact ... ok
+test nested_skin_and_morph_channels_reach_cloth_contact_with_additive_reference ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s
+
+     Running tests/cloth_self_contact_playback.rs (target/debug/deps/cloth_self_contact_playback-acd93fd811cbc233)
+
+running 5 tests
+test initial_bake_measures_pinned_self_contact_and_rejects_penetration_or_query_budget_atomically ... ok
+test fractional_cache_query_budget_failure_is_reported_and_rejects_rendering ... ok
+test crafted_free_vertex_cache_interpolation_is_checked_even_when_both_stored_frames_are_clear ... ok
+test fractional_self_contact_gate_obeys_authored_tolerance_and_disabled_negative_control ... ok
+test generated_cache_rechecks_fractional_pin_contact_and_preserves_the_document_on_rejection ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/curve_edit.rs (target/debug/deps/curve_edit-d08315ec61aa57f9)
+
+running 5 tests
+test request_schema_rejects_unknown_fields_and_keeps_tagged_operations_explicit ... ok
+test manual_morph_timing_replaces_one_track_in_place_and_changes_the_native_field ... ok
+test facial_upsert_changes_real_mouth_geometry_and_new_channels_append_without_reordering ... ok
+test removing_face_and_morph_curves_preserves_every_other_field_and_restores_defaults ... ok
+test invalid_values_key_times_references_and_missing_removals_are_atomic ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests/deformation.rs (target/debug/deps/deformation-fb4a12e4ba945441)
+
+running 10 tests
+test binding_cloth_owned_surface_is_rejected_without_mutating_its_recipe ... ok
+test morph_local_then_object_rest_transform_then_bones_order_is_exact ... ok
+test scalar_channel_validation_and_removal_preserve_other_animation ... ok
+test conflicting_ownership_rigid_motion_and_dqs_ancestor_scale_are_rejected ... ok
+test morph_only_uses_empty_skin_and_shared_easing_clamp_loop_time ... ok
+test rigid_dqs_retains_blended_cross_section_on_the_real_surface ... ok
+test collapsed_animated_pose_fails_without_partial_scene_mutation ... ok
+test invalid_weights_morphs_and_default_collapse_are_atomic ... ok
+test analytic_two_joint_bend_updates_continuous_native_field_and_render_pixels ... ok
+test editor_protocol_undo_reload_and_material_rest_geometry_edits_reach_native_field ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+
+     Running tests/delivery_uv.rs (target/debug/deps/delivery_uv-472a1daf4cf6eaff)
+
+running 7 tests
+test intentional_multi_tile_affine_uv_winding_is_not_shortest_unwrapped ... ok
+test exact_material_owner_ties_and_selection_remapping_match_the_field ... ok
+test bounds_unrepresentable_uvs_and_unresolved_owner_changes_reject ... ok
+test planar_uv_seam_is_cut_on_composed_geometry_with_distinct_corner_values ... ok
+test seed_and_only_subtractors_have_the_same_exact_owner_without_repeated_field_queries ... ok
+test continuous_chart_covers_full_extracted_thick_shell_and_rims ... ok
+test connected_cylindrical_unwrap_keeps_its_local_wrap_seam ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.92s
+
+     Running tests/editor.rs (target/debug/deps/editor-8c6188053e81714b)
+
+running 10 tests
+test part_scoped_observation_distinguishes_overlapping_geometry ... ok
+test invalid_geometry_camera_and_unknown_fields_are_rejected ... ok
+test revisions_prevent_duplicate_mutations_and_undo_redo_do_not_reuse_revisions ... ok
+test paths_cannot_escape_root_and_invalid_load_preserves_the_document ... ok
+test invalid_batch_rolls_back_every_change_and_dry_run_is_nonmutating ... ok
+test humanoid_has_editable_roles_and_duplicate_recipe_does_not_partially_append ... ok
+test jsonl_framing_recovers_after_a_malformed_and_oversized_request ... ok
+test native_save_reload_preserves_geometry_camera_settings_and_baked_samples ... ok
+test obj_import_uses_real_baking_and_survives_native_save_load ... ok
+test real_jsonl_binary_renders_changed_pixels_and_reopens_the_saved_scene_identically ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.15s
+
+     Running tests/facial.rs (target/debug/deps/facial-4b74c7f4a3dc80f9)
+
+running 12 tests
+test new_control_defaults_preserve_legacy_serialization_and_each_invalid_value_is_rejected ... ok
+test nonzero_gaze_is_a_head_local_vector_at_translated_rotated_scaled_rest ... ok
+test neutral_gaze_preserves_translated_rest_positions_bit_for_bit ... ok
+test current_authored_head_is_used_after_source_edits_and_bad_tracks_fail ... ok
+test physical_blink_occludes_unchanged_eyes_and_removing_lids_restores_visibility ... ok
+test mouth_has_a_true_cavity_width_controls_and_independent_solid_negative_control ... ok
+test gaze_brow_and_lip_seal_controls_are_independent_and_persisted ... ok
+test direct_head_object_motion_carries_eyes_lids_lips_and_cavity ... ok
+test animated_seal_and_blink_close_with_brows_and_reload_without_accumulation ... ok
+test full_blinks_remain_closed_with_either_brow_extreme ... ok
+test full_lip_seal_closes_the_cavity_and_meets_both_lips_at_maximum_jaw ... ok
+test closed_mouth_has_no_phantom_interior_hits_outside_the_head ... ok
+
+test result: ok. 12 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.12s
+
+     Running tests/facial_native_compatibility.rs (target/debug/deps/facial_native_compatibility-17d85f3606ec66c5)
+
+running 3 tests
+test authentic_legacy_startup_migrates_in_memory_preserving_source_and_saved_revision ... ok
+test command_load_migration_is_undoable_and_preserves_authored_fields_and_cache_frames ... ok
+test edited_or_mixed_legacy_geometry_rejects_without_changing_files_state_or_history ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.18s
+
+     Running tests/film.rs (target/debug/deps/film-39b4802a6c2138c6)
+
+running 2 tests
+test exr_rejects_invalid_dimensions_pixel_counts_and_nonfinite_channels ... ok
+test exr_reader_recovers_float_rgb_hdr_and_chromaticities_without_display_conversion ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/film_compositing.rs (target/debug/deps/film_compositing-a286c07c97e8a17e)
+
+running 7 tests
+test independent_openexr_decoder_recovers_compositing_channels_and_utf8_metadata ... ignored, requires independent Python OpenEXR and numpy; set PYTHONPATH for the decoder installation
+test compositing_exr_rejects_malformed_dimensions_and_every_truncated_buffer ... ok
+test compositing_exr_rejects_nonfinite_colors_normals_invalid_coverage_and_depth ... ok
+test camera_origin_inside_geometry_has_valid_zero_exr_depth ... ok
+test compositing_exr_preserves_premultiplied_hdr_coverage_and_exact_unfiltered_data ... ok
+test compositing_exr_preserves_utf8_provenance_and_blocks_metadata_overrides_and_oversized_headers ... ok
+test rgba_only_output_omits_data_channels_and_claims_and_validates_only_required_buffers ... ok
+
+test result: ok. 6 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/garments.rs (target/debug/deps/garments-9f5ac0488424c920)
+
+running 10 tests
+test stale_or_tampered_saved_garment_geometry_is_rejected ... ok
+test trousers_have_two_open_cuffs_and_an_open_waist ... ok
+test invalid_creation_and_unsupported_source_edits_do_not_pass_validation ... ok
+test shirt_has_neck_hem_and_sleeve_openings ... ok
+test garment_is_distinct_thick_hollow_geometry_and_preserves_body ... ok
+test updating_garment_parameters_preserves_identity_order_and_explicit_material ... ok
+test source_animation_updates_the_actual_garment_without_a_second_binding ... ok
+test derived_clothing_rejects_double_binding_and_persists_with_source_edits ... ok
+test fit_uses_whole_body_so_noncovered_smooth_bulges_cannot_pierce_clothing ... ok
+test fit_report_measures_generated_surfaces_in_rest_and_motion ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.04s
+
+     Running tests/ik.rs (target/debug/deps/ik-8339845373233e2d)
+
+running 5 tests
+test unreachable_rejection_is_atomic_and_clamping_is_explicit_without_stretch ... ok
+test malformed_chain_time_and_targets_leave_document_unchanged ... ok
+test ik_reaches_world_target_through_translated_rotated_scaled_ancestor_and_preserves_other_data ... ok
+test jsonl_command_requires_revision_supports_dry_run_undo_redo_and_reports_reachable_pose ... ok
+test ik_edits_composite_clip_without_erasing_inherited_translation_scale_or_source_keys ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/joint_limits.rs (target/debug/deps/joint_limits-e4d34fde2f942674)
+
+running 9 tests
+test malformed_limit_transaction_preserves_scene_revision_and_original_joint_data ... ok
+test projection_preserves_offset_anchor_translation_and_scale_before_noncommuting_parent_fk ... ok
+test swing_twist_projection_reaches_the_same_geometry_as_explicit_component_limits ... ok
+test rejected_later_frames_and_shutter_subsamples_fail_before_any_output ... ok
+test weighted_jaw_projection_reaches_surface_field_and_invalidates_supplied_evaluation ... ok
+test limits_measure_final_layered_rotation_and_local_keys_remain_authoritative ... ok
+test relevant_limit_changes_stale_cloth_and_rebaked_pins_follow_projected_motion ... ok
+test absent_and_admitted_limits_preserve_exact_pose_pixels_and_legacy_serialization ... ok
+test frozen_projected_jobs_resume_with_original_limits_after_live_limit_edits ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.23s
+
+     Running tests/layer_evaluation_provenance.rs (target/debug/deps/layer_evaluation_provenance-587b9485d36b0948)
+
+running 5 tests
+test removing_a_deformer_preserves_empty_masks_and_unrelated_layer_channels ... ok
+test relabeled_time_and_modified_joint_payloads_are_rejected_before_geometry_changes ... ok
+test supplied_evaluation_from_a_different_clip_at_the_same_time_is_rejected_before_mutation ... ok
+test changed_animation_inputs_invalidate_supplied_evaluation_but_mesh_edits_do_not ... ok
+test layered_eye_delta_is_applied_once_inside_the_animated_head_and_local_keys_override_it ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/limited_ik_editor.rs (target/debug/deps/limited_ik_editor-7fd36bc91d6f7399)
+
+running 7 tests
+test layered_translation_scale_and_source_keys_survive_constrained_rotation_authoring ... ok
+test radial_clamping_and_angular_approximation_are_separate_explicit_policies ... ok
+test first_ik_keys_hold_back_to_zero_and_rebake_rejects_changed_rest_pin_alignment_atomically ... ok
+test impossible_pole_rejects_atomically_and_explicit_approximation_retains_residuals ... ok
+test constrained_ik_reports_stale_cloth_and_rebake_follows_the_new_hand_pose ... ok
+test locked_tip_orientation_is_achieved_by_upstream_non_cartesian_bone_twist ... ok
+test exact_constrained_authoring_supports_dry_run_history_native_reload_and_real_field ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+
+     Running tests/lip_sync.rs (target/debug/deps/lip_sync-d35b773184c79975)
+
+running 8 tests
+test generated_clip_can_be_layered_with_authored_blinks_and_body_motion ... ok
+test zero_transition_is_a_native_step_and_tiny_collapsed_transition_rejects_atomically ... ok
+test generated_curves_close_at_cues_preserve_other_performance_and_move_real_geometry ... ok
+test retained_provenance_detects_curve_edits_and_survives_source_and_target_removal ... ok
+test optional_analysis_hash_seals_exact_report_bytes_before_authoring ... ok
+test independent_profile_or_backend_metadata_corruption_is_rejected_but_curve_edits_remain_valid ... ok
+test invalid_mapping_and_implicit_replacement_leave_the_document_unchanged ... ok
+test curve_budgets_are_enforced_without_decimating_short_mouth_closures ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.04s
+
+     Running tests/material_maps.rs (target/debug/deps/material_maps-203a5bdd339b4f3d)
+
+running 3 tests
+test no_albedo_map_required_and_packed_channels_remain_independent_of_alpha ... ok
+test invalid_map_roles_and_uvs_are_atomic_and_old_color_only_bindings_still_work ... ok
+test maps_and_pixels_reload_exactly_without_original_sources ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.09s
+
+     Running tests/morph_controls.rs (target/debug/deps/morph_controls-ea135f06fc5083fb)
+
+running 1 test
+test sparse_default_morph_controls_preserve_dense_sources_and_are_atomic ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/pattern_cloth.rs (target/debug/deps/pattern_cloth-c2de4f108003c931)
+
+running 4 tests
+test preview_retains_controls_named_holes_and_exact_material_area ... ok
+test invalid_outlines_density_seams_and_provenance_fail_atomically ... ok
+test pattern_protocol_update_undo_save_and_cold_reload_keep_native_topology ... ok
+test sewn_pattern_bakes_native_mesh_while_unsewn_piece_falls_and_hole_stays_open ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.15s
+
+     Running tests/pattern_limits.rs (target/debug/deps/pattern_limits-87c8c3a954053a30)
+
+running 4 tests
+test empty_and_excessive_hole_lists_fail_before_unbounded_contour_processing ... ok
+test preview_is_read_only_with_optional_revision_while_mutations_require_current_revision ... ok
+test seam_counts_and_lengths_are_bounded_before_per_vertex_sets_are_built ... ok
+test excessive_pin_lists_are_rejected_and_exact_256_valid_pins_are_supported ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+
+     Running tests/project_budget.rs (target/debug/deps/project_budget-92f6d8cf7e57b61c)
+
+running 2 tests
+test last_u64_revision_commits_once_then_rejection_preserves_history_disk_and_readonly_budget ... ok
+test persistent_load_and_startup_reject_canonical_inflation_preserving_data_history_and_queries ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 6.09s
+
+     Running tests/render_jobs.rs (target/debug/deps/render_jobs-1068cc05ba04d92b)
+
+running 10 tests
+test bounds_invalid_requests_and_revision_conflicts_create_no_work_or_authoring_changes ... ok
+test corrupted_renderer_pixel_fingerprint_is_not_certified_or_copied_to_delivery ... ok
+test corrupted_renderer_camera_is_not_certified_or_copied_to_delivery ... ok
+test directory_and_manifest_collisions_are_preserved_and_completion_can_be_retried ... ok
+test foreign_frame_collision_preserves_bytes_and_retry_reconciles_the_pending_frame ... ok
+test symlinked_job_metadata_and_destinations_are_rejected_without_touching_the_target ... ok
+test shot_job_retains_exact_partial_audio_phase_and_linear_frames_without_source_files ... ok
+test bounded_steps_survive_reopen_and_use_frozen_scene_with_identical_rendered_pixels ... ok
+test corrupted_snapshot_plan_committed_frame_and_manifest_are_never_silently_reused ... ok
+test a_different_actual_executable_can_inspect_but_cannot_append_frames ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 3.53s
+
+     Running tests/sewing.rs (target/debug/deps/sewing-853a2353b6979bd5)
+
+running 5 tests
+test explicit_separated_assembly_closes_gap_without_modifying_rest_pattern ... ok
+test sampled_seam_gate_measures_positions_and_seam_edits_invalidate_cache ... ok
+test native_sewn_cache_and_diagnostics_survive_cold_actual_editor_process_reload ... ok
+test tight_seams_hold_joint_attached_garment_while_unsewn_panels_separate ... ok
+test malformed_boundaries_correspondence_recipes_and_updates_are_atomic ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.76s
+
+     Running tests/speech_backend.rs (target/debug/deps/speech_backend-e4d84b003fe9e2e9)
+
+running 11 tests
+test real_rhubarb_recognizes_original_speech_and_reports_exact_backend_identity ... ignored, requires the verified local Rhubarb 1.14.0 distribution; actual recognizer acceptance
+test recognizer_owner_death_process_helper ... ignored, subprocess-only owner-death lifecycle harness
+test changed_binary_or_resources_are_rejected_before_or_after_execution ... ok
+test direct_arguments_logs_and_identity_are_deterministic ... ok
+test either_stream_is_capped_exactly_and_child_is_reaped ... ok
+test failed_exit_and_invalid_json_preserve_diagnostic_evidence ... ok
+test exact_output_limit_is_accepted_without_truncation ... ok
+test invalid_version_timeout_and_resource_symlinks_are_explicit ... ok
+test recognizer_terminates_when_owner_is_killed_during_probe_or_analysis ... ok
+test version_probe_has_output_and_time_limits_and_reaps_its_process ... ok
+test timeout_kills_and_reaps_without_losing_partial_logs ... ok
+
+test result: ok. 9 passed; 0 failed; 2 ignored; 0 measured; 0 filtered out; finished in 6.66s
+
+     Running tests/speech_host_config.rs (target/debug/deps/speech_host_config-53e8c93e61b79ae7)
+
+running 1 test
+test broken_optional_bundle_preserves_authoring_and_explicit_configuration_is_strict ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.12s
+
+     Running tests/surface_condition.rs (target/debug/deps/surface_condition-ab851bd411ffe474)
+
+running 5 tests
+test invalid_input_embedding_and_limits_reject_with_real_spent_work ... ok
+test zero_allowance_preserves_geometry_and_unresolved_topology_does_not_delete_a_component ... ok
+test endpoint_conditioning_preserves_frozen_face_ancestry_and_exact_work_boundary ... ok
+test certificate_reuse_binds_compact_output_and_stale_input_requires_full_validation ... ok
+test frozen_original_bundle_conditions_nanometre_edges_without_changing_endpoint_coordinates ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 5.45s
+
+     Running tests/surface_feature_split.rs (target/debug/deps/surface_feature_split-c9273e1b881b35ef)
+
+running 2 tests
+test original_cross_feature_chord_needs_a_local_shoulder_before_binary_refinement ... ok
+test original_frozen_flat_shoulders_converge_within_unchanged_six_passes ... FAILED
+
+failures:
+
+---- original_frozen_flat_shoulders_converge_within_unchanged_six_passes stdout ----
+
+thread 'original_frozen_flat_shoulders_converge_within_unchanged_six_passes' (89606) panicked at mm3e-editor/tests/surface_feature_split.rs:137:49:
+called `Result::unwrap()` on an `Err` value: "native surface embedding: surface intersection candidate query failed: surface candidate work budget exceeded (143); total embedding work 57823712; radial attempt {\"kind\":\"inconclusive\",\"message\":\"radial embedding found no strict common-sign centre and exact generic degree-one ray within its fixed candidate caps\",\"work\":{\"centre_work\":614720,\"centres_attempted\":2,\"edge_cone_tests\":0,\"face_plane_tests\":660,\"integer_fallbacks\":0,\"plane_work\":21120,\"point_work\":19008,\"ray_work\":0,\"rays_attempted\":0,\"structural_work\":470031,\"topology_work\":4675548,\"work\":5800427}}"
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    original_frozen_flat_shoulders_converge_within_unchanged_six_passes
+
+test result: FAILED. 1 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 15.15s
+
+error: test failed, to rerun pass `-p mm3e-editor --test surface_feature_split`
+     Running tests/surface_refine.rs (target/debug/deps/surface_refine-2c0cb4f1071b93ca)
+
+running 6 tests
+test open_edges_reversed_winding_and_vertex_pinches_are_not_silently_repaired ... ok
+test exhausted_work_geometry_pass_and_coordinate_budgets_fail_without_scene_mutation ... ok
+test scalar_sampled_prism_with_irregular_fans_is_not_accepted_with_missing_caps ... ok
+test triangular_prism_is_projected_to_rounded_native_edge_and_corner_caps ... ok
+test folded_scalar_grid_correspondence_exhaustion_is_a_bounded_rejection ... ok
+test folded_support_poly_producer_refines_the_original_complete_native_sheet ... FAILED
+
+failures:
+
+---- folded_support_poly_producer_refines_the_original_complete_native_sheet stdout ----
+support producer: 1794 vertices/3584 faces, 27555836 work
+
+thread 'folded_support_poly_producer_refines_the_original_complete_native_sheet' (89647) panicked at mm3e-editor/tests/surface_refine.rs:247:55:
+called `Result::unwrap()` on an `Err` value: "native surface refinement exhausted work budget at mm3e-editor/src/surface_refine.rs:650 (used 8000000, requested 1); projection pass 1, 3976 vertices/7948 faces; prior passes [Object {\"budget_limited_edge_marking\": Bool(true), \"charged_work\": Number(7671053), \"faces\": Number(3584), \"failed_faces\": Number(1762), \"feature_directed_splits\": Number(238), \"feature_refined_input_faces\": Number(308), \"feature_region_queries\": Number(490), \"field_queries\": Number(72359), \"filtered_split_edges\": Number(37), \"marked_faces\": Number(1966), \"max_residual\": Number(0.04736260697245598), \"orientation_examples\": Array [Object {\"face\": Number(165), \"indices\": Array [Number(100), Number(106), Number(101)], \"input_face\": Number(165), \"normal\": Array [Number(0.0), Number(7.655023281927242e-10), Number(-7.655023281927242e-10)], \"positions\": Array [Array [Number(1.0281084775924683), Number(-0.06785984337329865), Number(-0.06785984337329865)], Array [Number(1.0577349662780762), Number(-0.057735033333301544), Number(-0.057735033333301544)], Array [Number(1.0281085968017578), Number(-0.06785982847213745), Number(-0.06785982847213745)]]}, Object {\"face\": Number(263), \"indices\": Array [Number(157), Number(158), Number(159)], \"input_face\": Number(263), \"normal\": Array [Number(0.00015867926443209265), Number(0.0), Number(0.0)], \"positions\": Array [Array [Number(0.10000000149011612), Number(0.02360679768025875), Number(-0.10000000149011612)], Array [Number(0.10000000149011612), Number(0.0036895149387419224), Number(-0.10000000149011612)], Array [Number(0.10000000149011612), Number(0.0076729715801775455), Number(-0.10796691477298737)]]}, Object {\"face\": Number(267), \"indices\": Array [Number(160), Number(159), Number(158)], \"input_face\": Number(267), \"normal\": Array [Number(3.709883095170952e-12), Number(0.0), Number(-0.0)], \"positions\": Array [Array [Number(0.10000000149011612), Number(0.007672971114516258), Number(-0.10796691477298737)], Array [Number(0.10000000149011612), Number(0.0076729715801775455), Number(-0.10796691477298737)], Array [Number(0.10000000149011612), Number(0.0036895149387419224), Number(-0.10000000149011612)]]}, Object {\"face\": Number(769), \"indices\": Array [Number(416), Number(426), Number(425)], \"input_face\": Number(769), \"normal\": Array [Number(-9.4281027429588e-11), Number(0.0), Number(0.0)], \"positions\": Array [Array [Number(0.9923270344734192), Number(0.9126541614532471), Number(-0.10036762058734894)], Array [Number(0.9923270344734192), Number(0.8999999761581421), Number(-0.10036762058734894)], Array [Number(0.9923270344734192), Number(0.8999999761581421), Number(-0.10036761313676834)]]}, Object {\"face\": Number(776), \"indices\": Array [Number(422), Number(425), Number(423)], \"input_face\": Number(776), \"normal\": Array [Number(0.0), Number(-7.321812951488482e-6), Number(1.1871605920532602e-9)], \"positions\": Array [Array [Number(0.9763932228088379), Number(0.9000000357627869), Number(-0.10000000149011612)], Array [Number(0.9923270344734192), Number(0.8999999761581421), Number(-0.10036761313676834)], Array [Number(0.9963104724884033), Number(0.9000000357627869), Number(-0.10000000149011612)]]}, Object {\"face\": Number(778), \"indices\": Array [Number(423), Number(425), Number(426)], \"input_face\": Number(778), \"normal\": Array [Number(4.440892098500626e-16), Number(-2.9678925983489535e-11), Number(0.0)], \"positions\": Array [Array [Number(0.9963104724884033), Number(0.9000000357627869), Number(-0.10000000149011612)], Array [Number(0.9923270344734192), Number(0.8999999761581421), Number(-0.10036761313676834)], Array [Number(0.9923270344734192), Number(0.8999999761581421), Number(-0.10036762058734894)]]}, Object {\"face\": Number(1487), \"indices\": Array [Number(785), Number(784), Number(781)], \"input_face\": Number(1487), \"normal\": Array [Number(0.0020156503146051066), Number(0.0), Number(0.0)], \"positions\": Array [Array [Number(0.10000000149011612), Number(0.09305986016988754), Number(0.15833333134651184)], Array [Number(0.10000000149011612), Number(-0.022975293919444084), Number(0.097324900329113)], Array [Number(0.10000000149011612), Number(0.01515150349587202), Number(0.10000000149011612)]]}, Object {\"face\": Number(2028), \"indices\": Array [Number(1052), Number(1055), Number(1053)], \"input_face\": Number(2028), \"normal\": Array [Number(-1.5944801035061573e-10), Number(-0.00008461395675674055), Number(-4.4399790510851744e-9)], \"positions\": Array [Array [Number(0.9484848380088806), Number(0.9000000357627869), Number(0.10000000149011612)], Array [Number(1.0229753255844116), Number(0.9000000357627869), Number(0.0973249077796936)], Array [Number(0.9801151156425476), Number(0.8999999761581421), Number(0.10000000149011612)]]}], \"orientation_failures\": Number(24), \"pass\": Number(0), \"proposed_split_edges\": Number(2219), \"split_edges\": Number(2182), \"vertices\": Number(3976), \"worst_sample\": String(\"vertex 455 at Vec3 { x: 0.9585786, y: 1.1, z: -0.1 }\")}]"
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    folded_support_poly_producer_refines_the_original_complete_native_sheet
+
+test result: FAILED. 5 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.39s
+
+error: test failed, to rerun pass `-p mm3e-editor --test surface_refine`
+     Running tests/surface_refine_intersections.rs (target/debug/deps/surface_refine_intersections-8561fe16585243cc)
+
+running 2 tests
+test disjoint_closed_shells_cannot_be_accepted_as_coincident_projected_components ... ok
+test one_shell_still_refines_to_the_native_triangle_offset_with_replayable_work ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.39s
+
+     Running tests/surface_retessellate.rs (target/debug/deps/surface_retessellate-fc72fe551a415bee)
+
+running 11 tests
+test candidate_pass_and_malformed_ancestry_limits_return_no_partial_mesh ... ok
+test strict_convex_coplanar_flip_preserves_patch_and_all_ancestors ... ok
+test concave_boundary_existing_diagonal_and_ancestry_bound_cannot_be_bypassed ... ok
+test arbitrary_exact_plane_flips_but_a_true_subnormal_nonplanarity_does_not ... ok
+test disjoint_warped_patches_take_maximum_instead_of_summing_errors ... ok
+test colliding_warp_rolls_back_geometry_ancestry_and_error_bounds ... ok
+test exact_certified_path_checks_input_identity_and_issues_final_snapshot ... ok
+test bounded_warp_uses_explicit_allowance_and_exact_work_boundary ... ok
+test bounded_certified_path_preserves_batch_proofs_and_charges_all_matches ... ok
+test frozen_conditioned_bundle_retessellates_both_original_locked_pairs ... ok
+test frozen_exact_retessellated_bundle_repairs_all_four_remaining_warped_slivers ... ok
+
+test result: ok. 11 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 4.88s
+
+     Running tests/textures.rs (target/debug/deps/textures-988abeff28335b42)
+
+running 8 tests
+test png_color_alpha_precision_and_native_original_bytes_round_trip ... ok
+test planar_projection_and_scoped_uv_inspection_preserve_geometry_and_revision ... ok
+test runtime_texture_failure_produces_no_file_and_preserves_the_authored_document ... ok
+test palette_low_bit_grayscale_rgb_and_apng_policy_are_explicit ... ok
+test invalid_references_topology_and_input_preserve_revision_history_and_document ... ok
+test texture_tracks_actual_joint_and_morph_deformation_with_immutable_uvs ... ok
+test import_dry_run_preserves_state_and_saved_texture_renders_without_source_file ... ok
+test cloth_uvs_follow_cached_motion_and_visual_edits_preserve_physical_cache ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.69s
+
+     Running tests/timeline.rs (target/debug/deps/timeline-c961a94afbf317c5)
+
+running 8 tests
+test low_sample_rate_empty_frame_windows_keep_exact_source_indices_without_silence ... ok
+test full_half_open_interval_fits_at_native_clip_precision_and_extra_frames_are_rejected ... ok
+test durable_validation_rejects_duplicate_missing_and_unbounded_references ... ok
+test large_absolute_and_negative_frame_numbers_keep_distinct_native_samples ... ok
+test pcm_bounds_and_checked_wide_arithmetic_do_not_pad_resample_or_wrap ... ok
+test positive_rate_frame_count_and_integer_overflow_limits_fail_without_partial_schedule ... ok
+test fractional_rate_audio_windows_are_gapless_and_partial_selection_retains_floor_phase ... ok
+test integer_shot_has_exact_count_and_drives_the_existing_native_animation_pose ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/usd_delivery.rs (target/debug/deps/usd_delivery-8ec778120ea861d3)
+
+running 7 tests
+test malformed_selection_grid_time_material_and_clipping_are_rejected_without_output ... ok
+test editor_protocol_writes_complete_delivery_without_mutation_and_never_overwrites ... ok
+test coarse_geometry_is_rejected_by_convergence_and_finer_geometry_passes ... ok
+test composed_selection_preserves_authored_subtraction_order_and_cavity_geometry ... ok
+test animation_uses_exact_inclusive_frame_schedule_and_evaluated_world_positions ... ok
+test authored_scalar_residual_is_reported_and_gated_separately_from_geometric_distance ... ok
+test thickened_native_triangle_sheet_delivers_both_sides_and_rounded_border ... FAILED
+
+failures:
+
+---- thickened_native_triangle_sheet_delivers_both_sides_and_rounded_border stdout ----
+
+thread 'thickened_native_triangle_sheet_delivers_both_sides_and_rounded_border' (89767) panicked at mm3e-editor/tests/usd_delivery.rs:197:64:
+called `Result::unwrap()` on an `Err` value: "USD at 0s source-feature comparison grid: surface coplanar retessellation: exact geometry exhausted work budget (retessellation work 2319554); completed fine-grid work Some(Object {\"bounded_retessellation\": Number(17657337), \"charged_work\": Number(175091859), \"conditioning\": Number(38563347), \"conditioning_reused_input_embedding\": Bool(true), \"extraction\": Number(45757293), \"refinement\": Number(51081654), \"retessellation\": Number(21486445)}); aggregate source work 175091859/200000000"
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    thickened_native_triangle_sheet_delivers_both_sides_and_rounded_border
+
+test result: FAILED. 6 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 11.06s
+
+error: test failed, to rerun pass `-p mm3e-editor --test usd_delivery`
+     Running tests/usd_texture_delivery.rs (target/debug/deps/usd_texture_delivery-add71c2b525e4067)
+
+running 2 tests
+test bundle_conflicts_and_unsupported_requests_preserve_existing_files ... ok
+test constant_map_bundle_retains_source_and_installs_layer_with_verified_manifest ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 25.92s
+
+     Running tests/usd_writer.rs (target/debug/deps/usd_writer-d9f4fc303364e195)
+
+running 8 tests
+test openusd_reader_validates_real_schema_values_and_bindings ... ignored, requires independent pxr OpenUSD reader; set MM3E_USD_PYTHONPATH
+test openusd_reader_validates_texture_graphs_uv_seams_and_original_packed_channels ... ignored, requires independent pxr OpenUSD reader; set MM3E_USD_PYTHONPATH
+test usd_writer_rejects_missing_uvs_injection_paths_and_incompatible_map_types ... ok
+test usd_writer_represents_mesh_disappearance_and_single_frame_delivery ... ok
+test usd_writer_handles_topology_material_camera_animation_and_stable_ids ... ok
+test uv_sampling_follows_uv_changes_and_topology_without_inventing_missing_coordinates ... ok
+test usd_writer_rejects_invalid_payloads_before_returning_any_bytes ... ok
+test usd_writer_emits_typed_texture_graphs_and_face_varying_uv_samples ... ok
+
+test result: ok. 6 passed; 0 failed; 2 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/uv_periodic_semantics.rs (target/debug/deps/uv_periodic_semantics-c4992a6eada6e472)
+
+running 5 tests
+test agreeing_periodic_probe_samples_do_not_authorize_a_cross_seam_interpolation ... ok
+test odd_mirror_shifts_and_clamped_axis_shifts_are_not_repeat_equivalences ... ok
+test integer_repeat_and_even_mirror_shifts_preserve_actual_color_and_data_samples ... ok
+test f32_storage_must_preserve_phase_within_requested_texel_error ... ok
+test transfer_reports_intersection_of_all_bound_sampler_periods_per_axis ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/lib.rs (target/debug/deps/mm3e_kit-9999545d578f7c92)
+
+running 94 tests
+test cloth::self_contact::tests::fast_tangential_near_contact_sweeps_finish_without_creating_a_collision ... ok
+test cloth::self_contact::tests::nearly_parallel_edges_skinny_triangles_and_collapses_keep_valid_closest_features ... ok
+test cloth::self_contact::tests::sewing_adjacency_does_not_expand_through_transitive_stitch_links ... ok
+test csg::tests::malformed_geometry_and_excessive_expression_depth_are_rejected ... ok
+test cloth::tests::analytic_dihedral_gradients_match_independent_central_difference ... ok
+test deform::tests::dual_quaternion_hemisphere_alignment_is_invariant_to_sign ... ok
+test csg::tests::eyelid_shell_clip_has_an_actual_opening ... ok
+test deform::tests::exact_half_turn_hemisphere_tie_is_invariant_to_quaternion_sign ... ok
+test dual::tests::capsule_gradient_matches_finite_difference ... ok
+test dual::tests::boxed_gradient_matches_finite_difference ... ok
+test dual::tests::cylinder_gradient_matches_finite_difference ... ok
+test dual::tests::ellipsoid_gradient_matches_finite_difference ... ok
+test dual::tests::hex_prism_gradient_matches_finite_difference ... ok
+test dual::tests::octahedron_gradient_matches_finite_difference ... ok
+test dual::tests::plane_gradient_matches_finite_difference ... ok
+test dual::tests::rounded_box_gradient_matches_finite_difference ... ok
+test dual::tests::round_cone_gradient_matches_finite_difference ... ok
+test dual::tests::sphere_gradient_matches_finite_difference ... ok
+test dual::tests::subtract_gradient_matches_finite_difference ... ok
+test dual::tests::smooth_union_gradient_matches_finite_difference ... ok
+test dual::tests::torus_gradient_matches_finite_difference ... ok
+test csg::tests::transformed_subtraction_and_bounds_match_field ... ok
+test ik::tests::antipodal_and_nearly_antipodal_from_to_remain_finite_and_correct ... ok
+test ik::tests::parallel_and_tiny_from_to_rotations_are_not_replaced_by_an_angular_dead_zone ... ok
+test meshing_boolean::coordinate_tests::single_product_halfway_nearest_and_cached_comparison_budgets_preserve_exact_results ... ok
+test meshing_boolean::coordinate_tests::constant_support_components_and_cached_equalities_are_exact_not_proximity_tests ... ok
+test meshing_boolean::cross_cell_boundary_plane_tests::opposite_cell_endpoints_match_only_the_exact_oriented_plane ... ok
+test meshing_boolean::ear_tests::blocker_masks_and_two_neighbor_refreshes_match_reference_after_each_possible_removal ... ok
+test meshing_boolean::cross_cell_boundary_plane_tests::exact_cross_cell_regions_keep_original_cancellation_and_feature_gates ... ok
+test meshing_boolean::exact_support_tests::cumulative_interval_displacement_cannot_reset_or_borrow_large_axis_precision ... ok
+test meshing_boolean::exact_support_tests::exact_certificate_rejects_a_zero_denominator ... ok
+test meshing_boolean::endpoint_tests::endpoint_constraints_and_exact_budget_cannot_be_bypassed ... ok
+test meshing_boolean::exact_support_tests::captured_source_cofactors_reproduce_independent_fraction_brackets ... ok
+test meshing_boolean::exact_support_tests::exact_plane_sign_preserves_zero_and_genuinely_tiny_nonzero_values ... ok
+test meshing_boolean::exact_support_tests::exact_same_cell_plane_coalescing_rejects_lost_subnormal_coefficients ... ok
+test meshing_boolean::ear_tests::exact_cached_budget_replays_and_one_less_cannot_return_partial_triangulation ... ok
+test meshing_boolean::exact_support_tests::large_constant_coordinate_cannot_supply_small_axis_rounding_allowance ... ok
+test meshing_boolean::exact_support_tests::exact_region_coalescing_keeps_junctions_used_by_other_regions ... ok
+test meshing_boolean::exact_support_tests::genuinely_tiny_nonzero_support_survives_exact_zero_certification ... ok
+test meshing_boolean::exact_support_tests::original_flat_support_face_has_exactly_zero_queried_plane_value ... ok
+test meshing_boolean::exact_support_tests::exact_region_coalescing_never_fills_an_annular_hole ... ok
+test meshing_boolean::exact_support_tests::source_identity_merges_equal_constraints_but_not_a_shared_f32_rounding ... ok
+test meshing_boolean::exact_support_tests::exact_coordinate_brackets_match_independent_fraction_oracle ... ok
+test meshing_boolean::fan_tests::factored_fans_preserve_degenerate_and_signed_zero_ties ... ok
+test meshing_boolean::line_tests::singleton_line_accepts_cross_tetra_axis_and_diagonal_segments ... ok
+test meshing_boolean::line_tests::singleton_line_rejects_noncollinear_and_nonbetween_points_with_exact_residuals ... ok
+test meshing_boolean::line_tests::singleton_line_requires_three_singleton_sources_and_charges_exact_budget ... ok
+test meshing_boolean::relation_tests::finite_f32_extremes_preserve_exact_relations ... ok
+test meshing_boolean::relation_tests::fixed_edge_solver_retains_the_general_gaussian_work_charge ... ok
+test meshing_boolean::relation_tests::full_relations_share_symmetric_keys_for_same_opposite_and_noncoincident_rows ... ok
+test meshing_boolean::source_basis_tests::deep_clone_mutation_cannot_reuse_an_old_basis_equation ... ok
+test meshing_boolean::relation_tests::direct_triangle_anchor_preserves_oriented_corners_and_source_provenance ... ok
+test meshing_boolean::relation_tests::support_mask_separates_full_noncoincidence_from_edge_coincidence ... ok
+test meshing_boolean::solve_compare_tests::proportional_relation_cache_replays_the_exact_zero_decision ... ok
+test meshing_boolean::relation_tests::local_cache_preserves_exact_zero_and_nonzero_vertex_values ... ok
+test meshing_boolean::relation_tests::relation_misses_and_hits_replay_at_exact_work_and_reject_one_less ... ok
+test meshing_boolean::source_basis_tests::non_f32_cross_product_rounding_and_zero_pivot_controls ... ok
+test meshing_local::cleanup_tests::multiple_collinear_constraints_preserve_face_labels_and_existing_points ... ok
+test radial_embedding::tests::edge_vertex_and_centre_plane_degeneracies_are_inconclusive_without_epsilon ... ok
+test meshing_local::cleanup_tests::exact_alias_cleanup_unions_provenance_and_compacts_by_original_identity ... ok
+test radial_embedding::tests::malformed_geometry_rejects_and_open_or_pinched_complexes_are_not_certified ... ok
+test radial_embedding::tests::virtual_ray_endpoint_preserves_a_direction_lost_by_rounded_addition ... ok
+test radial_embedding::tests::failed_face_prefix_does_not_convert_unvisited_vertices_or_refund_work ... ok
+test surface::tests::physical_shell_has_two_sides_and_round_open_border_without_inferred_interior ... ok
+test radial_embedding::tests::failed_bbox_candidate_and_nongeneric_first_ray_remain_in_successful_work ... ok
+test radial_embedding::tests::twice_wrapped_sphere_passes_plane_and_euler_gates_but_degree_two_rejects ... ok
+test radial_embedding::tests::extra_components_and_a_closed_torus_do_not_receive_spherical_certificates ... ok
+test radial_embedding::tests::ordinary_and_reversed_spheres_have_complete_degree_one_certificates ... ok
+test surface_intersections::orient3_tests::forced_difference_fallback_exact_budget_replays_and_failures_keep_charges ... ok
+test surface_intersections::orient3_tests::difference_tail_is_exact_across_f32_least_bits_and_full_exponent_span ... ok
+test triangle::tests::a_shared_diagonal_is_counted_once_independent_of_winding ... ok
+test surface::tests::sharply_bent_shared_edge_has_no_crack_and_preserves_both_open_sides ... ok
+test triangle::tests::projected_vertices_and_thin_faces_have_consistent_ownership ... ok
+test surface_intersections::prepared_source_contractions::tests::committed_boxes_expand_outside_old_internal_nodes_and_deleted_leaves_disappear ... ok
+test surface_intersections::prepared_source_contractions::tests::source_only_admission_can_empty_the_tree_without_reviving_removed_faces ... ok
+test radial_embedding::tests::exact_budget_replay_and_failed_retry_charges_never_create_partial_success ... ok
+test surface::tests::rejects_invalid_geometry_and_handles_finite_geometry_at_small_and_large_scales ... ok
+test meshing_boolean::relation_tests::cache_saturation_falls_back_to_charged_exact_predicates ... ok
+test meshing_boolean::exact_support_tests::exact_cofactors_match_an_independent_integer_determinant ... ok
+test csg::tests::clipping_subtraction_smoothing_and_shell_bounds_are_safe ... ok
+test meshing_boolean::coordinate_tests::single_product_signs_match_independent_integer_ratios_at_rounding_cell_boundaries ... ok
+test cloth::self_contact::tests::closest_feature_normals_are_supporting_planes_for_both_convex_primitives ... ok
+test meshing_boolean::coordinate_tests::source_domain_index_is_exactly_the_original_plane_candidates_with_necessary_node_filter ... ok
+test meshing_boolean::solve_compare_tests::edge_solver_matches_general_solver_bits ... ok
+test cloth::self_contact::tests::partitioned_interval_join_and_unchanged_pose_reuse_match_exhaustive_primitive_pairs ... ok
+test cloth::self_contact::tests::conservative_sweeps_do_not_miss_dense_sampled_deforming_primitive_contacts ... ok
+test surface::tests::bvh_matches_brute_force_on_bent_mesh_across_faces_edges_and_distant_points ... ok
+test meshing_boolean::ear_tests::tilted_translated_and_nearly_degenerate_ear_sequences_keep_reference_bits ... ok
+test surface_intersections::orient3_tests::filtered_and_forced_difference_fallback_match_fraction_and_rational_oracles ... ok
+test meshing_boolean::fan_tests::factored_small_fans_preserve_every_score_bit_across_scales_and_rounding ... ok
+test meshing_boolean::source_basis_tests::independent_fraction_basis_signs_cold_warm_and_exact_budgets ... ok
+test meshing_boolean::endpoint_tests::exact_endpoints_match_frozen_reference_across_every_f32_exponent_and_support_edge ... ok
+test meshing_boolean::fan_tests::factored_large_fans_preserve_scores_through_the_cached_polygon_range ... ok
+test meshing_boolean::ear_tests::cached_small_polygons_match_frozen_reference_triangles_and_large_path_stays_unchanged ... ok
+
+test result: ok. 94 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.98s
+
+     Running tests/bounded_surface.rs (target/debug/deps/bounded_surface-4d4ce2486aa3b186)
+
+running 5 tests
+test counts_root_children_ordering_repeated_bounds_and_triangle_tests ... ok
+test fully_visited_tree_counts_all_tests_and_preserves_winding_tie_normal ... ok
+test rejects_nonfinite_queries_and_zero_budget_without_changing_legacy_behavior ... ok
+test pruned_queries_count_far_less_work_than_visiting_every_triangle ... ok
+test bounded_distance_matches_existing_and_brute_force_individual_triangles_bitwise ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+
+     Running tests/cloth.rs (target/debug/deps/cloth-fd979abc81ebe94c)
+
+running 29 tests
+test coincident_current_vertices_produce_finite_motion_and_do_not_rewrite_rest_topology ... ok
+test malformed_contact_and_numeric_overflow_fail_atomically ... ok
+test static_self_contact_clearance_is_not_a_global_surface_intersection_proof ... ok
+test self_contact_reports_immovable_penetrations_and_validates_resource_limits ... ok
+test static_self_contact_query_budget_failures_are_deterministic_and_read_only ... ok
+test static_self_contact_query_catches_edge_only_interpolation_overlap ... ok
+test static_self_contact_query_validates_topology_and_pose_but_handles_collapsed_features ... ok
+test static_self_contact_query_detects_overlap_created_between_clear_cache_endpoints ... ok
+test topological_neighbors_do_not_collide_with_their_own_sheet ... ok
+test unrepresentable_acceleration_fails_without_committing_partial_simulation ... ok
+test construction_rejects_invalid_geometry_masses_and_unbounded_work ... ok
+test pinned_contacts_are_reported_without_violating_attachment_constraints ... ok
+test a_moving_pinned_layer_transfers_contact_reaction_to_the_free_triangle ... ok
+test self_contact_normal_and_friction_reactions_conserve_free_system_momentum ... ok
+test edge_edge_sweep_catches_intersections_that_all_vertex_triangle_tests_miss ... ok
+test friction_does_not_damp_motion_without_contact_or_common_layer_translation ... ok
+test animated_pin_reaches_exact_target_and_moves_the_attached_fabric ... ok
+test swept_vertex_triangle_contact_stops_layers_crossing_with_disabled_negative_control ... ok
+test self_contact_checkpoint_replay_is_exact_and_budget_failures_are_atomic ... ok
+test free_fall_follows_acceleration_without_a_rest_position_hold ... ok
+test bending_resists_a_hinge_fold_that_does_not_stretch_any_edge ... ok
+test compliant_gravity_equilibrium_matches_hooke_law_at_two_timestep_sizes ... ok
+test external_coulomb_friction_slows_sliding_and_zero_friction_preserves_it ... ok
+test self_contact_friction_uses_relative_layer_sliding_with_zero_friction_control ... ok
+test deterministic_replay_and_checkpoint_resume_match_every_vertex_and_velocity ... ok
+test unpinned_cloth_falls_and_settles_above_plane_at_configured_thickness ... ok
+test connected_folded_strip_keeps_nonadjacent_layers_apart_under_gravity ... ok
+test cloth_sags_under_gravity_while_anchors_stay_exact_and_edges_resist_stretch ... ok
+test cloth_drapes_over_sphere_with_vertex_contact_and_reports_actual_projection ... ok
+
+test result: ok. 29 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 5.95s
+
+     Running tests/cloth_broadphase.rs (target/debug/deps/cloth_broadphase-337a4049123d5759)
+
+running 1 test
+test flat_panel_broadphase_work_is_bounded_and_cannot_change_contact_free_motion ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.42s
+
+     Running tests/cloth_sewing.rs (target/debug/deps/cloth_sewing-0a02b9fe3250dbd3)
+
+running 9 tests
+test failure_after_a_real_sewing_correction_rolls_back_the_entire_step ... ok
+test coincident_zero_length_stitches_stay_finite_and_nonzero_targets_can_separate_them ... ok
+test sewing_redistributes_reaction_by_inverse_mass_and_preserves_exact_pins ... ok
+test sewing_compliance_changes_actual_closure_and_conflicting_pins_are_reported ... ok
+test static_clearance_uses_direct_seams_without_excluding_unsewn_neighbors_or_other_layers ... ok
+test sewing_validation_rejects_bad_or_reversed_duplicate_pairs_without_changing_state ... ok
+test sewing_checkpoint_replay_and_canonical_pair_order_are_exact ... ok
+test empty_seam_constructor_and_replacement_preserve_the_existing_solver_bitwise ... ok
+test two_separate_square_panels_zip_their_edge_under_gravity_with_an_unsewn_control ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.78s
+
+     Running tests/deform.rs (target/debug/deps/deform-28d60c40016ba5b5)
+
+running 11 tests
+test antipodal_authored_quaternions_and_reordered_weights_give_equivalent_poses ... ok
+test blend_shapes_are_added_before_bone_rotation_and_support_signed_weights ... ok
+test identity_and_rest_recovery_retain_source_bits_including_signed_zero ... ok
+test proper_transform_and_explicit_scale_contract_is_enforced ... ok
+test malformed_weights_are_rejected_without_silent_normalization ... ok
+test single_influence_is_the_exact_rigid_transform_for_both_methods ... ok
+test weighted_hinge_matches_analytic_linear_and_dual_quaternion_positions ... ok
+test malformed_cardinalities_nonfinite_data_and_budget_excess_are_rejected ... ok
+test parallel_replay_is_deterministic_source_is_immutable_and_failures_do_not_poison_recovery ... ok
+test twist_cylinder_quantifies_lbs_collapse_and_dual_quaternion_radius_retention ... ok
+test maximum_supported_vertices_and_influences_have_finite_exact_identity_results ... ok
+
+test result: ok. 11 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.08s
+
+     Running tests/embedding_certificate.rs (target/debug/deps/embedding_certificate-8e7bb4e04256a2dc)
+
+running 11 tests
+test mutable_public_preparation_and_validation_counters_cannot_forge_certificate_provenance ... ok
+test certified_preparation_reuses_only_matching_complete_proof_and_preserves_original_provenance ... ok
+test certified_retopology_binds_the_actual_new_face_slots_and_rejects_bad_candidates ... ok
+test incomplete_and_nonempty_inventories_cannot_issue_baseline_certificates ... ok
+test complete_full_validation_captures_owned_bits_and_ordered_indices_with_compact_debug ... ok
+test bijective_used_vertex_compaction_rebinds_without_running_geometric_predicates ... ok
+test reindex_cannot_weld_retain_unused_move_coordinates_or_edit_ordered_faces ... ok
+test stale_bits_index_identity_and_face_order_are_not_authorized_by_geometry_similarity ... ok
+test radial_snapshot_is_issued_only_by_a_complete_same_input_proof_and_seeds_private_reuse ... ok
+test snapshots_matches_prepared_calls_and_certified_final_work_replay_exactly ... ok
+test represented_box_producer_returns_a_certificate_bound_after_cleanup ... ok
+
+test result: ok. 11 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.07s
+
+     Running tests/exact_geometry.rs (target/debug/deps/exact_geometry-248628bb8a505ab8)
+
+running 10 tests
+test cancelled_and_negative_homogeneous_denominators_preserve_the_exact_coordinate ... ok
+test constructor_and_predicate_work_replay_exactly_and_one_less_fails ... ok
+test a_genuine_subnormal_offset_keeps_its_sign_in_nearly_collinear_coordinates ... ok
+test malformed_inputs_and_retried_zero_denominators_reject_with_counted_work ... ok
+test orient3_exact_budgets_and_counted_retries_preserve_the_original_points ... ok
+test orient3_signed_volume_is_invariant_under_independent_negative_homogeneous_scales ... ok
+test arc_clones_and_separately_reconstructed_equal_points_agree ... ok
+test orient3_preserves_a_one_subnormal_departure_from_an_oblique_plane ... ok
+test every_fraction_oracle_sign_matches_including_actual_cofactors_and_all_binary_exponents ... ok
+test orient3_matches_independent_fraction_determinants_rotations_scales_and_extreme_cancellation ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.94s
+
+     Running tests/ik.rs (target/debug/deps/ik-fe2b1c5a30c377d4)
+
+running 15 tests
+test equal_length_target_at_root_folds_toward_the_pole_and_reports_the_undefined_axis ... ok
+test analytic_out_of_plane_middle_has_the_correct_triangle_height ... ok
+test finite_input_with_an_unrepresentable_output_fails_instead_of_stretching_or_overflowing ... ok
+test current_tip_and_current_pole_recover_exact_input_bits_even_at_extreme_length_ratios ... ok
+test flipping_the_pole_selects_opposite_bends_with_the_same_endpoint ... ok
+test collinear_poles_fall_back_to_the_existing_bend_or_a_deterministic_perpendicular ... ok
+test analytic_right_angle_is_reached_by_the_actual_two_rotation_corrections ... ok
+test nearly_straight_and_nearly_fully_folded_chains_preserve_lengths_and_true_fk ... ok
+test satisfied_collinear_inner_boundary_keeps_the_measured_tiny_distal_bone_for_any_pole ... ok
+test nonfinite_or_degenerate_inputs_are_rejected_without_rewriting_sources ... ok
+test small_nonzero_segments_are_not_rejected_by_an_absolute_epsilon ... ok
+test unequal_length_target_at_root_clamps_along_the_reported_current_direction ... ok
+test translations_and_uniform_scales_preserve_the_geometric_solution_and_corrections ... ok
+test unreachable_inner_and_outer_targets_are_explicitly_rejected_or_clamped_without_stretching ... ok
+test spatial_targets_execute_correct_fk_and_detect_the_wrong_rotation_order ... ok
+
+test result: ok. 15 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/kit.rs (target/debug/deps/kit-692c75145cb2b7b2)
+
+running 23 tests
+test csg_union_subtract_intersect ... ok
+test box_and_torus_are_lipschitz_outside ... ok
+test domain_ops ... ok
+test font_draws_glyphs ... ok
+test marcher_hits_a_sphere_and_normal_points_back ... ok
+test mat3_rotation_is_orthonormal_and_correct ... ok
+test new_primitives_have_correct_sign ... ok
+test pivot_delta_moves_attached_geometry_without_moving_the_joint ... ok
+test quat_slerp_endpoints_and_axis ... ok
+test quaternion_matrix_roundtrip_including_half_turns ... ok
+test sdf_volume_samples_and_guards_bad_layouts ... ok
+test shading_invariants ... ok
+test slerp_normalizes_nonunit_authored_endpoints ... ok
+test slerp_takes_short_path_across_angle_wrap_and_antipodal_quaternions ... ok
+test smooth_union_is_bounded_below_hard_union ... ok
+test sdf_volume_sdfv_roundtrips_and_rejects_bad_input ... ok
+test sphere_sdf_is_signed_distance ... ok
+test transform_hierarchy_composes_rotation_translation_and_scale ... ok
+test transform_to_local_roundtrip ... ok
+test transform_zero_scale_is_finite ... ok
+test vec_basics ... ok
+test quaternion_product_matches_matrix_order_and_stays_unit ... ok
+test boosted_steps_never_accept_hits_buried_inside_a_surface ... ok
+
+test result: ok. 23 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/limited_ik.rs (target/debug/deps/limited_ik-96bd23d6c053c84b)
+
+running 6 tests
+test budgets_are_deterministic_and_malformed_inputs_fail_explicitly ... ok
+test constructive_current_and_analytic_hinge_poses_preserve_exact_cases ... ok
+test world_rest_pivots_translations_scales_and_parent_are_frozen ... ok
+test radial_reach_does_not_hide_limits_or_an_infeasible_pole ... ok
+test non_cartesian_bone_twist_meets_tip_orientation_with_a_locked_tip ... ok
+test projected_search_finds_hinged_target_and_requested_bend_from_poor_seeds ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.09s
+
+     Running tests/march_sign_crossing.rs (target/debug/deps/march_sign_crossing-78c19e447fef528c)
+
+running 3 tests
+test accelerated_sign_crossing_returns_plane_surface_instead_of_buried_hit ... ok
+test touching_sphere_distance_bounds_do_not_authorize_a_negative_hit ... ok
+test ray_origin_inside_solid_preserves_immediate_hit_policy ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/material_maps.rs (target/debug/deps/material_maps-5da4d9221b5182ac)
+
+running 5 tests
+test backside_is_opposite_and_rim_fallback_stays_in_geometry_hemisphere ... ok
+test data_channels_filter_independently_of_alpha ... ok
+test neutral_strength_and_axis_convention_have_expected_normals ... ok
+test mirrored_charts_and_mirrored_geometry_preserve_uv_orientation ... ok
+test invalid_uv_frames_and_lower_hemisphere_maps_are_errors ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/mesh_correspondence.rs (target/debug/deps/mesh_correspondence-dbb6f2ed92ee3bdd)
+
+running 12 tests
+test a_collapsed_face_must_land_on_an_actual_final_edge ... ok
+test a_true_alias_is_an_additional_coordinate_witness_even_without_its_own_face ... ok
+test actual_flat_source_star_has_a_direct_bound_without_claiming_stored_mesh_validity ... ok
+test counted_rejections_spend_real_work_and_replay_with_a_cumulative_allowance ... ok
+test composed_ancestry_charges_the_original_point_not_the_largest_individual_step ... ok
+test deleting_a_patch_or_component_and_inventing_a_face_cannot_pass_vertex_only_checks ... ok
+test exact_identity_and_cyclic_orientation_need_no_borrowed_error_allowance ... ok
+test outward_bounds_preserve_tiny_nonzero_displacements_and_reject_overflow ... ok
+test malformed_bounds_ancestry_indices_and_positions_fail_explicitly ... ok
+test valid_endpoint_contraction_covers_removed_faces_and_disjoint_changes_take_the_maximum ... ok
+test warped_quad_retriangulation_is_rejected_despite_zero_vertex_motion ... ok
+test reported_work_and_error_bounds_replay_exactly_and_one_less_work_fails ... ok
+
+test result: ok. 12 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/mesh_topology.rs (target/debug/deps/mesh_topology-d5652677a75144d6)
+
+running 15 tests
+test a_tetrahedron_edge_fails_the_full_link_despite_exactly_two_common_neighbors ... ok
+test duplicate_reversed_open_inconsistently_oriented_and_overfull_faces_are_rejected ... ok
+test malformed_indices_degenerate_faces_and_absent_source_edges_fail_explicitly ... ok
+test closed_oriented_components_and_sparse_ids_are_counted_without_coordinate_assumptions ... ok
+test extra_common_link_vertices_are_rejected_on_a_closed_periodic_torus ... ok
+test octahedron_endpoint_contractions_preserve_the_valid_complex_in_both_directions ... ok
+test prepared_topology_rejects_original_tetra_torus_and_pinched_controls ... ok
+test rejected_topology_and_full_link_attempts_keep_spent_work_for_retries ... ok
+test two_closed_shells_pinched_at_one_vertex_fail_the_single_cycle_link_gate ... ok
+test prepared_contractions_are_atomic_reject_stale_foreign_tickets_and_keep_owned_input ... ok
+test successful_topology_and_link_budgets_replay_exactly_and_one_less_fails ... ok
+test prepared_work_budgets_replay_and_failed_commit_preserves_all_state ... ok
+test prepared_all_endpoint_decisions_track_sequential_changes_in_separate_components ... ok
+test both_captured_source_edges_pass_full_links_on_the_complete_real_complexes ... ok
+test prepared_sequential_collapses_match_independent_rebuilds_and_reduce_real_work ... ok
+
+test result: ok. 15 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.84s
+
+     Running tests/meshing.rs (target/debug/deps/meshing-7ee664b37b2980da)
+
+running 12 tests
+test finite_validation_empty_degenerate_fields_and_work_limits_are_explicit ... ok
+test clipping_requires_explicit_mode_and_never_adds_caps ... ok
+test representably_distinct_roots_near_a_grid_vertex_are_never_epsilon_welded ... ok
+test nonzero_isovalue_and_anisotropic_grid_work_without_changing_the_field ... ok
+test box_retains_faces_and_exact_lattice_isovalues_do_not_crack ... ok
+test rounded_native_sheet_grid_vertex_rounding_retains_closed_edges ... ok
+test subtractive_cavity_has_inner_outward_winding_and_negative_volume_contribution ... ok
+test open_cut_and_disconnected_boolean_components_survive_sampling ... ok
+test translated_thick_sheet_retains_closed_edges_off_grid ... ok
+test a_resolved_thin_shell_preserves_both_surfaces ... ok
+test sphere_is_indexed_closed_outward_and_converges_in_both_distance_directions ... ok
+test torus_retains_its_hole_and_matches_analytic_surface_and_volume ... ok
+
+test result: ok. 12 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.62s
+
+     Running tests/meshing_boolean.rs (target/debug/deps/meshing_boolean-536748373db230e7)
+
+running 13 tests
+test invalid_channels_work_and_clipping_are_rejected_before_output ... ok
+test close_distinct_boolean_components_are_not_merged_by_a_tolerance ... ok
+test normal_probe_policy_parameters_validate_without_changing_film_defaults ... ok
+test projection_extra_callbacks_are_precharged_and_nonfinite_results_never_deliver_geometry ... ok
+test tangent_zero_volume_and_vertex_contacts_are_explicit_errors ... ok
+test caller_arrangement_budget_is_checked_before_overshoot_and_never_returns_partial_geometry ... ok
+test identical_leaf_operations_are_deterministic_and_self_subtraction_has_no_surface ... ok
+test nested_intersection_subtraction_and_union_have_correct_scalar_truth_and_geometry ... ok
+test refined_nested_booleans_and_two_sided_shell_keep_actual_field_normals ... ok
+test refined_projection_handles_translated_scaled_fields_with_native_float_probes ... ok
+test original_open_rim_preserves_two_components_and_original_quality_limits_at_every_frame ... ok
+test projected_original_rim_passes_the_unchanged_native_normal_probe_at_all_frames ... ok
+test negative_channel_intersection_preserves_original_subtraction_geometry_and_quality ... ok
+
+test result: ok. 13 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 19.89s
+
+     Running tests/meshing_local.rs (target/debug/deps/meshing_local-06c3111782dacd7b)
+
+running 7 tests
+test changing_a_global_feature_at_a_shared_node_is_rejected ... ok
+test malformed_cells_clipping_and_budget_limits_reject_without_partial_mesh ... ok
+test original_thin_triangle_local_and_global_use_the_same_unmodified_feature_program ... ok
+test sorted_channel_remapping_preserves_noncommutative_subtraction ... ok
+test thin_slab_with_no_negative_combined_grid_node_matches_global_arrangement ... ok
+test per_cell_channel_order_does_not_change_welds_or_global_feature_provenance ... ok
+test sparse_local_cells_support_more_than_128_global_features_without_a_dense_grid ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.09s
+
+     Running tests/meshing_local_convex.rs (target/debug/deps/meshing_local_convex-89c6c787afb2616c)
+
+running 9 tests
+test convex_api_rejects_non_dnf_and_preserves_work_and_component_limits ... ok
+test a_single_component_keeps_its_32_active_plane_limit ... ok
+test diagonal_coplanar_overlap_conforms_both_edges_of_a_retained_facet ... ok
+test many_redundant_components_do_not_partition_unrelated_facets ... ok
+test overlapping_boxes_match_general_boundary_and_analytic_volume ... ok
+test contained_duplicate_and_disjoint_convex_volumes_keep_union_semantics ... ok
+test original_tilted_triangle_support_enclosure_has_one_connected_boundary ... ok
+test folded_native_sheet_support_enclosure_keeps_one_closed_oriented_boundary ... ok
+test original_flat_focused_oracle_support_enclosure_keeps_both_shell_sheets ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 4.93s
+
+     Running tests/normal_filter.rs (target/debug/deps/normal_filter-95a77848d98f3889)
+
+running 5 tests
+test variance_uses_normal_sampler_wrap_and_rejects_invalid_inputs ... ok
+test constant_quantized_and_grazing_normals_have_exactly_zero_variance ... ok
+test checker_matches_source_slope_variance_and_continuous_lod_boundaries ... ok
+test odd_mips_retain_source_population_variance ... ok
+test unminified_and_unfiltered_queries_allocate_nothing_and_bias_is_applied_once ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/pattern.rs (target/debug/deps/pattern-cc8c26bdfa1d39a1)
+
+running 9 tests
+test rejects_nonfinite_controls_invalid_options_and_insufficient_vertex_budget ... ok
+test rejects_self_intersections_overlaps_touches_nested_holes_and_too_close_features ... ok
+test straight_boundary_controls_and_finite_extreme_scales_are_preserved ... ok
+test refinement_checks_physical_lengths_and_rejects_unrepresentable_midpoint_triangles ... ok
+test concave_l_shape_and_u_neckline_cover_only_authored_material ... ok
+test work_budget_is_exact_deterministic_and_failure_cannot_modify_input ... ok
+test two_holes_and_concave_neckline_with_armholes_preserve_all_constraints ... ok
+test conforming_refinement_bounds_every_edge_and_keeps_stable_seam_controls ... ok
+test multiple_curved_holes_bridge_deterministically_across_input_start_points ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.13s
+
+     Running tests/prepared_intersections.rs (target/debug/deps/prepared_intersections-74faa8c66d88fe0e)
+
+running 17 tests
+test changed_geometry_hits_unchanged_baseline_and_retains_pair_and_work ... ok
+test all_accumulated_edits_are_checked_against_each_other_not_stale_boxes ... ok
+test changed_face_degeneracy_invalid_dimensions_and_nonfinite_values_reject ... ok
+test final_bvh_finds_new_contacts_that_were_outside_all_baseline_boxes ... ok
+test final_traversal_requires_a_private_completed_inventory_and_ignores_report_tampering ... ok
+test baseline_contacts_are_exhaustive_immutable_and_never_partial_at_limits ... ok
+test retopologized_fixed_slots_malformed_indices_and_nonfinite_coordinates_reject ... ok
+test retopologized_coordinate_only_change_invalidates_reuse_even_with_identical_index_triples ... ok
+test retopologized_edit_elsewhere_cannot_hide_an_untouched_original_contact ... ok
+test retopologized_duplicate_coordinate_index_loses_shared_boundary_permission ... ok
+test retopologized_coplanar_diagonal_flip_passes_and_index_changed_pairs_are_not_reused ... ok
+test retopologized_unchanged_clones_reuse_only_the_private_complete_baseline_proof ... ok
+test untouched_baseline_contacts_remain_pending_until_complete_validation ... ok
+test every_incident_face_is_derived_and_valid_shared_simplices_survive ... ok
+test retopologized_warped_quad_rechecks_new_probe_intersection_without_any_vertex_motion ... ok
+test retopologized_success_and_rejection_budgets_replay_without_mutating_baseline ... ok
+test complete_final_candidate_pairs_match_uncached_validation_and_report_exact_reuse ... ok
+
+test result: ok. 17 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/prepared_source_contractions.rs (target/debug/deps/prepared_source_contractions-66fdc58ac13ee84b)
+
+running 7 tests
+test malformed_enclosures_indices_edges_and_rejected_source_proposals_keep_work ... ok
+test every_mapped_changed_pair_is_checked_even_when_both_old_leaves_are_skipped ... ok
+test prepared_source_owns_inputs_rejects_stale_foreign_tickets_and_reports_stable_rows ... ok
+test nonadjacent_stationary_component_inside_a_sweep_remains_a_rejection ... ok
+test setup_query_commit_and_snapshot_budgets_replay_and_fail_atomically ... ok
+test complete_captured_source_proposals_match_uncached_counts_in_both_directions ... ok
+test many_sequential_captured_collapses_match_every_uncached_gate_and_count ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.55s
+
+     Running tests/radial_embedding.rs (target/debug/deps/radial_embedding-0a70b5a0d93b3aea)
+
+running 1 test
+test unchanged_refined_mesh_radial_certificate_agrees_with_complete_pair_validation ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 3.41s
+
+     Running tests/rotation_limit.rs (target/debug/deps/rotation_limit-e0ad68365f70631c)
+
+running 11 tests
+test cone_and_twist_follow_the_declared_separate_clamping_rule ... ok
+test compliant_rotations_identity_and_tiny_angles_keep_exact_bits ... ok
+test conservative_quantization_repair_is_reported_and_excessive_repairs_are_rejected ... ok
+test cyclic_twist_chooses_the_correct_endpoint_across_plus_minus_pi ... ok
+test hinge_removes_off_axis_rotation_and_preserves_its_requested_twist ... ok
+test dynamic_tiny_and_large_axes_and_scaled_quaternions_normalize_without_overflow ... ok
+test invalid_axes_bounds_and_quaternions_are_rejected ... ok
+test singular_perpendicular_half_turns_have_a_deterministic_zero_twist_gauge ... ok
+test near_singular_cones_remain_finite_compliant_and_idempotent ... ok
+test hinge_projection_is_at_least_as_close_as_independent_dense_angle_candidates ... ok
+test deterministic_random_sweep_preserves_sign_invariance_compliance_and_idempotence ... ok
+
+test result: ok. 11 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.09s
+
+     Running tests/rounding_constraints.rs (target/debug/deps/rounding_constraints-7024241946138509)
+
+running 12 tests
+test a_failed_branch_is_restored_before_a_later_branch_finds_a_complete_solution ... ok
+test duplicate_candidates_do_not_create_spurious_variables_or_expand_the_coordinate_set ... ok
+test an_unsatisfiable_incident_constraint_returns_no_partial_assignment ... ok
+test every_status_replays_its_exact_work_and_one_less_never_returns_partial_state ... ok
+test non_axis_aligned_3d_normals_use_the_same_stored_orientation_constraints ... ok
+test finite_underflow_retains_nominal_predicate_scope_without_claiming_an_exact_sign ... ok
+test bounded_search_distinguishes_unexplored_branches_from_proven_unsatisfiability ... ok
+test stable_borders_and_fixed_shared_anchors_do_not_pull_in_unrelated_fragile_regions ... ok
+test nonfinite_predicate_products_and_sums_fail_with_counted_work ... ok
+test invalid_inputs_and_missing_current_candidates_reject_with_counted_work ... ok
+test three_coupled_changes_are_solved_when_no_one_or_two_vertex_change_can_work ... ok
+test variable_and_allowed_tuple_caps_return_explicit_limits_without_assignments ... ok
+
+test result: ok. 12 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/source_contraction.rs (target/debug/deps/source_contraction-da931137fdf66df2)
+
+running 6 tests
+test unresolved_intervals_invalid_source_edges_and_exhaustion_reject ... ok
+test inverted_and_uncertain_changed_source_normals_are_rejected_before_embedding ... ok
+test distant_source_faces_with_degenerate_nearest_f32_images_are_still_considered ... ok
+test a_stationary_closed_component_inside_the_swept_region_is_rejected ... ok
+test rejected_search_proposals_retain_their_spent_work ... ok
+test source_endpoint_embedding_and_nonadjacent_sweeps_have_replayable_charged_certificates ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/source_contraction_captured.rs (target/debug/deps/source_contraction_captured-c9270eaf92af1110)
+
+running 4 tests
+test complete_folded_source_510_to_846_matches_exact_intersection_oracle ... ok
+test complete_folded_source_846_to_510_matches_exact_intersection_oracle ... ok
+test complete_flat_source_zero_to_five_matches_exact_intersection_oracle ... ok
+test complete_flat_source_five_to_zero_matches_exact_intersection_oracle ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.04s
+
+     Running tests/surface_attributes.rs (target/debug/deps/surface_attributes-b37ad66ef433f39b)
+
+running 8 tests
+test attribute_step_is_precharged_and_invalid_queries_do_not_change_legacy_results ... ok
+test original_corner_parameters_remain_attached_after_actual_lbs_and_dqs_vertex_deformation ... ok
+test zero_plane_projection_roundoff_is_retained_but_gross_reconstruction_loss_is_rejected ... ok
+test analytic_interior_edge_corner_and_both_shell_sides_have_correct_attributes ... ok
+test thin_valid_triangles_retain_interior_weights_without_gram_determinant_cancellation ... ok
+test shared_edges_corners_and_bvh_ties_use_original_triangle_id_and_corner_order ... ok
+test actual_lip_seam_edge_recovers_weights_without_changing_legacy_winner_or_point ... ok
+test attributes_match_an_independent_brute_force_oracle_on_curved_meshes_at_three_scales ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.16s
+
+     Running tests/surface_box_query.rs (target/debug/deps/surface_box_query-adffc7d14a4482e5)
+
+running 5 tests
+test touching_faces_edges_points_and_explicit_padding_use_closed_boxes ... ok
+test large_coordinates_tiny_padding_and_finite_expansion_never_exclude_overlap ... ok
+test invalid_queries_and_budget_failures_do_not_change_legacy_distance_or_hit ... ok
+test deformed_rotated_world_coordinate_surfaces_keep_conservative_candidates ... ok
+test bvh_candidates_match_brute_force_and_stable_original_ids ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/surface_candidate_accounting.rs (target/debug/deps/surface_candidate_accounting-115b1b219337f28b)
+
+running 6 tests
+test changed_candidate_validation_retains_both_query_failure_boundaries ... ok
+test counted_query_retains_every_completed_visit_without_exposing_partial_candidates ... ok
+test baseline_inventory_retains_query_work_without_publishing_partial_proof ... ok
+test complete_validation_retains_failed_query_and_completed_query_work ... ok
+test invalid_counted_queries_report_zero_traversal_and_preserve_legacy_messages ... ok
+test prepared_final_validation_retains_both_query_failure_boundaries ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/surface_features.rs (target/debug/deps/surface_features-207a3a0947c2831e)
+
+running 9 tests
+test coplanar_opposite_winding_faces_share_canonical_offset_planes ... ok
+test axis_aligned_query_avoids_redundant_domain_work_without_changing_program_values ... ok
+test cell_pruning_is_conservative_and_prism_keeps_subcell_sheets ... ok
+test common_kernel_preserves_convex_planar_union_across_opposite_windings ... ok
+test local_extraction_sees_both_slab_sheets_when_combined_scalar_has_no_negative_nodes ... ok
+test common_box_kernel_encloses_native_sphere_but_remains_an_initial_proxy ... ok
+test prism_capsule_inside_set_matches_actual_distance_on_faces_edges_and_corners ... ok
+test supporting_capsules_contain_the_native_field_instead_of_detached_inside_islands ... ok
+test common_box_kernel_matches_independent_triangle_box_clipping ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.11s
+
+     Running tests/surface_intersections.rs (target/debug/deps/surface_intersections-f6fc8a752b4cc1cb)
+
+running 10 tests
+test counted_rejection_exposes_only_proven_pair_ids_and_retains_failed_work ... ok
+test invalid_indices_nonfinite_and_degenerate_inputs_are_rejected ... ok
+test exact_fallback_handles_tilted_coplanarity_without_coordinate_plane_shortcuts ... ok
+test large_translated_geometry_uses_the_original_f32_orientation ... ok
+test crossings_coplanar_area_containment_and_unshared_contact_are_rejected ... ok
+test representable_near_misses_and_subnormal_plane_separation_remain_disjoint ... ok
+test shared_indexed_edges_and_vertices_accept_only_their_actual_common_simplex ... ok
+test closed_curved_mesh_is_valid_and_exact_reported_budget_is_enforced ... ok
+test classification_is_invariant_under_all_triangle_windings_and_pair_order ... ok
+test bvh_chunk_boundaries_preserve_global_identity_and_cross_chunk_contacts ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.51s
+
+     Running tests/texture.rs (target/debug/deps/texture-e50aa3221bf2a3bc)
+
+running 6 tests
+test invalid_images_coordinates_and_unbounded_inputs_are_rejected ... ok
+test independent_corner_indices_preserve_discontinuous_uv_charts ... ok
+test filtering_is_linear_and_transparent_texels_do_not_leak_hidden_colors ... ok
+test lower_left_uvs_address_top_down_images_and_boundaries_consistently ... ok
+test repeat_and_mirror_cover_negative_coordinates_and_tile_edges ... ok
+test odd_mipmap_sizes_preserve_area_mean_and_fractional_lod_is_continuous ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/wave.rs (target/debug/deps/wave-47ab00da9212d44e)
+
+running 15 tests
+test all_truncations_missing_pad_trailing_bytes_and_forged_lengths_fail_without_panics ... ok
+test classic_pcm_cbsize_is_ignored_as_specified_but_float_extensions_are_not ... ok
+test every_nonfinite_float_sample_is_rejected_even_in_an_otherwise_silent_file ... ok
+test extensible_float_direct_output_and_partial_masks_keep_all_channels_in_order ... ok
+test duplicates_conflicts_missing_chunks_and_segmented_audio_are_explicit_errors ... ok
+test extensible_pcm_precision_and_channel_metadata_survive_slices_without_quantization ... ok
+test independent_readers_confirm_exact_pcm24_and_unclipped_float_slice_exports ... ignored, independent Python wave + libsndfile reader; run explicitly where python3/libsndfile are available
+test fact_counts_are_checked_and_rewritten_to_the_exact_slice_frame_count ... ok
+test float32_and_float64_keep_over_range_values_subnormals_and_signed_zero ... ok
+test integer_containers_decode_signed_limits_and_interleaved_frames_exactly ... ok
+test invalid_rate_alignment_channels_and_partial_frames_are_rejected ... ok
+test riff_chunk_order_odd_padding_and_opaque_ancillary_payloads_are_handled ... ok
+test parser_budgets_and_slice_limits_fail_before_unbounded_allocation ... ok
+test unsupported_encodings_extensible_variants_and_containers_do_not_silently_convert ... ok
+test byte_preservation_and_out_of_order_parallel_reads_do_not_mutate_source_or_state ... ok
+
+test result: ok. 14 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/lib.rs (target/debug/deps/mm3e_orchestrator-5cf36ee484e84a4c)
+
+running 11 tests
+test rigid::tests::sphere_rolls_downhill_and_stays_on_slope ... ok
+test rigid::tests::free_spin_is_conserved ... ok
+test explicit_worker_tests::explicit_aov_worker_budget_drives_the_actual_render_threads ... ok
+test dual_wiring_tests::union_only_scene_is_dual_safe_and_matches_old_radiance ... ok
+test dual_wiring_tests::mirror_and_round_and_onion_modifiers_are_dual_safe ... ok
+test rigid::tests::tilted_box_settles_on_ground ... ok
+test dual_wiring_tests::twist_scene_is_not_dual_safe_and_output_is_unchanged ... ok
+test dual_wiring_tests::subtract_scene_is_dual_safe_and_matches_old_radiance ... ok
+test dual_wiring_tests::full_render_produces_a_sane_image_on_a_dual_safe_scene ... ok
+test dual_wiring_tests::smooth_union_scene_is_dual_safe_and_matches_old_radiance ... ok
+test dual_wiring_tests::shipped_dual_path_is_not_slower_than_old_path_on_a_real_scene ... ok
+
+test result: ok. 11 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.65s
+
+     Running tests/animation_tracks.rs (target/debug/deps/animation_tracks-95185106e87c7a04)
+
+running 4 tests
+test all_easings_return_authored_keys_without_arithmetic ... ok
+test continuous_easing_between_keys_is_unchanged ... ok
+test disparate_scale_keys_do_not_lose_precision_at_an_interior_key ... ok
+test step_holds_exact_values_and_never_calls_interpolation ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/appearance.rs (target/debug/deps/appearance-10d9ace40ca62fab)
+
+running 5 tests
+test uv_coordinates_follow_placed_and_replaced_posed_surfaces ... ok
+test checked_render_rejects_runtime_attribute_precision_failures_instead_of_delivering_fallback_pixels ... ok
+test shared_material_ids_keep_independent_object_textures_and_exact_csg_owner_policy ... ok
+test automatic_mips_converge_in_beauty_film_and_albedo_and_level_zero_is_a_negative_control ... ok
+test reflection_and_gi_resolve_the_same_attached_texture ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/boolean_field.rs (target/debug/deps/boolean_field-44dc8d25851bbf13)
+
+running 5 tests
+test large_union_is_balanced_and_limits_reject_expansion_without_fallback ... ok
+test smoothing_stays_an_exact_opaque_channel_and_later_cut_remains_separate ... ok
+test global_csg_modifiers_and_spatial_warps_retain_exact_authored_scalars ... ok
+test native_triangles_and_volumes_remain_actual_registered_geometry ... ok
+test nested_transforms_offset_shell_intersection_and_subtraction_preserve_operation_order ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/boolean_invalid_scene.rs (target/debug/deps/boolean_invalid_scene-a7b44f9d1cf217d6)
+
+running 4 tests
+test lowering_rejects_nonfinite_transforms_and_domain_modifiers_before_scalar_sampling ... ok
+test nonfinite_query_points_are_rejected_instead_of_masked_by_box_min_max ... ok
+test malformed_primitives_and_registered_buffers_cannot_hide_inside_a_union ... ok
+test overflow_in_a_finite_domain_transform_cannot_be_hidden_in_an_opaque_smooth_subtree ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/counted_sampling.rs (target/debug/deps/counted_sampling-a11f84d7746fe62c)
+
+running 6 tests
+test analytic_csg_nodes_and_volume_corners_have_precomputed_constant_costs ... ok
+test invalid_registered_sources_transforms_and_geometry_are_rejected_before_sampling ... ok
+test empty_field_cost_is_nonzero_and_nonfinite_queries_fail_explicitly ... ok
+test material_ties_and_first_object_fold_semantics_match_authored_scene ... ok
+test single_triangle_charges_actual_node_triangle_domain_scale_and_seed ... ok
+test exact_authored_distance_and_material_with_surface_domain_modifiers_csg_and_volume ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests/editor_queries.rs (target/debug/deps/editor_queries-ecdef53f390a2c54)
+
+running 2 tests
+test authored_query_does_not_report_an_acceleration_sphere_as_the_geometry ... ok
+test authored_query_preserves_csg_order_and_base_material_on_a_cut ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/engine.rs (target/debug/deps/engine-93687646166bb13a)
+
+running 23 tests
+test animation_tracks_sample ... ok
+test camera_roundtrips ... ok
+test orbit_camera_is_periodic_and_finite_at_a_full_turn ... ok
+test particles_burst_move_and_expire ... ok
+test physics_resolves_exactly_overlapping_bodies ... ok
+test physics_resolves_penetration ... ok
+test physics_body_rests_on_floor ... ok
+test quality_presets_and_lerp ... ok
+test scene_io_rejects_garbage ... ok
+test scene_io_roundtrips_stably ... ok
+test gi_volume_interpolates_a_known_field ... ok
+test gi_degenerate_dims_dont_panic ... ok
+test obj_parser_and_sdf_bake_work ... ok
+test checkerboard_render_fills_every_pixel ... ok
+test reprojection_object_motion_has_effect ... ok
+test reprojection_identity_mostly_matches ... ok
+test render_smoke_produces_a_nontrivial_image ... ok
+test gi_bake_and_render ... ok
+test volume_prim_renders_and_matches_linear_world ... ok
+test reprojection_hybrid_beats_cheap_fill ... ok
+test render_is_deterministic ... ok
+test all_render_modes_run ... ok
+test subitize_knob_cuts_field_evals_via_shipped_marcher ... ok
+
+test result: ok. 23 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.11s
+
+     Running tests/film.rs (target/debug/deps/film-3b873267ba34ae15)
+
+running 7 tests
+test lens_rays_converge_on_camera_forward_focus_plane_even_off_axis ... ok
+test lens_validation_and_empty_film_dimensions_are_explicit ... ok
+test geometry_passes_are_raw_center_pinhole_depth_world_normal_and_material ... ok
+test black_geometry_is_opaque_and_primary_sky_is_uncovered ... ok
+test pinhole_beauty_is_bitwise_canonical_with_lighting_fog_reflections_and_aa ... ok
+test premultiplied_foreground_composites_over_independent_physical_background ... ok
+test aperture_changes_defocused_coverage_deterministically_but_not_geometry_aovs ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.06s
+
+     Running tests/local_csg.rs (target/debug/deps/local_csg-1d910f233e5f7ad2)
+
+running 5 tests
+test local_cavity_does_not_cut_an_overlapping_independent_object ... ok
+test local_shell_clipping_is_preserved_under_object_pose ... ok
+test registration_failure_is_atomic_and_csg_primitive_renders_identically ... ok
+test scene_linear_radiance_preserves_hdr_and_display_output ... ok
+test accelerated_and_linear_csg_fields_match_and_legacy_export_rejects_csg ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/material_maps.rs (target/debug/deps/material_maps-f2aa9602a1d32c32)
+
+running 6 tests
+test invalid_role_and_uv_inputs_leave_the_previous_binding_intact ... ok
+test actual_placement_mirroring_and_posed_triangle_changes_update_tangent_directions ... ok
+test independent_data_channels_and_emission_factors_reach_actual_material_and_hdr_render ... ok
+test shading_normal_cannot_light_the_back_of_opaque_geometry ... ok
+test mapped_metalness_changes_gathered_light_instead_of_being_ignored_by_gi ... ok
+test mapped_normals_change_lighting_without_changing_geometry_or_raw_aovs ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/native_surfaces.rs (target/debug/deps/native_surfaces-8afad8f9b2a9895b)
+
+running 3 tests
+test surface_registration_preserves_topology_material_placement_and_failure_atomicity ... ok
+test surface_world_bvh_preserves_union_order_and_scalar_reference ... ok
+test actual_bent_cloth_shell_renders_without_holes_and_changes_depth_and_normals ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.61s
+
+     Running tests/normal_filter.rs (target/debug/deps/normal_filter-4a9611cd910bd4db)
+
+running 4 tests
+test unresolved_opposing_normals_do_not_invent_a_sharp_frontal_glint ... ok
+test disable_strength_and_constant_controls_preserve_pixels_and_geometry ... ok
+test normal_strength_changes_variance_quadratically_and_roughness_stays_bounded ... ok
+test moving_light_retains_reference_errors_and_suppresses_false_frontal_peak ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+error: 3 targets failed:
+    `-p mm3e-editor --test surface_feature_split`
+    `-p mm3e-editor --test surface_refine`
+    `-p mm3e-editor --test usd_delivery`

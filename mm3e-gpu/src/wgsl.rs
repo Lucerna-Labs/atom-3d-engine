@@ -5,7 +5,7 @@
 //! runs thousands of lanes at once. The camera + time ride in a uniform so a real-time loop never
 //! recompiles; the scene (objects, materials, lights, sky) is baked into the source.
 
-use mm3e_kit::vec::Vec3;
+use mm3e_kit::{csg::Expr, vec::Vec3};
 use mm3e_orchestrator::{Combine, Object, Prim, Scene};
 
 fn f(x: f32) -> String {
@@ -32,6 +32,19 @@ fn v3(v: Vec3) -> String {
 
 /// Build the full compute shader for `scene`.
 pub fn build_shader(scene: &Scene) -> String {
+    build_shader_checked(scene).expect("GPU shader cannot represent this scene; use the CPU renderer")
+}
+
+/// Check native geometry support before generating shader source. Triangle shells currently
+/// use the CPU nearest-triangle BVH; they must never disappear or become volume approximations
+/// on the GPU path. The compatibility `build_shader` wrapper fails explicitly for these scenes.
+pub fn build_shader_checked(scene: &Scene) -> Result<String, String> {
+    if !scene.appearance.is_empty() {
+        return Err("UV textures require the checked CPU renderer".into());
+    }
+    if scene.objects.iter().any(|object| matches!(object.prim, Prim::Surface { .. })) {
+        return Err("native triangle surfaces are not supported by the GPU backend; use the CPU renderer".into());
+    }
     let mut s = String::new();
     s.push_str(&format!("const MAX_DYN: u32 = {}u;\n", crate::MAX_DYN));
     s.push_str(KERNEL_HEADER);
@@ -80,11 +93,81 @@ pub fn build_shader(scene: &Scene) -> String {
         }
     }
 
+    s.push_str(&csg_functions(scene));
     s.push_str(&material_fn(scene));
     s.push_str(&map_fn(scene));
     s.push_str(&direct_lighting_fn(scene));
     s.push_str(KERNEL_BODY);
-    s
+    Ok(s)
+}
+
+/// Emit one bounded helper per node, keeping source size linear even when transforms are
+/// nested. Helpers evaluate local scalar distances; the enclosing Object supplies material.
+fn csg_functions(scene: &Scene) -> String {
+    fn emit(expr: &Expr, id: usize, next: &mut usize, out: &mut String) -> String {
+        let name = format!("csg_{id}_{}", *next);
+        *next += 1;
+        let mut prelude = String::new();
+        let body = match expr {
+            Expr::Sphere { r } => format!("sd_sphere(p, {})", f(*r)),
+            Expr::Box { half } => format!("sd_box(p, {})", v3(*half)),
+            Expr::RoundBox { half, radius } => format!("sd_round_box(p, {}, {})", v3(*half), f(*radius)),
+            Expr::Torus { major, minor } => format!("sd_torus(p, {}, {})", f(*major), f(*minor)),
+            Expr::Cylinder { h, r } => format!("sd_cylinder(p, {}, {})", f(*h), f(*r)),
+            Expr::Capsule { a, b, r } => format!("sd_capsule(p, {}, {}, {})", v3(*a), v3(*b), f(*r)),
+            Expr::Cone { r1, r2, h } => format!("sd_round_cone(p, {}, {}, {})", f(*r1), f(*r2), f(*h)),
+            Expr::Ellipsoid { r } => format!("sd_ellipsoid(p, {})", v3(*r)),
+            Expr::Octahedron { s } => format!("sd_octahedron(p, {})", f(*s)),
+            Expr::HexPrism { r, h } => format!("sd_hex_prism(p, {}, {})", f(*r), f(*h)),
+            Expr::Plane { n, h } => format!("sd_plane(p, {}, {})", v3(*n), f(*h)),
+            Expr::Transform { shape, xform } => {
+                let child = emit(shape, id, next, out);
+                let r = xform.rot.cols;
+                prelude.push_str(&format!("  let R = mat3x3<f32>({}, {}, {});\n", v3(r[0]), v3(r[1]), v3(r[2])));
+                prelude.push_str(&format!(
+                    "  let q = transpose(R) * (p - {}) * {};\n",
+                    v3(xform.pos),
+                    f(1.0 / xform.scale)
+                ));
+                format!("{child}(q) * {}", f(xform.scale))
+            }
+            Expr::Union { a, b }
+            | Expr::Intersect { a, b }
+            | Expr::Subtract { a, b }
+            | Expr::SmoothUnion { a, b, .. } => {
+                let aa = emit(a, id, next, out);
+                let bb = emit(b, id, next, out);
+                match expr {
+                    Expr::Union { .. } => format!("min({aa}(p), {bb}(p))"),
+                    Expr::Intersect { .. } => format!("max({aa}(p), {bb}(p))"),
+                    Expr::Subtract { .. } => format!("max({aa}(p), -{bb}(p))"),
+                    Expr::SmoothUnion { k, .. } if *k <= 0.0 => format!("min({aa}(p), {bb}(p))"),
+                    Expr::SmoothUnion { k, .. } => {
+                        prelude.push_str(&format!("  let a = {aa}(p);\n  let b = {bb}(p);\n"));
+                        prelude.push_str(&format!("  let h = clamp(0.5 + 0.5 * (b-a)/{}, 0.0, 1.0);\n", f(*k)));
+                        format!("b*(1.0-h) + a*h - {}*h*(1.0-h)", f(*k))
+                    }
+                    _ => unreachable!(),
+                }
+            }
+            Expr::Offset { shape, distance } => {
+                let child = emit(shape, id, next, out);
+                format!("{child}(p) - {}", f(*distance))
+            }
+            Expr::Shell { shape, thickness } => {
+                let child = emit(shape, id, next, out);
+                format!("abs({child}(p)) - {}", f(*thickness))
+            }
+        };
+        out.push_str(&format!("fn {name}(p: vec3<f32>) -> f32 {{\n{prelude}  return {body};\n}}\n"));
+        name
+    }
+    let mut out = String::new();
+    for (id, expr) in scene.csgs.iter().enumerate() {
+        expr.validate().expect("invalid registered CSG expression");
+        emit(expr, id, &mut 0, &mut out);
+    }
+    out
 }
 
 fn material_fn(scene: &Scene) -> String {
@@ -140,7 +223,7 @@ fn emit_local(o: &Object) -> String {
 }
 
 /// The primitive distance expression in WGSL, evaluated on `q` and scaled to world units.
-fn emit_prim(o: &Object, vols: &(Vec<u32>, &[mm3e_kit::volume::SdfVolume])) -> String {
+fn emit_prim(o: &Object, vols: &(Vec<u32>, &[mm3e_kit::volume::SdfVolume]), csg_count: usize) -> String {
     let sc = f(o.xform.scale);
     let body = match o.prim {
         Prim::Sphere { r } => format!("sd_sphere(q, {})", f(r)),
@@ -154,6 +237,11 @@ fn emit_prim(o: &Object, vols: &(Vec<u32>, &[mm3e_kit::volume::SdfVolume])) -> S
         Prim::Octahedron { s } => format!("sd_octahedron(q, {})", f(s)),
         Prim::HexPrism { r, h } => format!("sd_hex_prism(q, {}, {})", f(r), f(h)),
         Prim::Plane { n, h } => format!("sd_plane(q, {}, {})", v3(n), f(h)),
+        Prim::Surface { .. } => unreachable!("triangle surfaces are rejected before shader generation"),
+        Prim::Csg { id } => {
+            assert!((id as usize) < csg_count, "unregistered CSG expression");
+            format!("csg_{id}_0(q)")
+        }
         Prim::Volume { id } => {
             let (offsets, volumes) = vols;
             if volumes.is_empty() {
@@ -193,7 +281,7 @@ fn map_fn(scene: &Scene) -> String {
         let matf = f(o.mat as f32);
         s.push_str("  {\n");
         s.push_str(&emit_local(o));
-        s.push_str(&emit_prim(o, &vols));
+        s.push_str(&emit_prim(o, &vols, scene.csgs.len()));
         if i == 0 {
             s.push_str(&format!("    d = vec2<f32>(od, {matf});\n"));
         } else {
@@ -492,3 +580,158 @@ fn main(@builtin(global_invocation_id) gid: vec3<u32>) {
   textureStore(outtex, vec2<i32>(gid.xy), vec4<f32>(col, 1.0));
 }
 "#;
+
+#[cfg(test)]
+mod csg_parity_tests {
+    use super::*;
+    use crate::GpuRenderer;
+    use mm3e_kit::{
+        vec::{Mat3, Transform},
+        Camera, Rgba,
+    };
+    use wgpu::util::DeviceExt;
+
+    /// This test must run on an actual wgpu adapter; failure to initialize is a failure, not a
+    /// passing substitute. It is opt-in so CPU-only library consumers can run normal tests.
+    #[test]
+    #[ignore = "requires an actual wgpu adapter; run cargo test -p mm3e-gpu --lib -- --ignored --nocapture"]
+    fn csg_gpu_field_and_render_parity() {
+        let gpu = GpuRenderer::new().expect("a wgpu adapter is required for CSG parity validation");
+        println!("CSG parity adapter: {}", gpu.adapter_name());
+        let sphere = || Box::new(Expr::Sphere { r: 0.8 });
+        let moved = || Box::new(Expr::Transform { shape: sphere(), xform: Transform::at(Vec3::new(0.0, 0.0, 0.6)) });
+        let expressions = vec![
+            Expr::Sphere { r: 0.8 },
+            Expr::Box { half: Vec3::new(0.8, 0.5, 0.3) },
+            Expr::RoundBox { half: Vec3::new(0.8, 0.5, 0.3), radius: 0.1 },
+            Expr::Torus { major: 0.7, minor: 0.2 },
+            Expr::Cylinder { h: 0.7, r: 0.4 },
+            Expr::Capsule { a: Vec3::new(-0.2, -0.7, 0.0), b: Vec3::new(0.2, 0.7, 0.0), r: 0.3 },
+            Expr::Cone { r1: 0.5, r2: 0.2, h: 0.8 },
+            Expr::Ellipsoid { r: Vec3::new(0.8, 0.5, 0.3) },
+            Expr::Octahedron { s: 0.8 },
+            Expr::HexPrism { r: 0.6, h: 0.8 },
+            Expr::Plane { n: Vec3::new(0.0, 1.0, 0.0), h: 0.2 },
+            Expr::Transform {
+                shape: Box::new(Expr::Box { half: Vec3::new(0.8, 0.5, 0.3) }),
+                xform: Transform::new(Vec3::new(0.2, 0.1, 0.3), Mat3::from_euler(0.1, 0.6, 0.3), 1.4),
+            },
+            Expr::Union { a: sphere(), b: moved() },
+            Expr::Intersect { a: sphere(), b: moved() },
+            Expr::Subtract { a: sphere(), b: moved() },
+            Expr::SmoothUnion { a: sphere(), b: moved(), k: 0.2 },
+            Expr::Offset { shape: sphere(), distance: 0.12 },
+            Expr::Shell { shape: sphere(), thickness: 0.07 },
+        ];
+        let mut scene = Scene::new(32, 32);
+        for expr in expressions {
+            scene.csg(expr).unwrap();
+        }
+        let mut points = vec![];
+        for x in -4..=4 {
+            for y in -4..=4 {
+                for z in -4..=4 {
+                    points.push([x as f32 * 0.31, y as f32 * 0.37, z as f32 * 0.41, 0.0]);
+                }
+            }
+        }
+        let n = points.len();
+        let total = n * scene.csgs.len();
+        let mut source = build_shader(&scene);
+        source.push_str("\n@group(0) @binding(4) var<storage,read> points: array<vec4<f32>>;\n@group(0) @binding(5) var<storage,read_write> results: array<f32>;\n");
+        source.push_str(&format!("@compute @workgroup_size(64) fn probe(@builtin(global_invocation_id) gid: vec3<u32>) {{ if(gid.x >= {total}u) {{ return; }} let p = points[gid.x % {n}u].xyz; switch(gid.x/{n}u) {{\n"));
+        for i in 0..scene.csgs.len() {
+            source.push_str(&format!("case {i}u: {{ results[gid.x] = csg_{i}_0(p); }}\n"));
+        }
+        source.push_str("default: { results[gid.x]=0.0; } } }\n");
+        let device = &gpu.device;
+        let module = device.create_shader_module(wgpu::ShaderModuleDescriptor {
+            label: Some("csg-parity"),
+            source: wgpu::ShaderSource::Wgsl(source.into()),
+        });
+        let pipeline = device.create_compute_pipeline(&wgpu::ComputePipelineDescriptor {
+            label: Some("csg-parity"),
+            layout: None,
+            module: &module,
+            entry_point: Some("probe"),
+            compilation_options: Default::default(),
+            cache: None,
+        });
+        let input = device.create_buffer_init(&wgpu::util::BufferInitDescriptor {
+            label: Some("csg-points"),
+            contents: bytemuck::cast_slice(&points),
+            usage: wgpu::BufferUsages::STORAGE,
+        });
+        let size = (total * 4) as u64;
+        let output = device.create_buffer(&wgpu::BufferDescriptor {
+            label: Some("csg-output"),
+            size,
+            usage: wgpu::BufferUsages::STORAGE | wgpu::BufferUsages::COPY_SRC,
+            mapped_at_creation: false,
+        });
+        let readback = device.create_buffer(&wgpu::BufferDescriptor {
+            label: Some("csg-readback"),
+            size,
+            usage: wgpu::BufferUsages::MAP_READ | wgpu::BufferUsages::COPY_DST,
+            mapped_at_creation: false,
+        });
+        let bindings = device.create_bind_group(&wgpu::BindGroupDescriptor {
+            label: Some("csg-bindings"),
+            layout: &pipeline.get_bind_group_layout(0),
+            entries: &[
+                wgpu::BindGroupEntry { binding: 4, resource: input.as_entire_binding() },
+                wgpu::BindGroupEntry { binding: 5, resource: output.as_entire_binding() },
+            ],
+        });
+        let mut encoder = device.create_command_encoder(&wgpu::CommandEncoderDescriptor { label: Some("csg-parity") });
+        {
+            let mut pass = encoder
+                .begin_compute_pass(&wgpu::ComputePassDescriptor { label: Some("csg-parity"), timestamp_writes: None });
+            pass.set_pipeline(&pipeline);
+            pass.set_bind_group(0, &bindings, &[]);
+            pass.dispatch_workgroups((total as u32).div_ceil(64), 1, 1);
+        }
+        encoder.copy_buffer_to_buffer(&output, 0, &readback, 0, size);
+        gpu.queue.submit(Some(encoder.finish()));
+        let slice = readback.slice(..);
+        let (tx, rx) = std::sync::mpsc::channel();
+        slice.map_async(wgpu::MapMode::Read, move |r| tx.send(r).unwrap());
+        device.poll(wgpu::PollType::Wait).unwrap();
+        rx.recv().unwrap().unwrap();
+        let mapped = slice.get_mapped_range();
+        let values: &[f32] = bytemuck::cast_slice(&mapped);
+        let mut max_error = 0.0f32;
+        for (i, expr) in scene.csgs.iter().enumerate() {
+            for (j, p) in points.iter().enumerate() {
+                let expected = expr.distance(Vec3::new(p[0], p[1], p[2]));
+                let actual = values[i * n + j];
+                let error = (expected - actual).abs();
+                max_error = max_error.max(error);
+                assert!(
+                    actual.is_finite() && error <= 5e-5 * expected.abs().max(1.0),
+                    "expression {i} at {p:?}: CPU {expected}, GPU {actual}"
+                );
+            }
+        }
+        println!("{total} GPU scalar samples match CPU, max error={max_error}");
+        drop(mapped);
+        readback.unmap();
+        scene.csgs.clear();
+        let id = scene.csg(Expr::Sphere { r: 1.0 }).unwrap();
+        scene.add(Object::new(Prim::Csg { id }, Transform::IDENTITY, 0));
+        scene.aa = 1;
+        scene.ao = false;
+        scene.shadows = false;
+        scene.bounces = 0;
+        scene.post.bloom = false;
+        let camera = Camera::look_at(Vec3::new(0.0, 0.0, 4.0), Vec3::ZERO, Vec3::new(0.0, 1.0, 0.0), 0.7);
+        let csg_gpu = gpu.compile(&scene, 32, 32).render_rgba(&gpu, &camera);
+        scene.objects[0].prim = Prim::Sphere { r: 1.0 };
+        let primitive_gpu = gpu.compile(&scene, 32, 32).render_rgba(&gpu, &camera);
+        assert_eq!(csg_gpu, primitive_gpu, "GPU analytic CSG sphere must retain primitive pixels");
+        let cpu = mm3e_orchestrator::render(&scene, &camera).to_rgba8(Rgba::new(0.0, 0.0, 0.0, 1.0));
+        let mean = cpu.iter().zip(&csg_gpu).map(|(a, b)| (*a as f32 - *b as f32).abs()).sum::<f32>() / cpu.len() as f32;
+        println!("CPU/GPU sphere display mean byte error={mean}");
+        assert!(mean < 2.0, "CPU/GPU render diverges");
+    }
+}

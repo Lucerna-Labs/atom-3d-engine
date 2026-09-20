@@ -13,6 +13,7 @@
 use mm3e_kit::{atoms, vec::Vec3};
 
 /// A baked irradiance volume covering an axis-aligned region of the scene.
+#[derive(Clone)]
 pub struct GiVolume {
     min: Vec3,
     size: Vec3,

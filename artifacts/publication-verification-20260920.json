@@ -1,0 +1,148 @@
+{
+  "scope": "Rebuilt and executed from git checkout-index export containing only files prepared for publication; dependency/compiler caches and the pinned speech runtime were reused explicitly. No untracked project input files were available in the exported tree.",
+  "test_total": {
+    "passed": 818,
+    "failed": 3,
+    "ignored": 6
+  },
+  "retained_artifact_inputs_reproduced": true,
+  "original_face_cloth_inputs_and_requests_exact": true,
+  "textured_cases": {
+    "face": "failed",
+    "cloth": "failed",
+    "material": "failed",
+    "constant-floor": "failed",
+    "active-normal": "passed"
+  },
+  "reproduction": {
+    "status": "failed",
+    "retained_files_verified": 45,
+    "runs": [
+      {
+        "name": "build",
+        "command": [
+          "cargo",
+          "build",
+          "--locked",
+          "--release",
+          "-p",
+          "mm3e-editor"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 25.992174421999152
+      },
+      {
+        "name": "tests",
+        "command": [
+          "cargo",
+          "test",
+          "--locked",
+          "-p",
+          "mm3e-kit",
+          "-p",
+          "mm3e-orchestrator",
+          "-p",
+          "mm3e-editor",
+          "--tests",
+          "--no-fail-fast"
+        ],
+        "exit_code": 101,
+        "elapsed_seconds": 155.20449464299963
+      },
+      {
+        "name": "face",
+        "command": [
+          "/usr/bin/python3",
+          "/home/jesse/Desktop/Projects/atom-3d-engine-main/atom-3d-engine-main/.git/publish-validation/tree/scripts/agent_face_acceptance.py",
+          "--editor",
+          "/home/jesse/Desktop/Projects/atom-3d-engine-main/atom-3d-engine-main/target/release/mm3e-editor",
+          "--output",
+          "/home/jesse/Desktop/Projects/atom-3d-engine-main/atom-3d-engine-main/.git/publish-validation/results/face"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 7.904529708999689
+      },
+      {
+        "name": "deformed_face",
+        "command": [
+          "/usr/bin/python3",
+          "/home/jesse/Desktop/Projects/atom-3d-engine-main/atom-3d-engine-main/.git/publish-validation/tree/scripts/agent_deformed_face_acceptance.py",
+          "--editor",
+          "/home/jesse/Desktop/Projects/atom-3d-engine-main/atom-3d-engine-main/target/release/mm3e-editor",
+          "--output",
+          "/home/jesse/Desktop/Projects/atom-3d-engine-main/atom-3d-engine-main/.git/publish-validation/results/deformed_face"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 10.263572968000517
+      },
+      {
+        "name": "animation_layer",
+        "command": [
+          "/usr/bin/python3",
+          "/home/jesse/Desktop/Projects/atom-3d-engine-main/atom-3d-engine-main/.git/publish-validation/tree/scripts/agent_animation_layer_acceptance.py",
+          "--editor",
+          "/home/jesse/Desktop/Projects/atom-3d-engine-main/atom-3d-engine-main/target/release/mm3e-editor",
+          "--output",
+          "/home/jesse/Desktop/Projects/atom-3d-engine-main/atom-3d-engine-main/.git/publish-validation/results/animation_layer"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 12.591307336000682
+      },
+      {
+        "name": "sewing",
+        "command": [
+          "/usr/bin/python3",
+          "/home/jesse/Desktop/Projects/atom-3d-engine-main/atom-3d-engine-main/.git/publish-validation/tree/scripts/agent_sewing_acceptance.py",
+          "--executable",
+          "/home/jesse/Desktop/Projects/atom-3d-engine-main/atom-3d-engine-main/target/release/mm3e-editor",
+          "--output",
+          "/home/jesse/Desktop/Projects/atom-3d-engine-main/atom-3d-engine-main/.git/publish-validation/results/sewing"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 1.1535430000003544
+      },
+      {
+        "name": "speech",
+        "command": [
+          "/usr/bin/python3",
+          "/home/jesse/Desktop/Projects/atom-3d-engine-main/atom-3d-engine-main/.git/publish-validation/tree/scripts/agent_speech_acceptance.py",
+          "--editor",
+          "/home/jesse/Desktop/Projects/atom-3d-engine-main/atom-3d-engine-main/target/release/mm3e-editor",
+          "--backend",
+          "/home/jesse/Desktop/Projects/atom-3d-engine-main/atom-3d-engine-main/.dependencies/rhubarb-installer-https-verified/rhubarb",
+          "--output",
+          "/home/jesse/Desktop/Projects/atom-3d-engine-main/atom-3d-engine-main/.git/publish-validation/results/speech"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 6.395631991999835
+      },
+      {
+        "name": "textured_usd",
+        "command": [
+          "/usr/bin/python3",
+          "/home/jesse/Desktop/Projects/atom-3d-engine-main/atom-3d-engine-main/.git/publish-validation/tree/scripts/agent_textured_usd_acceptance.py",
+          "--binary",
+          "/home/jesse/Desktop/Projects/atom-3d-engine-main/atom-3d-engine-main/target/release/mm3e-editor",
+          "--output",
+          "/home/jesse/Desktop/Projects/atom-3d-engine-main/atom-3d-engine-main/.git/publish-validation/results/textured_usd",
+          "--fixture-root",
+          "/home/jesse/Desktop/Projects/atom-3d-engine-main/atom-3d-engine-main/.git/publish-validation/tree/artifacts/material-maps-normal-filter-20260907-opt-in",
+          "--challenge-root",
+          "/home/jesse/Desktop/Projects/atom-3d-engine-main/atom-3d-engine-main/.git/publish-validation/tree/artifacts/textured-usd-acceptance-20260907-final",
+          "--reader-path",
+          "/home/jesse/Desktop/Projects/atom-3d-engine-main/atom-3d-engine-main/.dependencies/usd-reader",
+          "--exr-reader-path",
+          "/home/jesse/Desktop/Projects/atom-3d-engine-main/atom-3d-engine-main/.dependencies/exr-reader"
+        ],
+        "exit_code": 1,
+        "elapsed_seconds": 1.8560999590008578
+      }
+    ],
+    "skipped": [],
+    "editor_sha256": "422b38b0b4f54ecee5957ad8926783128ee6d980d36b629fc2ca9a5e00f1f011",
+    "failed": [
+      "tests",
+      "textured_usd"
+    ]
+  }
+}

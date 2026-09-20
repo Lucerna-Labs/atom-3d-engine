@@ -186,6 +186,32 @@ impl Transform {
         self
     }
 
+    /// Map a local-space point into world space.
+    pub fn to_world(&self, p: Vec3) -> Vec3 {
+        self.pos + self.rot.mul_vec(p.scale(self.scale))
+    }
+
+    /// Compose a parent transform with a child: apply `child` first, then `self`.
+    /// Rotations are normalized through quaternions to limit hierarchy drift.
+    /// Both inputs must be rigid transforms with finite, positive uniform scales;
+    /// validating authored values and representable products belongs to the caller.
+    pub fn compose(self, child: Transform) -> Transform {
+        Transform {
+            rot: (Quat::from_mat3(self.rot) * Quat::from_mat3(child.rot)).to_mat3(),
+            pos: self.to_world(child.pos),
+            scale: self.scale * child.scale,
+        }
+    }
+
+    /// A delta about a world-space rest pivot, followed by a world-space translation.
+    /// Maps `p` to `pivot + translation + rotation * (p - pivot) * scale`.
+    /// Use `delta.compose(rest_transform)` to pose an object without changing its rest
+    /// geometry. The caller must provide a finite, positive uniform `scale`.
+    pub fn around_pivot(pivot: Vec3, rotation: Quat, scale: f32, translation: Vec3) -> Transform {
+        let rot = rotation.to_mat3();
+        Transform { pos: pivot + translation - rot.mul_vec(pivot.scale(scale)), rot, scale }
+    }
+
     /// Map a world-space point into this object's local space.
     pub fn to_local(&self, p: Vec3) -> Vec3 {
         // Guard a zero scale (matches the zero-length guards in `normalize`) so a degenerate
@@ -217,6 +243,32 @@ impl Quat {
         Quat { x: a.x * s, y: a.y * s, z: a.z * s, w: half.cos() }
     }
 
+    /// Convert an orthonormal rotation matrix to a unit quaternion. Selecting the
+    /// largest diagonal component keeps half-turns stable when the trace is negative.
+    pub fn from_mat3(rot: Mat3) -> Quat {
+        let [a, b, c] = rot.cols;
+        let trace = a.x + b.y + c.z;
+        let q = if trace > 0.0 {
+            let s = (trace + 1.0).sqrt() * 2.0;
+            Quat { x: (b.z - c.y) / s, y: (c.x - a.z) / s, z: (a.y - b.x) / s, w: 0.25 * s }
+        } else if a.x > b.y && a.x > c.z {
+            let s = (1.0 + a.x - b.y - c.z).sqrt() * 2.0;
+            Quat { x: 0.25 * s, y: (b.x + a.y) / s, z: (c.x + a.z) / s, w: (b.z - c.y) / s }
+        } else if b.y > c.z {
+            let s = (1.0 + b.y - a.x - c.z).sqrt() * 2.0;
+            Quat { x: (b.x + a.y) / s, y: 0.25 * s, z: (c.y + b.z) / s, w: (c.x - a.z) / s }
+        } else {
+            let s = (1.0 + c.z - a.x - b.y).sqrt() * 2.0;
+            Quat { x: (c.x + a.z) / s, y: (c.y + b.z) / s, z: 0.25 * s, w: (a.y - b.x) / s }
+        };
+        q.normalize()
+    }
+
+    /// Euler rotation in radians, in the same Z-then-Y-then-X order as `Mat3`.
+    pub fn from_euler(x: f32, y: f32, z: f32) -> Quat {
+        Quat::from_mat3(Mat3::from_euler(x, y, z))
+    }
+
     pub fn dot(self, o: Quat) -> f32 {
         self.x * o.x + self.y * o.y + self.z * o.z + self.w * o.w
     }
@@ -232,19 +284,20 @@ impl Quat {
 
     /// Spherical linear interpolation toward `o` by `t` (shortest path).
     pub fn slerp(self, o: Quat, t: f32) -> Quat {
-        let mut cos = self.dot(o);
-        let mut end = o;
+        let start = self.normalize();
+        let mut end = o.normalize();
+        let mut cos = start.dot(end);
         if cos < 0.0 {
             cos = -cos;
-            end = Quat { x: -o.x, y: -o.y, z: -o.z, w: -o.w };
+            end = Quat { x: -end.x, y: -end.y, z: -end.z, w: -end.w };
         }
         if cos > 0.9995 {
             // Nearly parallel — fall back to normalized lerp.
             return Quat {
-                x: self.x + (end.x - self.x) * t,
-                y: self.y + (end.y - self.y) * t,
-                z: self.z + (end.z - self.z) * t,
-                w: self.w + (end.w - self.w) * t,
+                x: start.x + (end.x - start.x) * t,
+                y: start.y + (end.y - start.y) * t,
+                z: start.z + (end.z - start.z) * t,
+                w: start.w + (end.w - start.w) * t,
             }
             .normalize();
         }
@@ -253,11 +306,12 @@ impl Quat {
         let a = ((1.0 - t) * theta).sin() / sin;
         let b = (t * theta).sin() / sin;
         Quat {
-            x: self.x * a + end.x * b,
-            y: self.y * a + end.y * b,
-            z: self.z * a + end.z * b,
-            w: self.w * a + end.w * b,
+            x: start.x * a + end.x * b,
+            y: start.y * a + end.y * b,
+            z: start.z * a + end.z * b,
+            w: start.w * a + end.w * b,
         }
+        .normalize()
     }
 
     /// The equivalent 3×3 rotation matrix.
@@ -269,5 +323,22 @@ impl Quat {
             Vec3::new(2.0 * (x * y - z * w), 1.0 - 2.0 * (x * x + z * z), 2.0 * (y * z + x * w)),
             Vec3::new(2.0 * (x * z + y * w), 2.0 * (y * z - x * w), 1.0 - 2.0 * (x * x + y * y)),
         )
+    }
+}
+
+impl std::ops::Mul for Quat {
+    type Output = Quat;
+
+    /// Normalized Hamilton product: apply `other` first, then `self`.
+    fn mul(self, other: Quat) -> Quat {
+        let a = self.normalize();
+        let b = other.normalize();
+        Quat {
+            x: a.w * b.x + a.x * b.w + a.y * b.z - a.z * b.y,
+            y: a.w * b.y - a.x * b.z + a.y * b.w + a.z * b.x,
+            z: a.w * b.z + a.x * b.y - a.y * b.x + a.z * b.w,
+            w: a.w * b.w - a.x * b.x - a.y * b.y - a.z * b.z,
+        }
+        .normalize()
     }
 }

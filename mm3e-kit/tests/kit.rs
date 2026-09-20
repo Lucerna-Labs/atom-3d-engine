@@ -46,9 +46,78 @@ fn transform_to_local_roundtrip() {
     let t = Transform::new(Vec3::new(2.0, -1.0, 3.0), Mat3::from_euler(0.3, 0.5, -0.2), 2.0);
     let world = Vec3::new(1.0, 4.0, -2.0);
     let local = t.to_local(world);
-    // Reconstruct the world point: pos + R·(local·scale).
-    let back = t.pos + t.rot.mul_vec(local.scale(t.scale));
+    let back = t.to_world(local);
     assert!((back - world).length() < 1e-4);
+}
+
+#[test]
+fn transform_hierarchy_composes_rotation_translation_and_scale() {
+    let parent =
+        Transform::new(Vec3::new(10.0, 0.0, 0.0), Mat3::from_euler(0.0, 0.0, std::f32::consts::FRAC_PI_2), 2.0);
+    let child = Transform::new(Vec3::new(1.0, 0.0, 0.0), Mat3::from_euler(std::f32::consts::FRAC_PI_2, 0.0, 0.0), 0.5);
+    let world = parent.compose(child);
+    assert!((world.pos - Vec3::new(10.0, 2.0, 0.0)).length() < 1e-5);
+    assert!(close(world.scale, 1.0, 1e-6));
+    let local = Vec3::new(0.0, 1.0, 0.0);
+    assert!((world.to_world(local) - Vec3::new(10.0, 2.0, 1.0)).length() < 1e-5);
+    assert!((world.to_world(local) - parent.to_world(child.to_world(local))).length() < 1e-5);
+    assert!((world.to_local(world.to_world(local)) - local).length() < 1e-5);
+}
+
+#[test]
+fn pivot_delta_moves_attached_geometry_without_moving_the_joint() {
+    let pivot = Vec3::new(2.0, 3.0, 0.0);
+    let translation = Vec3::new(-1.0, 0.0, 1.0);
+    let rotation = Quat::from_axis_angle(Vec3::new(0.0, 0.0, 1.0), std::f32::consts::FRAC_PI_2);
+    let delta = Transform::around_pivot(pivot, rotation, 2.0, translation);
+    assert!((delta.to_world(pivot) - pivot - translation).length() < 1e-5);
+    let rest = Transform::at(pivot + Vec3::new(1.0, 0.0, 0.0));
+    let posed = delta.compose(rest);
+    assert!((posed.pos - Vec3::new(1.0, 5.0, 1.0)).length() < 1e-5);
+    assert!(close(posed.scale, 2.0, 1e-6));
+    assert_eq!(rest.pos, Vec3::new(3.0, 3.0, 0.0));
+}
+
+#[test]
+fn quaternion_matrix_roundtrip_including_half_turns() {
+    let axes = [
+        Vec3::new(1.0, 0.0, 0.0),
+        Vec3::new(0.0, 1.0, 0.0),
+        Vec3::new(0.0, 0.0, 1.0),
+        Vec3::new(1.0, 2.0, -3.0).normalize(),
+    ];
+    for axis in axes {
+        for angle in [0.0, 0.01, 1.7, std::f32::consts::PI, -std::f32::consts::PI, 5.9] {
+            let original = Mat3::from_axis_angle(axis, angle);
+            let quaternion = Quat::from_mat3(original);
+            assert!(close(quaternion.dot(quaternion), 1.0, 1e-6));
+            let recovered = quaternion.to_mat3();
+            for (expected, actual) in original.cols.iter().zip(recovered.cols) {
+                assert!((*expected - actual).length() < 1e-5, "axis={axis:?}, angle={angle}");
+            }
+        }
+    }
+    let expected = Mat3::from_euler(0.4, -2.1, 0.8);
+    let actual = Quat::from_euler(0.4, -2.1, 0.8).to_mat3();
+    for (expected, actual) in expected.cols.iter().zip(actual.cols) {
+        assert!((*expected - actual).length() < 1e-5);
+    }
+}
+
+#[test]
+fn quaternion_product_matches_matrix_order_and_stays_unit() {
+    let a = Quat::from_euler(0.7, -0.2, 0.8);
+    let b = Quat::from_euler(-1.1, 0.5, 0.1);
+    let point = Vec3::new(0.3, -0.8, 1.2);
+    assert!(((a * b).to_mat3().mul_vec(point) - a.to_mat3().mul_vec(b.to_mat3().mul_vec(point))).length() < 1e-5);
+    let step = Quat::from_axis_angle(Vec3::new(0.0, 1.0, 0.0), 0.001);
+    let mut accumulated = Quat::IDENTITY;
+    for _ in 0..10_000 {
+        accumulated = step * accumulated;
+    }
+    assert!(close(accumulated.dot(accumulated), 1.0, 1e-6));
+    let expected = Mat3::from_axis_angle(Vec3::new(0.0, 1.0, 0.0), 10.0).mul_vec(point);
+    assert!((accumulated.to_mat3().mul_vec(point) - expected).length() < 1e-4);
 }
 
 #[test]
@@ -61,6 +130,33 @@ fn quat_slerp_endpoints_and_axis() {
     assert!((va - Vec3::new(1.0, 0.0, 0.0)).length() < 1e-4);
     let vb = b.to_mat3().mul_vec(Vec3::new(1.0, 0.0, 0.0));
     assert!((vb - Vec3::new(0.0, 0.0, -1.0)).length() < 1e-3);
+}
+
+#[test]
+fn slerp_takes_short_path_across_angle_wrap_and_antipodal_quaternions() {
+    let axis = Vec3::new(0.0, 1.0, 0.0);
+    let start = Quat::from_axis_angle(axis, 170.0_f32.to_radians());
+    let end = Quat::from_axis_angle(axis, -170.0_f32.to_radians());
+    let midpoint = start.slerp(end, 0.5);
+    let point = Vec3::new(1.0, 0.0, 0.0);
+    assert!((midpoint.to_mat3().mul_vec(point) + point).length() < 1e-5);
+    let antipodal = Quat { x: -start.x, y: -start.y, z: -start.z, w: -start.w };
+    for t in [0.0, 0.25, 0.5, 0.75, 1.0] {
+        let interpolated = start.slerp(antipodal, t);
+        assert!(close(interpolated.dot(interpolated), 1.0, 1e-6));
+        assert!((interpolated.to_mat3().mul_vec(point) - start.to_mat3().mul_vec(point)).length() < 1e-5);
+    }
+}
+
+#[test]
+fn slerp_normalizes_nonunit_authored_endpoints() {
+    let unit = Quat::from_euler(0.0, 1.2, 0.0);
+    let scaled = Quat { x: unit.x * 3.0, y: unit.y * 3.0, z: unit.z * 3.0, w: unit.w * 3.0 };
+    let start = Quat { w: 2.0, ..Quat::IDENTITY };
+    let actual = start.slerp(scaled, 0.5);
+    let expected = Quat::from_euler(0.0, 0.6, 0.0);
+    assert!(close(actual.dot(actual), 1.0, 1e-6));
+    assert!(close(actual.dot(expected).abs(), 1.0, 1e-6));
 }
 
 // ---- SDF primitives ----
